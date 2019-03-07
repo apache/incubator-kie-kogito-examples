@@ -2,24 +2,24 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   labels:
-    app: quick-drools
+    app: drools-quarkus
     version: v1
-  name: quick-drools
+  name: drools-quarkus
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: quick-drools
+      app: drools-quarkus
       version: v1
   template:
     metadata:
       labels:
-        app: quick-drools
+        app: drools-quarkus
         version: v1
     spec:
       containers:
       - env:
-        image: quickstarter/quick-drools:latest
+        image: submarine-examples/drools-quarkus:latest
         imagePullPolicy: IfNotPresent
         livenessProbe:
           exec:
@@ -29,7 +29,7 @@ spec:
           initialDelaySeconds: 20
           periodSeconds: 10
           timeoutSeconds: 1
-        name: quick-drools
+        name: drools-quarkus
         ports:
         - containerPort: 8080
           name: http
