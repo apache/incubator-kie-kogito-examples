@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: quick-drools
+  name: drools-quarkus
   labels:
-    app: quick-drools
+    app: drools-quarkus
 spec:
   ports:
   - name: http
     port: 8080
   selector:
-    app: quick-drools
+    app: drools-quarkus

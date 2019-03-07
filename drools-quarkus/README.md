@@ -41,8 +41,8 @@ curl -d '{"name":"edo", "age":32}' -H "Content-Type: application/json" \
 
 #### Build Container on docker
 ```sh
-docker build -t quickstarter/quick-drools .
-docker images | grep quick-drools
+docker build -t submarine-examples/drools-quarkus .
+docker images | grep drools-quarkus
 ```
 
 #### Deploy on Openshift
@@ -50,7 +50,16 @@ By default will be created under project called "My Project"
 ```sh
 kubectl create -f kubernetes/deployment.yml 
 kubectl create -f kubernetes/service.yml 
-oc expose service quick-drools
+```
+In the pod's log you could see
+```
+2019-03-07 15:51:40,720 INFO  [io.quarkus] (main) Quarkus 0.11.0 started in 0.019s. Listening on: http://[::]:8080
+2019-03-07 15:51:40,720 INFO [io.quarkus] (main) Installed features: [cdi, resteasy]
+```
+
+Let's go to expose the service
+```
+oc expose service drools-quarkus
 ```
 this create a yaml file and the route for us on openshift, like this (in routes section on My Project)
  ```yaml
@@ -62,19 +71,19 @@ this create a yaml file and the route for us on openshift, like this (in routes 
      openshift.io/host.generated: 'true'
    creationTimestamp: '2019-02-20T10:25:59Z'
    labels:
-     app: quick-drools
-   name: quick-drools
+     app: drools-quarkus
+   name: drools-quarkus
    namespace: myproject
    resourceVersion: '30743'
-   selfLink: /apis/route.openshift.io/v1/namespaces/myproject/routes/quick-drools
+   selfLink: /apis/route.openshift.io/v1/namespaces/myproject/routes/drools-quarkus
    uid: ea2676d6-34f9-11e9-bd97-08002709a920
  spec:
-   host: quick-drools-myproject.192.168.99.109.nip.io
+   host: drools-quarkus-myproject.192.168.99.109.nip.io
    port:
      targetPort: http
    to:
      kind: Service
-     name: quick-drools
+     name: drools-quarkus
      weight: 100
    wildcardPolicy: None
  status:
@@ -83,7 +92,7 @@ this create a yaml file and the route for us on openshift, like this (in routes 
          - lastTransitionTime: '2019-02-20T10:25:59Z'
            status: 'True'
            type: Admitted
-       host: quick-drools-myproject.192.168.99.109.nip.io
+       host: drools-quarkus-myproject.192.168.99.109.nip.io
        routerName: router
        wildcardPolicy: None
 
@@ -91,9 +100,11 @@ this create a yaml file and the route for us on openshift, like this (in routes 
  ```
  oc get route
  
-  NAME           HOST/PORT                                      PATH      SERVICES       PORT      TERMINATION   WILDCARD
-  quick-drools   quick-drools-myproject.192.168.99.109.nip.io             quick-drools   http                    None
+  NAME             HOST/PORT                                        PATH             SERVICES       PORT      TERMINATION   WILDCARD
+  drools-quarkus   drools-quarkus-myproject.192.168.99.109.nip.io   drools-quarkus   http           None
   ```
-  
+
   Your address will be
-  http://quick-drools-myproject.192.168.99.109.nip.io/hello
+  http://drools-quarkus-myproject.192.168.99.109.nip.io/hello
+  
+  
