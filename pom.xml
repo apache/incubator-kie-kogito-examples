@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
   <parent>
@@ -8,7 +9,7 @@
     <artifactId>submarine-bom</artifactId>
     <version>8.0.0-SNAPSHOT</version>
     <!-- relativePath causes out-of-date problems on hudson slaves -->
-    <!--<relativePath>../droolsjbpm-build-bootstrap/pom.xml</relativePath>-->
+    <!--<relativePath>../droolsjbpm-build-bootstrap/pom.xml</relativePath> -->
   </parent>
 
   <groupId>org.submarine</groupId>
@@ -26,7 +27,8 @@
   </properties>
 
   <repositories>
-    <!-- Bootstrap repository to locate the parent pom when the parent pom has not been build locally. -->
+    <!-- Bootstrap repository to locate the parent pom when the parent pom 
+      has not been build locally. -->
     <repository>
       <id>jboss-public-repository-group</id>
       <name>JBoss Public Repository Group</name>
@@ -44,12 +46,15 @@
   </repositories>
   <modules>
     <module>drools-quarkus</module>
-    </modules>
+    <module>jbpm-quarkus-example</module>
+    <module>jbpm-springboot-example</module>
+  </modules>
 
   <dependencyManagement>
-    <!-- Important: Do not add any additional dependency versions here!
-         The dependency management should only import drools-bom and kie-third-party-bom to get the proper versions
-         it needs. Any additional 3rd party dependency versions need to go directly into kie-third-party-bom. -->
+    <!-- Important: Do not add any additional dependency versions here! The 
+      dependency management should only import drools-bom and kie-third-party-bom 
+      to get the proper versions it needs. Any additional 3rd party dependency 
+      versions need to go directly into kie-third-party-bom. -->
     <dependencies>
       <dependency>
         <groupId>org.drools</groupId>
