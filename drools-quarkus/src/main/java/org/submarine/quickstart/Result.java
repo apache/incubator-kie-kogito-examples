@@ -19,9 +19,6 @@ package org.submarine.quickstart;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import io.quarkus.runtime.annotations.RegisterForReflection;
-
-@RegisterForReflection
 public class Result {
     private Object value;
 

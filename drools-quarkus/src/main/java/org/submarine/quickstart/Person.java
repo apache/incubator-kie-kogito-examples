@@ -1,8 +1,5 @@
 package org.submarine.quickstart;
 
-import io.quarkus.runtime.annotations.RegisterForReflection;
-
-@RegisterForReflection
 public class Person {
     String name;
     int age;
