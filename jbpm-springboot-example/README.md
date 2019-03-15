@@ -8,7 +8,7 @@
 - Compile and Run
 
     ```
-     mvn clean compile springboot:run    
+     mvn clean package spring-boot:run    
     ```
 
 
