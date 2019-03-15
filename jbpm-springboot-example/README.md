@@ -2,15 +2,13 @@
 
 ## Installing and Running
 
-- Prerequisites: build locally submarine-bom and submarine-runtimes
+-   Prerequisites: build locally submarine-bom and submarine-runtimes
 
-
-- Compile and Run
+*   Compile and Run
 
     ```
-     mvn clean compile springboot:run    
+    mvn clean package spring-boot:run
     ```
-
 
 ## Swagger documentation
 
@@ -28,7 +26,7 @@ Allows to create new orders with following sample command
 
 ```sh
 curl -d '{"approver" : "john", "order" : {"orderNumber" : "12345", "shipped" : false}}' -H "Content-Type: application/json" \
-    -X POST http://localhost:8080/orders                                                                                                    
+    -X POST http://localhost:8080/orders
 ```
 
 As response the updated order is returned.
@@ -38,7 +36,7 @@ As response the updated order is returned.
 Returns list of orders currently active with following command
 
 ```sh
-curl -H "Accept: application/json" -X GET http://localhost:8080/orders                                                                                                    
+curl -H "Accept: application/json" -X GET http://localhost:8080/orders
 ```
 
 As response array of orders is returned
@@ -48,7 +46,7 @@ As response array of orders is returned
 Returns specified order active following command
 
 ```sh
-curl -H "Accept: application/json" -X GET http://localhost:8080/orders/1                                                                                                   
+curl -H "Accept: application/json" -X GET http://localhost:8080/orders/1
 ```
 
 As response single order is returned if found otherwise no content (204)
@@ -58,5 +56,5 @@ As response single order is returned if found otherwise no content (204)
 Cancels specified order with following command
 
 ```sh
-curl -H "Accept: application/json" -X DELETE http://localhost:8080/orders/1                                                                                                   
+curl -H "Accept: application/json" -X DELETE http://localhost:8080/orders/1
 ```

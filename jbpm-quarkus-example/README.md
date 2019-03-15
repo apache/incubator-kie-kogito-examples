@@ -2,22 +2,21 @@
 
 ## Installing and Running
 
-- Prerequisites: build locally submarine-bom and submarine-runtimes
+-   Prerequisites: build locally submarine-bom and submarine-runtimes
 
-
-- Compile and Run
+*   Compile and Run
 
     ```
-     mvn clean compile quarkus:dev    
+     mvn clean package quarkus:dev
     ```
 
-- Native Image (requires JAVA_HOME to point to a valid GraalVM)
+*   Native Image (requires JAVA_HOME to point to a valid GraalVM)
 
     ```
     mvn clean package -Pnative
     ```
-  
-  native executable (and runnable jar) generated in `target/`
+
+    native executable (and runnable jar) generated in `target/`
 
 ## Swagger documentation
 
@@ -35,7 +34,7 @@ Allows to create new orders with following sample command
 
 ```sh
 curl -d '{"approver" : "john", "order" : {"orderNumber" : "12345", "shipped" : false}}' -H "Content-Type: application/json" \
-    -X POST http://localhost:8080/orders                                                                                                    
+    -X POST http://localhost:8080/orders
 ```
 
 As response the updated order is returned.
@@ -45,7 +44,7 @@ As response the updated order is returned.
 Returns list of orders currently active with following command
 
 ```sh
-curl -H "Accept: application/json" -X GET http://localhost:8080/orders                                                                                                    
+curl -H "Accept: application/json" -X GET http://localhost:8080/orders
 ```
 
 As response array of orders is returned
@@ -55,7 +54,7 @@ As response array of orders is returned
 Returns specified order active following command
 
 ```sh
-curl -H "Accept: application/json" -X GET http://localhost:8080/orders/1                                                                                                   
+curl -H "Accept: application/json" -X GET http://localhost:8080/orders/1
 ```
 
 As response single order is returned if found otherwise no content (204)
@@ -65,5 +64,5 @@ As response single order is returned if found otherwise no content (204)
 Cancels specified order with following command
 
 ```sh
-curl -H "Accept: application/json" -X DELETE http://localhost:8080/orders/1                                                                                                   
+curl -H "Accept: application/json" -X DELETE http://localhost:8080/orders/1
 ```
