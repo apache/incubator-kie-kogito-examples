@@ -44,29 +44,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>1.6.0</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <executable>node</executable>
-                    <!-- optional -->
-                    <arguments>
-                        <argument>--jvm.classpath</argument>
-                        <argument>${maven.compile.classpath}${path.separator}${project.build.directory}/${project.build.finalName}.jar</argument>
-                        <argument>--experimental-modules</argument>
-                        <argument>${project.basedir}/src/main/js/main.mjs</argument>
-                    </arguments>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 
@@ -105,10 +82,31 @@
 
     <profiles>
         <profile>
-            <id>native</id>
+            <id>run</id>
             <build>
                 <plugins>
-
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>1.6.0</version>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <executable>node</executable>
+                            <arguments>
+                                <argument>--jvm.classpath</argument>
+                                <argument>${maven.compile.classpath}${path.separator}${project.build.directory}/${project.build.finalName}.jar</argument>
+                                <argument>--experimental-modules</argument>
+                                <argument>${project.basedir}/src/main/js/main.mjs</argument>
+                            </arguments>
+                        </configuration>
+                    </plugin>
                 </plugins>
             </build>
         </profile>
