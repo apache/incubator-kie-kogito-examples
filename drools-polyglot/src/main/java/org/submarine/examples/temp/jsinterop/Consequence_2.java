@@ -1,9 +1,10 @@
-package org.submarine.examples.polyglot;
+package org.submarine.examples.temp.jsinterop;
 
 import org.drools.model.Variable;
 import org.drools.model.consequences.ConsequenceBuilder.AbstractValidBuilder;
 import org.drools.model.functions.Block2;
 
+// we temporarily address an interop issue with this shim
 public class Consequence_2<A, B> extends AbstractValidBuilder<Consequence_2<A, B>> {
 
     public Consequence_2(Variable<A> decl1, Variable<B> decl2) {
