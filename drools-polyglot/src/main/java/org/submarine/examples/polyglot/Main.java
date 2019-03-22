@@ -23,8 +23,11 @@ public class Main {
                 pattern(olderV)
                         .expr(p -> !p.getName().equals("Mark"))
                         .expr(markV, (p1, p2) -> p1.getAge() > p2.getAge()),
-                on(olderV, markV).execute((p1, p2) -> System.out.println( p1.getName() + " is older than " + p2.getName() ))
-        );
+                on(olderV, markV)
+                        .execute((p1, p2) ->
+                                         System.out.println(
+                                                 p1.getName() + " is older than " + p2.getName() )));
+
         ModelImpl m = new ModelImpl().addRule(r);
         KieSession s = KieBaseBuilder.createKieBaseFromModel(m).newKieSession();
         s.insert(new Person("Mark", 37));
