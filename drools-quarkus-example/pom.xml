@@ -14,6 +14,8 @@
 
     <packaging>kjar</packaging>
 
+    <name>Drools example running on Quarkus</name>
+
     <properties>
         <quarkus.version>0.11.0</quarkus.version>
         <surefire.version>2.22.0</surefire.version>

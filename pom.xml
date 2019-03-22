@@ -45,7 +45,7 @@
     </repository>
   </repositories>
   <modules>
-    <module>drools-quarkus</module>
+    <module>drools-quarkus-example</module>
     <module>jbpm-quarkus-example</module>
     <module>jbpm-springboot-example</module>
   </modules>
