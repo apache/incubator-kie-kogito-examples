@@ -9,7 +9,7 @@
     </parent>
 
     <groupId>org.submarine</groupId>
-    <artifactId>drools-quarkus</artifactId>
+    <artifactId>drools-quarkus-example</artifactId>
     <version>8.0.0-SNAPSHOT</version>
 
     <packaging>kjar</packaging>
