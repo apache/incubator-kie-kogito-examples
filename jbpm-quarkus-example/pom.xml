@@ -4,24 +4,29 @@
   xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.submarine.examples</groupId>
+
+  <parent>
+    <groupId>org.submarine</groupId>
+    <artifactId>submarine-examples</artifactId>
+    <version>8.0.0-SNAPSHOT</version>
+  </parent>
+
   <artifactId>jbpm-quarkus-example</artifactId>
-  <version>1.0.0</version>
   <packaging>kjar</packaging>
-  
+
   <name>jBPM example running on Quarkus</name>
   <description>Order management service</description>
-  
+
   <properties>
     <quarkus.version>0.11.0</quarkus.version>
     <submarine.version>8.0.0-SNAPSHOT</submarine.version>
     <swagger.version>1.5.9</swagger.version>
-    
+
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
-  
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -79,6 +84,7 @@
       <plugin>
         <groupId>io.openapitools.swagger</groupId>
         <artifactId>swagger-maven-plugin</artifactId>
+        <version>2.0.3</version>
         <configuration>
           <resourcePackages>
             <resourcePackage>com.myspace.demo</resourcePackage>
