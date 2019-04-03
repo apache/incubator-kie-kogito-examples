@@ -19,7 +19,7 @@
   <properties>
     <java.version>1.8</java.version>
     <submarine.version>8.0.0-SNAPSHOT</submarine.version>
-    <swagger.version>1.5.9</swagger.version>
+    <swagger.version>1.5.21</swagger.version>
     <cxf.version>3.2.6</cxf.version>
     <springboot.version>2.1.1.RELEASE</springboot.version>
   </properties>
@@ -104,26 +104,31 @@
         </configuration>
       </plugin>
       <plugin>
-        <groupId>io.openapitools.swagger</groupId>
+        <groupId>com.github.kongchen</groupId>
         <artifactId>swagger-maven-plugin</artifactId>
-        <version>2.0.3</version>
+        <version>3.1.8</version>
         <configuration>
-          <resourcePackages>
-            <resourcePackage>com.myspace.demo</resourcePackage>
-          </resourcePackages>
-          <outputDirectory>${basedir}/target/classes/static/</outputDirectory>
-          <outputFilename>swagger</outputFilename>
-          <outputFormats>JSON</outputFormats>
-          <prettyPrint>true</prettyPrint>
-          <swaggerConfig>
-            <info>
-              <title>${project.description}</title>
-              <version>${project.version}</version>
-            </info>
-          </swaggerConfig>
+          <apiSources>
+            <apiSource>
+              <springmvc>false</springmvc>
+              <locations>
+                <location>com.myspace.demo</location>
+              </locations>
+              <schemes>http,https</schemes>
+              <info>
+                <title>${project.description}</title>
+                <version>${project.version}</version>
+              </info>
+              <outputPath>${basedir}/target/classes/static/</outputPath>
+              <outputFormats>json,yaml</outputFormats>
+              <swaggerDirectory>${basedir}/target/classes/static/</swaggerDirectory>
+              <swaggerFileName>swagger</swaggerFileName>
+            </apiSource>
+          </apiSources>
         </configuration>
         <executions>
           <execution>
+            <phase>compile</phase>
             <goals>
               <goal>generate</goal>
             </goals>
