@@ -1,0 +1,95 @@
+@Library('jenkins-pipeline-shared-libraries')_
+
+def submarineBomScmCustom = null
+def submarineRuntimesScmCustom = null
+
+pipeline {
+    agent {
+        label 'kie-rhel7'
+    }
+    tools {
+        maven 'kie-maven-3.5.4'
+        jdk 'kie-jdk1.8'
+    }
+    options {
+        buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '10')
+    }
+    stages {
+        stage('Initialize') {
+            steps {
+                sh 'printenv'
+                script {
+                    try {
+                        submarineBomScmCustom = githubscm.resolveRepository('submarine-bom', "$CHANGE_AUTHOR", "$CHANGE_BRANCH", true)
+                    } catch (Exception ex) {
+                        echo "Branch $CHANGE_BRANCH from repository submarine-bom not found in $CHANGE_AUTHOR organisation."
+                    }
+
+                    try {
+                        submarineRuntimesScmCustom = githubscm.resolveRepository('submarine-runtimes', "$CHANGE_AUTHOR", "$CHANGE_BRANCH", true)
+                    } catch (Exception ex) {
+                        echo "Branch $CHANGE_BRANCH from repository submarine-runtimes not found in $CHANGE_AUTHOR organisation."
+                    }
+                }
+            }
+        }
+        stage('Build submarine-bom') {
+            when {
+                expression {
+                    return submarineBomScmCustom != null
+                }
+            }
+            steps {
+                timeout(15) {
+                    dir("submarine-bom") {
+                        checkout submarineBomScmCustom
+                        sh 'mvn clean install -DskipTests'
+                    }
+                }
+            }
+        }
+        stage('Build submarine-runtimes') {
+            when {
+                expression {
+                    return submarineRuntimesScmCustom != null
+                }
+            }
+            steps {
+                timeout(30) {
+                    dir("submarine-runtimes") {
+                        checkout submarineRuntimesScmCustom
+                        sh 'mvn clean install -DskipTests'
+                    }
+                }
+            }
+        }
+        stage('Build submarine-examples') {
+            steps {
+                timeout(30) {
+                    sh 'mvn clean install'
+                }
+            }
+        }
+        // Currently there are no tests in submarine-examples
+//        stage('Publish test results') {
+//            steps {
+//                junit '**/target/surefire-reports/**/*.xml'
+//            }
+//        }
+    }
+    post {
+        unstable {
+            script {
+                mailer.sendEmailFailure()
+            }
+        }
+        failure {
+            script {
+                mailer.sendEmailFailure()
+            }
+        }
+        always {
+            cleanWs()
+        }
+    }
+}
