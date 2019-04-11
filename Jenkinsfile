@@ -34,30 +34,32 @@ pipeline {
             }
         }
         stage('Build submarine-bom') {
-            when {
-                expression {
-                    return submarineBomScmCustom != null
-                }
-            }
             steps {
                 timeout(15) {
                     dir("submarine-bom") {
-                        checkout submarineBomScmCustom
+                        script {
+                            if (submarineBomScmCustom != null) {
+                                checkout submarineBomScmCustom
+                            } else {
+                                checkout(githubscm.resolveRepository('submarine-bom', 'kiegroup', "$CHANGE_TARGET", false))
+                            }
+                        }
                         sh 'mvn clean install -DskipTests'
                     }
                 }
             }
         }
         stage('Build submarine-runtimes') {
-            when {
-                expression {
-                    return submarineRuntimesScmCustom != null
-                }
-            }
             steps {
                 timeout(30) {
                     dir("submarine-runtimes") {
-                        checkout submarineRuntimesScmCustom
+                        script {
+                            if (submarineRuntimesScmCustom != null) {
+                                checkout submarineRuntimesScmCustom
+                            } else {
+                                checkout(githubscm.resolveRepository('submarine-runtimes', 'kiegroup', "$CHANGE_TARGET", false))
+                            }
+                        }
                         sh 'mvn clean install -DskipTests'
                     }
                 }
