@@ -70,11 +70,12 @@ pipeline {
                 }
             }
         }
-        stage('Publish test results') {
-            steps {
-                junit '**/target/surefire-reports/**/*.xml'
-            }
-        }
+        // Currently there are no tests in submarine-examples
+//        stage('Publish test results') {
+//            steps {
+//                junit '**/target/surefire-reports/**/*.xml'
+//            }
+//        }
     }
     post {
         unstable {
