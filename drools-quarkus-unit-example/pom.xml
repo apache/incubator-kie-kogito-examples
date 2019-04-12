@@ -15,7 +15,7 @@
     <packaging>kjar</packaging>
 
     <properties>
-        <quarkus.version>0.11.0</quarkus.version>
+        <quarkus.version>${version.io.quarkus}</quarkus.version>
         <surefire.version>2.22.0</surefire.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
