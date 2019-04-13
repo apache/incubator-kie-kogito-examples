@@ -12,7 +12,7 @@
     <artifactId>drools-quarkus-unit-example</artifactId>
     <version>8.0.0-SNAPSHOT</version>
 
-    <packaging>kjar</packaging>
+    <packaging>jar</packaging>
 
     <properties>
         <quarkus.version>${version.io.quarkus}</quarkus.version>
@@ -34,6 +34,15 @@
                 <artifactId>kie-maven-plugin</artifactId>
                 <version>${submarine.version}</version>
                 <extensions>true</extensions>
+                <executions>
+                  <execution>
+                    <goals>
+                      <goal>generateModel</goal>
+                      <goal>generateDMNModel</goal>              
+                      <goal>generateProcessModel</goal>
+                    </goals>
+                  </execution>
+                </executions>
             </plugin>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>

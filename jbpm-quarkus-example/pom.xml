@@ -12,7 +12,7 @@
   </parent>
 
   <artifactId>jbpm-quarkus-example</artifactId>
-  <packaging>kjar</packaging>
+  <packaging>jar</packaging>
 
   <name>jBPM example running on Quarkus</name>
   <description>Order management service</description>
@@ -80,6 +80,15 @@
         <artifactId>kie-maven-plugin</artifactId>
         <version>${submarine.version}</version>
         <extensions>true</extensions>
+        <executions>
+          <execution>
+            <goals>
+              <goal>generateModel</goal>
+              <goal>generateDMNModel</goal>              
+              <goal>generateProcessModel</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>com.github.kongchen</groupId>
