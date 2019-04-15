@@ -32,6 +32,3 @@ jdbc_driver.jar
 db-settings.xml
 
 quarkus.log
-
-# XTF properties files
-test.properties
