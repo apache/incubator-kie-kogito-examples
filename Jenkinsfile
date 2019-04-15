@@ -1,11 +1,8 @@
 @Library('jenkins-pipeline-shared-libraries')_
 
-def submarineBomScmCustom = null
-def submarineRuntimesScmCustom = null
-
 pipeline {
     agent {
-        label 'kie-rhel7'
+        label 'submarine-static || kie-rhel7'
     }
     tools {
         maven 'kie-maven-3.5.4'
@@ -18,19 +15,6 @@ pipeline {
         stage('Initialize') {
             steps {
                 sh 'printenv'
-                script {
-                    try {
-                        submarineBomScmCustom = githubscm.resolveRepository('submarine-bom', "$CHANGE_AUTHOR", "$CHANGE_BRANCH", true)
-                    } catch (Exception ex) {
-                        echo "Branch $CHANGE_BRANCH from repository submarine-bom not found in $CHANGE_AUTHOR organisation."
-                    }
-
-                    try {
-                        submarineRuntimesScmCustom = githubscm.resolveRepository('submarine-runtimes', "$CHANGE_AUTHOR", "$CHANGE_BRANCH", true)
-                    } catch (Exception ex) {
-                        echo "Branch $CHANGE_BRANCH from repository submarine-runtimes not found in $CHANGE_AUTHOR organisation."
-                    }
-                }
             }
         }
         stage('Build submarine-bom') {
@@ -38,11 +22,7 @@ pipeline {
                 timeout(15) {
                     dir("submarine-bom") {
                         script {
-                            if (submarineBomScmCustom != null) {
-                                checkout submarineBomScmCustom
-                            } else {
-                                checkout(githubscm.resolveRepository('submarine-bom', 'kiegroup', "$CHANGE_TARGET", false))
-                            }
+                            githubscm.checkoutIfExists('submarine-bom', "$CHANGE_AUTHOR", "$CHANGE_BRANCH", 'kiegroup', "$CHANGE_TARGET")
                         }
                         sh 'mvn clean install -DskipTests'
                     }
@@ -54,11 +34,7 @@ pipeline {
                 timeout(30) {
                     dir("submarine-runtimes") {
                         script {
-                            if (submarineRuntimesScmCustom != null) {
-                                checkout submarineRuntimesScmCustom
-                            } else {
-                                checkout(githubscm.resolveRepository('submarine-runtimes', 'kiegroup', "$CHANGE_TARGET", false))
-                            }
+                            githubscm.checkoutIfExists('submarine-runtimes', "$CHANGE_AUTHOR", "$CHANGE_BRANCH", 'kiegroup', "$CHANGE_TARGET")
                         }
                         sh 'mvn clean install -DskipTests'
                     }
