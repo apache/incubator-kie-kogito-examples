@@ -12,12 +12,10 @@
     <artifactId>drools-quarkus-example</artifactId>
     <version>8.0.0-SNAPSHOT</version>
 
-    <packaging>kjar</packaging>
-
     <name>Drools example running on Quarkus</name>
 
     <properties>
-        <quarkus.version>0.11.0</quarkus.version>
+        <quarkus.version>0.13.1</quarkus.version>
         <surefire.version>2.22.0</surefire.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -59,19 +57,11 @@
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-resteasy</artifactId>
-            <scope>provided</scope>
-            <version>${quarkus.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-resteasy-jsonb</artifactId>
-            <scope>provided</scope>
             <version>${quarkus.version}</version>
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-arc</artifactId>
-            <scope>provided</scope>
             <version>${quarkus.version}</version>
         </dependency>
 
