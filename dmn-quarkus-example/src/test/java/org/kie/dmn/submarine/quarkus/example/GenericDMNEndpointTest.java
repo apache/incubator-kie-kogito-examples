@@ -16,7 +16,7 @@ import static org.hamcrest.Matchers.is;
 public class GenericDMNEndpointTest {
 
     @Test
-    public void testHelloEndpoint() {
+    public void testGET() {
         given()
           .when()
               .get("/dmn")
