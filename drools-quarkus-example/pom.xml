@@ -15,7 +15,7 @@
     <name>Drools example running on Quarkus</name>
 
     <properties>
-        <quarkus.version>0.13.1</quarkus.version>
+        <quarkus.version>${version.io.quarkus}</quarkus.version>
         <surefire.version>2.22.0</surefire.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
