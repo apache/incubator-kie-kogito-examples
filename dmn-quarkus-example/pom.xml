@@ -2,17 +2,12 @@
 <project>
   <modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>org.submarine</groupId>
-    <artifactId>submarine-examples</artifactId>
-    <version>8.0.0-SNAPSHOT</version>
-  </parent>
-
+  <groupId>org.submarine</groupId>
   <artifactId>dmn-quarkus-example</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <properties>
-    <quarkus.version>0.12.0</quarkus.version>
+    <quarkus.version>0.13.1</quarkus.version>
     <surefire-plugin.version>2.22.0</surefire-plugin.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
