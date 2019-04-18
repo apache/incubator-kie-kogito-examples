@@ -38,7 +38,7 @@ import org.kie.dmn.submarine.rest.quarkus.DMNModelInfoList;
 import org.kie.dmn.submarine.rest.quarkus.DMNResult;
 import org.kie.dmn.submarine.rest.quarkus.DMNSubmarineQuarkus;
 
-@Path("/dmn")
+@Path("/")
 public class GenericDMNEndpoint {
 
     static final DMNRuntime dmnRuntime = DMNSubmarineQuarkus.createGenericDMNRuntime();

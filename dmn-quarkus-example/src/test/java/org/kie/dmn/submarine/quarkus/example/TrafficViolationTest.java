@@ -22,22 +22,23 @@ import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 
 @QuarkusTest
-public class ByNameDMNEndpointTest {
+public class TrafficViolationTest {
 
     @Test
     public void testGET() {
         given()
           .when()
-               .get("/dmn/Traffic Violation")
+               .get("/")
           .then()
              .statusCode(200)
-               .body("model-namespace", is("https://github.com/kiegroup/drools/kie-dmn/_A4BCA8B8-CF08-433F-93B2-A2598F19ECFF"))
-               .body("model-name", is("Traffic Violation"));
+               .body("models", hasSize(greaterThanOrEqualTo(1)));
     }
     
     @Test
@@ -55,7 +56,9 @@ public class ByNameDMNEndpointTest {
                      "}")
                .contentType(ContentType.JSON)
           .when()
-               .post("/dmn/Traffic Violation")
+               //               .header("X-DMN-model-namespace", "https://github.com/kiegroup/drools/kie-dmn/_A4BCA8B8-CF08-433F-93B2-A2598F19ECFF")
+               //               .header("X-DMN-model-name", "Traffic Violation")
+               .post("/")
           .then()
              .statusCode(200)
                .body("'dmn-context'.'Should the driver be suspended?'", is("No"))
