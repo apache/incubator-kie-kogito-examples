@@ -10,6 +10,7 @@ pipeline {
     }
     options {
         buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '10')
+        timeout(time: 90, unit: 'MINUTES')
     }
     stages {
         stage('Initialize') {
@@ -19,34 +20,28 @@ pipeline {
         }
         stage('Build submarine-bom') {
             steps {
-                timeout(15) {
-                    dir("submarine-bom") {
-                        script {
-                            githubscm.checkoutIfExists('submarine-bom', "$CHANGE_AUTHOR", "$CHANGE_BRANCH", 'kiegroup', "$CHANGE_TARGET")
-                            maven.runMavenWithSubmarineSettings('clean install', true)
-                        }
+                dir("submarine-bom") {
+                    script {
+                        githubscm.checkoutIfExists('submarine-bom', "$CHANGE_AUTHOR", "$CHANGE_BRANCH", 'kiegroup', "$CHANGE_TARGET")
+                        maven.runMavenWithSubmarineSettings('clean install', true)
                     }
                 }
             }
         }
         stage('Build submarine-runtimes') {
             steps {
-                timeout(30) {
-                    dir("submarine-runtimes") {
-                        script {
-                            githubscm.checkoutIfExists('submarine-runtimes', "$CHANGE_AUTHOR", "$CHANGE_BRANCH", 'kiegroup', "$CHANGE_TARGET")
-                            maven.runMavenWithSubmarineSettings('clean install', true)
-                        }
+                dir("submarine-runtimes") {
+                    script {
+                        githubscm.checkoutIfExists('submarine-runtimes', "$CHANGE_AUTHOR", "$CHANGE_BRANCH", 'kiegroup', "$CHANGE_TARGET")
+                        maven.runMavenWithSubmarineSettings('clean install', true)
                     }
                 }
             }
         }
         stage('Build submarine-examples') {
             steps {
-                timeout(30) {
-                    script {
-                        maven.runMavenWithSubmarineSettings('clean install', false)
-                    }
+                script {
+                    maven.runMavenWithSubmarineSettings('clean install', false)
                 }
             }
         }
