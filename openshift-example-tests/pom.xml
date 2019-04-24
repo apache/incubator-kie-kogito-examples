@@ -16,8 +16,6 @@
 
   <properties>
     <java.version>1.8</java.version>
-    <cz.xtf.version>0.10</cz.xtf.version>
-    <io.rest-assured.version>3.3.0</io.rest-assured.version>
     <!-- Skip tests by default. -->
     <skipITs>true</skipITs>
   </properties>
@@ -27,12 +25,10 @@
     <dependency>
       <groupId>cz.xtf</groupId>
       <artifactId>core</artifactId>
-      <version>${cz.xtf.version}</version>
     </dependency>
     <dependency>
       <groupId>cz.xtf</groupId>
       <artifactId>builder</artifactId>
-      <version>${cz.xtf.version}</version>
     </dependency>
 
     <!-- Logging -->
@@ -60,7 +56,6 @@
     <dependency>
       <groupId>io.rest-assured</groupId>
       <artifactId>rest-assured</artifactId>
-      <version>${io.rest-assured.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
