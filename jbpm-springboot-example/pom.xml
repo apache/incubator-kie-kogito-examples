@@ -9,7 +9,6 @@
     <version>8.0.0-SNAPSHOT</version>
   </parent>
 
-  <groupId>org.submarine.examples</groupId>
   <artifactId>jbpm-springboot-example</artifactId>
 
   <name>jBPM example running on SpringBoot</name>
@@ -17,11 +16,10 @@
 
   <properties>
     <java.version>1.8</java.version>
-    <submarine.version>8.0.0-SNAPSHOT</submarine.version>
-    <swagger.version>1.5.21</swagger.version>
     <cxf.version>3.2.6</cxf.version>
     <springboot.version>2.1.1.RELEASE</springboot.version>
     <dependencyInjection>false</dependencyInjection>
+    <javax.activation.version>1.1.1</javax.activation.version>
   </properties>
 
   <dependencyManagement>
@@ -36,7 +34,7 @@
       <dependency>
         <groupId>ch.qos.logback</groupId>
         <artifactId>logback-core</artifactId>
-        <version>1.1.3</version>
+        <version>${version.ch.qos.logback}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -60,28 +58,24 @@
     <dependency>
       <groupId>org.kie</groupId>
       <artifactId>kie-api</artifactId>
-      <version>${submarine.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.jbpm</groupId>
       <artifactId>jbpm-flow</artifactId>
-      <version>${submarine.version}</version>
     </dependency>
     <dependency>
       <groupId>io.swagger</groupId>
       <artifactId>swagger-annotations</artifactId>
-      <version>${swagger.version}</version>
     </dependency>
     <dependency>
       <groupId>javax.xml.bind</groupId>
       <artifactId>jaxb-api</artifactId>
-      <version>2.3.0</version>
     </dependency>
     <dependency>
       <groupId>javax.activation</groupId>
       <artifactId>activation</artifactId>
-      <version>1.1.1</version>
+      <version>${javax.activation.version}</version>
     </dependency>
 
     <dependency>
@@ -96,7 +90,6 @@
       <plugin>
         <groupId>org.kie</groupId>
         <artifactId>kie-maven-plugin</artifactId>
-        <version>${submarine.version}</version>
         <extensions>true</extensions>
       </plugin>
       <plugin>
@@ -117,7 +110,6 @@
       <plugin>
         <groupId>com.github.kongchen</groupId>
         <artifactId>swagger-maven-plugin</artifactId>
-        <version>3.1.8</version>
         <configuration>
           <apiSources>
             <apiSource>
@@ -149,17 +141,17 @@
           <dependency>
             <groupId>org.kie</groupId>
             <artifactId>kie-api</artifactId>
-            <version>${submarine.version}</version>
+            <version>${version.org.kie}</version>
           </dependency>
           <dependency>
             <groupId>org.drools</groupId>
             <artifactId>drools-core</artifactId>
-            <version>${submarine.version}</version>
+            <version>${version.org.kie}</version>
           </dependency>
           <dependency>
             <groupId>org.jbpm</groupId>
             <artifactId>jbpm-flow</artifactId>
-            <version>${submarine.version}</version>
+            <version>${version.org.kie}</version>
           </dependency>
         </dependencies>
       </plugin>

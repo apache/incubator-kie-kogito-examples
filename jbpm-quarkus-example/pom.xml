@@ -16,22 +16,12 @@
   <name>jBPM example running on Quarkus</name>
   <description>Order management service</description>
 
-  <properties>
-    <quarkus.version>${version.io.quarkus}</quarkus.version>
-    <submarine.version>8.0.0-SNAPSHOT</submarine.version>
-    <swagger.version>1.5.21</swagger.version>
-
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-  </properties>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
         <groupId>io.quarkus</groupId>
         <artifactId>quarkus-bom</artifactId>
-        <version>${quarkus.version}</version>
+        <version>${version.io.quarkus}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -47,37 +37,30 @@
     <dependency>
       <groupId>org.kie</groupId>
       <artifactId>kie-api</artifactId>
-      <version>${submarine.version}</version>
     </dependency>
     <dependency>
       <groupId>org.drools</groupId>
       <artifactId>drools-core-static</artifactId>
-      <version>${submarine.version}</version>
     </dependency>
     <dependency>
       <groupId>org.drools</groupId>
       <artifactId>drools-compiler</artifactId>
-      <version>${submarine.version}</version>
     </dependency>
     <dependency>
       <groupId>org.drools</groupId>
       <artifactId>drools-canonical-model</artifactId>
-      <version>${submarine.version}</version>
     </dependency>
     <dependency>
       <groupId>org.drools</groupId>
       <artifactId>drools-model-compiler</artifactId>
-      <version>${submarine.version}</version>
     </dependency>
     <dependency>
       <groupId>org.jbpm</groupId>
       <artifactId>jbpm-flow</artifactId>
-      <version>${submarine.version}</version>
     </dependency>
     <dependency>
       <groupId>io.swagger</groupId>
       <artifactId>swagger-annotations</artifactId>
-      <version>${swagger.version}</version>
     </dependency>
   </dependencies>
   <build>
@@ -85,7 +68,6 @@
       <plugin>
         <groupId>io.quarkus</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
-        <version>${quarkus.version}</version>
         <executions>
           <execution>
             <goals>
@@ -97,13 +79,11 @@
       <plugin>
         <groupId>org.kie</groupId>
         <artifactId>kie-maven-plugin</artifactId>
-        <version>${submarine.version}</version>
         <extensions>true</extensions>
       </plugin>
       <plugin>
         <groupId>com.github.kongchen</groupId>
         <artifactId>swagger-maven-plugin</artifactId>
-        <version>3.1.8</version>
         <configuration>
           <apiSources>
             <apiSource>
@@ -135,17 +115,17 @@
           <dependency>
             <groupId>org.kie</groupId>
             <artifactId>kie-api</artifactId>
-            <version>${submarine.version}</version>
+            <version>${version.org.kie}</version>
           </dependency>
           <dependency>
             <groupId>org.drools</groupId>
             <artifactId>drools-core</artifactId>
-            <version>${submarine.version}</version>
+            <version>${version.org.kie}</version>
           </dependency>
           <dependency>
             <groupId>org.jbpm</groupId>
             <artifactId>jbpm-flow</artifactId>
-            <version>${submarine.version}</version>
+            <version>${version.org.kie}</version>
           </dependency>
         </dependencies>
       </plugin>
@@ -164,17 +144,10 @@
           <plugin>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-maven-plugin</artifactId>
-            <version>${quarkus.version}</version>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>native-image</goal>
-                </goals>
-                <configuration>
-                  <enableHttpUrlHandler>true</enableHttpUrlHandler>
-                </configuration>
-              </execution>
-            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-failsafe-plugin</artifactId>
           </plugin>
         </plugins>
       </build>
