@@ -1,26 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
   <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.submarine</groupId>
+    <artifactId>submarine-examples</artifactId>
+    <version>8.0.0-SNAPSHOT</version>
+  </parent>
 
-  <groupId>org.submarine</groupId>
   <artifactId>dmn-quarkus-example</artifactId>
-  <version>1.0-SNAPSHOT</version>
-
-  <properties>
-    <quarkus.version>0.12.0</quarkus.version>
-    <surefire-plugin.version>2.22.0</surefire-plugin.version>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-    <submarine.version>8.0.0-SNAPSHOT</submarine.version>
-  </properties>
 
   <dependencyManagement>
     <dependencies>
       <dependency>
         <groupId>io.quarkus</groupId>
         <artifactId>quarkus-bom</artifactId>
-        <version>${quarkus.version}</version>
+        <version>${version.io.quarkus}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -41,11 +35,11 @@
       <artifactId>quarkus-resteasy-jsonb</artifactId>
     </dependency>
 
-
+    <!-- TODO add this dependency to BOM -->
     <dependency>
       <groupId>org.kie</groupId>
       <artifactId>kie-dmn-rest-utils</artifactId>
-      <version>${submarine.version}</version>
+      <version>${project.version}</version>
     </dependency>
 
     <dependency>
@@ -64,7 +58,6 @@
     <plugins>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>${surefire-plugin.version}</version>
         <configuration>
           <systemProperties>
             <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
@@ -74,7 +67,6 @@
       <plugin>
         <groupId>io.quarkus</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
-        <version>${quarkus.version}</version>
         <executions>
           <execution>
             <goals>
@@ -98,35 +90,9 @@
           <plugin>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-maven-plugin</artifactId>
-            <version>${quarkus.version}</version>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>native-image</goal>
-                </goals>
-                <configuration>
-                  <enableHttpUrlHandler>true</enableHttpUrlHandler>
-                </configuration>
-              </execution>
-            </executions>
           </plugin>
           <plugin>
             <artifactId>maven-failsafe-plugin</artifactId>
-            <version>${surefire-plugin.version}</version>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>integration-test</goal>
-                  <goal>verify</goal>
-                </goals>
-                <configuration>
-                  <systemProperties>
-                    <native.image.path>${project.build.directory}/${project.build.finalName}-runner
-                    </native.image.path>
-                  </systemProperties>
-                </configuration>
-              </execution>
-            </executions>
           </plugin>
         </plugins>
       </build>
