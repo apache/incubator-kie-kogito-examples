@@ -22,6 +22,7 @@ import cz.xtf.builder.builders.BuildConfigBuilder;
 import cz.xtf.builder.builders.ImageStreamBuilder;
 import cz.xtf.core.openshift.OpenShiftBinary;
 import cz.xtf.core.openshift.OpenShifts;
+import cz.xtf.core.waiting.SimpleWaiter;
 import io.fabric8.openshift.api.model.ImageSourceBuilder;
 import io.fabric8.openshift.api.model.ImageSourcePath;
 import io.fabric8.openshift.api.model.ImageStream;
@@ -172,6 +173,12 @@ public class Deployer {
     private static void createInsecureImageStream(Project project, String name, String tag, String externalImage) {
         ImageStream s2iImageStream = new ImageStreamBuilder(name).addTag(tag, externalImage, true).build();
         project.getMaster().createImageStream(s2iImageStream);
+        new SimpleWaiter(() -> isImageStreamTagAvailable(project, name, tag)).reason("Waiting for image to be loaded by OpenShift.").timeout(TimeUnit.MINUTES, 5).waitFor();
+    }
+
+    private static boolean isImageStreamTagAvailable(Project project, String imageStreamName, String imageStreamTag) {
+        return project.getMaster().getImageStream(imageStreamName).getStatus().getTags().stream()
+                                                                                        .anyMatch(s -> s.getTag().equals(imageStreamTag));
     }
 
     /**
