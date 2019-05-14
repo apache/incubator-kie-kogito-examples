@@ -1,0 +1,19 @@
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: onboarding-hr
+  namespace: default
+  labels:
+    department: process
+    id: process
+    employeeValidation: process
+spec:
+  runLatest:
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            image: docker.io/mswiderski/onboarding-hr:0.1
+            env:
+            - name: NAMESPACE
+              value: "default"

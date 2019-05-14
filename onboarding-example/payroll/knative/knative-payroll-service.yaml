@@ -1,0 +1,19 @@
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: onboarding-payroll
+  namespace: default
+  labels:
+    taxRate: process
+    vacationDays: process
+    paymentDate: process
+spec:
+  runLatest:
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            image: docker.io/mswiderski/onboarding-payroll:0.1
+            env:
+            - name: NAMESPACE
+              value: "default"
