@@ -1,0 +1,17 @@
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: onboarding
+  namespace: default
+  labels:
+    onboarding: process
+spec:
+  runLatest:
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            image: docker.io/mswiderski/onboarding:0.2
+            env:
+            - name: NAMESPACE
+              value: "default"

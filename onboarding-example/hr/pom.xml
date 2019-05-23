@@ -4,17 +4,19 @@
   xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-
   <parent>
     <groupId>org.submarine</groupId>
-    <artifactId>submarine-examples</artifactId>
+    <artifactId>onboarding-example</artifactId>
     <version>8.0.0-SNAPSHOT</version>
   </parent>
-
-  <artifactId>jbpm-quarkus-example</artifactId>
-
-  <name>jBPM example running on Quarkus</name>
-  <description>Order management service</description>
+  <artifactId>hr</artifactId>
+  <packaging>jar</packaging>
+  <name>hr</name>
+  <description>HR related processes and decisions for onboarding</description>
+  
+  <properties>
+    <generateModel>YES</generateModel>    
+  </properties>
 
   <dependencyManagement>
     <dependencies>
@@ -55,12 +57,24 @@
       <artifactId>drools-model-compiler</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.jbpm</groupId>
-      <artifactId>jbpm-flow</artifactId>
-    </dependency>
-    <dependency>
       <groupId>io.swagger</groupId>
       <artifactId>swagger-annotations</artifactId>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>monitoring-prometheus-addon</artifactId>
+    </dependency>
+    
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-junit5</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.rest-assured</groupId>
+      <artifactId>rest-assured</artifactId>
+      <scope>test</scope>
     </dependency>
   </dependencies>
   <build>
@@ -68,6 +82,10 @@
       <plugin>
         <groupId>io.quarkus</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
+        <configuration>
+          <debug>false</debug>
+          <jvmArgs>-Dquarkus.http.port=8081 -Dquarkus.http.host=localhost</jvmArgs>
+        </configuration>
         <executions>
           <execution>
             <goals>
@@ -79,7 +97,7 @@
       <plugin>
         <groupId>org.kie</groupId>
         <artifactId>kie-maven-plugin</artifactId>
-        <extensions>true</extensions>
+        <extensions>true</extensions>        
       </plugin>
       <plugin>
         <groupId>com.github.kongchen</groupId>
@@ -89,7 +107,7 @@
             <apiSource>
               <springmvc>false</springmvc>
               <locations>
-                <location>com.myspace.demo</location>
+                <location>org.submarine</location>
               </locations>
               <schemes>http,https</schemes>
               <info>
@@ -127,10 +145,16 @@
           <plugin>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-maven-plugin</artifactId>
-          </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-failsafe-plugin</artifactId>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>native-image</goal>
+                </goals>
+                <configuration>
+                  <enableHttpUrlHandler>true</enableHttpUrlHandler>
+                </configuration>
+              </execution>
+            </executions>
           </plugin>
         </plugins>
       </build>
