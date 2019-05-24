@@ -3,12 +3,11 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.submarine</groupId>
-    <artifactId>submarine-examples</artifactId>
+    <groupId>org.kie.kogito</groupId>
+    <artifactId>kogito-examples</artifactId>
     <version>8.0.0-SNAPSHOT</version>
   </parent>
 
-  <groupId>org.submarine.examples</groupId>
   <artifactId>openshift-example-tests</artifactId>
 
   <name>OpenShift tests for Submarine examples</name>
@@ -102,4 +101,3 @@
     </repository>
   </repositories>
 </project>
-

@@ -3,11 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.submarine</groupId>
-    <artifactId>submarine-examples</artifactId>
+    <groupId>org.kie.kogito</groupId>
+    <artifactId>kogito-examples</artifactId>
     <version>8.0.0-SNAPSHOT</version>
   </parent>
-
+  <groupId>org.kie.kogito.examples</groupId>
   <artifactId>drools-quarkus-example</artifactId>
   <name>Drools example running on Quarkus</name>
 
@@ -15,13 +15,23 @@
     <generateModel>YES</generateModel>
   </properties>
 
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>io.quarkus</groupId>
+        <artifactId>quarkus-bom</artifactId>
+        <version>${version.io.quarkus}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <build>
-    <finalName>submarine-quickstart</finalName>
     <plugins>
       <plugin>
-        <groupId>org.kie</groupId>
-        <artifactId>kie-maven-plugin</artifactId>
+        <groupId>org.kie.kogito</groupId>
+        <artifactId>kogito-maven-plugin</artifactId>
         <extensions>true</extensions>
       </plugin>
       <plugin>
@@ -45,7 +55,6 @@
     <dependency>
       <groupId>org.drools</groupId>
       <artifactId>drools-decisiontables</artifactId>
-      <version>7.20.0.Final</version>
       <exclusions>
         <exclusion>
           <groupId>org.drools</groupId>
@@ -60,19 +69,23 @@
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-resteasy-jsonb</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
       <artifactId>quarkus-arc</artifactId>
     </dependency>
 
     <dependency>
-      <groupId>org.drools</groupId>
+      <groupId>org.kie.kogito</groupId>
       <artifactId>drools-core-static</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.drools</groupId>
+      <groupId>org.kie.kogito</groupId>
       <artifactId>drools-model-compiler</artifactId>
       <exclusions>
         <exclusion>
-          <groupId>org.drools</groupId>
+          <groupId>org.kie.kogito</groupId>
           <artifactId>drools-core-dynamic</artifactId>
         </exclusion>
         <exclusion>

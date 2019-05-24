@@ -5,10 +5,11 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.submarine</groupId>
+    <groupId>org.kie.kogito</groupId>
     <artifactId>onboarding-example</artifactId>
     <version>8.0.0-SNAPSHOT</version>
   </parent>
+  <groupId>org.kie.kogito.examples</groupId>
   <artifactId>payroll</artifactId>
   <packaging>jar</packaging>
   <name>payroll</name>
@@ -33,27 +34,27 @@
     </dependency>
 
     <dependency>
-      <groupId>org.kie</groupId>
-      <artifactId>kie-api</artifactId>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-api</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.drools</groupId>
+      <groupId>org.kie.kogito</groupId>
       <artifactId>drools-core-static</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.drools</groupId>
+      <groupId>org.kie.kogito</groupId>
       <artifactId>drools-compiler</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.drools</groupId>
+      <groupId>org.kie.kogito</groupId>
       <artifactId>drools-canonical-model</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.drools</groupId>
+      <groupId>org.kie.kogito</groupId>
       <artifactId>drools-model-compiler</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.jbpm</groupId>
+      <groupId>org.kie.kogito</groupId>
       <artifactId>jbpm-flow</artifactId>
       <exclusions>
         <exclusion>
@@ -62,18 +63,17 @@
         </exclusion>
       </exclusions>
     </dependency>
-        
+
     <dependency>
       <groupId>io.swagger</groupId>
       <artifactId>swagger-annotations</artifactId>
     </dependency>
-    
+
     <dependency>
-      <groupId>org.kie</groupId>
-      <artifactId>kie-dmn-rest-utils</artifactId>
-      <version>${project.version}</version>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-dmn-rest-utils</artifactId>
     </dependency>
-    
+
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-junit5</artifactId>
@@ -84,7 +84,7 @@
       <artifactId>rest-assured</artifactId>
       <scope>test</scope>
     </dependency>
-    
+
   </dependencies>
   <build>
     <plugins>
@@ -104,20 +104,19 @@
         </executions>
       </plugin>
       <plugin>
-        <groupId>org.kie</groupId>
-        <artifactId>kie-maven-plugin</artifactId>
+        <groupId>org.kie.kogito</groupId>
+        <artifactId>kogito-maven-plugin</artifactId>
         <extensions>true</extensions>
       </plugin>
       <plugin>
         <groupId>com.github.kongchen</groupId>
         <artifactId>swagger-maven-plugin</artifactId>
-        <version>3.1.8</version>
         <configuration>
           <apiSources>
             <apiSource>
               <springmvc>false</springmvc>
               <locations>
-                <location>org.submarine</location>
+                <location>org.kie.kogito.examples</location>
               </locations>
               <schemes>http,https</schemes>
               <info>
