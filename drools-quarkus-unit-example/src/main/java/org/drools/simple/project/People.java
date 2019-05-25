@@ -1,10 +1,10 @@
 package org.drools.simple.project;
 
-import org.kie.submarine.rules.DataSource;
-import org.kie.submarine.rules.Unit;
-import org.kie.submarine.rules.impl.ListDataSource;
-import org.submarine.quickstart.Person;
-import org.submarine.quickstart.Result;
+import org.kie.kogito.quickstart.Person;
+import org.kie.kogito.quickstart.Result;
+import org.kie.kogito.rules.DataSource;
+import org.kie.kogito.rules.Unit;
+import org.kie.kogito.rules.impl.ListDataSource;
 
 @Unit
 public class People {

@@ -1,6 +1,6 @@
 import { declarationOf, Rule, Pattern, on, Model, Session } from './drools'
 
-const Person = Java.type('org.submarine.examples.polyglot.Person');
+const Person = Java.type('org.kie.kogito.examples.polyglot.Person');
 const markV = declarationOf( Person.class );
 const olderV = declarationOf( Person.class );
 

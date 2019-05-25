@@ -1,13 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.submarine</groupId>
-    <artifactId>submarine-examples</artifactId>
+    <groupId>org.kie.kogito</groupId>
+    <artifactId>kogito-examples</artifactId>
     <version>8.0.0-SNAPSHOT</version>
   </parent>
   <artifactId>onboarding-example</artifactId>
   <packaging>pom</packaging>
-  
+
   <name>onboarding example running on Quarkus (onboarding, hr, payroll)</name>
   <description>onboarding example service (onboarding, hr, payroll)</description>
   

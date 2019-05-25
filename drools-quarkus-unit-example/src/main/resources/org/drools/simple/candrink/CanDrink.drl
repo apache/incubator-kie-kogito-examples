@@ -1,8 +1,8 @@
 package org.drools.simple.candrink
 unit People;
 
-import org.submarine.quickstart.Person
-import org.submarine.quickstart.Result
+import org.kie.kogito.quickstart.Person
+import org.kie.kogito.quickstart.Result
 
 rule R1 when
         $r : Result()

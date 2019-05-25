@@ -4,7 +4,7 @@ const declarationOf = DSL.declarationOf;
 const PatternDSL = Java.type('org.drools.model.PatternDSL');
 const Rule = PatternDSL.rule;
 const Pattern = PatternDSL.pattern;
-const on = (v1, v2) => new (Java.type('org.submarine.examples.temp.jsinterop.Consequence_2'))(v1,v2);
+const on = (v1, v2) => new (Java.type('org.kie.kogito.examples.temp.jsinterop.Consequence_2'))(v1,v2);
 const KieBaseBuilder = Java.type('org.drools.modelcompiler.builder.KieBaseBuilder');
 
 function Session(model) {
