@@ -2,7 +2,7 @@
 
 ## Installing and Running
 
-- Prerequisites: build locally submarine-bom and submarine-runtimes
+- Prerequisites: build locally kogito-bom and kogito-runtimes
 
 
 - Compile and Run

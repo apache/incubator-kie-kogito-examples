@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package org.submarine.examples.openshift;
+package org.kogito.examples.openshift;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -25,10 +25,10 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.submarine.examples.openshift.Project;
-import org.submarine.examples.openshift.TestConfig;
-import org.submarine.examples.openshift.deployment.Deployer;
-import org.submarine.examples.openshift.deployment.HttpDeployment;
+import org.kogito.examples.openshift.Project;
+import org.kogito.examples.openshift.TestConfig;
+import org.kogito.examples.openshift.deployment.Deployer;
+import org.kogito.examples.openshift.deployment.HttpDeployment;
 
 public class DroolsQuarkusExampleIntegrationTest {
 
@@ -37,7 +37,7 @@ public class DroolsQuarkusExampleIntegrationTest {
 
     @BeforeClass
     public static void setUp() throws MalformedURLException {
-        URL assetsUrl = new URL("https://github.com/kiegroup/submarine-examples");
+        URL assetsUrl = new URL("https://github.com/kiegroup/kogito-examples");
         String gitContextDir = "drools-quarkus-example";
 
         String randomProjectName = RandomStringUtils.randomAlphanumeric(4).toLowerCase();

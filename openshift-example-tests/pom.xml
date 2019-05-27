@@ -10,8 +10,8 @@
 
   <artifactId>openshift-example-tests</artifactId>
 
-  <name>OpenShift tests for Submarine examples</name>
-  <description>Set of OpenShift integration tests verifying functionality of Submarine examples.</description>
+  <name>OpenShift tests for Kogito examples</name>
+  <description>Set of OpenShift integration tests verifying functionality of Kogito examples.</description>
 
   <properties>
     <java.version>1.8</java.version>

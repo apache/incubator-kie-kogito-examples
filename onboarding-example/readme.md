@@ -2,7 +2,7 @@
 
 ## Description
 
-This sample service illustrates use of submarine components to build a complete
+This sample service illustrates use of kogito components to build a complete
 business solution based on business processes and decisions.
 
 It consists of three services
@@ -16,7 +16,7 @@ Users usually will interact directly only with onboarding service.
 
 ## Installation
 
-Currently there is a need to manually build [submarine-cloud](https://github.com/kiegroup/submarine-cloud)
+Currently there is a need to manually build [kogito-cloud](https://github.com/kiegroup/kogito-cloud)
 repository as it's not yet published to any remote maven repository.
 
 Follow instruction of individual services

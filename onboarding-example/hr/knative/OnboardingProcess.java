@@ -6,7 +6,7 @@ import org.drools.core.util.KieFunctions;
 
 @javax.inject.Singleton()
 @javax.inject.Named("onboarding.onboarding")
-public class OnboardingProcess extends org.kie.submarine.process.impl.AbstractProcess<com.myspace.onboarding.OnboardingModel> {
+public class OnboardingProcess extends org.kie.kogito.process.impl.AbstractProcess<com.myspace.onboarding.OnboardingModel> {
 
     com.myspace.Application app;
 
@@ -116,7 +116,7 @@ public class OnboardingProcess extends org.kie.submarine.process.impl.AbstractPr
                 return model;
             }
 
-            public org.kie.submarine.process.ProcessInstance<SetupHRModel> createInstance(SetupHRModel model) {
+            public org.kie.kogito.process.ProcessInstance<SetupHRModel> createInstance(SetupHRModel model) {
                 return app.createSetupHRProcess().createInstance(model);
             }
 
@@ -158,7 +158,7 @@ public class OnboardingProcess extends org.kie.submarine.process.impl.AbstractPr
                 return model;
             }
 
-            public org.kie.submarine.process.ProcessInstance<SetupPayrollModel> createInstance(SetupPayrollModel model) {
+            public org.kie.kogito.process.ProcessInstance<SetupPayrollModel> createInstance(SetupPayrollModel model) {
                 return app.createSetupPayrollProcess().createInstance(model);
             }
 

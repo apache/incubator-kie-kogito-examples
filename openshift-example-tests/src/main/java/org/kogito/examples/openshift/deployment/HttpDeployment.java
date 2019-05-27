@@ -13,13 +13,13 @@
  * limitations under the License.
  */
 
-package org.submarine.examples.openshift.deployment;
+package org.kogito.examples.openshift.deployment;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
 import io.fabric8.openshift.api.model.Route;
-import org.submarine.examples.openshift.Project;
+import org.kogito.examples.openshift.Project;
 
 public class HttpDeployment {
 
