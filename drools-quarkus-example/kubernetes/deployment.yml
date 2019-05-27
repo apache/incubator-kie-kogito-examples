@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - env:
-        image: submarine-examples/drools-quarkus:latest
+        image: kogito-examples/drools-quarkus:latest
         imagePullPolicy: IfNotPresent
         livenessProbe:
           exec:

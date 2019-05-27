@@ -4,9 +4,9 @@ import java.util.Map;
 
 import org.kie.api.runtime.process.WorkItem;
 import org.kie.api.runtime.process.WorkItemManager;
-import org.kie.submarine.cloud.workitems.DiscoveredServiceWorkItemHandler;
-import org.kie.submarine.cloud.workitems.HttpMethods;
-import org.kie.submarine.cloud.workitems.ServiceInfo;
+import org.kie.kogito.cloud.workitems.DiscoveredServiceWorkItemHandler;
+import org.kie.kogito.cloud.workitems.HttpMethods;
+import org.kie.kogito.cloud.workitems.ServiceInfo;
 
 public class DecisionTaskWorkItemHandler extends DiscoveredServiceWorkItemHandler {
 

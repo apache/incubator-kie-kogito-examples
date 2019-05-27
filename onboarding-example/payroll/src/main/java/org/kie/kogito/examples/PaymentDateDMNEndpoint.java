@@ -25,8 +25,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.kie.dmn.api.core.DMNRuntime;
-import org.kie.dmn.submarine.rest.quarkus.DMNResult;
-import org.kie.dmn.submarine.rest.quarkus.DMNSubmarineQuarkus;
+import org.kie.dmn.kogito.rest.quarkus.DMNKogitoQuarkus;
+import org.kie.dmn.kogito.rest.quarkus.DMNResult;
 import org.kie.kogito.examples.payroll.Payroll;
 
 import io.swagger.annotations.Api;
@@ -37,14 +37,14 @@ import io.swagger.annotations.ApiParam;
 @Api(description = "Payments service")
 public class PaymentDateDMNEndpoint {
 
-    static final DMNRuntime dmnRuntime = DMNSubmarineQuarkus.createGenericDMNRuntime();
+    static final DMNRuntime dmnRuntime = DMNKogitoQuarkus.createGenericDMNRuntime();
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @ApiOperation("Calculates payment date for given employee")
     public Payroll calculatePaymentDate(@ApiParam(value = "data model representing employee to be used") Payroll payrollInput) {
-        DMNResult evaluate = DMNSubmarineQuarkus.evaluate(dmnRuntime, "paymentDate", Collections.singletonMap("employee", payrollInput.getEmployee()));
+        DMNResult evaluate = DMNKogitoQuarkus.evaluate(dmnRuntime, "paymentDate", Collections.singletonMap("employee", payrollInput.getEmployee()));
         Payroll payroll = new Payroll();
         
         payroll.setPaymentDate((String) evaluate.getDmnContext().get("paymentDate"));

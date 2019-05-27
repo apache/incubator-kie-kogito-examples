@@ -25,27 +25,26 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import org.kie.dmn.api.core.DMNRuntime;
-import org.kie.dmn.submarine.rest.quarkus.DMNResult;
-import org.kie.dmn.submarine.rest.quarkus.DMNSubmarineQuarkus;
-import org.kie.kogito.examples.payroll.Payroll;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.kie.dmn.api.core.DMNRuntime;
+import org.kie.dmn.kogito.rest.quarkus.DMNKogitoQuarkus;
+import org.kie.dmn.kogito.rest.quarkus.DMNResult;
+import org.kie.kogito.examples.payroll.Payroll;
 
 @Path("/vacationDays")
 @Api(description = "Vaction days service")
 public class VacationDaysDMNEndpoint {
 
-    static final DMNRuntime dmnRuntime = DMNSubmarineQuarkus.createGenericDMNRuntime();
+    static final DMNRuntime dmnRuntime = DMNKogitoQuarkus.createGenericDMNRuntime();
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @ApiOperation("Calculates vacation days for given employee")
     public Payroll calculateVactionDays(@ApiParam(value = "data model representing employee to be used") Payroll payrollInput) {
-        DMNResult evaluate = DMNSubmarineQuarkus.evaluate(dmnRuntime, "vacationDays", Collections.singletonMap("employee", payrollInput.getEmployee()));
+        DMNResult evaluate = DMNKogitoQuarkus.evaluate(dmnRuntime, "vacationDays", Collections.singletonMap("employee", payrollInput.getEmployee()));
         Payroll payroll = new Payroll();
         
         payroll.setVacationDays((BigDecimal) evaluate.getDmnContext().get("vacationDays"));

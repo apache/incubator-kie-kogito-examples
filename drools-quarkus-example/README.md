@@ -41,7 +41,7 @@ curl -d '{"name":"edo", "age":32}' -H "Content-Type: application/json" \
 
 #### Build Container on docker
 ```sh
-docker build -t submarine-examples/drools-quarkus .
+docker build -t kogito-examples/drools-quarkus .
 docker images | grep drools-quarkus
 ```
 

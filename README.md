@@ -1,8 +1,8 @@
-# Submarine Examples
+# Kogito Examples
 
 - Prerequisites:
-  - `git clone https://github.com/kiegroup/submarine-bom; cd submarine-bom; mvn install`
-  - `git clone https://github.com/kiegroup/submarine-runtimes; cd submarine-runtimes; mvn install`
+  - `git clone https://github.com/kiegroup/kogito-bom; cd kogito-bom; mvn install`
+  - `git clone https://github.com/kiegroup/kogito-runtimes; cd kogito-runtimes; mvn install`
   
 - Polyglot Drools with GraalVM: see [README.md](drools-polyglot-example/README.md)
 - Drools on Quarkus: see [README.md](drools-quarkus-example/README.md)

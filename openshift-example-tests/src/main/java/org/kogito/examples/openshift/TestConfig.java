@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package org.submarine.examples.openshift;
+package org.kogito.examples.openshift;
 
 import cz.xtf.core.config.XTFConfig;
 

@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package org.submarine.examples.openshift.deployment;
+package org.kogito.examples.openshift.deployment;
 
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
@@ -26,7 +26,7 @@ import cz.xtf.core.waiting.SimpleWaiter;
 import io.fabric8.openshift.api.model.ImageSourceBuilder;
 import io.fabric8.openshift.api.model.ImageSourcePath;
 import io.fabric8.openshift.api.model.ImageStream;
-import org.submarine.examples.openshift.Project;
+import org.kogito.examples.openshift.Project;
 
 public class Deployer {
 
@@ -124,7 +124,7 @@ public class Deployer {
                                                                                              .withName(s2iResultImageStreamName + ":latest")
                                                                                              .withNamespace(project.getName())
                                                                                          .endFrom()
-                                                                                         .withPaths(new ImageSourcePath(".", "/home/submarine/bin"))
+                                                                                         .withPaths(new ImageSourcePath(".", "/home/kogito/bin"))
                                                                                          .build();
 
         io.fabric8.openshift.api.model.BuildConfig runtimeConfig = new io.fabric8.openshift.api.model.BuildConfigBuilder().withNewMetadata()

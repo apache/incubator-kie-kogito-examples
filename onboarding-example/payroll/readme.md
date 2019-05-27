@@ -55,7 +55,7 @@ curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -
 
 ## Deployment to OpenShift
 
-NOTE: Make sure that submarine S2I image builders are available to your OpenShift environment
+NOTE: Make sure that kogito S2I image builders are available to your OpenShift environment
 
 ### Build from local workspace
 
@@ -70,7 +70,7 @@ oc start-build payroll-service-builder --from-dir . --incremental=true
 Once the build is completed create new build for runtime image
 
 ```sh
-oc new-build --name payroll-service --source-image=payroll-service-builder --source-image-path=/home/submarine/bin:. --image-stream=kaas-quarkus-centos
+oc new-build --name payroll-service --source-image=payroll-service-builder --source-image-path=/home/kogito/bin:. --image-stream=kaas-quarkus-centos
 ```
 
 Next create application for the runtime image
