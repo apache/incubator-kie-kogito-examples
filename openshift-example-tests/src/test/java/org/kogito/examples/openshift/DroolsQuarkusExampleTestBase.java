@@ -16,7 +16,6 @@
 package org.kogito.examples.openshift;
 
 import java.net.MalformedURLException;
-import java.net.URL;
 
 import io.restassured.RestAssured;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -25,35 +24,32 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.kogito.examples.openshift.Project;
-import org.kogito.examples.openshift.TestConfig;
-import org.kogito.examples.openshift.deployment.Deployer;
 import org.kogito.examples.openshift.deployment.HttpDeployment;
 
-public class DroolsQuarkusExampleIntegrationTest {
+public abstract class DroolsQuarkusExampleTestBase {
 
-    private static Project project;
-    private static HttpDeployment kaasDeloyment;
+    protected static Project project;
+
+    protected static final String ASSETS_URL = "https://github.com/kiegroup/kogito-examples";
+    protected static final String GIT_CONTEXT_DIR = "drools-quarkus-example";
 
     @BeforeClass
-    public static void setUp() throws MalformedURLException {
-        URL assetsUrl = new URL("https://github.com/kiegroup/kogito-examples");
-        String gitContextDir = "drools-quarkus-example";
-
+    public static void setUpProject() throws MalformedURLException {
         String randomProjectName = RandomStringUtils.randomAlphanumeric(4).toLowerCase();
         project = Project.create("drools-example-" + randomProjectName);
-        kaasDeloyment = Deployer.deployKaasUsingS2iAndWait(project, assetsUrl, gitContextDir, TestConfig.getKaasS2iQuarkusBuilderImage(), TestConfig.getKaasQuarkusRuntimeImage());
     }
 
     @AfterClass
-    public static void tearDown() {
+    public static void tearDownProject() {
         project.delete();
     }
+
+    protected abstract HttpDeployment getKogitoDeployment();
 
     @Test
     public void testHelloWorld() {
       RestAssured.when()
-          .get(kaasDeloyment.getRouteUrl().toExternalForm() + "/hello")
+          .get(getKogitoDeployment().getRouteUrl().toExternalForm() + "/hello")
       .then()
           .statusCode(200)
           .assertThat().body(StringContains.containsString("Mario is older than Mark"));
@@ -66,7 +62,7 @@ public class DroolsQuarkusExampleIntegrationTest {
           .header("Content-Type", "application/json")
           .body("{\"name\":\"edo\", \"age\":32}")
       .when()
-          .post(kaasDeloyment.getRouteUrl().toExternalForm() + "/persons")
+          .post(getKogitoDeployment().getRouteUrl().toExternalForm() + "/persons")
       .then()
           .statusCode(200);
     }

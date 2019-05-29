@@ -60,7 +60,7 @@ public class Deployer {
         String runtimeImageBuildName = buildKaasS2iRuntimeImage(project, s2iResultImageStreamName, s2iRuntimeImageTag);
 
         masterBinary.execute("new-app", runtimeImageBuildName + ":latest");
-        project.getMaster().waiters().areExactlyNPodsRunning(1, runtimeImageBuildName).interval(TimeUnit.MINUTES, 1L).waitFor();
+        project.getMaster().waiters().areExactlyNPodsRunning(1, runtimeImageBuildName).timeout(TimeUnit.MINUTES, 1L).waitFor();
 
         masterBinary.execute("expose", "svc/" + runtimeImageBuildName);
 
@@ -156,7 +156,7 @@ public class Deployer {
 
         project.getMaster().createBuildConfig(runtimeConfig);
         project.getMaster().startBuild(buildName);
-        project.getMaster().waiters().hasBuildCompleted(buildName).timeout(TimeUnit.MINUTES, 2L).waitFor();
+        project.getMaster().waiters().hasBuildCompleted(buildName).timeout(TimeUnit.MINUTES, 5L).waitFor();
         return resultImageStreamName;
     }
 
