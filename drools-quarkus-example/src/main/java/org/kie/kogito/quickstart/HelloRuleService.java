@@ -1,22 +1,15 @@
 package org.kie.kogito.quickstart;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import org.drools.modelcompiler.KieRuntimeBuilder;
-import org.kie.api.runtime.KieSession;
-import org.kie.api.runtime.rule.FactHandle;
+import javax.inject.Named;
+import org.drools.modelcompiler.SessionMemory;
+import org.kie.kogito.rules.RuleUnit;
 
 @ApplicationScoped
 public class HelloRuleService {
 
-    private KieSession ksession;
-
-    HelloRuleService() { }
-
-    @Inject
-    HelloRuleService( KieRuntimeBuilder runtimeBuilder ) {
-        ksession = runtimeBuilder.newKieSession();
-    }
+    @Named("simpleKS")
+    RuleUnit<SessionMemory> ruleUnit;
 
     public String run() {
 
@@ -25,12 +18,13 @@ public class HelloRuleService {
         Person edson = new Person("Edson", 35);
         Person mario = new Person("Mario", 40);
 
-        ksession.insert(result);
-        FactHandle markFH = ksession.insert(mark);
-        FactHandle edsonFH = ksession.insert(edson);
-        FactHandle marioFH = ksession.insert(mario);
+        SessionMemory memory = new SessionMemory();
+        memory.add(result);
+        memory.add(mark);
+        memory.add(edson);
+        memory.add(mario);
 
-        ksession.fireAllRules();
+        ruleUnit.evaluate(memory);
 
         return result.toString();
     }
