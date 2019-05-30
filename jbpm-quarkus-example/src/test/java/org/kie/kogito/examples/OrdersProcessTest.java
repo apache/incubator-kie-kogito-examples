@@ -61,9 +61,11 @@ public class OrdersProcessTest {
         
         childProcessInstance.completeWorkItem(workItems.get(0).getId(), null);
         
-        assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_COMPLETED, childProcessInstance.status());                
+        assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_COMPLETED, childProcessInstance.status());                        
+        assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_COMPLETED, processInstance.status());        
         
-        processInstance.abort();
-        assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_ABORTED, processInstance.status());
+        // no active process instances for both orders and order items processes
+        assertEquals(0, orderProcess.instances().values().size());
+        assertEquals(0, orderItemsProcess.instances().values().size());
     }
 }
