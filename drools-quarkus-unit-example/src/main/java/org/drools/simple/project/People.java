@@ -3,11 +3,12 @@ package org.drools.simple.project;
 import org.kie.kogito.quickstart.Person;
 import org.kie.kogito.quickstart.Result;
 import org.kie.kogito.rules.DataSource;
+import org.kie.kogito.rules.RuleUnitMemory;
 import org.kie.kogito.rules.Unit;
 import org.kie.kogito.rules.impl.ListDataSource;
 
 @Unit
-public class People {
+public class People implements RuleUnitMemory {
     private final DataSource<Result> results = new ListDataSource<>();
     private final DataSource<Person> persons = new ListDataSource<>();
 
