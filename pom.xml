@@ -41,6 +41,13 @@
       </snapshots>
     </repository>
   </repositories>
+  
+  <scm>
+    <connection>scm:git:https://github.com/kiegroup/kogito-examples.git</connection>
+    <developerConnection>scm:git:git@github.com:kiegroup/kogito-examples.git</developerConnection>
+    <url>https://github.com/kiegroup/kogito-examples</url>
+  </scm>
+  
   <modules>
     <module>drools-quarkus-example</module>
     <module>drools-quarkus-unit-example</module>
