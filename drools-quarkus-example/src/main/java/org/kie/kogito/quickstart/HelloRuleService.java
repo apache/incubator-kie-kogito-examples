@@ -2,8 +2,8 @@ package org.kie.kogito.quickstart;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
-import org.drools.modelcompiler.SessionMemory;
 import org.kie.kogito.rules.RuleUnit;
+import org.kie.kogito.rules.impl.SessionMemory;
 
 @ApplicationScoped
 public class HelloRuleService {
