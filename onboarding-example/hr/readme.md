@@ -2,56 +2,69 @@
 
 ## Description
 
-This is a sample service that is exposing set of REST endpoints to allow
+This is a sample HR service that is exposing set of REST endpoints to:
 
-* verify if given employee requires registration aka onboarding
+* verify if the given employee requires registration
 * assign employee id and email address
 * assign department and manager
 
+The service is defined as a decision service, using three sets of DRL rules for each of the functions described above.
 
-## Installation
+## Installing and Running
 
-- Compile and Run
+### Compile and Run in Local Dev Mode
 
-    ```
-     mvn clean package quarkus:dev
-    ```
+```
+mvn clean package quarkus:dev    
+```
 
-- Native Image (requires JAVA_HOME to point to a valid GraalVM)
+### Compile and Run using Local Native Image
+Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
 
-    ```
-    mvn clean package -Pnative
-    ./target/hr-1.0.0-SNAPSHOT-runner -Dquarkus.http.port=8081 -Dquarkus.http.host=localhost
-    ```
+```
+mvn clean package -Pnative
+```
   
-## Usage
+To run the generated native executable, generated in `target/`, execute:
 
-There are three REST endponts exposed
+```
+./target/hr-{version}-runner -Dquarkus.http.port=8081 -Dquarkus.http.host=localhost
+```
+Please replace {version} with the actual version of kogito you are trying to use, e.g. 8.0.0-SNAPSHOT.
+  
+## Swagger documentation
 
-### post /id
+You can take a look at the [swagger definition](http://localhost:8081/docs/swagger.json) - automatically generated and included in this service - to determine all available operations exposed by this service.  For easy readability you can visualize the swagger definition file using a swagger UI like for example available [here](https://editor.swagger.io). In addition, various clients to interact with this service can be easily generated using this swagger definition.
 
-Assigns employee id and email address for given employee
+## Example Usage
+
+Once the service is up and running, you can use the following examples to interact with the service.
+
+### POST /id
+
+Assigns employee id and email address for given employee:
 
 ```sh
-curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"employee" : {"firstName" : "Mark", "lastName" : "Test", "personalId" : "xxx-yy-zzz", "birthDate" : "2012-12-10T14:50:12.123+02:00", "address" : {"country" : "US", "city" : "Boston", "street" : "any street 3", "zipCode" : "10001"}}}' http://localhost:8081/id                                                                                                  
+curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"employee" : {"firstName" : "Mark", "lastName" : "Test", "personalId" : "xxx-yy-zzz", "birthDate" : "2012-12-10T14:50:12.123+02:00", "address" : {"country" : "US", "city" : "Boston", "street" : "any street 3", "zipCode" : "10001"}}}' http://localhost:8081/id
 ```
 
-### post /employeeValidation
+As response the employee details including the new employee id and email address are returned.
 
-Allows to verify if given employee requires registration
+### POST /employeeValidation
+
+Allows to verify if the given employee requires registration:
 
 ```sh
-curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"employee" : {"firstName" : "Mark", "lastName" : "Test", "personalId" : "xxx-yy-zzz", "birthDate" : "2012-12-10T14:50:12.123+02:00", "address" : {"country" : "US", "city" : "Boston", "street" : "any street 3", "zipCode" : "10001"}}}' http://localhost:8081/employeeValidation                                                                                                  
+curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"employee" : {"firstName" : "Mark", "lastName" : "Test", "personalId" : "xxx-yy-zzz", "birthDate" : "2012-12-10T14:50:12.123+02:00", "address" : {"country" : "US", "city" : "Boston", "street" : "any street 3", "zipCode" : "10001"}}}' http://localhost:8081/employeeValidation
 ```
 
-### post /department
+### POST /department
 
-Assigns department and manager for given employee
+Assigns department and manager for the given employee:
 
 ```sh
-curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"employee" : {"firstName" : "Mark", "lastName" : "Test", "personalId" : "xxx-yy-zzz", "birthDate" : "2012-12-10T14:50:12.123+02:00", "address" : {"country" : "US", "city" : "Boston", "street" : "any street 3", "zipCode" : "10001"}}}' http://localhost:8081/department                                                                                                 
+curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"employee" : {"firstName" : "Mark", "lastName" : "Test", "personalId" : "xxx-yy-zzz", "birthDate" : "2012-12-10T14:50:12.123+02:00", "address" : {"country" : "US", "city" : "Boston", "street" : "any street 3", "zipCode" : "10001"}}}' http://localhost:8081/department
 ```
-
 
 ## Deployment to OpenShift
 
@@ -84,8 +97,6 @@ and lastly create the route for it
 ```sh
 oc expose svc/hr-service
 ```
-
-You can inspect [swagger docs](http://localhost:8081/docs/swagger.json) to learn more about the service.
 
 ## Knative
 

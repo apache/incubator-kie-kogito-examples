@@ -2,41 +2,44 @@
 
 ## Description
 
-This sample service illustrates use of kogito components to build a complete
-business solution based on business processes and decisions.
+This example illustrates how you can build a complete onboarding solution by combining multiple services (based on business processes and decisions).
 
-It consists of three services
+It consists of three independent services:
 
-* onboarding - main one which is the entry point for end users
-* hr - responsible for strictly hr related activities
-* payroll - responsible for payroll related activities
+* onboarding - main service where you can start onboarding new employees (defined as a set of 3 business processes)
+* hr - a decision service responsible for HR-related activities (using DRL rules)
+* payroll - a decision service responsible for payroll-related activities (using DMN)
 
-Users usually will interact directly only with onboarding service.
+Users will typically only interact with the main onboarding service, but this one relies on the other two to manage some of the work.
 
+You can run the example in any of the following configurations:
+* As local services using quarkus dev mode
+* As local services using native images
+* Running on top of Kubernetes
+* Running on top of knative
 
-## Installation
+## Installing and Running
 
-Currently there is a need to manually build [kogito-cloud](https://github.com/kiegroup/kogito-cloud)
-repository as it's not yet published to any remote maven repository.
+### Prerequisites
+ 
+You will need:
+  - Java 1.8.0+ installed 
+  - Environment variable JAVA_HOME set accordingly
+  - Maven 3.5.4+ installed
 
-Follow instruction of individual services
+When using native image compilation, you will also need: 
+  - GraalVM 1.0.0-rc16 installed - note that GraalVM 19.0+ does not (yet) work with Quarkus for native image compilation, this should be updated soon but please use 1.0.0.rc16 until then
+  - Environment variable GRAALVM_HOME set accordingly
+  - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too, please refer to GraalVM installation documentation for more details.
+
+### Installation
+
+Please follow the instruction for each of the individual services
 
 * [hr](hr/readme.md)
 * [payroll](payroll/readme.md)
 * [onboarding](onboarding/readme.md)
 
+## Example Usage
 
-## Usage
-
-### post /onboarding
-
-To start a onboarding for given employee use following sample request
-
-```sh
-curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"employee" : {"firstName" : "Mark", "lastName" : "Test", "personalId" : "xxx-yy-zzz", "birthDate" : "1995-12-10T14:50:12.123+02:00", "address" : {"country" : "US", "city" : "Boston", "street" : "any street 3", "zipCode" : "10001"}}}' http://localhost:8080/onboarding                                                                                                
-```
-
-Note that subsequent calls for the same employee will result in failed validation as only one time
-employee can be onboarded.
-
-You can inspect [swagger docs](http://localhost:8080/docs/swagger.json) to learn more about the service.
+Once the services are up and running, please use the sample request as described in the onboarding service readme to start a new onboarding.

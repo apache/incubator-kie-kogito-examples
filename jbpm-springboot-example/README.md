@@ -1,62 +1,71 @@
 # jBPM + SpringBoot example
 
+## Description
+
+A simple process service for ordering items, as a sequence of a script task (writing out some debug info) and a call activity invoking a sub-process, using a custom `Order` data element.
+
+The sub-process invokes a custom Java service `CalculationService.calculateTotal`, followed by a user task to verify the order.
+
+Based on these two processes (defined using BPMN 2.0 format), the custom data object and custom Java service, a new service is generated that exposes REST operations to create new orders (following the steps as defined in the main and sub-process), or to list and delete active orders.
+
 ## Installing and Running
 
-- Prerequisites: build locally kogito-bom and kogito-runtimes
+### Prerequisites
+ 
+You will need:
+  - Java 1.8.0+ installed 
+  - Environment variable JAVA_HOME set accordingly
+  - Maven 3.5.4+ installed
 
+## Installing and Running
 
-- Compile and Run
-
-    ```
-     mvn clean package spring-boot:run    
-    ```
-
+```
+mvn clean package spring-boot:run    
+```
 
 ## Swagger documentation
 
-Point to [swagger docs](http://localhost:8080/docs/swagger.json) to retrieve swagger definition of the exposed service
+You can take a look at the [swagger definition](http://localhost:8080/docs/swagger.json) - automatically generated and included in this service - to determine all available operations exposed by this service.  For easy readability you can visualize the swagger definition file using a swagger UI like for example available [here](https://editor.swagger.io). In addition, various clients to interact with this service can be easily generated using this swagger definition.
 
-You can visualize that JSON file at [swagger editor](https://editor.swagger.io)
+## Example Usage
 
-In addition client application can be easily generated from the swagger definition to interact with this service.
+Once the service is up and running, you can use the following examples to interact with the service.
 
-## Examples
+### POST /orders
 
-### post /orders
-
-Allows to create new orders with following sample command
+Allows to create a new order with the given data:
 
 ```sh
 curl -d '{"approver" : "john", "order" : {"orderNumber" : "12345", "shipped" : false}}' -H "Content-Type: application/json" \
-    -X POST http://localhost:8080/orders                                                                                                    
+    -X POST http://localhost:8080/orders
 ```
 
 As response the updated order is returned.
 
-### get /orders
+### GET /orders
 
-Returns list of orders currently active with following command
+Returns list of orders currently active:
 
 ```sh
-curl -H "Accept: application/json" -X GET http://localhost:8080/orders                                                                                                    
+curl -X GET http://localhost:8080/orders
 ```
 
-As response array of orders is returned
+As response an array of orders is returned.
 
-### get /orders/{id}
+### GET /orders/{id}
 
-Returns specified order active following command
+Returns order with given id (if active):
 
 ```sh
-curl -H "Accept: application/json" -X GET http://localhost:8080/orders/1                                                                                                   
+curl -X GET http://localhost:8080/orders/1
 ```
 
-As response single order is returned if found otherwise no content (204)
+As response a single order is returned if found, otherwise no content (204) is returned.
 
-### delete /orders/{id}
+### DELETE /orders/{id}
 
-Cancels specified order with following command
+Cancels order with given id
 
 ```sh
-curl -H "Accept: application/json" -X DELETE http://localhost:8080/orders/1                                                                                                   
+curl -X DELETE http://localhost:8080/orders/1
 ```

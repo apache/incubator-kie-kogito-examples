@@ -2,38 +2,53 @@
 
 ## Description
 
-This is a sample service that is exposing single REST endpoint to allow
+This is the main onboarding service that exposes a single REST endpoint to onboard new employees.
 
-* onboard new employees
+The service is defined using a combination of 3 business processes to describe the steps required to onboard new employees.  This includes one main process that serves as the overall entry point and two sub-processes to handle the interaction with HR and payroll. 
 
+## Installing and Running
 
-## Installation
+### Compile and Run in Local Dev Mode
 
-- Compile and Run
-
-    ```
-     mvn clean package quarkus:dev      
-    ```
-
-- Native Image (requires JAVA_HOME to point to a valid GraalVM)
-
-    ```
-    mvn clean package -Pnative
-    ./target/onboarding-1.0.0-SNAPSHOT-runner -Dquarkus.http.port=8080 -Dquarkus.http.host=localhost
-    ```
-  
-## Usage
-
-There are one REST endpoint exposed
-
-### post /onboarding
-
-Allows to start onboarding procedure for given employee
-
-```sh
-curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"employee" : {"firstName" : "Mark", "lastName" : "Test", "personalId" : "xxx-yy-zzz", "birthDate" : "1995-12-10T14:50:12.123+02:00", "address" : {"country" : "US", "city" : "Boston", "street" : "any street 3", "zipCode" : "10001"}}}' http://localhost:8080/onboarding                                                                                                
+```
+mvn clean package quarkus:dev    
 ```
 
+### Compile and Run using Local Native Image
+Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
+
+```
+mvn clean package -Pnative
+```
+  
+To run the generated native executable, generated in `target/`, execute:
+
+```
+./target/onboarding-{version}-runner -Dquarkus.http.port=8080 -Dquarkus.http.host=localhost -Dlocal=true
+```
+Please replace {version} with the actual version of kogito you are trying to use, e.g. 8.0.0-SNAPSHOT.
+
+Please note the additional parameter to specify you are running the service locally. When running this service inside kubernetes, it would take advantage of the service lookup feature to find other required service using labels (which isn't available when running locally).
+
+## Swagger documentation
+
+You can take a look at the [swagger definition](http://localhost:8081/docs/swagger.json) - automatically generated and included in this service - to determine all available operations exposed by this service.  For easy readability you can visualize the swagger definition file using a swagger UI like for example available [here](https://editor.swagger.io). In addition, various clients to interact with this service can be easily generated using this swagger definition.
+
+## Usage
+
+Once the services are up and running, you can use the following example to interact with the service.
+
+### POST /onboarding
+
+To start a new onboarding for the given employee, use following sample request:
+
+```sh
+curl -X POST -H 'Content-Type: application/json' -d '{"employee" : {"firstName" : "Mark", "lastName" : "Test", "personalId" : "xxx-yy-zzz", "birthDate" : "1995-12-10T14:50:12.123+02:00", "address" : {"country" : "US", "city" : "Boston", "street" : "any street 3", "zipCode" : "10001"}}}' http://localhost:8080/onboarding
+```
+
+This will onboard the given employee by the contacting the hr service (for validation, adding an employee identifier and manager, etc.) and the payroll service (for adding information about payroll, taxation and vacation days).  It will return all employee information (including the newly generated information from the hr and payroll service) and the status of the onboarding request.  Note that subsequent calls with the same information (employee personal ID) will result in a failed status as an employee can only be onboarded once.
+
+Please note that the first execution of this request might take slightly longer, as some lazy loading and initialization of various components might still be required.  Subsequent calls should be a lot faster though.
 
 ## Deployment to OpenShift
 
@@ -67,7 +82,6 @@ and lastly create the route for it
 oc expose svc/onboarding-service
 ```
 
-
 Since onboarding service uses discovery of services that it's going to interact with, you need to give view access to 
 default service account
 
@@ -78,9 +92,6 @@ oc policy add-role-to-user view -z default
 ```
 
 You can now use the onboarding service on OpenShift!
-
-You can inspect [swagger docs](http://localhost:8080/docs/swagger.json) to learn more about the service.
-
 
 ## Knative
 
