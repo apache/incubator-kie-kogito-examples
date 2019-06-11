@@ -2,56 +2,73 @@
 
 ## Description
 
-This is a sample service that is exposing set of REST endpoints to allow
+This is a sample Payroll service that is exposing a set of REST endpoints to:
 
-* assign payment date for given employee
-* calculate tax rate for given employee
-* calculate vacation days for given employee
+* assign a payment date for the given employee
+* calculate a tax rate for the given employee
+* calculate the number of vacation days for the given employee
 
+The service is defined as a decision service, using three sets of DMN decisions for each of the functions described above.
 
-## Installation
+## Installing and Running
 
-- Compile and Run
+### Compile and Run in Local Dev Mode
 
-    ```
-     mvn clean package quarkus:dev   
-    ```
+```
+mvn clean package quarkus:dev    
+```
 
-- Native Image (requires JAVA_HOME to point to a valid GraalVM)
+### Compile and Run using Local Native Image
+Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
 
-    ```
-    mvn clean package -Pnative
-    ./target/payroll-1.0.0-SNAPSHOT-runner -Dquarkus.http.port=8082 -Dquarkus.http.host=localhost
-    ```
+```
+mvn clean package -Pnative
+```
   
-## Usage
+To run the generated native executable, generated in `target/`, execute:
 
-There are three REST endponts exposed
+```
+./target/payroll-{version}-runner -Dquarkus.http.port=8082 -Dquarkus.http.host=localhost
+```
+Please replace {version} with the actual version of kogito you are trying to use, e.g. 8.0.0-SNAPSHOT.
+  
+## Swagger documentation
 
-### post /paymentDate
+You can take a look at the [swagger definition](http://localhost:8082/docs/swagger.json) - automatically generated and included in this service - to determine all available operations exposed by this service.  For easy readability you can visualize the swagger definition file using a swagger UI like for example available [here](https://editor.swagger.io). In addition, various clients to interact with this service can be easily generated using this swagger definition.
 
-Assigns payment date for given employee
+## Example Usage
+
+Once the service is up and running, you can use the following examples to interact with the service.
+
+### POST /paymentDate
+
+Assigns payment date for the given employee:
 
 ```sh
-curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"employee" : {"firstName" : "Mark", "lastName" : "Test", "personalId" : "xxx-yy-zzz", "birthDate" : "1995-12-10T14:50:12.123+02:00", "address" : {"country" : "US", "city" : "Boston", "street" : "any street 3", "zipCode" : "10001"}}}' http://localhost:8082/paymentDate                                                                                                 
+curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"employee" : {"firstName" : "Mark", "lastName" : "Test", "personalId" : "xxx-yy-zzz", "birthDate" : "1995-12-10T14:50:12.123+02:00", "address" : {"country" : "US", "city" : "Boston", "street" : "any street 3", "zipCode" : "10001"}}}' http://localhost:8082/paymentDate
 ```
 
-### post /taxRate
+As response the employee details including the new payment date are returned.
 
-Calculates tax rate for given employee
+### POST /taxRate
+
+Calculates the tax rate for the given employee:
 
 ```sh
-curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"employee" : {"firstName" : "Mark", "lastName" : "Test", "personalId" : "xxx-yy-zzz", "birthDate" : "1995-12-10T14:50:12.123+02:00", "address" : {"country" : "US", "city" : "Boston", "street" : "any street 3", "zipCode" : "10001"}}}' http://localhost:8082/taxRate                                                                                                 
+curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"employee" : {"firstName" : "Mark", "lastName" : "Test", "personalId" : "xxx-yy-zzz", "birthDate" : "1995-12-10T14:50:12.123+02:00", "address" : {"country" : "US", "city" : "Boston", "street" : "any street 3", "zipCode" : "10001"}}}' http://localhost:8082/taxRate
 ```
 
-### post /vacationDays
+As response the employee details including the new tax rate are returned.
 
-Assigns department and manager for given employee
+### POST /vacationDays
+
+Calculates the number of vacation days for the given employee:
 
 ```sh
-curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"employee" : {"firstName" : "Mark", "lastName" : "Test", "personalId" : "xxx-yy-zzz", "birthDate" : "1995-12-10T14:50:12.123+02:00", "address" : {"country" : "US", "city" : "Boston", "street" : "any street 3", "zipCode" : "10001"}}}' http://localhost:8082/vacationDays                                                                                                
+curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"employee" : {"firstName" : "Mark", "lastName" : "Test", "personalId" : "xxx-yy-zzz", "birthDate" : "1995-12-10T14:50:12.123+02:00", "address" : {"country" : "US", "city" : "Boston", "street" : "any street 3", "zipCode" : "10001"}}}' http://localhost:8082/vacationDays
 ```
 
+As response the employee details including the number of vacation days are returned.
 
 ## Deployment to OpenShift
 
@@ -84,8 +101,6 @@ and lastly create the route for it
 ```sh
 oc expose svc/payroll-service
 ```
-
-You can inspect [swagger docs](http://localhost:8082/docs/swagger.json) to learn more about the service.
 
 ## Knative
 
