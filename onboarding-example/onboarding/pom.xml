@@ -15,10 +15,6 @@
   <name>onboarding</name>
   <description>Onboarding function and service orchestration</description>
 
-  <properties>
-    <generateModel>YES</generateModel>
-  </properties>
-
   <dependencyManagement>
     <dependencies>
       <dependency>

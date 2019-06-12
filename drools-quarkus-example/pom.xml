@@ -11,9 +11,7 @@
   <artifactId>drools-quarkus-example</artifactId>
   <name>Drools example running on Quarkus</name>
 
-  <properties>
-    <generateModel>YES</generateModel>
-  </properties>
+
 
   <dependencyManagement>
     <dependencies>
