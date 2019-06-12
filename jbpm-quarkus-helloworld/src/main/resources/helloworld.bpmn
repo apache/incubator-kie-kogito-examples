@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn2:definitions targetNamespace="http://www.omg.org/bpmn20" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/bpmn20" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:drools="http://www.jboss.org/drools" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd">
+  <bpmn2:process id="demo.helloworld" name="Hello World" isExecutable="true" drools:packageName="org.kie.kogito.examples">
+    <bpmn2:startEvent id="start">
+      <bpmn2:outgoing>_B7B4282B-F317-4BF9-95E9-962B046EE815</bpmn2:outgoing>
+    </bpmn2:startEvent>
+    <bpmn2:sequenceFlow id="sequenceFlow1" sourceRef="start" targetRef="script"/>
+    <bpmn2:scriptTask id="script" name="Script" scriptFormat="http://www.java.com/java">
+      <bpmn2:incoming>sequenceFlow1</bpmn2:incoming>
+      <bpmn2:outgoing>sequenceFlow2</bpmn2:outgoing>
+      <bpmn2:script><![CDATA[System.out.println("Hello World!");]]></bpmn2:script>
+    </bpmn2:scriptTask>
+    <bpmn2:sequenceFlow id="sequenceFlow2" sourceRef="script" targetRef="end"/>
+    <bpmn2:endEvent id="end">
+      <bpmn2:incoming>sequenceFlow2</bpmn2:incoming>
+    </bpmn2:endEvent>
+  </bpmn2:process>
+</bpmn2:definitions>
