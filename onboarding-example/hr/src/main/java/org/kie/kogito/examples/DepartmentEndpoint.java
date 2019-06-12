@@ -25,10 +25,10 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import org.drools.modelcompiler.KieRuntimeBuilder;
 import org.kie.api.runtime.KieSession;
 import org.kie.kogito.Application;
 import org.kie.kogito.examples.hr.DepartmentModel;
+import org.kie.kogito.rules.KieRuntimeBuilder;
 
 @Path("/department")
 @Api(description = "Department service")
