@@ -2,9 +2,9 @@ package org.kie.kogito.quickstart;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import org.drools.modelcompiler.KieRuntimeBuilder;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.rule.FactHandle;
+import org.kie.kogito.rules.KieRuntimeBuilder;
 
 @ApplicationScoped
 public class HelloRuleService {

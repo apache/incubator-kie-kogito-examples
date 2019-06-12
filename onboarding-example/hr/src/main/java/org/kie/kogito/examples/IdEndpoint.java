@@ -23,7 +23,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import org.drools.modelcompiler.KieRuntimeBuilder;
 import org.kie.api.runtime.KieSession;
 import org.kie.kogito.Application;
 import org.kie.kogito.examples.hr.IdModel;
@@ -31,6 +30,7 @@ import org.kie.kogito.examples.hr.IdModel;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.kie.kogito.rules.KieRuntimeBuilder;
 
 @Path("/id")
 @Api(description = "Id and Email service")
