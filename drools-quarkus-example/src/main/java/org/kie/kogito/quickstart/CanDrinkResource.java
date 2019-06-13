@@ -1,5 +1,6 @@
 package org.kie.kogito.quickstart;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -12,7 +13,7 @@ import org.kie.kogito.rules.impl.SessionMemory;
 @Path("/candrink/{name}/{age}")
 public class CanDrinkResource {
 
-    @Named("canDrinkKS")
+    @Inject @Named("canDrinkKS")
     RuleUnit<SessionMemory> ruleUnit;
 
     @GET

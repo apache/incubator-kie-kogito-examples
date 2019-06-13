@@ -10,12 +10,6 @@
   <groupId>org.kie.kogito.examples</groupId>
   <artifactId>drools-quarkus-unit-example</artifactId>
 
-  <properties>
-    <generateModel>YES</generateModel>
-    <generateProcessModel>NO</generateProcessModel>
-  </properties>
-
-
   <build>
     <plugins>
       <plugin>
