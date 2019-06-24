@@ -2,7 +2,7 @@
 <project>
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.submarine</groupId>
+  <groupId>org.kogito</groupId>
   <artifactId>dmn-quarkus-example</artifactId>
   <version>1.0-SNAPSHOT</version>
 
@@ -12,7 +12,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <submarine.version>8.0.0-SNAPSHOT</submarine.version>
+    <kogito.version>8.0.0-SNAPSHOT</kogito.version>
   </properties>
 
   <dependencyManagement>
@@ -41,11 +41,10 @@
       <artifactId>quarkus-resteasy-jsonb</artifactId>
     </dependency>
 
-
     <dependency>
-      <groupId>org.kie</groupId>
-      <artifactId>kie-dmn-rest-utils</artifactId>
-      <version>${submarine.version}</version>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-dmn-rest-utils</artifactId>
+      <version>${kogito.version}</version>
     </dependency>
 
     <dependency>
