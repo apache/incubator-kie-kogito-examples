@@ -5,15 +5,15 @@ import org.kie.kogito.quickstart.Person
 import org.kie.kogito.quickstart.Result
 
 rule R1 when
-        $r : Result()
-        $p : Person( age >= 18 )
+        $r : Result() from entry-point results
+        $p : Person( age >= 18 ) from entry-point persons
     then
         $r.setValue( $p.getName() + " can drink");
 end
 
 rule R2 when
-        $r : Result()
-        $p : Person( age < 18 )
+        $r : Result() from entry-point results
+        $p : Person( age < 18 ) from entry-point persons
     then
         $r.setValue( $p.getName() + " can NOT drink");
 end
