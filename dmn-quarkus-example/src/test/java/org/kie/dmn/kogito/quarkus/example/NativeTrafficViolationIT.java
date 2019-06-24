@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.kie.dmn.submarine.quarkus.example;
+package org.kie.dmn.kogito.quarkus.example;
 
 import io.quarkus.test.junit.SubstrateTest;
 
