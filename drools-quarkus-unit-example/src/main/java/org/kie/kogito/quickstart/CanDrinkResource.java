@@ -26,8 +26,8 @@ public class CanDrinkResource {
         Result result = new Result();
         Person person = new Person(name, age);
 
-        people.results().add(result);
-        people.persons().add(person);
+        people.getResults().add(result);
+        people.getPersons().add(person);
 
         instance.fire();
 

@@ -1,0 +1,10 @@
+package org.kie.kogito.rules.alerting
+unit MonitoringService
+
+rule IncomingEvent when
+    $e : /eventStream
+then
+    System.out.println("incoming event: "+$e.getMessage());
+    alertStream.add(
+        new Alert("I have received a message: " + $e.getMessage()));
+end

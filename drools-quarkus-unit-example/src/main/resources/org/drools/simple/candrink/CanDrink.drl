@@ -1,19 +1,19 @@
-package org.drools.simple.candrink
+package org.drools.simple.candrink;
 unit People;
 
 import org.kie.kogito.quickstart.Person
 import org.kie.kogito.quickstart.Result
 
 rule R1 when
-        $r : Result() from entry-point results
-        $p : Person( age >= 18 ) from entry-point persons
+        $r1 : /results
+        $p : /persons[ age >= 18 ]
     then
-        $r.setValue( $p.getName() + " can drink");
+        $r1.setValue( $p.getName() + " can drink");
 end
 
 rule R2 when
-        $r : Result() from entry-point results
-        $p : Person( age < 18 ) from entry-point persons
+        $r : /results
+        $p : /persons[ age < 18 ]
     then
         $r.setValue( $p.getName() + " can NOT drink");
 end

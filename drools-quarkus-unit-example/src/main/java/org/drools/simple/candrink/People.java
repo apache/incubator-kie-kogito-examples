@@ -10,11 +10,11 @@ public class People implements RuleUnitMemory {
     private final DataSource<Result> results = new ListDataSource<>();
     private final DataSource<Person> persons = new ListDataSource<>();
 
-    public DataSource<Result> results() {
+    public DataSource<Result> getResults() {
         return results;
     }
 
-    public DataSource<Person> persons() {
+    public DataSource<Person> getPersons() {
         return persons;
     }
 }

@@ -1,0 +1,8 @@
+package org.kie.kogito.rules.alerting
+unit LoggerService
+
+rule IncomingAlert when
+    $e : /alertStream
+then
+    System.out.println($e.getMessage());
+end
