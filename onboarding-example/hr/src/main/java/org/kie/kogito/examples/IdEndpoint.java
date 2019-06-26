@@ -26,14 +26,9 @@ import javax.ws.rs.core.MediaType;
 import org.kie.api.runtime.KieSession;
 import org.kie.kogito.Application;
 import org.kie.kogito.examples.hr.IdModel;
-
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import org.kie.kogito.rules.KieRuntimeBuilder;
 
 @Path("/id")
-@Api(description = "Id and Email service")
 public class IdEndpoint {
 
     @Inject
@@ -45,8 +40,7 @@ public class IdEndpoint {
     @POST()
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @ApiOperation("Assign employee id and email")
-    public IdModel assignId(@ApiParam(value = "data model representing employee") IdModel resource) {
+    public IdModel assignId(IdModel resource) {
         KieSession ksession = runtimeBuilder.newKieSession("defaultStatelessKieSession", app.config().rule());
 
         ksession.insert( resource );

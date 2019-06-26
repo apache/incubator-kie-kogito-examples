@@ -16,9 +16,6 @@
 
 package org.kie.kogito.examples;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -31,7 +28,6 @@ import org.kie.kogito.examples.hr.DepartmentModel;
 import org.kie.kogito.rules.KieRuntimeBuilder;
 
 @Path("/department")
-@Api(description = "Department service")
 public class DepartmentEndpoint {
 
     @Inject
@@ -43,8 +39,7 @@ public class DepartmentEndpoint {
     @POST()
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @ApiOperation("Assign depeartment and manager")
-    public DepartmentModel assignDepartment(@ApiParam(value = "department data that should be created") DepartmentModel resource) {
+    public DepartmentModel assignDepartment(DepartmentModel resource) {
         KieSession ksession = runtimeBuilder.newKieSession("defaultStatelessKieSession", app.config().rule());
 
         ksession.insert( resource );

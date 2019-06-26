@@ -29,12 +29,7 @@ import org.kie.dmn.kogito.rest.quarkus.DMNKogitoQuarkus;
 import org.kie.dmn.kogito.rest.quarkus.DMNResult;
 import org.kie.kogito.examples.payroll.Payroll;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-
 @Path("/paymentDate")
-@Api(description = "Payments service")
 public class PaymentDateDMNEndpoint {
 
     static final DMNRuntime dmnRuntime = DMNKogitoQuarkus.createGenericDMNRuntime();
@@ -42,8 +37,7 @@ public class PaymentDateDMNEndpoint {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @ApiOperation("Calculates payment date for given employee")
-    public Payroll calculatePaymentDate(@ApiParam(value = "data model representing employee to be used") Payroll payrollInput) {
+    public Payroll calculatePaymentDate(Payroll payrollInput) {
         DMNResult evaluate = DMNKogitoQuarkus.evaluate(dmnRuntime, "paymentDate", Collections.singletonMap("employee", payrollInput.getEmployee()));
         Payroll payroll = new Payroll();
         
