@@ -31,14 +31,9 @@ import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.ObjectFilter;
 import org.kie.kogito.Application;
 import org.kie.kogito.examples.hr.EmployeeValidationModel;
-
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import org.kie.kogito.rules.KieRuntimeBuilder;
 
 @Path("/employeeValidation")
-@Api(description = "Employee validation service")
 public class ValidationEndpoint {
 
     @Inject
@@ -62,9 +57,8 @@ public class ValidationEndpoint {
     @SuppressWarnings("unchecked")
     @POST()
     @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    @ApiOperation("Validate given employee")
-    public EmployeeValidationModel validateEmployee(@ApiParam(value = "data model representing employee to be validated") EmployeeValidationModel resource) {
+    @Consumes(MediaType.APPLICATION_JSON)    
+    public EmployeeValidationModel validateEmployee(EmployeeValidationModel resource) {
         
         ksession.insert(resource.getEmployee());
         ksession.fireAllRules();
