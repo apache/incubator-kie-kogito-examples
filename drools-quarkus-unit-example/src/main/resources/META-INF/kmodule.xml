@@ -6,7 +6,7 @@
 <!--    <kbase name="canDrinkKB" packages="org.drools.simple.candrink">-->
 <!--        <ksession name="canDrinkKS"/>-->
 <!--    </kbase>-->
-<!--    <kbase name="alertingKB" packages="org.kie.kogito.rules.alerting">-->
-<!--        <ksession name="alertingKS"/>-->
-<!--    </kbase>-->
+    <kbase name="alertingKB" packages="org.kie.kogito.rules.alerting">
+        <ksession name="alertingKS"/>
+    </kbase>
 </kmodule>
