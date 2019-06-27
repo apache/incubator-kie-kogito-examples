@@ -35,7 +35,6 @@ public class Main {
         MonitoringService monitoringService = new MonitoringService();
         LoggerService loggerService = new LoggerService(monitoringService.getAlertStream());
 
-        Executor executor = Executor.create();
         monitoringService.getEventStream().add(new Event("Hello!"));
         monitoringService.getEventStream().add(new Event("Hello Again!"));
         monitoringService.getEventStream().add(new Event("Hello 3!"));
