@@ -50,5 +50,5 @@ Once the service is up and running, you can use the following example to interac
 Allows to create a new order with the given data:
 
 ```sh
-curl -H "Content-Type: application/json" -X POST http://localhost:8080/helloworld
+curl -H "Content-Type: application/json" -X POST -d '{}' http://localhost:8080/helloworld
 ```
