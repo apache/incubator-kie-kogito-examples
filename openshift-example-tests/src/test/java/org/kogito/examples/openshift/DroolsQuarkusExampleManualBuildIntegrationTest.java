@@ -20,7 +20,7 @@ import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 import cz.xtf.core.http.Https;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
 import org.kogito.examples.openshift.deployment.Deployer;
 import org.kogito.examples.openshift.deployment.HttpDeployment;
 
@@ -28,7 +28,7 @@ public class DroolsQuarkusExampleManualBuildIntegrationTest extends DroolsQuarku
 
     private static HttpDeployment kogitoDeployment;
 
-    @BeforeClass
+    @BeforeAll
     public static void setUpManualBuild() throws MalformedURLException {
         kogitoDeployment = Deployer.deployKaasUsingS2iAndWait(project, new URL(ASSETS_URL), GIT_CONTEXT_DIR, TestConfig.getKaasS2iQuarkusBuilderImage(), TestConfig.getKaasQuarkusRuntimeImage());
         // Wait until OpenShift route is ready to serve requests

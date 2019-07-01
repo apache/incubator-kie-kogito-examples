@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 import cz.xtf.core.http.Https;
 import io.fabric8.kubernetes.client.dsl.NonNamespaceOperation;
 import io.fabric8.kubernetes.client.dsl.Resource;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
 import org.kogito.examples.openshift.deployment.HttpDeployment;
 import org.kogito.examples.openshift.deployment.OperatorDeployer;
 import org.kogito.examples.openshift.operator.KogitoApp;
@@ -36,7 +36,7 @@ public class DroolsQuarkusExampleKogitoOperatorIntegrationTest extends DroolsQua
     private static final String DEPLOYMENT_NAME = "kogito";
     private static HttpDeployment kogitoDeployment;
 
-    @BeforeClass
+    @BeforeAll
     public static void setUpOperator() throws MalformedURLException {
         NonNamespaceOperation<KogitoApp, KogitoAppList, KogitoAppDoneable, Resource<KogitoApp, KogitoAppDoneable>> kogitoOperatorClient = OperatorDeployer.deployKogitoOperator(project);
 

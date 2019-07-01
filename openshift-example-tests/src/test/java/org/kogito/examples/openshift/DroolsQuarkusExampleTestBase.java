@@ -20,10 +20,10 @@ import java.net.MalformedURLException;
 import io.restassured.RestAssured;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.hamcrest.core.StringContains;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.kogito.examples.openshift.deployment.HttpDeployment;
 
 public abstract class DroolsQuarkusExampleTestBase {
@@ -33,13 +33,13 @@ public abstract class DroolsQuarkusExampleTestBase {
     protected static final String ASSETS_URL = "https://github.com/kiegroup/kogito-examples";
     protected static final String GIT_CONTEXT_DIR = "drools-quarkus-example";
 
-    @BeforeClass
+    @BeforeAll
     public static void setUpProject() throws MalformedURLException {
         String randomProjectName = RandomStringUtils.randomAlphanumeric(4).toLowerCase();
         project = Project.create("drools-example-" + randomProjectName);
     }
 
-    @AfterClass
+    @AfterAll
     public static void tearDownProject() {
         project.delete();
     }
@@ -56,7 +56,7 @@ public abstract class DroolsQuarkusExampleTestBase {
     }
 
     @Test
-    @Ignore("Skipped because persons REST endpoint has a marshalling issue.")
+    @Disabled("Skipped because persons REST endpoint has a marshalling issue.")
     public void testPersonsCrud() {
       RestAssured.given()
           .header("Content-Type", "application/json")

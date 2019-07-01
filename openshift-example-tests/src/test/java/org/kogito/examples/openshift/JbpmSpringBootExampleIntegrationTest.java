@@ -20,9 +20,9 @@ import java.net.URL;
 
 import io.restassured.RestAssured;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.kogito.examples.openshift.Project;
 import org.kogito.examples.openshift.TestConfig;
 import org.kogito.examples.openshift.deployment.Deployer;
@@ -33,7 +33,7 @@ public class JbpmSpringBootExampleIntegrationTest {
     private static Project project;
     private static HttpDeployment kaasDeloyment;
 
-    @BeforeClass
+    @BeforeAll
     public static void setUp() throws MalformedURLException {
         URL assetsUrl = new URL("https://github.com/kiegroup/kogito-examples");
         String gitContextDir = "jbpm-springboot-example";
@@ -43,7 +43,7 @@ public class JbpmSpringBootExampleIntegrationTest {
         kaasDeloyment = Deployer.deployKaasUsingS2iAndWait(project, assetsUrl, gitContextDir, TestConfig.getKaasS2iSpringBootBuilderImage(), TestConfig.getKaasSpringBootRuntimeImage());
     }
 
-    @AfterClass
+    @AfterAll
     public static void tearDown() {
         project.delete();
     }
