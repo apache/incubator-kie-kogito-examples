@@ -15,18 +15,27 @@
 
 package org.kie.kogito.rules.alerting;
 
-import org.kie.kogito.rules.DataSource;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.kie.kogito.rules.DataStream;
 import org.kie.kogito.rules.RuleUnitMemory;
 
 public class LoggerService implements RuleUnitMemory {
 
-    private final DataSource<Alert> alertStream;
+    private final DataStream<Alert> alertStream;
 
-    public LoggerService(DataSource<Alert> alertStream) {
+    private final List<String> log = new ArrayList<>();
+
+    public LoggerService( DataStream<Alert> alertStream) {
         this.alertStream = alertStream;
     }
 
-    public DataSource<Alert> getAlertStream() {
+    public DataStream<Alert> getAlertStream() {
         return alertStream;
+    }
+
+    public List<String> getLog() {
+        return log;
     }
 }

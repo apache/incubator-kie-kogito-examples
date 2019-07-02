@@ -4,5 +4,5 @@ unit LoggerService
 rule "org.kie.kogito.rules.alerting.LoggerService.IncomingAlert" when
     $e : /alertStream
 then
-    System.out.println($e.getMessage());
+    log.add($e.getMessage());
 end

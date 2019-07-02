@@ -15,19 +15,19 @@
 
 package org.kie.kogito.rules.alerting;
 
-import org.kie.kogito.rules.DataSource;
+import org.kie.kogito.rules.DataStream;
 import org.kie.kogito.rules.RuleUnitMemory;
-import org.kie.kogito.rules.impl.ListDataSource;
+import org.kie.kogito.rules.impl.ListDataStream;
 
 public class MonitoringService implements RuleUnitMemory {
-    DataSource<Event> eventStream = new ListDataSource<>();
-    DataSource<Alert> alertStream = new ListDataSource<>();
+    private final DataStream<Event> eventStream = new ListDataStream<>();
+    private final DataStream<Alert> alertStream = new ListDataStream<>();
 
-    public DataSource<Event> getEventStream() {
+    public DataStream<Event> getEventStream() {
         return eventStream;
     }
 
-    public DataSource<Alert> getAlertStream() {
+    public DataStream<Alert> getAlertStream() {
         return alertStream;
     }
 }

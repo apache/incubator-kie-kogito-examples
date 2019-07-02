@@ -15,9 +15,7 @@
 
 package org.kie.kogito;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
+import org.junit.jupiter.api.Test;
 import org.kie.kogito.rules.alerting.Event;
 import org.kie.kogito.rules.alerting.LoggerService;
 import org.kie.kogito.rules.alerting.LoggerServiceRuleUnit;
@@ -26,35 +24,32 @@ import org.kie.kogito.rules.alerting.MonitoringService;
 import org.kie.kogito.rules.alerting.MonitoringServiceRuleUnit;
 import org.kie.kogito.rules.alerting.MonitoringServiceRuleUnitInstance;
 
-public class Main {
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-    public static void main(String[] args) {
+public class ServicesTest {
+
+    @Test
+    public void test() {
 
         org.kie.kogito.examples.Application application = new org.kie.kogito.examples.Application();
 
         MonitoringService monitoringService = new MonitoringService();
         LoggerService loggerService = new LoggerService(monitoringService.getAlertStream());
 
-        monitoringService.getEventStream().add(new Event("Hello!"));
-        monitoringService.getEventStream().add(new Event("Hello Again!"));
-        monitoringService.getEventStream().add(new Event("Hello 3!"));
+        monitoringService.getEventStream().append(new Event("Hello!"));
+        monitoringService.getEventStream().append(new Event("Hello Again!"));
+        monitoringService.getEventStream().append(new Event("Hello 3!"));
 
         MonitoringServiceRuleUnitInstance monitoringServiceInstance = new MonitoringServiceRuleUnit().createInstance(monitoringService);
-//        executor.submit(instance);
-//        executor.submit(new LoggerServiceRuleUnit().createInstance(loggerService));
+        monitoringServiceInstance.fire();
 
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        monitoringService.getEventStream().append(new Event("Hello 4!"));
+        monitoringServiceInstance.fire();
 
         LoggerServiceRuleUnitInstance loggerServiceInstance = new LoggerServiceRuleUnit().createInstance(loggerService);
-//        executorService.submit(monitoringServiceInstance::fire);
-//        executorService.submit(loggerServiceInstance::fire);
-
-//        instance.fire();
-        monitoringService.getEventStream().add(new Event("Hello 4!"));
-//        instance.fire();
-
-        monitoringServiceInstance.fire();
         loggerServiceInstance.fire();
 
+        System.out.println(loggerService.getLog());
+        assertEquals(4, loggerService.getLog().size());
     }
 }

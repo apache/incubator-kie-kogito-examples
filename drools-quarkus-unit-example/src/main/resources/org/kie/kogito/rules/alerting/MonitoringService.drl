@@ -4,12 +4,7 @@ unit MonitoringService
 rule "org.kie.kogito.rules.alerting.MonitoringService.IncomingEvent" when
     $e : /eventStream
 then
-    System.out.println("incoming event: "+$e.getMessage());
-    drools.getEntryPoint("alertStream").insert(
-        new Alert("I have received a message: " + $e));
+    System.out.println("incoming event: "+ $e.getMessage());
+    alertStream.append( new Alert("I have received a message: " + $e) );
 end
 
-rule "org.kie.kogito.rules.alerting.MonitoringService.dummy" when
-    $e : /alertStream
-then
-end

@@ -25,4 +25,9 @@ public class Event {
     public String getMessage() {
         return message;
     }
+
+    @Override
+    public String toString() {
+        return "Event -> " + message;
+    }
 }
