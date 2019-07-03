@@ -21,6 +21,7 @@
   <properties>
     <surefire.forkCount>1</surefire.forkCount>
     <alphanetworkCompilerEnabled>false</alphanetworkCompilerEnabled>
+    <version.org.junit>5.4.2</version.org.junit>
   </properties>
 
   <repositories>
@@ -62,6 +63,13 @@
     <dependencies>
       <dependency>
         <groupId>org.kie.kogito</groupId>
+        <artifactId>kogito-bom</artifactId>
+        <version>${version.org.kie.kogito}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.kie.kogito</groupId>
         <artifactId>drools-bom</artifactId>
         <version>${version.org.kie.kogito}</version>
         <type>pom</type>
@@ -74,13 +82,47 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+      <!-- make sure that kogito dependencies are taken from current version instead of quarkus bom -->
+       <dependency>
+        <groupId>org.kie.kogito</groupId>
+        <artifactId>kogito-api</artifactId>
+        <version>${version.org.kie.kogito}</version>
+      </dependency>
       <dependency>
         <groupId>org.kie.kogito</groupId>
-        <artifactId>kogito-bom</artifactId>
+        <artifactId>drools-model-compiler</artifactId>
         <version>${version.org.kie.kogito}</version>
-        <type>pom</type>
-        <scope>import</scope>
       </dependency>
+      <dependency>
+        <groupId>org.kie.kogito</groupId>
+        <artifactId>drools-core</artifactId>
+        <version>${version.org.kie.kogito}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.kie.kogito</groupId>
+        <artifactId>drools-core-static</artifactId>
+        <version>${version.org.kie.kogito}</version>
+      </dependency>
+          <dependency>
+        <groupId>org.kie.kogito</groupId>
+        <artifactId>kogito-codegen</artifactId>
+        <version>${version.org.kie.kogito}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.kie.kogito</groupId>
+        <artifactId>drools-decisiontables</artifactId>
+        <version>${version.org.kie.kogito}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.kie.kogito</groupId>
+        <artifactId>jbpm-flow</artifactId>
+        <version>${version.org.kie.kogito}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.kie.kogito</groupId>
+        <artifactId>jbpm-bpmn2</artifactId>
+        <version>${version.org.kie.kogito}</version>
+      </dependency>      
     </dependencies>
   </dependencyManagement>
 
