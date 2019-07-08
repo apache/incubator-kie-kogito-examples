@@ -89,8 +89,9 @@ Private process that will be responsible for booking a flight.
 ## Services
 
 There will be services implemented to carry on the hotel and flight booking. Implementation will be a CDI beans that will have hard coded logic to return a booked flight or hotel.
-org.acme.travels.service.HotelBookingService
-org.acme.travels.service.FlightBookingService
+
+* org.acme.travels.service.HotelBookingService
+* org.acme.travels.service.FlightBookingService
 
 
 
@@ -294,5 +295,5 @@ curl -X GET http://localhost:8080/travels/1/tasks/ConfirmTravel/1
 Completes confirms travel task - meaning confirms (and completes) the travel request
 
 ```sh
-curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST http://localhost:8080/travels/1/tasks/VisaApplication/1 -d '{}'
+curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST http://localhost:8080/travels/1/tasks/ConfirmTravel/1 -d '{}'
 ```
