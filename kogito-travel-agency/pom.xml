@@ -38,11 +38,15 @@
     <dependency>
       <groupId>org.drools</groupId>
       <artifactId>drools-decisiontables</artifactId>
-      <version>7.23.0.Final</version>
+      <version>7.22.0.Final</version>
       <exclusions>
         <exclusion>
           <groupId>org.drools</groupId>
           <artifactId>drools-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.drools</groupId>
+          <artifactId>drools-compiler</artifactId>
         </exclusion>
       </exclusions>
     </dependency>

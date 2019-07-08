@@ -9,6 +9,6 @@ import org.acme.travels.Trip;
 public class FlightBookingService {
 
 	public Flight bookFlight(Trip trip) {
-		return new Flight("MX555", trip.getBegin(), trip.getEnd());
+		return new Flight("KLM009988", trip.getBegin(), trip.getEnd());
 	}
 }
