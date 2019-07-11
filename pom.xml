@@ -1,0 +1,36 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.kie.kogito.quickstarts</groupId>
+  <artifactId>kogito-quickstarts</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>Kogito :: Quickstarts</name>
+  <description>Set of quickstart projects for Kogito</description>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>    
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    
+    <!-- quarkus related -->
+    <quarkus.dev.version>999-SNAPSHOT</quarkus.dev.version>
+    <quarkus.version>0.18.0</quarkus.version>
+    <!-- springboot related -->
+    <springboot.version>2.1.1.RELEASE</springboot.version>
+    <cxf.version>3.2.6</cxf.version>
+    <javax.activation.version>1.1.1</javax.activation.version>
+    <!-- kogito -->
+    <kogito.version>8.0.0-SNAPSHOT</kogito.version>
+
+    <swagger-plugin.version>2.1.0</swagger-plugin.version>
+    <surefire-plugin.version>2.22.0</surefire-plugin.version>
+  </properties>
+
+  <modules>
+    <module>kogito-kafka-quickstart-quarkus</module>
+    <module>kogito-kafka-quickstart-springboot</module>
+  </modules>
+</project>

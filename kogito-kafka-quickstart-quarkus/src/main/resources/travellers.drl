@@ -1,0 +1,24 @@
+package defaultPackage
+
+import org.acme.travel.Traveller;
+
+
+rule "Process travellers" ruleflow-group "travellers"
+
+when
+    $traveller: Traveller(processed == false, nationality != 'American')
+then
+	System.out.println("Hello traveller " + $traveller);   
+	$traveller.setProcessed( true );
+    
+end
+
+rule "Don't process travellers from US" ruleflow-group "travellers"
+
+when
+    $traveller: Traveller(processed == false, nationality == 'American')
+then
+	System.out.println("This system can't deal with " + $traveller.getNationality());
+ 	$traveller.setProcessed( false ); 
+    
+end
