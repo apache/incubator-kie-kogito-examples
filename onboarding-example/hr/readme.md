@@ -76,14 +76,14 @@ NOTE: Make sure that kogito S2I image builders are available to your OpenShift e
 * Create new binary build and start it by uploading content of the current directory
 
 ```sh
-oc new-build myproject/kaas-quarkus-centos-s2i --binary=true --name=hr-service-builder
+oc new-build myproject/kogito-quarkus-centos-s2i --binary=true --name=hr-service-builder
 oc start-build hr-service-builder --from-dir . --incremental=true
 ```
 
 Once the build is completed create new build for runtime image
 
 ```sh
-oc new-build --name hr-service --source-image=hr-service-builder --source-image-path=/home/kogito/bin:. --image-stream=kaas-quarkus-centos
+oc new-build --name hr-service --source-image=hr-service-builder --source-image-path=/home/kogito/bin:. --image-stream=kogito-quarkus-centos
 ```
 
 Next create application for the runtime image

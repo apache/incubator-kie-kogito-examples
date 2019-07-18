@@ -60,14 +60,14 @@ NOTE: Make sure that kogito S2I image builders are available to your OpenShift e
 * Create new binary build and start it by uploading content of the current directory
 
 ```sh
-oc new-build myproject/kaas-quarkus-centos-s2i --binary=true --name=onboarding-service-builder
+oc new-build myproject/kogito-quarkus-centos-s2i --binary=true --name=onboarding-service-builder
 oc start-build onboarding-service-builder --from-dir . --incremental=true
 ```
 
 Once the build is completed create new build for runtime image
 
 ```sh
-oc new-build --name onboarding-service --source-image=onboarding-service-builder --source-image-path=/home/kogito/bin:. --image-stream=kaas-quarkus-centos
+oc new-build --name onboarding-service --source-image=onboarding-service-builder --source-image-path=/home/kogito/bin:. --image-stream=kogito-quarkus-centos
 ```
 
 Next create application for the runtime image
@@ -107,5 +107,12 @@ service discovery can properly happen
 
 ```sh
 oc policy add-role-to-group view system:serviceaccounts:default -n istio-system
- oc policy add-role-to-group knative-serving-core system:serviceaccounts:default -n default
+oc policy add-role-to-group knative-serving-core system:serviceaccounts:default -n default
+```
+
+If using [Knative Serving Operator](https://github.com/knative/serving-operator) on OpenShift 4.x, the permissions that need to be set are
+
+```sh
+oc adm policy add-role-to-user knative-serving-core system:serviceaccount:myproject:default -n default
+oc adm policy add-role-to-user view system:serviceaccount:myproject:default -n istio-system    
 ```
