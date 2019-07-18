@@ -15,10 +15,8 @@
 
 package org.kie.kogito;
 
-import java.io.IOException;
 import java.util.List;
 
-import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.queries.AdultUnit;
 import org.kie.kogito.queries.AdultUnitQueryFindAdultsEndpoint;
