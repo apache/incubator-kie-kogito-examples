@@ -1,7 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.kie.kogito</groupId>
@@ -10,17 +8,17 @@
   </parent>
   <groupId>org.kie.kogito.examples</groupId>
   <artifactId>jbpm-springboot-example</artifactId>
-
+  
   <name>jBPM example running on SpringBoot</name>
   <description>Order management service</description>
-
+  
   <properties>
     <java.version>1.8</java.version>
     <cxf.version>3.2.6</cxf.version>
-    <springboot.version>2.1.1.RELEASE</springboot.version>    
+    <springboot.version>2.1.1.RELEASE</springboot.version>
     <javax.activation.version>1.1.1</javax.activation.version>
   </properties>
-
+  
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -37,13 +35,13 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-
+  
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter</artifactId>
     </dependency>
-
+    
     <dependency>
       <groupId>com.fasterxml.jackson.jaxrs</groupId>
       <artifactId>jackson-jaxrs-json-provider</artifactId>
@@ -53,7 +51,7 @@
       <artifactId>cxf-spring-boot-starter-jaxrs</artifactId>
       <version>${cxf.version}</version>
     </dependency>
-
+    
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-api</artifactId>
@@ -74,7 +72,7 @@
       <groupId>org.kie.kogito</groupId>
       <artifactId>drools-model-compiler</artifactId>
     </dependency>
-
+    
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>jbpm-flow</artifactId>
@@ -88,14 +86,19 @@
       <artifactId>activation</artifactId>
       <version>${javax.activation.version}</version>
     </dependency>
-
+    
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>io.rest-assured</groupId>
+      <artifactId>rest-assured</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
-
+  
   <build>
     <plugins>
       <plugin>
@@ -146,5 +149,5 @@
       </plugin>
     </plugins>
   </build>
-
+  
 </project>
