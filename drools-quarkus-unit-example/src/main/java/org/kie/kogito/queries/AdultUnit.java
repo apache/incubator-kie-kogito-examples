@@ -17,7 +17,6 @@
 package org.kie.kogito.queries;
 
 import java.io.Serializable;
-import java.util.List;
 
 import org.kie.kogito.rules.DataSource;
 import org.kie.kogito.rules.DataStore;
@@ -25,6 +24,7 @@ import org.kie.kogito.rules.RuleUnitMemory;
 
 public class AdultUnit implements RuleUnitMemory, Serializable {
     private int adultAge;
+
     private DataStore<Person> persons;
 
     public AdultUnit( ) {
@@ -49,9 +49,5 @@ public class AdultUnit implements RuleUnitMemory, Serializable {
 
     public void setAdultAge( int adultAge ) {
         this.adultAge = adultAge;
-    }
-
-    public void setPersonList( List<Person> personList ) {
-        personList.forEach( persons::add );
     }
 }
