@@ -20,6 +20,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.queries.AdultUnit;
 import org.kie.kogito.queries.AdultUnitQueryFindAdultsEndpoint;
+import org.kie.kogito.queries.AdultUnitQueryFindAdultNamesEndpoint;
 import org.kie.kogito.queries.AdultUnitRuleUnit;
 import org.kie.kogito.queries.Person;
 
@@ -32,28 +33,36 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class QueryTest {
 
     @Test
-    public void test() {
-
-        org.kie.kogito.examples.Application application = new org.kie.kogito.examples.Application();
-
-        AdultUnit adults = new AdultUnit();
-
-        adults.getPersons().add(new Person( "Mario", 45 ));
-        adults.getPersons().add(new Person( "Marilena", 47 ));
-        adults.getPersons().add(new Person( "Sofia", 7 ));
-
-        // {"adultAge":18,"persons":[{"name":"Mario","age":45,"adult":false},{"name":"Marilena","age":47,"adult":false},{"name":"Sofia","age":7,"adult":false}]}
-
+    public void testPersons() {
         AdultUnitQueryFindAdultsEndpoint query = new AdultUnitQueryFindAdultsEndpoint(new AdultUnitRuleUnit());
 
-        List<String> results = query.executeQuery( adults )
+        List<String> results = query.executeQuery( createAdultUnit() )
                 .stream()
-                .map( m -> m.get("$p") )
-                .map( Person.class::cast )
                 .map( Person::getName )
                 .collect( toList() );
 
         assertEquals( 2, results.size() );
         assertTrue( results.containsAll( asList("Mario", "Marilena") ) );
+    }
+
+    @Test
+    public void testNames() {
+        AdultUnitQueryFindAdultNamesEndpoint query = new AdultUnitQueryFindAdultNamesEndpoint(new AdultUnitRuleUnit());
+
+        List<String> results = query.executeQuery( createAdultUnit() );
+
+        assertEquals( 2, results.size() );
+        assertTrue( results.containsAll( asList("Mario", "Marilena") ) );
+    }
+
+    private AdultUnit createAdultUnit() {
+        org.kie.kogito.examples.Application application = new org.kie.kogito.examples.Application();
+
+        AdultUnit adults = new AdultUnit();
+
+        adults.getPersons().add( new Person( "Mario", 45 ) );
+        adults.getPersons().add( new Person( "Marilena", 47 ) );
+        adults.getPersons().add( new Person( "Sofia", 7 ) );
+        return adults;
     }
 }
