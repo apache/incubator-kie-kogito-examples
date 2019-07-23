@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 import org.kie.kogito.queries.AdultUnit;
 import org.kie.kogito.queries.AdultUnitQueryFindAdultsEndpoint;
 import org.kie.kogito.queries.AdultUnitQueryFindAdultNamesEndpoint;
+import org.kie.kogito.queries.AdultUnitQueryFindNotAdultNamesAndAgeEndpoint;
 import org.kie.kogito.queries.AdultUnitRuleUnit;
 import org.kie.kogito.queries.Person;
 
@@ -53,6 +54,18 @@ public class QueryTest {
 
         assertEquals( 2, results.size() );
         assertTrue( results.containsAll( asList("Mario", "Marilena") ) );
+    }
+
+    @Test
+    public void testResult() {
+        AdultUnitQueryFindNotAdultNamesAndAgeEndpoint query = new AdultUnitQueryFindNotAdultNamesAndAgeEndpoint(new AdultUnitRuleUnit());
+
+        List<AdultUnitQueryFindNotAdultNamesAndAgeEndpoint.Result> results = query.executeQuery( createAdultUnit() );
+
+        assertEquals( 1, results.size() );
+        AdultUnitQueryFindNotAdultNamesAndAgeEndpoint.Result result = results.get(0);
+        assertEquals( "Sofia", result.get$name() );
+        assertEquals( 7, result.get$age() );
     }
 
     private AdultUnit createAdultUnit() {

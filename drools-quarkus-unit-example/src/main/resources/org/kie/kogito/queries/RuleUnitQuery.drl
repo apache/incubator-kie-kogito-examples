@@ -23,3 +23,7 @@ query FindAdultNames
     /persons[ adult, $name : name ]
 end
 
+query FindNotAdultNamesAndAge
+    /persons[ !adult, $name : name, $age : age ]
+end
+
