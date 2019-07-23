@@ -20,6 +20,7 @@ import java.util.concurrent.TimeUnit;
 
 import cz.xtf.builder.builders.BuildConfigBuilder;
 import cz.xtf.builder.builders.ImageStreamBuilder;
+import cz.xtf.core.http.Https;
 import cz.xtf.core.openshift.OpenShiftBinary;
 import cz.xtf.core.openshift.OpenShifts;
 import cz.xtf.core.waiting.SimpleWaiter;
@@ -65,7 +66,12 @@ public class Deployer {
         masterBinary.execute("expose", "svc/" + runtimeImageBuildName);
 
         // Temporary implementation, service name is equal to runtimeImageBuildName
-        return new HttpDeployment(project, runtimeImageBuildName);
+        HttpDeployment kaasDeployment = new HttpDeployment(project, runtimeImageBuildName);
+
+        // Wait until route is available and working
+        new SimpleWaiter(() -> Https.getCode(kaasDeployment.getRouteUrl().toExternalForm()) != 503).reason("Waiting for deployment route to connect to pod.").timeout(TimeUnit.SECONDS, 30L).waitFor();
+
+        return kaasDeployment;
     }
 
     /**
