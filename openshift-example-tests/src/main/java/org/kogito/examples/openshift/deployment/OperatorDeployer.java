@@ -18,11 +18,11 @@ package org.kogito.examples.openshift.deployment;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import cz.xtf.core.openshift.OpenShiftBinary;
-import cz.xtf.core.openshift.OpenShifts;
 import io.fabric8.kubernetes.api.model.ServiceAccount;
 import io.fabric8.kubernetes.api.model.apiextensions.CustomResourceDefinition;
 import io.fabric8.kubernetes.api.model.apps.Deployment;
+import io.fabric8.kubernetes.api.model.rbac.Role;
+import io.fabric8.kubernetes.api.model.rbac.RoleBinding;
 import io.fabric8.kubernetes.client.dsl.NonNamespaceOperation;
 import io.fabric8.kubernetes.client.dsl.Resource;
 import org.kogito.examples.openshift.Project;
@@ -37,6 +37,7 @@ public class OperatorDeployer {
     private static final Logger logger = LoggerFactory.getLogger(OperatorDeployer.class);
 
     private static final String OPERATOR_RESOURCE_BASE_URL = "https://raw.githubusercontent.com/kiegroup/kogito-cloud-operator/master/deploy";
+    private static final String OPERATOR_CUSTOM_RESOURCE_DEFINITION = OPERATOR_RESOURCE_BASE_URL + "/crds/kogitoapp.crd.yaml";
     private static final String OPERATOR_SERVICE_ACCOUNT = OPERATOR_RESOURCE_BASE_URL + "/service_account.yaml";
     private static final String OPERATOR_ROLE = OPERATOR_RESOURCE_BASE_URL + "/role.yaml";
     private static final String OPERATOR_ROLE_BINDING = OPERATOR_RESOURCE_BASE_URL + "/role_binding.yaml";
@@ -53,29 +54,40 @@ public class OperatorDeployer {
      * @return Fabric8 client for Kogito operator.
      */
     public static NonNamespaceOperation<KogitoApp, KogitoAppList, KogitoAppDoneable, Resource<KogitoApp, KogitoAppDoneable>> deployKogitoOperator(Project project) {
-        OpenShiftBinary masterBinary = OpenShifts.masterBinary(project.getName());
+        createCustomResourceDefinitionsInOpenShift(project);
         createServiceAccountInProject(project);
-        createRoleInProject(project, masterBinary);
-        createRoleBindingsInProject(project, masterBinary);
+        createRoleInProject(project);
+        createRoleBindingsInProject(project);
         createOperatorInProject(project);
 
         return getKogitoOperatorFabric8Client(project);
     }
 
+    private static void createCustomResourceDefinitionsInOpenShift(Project project) {
+        CustomResourceDefinition customResourceDefinition = project.getAdmin().customResourceDefinitions().withName(KOGITO_CRD_NAME).get();
+        if (customResourceDefinition == null) {
+            logger.info("Creating custom resource definition '" + KOGITO_CRD_NAME + "' from " + OPERATOR_CUSTOM_RESOURCE_DEFINITION);
+            customResourceDefinition = project.getAdmin().customResourceDefinitions().load(getResource(OPERATOR_CUSTOM_RESOURCE_DEFINITION)).get();
+            project.getAdmin().customResourceDefinitions().create(customResourceDefinition);
+        }
+    }
+
     private static void createServiceAccountInProject(Project project) {
         logger.info("Creating service account in project '" + project.getName() + "' from " + OPERATOR_SERVICE_ACCOUNT);
-        ServiceAccount serviceAccount = project.getMaster().serviceAccounts().load(getResource(OPERATOR_SERVICE_ACCOUNT)).get();
-        project.getMaster().createServiceAccount(serviceAccount);
+        ServiceAccount serviceAccount = project.getAdmin().serviceAccounts().load(getResource(OPERATOR_SERVICE_ACCOUNT)).get();
+        project.getAdmin().createServiceAccount(serviceAccount);
     }
 
-    private static void createRoleInProject(Project project, OpenShiftBinary masterBinary) {
+    private static void createRoleInProject(Project project) {
         logger.info("Creating role in project '" + project.getName() + "' from " + OPERATOR_ROLE);
-        masterBinary.execute("create", "-f", OPERATOR_ROLE);
+        Role role = project.getAdmin().rbac().roles().load(getResource(OPERATOR_ROLE)).get();
+        project.getAdmin().rbac().roles().inNamespace(project.getName()).create(role);
     }
 
-    private static void createRoleBindingsInProject(Project project, OpenShiftBinary masterBinary) {
+    private static void createRoleBindingsInProject(Project project) {
         logger.info("Creating role bindings in project '" + project.getName() + "' from " + OPERATOR_ROLE_BINDING);
-        masterBinary.execute("create", "-f", OPERATOR_ROLE_BINDING);
+        RoleBinding roleBinding = project.getAdmin().rbac().roleBindings().load(getResource(OPERATOR_ROLE_BINDING)).get();
+        project.getAdmin().rbac().roleBindings().inNamespace(project.getName()).create(roleBinding);
     }
 
     private static void createOperatorInProject(Project project) {
@@ -96,7 +108,7 @@ public class OperatorDeployer {
     }
 
     private static NonNamespaceOperation<KogitoApp, KogitoAppList, KogitoAppDoneable, Resource<KogitoApp, KogitoAppDoneable>> getKogitoOperatorFabric8Client(Project project) {
-        CustomResourceDefinition customResourceDefinition = project.getMaster().customResourceDefinitions().withName(KOGITO_CRD_NAME).get();
-        return project.getMaster().customResources(customResourceDefinition, KogitoApp.class, KogitoAppList.class, KogitoAppDoneable.class).inNamespace(project.getName());
+        CustomResourceDefinition customResourceDefinition = project.getAdmin().customResourceDefinitions().withName(KOGITO_CRD_NAME).get();
+        return project.getAdmin().customResources(customResourceDefinition, KogitoApp.class, KogitoAppList.class, KogitoAppDoneable.class).inNamespace(project.getName());
     }
 }
