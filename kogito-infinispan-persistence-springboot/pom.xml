@@ -9,9 +9,9 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
 
-  <artifactId>kogito-kafka-quickstart-springboot</artifactId>
-  <name>Kogito-kafka-quickstart-springboot</name>
-  <description>Kogito with Kafka - Spring Boot</description>
+  <artifactId>kogito-infinispan-persistence-springboot</artifactId>
+  <name>Kogito-infinispan-persistence-springboot</name>
+  <description>Kogito with Infinispan persistence - Spring Boot</description>
 
   <properties>
   </properties>
@@ -34,15 +34,17 @@
       <artifactId>spring-boot-starter</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.springframework.kafka</groupId>
-      <artifactId>spring-kafka</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
+      <groupId>org.infinispan</groupId>
+      <artifactId>infinispan-spring-boot-starter-remote</artifactId>
+      <version>${infinispan.version}</version>
     </dependency>
 
     <!-- kogito -->
+    <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>infinispan-persistence-addon</artifactId>
+      <version>${kogito.version}</version>
+    </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.jaxrs</groupId>
       <artifactId>jackson-jaxrs-json-provider</artifactId>
@@ -99,11 +101,6 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.kafka</groupId>
-      <artifactId>spring-kafka-test</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>

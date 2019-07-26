@@ -17,13 +17,16 @@
     
     <!-- quarkus related -->
     <quarkus.dev.version>999-SNAPSHOT</quarkus.dev.version>
-    <quarkus.version>0.18.0</quarkus.version>
+    <quarkus.version>999-SNAPSHOT</quarkus.version>
     <!-- springboot related -->
     <springboot.version>2.1.1.RELEASE</springboot.version>
     <cxf.version>3.2.6</cxf.version>
     <javax.activation.version>1.1.1</javax.activation.version>
     <!-- kogito -->
     <kogito.version>8.0.0-SNAPSHOT</kogito.version>
+    
+    <!-- infinispan -->
+    <infinispan.version>2.1.7.Final</infinispan.version>
 
     <swagger-plugin.version>2.1.0</swagger-plugin.version>
     <surefire-plugin.version>2.22.0</surefire-plugin.version>
@@ -32,5 +35,7 @@
   <modules>
     <module>kogito-kafka-quickstart-quarkus</module>
     <module>kogito-kafka-quickstart-springboot</module>
+    <module>kogito-infinispan-persistence-quarkus</module>
+    <module>kogito-infinispan-persistence-springboot</module>
   </modules>
 </project>
