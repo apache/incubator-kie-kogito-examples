@@ -22,10 +22,12 @@ public class Project {
 
     private String name;
     private OpenShift master;
+    private OpenShift admin;
 
     private Project(String name) {
         this.name = name;
         this.master = OpenShifts.master(name);
+        this.admin = OpenShifts.admin(name);
     }
 
     public String getName() {
@@ -34,6 +36,10 @@ public class Project {
 
     public OpenShift getMaster() {
         return master;
+    }
+
+    public OpenShift getAdmin() {
+        return admin;
     }
 
     public void delete() {
