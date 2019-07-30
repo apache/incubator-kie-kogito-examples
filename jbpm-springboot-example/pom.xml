@@ -150,4 +150,27 @@
     </plugins>
   </build>
   
+  <profiles>
+    <profile>
+      <id>persistence</id>
+      <activation>
+        <property>  
+          <name>persistence</name>
+        </property>
+      </activation>
+      <dependencies>       
+        <dependency>
+          <groupId>org.kie.kogito</groupId>
+          <artifactId>infinispan-persistence-addon</artifactId>
+          <version>${project.version}</version>
+        </dependency>
+        <dependency>
+          <groupId>org.infinispan</groupId>
+          <artifactId>infinispan-spring-boot-starter-remote</artifactId>
+          <version>2.1.7.Final</version>
+        </dependency>
+      </dependencies>
+    </profile>
+  </profiles>
+  
 </project>

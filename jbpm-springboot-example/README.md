@@ -23,6 +23,23 @@ You will need:
 mvn clean package spring-boot:run    
 ```
 
+### Running with persistence enabled
+
+Kogito support runtime persistence that is backed by Inifinispan. So to be able to enable this you need to have 
+Infinispan server installed and available over the network. By default it expects it to be at
+
+```
+localhost:11222
+```
+
+it can be configured via application.properties file located in src/main/resources
+
+Once Inifispan is up and running you can build this project with `-Ppersistence` to enable additional processing
+during the build. Next you start it in exact same way as without persistence.
+
+This extra profile in maven configuration adds additional dependencies needed to work with infinispan as persistent store. 
+
+
 ## Swagger documentation
 
 You can take a look at the [swagger definition](http://localhost:8080/docs/swagger.json) - automatically generated and included in this service - to determine all available operations exposed by this service.  For easy readability you can visualize the swagger definition file using a swagger UI like for example available [here](https://editor.swagger.io). In addition, various clients to interact with this service can be easily generated using this swagger definition.
