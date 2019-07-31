@@ -15,8 +15,15 @@
 
 package org.kie.kogito;
 
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+
 import org.junit.jupiter.api.Test;
+import org.kie.kogito.rules.DataObserver;
+import org.kie.kogito.rules.DataSource;
+import org.kie.kogito.rules.DataStream;
 import org.kie.kogito.rules.alerting.Event;
+import org.kie.kogito.rules.alerting.Logger;
 import org.kie.kogito.rules.alerting.LoggerService;
 import org.kie.kogito.rules.alerting.LoggerServiceRuleUnit;
 import org.kie.kogito.rules.alerting.LoggerServiceRuleUnitInstance;
@@ -29,9 +36,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ServicesTest {
 
     @Test
-    public void test() {
-
-        org.kie.kogito.examples.Application application = new org.kie.kogito.examples.Application();
+    public void testExplicitly() {
 
         MonitoringService monitoringService = new MonitoringService();
         LoggerService loggerService = new LoggerService(monitoringService.getAlertStream());
@@ -40,16 +45,54 @@ public class ServicesTest {
         monitoringService.getEventStream().append(new Event("Hello Again!"));
         monitoringService.getEventStream().append(new Event("Hello 3!"));
 
-        MonitoringServiceRuleUnitInstance monitoringServiceInstance = new MonitoringServiceRuleUnit().createInstance(monitoringService);
+        MonitoringServiceRuleUnitInstance monitoringServiceInstance =
+                new MonitoringServiceRuleUnit().createInstance(monitoringService);
         monitoringServiceInstance.fire();
 
         monitoringService.getEventStream().append(new Event("Hello 4!"));
         monitoringServiceInstance.fire();
 
-        LoggerServiceRuleUnitInstance loggerServiceInstance = new LoggerServiceRuleUnit().createInstance(loggerService);
+        LoggerServiceRuleUnitInstance loggerServiceInstance =
+                new LoggerServiceRuleUnit().createInstance(loggerService);
         loggerServiceInstance.fire();
 
-        System.out.println(loggerService.getLog());
-        assertEquals(4, loggerService.getLog().size());
+        CountDownLatch latch = new CountDownLatch(4);
+
+        loggerService.getLogger().subscribe(DataObserver.of(v -> latch.countDown()));
+
+        assertEquals(0, latch.getCount());
+    }
+
+    @Test
+    public void testScheduled() throws InterruptedException {
+        MonitoringService monitoringService = new MonitoringService();
+        LoggerService loggerService = new LoggerService(monitoringService.getAlertStream());
+        CountDownLatch latch = new CountDownLatch(4);
+        loggerService.getLogger().subscribe(DataObserver.of(v -> latch.countDown()));
+
+        MonitoringServiceRuleUnitInstance monitoringServiceInstance =
+                new MonitoringServiceRuleUnit()
+                        .createInstance(monitoringService);
+
+        LoggerServiceRuleUnitInstance loggerServiceInstance =
+                new LoggerServiceRuleUnit()
+                        .createInstance(loggerService);
+
+        Executor executor = Executor.create();
+        executor.submit(monitoringServiceInstance);
+        executor.submit(loggerServiceInstance);
+
+        DataStream<Event> eventStream =
+                monitoringService.getEventStream();
+
+        eventStream.append(new Event("Hello!"));
+        eventStream.append(new Event("Hello Again!"));
+        eventStream.append(new Event("Hello 3!"));
+        eventStream.append(new Event("Hello 4!"));
+
+        latch.await(5, TimeUnit.SECONDS);
+
+        assertEquals(0, latch.getCount(), "countdown must be zero");
+
     }
 }

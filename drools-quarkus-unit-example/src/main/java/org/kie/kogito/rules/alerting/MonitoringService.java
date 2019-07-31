@@ -20,8 +20,19 @@ import org.kie.kogito.rules.DataStream;
 import org.kie.kogito.rules.RuleUnitMemory;
 
 public class MonitoringService implements RuleUnitMemory {
-    private final DataStream<Event> eventStream = DataSource.createStream();
-    private final DataStream<Alert> alertStream = DataSource.createStream();
+
+    private final DataStream<Event> eventStream;
+    private final DataStream<Alert> alertStream;
+
+    public MonitoringService(DataStream<Event> eventStream, DataStream<Alert> alertStream) {
+        this.eventStream = eventStream;
+        this.alertStream = alertStream;
+    }
+
+    public MonitoringService() {
+        this(DataSource.createStream(),
+             DataSource.createStream());
+    }
 
     public DataStream<Event> getEventStream() {
         return eventStream;
