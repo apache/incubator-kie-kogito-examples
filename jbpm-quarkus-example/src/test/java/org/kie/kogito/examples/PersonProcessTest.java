@@ -42,7 +42,7 @@ public class PersonProcessTest {
         ProcessInstance<?> processInstance = personProcess.createInstance(m);
         processInstance.start();
         
-        assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_COMPLETED, processInstance.status());
+        assertEquals(ProcessInstance.STATE_COMPLETED, processInstance.status());
         Model result = (Model)processInstance.variables();
         assertEquals(1, result.toMap().size());
         assertTrue(((Person)result.toMap().get("person")).isAdult());
@@ -58,7 +58,7 @@ public class PersonProcessTest {
         ProcessInstance<?> processInstance = personProcess.createInstance(m);
         processInstance.start();
         
-        assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_ACTIVE, processInstance.status());
+        assertEquals(ProcessInstance.STATE_ACTIVE, processInstance.status());
         Model result = (Model)processInstance.variables();
         assertEquals(1, result.toMap().size());
         assertFalse(((Person)result.toMap().get("person")).isAdult());
@@ -68,6 +68,6 @@ public class PersonProcessTest {
         
         processInstance.completeWorkItem(workItems.get(0).getId(), null);
         
-        assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_COMPLETED, processInstance.status()); 
+        assertEquals(ProcessInstance.STATE_COMPLETED, processInstance.status()); 
     }
 }

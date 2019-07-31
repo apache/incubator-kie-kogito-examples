@@ -33,14 +33,15 @@ Please note the additional parameter to specify you are running the service loca
 
 ### Running with persistence enabled
 
-Kogito support runtime persistence that is backed by Inifinispan. So to be able to enable this you need to have 
-Infinispan server installed and available over the network. By default it expects it to be at
+Kogito supports runtime persistence that is backed by Inifinispan. So to be able to enable this you need to have 
+Infinispan server installed and available over the network. By default it expects it to be at (it can be configured via application.properties file located in src/main/resources)
 
 ```
 localhost:11222
 ```
 
-it can be configured via application.properties file located in src/main/resources
+You can install Inifinispan server by downloading it from [https://infinispan.org/download/](official website) version to be used in 10.0.0.Beta4
+
 
 Once Inifispan is up and running you can build this project with `-Ppersistence` to enable additional processing
 during the build. Next you start it in exact same way as without persistence.

@@ -36,49 +36,41 @@ public class OrderServiceRestTest {
     @Test
     public void testCreateNewOrder() {
         // create order
-        int firstCreatedId = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(orderPayload).when()
+        String firstCreatedId = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(orderPayload).when()
                 .post("/orders").then().statusCode(200).body("id",
                                                              notNullValue()).extract().path("id");
 
-        assertEquals(1,
-                     firstCreatedId);
+        assertNotNull(firstCreatedId);
     }
 
     @Test
     public void testGetOrders() {
         // create two orders
-        int firstCreatedId = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(orderPayload).when()
+        String firstCreatedId = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(orderPayload).when()
                 .post("/orders").then().statusCode(200).body("id",
                                                              notNullValue()).extract().path("id");
 
-        assertEquals(1,
-                     firstCreatedId);
+        assertNotNull(firstCreatedId);
 
-        int secondCreatedId = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(orderPayload).when()
+        String secondCreatedId = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(orderPayload).when()
                 .post("/orders").then().statusCode(200).body("id",
                                                              notNullValue()).extract().path("id");
 
-        assertEquals(2,
-                     secondCreatedId);
+        assertNotNull(secondCreatedId);
 
         // get all orders
         given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
                 .body("$.size()",
-                      is(2),
-                      "[0].id",
-                      is(firstCreatedId),
-                      "[1].id",
-                      is(secondCreatedId));
+                      is(2));
     }
 
     @Test
     public void testGetOrderById() {
-        int firstCreatedId = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(orderPayload).when()
+        String firstCreatedId = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(orderPayload).when()
                 .post("/orders").then().statusCode(200).body("id",
                                                              notNullValue()).extract().path("id");
 
-        assertEquals(1,
-                     firstCreatedId);
+        assertNotNull(firstCreatedId);
 
         // get order by its id and test
         given().accept(ContentType.JSON).body(orderPayload).when().get("/orders/" + firstCreatedId).then()
@@ -89,19 +81,17 @@ public class OrderServiceRestTest {
     @Test
     public void testDeleteOrder() {
         // create two orders
-        int firstCreatedId = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(orderPayload).when()
+        String firstCreatedId = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(orderPayload).when()
                 .post("/orders").then().statusCode(200).body("id",
                                                              notNullValue()).extract().path("id");
 
-        assertEquals(1,
-                     firstCreatedId);
+        assertNotNull(firstCreatedId);
 
-        int secondCreatedId = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(orderPayload).when()
+        String secondCreatedId = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(orderPayload).when()
                 .post("/orders").then().statusCode(200).body("id",
                                                              notNullValue()).extract().path("id");
 
-        assertEquals(2,
-                     secondCreatedId);
+        assertNotNull(secondCreatedId);
 
         // delete first order
         given().accept(ContentType.JSON).when().delete("/orders/" + firstCreatedId).then().statusCode(200);
