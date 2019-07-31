@@ -21,7 +21,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.*;
 
-;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = DemoApplication.class)
@@ -57,7 +56,7 @@ public class OrderServiceApiTest {
         ProcessInstance<?> processInstance = orderProcess.createInstance(m);
         processInstance.start();
 
-        assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_ACTIVE,
+        assertEquals(ProcessInstance.STATE_ACTIVE,
                      processInstance.status());
         Model result = (Model) processInstance.variables();
         assertEquals(2,
@@ -77,9 +76,9 @@ public class OrderServiceApiTest {
         childProcessInstance.completeWorkItem(workItems.get(0).getId(),
                                               null);
 
-        assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_COMPLETED,
+        assertEquals(ProcessInstance.STATE_COMPLETED,
                      childProcessInstance.status());
-        assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_COMPLETED,
+        assertEquals(ProcessInstance.STATE_COMPLETED,
                      processInstance.status());
 
         // no active process instances for both orders and order items processes
@@ -101,7 +100,7 @@ public class OrderServiceApiTest {
         ProcessInstance<?> processInstance = personProcess.createInstance(m);
         processInstance.start();
 
-        assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_COMPLETED,
+        assertEquals(ProcessInstance.STATE_COMPLETED,
                      processInstance.status());
         Model result = (Model) processInstance.variables();
         assertEquals(1,
@@ -121,7 +120,7 @@ public class OrderServiceApiTest {
         ProcessInstance<?> processInstance = personProcess.createInstance(m);
         processInstance.start();
 
-        assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_ACTIVE,
+        assertEquals(ProcessInstance.STATE_ACTIVE,
                      processInstance.status());
         Model result = (Model) processInstance.variables();
         assertEquals(1,
@@ -135,7 +134,7 @@ public class OrderServiceApiTest {
         processInstance.completeWorkItem(workItems.get(0).getId(),
                                          null);
 
-        assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_COMPLETED,
+        assertEquals(ProcessInstance.STATE_COMPLETED,
                      processInstance.status());
     }
 }

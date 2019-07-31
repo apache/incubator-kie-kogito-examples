@@ -9,7 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.Model;
 import org.kie.kogito.process.Process;
-import org.kie.kogito.process.ProcessInstances;
 
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
@@ -39,7 +38,7 @@ public class OrdersRestTest {
 
         // test adding new order
         String addOrderPayload = "{\"approver\" : \"john\", \"order\" : {\"orderNumber\" : \"12345\", \"shipped\" : false}}";
-        int firstCreatedId = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(addOrderPayload).when()
+        String firstCreatedId = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(addOrderPayload).when()
                 .post("/orders").then().statusCode(200).body("id", notNullValue()).extract().path("id");
 
         // test getting the created order
@@ -52,7 +51,7 @@ public class OrdersRestTest {
 
         // test delete order
         // first add second order...
-        int secondCreatedId = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(addOrderPayload)
+        String secondCreatedId = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(addOrderPayload)
                 .when().post("/orders").then().statusCode(200).body("id", notNullValue()).extract().path("id");
         // now delete the first order created
         given().accept(ContentType.JSON).when().delete("/orders/" + firstCreatedId).then().statusCode(200);
