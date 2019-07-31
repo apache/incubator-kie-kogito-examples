@@ -11,41 +11,32 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
-*/
+ */
 
 package org.kogito.examples.openshift.operator.model;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 /**
- * KogitoApp environment variable.
+ * KogitoApp service.
  */
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class Env {
+public class Service {
 
-    private String name;
-    private String value;
+    private Map<String, String> labels = new HashMap<>();
 
-    public Env() {}
-
-    public Env(String name, String value) {
-        this.name = name;
-        this.value = value;
+    public void addLabel(String name, String value) {
+        labels.put(name, value);
     }
 
-    public String getName() {
-        return name;
+    public Map<String, String> getLabels() {
+        return labels;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
+    public void setLabels(Map<String, String> labels) {
+        this.labels = labels;
     }
 }

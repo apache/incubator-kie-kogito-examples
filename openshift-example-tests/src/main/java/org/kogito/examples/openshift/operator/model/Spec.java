@@ -15,6 +15,10 @@
 
 package org.kogito.examples.openshift.operator.model;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 /**
@@ -27,6 +31,8 @@ public class Spec {
     private String runtime;
     private Integer replicas;
     private Build build;
+    private Service service;
+    private List<Env> env = new ArrayList<>();
 
     public String getName() {
         return name;
@@ -58,5 +64,29 @@ public class Spec {
 
     public void setBuild(Build build) {
         this.build = build;
+    }
+
+    public Service getService() {
+        return service;
+    }
+
+    public void setService(Service service) {
+        this.service = service;
+    }
+
+    public void addEnv(Env env) {
+        this.env.add(env);
+    }
+
+    public void addEnvs(List<Env> envs) {
+        this.env.addAll(envs);
+    }
+
+    public Env[] getEnv() {
+        return env.toArray(new Env[0]);
+    }
+
+    public void setEnv(Env[] env) {
+        this.env = Arrays.asList(env);
     }
 }
