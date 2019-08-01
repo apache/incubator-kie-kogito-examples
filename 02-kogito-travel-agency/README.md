@@ -1,8 +1,5 @@
 # Kogito Travel Agency - base version
 
-NOTE: This requires Kogito 0.3.0 that is not yet released and that's why it refers to snapshot versions
-for both Kogito and Quarkus
-
 ## Description
 
 During this workshop we will create a software system for a startup travel agency called Kogito Travel Agency. The first iteration of the system will consist of a set of services that are able to deal with travel requests and the booking of hotels and flights.
@@ -110,9 +107,16 @@ You will need:
   - Maven 3.5.4+ installed
 
 When using native image compilation, you will also need:
-  - GraalVM installed
+  - GraalVM installed 
   - Environment variable GRAALVM_HOME set accordingly
   - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too, please refer to GraalVM installation documentation for more details.
+
+### Infrastructure requirements
+
+This application requires an Inifinispan server to be available and by default expects it to be on default port and localhost.
+
+You can install Inifinispan server by downloading it from [https://infinispan.org/download/](official website) version to be used in 10.0.0.Beta4
+
 
 ### Compile and Run in Local Dev Mode
 
@@ -138,6 +142,7 @@ To run the generated native executable, generated in `target/`, execute
 ```
 
 ## Known issues
+
 
 ## User interface
 
