@@ -16,6 +16,9 @@ and to start any any place.
 
 [Base travel agency service](01-kogito-travel-agency) - deals with all the basic steps to book flight and hotel.
 Consists of single service that has both business logic and decision logic included.
+[Base travel agency service with persistence](02-kogito-travel-agency) - deals with all the basic steps to book flight and hotel.
+Consists of single service that has both business logic and decision logic included. Preserves data between service restarts and
+requires Infinispan server to be available.
 
 ## Contribution
 

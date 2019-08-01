@@ -1,8 +1,5 @@
 # Kogito Travel Agency - base version
 
-NOTE: This requires Kogito 0.3.0 that is not yet released and that's why it refers to snapshot versions
-for both Kogito and Quarkus
-
 ## Description
 
 During this workshop we will create a software system for a startup travel agency called Kogito Travel Agency. The first iteration of the system will consist of a set of services that are able to deal with travel requests and the booking of hotels and flights.
