@@ -10,27 +10,23 @@ import org.kie.kogito.cloud.workitems.ServiceInfo;
 
 public class DecisionTaskWorkItemHandler extends DiscoveredServiceWorkItemHandler {
 
-    private String namespace = System.getenv("NAMESPACE");
-
     public DecisionTaskWorkItemHandler() {
         if ("true".equalsIgnoreCase(System.getProperty("local"))) {
-            this.serviceEndpoints.put("id", new ServiceInfo("http://localhost:8081/id", null));
-            this.serviceEndpoints.put("department", new ServiceInfo("http://localhost:8081/department", null));
-            this.serviceEndpoints.put("employeeValidation", new ServiceInfo("http://localhost:8081/employeeValidation", null));
-            this.serviceEndpoints.put("vacationDays", new ServiceInfo("http://localhost:8082/vacationDays", null));
-            this.serviceEndpoints.put("taxRate", new ServiceInfo("http://localhost:8082/taxRate", null));
-            this.serviceEndpoints.put("paymentDate", new ServiceInfo("http://localhost:8082/paymentDate", null));
+            this.addServices("id", new ServiceInfo("http://localhost:8081/id", null));
+            this.addServices("department", new ServiceInfo("http://localhost:8081/department", null));
+            this.addServices("employeeValidation", new ServiceInfo("http://localhost:8081/employeeValidation", null));
+            this.addServices("vacationDays", new ServiceInfo("http://localhost:8082/vacationDays", null));
+            this.addServices("taxRate", new ServiceInfo("http://localhost:8082/taxRate", null));
+            this.addServices("paymentDate", new ServiceInfo("http://localhost:8082/paymentDate", null));
         }
     }
 
     @Override
     public void executeWorkItem(WorkItem workItem, WorkItemManager manager) {
-
-        Map<String, Object> results = discoverAndCall(workItem, namespace, "Decision", HttpMethods.POST);
+        Map<String, Object> results = discoverAndCall(workItem, System.getenv("NAMESPACE"), "Decision", HttpMethods.POST);
 
         manager.completeWorkItem(workItem.getId(), results);
     }
-
 
     @Override
     public void abortWorkItem(WorkItem workItem, WorkItemManager manager) {
