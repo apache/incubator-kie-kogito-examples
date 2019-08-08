@@ -37,7 +37,7 @@ public class OperatorDeployer {
     private static final Logger logger = LoggerFactory.getLogger(OperatorDeployer.class);
 
     private static final String OPERATOR_RESOURCE_BASE_URL = "https://raw.githubusercontent.com/kiegroup/kogito-cloud-operator/master/deploy";
-    private static final String OPERATOR_CUSTOM_RESOURCE_DEFINITION = OPERATOR_RESOURCE_BASE_URL + "/crds/kogitoapp.crd.yaml";
+    private static final String OPERATOR_CUSTOM_RESOURCE_DEFINITION = OPERATOR_RESOURCE_BASE_URL + "/crds/app_v1alpha1_kogitoapp_crd.yaml";
     private static final String OPERATOR_SERVICE_ACCOUNT = OPERATOR_RESOURCE_BASE_URL + "/service_account.yaml";
     private static final String OPERATOR_ROLE = OPERATOR_RESOURCE_BASE_URL + "/role.yaml";
     private static final String OPERATOR_ROLE_BINDING = OPERATOR_RESOURCE_BASE_URL + "/role_binding.yaml";
