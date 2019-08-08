@@ -4,13 +4,13 @@ unit AdultUnit;
 import org.kie.kogito.queries.Person
 
 rule CheckAdult when
-    $p: /persons[ age >= 18 ]
+    $p: /persons[ age >= adultAge ]
 then
     modify($p) { $p.setAdult(true) };
 end
 
 rule CheckNotAdult when
-    $p: /persons[ age < 18 ]
+    $p: /persons[ age < adultAge ]
 then
     modify($p) { $p.setAdult(false) };
 end

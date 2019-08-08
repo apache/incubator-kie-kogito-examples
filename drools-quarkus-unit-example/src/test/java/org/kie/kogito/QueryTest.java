@@ -15,10 +15,11 @@
 
 package org.kie.kogito;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-import org.kie.kogito.queries.AdultUnit;
+import org.kie.kogito.queries.AdultUnitDTO;
 import org.kie.kogito.queries.AdultUnitQueryFindAdultsEndpoint;
 import org.kie.kogito.queries.AdultUnitQueryFindAdultNamesEndpoint;
 import org.kie.kogito.queries.AdultUnitQueryFindNotAdultNamesAndAgeEndpoint;
@@ -37,7 +38,7 @@ public class QueryTest {
     public void testPersons() {
         AdultUnitQueryFindAdultsEndpoint query = new AdultUnitQueryFindAdultsEndpoint(new AdultUnitRuleUnit());
 
-        List<String> results = query.executeQuery( createAdultUnit() )
+        List<String> results = query.executeQuery( createAdultUnitDTO() )
                 .stream()
                 .map( Person::getName )
                 .collect( toList() );
@@ -50,7 +51,7 @@ public class QueryTest {
     public void testNames() {
         AdultUnitQueryFindAdultNamesEndpoint query = new AdultUnitQueryFindAdultNamesEndpoint(new AdultUnitRuleUnit());
 
-        List<String> results = query.executeQuery( createAdultUnit() );
+        List<String> results = query.executeQuery( createAdultUnitDTO() );
 
         assertEquals( 2, results.size() );
         assertTrue( results.containsAll( asList("Mario", "Marilena") ) );
@@ -60,7 +61,7 @@ public class QueryTest {
     public void testResult() {
         AdultUnitQueryFindNotAdultNamesAndAgeEndpoint query = new AdultUnitQueryFindNotAdultNamesAndAgeEndpoint(new AdultUnitRuleUnit());
 
-        List<AdultUnitQueryFindNotAdultNamesAndAgeEndpoint.Result> results = query.executeQuery( createAdultUnit() );
+        List<AdultUnitQueryFindNotAdultNamesAndAgeEndpoint.Result> results = query.executeQuery( createAdultUnitDTO() );
 
         assertEquals( 1, results.size() );
         AdultUnitQueryFindNotAdultNamesAndAgeEndpoint.Result result = results.get(0);
@@ -68,14 +69,16 @@ public class QueryTest {
         assertEquals( 7, result.get$age() );
     }
 
-    private AdultUnit createAdultUnit() {
-        org.kie.kogito.examples.Application application = new org.kie.kogito.examples.Application();
+    private AdultUnitDTO createAdultUnitDTO() {
+        List<Person> persons = new ArrayList<>();
+        persons.add( new Person( "Mario", 45 ) );
+        persons.add( new Person( "Marilena", 47 ) );
+        persons.add( new Person( "Sofia", 7 ) );
 
-        AdultUnit adults = new AdultUnit();
+        AdultUnitDTO adultsDTO = new AdultUnitDTO();
+        adultsDTO.setAdultAge(18);
+        adultsDTO.setPersons(persons);
 
-        adults.getPersons().add( new Person( "Mario", 45 ) );
-        adults.getPersons().add( new Person( "Marilena", 47 ) );
-        adults.getPersons().add( new Person( "Sofia", 7 ) );
-        return adults;
+        return adultsDTO;
     }
 }
