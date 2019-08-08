@@ -1,4 +1,5 @@
 bin/
+tmp/
 /target
 /local
 

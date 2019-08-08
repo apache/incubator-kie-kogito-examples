@@ -21,6 +21,8 @@
   <properties>
     <surefire.forkCount>1</surefire.forkCount>
     <alphanetworkCompilerEnabled>false</alphanetworkCompilerEnabled>
+    <!-- Force kubernetes client version as long as cz-xtf library did not integrate it, due to bug https://github.com/fabric8io/kubernetes-client/issues/1631 -->
+    <version.kubernetes-client>4.4.0</version.kubernetes-client>
   </properties>
 
   <repositories>
