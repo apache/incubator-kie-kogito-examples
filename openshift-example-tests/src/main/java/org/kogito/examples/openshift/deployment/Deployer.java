@@ -119,6 +119,8 @@ public class Deployer {
         s2iConfigBuilder.setOutput(resultImageStreamName);
         s2iConfigBuilder.gitSource(assetsUrl.toExternalForm());
         s2iConfigBuilder.sti().fromImageStream(project.getName(), s2iImageStreamName, s2iImageStreamTag);
+        s2iConfigBuilder.addMemoryResource().setRequests("6Gi").setLimits("6Gi");
+        s2iConfigBuilder.addCPUResource().setRequests("2").setLimits("2");
 
         if (gitContextDir != null && !gitContextDir.isEmpty()) {
             s2iConfigBuilder.gitContextDir(gitContextDir);
