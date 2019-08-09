@@ -10,8 +10,6 @@ A simple experiment with GraalVM and Node.js.
 ### Plain Java
 
 This example defines a jBPM process which evaluates an Applicant (by age).
-The process calls a Rule Task which executes Drools rules that evaluate the
-Applicant given age.
 
 To compile and run the tests execute
 
@@ -21,7 +19,7 @@ To compile and run the tests execute
 
 ### Node.js app
 
-This example defines the same jBPM process and rules and also starts a Node.js
+This example defines the same jBPM process and also starts a Node.js
 server running on port 8080 which showcasts how easy we can use our Kodito
 application inside a Node.js app with GraalVM.
 
@@ -60,7 +58,7 @@ First you will be presented with a very simple Applicant form:
 
 ![Applicant form](img/applicantform.png)
 
-Here enter in some random first and last name. For age, the business rules are simple:
+Here enter in some random first and last name. For age, the processing rules are simple:
 if the applicant is over 18 the application is accepted, otherwise the applicant is not accepted.
 
 Here you can see some outcomes given valid and invalid ages for an applicant:
