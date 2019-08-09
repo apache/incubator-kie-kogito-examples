@@ -1,7 +1,6 @@
-const ApplicationType = Java.type('org.kie.kogito.examples.Application');
 const ApplicantType = Java.type('org.kie.kogito.examples.polyglot.Applicant');
 const ApplicantProcessModelType = Java.type('org.kogito.examples.polyglot.ApplicantprocessModel');
-const HashMapType = Java.type('java.util.HashMap');
+const ApplicantProcessType = Java.type('org.kogito.examples.polyglot.ApplicantprocessProcess');
 const http = require('http');
 const querystring = require('querystring');
 
@@ -62,12 +61,10 @@ server.listen(8080, function () {
 
 function getApplicantProcessInstance(applicant) {
 
-    var kogitoApp = new ApplicationType();
-
     var model = new ApplicantProcessModelType();
     model.setApplicant(applicant);
 
-    var process = kogitoApp.processes().createApplicantprocessProcess();
-    return process.createInstance(model);
+    var applicantProcess = new  ApplicantProcessType();
+    return applicantProcess.createInstance(model);
 
 }
