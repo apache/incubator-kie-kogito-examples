@@ -18,6 +18,7 @@ package org.kogito.examples.openshift;
 import java.net.MalformedURLException;
 
 import io.restassured.RestAssured;
+import io.restassured.response.Response;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.hamcrest.core.StringContains;
 import org.junit.jupiter.api.AfterAll;
@@ -53,13 +54,38 @@ public abstract class OnboardingQuarkusExampleTestBase {
 
     @Test
     public void testOnboarding() {
+        onboardMarkTest().then()
+                         .statusCode(200)
+                         .assertThat().body(StringContains.containsString("\"manager\":\"John Doe\""), StringContains.containsString("\"taxRate\":35.0"));
+
+        // Onboarding is still not yet finished, applicant is still in state "new".
         RestAssured.given()
             .header("Content-Type", "application/json")
-            .body("{\"employee\" : {\"firstName\" : \"Mark\", \"lastName\" : \"Test\", \"personalId\" : \"xxx-yy-zzz\", \"birthDate\" : \"1995-12-10T14:50:12.123+02:00\", \"address\" : {\"country\" : \"US\", \"city\" : \"Boston\", \"street\" : \"any street 3\", \"zipCode\" : \"10001\"}}}")
         .when()
-            .post(getKogitoDeployment().getRouteUrl().toExternalForm() + "/onboarding")
+            .get(getOnboardingUrl())
         .then()
             .statusCode(200)
-            .assertThat().body(StringContains.containsString("\"manager\":\"John Doe\""), StringContains.containsString("\"taxRate\":35.0"));
+            .assertThat().body(StringContains.containsString("\"firstName\":\"Mark\""),
+                               StringContains.containsString("\"lastName\":\"Test\""),
+                               StringContains.containsString("\"message\":\"Employee Mark Test is not yet registered\""),
+                               StringContains.containsString("\"status\":\"new\""));
+
+        // Resend the same onboarding request, should return error message stating that onboarding of this person is already in progress
+        onboardMarkTest().then()
+                         .statusCode(200)
+                         .assertThat().body(StringContains.containsString("\"message\":\"Employee Mark Test is already registered\""),
+                                            StringContains.containsString("\"status\":\"exists\""));
+    }
+
+    private Response onboardMarkTest() {
+        return RestAssured.given()
+                              .header("Content-Type", "application/json")
+                              .body("{\"employee\" : {\"firstName\" : \"Mark\", \"lastName\" : \"Test\", \"personalId\" : \"xxx-yy-zzz\", \"birthDate\" : \"1995-12-10T14:50:12.123+02:00\", \"address\" : {\"country\" : \"US\", \"city\" : \"Boston\", \"street\" : \"any street 3\", \"zipCode\" : \"10001\"}}}")
+                          .when()
+                              .post(getOnboardingUrl());
+    }
+
+    private String getOnboardingUrl() {
+        return getKogitoDeployment().getRouteUrl().toExternalForm() + "/onboarding";
     }
 }
