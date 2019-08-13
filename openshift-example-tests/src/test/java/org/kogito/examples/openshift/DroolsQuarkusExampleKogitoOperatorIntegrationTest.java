@@ -28,6 +28,7 @@ import org.kogito.examples.openshift.operator.KogitoApp;
 import org.kogito.examples.openshift.operator.KogitoAppDoneable;
 import org.kogito.examples.openshift.operator.KogitoAppList;
 import org.kogito.examples.openshift.operator.model.Build;
+import org.kogito.examples.openshift.operator.model.Env;
 import org.kogito.examples.openshift.operator.model.GitSource;
 import org.kogito.examples.openshift.operator.model.Spec;
 
@@ -46,6 +47,7 @@ public class DroolsQuarkusExampleKogitoOperatorIntegrationTest extends DroolsQua
 
         Build build = new Build();
         build.setGitSource(gitSource);
+        TestConfig.getMavenMirrorUrl().ifPresent(mavenMirrorUrl -> build.addEnv(new Env("MAVEN_MIRROR_URL", mavenMirrorUrl)));
 
         Spec spec = new Spec();
         spec.setBuild(build);
