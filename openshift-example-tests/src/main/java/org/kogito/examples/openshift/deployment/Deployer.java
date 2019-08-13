@@ -34,6 +34,7 @@ import io.fabric8.openshift.api.model.ImageSourceBuilder;
 import io.fabric8.openshift.api.model.ImageSourcePath;
 import io.fabric8.openshift.api.model.ImageStream;
 import org.kogito.examples.openshift.Project;
+import org.kogito.examples.openshift.TestConfig;
 
 public class Deployer {
 
@@ -125,6 +126,8 @@ public class Deployer {
         if (gitContextDir != null && !gitContextDir.isEmpty()) {
             s2iConfigBuilder.gitContextDir(gitContextDir);
         }
+
+        TestConfig.getMavenMirrorUrl().ifPresent(mavenMirrorUrl -> s2iConfigBuilder.sti().addEnvVariable("MAVEN_MIRROR_URL", mavenMirrorUrl));
 
         project.getMaster().createBuildConfig(s2iConfigBuilder.build());
         project.getMaster().startBuild(buildName);

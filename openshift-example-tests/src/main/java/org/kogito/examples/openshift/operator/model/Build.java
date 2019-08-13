@@ -15,6 +15,10 @@
 
 package org.kogito.examples.openshift.operator.model;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 /**
@@ -25,6 +29,7 @@ public class Build {
 
     private Boolean incremental;
     private GitSource gitSource;
+    private List<Env> env = new ArrayList<>();
 
     public Boolean getIncremental() {
         return incremental;
@@ -40,5 +45,21 @@ public class Build {
 
     public void setGitSource(GitSource gitSource) {
         this.gitSource = gitSource;
+    }
+
+    public void addEnv(Env env) {
+        this.env.add(env);
+    }
+
+    public void addEnvs(List<Env> envs) {
+        this.env.addAll(envs);
+    }
+
+    public Env[] getEnv() {
+        return env.toArray(new Env[0]);
+    }
+
+    public void setEnv(Env[] env) {
+        this.env = Arrays.asList(env);
     }
 }
