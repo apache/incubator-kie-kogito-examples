@@ -65,5 +65,36 @@ public class OrdersRestTest {
         given().accept(ContentType.JSON).body(addOrderPayload).when().get("/orders").then().statusCode(200)
                 .body("$.size()", is(0));
     }
+    
+    @Test
+    public void testOrdersWithErrorRest() {
+        assertNotNull(orderProcess);
+
+        // test adding new order
+        String addOrderPayload = "{\"order\" : {\"orderNumber\" : \"12345\", \"shipped\" : false}}";
+        String firstCreatedId = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(addOrderPayload).when()
+                .post("/orders").then().statusCode(500).body("id", notNullValue()).extract().path("id");
+
+        // test getting the created order
+        given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
+                .body("$.size()", is(1), "[0].id", is(firstCreatedId));
+        
+        // test retrieving error info using process management addon
+        given().accept(ContentType.JSON).when().get("/management/process/demo.orders/instances/" + firstCreatedId + "/error").then()
+        .statusCode(200).body("id", is(firstCreatedId));
+        
+        String fixedOrderPayload = "{\"approver\" : \"john\", \"order\" : {\"orderNumber\" : \"12345\", \"shipped\" : false}}";
+        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(fixedOrderPayload).when().post("/orders/" + firstCreatedId).then()
+        .statusCode(200).body("id", is(firstCreatedId));
+        
+        given().accept(ContentType.JSON).when().post("/management/process/demo.orders/instances/" + firstCreatedId + "/retrigger").then()
+        .statusCode(200);
+        
+        // delete second before finishing
+        given().accept(ContentType.JSON).when().delete("/orders/" + firstCreatedId).then().statusCode(200);
+        // get all orders make sure there is zero
+        given().accept(ContentType.JSON).body(addOrderPayload).when().get("/orders").then().statusCode(200)
+                .body("$.size()", is(0));
+    }
 
 }
