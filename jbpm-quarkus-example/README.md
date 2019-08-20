@@ -62,9 +62,11 @@ This extra profile in maven configuration adds additional dependencies needed to
 
 You can take a look at the [swagger definition](http://localhost:8080/docs/swagger.json) - automatically generated and included in this service - to determine all available operations exposed by this service.  For easy readability you can visualize the swagger definition file using a swagger UI like for example available [here](https://editor.swagger.io). In addition, various clients to interact with this service can be easily generated using this swagger definition.
 
+When running in quarkus development mode, we also leverage the Quarkus openapi extension that exposes [swagger UI](http://localhost:8080/swagger-ui/) that you can use to look at available REST endpoints and send test requests. 
+
 ## Example Usage
 
-Once the service is up and running, you can use the following examples to interact with the service.
+Once the service is up and running, you can use the following examples to interact with the service.  Note that rather than using the curl commands below, you can also use the [swagger UI](http://localhost:8080/swagger-ui/) to send requests.
 
 ### POST /orders
 
