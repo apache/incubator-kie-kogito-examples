@@ -16,7 +16,13 @@
 package org.kogito.examples.openshift.deployment;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import cz.xtf.builder.builders.BuildConfigBuilder;
 import cz.xtf.builder.builders.ImageStreamBuilder;
@@ -28,6 +34,7 @@ import io.fabric8.openshift.api.model.ImageSourceBuilder;
 import io.fabric8.openshift.api.model.ImageSourcePath;
 import io.fabric8.openshift.api.model.ImageStream;
 import org.kogito.examples.openshift.Project;
+import org.kogito.examples.openshift.TestConfig;
 
 public class Deployer {
 
@@ -44,23 +51,39 @@ public class Deployer {
         return deployKaasUsingS2iAndWait(project, assetsUrl, null, s2iBuildImageTag, s2iRuntimeImageTag);
     }
 
+    public static HttpDeployment deployKaasUsingS2iAndWait(Project project, URL assetsUrl, String gitContextDir, String s2iBuildImageTag, String s2iRuntimeImageTag) {
+        return deployKaasUsingS2iAndWait(project, "kaas", assetsUrl, gitContextDir, s2iBuildImageTag, s2iRuntimeImageTag, new HashMap<>(), new HashMap<>());
+    }
+
     /**
      * Deploy KaaS application into the project using S2I and wait until application starts.
      *
      * @param project Project where the application will be deployed to.
+     * @param applicationName Name of the deployed application.
      * @param assetsUrl URL pointing to the GIT repo containing Kie assets.
      * @param gitContextDir Context directory of GIT repo containing Kie assets.
      * @param s2iBuildImageTag Image tag pointing to image used to build KaaS application from source code.
      * @param s2iRuntimeImageTag Image tag pointing to image used as a base for KaaS runtime application.
+     * @param envVariables Environment variables for running application.
+     * @param serviceLabels Service labels applied to deployed service.
      * @return Deployment object containing reference to the deployed application URL.
      */
-    public static HttpDeployment deployKaasUsingS2iAndWait(Project project, URL assetsUrl, String gitContextDir, String s2iBuildImageTag, String s2iRuntimeImageTag) {
+    public static HttpDeployment deployKaasUsingS2iAndWait(Project project, String applicationName, URL assetsUrl, String gitContextDir, String s2iBuildImageTag, String s2iRuntimeImageTag, Map<String, String> envVariables, Map<String, String> serviceLabels) {
         OpenShiftBinary masterBinary = OpenShifts.masterBinary(project.getName());
 
-        String s2iResultImageStreamName = buildKaasS2iApplication(project, assetsUrl, gitContextDir, s2iBuildImageTag);
-        String runtimeImageBuildName = buildKaasS2iRuntimeImage(project, s2iResultImageStreamName, s2iRuntimeImageTag);
+        String s2iResultImageStreamName = buildKaasS2iApplication(project, applicationName, assetsUrl, gitContextDir, s2iBuildImageTag);
+        String runtimeImageBuildName = buildKaasS2iRuntimeImage(project, applicationName, s2iResultImageStreamName, s2iRuntimeImageTag);
 
-        masterBinary.execute("new-app", runtimeImageBuildName + ":latest");
+        List<String> newAppCommand = new ArrayList<>(Arrays.asList("new-app", runtimeImageBuildName + ":latest"));
+        if (!envVariables.isEmpty()) {
+            newAppCommand.add("-e");
+            newAppCommand.add(getParameterKeyValueString(envVariables));
+        }
+        if (!serviceLabels.isEmpty()) {
+            newAppCommand.add("-l");
+            newAppCommand.add(getParameterKeyValueString(serviceLabels));
+        }
+        masterBinary.execute(newAppCommand.toArray(new String[0]));
         project.getMaster().waiters().areExactlyNPodsRunning(1, runtimeImageBuildName).timeout(TimeUnit.MINUTES, 1L).waitFor();
 
         masterBinary.execute("expose", "svc/" + runtimeImageBuildName);
@@ -78,16 +101,17 @@ public class Deployer {
      * Build the KaaS application image and push it to an image stream.
      *
      * @param project
+     * @param applicationName Name of the application to be built.
      * @param assetsUrl URL pointing to the GIT repo containing Kie assets.
      * @param gitContextDir Context directory of GIT repo containing Kie assets.
      * @param s2iBuildImageTag Image tag pointing to image used to build KaaS application from source code.
      * @return Name of the image stream containing application image.
      */
-    private static String buildKaasS2iApplication(Project project, URL assetsUrl, String gitContextDir, String s2iBuildImageTag) {
-        String s2iImageStreamName = "kaas-builder-s2i-image";
+    private static String buildKaasS2iApplication(Project project, String applicationName, URL assetsUrl, String gitContextDir, String s2iBuildImageTag) {
+        String s2iImageStreamName = applicationName + "-builder-s2i-image";
         String s2iImageStreamTag = "1.0";
-        String buildName = "kaas-s2i-build";
-        String resultImageStreamName = "kaas-s2i";
+        String buildName = applicationName + "-s2i-build";
+        String resultImageStreamName = applicationName + "-s2i";
 
         createInsecureImageStream(project, s2iImageStreamName, s2iImageStreamTag, s2iBuildImageTag);
         createEmptyImageStream(project, resultImageStreamName);
@@ -96,10 +120,14 @@ public class Deployer {
         s2iConfigBuilder.setOutput(resultImageStreamName);
         s2iConfigBuilder.gitSource(assetsUrl.toExternalForm());
         s2iConfigBuilder.sti().fromImageStream(project.getName(), s2iImageStreamName, s2iImageStreamTag);
+        s2iConfigBuilder.addMemoryResource().setRequests("6Gi").setLimits("6Gi");
+        s2iConfigBuilder.addCPUResource().setRequests("2").setLimits("2");
 
         if (gitContextDir != null && !gitContextDir.isEmpty()) {
             s2iConfigBuilder.gitContextDir(gitContextDir);
         }
+
+        TestConfig.getMavenMirrorUrl().ifPresent(mavenMirrorUrl -> s2iConfigBuilder.sti().addEnvVariable("MAVEN_MIRROR_URL", mavenMirrorUrl));
 
         project.getMaster().createBuildConfig(s2iConfigBuilder.build());
         project.getMaster().startBuild(buildName);
@@ -111,15 +139,16 @@ public class Deployer {
      * Build runtime image of the KaaS application and push it to an image stream.
      *
      * @param project
+     * @param applicationName Name of the application to be built.
      * @param s2iResultImageStreamName Image stream name containing KaaS application created by S2I build.
      * @param s2iRuntimeImageTag Image tag pointing to image used as a base for KaaS runtime application.
      * @return Name of the image stream containing runtime image.
      */
-    private static String buildKaasS2iRuntimeImage(Project project, String s2iResultImageStreamName, String s2iRuntimeImageTag) {
-        String finalImageStreamName = "kaas-builder-image";
+    private static String buildKaasS2iRuntimeImage(Project project, String applicationName, String s2iResultImageStreamName, String s2iRuntimeImageTag) {
+        String finalImageStreamName = applicationName + "-builder-image";
         String finalImageStreamTag = "1.0";
-        String buildName = "kaas-runtime-build";
-        String resultImageStreamName = "kaas-runtime";
+        String buildName = applicationName + "-runtime-build";
+        String resultImageStreamName = applicationName + "-runtime";
 
         createInsecureImageStream(project, finalImageStreamName, finalImageStreamTag, s2iRuntimeImageTag);
         createEmptyImageStream(project, resultImageStreamName);
@@ -196,5 +225,15 @@ public class Deployer {
     private static void createEmptyImageStream(Project project, String name) {
         ImageStream imageStream = new ImageStreamBuilder(name).build();
         project.getMaster().createImageStream(imageStream);
+    }
+
+    /**
+     * Returns String containing parameters prepared for usage with OC client, in for of parameter1=value1,parameter=value2...
+     *
+     * @param parameters
+     * @return
+     */
+    private static String getParameterKeyValueString(Map<String, String> parameters) {
+        return parameters.entrySet().stream().map(e -> e.getKey() + "=" + e.getValue()).collect(Collectors.joining(","));
     }
 }

@@ -7,10 +7,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.enterprise.context.ApplicationScoped;
+
 import org.kie.api.runtime.process.WorkItemHandler;
 import org.kie.kogito.examples.onboarding.DecisionTaskWorkItemHandler;
 import org.kie.kogito.process.impl.DefaultWorkItemHandlerConfig;
 
+@ApplicationScoped
 public class WorkItemHandlerConfig extends DefaultWorkItemHandlerConfig {
 
     private final Map<String, WorkItemHandler> workItemHandlers = new HashMap<>();

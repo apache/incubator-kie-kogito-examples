@@ -15,6 +15,8 @@
 
 package org.kogito.examples.openshift;
 
+import java.util.Optional;
+
 import cz.xtf.core.config.XTFConfig;
 
 public class TestConfig {
@@ -23,6 +25,8 @@ public class TestConfig {
     private static final String IMAGE_KAAS_QUARKUS_RUNTIME = "image.kaas.quarkus.runtime";
     private static final String IMAGE_KAAS_SPRINGBOOT_BUILDER_S2I = "image.kaas.springboot.builder.s2i";
     private static final String IMAGE_KAAS_SPRINGBOOT_RUNTIME = "image.kaas.springboot.runtime";
+
+    private static final String MAVEN_MIRROR_URL = "maven.mirror.url";
 
     public static String getKaasS2iQuarkusBuilderImage() {
         return getMandatoryProperty(IMAGE_KAAS_QUARKUS_BUILDER_S2I);
@@ -40,11 +44,23 @@ public class TestConfig {
         return getMandatoryProperty(IMAGE_KAAS_SPRINGBOOT_RUNTIME);
     }
 
+    public static Optional<String> getMavenMirrorUrl() {
+        return getOptionalProperty(MAVEN_MIRROR_URL);
+    }
+
     private static String getMandatoryProperty(String propertyName) {
         String propertyValue = XTFConfig.get(propertyName);
         if (propertyValue == null || propertyValue.isEmpty()) {
             throw new RuntimeException("Required property with name " + propertyName + " is not set.");
         }
         return propertyValue;
+    }
+
+    private static Optional<String> getOptionalProperty(String propertyName) {
+        String propertyValue = XTFConfig.get(propertyName);
+        if (propertyValue == null || propertyValue.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(propertyValue);
     }
 }
