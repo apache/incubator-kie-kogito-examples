@@ -22,24 +22,12 @@ import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 
 @QuarkusTest
 public class TrafficViolationTest {
-
-    @Test
-    public void testGET() {
-        given()
-          .when()
-               .get("/")
-          .then()
-             .statusCode(200)
-               .body("models", hasSize(greaterThanOrEqualTo(1)));
-    }
     
     @Test
     public void testEvaluateTrafficViolation() {
@@ -56,9 +44,7 @@ public class TrafficViolationTest {
                      "}")
                .contentType(ContentType.JSON)
           .when()
-               //               .header("X-DMN-model-namespace", "https://github.com/kiegroup/drools/kie-dmn/_A4BCA8B8-CF08-433F-93B2-A2598F19ECFF")
-               //               .header("X-DMN-model-name", "Traffic Violation")
-               .post("/")
+               .post("/Traffic Violation")
           .then()
              .statusCode(200)
                .body("'dmn-context'.'Should the driver be suspended?'", is("No"))
