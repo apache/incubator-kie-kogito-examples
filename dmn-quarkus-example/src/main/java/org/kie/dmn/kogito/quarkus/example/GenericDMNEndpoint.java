@@ -32,16 +32,17 @@ import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
 import org.kie.dmn.api.core.DMNModel;
-import org.kie.dmn.api.core.DMNRuntime;
+import org.kie.dmn.kogito.rest.quarkus.DMNKogitoQuarkus;
 import org.kie.dmn.kogito.rest.quarkus.DMNModelInfo;
 import org.kie.dmn.kogito.rest.quarkus.DMNModelInfoList;
 import org.kie.dmn.kogito.rest.quarkus.DMNResult;
-import org.kie.dmn.kogito.rest.quarkus.DMNKogitoQuarkus;
+import org.kie.kogito.Application;
 
 @Path("/")
 public class GenericDMNEndpoint {
 
-    static final DMNRuntime dmnRuntime = DMNKogitoQuarkus.createGenericDMNRuntime();
+    @javax.inject.Inject()
+    Application application;
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -49,10 +50,10 @@ public class GenericDMNEndpoint {
     public DMNResult dmn(@HeaderParam("X-DMN-model-namespace") String modelNamespace,
                          @HeaderParam("X-DMN-model-name") String modelName,
                          Map<String, Object> dmnContext) {
-        if (dmnRuntime.getModels().size() > 1 && (modelNamespace == null || modelName == null)) {
+        if (application.decisions().getModels().size() > 1 && (modelNamespace == null || modelName == null)) {
             throw new MultipleModelsMissingParams();
         }
-        return DMNKogitoQuarkus.evaluate(dmnRuntime,
+        return DMNKogitoQuarkus.evaluate(application.decisions(),
                                             modelNamespace,
                                             modelName,
                                             dmnContext);
@@ -62,7 +63,7 @@ public class GenericDMNEndpoint {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public DMNModelInfoList dmn() {
-        List<DMNModel> models = dmnRuntime.getModels();
+        List<DMNModel> models = application.decisions().getModels();
         List<DMNModelInfo> result = models.stream().map(DMNModelInfo::of).collect(Collectors.toList());
         return new DMNModelInfoList(result);
     }
