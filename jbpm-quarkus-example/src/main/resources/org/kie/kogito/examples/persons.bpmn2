@@ -19,10 +19,10 @@
       <bpmn2:outgoing>SequenceFlow_1</bpmn2:outgoing>
     </bpmn2:startEvent>
     <!--
-      'ruleFlowGroup="unit:PersonValidationService"' or ruleFlowGroup="unit:org.kie.kogito.examples.PersonValidationService"
+      ruleFlowGroup="unit:org.kie.kogito.examples.PersonValidationService"
       may be used ad-interim, until we support 'tns:ruleUnit="..."' — especially tooling-wise
     -->
-    <bpmn2:businessRuleTask id="BusinessRuleTask_1" tns:ruleFlowGroup="unit:PersonValidationService" name="Evaluate person">
+    <bpmn2:businessRuleTask id="BusinessRuleTask_1" tns:ruleFlowGroup="unit:org.kie.kogito.examples.PersonValidationService" name="Evaluate person">
       <bpmn2:extensionElements>
         <tns:metaData name="elementname">
           <tns:metaValue><![CDATA[Evaluate person]]></tns:metaValue>
