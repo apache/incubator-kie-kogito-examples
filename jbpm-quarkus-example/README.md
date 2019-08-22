@@ -18,9 +18,9 @@ You will need:
   - Maven 3.5.4+ installed
 
 When using native image compilation, you will also need: 
-  - GraalVM 1.0.0-rc16 installed - note that GraalVM 19.0+ does not (yet) work with Quarkus for native image compilation, this should be updated soon but please use 1.0.0.rc16 until then
+  - [GraalVM 19.1.1](https://github.com/oracle/graal/releases/tag/vm-19.1.1) installed 
   - Environment variable GRAALVM_HOME set accordingly
-  - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too, please refer to GraalVM installation documentation for more details.
+  - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too, please refer to GraalVM installation [documentation](https://www.graalvm.org/docs/reference-manual/aot-compilation/#prerequisites) for more details.
 
 ### Compile and Run in Local Dev Mode
 
@@ -43,26 +43,26 @@ To run the generated native executable, generated in `target/`, execute
 
 ### Running with persistence enabled
 
-Kogito supports runtime persistence that is backed by Inifinispan. So to be able to enable this you need to have 
+Kogito supports runtime persistence that is backed by Infinispan. So to be able to enable this you need to have 
 Infinispan server installed and available over the network. By default it expects it to be at (it can be configured via application.properties file located in src/main/resources)
 
 ```
-localhost:11222
+quarkus.infinispan-client.server-list=localhost:11222
 ```
 
-You can install Inifinispan server by downloading it from [https://infinispan.org/download/](official website) version to be used in 10.0.0.Beta4
+You can install Infinispan server by downloading it from the [official website](https://infinispan.org/download/), version to be used is 10.0.0.Beta4
 
-Once Inifispan is up and running you can build this project with `-Ppersistence` to enable additional processing
+Once Infinispan is up and running you can build this project with `-Ppersistence` to enable additional processing
 during the build. Next you start it in exact same way as without persistence.
 
-This extra profile in maven configuration adds additional dependencies needed to work with infinispan as persistent store. 
+This extra profile in maven configuration adds additional dependencies needed to work with Infinispan as persistent store. 
 
 
 ## Swagger documentation
 
 You can take a look at the [swagger definition](http://localhost:8080/docs/swagger.json) - automatically generated and included in this service - to determine all available operations exposed by this service.  For easy readability you can visualize the swagger definition file using a swagger UI like for example available [here](https://editor.swagger.io). In addition, various clients to interact with this service can be easily generated using this swagger definition.
 
-When running in quarkus development mode, we also leverage the Quarkus openapi extension that exposes [swagger UI](http://localhost:8080/swagger-ui/) that you can use to look at available REST endpoints and send test requests. 
+When running in Quarkus development mode, we also leverage the Quarkus openapi extension that exposes [swagger UI](http://localhost:8080/swagger-ui/) that you can use to look at available REST endpoints and send test requests. 
 
 ## Example Usage
 
@@ -79,12 +79,37 @@ curl -d '{"approver" : "john", "order" : {"orderNumber" : "12345", "shipped" : f
 
 As response the updated order is returned.
 
+Example response:
+```json
+    {
+      "approver": "john",
+      "id": "b5225020-4cf4-4e91-8f86-dc840589cc22",
+      "order": {
+        "orderNumber": "12345",
+        "shipped": false,
+        "total": 0.529655982561999
+      }
+    }
+```
+
 ### GET /orders
 
 Returns list of orders currently active:
 
 ```sh
 curl -X GET http://localhost:8080/orders
+```
+Example response:
+```json
+    [{
+      "approver": "john",
+      "id": "b5225020-4cf4-4e91-8f86-dc840589cc22",
+      "order": {
+        "orderNumber": "12345",
+        "shipped": false,
+        "total": 0.529655982561999
+      }
+    }]
 ```
 
 As response an array of orders is returned.
@@ -94,7 +119,19 @@ As response an array of orders is returned.
 Returns order with given id (if active):
 
 ```sh
-curl -X GET http://localhost:8080/orders/1
+curl -X GET http://localhost:8080/orders/b5225020-4cf4-4e91-8f86-dc840589cc22
+```
+Example response:
+```json
+    {
+      "approver": "john",
+      "id": "b5225020-4cf4-4e91-8f86-dc840589cc22",
+      "order": {
+        "orderNumber": "12345",
+        "shipped": false,
+        "total": 0.529655982561999
+      }
+    }
 ```
 
 As response a single order is returned if found, otherwise no content (204) is returned.
@@ -104,5 +141,17 @@ As response a single order is returned if found, otherwise no content (204) is r
 Cancels order with given id
 
 ```sh
-curl -X DELETE http://localhost:8080/orders/1
+curl -X DELETE http://localhost:8080/orders/b5225020-4cf4-4e91-8f86-dc840589cc22
+```
+Example response:
+```json
+    {
+      "approver": "john",
+      "id": "b5225020-4cf4-4e91-8f86-dc840589cc22",
+      "order": {
+        "orderNumber": "12345",
+        "shipped": false,
+        "total": 0.529655982561999
+      }
+    }
 ```
