@@ -28,9 +28,9 @@ You will need:
   - Maven 3.5.4+ installed
 
 When using native image compilation, you will also need: 
-  - GraalVM 1.0.0-rc16 installed - note that GraalVM 19.0+ does not (yet) work with Quarkus for native image compilation, this should be updated soon but please use 1.0.0.rc16 until then
+  - [GraalVM 19.1.1](https://github.com/oracle/graal/releases/tag/vm-19.1.1) installed 
   - Environment variable GRAALVM_HOME set accordingly
-  - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too, please refer to GraalVM installation documentation for more details.
+  - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too, please refer to GraalVM installation [documentation](https://www.graalvm.org/docs/reference-manual/aot-compilation/#prerequisites) for more details.
 
 ### Installation
 
