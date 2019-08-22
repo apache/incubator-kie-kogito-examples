@@ -1,5 +1,4 @@
 FROM registry.fedoraproject.org/fedora-minimal
-# FROM centos:7
 WORKDIR /work/
 COPY target/*-runner /work/application
 RUN chmod 775 /work
