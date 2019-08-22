@@ -1,12 +1,14 @@
 package org.kie.kogito.examples;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -72,7 +74,8 @@ public class OrdersProcessTest {
         childProcessInstance.completeWorkItem(workItems.get(0).getId(), null);
 
         assertEquals(ProcessInstance.STATE_COMPLETED, childProcessInstance.status());
-        assertEquals(ProcessInstance.STATE_COMPLETED, processInstance.status());
+        Optional<?> pi = orderProcess.instances().findById(processInstance.id());
+        assertFalse(pi.isPresent());
 
         // no active process instances for both orders and order items processes
         assertEquals(0, orderProcess.instances().values().size());
