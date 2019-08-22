@@ -20,6 +20,7 @@ import java.net.MalformedURLException;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.assertj.core.api.Assertions;
 import org.hamcrest.core.StringContains;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -75,6 +76,13 @@ public abstract class OnboardingQuarkusExampleTestBase {
                          .statusCode(200)
                          .assertThat().body(StringContains.containsString("\"message\":\"Employee Mark Test is already registered\""),
                                             StringContains.containsString("\"status\":\"exists\""));
+    }
+
+    @Test
+    public void testServiceLabels() {
+        Assertions.assertThat(project.getMaster().getService("onboarding").getMetadata().getLabels()).contains(Assertions.entry("onboarding", "process"));
+        Assertions.assertThat(project.getMaster().getService("payroll").getMetadata().getLabels()).contains(Assertions.entry("taxRate", "process"), Assertions.entry("vacationDays", "process"), Assertions.entry("paymentDate", "process"));
+        Assertions.assertThat(project.getMaster().getService("hr").getMetadata().getLabels()).contains(Assertions.entry("department", "process"), Assertions.entry("id", "process"), Assertions.entry("employeeValidation", "process"));
     }
 
     private Response onboardMarkTest() {

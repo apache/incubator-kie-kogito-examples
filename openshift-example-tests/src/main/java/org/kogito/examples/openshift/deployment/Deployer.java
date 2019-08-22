@@ -148,7 +148,7 @@ public class Deployer {
         String finalImageStreamName = applicationName + "-builder-image";
         String finalImageStreamTag = "1.0";
         String buildName = applicationName + "-runtime-build";
-        String resultImageStreamName = applicationName + "-runtime";
+        String resultImageStreamName = applicationName;
 
         createInsecureImageStream(project, finalImageStreamName, finalImageStreamTag, s2iRuntimeImageTag);
         createEmptyImageStream(project, resultImageStreamName);

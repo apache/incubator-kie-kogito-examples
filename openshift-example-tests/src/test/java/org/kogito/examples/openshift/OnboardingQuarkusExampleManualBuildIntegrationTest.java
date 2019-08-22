@@ -20,9 +20,7 @@ import java.net.URL;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
-import cz.xtf.core.http.Https;
 import cz.xtf.core.openshift.OpenShiftBinary;
 import cz.xtf.core.openshift.OpenShifts;
 import org.junit.jupiter.api.BeforeAll;
@@ -49,7 +47,7 @@ public class OnboardingQuarkusExampleManualBuildIntegrationTest extends Onboardi
         OpenShiftBinary masterBinary = OpenShifts.masterBinary(project.getName());
         masterBinary.execute("policy", "add-role-to-user", "view", "-z", "default");
 
-        kogitoDeployment = Deployer.deployKaasUsingS2iAndWait(project, ONBOARDING_DEPLOYMENT_NAME, new URL(ASSETS_URL), ONBOARDING_GIT_CONTEXT_DIR, TestConfig.getKaasS2iQuarkusBuilderImage(), TestConfig.getKaasQuarkusRuntimeImage(), Collections.singletonMap("NAMESPACE", project.getName()), new HashMap<>());
+        kogitoDeployment = Deployer.deployKaasUsingS2iAndWait(project, ONBOARDING_DEPLOYMENT_NAME, new URL(ASSETS_URL), ONBOARDING_GIT_CONTEXT_DIR, TestConfig.getKaasS2iQuarkusBuilderImage(), TestConfig.getKaasQuarkusRuntimeImage(), Collections.singletonMap("NAMESPACE", project.getName()), Collections.singletonMap("onboarding", "process"));
         Deployer.deployKaasUsingS2iAndWait(project, PAYROLL_DEPLOYMENT_NAME, new URL(ASSETS_URL), PAYROLL_GIT_CONTEXT_DIR, TestConfig.getKaasS2iQuarkusBuilderImage(), TestConfig.getKaasQuarkusRuntimeImage(), new HashMap<>(), payrollServiceLabels);
         Deployer.deployKaasUsingS2iAndWait(project, HR_DEPLOYMENT_NAME, new URL(ASSETS_URL), HR_GIT_CONTEXT_DIR, TestConfig.getKaasS2iQuarkusBuilderImage(), TestConfig.getKaasQuarkusRuntimeImage(), new HashMap<>(), hrServiceLabels);
     }
