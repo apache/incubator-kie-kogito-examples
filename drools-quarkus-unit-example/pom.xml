@@ -28,6 +28,9 @@
         <groupId>org.kie.kogito</groupId>
         <artifactId>kogito-maven-plugin</artifactId>
         <extensions>true</extensions>
+        <configuration>
+          <kieSourcesDirectory>target/generated-sources/annotations</kieSourcesDirectory>
+        </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
@@ -63,6 +66,10 @@
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>drools-core-static</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-codegen</artifactId>
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
