@@ -32,12 +32,15 @@ Infinispan server installed and available over the network. By default it expect
 localhost:11222
 ```
 
-You can install Inifinispan server by downloading it from [https://infinispan.org/download/](official website) version to be used in 10.0.0.Beta4
+You can install Infinispan server by downloading it from [Infinispan website](https://infinispan.org/download/), you should use version 10.0.x.  To enable our simplified demo setup, go to /server/conf/infinispan.xml and remove the security domain from the endpoints definition:
 
-Once Inifispan is up and running you can build this project with `-Ppersistence` to enable additional processing
-during the build. Next you start it in exact same way as without persistence.
+```
+<endpoints socket-binding="default">
+```
 
-This extra profile in maven configuration adds additional dependencies needed to work with infinispan as persistent store. 
+Once Infinispan is up and running you can build this project with `-Ppersistence` to enable additional processing during the build. Next you start it in exact same way as without persistence.
+
+This extra profile in maven configuration adds additional dependencies needed to work with Infinispan as persistent store.
 
 
 ## Swagger documentation
@@ -53,8 +56,12 @@ Once the service is up and running, you can use the following examples to intera
 Allows to create a new order with the given data:
 
 ```sh
-curl -d '{"approver" : "john", "order" : {"orderNumber" : "12345", "shipped" : false}}' -H "Content-Type: application/json" \
-    -X POST http://localhost:8080/orders
+curl -d '{"approver" : "john", "order" : {"orderNumber" : "12345", "shipped" : false}}' -H "Content-Type: application/json" -X POST http://localhost:8080/orders
+```
+or on windows
+
+```sh
+curl -d "{\"approver\" : \"john\", \"order\" : {\"orderNumber\" : \"12345\", \"shipped\" : false}}" -H "Content-Type: application/json" -X POST http://localhost:8080/orders
 ```
 
 As response the updated order is returned.
