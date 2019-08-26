@@ -6,12 +6,37 @@ Since Kogito aims at supporting both Quarkus and SpringBoot each quickstart shou
 
 ## Kogito with Kafka
 
-shows how message start and end events can be easily used to integrate with Apache Kafka to consume where 
-message name is the Kafka topic and the payload is mapped to process variable. Uses custom types 
-that are serialized into JSON. 
+shows how message start and end events can be easily used to integrate with Apache Kafka to consume where
+message name is the Kafka topic and the payload is mapped to process variable. Uses custom types
+that are serialized into JSON.
 
 * [on Quarkus](kogito-kafka-quickstart-quarkus)
 * [on SpringBoot](kogito-kafka-quickstart-springboot)
+
+## Kogito with Infinispan persistence
+
+shows long running processes with Infinispan persistence so the state of process instances can
+be preserved across service restarts.
+
+* [on Quarkus](kogito-infinispan-persistence-quarkus)
+* [on SpringBoot](kogito-infinispan-persistence-springboot)
+
+## Kogito with service invocation
+
+shows how easy it is to use local services to be invoked from within process. Allows easy and readable
+service invocation use cases to be covered.
+
+* [on Quarkus](kogito-service-calls-quarkus)
+* [on SpringBoot](kogito-service-calls-springboot)
+
+## Kogito with REST call
+
+shows REST service invocation and parsing data back to an object instance used as process variable.
+
+* [on Quarkus](kogito-service-rest-call-quarkus)
+* [on SpringBoot](kogito-service-rest-call-springboot)
+
+
 
 ## Contribution
 

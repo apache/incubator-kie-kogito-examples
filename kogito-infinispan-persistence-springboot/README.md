@@ -54,7 +54,7 @@ mvn clean package
 To run the generated native executable, generated in `target/`, execute
 
 ```
-java -jar target/kogito-infinispan-persistence-sprintbiit-{version}.jar
+java -jar target/kogito-infinispan-persistence-sprintboot-{version}.jar
 ```
 
 ### Use the application
