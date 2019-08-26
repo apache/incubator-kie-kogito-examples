@@ -17,5 +17,6 @@ To properly configure OpenShift and related images user needs to specify these p
 * image.kogito.springboot.builder.s2i - Tag for S2I image, for example buil from https://github.com/kiegroup/kogito-cloud/tree/master/s2i/kogito-springboot-ubi8-s2i-overrides.yaml
 * image.kogito.springboot.runtime - Tag for runtime image, for example built from https://github.com/kiegroup/kogito-cloud/tree/master/s2i/kogito-springboot-ubi8-overrides.yaml
 * maven.mirror.url - URL for Maven mirror. This mirror is used in S2I build.
+* kogito.cli.file.url - URL pointing to Kogito CLI file. This file is downloaded and used in tests using Kogito CLI.
 
 These properties need to be set as system property or they can be placed in test.properties file (with appropriate values). test.properties file can be placed next to pom.xml of the parent directory. It is added to .gitignore.

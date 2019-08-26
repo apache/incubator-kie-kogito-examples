@@ -15,11 +15,15 @@
 
 package org.kogito.examples.openshift;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Optional;
 
 import cz.xtf.core.config.XTFConfig;
 
 public class TestConfig {
+
+    private TestConfig() {}
 
     private static final String IMAGE_KAAS_QUARKUS_BUILDER_S2I = "image.kaas.quarkus.builder.s2i";
     private static final String IMAGE_KAAS_QUARKUS_RUNTIME = "image.kaas.quarkus.runtime";
@@ -27,6 +31,8 @@ public class TestConfig {
     private static final String IMAGE_KAAS_SPRINGBOOT_RUNTIME = "image.kaas.springboot.runtime";
 
     private static final String MAVEN_MIRROR_URL = "maven.mirror.url";
+
+    private static final String KOGITO_CLI_FILE_URL = "kogito.cli.file.url";
 
     public static String getKaasS2iQuarkusBuilderImage() {
         return getMandatoryProperty(IMAGE_KAAS_QUARKUS_BUILDER_S2I);
@@ -46,6 +52,15 @@ public class TestConfig {
 
     public static Optional<String> getMavenMirrorUrl() {
         return getOptionalProperty(MAVEN_MIRROR_URL);
+    }
+
+    public static URL getKogitoCliFileUrl() {
+        String kogitoCliFileUrl = getMandatoryProperty(KOGITO_CLI_FILE_URL);
+        try {
+            return new URL(kogitoCliFileUrl);
+        } catch (MalformedURLException e) {
+            throw new RuntimeException("Malformed Kogito CLI file URL.", e);
+        }
     }
 
     private static String getMandatoryProperty(String propertyName) {
