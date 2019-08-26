@@ -13,9 +13,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.junit.jupiter.api.Test;
-import org.kie.kogito.Application;
 import org.kie.kogito.Model;
-import org.kie.kogito.examples.demo.Order;
 import org.kie.kogito.examples.demo.Person;
 import org.kie.kogito.process.Process;
 import org.kie.kogito.process.ProcessInstance;

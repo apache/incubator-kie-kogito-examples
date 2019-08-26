@@ -20,12 +20,26 @@ You will need:
 When using native image compilation, you will also need: 
   - [GraalVM 19.1.1](https://github.com/oracle/graal/releases/tag/vm-19.1.1) installed 
   - Environment variable GRAALVM_HOME set accordingly
-  - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too, please refer to GraalVM installation [documentation](https://www.graalvm.org/docs/reference-manual/aot-compilation/#prerequisites) for more details.
+  - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too.  You also need 'native-image' installed in GraalVM (using 'gu install native-image'). Please refer to [GraalVM installation documentation](https://www.graalvm.org/docs/reference-manual/aot-compilation/#prerequisites) for more details.
 
 ### Compile and Run in Local Dev Mode
 
 ```
 mvn clean package quarkus:dev    
+```
+
+### Compile and Run in JVM mode
+
+```
+mvn clean package 
+java -jar target/jbpm-quarkus-example-{version}-runner.jar    
+```
+
+or on windows
+
+```
+mvn clean package
+java -jar target\jbpm-quarkus-example-{version}-runner.jar
 ```
 
 ### Compile and Run using Local Native Image
@@ -41,6 +55,8 @@ To run the generated native executable, generated in `target/`, execute
 ./target/jbpm-quarkus-example-{version}-runner
 ```
 
+Note: This does not yet work on Windows, GraalVM and Quarkus should be rolling out support for Windows soon.
+
 ### Running with persistence enabled
 
 Kogito supports runtime persistence that is backed by Infinispan. So to be able to enable this you need to have 
@@ -50,10 +66,13 @@ Infinispan server installed and available over the network. By default it expect
 quarkus.infinispan-client.server-list=localhost:11222
 ```
 
-You can install Infinispan server by downloading it from the [official website](https://infinispan.org/download/), version to be used is 10.0.0.Beta4
+You can install Infinispan server by downloading it from [Infinispan website](https://infinispan.org/download/), you should use version 10.0.x.  To enable our simplified demo setup, go to /server/conf/infinispan.xml and remove the security domain from the endpoints definition:
 
-Once Infinispan is up and running you can build this project with `-Ppersistence` to enable additional processing
-during the build. Next you start it in exact same way as without persistence.
+```
+<endpoints socket-binding="default">
+```
+
+Once Infinispan is up and running you can build this project with `-Ppersistence` to enable additional processing during the build. Next you start it in exact same way as without persistence.
 
 This extra profile in maven configuration adds additional dependencies needed to work with Infinispan as persistent store. 
 
@@ -73,8 +92,12 @@ Once the service is up and running, you can use the following examples to intera
 Allows to create a new order with the given data:
 
 ```sh
-curl -d '{"approver" : "john", "order" : {"orderNumber" : "12345", "shipped" : false}}' -H "Content-Type: application/json" \
-    -X POST http://localhost:8080/orders
+curl -d '{"approver" : "john", "order" : {"orderNumber" : "12345", "shipped" : false}}' -H "Content-Type: application/json" -X POST http://localhost:8080/orders
+```
+or on windows
+
+```sh
+curl -d "{\"approver\" : \"john\", \"order\" : {\"orderNumber\" : \"12345\", \"shipped\" : false}}" -H "Content-Type: application/json" -X POST http://localhost:8080/orders
 ```
 
 As response the updated order is returned.
