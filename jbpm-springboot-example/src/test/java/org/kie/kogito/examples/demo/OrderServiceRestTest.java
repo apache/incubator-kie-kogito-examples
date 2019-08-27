@@ -8,7 +8,11 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.kie.kogito.Model;
 import org.kie.kogito.examples.DemoApplication;
+import org.kie.kogito.process.Process;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.annotation.DirtiesContext;
@@ -22,6 +26,10 @@ import io.restassured.http.ContentType;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = DemoApplication.class)
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD) // reset spring context after each test method
 public class OrderServiceRestTest {
+
+    @Autowired
+    @Qualifier("demo.orders")
+    Process<? extends Model> orderProcess;
 
     // restassured needs to know the random port created for test
     @LocalServerPort
@@ -46,6 +54,10 @@ public class OrderServiceRestTest {
 
     @Test
     public void testGetOrders() {
+        // abort all instances after each test
+        // as other tests might have added instances
+        orderProcess.instances().values().forEach(pi -> pi.abort());
+
         // create two orders
         String firstCreatedId = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(orderPayload).when()
                 .post("/orders").then().statusCode(200).body("id",
@@ -81,6 +93,10 @@ public class OrderServiceRestTest {
 
     @Test
     public void testDeleteOrder() {
+        // abort all instances after each test
+        // as other tests might have added instances
+        orderProcess.instances().values().forEach(pi -> pi.abort());
+        
         // create two orders
         String firstCreatedId = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(orderPayload).when()
                 .post("/orders").then().statusCode(200).body("id",
