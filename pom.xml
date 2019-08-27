@@ -57,6 +57,7 @@
     <module>jbpm-springboot-example</module>
     <module>onboarding-example</module>
     <module>jbpm-polyglot-example</module>
+    <module>dmn-quarkus-example</module>
   </modules>
 
   <dependencyManagement>
