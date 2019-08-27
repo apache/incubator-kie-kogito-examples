@@ -4,6 +4,22 @@ A collection of quickstarts for Kogito that illustrates various uses case covere
 
 Since Kogito aims at supporting both Quarkus and SpringBoot each quickstart should provide both type of projects.
 
+## Kogito hello world with scripts
+
+shows most basic use of processes to build up a hello world example
+
+* [on Quarkus](kogito-scripts-quarkus)
+* [on SpringBoot](kogito-scripts-springboot)
+
+
+## Kogito with business rules
+
+shows integration between processes and rules.
+
+* [on Quarkus](kogito-business-rules-quarkus)
+* [on SpringBoot](kogito-business-rules-springboot)
+
+
 ## Kogito with Kafka
 
 shows how message start and end events can be easily used to integrate with Apache Kafka to consume where

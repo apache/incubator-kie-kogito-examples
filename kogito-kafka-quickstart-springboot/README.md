@@ -36,31 +36,23 @@ You will need:
   - Environment variable JAVA_HOME set accordingly
   - Maven 3.5.4+ installed
 
-When using native image compilation, you will also need: 
-  - GraalVM 19.2+ installed
-  - Environment variable GRAALVM_HOME set accordingly
-  - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too, please refer to GraalVM installation documentation for more details.
-
 ### Compile and Run in Local Dev Mode
 
 ```
-mvn clean package quarkus:dev    
+mvn clean package spring-boot:run    
 ```
 
-NOTE: With dev mode of Quarkus you can take advantage of hot reload for business assets like processes, rules, decision tables and java code. No need to redeploy or restart your running application.
 
-
-### Compile and Run using Local Native Image
-Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
+### Compile and Run using uberjar
 
 ```
-mvn clean package -Pnative
+mvn clean package 
 ```
   
 To run the generated native executable, generated in `target/`, execute
 
 ```
-./target/kogito-kafka-quickstart-{version}-runner
+java -jar target/kogito-kafka-quickstart-sprintboot-{version}.jar
 ```
 
 ### Use the application
