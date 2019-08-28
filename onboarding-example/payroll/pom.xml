@@ -66,7 +66,7 @@
 
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-dmn-rest-utils</artifactId>
+      <artifactId>kogito-dmn</artifactId>
     </dependency>
 
     <dependency>
