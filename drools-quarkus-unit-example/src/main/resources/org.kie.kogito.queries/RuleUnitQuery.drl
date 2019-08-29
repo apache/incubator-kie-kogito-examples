@@ -1,0 +1,29 @@
+package org.kie.kogito.queries;
+unit AdultUnit;
+
+import org.kie.kogito.queries.Person
+
+rule CheckAdult when
+    $p: /persons[ age >= adultAge ]
+then
+    modify($p) { $p.setAdult(true) };
+end
+
+rule CheckNotAdult when
+    $p: /persons[ age < adultAge ]
+then
+    modify($p) { $p.setAdult(false) };
+end
+
+query FindAdults
+    $p: /persons[ adult ]
+end
+
+query FindAdultNames
+    /persons[ adult, $name : name ]
+end
+
+query FindNotAdultNamesAndAge
+    /persons[ !adult, $name : name, $age : age ]
+end
+
