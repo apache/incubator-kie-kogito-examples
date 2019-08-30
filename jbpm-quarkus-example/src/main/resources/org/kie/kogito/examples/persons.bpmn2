@@ -18,7 +18,11 @@
       </bpmn2:extensionElements>
       <bpmn2:outgoing>SequenceFlow_1</bpmn2:outgoing>
     </bpmn2:startEvent>
-    <bpmn2:businessRuleTask id="BusinessRuleTask_1" tns:ruleFlowGroup="person" name="Evaluate person">
+    <!--
+      ruleFlowGroup="org.kie.kogito.examples.PersonValidationService"
+      with implementation="http://www.jboss.org/drools/rule-unit" means ruleFlowGroup indicates a unit
+    -->
+    <bpmn2:businessRuleTask id="BusinessRuleTask_1" tns:ruleFlowGroup="org.kie.kogito.examples.PersonValidationService" name="Evaluate person" implementation="http://www.jboss.org/drools/rule-unit">
       <bpmn2:extensionElements>
         <tns:metaData name="elementname">
           <tns:metaValue><![CDATA[Evaluate person]]></tns:metaValue>
@@ -27,8 +31,8 @@
       <bpmn2:incoming>SequenceFlow_1</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
       <bpmn2:ioSpecification id="InputOutputSpecification_2">
-        <bpmn2:dataInput id="DataInput_1" itemSubjectRef="ItemDefinition_51" name="person"/>
-        <bpmn2:dataOutput id="DataOutput_1" itemSubjectRef="ItemDefinition_51" name="person"/>
+        <bpmn2:dataInput id="DataInput_1" itemSubjectRef="ItemDefinition_51" name="persons"/>
+        <bpmn2:dataOutput id="DataOutput_1" itemSubjectRef="ItemDefinition_51" name="persons"/>
         <bpmn2:inputSet id="InputSet_2" name="Input Set 2">
           <bpmn2:dataInputRefs>DataInput_1</bpmn2:dataInputRefs>
         </bpmn2:inputSet>
