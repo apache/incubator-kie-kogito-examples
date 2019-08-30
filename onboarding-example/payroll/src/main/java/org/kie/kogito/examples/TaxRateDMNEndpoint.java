@@ -26,20 +26,20 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.kie.dmn.api.core.DMNRuntime;
-import org.kie.dmn.kogito.rest.quarkus.DMNKogitoQuarkus;
-import org.kie.dmn.kogito.rest.quarkus.DMNResult;
+import org.kie.kogito.dmn.DMNKogito;
+import org.kie.kogito.dmn.rest.DMNResult;
 import org.kie.kogito.examples.payroll.Payroll;
 
 @Path("/taxRate")
 public class TaxRateDMNEndpoint {
 
-    static final DMNRuntime dmnRuntime = DMNKogitoQuarkus.createGenericDMNRuntime();
+    static final DMNRuntime dmnRuntime = DMNKogito.createGenericDMNRuntime();
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Payroll calculateTaxRate(Payroll payrollInput) {
-        DMNResult evaluate = DMNKogitoQuarkus.evaluate(dmnRuntime, "taxRate", Collections.singletonMap("employee", payrollInput.getEmployee()));
+        DMNResult evaluate = DMNKogito.evaluate(dmnRuntime, "taxRate", Collections.singletonMap("employee", payrollInput.getEmployee()));
         Payroll payroll = new Payroll();
         
         payroll.setTaxRate((BigDecimal) evaluate.getDmnContext().get("taxRate"));
