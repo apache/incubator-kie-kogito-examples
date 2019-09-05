@@ -42,14 +42,14 @@ public class OnboardingQuarkusExampleKogitoOperatorIntegrationTest extends Onboa
     public static void setUpOperator() {
         NonNamespaceOperation<KogitoApp, KogitoAppList, KogitoAppDoneable, Resource<KogitoApp, KogitoAppDoneable>> kogitoOperatorClient = OperatorDeployer.deployKogitoOperator(project);
 
-        kogitoOperatorClient.create(getOnboardingKogitoApp());
-        project.getMaster().waiters().areExactlyNPodsRunning(1, ONBOARDING_DEPLOYMENT_NAME).timeout(TimeUnit.MINUTES, 30L).waitFor();
+        kogitoOperatorClient.create(getHrKogitoApp());
+        project.getMaster().waiters().areExactlyNPodsRunning(1, HR_DEPLOYMENT_NAME).timeout(TimeUnit.MINUTES, 30L).waitFor();
 
         kogitoOperatorClient.create(getPayrollKogitoApp());
         project.getMaster().waiters().areExactlyNPodsRunning(1, PAYROLL_DEPLOYMENT_NAME).timeout(TimeUnit.MINUTES, 30L).waitFor();
 
-        kogitoOperatorClient.create(getHrKogitoApp());
-        project.getMaster().waiters().areExactlyNPodsRunning(1, HR_DEPLOYMENT_NAME).timeout(TimeUnit.MINUTES, 30L).waitFor();
+        kogitoOperatorClient.create(getOnboardingKogitoApp());
+        project.getMaster().waiters().areExactlyNPodsRunning(1, ONBOARDING_DEPLOYMENT_NAME).timeout(TimeUnit.MINUTES, 30L).waitFor();
 
         onboardingDeployment = new HttpDeployment(project, ONBOARDING_DEPLOYMENT_NAME);
         HttpDeployment payrollDeployment = new HttpDeployment(project, ONBOARDING_DEPLOYMENT_NAME);
