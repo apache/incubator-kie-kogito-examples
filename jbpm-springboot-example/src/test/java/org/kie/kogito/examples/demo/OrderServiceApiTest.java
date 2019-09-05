@@ -1,7 +1,6 @@
 package org.kie.kogito.examples.demo;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -38,9 +37,6 @@ public class OrderServiceApiTest {
     @Qualifier("demo.orderItems")
     Process<? extends Model> orderItemsProcess;
 
-    @Autowired
-    @Qualifier("persons")
-    Process<? extends Model> personProcess;
 
     @Test
     public void testOrderProcess() {
@@ -89,56 +85,6 @@ public class OrderServiceApiTest {
                      orderProcess.instances().values().size());
         assertEquals(0,
                      orderItemsProcess.instances().values().size());
-    }
-
-    @Test
-    public void testPersonsProcessIsAdult() {
-        Model m = personProcess.createModel();
-        Map<String, Object> parameters = new HashMap<>();
-        parameters.put("person",
-                       new Person("John Doe",
-                                  20));
-        m.fromMap(parameters);
-
-        ProcessInstance<?> processInstance = personProcess.createInstance(m);
-        processInstance.start();
-
-        assertEquals(ProcessInstance.STATE_COMPLETED,
-                     processInstance.status());
-        Model result = (Model) processInstance.variables();
-        assertEquals(1,
-                     result.toMap().size());
-        assertTrue(((Person) result.toMap().get("person")).isAdult());
-    }
-
-    @Test
-    public void testPersonsProcessIsChild() {
-        Model m = personProcess.createModel();
-        Map<String, Object> parameters = new HashMap<>();
-        parameters.put("person",
-                       new Person("Jenny Quark",
-                                  14));
-        m.fromMap(parameters);
-
-        ProcessInstance<?> processInstance = personProcess.createInstance(m);
-        processInstance.start();
-
-        assertEquals(ProcessInstance.STATE_ACTIVE,
-                     processInstance.status());
-        Model result = (Model) processInstance.variables();
-        assertEquals(1,
-                     result.toMap().size());
-        assertFalse(((Person) result.toMap().get("person")).isAdult());
-
-        List<WorkItem> workItems = processInstance.workItems();
-        assertEquals(1,
-                     workItems.size());
-
-        processInstance.completeWorkItem(workItems.get(0).getId(),
-                                         null);
-
-        assertEquals(ProcessInstance.STATE_COMPLETED,
-                     processInstance.status());
     }
     
     @Test
