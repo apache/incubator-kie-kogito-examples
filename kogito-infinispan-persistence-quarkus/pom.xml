@@ -4,28 +4,28 @@
   xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-  
+
   <parent>
     <groupId>org.kie.kogito.quickstarts</groupId>
     <artifactId>kogito-quickstarts</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  
-  <artifactId>kogito-infinispan-persistence-quarkus</artifactId> 
-  
+
+  <artifactId>kogito-infinispan-persistence-quarkus</artifactId>
+
   <name>Kogito-infinispan-persistence-quarkus</name>
   <description>Kogito with Infinispan persistence - Quarkus</description>
-  
-   
+
+
   <properties>
   </properties>
-  
+
   <dependencyManagement>
     <dependencies>
       <dependency>
         <groupId>io.quarkus</groupId>
         <artifactId>quarkus-bom</artifactId>
-        <version>${quarkus.dev.version}</version>
+        <version>${quarkus.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -71,7 +71,7 @@
       <plugin>
         <groupId>io.quarkus</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
-        <version>${quarkus.dev.version}</version>
+        <version>${quarkus.version}</version>
         <executions>
           <execution>
             <goals>

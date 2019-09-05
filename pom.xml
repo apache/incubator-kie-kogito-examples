@@ -11,20 +11,19 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>    
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.compiler.source>1.8</maven.compiler.source>
-    
+
     <!-- quarkus related -->
-    <quarkus.dev.version>999-SNAPSHOT</quarkus.dev.version>
-    <quarkus.version>999-SNAPSHOT</quarkus.version>
+    <quarkus.version>0.21.2</quarkus.version>
     <!-- springboot related -->
     <springboot.version>2.1.1.RELEASE</springboot.version>
     <cxf.version>3.2.6</cxf.version>
     <javax.activation.version>1.1.1</javax.activation.version>
     <!-- kogito -->
-    <kogito.version>8.0.0-SNAPSHOT</kogito.version>
-    
+    <kogito.version>0.3.0</kogito.version>
+
     <!-- infinispan -->
     <infinispan.version>2.1.7.Final</infinispan.version>
 
@@ -37,5 +36,13 @@
     <module>kogito-kafka-quickstart-springboot</module>
     <module>kogito-infinispan-persistence-quarkus</module>
     <module>kogito-infinispan-persistence-springboot</module>
+    <module>kogito-business-rules-quarkus</module>
+    <module>kogito-business-rules-springboot</module>
+    <module>kogito-scripts-quarkus</module>
+    <module>kogito-scripts-springboot</module>
+    <module>kogito-service-calls-quarkus</module>
+    <module>kogito-service-calls-springboot</module>
+    <module>kogito-service-rest-call-quarkus</module>
+    <module>kogito-service-rest-call-springboot</module>
   </modules>
 </project>

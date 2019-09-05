@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.Model;
 import org.kie.kogito.process.Process;
@@ -17,6 +18,7 @@ import org.kie.kogito.process.ProcessInstance;
 
 import io.quarkus.test.junit.QuarkusTest;
 
+@Disabled("depends on https://petstore.swagger.io existing users")
 @QuarkusTest
 public class UsersProcessTest {
 

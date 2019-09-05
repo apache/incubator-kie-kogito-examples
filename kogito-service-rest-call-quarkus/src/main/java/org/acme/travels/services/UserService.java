@@ -15,7 +15,7 @@ public class UserService {
     @RestClient
     UsersRemoteService usersRemoteService;
 
-    @Fallback(fallbackMethod = "missingUser")
+//    @Fallback(fallbackMethod = "missingUser")
     public User get(String username) {
         return usersRemoteService.get(username);
     }
