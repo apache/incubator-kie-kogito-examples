@@ -52,6 +52,13 @@ shows REST service invocation and parsing data back to an object instance used a
 * [on Quarkus](kogito-service-rest-call-quarkus)
 * [on SpringBoot](kogito-service-rest-call-springboot)
 
+## Kogito with user tasks
+
+shows user task interactions with four eye principle applied
+
+* [on Quarkus](kogito-usertasks-quarkus)
+* [on SpringBoot](kogito-usertasks-springboot)
+
 
 
 ## Contribution

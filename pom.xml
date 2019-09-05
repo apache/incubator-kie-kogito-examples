@@ -16,13 +16,13 @@
     <maven.compiler.source>1.8</maven.compiler.source>
 
     <!-- quarkus related -->
-    <quarkus.version>0.21.2</quarkus.version>
+    <quarkus.version>999-SNAPSHOT</quarkus.version>
     <!-- springboot related -->
     <springboot.version>2.1.1.RELEASE</springboot.version>
     <cxf.version>3.2.6</cxf.version>
     <javax.activation.version>1.1.1</javax.activation.version>
     <!-- kogito -->
-    <kogito.version>0.3.0</kogito.version>
+    <kogito.version>8.0.0-SNAPSHOT</kogito.version>
 
     <!-- infinispan -->
     <infinispan.version>2.1.7.Final</infinispan.version>
@@ -44,5 +44,7 @@
     <module>kogito-service-calls-springboot</module>
     <module>kogito-service-rest-call-quarkus</module>
     <module>kogito-service-rest-call-springboot</module>
+    <module>kogito-usertasks-quarkus</module>
+    <module>kogito-usertasks-springboot</module>
   </modules>
 </project>
