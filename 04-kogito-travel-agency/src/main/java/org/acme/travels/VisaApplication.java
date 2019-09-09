@@ -9,6 +9,8 @@ public class VisaApplication {
 	private int duration;
 	private String passportNumber;
 	private String nationality;
+	
+	private boolean approved;
 
 	public VisaApplication() {
 
@@ -80,10 +82,19 @@ public class VisaApplication {
 		this.nationality = nationality;
 	}
 
+	public boolean isApproved() {
+		return approved;
+	}
+
+	public void setApproved(boolean approved) {
+		this.approved = approved;
+	}
+
 	@Override
 	public String toString() {
 		return "VisaApplication [firstName=" + firstName + ", lastName=" + lastName + ", city=" + city + ", country="
-				+ country + ", duration=" + duration + ", passportNumber=" + passportNumber + "]";
+				+ country + ", duration=" + duration + ", passportNumber=" + passportNumber + ", approved=" + approved
+				+ "]";
 	}
 
 }
