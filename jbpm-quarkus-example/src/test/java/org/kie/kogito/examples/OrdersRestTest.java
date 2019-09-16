@@ -50,11 +50,11 @@ public class OrdersRestTest {
                 .post("/orders").then().statusCode(200).body("id", notNullValue()).extract().path("id");
 
         // test getting the created order
-        given().accept(ContentType.JSON).body(addOrderPayload).when().get("/orders").then().statusCode(200)
+        given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
                 .body("$.size()", is(1), "[0].id", is(firstCreatedId));
 
         // test getting order by id
-        given().accept(ContentType.JSON).body(addOrderPayload).when().get("/orders/" + firstCreatedId).then()
+        given().accept(ContentType.JSON).when().get("/orders/" + firstCreatedId).then()
                 .statusCode(200).body("id", is(firstCreatedId));
 
         // test delete order
@@ -64,13 +64,13 @@ public class OrdersRestTest {
         // now delete the first order created
         given().accept(ContentType.JSON).when().delete("/orders/" + firstCreatedId).then().statusCode(200);
         // get all orders make sure there is only one
-        given().accept(ContentType.JSON).body(addOrderPayload).when().get("/orders").then().statusCode(200)
+        given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
                 .body("$.size()", is(1), "[0].id", is(secondCreatedId));
 
         // delete second before finishing
         given().accept(ContentType.JSON).when().delete("/orders/" + secondCreatedId).then().statusCode(200);
         // get all orders make sure there is zero
-        given().accept(ContentType.JSON).body(addOrderPayload).when().get("/orders").then().statusCode(200)
+        given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
                 .body("$.size()", is(0));
     }
     
@@ -115,15 +115,15 @@ public class OrdersRestTest {
                 .post("/orders").then().statusCode(200).body("id", notNullValue()).extract().path("id");
 
         // test getting the created order
-        given().accept(ContentType.JSON).body(addOrderPayload).when().get("/orders").then().statusCode(200)
+        given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
                 .body("$.size()", is(1), "[0].id", is(firstCreatedId));
 
         // test getting order by id
-        given().accept(ContentType.JSON).body(addOrderPayload).when().get("/orders/" + firstCreatedId).then()
+        given().accept(ContentType.JSON).when().get("/orders/" + firstCreatedId).then()
                 .statusCode(200).body("id", is(firstCreatedId));
 
         // test getting order items subprocess
-        String orderItemsId = given().accept(ContentType.JSON).body(addOrderPayload).when().get("/orderItems").then().statusCode(200)
+        String orderItemsId = given().accept(ContentType.JSON).when().get("/orderItems").then().statusCode(200)
                 .body("$.size()", is(1)).extract().path("[0].id");
         
         // test getting order items by id
@@ -161,15 +161,15 @@ public class OrdersRestTest {
                 .post("/orders").then().statusCode(200).body("id", notNullValue()).extract().path("id");
 
         // test getting the created order
-        given().accept(ContentType.JSON).body(addOrderPayload).when().get("/orders").then().statusCode(200)
+        given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
                 .body("$.size()", is(1), "[0].id", is(firstCreatedId));
 
         // test getting order by id
-        given().accept(ContentType.JSON).body(addOrderPayload).when().get("/orders/" + firstCreatedId).then()
+        given().accept(ContentType.JSON).when().get("/orders/" + firstCreatedId).then()
                 .statusCode(200).body("id", is(firstCreatedId));
 
         // test getting order items subprocess
-        String orderItemsId = given().accept(ContentType.JSON).body(addOrderPayload).when().get("/orderItems").then().statusCode(200)
+        String orderItemsId = given().accept(ContentType.JSON).when().get("/orderItems").then().statusCode(200)
                 .body("$.size()", is(1)).extract().path("[0].id");
         
         // test getting order items by id
