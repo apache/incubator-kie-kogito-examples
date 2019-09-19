@@ -178,3 +178,84 @@ Example response:
       }
     }
 ```
+
+### GET /orderItems
+
+Getting order items sub processes
+
+```sh
+curl -X GET http://localhost:8080/orderItems
+```
+Example response:
+```json
+[
+  {
+    "id":"66c11e3e-c211-4cee-9a07-848b5e861bc5",
+    "order":
+    {
+      "orderNumber":"12345",
+      "shipped":false,
+      "total":0.537941914075738
+    }
+  }
+]
+```
+
+### GET /orderItems/{id}/tasks
+
+Getting user tasks awaiting user action
+
+```sh
+curl -X GET http://localhost:8080/orderItems/66c11e3e-c211-4cee-9a07-848b5e861bc5/tasks
+```
+Example response:
+```json
+{
+  "62f1c985-d31c-4ead-9906-2fe8d05937f0":"Verify order"
+}
+```
+
+### GET /orderItems/{id}/Verify_order/{tid}
+
+Getting user task details
+
+```sh
+curl -X GET http://localhost:8080/orderItems/66c11e3e-c211-4cee-9a07-848b5e861bc5/Verify_order/62f1c985-d31c-4ead-9906-2fe8d05937f0
+```
+Example response:
+```json
+{
+  "id":"62f1c985-d31c-4ead-9906-2fe8d05937f0",
+  "input1":
+  {
+    "orderNumber":"12345",
+    "shipped":false,
+    "total":0.537941914075738
+  },
+  "name":"Verify order"
+}
+```
+
+### POST /orderItems/{id}/Verify_order/{tid}
+
+Complete user task
+
+```sh
+curl -d '{}' -H "Content-Type: application/json" -X POST http://localhost:8080/orderItems/66c11e3e-c211-4cee-9a07-848b5e861bc5/Verify_order/62f1c985-d31c-4ead-9906-2fe8d05937f0
+```
+
+
+As response the updated order is returned.
+
+Example response:
+```json
+{
+  "id":"66c11e3e-c211-4cee-9a07-848b5e861bc5",
+  "order":
+  {
+    "orderNumber":"12345",
+    "shipped":false,
+    "total":0.537941914075738
+  }
+}
+```
