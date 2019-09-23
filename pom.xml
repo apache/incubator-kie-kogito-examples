@@ -46,5 +46,7 @@
     <module>kogito-service-rest-call-springboot</module>
     <module>kogito-usertasks-quarkus</module>
     <module>kogito-usertasks-springboot</module>
+    <module>kogito-usertasks-custom-lifecycle-quarkus</module>
+    <module>kogito-usertasks-custom-lifecycle-springboot</module>
   </modules>
 </project>

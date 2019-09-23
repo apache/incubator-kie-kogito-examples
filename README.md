@@ -59,6 +59,13 @@ shows user task interactions with four eye principle applied
 * [on Quarkus](kogito-usertasks-quarkus)
 * [on SpringBoot](kogito-usertasks-springboot)
 
+## Kogito with user tasks based on custom life cycle
+
+shows user task interactions with four eye principle applied that supports custom life cycle that allows to 
+add additional phases to user tasks to indicate other states.
+
+* [on Quarkus](kogito-usertasks-custom-lifecycle-quarkus)
+* [on SpringBoot](kogito-usertasks-custom-lifecycle-springboot)
 
 
 ## Contribution
