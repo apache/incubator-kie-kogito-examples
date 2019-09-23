@@ -124,16 +124,16 @@ When using native image compilation, you will also need:
 
 This application requires an Inifinispan server to be available and by default expects it to be on default port and localhost.
 
-You can install Inifinispan server by downloading it from [https://infinispan.org/download/](official website) version to be used in 10.0.0.Beta4
+You can install Inifinispan server by downloading it from [official website](https://infinispan.org/download) version to be used in 10.0.0.Beta4
 
 
 #### Apache Kafka
 
-This application requires a Apache Kafka installed and following topics created
+This application requires a [Apache Kafka](https://kafka.apache.org/) installed and following topics created
 
 * `visaapplications` - used to send visa application that are consumed and processed by Kogito Visas service
 * `kogito-processinstances-events` - used to emit events by kogito that can be consumed by data index service and other services
-
+* `kogito-usertaskinstances-events` -used to emit events by kogito that can be consumed by data index service
 
 ### Compile and Run in Local Dev Mode
 
@@ -180,6 +180,10 @@ Kogito Travel Agency comes with basic UI that allows to
 ### show active tasks of selected travel request
 
 <p align="center"><img width=75% height=75% src="docs/images/tasks.png"></p>
+
+### perform Human task: visa application
+
+<p align="center"><img width=75% height=75% src="docs/images/visa-application.png"></p>
 
 ### cancel selected travel request
 

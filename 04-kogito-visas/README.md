@@ -79,7 +79,7 @@ When using native image compilation, you will also need:
 
 This application requires an Inifinispan server to be available and by default expects it to be on default port and localhost.
 
-You can install Inifinispan server by downloading it from [https://infinispan.org/download/](official website) version to be used in 10.0.0.Beta4
+You can install Inifinispan server by downloading it from [official website](https://infinispan.org/download) version to be used in 10.0.0.Beta4
 
 
 #### Apache Kafka
