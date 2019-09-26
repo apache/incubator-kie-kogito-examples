@@ -14,10 +14,6 @@
   <name>Kogito-kafka-quickstart-quarkus</name>
   <description>Kogito with Kafka - Quarkus</description>
 
-  <properties>
-    <!-- overriding version as the required code is not yet in released version of quarkus -->
-    <quarkus.version>${quarkus.version}</quarkus.version>
-  </properties>
   <dependencyManagement>
     <dependencies>
       <dependency>

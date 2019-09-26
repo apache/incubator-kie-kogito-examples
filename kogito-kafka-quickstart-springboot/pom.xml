@@ -13,9 +13,6 @@
   <name>Kogito-kafka-quickstart-springboot</name>
   <description>Kogito with Kafka - Spring Boot</description>
 
-  <properties>
-  </properties>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
