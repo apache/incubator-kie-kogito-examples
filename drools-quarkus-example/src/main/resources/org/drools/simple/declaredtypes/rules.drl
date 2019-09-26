@@ -1,0 +1,24 @@
+package org.drools.simple.declaredtypes
+
+declare DeclaredPerson
+  name : String
+  age : int
+end
+
+declare DeclaredResult
+  value : Object
+end
+
+rule "Can drink" when
+  $r : DeclaredResult()
+  DeclaredPerson( age >= 18, $name : name )
+then
+  $r.setValue( $name + " can drink" );
+end
+
+rule "Can not drink" when
+  $r : DeclaredResult()
+  DeclaredPerson( age < 18, $name : name )
+then
+  $r.setValue( $name + " can NOT drink" );
+end
