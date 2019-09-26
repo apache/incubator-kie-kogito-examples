@@ -6,4 +6,7 @@
     <kbase name="canDrinkKB" packages="org.drools.simple.candrink">
         <ksession name="canDrinkKS"/>
     </kbase>
+    <kbase name="canDrinkWithTypesKB" packages="org.drools.simple.declaredtypes">
+        <ksession name="canDrinkWithTypesKS"/>
+    </kbase>
 </kmodule>
