@@ -4,6 +4,8 @@ A collection of quickstarts for Kogito that illustrates various uses case covere
 
 Since Kogito aims at supporting both Quarkus and SpringBoot each quickstart should provide both type of projects.
 
+**To try it out locally on latest stable version download the released repository content [here](https://github.com/mswiderski/kogito-quickstarts/releases/latest)**
+
 ## Kogito hello world with scripts
 
 shows most basic use of processes to build up a hello world example
