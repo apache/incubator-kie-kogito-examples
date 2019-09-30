@@ -319,7 +319,7 @@ EOF
 Returns travel (hotel, flight) task information required for confirmation:
 
 ```sh
-curl -X GET http://localhost:8080/travels/{uuid}/tasks/ConfirmTravel/{task-uuid}
+curl -X GET http://localhost:8080/travels/{uuid}/ConfirmTravel/{task-uuid}
 ```
 
 ### POST /travels/{id}/ConfirmTravel/{taskId}
@@ -327,5 +327,5 @@ curl -X GET http://localhost:8080/travels/{uuid}/tasks/ConfirmTravel/{task-uuid}
 Completes confirms travel task - meaning confirms (and completes) the travel request
 
 ```sh
-curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST http://localhost:8080/travels/{uuid}/tasks/ConfirmTravel/{task-uuid} -d '{}'
+curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST http://localhost:8080/travels/{uuid}/ConfirmTravel/{task-uuid} -d '{}'
 ```

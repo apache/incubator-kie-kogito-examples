@@ -240,7 +240,7 @@ As response an array of travels is returned.
 Returns travel request with given id (if active):
 
 ```sh
-curl -X GET http://localhost:8080/travels/1
+curl -X GET http://localhost:8080/travels/{uuid}
 ```
 
 As response a single travel request is returned if found, otherwise no content (204) is returned.
@@ -250,7 +250,7 @@ As response a single travel request is returned if found, otherwise no content (
 Cancels travel request with given id
 
 ```sh
-curl -X DELETE http://localhost:8080/travels/1
+curl -X DELETE http://localhost:8080/travels/{uuid}
 ```
 
 ### GET /travels/{id}/tasks
@@ -258,7 +258,7 @@ curl -X DELETE http://localhost:8080/travels/1
 Returns currently assigned user tasks for give travel request:
 
 ```sh
-curl -X GET http://localhost:8080/travels/1/tasks
+curl -X GET http://localhost:8080/travels/{uuid}/tasks
 ```
 
 ### GET /travels/{id}/VisaApplication/{taskId}
@@ -266,7 +266,7 @@ curl -X GET http://localhost:8080/travels/1/tasks
 Returns visa application task information:
 
 ```sh
-curl -X GET http://localhost:8080/travels/1/tasks/VisaApplication/1
+curl -X GET http://localhost:8080/travels/{uuid}/VisaApplication/{task-uuid}
 ```
 
 ### POST /travels/{id}/VisaApplication/{taskId}
@@ -274,7 +274,7 @@ curl -X GET http://localhost:8080/travels/1/tasks/VisaApplication/1
 Completes visa application task
 
 ```sh
-curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST http://localhost:8080/travels/1/tasks/VisaApplication/1 -d '{}'
+curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST http://localhost:8080/travels/{uuid}/VisaApplication/{task-uuid} -d '{}'
 ```
 
 ### GET /travels/{id}/ConfirmTravel/{taskId}
@@ -282,7 +282,7 @@ curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST h
 Returns travel (hotel, flight) task information required for confirmation:
 
 ```sh
-curl -X GET http://localhost:8080/travels/1/tasks/ConfirmTravel/1
+curl -X GET http://localhost:8080/travels/{uuid}/ConfirmTravel/{task-uuid}
 ```
 
 ### POST /travels/{id}/ConfirmTravel/{taskId}
@@ -290,5 +290,5 @@ curl -X GET http://localhost:8080/travels/1/tasks/ConfirmTravel/1
 Completes confirms travel task - meaning confirms (and completes) the travel request
 
 ```sh
-curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST http://localhost:8080/travels/1/tasks/ConfirmTravel/1 -d '{}'
+curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST http://localhost:8080/travels/{uuid}/ConfirmTravel/{task-uuid} -d '{}'
 ```
