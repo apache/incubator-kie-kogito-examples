@@ -118,7 +118,7 @@ mvn clean package quarkus:dev
 ```
 
 NOTE: With dev mode of Quarkus you can take advantage of hot reload for business assets like processes, rules and decision
-tables and java code. No need to redeploy or restart your running application.During this workshop we will create a software system for a startup travel agency called Kogito Travel Agency. The first iteration of the system will consist of a set of services that are able to deal with travel requests and the booking of hotels and flights.
+tables and java code. No need to redeploy or restart your running application.
 
 
 ### Compile and Run using Local Native Image

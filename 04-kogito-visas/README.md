@@ -1,9 +1,5 @@
 # Kogito Visas
 
-
-NOTE: This requires Kogito 0.3.0 that is not yet released and that's why it refers to snapshot versions
-for both Kogito and Quarkus
-
 ## Description
 
 This is another service of the Kogito Travel Agency application. It's responsible for processing visa applications
@@ -77,10 +73,11 @@ When using native image compilation, you will also need:
 
 #### Infinispan
 
-This application requires an Inifinispan server to be available and by default expects it to be on default port and localhost.
+This application requires an Infinispan server to be available and by default expects it to be on default port and localhost.
 
-You can install Inifinispan server by downloading it from [official website](https://infinispan.org/download) version to be used in 10.0.0.Beta4
-
+You can install Infinispan server by downloading it from [official website](https://infinispan.org/download) version to be used in 10.0.0.CR2
+Here  [https://github.com/kiegroup/kogito-runtimes/wiki/Persistence](https://github.com/kiegroup/kogito-runtimes/wiki/Persistence) the required 
+Infinispan configuration is explained in more detail.
 
 #### Apache Kafka
 
@@ -88,6 +85,7 @@ This application requires a Apache Kafka installed and following topics created
 
 * `visaapplications` - used to send visa application that are consumed and processed by Kogito Visas service
 * `kogito-processinstances-events` - used to emit events by kogito that can be consumed by data index service and other services
+* `kogito-usertaskinstances-events` -used to emit events by kogito that can be consumed by data index service
 
 
 ### Compile and Run in Local Dev Mode
@@ -97,7 +95,7 @@ mvn clean package quarkus:dev
 ```
 
 NOTE: With dev mode of Quarkus you can take advantage of hot reload for business assets like processes, rules and decision
-tables and java code. No need to redeploy or restart your running application.During this workshop we will create a software system for a startup travel agency called Kogito Travel Agency. The first iteration of the system will consist of a set of services that are able to deal with travel requests and the booking of hotels and flights.
+tables and java code. No need to redeploy or restart your running application.
 
 
 ### Compile and Run using Local Native Image
@@ -112,6 +110,30 @@ To run the generated native executable, generated in `target/`, execute
 ```
 ./target/kogito-visas-{version}-runner
 ```
+
+### Start Kogito Data Index Service
+
+ We have to start the Data Index Service, we can find this service description more detailed at [Kogito Data Index Service](https://github.com/kiegroup/kogito-runtimes/wiki/Data-Index-Service).
+ 
+ It can be downloaded from [Kogito Dada Index Service 0.4.0](http://repo2.maven.org/maven2/org/kie/kogito/data-index-service/0.4.0/data-index-service-0.4.0-runner.jar)
+ 
+ NOTE: Here can be found other versions [Kogito Dada Index Service versions](http://repo2.maven.org/maven2/org/kie/kogito/data-index-service)
+ 
+ After downloading the runner, create a folder to store the .proto files that will be used by the service. 
+
+ This service works with .proto files that define the data model. Once **Kogito Visa Service** is started, /target/classes/persistence/visaApplication.proto 
+ is generated and it has to be copied to the proto files folder.
+ 
+ To start the **Kogito Data Index Service** just past the full path of the proto files folder and execute 
+ 
+ ```
+ java -jar  -Dkogito.protobuf.folder={full path to proto files folder} data-index-service-0.4.0-runner.jar
+ ```
+ 
+ NOTE: If we want to run 'Kogito Travels Service' and 'Kogito Visa Service' using the same Kogito Data Index Service,
+ we will copy both files travels.proto and visaApplications.proto at the same 'kogito.protobuf.folder' that is 
+ passed as parameter, and will start the data index service once.
+
 
 ## Known issues
 
@@ -201,3 +223,8 @@ curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST h
 }
 EOF
 ```
+
+### Querying the technical cache
+
+When running **Kogito Data Index Service** on dev mode, the GraphiQL UI is available at [http://localhost:8180](http://localhost:8180/) and allow to
+perform different queries on the model as is explained at [wiki/Data-Index-service](https://github.com/kiegroup/kogito-runtimes/wiki/Data-Index-Service)

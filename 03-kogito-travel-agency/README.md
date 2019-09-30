@@ -1,13 +1,13 @@
 # Kogito Travel Agency
 
 
-NOTE: This requires Kogito 0.3.0 that is not yet released and that's why it refers to snapshot versions
-for both Kogito and Quarkus
-
 ## Description
 
-During this workshop we will create a software system for a startup travel agency called Kogito Travel Agency. The first iteration of the system will consist of a set of services that are able to deal with travel requests and the booking of hotels and flights. In addition to that, in case visa is required for the traveller 
-she will be given a chance to apply for visa and by that send visa application automatically to Kogito Visas service.
+We keep working in the startup travel agency called Kogito Travel Agency. After the  creation of a set of services that are 
+able to deal with travel requests and the booking of hotels and flights, we added runtime workflow persistence. 
+This time, we are going to add communication between services: this one **Kogito travel service** that deal with travels details and, 
+in case visa is required for the traveller, she will be given a chance to apply for visa and by that send visa application 
+automatically to **Kogito Visas service** explained in the next step of the tutorial.
 
 ## Activities to perform
 
@@ -31,6 +31,7 @@ she will be given a chance to apply for visa and by that send visa application a
 	* Public business process to deal with complete travel request
 	* Private business process to deal with hotel booking
 	* Private business process to deal with flight booking
+* Enable runtime Persistence for runtime workflow
 * Create a test case that makes use of processes and decisions
 * Configure messaging and events
 * Create or import UI components
@@ -122,9 +123,11 @@ When using native image compilation, you will also need:
 
 #### Infinispan
 
-This application requires an Inifinispan server to be available and by default expects it to be on default port and localhost.
+This application requires an Infinispan server to be available and by default expects it to be on default port and localhost.
 
-You can install Inifinispan server by downloading it from [official website](https://infinispan.org/download) version to be used in 10.0.0.Beta4
+You can install Infinispan server by downloading it from [official website](https://infinispan.org/download) version to be used in 10.0.0.CR2
+Here  [https://github.com/kiegroup/kogito-runtimes/wiki/Persistence](https://github.com/kiegroup/kogito-runtimes/wiki/Persistence) the required 
+Infinispan configuration is explained in more detail.
 
 
 #### Apache Kafka
@@ -142,7 +145,7 @@ mvn clean package quarkus:dev
 ```
 
 NOTE: With dev mode of Quarkus you can take advantage of hot reload for business assets like processes, rules and decision
-tables and java code. No need to redeploy or restart your running application.During this workshop we will create a software system for a startup travel agency called Kogito Travel Agency. The first iteration of the system will consist of a set of services that are able to deal with travel requests and the booking of hotels and flights.
+tables and java code. No need to redeploy or restart your running application.
 
 
 ### Compile and Run using Local Native Image
