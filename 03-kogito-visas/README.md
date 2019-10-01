@@ -1,9 +1,6 @@
 # Kogito Visas
 
 
-NOTE: This requires Kogito 0.3.0 that is not yet released and that's why it refers to snapshot versions
-for both Kogito and Quarkus
-
 ## Description
 
 This is another service of the Kogito Travel Agency application. It's responsible for processing visa applications
@@ -77,9 +74,11 @@ When using native image compilation, you will also need:
 
 #### Infinispan
 
-This application requires an Inifinispan server to be available and by default expects it to be on default port and localhost.
+This application requires an Infinispan server to be available and by default expects it to be on default port and localhost.
 
-You can install Inifinispan server by downloading it from [official website](https://infinispan.org/download) version to be used in 10.0.0.Beta4
+You can install Infinispan server by downloading it from [official website](https://infinispan.org/download) version to be used in 10.0.0.CR2
+Here  [https://github.com/kiegroup/kogito-runtimes/wiki/Persistence](https://github.com/kiegroup/kogito-runtimes/wiki/Persistence) the required 
+Infinispan configuration is explained in more detail.
 
 
 #### Apache Kafka
@@ -88,7 +87,7 @@ This application requires a Apache Kafka installed and following topics created
 
 * `visaapplications` - used to send visa application that are consumed and processed by Kogito Visas service
 * `kogito-processinstances-events` - used to emit events by kogito that can be consumed by data index service and other services
-
+* `kogito-usertaskinstances-events` -used to emit events by kogito that can be consumed by data index service
 
 ### Compile and Run in Local Dev Mode
 
@@ -97,7 +96,7 @@ mvn clean package quarkus:dev
 ```
 
 NOTE: With dev mode of Quarkus you can take advantage of hot reload for business assets like processes, rules and decision
-tables and java code. No need to redeploy or restart your running application.During this workshop we will create a software system for a startup travel agency called Kogito Travel Agency. The first iteration of the system will consist of a set of services that are able to deal with travel requests and the booking of hotels and flights.
+tables and java code. No need to redeploy or restart your running application.
 
 
 ### Compile and Run using Local Native Image
