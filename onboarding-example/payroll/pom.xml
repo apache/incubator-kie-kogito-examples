@@ -14,6 +14,9 @@
   <packaging>jar</packaging>
   <name>payroll</name>
   <description>Payroll related rules and processes for onboarding</description>
+  <properties>
+    <kogito.codegen.decisions>false</kogito.codegen.decisions>
+  </properties>
 
   <dependencyManagement>
     <dependencies>
