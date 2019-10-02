@@ -33,7 +33,7 @@ import org.kie.kogito.examples.payroll.Payroll;
 @Path("/taxRate")
 public class TaxRateDMNEndpoint {
 
-    static final DMNRuntime dmnRuntime = DMNKogito.createGenericDMNRuntime();
+    static final DMNRuntime dmnRuntime = DMNKogito.createGenericDMNRuntime(new java.io.InputStreamReader(TaxRateDMNEndpoint.class.getResourceAsStream("/org/kie/kogito/examples/payroll/taxRate.dmn")));
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
