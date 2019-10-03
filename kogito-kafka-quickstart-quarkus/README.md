@@ -65,19 +65,51 @@ To run the generated native executable, generated in `target/`, execute
 
 ### Use the application
 
-To make use of this application it is as simple as putting a message on `travellers` topic with following content 
+To make use of this application it is as simple as putting a message on `travellers` topic with following content (cloud event format) 
 
 ```
-{ 
-"firstName" : "Jan", 
-"lastName" : "Kowalski", 
-"email" : "jan.kowalski@example.com", 
-"nationality" : "Polish"
+{
+  "specversion": "0.3",
+  "id": "21627e26-31eb-43e7-8343-92a696fd96b1",
+  "source": "",
+  "type": "VisaApplicationsMessageDataEvent_8",
+  "time": "2019-10-01T12:02:23.812262+02:00[Europe/Warsaw]",
+  "data": { 
+	"firstName" : "Jan", 
+	"lastName" : "Kowalski", 
+	"email" : "jan.kowalski@example.com", 
+	"nationality" : "Polish"
+	}
 }
-
 ```
 
-this will then trigger the successful processing of the traveller and put another message on `processedtravellers` topic.
+this will then trigger the successful processing of the traveller and put another message on `processedtravellers` topic with following content (cloud event format)
+
+```
+{
+  "specversion": "0.3",
+  "id": "86f69dd6-7145-4188-aeaa-e44622eeec86",
+  "source": "",
+  "type": "TravellersMessageDataEvent_3",
+  "time": "2019-10-03T16:22:40.373523+02:00[Europe/Warsaw]",
+  "data": {
+    "firstName": "Jan",
+    "lastName": "Kowalski",
+    "email": "jan.kowalski@example.com",
+    "nationality": "Polish",
+    "processed": true
+  },
+  "kogitoProcessinstanceId": "4fb091c2-82f7-4655-8687-245a4ab07483",
+  "kogitoParentProcessinstanceId": null,
+  "kogitoRootProcessinstanceId": null,
+  "kogitoProcessId": "Travellers",
+  "kogitoRootProcessId": null,
+  "kogitoProcessinstanceState": "1",
+  "kogitoReferenceId": null
+}
+```
+
+there are bunch of extension attributes that starts with `kogito` to provide some context of the execution and the event producer.
 
 To take the other path of the process put following message on `travellers` topic
 
