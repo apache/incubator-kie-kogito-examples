@@ -82,19 +82,19 @@ To make use of this application it is as simple as putting a sending request to 
 Complete curl command can be found below:
 
 ```
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"traveller" : { "firstName" : "John", "lastName" : "Doe", "email" : "jon.doe@example.com", "nationality" : "American","address" : { "street" : "main street", "city" : "Boston", "zipCode" : "10005", "country" : "US" }}}' http://localhost:8080/approvals
+curl -u john:john -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"traveller" : { "firstName" : "John", "lastName" : "Doe", "email" : "jon.doe@example.com", "nationality" : "American","address" : { "street" : "main street", "city" : "Boston", "zipCode" : "10005", "country" : "US" }}}' http://localhost:8080/approvals
 ```
 
 ### Show active approvals
 
 ```
-curl -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/approvals
+curl -u john:john -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/approvals
 ```
 
 ### Show tasks 
 
 ```
-curl -H 'Content-Type:application/json' -H 'Accept:application/json' 'http://localhost:8080/approvals/{uuid}/tasks?user=admin&group=managers'
+curl -u john:john -H 'Content-Type:application/json' -H 'Accept:application/json' 'http://localhost:8080/approvals/{uuid}/tasks?user=admin&group=managers'
 ```
 
 where `{uuid}` is the id of the given approval instance
@@ -111,7 +111,7 @@ where `{uuid}` is the id of the given approval instance and `{tuuid}` is the id 
 ### Show tasks 
 
 ```
-curl -H 'Content-Type:application/json' -H 'Accept:application/json' 'http://localhost:8080/approvals/{uuid}/tasks?user=admin&group=managers'
+curl -u john:john -H 'Content-Type:application/json' -H 'Accept:application/json' 'http://localhost:8080/approvals/{uuid}/tasks?user=admin&group=managers'
 ```
 
 where `{uuid}` is the id of the given approval instance
