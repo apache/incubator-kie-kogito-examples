@@ -63,11 +63,18 @@ shows user task interactions with four eye principle applied
 
 ## Kogito with user tasks based on custom life cycle
 
-shows user task interactions with four eye principle applied that supports custom life cycle that allows to 
+shows user task interactions with four eye principle applied that supports custom life cycle that allows to
 add additional phases to user tasks to indicate other states.
 
 * [on Quarkus](kogito-usertasks-custom-lifecycle-quarkus)
 * [on SpringBoot](kogito-usertasks-custom-lifecycle-springboot)
+
+## Kogito with user tasks with security on REST api
+
+shows user task interactions with four eye principle applied with security restrictions on REST api.
+
+* [on Quarkus](kogito-usertasks-with-security-quarkus)
+* [on SpringBoot](kogito-usertasks-with-security-springboot)
 
 
 ## Contribution
