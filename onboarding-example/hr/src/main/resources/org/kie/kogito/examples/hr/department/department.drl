@@ -1,0 +1,33 @@
+package org.kie.kogito.examples.hr.department
+
+unit DepartmentModel
+
+import org.kie.kogito.examples.hr.Employee
+
+rule "US Employee" when
+    $e: /employees[address.country == "US"]
+then
+    modify($e) { setDepartment( "US12345" ) };
+end
+
+rule "UK Employee" when
+    $e: /employees[address.country == "UK"]
+then
+    modify($e) { setDepartment( "UK9876" ) };
+end
+
+rule "US Department" when
+    $e: /employees[department == "US12345"]
+then
+    $e.setManager( "John Doe" );
+end
+
+rule "UK Department" when
+    $e: /employees[department == "UK9876"]
+then
+    $e.setManager( "Teresa April" );
+end
+
+query Department
+    $e: /employees
+end

@@ -1,5 +1,6 @@
-package org.kie.kogito.examples.hr
+package org.kie.kogito.examples.hr.employees
 
+import org.kie.kogito.examples.hr.IdModel
 
 rule "Assign Employee ID"
 when

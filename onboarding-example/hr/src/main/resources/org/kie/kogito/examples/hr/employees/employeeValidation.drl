@@ -1,5 +1,7 @@
-package org.kie.kogito.examples.hr
+package org.kie.kogito.examples.hr.employees
 
+import org.kie.kogito.examples.hr.Employee
+import org.kie.kogito.examples.hr.EmployeeValidationModel
 
 rule "Employee exists" 
 

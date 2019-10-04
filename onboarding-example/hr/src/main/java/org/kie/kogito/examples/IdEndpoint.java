@@ -41,7 +41,7 @@ public class IdEndpoint {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public IdModel assignId(IdModel resource) {
-        KieSession ksession = runtimeBuilder.newKieSession("defaultStatelessKieSession", app.config().rule());
+        KieSession ksession = runtimeBuilder.newKieSession("employeesKS", app.config().rule());
 
         ksession.insert( resource );
         ksession.fireAllRules();

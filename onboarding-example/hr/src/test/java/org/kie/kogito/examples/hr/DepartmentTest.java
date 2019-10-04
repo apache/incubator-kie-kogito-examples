@@ -16,34 +16,35 @@
 
 package org.kie.kogito.examples.hr;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.core.Is.is;
-
-import org.junit.jupiter.api.Test;
+import java.util.Arrays;
 
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
+import org.junit.jupiter.api.Test;
+
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.core.Is.is;
 
 @QuarkusTest
 public class DepartmentTest {
 
     @Test
     public void testDepartmentUS() {
-        evaluateForCountry("US", "John Doe");
+        evaluateForCountry("US", Arrays.asList( "John Doe" ));
     }
 
     @Test
     public void testDepartmentUK() {
-        evaluateForCountry("UK", "Teresa April");
+        evaluateForCountry("UK", Arrays.asList( "Teresa April" ));
     }
 
-    private void evaluateForCountry(String country, String result) {
+    private void evaluateForCountry(String country, Object result) {
         given()
-                .body("{\"employee\" : {\"firstName\" : \"Mark\", \"lastName\" : \"Test\", \"personalId\" : \"xxx-yy-zzz\", \"birthDate\" : \"1995-12-10T14:50:12.123+02:00\", \"address\" : {\"country\" : \""+country+"\", \"city\" : \"Boston\", \"street\" : \"any street 3\", \"zipCode\" : \"10001\"}}}")
+                .body("{\"employees\" : [{\"firstName\" : \"Mark\", \"lastName\" : \"Test\", \"personalId\" : \"xxx-yy-zzz\", \"birthDate\" : \"1995-12-10T14:50:12.123+02:00\", \"address\" : {\"country\" : \""+country+"\", \"city\" : \"Boston\", \"street\" : \"any street 3\", \"zipCode\" : \"10001\"}}] }")
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
                 .when()
-                .post("/department")
+                .post("/Department")
                 .then()
                 .statusCode(200)
                 .body("manager", is(result));

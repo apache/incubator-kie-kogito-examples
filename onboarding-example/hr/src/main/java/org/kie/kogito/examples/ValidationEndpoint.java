@@ -46,7 +46,7 @@ public class ValidationEndpoint {
     
     @PostConstruct
     public void setup() {
-        ksession = runtimeBuilder.newKieSession("defaultKieSession", app.config().rule());
+        ksession = runtimeBuilder.newKieSession("employeesKS", app.config().rule());
     }
     
     @PreDestroy
