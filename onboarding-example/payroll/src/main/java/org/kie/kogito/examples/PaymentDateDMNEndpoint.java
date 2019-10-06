@@ -32,7 +32,7 @@ import org.kie.kogito.examples.payroll.Payroll;
 @Path("/paymentDate")
 public class PaymentDateDMNEndpoint {
 
-    static final DMNRuntime dmnRuntime = DMNKogito.createGenericDMNRuntime();
+    static final DMNRuntime dmnRuntime = DMNKogito.createGenericDMNRuntime(new java.io.InputStreamReader(PaymentDateDMNEndpoint.class.getResourceAsStream("/org/kie/kogito/examples/payroll/paymentDate.dmn")));
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
