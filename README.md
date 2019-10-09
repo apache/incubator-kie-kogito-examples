@@ -1,5 +1,7 @@
 # Kogito Quickstarts
 
+[![CircleCI](https://circleci.com/gh/mswiderski/kogito-quickstarts.svg?style=svg)](https://circleci.com/gh/mswiderski/kogito-quickstarts)
+
 A collection of quickstarts for Kogito that illustrates various uses case covered.
 
 Since Kogito aims at supporting both Quarkus and SpringBoot each quickstart should provide both type of projects.
