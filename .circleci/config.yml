@@ -18,16 +18,16 @@ jobs:
     steps:
 
       # build kogito first
-      - run: git checkout https://github.com/kiegroup/kogito-bom
+      - run: git clone --depth=1 https://github.com/kiegroup/kogito-bom
       - run: mvn clean install -DskipTests -f kogito-bom/pom.xml
 
-      - run: git checkout https://github.com/kiegroup/kogito-runtimes
+      - run: git clone --depth=1 https://github.com/kiegroup/kogito-runtimes
       - run: mvn clean install -DskipTests -f kogito-runtimes/pom.xml
 
       # build quarkus
-      - run: git checkout https://github.com/mswiderski/quarkus
+      - run: git clone --depth=1 https://github.com/mswiderski/quarkus
       - run: mvn clean install -DskipTests -Denforcer.skip=true -pl '!devtools/gradle' -f quarkus/pom.xml
 
       # run tests!
-      - run: git checkout https://github.com/mswiderski/kogito-quickstarts
+      - run: git clone --depth=1 https://github.com/mswiderski/kogito-quickstarts
       - run: mvn clean package -f kogito-quickstarts/pom.xml
