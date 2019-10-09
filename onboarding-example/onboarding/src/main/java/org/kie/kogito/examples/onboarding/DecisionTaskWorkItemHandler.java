@@ -15,9 +15,9 @@ public class DecisionTaskWorkItemHandler extends DiscoveredServiceWorkItemHandle
             this.addServices("id", new ServiceInfo("http://localhost:8081/id", null));
             this.addServices("department", new ServiceInfo("http://localhost:8081/department", null));
             this.addServices("employeeValidation", new ServiceInfo("http://localhost:8081/employeeValidation", null));
-            this.addServices("vacationDays", new ServiceInfo("http://localhost:8082/vacationDays", null));
-            this.addServices("taxRate", new ServiceInfo("http://localhost:8082/taxRate", null));
-            this.addServices("paymentDate", new ServiceInfo("http://localhost:8082/paymentDate", null));
+            this.addServices("vacationDays", new ServiceInfo("http://localhost:8082/vacationDays/payrollService", null));
+            this.addServices("taxRate", new ServiceInfo("http://localhost:8082/taxRate/payrollService", null));
+            this.addServices("paymentDate", new ServiceInfo("http://localhost:8082/paymentDate/payrollService", null));
         }
     }
 
