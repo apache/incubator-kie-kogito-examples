@@ -120,8 +120,8 @@
             </semantic:contextEntry>
         </semantic:context>
     </semantic:decision>
-    <semantic:decisionService id="_b08a25c9-8ca3-4947-a1d1-abfcaa8c894a" name="payroll Service">
-        <semantic:variable name="payroll Service" id="_e37a31a1-55db-4381-9dfa-72db7f33eb15" typeRef="Any"/>
+    <semantic:decisionService id="_b08a25c9-8ca3-4947-a1d1-abfcaa8c894a" name="payrollService">
+        <semantic:variable name="payrollService" id="_e37a31a1-55db-4381-9dfa-72db7f33eb15" typeRef="Any"/>
         <semantic:outputDecision href="#_06bd0846-8535-4f57-bd41-15f618acff5b"/>
         <semantic:encapsulatedDecision href="#_eac3ef9e-37de-4dca-8802-ee08ded9e268"/>
         <semantic:inputData href="#_89e85ee4-f052-4977-bee5-a3b81a600c6c"/>
