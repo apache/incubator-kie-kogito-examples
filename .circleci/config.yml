@@ -31,3 +31,15 @@ jobs:
       # run tests!
       - run: git clone --depth=1 https://github.com/mswiderski/kogito-quickstarts
       - run: mvn clean package -f kogito-quickstarts/pom.xml
+
+workflows:
+  version: 2
+  commit:
+    jobs:
+      - build
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+    jobs:
+      - build
