@@ -113,7 +113,7 @@
       <bpmn2:dataInputAssociation id="_fWl5aGdbEemTPrcubws9TA">
         <bpmn2:targetRef>_83EB46B5-7186-4575-8AA0-1A8FCCE1D163_DecisionInputX</bpmn2:targetRef>
         <bpmn2:assignment id="_fWl5aWdbEemTPrcubws9TA">
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_fWl5amdbEemTPrcubws9TA"><![CDATA[paymentDate]]></bpmn2:from>
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_fWl5amdbEemTPrcubws9TA"><![CDATA[payments/date]]></bpmn2:from>
           <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_fWl5a2dbEemTPrcubws9TA">_83EB46B5-7186-4575-8AA0-1A8FCCE1D163_DecisionInputX</bpmn2:to>
         </bpmn2:assignment>
       </bpmn2:dataInputAssociation>
@@ -203,7 +203,7 @@
       <bpmn2:dataInputAssociation id="_fWmgcGdbEemTPrcubws9TA">
         <bpmn2:targetRef>_AE1BFAA6-7AFD-455F-95B4-FA619A2095CF_DecisionInputX</bpmn2:targetRef>
         <bpmn2:assignment id="_fWmgcWdbEemTPrcubws9TA">
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_fWmgcmdbEemTPrcubws9TA"><![CDATA[vacationDays]]></bpmn2:from>
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_fWmgcmdbEemTPrcubws9TA"><![CDATA[vacations/days]]></bpmn2:from>
           <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_fWmgc2dbEemTPrcubws9TA">_AE1BFAA6-7AFD-455F-95B4-FA619A2095CF_DecisionInputX</bpmn2:to>
         </bpmn2:assignment>
       </bpmn2:dataInputAssociation>
@@ -260,7 +260,7 @@
       <bpmn2:dataInputAssociation id="_fWmgfWdbEemTPrcubws9TA">
         <bpmn2:targetRef>_D2DE6249-804E-432D-9600-6B0F618B457C_DecisionInputX</bpmn2:targetRef>
         <bpmn2:assignment id="_fWmgfmdbEemTPrcubws9TA">
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_fWmgf2dbEemTPrcubws9TA"><![CDATA[taxRate]]></bpmn2:from>
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_fWmgf2dbEemTPrcubws9TA"><![CDATA[taxes/rate]]></bpmn2:from>
           <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_fWmggGdbEemTPrcubws9TA">_D2DE6249-804E-432D-9600-6B0F618B457C_DecisionInputX</bpmn2:to>
         </bpmn2:assignment>
       </bpmn2:dataInputAssociation>

@@ -1,51 +1,50 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<semantic:definitions xmlns:semantic="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns:triso="http://www.trisotech.com/2015/triso/modeling" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:dmndi="http://www.omg.org/spec/DMN/20180521/DMNDI/" xmlns:feel="http://www.omg.org/spec/DMN/20180521/FEEL/" xmlns:tc="http://www.omg.org/spec/DMN/20160719/testcase" xmlns:trisofeed="http://trisotech.com/feed" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.trisotech.com/definitions/_a412928f-61f7-428c-a0bb-150fda386899" id="_a412928f-61f7-428c-a0bb-150fda386899" namespace="http://www.trisotech.com/definitions/_a412928f-61f7-428c-a0bb-150fda386899"          exporter="DMN Modeler" exporterVersion="6.2.1" name="paymentDate" triso:logoChoice="Default">
+<semantic:definitions xmlns:semantic="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns:triso="http://www.trisotech.com/2015/triso/modeling" xmlns:dmndi="http://www.omg.org/spec/DMN/20180521/DMNDI/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:trisodmn="http://www.trisotech.com/2016/triso/dmn" xmlns:feel="http://www.omg.org/spec/DMN/20180521/FEEL/" xmlns:tc="http://www.omg.org/spec/DMN/20160719/testcase" xmlns:drools="http://www.drools.org/kie/dmn/1.1" xmlns:openapi="https://openapis.org/omg/extension/1.0" xmlns:dmn11="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:rss="http://purl.org/rss/2.0/" xmlns:trisofeed="http://trisotech.com/feed" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"               xmlns:xsd="http://www.w3.org/2001/XMLSchema"  xmlns="http://www.trisotech.com/definitions/_c4149c32-ff63-4d28-9edb-55f0c1ac92b7" id="_c4149c32-ff63-4d28-9edb-55f0c1ac92b7" name="payments" namespace="http://www.trisotech.com/definitions/_c4149c32-ff63-4d28-9edb-55f0c1ac92b7" exporter="DMN Modeler" exporterVersion="6.2.11" triso:logoChoice="Default">
     <semantic:extensionElements/>
-    <semantic:itemDefinition name="tAddress" label="tAddress">
-        <semantic:itemComponent id="_2c4e3950-8304-4f47-b04a-3d440df9ef82" name="street">
+    <semantic:itemDefinition name="tAddress" label="tAddress" isCollection="false">
+        <semantic:itemComponent name="street" id="_2c4e3950-8304-4f47-b04a-3d440df9ef82" isCollection="false">
             <semantic:typeRef>string</semantic:typeRef>
         </semantic:itemComponent>
-        <semantic:itemComponent id="_629c8baf-7b05-4144-949c-22bafd14c0fb" name="city">
+        <semantic:itemComponent name="city" id="_629c8baf-7b05-4144-949c-22bafd14c0fb" isCollection="false">
             <semantic:typeRef>string</semantic:typeRef>
         </semantic:itemComponent>
-        <semantic:itemComponent id="_c766b628-2079-4e01-81ba-c2e79cb0dbf5" name="zipCode">
+        <semantic:itemComponent name="zipCode" id="_c766b628-2079-4e01-81ba-c2e79cb0dbf5" isCollection="false">
             <semantic:typeRef>string</semantic:typeRef>
         </semantic:itemComponent>
-        <semantic:itemComponent id="_49d284b2-1ff1-4b8a-b533-ac12c49146a0" name="country">
+        <semantic:itemComponent name="country" id="_49d284b2-1ff1-4b8a-b533-ac12c49146a0" isCollection="false">
             <semantic:typeRef>string</semantic:typeRef>
         </semantic:itemComponent>
     </semantic:itemDefinition>
-    <semantic:itemDefinition name="tEmployee" label="tEmployee">
-        <semantic:itemComponent id="_19795644-4d75-4618-9922-6e3009294f27" name="firstName">
+    <semantic:itemDefinition name="tEmployee" label="tEmployee" isCollection="false">
+        <semantic:itemComponent name="firstName" id="_19795644-4d75-4618-9922-6e3009294f27" isCollection="false">
             <semantic:typeRef>string</semantic:typeRef>
         </semantic:itemComponent>
-        <semantic:itemComponent id="_8af0d078-2fa5-4929-9821-d3c6328330d1" name="lastName">
+        <semantic:itemComponent name="lastName" id="_8af0d078-2fa5-4929-9821-d3c6328330d1" isCollection="false">
             <semantic:typeRef>string</semantic:typeRef>
         </semantic:itemComponent>
-        <semantic:itemComponent id="_67a5b40e-7616-41f7-857e-8e74ff2ea9d0" name="personalId">
+        <semantic:itemComponent name="personalId" id="_67a5b40e-7616-41f7-857e-8e74ff2ea9d0" isCollection="false">
             <semantic:typeRef>string</semantic:typeRef>
         </semantic:itemComponent>
-        <semantic:itemComponent id="_4004aa03-31c6-4aee-8b7a-2120b679d6f9" name="birthDate">
-            <semantic:typeRef>dateTime</semantic:typeRef>
+        <semantic:itemComponent name="birthDate" id="_4004aa03-31c6-4aee-8b7a-2120b679d6f9" isCollection="false">
+            <semantic:typeRef>Any</semantic:typeRef>
         </semantic:itemComponent>
-        <semantic:itemComponent id="_26e93058-1683-427e-b013-7159fcaafe81" name="address">
+        <semantic:itemComponent name="address" id="_26e93058-1683-427e-b013-7159fcaafe81" isCollection="false">
             <semantic:typeRef>tAddress</semantic:typeRef>
         </semantic:itemComponent>
     </semantic:itemDefinition>
-    <semantic:decisionService id="_a412928f-61f7-428c-a0bb-150fda386899_DS" name="Whole Model Decision Service" triso:dynamicDecisionService="true">
-        <semantic:variable name="Whole Model Decision Service" id="_bd2cee0b-929c-421f-bd94-c905434e1afd" typeRef="Any"/>
-        <semantic:outputDecision href="#_eac3ef9e-37de-4dca-8802-ee08ded9e268"/>
+    <semantic:decisionService id="_c4149c32-ff63-4d28-9edb-55f0c1ac92b7_DS" name="Whole Model Decision Service" triso:dynamicDecisionService="true">
+        <semantic:variable name="Whole Model Decision Service" id="_c4149c32-ff63-4d28-9edb-55f0c1ac92b7_DS_VAR" typeRef="Any"/>
+        <semantic:outputDecision href="#_63396f8c-a8d1-467b-a82b-9dc07f4ff028"/>
+        <semantic:encapsulatedDecision href="#_eac3ef9e-37de-4dca-8802-ee08ded9e268"/>
         <semantic:inputData href="#_89e85ee4-f052-4977-bee5-a3b81a600c6c"/>
     </semantic:decisionService>
     <semantic:decisionService id="_cf751e40-9c00-4b28-9d6a-0c72e035d462_DS" name="Diagram Page 1" triso:dynamicDecisionService="true">
-        <semantic:variable name="Diagram Page 1" id="_1df05825-c007-46a7-af19-baaeb2def95d" typeRef="Any"/>
-        <semantic:outputDecision href="#_eac3ef9e-37de-4dca-8802-ee08ded9e268"/>
-        <semantic:inputData href="#_89e85ee4-f052-4977-bee5-a3b81a600c6c"/>
+        <semantic:variable name="Diagram Page 1" id="_cf751e40-9c00-4b28-9d6a-0c72e035d462_DS_VAR" typeRef="Any"/>
     </semantic:decisionService>
     <semantic:inputData id="_89e85ee4-f052-4977-bee5-a3b81a600c6c" name="employee">
         <semantic:variable name="employee" id="_682874bf-b580-4a33-858d-7c1c4c8b9f3e" typeRef="tEmployee"/>
     </semantic:inputData>
-    <semantic:decision id="_eac3ef9e-37de-4dca-8802-ee08ded9e268" name="paymentDate">
+    <semantic:decision id="_eac3ef9e-37de-4dca-8802-ee08ded9e268" name="paymentDate" triso:useOutputTypeAsAnswer="false">
         <semantic:variable name="paymentDate" id="_92a674f9-ebf5-4605-aa18-4731239cffe2" typeRef="dateTime"/>
         <semantic:informationRequirement id="_5e303927-d1c9-403c-a1b2-2af72044737d">
             <semantic:requiredInput href="#_89e85ee4-f052-4977-bee5-a3b81a600c6c"/>
@@ -57,7 +56,7 @@
             <semantic:contextEntry id="_7d8e26b0-8377-4279-a4e8-3b14372a7c07">
                 <semantic:variable name="date of month" id="_a3891c94-8839-4219-aa66-69cb07535fc6" typeRef="Any"/>
                 <semantic:decisionTable id="_c7a83474-a6bc-49c6-8296-4428c9285f4d" hitPolicy="FIRST" outputLabel="date of month">
-                    <semantic:input id="_22cc8d8b-037c-4d0b-a00d-9e0943b1278a">
+                    <semantic:input id="_22cc8d8b-037c-4d0b-a00d-9e0943b1278a" label="employee.address.country">
                         <semantic:inputExpression typeRef="string">
                             <semantic:text>employee.address.country</semantic:text>
                         </semantic:inputExpression>
@@ -72,7 +71,7 @@
                             <semantic:text>"15"</semantic:text>
                         </semantic:outputEntry>
                         <semantic:annotationEntry>
-                            <semantic:text></semantic:text>
+                            <semantic:text/>
                         </semantic:annotationEntry>
                     </semantic:rule>
                     <semantic:rule id="_f2778f91-68e7-4af8-bbd8-7ba73c0ad3d0">
@@ -83,7 +82,7 @@
                             <semantic:text>"10"</semantic:text>
                         </semantic:outputEntry>
                         <semantic:annotationEntry>
-                            <semantic:text></semantic:text>
+                            <semantic:text/>
                         </semantic:annotationEntry>
                     </semantic:rule>
                     <semantic:rule id="_1812fc7e-da78-475f-b401-8088905760e5">
@@ -94,7 +93,7 @@
                             <semantic:text>"01"</semantic:text>
                         </semantic:outputEntry>
                         <semantic:annotationEntry>
-                            <semantic:text></semantic:text>
+                            <semantic:text/>
                         </semantic:annotationEntry>
                     </semantic:rule>
                 </semantic:decisionTable>
@@ -110,43 +109,102 @@
         <semantic:variable name="on the" id="_8de1169a-5442-4cc5-a769-b6aacd4e8d0c" typeRef="date"/>
         <semantic:encapsulatedLogic id="_7da15487-1478-4f26-a12e-35cfd3f5a9db" kind="FEEL" typeRef="date" triso:expressionId="_aaf6abb4-cc7b-4d6d-b636-688683e2bea3">
             <semantic:formalParameter name="x" typeRef="Any" id="_183a1efa-5ed0-49fe-857c-935e773e9ca6"/>
-            <semantic:literalExpression id="_597d8d7f-651d-4089-8b58-23df82bae995">
+            <semantic:literalExpression id="_597d8d7f-651d-4089-8b58-23df82bae995" typeRef="date">
                 <semantic:text>"2019-05-"+x+"T23:59:00.123+00:00"</semantic:text>
             </semantic:literalExpression>
         </semantic:encapsulatedLogic>
     </semantic:businessKnowledgeModel>
+    <semantic:decisionService id="_4f012b28-cc71-4e81-9db6-8190fe944615" name="date">
+        <semantic:variable name="payrollService" id="_2d80f58b-625a-4cf0-907d-6b293fccb3fd" typeRef="Any"/>
+        <semantic:outputDecision href="#_63396f8c-a8d1-467b-a82b-9dc07f4ff028"/>
+        <semantic:encapsulatedDecision href="#_eac3ef9e-37de-4dca-8802-ee08ded9e268"/>
+        <semantic:inputData href="#_89e85ee4-f052-4977-bee5-a3b81a600c6c"/>
+    </semantic:decisionService>
+    <semantic:decision id="_63396f8c-a8d1-467b-a82b-9dc07f4ff028" name="compute Payroll">
+        <semantic:variable name="compute Payroll" id="_4c522111-1de7-4917-a2cc-23da9444abab" typeRef="Any"/>
+        <semantic:informationRequirement id="_b87a8aa6-dff0-4dc8-acfe-491847cab84f">
+            <semantic:requiredDecision href="#_eac3ef9e-37de-4dca-8802-ee08ded9e268"/>
+        </semantic:informationRequirement>
+        <semantic:informationRequirement id="_b0db7e59-4fd5-4a8a-ad94-e289d61664cd">
+            <semantic:requiredInput href="#_89e85ee4-f052-4977-bee5-a3b81a600c6c"/>
+        </semantic:informationRequirement>
+        <semantic:context id="_b8d2d567-7394-4fd7-8b03-7a54414426ee" typeRef="Any" triso:expressionId="_b507e160-5a65-4963-bc34-3f5c8b69e420">
+            <semantic:contextEntry id="_7bdec0f4-d05d-499e-b76b-756a3ec6b08e">
+                <semantic:variable name="employee" id="_bd696388-9a04-4221-8f33-d8d5053a50ba" typeRef="Any"/>
+                <semantic:literalExpression id="_3de83801-6ece-4896-9df2-c873c5eb4f8c">
+                    <semantic:text>employee</semantic:text>
+                </semantic:literalExpression>
+            </semantic:contextEntry>
+            <semantic:contextEntry id="_29da6001-2ad3-47d2-81a8-e96afb737028">
+                <semantic:variable name="paymentDate" id="_1b63659f-3453-47f4-8c71-d5acf08b1420" typeRef="Any"/>
+                <semantic:literalExpression id="_9f94fd02-19ff-4fe5-9e75-e40c66ee5671">
+                    <semantic:text>paymentDate</semantic:text>
+                </semantic:literalExpression>
+            </semantic:contextEntry>
+            <semantic:contextEntry id="_c4a4586b-7f90-4f68-b88b-f9349cc05f34">
+                <semantic:variable name="taxRate" id="_2bc9b0c6-6d6d-4fcf-aea5-d840b58fac0f" typeRef="Any"/>
+                <semantic:literalExpression id="_f55c030e-2636-4b75-97ca-e92b5cf15f92">
+                    <semantic:text>null</semantic:text>
+                </semantic:literalExpression>
+            </semantic:contextEntry>
+            <semantic:contextEntry id="_2aa9a17a-c8a6-4198-a2df-a7019387b246">
+                <semantic:variable name="vacationDays" id="_0d325aaa-669b-4b96-bdde-bf7e03b3a7f6" typeRef="Any"/>
+                <semantic:literalExpression id="_fe278a1c-309b-46b7-a49d-e736a1acc874">
+                    <semantic:text>null</semantic:text>
+                </semantic:literalExpression>
+            </semantic:contextEntry>
+        </semantic:context>
+    </semantic:decision>
     <dmndi:DMNDI>
-        <dmndi:DMNDiagram id="_cf751e40-9c00-4b28-9d6a-0c72e035d462" name="Page 1">
-            <dmndi:Size height="1050" width="1485"/>
+        <dmndi:DMNDiagram id="_cf751e40-9c00-4b28-9d6a-0c72e035d462" triso:modelElementRef="_5b8a8b5d-6ac2-4144-a60e-f48e8d24c1c9" name="Page 1">
+            <di:extension/>
+            <dmndi:Size height="1153" width="1681.7411708831787"/>
             <dmndi:DMNShape id="_11db37ae-6ea9-447f-8da6-4ef833835b9d" dmnElementRef="_89e85ee4-f052-4977-bee5-a3b81a600c6c">
-                <dc:Bounds x="305.7588291168213" y="112.99999618530273" width="135.48234176635742" height="60.00000762939453"/>
-                <dmndi:DMNLabel sharedStyle="LS_a412928f-61f7-428c-a0bb-150fda386899_0" xmlns:trisodmn="http://www.trisotech.com/2016/triso/dmn" trisodmn:defaultBounds="true">
-                    <dc:Bounds height="12" width="94" x="324.9968013763428" y="135.99999618530273"/>
-                </dmndi:DMNLabel>
-            </dmndi:DMNShape>
-            <dmndi:DMNShape id="_c23f47cf-a715-47b2-b472-4eb62fdf6f66" dmnElementRef="_eac3ef9e-37de-4dca-8802-ee08ded9e268">
-                <dc:Bounds x="496.2411708831787" y="113" width="153" height="60"/>
-                <dmndi:DMNLabel sharedStyle="LS_a412928f-61f7-428c-a0bb-150fda386899_0" xmlns:trisodmn="http://www.trisotech.com/2016/triso/dmn" trisodmn:defaultBounds="true">
-                    <dc:Bounds height="12.000000000000004" width="146" x="498.7476643896722" y="136.50819672131146"/>
-                </dmndi:DMNLabel>
+                <dc:Bounds x="245.7588291168213" y="212.99999618530273" width="135.48234176635742" height="60.00000762939453"/>
+                <dmndi:DMNLabel sharedStyle="LS_c4149c32-ff63-4d28-9edb-55f0c1ac92b7_0" trisodmn:defaultBounds="true"/>
             </dmndi:DMNShape>
             <dmndi:DMNShape id="_ee13aeb3-375f-4e88-bb89-e5872de169dd" dmnElementRef="_bfc1e622-768b-43af-8f3e-7a9242b3b1b9">
-                <dc:Bounds x="297.5" y="226.5" width="152" height="59"/>
-                <dmndi:DMNLabel sharedStyle="LS_a412928f-61f7-428c-a0bb-150fda386899_0" xmlns:trisodmn="http://www.trisotech.com/2016/triso/dmn" trisodmn:defaultBounds="true">
-                    <dc:Bounds height="12" width="94" x="325.5" y="249.5"/>
-                </dmndi:DMNLabel>
+                <dc:Bounds x="297.5" y="329.5" width="152" height="59"/>
+                <dmndi:DMNLabel sharedStyle="LS_c4149c32-ff63-4d28-9edb-55f0c1ac92b7_0" trisodmn:defaultBounds="true"/>
+            </dmndi:DMNShape>
+            <dmndi:DMNShape id="_57d40a0a-af34-45f4-b728-f16c465d6442" dmnElementRef="_4f012b28-cc71-4e81-9db6-8190fe944615" isCollapsed="false">
+                <dc:Bounds x="435.2411708831787" y="69" width="288" height="229"/>
+                <dmndi:DMNLabel sharedStyle="LS_c4149c32-ff63-4d28-9edb-55f0c1ac92b7_1" trisodmn:defaultBounds="true"/>
+                <dmndi:DMNDecisionServiceDividerLine>
+                    <di:waypoint x="435.2411708831787" y="195"/>
+                    <di:waypoint x="723.2411708831787" y="195"/>
+                </dmndi:DMNDecisionServiceDividerLine>
+            </dmndi:DMNShape>
+            <dmndi:DMNShape id="_c23f47cf-a715-47b2-b472-4eb62fdf6f66" dmnElementRef="_eac3ef9e-37de-4dca-8802-ee08ded9e268">
+                <dc:Bounds x="496.2411708831787" y="213" width="153" height="60"/>
+                <dmndi:DMNLabel sharedStyle="LS_c4149c32-ff63-4d28-9edb-55f0c1ac92b7_0" trisodmn:defaultBounds="true"/>
+            </dmndi:DMNShape>
+            <dmndi:DMNShape id="_644f5ef8-5c2f-469d-9b32-7364b4e84fac" dmnElementRef="_63396f8c-a8d1-467b-a82b-9dc07f4ff028">
+                <dc:Bounds x="496.2411708831787" y="116" width="153" height="60"/>
+                <dmndi:DMNLabel sharedStyle="LS_c4149c32-ff63-4d28-9edb-55f0c1ac92b7_1" trisodmn:defaultBounds="true"/>
             </dmndi:DMNShape>
             <dmndi:DMNEdge id="_fc5efbd8-c262-48a1-8442-e57656c51a0b" dmnElementRef="_5e303927-d1c9-403c-a1b2-2af72044737d">
-                <di:waypoint x="441.9968013763428" y="142.99999618530273"/>
-                <di:waypoint x="496.2411708831787" y="143"/>
-                <dmndi:DMNLabel sharedStyle="LS_a412928f-61f7-428c-a0bb-150fda386899_0"/>
+                <di:waypoint x="381.9968013763428" y="242.99999618530273"/>
+                <di:waypoint x="496.2411708831787" y="243"/>
+                <dmndi:DMNLabel sharedStyle="LS_c4149c32-ff63-4d28-9edb-55f0c1ac92b7_0"/>
             </dmndi:DMNEdge>
             <dmndi:DMNEdge id="_66c3f33c-86c1-46cc-9174-dab74cf9038c" dmnElementRef="_f3ed9e7e-9d6a-4616-a4ae-41c934fdfb4c">
-                <di:waypoint x="449.5" y="245.5"/>
-                <di:waypoint x="522.7411708831787" y="173"/>
-                <dmndi:DMNLabel sharedStyle="LS_a412928f-61f7-428c-a0bb-150fda386899_0"/>
+                <di:waypoint x="449.5" y="348.5"/>
+                <di:waypoint x="522.7411708831787" y="273"/>
+                <dmndi:DMNLabel sharedStyle="LS_c4149c32-ff63-4d28-9edb-55f0c1ac92b7_0"/>
+            </dmndi:DMNEdge>
+            <dmndi:DMNEdge id="_832c62cc-4951-447e-90eb-967ade475664" dmnElementRef="_b87a8aa6-dff0-4dc8-acfe-491847cab84f">
+                <di:waypoint x="562.7411708831787" y="213"/>
+                <di:waypoint x="562.7411708831787" y="176"/>
+                <dmndi:DMNLabel sharedStyle="LS_c4149c32-ff63-4d28-9edb-55f0c1ac92b7_1"/>
+            </dmndi:DMNEdge>
+            <dmndi:DMNEdge id="_c63f12a8-d074-40bf-a899-e64d9a7441ef" dmnElementRef="_b0db7e59-4fd5-4a8a-ad94-e289d61664cd">
+                <di:waypoint x="379.9968013763428" y="232.99999872843424"/>
+                <di:waypoint x="496.2411708831787" y="156"/>
+                <dmndi:DMNLabel sharedStyle="LS_c4149c32-ff63-4d28-9edb-55f0c1ac92b7_1"/>
             </dmndi:DMNEdge>
         </dmndi:DMNDiagram>
-        <dmndi:DMNStyle id="LS_a412928f-61f7-428c-a0bb-150fda386899_0" fontFamily="arial,helvetica,sans-serif" fontSize="11" fontBold="false" fontItalic="false" fontUnderline="false" fontStrikeThrough="false"/>
+        <dmndi:DMNStyle id="LS_c4149c32-ff63-4d28-9edb-55f0c1ac92b7_0" fontFamily="arial,helvetica,sans-serif" fontSize="11" fontBold="false" fontItalic="false" fontUnderline="false" fontStrikeThrough="false"/>
+        <dmndi:DMNStyle id="LS_c4149c32-ff63-4d28-9edb-55f0c1ac92b7_1" fontFamily="arial,helvetica,sans-serif" fontSize="11" fontBold="false" fontItalic="false" fontUnderline="false" fontStrikeThrough="false"/>
     </dmndi:DMNDI>
 </semantic:definitions>

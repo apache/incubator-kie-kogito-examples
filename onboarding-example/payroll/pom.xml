@@ -14,9 +14,6 @@
   <packaging>jar</packaging>
   <name>payroll</name>
   <description>Payroll related rules and processes for onboarding</description>
-  <properties>
-    <kogito.codegen.decisions>false</kogito.codegen.decisions>
-  </properties>
 
   <dependencyManagement>
     <dependencies>
@@ -105,6 +102,14 @@
         <groupId>org.kie.kogito</groupId>
         <artifactId>kogito-maven-plugin</artifactId>
         <extensions>true</extensions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <systemProperties>
+            <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+          </systemProperties>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>io.openapitools.swagger</groupId>
