@@ -41,7 +41,7 @@ public class VacationDaysTest {
                .body("{\"employee\" : {\"firstName\" : \"Mark\", \"lastName\" : \"Test\", \"personalId\" : \"xxx-yy-zzz\", \"birthDate\" : \"1995-12-10T14:50:12.123+02:00\", \"address\" : {\"country\" : \""+country+"\", \"city\" : \"Boston\", \"street\" : \"any street 3\", \"zipCode\" : \"10001\"}}}")
                .contentType(ContentType.JSON)
           .when()
-               .post("/vacationDays/payrollService")
+               .post("/vacations/days")
           .then()
              .statusCode(200)
                .body("vacationDays", is(result));

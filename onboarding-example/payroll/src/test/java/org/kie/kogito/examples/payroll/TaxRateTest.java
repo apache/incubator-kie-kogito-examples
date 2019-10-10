@@ -46,7 +46,7 @@ public class TaxRateTest {
                .body("{\"employee\" : {\"firstName\" : \"Mark\", \"lastName\" : \"Test\", \"personalId\" : \"xxx-yy-zzz\", \"birthDate\" : \"1995-12-10T14:50:12.123+02:00\", \"address\" : {\"country\" : \""+country+"\", \"city\" : \"Boston\", \"street\" : \"any street 3\", \"zipCode\" : \"10001\"}}}")
                .contentType(ContentType.JSON)
           .when()
-               .post("/taxRate/payrollService")
+               .post("/taxes/rate")
           .then()
              .statusCode(200)
                .body("taxRate", is(result));

@@ -46,7 +46,7 @@ public class PaymentDateTest {
                .body("{\"employee\" : {\"firstName\" : \"Mark\", \"lastName\" : \"Test\", \"personalId\" : \"xxx-yy-zzz\", \"birthDate\" : \"1995-12-10T14:50:12.123+02:00\", \"address\" : {\"country\" : \""+country+"\", \"city\" : \"Boston\", \"street\" : \"any street 3\", \"zipCode\" : \"10001\"}}}")
                .contentType(ContentType.JSON)
           .when()
-               .post("/paymentDate/payrollService")
+               .post("/payments/date")
           .then()
              .statusCode(200)
                .body("paymentDate", is(result));

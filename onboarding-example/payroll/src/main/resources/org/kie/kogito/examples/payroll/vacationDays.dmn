@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<semantic:definitions xmlns:semantic="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns:triso="http://www.trisotech.com/2015/triso/modeling" xmlns:dmndi="http://www.omg.org/spec/DMN/20180521/DMNDI/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:trisodmn="http://www.trisotech.com/2016/triso/dmn" xmlns:feel="http://www.omg.org/spec/DMN/20180521/FEEL/" xmlns:tc="http://www.omg.org/spec/DMN/20160719/testcase" xmlns:drools="http://www.drools.org/kie/dmn/1.1" xmlns:openapi="https://openapis.org/omg/extension/1.0" xmlns:dmn11="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:rss="http://purl.org/rss/2.0/" xmlns:trisofeed="http://trisotech.com/feed" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"               xmlns:xsd="http://www.w3.org/2001/XMLSchema"  xmlns="http://www.trisotech.com/definitions/_9efe7fc6-f41b-422c-accd-95dcaaa67a39" id="_9efe7fc6-f41b-422c-accd-95dcaaa67a39" name="vacationDays" namespace="http://www.trisotech.com/definitions/_9efe7fc6-f41b-422c-accd-95dcaaa67a39" exporter="DMN Modeler" exporterVersion="6.2.11" triso:logoChoice="Default">
+<semantic:definitions xmlns:semantic="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns:triso="http://www.trisotech.com/2015/triso/modeling" xmlns:dmndi="http://www.omg.org/spec/DMN/20180521/DMNDI/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:trisodmn="http://www.trisotech.com/2016/triso/dmn" xmlns:feel="http://www.omg.org/spec/DMN/20180521/FEEL/" xmlns:tc="http://www.omg.org/spec/DMN/20160719/testcase" xmlns:drools="http://www.drools.org/kie/dmn/1.1" xmlns:openapi="https://openapis.org/omg/extension/1.0" xmlns:dmn11="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:rss="http://purl.org/rss/2.0/" xmlns:trisofeed="http://trisotech.com/feed" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"               xmlns:xsd="http://www.w3.org/2001/XMLSchema"  xmlns="http://www.trisotech.com/definitions/_9efe7fc6-f41b-422c-accd-95dcaaa67a39" id="_9efe7fc6-f41b-422c-accd-95dcaaa67a39" name="vacations" namespace="http://www.trisotech.com/definitions/_9efe7fc6-f41b-422c-accd-95dcaaa67a39" exporter="DMN Modeler" exporterVersion="6.2.11" triso:logoChoice="Default">
     <semantic:extensionElements/>
     <semantic:itemDefinition name="tAddress" label="tAddress" isCollection="false">
         <semantic:itemComponent name="street" id="_2c4e3950-8304-4f47-b04a-3d440df9ef82" isCollection="false">
@@ -134,7 +134,7 @@
             </semantic:contextEntry>
         </semantic:context>
     </semantic:decision>
-    <semantic:decisionService id="_fcf22829-0fd8-4f41-919e-3e909f01fbff" name="payrollService">
+    <semantic:decisionService id="_fcf22829-0fd8-4f41-919e-3e909f01fbff" name="days">
         <semantic:variable name="payrollService" id="_8ea3497e-8969-4aa6-9a39-254e4e8edea5" typeRef="Any"/>
         <semantic:outputDecision href="#_5b8d18fb-39d8-4f5c-84a0-b79913b7aded"/>
         <semantic:encapsulatedDecision href="#_eac3ef9e-37de-4dca-8802-ee08ded9e268"/>
