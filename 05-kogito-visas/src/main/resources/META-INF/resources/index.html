@@ -48,7 +48,7 @@
 </div>
 </div>
 <script>
-    var graphql = "http://localhost:8180/graphql";
+    var graphql = "http://" + __GRAPHIQL_ENDPOINT__;
 
     $(function () {
         $.ajaxSetup({
@@ -59,11 +59,41 @@
         });
         load();
         initModal();
+
+        if ("WebSocket" in window) {
+
+           // Let us open a web socket
+           var ws = new WebSocket("ws://" + __GRAPHIQL_ENDPOINT__);
+
+           ws.onopen = function() {
+
+              // Web Socket is connected, send data using send()
+              ws.send('{"id" : "2", "type" : "start", "payload" : { "query" : "subscription { VisaApplicationsUpdated { id, visaApplication { lastName, firstName, country, city, nationality, duration, passportNumber, approved } processInstances { state  } } }"}}');
+
+           };
+
+           ws.onmessage = function (evt) {
+              var received_msg = evt.data;
+              let jsonObject = JSON.parse(received_msg);
+              var val = jsonObject.payload.data.VisaApplicationsUpdated;
+
+              var existing = document.getElementById(val.id);
+              if (existing != null) {
+                existing.remove();
+              }
+
+              appendDataRow(null, val);
+           };
+
+           ws.onclose = function() {
+
+              // websocket is closed.
+           };
+        }
     });
 
     function load() {
         $("#content").children().remove();
-
         var query = "{ \"query\": \"" +
                 "{ VisaApplications { " +
                 "id " +
@@ -71,45 +101,50 @@
                 "processInstances { state  } " +
                 "}}\"" +
                 "}";
+
         $.ajax({
             type: 'POST',
             url: graphql,
             data: query,
             success: function (data) {
                 $.each(data.data["VisaApplications"], function (key, val) {
-                    var active = $.grep(val.processInstances, function (pi) {
-                        return pi.state == "ACTIVE"
-                    }).length > 0;
-                    var html =
-                            "<tr class='" + (active ? "" : "active") + "'><td>" + val.visaApplication.lastName + ", " + val.visaApplication.firstName + "</td>" +
-                            "<td>" + val.visaApplication.country + ", " + val.visaApplication.city + "</td>" +
-                            "<td>" + val.visaApplication.duration + " days</td>" +
-                            "<td>" + val.visaApplication.passportNumber + "</td>" +
-                            "<td>" + val.visaApplication.nationality + "</td>" +
-                            "<td>" + (val.visaApplication.approved ? 'Yes' : 'No') + "</td>" +                            
-                            "<td>";
-                    if (active) {
-                        html +=
-                                "<button class='btn btn-primary btn-sm' " +
-                                "data-toggle='modal' " +
-                                "data-target='#detailsModal' " +
-                                "data-firstname='" + val.visaApplication.firstName + "' " +
-                                "data-lastname='" + val.visaApplication.lastName + "' " +
-                                "data-duration='" + val.visaApplication.duration + "' " +
-                                "data-passportnumber='" + val.visaApplication.passportNumber + "' " +
-                                "data-country='" + val.visaApplication.country + "' " +
-                                "data-nationality='" + val.visaApplication.nationality + "' " +
-                                "data-city='" + val.visaApplication.city + "' " +
-                                "data-id='" + val.id + "'>" +
-                                "   <span>Approval</span>" +
-                                "</button>&nbsp;";
-                    }
-                    html += "</td></tr>";
-                    $(html).appendTo("#content");
+                    appendDataRow(key, val);
                 });
                 initCallbacks();
             }
         });
+    }
+
+    function appendDataRow(key, val) {
+      var active = $.grep(val.processInstances, function (pi) {
+          return pi.state == "ACTIVE"
+      }).length > 0;
+      var html =
+              "<tr id='" + val.id + "' class='" + (active ? "" : "active") + "'><td>" + val.visaApplication.lastName + ", " + val.visaApplication.firstName + "</td>" +
+              "<td>" + val.visaApplication.country + ", " + val.visaApplication.city + "</td>" +
+              "<td>" + val.visaApplication.duration + " days</td>" +
+              "<td>" + val.visaApplication.passportNumber + "</td>" +
+              "<td>" + val.visaApplication.nationality + "</td>" +
+              "<td>" + (val.visaApplication.approved ? 'Yes' : 'No') + "</td>" +
+              "<td>";
+      if (active) {
+          html +=
+                  "<button class='btn btn-primary btn-sm' " +
+                  "data-toggle='modal' " +
+                  "data-target='#detailsModal' " +
+                  "data-firstname='" + val.visaApplication.firstName + "' " +
+                  "data-lastname='" + val.visaApplication.lastName + "' " +
+                  "data-duration='" + val.visaApplication.duration + "' " +
+                  "data-passportnumber='" + val.visaApplication.passportNumber + "' " +
+                  "data-country='" + val.visaApplication.country + "' " +
+                  "data-nationality='" + val.visaApplication.nationality + "' " +
+                  "data-city='" + val.visaApplication.city + "' " +
+                  "data-id='" + val.id + "'>" +
+                  "   <span>Approval</span>" +
+                  "</button>&nbsp;";
+      }
+      html += "</td></tr>";
+      $(html).appendTo("#content");
     }
 
     function initCallbacks() {
@@ -131,7 +166,7 @@
         var visaApplicationRequest = JSON.stringify({application: vapplication});
 
         $.post("/visaApplications/" + $("#visa_p_id").val() + "/ApplicationApproval/" + $("#visa_t_id").val(), visaApplicationRequest, function () {
-            load();
+
         }, "json");
     }
 

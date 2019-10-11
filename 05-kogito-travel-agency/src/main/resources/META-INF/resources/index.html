@@ -54,7 +54,7 @@
 </div>
 </div>
 <script>
-    var graphql = "http://localhost:8180/graphql";
+    var graphql = "http://" + __GRAPHIQL_ENDPOINT__;
 
     $(function () {
         $.ajaxSetup({
@@ -73,6 +73,37 @@
         });
         load();
         initModal();
+
+        if ("WebSocket" in window) {
+
+           // Let us open a web socket
+           var ws = new WebSocket("ws://" + __GRAPHIQL_ENDPOINT__);
+
+           ws.onopen = function() {
+
+              // Web Socket is connected, send data using send()
+              ws.send('{"id" : "2", "type" : "start", "payload" : { "query" : "subscription { TravelsUpdated { id, traveller { lastName, firstName, email, nationality } trip { city, country, begin, end, visaRequired } hotel { name, bookingNumber, phone, address { street } } flight { flightNumber, departure, arrival } visaApplication { approved } processInstances { state } } }"}}');
+
+           };
+
+           ws.onmessage = function (evt) {
+              var received_msg = evt.data;
+              let jsonObject = JSON.parse(received_msg);
+              var val = jsonObject.payload.data.TravelsUpdated;
+
+              var existing = document.getElementById(val.id);
+              if (existing != null) {
+                existing.remove();
+              }
+
+              appendDataRow(null, val);
+           };
+
+           ws.onclose = function() {
+
+              // websocket is closed.
+           };
+        }
     });
 
     function create(travelRequest) {
@@ -86,7 +117,7 @@
             method: "DELETE",
             url: "/travels/" + id
         }).done(function () {
-            load();
+
         });
     }
 
@@ -104,13 +135,13 @@
         var visaApplicationRequest = JSON.stringify({visaApplication: application});
 
         $.post("/travels/" + $("#visa_p_id").val() + "/VisaApplication/" + $("#visa_t_id").val(), visaApplicationRequest, function () {
-            load();
+
         }, "json");
     }
 
     function completeTask(id, taskName, taskId) {
         $.post("/travels/" + id + "/" + taskName + "/" + taskId, JSON.stringify({}), function () {
-            load();
+
         }, "json");
     }
 
@@ -133,59 +164,63 @@
             data: query,
             success: function (data) {
                 $.each(data.data["Travels"], function (key, val) {
-                    var active = $.grep(val.processInstances, function (pi) {
-                        return pi.state == "ACTIVE"
-                    }).length > 0;
-                    var html =
-                            "<tr class='" + (active ? "" : "active") + "'><td>" + val.traveller.lastName + ", " + val.traveller.firstName + "</td>" +
-                            "<td>" + val.trip.country + ", " + val.trip.city + "</td>" +
-                            "<td>" + val.trip.begin.substring(0, 10) + " - " + val.trip.end.substring(0, 10) + "</td>" +
-                            "<td>" + (val.trip.visaRequired ? 'Yes' : 'No') + "</td>" +
-                            "<td>" + (val.visaApplication != null ? (val.visaApplication.approved ? 'Yes' : 'No') : 'N/A')+ "</td>" +
-                            "<td>" + (val.hotel != null ? val.hotel.name : '') + "</td>" +
-                            "<td>" + (val.flight != null ? val.flight.flightNumber : '') + "</td>" +
-                            "<td>" +
-                            "<button class='btn btn-primary btn-sm' " +
-                            "data-toggle='modal' " +
-                            "data-target='#detailsModal' " +
-                            "data-firstname='" + val.traveller.firstName + "' " +
-                            "data-lastname='" + val.traveller.lastName + "' " +
-                            "data-email='" + val.traveller.email + "' " +
-                            "data-nationality='" + val.traveller.nationality + "' " +
-                            "data-country='" + val.trip.country + "' " +
-                            "data-city='" + val.trip.city + "' " +
-                            "data-begin='" + val.trip.begin.substring(0, 10) + "' " +
-                            "data-end='" + val.trip.end.substring(0, 10) + "' " +
-                            "data-hotelname='" + (val.hotel != null ? val.hotel.name : "") + "' " +
-                            "data-address='" + (val.hotel != null ? val.hotel.address.street : "") + "' " +
-                            "data-bookingnumber='" + (val.hotel != null ? val.hotel.bookingNumber : "") + "' " +
-                            "data-phone='" + (val.hotel != null ? val.hotel.phone : "") + "' " +
-                            "data-flightnumber='" + (val.flight != null ? val.flight.flightNumber : "") + "' " +
-                            "data-arrival='" + (val.flight != null ? val.flight.arrival : "") + "' " +
-                            "data-departure='" + (val.flight != null ? val.flight.departure : "") + "' " +
-                            "data-id='" + val.id + "'>" +
-                            "   <span>Details</span>" +
-                            "</button>&nbsp;";
-                    if (active) {
-                        html +=
-                                "<button class='btn btn-primary btn-sm' " +
-                                "data-toggle='modal' " +
-                                "data-target='#tasksModal' " +
-                                "data-firstname='" + val.traveller.firstName + "' " +
-                                "data-lastname='" + val.traveller.lastName + "' " +
-                                "data-id='" + val.id + "'>" +
-                                "   <span>Tasks</span>" +
-                                "</button>&nbsp;" +
-                                "<button class='btn btn-danger btn-sm product-delete' data-id='" + val.id + "'>" +
-                                "   <span>Cancel</span>" +
-                                "</button>";
-                    }
-                    html += "</td></tr>";
-                    $(html).appendTo("#content");
+                    appendDataRow(key, val);
                 });
                 initCallbacks();
             }
         });
+    }
+
+    function appendDataRow(key, val) {
+      var active = $.grep(val.processInstances, function (pi) {
+          return pi.state == "ACTIVE"
+      }).length > 0;
+      var html =
+              "<tr id='" + val.id + "' class='" + (active ? "" : "active") + "'><td>" + val.traveller.lastName + ", " + val.traveller.firstName + "</td>" +
+              "<td>" + val.trip.country + ", " + val.trip.city + "</td>" +
+              "<td>" + val.trip.begin.substring(0, 10) + " - " + val.trip.end.substring(0, 10) + "</td>" +
+              "<td>" + (val.trip.visaRequired ? 'Yes' : 'No') + "</td>" +
+              "<td>" + (val.visaApplication != null ? (val.visaApplication.approved ? 'Yes' : 'No') : 'N/A')+ "</td>" +
+              "<td>" + (val.hotel != null ? val.hotel.name : '') + "</td>" +
+              "<td>" + (val.flight != null ? val.flight.flightNumber : '') + "</td>" +
+              "<td>" +
+              "<button class='btn btn-primary btn-sm' " +
+              "data-toggle='modal' " +
+              "data-target='#detailsModal' " +
+              "data-firstname='" + val.traveller.firstName + "' " +
+              "data-lastname='" + val.traveller.lastName + "' " +
+              "data-email='" + val.traveller.email + "' " +
+              "data-nationality='" + val.traveller.nationality + "' " +
+              "data-country='" + val.trip.country + "' " +
+              "data-city='" + val.trip.city + "' " +
+              "data-begin='" + val.trip.begin.substring(0, 10) + "' " +
+              "data-end='" + val.trip.end.substring(0, 10) + "' " +
+              "data-hotelname='" + (val.hotel != null ? val.hotel.name : "") + "' " +
+              "data-address='" + (val.hotel != null ? val.hotel.address.street : "") + "' " +
+              "data-bookingnumber='" + (val.hotel != null ? val.hotel.bookingNumber : "") + "' " +
+              "data-phone='" + (val.hotel != null ? val.hotel.phone : "") + "' " +
+              "data-flightnumber='" + (val.flight != null ? val.flight.flightNumber : "") + "' " +
+              "data-arrival='" + (val.flight != null ? val.flight.arrival : "") + "' " +
+              "data-departure='" + (val.flight != null ? val.flight.departure : "") + "' " +
+              "data-id='" + val.id + "'>" +
+              "   <span>Details</span>" +
+              "</button>&nbsp;";
+      if (active) {
+          html +=
+                  "<button class='btn btn-primary btn-sm' " +
+                  "data-toggle='modal' " +
+                  "data-target='#tasksModal' " +
+                  "data-firstname='" + val.traveller.firstName + "' " +
+                  "data-lastname='" + val.traveller.lastName + "' " +
+                  "data-id='" + val.id + "'>" +
+                  "   <span>Tasks</span>" +
+                  "</button>&nbsp;" +
+                  "<button class='btn btn-danger btn-sm product-delete' data-id='" + val.id + "'>" +
+                  "   <span>Cancel</span>" +
+                  "</button>";
+      }
+      html += "</td></tr>";
+      $(html).appendTo("#content");
     }
 
     function initCallbacks() {

@@ -8,7 +8,7 @@
   <properties>
     <surefire-plugin.version>2.22.0</surefire-plugin.version>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <kogito.version>8.0.0-SNAPSHOT</kogito.version>
+    <kogito.version>0.5.0</kogito.version>
     <maven.compiler.source>1.8</maven.compiler.source>
     <quarkus.version>999-SNAPSHOT</quarkus.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -30,6 +30,10 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-kogito</artifactId>
     </dependency>
+    <dependency>
+       <groupId>io.quarkus</groupId>
+       <artifactId>quarkus-vertx-web</artifactId>
+     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>monitoring-prometheus-addon</artifactId>
