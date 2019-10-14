@@ -20,7 +20,7 @@ public class CanDrinkWithDeclaredTypesResource {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String canDrink( @PathParam("name") String name, @PathParam("age") int age ) throws IllegalAccessException, InstantiationException {
-        KieBase kbase = runtimeBuilder.newKieBase( "canDrinkWithTypesKB" );
+        KieBase kbase = runtimeBuilder.getKieBase( "canDrinkWithTypesKB" );
 
         KieSession ksession = kbase.newKieSession();
 
