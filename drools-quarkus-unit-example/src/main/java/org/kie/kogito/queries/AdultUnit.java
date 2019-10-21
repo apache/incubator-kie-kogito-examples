@@ -18,10 +18,12 @@ package org.kie.kogito.queries;
 
 import java.io.Serializable;
 
+import org.kie.api.conf.SessionsPool;
 import org.kie.kogito.rules.DataSource;
 import org.kie.kogito.rules.DataStore;
 import org.kie.kogito.rules.RuleUnitMemory;
 
+@SessionsPool(1)
 public class AdultUnit implements RuleUnitMemory, Serializable {
     private int adultAge;
 

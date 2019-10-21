@@ -1,9 +1,2 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<kmodule xmlns="http://www.drools.org/xsd/kmodule">
-    <kbase name="alertingKB" packages="org.kie.kogito.rules.alerting">
-        <ksession name="alertingKS"/>
-    </kbase>
-    <kbase name="queriesKB" packages="org.kie.kogito.queries">
-        <ksession name="queriesKS"/>
-    </kbase>
-</kmodule>
+<kmodule xmlns="http://www.drools.org/xsd/kmodule"/>
