@@ -21,10 +21,10 @@ import java.io.Serializable;
 import org.kie.kogito.conf.SessionsPool;
 import org.kie.kogito.rules.DataSource;
 import org.kie.kogito.rules.DataStore;
-import org.kie.kogito.rules.RuleUnitMemory;
+import org.kie.kogito.rules.RuleUnitData;
 
 @SessionsPool(1)
-public class AdultUnit implements RuleUnitMemory, Serializable {
+public class AdultUnit implements RuleUnitData, Serializable {
     private int adultAge;
 
     private DataStore<Person> persons;

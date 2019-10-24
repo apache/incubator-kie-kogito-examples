@@ -20,16 +20,13 @@ import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.rules.DataObserver;
-import org.kie.kogito.rules.DataSource;
 import org.kie.kogito.rules.DataStream;
+import org.kie.kogito.rules.RuleUnitInstance;
 import org.kie.kogito.rules.alerting.Event;
-import org.kie.kogito.rules.alerting.Logger;
 import org.kie.kogito.rules.alerting.LoggerService;
 import org.kie.kogito.rules.alerting.LoggerServiceRuleUnit;
-import org.kie.kogito.rules.alerting.LoggerServiceRuleUnitInstance;
 import org.kie.kogito.rules.alerting.MonitoringService;
 import org.kie.kogito.rules.alerting.MonitoringServiceRuleUnit;
-import org.kie.kogito.rules.alerting.MonitoringServiceRuleUnitInstance;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -45,14 +42,14 @@ public class ServicesTest {
         monitoringService.getEventStream().append(new Event("Hello Again!"));
         monitoringService.getEventStream().append(new Event("Hello 3!"));
 
-        MonitoringServiceRuleUnitInstance monitoringServiceInstance =
+        RuleUnitInstance<MonitoringService> monitoringServiceInstance =
                 new MonitoringServiceRuleUnit().createInstance(monitoringService);
         monitoringServiceInstance.fire();
 
         monitoringService.getEventStream().append(new Event("Hello 4!"));
         monitoringServiceInstance.fire();
 
-        LoggerServiceRuleUnitInstance loggerServiceInstance =
+        RuleUnitInstance<LoggerService> loggerServiceInstance =
                 new LoggerServiceRuleUnit().createInstance(loggerService);
         loggerServiceInstance.fire();
 
@@ -70,11 +67,11 @@ public class ServicesTest {
         CountDownLatch latch = new CountDownLatch(4);
         loggerService.getLogger().subscribe(DataObserver.of(v -> latch.countDown()));
 
-        MonitoringServiceRuleUnitInstance monitoringServiceInstance =
+        RuleUnitInstance<MonitoringService> monitoringServiceInstance =
                 new MonitoringServiceRuleUnit()
                         .createInstance(monitoringService);
 
-        LoggerServiceRuleUnitInstance loggerServiceInstance =
+        RuleUnitInstance<LoggerService> loggerServiceInstance =
                 new LoggerServiceRuleUnit()
                         .createInstance(loggerService);
 

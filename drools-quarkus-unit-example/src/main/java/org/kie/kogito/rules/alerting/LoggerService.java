@@ -17,9 +17,9 @@ package org.kie.kogito.rules.alerting;
 
 import org.kie.kogito.rules.DataSource;
 import org.kie.kogito.rules.DataStream;
-import org.kie.kogito.rules.RuleUnitMemory;
+import org.kie.kogito.rules.RuleUnitData;
 
-public class LoggerService implements RuleUnitMemory {
+public class LoggerService implements RuleUnitData {
 
     private final DataStream<Alert> alertStream;
 
