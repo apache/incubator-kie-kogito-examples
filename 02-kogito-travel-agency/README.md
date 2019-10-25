@@ -120,6 +120,8 @@ You can install Infinispan server by downloading it from [official website](http
 Here  [https://github.com/kiegroup/kogito-runtimes/wiki/Persistence](https://github.com/kiegroup/kogito-runtimes/wiki/Persistence) the required 
 Infinispan configuration is explained in more detail.
 
+Alternatively, you can use the Docker Compose template, instructions on how to use it are available in the [README](../docker-compose/README.md) file. 
+
 ### Compile and Run in Local Dev Mode
 
 ```

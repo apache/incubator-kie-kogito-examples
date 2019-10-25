@@ -127,13 +127,17 @@ You can install Infinispan server by downloading it from [official website](http
 Here  [https://github.com/kiegroup/kogito-runtimes/wiki/Persistence](https://github.com/kiegroup/kogito-runtimes/wiki/Persistence) the required 
 Infinispan configuration is explained in more detail.
 
+Alternatively, you can use the Docker Compose template, instructions on how to use it are available in the [README](../docker-compose/README.md) file.
+
 #### Apache Kafka
 
-This application requires a Apache Kafka installed and following topics created
+This application requires a [Apache Kafka](https://kafka.apache.org/) installed and following topics created
 
 * `visaapplications` - used to send visa application that are consumed and processed by Kogito Visas service
 * `kogito-processinstances-events` - used to emit events by kogito that can be consumed by data index service and other services
 * `kogito-usertaskinstances-events` -used to emit events by kogito that can be consumed by data index service
+
+Alternatively, you can use the Docker Compose template, instructions on how to use it are available in the [README](../docker-compose/README.md) file.
 
 ### Compile and Run in Local Dev Mode
 
