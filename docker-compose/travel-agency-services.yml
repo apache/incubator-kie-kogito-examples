@@ -4,12 +4,11 @@ services:
 
   infinispan:
     image: infinispan/server:10.0.0.CR3-4
-    network_mode: host
     ports:
         - 11222:11222
     command: "/opt/infinispan/bin/server.sh -c infinispan-demo.xml"
     volumes:
-      - ./infinispan/infinispan.xml:/opt/infinispan/server/conf/infinispan-demo.xml
+      - ./infinispan/infinispan.xml:/opt/infinispan/server/conf/infinispan-demo.xml:z
 
   kafka:
     image: spotify/kafka
@@ -24,7 +23,7 @@ services:
     image: prom/prometheus:v2.8.0
     network_mode: host
     volumes:
-      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:z
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
     ports:
@@ -38,4 +37,4 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ./grafana/provisioning/:/etc/grafana/provisioning/
+      - ./grafana/provisioning/:/etc/grafana/provisioning/:z
