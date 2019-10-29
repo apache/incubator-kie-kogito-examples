@@ -3,7 +3,7 @@ version: '2'
 services:
 
   infinispan:
-    image: infinispan/server:10.0.0.CR3-4
+    image: infinispan/server:10.0.0.Final-1
     ports:
         - 11222:11222
     command: "/opt/infinispan/bin/server.sh -c infinispan-demo.xml"
