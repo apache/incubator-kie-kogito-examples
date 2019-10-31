@@ -117,7 +117,14 @@
         <groupId>org.kie.kogito</groupId>
         <artifactId>jbpm-bpmn2</artifactId>
         <version>${version.org.kie.kogito}</version>
-      </dependency>      
+      </dependency>
+      <dependency>
+        <groupId>io.quarkus</groupId>
+        <artifactId>quarkus-bom</artifactId>
+        <version>${version.io.quarkus}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 

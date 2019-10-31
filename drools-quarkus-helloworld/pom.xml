@@ -16,20 +16,6 @@
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
 
-
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>io.quarkus</groupId>
-        <artifactId>quarkus-bom</artifactId>
-        <version>${version.io.quarkus}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-
-    </dependencies>
-  </dependencyManagement>
-
   <build>
     <plugins>
       <plugin>
