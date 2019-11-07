@@ -9,7 +9,7 @@
   </parent>
   <groupId>org.kie.kogito.examples</groupId>
   <artifactId>drools-quarkus-example</artifactId>
-  <name>Drools example running on Quarkus</name>
+  <name>Kogito Example :: Drools and Quarkus</name>
 
   <build>
     <plugins>

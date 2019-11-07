@@ -9,6 +9,7 @@
   </parent>
   <groupId>org.kie.kogito.examples</groupId>
   <artifactId>drools-polyglot-example</artifactId>
+  <name>Kogito Example :: Drools Polyglot</name>
 
   <build>
     <plugins>

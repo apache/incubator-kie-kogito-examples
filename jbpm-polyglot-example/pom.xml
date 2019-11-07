@@ -10,8 +10,7 @@
   <groupId>org.kie.kogito.examples</groupId>
   <artifactId>jbpm-polyglot-example</artifactId>
 
-  <name>jBPM Polyglot Example</name>
-  <description>Simple Polyglot example using jBPM</description>
+  <name>Kogito Example :: jBPM Polyglot</name>
 
   <dependencies>
     <dependency>

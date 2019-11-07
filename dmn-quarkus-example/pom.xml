@@ -10,14 +10,13 @@
     <version>8.0.0-SNAPSHOT</version>
   </parent>
   <artifactId>dmn-quarkus-example</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <name>Kogito Example :: DMN</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
-  
   <dependencies>
     <dependency>
       <groupId>io.quarkus</groupId>

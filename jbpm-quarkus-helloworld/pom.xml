@@ -13,7 +13,7 @@
   <groupId>org.kie.kogito.examples</groupId>
   <artifactId>jbpm-quarkus-helloworld</artifactId>
 
-  <name>jBPM hello world running on Quarkus</name>
+  <name>Kogito Example :: jBPM HelloWorld</name>
   <description>Hello world service</description>
 
   <dependencies>

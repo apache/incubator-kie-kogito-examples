@@ -8,17 +8,17 @@
   </parent>
   <groupId>org.kie.kogito.examples</groupId>
   <artifactId>jbpm-springboot-example</artifactId>
-  
-  <name>jBPM example running on SpringBoot</name>
+
+  <name>Kogito Example :: jBPM and SpringBoot</name>
   <description>Order management service</description>
-  
+
   <properties>
     <java.version>1.8</java.version>
     <cxf.version>3.2.6</cxf.version>
     <springboot.version>2.1.1.RELEASE</springboot.version>
     <javax.activation.version>1.1.1</javax.activation.version>
   </properties>
-  
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -36,7 +36,6 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter</artifactId>
     </dependency>
-    
     <dependency>
       <groupId>com.fasterxml.jackson.jaxrs</groupId>
       <artifactId>jackson-jaxrs-json-provider</artifactId>
@@ -46,7 +45,6 @@
       <artifactId>cxf-spring-boot-starter-jaxrs</artifactId>
       <version>${cxf.version}</version>
     </dependency>
-    
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-api</artifactId>
@@ -67,7 +65,6 @@
       <groupId>org.kie.kogito</groupId>
       <artifactId>drools-model-compiler</artifactId>
     </dependency>
-    
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>jbpm-flow</artifactId>
@@ -85,7 +82,6 @@
       <artifactId>activation</artifactId>
       <version>${javax.activation.version}</version>
     </dependency>
-    
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
@@ -97,7 +93,7 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-  
+
   <build>
     <plugins>
       <plugin>
@@ -148,16 +144,16 @@
       </plugin>
     </plugins>
   </build>
-  
+
   <profiles>
     <profile>
       <id>persistence</id>
       <activation>
-        <property>  
+        <property>
           <name>persistence</name>
         </property>
       </activation>
-      <dependencies>       
+      <dependencies>
         <dependency>
           <groupId>org.kie.kogito</groupId>
           <artifactId>infinispan-persistence-addon</artifactId>
@@ -171,5 +167,5 @@
       </dependencies>
     </profile>
   </profiles>
-  
+
 </project>

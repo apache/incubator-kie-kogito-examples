@@ -8,9 +8,9 @@
   <artifactId>onboarding-example</artifactId>
   <packaging>pom</packaging>
 
-  <name>onboarding example running on Quarkus (onboarding, hr, payroll)</name>
+  <name>Kogito Example :: Onboarding Example</name>
   <description>onboarding example service (onboarding, hr, payroll)</description>
-  
+
   <modules>
     <module>hr</module>
     <module>payroll</module>

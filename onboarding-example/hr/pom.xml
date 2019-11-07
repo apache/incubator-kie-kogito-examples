@@ -12,7 +12,7 @@
   <groupId>org.kie.kogito.examples</groupId>
   <artifactId>hr</artifactId>
   <packaging>jar</packaging>
-  <name>hr</name>
+  <name>Kogito Example :: Onboarding Example :: HR with Drools</name>
   <description>HR related processes and decisions for onboarding</description>
 
   <dependencies>

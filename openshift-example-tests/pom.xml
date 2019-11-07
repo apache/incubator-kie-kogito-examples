@@ -10,7 +10,7 @@
 
   <artifactId>openshift-example-tests</artifactId>
 
-  <name>OpenShift tests for Kogito examples</name>
+  <name>Kogito Example :: OpenShift Tests</name>  
   <description>Set of OpenShift integration tests verifying functionality of Kogito examples.</description>
 
   <properties>
