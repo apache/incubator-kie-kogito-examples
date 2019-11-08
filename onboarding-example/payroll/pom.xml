@@ -12,7 +12,7 @@
   <groupId>org.kie.kogito.examples</groupId>
   <artifactId>payroll</artifactId>
   <packaging>jar</packaging>
-  <name>payroll</name>
+  <name>Kogito Example :: Onboarding Example :: Payroll with DMN</name>
   <description>Payroll related rules and processes for onboarding</description>
 
   <dependencies>

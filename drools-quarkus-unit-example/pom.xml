@@ -9,6 +9,8 @@
   </parent>
   <groupId>org.kie.kogito.examples</groupId>
   <artifactId>drools-quarkus-unit-example</artifactId>
+  <name>Kogito Example :: Drools and Openshift</name>
+
 
   <build>
     <plugins>

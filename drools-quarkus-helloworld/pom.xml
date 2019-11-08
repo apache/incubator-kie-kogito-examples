@@ -9,7 +9,7 @@
   </parent>
   <groupId>org.kie.kogito.examples</groupId>
   <artifactId>drools-quarkus-helloworld</artifactId>
-  <name>Drools hello world example on Quarkus</name>
+  <name>Kogito Example :: Drools HelloWorld</name>
 
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>

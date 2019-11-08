@@ -13,7 +13,7 @@
   <groupId>org.kie.kogito.examples</groupId>
   <artifactId>jbpm-quarkus-example</artifactId>
 
-  <name>jBPM example running on Quarkus</name>
+  <name>Kogito Example :: jBPM and Quarkus</name>
   <description>Order management service</description>
 
   <dependencies>
