@@ -51,5 +51,7 @@
     <module>kogito-usertasks-with-security-oidc-keycloak</module>
     <module>kogito-usertasks-with-security-quarkus</module>
     <module>kogito-usertasks-with-security-springboot</module>
+    <module>kogito-timer-quarkus</module>
+    <module>kogito-timer-springboot</module>
   </modules>
 </project>

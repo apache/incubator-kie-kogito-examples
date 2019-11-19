@@ -78,6 +78,12 @@ shows user task interactions with four eye principle applied with security restr
 * [on Quarkus](kogito-usertasks-with-security-quarkus)
 * [on SpringBoot](kogito-usertasks-with-security-springboot)
 
+## Kogito with timers
+
+shows timers (intermediate and boundary) that allows to introduce delays in process execution
+
+* [on Quarkus](kogito-timer-quarkus)
+* [on SpringBoot](kogito-timer-springboot)
 
 ## Contribution
 
