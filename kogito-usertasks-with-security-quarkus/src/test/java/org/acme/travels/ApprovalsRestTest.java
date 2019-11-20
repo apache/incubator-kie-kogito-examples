@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Map;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import io.quarkus.test.junit.QuarkusTest;
@@ -15,6 +16,7 @@ import io.restassured.http.ContentType;
 @QuarkusTest
 public class ApprovalsRestTest {
     
+    @Disabled("quarkus related issue https://github.com/quarkusio/quarkus/pull/5617")
     @Test
     public void testStartApprovalUnauthorized() {
 
