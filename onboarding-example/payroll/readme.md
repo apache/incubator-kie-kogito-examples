@@ -40,32 +40,32 @@ You can take a look at the [swagger definition](http://localhost:8082/docs/swagg
 
 Once the service is up and running, you can use the following examples to interact with the service.
 
-### POST /paymentDate
+### POST /payments/date
 
 Assigns payment date for the given employee:
 
 ```sh
-curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"employee" : {"firstName" : "Mark", "lastName" : "Test", "personalId" : "xxx-yy-zzz", "birthDate" : "1995-12-10T14:50:12.123+02:00", "address" : {"country" : "US", "city" : "Boston", "street" : "any street 3", "zipCode" : "10001"}}}' http://localhost:8082/paymentDate
+curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"employee" : {"firstName" : "Mark", "lastName" : "Test", "personalId" : "xxx-yy-zzz", "birthDate" : "1995-12-10T14:50:12.123+02:00", "address" : {"country" : "US", "city" : "Boston", "street" : "any street 3", "zipCode" : "10001"}}}' http://localhost:8082/payments/date
 ```
 
 As response the employee details including the new payment date are returned.
 
-### POST /taxRate
+### POST /taxes/rate
 
 Calculates the tax rate for the given employee:
 
 ```sh
-curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"employee" : {"firstName" : "Mark", "lastName" : "Test", "personalId" : "xxx-yy-zzz", "birthDate" : "1995-12-10T14:50:12.123+02:00", "address" : {"country" : "US", "city" : "Boston", "street" : "any street 3", "zipCode" : "10001"}}}' http://localhost:8082/taxRate
+curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"employee" : {"firstName" : "Mark", "lastName" : "Test", "personalId" : "xxx-yy-zzz", "birthDate" : "1995-12-10T14:50:12.123+02:00", "address" : {"country" : "US", "city" : "Boston", "street" : "any street 3", "zipCode" : "10001"}}}' http://localhost:8082/taxes/rate
 ```
 
 As response the employee details including the new tax rate are returned.
 
-### POST /vacationDays
+### POST /vacations/days
 
 Calculates the number of vacation days for the given employee:
 
 ```sh
-curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"employee" : {"firstName" : "Mark", "lastName" : "Test", "personalId" : "xxx-yy-zzz", "birthDate" : "1995-12-10T14:50:12.123+02:00", "address" : {"country" : "US", "city" : "Boston", "street" : "any street 3", "zipCode" : "10001"}}}' http://localhost:8082/vacationDays
+curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"employee" : {"firstName" : "Mark", "lastName" : "Test", "personalId" : "xxx-yy-zzz", "birthDate" : "1995-12-10T14:50:12.123+02:00", "address" : {"country" : "US", "city" : "Boston", "street" : "any street 3", "zipCode" : "10001"}}}' http://localhost:8082/vacations/days
 ```
 
 As response the employee details including the number of vacation days are returned.
@@ -93,7 +93,7 @@ oc new-build --name payroll-service --source-image=payroll-service-builder --sou
 Next create application for the runtime image
 
 ```sh
-oc new-app payroll-service:latest -l taxRate=process,vacationDays=process,paymentDate=process
+oc new-app payroll-service:latest -l taxes/rate=process,vacations/days=process,payments/date=process
 ```
 
 and lastly create the route for it
