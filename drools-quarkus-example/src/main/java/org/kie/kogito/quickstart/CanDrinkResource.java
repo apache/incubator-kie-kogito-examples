@@ -7,8 +7,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import org.kie.kogito.rules.impl.SessionData;
-import org.kie.kogito.rules.impl.SessionUnit;
+
+import org.kie.kogito.rules.units.impl.SessionData;
+import org.kie.kogito.rules.units.impl.SessionUnit;
 
 @Path("/candrink/{name}/{age}")
 public class CanDrinkResource {
