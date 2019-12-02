@@ -420,6 +420,7 @@
       <bpmn2:incoming>SequenceFlow_20</bpmn2:incoming>
       <bpmn2:dataInput id="DataInput_30" name="Error_1_Input"/>
       <bpmn2:dataInputAssociation id="DataInputAssociation_30">
+        <bpmn2:sourceRef>visaApplication</bpmn2:sourceRef>
         <bpmn2:targetRef>DataInput_30</bpmn2:targetRef>
       </bpmn2:dataInputAssociation>
       <bpmn2:inputSet id="InputSet_2" name="Input Set 2">
