@@ -46,11 +46,11 @@
     </dependency>
 
     <!-- uncomment this to use externalized job service to deal with timers -->
-<!--     <dependency>
+    <!--<dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>jobs-management-quarkus-addon</artifactId>
-    </dependency> -->
-    
+    </dependency>-->
+
     <!-- uncomment these two to enable persistence for kogito -->
 <!--     <dependency>
       <groupId>io.quarkus</groupId>

@@ -54,19 +54,9 @@
     <!-- kogito -->
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>infinispan-persistence-addon</artifactId>
+      <artifactId>kogito-springboot-starter</artifactId>
       <version>${kogito.version}</version>
     </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.jaxrs</groupId>
-      <artifactId>jackson-jaxrs-json-provider</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.cxf</groupId>
-      <artifactId>cxf-spring-boot-starter-jaxrs</artifactId>
-      <version>${cxf.version}</version>
-    </dependency>
-
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-api</artifactId>
@@ -74,41 +64,10 @@
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>drools-core-static</artifactId>
+      <artifactId>infinispan-persistence-addon</artifactId>
       <version>${kogito.version}</version>
     </dependency>
-    <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>drools-compiler</artifactId>
-      <version>${kogito.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>drools-canonical-model</artifactId>
-      <version>${kogito.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>drools-model-compiler</artifactId>
-      <version>${kogito.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>jbpm-flow</artifactId>
-      <version>${kogito.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>javax.xml.bind</groupId>
-      <artifactId>jaxb-api</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>javax.activation</groupId>
-      <artifactId>activation</artifactId>
-      <version>${javax.activation.version}</version>
-    </dependency>
+    
 
     <dependency>
       <groupId>org.springframework.boot</groupId>

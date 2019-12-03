@@ -18,9 +18,7 @@
     <!-- quarkus related -->
     <quarkus.version>999-SNAPSHOT</quarkus.version>
     <!-- springboot related -->
-    <springboot.version>2.1.1.RELEASE</springboot.version>
-    <cxf.version>3.2.6</cxf.version>
-    <javax.activation.version>1.1.1</javax.activation.version>
+    <springboot.version>2.2.0.RELEASE</springboot.version>
     <!-- kogito -->
     <kogito.version>8.0.0-SNAPSHOT</kogito.version>
 
