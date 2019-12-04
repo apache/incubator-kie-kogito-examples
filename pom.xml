@@ -85,20 +85,10 @@
       </dependency>
       <dependency>
         <groupId>org.kie.kogito</groupId>
-        <artifactId>drools-model-compiler</artifactId>
+        <artifactId>kogito-drools</artifactId>
         <version>${version.org.kie.kogito}</version>
       </dependency>
       <dependency>
-        <groupId>org.kie.kogito</groupId>
-        <artifactId>drools-core</artifactId>
-        <version>${version.org.kie.kogito}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.kie.kogito</groupId>
-        <artifactId>drools-core-static</artifactId>
-        <version>${version.org.kie.kogito}</version>
-      </dependency>
-          <dependency>
         <groupId>org.kie.kogito</groupId>
         <artifactId>kogito-codegen</artifactId>
         <version>${version.org.kie.kogito}</version>
