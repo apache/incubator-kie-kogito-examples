@@ -1,6 +1,7 @@
 package org.kie.kogito.examples;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.Map;
@@ -20,6 +21,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
+@SuppressWarnings("rawtypes")
 @QuarkusTest
 public class PersonsRestTest {
     @Inject
@@ -42,7 +44,7 @@ public class PersonsRestTest {
         // test new person
         String addPersonPayload = "{\"person\" : {\"name\" : \"John Doe\", \"age\" : 20}}";
         given().contentType(ContentType.JSON).accept(ContentType.JSON).body(addPersonPayload).when()
-                .post("/persons").then().statusCode(200).body("id", notNullValue()).extract().path("id");
+                .post("/persons").then().statusCode(200).body("id", notNullValue(), "person.adult", is(true)).extract().path("id");
 
         // get all persons make sure there is zero
         given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)
@@ -178,6 +180,172 @@ public class PersonsRestTest {
         .statusCode(200).body("id", is(firstCreatedId));
         // test skip
         given().contentType(ContentType.JSON).accept(ContentType.JSON).body(fixedOrderPayload).when().post("/persons/" + firstCreatedId + "/ChildrenHandling/" + taskId + "?phase=skip&user=admin").then()
+        .statusCode(200).body("id", is(firstCreatedId));
+     
+        // get all persons make sure there is zero
+        given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)
+                .body("$.size()", is(0));
+    }
+    
+    @Test
+    public void testPersonsRestStartFromUserTask() {
+        assertNotNull(personProcess);
+
+        // test new person
+        String addPersonPayload = "{\"person\" : {\"name\" : \"Jane Doe\", \"age\" : 30}}";
+        String firstCreatedId = given().contentType(ContentType.JSON).accept(ContentType.JSON)
+                .header("X-KOGITO-StartFromNode", "UserTask_1")// this instructs to start from user task and skip any node before it
+                .body(addPersonPayload).when()
+                .post("/persons").then().statusCode(200)
+                .body("id", notNullValue(), "person.adult", is(false))// since rule evaluation was skipped adult is still false even though age is about the 18 limit
+                .extract().path("id");
+
+        // test getting the created order
+        given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)
+                .body("$.size()", is(1), "[0].id", is(firstCreatedId), "[0].person.adult", is(false));
+        
+        // test getting task
+        Map taskInfo = given().accept(ContentType.JSON).when().get("/persons/" + firstCreatedId + "/tasks").then()
+        .statusCode(200).extract().as(Map.class);
+        
+        assertEquals(1, taskInfo.size());
+        taskInfo.containsValue("ChildrenHandling");
+        
+        // test completing task
+        String fixedOrderPayload = "{}";
+        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(fixedOrderPayload).when().post("/persons/" + firstCreatedId + "/ChildrenHandling/" + taskInfo.keySet().iterator().next()).then()
+        .statusCode(200).body("id", is(firstCreatedId));
+     
+        // get all persons make sure there is zero
+        given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)
+                .body("$.size()", is(0));
+    }
+    
+    @Test
+    public void testChildPersonsRestAbortViaMgmtInterface() {
+        assertNotNull(personProcess);
+
+        // test new person
+        String addPersonPayload = "{\"person\" : {\"name\" : \"Jane Doe\", \"age\" : 16}}";
+        String firstCreatedId = given().contentType(ContentType.JSON).accept(ContentType.JSON)
+                .body(addPersonPayload).when()
+                .post("/persons").then().statusCode(200)
+                .body("id", notNullValue(), "person.adult", is(false))
+                .extract().path("id");
+
+        // test getting the created order
+        given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)
+                .body("$.size()", is(1), "[0].id", is(firstCreatedId), "[0].person.adult", is(false));
+        
+        // test getting task
+        Map taskInfo = given().accept(ContentType.JSON).when().get("/persons/" + firstCreatedId + "/tasks").then()
+        .statusCode(200).extract().as(Map.class);
+        
+        assertEquals(1, taskInfo.size());
+        taskInfo.containsValue("ChildrenHandling");
+        
+        // abort process instance via management interface        
+        given().contentType(ContentType.JSON).accept(ContentType.JSON).when().delete("/management/processes/persons/instances/" + firstCreatedId).then()
+        .statusCode(200).body("id", is(firstCreatedId));
+     
+        // get all persons make sure there is zero
+        given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)
+                .body("$.size()", is(0));
+    }
+    
+    @Test
+    public void testChildPersonsRestRetriggerNodeViaMgmtInterface() {
+        assertNotNull(personProcess);
+
+        // test new person
+        String addPersonPayload = "{\"person\" : {\"name\" : \"Jane Doe\", \"age\" : 16}}";
+        String firstCreatedId = given().contentType(ContentType.JSON).accept(ContentType.JSON)
+                .body(addPersonPayload).when()
+                .post("/persons").then().statusCode(200)
+                .body("id", notNullValue(), "person.adult", is(false))
+                .extract().path("id");
+
+        // test getting the created order
+        given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)
+                .body("$.size()", is(1), "[0].id", is(firstCreatedId), "[0].person.adult", is(false));
+        
+        // test getting task
+        Map taskInfo = given().accept(ContentType.JSON).when().get("/persons/" + firstCreatedId + "/tasks").then()
+        .statusCode(200).extract().as(Map.class);
+        
+        assertEquals(1, taskInfo.size());
+        taskInfo.containsValue("ChildrenHandling");
+        
+        String nodeInstanceId = given().contentType(ContentType.JSON).accept(ContentType.JSON).when().get("/management/processes/persons/instances/" + firstCreatedId + "/nodeInstances").then()
+        .statusCode(200).body("$.size()", is(1)).extract().path("[0].nodeInstanceId");
+        
+        // retrigger node instance via management interface        
+        given().contentType(ContentType.JSON).accept(ContentType.JSON).when().post("/management/processes/persons/instances/" + firstCreatedId + "/nodeInstances/" + nodeInstanceId).then()
+        .statusCode(200);
+        
+        taskInfo = given().accept(ContentType.JSON).when().get("/persons/" + firstCreatedId + "/tasks").then()
+                .statusCode(200).extract().as(Map.class);
+        
+        String retriggeredNodeInstanceId = given().contentType(ContentType.JSON).accept(ContentType.JSON).when().get("/management/processes/persons/instances/" + firstCreatedId + "/nodeInstances").then()
+                .statusCode(200).body("$.size()", is(1)).extract().path("[0].nodeInstanceId");
+        // since node instance was retriggered it must have different ids
+        assertNotEquals(nodeInstanceId, retriggeredNodeInstanceId);
+        
+        // test completing task
+        String fixedOrderPayload = "{}";
+        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(fixedOrderPayload).when().post("/persons/" + firstCreatedId + "/ChildrenHandling/" + taskInfo.keySet().iterator().next()).then()
+        .statusCode(200).body("id", is(firstCreatedId));
+     
+        // get all persons make sure there is zero
+        given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)
+                .body("$.size()", is(0));
+    }
+    
+    @Test
+    public void testChildPersonsRestCancelAndTriggerNodeViaMgmtInterface() {
+        assertNotNull(personProcess);
+
+        // test new person
+        String addPersonPayload = "{\"person\" : {\"name\" : \"Jane Doe\", \"age\" : 16}}";
+        String firstCreatedId = given().contentType(ContentType.JSON).accept(ContentType.JSON)
+                .body(addPersonPayload).when()
+                .post("/persons").then().statusCode(200)
+                .body("id", notNullValue(), "person.adult", is(false))
+                .extract().path("id");
+
+        // test getting the created order
+        given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)
+                .body("$.size()", is(1), "[0].id", is(firstCreatedId), "[0].person.adult", is(false));
+        
+        // test getting task
+        Map taskInfo = given().accept(ContentType.JSON).when().get("/persons/" + firstCreatedId + "/tasks").then()
+        .statusCode(200).extract().as(Map.class);
+        
+        assertEquals(1, taskInfo.size());
+        taskInfo.containsValue("ChildrenHandling");
+        
+        String nodeInstanceId = given().contentType(ContentType.JSON).accept(ContentType.JSON).when().get("/management/processes/persons/instances/" + firstCreatedId + "/nodeInstances").then()
+        .statusCode(200).body("$.size()", is(1)).extract().path("[0].nodeInstanceId");
+        
+        // cancel node instance
+        given().contentType(ContentType.JSON).accept(ContentType.JSON).when().delete("/management/processes/persons/instances/" + firstCreatedId + "/nodeInstances/" + nodeInstanceId).then()
+        .statusCode(200);
+        
+        // then trigger new node instance via management interface        
+        given().contentType(ContentType.JSON).accept(ContentType.JSON).when().post("/management/processes/persons/instances/" + firstCreatedId + "/nodes/UserTask_1").then()
+        .statusCode(200);
+        
+        taskInfo = given().accept(ContentType.JSON).when().get("/persons/" + firstCreatedId + "/tasks").then()
+                .statusCode(200).extract().as(Map.class);
+        
+        String retriggeredNodeInstanceId = given().contentType(ContentType.JSON).accept(ContentType.JSON).when().get("/management/processes/persons/instances/" + firstCreatedId + "/nodeInstances").then()
+                .statusCode(200).body("$.size()", is(1)).extract().path("[0].nodeInstanceId");
+        // since node instance was retriggered it must have different ids
+        assertNotEquals(nodeInstanceId, retriggeredNodeInstanceId);
+        
+        // test completing task
+        String fixedOrderPayload = "{}";
+        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(fixedOrderPayload).when().post("/persons/" + firstCreatedId + "/ChildrenHandling/" + taskInfo.keySet().iterator().next()).then()
         .statusCode(200).body("id", is(firstCreatedId));
      
         // get all persons make sure there is zero
