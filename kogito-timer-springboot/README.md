@@ -49,7 +49,7 @@ mvn clean package
 To run the generated native executable, generated in `target/`, execute
 
 ```
-java -jar target/kogito-usertasks-sprintboot-{version}.jar
+java -jar target/kogito-timer-sprintboot-{version}.jar
 ```
 
 ### Use the application
@@ -165,7 +165,7 @@ In case you'd like to run the job service with enabled persistence then start
 Infinispan server before and then run the job service with following command
 
 ```
-java -Dquarkus.http.port=8085 -Dkogito.job-service.persistence=infinispan -jar target/jobs-service-{version}-runner.jar
+java -Dquarkus.http.port=8085 -Dkogito.jobs-service.persistence=infinispan -jar target/jobs-service-{version}-runner.jar
 ```
 
 in both cases replace `{version}` with actual Kogito version to be used (Job Service is available from 0.6.0)

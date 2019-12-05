@@ -57,7 +57,7 @@ mvn clean package -Pnative
 To run the generated native executable, generated in `target/`, execute
 
 ```
-./target/kogito-usertasks-quarkus-{version}-runner
+./target/kogito-timer-quarkus-{version}-runner
 ```
 
 ### Use the application
@@ -145,6 +145,7 @@ kogito.jobs-service.url=http://localhost:8085
 kogito.service.url=http://localhost:8080
 ```
 
+
 First one is used to direct the Kogito runtime to let it know where is the Kogito Job Service - it needs
 to match the location of the Kogito Job Service when starting it - see below.
 Second one is used by Kogito Job Service to callback when the timer expires and needs to be pointing to the service host and port
@@ -172,7 +173,7 @@ In case you'd like to run the job service with enabled persistence then start
 Infinispan server before and then run the job service with following command
 
 ```
-java -Dquarkus.http.port=8085 -Dkogito.job-service.persistence=infinispan -jar target/jobs-service-{version}-runner.jar
+java -Dquarkus.http.port=8085 -Dkogito.jobs-service.persistence=infinispan -jar target/jobs-service-{version}-runner.jar
 ```
 
 in both cases replace `{version}` with actual Kogito version to be used (Job Service is available from 0.6.0)
