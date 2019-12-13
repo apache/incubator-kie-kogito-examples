@@ -64,7 +64,7 @@ public class PersonsRestTest {
                 .body("$.size()", is(1), "[0].id", is(firstCreatedId));
         
         // test getting task
-        Map taskInfo = given().accept(ContentType.JSON).when().get("/persons/" + firstCreatedId + "/tasks").then()
+        Map taskInfo = given().accept(ContentType.JSON).when().get("/persons/" + firstCreatedId + "/tasks?user=admin").then()
         .statusCode(200).extract().as(Map.class);
         
         assertEquals(1, taskInfo.size());
@@ -72,7 +72,7 @@ public class PersonsRestTest {
         
         // test completing task
         String fixedOrderPayload = "{}";
-        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(fixedOrderPayload).when().post("/persons/" + firstCreatedId + "/ChildrenHandling/" + taskInfo.keySet().iterator().next()).then()
+        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(fixedOrderPayload).when().post("/persons/" + firstCreatedId + "/ChildrenHandling/" + taskInfo.keySet().iterator().next() + "?user=admin").then()
         .statusCode(200).body("id", is(firstCreatedId));
      
         // get all persons make sure there is zero
@@ -203,7 +203,7 @@ public class PersonsRestTest {
                 .body("$.size()", is(1), "[0].id", is(firstCreatedId), "[0].person.adult", is(false));
         
         // test getting task
-        Map taskInfo = given().accept(ContentType.JSON).when().get("/persons/" + firstCreatedId + "/tasks").then()
+        Map taskInfo = given().accept(ContentType.JSON).when().get("/persons/" + firstCreatedId + "/tasks?user=admin").then()
         .statusCode(200).extract().as(Map.class);
         
         assertEquals(1, taskInfo.size());
@@ -211,7 +211,7 @@ public class PersonsRestTest {
         
         // test completing task
         String fixedOrderPayload = "{}";
-        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(fixedOrderPayload).when().post("/persons/" + firstCreatedId + "/ChildrenHandling/" + taskInfo.keySet().iterator().next()).then()
+        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(fixedOrderPayload).when().post("/persons/" + firstCreatedId + "/ChildrenHandling/" + taskInfo.keySet().iterator().next() + "?user=admin").then()
         .statusCode(200).body("id", is(firstCreatedId));
      
         // get all persons make sure there is zero
@@ -236,7 +236,7 @@ public class PersonsRestTest {
                 .body("$.size()", is(1), "[0].id", is(firstCreatedId), "[0].person.adult", is(false));
         
         // test getting task        
-        Map taskInfo = given().accept(ContentType.JSON).when().get("/persons/" + firstCreatedId + "/tasks").then()
+        Map taskInfo = given().accept(ContentType.JSON).when().get("/persons/" + firstCreatedId + "/tasks?user=admin").then()
         .statusCode(200).extract().as(Map.class);
         
         assertEquals(1, taskInfo.size());
@@ -267,7 +267,7 @@ public class PersonsRestTest {
                 .body("$.size()", is(1), "[0].id", is(firstCreatedId), "[0].person.adult", is(false));
         
         // test getting task
-        Map taskInfo = given().accept(ContentType.JSON).when().get("/persons/" + firstCreatedId + "/tasks").then()
+        Map taskInfo = given().accept(ContentType.JSON).when().get("/persons/" + firstCreatedId + "/tasks?user=admin").then()
         .statusCode(200).extract().as(Map.class);
         
         assertEquals(1, taskInfo.size());
@@ -280,7 +280,7 @@ public class PersonsRestTest {
         given().contentType(ContentType.JSON).accept(ContentType.JSON).when().post("/management/processes/persons/instances/" + firstCreatedId + "/nodeInstances/" + nodeInstanceId).then()
         .statusCode(200);
         
-        taskInfo = given().accept(ContentType.JSON).when().get("/persons/" + firstCreatedId + "/tasks").then()
+        taskInfo = given().accept(ContentType.JSON).when().get("/persons/" + firstCreatedId + "/tasks?user=admin").then()
                 .statusCode(200).extract().as(Map.class);
         
         String retriggeredNodeInstanceId = given().contentType(ContentType.JSON).accept(ContentType.JSON).when().get("/management/processes/persons/instances/" + firstCreatedId + "/nodeInstances").then()
@@ -290,7 +290,7 @@ public class PersonsRestTest {
         
         // test completing task
         String fixedOrderPayload = "{}";
-        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(fixedOrderPayload).when().post("/persons/" + firstCreatedId + "/ChildrenHandling/" + taskInfo.keySet().iterator().next()).then()
+        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(fixedOrderPayload).when().post("/persons/" + firstCreatedId + "/ChildrenHandling/" + taskInfo.keySet().iterator().next()+ "?user=admin").then()
         .statusCode(200).body("id", is(firstCreatedId));
      
         // get all persons make sure there is zero
@@ -314,7 +314,7 @@ public class PersonsRestTest {
                 .body("$.size()", is(1), "[0].id", is(firstCreatedId), "[0].person.adult", is(false));
         
         // test getting task
-        Map taskInfo = given().accept(ContentType.JSON).when().get("/persons/" + firstCreatedId + "/tasks").then()
+        Map taskInfo = given().accept(ContentType.JSON).when().get("/persons/" + firstCreatedId + "/tasks?user=admin").then()
         .statusCode(200).extract().as(Map.class);
         
         assertEquals(1, taskInfo.size());
@@ -331,7 +331,7 @@ public class PersonsRestTest {
         given().contentType(ContentType.JSON).accept(ContentType.JSON).when().post("/management/processes/persons/instances/" + firstCreatedId + "/nodes/UserTask_1").then()
         .statusCode(200);
         
-        taskInfo = given().accept(ContentType.JSON).when().get("/persons/" + firstCreatedId + "/tasks").then()
+        taskInfo = given().accept(ContentType.JSON).when().get("/persons/" + firstCreatedId + "/tasks?user=admin").then()
                 .statusCode(200).extract().as(Map.class);
         
         String retriggeredNodeInstanceId = given().contentType(ContentType.JSON).accept(ContentType.JSON).when().get("/management/processes/persons/instances/" + firstCreatedId + "/nodeInstances").then()
@@ -341,7 +341,7 @@ public class PersonsRestTest {
         
         // test completing task
         String fixedOrderPayload = "{}";
-        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(fixedOrderPayload).when().post("/persons/" + firstCreatedId + "/ChildrenHandling/" + taskInfo.keySet().iterator().next()).then()
+        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(fixedOrderPayload).when().post("/persons/" + firstCreatedId + "/ChildrenHandling/" + taskInfo.keySet().iterator().next() + "?user=admin").then()
         .statusCode(200).body("id", is(firstCreatedId));
      
         // get all persons make sure there is zero

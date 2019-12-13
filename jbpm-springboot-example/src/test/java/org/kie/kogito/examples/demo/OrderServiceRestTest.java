@@ -170,7 +170,7 @@ public class OrderServiceRestTest {
                 .statusCode(200).body("id", is(orderItemsId));
         
         // test getting task
-        Map taskInfo = given().accept(ContentType.JSON).when().get("/orderItems/" + orderItemsId + "/tasks").then()
+        Map taskInfo = given().accept(ContentType.JSON).when().get("/orderItems/" + orderItemsId + "/tasks?user=john").then()
         .statusCode(200).extract().as(Map.class);
         
         assertEquals(1, taskInfo.size());
@@ -178,7 +178,7 @@ public class OrderServiceRestTest {
         
         // test completing task
         String payload = "{}";
-        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(payload).when().post("/orderItems/" + orderItemsId + "/Verify_order/" + taskInfo.keySet().iterator().next()).then()
+        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(payload).when().post("/orderItems/" + orderItemsId + "/Verify_order/" + taskInfo.keySet().iterator().next() + "?user=john").then()
         .statusCode(200).body("id", is(orderItemsId));
         
         // get all orders make sure there is zero
@@ -215,7 +215,7 @@ public class OrderServiceRestTest {
                 .statusCode(200).body("id", is(orderItemsId));
         
         // test getting task
-        Map taskInfo = given().accept(ContentType.JSON).when().get("/orderItems/" + orderItemsId + "/tasks").then()
+        Map taskInfo = given().accept(ContentType.JSON).when().get("/orderItems/" + orderItemsId + "/tasks?user=john").then()
         .statusCode(200).extract().as(Map.class);
         
         assertEquals(1, taskInfo.size());
