@@ -27,21 +27,8 @@
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>drools-core-static</artifactId>
+      <artifactId>kogito-drools</artifactId>
     </dependency>
-    <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>drools-compiler</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>drools-canonical-model</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>drools-model-compiler</artifactId>
-    </dependency>
-
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>monitoring-prometheus-addon</artifactId>

@@ -41,7 +41,7 @@
       <groupId>org.kie.kogito</groupId>
       <artifactId>process-management-addon</artifactId>
     </dependency>
-    
+
     <!-- test related -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
