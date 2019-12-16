@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,11 +17,13 @@ import javax.inject.Named;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.Model;
+import org.kie.kogito.auth.SecurityPolicy;
 import org.kie.kogito.examples.demo.Order;
 import org.kie.kogito.process.Process;
 import org.kie.kogito.process.ProcessInstance;
 import org.kie.kogito.process.ProcessInstances;
 import org.kie.kogito.process.WorkItem;
+import org.kie.kogito.services.identity.StaticIdentityProvider;
 
 import io.quarkus.test.junit.QuarkusTest;
 
@@ -34,6 +37,8 @@ public class OrdersProcessTest {
     @Inject
     @Named("demo.orderItems")
     Process<? extends Model> orderItemsProcess;
+    
+    private SecurityPolicy policy = SecurityPolicy.of(new StaticIdentityProvider("john", Collections.singletonList("managers")));
 
     @BeforeEach
     public void setup() {
@@ -68,10 +73,10 @@ public class OrdersProcessTest {
 
         ProcessInstance<?> childProcessInstance = orderItemProcesses.values().iterator().next();
 
-        List<WorkItem> workItems = childProcessInstance.workItems();
+        List<WorkItem> workItems = childProcessInstance.workItems(policy);
         assertEquals(1, workItems.size());
 
-        childProcessInstance.completeWorkItem(workItems.get(0).getId(), null);
+        childProcessInstance.completeWorkItem(workItems.get(0).getId(), null, policy);
 
         assertEquals(ProcessInstance.STATE_COMPLETED, childProcessInstance.status());
         Optional<?> pi = orderProcess.instances().findById(processInstance.id());
@@ -115,10 +120,10 @@ public class OrdersProcessTest {
 
         ProcessInstance<?> childProcessInstance = orderItemProcesses.values().iterator().next();
 
-        List<WorkItem> workItems = childProcessInstance.workItems();
+        List<WorkItem> workItems = childProcessInstance.workItems(policy);
         assertEquals(1, workItems.size());
 
-        childProcessInstance.completeWorkItem(workItems.get(0).getId(), null);
+        childProcessInstance.completeWorkItem(workItems.get(0).getId(), null, policy);
 
         assertEquals(ProcessInstance.STATE_COMPLETED, childProcessInstance.status());
         assertEquals(ProcessInstance.STATE_COMPLETED, processInstance.status());

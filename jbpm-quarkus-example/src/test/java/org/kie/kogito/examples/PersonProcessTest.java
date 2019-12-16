@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +31,8 @@ public class PersonProcessTest {
     @Inject
     @Named("persons")
     Process<? extends Model> personProcess;
+    
+    private SecurityPolicy policy = SecurityPolicy.of(new StaticIdentityProvider("admin", Collections.singletonList("managers")));
 
     @Test
     public void testAdult() {
@@ -63,10 +66,10 @@ public class PersonProcessTest {
         assertEquals(1, result.toMap().size());
         assertFalse(((Person)result.toMap().get("person")).isAdult());
         
-        List<WorkItem> workItems = processInstance.workItems();
+        List<WorkItem> workItems = processInstance.workItems(policy);
         assertEquals(1, workItems.size());
         
-        processInstance.completeWorkItem(workItems.get(0).getId(), null);
+        processInstance.completeWorkItem(workItems.get(0).getId(), null, policy);
         
         assertEquals(ProcessInstance.STATE_COMPLETED, processInstance.status()); 
     }
@@ -85,9 +88,6 @@ public class PersonProcessTest {
         Model result = (Model)processInstance.variables();
         assertEquals(1, result.toMap().size());
         assertFalse(((Person)result.toMap().get("person")).isAdult());
-        
-        StaticIdentityProvider identity = new StaticIdentityProvider("admin");
-        SecurityPolicy policy = SecurityPolicy.of(identity);
         
         List<WorkItem> workItems = processInstance.workItems(policy);
         assertEquals(1, workItems.size());
@@ -112,10 +112,9 @@ public class PersonProcessTest {
         assertEquals(1, result.toMap().size());
         assertFalse(((Person)result.toMap().get("person")).isAdult());
         
-        StaticIdentityProvider identity = new StaticIdentityProvider("john");
-        SecurityPolicy policy = SecurityPolicy.of(identity);
+        SecurityPolicy johnPolicy = SecurityPolicy.of(new StaticIdentityProvider("john"));
         
-        List<WorkItem> workItems = processInstance.workItems(policy);
+        List<WorkItem> workItems = processInstance.workItems(johnPolicy);
         assertEquals(0, workItems.size());
         
         processInstance.abort();
