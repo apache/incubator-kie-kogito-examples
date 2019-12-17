@@ -2,14 +2,23 @@ package org.kie.kogito.examples;
 
 import javax.enterprise.context.ApplicationScoped;
 
-import org.drools.core.config.DefaultRuleEventListenerConfig;
 import org.kie.addons.monitoring.rule.PrometheusMetricsDroolsListener;
+import org.kie.kogito.rules.listeners.AgendaListener;
+import org.kie.kogito.rules.listeners.DataSourceListener;
 
 @ApplicationScoped
-public class RuleEventListenerConfig extends DefaultRuleEventListenerConfig {
+public class RuleEventListenerConfig implements org.kie.kogito.rules.RuleEventListenerConfig {
 
-    
-    public RuleEventListenerConfig() {
-        super(new PrometheusMetricsDroolsListener("onboarding"));
+    private final PrometheusMetricsDroolsListener onboarding =
+            new PrometheusMetricsDroolsListener("onboarding");
+
+    @Override
+    public AgendaListener agendaListener() {
+        return onboarding;
+    }
+
+    @Override
+    public DataSourceListener dataSourceListener() {
+        return null;
     }
 }
