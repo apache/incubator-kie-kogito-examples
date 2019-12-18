@@ -1,5 +1,8 @@
 package org.kie.kogito.examples;
 
+import java.util.Collection;
+import java.util.Collections;
+
 import javax.enterprise.context.ApplicationScoped;
 
 import org.kie.addons.monitoring.rule.PrometheusMetricsDroolsListener;
@@ -13,12 +16,12 @@ public class RuleEventListenerConfig implements org.kie.kogito.rules.RuleEventLi
             new PrometheusMetricsDroolsListener("onboarding");
 
     @Override
-    public AgendaListener agendaListener() {
-        return onboarding;
+    public Collection<AgendaListener> agendaListener() {
+        return Collections.singleton(onboarding);
     }
 
     @Override
-    public DataSourceListener dataSourceListener() {
-        return null;
+    public Collection<DataSourceListener> dataSourceListener() {
+        return Collections.emptyList();
     }
 }
