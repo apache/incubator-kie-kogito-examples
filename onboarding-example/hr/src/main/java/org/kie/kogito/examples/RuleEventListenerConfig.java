@@ -16,12 +16,12 @@ public class RuleEventListenerConfig implements org.kie.kogito.rules.RuleEventLi
             new PrometheusMetricsDroolsListener("onboarding");
 
     @Override
-    public Collection<AgendaListener> agendaListener() {
+    public Collection<AgendaListener> agendaListeners() {
         return Collections.singleton(onboarding);
     }
 
     @Override
-    public Collection<DataSourceListener> dataSourceListener() {
+    public Collection<DataSourceListener> dataSourceListeners() {
         return Collections.emptyList();
     }
 }
