@@ -7,26 +7,15 @@
     <version>8.0.0-SNAPSHOT</version>
   </parent>
   <groupId>org.kie.kogito.examples</groupId>
-  <artifactId>jbpm-springboot-example</artifactId>
+  <artifactId>jbpm-optaplanner-springboot-example</artifactId>
 
-  <name>Kogito Example :: jBPM and SpringBoot</name>
-  <description>Order management service</description>
+  <name>Kogito Example :: jBPM, OptaPlanner and SpringBoot</name>
+  <description>Wedding process and optimization</description>
 
   <properties>
     <springboot.version>2.2.2.RELEASE</springboot.version>
+    <version.org.optaplanner>7.32.0-SNAPSHOT</version.org.optaplanner>
   </properties>
-
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-dependencies</artifactId>
-        <version>${springboot.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
   
   <dependencies>
     <dependency>
@@ -41,6 +30,10 @@
       <groupId>org.kie.kogito</groupId>
       <artifactId>process-management-addon</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.optaplanner</groupId>
+      <artifactId>optaplanner-spring-boot-starter</artifactId>
+    </dependency>
 
     <!-- test related -->
     <dependency>
@@ -54,6 +47,25 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${springboot.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.optaplanner</groupId>
+        <artifactId>optaplanner-bom</artifactId>
+        <version>${version.org.optaplanner}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <build>
     <plugins>
