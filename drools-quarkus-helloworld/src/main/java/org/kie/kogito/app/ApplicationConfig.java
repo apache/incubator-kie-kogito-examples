@@ -4,6 +4,8 @@ import javax.inject.Singleton;
 
 import org.drools.core.config.DefaultRuleEventListenerConfig;
 import org.kie.kogito.process.ProcessConfig;
+import org.kie.kogito.rules.ClockType;
+import org.kie.kogito.rules.EventProcessingMode;
 import org.kie.kogito.rules.RuleConfig;
 import org.kie.kogito.rules.RuleEventListenerConfig;
 
@@ -28,8 +30,8 @@ public class ApplicationConfig  implements org.kie.kogito.Config {
             }
 
             @Override
-            public EventProcessing eventProcessingMode() {
-                return EventProcessing.Cloud;
+            public EventProcessingMode eventProcessingMode() {
+                return EventProcessingMode.Cloud;
             }
 
             @Override
