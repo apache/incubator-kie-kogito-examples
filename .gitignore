@@ -18,3 +18,5 @@ bin/
 *.tlog
 
 workspace
+data-index-service-*-runner.jar
+*/persistence/*
