@@ -8,9 +8,9 @@
   <properties>
     <surefire-plugin.version>2.22.0</surefire-plugin.version>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <kogito.version>0.6.0</kogito.version>
+    <kogito.version>0.6.1</kogito.version>
     <maven.compiler.source>1.8</maven.compiler.source>
-    <quarkus.version>1.1.0.CR1</quarkus.version>
+    <quarkus.version>1.1.0.Final</quarkus.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>

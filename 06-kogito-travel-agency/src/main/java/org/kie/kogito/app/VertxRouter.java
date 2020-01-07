@@ -13,14 +13,16 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 import static io.vertx.core.http.HttpMethod.GET;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-import java.net.URL;
-
 @ApplicationScoped
 public class VertxRouter {
 
     @Inject
-    @ConfigProperty(name = "kogito.dataindex.url", defaultValue = "http://localhost:8180")
-    String dataIndexURL;
+    @ConfigProperty(name = "kogito.dataindex.http.url", defaultValue = "http://localhost:8180")
+    String dataIndexHttpURL;
+
+    @Inject
+    @ConfigProperty(name = "kogito.dataindex.ws.url", defaultValue = "ws://localhost:8180")
+    String dataIndexWsURL;
 
     @Inject
     Vertx vertx;
@@ -30,14 +32,11 @@ public class VertxRouter {
     @PostConstruct
     public void init() {
         try {
-            String scheme = new URL(dataIndexURL).toURI().getScheme();
-            String dataIndexWsURL = ("https".equals(scheme) ? "wss:" : "ws:") + dataIndexURL.substring(scheme.length() + 1);
-
             resource = vertx.fileSystem()
-            .readFileBlocking("META-INF/resources/index.html")
-            .toString(UTF_8)
-            .replace("__GRAPHQL_HTTP_ENDPOINT__", "\"" + dataIndexURL + "/graphql\"")
-            .replace("__GRAPHQL_WS_ENDPOINT__", "\"" + dataIndexWsURL + "/graphql\"");
+                    .readFileBlocking("META-INF/resources/index.html")
+                    .toString(UTF_8)
+                    .replace("__GRAPHQL_HTTP_ENDPOINT__", "\"" + dataIndexHttpURL + "/graphql\"")
+                    .replace("__GRAPHQL_WS_ENDPOINT__", "\"" + dataIndexWsURL + "/graphql\"");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
