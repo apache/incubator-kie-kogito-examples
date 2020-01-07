@@ -171,9 +171,9 @@ To run the generated native executable, generated in `target/`, execute
 
 ### Start Kogito Data Index Service
 
-It can be downloaded from [Kogito Dada Index Service 0.4.0](http://repo2.maven.org/maven2/org/kie/kogito/data-index-service/0.4.0/data-index-service-0.4.0-runner.jar)
+It can be downloaded from [Kogito Data Index Service 0.4.0](http://repo2.maven.org/maven2/org/kie/kogito/data-index-service/0.4.0/data-index-service-0.4.0-runner.jar)
 
-NOTE: Here can be found other versions [Kogito Dada Index Service versions](http://repo2.maven.org/maven2/org/kie/kogito/data-index-service)
+NOTE: Here can be found other versions [Kogito Data Index Service versions](http://repo2.maven.org/maven2/org/kie/kogito/data-index-service)
 
 After downloading the runner, create a new folder to store the .proto files that will be used by the service. 
 
