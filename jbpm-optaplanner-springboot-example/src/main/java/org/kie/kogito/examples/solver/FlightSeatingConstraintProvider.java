@@ -1,0 +1,45 @@
+package org.kie.kogito.examples.solver;
+
+import org.kie.kogito.examples.domain.Passenger;
+import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScore;
+import org.optaplanner.core.api.score.stream.Constraint;
+import org.optaplanner.core.api.score.stream.ConstraintFactory;
+import org.optaplanner.core.api.score.stream.ConstraintProvider;
+
+import static org.optaplanner.core.api.score.stream.Joiners.equal;
+
+public class FlightSeatingConstraintProvider implements ConstraintProvider {
+
+    @Override
+    public Constraint[] defineConstraints(ConstraintFactory factory) {
+        return new Constraint[] {
+                seatConflict(factory),
+                emergencyExitRow(factory),
+                seatTypePreference(factory)
+                // TODO balance the plane
+        };
+    }
+
+    private Constraint seatConflict(ConstraintFactory factory) {
+        return factory
+                .fromUniquePair(Passenger.class, equal(Passenger::getSeat))
+                .penalize("Seat conflict", HardSoftScore.ONE_HARD);
+    }
+
+    private Constraint emergencyExitRow(ConstraintFactory factory) {
+        return factory
+                .from(Passenger.class)
+                .filter(passenger -> passenger.getSeat().isEmergencyExitRow()
+                        && !passenger.isEmergencyExitRowCapable())
+                .penalize("Emergency exit row has incapable passenger", HardSoftScore.ONE_HARD);
+    }
+
+    private Constraint seatTypePreference(ConstraintFactory factory) {
+        return factory
+                .from(Passenger.class)
+                .filter(passenger -> passenger.getSeat().getSeatType().violatesPreference(
+                        passenger.getSeatTypePreference()))
+                .penalize("Seat type preference", HardSoftScore.ONE_SOFT);
+    }
+
+}
