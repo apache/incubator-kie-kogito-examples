@@ -10,7 +10,7 @@
   <artifactId>jbpm-optaplanner-springboot-example</artifactId>
 
   <name>Kogito Example :: jBPM, OptaPlanner and SpringBoot</name>
-  <description>Wedding process and optimization</description>
+  <description>Flight assignment process and optimization</description>
 
   <properties>
     <springboot.version>2.2.2.RELEASE</springboot.version>
