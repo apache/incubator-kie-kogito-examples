@@ -22,7 +22,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = DemoApplication.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = WeddingApplication.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD) // reset spring context after each test method
 public class WeddingTest {
 
@@ -32,7 +32,7 @@ public class WeddingTest {
 
 
     @Test
-    public void testWedding() {
+    public void runProcess() {
         assertNotNull(process);
 
         Model m = process.createModel();
