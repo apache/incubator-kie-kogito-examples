@@ -17,6 +17,9 @@ public class Passenger {
     @PlanningPin
     private boolean payedForSeat;
 
+    @PlanningVariable(valueRangeProviderRefs = "seatRange")
+    private Seat seat;
+
     public Passenger() {
     }
 
@@ -26,9 +29,6 @@ public class Passenger {
         this.emergencyExitRowCapable = emergencyExitRowCapable;
         payedForSeat = false;
     }
-
-    @PlanningVariable(valueRangeProviderRefs = "seatRange")
-    private Seat seat;
 
     // ************************************************************************
     // Getters and setters
