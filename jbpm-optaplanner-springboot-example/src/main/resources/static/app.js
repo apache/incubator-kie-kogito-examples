@@ -6,7 +6,20 @@
  */
 function renderFlight(flight) {
     return element("div", {},
-      JSON.stringify(flight)
+      element("div", {},
+            element("h5", {}, flight.id),
+            element("button", {
+                class: "button",
+                role: "button",
+                "data-flight": flight.id,
+                "data-action": "add",
+                "data-toggle": "modal",
+                "data-target": "#add-passenger-modal",
+            },
+            "Add Passenger"
+          )
+      ),
+      element("div", {}, JSON.stringify(flight))
     );
 }
 
@@ -55,6 +68,41 @@ function initModal() {
             $('#new-flight-modal').modal('toggle');
         });
     });
+
+    $("#add-passenger-modal").on('show.bs.modal', event => {
+        var button = $(event.relatedTarget);
+        var action = button.data('action');
+        var flight = button.data('data-flight');
+        var addPassengerAction = $("#add-passenger-action");
+        addPassengerAction.unbind();
+        var modal = $("#add-passenger-modal");
+        modal.find('.modal-title').text(`Add Passenger to Flight ${flight}`);
+        modal.find('#name').val("Amy Cole");
+        modal.find('#seatTypePreference').val("NONE");
+        modal.find('#emergencyExitRowCapable').val(true);
+        modal.find('#payedForSeat').val(false);
+
+
+        addPassengerAction.click(() => {
+            const name = $('#name').val();
+            const seatTypePreference = $('#seatTypePreference').val();
+            const emergencyExitRowCapable = $('#emergencyExitRowCapable').val();
+            const payedForSeat = $('#payedForSeat').val();
+
+            const newPassengerRequest = JSON.stringify({
+                    name,
+                    seatTypePreference,
+                    emergencyExitRowCapable,
+                    payedForSeat,
+            });
+
+            $.post(`/rest/flights/${flight}/newPassengerRequest`, newPassengerRequest, () => {
+                refresh();
+            }, "json");
+
+            $('#add-passenger-modal').modal('toggle');
+        });
+    });
 }
 
 /** 
@@ -80,7 +128,7 @@ function element(elementType, props, ...childs) {
             }
         }
         else {
-            out.prop(prop, props[prop]);
+            out.attr(prop, props[prop]);
         }
     });
     if (childs.length === 1 && typeof childs[0] === 'string' || typeof childs[0] === 'number') {
