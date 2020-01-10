@@ -35,7 +35,7 @@ import static org.junit.Assert.*;
 public class FlightSeatingTest {
 
     @Inject
-    @Named("flightProcess")
+    @Named("assignSeatsToFlight")
     Process<? extends Model> process;
 
 

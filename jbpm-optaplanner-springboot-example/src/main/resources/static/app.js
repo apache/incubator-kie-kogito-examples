@@ -1,4 +1,105 @@
+/**
+ * Renders the display of a flight
+ * @param {object} flight - The flight to display
+ * 
+ * @returns jQuery
+ */
+function renderFlight(flight) {
+    return element("div", {},
+      JSON.stringify(flight)
+    );
+}
 
+function refresh() {
+    $("#flights-container").empty();
+    $.getJSON("/rest/flights", flights => {
+        flights.forEach(flight => renderFlight(flight).appendTo("#flights-container"));
+    });
+}
+
+function initModal() {
+    $("#new-flight-modal").on('show.bs.modal', () => {
+        const newFlightAction = $("#new-flight-action");
+        newFlightAction.unbind();
+        const modal = $(this);
+
+        $('.modal-title').text("Create New Flight");
+        $('#origin').val("YYZ");
+        $('#destination').val("KRND");
+        $("#departureDateTime").val(new Date().toISOString().slice(0, -1));
+
+        $("#seatRowSize").val(6);
+        $("#seatColumnSize").val(8);
+
+        newFlightAction.click(() => {
+            const origin = $('#origin').val();
+            const destination = $('#destination').val();
+            const departureDateTime = $('#departureDateTime').val();
+            const seatRowSize = $('#seatRowSize').val();
+            const seatColumnSize = $("#seatColumnSize").val();
+
+            const newFlightData = JSON.stringify({
+                params: {
+                    origin,
+                    destination,
+                    departureDateTime,
+                    seatRowSize,
+                    seatColumnSize
+                }
+            });
+
+            $.post("/rest/flights", newFlightData, () => {
+                refresh();
+            }, "json");
+
+            $('#new-flight-modal').modal('toggle');
+        });
+    });
+}
+
+/** 
+ * Returns a new jQuery object with a given element type, attributes, and text/children elements 
+ * @param {string} elementType - The type of the element to create (for instance, div)
+ * @param {object} props - props to add to the object (class, id, onClick, etc.)
+ * @param {string[]|jQuery[]} childs - The children elements of the object; either a single string or a list
+ *                                     of jQuery elements
+ * @returns jQuery
+*/
+function element(elementType, props, ...childs) {
+    const out = $(`<${elementType} />`);
+    const onRegex = /^on.+/g;
+    Object.keys(props).forEach(prop => {
+        if (prop.match(onRegex)) {
+            if (typeof out[prop.substring(2).toLowerCase()] === "function") {
+                out[prop.substring(2).toLowerCase()](props[prop]);
+            }
+            else {
+                const msg = `There is no event handler for ${prop} in JQuery.`;
+                console.error(msg);
+                throw new Error(msg);
+            }
+        }
+        else {
+            out.prop(prop, props[prop]);
+        }
+    });
+    if (childs.length === 1 && typeof childs[0] === 'string' || typeof childs[0] === 'number') {
+        out.text(childs[0]);
+    }
+    else {
+        childs.forEach(child => {
+            if (child instanceof $) {
+                out.append(child);
+            }
+            else {
+                const msg = "Only JQuery elements allowed in elements with more than 1 child.";
+                console.error(msg);
+                throw new Error(msg);
+            }
+        });
+    }
+    return out;
+}
 
 function showError(title, xhr) {
     var serverErrorMessage = xhr.responseJSON == null ? "No response from server." : xhr.responseJSON.message;
@@ -41,8 +142,8 @@ $(document).ready( function() {
             });
         };
     });
-
-    // TODO refresh page content
+    initModal();
+    refresh();
 });
 
 // ****************************************************************************
