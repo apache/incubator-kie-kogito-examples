@@ -1,6 +1,9 @@
 package org.kie.kogito.queries;
 unit AdultUnit;
 
+global Integer adultAge;
+global @datasource Person persons;
+
 import org.kie.kogito.queries.Person
 
 rule CheckAdult when
