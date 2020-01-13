@@ -4,12 +4,14 @@
  * 
  * @returns jQuery
  */
-function renderFlight(flight) {
-    return element("div", {},
-      element("div", {},
+function renderFlight(flight, tasks) {
+    let header;
+    const finalizePassengerListTasks = findTasks("finalizePassengerList", tasks);
+    if (finalizePassengerListTasks.length === 1) {
+        header = element("div", {},
             element("h5", {}, flight.id),
             element("button", {
-                class: "button",
+                class: "btn",
                 role: "button",
                 "data-flight": flight.id,
                 "data-action": "add",
@@ -17,17 +19,121 @@ function renderFlight(flight) {
                 "data-target": "#add-passenger-modal",
             },
             "Add Passenger"
-          )
-      ),
-      element("div", {}, JSON.stringify(flight))
-    );
+            ),
+            element("button", {
+                class: "btn btn-primary",
+                role: "button",
+                onClick: () => {
+                    $.post(`/rest/flights/${flight.id}/finalizePassengerList/${finalizePassengerListTasks[0]}`, JSON.stringify({}), () => {
+                        refresh();
+                    });
+                }
+            }, "Finalize Passenger List")
+        );
+    }
+    else {
+        const finalizeSeatAssignmentTasks = findTasks("finalizeSeatAssignment", tasks);
+        const finalizeSeatAssignmentButton = (finalizeSeatAssignmentTasks.length === 1)? [element("button", {
+            class: "btn btn-primary",
+            role: "button",
+            onClick: () => {
+                $.post(`/rest/flights/${flight.id}/finalizeSeatAssignment/${finalizeSeatAssignmentTasks[0]}`, JSON.stringify({}), () => {
+                    refresh();
+                });
+            }
+        }, "Finalize Seat Assignments")] : [];
+
+        header = element("div", {},
+            element("h5", {}, flight.id),
+            ...finalizeSeatAssignmentButton
+        );
+    }
+    return element("div", {},
+      element("div", {},
+            header,
+            element("div", { style: "display: grid; grid-template-columns: 1fr 1fr;"},
+                element("div", { style: "grid-column: 1;" },
+                    ...getPassengersToApproveDeny(flight, tasks).map(task => element(
+                        "div", {},
+                        element("span", {}, task.passenger.name),
+                        element("button", {
+                            onClick: () => {
+                                $.post(`/rest/flights/${flight.id}/approveDenyPassenger/${task.id}`, JSON.stringify({
+                                    passenger: task.passenger,
+                                    isPassengerApproved: true
+                                }), () => {
+                                    refresh();
+                                });
+                            }
+                    }, "Approve"),
+                    element("button", {
+                        onClick: () => {
+                            $.post(`/rest/flights/${flight.id}/approveDenyPassenger/${task.id}`, JSON.stringify({
+                                passenger: task.passenger,
+                                isPassengerApproved: false
+                            }), () => {
+                                refresh();
+                            });
+                        }
+                    }, "Deny")
+            ))),
+            element("div", {}, 
+                element("div", { style: `display: grid;
+                    grid-column: 2;
+                    grid-template-rows: repeat(${2*flight.flight.seatRowSize}, 1fr);
+                    grid-template-columns: repeat(${flight.flight.seatColumnSize}, 1fr);
+                    justify-items: center;
+                    align-items: center;
+                    border: 1px solid;
+                    ` }, ...flight.flight.seatList.map(seat => element(
+                      "span", { style: `grid-row: ${2*seat.row + 1}; grid-column: ${seat.column + 1}`},
+                      seat.name)
+                    ),
+                    ...flight.flight.passengerList.map(passenger => (passenger.seat !== null)? element(
+                        "span", { style: `grid-row: ${2*passenger.seat.row + 2}; grid-column: ${passenger.seat.column + 1}`},
+                        passenger.name
+                    ) : element("div", { hidden: true }, ""))
+                ),
+                element("div", {}, ...flight.flight.passengerList.map(passenger => element(
+                    "div", {}, passenger.name
+                )))
+              )),
+            element("div", {},
+                element("button", {
+                    type: "button",
+                    "data-toggle": "collapse",
+                    "data-target": `#flight-${flight.id}-json`,
+                    "aria-expanded": "false",
+                    "aria-controls": `#flight-${flight.id}-json`
+                }, "Show Flight JSON"),
+                element("div", {
+                    class: "collapse",
+                    id: `flight-${flight.id}-json`
+                }, element("div", { class: "card card-body" }, JSON.stringify(flight))),
+            )
+    ));
 }
 
 function refresh() {
     $("#flights-container").empty();
     $.getJSON("/rest/flights", flights => {
-        flights.forEach(flight => renderFlight(flight).appendTo("#flights-container"));
+        flights.forEach(flight => {
+            $.getJSON(`/rest/flights/${flight.id}/tasks`, tasks => {
+                renderFlight(flight, tasks).appendTo("#flights-container");
+            });
+        });
     });
+}
+
+function findTasks(taskName, tasks) {
+    return Object.keys(tasks).filter(key => tasks[key] === taskName);
+}
+
+function getPassengersToApproveDeny(flight, tasks) {
+    const out = findTasks("approveDenyPassenger", tasks).map(task => {
+        return $.getJSON(`/rest/flights/${flight.id}/approveDenyPassenger/${task}`).responseJSON;
+    });
+    return out;
 }
 
 function initModal() {
@@ -72,12 +178,12 @@ function initModal() {
     $("#add-passenger-modal").on('show.bs.modal', event => {
         var button = $(event.relatedTarget);
         var action = button.data('action');
-        var flight = button.data('data-flight');
+        var flight = button.data('flight');
         var addPassengerAction = $("#add-passenger-action");
         addPassengerAction.unbind();
         var modal = $("#add-passenger-modal");
         modal.find('.modal-title').text(`Add Passenger to Flight ${flight}`);
-        modal.find('#name').val("Amy Cole");
+        modal.find('#name').val(randomName());
         modal.find('#seatTypePreference').val("NONE");
         modal.find('#emergencyExitRowCapable').val(true);
         modal.find('#payedForSeat').val(false);
@@ -170,8 +276,9 @@ $(document).ready( function() {
     $.ajaxSetup({
         headers: {
             'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        }
+            'Accept': 'application/json',
+        },
+        async: false
     });
     // Extend jQuery to support $.put() and $.delete()
     jQuery.each( [ "put", "delete" ], function( i, method ) {
@@ -193,6 +300,20 @@ $(document).ready( function() {
     initModal();
     refresh();
 });
+
+// ****************************************************************************
+// Name Generator
+// ****************************************************************************
+
+function randElement(list) {
+    return list[Math.floor(Math.random() * list.length)];
+}
+
+function randomName() {
+    const FIRST_NAMES = ["Amy", "Bill", "Chris", "Dennis", "Hope", "Eve", "Frank", "Ivana", "Julianna", "Manci", "Olivia", "Sarah"];
+    const LAST_NAMES = ["Cole", "Zhang", "Smith"];
+    return `${randElement(FIRST_NAMES)} ${randElement(LAST_NAMES)}`
+}
 
 // ****************************************************************************
 // TangoColorFactory
