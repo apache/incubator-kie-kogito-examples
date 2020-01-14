@@ -102,7 +102,7 @@ public class FlightSeatingTest {
                     : (random.nextDouble() < 0.20) ? SeatType.AISLE
                     : null;
             boolean emergencyExitRowCapable = (random.nextDouble() < 0.90);
-            passengerList.add(new Passenger(name, seatTypePreference, emergencyExitRowCapable));
+            passengerList.add(new Passenger(Long.valueOf(i), name, seatTypePreference, emergencyExitRowCapable));
         }
         flight.setPassengerList(passengerList);
         return flight;

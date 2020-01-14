@@ -9,6 +9,8 @@ import org.optaplanner.core.api.domain.variable.PlanningVariable;
 public class Passenger {
 
     @PlanningId
+    private Long id;
+
     private String name;
     // Sometimes null
     private SeatType seatTypePreference;
@@ -23,7 +25,8 @@ public class Passenger {
     public Passenger() {
     }
 
-    public Passenger(String name, SeatType seatTypePreference, boolean emergencyExitRowCapable) {
+    public Passenger(Long id, String name, SeatType seatTypePreference, boolean emergencyExitRowCapable) {
+        this.id = id;
         this.name = name;
         this.seatTypePreference = seatTypePreference;
         this.emergencyExitRowCapable = emergencyExitRowCapable;
@@ -33,6 +36,10 @@ public class Passenger {
     // ************************************************************************
     // Getters and setters
     // ************************************************************************
+
+    public Long getId() {
+        return id;
+    }
 
     public String getName() {
         return name;

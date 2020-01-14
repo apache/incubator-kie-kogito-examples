@@ -8,6 +8,9 @@ function renderFlight(flight, tasks) {
     let header;
     const finalizePassengerListTasks = findTasks("finalizePassengerList", tasks);
     if (finalizePassengerListTasks.length === 1) {
+        const generatePassengerElement = (flight.flight.passengerList.length === 0)? [
+            element("button", { class: "btn btn-secondary", onClick: () => generatePassengersForFlight(flight) }, "Generate Passenger List")
+        ]: []
         header = element("div", {},
             element("h5", {}, flight.id),
             element("button", {
@@ -20,6 +23,7 @@ function renderFlight(flight, tasks) {
             },
             "Add Passenger"
             ),
+            ...generatePassengerElement,
             element("button", {
                 class: "btn btn-primary",
                 role: "button",
@@ -134,6 +138,28 @@ function getPassengersToApproveDeny(flight, tasks) {
         return $.getJSON(`/rest/flights/${flight.id}/approveDenyPassenger/${task}`).responseJSON;
     });
     return out;
+}
+
+function generatePassengersForFlight(flight) {
+    for (let i = 0; i < flight.flight.seatList.length * 0.8; i++) {
+        const newPassengerRequest = JSON.stringify({
+            name: randomName(),
+            seatTypePreference: "NONE",
+            emergencyExitRowCapable: true,
+            payedForSeat: false
+        });
+        $.post(`/rest/flights/${flight.id}/newPassengerRequest`, newPassengerRequest, () => {}, "json");
+    }
+    setTimeout(() => {
+        const tasks = $.getJSON(`/rest/flights/${flight.id}/tasks`).responseJSON;
+        getPassengersToApproveDeny(flight, tasks).forEach(task => {
+            $.post(`/rest/flights/${flight.id}/approveDenyPassenger/${task.id}`, JSON.stringify({
+                passenger: task.passenger,
+                isPassengerApproved: true
+            }), () => {}, "json");
+        });
+        refresh();
+    }, 2000);
 }
 
 function initModal() {
@@ -305,14 +331,15 @@ $(document).ready( function() {
 // Name Generator
 // ****************************************************************************
 
-function randElement(list) {
-    return list[Math.floor(Math.random() * list.length)];
-}
+let nameSequence = 0;
 
 function randomName() {
     const FIRST_NAMES = ["Amy", "Bill", "Chris", "Dennis", "Hope", "Eve", "Frank", "Ivana", "Julianna", "Manci", "Olivia", "Sarah"];
+    const MIDDLE_INITALS = [...Array('Z'.charCodeAt(0) - 'A'.charCodeAt(0) + 1).keys()].map(i => String.fromCharCode(i + 'A'.charCodeAt(0)));
     const LAST_NAMES = ["Cole", "Zhang", "Smith"];
-    return `${randElement(FIRST_NAMES)} ${randElement(LAST_NAMES)}`
+    const out = `${FIRST_NAMES[nameSequence % FIRST_NAMES.length]} ${MIDDLE_INITALS[Math.floor(nameSequence / FIRST_NAMES.length)]} ${LAST_NAMES[Math.floor((nameSequence / FIRST_NAMES.length) / LAST_NAMES.length)]}`
+    nameSequence = (nameSequence + 1) % (FIRST_NAMES.length * LAST_NAMES.length);
+    return out;
 }
 
 // ****************************************************************************

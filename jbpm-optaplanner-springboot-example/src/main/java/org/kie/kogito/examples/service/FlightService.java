@@ -60,7 +60,7 @@ public class FlightService {
     }
 
     public Flight addPassengerToFlight(Flight flight, PassengerDTO passenger) {
-        flight.getPassengerList().add(new Passenger(passenger.getName(),
+        flight.getPassengerList().add(new Passenger(Long.valueOf(flight.getPassengerList().size()), passenger.getName(),
           (passenger.getSeatTypePreference().equals("NONE"))? null : SeatType.valueOf(passenger.getSeatTypePreference()),
           passenger.isEmergencyExitRowCapable()));
         return flight;
