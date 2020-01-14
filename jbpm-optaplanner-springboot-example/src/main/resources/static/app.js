@@ -11,7 +11,7 @@ function renderFlight(flight, tasks) {
         header = element("div", {},
             element("h5", {}, flight.id),
             element("button", {
-                class: "btn",
+                class: "btn btn-secondary",
                 role: "button",
                 "data-flight": flight.id,
                 "data-action": "add",
