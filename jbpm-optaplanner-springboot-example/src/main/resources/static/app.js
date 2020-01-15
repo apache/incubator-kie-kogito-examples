@@ -63,7 +63,6 @@ function renderFlight(flight, tasks) {
                         element("button", {
                             onClick: () => {
                                 $.post(`/rest/flights/${flight.id}/approveDenyPassenger/${task.id}`, JSON.stringify({
-                                    passenger: task.passenger,
                                     isPassengerApproved: true
                                 }), () => {
                                     refresh();
@@ -73,7 +72,6 @@ function renderFlight(flight, tasks) {
                     element("button", {
                         onClick: () => {
                             $.post(`/rest/flights/${flight.id}/approveDenyPassenger/${task.id}`, JSON.stringify({
-                                passenger: task.passenger,
                                 isPassengerApproved: false
                             }), () => {
                                 refresh();
@@ -154,7 +152,6 @@ function generatePassengersForFlight(flight) {
         const tasks = $.getJSON(`/rest/flights/${flight.id}/tasks`).responseJSON;
         getPassengersToApproveDeny(flight, tasks).forEach(task => {
             $.post(`/rest/flights/${flight.id}/approveDenyPassenger/${task.id}`, JSON.stringify({
-                passenger: task.passenger,
                 isPassengerApproved: true
             }), () => {}, "json");
         });
