@@ -45,8 +45,8 @@
     <module>kogito-service-rest-call-springboot</module>
     <module>kogito-usertasks-quarkus</module>
     <module>kogito-usertasks-springboot</module>
-    <!-- <module>kogito-usertasks-custom-lifecycle-quarkus</module> -->
-    <!-- <module>kogito-usertasks-custom-lifecycle-springboot</module> -->
+    <module>kogito-usertasks-custom-lifecycle-quarkus</module>
+    <module>kogito-usertasks-custom-lifecycle-springboot</module>
     <module>kogito-usertasks-with-security-oidc-quarkus</module>
     <module>kogito-usertasks-with-security-oidc-springboot</module>
     <module>kogito-usertasks-with-security-quarkus</module>

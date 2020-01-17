@@ -58,6 +58,7 @@ public class ApprovalsProcessTest {
         assertEquals(1, workItems.size());
         Map<String, Object> results = new HashMap<>();
         results.put("approved", true);
+        processInstance.transitionWorkItem(workItems.get(0).getId(), new HumanTaskTransition(Start.ID, null, policy));
         processInstance.completeWorkItem(workItems.get(0).getId(), results, policy);
         
         workItems = processInstance.workItems(policy);        
@@ -72,6 +73,7 @@ public class ApprovalsProcessTest {
         assertEquals(1, workItems.size());
         
         results.put("approved", false);
+        processInstance.transitionWorkItem(workItems.get(0).getId(), new HumanTaskTransition(Start.ID, null, policy));
         processInstance.completeWorkItem(workItems.get(0).getId(), results, policy);
         assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_COMPLETED, processInstance.status());
         
