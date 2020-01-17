@@ -52,6 +52,8 @@ function renderFlight(flight, tasks) {
             ...finalizeSeatAssignmentButton
         );
     }
+    const rowToGridRow = row => 2*row + 1;
+    const columnToGridColumn = col => col + Math.round(col / (flight.flight.seatColumnSize)) + 1;
     return element("div", {},
       element("div", {},
             header,
@@ -83,16 +85,16 @@ function renderFlight(flight, tasks) {
                 element("div", { style: `display: grid;
                     grid-column: 2;
                     grid-template-rows: repeat(${2*flight.flight.seatRowSize}, 1fr);
-                    grid-template-columns: repeat(${flight.flight.seatColumnSize}, 1fr);
+                    grid-template-columns: repeat(${flight.flight.seatColumnSize + 1}, 1fr);
                     justify-items: center;
                     align-items: center;
                     border: 1px solid;
                     ` }, ...flight.flight.seatList.map(seat => element(
-                      "span", { style: `grid-row: ${2*seat.row + 1}; grid-column: ${seat.column + 1}`},
+                      "span", { class: "fas fa-couch", style: `grid-row: ${rowToGridRow(seat.row)}; grid-column: ${columnToGridColumn(seat.column)}`},
                       seat.name)
                     ),
                     ...flight.flight.passengerList.map(passenger => (passenger.seat !== null)? element(
-                        "span", { style: `grid-row: ${2*passenger.seat.row + 2}; grid-column: ${passenger.seat.column + 1}`},
+                        "span", { style: `grid-row: ${rowToGridRow(passenger.seat.row) + 1}; grid-column: ${columnToGridColumn(passenger.seat.column)}`},
                         passenger.name
                     ) : element("div", { hidden: true }, ""))
                 ),
@@ -170,8 +172,8 @@ function initModal() {
         $('#destination').val("KRND");
         $("#departureDateTime").val(new Date().toISOString().slice(0, -1));
 
-        $("#seatRowSize").val(6);
-        $("#seatColumnSize").val(8);
+        $("#seatRowSize").val(4);
+        $("#seatColumnSize").val(6);
 
         newFlightAction.click(() => {
             const origin = $('#origin').val();
