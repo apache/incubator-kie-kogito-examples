@@ -59,10 +59,14 @@ function renderFlight(flight, tasks) {
             header,
             element("div", { style: "display: grid; grid-template-columns: 1fr 1fr;"},
                 element("div", { style: "grid-column: 1;" },
-                    ...getPassengersToApproveDeny(flight, tasks).map(task => element(
+                    suspense(element("div", {}, "is loading"),
+                    element("div", {}, ...findTasks("approveDenyPassenger", tasks).map(futureTask => future(futureTask, { isLoading: true },
+                        resolve => $.getJSON(`/rest/flights/${flight.id}/approveDenyPassenger/${futureTask}`, resolve),
+                        task => element(
                         "div", {},
-                        element("span", {}, task.passenger.name),
-                        element("button", {
+                        // Note: we take advantage that undefined is falsey here (task doesn't have property "isLoading")
+                        element("span", {}, task.isLoading? "" : task.passenger.name),
+                        element("button", task.isLoading? {} : {
                             onClick: () => {
                                 $.post(`/rest/flights/${flight.id}/approveDenyPassenger/${task.id}`, JSON.stringify({
                                     isPassengerApproved: true
@@ -71,7 +75,7 @@ function renderFlight(flight, tasks) {
                                 });
                             }
                     }, "Approve"),
-                    element("button", {
+                    element("button", task.isLoading? {} : {
                         onClick: () => {
                             $.post(`/rest/flights/${flight.id}/approveDenyPassenger/${task.id}`, JSON.stringify({
                                 isPassengerApproved: false
@@ -80,7 +84,7 @@ function renderFlight(flight, tasks) {
                             });
                         }
                     }, "Deny")
-            ))),
+            )))))),
             element("div", {}, 
                 element("div", { style: `display: grid;
                     grid-column: 2;
@@ -280,6 +284,54 @@ function element(elementType, props, ...childs) {
     return out;
 }
 
+
+const memoizeMap = new Map();
+/** 
+ * Returns a jQuery object created from consumer with the default value, which will be updated
+ * when a future promise resolves.
+ * @param {object} defaultValue - Default value to be used by the consumer
+ * @param {(function resolve) => void} futureValueSupplier - A promise that returns the value to be used by the consumer
+ * @param {(object props) => jQuery} consumer - Creates the jquery object to be used
+ * @returns jQuery
+*/
+function future(key, defaultValue, futureValueSupplier, consumer) {
+    if (key !== null && memoizeMap.has(key)) {
+        return consumer(memoizeMap.get(key));
+    }
+    const out = consumer(defaultValue);
+    out.attr("data-is-loading", true);
+    futureValueSupplier(futureValue => {
+        if (key !== null) {
+            memoizeMap.set(key, futureValue);
+        }
+        const oldIsLoading = out.parent().attr("data-is-loading");
+        if (oldIsLoading !== undefined) {
+            const newIsLoading = parseInt(oldIsLoading) - 1;
+            if (newIsLoading !== 0) {
+                out.parent().attr("data-is-loading", newIsLoading);
+            }
+            else {
+                out.parent().removeAttr("data-is-loading");
+            }
+        }
+        out.replaceWith(consumer(futureValue));
+    });
+    return out;
+}
+
+function suspense(loadingElement, parentElement) {
+    const loadingCount = parentElement.children("[data-is-loading]").length;
+    if (loadingCount > 0) {
+        parentElement.attr("data-is-loading", loadingCount);
+        parentElement.addClass("suspended");
+    }
+    parentElement.addClass("suspense");
+    return element("div", {},
+        parentElement,
+        loadingElement
+    );
+}
+
 function showError(title, xhr) {
     var serverErrorMessage = xhr.responseJSON == null ? "No response from server." : xhr.responseJSON.message;
     console.error(title + "\n" + serverErrorMessage);
@@ -302,8 +354,7 @@ $(document).ready( function() {
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
-        },
-        async: false
+        }
     });
     // Extend jQuery to support $.put() and $.delete()
     jQuery.each( [ "put", "delete" ], function( i, method ) {

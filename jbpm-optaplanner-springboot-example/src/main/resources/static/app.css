@@ -1,0 +1,35 @@
+.suspense[data-is-loading] {
+    display: none;
+    visibility: hidden;
+}
+
+.suspended:not([data-is-loading]) {
+    animation: fade-in 1s;
+}
+
+.suspense + * {
+    display: none;
+    visibility: hidden;
+}
+
+.suspense[data-is-loading] + * {
+    display: initial;
+}
+
+@keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fade-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
