@@ -57,12 +57,12 @@ Note: This does not yet work on Windows, GraalVM and Quarkus should be rolling o
 
 Once the service is up and running, you can use the following example to interact with the service.
 
-### POST /Hello
+### POST /hello
 
 Post "hello":
 
 ```sh
-curl -H "Content-Type: application/json" -X POST -d '{"strings":["hello"]}' http://localhost:8080/Hello
+curl -H "Content-Type: application/json" -X POST -d '{"strings":["hello"]}' http://localhost:8080/hello
 ```
 
 the service will return `["hello", "world"]`
