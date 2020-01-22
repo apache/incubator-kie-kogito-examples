@@ -23,7 +23,7 @@ When using native image compilation, you will also need:
 ### Compile and Run in Local Dev Mode
 
 ```
-mvn clean package quarkus:dev
+mvn clean compile quarkus:dev
 ```
 
 ### Compile and Run in JVM mode
