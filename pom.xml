@@ -59,6 +59,7 @@
     <module>onboarding-example</module>
     <module>jbpm-polyglot-example</module>
     <module>dmn-quarkus-example</module>
+    <module>dmn-springboot-example</module>
     <module>ruleunit-quarkus-example</module>
     <module>ruleunit-springboot-example</module>
   </modules>
