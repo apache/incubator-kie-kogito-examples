@@ -60,9 +60,16 @@ public class FlightService {
     }
 
     public Flight addPassengerToFlight(Flight flight, PassengerDTO passenger) {
+        Seat seat = null;
+        if (passenger.isPayedForSeat()) {
+            String[] seatLoc = passenger.getSeat().split(";");
+            int row = Integer.parseInt(seatLoc[0]);
+            int col = Integer.parseInt(seatLoc[1]);
+            seat = flight.getSeatList().stream().filter(s -> s.getRow() == row && s.getColumn() == col).findAny().get();
+        }
         flight.getPassengerList().add(new Passenger(Long.valueOf(flight.getPassengerList().size()), passenger.getName(),
           (passenger.getSeatTypePreference().equals("NONE"))? null : SeatType.valueOf(passenger.getSeatTypePreference()),
-          passenger.isEmergencyExitRowCapable()));
+          passenger.isEmergencyExitRowCapable(), passenger.isPayedForSeat(), seat));
         return flight;
     }
 }

@@ -15,15 +15,18 @@ public class PassengerDTO {
     private boolean emergencyExitRowCapable;
 
     private boolean payedForSeat;
+    // not-null iff payedForSeat is true
+    private String seat;
 
     public PassengerDTO() {
     }
 
-    public PassengerDTO(String name, String seatTypePreference, boolean emergencyExitRowCapable, boolean payedForSeat) {
+    public PassengerDTO(String name, String seatTypePreference, boolean emergencyExitRowCapable, boolean payedForSeat, String seat) {
         this.name = name;
         this.seatTypePreference = seatTypePreference;
         this.emergencyExitRowCapable = emergencyExitRowCapable;
         this.payedForSeat = payedForSeat;
+        this.seat = seat;
     }
 
     // ************************************************************************
@@ -60,6 +63,14 @@ public class PassengerDTO {
 
     public void setPayedForSeat(boolean payedForSeat) {
         this.payedForSeat = payedForSeat;
+    }
+
+    public String getSeat() {
+        return seat;
+    }
+
+    public void setSeat(String seat) {
+        this.seat = seat;
     }
 
 }

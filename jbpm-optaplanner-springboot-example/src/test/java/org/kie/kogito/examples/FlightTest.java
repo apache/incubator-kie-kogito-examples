@@ -58,7 +58,7 @@ public class FlightTest {
         processInstance.start();
         assertEquals(ProcessInstance.STATE_ACTIVE, processInstance.status());
         // add new passenger
-        processInstance.send(Sig.of("newPassengerRequest", new PassengerDTO("john", "NONE", false, false)));
+        processInstance.send(Sig.of("newPassengerRequest", new PassengerDTO("john", "NONE", false, false, null)));
         
         List<WorkItem> tasks = processInstance.workItems();
         assertEquals(2, tasks.size());

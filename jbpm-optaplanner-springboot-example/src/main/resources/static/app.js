@@ -85,23 +85,8 @@ function renderFlight(flight, tasks) {
                         }
                     }, "Deny")
             )))))),
-            element("div", {}, 
-                element("div", { style: `display: grid;
-                    grid-column: 2;
-                    grid-template-rows: repeat(${2*flight.flight.seatRowSize}, 1fr);
-                    grid-template-columns: repeat(${flight.flight.seatColumnSize + 1}, 1fr);
-                    justify-items: center;
-                    align-items: center;
-                    border: 1px solid;
-                    ` }, ...flight.flight.seatList.map(seat => element(
-                      "span", { class: "fas fa-couch", style: `grid-row: ${rowToGridRow(seat.row)}; grid-column: ${columnToGridColumn(seat.column)}`},
-                      seat.name)
-                    ),
-                    ...flight.flight.passengerList.map(passenger => (passenger.seat !== null)? element(
-                        "span", { style: `grid-row: ${rowToGridRow(passenger.seat.row) + 1}; grid-column: ${columnToGridColumn(passenger.seat.column)}`},
-                        passenger.name
-                    ) : element("div", { hidden: true }, ""))
-                ),
+            element("div", {},
+                flightSeats(flight, ({ passenger }) => (passenger)? element("div", {}, passenger.name) : element("div", { hidden: true}, "")),
                 element("div", {}, ...flight.flight.passengerList.map(passenger => element(
                     "div", {}, passenger.name
                 )))
@@ -122,9 +107,32 @@ function renderFlight(flight, tasks) {
     ));
 }
 
+function flightSeats(flight, flightSeatToElementMap) {
+    const rowToGridRow = row => 2*row + 1;
+    const columnToGridColumn = col => col + Math.round(col / (flight.flight.seatColumnSize)) + 1;
+    return element("div", { style: `display: grid;
+        grid-column: 2;
+        grid-auto-flow: dense;
+        grid-template-rows: repeat(${2*flight.flight.seatRowSize}, minmax(50px, 1fr));
+        grid-template-columns: repeat(${flight.flight.seatColumnSize + 1}, minmax(50px, 1fr));
+        justify-items: center;
+        align-items: center;
+        width: max-content;
+        border: 1px solid;
+        ` }, ...flight.flight.seatList.map(seat => element(
+          "span", { class: "fas fa-couch", style: `grid-row: ${rowToGridRow(seat.row)}; grid-column: ${columnToGridColumn(seat.column)}`},
+          seat.name)
+        ),
+        ...flight.flight.seatList.map(seat => flightSeatToElementMap({flight: flight.flight, seat: seat, passenger: flight.flight.passengerList.find(passenger => passenger.seat !== null &&
+            passenger.seat.row === seat.row && passenger.seat.column === seat.column) } ).css({"grid-row": String(rowToGridRow(seat.row) + 1), "grid-column": String(columnToGridColumn(seat.column)) }))
+    );
+}
+
+let myFlights = []
 function refresh() {
     $("#flights-container").empty();
     $.getJSON("/rest/flights", flights => {
+        myFlights = flights;
         flights.forEach(flight => {
             $.getJSON(`/rest/flights/${flight.id}/tasks`, tasks => {
                 renderFlight(flight, tasks).appendTo("#flights-container");
@@ -214,21 +222,27 @@ function initModal() {
         modal.find('.modal-title').text(`Add Passenger to Flight ${flight}`);
         modal.find('#name').val(randomName());
         modal.find('#seatTypePreference').val("NONE");
-        modal.find('#emergencyExitRowCapable').val(true);
-        modal.find('#payedForSeat').val(false);
+        modal.find('#emergencyExitRowCapable').prop('checked', false);
+        modal.find('#payedForSeat').prop('checked', false);
+
+        const flightObject = myFlights.find(f => f.id === flight);
+        modal.find('#seatPicker').replaceWith(element("div", { id: "seatPicker", class: "collapse" }, flightSeats(flightObject, ({seat, passenger}) => element("input",
+            { type: "radio", class: "form-control", name: "flight-seat", value: seat.row + ";" + seat.column, disabled: passenger !== undefined }))));
 
 
         addPassengerAction.click(() => {
             const name = $('#name').val();
             const seatTypePreference = $('#seatTypePreference').val();
-            const emergencyExitRowCapable = $('#emergencyExitRowCapable').val();
-            const payedForSeat = $('#payedForSeat').val();
+            const emergencyExitRowCapable = $('#emergencyExitRowCapable').prop( "checked" );
+            const payedForSeat = $('#payedForSeat').prop( "checked" );
+            const seat = (payedForSeat)? $('input[name="flight-seat"]:checked').val() : null;
 
             const newPassengerRequest = JSON.stringify({
                     name,
                     seatTypePreference,
                     emergencyExitRowCapable,
                     payedForSeat,
+                    seat
             });
 
             $.post(`/rest/flights/${flight}/newPassengerRequest`, newPassengerRequest, () => {

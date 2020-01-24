@@ -25,12 +25,13 @@ public class Passenger {
     public Passenger() {
     }
 
-    public Passenger(Long id, String name, SeatType seatTypePreference, boolean emergencyExitRowCapable) {
+    public Passenger(Long id, String name, SeatType seatTypePreference, boolean emergencyExitRowCapable, boolean payedForSeat, Seat seat) {
         this.id = id;
         this.name = name;
         this.seatTypePreference = seatTypePreference;
         this.emergencyExitRowCapable = emergencyExitRowCapable;
-        payedForSeat = false;
+        this.payedForSeat = payedForSeat;
+        this.seat = seat;
     }
 
     // ************************************************************************
