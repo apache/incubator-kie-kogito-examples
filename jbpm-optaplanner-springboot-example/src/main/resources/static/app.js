@@ -52,8 +52,15 @@ function renderFlight(flight, tasks) {
             ...finalizeSeatAssignmentButton
         );
     }
-    const rowToGridRow = row => 2*row + 1;
-    const columnToGridColumn = col => col + Math.round(col / (flight.flight.seatColumnSize)) + 1;
+
+    const getSeatName = (seat) => {
+        const seatRegex = /(\d+);(\d+)/;
+        const matches = seat.match(seatRegex);
+        const row = parseInt(matches[1]);
+        const column = parseInt(matches[2]);
+        return flight.flight.seatList.find(s => s.row === row && s.column === column).name;
+    };
+    const passengerRequestString = passenger => `${passenger.name}, Is Paying for Seat? ${passenger.payedForSeat? "Yes, Seat " + getSeatName(passenger.seat) : "No"}`;
     return element("div", {},
       element("div", {},
             header,
@@ -65,7 +72,7 @@ function renderFlight(flight, tasks) {
                         task => element(
                         "div", {},
                         // Note: we take advantage that undefined is falsey here (task doesn't have property "isLoading")
-                        element("span", {}, task.isLoading? "" : task.passenger.name),
+                        element("span", {}, task.isLoading? "" : passengerRequestString(task.passenger)),
                         element("button", task.isLoading? {} : {
                             onClick: () => {
                                 $.post(`/rest/flights/${flight.id}/approveDenyPassenger/${task.id}`, JSON.stringify({
@@ -227,7 +234,7 @@ function initModal() {
 
         const flightObject = myFlights.find(f => f.id === flight);
         modal.find('#seatPicker').replaceWith(element("div", { id: "seatPicker", class: "collapse" }, flightSeats(flightObject, ({seat, passenger}) => element("input",
-            { type: "radio", class: "form-control", name: "flight-seat", value: seat.row + ";" + seat.column, disabled: passenger !== undefined }))));
+            { type: "radio", class: "form-control", name: "flight-seat", value: seat.row + ";" + seat.column, disabled: passenger !== undefined, hidden: passenger !== undefined }))));
 
 
         addPassengerAction.click(() => {
