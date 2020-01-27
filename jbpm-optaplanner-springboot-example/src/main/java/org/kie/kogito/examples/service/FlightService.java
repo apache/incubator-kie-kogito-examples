@@ -2,6 +2,7 @@ package org.kie.kogito.examples.service;
 
 import org.kie.kogito.examples.domain.Flight;
 import org.kie.kogito.examples.domain.FlightDTO;
+import org.kie.kogito.examples.domain.FlightInfo;
 import org.kie.kogito.examples.domain.Passenger;
 import org.kie.kogito.examples.domain.PassengerDTO;
 import org.kie.kogito.examples.domain.Seat;
@@ -31,11 +32,13 @@ public class FlightService {
             throw new IllegalArgumentException("There must be at least one row.");
         }
         try {
-            newFlight.setOrigin(flightDTO.getOrigin());
-            newFlight.setDestination(flightDTO.getDestination());
-            newFlight.setDepartureDateTime(LocalDateTime.parse(flightDTO.getDepartureDateTime()));
-            newFlight.setSeatRowSize(flightDTO.getSeatRowSize());
-            newFlight.setSeatColumnSize(flightDTO.getSeatColumnSize());
+            FlightInfo flightInfo = new FlightInfo();
+            flightInfo.setOrigin(flightDTO.getOrigin());
+            flightInfo.setDestination(flightDTO.getDestination());
+            flightInfo.setDepartureDateTime(LocalDateTime.parse(flightDTO.getDepartureDateTime()));
+            flightInfo.setSeatRowSize(flightDTO.getSeatRowSize());
+            flightInfo.setSeatColumnSize(flightDTO.getSeatColumnSize());
+            newFlight.setFlightInfo(flightInfo);
             List<Seat> seatList = new ArrayList<Seat>(flightDTO.getSeatRowSize() * flightDTO.getSeatColumnSize());
             for (int row = 0; row < flightDTO.getSeatRowSize(); row++) {
                 final int MIDDLE_OF_ROW = flightDTO.getSeatColumnSize() / 2;

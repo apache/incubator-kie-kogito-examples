@@ -152,11 +152,10 @@ function findTasks(taskName, tasks) {
     return Object.keys(tasks).filter(key => tasks[key] === taskName);
 }
 
-function getPassengersToApproveDeny(flight, tasks) {
-    const out = findTasks("approveDenyPassenger", tasks).map(task => {
-        return $.getJSON(`/rest/flights/${flight.id}/approveDenyPassenger/${task}`).responseJSON;
+function getPassengersToApproveDeny(flight, tasks, map) {
+    findTasks("approveDenyPassenger", tasks).map(task => {
+        return $.getJSON(`/rest/flights/${flight.id}/approveDenyPassenger/${task}`, map);
     });
-    return out;
 }
 
 function generatePassengersForFlight(flight) {
@@ -170,14 +169,15 @@ function generatePassengersForFlight(flight) {
         $.post(`/rest/flights/${flight.id}/newPassengerRequest`, newPassengerRequest, () => {}, "json");
     }
     setTimeout(() => {
-        const tasks = $.getJSON(`/rest/flights/${flight.id}/tasks`).responseJSON;
-        getPassengersToApproveDeny(flight, tasks).forEach(task => {
-            $.post(`/rest/flights/${flight.id}/approveDenyPassenger/${task.id}`, JSON.stringify({
-                isPassengerApproved: true
-            }), () => {}, "json");
+        $.getJSON(`/rest/flights/${flight.id}/tasks`, tasks => {
+            getPassengersToApproveDeny(flight, tasks, task => {
+                $.post(`/rest/flights/${flight.id}/approveDenyPassenger/${task.id}`, JSON.stringify({
+                    isPassengerApproved: true
+                }), () => {}, "json");
+            });
+            setTimeout(refresh, 100);
         });
-        refresh();
-    }, 2000);
+    }, 100);
 }
 
 function initModal() {

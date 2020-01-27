@@ -7,17 +7,15 @@ import org.optaplanner.core.api.domain.solution.PlanningEntityCollectionProperty
 import org.optaplanner.core.api.domain.solution.PlanningScore;
 import org.optaplanner.core.api.domain.solution.PlanningSolution;
 import org.optaplanner.core.api.domain.solution.drools.ProblemFactCollectionProperty;
+import org.optaplanner.core.api.domain.solution.drools.ProblemFactProperty;
 import org.optaplanner.core.api.domain.valuerange.ValueRangeProvider;
 import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScore;
 
 @PlanningSolution
 public class Flight {
-
-    private String origin;
-    private String destination;
-    private LocalDateTime departureDateTime;
-    private int seatRowSize;
-    private int seatColumnSize;
+    
+    @ProblemFactProperty
+    private FlightInfo flightInfo = new FlightInfo();
 
     @ProblemFactCollectionProperty
     @ValueRangeProvider(id = "seatRange")
@@ -33,44 +31,52 @@ public class Flight {
     // Getters and setters
     // ************************************************************************
 
+    public FlightInfo getFlightInfo() {
+        return flightInfo;
+    }
+
+    public void setFlightInfo(FlightInfo flightInfo) {
+        this.flightInfo = flightInfo;
+    }
+
     public String getOrigin() {
-        return origin;
+        return flightInfo.getOrigin();
     }
 
     public void setOrigin(String origin) {
-        this.origin = origin;
+        flightInfo.setOrigin(origin);
     }
 
     public String getDestination() {
-        return destination;
+        return flightInfo.getDestination();
     }
 
     public void setDestination(String destination) {
-        this.destination = destination;
+        flightInfo.setDestination(destination);
     }
 
     public LocalDateTime getDepartureDateTime() {
-        return departureDateTime;
+        return flightInfo.getDepartureDateTime();
     }
 
     public void setDepartureDateTime(LocalDateTime departureDateTime) {
-        this.departureDateTime = departureDateTime;
+        flightInfo.setDepartureDateTime(departureDateTime);
     }
 
     public int getSeatRowSize() {
-        return seatRowSize;
+        return flightInfo.getSeatRowSize();
     }
 
     public void setSeatRowSize(int seatRowSize) {
-        this.seatRowSize = seatRowSize;
+        flightInfo.setSeatRowSize(seatRowSize);
     }
 
     public int getSeatColumnSize() {
-        return seatColumnSize;
+        return flightInfo.getSeatColumnSize();
     }
 
     public void setSeatColumnSize(int seatColumnSize) {
-        this.seatColumnSize = seatColumnSize;
+        flightInfo.setSeatColumnSize(seatColumnSize);
     }
 
     public List<Seat> getSeatList() {
