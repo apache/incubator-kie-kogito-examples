@@ -12,10 +12,10 @@ import org.springframework.stereotype.Service;
 public class FlightSeatingSolveService {
 
     @Autowired
-    private SolverManager<Flight, Long> solutionManager;
+    private SolverManager<Flight, Long> solverManager;
 
     public Flight assignSeats(Flight problem) {
-        SolverJob<Flight, Long> solverJob = solutionManager.solve(1L, problem);
+        SolverJob<Flight, Long> solverJob = solverManager.solve(1L, problem);
         try {
             return solverJob.getFinalBestSolution();
         } catch (InterruptedException | ExecutionException e) {

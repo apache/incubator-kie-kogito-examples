@@ -26,7 +26,7 @@ public class FlightSeatingConstraintProvider implements ConstraintProvider {
                 seatConflict(factory),
                 emergencyExitRow(factory),
                 seatTypePreference(factory),
-                //planeBalance(factory)
+                planeBalance(factory)
         };
     }
 
@@ -89,6 +89,9 @@ public class FlightSeatingConstraintProvider implements ConstraintProvider {
         }
         
         public Pair<Pair<BigDecimal, BigDecimal>, Integer> get() {
+            if (cog.getRight().equals(0)) {
+                return cog;
+            }
             BigDecimal averageX = cog.getLeft().getLeft().divide(BigDecimal.valueOf(cog.getRight()), MathContext.DECIMAL128);
             BigDecimal averageY = cog.getLeft().getRight().divide(BigDecimal.valueOf(cog.getRight()), MathContext.DECIMAL128);
             return Pair.of(Pair.of(averageX, averageY), cog.getRight());
