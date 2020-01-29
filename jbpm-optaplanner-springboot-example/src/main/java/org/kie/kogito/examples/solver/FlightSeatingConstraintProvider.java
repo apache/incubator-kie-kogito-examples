@@ -1,6 +1,5 @@
 package org.kie.kogito.examples.solver;
 
-import org.apache.commons.lang3.tuple.Pair;
 import org.kie.kogito.examples.domain.FlightInfo;
 import org.kie.kogito.examples.domain.Passenger;
 import org.optaplanner.core.api.function.TriFunction;
@@ -26,7 +25,7 @@ public class FlightSeatingConstraintProvider implements ConstraintProvider {
                 seatConflict(factory),
                 emergencyExitRow(factory),
                 seatTypePreference(factory),
-                planeBalance(factory)
+                //planeBalance(factory)
         };
     }
 
@@ -52,7 +51,7 @@ public class FlightSeatingConstraintProvider implements ConstraintProvider {
                 .penalize("Seat type preference", HardSoftScore.ONE_SOFT);
     }
 
-    private Constraint planeBalance(ConstraintFactory factory) {
+    /*private Constraint planeBalance(ConstraintFactory factory) {
         return factory.from(Passenger.class).join(FlightInfo.class).groupBy(new BiConstraintCollector<Passenger, FlightInfo, CenterOfGravity, Pair<Pair<BigDecimal, BigDecimal>, Integer>>() {
                 @Override
                 public Supplier<CenterOfGravity> supplier() {
@@ -78,8 +77,9 @@ public class FlightSeatingConstraintProvider implements ConstraintProvider {
         ).penalize("Plane Balance", HardSoftScore.ONE_SOFT, cog -> {
             return (int) Math.round(Point2D.distance(0, 0, cog.getLeft().getLeft().doubleValue(), cog.getLeft().getRight().doubleValue()) * cog.getRight() * 100);
         });
-    }
+    }*/
 
+    /*
     private static final class CenterOfGravity {
         private FlightInfo flightInfo;
         private Pair<Pair<BigDecimal, BigDecimal>, Integer> cog;
@@ -143,6 +143,6 @@ public class FlightSeatingConstraintProvider implements ConstraintProvider {
                 1);
         }
 
-    }
+    }*/
 
 }
