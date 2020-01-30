@@ -16,8 +16,13 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.Set;
+import java.util.HashSet;
 
 public class FlightSeatingConstraintProvider implements ConstraintProvider {
+
+    private Set<MassPoint> massPointSet = new HashSet<>();
+    int times = 0;
 
     @Override
     public Constraint[] defineConstraints(ConstraintFactory factory) {
@@ -25,7 +30,7 @@ public class FlightSeatingConstraintProvider implements ConstraintProvider {
                 seatConflict(factory),
                 emergencyExitRow(factory),
                 seatTypePreference(factory),
-                //planeBalance(factory)
+                planeBalance(factory)
         };
     }
 
@@ -51,8 +56,8 @@ public class FlightSeatingConstraintProvider implements ConstraintProvider {
                 .penalize("Seat type preference", HardSoftScore.ONE_SOFT);
     }
 
-    /*private Constraint planeBalance(ConstraintFactory factory) {
-        return factory.from(Passenger.class).join(FlightInfo.class).groupBy(new BiConstraintCollector<Passenger, FlightInfo, CenterOfGravity, Pair<Pair<BigDecimal, BigDecimal>, Integer>>() {
+    private Constraint planeBalance(ConstraintFactory factory) {
+        return factory.from(Passenger.class).join(FlightInfo.class).groupBy(new BiConstraintCollector<Passenger, FlightInfo, CenterOfGravity, MassPoint>() {
                 @Override
                 public Supplier<CenterOfGravity> supplier() {
                     return CenterOfGravity::new;
@@ -70,79 +75,110 @@ public class FlightSeatingConstraintProvider implements ConstraintProvider {
                 }
 
                 @Override
-                public Function<CenterOfGravity, Pair<Pair<BigDecimal, BigDecimal>, Integer>> finisher() {
+                public Function<CenterOfGravity, MassPoint> finisher() {
                     return CenterOfGravity::get;
                 }
             }
         ).penalize("Plane Balance", HardSoftScore.ONE_SOFT, cog -> {
-            return (int) Math.round(Point2D.distance(0, 0, cog.getLeft().getLeft().doubleValue(), cog.getLeft().getRight().doubleValue()) * cog.getRight() * 100);
+            massPointSet.add(cog);
+            if (times == 1000) {
+                System.out.printf("Size: %d\n", massPointSet.size());
+                massPointSet.forEach(mp -> System.out.println(cog.toString()));
+            }
+            times++;
+            return (int) Math.round(Point2D.distance(0, 0, cog.getX().doubleValue(), cog.getY().doubleValue()) * cog.getMass() * 100);
         });
-    }*/
+    }
 
-    /*
+    private static final class MassPoint {
+        private final BigDecimal x;
+        private final BigDecimal y;
+        private final int mass;
+        private static MassPoint ZERO = new MassPoint(BigDecimal.ZERO, BigDecimal.ZERO, 0);
+
+        public MassPoint(BigDecimal x, BigDecimal y, int mass) {
+            this.x = x;
+            this.y = y;
+            this.mass = mass;
+        }
+
+        public MassPoint add(MassPoint other) {
+            return new MassPoint(x.add(other.x), y.add(other.y), mass + other.mass);
+        }
+
+        public MassPoint subtract(MassPoint other) {
+            return new MassPoint(x.subtract(other.x), y.subtract(other.y), mass - other.mass);
+        }
+
+        public BigDecimal getX() {
+            return x;
+        }
+
+        public BigDecimal getY() {
+            return y;
+        }
+
+        public int getMass() {
+            return mass;
+        }
+
+        @Override
+        public String toString() {
+            return String.format("%dkg at (%s, %s)", mass, x.toPlainString(), y.toPlainString());
+        }
+
+        public boolean equals(Object o) {
+            if (o instanceof MassPoint) {
+                MassPoint mp = (MassPoint) o;
+                return x.equals(mp.x) && y.equals(mp.y) && mass == mp.mass;
+            }
+            return false;
+        }
+
+        public int hashCode() {
+            return (31 * (31 * x.hashCode()) ^ y.hashCode()) ^ Integer.hashCode(mass);
+        }
+
+    }
+
     private static final class CenterOfGravity {
         private FlightInfo flightInfo;
-        private Pair<Pair<BigDecimal, BigDecimal>, Integer> cog;
+        private MassPoint cog;
         
         public CenterOfGravity() {
-            cog = Pair.of(Pair.of(BigDecimal.ZERO, BigDecimal.ZERO), 0);
+            cog = MassPoint.ZERO;
         }
         
-        public Pair<Pair<BigDecimal, BigDecimal>, Integer> get() {
-            if (cog.getRight().equals(0)) {
+        public MassPoint get() {
+            if (cog.getMass() == 0) {
                 return cog;
             }
-            BigDecimal averageX = cog.getLeft().getLeft().divide(BigDecimal.valueOf(cog.getRight()), MathContext.DECIMAL128);
-            BigDecimal averageY = cog.getLeft().getRight().divide(BigDecimal.valueOf(cog.getRight()), MathContext.DECIMAL128);
-            return Pair.of(Pair.of(averageX, averageY), cog.getRight());
+            BigDecimal averageX = cog.getX().divide(BigDecimal.valueOf(cog.getMass()), MathContext.DECIMAL128);
+            BigDecimal averageY = cog.getY().divide(BigDecimal.valueOf(cog.getMass()), MathContext.DECIMAL128);
+            return new MassPoint(averageX, averageY, cog.getMass());
         }
 
         public void setFlightInfo(FlightInfo flightInfo) {
-            if (this.flightInfo != null) {
-                this.flightInfo = flightInfo;
-            }
-            else if (this.flightInfo != flightInfo) {
-                throw new IllegalStateException("There should only be one FlightInfo");
-            }
+            this.flightInfo = flightInfo;
         }
         
         public void addPassenger(Passenger passenger) {
-            Pair<Pair<BigDecimal, BigDecimal>, Integer> passengerCog = getPassengerCoG(passenger);
-            
-            Pair<BigDecimal,BigDecimal> cogPoint1 = cog.getLeft();
-            Pair<BigDecimal,BigDecimal> cogPoint2 = passengerCog.getLeft();
-            Integer cogWeight1 = cog.getRight();
-            Integer cogWeight2 = passengerCog.getRight();
-            Integer combinedWeight = cogWeight1 + cogWeight2;
-
-            BigDecimal newX = cogPoint1.getLeft().add(cogPoint2.getLeft());
-            BigDecimal newY = cogPoint1.getRight().add(cogPoint2.getRight());
-            
-            cog = Pair.of(Pair.of(newX, newY), combinedWeight);
+            MassPoint passengerCog = getPassengerCoG(passenger); 
+            cog = cog.add(passengerCog);
         }
 
         public void removePassenger(Passenger passenger) {
-            Pair<Pair<BigDecimal, BigDecimal>, Integer> passengerCog = getPassengerCoG(passenger);
-            
-            Pair<BigDecimal,BigDecimal> cogPoint1 = cog.getLeft();
-            Pair<BigDecimal,BigDecimal> cogPoint2 = passengerCog.getLeft();
-            Integer cogWeight1 = cog.getRight();
-            Integer cogWeight2 = passengerCog.getRight();
-            Integer subtractedWeight = cogWeight1 - cogWeight2;
-
-            BigDecimal newX = cogPoint1.getLeft().subtract(cogPoint2.getLeft());
-            BigDecimal newY = cogPoint1.getRight().subtract(cogPoint2.getRight());
-    
-            cog = Pair.of(Pair.of(newX, newY), subtractedWeight);
+            MassPoint passengerCog = getPassengerCoG(passenger);
+            cog = cog.subtract(passengerCog);
         }
 
-        private Pair<Pair<BigDecimal, BigDecimal>, Integer> getPassengerCoG(Passenger passenger) {
-            return Pair.of(
-                Pair.of(BigDecimal.valueOf(passenger.getSeat().getColumn() - flightInfo.getSeatColumnSize() / 2),
-                BigDecimal.valueOf(passenger.getSeat().getRow() - flightInfo.getSeatRowSize() / 2d)),
+        private MassPoint getPassengerCoG(Passenger passenger) {
+            return new MassPoint(
+                BigDecimal.valueOf(passenger.getSeat().getColumn() - flightInfo.getSeatColumnSize() / 2),
+                BigDecimal.valueOf(passenger.getSeat().getRow() - flightInfo.getSeatRowSize() / 2d),
                 1);
         }
 
-    }*/
+    }
 
 }
