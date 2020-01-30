@@ -53,6 +53,8 @@ pipeline {
             steps {
                 script {
                     maven.runMavenWithSubmarineSettings('clean install', false)
+                    // Don't run with tests so far, see: https://github.com/quarkusio/quarkus/issues/6885
+                    maven.runMavenWithSubmarineSettings('clean install -Ppersistence', true)
                 }
             }
         }
