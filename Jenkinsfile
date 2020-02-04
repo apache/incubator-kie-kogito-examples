@@ -53,8 +53,14 @@ pipeline {
             steps {
                 script {
                     maven.runMavenWithSubmarineSettings('clean install', false)
-                    // Don't run with tests so far, see: https://github.com/quarkusio/quarkus/issues/6885
-                    maven.runMavenWithSubmarineSettings('clean install -Ppersistence', true)
+                }
+                // Use a separate dir for persistence to not overwrite the test results
+                dir("kogito-examples-persistence") {
+                    script {
+                        githubscm.checkoutIfExists('kogito-examples', "$CHANGE_AUTHOR", "$CHANGE_BRANCH", 'kiegroup', "$CHANGE_TARGET")
+                        // Don't run with tests so far, see: https://github.com/quarkusio/quarkus/issues/6885
+                        maven.runMavenWithSubmarineSettings('clean install -Ppersistence', true)
+                    }
                 }
             }
         }
@@ -71,8 +77,7 @@ pipeline {
             }
         }
         always {
-            // Currently there are no tests in submarine-examples
-            //junit '**/target/surefire-reports/**/*.xml'
+            junit '**/target/surefire-reports/**/*.xml'
             cleanWs()
         }
     }
