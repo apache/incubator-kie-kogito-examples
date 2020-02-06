@@ -54,7 +54,6 @@
     <module>kogito-timer-springboot</module>
   </modules>
 
-
   <build>
     <pluginManagement>
       <plugins>
