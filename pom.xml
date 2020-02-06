@@ -27,6 +27,7 @@
 
     <swagger-plugin.version>2.1.0</swagger-plugin.version>
     <surefire-plugin.version>2.22.0</surefire-plugin.version>
+    <version.deploy.plugin>2.8.2</version.deploy.plugin>
   </properties>
 
   <modules>
@@ -52,4 +53,19 @@
     <module>kogito-timer-quarkus</module>
     <module>kogito-timer-springboot</module>
   </modules>
+
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>${version.deploy.plugin}</version>
+          <configuration>
+            <retryFailedDeploymentCount>10</retryFailedDeploymentCount>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
 </project>
