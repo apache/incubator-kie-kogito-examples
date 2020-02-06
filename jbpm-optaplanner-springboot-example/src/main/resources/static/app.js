@@ -12,7 +12,7 @@ function renderFlight(flight, tasks) {
             element("button", { class: "btn btn-secondary", onClick: () => generatePassengersForFlight(flight) }, "Generate Passenger List")
         ]: []
         header = element("div", {},
-            element("h5", {}, flight.id),
+            element("h5", {}, getFlightName(flight)),
             element("button", {
                 class: "btn btn-secondary",
                 role: "button",
@@ -48,7 +48,7 @@ function renderFlight(flight, tasks) {
         }, "Finalize Seat Assignments")] : [];
 
         header = element("div", {},
-            element("h5", {}, flight.id),
+            element("h5", {}, getFlightName(flight)),
             ...finalizeSeatAssignmentButton
         );
     }
@@ -73,7 +73,8 @@ function renderFlight(flight, tasks) {
                         "div", {},
                         // Note: we take advantage that undefined is falsey here (task doesn't have property "isLoading")
                         element("span", {}, task.isLoading? "" : passengerRequestString(task.passenger)),
-                        element("button", task.isLoading? {} : {
+                        element("button", task.isLoading? { class: "btn btn-primary" } : {
+                            class: "btn btn-primary",
                             onClick: () => {
                                 $.post(`/rest/flights/${flight.id}/approveDenyPassenger/${task.id}`, JSON.stringify({
                                     isPassengerApproved: true
@@ -82,7 +83,8 @@ function renderFlight(flight, tasks) {
                                 });
                             }
                     }, "Approve"),
-                    element("button", task.isLoading? {} : {
+                    element("button", task.isLoading? { class: "btn btn-danger" } : {
+                        class: "btn btn-danger",
                         onClick: () => {
                             $.post(`/rest/flights/${flight.id}/approveDenyPassenger/${task.id}`, JSON.stringify({
                                 isPassengerApproved: false
@@ -97,20 +99,8 @@ function renderFlight(flight, tasks) {
                 element("div", {}, ...flight.flight.passengerList.map(passenger => element(
                     "div", {}, passenger.name
                 )))
-              )),
-            element("div", {},
-                element("button", {
-                    type: "button",
-                    "data-toggle": "collapse",
-                    "data-target": `#flight-${flight.id}-json`,
-                    "aria-expanded": "false",
-                    "aria-controls": `#flight-${flight.id}-json`
-                }, "Show Flight JSON"),
-                element("div", {
-                    class: "collapse",
-                    id: `flight-${flight.id}-json`
-                }, element("div", { class: "card card-body" }, JSON.stringify(flight))),
             )
+        ),
     ));
 }
 
@@ -146,6 +136,17 @@ function refresh() {
             });
         });
     });
+}
+
+function getFlightName(flight) {
+    return `${flight.flight.origin} -> ${flight.flight.destination}, departing on ${getMomentDate(flight.flight.departureDateTime).format("LLL")}`;
+}
+
+function getMomentDate(javaDate) {
+    return moment().year(javaDate.year)
+        .dayOfYear(javaDate.dayOfYear)
+        .hour(javaDate.hour)
+        .minute(javaDate.minute);
 }
 
 function findTasks(taskName, tasks) {
@@ -223,16 +224,16 @@ function initModal() {
         var button = $(event.relatedTarget);
         var action = button.data('action');
         var flight = button.data('flight');
+        const flightObject = myFlights.find(f => f.id === flight);
         var addPassengerAction = $("#add-passenger-action");
         addPassengerAction.unbind();
         var modal = $("#add-passenger-modal");
-        modal.find('.modal-title').text(`Add Passenger to Flight ${flight}`);
+        modal.find('.modal-title').text(`Add Passenger to Flight ${getFlightName(flightObject)}`);
         modal.find('#name').val(randomName());
         modal.find('#seatTypePreference').val("NONE");
         modal.find('#emergencyExitRowCapable').prop('checked', false);
         modal.find('#payedForSeat').prop('checked', false);
 
-        const flightObject = myFlights.find(f => f.id === flight);
         modal.find('#seatPicker').replaceWith(element("div", { id: "seatPicker", class: "collapse" }, flightSeats(flightObject, ({seat, passenger}) => element("input",
             { type: "radio", class: "form-control", name: "flight-seat", value: seat.row + ";" + seat.column, disabled: passenger !== undefined, hidden: passenger !== undefined }))));
 
