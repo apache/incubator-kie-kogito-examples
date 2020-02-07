@@ -69,14 +69,14 @@
       <dependency>
         <groupId>org.kie.kogito</groupId>
         <artifactId>kogito-deps-bom</artifactId>
-        <version>${version.org.kie.kogito}</version>
+        <version>${project.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>org.kie.kogito</groupId>
         <artifactId>kogito-bom</artifactId>
-        <version>${version.org.kie.kogito}</version>
+        <version>${project.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -84,32 +84,32 @@
        <dependency>
         <groupId>org.kie.kogito</groupId>
         <artifactId>kogito-api</artifactId>
-        <version>${version.org.kie.kogito}</version>
+        <version>${project.version}</version>
       </dependency>
       <dependency>
         <groupId>org.kie.kogito</groupId>
         <artifactId>kogito-drools</artifactId>
-        <version>${version.org.kie.kogito}</version>
+        <version>${project.version}</version>
       </dependency>
       <dependency>
         <groupId>org.kie.kogito</groupId>
         <artifactId>kogito-codegen</artifactId>
-        <version>${version.org.kie.kogito}</version>
+        <version>${project.version}</version>
       </dependency>
       <dependency>
         <groupId>org.kie.kogito</groupId>
         <artifactId>drools-decisiontables</artifactId>
-        <version>${version.org.kie.kogito}</version>
+        <version>${project.version}</version>
       </dependency>
       <dependency>
         <groupId>org.kie.kogito</groupId>
         <artifactId>jbpm-flow</artifactId>
-        <version>${version.org.kie.kogito}</version>
+        <version>${project.version}</version>
       </dependency>
       <dependency>
         <groupId>org.kie.kogito</groupId>
         <artifactId>jbpm-bpmn2</artifactId>
-        <version>${version.org.kie.kogito}</version>
+        <version>${project.version}</version>
       </dependency>
       <dependency>
         <groupId>io.quarkus</groupId>
@@ -136,7 +136,7 @@
         <plugin>
           <groupId>org.kie.kogito</groupId>
           <artifactId>kogito-maven-plugin</artifactId>
-          <version>${version.org.kie.kogito}</version>
+          <version>${project.version}</version>
         </plugin>
         <!-- Added to avoid errors when importing sample projects into eclipse.-->
         <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
