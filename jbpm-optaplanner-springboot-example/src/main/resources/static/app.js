@@ -66,39 +66,67 @@ function renderFlight(flight, tasks) {
             header,
             element("div", { style: "display: grid; grid-template-columns: 1fr 1fr;"},
                 element("div", { style: "grid-column: 1;" },
+                    // Passenger Request List
                     suspense(element("div", {}, "is loading"),
-                    element("div", {}, ...findTasks("approveDenyPassenger", tasks).map(futureTask => future(futureTask, { isLoading: true },
+                    element("div", { class: "list-group" }, ...findTasks("approveDenyPassenger", tasks).map(futureTask => future(futureTask, { isLoading: true },
                         resolve => $.getJSON(`/rest/flights/${flight.id}/approveDenyPassenger/${futureTask}`, resolve),
                         task => element(
-                        "div", {},
+                        "div", { class: "list-group-item list-group-item-action flex-column align-items-start d-flex w-100 justify-content-between" },
                         // Note: we take advantage that undefined is falsey here (task doesn't have property "isLoading")
-                        element("span", {}, task.isLoading? "" : passengerRequestString(task.passenger)),
-                        element("button", task.isLoading? { class: "btn btn-primary" } : {
-                            class: "btn btn-primary",
+                        element("span", {},
+                            element("i", { class: "fas fa-user" }, ""),
+                            element("span", {}, task.isLoading? "" : passengerRequestString(task.passenger)),
+                        ),
+                        element("span", {},
+                            element("button", task.isLoading? { class: "btn btn-primary" } : {
+                                class: "btn btn-primary",
+                                onClick: () => {
+                                    $.post(`/rest/flights/${flight.id}/approveDenyPassenger/${task.id}`, JSON.stringify({
+                                        isPassengerApproved: true
+                                    }), () => {
+                                        refresh();
+                                    });
+                                }
+                        }, "Approve"),
+                        element("button", task.isLoading? { class: "btn btn-danger" } : {
+                            class: "btn btn-danger",
                             onClick: () => {
                                 $.post(`/rest/flights/${flight.id}/approveDenyPassenger/${task.id}`, JSON.stringify({
-                                    isPassengerApproved: true
+                                    isPassengerApproved: false
                                 }), () => {
                                     refresh();
                                 });
                             }
-                    }, "Approve"),
-                    element("button", task.isLoading? { class: "btn btn-danger" } : {
-                        class: "btn btn-danger",
-                        onClick: () => {
-                            $.post(`/rest/flights/${flight.id}/approveDenyPassenger/${task.id}`, JSON.stringify({
-                                isPassengerApproved: false
-                            }), () => {
-                                refresh();
-                            });
-                        }
-                    }, "Deny")
+                        }, "Deny")
+                    )
             )))))),
             element("div", {},
                 flightSeats(flight, ({ passenger }) => (passenger)? element("div", {}, passenger.name) : element("div", { hidden: true}, "")),
-                element("div", {}, ...flight.flight.passengerList.map(passenger => element(
-                    "div", {}, passenger.name
-                )))
+                // Approved Passenger List
+                element("div", { class: "card" },
+                    element("h5", {}, "Passenger List"),
+                    element("button", {
+                            class: "collapsed",
+                            "data-toggle": "collapse",
+                            "data-target":  `#${flight.id}-passenger-list`,
+                            "aria-expanded": "false",
+                            "aria-controls": `#${flight.id}-passenger-list`,
+                            onClick: () => $(`#${flight.id}-passenger-list`).collapse("toggle")
+                        },
+                        "Show/Hide"
+                    ),
+                    element("div", { id: `${flight.id}-passenger-list`, class: "collapse list-group" }, ...flight.flight.passengerList.map(passenger =>  element(
+                        "div", { class: "list-group-item list-group-item-action flex-column align-items-start d-flex w-100 justify-content-between" },
+                        element("span", {},
+                            element("i", { class: "fas fa-user" }, ""),
+                            element("span", {}, passenger.name),
+                        ),
+                        element("span", {},
+                            `Seat: ${passenger.seat? passenger.seat.name : "Unassigned"}`
+                        )
+                    ))
+                    )
+                )
             )
         ),
     ));
@@ -107,6 +135,8 @@ function renderFlight(flight, tasks) {
 function flightSeats(flight, flightSeatToElementMap) {
     const rowToGridRow = row => 2*row + 1;
     const columnToGridColumn = col => col + Math.round(col / (flight.flight.seatColumnSize)) + 1;
+    const sortedSeatList = [...flight.flight.seatList].sort((a,b) => (a.row - b.row === 0)? a.column - b.column : a.row - b.row);
+    
     return element("div", { style: `display: grid;
         grid-column: 2;
         grid-auto-flow: dense;
@@ -116,23 +146,36 @@ function flightSeats(flight, flightSeatToElementMap) {
         align-items: center;
         width: max-content;
         border: 1px solid;
-        ` }, ...flight.flight.seatList.map(seat => element(
+        ` }, ...sortedSeatList.map(seat => element(
           "span", { class: "fas fa-couch", style: `grid-row: ${rowToGridRow(seat.row)}; grid-column: ${columnToGridColumn(seat.column)}`},
           seat.name)
         ),
-        ...flight.flight.seatList.map(seat => flightSeatToElementMap({flight: flight.flight, seat: seat, passenger: flight.flight.passengerList.find(passenger => passenger.seat !== null &&
+        ...sortedSeatList.map(seat => flightSeatToElementMap({flight: flight.flight, seat: seat, passenger: flight.flight.passengerList.find(passenger => passenger.seat !== null &&
             passenger.seat.row === seat.row && passenger.seat.column === seat.column) } ).css({"grid-row": String(rowToGridRow(seat.row) + 1), "grid-column": String(columnToGridColumn(seat.column)) }))
     );
 }
 
-let myFlights = []
+let myFlights = [];
+let flightOrder = [];
+
 function refresh() {
     $("#flights-container").empty();
     $.getJSON("/rest/flights", flights => {
+        const toRemove = [...flightOrder];
+        flights.forEach(flight => {
+            if (!flightOrder.includes(flight.id)) {
+                flightOrder.push(flight.id);
+            }
+            else {
+                toRemove.splice(toRemove.indexOf(flight.id), 1);
+            }
+        });
+        toRemove.forEach(flight => flightOrder.splice(flightOrder.indexOf(flight.id), 1));
+        flightOrder.forEach(flightId => element("div", { id: flightId }).appendTo("#flights-container"));
         myFlights = flights;
         flights.forEach(flight => {
             $.getJSON(`/rest/flights/${flight.id}/tasks`, tasks => {
-                renderFlight(flight, tasks).appendTo("#flights-container");
+                renderFlight(flight, tasks).appendTo(`#${flight.id}`);
             });
         });
     });
