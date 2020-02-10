@@ -17,7 +17,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 public class VertxRouter {
 
     @Inject
-    @ConfigProperty(name = "kogito.dataindex.url", defaultValue = "http://localhost:8180/graphql")
+    @ConfigProperty(name = "kogito.dataindex.url", defaultValue = "http://localhost:8180")
     private String dataIndexURL;
 
     @Inject
@@ -30,7 +30,7 @@ public class VertxRouter {
         resource = vertx.fileSystem()
                 .readFileBlocking("META-INF/resources/index.html")
                 .toString(UTF_8)
-                .replace("__GRAPHIQL_ENDPOINT__", "\"" + dataIndexURL + "\"");
+                .replace("__GRAPHIQL_ENDPOINT__", "\"" + dataIndexURL + "/graphql\"");
     }
 
     @Route(path = "/", methods = GET)
