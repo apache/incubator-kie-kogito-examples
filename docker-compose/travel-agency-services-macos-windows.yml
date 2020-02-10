@@ -1,0 +1,40 @@
+version: '2.1'
+
+services:
+
+  infinispan:
+    image: infinispan/server:10.0.0.Final-1
+    ports:
+        - 11222:11222
+    command: "/opt/infinispan/bin/server.sh -c infinispan-demo.xml"
+    volumes:
+      - ./infinispan/infinispan.xml:/opt/infinispan/server/conf/infinispan-demo.xml:z
+
+  kafka:
+    image: spotify/kafka
+    ports:
+      - 2181:2181
+      - 9092:9092
+    environment:
+      - ADVERTISED_HOST=localhost
+      - ADVERTISED_PORT=9092
+
+  prometheus:
+    image: prom/prometheus:v2.8.0
+    volumes:
+      - ./prometheus/prometheus-macos-windows.yml:/etc/prometheus/prometheus.yml:z
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    ports:
+      - 9090:9090
+
+  grafana:
+    image: grafana/grafana:6.6.1
+    depends_on:
+      - prometheus
+    ports:
+      - 3000:3000
+    volumes:
+      - ./grafana/provisioning/:/etc/grafana/provisioning/:z
+    environment:
+      - PROMETHEUS_URL=http://prometheus:9090
