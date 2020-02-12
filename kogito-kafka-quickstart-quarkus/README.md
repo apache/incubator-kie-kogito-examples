@@ -16,14 +16,65 @@ This example shows
 	
 <p align="center"><img width=75% height=50% src="docs/images/process.png"></p>
 
+* Diagram Properties
+<p align="center"><img src="docs/images/diagramProperties.png"></p>
+
+* Diagram Properties
+<p align="center"><img src="docs/images/diagramProperties2.png"></p>
+
+* Diagram Properties
+<p align="center"><img src="docs/images/diagramProperties3.png"></p>
+
+* Start Message
+<p align="center"><img src="docs/images/startMessage.png"></p>
+
+* Start Message Assignments
+<p align="center"><img src="docs/images/startMessageAssignments.png"></p>
+
+* Process Traveler Business Rule
+<p align="center"><img src="docs/images/processTravelerBusinessRule.png"></p>
+
+* Process Traveler Business Rule
+<p align="center"><img src="docs/images/processTravelerBusinessRule2.png"></p>
+
+* Process Traveler Gateway
+<p align="center"><img src="docs/images/processedTravelerGateway.png"></p>
+
+* Process Traveler Gateway Yes Connector
+<p align="center"><img src="docs/images/processedTravelerYesConnector.png"></p>
+
+* Process Traveler Gateway No Connector
+<p align="center"><img src="docs/images/processedTravelerNoConnector.png"></p>
+
+* Log Traveler Script Task
+<p align="center"><img src="docs/images/logTravelerScriptTask.png"></p>
+
+* Skip Traveler Script Task
+<p align="center"><img src="docs/images/skipTravelerScriptTask.png"></p>
+
+* Processed Traveler End Message
+<p align="center"><img src="docs/images/processedTravelerEndMessage.png"></p>
+
+* Processed Traveler End Message
+<p align="center"><img src="docs/images/processedTravelerEndMessageAssignments.png"></p>
+
+* Skip Traveler End
+<p align="center"><img src="docs/images/skipTraveler.png"></p>
+
+
 ## Infrastructure requirements
 
 This quickstart requires an Apache Kafka to be available and by default expects it to be on default port and localhost.
+
+* Install and Startup Kafka Server / Zookeeper
+<p align="center"><img src="docs/images/downloadKafkaStartUp.png"></p>
 
 In addition to that two topics are needed
 
 * travellers
 * processedtravellers
+
+<p align="center"><img src="docs/images/createKafkaTopics.png"></p>
 
 These topics are expected to be without key
 
@@ -85,6 +136,10 @@ To make use of this application it is as simple as putting a message on `travell
 
 this will then trigger the successful processing of the traveller and put another message on `processedtravellers` topic with following content (cloud event format)
 
+* Send Message to Topic
+<p align="center"><img src="docs/images/sendMessagetoTravelersTopic.png"></p>
+
+
 ```
 {
   "specversion": "0.3",
@@ -108,6 +163,10 @@ this will then trigger the successful processing of the traveller and put anothe
   "kogitoReferenceId": null
 }
 ```
+
+
+* ProcessedTravellers Message auto sent
+<p align="center"><img src="docs/images/examiningProcessedTravelersTopic.png"></p>
 
 there are bunch of extension attributes that starts with `kogito` to provide some context of the execution and the event producer.
 
