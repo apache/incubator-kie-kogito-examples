@@ -7,9 +7,20 @@ A quickstart project is the simplest hello world kind of example, it accepts inp
 This example shows
 
 * invoking scripts from within process
-	
-	
+			
 <p align="center"><img width=75% height=50% src="docs/images/process.png"></p>
+
+* Diagram Properties
+<p align="center"><img src="docs/images/diagramProperties.png"></p>
+
+* Diagram Properties
+<p align="center"><img src="docs/images/diagramProperties2.png"></p>
+
+* Hello Script Task
+<p align="center"><img src="docs/images/sayHelloScriptTask.png"></p>	
+
+* Update Message Script Task
+<p align="center"><img src="docs/images/updateMessageScriptTask.png"></p>
 
 
 ## Build and run
@@ -59,4 +70,12 @@ Complete curl command can be found below:
 ```
 curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"name" : "john"}' http://localhost:8080/scripts
 ```
+
+After executing the above you should see a log similar to
+
+<p align="center"><img src="docs/images/springBootLog.png"></p>
+
+And a message after the curl command such as
+
+<p align="center"><img src="docs/images/consoleLog.png"></p>
 
