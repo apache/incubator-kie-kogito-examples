@@ -17,15 +17,56 @@ This example shows
 
 It utilizes Infinispan server as the backend store. 
 	
-	
+* Process	
 <p align="center"><img width=75% height=50% src="docs/images/process.png"></p>
+
+* Process Properties	
+<p align="center"><img src="docs/images/processProperties.png"></p>
+
+* Process Properties	
+<p align="center"><img src="docs/images/processProperties2.png"></p>
+
+* Process Properties	
+<p align="center"><img src="docs/images/processProperties3.png"></p>
+
+* Call a deal	
+<p align="center"><img src="docs/images/callADeal.png"></p>
+
+* Call a deal	
+<p align="center"><img src="docs/images/callADeal2.png"></p>
+
+* Print review the Deal	
+<p align="center"><img src="docs/images/printReviewTheDeal.png"></p>
+
+* Subprocess
 <p align="center"><img width=75% height=50% src="docs/images/subprocess.png"></p>
+
+* Deal Review	
+<p align="center"><img src="docs/images/dealReview.png"></p>
+
+* Deal Review	
+<p align="center"><img src="docs/images/dealReview2.png"></p>
+
+* Deal Review	
+<p align="center"><img src="docs/images/dealReview3.png"></p>
+
+* Review deal user task	
+<p align="center"><img src="docs/images/reviewDealUserTask.png"></p>
+
+* Review deal user task	
+<p align="center"><img src="docs/images/reviewDealUserTask2.png"></p>
+
+* Review deal user task	
+<p align="center"><img src="docs/images/reviewDealUserTask3.png"></p>
 
 ## Infrastructure requirements
 
 This quickstart requires an Inifinispan server to be available and by default expects it to be on default port and localhost.
 
 You can install Inifinispan server by downloading it from [https://infinispan.org/download/](official website) version to be used in 10.0.0.Beta4
+
+* Infinispan installed and running	
+<p align="center"><img src="docs/images/infinispanInstalledAndRunning.png"></p>
 
 ## Build and run
 
@@ -129,3 +170,6 @@ Last but not least you can complete review user task by
 ```
 curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"review" : "very good work"}' http://localhost:8080/dealreviews/xxx-aaa-cccc/review/xxx-yyy-zzz
 ```
+
+* Review Log should look similar to 	
+<p align="center"><img src="docs/images/finishingReviewLog.png"></p>
