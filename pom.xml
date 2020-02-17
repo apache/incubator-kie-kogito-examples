@@ -62,6 +62,8 @@
     <module>dmn-springboot-example</module>
     <module>ruleunit-quarkus-example</module>
     <module>ruleunit-springboot-example</module>
+    <module>timer-quarkus-example</module>
+    <module>timer-springboot-example</module>
   </modules>
 
   <dependencyManagement>
