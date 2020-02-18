@@ -232,4 +232,56 @@ public class OrderServiceRestTest {
         given().accept(ContentType.JSON).when().get("/orderItems").then().statusCode(200)
                 .body("$.size()", is(0));
     }
+    
+    @Test
+    public void testCreateAndGetOrderByBusinessKey() {
+        String firstCreatedId = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(orderPayload).when()
+                .post("/orders?businessKey=ORD-0001").then().statusCode(200).body("id",
+                                                             notNullValue()).extract().path("id");
+
+        assertNotNull(firstCreatedId);
+
+        // get order by its business key and test
+        given().accept(ContentType.JSON).body(orderPayload).when().get("/orders/ORD-0001").then()
+                .statusCode(200).body("id",
+                                      is(firstCreatedId));
+        
+        // test deleting order items by business key
+        given().accept(ContentType.JSON).when().delete("/orders/ORD-0001").then().statusCode(200);
+        
+        // get all orders make sure there is zero
+        given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
+                .body("$.size()", is(0));
+    }
+    
+    @Test
+    public void testCreateDuplicateOrders() {
+        String firstCreatedId = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(orderPayload).when()
+                .post("/orders?businessKey=ORD-0001").then().statusCode(200).body("id",
+                                                             notNullValue()).extract().path("id");
+
+        assertNotNull(firstCreatedId);
+        // get all orders make sure there is one
+        given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
+                .body("$.size()", is(1));
+
+        // get order by its business key and test
+        given().accept(ContentType.JSON).body(orderPayload).when().get("/orders/ORD-0001").then()
+                .statusCode(200).body("id",
+                                      is(firstCreatedId));
+        // create another instance with same business key which should fail with conflict response code
+        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(orderPayload).when()
+        .post("/orders?businessKey=ORD-0001").then().statusCode(409);
+        
+        // get all orders make sure there is one
+        given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
+                .body("$.size()", is(1));
+        
+        // test deleting order items by business key
+        given().accept(ContentType.JSON).when().delete("/orders/ORD-0001").then().statusCode(200);
+        
+        // get all orders make sure there is zero
+        given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
+                .body("$.size()", is(0));
+    }
 }
