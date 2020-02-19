@@ -1,3 +1,16 @@
+.btn {
+  margin: 5px;
+}
+
+.seat-picker {
+  margin: 40px;
+}
+
+.hide-seat-picker {
+  opacity: 50%;
+  pointer-events: none;
+}
+
 .suspense[data-is-loading] {
     display: none;
     visibility: hidden;

@@ -3,9 +3,9 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <title>OptaPlanner Spring Boot example</title>
-    <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/webjars/font-awesome/css/all.css" />
-    <link rel="stylesheet" href="/app.css" />
+    <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/webjars/font-awesome/css/all.css"/>
+    <link rel="stylesheet" href="/app.css"/>
 </head>
 <body>
 <div class="container">
@@ -20,7 +20,7 @@
     <div class="sticky-top d-flex justify-content-center align-items-center" aria-live="polite" aria-atomic="true">
         <div id="notificationPanel" style="position: absolute; top: .5rem;"></div>
     </div>
-<!--    <div id="notificationPanel" aria-live="polite" aria-atomic="true" class=""></div>-->
+    <!--    <div id="notificationPanel" aria-live="polite" aria-atomic="true" class=""></div>-->
     <h1>Flight process</h1>
     <p>Flight with the optimal seating assignment.</p>
     <button class="btn btn-primary" role="button" data-action="add" data-toggle="modal" data-target="#new-flight-modal">
@@ -37,46 +37,63 @@
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
             </div>
             <div class="modal-body">
-            	<div class="container-fluid">
-					<div class="row">
-                        <h3>Flight Info</h3>
-						<div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group">
+                                <h3>Flight Info</h3>
+                            </div>
 
-							<div class="form-group">
-								<label for="origin">Origin</label> <input type="text"
-									class="form-control" id="origin" name="origin" required />
-							</div>
-							<div class="form-group">
-								<label for="destination">Destination</label> <input type="text"
-									class="form-control" id="destination" name="destination" required />
+                            <div class="form-group">
+                                <label for="origin">Origin</label> <input type="text"
+                                                                          class="form-control" id="origin" name="origin"
+                                                                          required/>
                             </div>
                             <div class="form-group">
-								<label for="departureDateTime">Departure Date Time</label> <input type="datetime-local"
-									class="form-control" id="departureDateTime" name="departureDateTime" required />
-							</div>  
+                                <label for="destination">Destination</label> <input type="text"
+                                                                                    class="form-control"
+                                                                                    id="destination" name="destination"
+                                                                                    required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="departureDateTime">Departure Date Time</label> <input type="datetime-local"
+                                                                                                  class="form-control"
+                                                                                                  id="departureDateTime"
+                                                                                                  name="departureDateTime"
+                                                                                                  required/>
+                            </div>
                         </div>
-                        
-                        <h3>Seating Info</h3>
-						<div class="col-md-6 col-sm-6 col-xs-6">
-							<div class="form-group">
-								<label for="seatRowSize">Number of Rows</label> <input type="number"
-									class="form-control" id="seatRowSize" name="seatRowSize" required />
+
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group">
+                                <h3>Seating Info</h3>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="seatRowSize">Number of Rows</label> <input type="number"
+                                                                                       class="form-control"
+                                                                                       id="seatRowSize"
+                                                                                       name="seatRowSize" required/>
                             </div>
                             <div class="form-group">
-								<label for="seatColumnSize">Number of Columns</label> <input type="number"
-									class="form-control" id="seatColumnSize" name="seatColumnSize" required />
-							</div>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">Cancel</button>
-							<button type="button" id="new-flight-action" class="btn btn-primary">Create Flight</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                                <label for="seatColumnSize">Number of Columns</label> <input type="number"
+                                                                                             class="form-control"
+                                                                                             id="seatColumnSize"
+                                                                                             name="seatColumnSize"
+                                                                                             required/>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger"
+                                    data-dismiss="modal">Cancel
+                            </button>
+                            <button type="button" id="new-flight-action" class="btn btn-primary">Create Flight</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="modal fade" id="add-passenger-modal" tabindex="-1" role="dialog">
@@ -87,12 +104,13 @@
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
             </div>
             <div class="modal-body">
-            	<div class="container-fluid">
-					<div class="row">
-						<div class="col-md-6 col-sm-6 col-xs-6">
-							<div class="form-group">
-								<label for="name">Name</label> <input type="text"
-									class="form-control" id="name" name="name" required />
+                <div class="container col-md-12">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group">
+                                <label for="name">Name</label> <input type="text"
+                                                                      class="form-control" id="name" name="name"
+                                                                      required/>
                             </div>
                             <div class="form-group">
                                 <label for="seatTypePreference">Seat Type Preference</label>
@@ -101,28 +119,37 @@
                                     <option value="AISLE">Aisle</option>
                                     <option value="NONE">None</option>
                                 </select>
-							</div>
-                            <div class="form-group">
-								<label for="emergencyExitRowCapable">Able to help in emergencies?</label> <input type="checkbox"
-									class="form-control" id="emergencyExitRowCapable" name="emergencyExitRowCapable" required />
                             </div>
                             <div class="form-group">
-								<label for="payedForSeat">Paying to reserve a seat?</label> <input type="checkbox"
-                                    class="form-control" id="payedForSeat" name="payedForSeat" required data-toggle="collapse",
-                                    data-target="#seatPicker" aria-expanded="false" aria-controls="#seatPicker" />
-                                <div id="seatPicker" />
+                                <label for="emergencyExitRowCapable">Able to help in emergencies?</label> <input
+                                    type="checkbox"
+                                    class="form-control" id="emergencyExitRowCapable" name="emergencyExitRowCapable"
+                                    required/>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default"
-                                    data-dismiss="modal">Cancel</button>
-                                <button type="button" id="add-passenger-action" class="btn btn-primary">Add Passenger</button>
+                            <div class="form-group">
+                                <label for="payedForSeat">Paying to reserve a seat?</label> <input type="checkbox"
+                                                                                                   class="form-control"
+                                                                                                   id="payedForSeat"
+                                                                                                   name="payedForSeat"
+                                                                                                   required,
+                                                                                                   data-target="#seatPicker"
+                                                                                                   aria-expanded="false"
+                                                                                                   aria-controls="#seatPicker"/>
+                                <div id="seatPicker"/>
+                            </div>
+                            <div class="modal-footer" style="width: max-content;">
+                                <button type="button" class="btn btn-danger"
+                                        data-dismiss="modal">Cancel
+                                </button>
+                                <button type="button" id="add-passenger-action" class="btn btn-primary">Add Passenger
+                                </button>
                             </div>
                         </div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script src="/webjars/jquery/jquery.min.js"></script>
