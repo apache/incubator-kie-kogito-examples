@@ -1,4 +1,4 @@
-<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_-lFkATVfEDi71NAmKSxCZg" exporter="jBPM Process Modeler" exporterVersion="2.0" targetNamespace="http://www.omg.org/bpmn20">
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_9HzYwDWCEDiaGNc79JnBiw" exporter="jBPM Process Modeler" exporterVersion="2.0" targetNamespace="http://www.omg.org/bpmn20">
   <bpmn2:itemDefinition id="_flightItem" structureRef="org.kie.kogito.examples.domain.Flight"/>
   <bpmn2:itemDefinition id="_paramsItem" structureRef="org.kie.kogito.examples.domain.FlightDTO"/>
   <bpmn2:itemDefinition id="_isPassengerListFinalizedItem" structureRef="Boolean"/>
@@ -49,14 +49,17 @@
   <bpmn2:itemDefinition id="__F9063D79-F12D-4F18-9EE2-7034AE7C4776_NotCompletedReassignInputXItem" structureRef="Object"/>
   <bpmn2:itemDefinition id="__F9063D79-F12D-4F18-9EE2-7034AE7C4776_NotStartedNotifyInputXItem" structureRef="Object"/>
   <bpmn2:itemDefinition id="__F9063D79-F12D-4F18-9EE2-7034AE7C4776_NotCompletedNotifyInputXItem" structureRef="Object"/>
-  <bpmn2:itemDefinition id="__33D305B7-7E3C-4704-860C-F3B6C4262B37_flightInputXItem" structureRef="org.kie.kogito.examples.domain.Flight"/>
-  <bpmn2:itemDefinition id="__33D305B7-7E3C-4704-860C-F3B6C4262B37_flightOutputXItem" structureRef="org.kie.kogito.examples.domain.Flight"/>
+  <bpmn2:itemDefinition id="__33D305B7-7E3C-4704-860C-F3B6C4262B37_ParameterInputXItem" structureRef="org.kie.kogito.examples.domain.Flight"/>
+  <bpmn2:itemDefinition id="__33D305B7-7E3C-4704-860C-F3B6C4262B37_ResultOutputXItem" structureRef="org.kie.kogito.examples.domain.Flight"/>
   <bpmn2:signal id="_1134912085" name="newPassengerRequest"/>
   <bpmn2:interface id="_5509C065-1D42-426E-8FF9-64D1E2E7B2EF_ServiceInterface" name="org.kie.kogito.examples.service.FlightService" implementationRef="org.kie.kogito.examples.service.FlightService">
     <bpmn2:operation id="_5509C065-1D42-426E-8FF9-64D1E2E7B2EF_ServiceOperation" name="addPassengerToFlight" implementationRef="addPassengerToFlight"/>
   </bpmn2:interface>
   <bpmn2:interface id="_3DA12126-C2FD-49CE-9119-615965FAC79D_ServiceInterface" name="org.kie.kogito.examples.service.FlightService" implementationRef="org.kie.kogito.examples.service.FlightService">
     <bpmn2:operation id="_3DA12126-C2FD-49CE-9119-615965FAC79D_ServiceOperation" name="createFlight" implementationRef="createFlight"/>
+  </bpmn2:interface>
+  <bpmn2:interface id="_33D305B7-7E3C-4704-860C-F3B6C4262B37_ServiceInterface" name="org.kie.kogito.examples.service.FlightSeatingSolveService" implementationRef="org.kie.kogito.examples.service.FlightSeatingSolveService">
+    <bpmn2:operation id="_33D305B7-7E3C-4704-860C-F3B6C4262B37_ServiceOperation" name="assignSeats" implementationRef="assignSeats"/>
   </bpmn2:interface>
   <bpmn2:process id="flights" drools:packageName="org.kie.kogito.examples" drools:version="1.0" drools:adHoc="false" name="Schedule Flight" isExecutable="true" processType="Public">
     <bpmn2:property id="flight" itemSubjectRef="_flightItem" name="flight"/>
@@ -126,7 +129,7 @@
       <bpmn2:outgoing>_4F515548-C937-4BA7-84D5-21776CFD70D5</bpmn2:outgoing>
       <bpmn2:script>kcontext.setVariable("isPassengerListFinalized", false);</bpmn2:script>
     </bpmn2:scriptTask>
-    <bpmn2:callActivity id="_33D305B7-7E3C-4704-860C-F3B6C4262B37" drools:independent="false" drools:waitForCompletion="true" name="Create Seat Assignments" calledElement="assignSeatsToFlight">
+    <bpmn2:serviceTask id="_33D305B7-7E3C-4704-860C-F3B6C4262B37" drools:serviceimplementation="Java" drools:serviceinterface="org.kie.kogito.examples.service.FlightSeatingSolveService" drools:serviceoperation="assignSeats" name="Create Seat Assignments" implementation="Java" operationRef="_33D305B7-7E3C-4704-860C-F3B6C4262B37_ServiceOperation">
       <bpmn2:extensionElements>
         <drools:metaData name="elementname">
           <drools:metaValue>Create Seat Assignments</drools:metaValue>
@@ -134,28 +137,28 @@
       </bpmn2:extensionElements>
       <bpmn2:incoming>_EF6673DD-1D02-4E37-833A-810CB29DC113</bpmn2:incoming>
       <bpmn2:outgoing>_A59B010C-5D2C-45DF-9219-A46D06EEE82D</bpmn2:outgoing>
-      <bpmn2:ioSpecification id="_-lPVADVfEDi71NAmKSxCZg">
-        <bpmn2:dataInput id="_33D305B7-7E3C-4704-860C-F3B6C4262B37_flightInputX" drools:dtype="org.kie.kogito.examples.domain.Flight" itemSubjectRef="__33D305B7-7E3C-4704-860C-F3B6C4262B37_flightInputXItem" name="flight"/>
-        <bpmn2:dataOutput id="_33D305B7-7E3C-4704-860C-F3B6C4262B37_flightOutputX" drools:dtype="org.kie.kogito.examples.domain.Flight" itemSubjectRef="__33D305B7-7E3C-4704-860C-F3B6C4262B37_flightOutputXItem" name="flight"/>
-        <bpmn2:inputSet id="_-lPVATVfEDi71NAmKSxCZg">
-          <bpmn2:dataInputRefs>_33D305B7-7E3C-4704-860C-F3B6C4262B37_flightInputX</bpmn2:dataInputRefs>
+      <bpmn2:ioSpecification id="_9H5fYDWCEDiaGNc79JnBiw">
+        <bpmn2:dataInput id="_33D305B7-7E3C-4704-860C-F3B6C4262B37_ParameterInputX" drools:dtype="org.kie.kogito.examples.domain.Flight" itemSubjectRef="__33D305B7-7E3C-4704-860C-F3B6C4262B37_ParameterInputXItem" name="Parameter"/>
+        <bpmn2:dataOutput id="_33D305B7-7E3C-4704-860C-F3B6C4262B37_ResultOutputX" drools:dtype="org.kie.kogito.examples.domain.Flight" itemSubjectRef="__33D305B7-7E3C-4704-860C-F3B6C4262B37_ResultOutputXItem" name="Result"/>
+        <bpmn2:inputSet id="_9H5fYTWCEDiaGNc79JnBiw">
+          <bpmn2:dataInputRefs>_33D305B7-7E3C-4704-860C-F3B6C4262B37_ParameterInputX</bpmn2:dataInputRefs>
         </bpmn2:inputSet>
-        <bpmn2:outputSet id="_-lP8EDVfEDi71NAmKSxCZg">
-          <bpmn2:dataOutputRefs>_33D305B7-7E3C-4704-860C-F3B6C4262B37_flightOutputX</bpmn2:dataOutputRefs>
+        <bpmn2:outputSet id="_9H5fYjWCEDiaGNc79JnBiw">
+          <bpmn2:dataOutputRefs>_33D305B7-7E3C-4704-860C-F3B6C4262B37_ResultOutputX</bpmn2:dataOutputRefs>
         </bpmn2:outputSet>
       </bpmn2:ioSpecification>
-      <bpmn2:dataInputAssociation id="_-lP8ETVfEDi71NAmKSxCZg">
+      <bpmn2:dataInputAssociation id="_9H6GcDWCEDiaGNc79JnBiw">
         <bpmn2:sourceRef>flight</bpmn2:sourceRef>
-        <bpmn2:targetRef>_33D305B7-7E3C-4704-860C-F3B6C4262B37_flightInputX</bpmn2:targetRef>
+        <bpmn2:targetRef>_33D305B7-7E3C-4704-860C-F3B6C4262B37_ParameterInputX</bpmn2:targetRef>
       </bpmn2:dataInputAssociation>
-      <bpmn2:dataOutputAssociation id="_-lP8EjVfEDi71NAmKSxCZg">
-        <bpmn2:sourceRef>_33D305B7-7E3C-4704-860C-F3B6C4262B37_flightOutputX</bpmn2:sourceRef>
+      <bpmn2:dataOutputAssociation id="_9H6GcTWCEDiaGNc79JnBiw">
+        <bpmn2:sourceRef>_33D305B7-7E3C-4704-860C-F3B6C4262B37_ResultOutputX</bpmn2:sourceRef>
         <bpmn2:targetRef>flight</bpmn2:targetRef>
       </bpmn2:dataOutputAssociation>
-    </bpmn2:callActivity>
+    </bpmn2:serviceTask>
     <bpmn2:endEvent id="_C0E64248-F51D-4AA7-8E6F-22011EF77B8A">
       <bpmn2:incoming>_29D92CB9-DE14-4571-9399-FD1BAD9595D6</bpmn2:incoming>
-      <bpmn2:terminateEventDefinition id="_-lQjIDVfEDi71NAmKSxCZg"/>
+      <bpmn2:terminateEventDefinition id="_9H6tgDWCEDiaGNc79JnBiw"/>
     </bpmn2:endEvent>
     <bpmn2:userTask id="_F9063D79-F12D-4F18-9EE2-7034AE7C4776" name="Finalize Seat Assignments">
       <bpmn2:extensionElements>
@@ -165,26 +168,26 @@
       </bpmn2:extensionElements>
       <bpmn2:incoming>_A59B010C-5D2C-45DF-9219-A46D06EEE82D</bpmn2:incoming>
       <bpmn2:outgoing>_29D92CB9-DE14-4571-9399-FD1BAD9595D6</bpmn2:outgoing>
-      <bpmn2:ioSpecification id="_-lRKMDVfEDi71NAmKSxCZg">
+      <bpmn2:ioSpecification id="_9H6tgTWCEDiaGNc79JnBiw">
         <bpmn2:dataInput id="_F9063D79-F12D-4F18-9EE2-7034AE7C4776_TaskNameInputX" drools:dtype="Object" itemSubjectRef="__F9063D79-F12D-4F18-9EE2-7034AE7C4776_TaskNameInputXItem" name="TaskName"/>
         <bpmn2:dataInput id="_F9063D79-F12D-4F18-9EE2-7034AE7C4776_SkippableInputX" drools:dtype="Object" itemSubjectRef="__F9063D79-F12D-4F18-9EE2-7034AE7C4776_SkippableInputXItem" name="Skippable"/>
-        <bpmn2:inputSet id="_-lRKMTVfEDi71NAmKSxCZg">
+        <bpmn2:inputSet id="_9H6tgjWCEDiaGNc79JnBiw">
           <bpmn2:dataInputRefs>_F9063D79-F12D-4F18-9EE2-7034AE7C4776_TaskNameInputX</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>_F9063D79-F12D-4F18-9EE2-7034AE7C4776_SkippableInputX</bpmn2:dataInputRefs>
         </bpmn2:inputSet>
       </bpmn2:ioSpecification>
-      <bpmn2:dataInputAssociation id="_-lRKMjVfEDi71NAmKSxCZg">
+      <bpmn2:dataInputAssociation id="_9H6tgzWCEDiaGNc79JnBiw">
         <bpmn2:targetRef>_F9063D79-F12D-4F18-9EE2-7034AE7C4776_TaskNameInputX</bpmn2:targetRef>
-        <bpmn2:assignment id="_-lRKMzVfEDi71NAmKSxCZg">
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_-lRxQDVfEDi71NAmKSxCZg">finalizeSeatAssignment</bpmn2:from>
-          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_-lSYUDVfEDi71NAmKSxCZg">_F9063D79-F12D-4F18-9EE2-7034AE7C4776_TaskNameInputX</bpmn2:to>
+        <bpmn2:assignment id="_9H6thDWCEDiaGNc79JnBiw">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_9H7UkDWCEDiaGNc79JnBiw">finalizeSeatAssignment</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_9H77oDWCEDiaGNc79JnBiw">_F9063D79-F12D-4F18-9EE2-7034AE7C4776_TaskNameInputX</bpmn2:to>
         </bpmn2:assignment>
       </bpmn2:dataInputAssociation>
-      <bpmn2:dataInputAssociation id="_-lSYUTVfEDi71NAmKSxCZg">
+      <bpmn2:dataInputAssociation id="_9H77oTWCEDiaGNc79JnBiw">
         <bpmn2:targetRef>_F9063D79-F12D-4F18-9EE2-7034AE7C4776_SkippableInputX</bpmn2:targetRef>
-        <bpmn2:assignment id="_-lSYUjVfEDi71NAmKSxCZg">
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_-lSYUzVfEDi71NAmKSxCZg">false</bpmn2:from>
-          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_-lSYVDVfEDi71NAmKSxCZg">_F9063D79-F12D-4F18-9EE2-7034AE7C4776_SkippableInputX</bpmn2:to>
+        <bpmn2:assignment id="_9H77ojWCEDiaGNc79JnBiw">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_9H77ozWCEDiaGNc79JnBiw">false</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_9H77pDWCEDiaGNc79JnBiw">_F9063D79-F12D-4F18-9EE2-7034AE7C4776_SkippableInputX</bpmn2:to>
         </bpmn2:assignment>
       </bpmn2:dataInputAssociation>
     </bpmn2:userTask>
@@ -196,33 +199,33 @@
       </bpmn2:extensionElements>
       <bpmn2:incoming>_1C8C09DA-FFCF-4ACA-A3FD-D63E14B32C41</bpmn2:incoming>
       <bpmn2:outgoing>_EF6673DD-1D02-4E37-833A-810CB29DC113</bpmn2:outgoing>
-      <bpmn2:ioSpecification id="_-lSYVTVfEDi71NAmKSxCZg">
+      <bpmn2:ioSpecification id="_9H8isDWCEDiaGNc79JnBiw">
         <bpmn2:dataInput id="_5289B275-031F-437C-9538-CF0D3D4E83B9_TaskNameInputX" drools:dtype="Object" itemSubjectRef="__5289B275-031F-437C-9538-CF0D3D4E83B9_TaskNameInputXItem" name="TaskName"/>
         <bpmn2:dataInput id="_5289B275-031F-437C-9538-CF0D3D4E83B9_SkippableInputX" drools:dtype="Object" itemSubjectRef="__5289B275-031F-437C-9538-CF0D3D4E83B9_SkippableInputXItem" name="Skippable"/>
         <bpmn2:dataOutput id="_5289B275-031F-437C-9538-CF0D3D4E83B9_isPassengerListFinalizedOutputX" drools:dtype="Boolean" itemSubjectRef="__5289B275-031F-437C-9538-CF0D3D4E83B9_isPassengerListFinalizedOutputXItem" name="isPassengerListFinalized"/>
-        <bpmn2:inputSet id="_-lS_YDVfEDi71NAmKSxCZg">
+        <bpmn2:inputSet id="_9H8isTWCEDiaGNc79JnBiw">
           <bpmn2:dataInputRefs>_5289B275-031F-437C-9538-CF0D3D4E83B9_TaskNameInputX</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>_5289B275-031F-437C-9538-CF0D3D4E83B9_SkippableInputX</bpmn2:dataInputRefs>
         </bpmn2:inputSet>
-        <bpmn2:outputSet id="_-lS_YTVfEDi71NAmKSxCZg">
+        <bpmn2:outputSet id="_9H8isjWCEDiaGNc79JnBiw">
           <bpmn2:dataOutputRefs>_5289B275-031F-437C-9538-CF0D3D4E83B9_isPassengerListFinalizedOutputX</bpmn2:dataOutputRefs>
         </bpmn2:outputSet>
       </bpmn2:ioSpecification>
-      <bpmn2:dataInputAssociation id="_-lS_YjVfEDi71NAmKSxCZg">
+      <bpmn2:dataInputAssociation id="_9H8iszWCEDiaGNc79JnBiw">
         <bpmn2:targetRef>_5289B275-031F-437C-9538-CF0D3D4E83B9_TaskNameInputX</bpmn2:targetRef>
-        <bpmn2:assignment id="_-lS_YzVfEDi71NAmKSxCZg">
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_-lS_ZDVfEDi71NAmKSxCZg">finalizePassengerList</bpmn2:from>
-          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_-lS_ZTVfEDi71NAmKSxCZg">_5289B275-031F-437C-9538-CF0D3D4E83B9_TaskNameInputX</bpmn2:to>
+        <bpmn2:assignment id="_9H8itDWCEDiaGNc79JnBiw">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_9H8itTWCEDiaGNc79JnBiw">finalizePassengerList</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_9H8itjWCEDiaGNc79JnBiw">_5289B275-031F-437C-9538-CF0D3D4E83B9_TaskNameInputX</bpmn2:to>
         </bpmn2:assignment>
       </bpmn2:dataInputAssociation>
-      <bpmn2:dataInputAssociation id="_-lS_ZjVfEDi71NAmKSxCZg">
+      <bpmn2:dataInputAssociation id="_9H8itzWCEDiaGNc79JnBiw">
         <bpmn2:targetRef>_5289B275-031F-437C-9538-CF0D3D4E83B9_SkippableInputX</bpmn2:targetRef>
-        <bpmn2:assignment id="_-lS_ZzVfEDi71NAmKSxCZg">
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_-lS_aDVfEDi71NAmKSxCZg">false</bpmn2:from>
-          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_-lS_aTVfEDi71NAmKSxCZg">_5289B275-031F-437C-9538-CF0D3D4E83B9_SkippableInputX</bpmn2:to>
+        <bpmn2:assignment id="_9H8iuDWCEDiaGNc79JnBiw">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_9H8iuTWCEDiaGNc79JnBiw">false</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_9H8iujWCEDiaGNc79JnBiw">_5289B275-031F-437C-9538-CF0D3D4E83B9_SkippableInputX</bpmn2:to>
         </bpmn2:assignment>
       </bpmn2:dataInputAssociation>
-      <bpmn2:dataOutputAssociation id="_-lTmcDVfEDi71NAmKSxCZg">
+      <bpmn2:dataOutputAssociation id="_9H8iuzWCEDiaGNc79JnBiw">
         <bpmn2:sourceRef>_5289B275-031F-437C-9538-CF0D3D4E83B9_isPassengerListFinalizedOutputX</bpmn2:sourceRef>
         <bpmn2:targetRef>isPassengerListFinalized</bpmn2:targetRef>
       </bpmn2:dataOutputAssociation>
@@ -235,21 +238,21 @@
       </bpmn2:extensionElements>
       <bpmn2:incoming>_4F515548-C937-4BA7-84D5-21776CFD70D5</bpmn2:incoming>
       <bpmn2:outgoing>_1C8C09DA-FFCF-4ACA-A3FD-D63E14B32C41</bpmn2:outgoing>
-      <bpmn2:ioSpecification id="_-lTmcTVfEDi71NAmKSxCZg">
+      <bpmn2:ioSpecification id="_9H9JwDWCEDiaGNc79JnBiw">
         <bpmn2:dataInput id="_3DA12126-C2FD-49CE-9119-615965FAC79D_flightParamsInputX" drools:dtype="org.kie.kogito.examples.domain.FlightDTO" itemSubjectRef="__3DA12126-C2FD-49CE-9119-615965FAC79D_flightParamsInputXItem" name="flightParams"/>
         <bpmn2:dataOutput id="_3DA12126-C2FD-49CE-9119-615965FAC79D_flightOutputX" drools:dtype="org.kie.kogito.examples.domain.Flight" itemSubjectRef="__3DA12126-C2FD-49CE-9119-615965FAC79D_flightOutputXItem" name="flight"/>
-        <bpmn2:inputSet id="_-lTmcjVfEDi71NAmKSxCZg">
+        <bpmn2:inputSet id="_9H9JwTWCEDiaGNc79JnBiw">
           <bpmn2:dataInputRefs>_3DA12126-C2FD-49CE-9119-615965FAC79D_flightParamsInputX</bpmn2:dataInputRefs>
         </bpmn2:inputSet>
-        <bpmn2:outputSet id="_-lTmczVfEDi71NAmKSxCZg">
+        <bpmn2:outputSet id="_9H9JwjWCEDiaGNc79JnBiw">
           <bpmn2:dataOutputRefs>_3DA12126-C2FD-49CE-9119-615965FAC79D_flightOutputX</bpmn2:dataOutputRefs>
         </bpmn2:outputSet>
       </bpmn2:ioSpecification>
-      <bpmn2:dataInputAssociation id="_-lTmdDVfEDi71NAmKSxCZg">
+      <bpmn2:dataInputAssociation id="_9H9JwzWCEDiaGNc79JnBiw">
         <bpmn2:sourceRef>params</bpmn2:sourceRef>
         <bpmn2:targetRef>_3DA12126-C2FD-49CE-9119-615965FAC79D_flightParamsInputX</bpmn2:targetRef>
       </bpmn2:dataInputAssociation>
-      <bpmn2:dataOutputAssociation id="_-lUNgDVfEDi71NAmKSxCZg">
+      <bpmn2:dataOutputAssociation id="_9H9JxDWCEDiaGNc79JnBiw">
         <bpmn2:sourceRef>_3DA12126-C2FD-49CE-9119-615965FAC79D_flightOutputX</bpmn2:sourceRef>
         <bpmn2:targetRef>flight</bpmn2:targetRef>
       </bpmn2:dataOutputAssociation>
@@ -283,17 +286,6 @@
           </drools:metaData>
         </bpmn2:extensionElements>
       </bpmn2:sequenceFlow>
-      <bpmn2:sequenceFlow id="_94AD6769-D320-49C0-9CC1-92132A075462" sourceRef="_88B43256-BDA2-4AA8-B5A3-F43D9B799234" targetRef="_1D32B117-1B5F-4F39-B2FC-9E682CA0B465">
-        <bpmn2:extensionElements>
-          <drools:metaData name="isAutoConnection.source">
-            <drools:metaValue>true</drools:metaValue>
-          </drools:metaData>
-          <drools:metaData name="isAutoConnection.target">
-            <drools:metaValue>true</drools:metaValue>
-          </drools:metaData>
-        </bpmn2:extensionElements>
-        <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_-lWCsDVfEDi71NAmKSxCZg" language="http://www.java.com/java">return !isPassengerApproved;</bpmn2:conditionExpression>
-      </bpmn2:sequenceFlow>
       <bpmn2:sequenceFlow id="_C6BEB443-A465-4A89-B0CE-ACB76BEE7D03" sourceRef="_88B43256-BDA2-4AA8-B5A3-F43D9B799234" targetRef="_5509C065-1D42-426E-8FF9-64D1E2E7B2EF">
         <bpmn2:extensionElements>
           <drools:metaData name="isAutoConnection.source">
@@ -303,7 +295,18 @@
             <drools:metaValue>true</drools:metaValue>
           </drools:metaData>
         </bpmn2:extensionElements>
-        <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_-lWCsTVfEDi71NAmKSxCZg" language="http://www.java.com/java">return isPassengerApproved;</bpmn2:conditionExpression>
+        <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_9H-X4DWCEDiaGNc79JnBiw" language="http://www.java.com/java">return isPassengerApproved;</bpmn2:conditionExpression>
+      </bpmn2:sequenceFlow>
+      <bpmn2:sequenceFlow id="_94AD6769-D320-49C0-9CC1-92132A075462" sourceRef="_88B43256-BDA2-4AA8-B5A3-F43D9B799234" targetRef="_1D32B117-1B5F-4F39-B2FC-9E682CA0B465">
+        <bpmn2:extensionElements>
+          <drools:metaData name="isAutoConnection.source">
+            <drools:metaValue>true</drools:metaValue>
+          </drools:metaData>
+          <drools:metaData name="isAutoConnection.target">
+            <drools:metaValue>true</drools:metaValue>
+          </drools:metaData>
+        </bpmn2:extensionElements>
+        <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_9H--8DWCEDiaGNc79JnBiw" language="http://www.java.com/java">return !isPassengerApproved;</bpmn2:conditionExpression>
       </bpmn2:sequenceFlow>
       <bpmn2:sequenceFlow id="_3FD370AA-36A7-4074-8977-5F58E0E88F04" sourceRef="_1120E34E-319E-49DF-AF68-7BB569F92ADC" targetRef="_88B43256-BDA2-4AA8-B5A3-F43D9B799234">
         <bpmn2:extensionElements>
@@ -339,27 +342,27 @@
         </bpmn2:extensionElements>
         <bpmn2:incoming>_C6BEB443-A465-4A89-B0CE-ACB76BEE7D03</bpmn2:incoming>
         <bpmn2:outgoing>_A95FF555-9C22-42E4-A25F-7D4724BD2AEF</bpmn2:outgoing>
-        <bpmn2:ioSpecification id="_-lWpwDVfEDi71NAmKSxCZg">
+        <bpmn2:ioSpecification id="_9H_mADWCEDiaGNc79JnBiw">
           <bpmn2:dataInput id="_5509C065-1D42-426E-8FF9-64D1E2E7B2EF_flightInputX" drools:dtype="org.kie.kogito.examples.domain.Flight" itemSubjectRef="__5509C065-1D42-426E-8FF9-64D1E2E7B2EF_flightInputXItem" name="flight"/>
           <bpmn2:dataInput id="_5509C065-1D42-426E-8FF9-64D1E2E7B2EF_passengerInputX" drools:dtype="org.kie.kogito.examples.domain.PassengerDTO" itemSubjectRef="__5509C065-1D42-426E-8FF9-64D1E2E7B2EF_passengerInputXItem" name="passenger"/>
           <bpmn2:dataOutput id="_5509C065-1D42-426E-8FF9-64D1E2E7B2EF_flightOutputX" drools:dtype="org.kie.kogito.examples.domain.Flight" itemSubjectRef="__5509C065-1D42-426E-8FF9-64D1E2E7B2EF_flightOutputXItem" name="flight"/>
-          <bpmn2:inputSet id="_-lXQ0DVfEDi71NAmKSxCZg">
+          <bpmn2:inputSet id="_9IANEDWCEDiaGNc79JnBiw">
             <bpmn2:dataInputRefs>_5509C065-1D42-426E-8FF9-64D1E2E7B2EF_flightInputX</bpmn2:dataInputRefs>
             <bpmn2:dataInputRefs>_5509C065-1D42-426E-8FF9-64D1E2E7B2EF_passengerInputX</bpmn2:dataInputRefs>
           </bpmn2:inputSet>
-          <bpmn2:outputSet id="_-lXQ0TVfEDi71NAmKSxCZg">
+          <bpmn2:outputSet id="_9IANETWCEDiaGNc79JnBiw">
             <bpmn2:dataOutputRefs>_5509C065-1D42-426E-8FF9-64D1E2E7B2EF_flightOutputX</bpmn2:dataOutputRefs>
           </bpmn2:outputSet>
         </bpmn2:ioSpecification>
-        <bpmn2:dataInputAssociation id="_-lXQ0jVfEDi71NAmKSxCZg">
+        <bpmn2:dataInputAssociation id="_9IANEjWCEDiaGNc79JnBiw">
           <bpmn2:sourceRef>flight</bpmn2:sourceRef>
           <bpmn2:targetRef>_5509C065-1D42-426E-8FF9-64D1E2E7B2EF_flightInputX</bpmn2:targetRef>
         </bpmn2:dataInputAssociation>
-        <bpmn2:dataInputAssociation id="_-lXQ0zVfEDi71NAmKSxCZg">
+        <bpmn2:dataInputAssociation id="_9IANEzWCEDiaGNc79JnBiw">
           <bpmn2:sourceRef>passengerRequest</bpmn2:sourceRef>
           <bpmn2:targetRef>_5509C065-1D42-426E-8FF9-64D1E2E7B2EF_passengerInputX</bpmn2:targetRef>
         </bpmn2:dataInputAssociation>
-        <bpmn2:dataOutputAssociation id="_-lXQ1DVfEDi71NAmKSxCZg">
+        <bpmn2:dataOutputAssociation id="_9IANFDWCEDiaGNc79JnBiw">
           <bpmn2:sourceRef>_5509C065-1D42-426E-8FF9-64D1E2E7B2EF_flightOutputX</bpmn2:sourceRef>
           <bpmn2:targetRef>flight</bpmn2:targetRef>
         </bpmn2:dataOutputAssociation>
@@ -371,8 +374,8 @@
           </drools:metaData>
         </bpmn2:extensionElements>
         <bpmn2:incoming>_3FD370AA-36A7-4074-8977-5F58E0E88F04</bpmn2:incoming>
-        <bpmn2:outgoing>_C6BEB443-A465-4A89-B0CE-ACB76BEE7D03</bpmn2:outgoing>
         <bpmn2:outgoing>_94AD6769-D320-49C0-9CC1-92132A075462</bpmn2:outgoing>
+        <bpmn2:outgoing>_C6BEB443-A465-4A89-B0CE-ACB76BEE7D03</bpmn2:outgoing>
       </bpmn2:exclusiveGateway>
       <bpmn2:userTask id="_1120E34E-319E-49DF-AF68-7BB569F92ADC" name="Approve/Deny Passenger">
         <bpmn2:extensionElements>
@@ -382,99 +385,104 @@
         </bpmn2:extensionElements>
         <bpmn2:incoming>_8AE45BEB-7A37-4A21-B22A-3DA124D3368E</bpmn2:incoming>
         <bpmn2:outgoing>_3FD370AA-36A7-4074-8977-5F58E0E88F04</bpmn2:outgoing>
-        <bpmn2:ioSpecification id="_-lX34DVfEDi71NAmKSxCZg">
+        <bpmn2:ioSpecification id="_9IA0IDWCEDiaGNc79JnBiw">
           <bpmn2:dataInput id="_1120E34E-319E-49DF-AF68-7BB569F92ADC_TaskNameInputX" drools:dtype="Object" itemSubjectRef="__1120E34E-319E-49DF-AF68-7BB569F92ADC_TaskNameInputXItem" name="TaskName"/>
           <bpmn2:dataInput id="_1120E34E-319E-49DF-AF68-7BB569F92ADC_passengerInputX" drools:dtype="org.kie.kogito.examples.PassengerDTO" itemSubjectRef="__1120E34E-319E-49DF-AF68-7BB569F92ADC_passengerInputXItem" name="passenger"/>
           <bpmn2:dataInput id="_1120E34E-319E-49DF-AF68-7BB569F92ADC_SkippableInputX" drools:dtype="Object" itemSubjectRef="__1120E34E-319E-49DF-AF68-7BB569F92ADC_SkippableInputXItem" name="Skippable"/>
           <bpmn2:dataOutput id="_1120E34E-319E-49DF-AF68-7BB569F92ADC_isPassengerApprovedOutputX" drools:dtype="Boolean" itemSubjectRef="__1120E34E-319E-49DF-AF68-7BB569F92ADC_isPassengerApprovedOutputXItem" name="isPassengerApproved"/>
-          <bpmn2:inputSet id="_-lX34TVfEDi71NAmKSxCZg">
+          <bpmn2:inputSet id="_9IA0ITWCEDiaGNc79JnBiw">
             <bpmn2:dataInputRefs>_1120E34E-319E-49DF-AF68-7BB569F92ADC_TaskNameInputX</bpmn2:dataInputRefs>
             <bpmn2:dataInputRefs>_1120E34E-319E-49DF-AF68-7BB569F92ADC_passengerInputX</bpmn2:dataInputRefs>
             <bpmn2:dataInputRefs>_1120E34E-319E-49DF-AF68-7BB569F92ADC_SkippableInputX</bpmn2:dataInputRefs>
           </bpmn2:inputSet>
-          <bpmn2:outputSet id="_-lX34jVfEDi71NAmKSxCZg">
+          <bpmn2:outputSet id="_9IA0IjWCEDiaGNc79JnBiw">
             <bpmn2:dataOutputRefs>_1120E34E-319E-49DF-AF68-7BB569F92ADC_isPassengerApprovedOutputX</bpmn2:dataOutputRefs>
           </bpmn2:outputSet>
         </bpmn2:ioSpecification>
-        <bpmn2:dataInputAssociation id="_-lX34zVfEDi71NAmKSxCZg">
+        <bpmn2:dataInputAssociation id="_9IA0IzWCEDiaGNc79JnBiw">
           <bpmn2:targetRef>_1120E34E-319E-49DF-AF68-7BB569F92ADC_TaskNameInputX</bpmn2:targetRef>
-          <bpmn2:assignment id="_-lX35DVfEDi71NAmKSxCZg">
-            <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_-lX35TVfEDi71NAmKSxCZg">approveDenyPassenger</bpmn2:from>
-            <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_-lX35jVfEDi71NAmKSxCZg">_1120E34E-319E-49DF-AF68-7BB569F92ADC_TaskNameInputX</bpmn2:to>
+          <bpmn2:assignment id="_9IA0JDWCEDiaGNc79JnBiw">
+            <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_9IA0JTWCEDiaGNc79JnBiw">approveDenyPassenger</bpmn2:from>
+            <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_9IA0JjWCEDiaGNc79JnBiw">_1120E34E-319E-49DF-AF68-7BB569F92ADC_TaskNameInputX</bpmn2:to>
           </bpmn2:assignment>
         </bpmn2:dataInputAssociation>
-        <bpmn2:dataInputAssociation id="_-lX35zVfEDi71NAmKSxCZg">
+        <bpmn2:dataInputAssociation id="_9IA0JzWCEDiaGNc79JnBiw">
           <bpmn2:sourceRef>passengerRequest</bpmn2:sourceRef>
           <bpmn2:targetRef>_1120E34E-319E-49DF-AF68-7BB569F92ADC_passengerInputX</bpmn2:targetRef>
         </bpmn2:dataInputAssociation>
-        <bpmn2:dataInputAssociation id="_-lX36DVfEDi71NAmKSxCZg">
+        <bpmn2:dataInputAssociation id="_9IA0KDWCEDiaGNc79JnBiw">
           <bpmn2:targetRef>_1120E34E-319E-49DF-AF68-7BB569F92ADC_SkippableInputX</bpmn2:targetRef>
-          <bpmn2:assignment id="_-lYe8DVfEDi71NAmKSxCZg">
-            <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_-lYe8TVfEDi71NAmKSxCZg">false</bpmn2:from>
-            <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_-lYe8jVfEDi71NAmKSxCZg">_1120E34E-319E-49DF-AF68-7BB569F92ADC_SkippableInputX</bpmn2:to>
+          <bpmn2:assignment id="_9IA0KTWCEDiaGNc79JnBiw">
+            <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_9IA0KjWCEDiaGNc79JnBiw">false</bpmn2:from>
+            <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_9IBbMDWCEDiaGNc79JnBiw">_1120E34E-319E-49DF-AF68-7BB569F92ADC_SkippableInputX</bpmn2:to>
           </bpmn2:assignment>
         </bpmn2:dataInputAssociation>
-        <bpmn2:dataOutputAssociation id="_-lYe8zVfEDi71NAmKSxCZg">
+        <bpmn2:dataOutputAssociation id="_9IBbMTWCEDiaGNc79JnBiw">
           <bpmn2:sourceRef>_1120E34E-319E-49DF-AF68-7BB569F92ADC_isPassengerApprovedOutputX</bpmn2:sourceRef>
           <bpmn2:targetRef>isPassengerApproved</bpmn2:targetRef>
         </bpmn2:dataOutputAssociation>
       </bpmn2:userTask>
-      <bpmn2:startEvent id="_3F96473B-23BA-4A72-83D3-3EA4B33665D1">
+      <bpmn2:startEvent id="_3F96473B-23BA-4A72-83D3-3EA4B33665D1" name="New Passenger Boarding Request">
+        <bpmn2:extensionElements>
+          <drools:metaData name="elementname">
+            <drools:metaValue>New Passenger Boarding Request</drools:metaValue>
+          </drools:metaData>
+        </bpmn2:extensionElements>
         <bpmn2:outgoing>_8AE45BEB-7A37-4A21-B22A-3DA124D3368E</bpmn2:outgoing>
         <bpmn2:dataOutput id="_3F96473B-23BA-4A72-83D3-3EA4B33665D1_passengerOutputX" drools:dtype="org.kie.kogito.domain.PassengerDTO" itemSubjectRef="__3F96473B-23BA-4A72-83D3-3EA4B33665D1_passengerOutputXItem" name="passenger"/>
-        <bpmn2:dataOutputAssociation id="_-lYe9DVfEDi71NAmKSxCZg">
+        <bpmn2:dataOutputAssociation id="_9ICCQDWCEDiaGNc79JnBiw">
           <bpmn2:sourceRef>_3F96473B-23BA-4A72-83D3-3EA4B33665D1_passengerOutputX</bpmn2:sourceRef>
           <bpmn2:targetRef>passengerRequest</bpmn2:targetRef>
         </bpmn2:dataOutputAssociation>
-        <bpmn2:outputSet id="_-lYe9TVfEDi71NAmKSxCZg">
+        <bpmn2:outputSet id="_9ICCQTWCEDiaGNc79JnBiw">
           <bpmn2:dataOutputRefs>_3F96473B-23BA-4A72-83D3-3EA4B33665D1_passengerOutputX</bpmn2:dataOutputRefs>
         </bpmn2:outputSet>
-        <bpmn2:signalEventDefinition id="_-lYe9jVfEDi71NAmKSxCZg" signalRef="_1134912085"/>
+        <bpmn2:signalEventDefinition id="_9ICCQjWCEDiaGNc79JnBiw" signalRef="_1134912085"/>
       </bpmn2:startEvent>
     </bpmn2:subProcess>
   </bpmn2:process>
   <bpmndi:BPMNDiagram>
     <bpmndi:BPMNPlane bpmnElement="flights">
       <bpmndi:BPMNShape id="shape__C9CB4707-AB7F-4B46-BFA2-4F8BF25AA037" bpmnElement="_C9CB4707-AB7F-4B46-BFA2-4F8BF25AA037" isExpanded="true">
-        <dc:Bounds height="373" width="954" x="269" y="589.5"/>
+        <dc:Bounds height="401" width="989" x="251" y="561.5"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__3F96473B-23BA-4A72-83D3-3EA4B33665D1" bpmnElement="_3F96473B-23BA-4A72-83D3-3EA4B33665D1">
-        <dc:Bounds height="56" width="56" x="300" y="687"/>
+        <dc:Bounds height="56" width="56" x="348.5" y="678"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__1120E34E-319E-49DF-AF68-7BB569F92ADC" bpmnElement="_1120E34E-319E-49DF-AF68-7BB569F92ADC">
-        <dc:Bounds height="102" width="154" x="474" y="663.5"/>
+        <dc:Bounds height="102" width="154" x="523" y="654.5"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__88B43256-BDA2-4AA8-B5A3-F43D9B799234" bpmnElement="_88B43256-BDA2-4AA8-B5A3-F43D9B799234">
-        <dc:Bounds height="56" width="56" x="719" y="686.5"/>
+        <dc:Bounds height="56" width="56" x="768" y="677.5"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__5509C065-1D42-426E-8FF9-64D1E2E7B2EF" bpmnElement="_5509C065-1D42-426E-8FF9-64D1E2E7B2EF">
-        <dc:Bounds height="102" width="154" x="866" y="663.5"/>
+        <dc:Bounds height="102" width="154" x="916" y="654.5"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__1CBDC9E4-A8ED-4927-A7A9-2199194E569B" bpmnElement="_1CBDC9E4-A8ED-4927-A7A9-2199194E569B">
-        <dc:Bounds height="56" width="56" x="1111" y="686.5"/>
+        <dc:Bounds height="56" width="56" x="1162" y="677.5"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__1D32B117-1B5F-4F39-B2FC-9E682CA0B465" bpmnElement="_1D32B117-1B5F-4F39-B2FC-9E682CA0B465">
-        <dc:Bounds height="56" width="56" x="719" y="870.5"/>
+        <dc:Bounds height="56" width="56" x="768" y="861.5"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="edge_shape__3F96473B-23BA-4A72-83D3-3EA4B33665D1_to_shape__1120E34E-319E-49DF-AF68-7BB569F92ADC" bpmnElement="_8AE45BEB-7A37-4A21-B22A-3DA124D3368E">
-        <di:waypoint x="328" y="743"/>
-        <di:waypoint x="474" y="714.5"/>
+        <di:waypoint x="376.5" y="734"/>
+        <di:waypoint x="523" y="705.5"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="edge_shape__1120E34E-319E-49DF-AF68-7BB569F92ADC_to_shape__88B43256-BDA2-4AA8-B5A3-F43D9B799234" bpmnElement="_3FD370AA-36A7-4074-8977-5F58E0E88F04">
-        <di:waypoint x="628" y="714.5"/>
-        <di:waypoint x="719" y="714.5"/>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="edge_shape__88B43256-BDA2-4AA8-B5A3-F43D9B799234_to_shape__5509C065-1D42-426E-8FF9-64D1E2E7B2EF" bpmnElement="_C6BEB443-A465-4A89-B0CE-ACB76BEE7D03">
-        <di:waypoint x="775" y="714.5"/>
-        <di:waypoint x="866" y="714.5"/>
+        <di:waypoint x="677" y="705.5"/>
+        <di:waypoint x="768" y="705.5"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="edge_shape__88B43256-BDA2-4AA8-B5A3-F43D9B799234_to_shape__1D32B117-1B5F-4F39-B2FC-9E682CA0B465" bpmnElement="_94AD6769-D320-49C0-9CC1-92132A075462">
-        <di:waypoint x="747" y="742.5"/>
-        <di:waypoint x="747" y="870.5"/>
+        <di:waypoint x="796" y="733.5"/>
+        <di:waypoint x="796" y="861.5"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="edge_shape__88B43256-BDA2-4AA8-B5A3-F43D9B799234_to_shape__5509C065-1D42-426E-8FF9-64D1E2E7B2EF" bpmnElement="_C6BEB443-A465-4A89-B0CE-ACB76BEE7D03">
+        <di:waypoint x="824" y="705.5"/>
+        <di:waypoint x="916" y="705.5"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="edge_shape__5509C065-1D42-426E-8FF9-64D1E2E7B2EF_to_shape__1CBDC9E4-A8ED-4927-A7A9-2199194E569B" bpmnElement="_A95FF555-9C22-42E4-A25F-7D4724BD2AEF">
-        <di:waypoint x="1020" y="714.5"/>
-        <di:waypoint x="1111" y="714.5"/>
+        <di:waypoint x="1070" y="705.5"/>
+        <di:waypoint x="1162" y="705.5"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="shape__02BFCEB6-C148-4F2B-9CC9-E5BA5D7AFEDC" bpmnElement="_02BFCEB6-C148-4F2B-9CC9-E5BA5D7AFEDC">
         <dc:Bounds height="56" width="56" x="154" y="435"/>
@@ -525,7 +533,7 @@
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
-  <bpmn2:relationship id="_-lbiQDVfEDi71NAmKSxCZg" type="BPSimData">
+  <bpmn2:relationship id="_9ID3cDWCEDiaGNc79JnBiw" type="BPSimData">
     <bpmn2:extensionElements>
       <bpsim:BPSimData>
         <bpsim:Scenario id="default" name="Simulationscenario">
@@ -640,7 +648,7 @@
         </bpsim:Scenario>
       </bpsim:BPSimData>
     </bpmn2:extensionElements>
-    <bpmn2:source>_-lFkATVfEDi71NAmKSxCZg</bpmn2:source>
-    <bpmn2:target>_-lFkATVfEDi71NAmKSxCZg</bpmn2:target>
+    <bpmn2:source>_9HzYwDWCEDiaGNc79JnBiw</bpmn2:source>
+    <bpmn2:target>_9HzYwDWCEDiaGNc79JnBiw</bpmn2:target>
   </bpmn2:relationship>
 </bpmn2:definitions>
