@@ -16,7 +16,7 @@
     <springboot.version>2.2.2.RELEASE</springboot.version>
     <version.org.optaplanner>${version.org.kie7.final}</version.org.optaplanner>
   </properties>
-  
+
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>

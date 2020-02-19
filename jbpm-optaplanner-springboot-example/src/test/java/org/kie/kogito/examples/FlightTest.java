@@ -29,37 +29,36 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = FlightSeatingApplication.class)
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD) // reset spring context after each test method
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+// reset spring context after each test method
 public class FlightTest {
 
     @Autowired
     @Qualifier("flights")
     Process<? extends Model> process;
 
-
     @Test
     public void runProcess() {
         assertNotNull(process);
-        
+
         FlightDTO flightParams = new FlightDTO();
         flightParams.setDepartureDateTime(LocalDateTime.now().toString());
         flightParams.setDestination("");
         flightParams.setOrigin("");
         flightParams.setSeatColumnSize(10);
         flightParams.setSeatRowSize(6);
-        
 
         Model m = process.createModel();
         Map<String, Object> parameters = new HashMap<>();
-        parameters.put("params", flightParams);        
+        parameters.put("params", flightParams);
         m.fromMap(parameters);
-        
+
         ProcessInstance<?> processInstance = process.createInstance(m);
         processInstance.start();
         assertEquals(ProcessInstance.STATE_ACTIVE, processInstance.status());
         // add new passenger
         processInstance.send(Sig.of("newPassengerRequest", new PassengerDTO("john", "NONE", false, false, null)));
-        
+
         List<WorkItem> tasks = processInstance.workItems();
         assertEquals(2, tasks.size());
         // approve passenger
@@ -70,16 +69,15 @@ public class FlightTest {
         result = new HashMap<>();
         result.put("isPassengerListFinalized", true);
         processInstance.completeWorkItem(tasks.get(0).getId(), result);
-        
+
         tasks = processInstance.workItems();
         assertEquals(1, tasks.size());
         // then complete the flight
         processInstance.completeWorkItem(tasks.get(0).getId(), null);
         // flight process is done
         assertEquals(ProcessInstance.STATE_COMPLETED, processInstance.status());
-        
-        Model resultData = (Model)processInstance.variables();
-        assertEquals(4, resultData.toMap().size());
-    }
 
+        Model resultData = (Model) processInstance.variables();
+        assertEquals(3, resultData.toMap().size());
+    }
 }
