@@ -1,4 +1,4 @@
-version: '2'
+version: '2.1'
 
 services:
 
@@ -23,14 +23,14 @@ services:
     image: prom/prometheus:v2.8.0
     network_mode: host
     volumes:
-      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:z
+      - ./prometheus/prometheus-linux.yml:/etc/prometheus/prometheus.yml:z
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
     ports:
       - 9090:9090
 
   grafana:
-    image: grafana/grafana:6.0.1
+    image: grafana/grafana:6.6.1
     network_mode: host
     depends_on:
       - prometheus
@@ -38,3 +38,5 @@ services:
       - 3000:3000
     volumes:
       - ./grafana/provisioning/:/etc/grafana/provisioning/:z
+    environment:
+      - PROMETHEUS_URL=http://localhost:9090

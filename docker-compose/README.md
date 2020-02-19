@@ -15,7 +15,13 @@ In order to use it, please ensure you have Docker Compose installed on your mach
 
   You should start all the services before you execute any of the Travel Agency applications, to do that please execute:
   
-    docker-compose -f travel-agency-services.yml up
+  For MacOS and Windows:
+  
+    docker-compose -f travel-agency-services-macos-windows.yml up
+  
+  For Linux:
+  
+    docker-compose -f travel-agency-services-linux.yml up
     
   Once all services bootstrap, the following ports will be assigned on your local machine:
   - Infinispan: 11222

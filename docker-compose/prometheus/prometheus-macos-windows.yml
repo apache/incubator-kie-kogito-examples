@@ -12,8 +12,7 @@ scrape_configs:
     #   password: 'kieserver1!'
 
     static_configs:
-      - targets: ['localhost:8080']
-      # - targets: ['host.docker.internal:8080']
+      - targets: ['host.docker.internal:8080']
 
   - job_name: 'visas'
 
@@ -26,4 +25,4 @@ scrape_configs:
     #   password: 'kieserver1!'
 
     static_configs:
-      - targets: ['localhost:8090']
+      - targets: ['host.docker.internal:8090']
