@@ -31,11 +31,24 @@ function renderFlight(flight, tasks) {
                 style: "margin: 5px;",
                 onClick: () => {
                     $.post(`/rest/flights/${flight.id}/finalizePassengerList/${finalizePassengerListTasks[0]}`, JSON.stringify({}), () => {
-                        refresh();
+                        const intervalId = setInterval(() => {
+                            $.getJSON(`/rest/flights/${flight.id}`, flight => {
+                                if (!flight.isSolving) {
+                                    clearInterval(intervalId);
+                                }
+                                $.getJSON(`/rest/flights/${flight.id}/tasks`, tasks => {
+                                    $(`#${flight.id} > *`).replaceWith(renderFlight(flight, tasks));
+                                });
+                            });
+                        }, 500);
                     });
                 }
             }, "Finalize Passenger List")
         );
+    }
+    else if (flight.isSolving) {
+        header = element("div", {},
+            element("h5", {}, getFlightName(flight)), element("h6", {}, "Solving..."));
     }
     else {
         const finalizeSeatAssignmentTasks = findTasks("finalizeSeatAssignment", tasks);
@@ -162,33 +175,28 @@ let myFlights = [];
 let flightOrder = [];
 
 function refresh() {
-    const oldScrollPosX = window.pageXOffset;
-    const oldScrollPosY = window.pageYOffset;
-    $("#flights-container").empty();
-    $("#flights-container").addClass("hidden");
     $.getJSON("/rest/flights", flights => {
         const toRemove = [...flightOrder];
+        const toAdd = [];
         flights.forEach(flight => {
             if (!flightOrder.includes(flight.id)) {
                 flightOrder.push(flight.id);
+                toAdd.push(flight.id);
             }
             else {
                 toRemove.splice(toRemove.indexOf(flight.id), 1);
             }
         });
-        toRemove.forEach(flight => flightOrder.splice(flightOrder.indexOf(flight), 1));
-        flightOrder.forEach(flightId => element("div", { id: flightId }).appendTo("#flights-container"));
+        toRemove.forEach(flight => {
+            flightOrder.splice(flightOrder.indexOf(flight), 1);
+            $(`#${flight}`).remove();
+        });
+        toAdd.forEach(flightId => element("div", { id: flightId }, element("span", {})).appendTo("#flights-container"));
         myFlights = flights;
-        let toProcess = flights.length;
+        
         flights.forEach(flight => {
             $.getJSON(`/rest/flights/${flight.id}/tasks`, tasks => {
-                renderFlight(flight, tasks).appendTo(`#${flight.id}`);
-            }).then(() => {
-                toProcess--;
-                if (toProcess == 0) {
-                    $("#flights-container").removeClass("hidden");
-                    window.scrollTo(oldScrollPosX, oldScrollPosY);
-                }
+                $(`#${flight.id} > *`).replaceWith(renderFlight(flight, tasks));
             });
         });
     });
