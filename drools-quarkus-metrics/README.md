@@ -19,6 +19,7 @@ You will need:
   - Java 1.8.0+ installed 
   - Environment variable JAVA_HOME set accordingly
   - Maven 3.5.4+ installed
+  - Linux SO (No Windows atm)
 
 ### Compile and Run in Local Dev Mode
 
@@ -38,7 +39,31 @@ Once the service is up and running, you can use the following example to interac
 Post "hello":
 
 ```sh
+./sample-requests/query-drl-hello.sh
 
 ```
 
 the service will return `["hello", "world"]`
+
+### POST /LoanEligibility
+
+Post:
+
+```sh
+./sample-requests/query-dmn-loan.sh
+
+```
+
+the service will return the decision results. You can generate some traffic with 
+
+```sh
+while true; do ./sample-requests/query-dmn-loan.sh; done
+```
+
+for example. 
+
+Go to `localhost:3000` and have a look at your dashboards. Here a screenshot of what you will get
+
+![Screenshot from 2020-02-21 14-54-20](https://user-images.githubusercontent.com/18282531/75046661-cd6d3c00-54c5-11ea-81a7-2afcd09aea7b.png)
+
+
