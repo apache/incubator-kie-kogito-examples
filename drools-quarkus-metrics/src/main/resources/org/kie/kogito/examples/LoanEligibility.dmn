@@ -1,0 +1,278 @@
+<dmn:definitions xmlns:dmn="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns="https://github.com/kiegroup/kogito-examples/dmn-quarkus-listener-example" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:kie="http://www.drools.org/kie/dmn/1.2" xmlns:dmndi="http://www.omg.org/spec/DMN/20180521/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:feel="http://www.omg.org/spec/DMN/20180521/FEEL/" id="_DC5AB7D9-7D61-40F7-94C1-2E064A053AC0" name="LoanEligibility" typeLanguage="http://www.omg.org/spec/DMN/20180521/FEEL/" namespace="https://github.com/kiegroup/kogito-examples/dmn-quarkus-listener-example">
+  <dmn:extensionElements/>
+  <dmn:itemDefinition id="_AD041308-CE7E-4359-97DA-E03C520A7A70" name="tClient" isCollection="false">
+    <dmn:itemComponent id="_91AB76A9-CDCC-463E-B404-C530AB0AA6B5" name="age" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+      <dmn:allowedValues kie:constraintType="range" id="_4B686261-D292-4719-BCD7-4122528082CE">
+        <dmn:text>[18..80]</dmn:text>
+      </dmn:allowedValues>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_DDC79E0D-C9A1-40F9-BF5B-FC12B4894DBA" name="salary" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+      <dmn:allowedValues kie:constraintType="expression" id="_0C9977E2-35D1-4279-A4A0-5A421E9C72B8">
+        <dmn:text>&gt; 0</dmn:text>
+      </dmn:allowedValues>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_73E5A8FE-258A-4E02-B2C8-4C1247AC1173" name="existing payments" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+      <dmn:allowedValues kie:constraintType="expression" id="_D25C94E0-7BFD-40A4-8F4F-D60398D3B949">
+        <dmn:text>&gt;= 0</dmn:text>
+      </dmn:allowedValues>z
+    </dmn:itemComponent>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_D88AFBD5-4920-49E6-BE27-1A43179E51EA" name="tLoan" isCollection="false">
+    <dmn:itemComponent id="_3FECD32E-06B7-4D31-B25D-DA4CCBCFCB6C" name="duration" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+      <dmn:allowedValues kie:constraintType="expression" id="_124C0712-A0CB-4988-A225-8BBC57AA5963">
+        <dmn:text>&gt; 0</dmn:text>
+      </dmn:allowedValues>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_54CF2415-8CFA-4EAE-9482-F03C4355F218" name="installment" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+      <dmn:allowedValues kie:constraintType="expression" id="_9B214CD8-4B23-4BD5-8A22-F0D22C2713A6">
+        <dmn:text>&gt; 0</dmn:text>
+      </dmn:allowedValues>
+    </dmn:itemComponent>
+  </dmn:itemDefinition>
+  <dmn:inputData id="_94A72ABB-E455-4F5C-A254-DB4B6D291944" name="Client">
+    <dmn:extensionElements/>
+    <dmn:variable id="_2200B3CC-EF45-40A1-9B29-C4EC77B211C3" name="Client" typeRef="tClient"/>
+  </dmn:inputData>
+  <dmn:inputData id="_A6007998-6106-493C-8728-E1986304B7FC" name="Loan">
+    <dmn:extensionElements/>
+    <dmn:variable id="_8ACB289B-4BCF-4B6D-B0C4-1DE4390CE4B7" name="Loan" typeRef="tLoan"/>
+  </dmn:inputData>
+  <dmn:decision id="_AF3816EA-29BE-417F-A83F-D77A74719369" name="Eligibility">
+    <dmn:extensionElements/>
+    <dmn:question>Is the client eligible for the loan?</dmn:question>
+    <dmn:allowedAnswers>"Yes" "No"</dmn:allowedAnswers>
+    <dmn:variable id="_51474B96-4904-4A5F-911C-C7803178BC31" name="Eligibility" typeRef="string"/>
+    <dmn:informationRequirement id="_3D11E284-712F-4E06-B3B1-E5A9B92999D5">
+      <dmn:requiredInput href="#_94A72ABB-E455-4F5C-A254-DB4B6D291944"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_415EBA81-5FDF-45D5-8783-CB97C0485672">
+      <dmn:requiredInput href="#_A6007998-6106-493C-8728-E1986304B7FC"/>
+    </dmn:informationRequirement>
+    <dmn:decisionTable id="_98FE50CB-F4CC-45BB-A7F4-58D97A14A957" hitPolicy="UNIQUE" preferredOrientation="Rule-as-Row">
+      <dmn:input id="_CDF02DAD-5492-4BF6-B275-9DD55D1C14C6">
+        <dmn:inputExpression id="_336FE6B0-8A50-4B62-B17A-E851FC1B13CD" typeRef="number">
+          <dmn:text>Client.salary</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:input id="_BA521F15-CED4-4B69-A163-E41684519129">
+        <dmn:inputExpression id="_FDF9C754-1ACD-4808-8364-50A2D03D3E49" typeRef="number">
+          <dmn:text>Client.age + Loan.duration</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:input id="_EF5E6B06-2DFB-4703-9570-861D4F8306EA">
+        <dmn:inputExpression id="_9597291D-FE7E-4FE0-A2F0-0690AB8A439A" typeRef="number">
+          <dmn:text>((Client.existing payments + Loan.installment) / Client.salary) * 100</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:output id="_6919B10D-0B12-4B5E-9DF5-1A90F166CF9A" typeRef="string">
+        <dmn:defaultOutputEntry id="_F19ECF67-98FC-4041-B8A0-E1A39C2BD0D9">
+          <dmn:text>"No"</dmn:text>
+        </dmn:defaultOutputEntry>
+      </dmn:output>
+      <dmn:rule id="_CE3825FE-A003-43F7-B124-FA360BD8CFB8">
+        <dmn:inputEntry id="_6FE7CEAC-E5FF-4298-9575-BF93CFE47E47">
+          <dmn:text>(0..2000]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_20AC69B3-B16F-483B-9F04-C55F6809AA80">
+          <dmn:text>&lt;= 80</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_80AFC97A-047F-4EF5-945E-409A4FB17D03">
+          <dmn:text>&lt;= 20</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_E8F9174B-0F91-4F18-9A24-DEEE48FEB1B2">
+          <dmn:text>"Yes"</dmn:text>
+        </dmn:outputEntry>
+      </dmn:rule>
+      <dmn:rule id="_30A82FBE-4839-4CCD-81D7-E6143B5C266C">
+        <dmn:inputEntry id="_6AD0971D-18F5-402A-8F90-63A4F0AF50B6">
+          <dmn:text>(2000..3000]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_FC38A913-9135-41A4-A209-B07C84F485A9">
+          <dmn:text>&lt;= 80</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_371D1B0A-3730-4B21-9323-05D19D9BB444">
+          <dmn:text>&lt;= 25</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_22C51C0E-A741-4BF2-828C-7CAAB5B3309A">
+          <dmn:text>"Yes"</dmn:text>
+        </dmn:outputEntry>
+      </dmn:rule>
+      <dmn:rule id="_ABF81842-40CE-4195-8E7D-B3313EED4C99">
+        <dmn:inputEntry id="_A6A04F7C-59BD-4E7D-B75A-D650224E9316">
+          <dmn:text>&gt; 3000</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_23EE5ABD-0906-4244-ABA0-43CD3A5BF77B">
+          <dmn:text>&lt;= 80</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_6737F418-999A-42E9-B814-1A0E2DB75ABE">
+          <dmn:text>&lt;= 35</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_BC47E642-0629-46CF-ACD2-2AF9737D46CB">
+          <dmn:text>"Yes"</dmn:text>
+        </dmn:outputEntry>
+      </dmn:rule>
+    </dmn:decisionTable>
+  </dmn:decision>
+  <dmn:inputData id="_384E3E0A-C54F-419C-BD8B-2D67438DF75E" name="God">
+    <dmn:extensionElements/>
+    <dmn:variable id="_3A512E33-E6E7-4DD2-BC84-094E17BA2A4F" name="God" typeRef="string"/>
+  </dmn:inputData>
+  <dmn:decision id="_D2E1574D-15A0-4BA7-9F51-C3A08A33B093" name="Judgement">
+    <dmn:extensionElements/>
+    <dmn:question>does god approve it?</dmn:question>
+    <dmn:allowedAnswers>"yes" , "no"</dmn:allowedAnswers>
+    <dmn:variable id="_F51371F3-D8D8-494D-B31D-2050657C58D3" name="Judgement" typeRef="string"/>
+    <dmn:informationRequirement id="_EE5D79A8-BCA2-4818-9AF1-11068BD4B25C">
+      <dmn:requiredInput href="#_384E3E0A-C54F-419C-BD8B-2D67438DF75E"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_96E2003D-D51E-46AA-A1C9-1063E273AA05">
+      <dmn:requiredDecision href="#_AF3816EA-29BE-417F-A83F-D77A74719369"/>
+    </dmn:informationRequirement>
+    <dmn:decisionTable id="_5C30DC02-F116-454A-B87A-71A72DC4887F" hitPolicy="UNIQUE" preferredOrientation="Rule-as-Row">
+      <dmn:input id="_41D37F5C-6589-4C5E-A20A-63350D115D51">
+        <dmn:inputExpression id="_0DAEB9A4-90AA-4E69-8999-9AA533937833" typeRef="string">
+          <dmn:text>Eligibility</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:input id="_EDDAB97B-325B-4102-BFFD-2ADF96B7749F">
+        <dmn:inputExpression id="_99FE587F-F85D-4234-99F2-7EADD47D7D48" typeRef="string">
+          <dmn:text>God</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:output id="_6CBC7A80-E485-425E-81F9-570E96A64E2E" typeRef="boolean"/>
+      <dmn:rule id="_E11830D2-F640-4E6B-9680-E28FAF342951">
+        <dmn:inputEntry id="_74F3C294-5DCB-4B9A-9271-4972F1612630">
+          <dmn:text>"Yes"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_FA478FC4-0509-47EA-BFB6-552A25ACA9F3">
+          <dmn:text>"No"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_A90E8962-D2A3-4412-B054-3BC39064E57A">
+          <dmn:text>"No"</dmn:text>
+        </dmn:outputEntry>
+      </dmn:rule>
+      <dmn:rule id="_8E878140-E3D5-4E30-A138-2E4DEAFBB788">
+        <dmn:inputEntry id="_9D2A75E3-7FDF-4E83-A6E0-90CB81016469">
+          <dmn:text>"No"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_44EF108E-9EDC-402C-B31A-F6F790F42C73">
+          <dmn:text>"Yes"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_BC3E4D05-1494-4E87-9CB3-FE0A63CAB8FB">
+          <dmn:text>"Yes"</dmn:text>
+        </dmn:outputEntry>
+      </dmn:rule>
+      <dmn:rule id="_D398F29A-E764-4FC1-8715-2F3C2BD7402C">
+        <dmn:inputEntry id="_DD7EDF09-3836-485C-BD59-193FE8C29B8B">
+          <dmn:text>"No"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_6396722B-6A2A-4394-B0DC-D436128A3C96">
+          <dmn:text>"No"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_025F4EBE-63EA-49D3-8379-8B5C742888CB">
+          <dmn:text>"No"</dmn:text>
+        </dmn:outputEntry>
+      </dmn:rule>
+      <dmn:rule id="_6E28C0EE-D52E-479D-9B6D-AFF8BAB938C2">
+        <dmn:inputEntry id="_E7D161F5-5086-4A17-9883-BDEE48E20BB8">
+          <dmn:text>"Yes"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_B9D06AA6-9150-4A0A-8E76-4B257008AD3F">
+          <dmn:text>"Yes"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_C960F031-2C1B-4307-A3D7-3479F062EBB2">
+          <dmn:text>"Yes"</dmn:text>
+        </dmn:outputEntry>
+      </dmn:rule>
+    </dmn:decisionTable>
+  </dmn:decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <di:extension>
+        <kie:ComponentsWidthsExtension>
+          <kie:ComponentWidths dmnElementRef="_98FE50CB-F4CC-45BB-A7F4-58D97A14A957">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_5C30DC02-F116-454A-B87A-71A72DC4887F">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+          </kie:ComponentWidths>
+        </kie:ComponentsWidthsExtension>
+      </di:extension>
+      <dmndi:DMNShape id="dmnshape-_94A72ABB-E455-4F5C-A254-DB4B6D291944" dmnElementRef="_94A72ABB-E455-4F5C-A254-DB4B6D291944" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="255" y="407" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-_A6007998-6106-493C-8728-E1986304B7FC" dmnElementRef="_A6007998-6106-493C-8728-E1986304B7FC" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="454" y="407" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-_AF3816EA-29BE-417F-A83F-D77A74719369" dmnElementRef="_AF3816EA-29BE-417F-A83F-D77A74719369" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="355" y="254" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-_384E3E0A-C54F-419C-BD8B-2D67438DF75E" dmnElementRef="_384E3E0A-C54F-419C-BD8B-2D67438DF75E" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="676" y="253.3421052631579" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-_D2E1574D-15A0-4BA7-9F51-C3A08A33B093" dmnElementRef="_D2E1574D-15A0-4BA7-9F51-C3A08A33B093" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="511" y="101" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="dmnedge-_3D11E284-712F-4E06-B3B1-E5A9B92999D5" dmnElementRef="_3D11E284-712F-4E06-B3B1-E5A9B92999D5">
+        <di:waypoint x="305" y="407"/>
+        <di:waypoint x="405" y="304"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-_415EBA81-5FDF-45D5-8783-CB97C0485672" dmnElementRef="_415EBA81-5FDF-45D5-8783-CB97C0485672">
+        <di:waypoint x="504" y="407"/>
+        <di:waypoint x="405" y="304"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-_EE5D79A8-BCA2-4818-9AF1-11068BD4B25C" dmnElementRef="_EE5D79A8-BCA2-4818-9AF1-11068BD4B25C">
+        <di:waypoint x="726" y="253.3421052631579"/>
+        <di:waypoint x="561" y="151"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-_96E2003D-D51E-46AA-A1C9-1063E273AA05" dmnElementRef="_96E2003D-D51E-46AA-A1C9-1063E273AA05">
+        <di:waypoint x="405" y="254"/>
+        <di:waypoint x="561" y="151"/>
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</dmn:definitions>
