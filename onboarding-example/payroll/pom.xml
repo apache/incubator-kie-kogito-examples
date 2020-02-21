@@ -18,6 +18,7 @@
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
+    <version.surefire>2.22.1</version.surefire>
   </properties>
 
   <dependencies>
@@ -113,6 +114,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-failsafe-plugin</artifactId>
+            <version>${version.surefire}</version>
           </plugin>
         </plugins>
       </build>

@@ -11,6 +11,11 @@
   <artifactId>ruleunit-quarkus-example</artifactId>
   <name>Kogito Example :: RuleUnit - Quarkus</name>
 
+  <properties>
+    <version.surefire>2.22.1</version.surefire>
+  </properties>
+
+
   <build>
     <plugins>
       <plugin>
@@ -118,6 +123,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-failsafe-plugin</artifactId>
+            <version>${version.surefire}</version>
           </plugin>
         </plugins>
       </build>

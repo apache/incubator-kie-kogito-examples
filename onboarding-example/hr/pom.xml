@@ -15,6 +15,10 @@
   <name>Kogito Example :: Onboarding Example :: HR with Drools</name>
   <description>HR related processes and decisions for onboarding</description>
 
+  <properties>
+    <version.surefire>2.22.1</version.surefire>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>org.kie.kogito</groupId>
@@ -87,6 +91,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-failsafe-plugin</artifactId>
+            <version>${version.surefire}</version>
           </plugin>
         </plugins>
       </build>
