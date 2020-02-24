@@ -31,16 +31,18 @@ function renderFlight(flight, tasks) {
                 style: "margin: 5px;",
                 onClick: () => {
                     $.post(`/rest/flights/${flight.id}/finalizePassengerList/${finalizePassengerListTasks[0]}`, JSON.stringify({}), () => {
-                        const intervalId = setInterval(() => {
+                        const refreshFlight = () => {
                             $.getJSON(`/rest/flights/${flight.id}`, flight => {
-                                if (!flight.isSolving) {
-                                    clearInterval(intervalId);
-                                }
                                 $.getJSON(`/rest/flights/${flight.id}/tasks`, tasks => {
                                     $(`#${flight.id} > *`).replaceWith(renderFlight(flight, tasks));
+                                }).then(() => {
+                                    if (flight.isSolving) {
+                                        setTimeout(refreshFlight, 500);
+                                    }
                                 });
                             });
-                        }, 500);
+                        };
+                        refreshFlight();
                     });
                 }
             }, "Finalize Passenger List")
@@ -48,7 +50,7 @@ function renderFlight(flight, tasks) {
     }
     else if (flight.isSolving) {
         header = element("div", {},
-            element("h5", {}, getFlightName(flight)), element("h6", {}, "Solving..."));
+            element("h5", {}, getFlightName(flight)), element("h6", {}, "Solving..."), element("span", {}, `Score: ${getFlightScore(flight.flight)}`));
     }
     else {
         const finalizeSeatAssignmentTasks = findTasks("finalizeSeatAssignment", tasks);
@@ -64,6 +66,7 @@ function renderFlight(flight, tasks) {
 
         header = element("div", {},
             element("h5", {}, getFlightName(flight)),
+            element("div", {}, `Score: ${getFlightScore(flight.flight)}`),
             ...finalizeSeatAssignmentButton
         );
     }
@@ -151,6 +154,11 @@ function flightSeats(flight, flightSeatToElementMap) {
     const rowToGridRow = row => 2*row + 1;
     const columnToGridColumn = col => col + Math.round(col / (flight.flight.seatColumnSize)) + 1;
     const sortedSeatList = [...flight.flight.seatList].sort((a,b) => (a.row - b.row === 0)? a.column - b.column : a.row - b.row);
+    const seatToIndictment = sortedSeatList.map(seat => getSeatIndictment(seat, flight.flight.passengerList));
+    const seatColor = (index) => (seatToIndictment[index].score.hard < 0)? 'red' : (seatToIndictment[index].score.soft < 0)? 'yellow' : (seatToIndictment[index].matchPreference)? 'green' : 'white';
+    const seatTooltip = (seat, index) => (seatToIndictment[index].indictments.length === 0)? `The seat ${seat.name} does not violate any constraints.` :
+        seatToIndictment[index].indictments.map(indictment => `${indictment.name}: ${indictment.description} (${indictment.score.hard} Hard/${indictment.score.soft} Soft)`)
+        .reduce((prev, curr) => `${prev};\n${curr}`);
     
     return element("div", { style: `display: grid;
         grid-column: 2;
@@ -159,16 +167,73 @@ function flightSeats(flight, flightSeatToElementMap) {
         grid-template-columns: repeat(${flight.flight.seatColumnSize + 1}, minmax(100px, 1fr));
         column-gap: 10px;
         width: min-content;
-        justify-items: center;
-        align-items: center;
         border: 1px solid;
-        ` }, ...sortedSeatList.map(seat => element(
-          "span", { class: "fas fa-couch", style: `grid-row: ${rowToGridRow(seat.row)}; grid-column: ${columnToGridColumn(seat.column)}; margin-top: 30px;`},
-          seat.name)
+        ` }, ...sortedSeatList.map((seat, index) => element(
+            "span", {
+              class: "fas fa-couch",
+              style: `grid-row: ${rowToGridRow(seat.row)}; grid-column: ${columnToGridColumn(seat.column)}; margin-top: 30px; background-color: ${seatColor(index)}; text-align: center`,
+              title: seatTooltip(seat, index)
+            },
+            seat.name)
         ),
-        ...sortedSeatList.map(seat => flightSeatToElementMap({flight: flight.flight, seat: seat, passenger: flight.flight.passengerList.find(passenger => passenger.seat !== null &&
-            passenger.seat.row === seat.row && passenger.seat.column === seat.column) } ).css({"grid-row": String(rowToGridRow(seat.row) + 1), "grid-column": String(columnToGridColumn(seat.column)) }))
+        ...sortedSeatList.map((seat, index) => flightSeatToElementMap({flight: flight.flight, seat: seat, passenger: flight.flight.passengerList.find(passenger => passenger.seat !== null &&
+            passenger.seat.row === seat.row && passenger.seat.column === seat.column) } ).css({
+                "grid-row": String(rowToGridRow(seat.row) + 1),
+                "grid-column": String(columnToGridColumn(seat.column)),
+                "background-color": seatColor(index),
+                "text-align": "center"
+            }).attr("title", seatTooltip(seat, index)))
     );
+}
+
+function getFlightScore(flight) {
+    return `${flight.score.hardScore} Hard/${flight.score.softScore} Soft`;
+}
+
+function getSeatIndictment(seat, passengerList) {
+    const out = {
+        score: {
+            hard: 0,
+            soft: 0
+        },
+        indictments: []
+    };
+    const passengersInSeat = passengerList.filter(passenger => passenger.seat !== null && passenger.seat.name === seat.name);
+    if (passengersInSeat.length > 1) {
+        out.score.hard -= 1;
+        out.indictments.push({
+            name: "Seat conflict",
+            description: `The seat ${seat.name} has multiple passengers: ${passengersInSeat.map(passenger => passenger.name)}.`,
+            score: { hard: -1, soft: 0 }
+        });
+    }
+    passengersInSeat.forEach(passenger => {
+        if (seat.emergencyExitRow && !passenger.emergencyExitRowCapable) {
+            out.score.hard -= 1;
+            out.indictments.push({
+                name: "Emergency exit row has incapable passenger",
+                description: `The seat ${seat.name} is in the emergency exit row but the passenger ${passenger.name} cannot assist in an emergency.`,
+                score: { hard: -1, soft: 0 }
+            });
+        }
+        if (passenger.seatTypePreference !== null && passenger.seatTypePreference !== seat.seatType) {
+            out.score.soft -= 1;
+            out.indictments.push({
+                name: "Seat type preference",
+                description: `The passenger ${passenger.name} prefers ${passenger.seatTypePreference} seats but got a ${seat.seatType} seat.`,
+                score: { hard: 0, soft: -1 }
+            });
+        }
+        else if (passenger.seatTypePreference !== null && passenger.seatTypePreference === seat.seatType) {
+            out.matchPreference = true;
+            out.indictments.push({
+                name: "Seat type preference",
+                description: `The passenger ${passenger.name} prefers ${passenger.seatTypePreference} seats and got a ${seat.seatType} seat.`,
+                score: { hard: 0, soft: 0 }
+            });
+        }
+    });
+    return out;
 }
 
 let myFlights = [];
@@ -224,25 +289,24 @@ function getPassengersToApproveDeny(flight, tasks, map) {
 }
 
 function generatePassengersForFlight(flight) {
+    const SEAT_TYPE_PREFERENCE_CHOICES = ["NONE", "WINDOW", "AISLE"];
+    const passengersToAddList = [];
     for (let i = 0; i < flight.flight.seatList.length * 0.8; i++) {
-        const newPassengerRequest = JSON.stringify({
+        passengersToAddList.push(JSON.stringify({
             name: randomName(),
-            seatTypePreference: "NONE",
-            emergencyExitRowCapable: true,
+            seatTypePreference: SEAT_TYPE_PREFERENCE_CHOICES[Math.floor(Math.random() * SEAT_TYPE_PREFERENCE_CHOICES.length)],
+            emergencyExitRowCapable: Math.random() < 0.8,
             payedForSeat: false
-        });
-        $.post(`/rest/flights/${flight.id}/newPassengerRequest`, newPassengerRequest, () => {}, "json");
+        }));
     }
-    setTimeout(() => {
+    Promise.all(passengersToAddList.map(newPassengerRequest => $.post(`/rest/flights/${flight.id}/newPassengerRequest`, newPassengerRequest, () => {}, "json"))).then(() => {
+        console.log("Hi");
         $.getJSON(`/rest/flights/${flight.id}/tasks`, tasks => {
-            getPassengersToApproveDeny(flight, tasks, task => {
-                $.post(`/rest/flights/${flight.id}/approveDenyPassenger/${task.id}`, JSON.stringify({
-                    isPassengerApproved: true
-                }), () => {}, "json");
-            });
-            setTimeout(refresh, 100);
+            Promise.all(findTasks("approveDenyPassenger", tasks).map(task => $.post(`/rest/flights/${flight.id}/approveDenyPassenger/${task}`, JSON.stringify({
+                isPassengerApproved: true
+            }), () => {}, "json"))).then(() => refresh());
         });
-    }, 100);
+    });
 }
 
 function initModal() {
