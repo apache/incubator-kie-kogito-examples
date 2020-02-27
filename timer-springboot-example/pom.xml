@@ -15,6 +15,7 @@
 
   <properties>
     <springboot.version>2.2.0.RELEASE</springboot.version>
+    <version.swagger.plugin>2.1.0</version.swagger.plugin>
   </properties>
 
   <dependencyManagement>
@@ -74,6 +75,7 @@
       <plugin>
         <groupId>io.openapitools.swagger</groupId>
         <artifactId>swagger-maven-plugin</artifactId>
+        <version>${version.swagger.plugin}</version>
         <configuration>
           <resourcePackages>
             <resourcePackage>org.kie.kogito.examples</resourcePackage>
