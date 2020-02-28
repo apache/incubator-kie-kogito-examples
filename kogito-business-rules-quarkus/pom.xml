@@ -18,14 +18,15 @@
 
 
   <properties>
+    <kogito.version>8.0.0-SNAPSHOT</kogito.version>
   </properties>
 
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>io.quarkus</groupId>
-        <artifactId>quarkus-bom</artifactId>
-        <version>${quarkus.version}</version>
+        <groupId>org.kie.kogito</groupId>
+        <artifactId>kogito-quarkus-bom</artifactId>
+        <version>${kogito.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
