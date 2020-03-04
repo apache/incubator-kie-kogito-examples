@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Kogito Examples
 
 This module contains a number of examples that you can take a look at and try out yourself.  Please take a look at the readme of each individual example for more details on how the example works and how to run it yourself (either locally or on Kubernetes):
@@ -8,7 +7,6 @@ This module contains a number of examples that you can take a look at and try ou
 - Drools on Quarkus with Unit: see [README.md](drools-quarkus-unit-example/README.md)
 - jBPM on Quarkus: see [README.md](jbpm-quarkus-example/README.md)
 - jBPM on SpringBoot: see [README.md](jbpm-springboot-example/README.md)
-=======
 # Kogito Quickstarts
 
 [![CircleCI](https://circleci.com/gh/mswiderski/kogito-quickstarts.svg?style=svg)](https://circleci.com/gh/mswiderski/kogito-quickstarts)
@@ -104,4 +102,3 @@ Everyone is encouraged to contribute to this quickstarts by
 * create new quickstarts
 * blogging about it
 * using it on conferences and workshops
->>>>>>> evacchi-qs/import-kogito-bom
