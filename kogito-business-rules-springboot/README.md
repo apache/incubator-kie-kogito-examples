@@ -12,10 +12,6 @@ This example shows
 	
 <p align="center"><img width=75% height=50% src="docs/images/process.png"></p>
 
-
-* DRL File
-<p align="center"><img src="docs/images/drl.png"></p>
-
 * Diagram Properties
 <p align="center"><img src="docs/images/diagramProperties.png"></p>
 
@@ -99,9 +95,9 @@ curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d 
 ```
 
 After the Curl command you should see a similar console log
-
-<p align="center"><img src="docs/images/consoleLog.png"></p>
-
+```
+{"id":"fd4f629d-6822-4ca2-a8a6-a74f5f81e83d","person":{"name":"john","age":20,"adult":true}} 
+```
 
 Complete curl command can be found below for children:
 
@@ -111,6 +107,7 @@ curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d 
 
 After the Curl command you should see a similar console log
 
-<p align="center"><img src="docs/images/consoleLog2.png"></p>
-
+```
+{"id":"c59054b9-aa1d-4771-bc5e-40f8b32d3ff5","person":{"name":"john","age":5,"adult":false}} 
+```
 
