@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
 
@@ -19,10 +18,64 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     <surefire.forkCount>1</surefire.forkCount>
-    <alphanetworkCompilerEnabled>false</alphanetworkCompilerEnabled>
 
-    <version.io.quarkus>1.3.0.Alpha2</version.io.quarkus>
+    <!-- quarkus related -->
+    <quarkus.version>1.3.0.Alpha2</quarkus.version>
+    <!-- springboot related -->
+    <springboot.version>2.2.0.RELEASE</springboot.version>
+    <!-- kogito -->
+    <kogito.version>8.0.0-SNAPSHOT</kogito.version>
+
+    <!-- infinispan -->
+    <infinispan.version>2.1.7.Final</infinispan.version>
+
+    <swagger-plugin.version>2.1.0</swagger-plugin.version>
+    <surefire-plugin.version>2.22.0</surefire-plugin.version>
+    <version.deploy.plugin>2.8.2</version.deploy.plugin>
   </properties>
+
+  <modules>
+    <module>drools-quarkus-example</module>
+    <module>drools-quarkus-unit-example</module>
+    <module>drools-quarkus-helloworld</module>
+    <module>drools-polyglot-example</module>
+    <module>jbpm-quarkus-helloworld</module>
+    <module>jbpm-quarkus-example</module>
+    <module>jbpm-springboot-example</module>
+    <module>onboarding-example</module>
+    <module>jbpm-polyglot-example</module>
+    <module>dmn-quarkus-example</module>
+    <module>dmn-springboot-example</module>
+    <module>ruleunit-quarkus-example</module>
+    <module>ruleunit-springboot-example</module>
+    <module>decisiontable-quarkus-example</module>
+    <module>decisiontable-springboot-example</module>
+    <module>timer-quarkus-example</module>
+    <module>timer-springboot-example</module>
+    <module>kogito-kafka-quickstart-quarkus</module>
+    <module>kogito-kafka-quickstart-springboot</module>
+    <module>kogito-infinispan-persistence-quarkus</module>
+    <module>kogito-infinispan-persistence-springboot</module>
+    <module>kogito-business-rules-quarkus</module>
+    <module>kogito-business-rules-springboot</module>
+    <module>kogito-scripts-quarkus</module>
+    <module>kogito-scripts-springboot</module>
+    <module>kogito-service-calls-quarkus</module>
+    <module>kogito-service-calls-springboot</module>
+    <module>kogito-service-rest-call-quarkus</module>
+    <module>kogito-service-rest-call-springboot</module>
+    <module>kogito-usertasks-quarkus</module>
+    <module>kogito-usertasks-springboot</module>
+    <module>kogito-usertasks-custom-lifecycle-quarkus</module>
+    <module>kogito-usertasks-custom-lifecycle-springboot</module>
+    <module>kogito-usertasks-with-security-oidc-keycloak</module>
+    <module>kogito-usertasks-with-security-quarkus</module>
+    <module>kogito-usertasks-with-security-springboot</module>
+    <module>kogito-timer-quarkus</module>
+    <module>kogito-timer-springboot</module>
+  </modules>
+
+
 
   <!-- distributionManagement section -->
   <distributionManagement>
@@ -81,38 +134,6 @@
     <url>https://github.com/kiegroup/kogito-examples</url>
   </scm>
 
-  <modules>
-    <module>drools-quarkus-example</module>
-    <module>drools-quarkus-unit-example</module>
-    <module>drools-quarkus-helloworld</module>
-    <module>drools-polyglot-example</module>
-    <module>jbpm-quarkus-helloworld</module>
-    <module>jbpm-quarkus-example</module>
-    <module>jbpm-springboot-example</module>
-    <module>onboarding-example</module>
-    <module>jbpm-polyglot-example</module>
-    <module>dmn-quarkus-example</module>
-    <module>dmn-springboot-example</module>
-    <module>ruleunit-quarkus-example</module>
-    <module>ruleunit-springboot-example</module>
-    <module>decisiontable-quarkus-example</module>
-    <module>decisiontable-springboot-example</module>
-    <module>timer-quarkus-example</module>
-    <module>timer-springboot-example</module>
-  </modules>
-
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.kie.kogito</groupId>
-        <artifactId>kogito-quarkus-bom</artifactId>
-        <version>${project.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
-
   <build>
     <pluginManagement>
       <plugins>
@@ -163,6 +184,14 @@
       </plugins>
     </pluginManagement>
     <plugins>
+      <plugin>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <version>${version.deploy.plugin}</version>
+        <configuration>
+          <retryFailedDeploymentCount>10</retryFailedDeploymentCount>
+        </configuration>
+      </plugin>
+
         <!-- need at least maven 3.5.3, fail fast with actionable error rather than obscure errors like [ Error injecting: private org.eclipse.aether.spi.log.Logger org.apache.maven.repository.internal.DefaultVersionRangeResolver.logger ] -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
