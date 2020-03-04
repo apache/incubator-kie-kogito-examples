@@ -116,8 +116,14 @@ To run the generated native executable, generated in `target/`, execute
 
 ### Use the application
 
-To make use of this application it is as simple as putting a message on `travellers` topic with following content (cloud event format) 
+To make use of this application it is as simple as putting a message on `travellers` topic with following content 
 
+* Send Message to Topic
+```
+kafka-console-producer.sh --broker-list localhost:9092 --topic travellers
+```
+
+Content (cloud event format)
 ```
 {
   "specversion": "0.3",
@@ -135,10 +141,6 @@ To make use of this application it is as simple as putting a message on `travell
 ```
 
 this will then trigger the successful processing of the traveller and put another message on `processedtravellers` topic with following content (cloud event format)
-
-* Send Message to Topic
-<p align="center"><img src="docs/images/sendMessagetoTravelersTopic.png"></p>
-
 
 ```
 {
@@ -164,14 +166,22 @@ this will then trigger the successful processing of the traveller and put anothe
 }
 ```
 
+* To examine ProcessedTravellers topic and verify it was auto sent
 
-* ProcessedTravellers Message auto sent
-<p align="center"><img src="docs/images/examiningProcessedTravelersTopic.png"></p>
+```
+kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic processedtravellers --from-beginning
+```
 
 there are bunch of extension attributes that starts with `kogito` to provide some context of the execution and the event producer.
 
 To take the other path of the process put following message on `travellers` topic
 
+* Send Message to Topic
+```
+kafka-console-producer.sh --broker-list localhost:9092 --topic travellers
+```
+
+With the following content (Cloud Event Format)
 ```
 { 
 "firstName" : "John", 

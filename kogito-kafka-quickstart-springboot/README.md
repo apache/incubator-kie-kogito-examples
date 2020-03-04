@@ -110,6 +110,13 @@ java -jar target/kogito-kafka-quickstart-sprintboot-{version}.jar
 
 To make use of this application it is as simple as putting a message on `travellers` topic with following content 
 
+* Send Message to Topic
+```
+kafka-console-producer.sh --broker-list localhost:9092 --topic travellers
+```
+
+Content
+
 ```
 { 
 "firstName" : "Jan", 
@@ -122,13 +129,20 @@ To make use of this application it is as simple as putting a message on `travell
 
 this will then trigger the successful processing of the traveller and put another message on `processedtravellers` topic.
 
-* Send Message to Topic
-<p align="center"><img src="docs/images/sendMessagetoTravelersTopic.png"></p>
+* To examine ProcessedTravellers topic and verify it was auto sent
+
+```
+kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic processedtravellers --from-beginning
+```
 
 To take the other path of the process put following message on `travellers` topic
 
-* ProcessedTravellers Message auto sent
-<p align="center"><img src="docs/images/examiningProcessedTravelersTopic.png"></p>
+* Send Message to Topic
+```
+kafka-console-producer.sh --broker-list localhost:9092 --topic travellers
+```
+
+Content
 
 ```
 { 
