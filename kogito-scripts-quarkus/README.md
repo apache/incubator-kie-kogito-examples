@@ -81,10 +81,11 @@ Complete curl command can be found below:
 curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"name" : "john"}' http://localhost:8080/scripts
 ```
 
-After executing the above you should see a log similar to
+Log after curl executed
+```
+{"id":"ab5239e2-f497-4684-b337-5a44440b38dd","name":"john","message":"Hello john"}[jenrique@jenrique kogito-timer-quarkus]$ 
+```
+
+Likewise on Quarkus you should see a similar log to
 
 <p align="center"><img src="docs/images/quarkusLog.png"></p>
-
-And a message after the curl command such as
-
-<p align="center"><img src="docs/images/consoleLog.png"></p>
