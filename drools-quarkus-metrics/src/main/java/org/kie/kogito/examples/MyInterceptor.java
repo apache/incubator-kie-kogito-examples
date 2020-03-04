@@ -6,7 +6,7 @@ import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerResponseContext;
 import javax.ws.rs.ext.Provider;
 
-import org.kie.addons.systemmonitoring.interceptor.MetricsInterceptor;
+import org.kie.addons.monitoring.system.interceptor.MetricsInterceptor;
 
 @Provider
 public class MyInterceptor extends MetricsInterceptor {
