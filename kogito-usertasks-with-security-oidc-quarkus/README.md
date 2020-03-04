@@ -34,23 +34,22 @@ When using native image compilation, you will also need:
   - Environment variable GRAALVM_HOME set accordingly
   - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too, please refer to GraalVM installation documentation for more details.
 
-### Starting and Configuring the Keycloak Server
+#### Starting and Configuring the Keycloak Server
 
 To start a Keycloak Server you can use Docker and just run the following command:
 
 ```
-docker run --name keycloak -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin -p 8280:8080 quay.io/keycloak/keycloak
+docker run -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin  -e KEYCLOAK_IMPORT=/tmp/kogito-realm.json -v <kogito-quickstarts_absolute_path>/kogito-usertasks-with-security-oidc-springboot/config/kogito-realm.json:/tmp/kogito-realm.json -p 8280:8080  jboss/keycloak
 ```
 
 You should be able to access your Keycloak Server at [localhost:8280/auth](http://localhost:8280).
-
-Log in as the admin user to access the Keycloak Administration Console. Username should be admin and password admin.
-
-Add the quarkus realm in two steps:
-1. Create new realm named 'quarkus'
-2. Import config [file](config/quarkus-realm.json)  overwriting the existing items
-
-For more details, see the Keycloak documentation about how to create a new realm.
+and verify keycloak server is running properly: log in as the admin user to access the Keycloak Administration Console. 
+Username should be admin and password admin.
+With the keycloak kogito realm  imported we have defined users to be able to try the different endpoints
+user: 
+    john with role 'employees'
+    mary with role 'managers'
+    poul with roles 'interns and managers'
 
 ### Compile and Run in Local Dev Mode
 
@@ -75,9 +74,6 @@ To run the generated native executable, generated in `target/`, execute
 ```
 
 ### Use the application
-
-Examine OpenAPI via swagger UI at [http://localhost:8080/swagger-ui](http://localhost:8080/swagger-ui)
-
 
 ### Submit a request to start new approval
 
@@ -107,8 +103,8 @@ Server in order to access the application resources. Obtain an access token for 
 
 ```
 export access_token=$(\
-    curl -X POST http://localhost:8280/auth/realms/quarkus/protocol/openid-connect/token \
-    --user backend-service:secret \
+    curl -X POST http://localhost:8280/auth/realms/kogito/protocol/openid-connect/token \
+    --user kogito-app:secret \
     -H 'content-type: application/x-www-form-urlencoded' \
     -d 'username=john&password=john&grant_type=password' | jq --raw-output '.access_token' \
  )
@@ -134,8 +130,8 @@ Try with the manager Mary
 
 ```
 export access_token=$(\
-    curl -X POST http://localhost:8280/auth/realms/quarkus/protocol/openid-connect/token \
-    --user backend-service:secret \
+    curl -X POST http://localhost:8280/auth/realms/kogito/protocol/openid-connect/token \
+    --user kogito-app:secret \
     -H 'content-type: application/x-www-form-urlencoded' \
     -d 'username=mary&password=mary&grant_type=password' | jq --raw-output '.access_token' \
  )
@@ -167,8 +163,8 @@ Repeating the request with another user
 
 ```
 export access_token=$(\
-    curl -X POST http://localhost:8280/auth/realms/quarkus/protocol/openid-connect/token \
-    --user backend-service:secret \
+    curl -X POST http://localhost:8280/auth/realms/kogito/protocol/openid-connect/token \
+    --user kogito-app:secret \
     -H 'content-type: application/x-www-form-urlencoded' \
     -d 'username=poul&password=poul&grant_type=password' | jq --raw-output '.access_token' \
  )
