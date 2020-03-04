@@ -2,7 +2,7 @@
 
 pipeline {
     agent {
-        label 'kogito-static || kie-rhel7'
+        label 'kie-rhel7 && kie-mem16g'
     }
     tools {
         maven 'kie-maven-3.5.4'
@@ -28,7 +28,16 @@ pipeline {
                 }
             }
         }
-
+        stage('Build kogito-apps') {
+            steps {
+                dir("kogito-apps") {
+                    script {
+                        githubscm.checkoutIfExists('kogito-apps', "$CHANGE_AUTHOR", "$CHANGE_BRANCH", 'kiegroup', "$CHANGE_TARGET")
+                        maven.runMavenWithSubmarineSettings('clean install', true)
+                    }
+                }
+            }
+        }
         stage('Build kogito-cloud') {
             steps {
                 dir("kogito-cloud") {
