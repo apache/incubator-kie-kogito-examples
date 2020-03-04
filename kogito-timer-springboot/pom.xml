@@ -4,9 +4,9 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.kie.kogito.quickstarts</groupId>
-    <artifactId>kogito-quickstarts</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <groupId>org.kie.kogito</groupId>
+    <artifactId>kogito-examples</artifactId>
+    <version>8.0.0-SNAPSHOT</version>
   </parent>
 
   <artifactId>kogito-timer-springboot</artifactId>

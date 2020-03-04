@@ -11,6 +11,19 @@
   <name>Kogito Example :: Onboarding Example</name>
   <description>onboarding example service (onboarding, hr, payroll)</description>
 
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.kie.kogito</groupId>
+        <artifactId>kogito-quarkus-bom</artifactId>
+        <version>${kogito.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
   <modules>
     <module>hr</module>
     <module>payroll</module>

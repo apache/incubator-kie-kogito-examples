@@ -6,9 +6,9 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.kie.kogito.quickstarts</groupId>
-    <artifactId>kogito-quickstarts</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <groupId>org.kie.kogito</groupId>
+    <artifactId>kogito-examples</artifactId>
+    <version>8.0.0-SNAPSHOT</version>
   </parent>
 
   <artifactId>kogito-infinispan-persistence-quarkus</artifactId>

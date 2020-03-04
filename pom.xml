@@ -21,6 +21,8 @@
 
     <!-- quarkus related -->
     <quarkus.version>1.3.0.Alpha2</quarkus.version>
+    <version.io.quarkus>1.3.0.Alpha2</version.io.quarkus>
+    
     <!-- springboot related -->
     <springboot.version>2.2.0.RELEASE</springboot.version>
     <!-- kogito -->
@@ -38,12 +40,12 @@
     <module>drools-quarkus-example</module>
     <module>drools-quarkus-unit-example</module>
     <module>drools-quarkus-helloworld</module>
-    <module>drools-polyglot-example</module>
+    <!-- <module>drools-polyglot-example</module> -->
     <module>jbpm-quarkus-helloworld</module>
     <module>jbpm-quarkus-example</module>
     <module>jbpm-springboot-example</module>
     <module>onboarding-example</module>
-    <module>jbpm-polyglot-example</module>
+    <!-- <module>jbpm-polyglot-example</module> -->
     <module>dmn-quarkus-example</module>
     <module>dmn-springboot-example</module>
     <module>ruleunit-quarkus-example</module>
@@ -66,8 +68,8 @@
     <module>kogito-service-rest-call-springboot</module>
     <module>kogito-usertasks-quarkus</module>
     <module>kogito-usertasks-springboot</module>
-    <module>kogito-usertasks-custom-lifecycle-quarkus</module>
-    <module>kogito-usertasks-custom-lifecycle-springboot</module>
+    <!-- <module>kogito-usertasks-custom-lifecycle-quarkus</module>
+    <module>kogito-usertasks-custom-lifecycle-springboot</module> -->
     <module>kogito-usertasks-with-security-oidc-keycloak</module>
     <module>kogito-usertasks-with-security-quarkus</module>
     <module>kogito-usertasks-with-security-springboot</module>
