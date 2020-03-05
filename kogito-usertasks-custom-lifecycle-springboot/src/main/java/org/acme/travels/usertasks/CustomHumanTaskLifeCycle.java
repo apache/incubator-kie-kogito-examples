@@ -93,9 +93,9 @@ public class CustomHumanTaskLifeCycle implements LifeCycle<Map<String, Object>> 
             throw new InvalidTransitionException("Cannot transition from " + humanTaskWorkItem.getPhaseId() + " to " + targetPhase.id()); 
         }
         
-        if (!humanTaskWorkItem.enforce(transition.policies().toArray(new Policy[transition.policies().size()]))) {
-            throw new NotAuthorizedException("User is not authorized to access task instance with id " + humanTaskWorkItem.getId());
-        }
+         if (!targetPhase.id().equals(Active.ID) && !targetPhase.id().equals(Abort.ID) && !humanTaskWorkItem.enforce(transition.policies().toArray(new Policy[transition.policies().size()]))) {
+             throw new NotAuthorizedException("User is not authorized to access task instance with id " + humanTaskWorkItem.getId());
+         }
         
         humanTaskWorkItem.setPhaseId(targetPhase.id());
         humanTaskWorkItem.setPhaseStatus(targetPhase.status());
