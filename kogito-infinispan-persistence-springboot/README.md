@@ -136,27 +136,26 @@ curl -H 'Content-Type:application/json' -H 'Accept:application/json' http://loca
 based on the response you can select one of the reviews to see more details
 
 ```
-curl -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/dealreviews/xxx-aaa-cccc/tasks
+curl -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/dealreviews/{uuid}/tasks?user=john
 ```
 
-where xxx-aaa-cccc is the id of the deal review you want to work with.
+where uuid is the id of the deal review you want to work with.
 
 Next you can get the details assigned to review user task by
 
 ```
-curl -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/dealreviews/xxx-aaa-cccc/review/xxx-yyy-zzz
+curl -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/dealreviews/{uuid}/review/{tuuid}?user=john
 ```
 
-where xxx-yyy-zzz is the id of the user task you want to get.
+where tuuid is the id of the user task you want to get.
 
 ### Complete review task for given deal
 
 Last but not least you can complete review user task by
 
 ```
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"review" : "very good work"}' http://localhost:8080/dealreviews/xxx-aaa-cccc/review/xxx-yyy-zzz
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"review" : "very good work"}' http://localhost:8080/dealreviews/uuid/review/{tuuid}?user=john
 ```
-
 * Review Log should look similar to 	
 <p align="center"><img src="docs/images/finishingReviewLog.png"></p>
 
