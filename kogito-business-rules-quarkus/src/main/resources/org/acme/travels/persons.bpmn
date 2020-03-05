@@ -19,7 +19,7 @@
   <bpmn2:itemDefinition id="__7B8CC121-6F99-464A-93F8-9EAC4BE4601A_decisionInputXItem" structureRef="java.lang.String"/>
   <bpmn2:itemDefinition id="__7B8CC121-6F99-464A-93F8-9EAC4BE4601A_personInputXItem" structureRef="org.acme.travels.Person"/>
   <bpmn2:itemDefinition id="__7B8CC121-6F99-464A-93F8-9EAC4BE4601A_personOutputXItem" structureRef="org.acme.travels.Person"/>
-  <bpmn2:process id="persons" drools:packageName="org.acme.travels" drools:version="1.0" drools:adHoc="false" name="Person Process" isExecutable="true">
+  <bpmn2:process id="persons" drools:packageName="org.acme.travels" drools:version="1.0" drools:adHoc="false" name="persons" isExecutable="true">
     <bpmn2:extensionElements>
       <drools:import name="org.acme.travels.Person"/>
     </bpmn2:extensionElements>
