@@ -22,54 +22,54 @@ import io.quarkus.test.junit.QuarkusTest;
 @QuarkusTest
 public class UsersProcessTest {
 
-    
+
     @Named("users")
     @Inject
     Process<? extends Model> usersProcess;
-    
+
     @Test
     public void testExistingUser() {
-                
+
         assertNotNull(usersProcess);
-        
+
         Model m = usersProcess.createModel();
         Map<String, Object> parameters = new HashMap<>();
-        parameters.put("username", "test");       
+        parameters.put("username", "test");
         m.fromMap(parameters);
-        
+
         ProcessInstance<?> processInstance = usersProcess.createInstance(m);
         processInstance.start();
-        assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_COMPLETED, processInstance.status()); 
+        assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_COMPLETED, processInstance.status());
         Model result = (Model)processInstance.variables();
-        assertEquals(2, result.toMap().size());        
-        
+        assertEquals(2, result.toMap().size());
+
         User user = (User) result.toMap().get("traveller");
         assertNotNull(user);
-        
+
         assertEquals("test", user.getUsername());
         assertEquals("Test", user.getFirstName());
         assertEquals("Test", user.getLastName());
         assertEquals("test@test.com", user.getEmail());
     }
-    
+
     @Test
     public void testNotExistingUser() {
-                
+
         assertNotNull(usersProcess);
-        
+
         Model m = usersProcess.createModel();
         Map<String, Object> parameters = new HashMap<>();
-        parameters.put("username", "notexisting");       
+        parameters.put("username", "notexisting");
         m.fromMap(parameters);
-        
+
         ProcessInstance<?> processInstance = usersProcess.createInstance(m);
         processInstance.start();
-        assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_COMPLETED, processInstance.status()); 
+        assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_COMPLETED, processInstance.status());
         Model result = (Model)processInstance.variables();
-        assertEquals(2, result.toMap().size());        
-        
+        assertEquals(2, result.toMap().size());
+
         User user = (User) result.toMap().get("traveller");
         assertNull(user);
-    
+
     }
 }
