@@ -12,32 +12,28 @@ This example shows
 
 * working with user tasks
 * four eye principle with user tasks
-	
-* Diagram	
+
 <p align="center"><img width=75% height=50% src="docs/images/process.png"></p>
 	
-Diagram Properties
+Diagram Properties (top)
 <p align="center"><img src="docs/images/diagramProperties.png"></p>
 
-* Diagram Properties
-<p align="center"><img src="docs/images/diagramProperties2.png"></p>
-
-* Diagram Properties
+* Diagram Properties (bottom)
 <p align="center"><img src="docs/images/diagramProperties3.png"></p>
 
-* First Line Approval
+* First Line Approval (top)
 <p align="center"><img src="docs/images/firstLineApprovalUserTask.png"></p>
 
-* First Line Approval
+* First Line Approval (bottom)
 <p align="center"><img src="docs/images/firstLineApprovalUserTask2.png"></p>
 
-* First Line Approval
+* First Line Approval (Assignments)
 <p align="center"><img src="docs/images/firstLineApprovalUserTaskAssignments.png"></p>
 
 * Second Line Approval
 <p align="center"><img src="docs/images/secondLineApprovalUserTask.png"></p>
 
-* Second Line Approval
+* Second Line Approval (Assignments)
 <p align="center"><img src="docs/images/secondLineApprovalUserTaskAssignments.png"></p>
 
 In addition this quickstart also shows how to use custom life cycle for user tasks that uses custom life cycle phases
@@ -64,10 +60,11 @@ You will need:
   - Maven 3.5.4+ installed
 
 When using native image compilation, you will also need: 
-  - GraalVM 19.1+ installed
+  - GraalVM 19.1+ installed [prerequisites] with quarkus 1.3.0.*, GraalVM 19.3.1 minimum needed
   - Environment variable GRAALVM_HOME set accordingly
   - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too, please refer to GraalVM installation documentation for more details.
-
+    https://www.graalvm.org/docs/reference-manual/native-image/
+    
 ### Compile and Run in Local Dev Mode
 
 ```
@@ -93,7 +90,7 @@ To run the generated native executable, generated in `target/`, execute
 ### Use the application
 
 Examine OpenAPI via swagger UI at [http://localhost:8080/swagger-ui](http://localhost:8080/swagger-ui)
-
+(Dev Mode Only) https://quarkus.io/guides/openapi-swaggerui#use-swagger-ui-for-development
 
 ### Submit a request to start new approval
 
@@ -212,6 +209,6 @@ plus the approver who made the first one.
 }
 ```
 
-You should see a similar message after performing the second line approval
+You should see a similar message after performing the second line approval after the curl command
 
 <p align="center"><img src="docs/images/secondLineApprovalCurl.png"></p>

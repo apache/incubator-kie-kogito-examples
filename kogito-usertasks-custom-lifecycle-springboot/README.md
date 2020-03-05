@@ -13,31 +13,27 @@ This example shows
 * working with user tasks
 * four eye principle with user tasks
 
-* Diagram	
 <p align="center"><img width=75% height=50% src="docs/images/process.png"></p>
 	
-Diagram Properties
+Diagram Properties (top)
 <p align="center"><img src="docs/images/diagramProperties.png"></p>
 
-* Diagram Properties
-<p align="center"><img src="docs/images/diagramProperties2.png"></p>
-
-* Diagram Properties
+* Diagram Properties (bottom)
 <p align="center"><img src="docs/images/diagramProperties3.png"></p>
 
-* First Line Approval
+* First Line Approval (top)
 <p align="center"><img src="docs/images/firstLineApprovalUserTask.png"></p>
 
-* First Line Approval
+* First Line Approval (bottom)
 <p align="center"><img src="docs/images/firstLineApprovalUserTask2.png"></p>
 
-* First Line Approval
+* First Line Approval (Assignments)
 <p align="center"><img src="docs/images/firstLineApprovalUserTaskAssignments.png"></p>
 
 * Second Line Approval
 <p align="center"><img src="docs/images/secondLineApprovalUserTask.png"></p>
 
-* Second Line Approval
+* Second Line Approval (Assignments)
 <p align="center"><img src="docs/images/secondLineApprovalUserTaskAssignments.png"></p>
 
 In addition this quickstart also shows how to use custom life cycle for user tasks that uses custom life cycle phases
@@ -202,6 +198,6 @@ plus the approver who made the first one.
 }
 ```
 
-You should see a similar message after performing the second line approval
+You should see a similar message after performing the second line approval after the curl command
 
 <p align="center"><img src="docs/images/secondLineApprovalCurl.png"></p>
