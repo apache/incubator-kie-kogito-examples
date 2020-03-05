@@ -20,19 +20,16 @@ It utilizes Infinispan server as the backend store.
 * Process	
 <p align="center"><img width=75% height=50% src="docs/images/process.png"></p>
 
-* Process Properties	
+* Process Properties (top)
 <p align="center"><img src="docs/images/processProperties.png"></p>
 
-* Process Properties	
+* Process Properties (bottom)
 <p align="center"><img src="docs/images/processProperties2.png"></p>
-
-* Process Properties	
-<p align="center"><img src="docs/images/processProperties3.png"></p>
 
 * Call a deal	
 <p align="center"><img src="docs/images/callADeal.png"></p>
 
-* Call a deal	
+* Call a deal (Assignments)	
 <p align="center"><img src="docs/images/callADeal2.png"></p>
 
 * Print review the Deal	
@@ -41,22 +38,19 @@ It utilizes Infinispan server as the backend store.
 * Subprocess
 <p align="center"><img width=75% height=50% src="docs/images/subprocess.png"></p>
 
-* Deal Review	
+* Deal Review (top)	
 <p align="center"><img src="docs/images/dealReview.png"></p>
 
-* Deal Review	
-<p align="center"><img src="docs/images/dealReview2.png"></p>
-
-* Deal Review	
+* Deal Review (bottom)
 <p align="center"><img src="docs/images/dealReview3.png"></p>
 
-* Review deal user task	
+* Review deal user task	(top)
 <p align="center"><img src="docs/images/reviewDealUserTask.png"></p>
 
-* Review deal user task	
+* Review deal user task	(botom)
 <p align="center"><img src="docs/images/reviewDealUserTask2.png"></p>
 
-* Review deal user task	
+* Review deal user task	(Assignments)
 <p align="center"><img src="docs/images/reviewDealUserTask3.png"></p>
 
 ## Infrastructure requirements
