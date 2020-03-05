@@ -10,10 +10,10 @@ This example shows
 		
 <p align="center"><img width=75% height=50% src="docs/images/process.png"></p>
 
-* Diagram Properties
+* Diagram Properties (top)
 <p align="center"><img src="docs/images/diagramProperties.png"></p>
 
-* Diagram Properties
+* Diagram Properties (bottom)
 <p align="center"><img src="docs/images/diagramProperties2.png"></p>
 
 * Hello Script Task
@@ -33,10 +33,11 @@ You will need:
   - Maven 3.5.4+ installed
 
 When using native image compilation, you will also need: 
-  - GraalVM 19.1+ installed
+  - GraalVM 19.1+ installed  [prerequisites] with quarkus 1.3.0.*, GraalVM 19.3.1 minimum is needed
   - Environment variable GRAALVM_HOME set accordingly
   - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too, please refer to GraalVM installation documentation for more details.
-
+    [prerequisites] GraalVM native image needs as well native-image extension: https://www.graalvm.org/docs/reference-manual/native-image/
+    
 ### Compile and Run in Local Dev Mode
 
 ```
@@ -70,7 +71,7 @@ To make use of this application it is as simple as putting a sending request to 
 
 ```
 {
-"name" "john"
+"name" : "john"
 }
 
 ```
@@ -83,7 +84,7 @@ curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d 
 
 Log after curl executed
 ```
-{"id":"ab5239e2-f497-4684-b337-5a44440b38dd","name":"john","message":"Hello john"}[jenrique@jenrique kogito-timer-quarkus]$ 
+{"id":"ab5239e2-f497-4684-b337-5a44440b38dd","name":"john","message":"Hello john"} 
 ```
 
 Likewise on Quarkus you should see a similar log to

@@ -10,10 +10,10 @@ This example shows
 			
 <p align="center"><img width=75% height=50% src="docs/images/process.png"></p>
 
-* Diagram Properties
+* Diagram Properties (top)
 <p align="center"><img src="docs/images/diagramProperties.png"></p>
 
-* Diagram Properties
+* Diagram Properties (bottom)
 <p align="center"><img src="docs/images/diagramProperties2.png"></p>
 
 * Hello Script Task
@@ -60,7 +60,7 @@ To make use of this application it is as simple as putting a sending request to 
 
 ```
 {
-"name" "john"
+"name" : "john"
 }
 
 ```
@@ -73,7 +73,7 @@ curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d 
 
 Log after curl executed
 ```
-{"id":"ab5239e2-f497-4684-b337-5a44440b38dd","name":"john","message":"Hello john"}[jenrique@jenrique kogito-timer-quarkus]$ 
+{"id":"ab5239e2-f497-4684-b337-5a44440b38dd","name":"john","message":"Hello john"}
 ```
 
 Likewise on Springboot you should see a similar log to
