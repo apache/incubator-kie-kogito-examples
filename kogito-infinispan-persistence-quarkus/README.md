@@ -15,9 +15,12 @@ This example shows
 * each process instance is going to be evaluated and asks for review
 * at any point in time service can be shutdown and when brought back it will keep the state of the instances
 
+Note: The use of this example shows that the data sent to infinispan is saved, you can shut down the application and restart it
+and as long as infinispan is running after you restar you should still see the data
+
 It utilizes Infinispan server as the backend store. 
 	
-* Process	
+* Process (submitDeal.bpmn)	
 <p align="center"><img width=75% height=50% src="docs/images/process.png"></p>
 
 * Process Properties (top)
@@ -35,7 +38,7 @@ It utilizes Infinispan server as the backend store.
 * Print review the Deal	
 <p align="center"><img src="docs/images/printReviewTheDeal.png"></p>
 
-* Subprocess
+* Subprocess (reviewDeal.bpmn)
 <p align="center"><img width=75% height=50% src="docs/images/subprocess.png"></p>
 
 * Deal Review (top)	
@@ -72,8 +75,9 @@ You will need:
   - Maven 3.5.4+ installed
 
 When using native image compilation, you will also need: 
-  - GraalVM 19.1+ installed
+  - GraalVM 19.3+ installed
   - Environment variable GRAALVM_HOME set accordingly
+  - GraalVM native image needs as well native-image extension: https://www.graalvm.org/docs/reference-manual/native-image/
   - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too, please refer to GraalVM installation documentation for more details.
 
 ### Compile and Run in Local Dev Mode
@@ -101,7 +105,7 @@ To run the generated native executable, generated in `target/`, execute
 ### Use the application
 
 Examine OpenAPI via swagger UI at [http://localhost:8080/swagger-ui](http://localhost:8080/swagger-ui)
-
+[Dev Mode Only] https://quarkus.io/guides/openapi-swaggerui#use-swagger-ui-for-development
 
 ### Submit a deal
 
@@ -155,7 +159,8 @@ Next you can get the details assigned to review user task by
 curl -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/dealreviews/{uuid}/review/{tuuid}?user=john
 ```
 
-where tuuid is the id of the user task you want to get.
+where uuid is the id of the deal review and tuuid is the id of the user task you want to get
+
 
 ### Complete review task for given deal
 
@@ -164,5 +169,11 @@ Last but not least you can complete review user task by
 ```
 curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"review" : "very good work"}' http://localhost:8080/dealreviews/uuid/review/{tuuid}?user=john
 ```
+
+where uuid is the id of the deal review and tuuid is the id of the user task you want to get
+
 * Review Log should look similar to 	
-<p align="center"><img src="docs/images/finishingReviewLog.png"></p>
+
+```
+Review of the deal very good work for traveller Doe
+```
