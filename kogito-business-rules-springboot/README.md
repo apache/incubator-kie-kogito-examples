@@ -130,6 +130,7 @@ To verify there is a running task for Children
 ```
 curl http://localhost:8080/persons/{uuid}/tasks
 ```
+where uuid is the id of the task
 
 Should return something like
 
