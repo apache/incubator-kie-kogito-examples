@@ -62,8 +62,8 @@ To run the generated native executable, generated in `target/`, execute
 
 ### Use the application
 
+Examine OpenAPI via swagger UI at [http://localhost:8080/swagger-ui](http://localhost:8080/swagger-ui)
 (Dev Mode Only) https://quarkus.io/guides/openapi-swaggerui#use-swagger-ui-for-development
-
 
 ### Submit a request
 
