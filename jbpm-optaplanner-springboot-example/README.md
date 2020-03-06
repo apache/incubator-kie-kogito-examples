@@ -46,17 +46,17 @@ You can take a look at the [swagger definition](http://localhost:8080/docs/swagg
 Once the service is up and running, you can access the UI at `localhost:8080` or use
 the following examples to interact with the service.
 
-### POST /flights
+### POST  /rest/flights
 
 Allows to create a new flight with the given data:
 
 ```sh
-curl -d '{ "params": { "origin" : "JFK", "destination": "SFO", "departureDateTime": "2020-01-01T12:00", "seatRowSize": 8, "seatColumnSize": 6 } }' -H "Content-Type: application/json" -X POST http://localhost:8080/flights
+curl -d '{ "params": { "origin" : "JFK", "destination": "SFO", "departureDateTime": "2020-01-01T12:00", "seatRowSize": 8, "seatColumnSize": 6 } }' -H "Content-Type: application/json" -X POST http://localhost:8080/rest/flights
 ```
 or on windows
 
 ```sh
-curl -d "{\"params\": { \"origin\" : \"JFK\", \"destination\": \"SFO\", \"departureDateTime\": \"2020-01-01T12:00\", \"seatRowSize\": 8, \"seatColumnSize\": 6 }}" -H "Content-Type: application/json" -X POST http://localhost:8080/flights
+curl -d "{\"params\": { \"origin\" : \"JFK\", \"destination\": \"SFO\", \"departureDateTime\": \"2020-01-01T12:00\", \"seatRowSize\": 8, \"seatColumnSize\": 6 }}" -H "Content-Type: application/json" -X POST http://localhost:8080/rest/flights
 ```
 
 As response the created flight is returned (in field "flight").
@@ -94,40 +94,40 @@ Example response:
 }
 ```
 
-### GET /flights
+### GET  /rest/flights
 
 Returns list of flights currently being scheduled:
 
 ```sh
-curl -X GET http://localhost:8080/flights
+curl -X GET http://localhost:8080/rest/flights
 ```
 
 As response an array of flights is returned.
 
-### GET /flight/{id}
+### GET  /rest/flight/{id}
 
 Returns flight with given id (if being scheduled):
 
 ```sh
-curl -X GET http://localhost:8080/flights/62f1c985-d31c-4ead-9906-2fe8d05937f0
+curl -X GET http://localhost:8080/rest/flights/62f1c985-d31c-4ead-9906-2fe8d05937f0
 ```
 
 As response a single flight is returned if found, otherwise no content (204) is returned.
 
-### DELETE /flights/{id}
+### DELETE /rest/flights/{id}
 
 Cancels flight with given id
 
 ```sh
-curl -X DELETE http://localhost:8080/flights/62f1c985-d31c-4ead-9906-2fe8d05937f0
+curl -X DELETE http://localhost:8080/rest/flights/62f1c985-d31c-4ead-9906-2fe8d05937f0
 ```
 
-### GET /flights/{id}/tasks
+### GET /rest/flights/{id}/tasks
 
 Get user tasks that currently require action for a flight.
 
 ```sh
-curl -X GET http://localhost:8080/flights/62f1c985-d31c-4ead-9906-2fe8d05937f0/tasks
+curl -X GET http://localhost:8080/rest/flights/62f1c985-d31c-4ead-9906-2fe8d05937f0/tasks
 ```
 
 Example response:
@@ -139,24 +139,24 @@ Example response:
 }
 ```
 
-### POST /flights/{id}/newPassengerRequest
+### POST /rest//flights/{id}/newPassengerRequest
 
 Create a new Ticket request for a passenger, who must be approved by security.
 
 ```sh
-curl -d '{ "passenger": { "name": "Amy Cole", "seatTypePreference": "WINDOW", "emergencyExitRowCapable": true, "payedForSeat": true, "seat": "3A" } }' -X POST http://localhost:8080/flights/62f1c985-d31c-4ead-9906-2fe8d05937f0/newPassengerRequest
+curl -d '{ "passenger": { "name": "Amy Cole", "seatTypePreference": "WINDOW", "emergencyExitRowCapable": true, "payedForSeat": true, "seat": "3A" } }' -X POST http://localhost:8080/rest/flights/62f1c985-d31c-4ead-9906-2fe8d05937f0/newPassengerRequest
 ```
 or on Windows:
 
 ```sh
-curl -d "{ \"passenger\": { \"name\": \"Amy Cole\", \"seatTypePreference\": \"WINDOW\", \"emergencyExitRowCapable\": true, \"payedForSeat\": true, \"seat\": \"3A\" } }" -X POST http://localhost:8080/flights/62f1c985-d31c-4ead-9906-2fe8d05937f0/newPassengerRequest
+curl -d "{ \"passenger\": { \"name\": \"Amy Cole\", \"seatTypePreference\": \"WINDOW\", \"emergencyExitRowCapable\": true, \"payedForSeat\": true, \"seat\": \"3A\" } }" -X POST http://localhost:8080/rest/flights/62f1c985-d31c-4ead-9906-2fe8d05937f0/newPassengerRequest
 ```
 
-### GET /flights/{id}/approveDenyPassenger/{workItemId}
+### GET /rest/flights/{id}/approveDenyPassenger/{workItemId}
 
 Get the passenger that need to be denied or approved for the given "approveDenyPassenger" task.
 ```sh
-curl -X GET http://localhost:8080/flights/62f1c985-d31c-4ead-9906-2fe8d05937f0/approveDenyPassenger/66c11e3e-c211-4cee-9a07-848b5e861bc5
+curl -X GET http://localhost:8080/rest/flights/62f1c985-d31c-4ead-9906-2fe8d05937f0/approveDenyPassenger/66c11e3e-c211-4cee-9a07-848b5e861bc5
 ```
 Example response:
 ```json
@@ -171,16 +171,16 @@ Example response:
 }
 ```
 
-### POST /flights/{id}/approveDenyPassenger/{workItemId}
+### POST /rest/flights/{id}/approveDenyPassenger/{workItemId}
 
 Approves an passenger and add them to the flight if "isPassengerApproved" is true, otherwise cancels their ticket.
 
 ```sh
-curl -d '{ "isPassengerApproved": true }' -X POST http://localhost:8080/flights/7f24831f-9dc6-44c7-8dec-9b4a696506b5/approveDenyPassenger/66c11e3e-c211-4cee-9a07-848b5e861bc5
+curl -d '{ "isPassengerApproved": true }' -X POST http://localhost:8080/rest/flights/7f24831f-9dc6-44c7-8dec-9b4a696506b5/approveDenyPassenger/66c11e3e-c211-4cee-9a07-848b5e861bc5
 ```
 or in Windows
 ```sh
-curl -d "{ \"isPassengerApproved\": true }" -X POST http://localhost:8080/flights/7f24831f-9dc6-44c7-8dec-9b4a696506b5/approveDenyPassenger/66c11e3e-c211-4cee-9a07-848b5e861bc5
+curl -d "{ \"isPassengerApproved\": true }" -X POST http://localhost:8080/rest/flights/7f24831f-9dc6-44c7-8dec-9b4a696506b5/approveDenyPassenger/66c11e3e-c211-4cee-9a07-848b5e861bc5
 ```
 
 Example Response:
@@ -224,12 +224,12 @@ Example Response:
 }
 ```
 
-### POST /flights/{id}/finalizePassengerList/{workItemId}
+### POST /rest/flights/{id}/finalizePassengerList/{workItemId}
 
 Finalize the passenger list for the flight.
 
 ```sh
-curl -d '{}' -X POST http://localhost:8080/flights/7f24831f-9dc6-44c7-8dec-9b4a696506b5/finalizePassengerList/62f1c985-d31c-4ead-9906-2fe8d05937f0
+curl -d '{}' -X POST http://localhost:8080/rest/flights/7f24831f-9dc6-44c7-8dec-9b4a696506b5/finalizePassengerList/62f1c985-d31c-4ead-9906-2fe8d05937f0
 ```
 
 Example response:
@@ -273,12 +273,12 @@ Example response:
 }
 ```
 
-### POST /flights/{id}/finalizeSeatAssignment/{workItemId}
+### POST /rest/flights/{id}/finalizeSeatAssignment/{workItemId}
 
 Finalize seat assignments for the flight.
 
 ```sh
-curl -d '{}' -X POST http://localhost:8080/flights/7f24831f-9dc6-44c7-8dec-9b4a696506b5/finalizeSeatAssignment/62f1c985-d31c-4ead-9906-2fe8d05937f0
+curl -d '{}' -X POST http://localhost:8080/rest/flights/7f24831f-9dc6-44c7-8dec-9b4a696506b5/finalizeSeatAssignment/62f1c985-d31c-4ead-9906-2fe8d05937f0
 ```
 
 Example response:
