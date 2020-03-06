@@ -13,6 +13,11 @@ This example shows
 * working with user tasks
 * four eye principle with user tasks
 
+In addition this quickstart also shows how to use custom life cycle for user tasks that uses custom life cycle phases compared to those supported by default.
+
+Start
+Complete - extended the default one that allows only to complete started tasks
+
 <p align="center"><img width=75% height=50% src="docs/images/process.png"></p>
 	
 Diagram Properties (top)
@@ -42,7 +47,7 @@ compared to those supported by default.
 - Start
 - Complete - extended the default one that allows only to complete started tasks
 
-To learn more about this look at the following classes
+To learn more about custom lifecycle, look at the following classes:
 
 - `org.acme.travels.config.CustomWorkItemHandlerConfig` - responsible for registering work item handler to deal with user tasks
 - `org.acme.travels.usertasks.CustomHumanTaskLifeCycle` - defines actual the life cycle for user tasks
@@ -200,4 +205,6 @@ plus the approver who made the first one.
 
 You should see a similar message after performing the second line approval after the curl command
 
-<p align="center"><img src="docs/images/secondLineApprovalCurl.png"></p>
+```
+{"id":"f498de73-e02d-4829-905e-2f768479a4f1", "approver":"admin","firstLineApproval:true, "secondLineApproval":true,"traveller":{"firstName":"John","lastName":"Doe","email":"jon.doe@example.com","nationality":"American","address":{"street":"main street","city":"Boston","zipCode":"10005","country":"US"}}}
+```
