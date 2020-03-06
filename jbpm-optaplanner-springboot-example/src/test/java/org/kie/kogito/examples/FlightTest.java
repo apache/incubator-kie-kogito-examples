@@ -70,7 +70,14 @@ public class FlightTest {
         result.put("isPassengerListFinalized", true);
         processInstance.completeWorkItem(tasks.get(0).getId(), result);
 
+        try {
+            Thread.sleep(10000);
+        } catch (Exception e) {
+
+        }
+
         tasks = processInstance.workItems();
+
         assertEquals(1, tasks.size());
         // then complete the flight
         processInstance.completeWorkItem(tasks.get(0).getId(), null);
@@ -78,6 +85,6 @@ public class FlightTest {
         assertEquals(ProcessInstance.STATE_COMPLETED, processInstance.status());
 
         Model resultData = (Model) processInstance.variables();
-        assertEquals(3, resultData.toMap().size());
+        assertEquals(5, resultData.toMap().size());
     }
 }
