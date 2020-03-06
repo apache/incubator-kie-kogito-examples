@@ -47,8 +47,9 @@ You will need:
   - Maven 3.5.4+ installed
 
 When using native image compilation, you will also need: 
-  - GraalVM 19.1+ installed
+  - GraalVM 19.3+ installed
   - Environment variable GRAALVM_HOME set accordingly
+  - GraalVM native image needs as well native-image extension: https://www.graalvm.org/docs/reference-manual/native-image/
   - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too, please refer to GraalVM installation documentation for more details.
 
 ### Compile and Run in Local Dev Mode
@@ -76,7 +77,7 @@ To run the generated native executable, generated in `target/`, execute
 ### Use the application
 
 Examine OpenAPI via swagger UI at [http://localhost:8080/swagger-ui](http://localhost:8080/swagger-ui)
-
+[Dev Mode Only] https://quarkus.io/guides/openapi-swaggerui#use-swagger-ui-for-development
 
 ### Submit a request to start new approval
 
@@ -178,5 +179,7 @@ plus the approver who made the first one.
 
 You should see a similar message after performing the second line approval after the curl command
 
-<p align="center"><img src="docs/images/secondLineApprovalUserTaskAssignments.png"></p>
+```
+{"id":"f498de73-e02d-4829-905e-2f768479a4f1", "approver":"admin","firstLineApproval:true, "secondLineApproval":true,"traveller":{"firstName":"John","lastName":"Doe","email":"jon.doe@example.com","nationality":"American","address":{"street":"main street","city":"Boston","zipCode":"10005","country":"US"}}}
+```
 

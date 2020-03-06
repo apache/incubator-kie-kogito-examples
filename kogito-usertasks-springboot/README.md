@@ -168,5 +168,6 @@ plus the approver who made the first one.
 
 You should see a similar message after performing the second line approval after the curl command
 
-<p align="center"><img src="docs/images/secondLineApprovalUserTaskAssignments.png"></p>
-
+```
+{"id":"f498de73-e02d-4829-905e-2f768479a4f1", "approver":"admin","firstLineApproval:true, "secondLineApproval":true,"traveller":{"firstName":"John","lastName":"Doe","email":"jon.doe@example.com","nationality":"American","address":{"street":"main street","city":"Boston","zipCode":"10005","country":"US"}}}
+```
