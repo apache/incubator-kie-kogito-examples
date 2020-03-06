@@ -18,6 +18,7 @@ import org.kie.kogito.Model;
 import org.kie.kogito.examples.domain.FlightDTO;
 import org.kie.kogito.examples.domain.PassengerDTO;
 import org.kie.kogito.process.Process;
+import org.kie.kogito.process.Processes;
 import org.kie.kogito.process.ProcessInstance;
 import org.kie.kogito.process.WorkItem;
 import org.kie.kogito.process.impl.Sig;
@@ -34,11 +35,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class FlightTest {
 
     @Autowired
-    @Qualifier("flights")
-    Process<? extends Model> process;
+    Processes processMaker;
 
     @Test
     public void runProcess() {
+        Process<? extends Model> process = processMaker.processById("flights");
         assertNotNull(process);
 
         FlightDTO flightParams = new FlightDTO();
