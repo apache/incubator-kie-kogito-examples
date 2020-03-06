@@ -15,13 +15,13 @@ This example shows
 * optionally use Job Service that allows to externalize time tracking to separate service and by that offload the runtime service
 	
 	
-* Intermediate timer event
+* Intermediate timer event (timers.bpmn)
 <p align="center"><img width=75% height=50% src="docs/images/timers.png"></p>
 
-* Intermediate timer Diagram Properties
+* Intermediate timer Diagram Properties (top)
 <p align="center"><img src="docs/images/timersDiagramProperties.png"></p>
 
-* Intermediate timer Diagram Properties
+* Intermediate timer Diagram Properties (bottom)
 <p align="center"><img src="docs/images/timersDiagramProperties2.png"></p>
 
 * Intermediate timer Before Timer
@@ -33,22 +33,22 @@ This example shows
 * Intermediate timer After Timer 
 <p align="center"><img src="docs/images/timersAfterTimerScriptCall.png"></p>
 
-* Boundary timer event
+* Boundary timer event (timer-on-task.bpmn)
 <p align="center"><img width=75% height=50% src="docs/images/timerOnTask.png"></p>
 
-* Boundary timer Diagram Properties 
+* Boundary timer Diagram Properties (top)
 <p align="center"><img src="docs/images/timerOnTaskDiagramProperties.png"></p>
 
-* Boundary timer Diagram Properties 
+* Boundary timer Diagram Properties (bottom)
 <p align="center"><img src="docs/images/timerOnTaskDiagramProperties2.png"></p>
 
 * Boundary timer Before Timer 
 <p align="center"><img src="docs/images/timerOnTaskBeforeTimerScriptCall.png"></p>
 
-* Boundary timer User Task
+* Boundary timer User Task (top)
 <p align="center"><img src="docs/images/timerOnTaskUserTask1.png"></p>
 
-* Boundary timer User Task
+* Boundary timer User Task (bottom)
 <p align="center"><img src="docs/images/timerOnTaskUserTask2.png"></p>
 
 * Boundary timer Timer
@@ -57,13 +57,13 @@ This example shows
 * Boundary timer After Timer
 <p align="center"><img src="docs/images/timerOnTaskAfterTimerScriptCall.png"></p>
 
-* Cycle timer event
+* Cycle timer event (timerCycle.bpmn)
 <p align="center"><img width=75% height=50% src="docs/images/timersCycleProcess.png"></p>
 
-* Cycle timer Diagram Properties
+* Cycle timer Diagram Properties (top)
 <p align="center"><img src="docs/images/timersCycleDiagramProperties.png"></p>
 
-* Cycle timer Diagram Properties
+* Cycle timer Diagram Properties (bottom)
 <p align="center"><img src="docs/images/timersCycleDiagramProperties.png"></p>
 
 * Cycle timer Before Timer
@@ -208,12 +208,17 @@ where `{uuid}` is the id of the given timer instance
 
 After executing the above commands you should see a log similar to
 
-* Curl Log
-<p align="center"><img src="docs/images/curlLog.png"></p>
+* Springboot Log
 
-* Quarkus Log
-<p align="center"><img src="docs/images/springbootLog.png"></p>
-
+```
+Before timer... waiting for  PT30S
+After Timer
+Before timer, waiting for task to be complete or expires in PT30S
+After Timer
+Before timer... waiting for  R2/PT1S
+After Timer
+After Timer
+```
 ## Use Kogito Job Service as external timer service
 
 There is additional configuration needed in 
@@ -250,6 +255,9 @@ To be able to use Kogito Job Service as timer service additional dependency need
 
 You need to download the job service and start it locally
 
+You can download it from [Select Latest Version]
+https://repo.maven.apache.org/maven2/org/kie/kogito/jobs-service/
+
 ```
 java -Dquarkus.http.port=8085 -jar target/jobs-service-{version}-runner.jar
 ```
@@ -258,9 +266,16 @@ java -Dquarkus.http.port=8085 -jar target/jobs-service-{version}-runner.jar
 
 <p align="center"><img src="docs/images/kogitoWebServiceLog.png"></p>
 
+Note that in the above log infinispan has started on port 11222
 
 In case you'd like to run the job service with enabled persistence then start 
 Infinispan server before and then run the job service with following command
+
+Download Infinispan Server from
+https://infinispan.org/download/
+
+Start Infinispan Server
+[Infinispan Directory]/bin/sh server.sh
 
 ```
 java -Dquarkus.http.port=8085 -Dkogito.jobs-service.persistence=infinispan -jar target/jobs-service-{version}-runner.jar
@@ -271,3 +286,5 @@ in both cases replace `{version}` with actual Kogito version to be used (Job Ser
 * After Starting Infinispan you should see a similar Log as follows
 
 <p align="center"><img src="docs/images/infinispanRunning.png"></p>
+
+After that you can redo the timer queries described above
