@@ -70,7 +70,10 @@ This example shows
 This quickstart requires an Apache Kafka to be available and by default expects it to be on default port and localhost.
 
 * Install and Startup Kafka Server / Zookeeper
-<p align="center"><img src="docs/images/downloadKafkaStartUp.png"></p>
+
+```
+https://kafka.apache.org/downloads
+```
 
 https://kafka.apache.org/quickstart
 
@@ -80,8 +83,8 @@ In addition to that two topics are needed
 * processedtravellers
 
 ```
-sh bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic travellers
-sh bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic processedtravellers
+bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic travellers
+bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic processedtravellers
 ```
 
 These topics are expected to be without key
@@ -96,11 +99,11 @@ You will need:
   - Maven 3.5.4+ installed
 
 When using native image compilation, you will also need: 
-  - GraalVM 19.2+ installed [prerequisites] with quarkus 1.3.0.*, GraalVM 19.3.1 minimum is needed
+  - GraalVM 19.3+ installed 
   - Environment variable GRAALVM_HOME set accordingly
+  - GraalVM native image needs as well native-image extension: https://www.graalvm.org/docs/reference-manual/native-image/
   - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too, please refer to GraalVM installation documentation for more details.
-    [prerequisites] GraalVM native image needs as well native-image extension: https://www.graalvm.org/docs/reference-manual/native-image/
-
+    
 ### Compile and Run in Local Dev Mode
 
 ```
@@ -125,17 +128,19 @@ To run the generated native executable, generated in `target/`, execute
 
 ### Use the application
 
-To make use of this application it is as simple as putting a message on `travellers` topic with following content 
+To make use of this application it is as simple as putting a message on `travellers` topic with following content  (cloud event format)
 
 * To examine ProcessedTravellers topic and verify upcoming messages will be processed
 
+Execute in a separate terminal session
 ```
-kafka_2.11-2.4.0/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic processedtravellers 
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic processedtravellers 
 ```
 
-* Send Message to Topic
+* Send message that should be processed to Topic
+  
 ```
-kafka_2.11-2.4.0/bin/kafka-console-producer.sh --broker-list localhost:9092 --topic travellers
+bin/kafka-console-producer.sh --broker-list localhost:9092 --topic travellers
 ```
 
 Content (cloud event format)
@@ -144,7 +149,7 @@ Content (cloud event format)
   "specversion": "0.3",
   "id": "21627e26-31eb-43e7-8343-92a696fd96b1",
   "source": "",
-  "type": "VisaApplicationsMessageDataEvent_8", 
+  "type": "TravellersMessageDataEvent_3", 
   "time": "2019-10-01T12:02:23.812262+02:00[Europe/Warsaw]",
   "data": { 
 	"firstName" : "Jan", 
@@ -156,7 +161,7 @@ Content (cloud event format)
 ```
 One liner
 ```
-{"specversion": "0.3","id": "21627e26-31eb-43e7-8343-92a696fd96b1","source": "","type": "VisaApplicationsMessageDataEvent_8", "time": "2019-10-01T12:02:23.812262+02:00[Europe/Warsaw]","data": { "firstName" : "Jan", "lastName" : "Kowalski", "email" : "jan.kowalski@example.com", "nationality" : "Polish"}}
+{"specversion": "0.3","id": "21627e26-31eb-43e7-8343-92a696fd96b1","source": "","type": "TravellersMessageDataEvent_3", "time": "2019-10-01T12:02:23.812262+02:00[Europe/Warsaw]","data": { "firstName" : "Jan", "lastName" : "Kowalski", "email" : "jan.kowalski@example.com", "nationality" : "Polish"}}
 ```
 
 
@@ -192,7 +197,7 @@ To take the other path of the process put following message on `travellers` topi
 
 * Send Message that should be skipped to Topic
 ```
-kafka_2.11-2.4.0/bin/kafka-console-producer.sh --broker-list localhost:9092 --topic travellers
+bin/kafka-console-producer.sh --broker-list localhost:9092 --topic travellers
 ```
 
 With the following content (Cloud Event Format)
@@ -201,7 +206,7 @@ With the following content (Cloud Event Format)
   "specversion": "0.3",
   "id": "31627e26-31eb-43e7-8343-92a696fd96b1",
   "source": "",
-  "type": "VisaApplicationsMessageDataEvent_8", 
+  "type": "TravellersMessageDataEvent_3", 
   "time": "2019-10-01T12:02:23.812262+02:00[Europe/Warsaw]",
   "data": { 
 	"firstName" : "John", 
@@ -214,7 +219,7 @@ With the following content (Cloud Event Format)
 
 One Liner
 ```
-{"specversion": "0.3","id": "31627e26-31eb-43e7-8343-92a696fd96b1","source": "","type": "VisaApplicationsMessageDataEvent_8", "time": "2019-10-01T12:02:23.812262+02:00[Europe/Warsaw]","data": { "firstName" : "John", "lastName" : "Doe", "email" : "john.doe@example.com", "nationality" : "American"}}
+{"specversion": "0.3","id": "31627e26-31eb-43e7-8343-92a696fd96b1","source": "","type": "TravellersMessageDataEvent_3", "time": "2019-10-01T12:02:23.812262+02:00[Europe/Warsaw]","data": { "firstName" : "John", "lastName" : "Doe", "email" : "john.doe@example.com", "nationality" : "American"}}
 ```
 
 this will not result in message being send to `processedtravelers` topic.
