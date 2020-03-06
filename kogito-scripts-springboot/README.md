@@ -78,4 +78,6 @@ Log after curl executed
 
 Likewise on Springboot you should see a similar log to
 
-<p align="center"><img src="docs/images/springBootLog.png"></p>
+```
+Hello john"
+```

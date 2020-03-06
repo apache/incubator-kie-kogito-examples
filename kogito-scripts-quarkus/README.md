@@ -33,10 +33,10 @@ You will need:
   - Maven 3.5.4+ installed
 
 When using native image compilation, you will also need: 
-  - GraalVM 19.1+ installed  [prerequisites] with quarkus 1.3.0.*, GraalVM 19.3.1 minimum is needed
+  - GraalVM 19.3+ installed  
   - Environment variable GRAALVM_HOME set accordingly
+  - GraalVM native image needs as well native-image extension: https://www.graalvm.org/docs/reference-manual/native-image/        
   - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too, please refer to GraalVM installation documentation for more details.
-    [prerequisites] GraalVM native image needs as well native-image extension: https://www.graalvm.org/docs/reference-manual/native-image/
     
 ### Compile and Run in Local Dev Mode
 
@@ -62,7 +62,7 @@ To run the generated native executable, generated in `target/`, execute
 
 ### Use the application
 
-Examine OpenAPI via swagger UI at [http://localhost:8080/swagger-ui](http://localhost:8080/swagger-ui)
+(Dev Mode Only) https://quarkus.io/guides/openapi-swaggerui#use-swagger-ui-for-development
 
 
 ### Submit a request
@@ -88,5 +88,6 @@ Log after curl executed
 ```
 
 Likewise on Quarkus you should see a similar log to
-
-<p align="center"><img src="docs/images/quarkusLog.png"></p>
+```
+Hello john"
+```
