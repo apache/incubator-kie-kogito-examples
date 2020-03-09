@@ -16,7 +16,7 @@ This example shows
 * at any point in time service can be shutdown and when brought back it will keep the state of the instances
 
 Note: The use of this example shows that the data sent to infinispan is saved, you can shut down the application and restart it
-and as long as infinispan is running after you restar you should still see the data
+and as long as infinispan is running after you restart you should still see the data
 
 It utilizes Infinispan server as the backend store. 
 	
