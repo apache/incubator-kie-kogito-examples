@@ -293,8 +293,6 @@ java -Dquarkus.http.port=8085 -Dkogito.jobs-service.persistence=infinispan -jar 
 
 in both cases replace `{version}` with actual Kogito version to be used (Job Service is available from 0.6.0)
 
-After starting Infinispan you should see a similar log as follows
-
 * After Starting Infinispan you should see a similar Log as follows
 
 <p align="center"><img src="docs/images/infinispanRunning.png"></p>
