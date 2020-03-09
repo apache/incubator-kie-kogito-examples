@@ -13,11 +13,10 @@ This example shows
 * working with user tasks
 * four eye principle with user tasks
 
-In addition this quickstart also shows how to use custom life cycle for user tasks that uses custom life cycle phases compared to those supported by default.
+* In addition this quickstart also shows how to use custom life cycle for user tasks that uses custom life cycle phases compared to those supported by default.
 
-Start
-Complete - extended the default one that allows only to complete started tasks
-
+- Start
+- Complete - extended the default one that allows only to complete started tasks
 
 <p align="center"><img width=75% height=50% src="docs/images/process.png"></p>
 	
@@ -41,12 +40,6 @@ Diagram Properties (top)
 
 * Second Line Approval (Assignments)
 <p align="center"><img src="docs/images/secondLineApprovalUserTaskAssignments.png"></p>
-
-In addition this quickstart also shows how to use custom life cycle for user tasks that uses custom life cycle phases
-compared to those supported by default.
-
-- Start
-- Complete - extended the default one that allows only to complete started tasks
 
 To learn more about custom lifecycle, look at the following classes:
 
