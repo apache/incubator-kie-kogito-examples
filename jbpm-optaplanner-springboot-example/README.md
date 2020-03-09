@@ -39,7 +39,7 @@ mvn clean package spring-boot:run
 
 ## Swagger documentation
 
-You can take a look at the [swagger definition](http://localhost:8080/docs/swagger.json) - automatically generated and included in this service - to determine all available operations exposed by this service.  For easy readability you can visualize the swagger definition file using a swagger UI like for example available [here](https://editor.swagger.io). In addition, various clients to interact with this service can be easily generated using this swagger definition.
+You can take a look at the [swagger definition](http://localhost:8080/swagger.json) - automatically generated and included in this service - to determine all available operations exposed by this service.  For easy readability you can visualize the swagger definition file using a swagger UI like for example available [here](https://editor.swagger.io). In addition, various clients to interact with this service can be easily generated using this swagger definition.
 
 ## Example Usage
 
@@ -61,6 +61,7 @@ curl -d "{\"params\": { \"origin\" : \"JFK\", \"destination\": \"SFO\", \"depart
 
 As response the created flight is returned (in field "flight").
 Example response:
+
 ```json
 {
   "id":"7f24831f-9dc6-44c7-8dec-9b4a696506b5",
@@ -109,7 +110,8 @@ As response an array of flights is returned.
 Returns flight with given id (if being scheduled):
 
 ```sh
-curl -X GET http://localhost:8080/rest/flights/62f1c985-d31c-4ead-9906-2fe8d05937f0
+# Replace {id} with the process id
+curl -X GET http://localhost:8080/rest/flights/{id}
 ```
 
 As response a single flight is returned if found, otherwise no content (204) is returned.
@@ -119,18 +121,21 @@ As response a single flight is returned if found, otherwise no content (204) is 
 Cancels flight with given id
 
 ```sh
-curl -X DELETE http://localhost:8080/rest/flights/62f1c985-d31c-4ead-9906-2fe8d05937f0
+# Replace {id} with the process id
+curl -X DELETE http://localhost:8080/rest/flights/{id}
 ```
 
 ### GET /rest/flights/{id}/tasks
 
-Get user tasks that currently require action for a flight.
+Get user tasks that currently require action for a flight (with task id's as keys, and task types as values).
 
 ```sh
-curl -X GET http://localhost:8080/rest/flights/62f1c985-d31c-4ead-9906-2fe8d05937f0/tasks
+# Replace {id} with the process id
+curl -X GET http://localhost:8080/rest/flights/{id}/tasks
 ```
 
 Example response:
+
 ```json
 {
   "66c11e3e-c211-4cee-9a07-848b5e861bc5": "finalizePassengerList",
@@ -139,26 +144,31 @@ Example response:
 }
 ```
 
-### POST /rest//flights/{id}/newPassengerRequest
+### POST /rest/flights/{id}/newPassengerRequest
 
 Create a new Ticket request for a passenger, who must be approved by security.
 
 ```sh
-curl -d '{ "passenger": { "name": "Amy Cole", "seatTypePreference": "WINDOW", "emergencyExitRowCapable": true, "payedForSeat": true, "seat": "3A" } }' -X POST http://localhost:8080/rest/flights/62f1c985-d31c-4ead-9906-2fe8d05937f0/newPassengerRequest
+# Replace {id} with the process id
+curl -d '{ "passenger": { "name": "Amy Cole", "seatTypePreference": "WINDOW", "emergencyExitRowCapable": true, "payedForSeat": true, "seat": "3A" } }' -X POST http://localhost:8080/rest/flights/{id}/newPassengerRequest
 ```
 or on Windows:
 
 ```sh
-curl -d "{ \"passenger\": { \"name\": \"Amy Cole\", \"seatTypePreference\": \"WINDOW\", \"emergencyExitRowCapable\": true, \"payedForSeat\": true, \"seat\": \"3A\" } }" -X POST http://localhost:8080/rest/flights/62f1c985-d31c-4ead-9906-2fe8d05937f0/newPassengerRequest
+rem Replace {id} with the process id
+curl -d "{ \"passenger\": { \"name\": \"Amy Cole\", \"seatTypePreference\": \"WINDOW\", \"emergencyExitRowCapable\": true, \"payedForSeat\": true, \"seat\": \"3A\" } }" -X POST http://localhost:8080/rest/flights/{id}/newPassengerRequest
 ```
 
 ### GET /rest/flights/{id}/approveDenyPassenger/{workItemId}
 
 Get the passenger that need to be denied or approved for the given "approveDenyPassenger" task.
+
 ```sh
-curl -X GET http://localhost:8080/rest/flights/62f1c985-d31c-4ead-9906-2fe8d05937f0/approveDenyPassenger/66c11e3e-c211-4cee-9a07-848b5e861bc5
+# Replace {id} with the process id and {taskId} with the id of the task to complete
+curl -X GET http://localhost:8080/rest/flights/{id}/approveDenyPassenger/{taskId}
 ```
 Example response:
+
 ```json
 {
   "passenger": {
@@ -176,14 +186,18 @@ Example response:
 Approves an passenger and add them to the flight if "isPassengerApproved" is true, otherwise cancels their ticket.
 
 ```sh
-curl -d '{ "isPassengerApproved": true }' -X POST http://localhost:8080/rest/flights/7f24831f-9dc6-44c7-8dec-9b4a696506b5/approveDenyPassenger/66c11e3e-c211-4cee-9a07-848b5e861bc5
+# Replace {id} with the process id and {taskId} with the id of the task to complete
+curl -d '{ "isPassengerApproved": true }' -X POST http://localhost:8080/rest/flights/{id}/approveDenyPassenger/{taskId}
 ```
 or in Windows
+
 ```sh
-curl -d "{ \"isPassengerApproved\": true }" -X POST http://localhost:8080/rest/flights/7f24831f-9dc6-44c7-8dec-9b4a696506b5/approveDenyPassenger/66c11e3e-c211-4cee-9a07-848b5e861bc5
+rem Replace {id} with the process id and {taskId} with the id of the task to complete
+curl -d "{ \"isPassengerApproved\": true }" -X POST http://localhost:8080/rest/flights/{id}/approveDenyPassenger/{taskId}
 ```
 
 Example Response:
+
 ```json
 {
   "id":"7f24831f-9dc6-44c7-8dec-9b4a696506b5",
@@ -229,10 +243,12 @@ Example Response:
 Finalize the passenger list for the flight.
 
 ```sh
-curl -d '{}' -X POST http://localhost:8080/rest/flights/7f24831f-9dc6-44c7-8dec-9b4a696506b5/finalizePassengerList/62f1c985-d31c-4ead-9906-2fe8d05937f0
+# Replace {id} with the process id and {taskId} with the id of the task to complete
+curl -d '{}' -X POST http://localhost:8080/rest/flights/{id}/finalizePassengerList/{taskId}
 ```
 
 Example response:
+
 ```json
 {
   "id":"7f24831f-9dc6-44c7-8dec-9b4a696506b5",
@@ -278,10 +294,12 @@ Example response:
 Finalize seat assignments for the flight.
 
 ```sh
-curl -d '{}' -X POST http://localhost:8080/rest/flights/7f24831f-9dc6-44c7-8dec-9b4a696506b5/finalizeSeatAssignment/62f1c985-d31c-4ead-9906-2fe8d05937f0
+# Replace {id} with the process id and {taskId} with the id of the task to complete
+curl -d '{}' -X POST http://localhost:8080/rest/flights/{id}/finalizeSeatAssignment/{taskId}
 ```
 
 Example response:
+
 ```json
 {
   "id":"7f24831f-9dc6-44c7-8dec-9b4a696506b5",

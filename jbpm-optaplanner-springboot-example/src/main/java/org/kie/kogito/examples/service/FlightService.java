@@ -20,15 +20,13 @@ import javax.enterprise.context.ApplicationScoped;
 @Component
 public class FlightService {
 
-	public Flight createFlight(FlightDTO flightDTO) throws IllegalArgumentException {
+    public Flight createFlight(FlightDTO flightDTO) throws IllegalArgumentException {
         final Flight newFlight = new Flight();
         if (flightDTO.getSeatColumnSize() % 2 != 0) {
             throw new IllegalArgumentException("There must be an even number of seats in each row.");
-        }
-        else if (flightDTO.getSeatColumnSize() < 4) {
+        } else if (flightDTO.getSeatColumnSize() < 4) {
             throw new IllegalArgumentException("There must be at least four seats in each row.");
-        }
-        else if (flightDTO.getSeatRowSize() < 1) {
+        } else if (flightDTO.getSeatRowSize() < 1) {
             throw new IllegalArgumentException("There must be at least one row.");
         }
         try {
@@ -40,8 +38,8 @@ public class FlightService {
             flightInfo.setSeatColumnSize(flightDTO.getSeatColumnSize());
             newFlight.setFlightInfo(flightInfo);
             List<Seat> seatList = new ArrayList<Seat>(flightDTO.getSeatRowSize() * flightDTO.getSeatColumnSize());
+            final int MIDDLE_OF_ROW = flightDTO.getSeatColumnSize() / 2;
             for (int row = 0; row < flightDTO.getSeatRowSize(); row++) {
-                final int MIDDLE_OF_ROW = flightDTO.getSeatColumnSize() / 2;
                 final boolean IS_EMERGENCY_EXIT_ROW = row == (flightDTO.getSeatRowSize() / 2);
                 seatList.add(new Seat(row, 0, SeatType.WINDOW, IS_EMERGENCY_EXIT_ROW));
                 seatList.add(new Seat(row, flightDTO.getSeatColumnSize() - 1, SeatType.WINDOW, IS_EMERGENCY_EXIT_ROW));
@@ -56,23 +54,22 @@ public class FlightService {
             newFlight.setSeatList(seatList);
             newFlight.setPassengerList(new ArrayList<>(flightDTO.getSeatRowSize() * flightDTO.getSeatColumnSize()));
             return newFlight;
-        }
-        catch (DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             throw new IllegalArgumentException("Invalid Date", e);
         }
     }
 
     public Flight addPassengerToFlight(Flight flight, PassengerDTO passenger) {
         Seat seat = null;
-        if (passenger.isPayedForSeat()) {
+        if (passenger.hasPaidForSeat()) {
             String[] seatLoc = passenger.getSeat().split(";");
             int row = Integer.parseInt(seatLoc[0]);
             int col = Integer.parseInt(seatLoc[1]);
             seat = flight.getSeatList().stream().filter(s -> s.getRow() == row && s.getColumn() == col).findAny().get();
         }
         flight.getPassengerList().add(new Passenger(Long.valueOf(flight.getPassengerList().size()), passenger.getName(),
-          (passenger.getSeatTypePreference().equals("NONE"))? null : SeatType.valueOf(passenger.getSeatTypePreference()),
-          passenger.isEmergencyExitRowCapable(), passenger.isPayedForSeat(), seat));
+                                                    (passenger.getSeatTypePreference().equals("NONE")) ? null : SeatType.valueOf(passenger.getSeatTypePreference()),
+                                                    passenger.isEmergencyExitRowCapable(), passenger.hasPaidForSeat(), seat));
         return flight;
     }
 }

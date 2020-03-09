@@ -17,7 +17,7 @@ public class Passenger {
     // At least 15 years old, sufficient mobility, strength and dexterity to assist in an evacuation.
     private boolean emergencyExitRowCapable;
     @PlanningPin
-    private boolean payedForSeat;
+    private boolean paidForSeat;
 
     @PlanningVariable(valueRangeProviderRefs = "seatRange")
     private Seat seat;
@@ -25,12 +25,12 @@ public class Passenger {
     public Passenger() {
     }
 
-    public Passenger(Long id, String name, SeatType seatTypePreference, boolean emergencyExitRowCapable, boolean payedForSeat, Seat seat) {
+    public Passenger(Long id, String name, SeatType seatTypePreference, boolean emergencyExitRowCapable, boolean paidForSeat, Seat seat) {
         this.id = id;
         this.name = name;
         this.seatTypePreference = seatTypePreference;
         this.emergencyExitRowCapable = emergencyExitRowCapable;
-        this.payedForSeat = payedForSeat;
+        this.paidForSeat = paidForSeat;
         this.seat = seat;
     }
 
@@ -54,12 +54,11 @@ public class Passenger {
         return emergencyExitRowCapable;
     }
 
-    public boolean isPayedForSeat() {
-        return payedForSeat;
+    public boolean hasPaidForSeat() {
+        return paidForSeat;
     }
 
     public Seat getSeat() {
         return seat;
     }
-
 }

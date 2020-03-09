@@ -16,7 +16,7 @@ public class FlightSeatingConstraintProvider implements ConstraintProvider {
 
     @Override
     public Constraint[] defineConstraints(ConstraintFactory factory) {
-        return new Constraint[] {
+        return new Constraint[]{
                 seatConflict(factory),
                 emergencyExitRow(factory),
                 seatTypePreference(factory),
@@ -52,12 +52,11 @@ public class FlightSeatingConstraintProvider implements ConstraintProvider {
                 .join(factory.from(Passenger.class).groupBy(ConstraintCollectors.count()))
                 .join(FlightInfo.class)
                 .penalize("Plane Balance", HardSoftScore.ONE_SOFT, (totalX, totalY, passengerCount, flightInfo) -> {
-                    double localTotalX = totalX - passengerCount * ((flightInfo.getSeatColumnSize() / 2d) - 0.5);
-                    double localTotalY = totalY - passengerCount * ((flightInfo.getSeatRowSize() / 2d) - 0.5);
+                    double localTotalX = totalX - passengerCount * ((flightInfo.getSeatColumnSize() / 2.0) - 0.5);
+                    double localTotalY = totalY - passengerCount * ((flightInfo.getSeatRowSize() / 2.0) - 0.5);
                     double averageX = localTotalX / passengerCount;
                     double averageY = localTotalY / passengerCount;
                     return (int) Math.round(Point2D.distance(0, 0, averageX, averageY) * passengerCount * 100);
                 });
     }
-
 }

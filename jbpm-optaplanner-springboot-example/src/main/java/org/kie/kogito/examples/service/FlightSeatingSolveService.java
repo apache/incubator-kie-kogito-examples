@@ -29,6 +29,7 @@ public class FlightSeatingSolveService {
             });
         });
 
+        // TODO: Workaround for https://issues.redhat.com/browse/PLANNER-1868
         // Wait for solving to finish in new thread (so we don't block the return)
         new Thread(() -> {
             try {

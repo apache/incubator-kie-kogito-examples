@@ -78,7 +78,7 @@ function renderFlight(flight, tasks) {
         const column = parseInt(matches[2]);
         return flight.flight.seatList.find(s => s.row === row && s.column === column).name;
     };
-    const passengerRequestString = passenger => `${passenger.name}, Is Paying for Seat? ${passenger.payedForSeat? "Yes, Seat " + getSeatName(passenger.seat) : "No"}`;
+    const passengerRequestString = passenger => `${passenger.name}, Is Paying for Seat? ${passenger.paidForSeat? "Yes, Seat " + getSeatName(passenger.seat) : "No"}`;
     return element("div", {},
       element("div", {},
             header,
@@ -296,7 +296,7 @@ function generatePassengersForFlight(flight) {
             name: randomName(),
             seatTypePreference: SEAT_TYPE_PREFERENCE_CHOICES[Math.floor(Math.random() * SEAT_TYPE_PREFERENCE_CHOICES.length)],
             emergencyExitRowCapable: Math.random() < 0.8,
-            payedForSeat: false
+            paidForSeat: false
         }));
     }
     Promise.all(passengersToAddList.map(newPassengerRequest => $.post(`/rest/flights/${flight.id}/newPassengerRequest`, newPassengerRequest, () => {}, "json"))).then(() => {
@@ -361,26 +361,26 @@ function initModal() {
         modal.find('#name').val(randomName());
         modal.find('#seatTypePreference').val("NONE");
         modal.find('#emergencyExitRowCapable').prop('checked', false);
-        modal.find('#payedForSeat').prop('checked', false);
+        modal.find('#paidForSeat').prop('checked', false);
         
         modal.find('#seatPicker').replaceWith(element("div", { id: "seatPicker", class: "seat-picker hide-seat-picker" }, flightSeats(flightObject, ({seat, passenger}) => element("input",
             { type: "radio", class: "form-control", name: "flight-seat", value: seat.row + ";" + seat.column, disabled: passenger !== undefined, hidden: passenger !== undefined }))));
 
-        modal.find("#payedForSeat").off('click').click(() => $("#add-passenger-modal").find('#seatPicker').toggleClass("hide-seat-picker"));
+        modal.find("#paidForSeat").off('click').click(() => $("#add-passenger-modal").find('#seatPicker').toggleClass("hide-seat-picker"));
 
 
         addPassengerAction.off('click').click(() => {
             const name = $('#name').val();
             const seatTypePreference = $('#seatTypePreference').val();
             const emergencyExitRowCapable = $('#emergencyExitRowCapable').prop( "checked" );
-            const payedForSeat = $('#payedForSeat').prop( "checked" );
-            const seat = (payedForSeat)? $('input[name="flight-seat"]:checked').val() : null;
+            const paidForSeat = $('#paidForSeat').prop( "checked" );
+            const seat = (paidForSeat)? $('input[name="flight-seat"]:checked').val() : null;
 
             const newPassengerRequest = JSON.stringify({
                     name,
                     seatTypePreference,
                     emergencyExitRowCapable,
-                    payedForSeat,
+                    paidForSeat,
                     seat
             });
 

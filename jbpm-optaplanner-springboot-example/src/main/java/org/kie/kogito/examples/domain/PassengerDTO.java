@@ -1,10 +1,5 @@
 package org.kie.kogito.examples.domain;
 
-import org.optaplanner.core.api.domain.entity.PlanningEntity;
-import org.optaplanner.core.api.domain.entity.PlanningPin;
-import org.optaplanner.core.api.domain.lookup.PlanningId;
-import org.optaplanner.core.api.domain.variable.PlanningVariable;
-
 public class PassengerDTO {
 
     private String name;
@@ -14,18 +9,18 @@ public class PassengerDTO {
     // At least 15 years old, sufficient mobility, strength and dexterity to assist in an evacuation.
     private boolean emergencyExitRowCapable;
 
-    private boolean payedForSeat;
+    private boolean paidForSeat;
     // not-null iff payedForSeat is true
     private String seat;
 
     public PassengerDTO() {
     }
 
-    public PassengerDTO(String name, String seatTypePreference, boolean emergencyExitRowCapable, boolean payedForSeat, String seat) {
+    public PassengerDTO(String name, String seatTypePreference, boolean emergencyExitRowCapable, boolean paidForSeat, String seat) {
         this.name = name;
         this.seatTypePreference = seatTypePreference;
         this.emergencyExitRowCapable = emergencyExitRowCapable;
-        this.payedForSeat = payedForSeat;
+        this.paidForSeat = paidForSeat;
         this.seat = seat;
     }
 
@@ -57,12 +52,12 @@ public class PassengerDTO {
         this.emergencyExitRowCapable = emergencyExitRowCapable;
     }
 
-    public boolean isPayedForSeat() {
-        return payedForSeat;
+    public boolean hasPaidForSeat() {
+        return paidForSeat;
     }
 
-    public void setPayedForSeat(boolean payedForSeat) {
-        this.payedForSeat = payedForSeat;
+    public void setPaidForSeat(boolean paidForSeat) {
+        this.paidForSeat = paidForSeat;
     }
 
     public String getSeat() {
@@ -72,5 +67,4 @@ public class PassengerDTO {
     public void setSeat(String seat) {
         this.seat = seat;
     }
-
 }
