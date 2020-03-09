@@ -71,10 +71,6 @@ This quickstart requires an Apache Kafka to be available and by default expects 
 
 * Install and Startup Kafka Server / Zookeeper
 
-```
-https://kafka.apache.org/downloads
-```
-
 https://kafka.apache.org/quickstart
 
 In addition to that two topics are needed
