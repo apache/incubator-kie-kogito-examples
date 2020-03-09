@@ -150,13 +150,13 @@ Create a new Ticket request for a passenger, who must be approved by security.
 
 ```sh
 # Replace {id} with the process id
-curl -d '{ "passenger": { "name": "Amy Cole", "seatTypePreference": "WINDOW", "emergencyExitRowCapable": true, "payedForSeat": true, "seat": "3A" } }' -X POST http://localhost:8080/rest/flights/{id}/newPassengerRequest
+curl -d '{ "passenger": { "name": "Amy Cole", "seatTypePreference": "WINDOW", "emergencyExitRowCapable": true, "paidForSeat": true, "seat": "3A" } }' -X POST http://localhost:8080/rest/flights/{id}/newPassengerRequest
 ```
 or on Windows:
 
 ```sh
 rem Replace {id} with the process id
-curl -d "{ \"passenger\": { \"name\": \"Amy Cole\", \"seatTypePreference\": \"WINDOW\", \"emergencyExitRowCapable\": true, \"payedForSeat\": true, \"seat\": \"3A\" } }" -X POST http://localhost:8080/rest/flights/{id}/newPassengerRequest
+curl -d "{ \"passenger\": { \"name\": \"Amy Cole\", \"seatTypePreference\": \"WINDOW\", \"emergencyExitRowCapable\": true, \"paidForSeat\": true, \"seat\": \"3A\" } }" -X POST http://localhost:8080/rest/flights/{id}/newPassengerRequest
 ```
 
 ### GET /rest/flights/{id}/approveDenyPassenger/{workItemId}
@@ -175,7 +175,7 @@ Example response:
     "name": "Amy Cole",
     "seatTypePreference": "WINDOW",
     "emergencyExitRowCapable": true,
-    "payedForSeat": true,
+    "paidForSeat": true,
     "seat": "3A"
   }
 }
@@ -215,7 +215,7 @@ Example Response:
       "name": "Amy Cole",
       "seatTypePreference": "WINDOW",
       "emergencyExitRowCapable": true,
-      "payedForSeat": false,
+      "paidForSeat": false,
       "seat":null
     }],
     "score":null,
@@ -266,7 +266,7 @@ Example response:
       "name": "Amy Cole",
       "seatTypePreference": "WINDOW",
       "emergencyExitRowCapable": true,
-      "payedForSeat": false,
+      "paidForSeat": false,
       "seat":null
     }],
     "score":null,
@@ -317,7 +317,7 @@ Example response:
       "name": "Amy Cole",
       "seatTypePreference": "WINDOW",
       "emergencyExitRowCapable": true,
-      "payedForSeat": false,
+      "paidForSeat": false,
       "seat":{"name":"1A","row":0,"column":0,"seatType":"WINDOW","emergencyExitRow":false}
     }],
     "score":null,
