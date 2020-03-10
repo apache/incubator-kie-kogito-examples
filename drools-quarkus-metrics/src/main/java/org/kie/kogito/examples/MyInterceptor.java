@@ -11,7 +11,7 @@ import org.kie.addons.monitoring.system.interceptor.MetricsInterceptor;
 @Provider
 public class MyInterceptor extends MetricsInterceptor {
     @Override
-    public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {
+    public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) {
         super.filter(requestContext, responseContext);
     }
 }
