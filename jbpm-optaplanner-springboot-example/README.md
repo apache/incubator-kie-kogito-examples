@@ -19,7 +19,7 @@ and custom Java service, a new service is generated that exposes REST operations
 create new flights (following the steps as defined in the main and sub-process)
 and add passengers to flights.
 
-An UI is included in this example, which can be accessed on `localhost:8080`
+A UI is included in this example, which can be accessed on `localhost:8080`
 when the application is running.
 
 ## Installing and Running
