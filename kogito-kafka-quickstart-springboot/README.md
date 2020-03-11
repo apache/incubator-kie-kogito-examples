@@ -16,14 +16,72 @@ This example shows
 	
 <p align="center"><img width=75% height=50% src="docs/images/process.png"></p>
 
+* Diagram Properties (top)
+<p align="center"><img src="docs/images/diagramProperties.png"></p>
+
+* Diagram Properties (bottom)
+<p align="center"><img src="docs/images/diagramProperties2.png"></p>
+
+* Diagram Properties (process variables)
+<p align="center"><img src="docs/images/diagramProperties3.png"></p>
+
+* Start Message
+<p align="center"><img src="docs/images/startMessage.png"></p>
+
+* Start Message (Assignments)
+<p align="center"><img src="docs/images/startMessageAssignments.png"></p>
+
+* Process Traveler Business Rule (top)
+<p align="center"><img src="docs/images/processTravelerBusinessRule.png"></p>
+
+* Process Traveler Business Rule (bottom)
+<p align="center"><img src="docs/images/processTravelerBusinessRule2.png"></p>
+
+* Process Traveler Business Rule (Assignments)
+<p align="center"><img src="docs/images/processTravelerBusinessRuleAssignments.png"></p>
+
+* Process Traveler Gateway 
+<p align="center"><img src="docs/images/processedTravelerGateway.png"></p>
+
+* Process Traveler Gateway Yes Connector
+<p align="center"><img src="docs/images/processedTravelerYesConnector.png"></p>
+
+* Process Traveler Gateway No Connector
+<p align="center"><img src="docs/images/processedTravelerNoConnector.png"></p>
+
+* Log Traveler Script Task
+<p align="center"><img src="docs/images/logTravelerScriptTask.png"></p>
+
+* Skip Traveler Script Task
+<p align="center"><img src="docs/images/skipTravelerScriptTask.png"></p>
+
+* Processed Traveler End Message
+<p align="center"><img src="docs/images/processedTravelerEndMessage.png"></p>
+
+* Processed Traveler End Message (Assignments)
+<p align="center"><img src="docs/images/processedTravelerEndMessageAssignments.png"></p>
+
+* Skip Traveler End
+<p align="center"><img src="docs/images/skipTraveler.png"></p>
+
+
 ## Infrastructure requirements
 
 This quickstart requires an Apache Kafka to be available and by default expects it to be on default port and localhost.
+
+* Install and Startup Kafka Server / Zookeeper
+
+https://kafka.apache.org/quickstart
 
 In addition to that two topics are needed
 
 * travellers
 * processedtravellers
+
+```
+bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic travellers
+bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic processedtravellers
+```
 
 These topics are expected to be without key
 
@@ -59,28 +117,68 @@ java -jar target/kogito-kafka-quickstart-sprintboot-{version}.jar
 
 To make use of this application it is as simple as putting a message on `travellers` topic with following content 
 
-```
-{ 
-"firstName" : "Jan", 
-"lastName" : "Kowalski", 
-"email" : "jan.kowalski@example.com", 
-"nationality" : "Polish"
-}
+* To examine ProcessedTravellers topic and verify upcoming messages will be processed
 
+Execute in a separate terminal session
+```
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic processedtravellers 
+```
+
+* Send message that should be processed to Topic
+  
+```
+bin/kafka-console-producer.sh --broker-list localhost:9092 --topic travellers
+```
+
+Content (cloud event format)
+```
+{
+  "specversion": "0.3",
+  "id": "21627e26-31eb-43e7-8343-92a696fd96b1",
+  "source": "",
+  "type": "TravellersMessageDataEvent_3", 
+  "time": "2019-10-01T12:02:23.812262+02:00[Europe/Warsaw]",
+  "data": { 
+	"firstName" : "Jan", 
+	"lastName" : "Kowalski", 
+	"email" : "jan.kowalski@example.com", 
+	"nationality" : "Polish"
+	}
+}
+```
+One liner
+```
+{"specversion": "0.3","id": "21627e26-31eb-43e7-8343-92a696fd96b1","source": "","type": "TravellersMessageDataEvent_3", "time": "2019-10-01T12:02:23.812262+02:00[Europe/Warsaw]","data": { "firstName" : "Jan", "lastName" : "Kowalski", "email" : "jan.kowalski@example.com", "nationality" : "Polish"}}
 ```
 
 this will then trigger the successful processing of the traveller and put another message on `processedtravellers` topic.
 
 To take the other path of the process put following message on `travellers` topic
 
+* Send Message to Topic
 ```
-{ 
-"firstName" : "John", 
-"lastName" : "Doe", 
-"email" : "john.doe@example.com", 
-"nationality" : "American"
+bin/kafka-console-producer.sh --broker-list localhost:9092 --topic travellers
+```
+With the following content (Cloud Event Format)
+```
+{
+  "specversion": "0.3",
+  "id": "31627e26-31eb-43e7-8343-92a696fd96b1",
+  "source": "",
+  "type": "TravellersMessageDataEvent_3", 
+  "time": "2019-10-01T12:02:23.812262+02:00[Europe/Warsaw]",
+  "data": { 
+	"firstName" : "John", 
+	"lastName" : "Doe", 
+    "email" : "john.doe@example.com", 
+    "nationality" : "American"
+	}
 }
+```
 
+One Liner
+```
+{"specversion": "0.3","id": "31627e26-31eb-43e7-8343-92a696fd96b1","source": "","type": "TravellersMessageDataEvent_3", "time": "2019-10-01T12:02:23.812262+02:00[Europe/Warsaw]","data": { "firstName" : "John", "lastName" : "Doe", "email" : "john.doe@example.com", "nationality" : "American"}}
 ```
 
 this will not result in message being send to `processedtravelers` topic.
