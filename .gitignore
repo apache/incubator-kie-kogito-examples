@@ -5,6 +5,7 @@ bin/
 # Eclipse, Netbeans and IntelliJ files
 /.*
 !.gitignore
+!.circleci
 /nbproject
 /*.ipr
 /*.iws
@@ -12,6 +13,7 @@ bin/
 
 # Repository wide ignore mac DS_Store files
 .DS_Store
+<<<<<<< HEAD
 
 # Original jbpm ignores
 *~
@@ -35,3 +37,9 @@ quarkus.log
 
 # XTF properties files
 test.properties
+*~
+/settings*.xml
+*.db
+*.tlog
+
+workspace
