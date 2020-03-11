@@ -12,18 +12,36 @@ This example shows
 
 * working with user tasks
 * four eye principle with user tasks
-	
-	
-<p align="center"><img width=75% height=50% src="docs/images/process.png"></p>
 
-
-In addition this quickstart also shows how to use custom life cycle for user tasks that uses custom life cycle phases
-compared to those supported by default.
+* In addition this quickstart also shows how to use custom life cycle for user tasks that uses custom life cycle phases compared to those supported by default.
 
 - Start
 - Complete - extended the default one that allows only to complete started tasks
 
-To learn more about this look at the following classes
+<p align="center"><img width=75% height=50% src="docs/images/process.png"></p>
+	
+Diagram Properties (top)
+<p align="center"><img src="docs/images/diagramProperties.png"></p>
+
+* Diagram Properties (bottom)
+<p align="center"><img src="docs/images/diagramProperties3.png"></p>
+
+* First Line Approval (top)
+<p align="center"><img src="docs/images/firstLineApprovalUserTask.png"></p>
+
+* First Line Approval (bottom)
+<p align="center"><img src="docs/images/firstLineApprovalUserTask2.png"></p>
+
+* First Line Approval (Assignments)
+<p align="center"><img src="docs/images/firstLineApprovalUserTaskAssignments.png"></p>
+
+* Second Line Approval
+<p align="center"><img src="docs/images/secondLineApprovalUserTask.png"></p>
+
+* Second Line Approval (Assignments)
+<p align="center"><img src="docs/images/secondLineApprovalUserTaskAssignments.png"></p>
+
+To learn more about custom lifecycle, look at the following classes:
 
 - `org.acme.travels.config.CustomWorkItemHandlerConfig` - responsible for registering work item handler to deal with user tasks
 - `org.acme.travels.usertasks.CustomHumanTaskLifeCycle` - defines actual the life cycle for user tasks
@@ -41,10 +59,12 @@ You will need:
   - Maven 3.5.4+ installed
 
 When using native image compilation, you will also need: 
-  - GraalVM 19.1+ installed
+  - GraalVM 19.3+ installed
   - Environment variable GRAALVM_HOME set accordingly
+  - GraalVM native image needs as well native-image extension: https://www.graalvm.org/docs/reference-manual/native-image/
   - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too, please refer to GraalVM installation documentation for more details.
-
+    https://www.graalvm.org/docs/reference-manual/native-image/
+    
 ### Compile and Run in Local Dev Mode
 
 ```
@@ -71,6 +91,7 @@ To run the generated native executable, generated in `target/`, execute
 
 Examine OpenAPI via swagger UI at [http://localhost:8080/swagger-ui](http://localhost:8080/swagger-ui)
 
+[Dev Mode Only] https://quarkus.io/guides/openapi-swaggerui#use-swagger-ui-for-development
 
 ### Submit a request to start new approval
 
@@ -127,7 +148,7 @@ where `{uuid}` is the id of the given approval instance and `{tuuid}` is the id 
 ### Complete first line approval task
 
 ```
-curl -X POST -d '{"approved" : true}' -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/approvals/{uuid}/firstLineApproval/{tuuid}?user=admin&group=managers'
+curl -X POST -d '{"approved" : true}' -H 'Content-Type:application/json' -H 'Accept:application/json' 'http://localhost:8080/approvals/{uuid}/firstLineApproval/{tuuid}?user=admin&group=managers'
 ```
 
 where `{uuid}` is the id of the given approval instance and `{tuuid}` is the id of the task instance
@@ -187,4 +208,10 @@ plus the approver who made the first one.
 		"nationality":"American"
 	}
 }
+```
+
+You should see a similar message after performing the second line approval after the curl command
+
+```
+{"id":"f498de73-e02d-4829-905e-2f768479a4f1", "approver":"admin","firstLineApproval:true, "secondLineApproval":true,"traveller":{"firstName":"John","lastName":"Doe","email":"jon.doe@example.com","nationality":"American","address":{"street":"main street","city":"Boston","zipCode":"10005","country":"US"}}}
 ```
