@@ -79,9 +79,8 @@
             load();
         });
     }
-    
+
     function completeTask(id, taskName, taskId) {
-        
         $.post("/travels/" + id + "/" + taskName + "/" + taskId, JSON.stringify({}), function () {
             load();
         }, "json");
@@ -93,29 +92,29 @@
             $.each(data, function (key, val) {
                 $("<tr><td>" + val.traveller.lastName + ", " + val.traveller.firstName + "</td>" +
                 "<td>" + val.trip.country + ", " + val.trip.city + "</td>" +
-                "<td>" + val.trip.begin.substring(0, 10) + " - " + val.trip.end.substring(0, 10) + "</td>" +
+                "<td>" + new Date(val.trip.begin).toLocaleDateString() + " - " + new Date(val.trip.end).toLocaleDateString() + "</td>" +
                 "<td>" + (val.trip.visaRequired ? 'Yes' : 'No') + "</td>" +
                 "<td>" + (val.hotel != null ? val.hotel.name : '') + "</td>" +
-                "<td>" + (val.flight != null ? val.flight.flightNumber : '')  + "</td>" +                
-                        "<td>" +     
+                "<td>" + (val.flight != null ? val.flight.flightNumber : '')  + "</td>" +
+                        "<td>" +
                         "<button class='btn btn-primary btn-sm' " +
                         "data-toggle='modal' " +
                         "data-target='#detailsModal' " +
                         "data-firstname='" + val.traveller.firstName + "' " +
                         "data-lastname='" + val.traveller.lastName + "' " +
                         "data-email='" + val.traveller.email + "' " +
-                        "data-nationality='" + val.traveller.nationality + "' " +                        
+                        "data-nationality='" + val.traveller.nationality + "' " +
                         "data-country='" + val.trip.country + "' " +
                         "data-city='" + val.trip.city + "' " +
-                        "data-begin='" + val.trip.begin.substring(0, 10) + "' " +
-                        "data-end='" + val.trip.end.substring(0, 10) + "' " +                         
+                        "data-begin='" + new Date(val.trip.begin).toLocaleDateString() + "' " +
+                        "data-end='" + new Date(val.trip.end).toLocaleDateString() + "' " +                         
                         "data-hotelname='" + (val.hotel != null ? val.hotel.name : "") + "' " +
                         "data-address='" + (val.hotel != null ? val.hotel.address.street : "") + "' " +
                         "data-bookingnumber='" + (val.hotel != null ? val.hotel.bookingNumber : "") + "' " +
-                        "data-phone='" + (val.hotel != null ? val.hotel.phone : "") + "' " +                         
+                        "data-phone='" + (val.hotel != null ? val.hotel.phone : "") + "' " +
                         "data-flightnumber='" + (val.flight != null ? val.flight.flightNumber : "") + "' " +
-                        "data-arrival='" + (val.flight != null ? val.flight.arrival : "") + "' " +
-                        "data-departure='" + (val.flight != null ? val.flight.departure : "") + "' " +                        
+                        "data-arrival='" + (val.flight != null ? new Date(val.flight.arrival).toLocaleString() : "") + "' " +
+                        "data-departure='" + (val.flight != null ? new Date(val.flight.departure).toLocaleString() : "") + "' " +                        
                         "data-id='" + val.id + "'>" +
                         "   <span>Details</span>" +
                         "</button>&nbsp;" +
@@ -158,41 +157,41 @@
             modal.find('#lastName').val("");
             modal.find('#email').val("");
             modal.find('#nationality').val("");
-            
+
             modal.find('#street').val("");
             modal.find('#city').val("");
             modal.find('#zipCode').val("");
             modal.find('#country').val("");
-            
+
             modal.find('#destinationCountry').val("");
             modal.find('#destinationCity').val("");
             modal.find('#tripBegin').val("");
             modal.find('#tripEnd').val("");
-            
+
             productAction.click(function () {
-            	
+
             	var address = {street: $("#street").val(), city: $("#city").val(), zipCode: $("#zipCode").val(), country: $("#country").val()};
             	var traveller = {firstName: $("#firstName").val(), lastName: $("#lastName").val(), email: $("#email").val(), nationality: $("#nationality").val(), address: address};
             	var trip = {country: $("#destinationCountry").val(), city: $("#destinationCity").val(), begin: $("#tripBegin").val() + 'T00:00:00.000+02:00', end: $("#tripEnd").val() + 'T00:00:00.000+02:00'};
             	var travelRequest = JSON.stringify({traveller: traveller, trip: trip});
-            
+
                 create(travelRequest);
                 $('#productModal').modal('toggle');
             });
-            
+
         })
-        
+
         $("#detailsModal").on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget);
             var action = button.data('action');
             var id = button.data('id');
-            var modal = $(this);      
+            var modal = $(this);
             modal.find('.modal-title').text("Details of travel for " + button.data("lastname") + ", " + button.data("firstname"));
             modal.find('#firstName').val(button.data("firstname"));
             modal.find('#lastName').val(button.data("lastname"));
             modal.find('#email').val(button.data("email"));
-            modal.find('#nationality').val(button.data("nationality"));         
-            
+            modal.find('#nationality').val(button.data("nationality"));
+
             modal.find('#destinationCountry').val(button.data("country"));
             modal.find('#destinationCity').val(button.data("city"));
             modal.find('#tripBegin').val(button.data("begin"));
@@ -202,32 +201,32 @@
             modal.find('#bookingNumber').val(button.data("bookingnumber"));
             modal.find('#address').val(button.data("address"));
             modal.find('#phone').val(button.data("phone"));
-            
+
             modal.find('#flightNumber').val(button.data("flightnumber"));
             modal.find('#departure').val(button.data("departure"));
             modal.find('#arrival').val(button.data("arrival"));
         })
-        
+
         $("#tasksModal").on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget);
             var action = button.data('action');
             var id = button.data('id');
-            var modal = $(this);      
+            var modal = $(this);
             modal.find('.modal-title').text("Tasks for " + button.data("lastname") + ", " + button.data("firstname"));
-            
+
             $("#taskscontent").children().remove();
-            $.getJSON("/travels/"+ id + "/tasks", function (data) {            	
+            $.getJSON("/travels/"+ id + "/tasks", function (data) {
             	$.each(data, function (key, val) {
-                    
-                	$("<tr><td>" + val + "</td>" +             
+
+                	$("<tr><td>" + val + "</td>" +
                             "<td>" +
-                            "<button class='btn btn-primary btn-sm' onclick=\"completeTask(" + id + ", '" + val + "', " + key + ")\" data-dismiss=\"modal\" " +     
+                            "<button class='btn btn-primary btn-sm' onclick=\"completeTask('" + id + "', '" + val + "', '" + key + "')\" data-dismiss=\"modal\" " +     
                             "   <span>Complete</span>" +
-                            "</button>" +                    
+                            "</button>" +
                             "</td>" +
                             "</tr>").appendTo("#taskscontent");
                 });
-            
+
         })
     })
     }
@@ -281,7 +280,7 @@
 										class="form-control" id="country" name="country" required>
 								</div>
 							</div>
-							
+
 							<h3>Trip</h3>
 							<div class="col-md-12 col-sm-12 col-xs-12">
 								<div class="form-group">
@@ -314,7 +313,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 <div class="modal fade" id="detailsModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="dialog">
         <div class="modal-content">
@@ -325,7 +324,7 @@
             <div class="modal-body">
             	<div class="container-fluid">
 						<div class="row">
-							
+
 							<div class="col-md-6 col-sm-6 col-xs-6">
 								<div class="form-group">
 									<h3>Traveller</h3>
@@ -347,8 +346,8 @@
 										type="text" class="form-control" id="nationality"
 										name="form-control" readonly>
 								</div>
-							</div>							
-							
+							</div>
+
 							<div class="col-md-6 col-sm-6 col-xs-6">
 								<div class="form-group">
 									<h3>Trip</h3>
@@ -371,7 +370,7 @@
 										name="tripEnd" readonly>
 								</div>
 							</div>
-							
+
 							<div class="col-md-6 col-sm-6 col-xs-6">
 								<div class="form-group">
 									<h3>Hotel</h3>
@@ -393,7 +392,7 @@
 										class="form-control" id="phone" name="phone" readonly>
 								</div>
 							</div>
-							
+
 							<div class="col-md-6 col-sm-6 col-xs-6">
 								<div class="form-group">
 									<h3>Flight</h3>
@@ -423,8 +422,8 @@
 			</div>
 		</div>
 	</div>
-	
-	
+
+
 <div class="modal fade" id="tasksModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="dialog">
         <div class="modal-content">
@@ -435,9 +434,9 @@
             <div class="modal-body">
             	<div class="container-fluid">
 						<div class="row">
-							
+
 							<div class="col-md-12">
-				                <h1>Tasks</h1>				                
+				                <h1>Tasks</h1>
 				                <table class="table table-striped">
 				                    <thead>
 				                    <tr>
@@ -449,8 +448,8 @@
 				                    <!-- filled using Ajax -->
 				                    </tbody>
 				                </table>
-				            </div>					
-													
+				            </div>
+
 							<div class="modal-footer">
 								<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
 							</div>
@@ -459,6 +458,6 @@
 				</div>
 			</div>
 		</div>
-	</div>	
+	</div>
 </body>
 </html>

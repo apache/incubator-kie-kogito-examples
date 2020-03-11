@@ -31,7 +31,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            
+
             <table class="table">
                 <thead>
                 <tr>
@@ -122,7 +122,7 @@
                 "trip { city, country, begin, end, visaRequired } " +
                 "hotel { name, bookingNumber, phone, address { street } } " +
                 "flight { flightNumber, departure, arrival } " +
-                "processInstances { state } " +
+                "metadata { processInstances { state } } " +
                 "}}\"" +
                 "}";
         $.ajax({
@@ -131,13 +131,13 @@
             data: query,
             success: function (data) {
                 $.each(data.data["Travels"], function (key, val) {
-                    var active = $.grep(val.processInstances, function (pi) {
+                    var active = $.grep(val.metadata.processInstances, function (pi) {
                         return pi.state == "ACTIVE"
                     }).length > 0;
                     var html =
                             "<tr class='" + (active ? "" : "active") + "'><td>" + val.traveller.lastName + ", " + val.traveller.firstName + "</td>" +
                             "<td>" + val.trip.country + ", " + val.trip.city + "</td>" +
-                            "<td>" + val.trip.begin.substring(0, 10) + " - " + val.trip.end.substring(0, 10) + "</td>" +
+                            "<td>" + new Date(val.trip.begin).toLocaleDateString() + " - " + new Date(val.trip.end).toLocaleDateString() + "</td>" +
                             "<td>" + (val.trip.visaRequired ? 'Yes' : 'No') + "</td>" +
                             "<td>" + (val.hotel != null ? val.hotel.name : '') + "</td>" +
                             "<td>" + (val.flight != null ? val.flight.flightNumber : '') + "</td>" +
@@ -151,15 +151,15 @@
                             "data-nationality='" + val.traveller.nationality + "' " +
                             "data-country='" + val.trip.country + "' " +
                             "data-city='" + val.trip.city + "' " +
-                            "data-begin='" + val.trip.begin.substring(0, 10) + "' " +
-                            "data-end='" + val.trip.end.substring(0, 10) + "' " +
+                            "data-begin='" + new Date(val.trip.begin).toLocaleDateString() + "' " +
+                            "data-end='" + new Date(val.trip.end).toLocaleDateString() + "' " +
                             "data-hotelname='" + (val.hotel != null ? val.hotel.name : "") + "' " +
                             "data-address='" + (val.hotel != null ? val.hotel.address.street : "") + "' " +
                             "data-bookingnumber='" + (val.hotel != null ? val.hotel.bookingNumber : "") + "' " +
                             "data-phone='" + (val.hotel != null ? val.hotel.phone : "") + "' " +
                             "data-flightnumber='" + (val.flight != null ? val.flight.flightNumber : "") + "' " +
-                            "data-arrival='" + (val.flight != null ? val.flight.arrival : "") + "' " +
-                            "data-departure='" + (val.flight != null ? val.flight.departure : "") + "' " +
+                            "data-arrival='" + (val.flight != null ? new Date(val.flight.arrival).toLocaleString() : "") + "' " +
+                            "data-departure='" + (val.flight != null ? new Date(val.flight.departure).toLocaleString() : "") + "' " +
                             "data-id='" + val.id + "'>" +
                             "   <span>Details</span>" +
                             "</button>&nbsp;";
