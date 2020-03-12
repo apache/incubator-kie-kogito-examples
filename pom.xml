@@ -37,7 +37,7 @@
     <surefire.forkCount>1</surefire.forkCount>
     <alphanetworkCompilerEnabled>false</alphanetworkCompilerEnabled>
 
-    <version.io.quarkus>1.3.0.Alpha2</version.io.quarkus>
+    <version.io.quarkus>1.3.0.CR2</version.io.quarkus>
   </properties>
 
   <!-- distributionManagement section -->
