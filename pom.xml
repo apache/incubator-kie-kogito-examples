@@ -37,14 +37,12 @@
     <surefire.forkCount>1</surefire.forkCount>
     <alphanetworkCompilerEnabled>false</alphanetworkCompilerEnabled>
 
-    <version.io.quarkus>1.3.0.Alpha2</version.io.quarkus>
+    <version.io.quarkus>1.3.0.CR2</version.io.quarkus>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.compiler.source>1.8</maven.compiler.source>
 
-    <!-- quarkus related -->
-    <quarkus.version>1.3.0.Alpha2</quarkus.version>
     <!-- springboot related -->
     <springboot.version>2.2.0.RELEASE</springboot.version>
     <!-- kogito -->
@@ -163,18 +161,6 @@
     <module>kogito-timer-quarkus</module>
     <module>kogito-timer-springboot</module>
   </modules>
-
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.kie.kogito</groupId>
-        <artifactId>kogito-quarkus-bom</artifactId>
-        <version>${project.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
 
   <build>
     <pluginManagement>

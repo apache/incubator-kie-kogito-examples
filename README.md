@@ -1,22 +1,10 @@
 # Kogito Examples
 
-This module contains a number of examples that you can take a look at and try out yourself.  Please take a look at the readme of each individual example for more details on how the example works and how to run it yourself (either locally or on Kubernetes):
-- Onboaring example combining 1 process and two decision services: see [README.md](onboarding-example/readme.md) 
-- Polyglot Drools with GraalVM: see [README.md](drools-polyglot-example/README.md)
-- Drools on Quarkus: see [README.md](drools-quarkus-example/README.md)
-- Drools on Quarkus with Unit: see [README.md](drools-quarkus-unit-example/README.md)
-- jBPM on Quarkus: see [README.md](jbpm-quarkus-example/README.md)
-- jBPM on SpringBoot: see [README.md](jbpm-springboot-example/README.md)
+This module contains a number of examples that you can take a look at and try out yourself.  Please take a look at the readme of each individual example for more details on how the example works and how to run it yourself (either locally or on Kubernetes).
 
-# Kogito Quickstarts
+Since Kogito aims at supporting both Quarkus and SpringBoot each example usually provides both type of projects.
 
-[![CircleCI](https://circleci.com/gh/mswiderski/kogito-quickstarts.svg?style=svg)](https://circleci.com/gh/mswiderski/kogito-quickstarts)
-
-A collection of quickstarts for Kogito that illustrates various uses case covered.
-
-Since Kogito aims at supporting both Quarkus and SpringBoot each quickstart should provide both type of projects.
-
-**To try it out locally on latest stable version download the released repository content [here](https://github.com/mswiderski/kogito-quickstarts/releases/latest)**
+**To try it out locally on latest stable version download the released repository content [here](https://github.com/kiegroup/kogito-examples/releases/latest)**
 
 ## Kogito hello world with scripts
 
@@ -94,6 +82,15 @@ shows timers (intermediate and boundary) that allows to introduce delays in proc
 
 * [on Quarkus](kogito-timer-quarkus)
 * [on SpringBoot](kogito-timer-springboot)
+
+## Other Misc Examples
+
+- Onboarding example combining 1 process and two decision services: see [README.md](onboarding-example/readme.md) 
+- Polyglot Drools with GraalVM: see [README.md](drools-polyglot-example/README.md)
+- Drools on Quarkus: see [README.md](drools-quarkus-example/README.md)
+- Drools on Quarkus with Unit: see [README.md](drools-quarkus-unit-example/README.md)
+- jBPM on Quarkus: see [README.md](jbpm-quarkus-example/README.md)
+- jBPM on SpringBoot: see [README.md](jbpm-springboot-example/README.md)
 
 ## Contribution
 

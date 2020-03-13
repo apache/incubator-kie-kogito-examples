@@ -5,9 +5,9 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.kie.kogito.quickstarts</groupId>
-    <artifactId>kogito-quickstarts</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <groupId>org.kie.kogito</groupId>
+    <artifactId>kogito-examples</artifactId>
+    <version>8.0.0-SNAPSHOT</version>
   </parent>
 
   <artifactId>kogito-kafka-quickstart-quarkus</artifactId>
@@ -63,7 +63,7 @@
       <plugin>
         <groupId>io.quarkus</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
-        <version>${quarkus.version}</version>
+        <version>${version.io.quarkus}</version>
         <executions>
           <execution>
             <goals>
@@ -96,7 +96,7 @@
           <plugin>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-maven-plugin</artifactId>
-            <version>${quarkus.version}</version>
+            <version>${version.io.quarkus}</version>
             <executions>
               <execution>
                 <goals>
