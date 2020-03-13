@@ -128,6 +128,7 @@
     <module>jbpm-quarkus-helloworld</module>
     <module>jbpm-quarkus-example</module>
     <module>jbpm-springboot-example</module>
+    <module>jbpm-optaplanner-springboot-example</module>
     <module>onboarding-example</module>
     <module>jbpm-polyglot-example</module>
     <module>dmn-quarkus-example</module>
