@@ -37,7 +37,23 @@
     <surefire.forkCount>1</surefire.forkCount>
     <alphanetworkCompilerEnabled>false</alphanetworkCompilerEnabled>
 
-    <version.io.quarkus>1.3.0.Alpha2</version.io.quarkus>
+    <version.io.quarkus>1.3.0.CR2</version.io.quarkus>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
+
+    <!-- springboot related -->
+    <springboot.version>2.2.0.RELEASE</springboot.version>
+    <!-- kogito -->
+    <kogito.version>8.0.0-SNAPSHOT</kogito.version>
+
+    <!-- infinispan -->
+    <infinispan.version>2.1.7.Final</infinispan.version>
+
+    <swagger-plugin.version>2.1.0</swagger-plugin.version>
+    <surefire-plugin.version>2.22.0</surefire-plugin.version>
+    <version.deploy.plugin>2.8.2</version.deploy.plugin>
   </properties>
 
   <!-- distributionManagement section -->
@@ -123,19 +139,29 @@
     <module>decisiontable-springboot-example</module>
     <module>timer-quarkus-example</module>
     <module>timer-springboot-example</module>
+    <module>kogito-kafka-quickstart-quarkus</module>
+    <module>kogito-kafka-quickstart-springboot</module>
+    <module>kogito-infinispan-persistence-quarkus</module>
+    <module>kogito-infinispan-persistence-springboot</module>
+    <module>kogito-business-rules-quarkus</module>
+    <module>kogito-business-rules-springboot</module>
+    <module>kogito-scripts-quarkus</module>
+    <module>kogito-scripts-springboot</module>
+    <module>kogito-service-calls-quarkus</module>
+    <module>kogito-service-calls-springboot</module>
+    <module>kogito-service-rest-call-quarkus</module>
+    <module>kogito-service-rest-call-springboot</module>
+    <module>kogito-usertasks-quarkus</module>
+    <module>kogito-usertasks-springboot</module>
+    <module>kogito-usertasks-custom-lifecycle-quarkus</module>
+    <module>kogito-usertasks-custom-lifecycle-springboot</module>
+    <module>kogito-usertasks-with-security-oidc-quarkus</module>
+    <module>kogito-usertasks-with-security-oidc-springboot</module>
+    <module>kogito-usertasks-with-security-quarkus</module>
+    <module>kogito-usertasks-with-security-springboot</module>
+    <module>kogito-timer-quarkus</module>
+    <module>kogito-timer-springboot</module>
   </modules>
-
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.kie.kogito</groupId>
-        <artifactId>kogito-quarkus-bom</artifactId>
-        <version>${project.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
 
   <build>
     <pluginManagement>

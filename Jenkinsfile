@@ -38,16 +38,6 @@ pipeline {
                 }
             }
         }
-        stage('Build kogito-cloud') {
-            steps {
-                dir("kogito-cloud") {
-                    script {
-                        githubscm.checkoutIfExists('kogito-cloud', "$CHANGE_AUTHOR", "$CHANGE_BRANCH", 'kiegroup', "$CHANGE_TARGET")
-                        maven.runMavenWithSubmarineSettings('clean install', true)
-                    }
-                }
-            }
-        }
         stage('Build kogito-examples') {
             steps {
                 script {
