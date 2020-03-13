@@ -1,3 +1,10 @@
+:root {
+    --global-color-desired: #8ae234;
+    --global-color-undesired: #fcaf3e;
+    --global-color-unavailable: #ef2929;
+    --global-color-normal: #eeeeec;
+}
+
 .btn {
   margin: 5px;
 }

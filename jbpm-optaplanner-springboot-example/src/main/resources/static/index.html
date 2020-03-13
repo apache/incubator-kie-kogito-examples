@@ -39,7 +39,7 @@
             <div class="modal-body">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div>
                             <div class="form-group">
                                 <h3>Flight Info</h3>
                             </div>
@@ -56,15 +56,26 @@
                                                                                     required/>
                             </div>
                             <div class="form-group">
-                                <label for="departureDateTime">Departure Date Time</label> <input type="datetime-local"
-                                                                                                  class="form-control"
-                                                                                                  id="departureDateTime"
-                                                                                                  name="departureDateTime"
-                                                                                                  required/>
+                                <label for="departureDateTime">Departure Date Time</label>
+                                <div style="display: flex;">
+                                    <input type="date"
+                                           style="width: auto;"
+                                           class="form-control"
+                                           id="departureDate"
+                                           name="departureDate"
+                                           required/>
+
+                                    <input type="time"
+                                           style="width: auto;"
+                                           class="form-control"
+                                           id="departureTime"
+                                           name="departureTime"
+                                           required/>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div>
                             <div class="form-group">
                                 <h3>Seating Info</h3>
                             </div>

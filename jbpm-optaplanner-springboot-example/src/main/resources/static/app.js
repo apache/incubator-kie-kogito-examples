@@ -9,7 +9,7 @@ function renderFlight(flight, tasks) {
     const finalizePassengerListTasks = findTasks("finalizePassengerList", tasks);
     if (finalizePassengerListTasks.length === 1) {
         const generatePassengerElement = (flight.flight.passengerList.length === 0)? [
-            element("button", { class: "btn btn-secondary", style: "margin: 5px;", onClick: () => generatePassengersForFlight(flight) }, "Generate Passenger List")
+            element("button", { class: "btn btn-secondary", style: "margin: 5px;", onClick: () => generatePassengersForFlight(flight) }, "Generate passenger list")
         ]: []
         header = element("div", {},
             element("h5", {}, getFlightName(flight)),
@@ -22,7 +22,7 @@ function renderFlight(flight, tasks) {
                 "data-toggle": "modal",
                 "data-target": "#add-passenger-modal",
             },
-            "Add Passenger"
+            "Add passenger"
             ),
             ...generatePassengerElement,
             element("button", {
@@ -45,7 +45,7 @@ function renderFlight(flight, tasks) {
                         refreshFlight();
                     });
                 }
-            }, "Finalize Passenger List")
+            }, "Finalize passenger list")
         );
     }
     else if (flight.isSolving) {
@@ -62,7 +62,7 @@ function renderFlight(flight, tasks) {
                     refresh();
                 });
             }
-        }, "Finalize Seat Assignments")] : [];
+        }, "Finalize seat assignments")] : [];
 
         header = element("div", {},
             element("h5", {}, getFlightName(flight)),
@@ -92,7 +92,7 @@ function renderFlight(flight, tasks) {
                         "div", { class: "list-group-item list-group-item-action flex-column align-items-start d-flex w-100 justify-content-between" },
                         // Note: we take advantage that undefined is falsey here (task doesn't have property "isLoading")
                         element("span", {},
-                            element("i", { class: "fas fa-user" }, ""),
+                            element("i", { class: "fas fa-user", style: "margin-right: 10px;" }, ""),
                             element("span", {}, task.isLoading? "" : passengerRequestString(task.passenger)),
                         ),
                         element("span", {},
@@ -119,10 +119,10 @@ function renderFlight(flight, tasks) {
                     )
             )))))),
             element("div", {},
-                flightSeats(flight, ({ passenger }) => (passenger)? element("div", {}, passenger.name) : element("div", { hidden: true}, "")),
+                flightSeats(flight, ({ passenger }) => (passenger)? element("div", {}, passenger.name) : element("div", {}, "")),
                 // Approved Passenger List
                 element("div", { class: "card" },
-                    element("h5", {}, "Passenger List"),
+                    element("h5", {}, `Passenger list (${flight.flight.passengerList.length} passenger${(flight.flight.passengerList.length == 1)? "" : "s"})`),
                     element("button", {
                             class: "collapsed",
                             "data-toggle": "collapse",
@@ -136,7 +136,7 @@ function renderFlight(flight, tasks) {
                     element("div", { id: `${flight.id}-passenger-list`, class: "collapse list-group" }, ...flight.flight.passengerList.map(passenger =>  element(
                         "div", { class: "list-group-item list-group-item-action flex-column align-items-start d-flex w-100 justify-content-between" },
                         element("span", {},
-                            element("i", { class: "fas fa-user" }, ""),
+                            element("i", { class: "fas fa-user", style: "margin-right: 10px;" }, ""),
                             element("span", {}, passenger.name),
                         ),
                         element("span", {},
@@ -155,34 +155,62 @@ function flightSeats(flight, flightSeatToElementMap) {
     const columnToGridColumn = col => col + Math.round(col / (flight.flight.seatColumnSize)) + 1;
     const sortedSeatList = [...flight.flight.seatList].sort((a,b) => (a.row - b.row === 0)? a.column - b.column : a.row - b.row);
     const seatToIndictment = sortedSeatList.map(seat => getSeatIndictment(seat, flight.flight.passengerList));
-    const seatColor = (index) => (seatToIndictment[index].score.hard < 0)? 'red' : (seatToIndictment[index].score.soft < 0)? 'yellow' : (seatToIndictment[index].matchPreference)? 'green' : 'white';
+    const seatColor = (index) => (seatToIndictment[index].score.hard < 0)? 'var(--global-color-unavailable)' : 
+        (seatToIndictment[index].score.soft < 0)? 'var(--global-color-undesired)' : 
+        (seatToIndictment[index].matchPreference)? 'var(--global-color-desired)' :
+        'var(--global-color-normal)';
     const seatTooltip = (seat, index) => (seatToIndictment[index].indictments.length === 0)? `The seat ${seat.name} does not violate any constraints.` :
         seatToIndictment[index].indictments.map(indictment => `${indictment.name}: ${indictment.description} (${indictment.score.hard} Hard/${indictment.score.soft} Soft)`)
         .reduce((prev, curr) => `${prev};\n${curr}`);
+        
+    const emergencyExitRow = rowToGridRow(sortedSeatList.find(seat => seat.emergencyExitRow).row);
     
     return element("div", { style: `display: grid;
         grid-column: 2;
         grid-auto-flow: dense;
         grid-template-rows: repeat(${2*flight.flight.seatRowSize}, minmax(50px, 1fr));
         grid-template-columns: repeat(${flight.flight.seatColumnSize + 1}, minmax(100px, 1fr));
-        column-gap: 10px;
+        column-gap: 15px;
+        padding-left: 15px;
+        padding-right: 15px;
         width: min-content;
         border: 1px solid;
         ` }, ...sortedSeatList.map((seat, index) => element(
             "span", {
-              class: "fas fa-couch",
-              style: `grid-row: ${rowToGridRow(seat.row)}; grid-column: ${columnToGridColumn(seat.column)}; margin-top: 30px; background-color: ${seatColor(index)}; text-align: center`,
+              style: `grid-row: ${rowToGridRow(seat.row)};
+                      grid-column: ${columnToGridColumn(seat.column)};
+                      margin-top: 15px;
+                      background-color: ${seatColor(index)};
+                      text-align: center;
+                      `,
               title: seatTooltip(seat, index)
             },
-            seat.name)
-        ),
+            element("span", {
+                class: "fas fa-couch",
+                style: "margin-right: 5px;"
+            }, ""),
+            element("span", {}, seat.name)
+        )),
         ...sortedSeatList.map((seat, index) => flightSeatToElementMap({flight: flight.flight, seat: seat, passenger: flight.flight.passengerList.find(passenger => passenger.seat !== null &&
             passenger.seat.row === seat.row && passenger.seat.column === seat.column) } ).css({
                 "grid-row": String(rowToGridRow(seat.row) + 1),
                 "grid-column": String(columnToGridColumn(seat.column)),
                 "background-color": seatColor(index),
-                "text-align": "center"
-            }).attr("title", seatTooltip(seat, index)))
+                "text-align": "center",
+                "margin-bottom": "15px"
+            }).attr("title", seatTooltip(seat, index))),
+        element("div", {
+            style: `grid-column: 1 / -1;
+                    grid-row: ${emergencyExitRow} / span 2;
+                    margin-top: 15px;
+                    margin-bottom: 15px;
+                    margin-left: -15px;
+                    margin-right: -15px;
+                    border-top: 2px dashed;
+                    border-bottom: 2px dashed;
+                    pointer-events: none;
+                   `
+        }, "")
     );
 }
 
@@ -316,9 +344,10 @@ function initModal() {
         const modal = $(this);
 
         $('.modal-title').text("Create New Flight");
-        $('#origin').val("YYZ");
-        $('#destination').val("KRND");
-        $("#departureDateTime").val(new Date().toISOString().slice(0, -1));
+        $('#origin').val("JFK");
+        $('#destination').val("SFO");
+        $("#departureDate").val(moment().add(1, 'day').startOf('day').format("YYYY-MM-DD"));
+        $("#departureTime").val(moment().add(1, 'day').startOf('minute').format("HH:mm"));
 
         $("#seatRowSize").val(4);
         $("#seatColumnSize").val(6);
@@ -326,7 +355,9 @@ function initModal() {
         newFlightAction.off('click').click(() => {
             const origin = $('#origin').val();
             const destination = $('#destination').val();
-            const departureDateTime = $('#departureDateTime').val();
+            const departureDate = $('#departureDate').val();
+            const departureTime = $('#departureTime').val();
+            const departureDateTime = departureDate + "T" + departureTime;
             const seatRowSize = $('#seatRowSize').val();
             const seatColumnSize = $("#seatColumnSize").val();
 
