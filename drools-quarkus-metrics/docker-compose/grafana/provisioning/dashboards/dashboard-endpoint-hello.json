@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": -682055213,
+  "id": -906189601,
   "links": [],
   "panels": [
     {
@@ -56,7 +56,7 @@
       "pluginVersion": "6.6.1",
       "targets": [
         {
-          "expr": "sum(increase(api_http_response_code{handler=\"hello\"}[1d]))",
+          "expr": "sum(increase(api_http_response_code{endpoint=\"hello\"}[1d]))",
           "format": "time_series",
           "instant": false,
           "intervalFactor": 1,
@@ -109,7 +109,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(increase(api_http_response_code{handler=\"hello\"}[1m]))",
+          "expr": "sum(increase(api_http_response_code{endpoint=\"hello\"}[1m]))",
           "instant": false,
           "intervalFactor": 2,
           "refId": "A"
@@ -201,7 +201,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "api_execution_elapsed_nanosecond{handler=\"hello\"}",
+          "expr": "api_execution_elapsed_nanosecond{endpoint=\"hello\"}",
           "format": "time_series",
           "instant": false,
           "intervalFactor": 1,
@@ -292,7 +292,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "increase(api_http_response_code{handler=\"hello\"}[1m])",
+          "expr": "increase(api_http_response_code{endpoint=\"hello\"}[1m])",
           "instant": false,
           "intervalFactor": 2,
           "refId": "A"
@@ -378,9 +378,9 @@
       ],
       "targets": [
         {
-          "expr": "increase(api_http_stacktrace_exceptions{handler=\"hello\"}[1d])",
+          "expr": "increase(api_http_stacktrace_exceptions{endpoint=\"hello\"}[1d])",
           "format": "table",
-          "instant": false,
+          "instant": true,
           "intervalFactor": 2,
           "refId": "A"
         }
@@ -430,13 +430,13 @@
       "pluginVersion": "6.6.1",
       "targets": [
         {
-          "expr": "sum(increase(api_http_stacktrace_exceptions{handler=\"hello\"}[1d]))",
+          "expr": "sum(increase(api_http_stacktrace_exceptions{endpoint=\"hello\"}[1d]))",
           "instant": true,
           "intervalFactor": 2,
           "refId": "A"
         }
       ],
-      "title": "Global system exception count per day",
+      "title": "Exception count per day",
       "type": "stat"
     }
   ],
@@ -482,6 +482,6 @@
   },
   "timezone": "",
   "title": "hello endpoint metrics",
-  "uid": "8f0f357a-9e89-4c4a-9f33-b7331cd16a90",
+  "uid": "b08188fe-30a9-464f-bb9f-dce2132b43e7",
   "version": 14
 }

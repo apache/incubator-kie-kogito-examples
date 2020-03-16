@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": -1351883959,
+  "id": -638963918,
   "links": [],
   "panels": [
     {
@@ -56,7 +56,7 @@
       "pluginVersion": "6.6.1",
       "targets": [
         {
-          "expr": "sum(increase(api_http_response_code{handler=\"world\"}[1d]))",
+          "expr": "sum(increase(api_http_response_code{endpoint=\"world\"}[1d]))",
           "format": "time_series",
           "instant": false,
           "intervalFactor": 1,
@@ -109,7 +109,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(increase(api_http_response_code{handler=\"world\"}[1m]))",
+          "expr": "sum(increase(api_http_response_code{endpoint=\"world\"}[1m]))",
           "instant": false,
           "intervalFactor": 2,
           "refId": "A"
@@ -201,7 +201,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "api_execution_elapsed_nanosecond{handler=\"world\"}",
+          "expr": "api_execution_elapsed_nanosecond{endpoint=\"world\"}",
           "format": "time_series",
           "instant": false,
           "intervalFactor": 1,
@@ -292,7 +292,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "increase(api_http_response_code{handler=\"world\"}[1m])",
+          "expr": "increase(api_http_response_code{endpoint=\"world\"}[1m])",
           "instant": false,
           "intervalFactor": 2,
           "refId": "A"
@@ -378,9 +378,9 @@
       ],
       "targets": [
         {
-          "expr": "increase(api_http_stacktrace_exceptions{handler=\"world\"}[1d])",
+          "expr": "increase(api_http_stacktrace_exceptions{endpoint=\"world\"}[1d])",
           "format": "table",
-          "instant": false,
+          "instant": true,
           "intervalFactor": 2,
           "refId": "A"
         }
@@ -430,13 +430,13 @@
       "pluginVersion": "6.6.1",
       "targets": [
         {
-          "expr": "sum(increase(api_http_stacktrace_exceptions{handler=\"world\"}[1d]))",
+          "expr": "sum(increase(api_http_stacktrace_exceptions{endpoint=\"world\"}[1d]))",
           "instant": true,
           "intervalFactor": 2,
           "refId": "A"
         }
       ],
-      "title": "Global system exception count per day",
+      "title": "Exception count per day",
       "type": "stat"
     }
   ],
@@ -482,6 +482,6 @@
   },
   "timezone": "",
   "title": "world endpoint metrics",
-  "uid": "e117804d-d3fe-44d6-aa0d-b9a491f882da",
+  "uid": "5dd23b93-6c3f-412d-8ff6-94bcf8c59ba0",
   "version": 14
 }
