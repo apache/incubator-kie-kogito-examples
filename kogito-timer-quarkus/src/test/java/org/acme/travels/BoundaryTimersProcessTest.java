@@ -42,7 +42,7 @@ public class BoundaryTimersProcessTest {
         processInstance.start();
         assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_ACTIVE, processInstance.status());
 
-        latch.await(1, TimeUnit.MINUTES);
+        latch.await(2, TimeUnit.MINUTES);
 
         Optional<? extends ProcessInstance<?>> exists = timersOnTaskProcess.instances().findById(processInstance.id());
         assertFalse(exists.isPresent());
