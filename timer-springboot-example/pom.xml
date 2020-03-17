@@ -56,7 +56,7 @@
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>process-management-addon</artifactId>
+      <artifactId>process-management-springboot-addon</artifactId>
     </dependency>
   </dependencies>
 

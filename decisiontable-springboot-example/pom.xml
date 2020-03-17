@@ -42,7 +42,7 @@
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-springboot-starter</artifactId>
+      <artifactId>kogito-resteasy-springboot-starter</artifactId>
     </dependency>
 
     <!-- test related -->

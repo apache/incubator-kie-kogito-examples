@@ -43,8 +43,7 @@
     <!-- kogito -->
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-springboot-starter</artifactId>
-      <version>${kogito.version}</version>
+      <artifactId>kogito-resteasy-springboot-starter</artifactId>
     </dependency>
 
     <dependency>
