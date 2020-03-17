@@ -57,20 +57,8 @@
   <bpmn2:message id="_bQd4YUmuEDidf43-Kc2Rog" itemRef="visasrejectedType" name="visasrejected"/>
   <bpmn2:message id="_bQd4YkmuEDidf43-Kc2Rog" itemRef="visaapplicationsType" name="visaapplications"/>
   <bpmn2:process id="travels" drools:packageName="org.acme.travels" drools:version="1.0" drools:adHoc="false" name="travels" isExecutable="true" processType="Public">
-    <bpmn2:property id="traveller" itemSubjectRef="_travellerItem" name="traveller">
-      <bpmn2:extensionElements>
-        <drools:metaData name="customTags">
-          <drools:metaValue><![CDATA[required]]></drools:metaValue>
-        </drools:metaData>
-      </bpmn2:extensionElements>
-    </bpmn2:property>
-    <bpmn2:property id="trip" itemSubjectRef="_tripItem" name="trip">
-      <bpmn2:extensionElements>
-        <drools:metaData name="customTags">
-          <drools:metaValue><![CDATA[required]]></drools:metaValue>
-        </drools:metaData>
-      </bpmn2:extensionElements>
-    </bpmn2:property>
+    <bpmn2:property id="traveller" itemSubjectRef="_travellerItem" name="traveller"/>
+    <bpmn2:property id="trip" itemSubjectRef="_tripItem" name="trip"/>
     <bpmn2:property id="hotel" itemSubjectRef="_hotelItem" name="hotel">
       <bpmn2:extensionElements>
         <drools:metaData name="customTags">
