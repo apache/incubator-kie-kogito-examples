@@ -1,1 +1,0 @@
-curl --location --request POST 'http://localhost:8080/TrafficViolation' --header 'Content-Type: application/json' -d "{\"Driver\" : {\"Points\" : 15}, \"Violation\" : {\"Type\" : \"speed\", \"Actual Speed\" : 135, \"Speed Limit\" : 100}}"
