@@ -1,323 +1,339 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- origin at X=0.0 Y=0.0 -->
-<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:java="http://www.java.com/javaTypes" xmlns:tns="http://www.jboss.org/drools" xmlns="http://www.jboss.org/drools" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd" id="Definition" exporter="org.eclipse.bpmn2.modeler.core" exporterVersion="1.5.0.Final-v20180515-1642-B1" expressionLanguage="http://www.mvel.org/2.0" targetNamespace="http://www.jboss.org/drools" typeLanguage="http://www.java.com/javaTypes">
-  <bpmn2:itemDefinition id="ItemDefinition_181" isCollection="false" structureRef="org.acme.travels.VisaApplication"/>
-  <bpmn2:itemDefinition id="ItemDefinition_752" isCollection="false" structureRef="java.lang.String"/>
-  <bpmn2:itemDefinition id="ItemDefinition_753" isCollection="false" structureRef="java.lang.Integer"/>
-  <bpmn2:itemDefinition id="ItemDefinition_754" isCollection="false" structureRef="java.lang.Boolean"/>
-  <bpmn2:message id="Message_1" itemRef="ItemDefinition_181" name="visaapplications"/>
-  <bpmn2:message id="Message_2" itemRef="ItemDefinition_181" name="visasrejected"/>
-  <bpmn2:message id="Message_3" itemRef="ItemDefinition_181" name="visasapproved"/>
-  <bpmn2:process id="visaApplications" tns:packageName="org.acme.travels" name="ProcessVisaApplications" isExecutable="true" processType="Public">
-    <bpmn2:extensionElements>
-      <tns:import name="org.acme.travels.VisaApplication"/>
-    </bpmn2:extensionElements>
-    <bpmn2:property id="visaApplication" itemSubjectRef="ItemDefinition_181" name="visaApplication"/>
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_VKiskUsaEDiUs55av9KZ8A" exporter="jBPM Process Modeler" exporterVersion="2.0" targetNamespace="http://www.omg.org/bpmn20">
+  <bpmn2:itemDefinition id="_visaApplicationItem" structureRef="org.acme.travels.VisaApplication"/>
+  <bpmn2:itemDefinition id="_EndEvent_2_eventInputXItem" structureRef="org.acme.travels.VisaApplication"/>
+  <bpmn2:itemDefinition id="visasrejectedType" structureRef="org.acme.travels.VisaApplication"/>
+  <bpmn2:itemDefinition id="_UserTask_1_SkippableInputXItem" structureRef="Object"/>
+  <bpmn2:itemDefinition id="_UserTask_1_PriorityInputXItem" structureRef="Object"/>
+  <bpmn2:itemDefinition id="_UserTask_1_CommentInputXItem" structureRef="Object"/>
+  <bpmn2:itemDefinition id="_UserTask_1_DescriptionInputXItem" structureRef="Object"/>
+  <bpmn2:itemDefinition id="_UserTask_1_CreatedByInputXItem" structureRef="Object"/>
+  <bpmn2:itemDefinition id="_UserTask_1_TaskNameInputXItem" structureRef="Object"/>
+  <bpmn2:itemDefinition id="_UserTask_1_GroupIdInputXItem" structureRef="Object"/>
+  <bpmn2:itemDefinition id="_UserTask_1_ContentInputXItem" structureRef="Object"/>
+  <bpmn2:itemDefinition id="_UserTask_1_NotStartedReassignInputXItem" structureRef="Object"/>
+  <bpmn2:itemDefinition id="_UserTask_1_NotCompletedReassignInputXItem" structureRef="Object"/>
+  <bpmn2:itemDefinition id="_UserTask_1_NotStartedNotifyInputXItem" structureRef="Object"/>
+  <bpmn2:itemDefinition id="_UserTask_1_NotCompletedNotifyInputXItem" structureRef="Object"/>
+  <bpmn2:itemDefinition id="_UserTask_1_applicationInputXItem" structureRef="org.acme.travels.VisaApplication"/>
+  <bpmn2:itemDefinition id="_UserTask_1_applicationOutputXItem" structureRef="org.acme.travels.VisaApplication"/>
+  <bpmn2:itemDefinition id="_EndEvent_1_eventInputXItem" structureRef="org.acme.travels.VisaApplication"/>
+  <bpmn2:itemDefinition id="visasapprovedType" structureRef="org.acme.travels.VisaApplication"/>
+  <bpmn2:itemDefinition id="_BusinessRuleTask_1_namespaceInputXItem" structureRef="java.lang.String"/>
+  <bpmn2:itemDefinition id="_BusinessRuleTask_1_modelInputXItem" structureRef="java.lang.String"/>
+  <bpmn2:itemDefinition id="_BusinessRuleTask_1_decisionInputXItem" structureRef="java.lang.String"/>
+  <bpmn2:itemDefinition id="_BusinessRuleTask_1_applicationInputXItem" structureRef="org.acme.travels.VisaApplication"/>
+  <bpmn2:itemDefinition id="_BusinessRuleTask_1_applicationOutputXItem" structureRef="org.acme.travels.VisaApplication"/>
+  <bpmn2:itemDefinition id="_StartEvent_1_eventOutputXItem" structureRef="org.acme.travels.VisaApplication"/>
+  <bpmn2:itemDefinition id="visaapplicationsType" structureRef="org.acme.travels.VisaApplication"/>
+  <bpmn2:message id="_VKpaQEsaEDiUs55av9KZ8A" itemRef="visasrejectedType" name="visasrejected"/>
+  <bpmn2:message id="_VKqBUEsaEDiUs55av9KZ8A" itemRef="visasapprovedType" name="visasapproved"/>
+  <bpmn2:message id="_VKqoYEsaEDiUs55av9KZ8A" itemRef="visaapplicationsType" name="visaapplications"/>
+  <bpmn2:process id="visaApplications" drools:packageName="org.acme.travels" drools:version="1.0" drools:adHoc="false" name="ProcessVisaApplications" isExecutable="true" processType="Public">
+    <bpmn2:property id="visaApplication" itemSubjectRef="_visaApplicationItem" name="visaApplication"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_1" sourceRef="StartEvent_1" targetRef="BusinessRuleTask_1"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_2" sourceRef="BusinessRuleTask_1" targetRef="ExclusiveGateway_1"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_4" name="No" sourceRef="ExclusiveGateway_1" targetRef="UserTask_1">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue>No</drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_VKuSwEsaEDiUs55av9KZ8A" language="http://www.java.com/java">return !visaApplication.isApproved();</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="SequenceFlow_6" sourceRef="ExclusiveGateway_2" targetRef="EndEvent_1"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_3" name="Yes" sourceRef="ExclusiveGateway_1" targetRef="ExclusiveGateway_2">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue>Yes</drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_VKvg4EsaEDiUs55av9KZ8A" language="http://www.java.com/java">return visaApplication.isApproved();</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="SequenceFlow_9" name="Yes" sourceRef="ExclusiveGateway_3" targetRef="ExclusiveGateway_2">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue>Yes</drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_VKwH8EsaEDiUs55av9KZ8A" language="http://www.java.com/java">return visaApplication.isApproved();</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="SequenceFlow_7" sourceRef="UserTask_1" targetRef="ExclusiveGateway_3"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_8" name="No" sourceRef="ExclusiveGateway_3" targetRef="EndEvent_2">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue>No</drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_VKwH8UsaEDiUs55av9KZ8A" language="http://www.java.com/java">return !visaApplication.isApproved();</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
     <bpmn2:startEvent id="StartEvent_1" name="StartProcess">
       <bpmn2:extensionElements>
-        <tns:metaData name="elementname">
-          <tns:metaValue><![CDATA[StartProcess]]></tns:metaValue>
-        </tns:metaData>
+        <drools:metaData name="elementname">
+          <drools:metaValue>StartProcess</drools:metaValue>
+        </drools:metaData>
       </bpmn2:extensionElements>
       <bpmn2:outgoing>SequenceFlow_1</bpmn2:outgoing>
-      <bpmn2:dataOutput id="DataOutput_2" itemSubjectRef="ItemDefinition_181" name="event"/>
-      <bpmn2:dataOutputAssociation id="DataOutputAssociation_1">
-        <bpmn2:sourceRef>DataOutput_2</bpmn2:sourceRef>
+      <bpmn2:dataOutput id="StartEvent_1_eventOutputX" drools:dtype="org.acme.travels.VisaApplication" itemSubjectRef="_StartEvent_1_eventOutputXItem" name="event"/>
+      <bpmn2:dataOutputAssociation id="_VKxWEEsaEDiUs55av9KZ8A">
+        <bpmn2:sourceRef>StartEvent_1_eventOutputX</bpmn2:sourceRef>
         <bpmn2:targetRef>visaApplication</bpmn2:targetRef>
       </bpmn2:dataOutputAssociation>
-      <bpmn2:outputSet id="OutputSet_1" name="Output Set 1">
-        <bpmn2:dataOutputRefs>DataOutput_2</bpmn2:dataOutputRefs>
+      <bpmn2:outputSet id="_VKxWEUsaEDiUs55av9KZ8A">
+        <bpmn2:dataOutputRefs>StartEvent_1_eventOutputX</bpmn2:dataOutputRefs>
       </bpmn2:outputSet>
-      <bpmn2:messageEventDefinition id="MessageEventDefinition_1" messageRef="Message_1"/>
+      <bpmn2:messageEventDefinition id="_VKx9IEsaEDiUs55av9KZ8A" drools:msgref="visaapplications" messageRef="_VKqoYEsaEDiUs55av9KZ8A"/>
     </bpmn2:startEvent>
-    <bpmn2:businessRuleTask id="BusinessRuleTask_1" tns:ruleFlowGroup="visa-approvals" name="Automatic visa approvals">
+    <bpmn2:businessRuleTask id="BusinessRuleTask_1" drools:ruleFlowGroup="visa-approvals" name="Automatic visa approvals" implementation="http://www.jboss.org/drools/rule">
       <bpmn2:extensionElements>
-        <tns:metaData name="elementname">
-          <tns:metaValue><![CDATA[Automatic visa approvals]]></tns:metaValue>
-        </tns:metaData>
+        <drools:metaData name="elementname">
+          <drools:metaValue>Automatic visa approvals</drools:metaValue>
+        </drools:metaData>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_1</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
-      <bpmn2:ioSpecification id="InputOutputSpecification_4">
-        <bpmn2:dataInput id="DataInput_11" itemSubjectRef="ItemDefinition_181" name="application"/>
-        <bpmn2:dataOutput id="DataOutput_4" itemSubjectRef="ItemDefinition_181" name="application"/>
-        <bpmn2:inputSet id="InputSet_3" name="Input Set 3">
-          <bpmn2:dataInputRefs>DataInput_11</bpmn2:dataInputRefs>
+      <bpmn2:ioSpecification id="_VKykMEsaEDiUs55av9KZ8A">
+        <bpmn2:dataInput id="BusinessRuleTask_1_applicationInputX" drools:dtype="org.acme.travels.VisaApplication" itemSubjectRef="_BusinessRuleTask_1_applicationInputXItem" name="application"/>
+        <bpmn2:dataOutput id="BusinessRuleTask_1_applicationOutputX" drools:dtype="org.acme.travels.VisaApplication" itemSubjectRef="_BusinessRuleTask_1_applicationOutputXItem" name="application"/>
+        <bpmn2:inputSet id="_VKzLQEsaEDiUs55av9KZ8A">
+          <bpmn2:dataInputRefs>BusinessRuleTask_1_applicationInputX</bpmn2:dataInputRefs>
         </bpmn2:inputSet>
-        <bpmn2:outputSet id="OutputSet_5" name="Output Set 5">
-          <bpmn2:dataOutputRefs>DataOutput_4</bpmn2:dataOutputRefs>
+        <bpmn2:outputSet id="_VKzLQUsaEDiUs55av9KZ8A">
+          <bpmn2:dataOutputRefs>BusinessRuleTask_1_applicationOutputX</bpmn2:dataOutputRefs>
         </bpmn2:outputSet>
       </bpmn2:ioSpecification>
-      <bpmn2:dataInputAssociation id="DataInputAssociation_11">
+      <bpmn2:dataInputAssociation id="_VKzyUEsaEDiUs55av9KZ8A">
         <bpmn2:sourceRef>visaApplication</bpmn2:sourceRef>
-        <bpmn2:targetRef>DataInput_11</bpmn2:targetRef>
+        <bpmn2:targetRef>BusinessRuleTask_1_applicationInputX</bpmn2:targetRef>
       </bpmn2:dataInputAssociation>
-      <bpmn2:dataOutputAssociation id="DataOutputAssociation_3">
-        <bpmn2:sourceRef>DataOutput_4</bpmn2:sourceRef>
+      <bpmn2:dataOutputAssociation id="_VKzyUUsaEDiUs55av9KZ8A">
+        <bpmn2:sourceRef>BusinessRuleTask_1_applicationOutputX</bpmn2:sourceRef>
         <bpmn2:targetRef>visaApplication</bpmn2:targetRef>
       </bpmn2:dataOutputAssociation>
     </bpmn2:businessRuleTask>
-    <bpmn2:sequenceFlow id="SequenceFlow_1" tns:priority="1" sourceRef="StartEvent_1" targetRef="BusinessRuleTask_1"/>
     <bpmn2:exclusiveGateway id="ExclusiveGateway_1" name="Visa approved?" gatewayDirection="Diverging">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue>Visa approved?</drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
       <bpmn2:outgoing>SequenceFlow_4</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
-    <bpmn2:sequenceFlow id="SequenceFlow_2" tns:priority="1" sourceRef="BusinessRuleTask_1" targetRef="ExclusiveGateway_1"/>
     <bpmn2:endEvent id="EndEvent_1" name="Visa approved">
       <bpmn2:extensionElements>
-        <tns:metaData name="elementname">
-          <tns:metaValue><![CDATA[Visa approved]]></tns:metaValue>
-        </tns:metaData>
+        <drools:metaData name="elementname">
+          <drools:metaValue>Visa approved</drools:metaValue>
+        </drools:metaData>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_6</bpmn2:incoming>
-      <bpmn2:dataInput id="DataInput_15" itemSubjectRef="ItemDefinition_181" name="event"/>
-      <bpmn2:dataInputAssociation id="DataInputAssociation_13">
+      <bpmn2:dataInput id="EndEvent_1_eventInputX" drools:dtype="org.acme.travels.VisaApplication" itemSubjectRef="_EndEvent_1_eventInputXItem" name="event"/>
+      <bpmn2:dataInputAssociation id="_VK1AcEsaEDiUs55av9KZ8A">
         <bpmn2:sourceRef>visaApplication</bpmn2:sourceRef>
-        <bpmn2:targetRef>DataInput_15</bpmn2:targetRef>
+        <bpmn2:targetRef>EndEvent_1_eventInputX</bpmn2:targetRef>
       </bpmn2:dataInputAssociation>
-      <bpmn2:inputSet id="InputSet_2" name="Input Set 2">
-        <bpmn2:dataInputRefs>DataInput_15</bpmn2:dataInputRefs>
+      <bpmn2:inputSet id="_VK1AcUsaEDiUs55av9KZ8A">
+        <bpmn2:dataInputRefs>EndEvent_1_eventInputX</bpmn2:dataInputRefs>
       </bpmn2:inputSet>
-      <bpmn2:messageEventDefinition id="MessageEventDefinition_3" messageRef="Message_3"/>
+      <bpmn2:messageEventDefinition id="_VK1AcksaEDiUs55av9KZ8A" drools:msgref="visasapproved" messageRef="_VKqBUEsaEDiUs55av9KZ8A"/>
     </bpmn2:endEvent>
-    <bpmn2:sequenceFlow id="SequenceFlow_3" tns:priority="1" name="Yes" sourceRef="ExclusiveGateway_1" targetRef="ExclusiveGateway_2">
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="FormalExpression_20" language="http://www.java.com/java">return visaApplication.isApproved();</bpmn2:conditionExpression>
-    </bpmn2:sequenceFlow>
     <bpmn2:userTask id="UserTask_1" name="Manual visa approval">
       <bpmn2:extensionElements>
-        <tns:metaData name="elementname">
-          <tns:metaValue><![CDATA[Manual visa approval]]></tns:metaValue>
-        </tns:metaData>
+        <drools:metaData name="elementname">
+          <drools:metaValue>Manual visa approval</drools:metaValue>
+        </drools:metaData>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_4</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_7</bpmn2:outgoing>
-      <bpmn2:ioSpecification id="InputOutputSpecification_2">
-        <bpmn2:dataInput id="DataInput_1" itemSubjectRef="ItemDefinition_752" name="TaskName"/>
-        <bpmn2:dataInput id="DataInput_2" itemSubjectRef="ItemDefinition_753" name="Priority"/>
-        <bpmn2:dataInput id="DataInput_3" itemSubjectRef="ItemDefinition_752" name="Comment"/>
-        <bpmn2:dataInput id="DataInput_4" itemSubjectRef="ItemDefinition_752" name="Description"/>
-        <bpmn2:dataInput id="DataInput_5" itemSubjectRef="ItemDefinition_752" name="GroupId"/>
-        <bpmn2:dataInput id="DataInput_6" itemSubjectRef="ItemDefinition_754" name="Skippable"/>
-        <bpmn2:dataInput id="DataInput_7" itemSubjectRef="ItemDefinition_752" name="Content"/>
-        <bpmn2:dataInput id="DataInput_8" itemSubjectRef="ItemDefinition_752" name="Locale"/>
-        <bpmn2:dataInput id="DataInput_9" itemSubjectRef="ItemDefinition_752" name="CreatedBy"/>
-        <bpmn2:dataInput id="DataInput_10" itemSubjectRef="ItemDefinition_181" name="application"/>
-        <bpmn2:dataOutput id="DataOutput_3" itemSubjectRef="ItemDefinition_181" name="application"/>
-        <bpmn2:inputSet id="_InputSet_4">
-          <bpmn2:dataInputRefs>DataInput_1</bpmn2:dataInputRefs>
-          <bpmn2:dataInputRefs>DataInput_2</bpmn2:dataInputRefs>
-          <bpmn2:dataInputRefs>DataInput_3</bpmn2:dataInputRefs>
-          <bpmn2:dataInputRefs>DataInput_4</bpmn2:dataInputRefs>
-          <bpmn2:dataInputRefs>DataInput_5</bpmn2:dataInputRefs>
-          <bpmn2:dataInputRefs>DataInput_6</bpmn2:dataInputRefs>
-          <bpmn2:dataInputRefs>DataInput_7</bpmn2:dataInputRefs>
-          <bpmn2:dataInputRefs>DataInput_8</bpmn2:dataInputRefs>
-          <bpmn2:dataInputRefs>DataInput_9</bpmn2:dataInputRefs>
-          <bpmn2:dataInputRefs>DataInput_10</bpmn2:dataInputRefs>
+      <bpmn2:ioSpecification id="_VK1ngEsaEDiUs55av9KZ8A">
+        <bpmn2:dataInput id="UserTask_1_TaskNameInputX" drools:dtype="Object" itemSubjectRef="_UserTask_1_TaskNameInputXItem" name="TaskName"/>
+        <bpmn2:dataInput id="UserTask_1_applicationInputX" drools:dtype="org.acme.travels.VisaApplication" itemSubjectRef="_UserTask_1_applicationInputXItem" name="application"/>
+        <bpmn2:dataInput id="UserTask_1_SkippableInputX" drools:dtype="Object" itemSubjectRef="_UserTask_1_SkippableInputXItem" name="Skippable"/>
+        <bpmn2:dataInput id="UserTask_1_PriorityInputX" drools:dtype="Object" itemSubjectRef="_UserTask_1_PriorityInputXItem" name="Priority"/>
+        <bpmn2:dataOutput id="UserTask_1_applicationOutputX" drools:dtype="org.acme.travels.VisaApplication" itemSubjectRef="_UserTask_1_applicationOutputXItem" name="application"/>
+        <bpmn2:inputSet id="_VK2OkEsaEDiUs55av9KZ8A">
+          <bpmn2:dataInputRefs>UserTask_1_TaskNameInputX</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>UserTask_1_applicationInputX</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>UserTask_1_SkippableInputX</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>UserTask_1_PriorityInputX</bpmn2:dataInputRefs>
         </bpmn2:inputSet>
-        <bpmn2:outputSet id="OutputSet_3" name="Output Set">
-          <bpmn2:dataOutputRefs>DataOutput_3</bpmn2:dataOutputRefs>
+        <bpmn2:outputSet id="_VK2OkUsaEDiUs55av9KZ8A">
+          <bpmn2:dataOutputRefs>UserTask_1_applicationOutputX</bpmn2:dataOutputRefs>
         </bpmn2:outputSet>
       </bpmn2:ioSpecification>
-      <bpmn2:dataInputAssociation id="DataInputAssociation_1">
-        <bpmn2:targetRef>DataInput_1</bpmn2:targetRef>
-        <bpmn2:assignment id="Assignment_1">
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="FormalExpression_1">ApplicationApproval</bpmn2:from>
-          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="FormalExpression_2">DataInput_1</bpmn2:to>
+      <bpmn2:dataInputAssociation id="_VK2OkksaEDiUs55av9KZ8A">
+        <bpmn2:targetRef>UserTask_1_TaskNameInputX</bpmn2:targetRef>
+        <bpmn2:assignment id="_VK21oEsaEDiUs55av9KZ8A">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_VK3csEsaEDiUs55av9KZ8A">ApplicationApproval</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_VK4q0EsaEDiUs55av9KZ8A">UserTask_1_TaskNameInputX</bpmn2:to>
         </bpmn2:assignment>
       </bpmn2:dataInputAssociation>
-      <bpmn2:dataInputAssociation id="DataInputAssociation_2">
-        <bpmn2:targetRef>DataInput_2</bpmn2:targetRef>
-        <bpmn2:assignment id="Assignment_2">
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="FormalExpression_3">1</bpmn2:from>
-          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="FormalExpression_4">DataInput_2</bpmn2:to>
-        </bpmn2:assignment>
-      </bpmn2:dataInputAssociation>
-      <bpmn2:dataInputAssociation id="DataInputAssociation_3">
-        <bpmn2:targetRef>DataInput_3</bpmn2:targetRef>
-      </bpmn2:dataInputAssociation>
-      <bpmn2:dataInputAssociation id="DataInputAssociation_4">
-        <bpmn2:targetRef>DataInput_4</bpmn2:targetRef>
-      </bpmn2:dataInputAssociation>
-      <bpmn2:dataInputAssociation id="DataInputAssociation_5">
-        <bpmn2:targetRef>DataInput_5</bpmn2:targetRef>
-      </bpmn2:dataInputAssociation>
-      <bpmn2:dataInputAssociation id="DataInputAssociation_6">
-        <bpmn2:targetRef>DataInput_6</bpmn2:targetRef>
-        <bpmn2:assignment id="Assignment_6">
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="FormalExpression_11">true</bpmn2:from>
-          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="FormalExpression_12">DataInput_6</bpmn2:to>
-        </bpmn2:assignment>
-      </bpmn2:dataInputAssociation>
-      <bpmn2:dataInputAssociation id="DataInputAssociation_7">
-        <bpmn2:targetRef>DataInput_7</bpmn2:targetRef>
-      </bpmn2:dataInputAssociation>
-      <bpmn2:dataInputAssociation id="DataInputAssociation_8">
-        <bpmn2:targetRef>DataInput_8</bpmn2:targetRef>
-        <bpmn2:assignment id="Assignment_8">
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="FormalExpression_15">en-UK</bpmn2:from>
-          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="FormalExpression_16">DataInput_8</bpmn2:to>
-        </bpmn2:assignment>
-      </bpmn2:dataInputAssociation>
-      <bpmn2:dataInputAssociation id="DataInputAssociation_9">
-        <bpmn2:targetRef>DataInput_9</bpmn2:targetRef>
-      </bpmn2:dataInputAssociation>
-      <bpmn2:dataInputAssociation id="DataInputAssociation_10">
+      <bpmn2:dataInputAssociation id="_VK4q0UsaEDiUs55av9KZ8A">
         <bpmn2:sourceRef>visaApplication</bpmn2:sourceRef>
-        <bpmn2:targetRef>DataInput_10</bpmn2:targetRef>
+        <bpmn2:targetRef>UserTask_1_applicationInputX</bpmn2:targetRef>
       </bpmn2:dataInputAssociation>
-      <bpmn2:dataOutputAssociation id="DataOutputAssociation_2">
-        <bpmn2:sourceRef>DataOutput_3</bpmn2:sourceRef>
+      <bpmn2:dataInputAssociation id="_VK5R4EsaEDiUs55av9KZ8A">
+        <bpmn2:targetRef>UserTask_1_SkippableInputX</bpmn2:targetRef>
+        <bpmn2:assignment id="_VK5R4UsaEDiUs55av9KZ8A">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_VK5R4ksaEDiUs55av9KZ8A">true</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_VK5R40saEDiUs55av9KZ8A">UserTask_1_SkippableInputX</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="_VK5R5EsaEDiUs55av9KZ8A">
+        <bpmn2:targetRef>UserTask_1_PriorityInputX</bpmn2:targetRef>
+        <bpmn2:assignment id="_VK5R5UsaEDiUs55av9KZ8A">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_VK5R5ksaEDiUs55av9KZ8A">1</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_VK5R50saEDiUs55av9KZ8A">UserTask_1_PriorityInputX</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataOutputAssociation id="_VK5R6EsaEDiUs55av9KZ8A">
+        <bpmn2:sourceRef>UserTask_1_applicationOutputX</bpmn2:sourceRef>
         <bpmn2:targetRef>visaApplication</bpmn2:targetRef>
       </bpmn2:dataOutputAssociation>
     </bpmn2:userTask>
-    <bpmn2:sequenceFlow id="SequenceFlow_4" tns:priority="1" name="No" sourceRef="ExclusiveGateway_1" targetRef="UserTask_1">
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="FormalExpression_19" language="http://www.java.com/java">return !visaApplication.isApproved();</bpmn2:conditionExpression>
-    </bpmn2:sequenceFlow>
     <bpmn2:exclusiveGateway id="ExclusiveGateway_2" gatewayDirection="Converging">
-      <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
       <bpmn2:incoming>SequenceFlow_9</bpmn2:incoming>
+      <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_6</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
-    <bpmn2:sequenceFlow id="SequenceFlow_6" tns:priority="1" sourceRef="ExclusiveGateway_2" targetRef="EndEvent_1"/>
     <bpmn2:exclusiveGateway id="ExclusiveGateway_3" name="Manually approved?" gatewayDirection="Diverging">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue>Manually approved?</drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_7</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_8</bpmn2:outgoing>
       <bpmn2:outgoing>SequenceFlow_9</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
-    <bpmn2:sequenceFlow id="SequenceFlow_7" tns:priority="1" sourceRef="UserTask_1" targetRef="ExclusiveGateway_3"/>
     <bpmn2:endEvent id="EndEvent_2" name="Visa rejected">
       <bpmn2:extensionElements>
-        <tns:metaData name="elementname">
-          <tns:metaValue><![CDATA[Visa rejected]]></tns:metaValue>
-        </tns:metaData>
+        <drools:metaData name="elementname">
+          <drools:metaValue>Visa rejected</drools:metaValue>
+        </drools:metaData>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_8</bpmn2:incoming>
-      <bpmn2:dataInput id="DataInput_13" itemSubjectRef="ItemDefinition_181" name="event"/>
-      <bpmn2:dataInputAssociation id="DataInputAssociation_12">
+      <bpmn2:dataInput id="EndEvent_2_eventInputX" drools:dtype="org.acme.travels.VisaApplication" itemSubjectRef="_EndEvent_2_eventInputXItem" name="event"/>
+      <bpmn2:dataInputAssociation id="_VK6gAEsaEDiUs55av9KZ8A">
         <bpmn2:sourceRef>visaApplication</bpmn2:sourceRef>
-        <bpmn2:targetRef>DataInput_13</bpmn2:targetRef>
+        <bpmn2:targetRef>EndEvent_2_eventInputX</bpmn2:targetRef>
       </bpmn2:dataInputAssociation>
-      <bpmn2:inputSet id="InputSet_1" name="Input Set 1">
-        <bpmn2:dataInputRefs>DataInput_13</bpmn2:dataInputRefs>
+      <bpmn2:inputSet id="_VK6gAUsaEDiUs55av9KZ8A">
+        <bpmn2:dataInputRefs>EndEvent_2_eventInputX</bpmn2:dataInputRefs>
       </bpmn2:inputSet>
-      <bpmn2:messageEventDefinition id="MessageEventDefinition_2" messageRef="Message_2"/>
+      <bpmn2:messageEventDefinition id="_VK7HEEsaEDiUs55av9KZ8A" drools:msgref="visasrejected" messageRef="_VKpaQEsaEDiUs55av9KZ8A"/>
     </bpmn2:endEvent>
-    <bpmn2:sequenceFlow id="SequenceFlow_8" tns:priority="1" name="No" sourceRef="ExclusiveGateway_3" targetRef="EndEvent_2">
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="FormalExpression_21" language="http://www.java.com/java">return !visaApplication.isApproved();</bpmn2:conditionExpression>
-    </bpmn2:sequenceFlow>
-    <bpmn2:sequenceFlow id="SequenceFlow_9" tns:priority="1" name="Yes" sourceRef="ExclusiveGateway_3" targetRef="ExclusiveGateway_2">
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="FormalExpression_22" language="http://www.java.com/java">return visaApplication.isApproved();</bpmn2:conditionExpression>
-    </bpmn2:sequenceFlow>
   </bpmn2:process>
-  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
-    <bpmndi:BPMNPlane id="BPMNPlane_Process_1" bpmnElement="visaApplications">
-      <bpmndi:BPMNShape id="BPMNShape_StartEvent_1" bpmnElement="StartEvent_1">
-        <dc:Bounds height="36.0" width="36.0" x="80.0" y="130.0"/>
-        <bpmndi:BPMNLabel id="BPMNLabel_1" labelStyle="#//@definitions/@diagrams.0/@labelStyle.0">
-          <dc:Bounds height="11.0" width="52.0" x="72.0" y="166.0"/>
-        </bpmndi:BPMNLabel>
+  <bpmndi:BPMNDiagram>
+    <bpmndi:BPMNPlane bpmnElement="visaApplications">
+      <bpmndi:BPMNShape id="shape_EndEvent_2" bpmnElement="EndEvent_2">
+        <dc:Bounds height="56" width="56" x="908" y="275"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_BusinessRuleTask_1" bpmnElement="BusinessRuleTask_1" isExpanded="true">
-        <dc:Bounds height="50.0" width="110.0" x="221.0" y="123.0"/>
-        <bpmndi:BPMNLabel id="BPMNLabel_2">
-          <dc:Bounds height="11.0" width="101.0" x="225.0" y="142.0"/>
-        </bpmndi:BPMNLabel>
+      <bpmndi:BPMNShape id="shape_ExclusiveGateway_3" bpmnElement="ExclusiveGateway_3">
+        <dc:Bounds height="56" width="56" x="748" y="275"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_ExclusiveGateway_1" bpmnElement="ExclusiveGateway_1" isMarkerVisible="true">
-        <dc:Bounds height="50.0" width="50.0" x="406.0" y="123.0"/>
-        <bpmndi:BPMNLabel id="BPMNLabel_3" labelStyle="#//@definitions/@diagrams.0/@labelStyle.0">
-          <dc:Bounds height="11.0" width="63.0" x="400.0" y="173.0"/>
-        </bpmndi:BPMNLabel>
+      <bpmndi:BPMNShape id="shape_ExclusiveGateway_2" bpmnElement="ExclusiveGateway_2">
+        <dc:Bounds height="56" width="56" x="748" y="130"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_EndEvent_1" bpmnElement="EndEvent_1">
-        <dc:Bounds height="36.0" width="36.0" x="800.0" y="130.0"/>
-        <bpmndi:BPMNLabel id="BPMNLabel_4" labelStyle="#//@definitions/@diagrams.0/@labelStyle.0">
-          <dc:Bounds height="11.0" width="58.0" x="789.0" y="166.0"/>
-        </bpmndi:BPMNLabel>
+      <bpmndi:BPMNShape id="shape_UserTask_1" bpmnElement="UserTask_1">
+        <dc:Bounds height="61" width="146" x="552" y="272"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_UserTask_1" bpmnElement="UserTask_1" isExpanded="true">
-        <dc:Bounds height="50.0" width="110.0" x="500.0" y="272.0"/>
-        <bpmndi:BPMNLabel id="BPMNLabel_5">
-          <dc:Bounds height="11.0" width="86.0" x="512.0" y="291.0"/>
-        </bpmndi:BPMNLabel>
+      <bpmndi:BPMNShape id="shape_EndEvent_1" bpmnElement="EndEvent_1">
+        <dc:Bounds height="56" width="56" x="908" y="130"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_ExclusiveGateway_2" bpmnElement="ExclusiveGateway_2" isMarkerVisible="true">
-        <dc:Bounds height="50.0" width="50.0" x="654.0" y="123.0"/>
-        <bpmndi:BPMNLabel id="BPMNLabel_6" labelStyle="#//@definitions/@diagrams.0/@labelStyle.0"/>
+      <bpmndi:BPMNShape id="shape_ExclusiveGateway_1" bpmnElement="ExclusiveGateway_1">
+        <dc:Bounds height="56" width="56" x="463" y="130"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_ExclusiveGateway_3" bpmnElement="ExclusiveGateway_3" isMarkerVisible="true">
-        <dc:Bounds height="50.0" width="50.0" x="654.0" y="272.0"/>
-        <bpmndi:BPMNLabel id="BPMNLabel_7" labelStyle="#//@definitions/@diagrams.0/@labelStyle.0">
-          <dc:Bounds height="11.0" width="80.0" x="639.0" y="322.0"/>
-        </bpmndi:BPMNLabel>
+      <bpmndi:BPMNShape id="shape_BusinessRuleTask_1" bpmnElement="BusinessRuleTask_1">
+        <dc:Bounds height="69" width="156" x="221" y="123"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_EndEvent_2" bpmnElement="EndEvent_2">
-        <dc:Bounds height="36.0" width="36.0" x="800.0" y="279.0"/>
-        <bpmndi:BPMNLabel id="BPMNLabel_8" labelStyle="#//@definitions/@diagrams.0/@labelStyle.0">
-          <dc:Bounds height="11.0" width="52.0" x="792.0" y="315.0"/>
-        </bpmndi:BPMNLabel>
+      <bpmndi:BPMNShape id="shape_StartEvent_1" bpmnElement="StartEvent_1">
+        <dc:Bounds height="56" width="56" x="95" y="130"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_1" bpmnElement="SequenceFlow_1" sourceElement="BPMNShape_StartEvent_1" targetElement="BPMNShape_BusinessRuleTask_1">
-        <di:waypoint xsi:type="dc:Point" x="116.0" y="148.0"/>
-        <di:waypoint xsi:type="dc:Point" x="168.0" y="148.0"/>
-        <di:waypoint xsi:type="dc:Point" x="221.0" y="148.0"/>
-        <bpmndi:BPMNLabel id="BPMNLabel_9"/>
+      <bpmndi:BPMNEdge id="edge_shape_ExclusiveGateway_3_to_shape_EndEvent_2" bpmnElement="SequenceFlow_8">
+        <di:waypoint x="798" y="300"/>
+        <di:waypoint x="908" y="293"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" bpmnElement="SequenceFlow_2" sourceElement="BPMNShape_BusinessRuleTask_1" targetElement="BPMNShape_ExclusiveGateway_1">
-        <di:waypoint xsi:type="dc:Point" x="331.0" y="148.0"/>
-        <di:waypoint xsi:type="dc:Point" x="368.0" y="148.0"/>
-        <di:waypoint xsi:type="dc:Point" x="406.0" y="148.0"/>
-        <bpmndi:BPMNLabel id="BPMNLabel_10"/>
+      <bpmndi:BPMNEdge id="edge_shape_UserTask_1_to_shape_ExclusiveGateway_3" bpmnElement="SequenceFlow_7">
+        <di:waypoint x="698" y="302.5"/>
+        <di:waypoint x="748" y="300"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_3" bpmnElement="SequenceFlow_3" sourceElement="BPMNShape_ExclusiveGateway_1" targetElement="BPMNShape_ExclusiveGateway_2">
-        <di:waypoint xsi:type="dc:Point" x="456.0" y="148.0"/>
-        <di:waypoint xsi:type="dc:Point" x="555.0" y="148.0"/>
-        <di:waypoint xsi:type="dc:Point" x="654.0" y="148.0"/>
-        <bpmndi:BPMNLabel id="BPMNLabel_11">
-          <dc:Bounds height="11.0" width="15.0" x="548.0" y="149.0"/>
-        </bpmndi:BPMNLabel>
+      <bpmndi:BPMNEdge id="edge_shape_ExclusiveGateway_3_to_shape_ExclusiveGateway_2" bpmnElement="SequenceFlow_9">
+        <di:waypoint x="773" y="275"/>
+        <di:waypoint x="773" y="180"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_4" bpmnElement="SequenceFlow_4" sourceElement="BPMNShape_ExclusiveGateway_1" targetElement="BPMNShape_UserTask_1">
-        <di:waypoint xsi:type="dc:Point" x="431.0" y="173.0"/>
-        <di:waypoint xsi:type="dc:Point" x="431.0" y="297.0"/>
-        <di:waypoint xsi:type="dc:Point" x="500.0" y="297.0"/>
-        <bpmndi:BPMNLabel id="BPMNLabel_12">
-          <dc:Bounds height="11.0" width="12.0" x="426.0" y="271.0"/>
-        </bpmndi:BPMNLabel>
+      <bpmndi:BPMNEdge id="edge_shape_ExclusiveGateway_1_to_shape_ExclusiveGateway_2" bpmnElement="SequenceFlow_3">
+        <di:waypoint x="519" y="158"/>
+        <di:waypoint x="748" y="155"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_6" bpmnElement="SequenceFlow_6" sourceElement="BPMNShape_ExclusiveGateway_2" targetElement="BPMNShape_EndEvent_1">
-        <di:waypoint xsi:type="dc:Point" x="704.0" y="148.0"/>
-        <di:waypoint xsi:type="dc:Point" x="752.0" y="148.0"/>
-        <di:waypoint xsi:type="dc:Point" x="800.0" y="148.0"/>
-        <bpmndi:BPMNLabel id="BPMNLabel_13"/>
+      <bpmndi:BPMNEdge id="edge_shape_ExclusiveGateway_2_to_shape_EndEvent_1" bpmnElement="SequenceFlow_6">
+        <di:waypoint x="798" y="155"/>
+        <di:waypoint x="908" y="148"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_7" bpmnElement="SequenceFlow_7" sourceElement="BPMNShape_UserTask_1" targetElement="BPMNShape_ExclusiveGateway_3">
-        <di:waypoint xsi:type="dc:Point" x="610.0" y="297.0"/>
-        <di:waypoint xsi:type="dc:Point" x="632.0" y="297.0"/>
-        <di:waypoint xsi:type="dc:Point" x="654.0" y="297.0"/>
-        <bpmndi:BPMNLabel id="BPMNLabel_14"/>
+      <bpmndi:BPMNEdge id="edge_shape_ExclusiveGateway_1_to_shape_UserTask_1" bpmnElement="SequenceFlow_4">
+        <di:waypoint x="488" y="180"/>
+        <di:waypoint x="491" y="302.5"/>
+        <di:waypoint x="552" y="302.5"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_8" bpmnElement="SequenceFlow_8" sourceElement="BPMNShape_ExclusiveGateway_3" targetElement="BPMNShape_EndEvent_2">
-        <di:waypoint xsi:type="dc:Point" x="704.0" y="297.0"/>
-        <di:waypoint xsi:type="dc:Point" x="752.0" y="297.0"/>
-        <di:waypoint xsi:type="dc:Point" x="800.0" y="297.0"/>
-        <bpmndi:BPMNLabel id="BPMNLabel_15">
-          <dc:Bounds height="11.0" width="12.0" x="747.0" y="298.0"/>
-        </bpmndi:BPMNLabel>
+      <bpmndi:BPMNEdge id="edge_shape_BusinessRuleTask_1_to_shape_ExclusiveGateway_1" bpmnElement="SequenceFlow_2">
+        <di:waypoint x="377" y="157.5"/>
+        <di:waypoint x="463" y="155"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_9" bpmnElement="SequenceFlow_9" sourceElement="BPMNShape_ExclusiveGateway_3" targetElement="BPMNShape_ExclusiveGateway_2">
-        <di:waypoint xsi:type="dc:Point" x="679.0" y="272.0"/>
-        <di:waypoint xsi:type="dc:Point" x="679.0" y="223.0"/>
-        <di:waypoint xsi:type="dc:Point" x="679.0" y="173.0"/>
-        <bpmndi:BPMNLabel id="BPMNLabel_16">
-          <dc:Bounds height="11.0" width="15.0" x="672.0" y="224.0"/>
-        </bpmndi:BPMNLabel>
+      <bpmndi:BPMNEdge id="edge_shape_StartEvent_1_to_shape_BusinessRuleTask_1" bpmnElement="SequenceFlow_1">
+        <di:waypoint x="131" y="148"/>
+        <di:waypoint x="221" y="157.5"/>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
-    <bpmndi:BPMNLabelStyle>
-      <dc:Font name="arial" size="9.0"/>
-    </bpmndi:BPMNLabelStyle>
   </bpmndi:BPMNDiagram>
+  <bpmn2:relationship id="_VK-KYEsaEDiUs55av9KZ8A" type="BPSimData">
+    <bpmn2:extensionElements>
+      <bpsim:BPSimData>
+        <bpsim:Scenario id="default" name="Simulationscenario">
+          <bpsim:ScenarioParameters/>
+          <bpsim:ElementParameters elementRef="UserTask_1">
+            <bpsim:TimeParameters>
+              <bpsim:ProcessingTime>
+                <bpsim:NormalDistribution mean="0" standardDeviation="0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+            <bpsim:ResourceParameters>
+              <bpsim:Availability>
+                <bpsim:FloatingParameter value="0"/>
+              </bpsim:Availability>
+              <bpsim:Quantity>
+                <bpsim:FloatingParameter value="0"/>
+              </bpsim:Quantity>
+            </bpsim:ResourceParameters>
+            <bpsim:CostParameters>
+              <bpsim:UnitCost>
+                <bpsim:FloatingParameter value="0"/>
+              </bpsim:UnitCost>
+            </bpsim:CostParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters elementRef="BusinessRuleTask_1">
+            <bpsim:TimeParameters>
+              <bpsim:ProcessingTime>
+                <bpsim:NormalDistribution mean="0" standardDeviation="0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+            <bpsim:ResourceParameters>
+              <bpsim:Availability>
+                <bpsim:FloatingParameter value="0"/>
+              </bpsim:Availability>
+              <bpsim:Quantity>
+                <bpsim:FloatingParameter value="0"/>
+              </bpsim:Quantity>
+            </bpsim:ResourceParameters>
+            <bpsim:CostParameters>
+              <bpsim:UnitCost>
+                <bpsim:FloatingParameter value="0"/>
+              </bpsim:UnitCost>
+            </bpsim:CostParameters>
+          </bpsim:ElementParameters>
+        </bpsim:Scenario>
+      </bpsim:BPSimData>
+    </bpmn2:extensionElements>
+    <bpmn2:source>_VKiskUsaEDiUs55av9KZ8A</bpmn2:source>
+    <bpmn2:target>_VKiskUsaEDiUs55av9KZ8A</bpmn2:target>
+  </bpmn2:relationship>
 </bpmn2:definitions>
