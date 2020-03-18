@@ -1,29 +1,38 @@
 package org.kie.kogito.examples.hr
+unit EmployeeValidation;
 
+import org.kie.kogito.rules.DataStore;
+import org.kie.kogito.rules.RuleUnitData
+import org.kie.kogito.rules.SingletonStore;
+
+declare EmployeeValidation extends RuleUnitData
+    employee1: DataStore<Employee>
+    employeeValidation: DataStore<EmployeeValidationModel>
+end
 
 rule "Employee exists" 
 
 when
-    $emp : Employee()
-    $val : EmployeeValidationModel($emp.personalId == employee.personalId)
+    emp : /employee1
+    val : /employeeValidation[ emp.personalId == employee.personalId ]
 then
-    modify($val) { 
+    modify(val) { 
     	setStatus( "exists" ),
-    	setMessage( "Employee " + $val.getEmployee().getFirstName() + " " + $val.getEmployee().getLastName() + " is already registered" );
+    	setMessage( "Employee " + val.getEmployee().getFirstName() + " " + val.getEmployee().getLastName() + " is already registered" );
     };
-    delete($emp);
+    employee1.remove(emp);
 end
 
 rule "Employee does not exist" 
 
 when
-	$emp : Employee()
-    not EmployeeValidationModel($emp.personalId == employee.personalId)
+	emp : /employee1
+    not /employeeValidation[ emp.personalId == employee.personalId ]
 then
     EmployeeValidationModel val = new EmployeeValidationModel();
-    val.setEmployee($emp);
+    val.setEmployee(emp);
     val.setStatus( "new" );
-	val.setMessage( "Employee " + $emp.getFirstName() + " " + $emp.getLastName() + " is not yet registered" );
-    delete($emp);
-    insert(val);
+	val.setMessage( "Employee " + emp.getFirstName() + " " + emp.getLastName() + " is not yet registered" );
+    employee1.remove(emp);
+    employeeValidation.add(val);
 end

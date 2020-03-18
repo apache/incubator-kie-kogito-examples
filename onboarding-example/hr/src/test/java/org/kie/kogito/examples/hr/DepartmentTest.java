@@ -16,9 +16,14 @@
 
 package org.kie.kogito.examples.hr;
 
+import java.util.List;
+
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
+import io.restassured.common.mapper.TypeRef;
+import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
 
 import io.quarkus.test.junit.QuarkusTest;
@@ -39,13 +44,12 @@ public class DepartmentTest {
 
     private void evaluateForCountry(String country, String result) {
         given()
-                .body("{\"employee\" : {\"firstName\" : \"Mark\", \"lastName\" : \"Test\", \"personalId\" : \"xxx-yy-zzz\", \"birthDate\" : \"1995-12-10T14:50:12.123+02:00\", \"address\" : {\"country\" : \""+country+"\", \"city\" : \"Boston\", \"street\" : \"any street 3\", \"zipCode\" : \"10001\"}}}")
+                .body("{ \"department\": {\"employee\" : {\"firstName\" : \"Mark\", \"lastName\" : \"Test\", \"personalId\" : \"xxx-yy-zzz\", \"birthDate\" : \"1995-12-10T14:50:12.123+02:00\", \"address\" : {\"country\" : \""+country+"\", \"city\" : \"Boston\", \"street\" : \"any street 3\", \"zipCode\" : \"10001\"}}}}")
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
                 .when()
                 .post("/department")
                 .then()
-                .statusCode(200)
-                .body("manager", is(result));
+                .body("[0].manager", is(result));
     }
 }

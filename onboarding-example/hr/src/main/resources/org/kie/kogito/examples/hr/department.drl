@@ -1,26 +1,39 @@
 package org.kie.kogito.examples.hr
+unit Department;
 
+import org.kie.kogito.rules.DataSource
+import org.kie.kogito.rules.RuleUnitData
+import org.kie.kogito.rules.SingletonStore
+
+declare Department extends RuleUnitData
+    department: SingletonStore<DepartmentModel> = DataSource.createSingleton()
+end
+
+query department
+    d: /department
+end
 
 rule "US Employee" when
-    $d: DepartmentModel(employee.address.country == "US")
+    $d: /department[ employee.address.country == "US"]
 then
     modify($d) { setDepartment( "US12345" ) };
 end
 
 rule "UK Employee" when
-    $d: DepartmentModel(employee.address.country == "UK")
+    $d: /department[ employee.address.country == "UK"]
 then
     modify($d) { setDepartment( "UK9876" ) };
 end
 
 rule "US Department" when
-    $d: DepartmentModel(department == "US12345")
+    $d: /department[ department == "US12345" ]
 then
     $d.setManager( "John Doe" );
 end
 
 rule "UK Department" when
-    $d: DepartmentModel(department == "UK9876")
+    $d: /department[ department == "UK9876" ]
 then
     $d.setManager( "Teresa April" );
 end
+
