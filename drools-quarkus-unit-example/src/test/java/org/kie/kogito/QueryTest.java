@@ -15,70 +15,35 @@
 
 package org.kie.kogito;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
-import org.kie.kogito.queries.AdultUnitDTO;
-import org.kie.kogito.queries.AdultUnitQueryFindAdultsEndpoint;
-import org.kie.kogito.queries.AdultUnitQueryFindAdultNamesEndpoint;
-import org.kie.kogito.queries.AdultUnitQueryFindNotAdultNamesAndAgeEndpoint;
-import org.kie.kogito.queries.AdultUnitRuleUnit;
-import org.kie.kogito.queries.Person;
 
-import static java.util.Arrays.asList;
-import static java.util.stream.Collectors.toList;
-
+import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@QuarkusTest
 public class QueryTest {
 
     @Test
-    public void testPersons() {
-        AdultUnitQueryFindAdultsEndpoint query = new AdultUnitQueryFindAdultsEndpoint(new AdultUnitRuleUnit());
+    public void testFindAdults() {
+        String personsPayload = "{\"adultAge\":18,\"persons\":[{\"name\":\"Mario\",\"age\":45,\"adult\":false},{\"name\":\"Sofia\",\"age\":7,\"adult\":false}]}";
+        Map result = (Map) given().contentType( ContentType.JSON).accept(ContentType.JSON).body(personsPayload).when()
+                .post("/find-adults").then().statusCode(200).extract().as( List.class ).get( 0 );
 
-        List<String> results = query.executeQuery( createAdultUnitDTO() )
-                .stream()
-                .map( Person::getName )
-                .collect( toList() );
-
-        assertEquals( 2, results.size() );
-        assertTrue( results.containsAll( asList("Mario", "Marilena") ) );
+        assertEquals("Mario", result.get("name"));
     }
 
     @Test
     public void testNames() {
-        AdultUnitQueryFindAdultNamesEndpoint query = new AdultUnitQueryFindAdultNamesEndpoint(new AdultUnitRuleUnit());
+        String personsPayload = "{\"adultAge\":18,\"persons\":[{\"name\":\"Mario\",\"age\":45,\"adult\":false},{\"name\":\"Sofia\",\"age\":7,\"adult\":false}]}";
+        String result = given().contentType( ContentType.JSON).accept(ContentType.JSON).body(personsPayload).when()
+                .post("/find-adult-names").then().statusCode(200).extract().as( List.class ).get( 0 ).toString();
 
-        List<String> results = query.executeQuery( createAdultUnitDTO() );
-
-        assertEquals( 2, results.size() );
-        assertTrue( results.containsAll( asList("Mario", "Marilena") ) );
+        assertEquals("Mario", result);
     }
 
-    @Test
-    public void testResult() {
-        AdultUnitQueryFindNotAdultNamesAndAgeEndpoint query = new AdultUnitQueryFindNotAdultNamesAndAgeEndpoint(new AdultUnitRuleUnit());
-
-        List<AdultUnitQueryFindNotAdultNamesAndAgeEndpoint.Result> results = query.executeQuery( createAdultUnitDTO() );
-
-        assertEquals( 1, results.size() );
-        AdultUnitQueryFindNotAdultNamesAndAgeEndpoint.Result result = results.get(0);
-        assertEquals( "Sofia", result.get$name() );
-        assertEquals( 7, result.get$age() );
-    }
-
-    private AdultUnitDTO createAdultUnitDTO() {
-        List<Person> persons = new ArrayList<>();
-        persons.add( new Person( "Mario", 45 ) );
-        persons.add( new Person( "Marilena", 47 ) );
-        persons.add( new Person( "Sofia", 7 ) );
-
-        AdultUnitDTO adultsDTO = new AdultUnitDTO();
-        adultsDTO.setAdultAge(18);
-        adultsDTO.setPersons(persons);
-
-        return adultsDTO;
-    }
 }

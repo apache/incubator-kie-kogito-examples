@@ -13,6 +13,7 @@
 
   <properties>
     <springboot.version>2.2.0.RELEASE</springboot.version>
+    <version.swagger.plugin>2.1.0</version.swagger.plugin>
   </properties>
 
   <dependencyManagement>
@@ -24,9 +25,16 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+      <dependency>
+        <groupId>org.kie.kogito</groupId>
+        <artifactId>kogito-bom</artifactId>
+        <version>${project.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
     </dependencies>
-  </dependencyManagement>
-
+  </dependencyManagement> 
+  
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -75,6 +83,7 @@
       <plugin>
         <groupId>io.openapitools.swagger</groupId>
         <artifactId>swagger-maven-plugin</artifactId>
+        <version>${version.swagger.plugin}</version>
         <configuration>
           <resourcePackages>
             <resourcePackage>org.kie.kogito.queries</resourcePackage>

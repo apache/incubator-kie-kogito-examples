@@ -18,6 +18,7 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <springboot.version>2.2.0.RELEASE</springboot.version>
+    <version.swagger.plugin>2.1.0</version.swagger.plugin>
   </properties>
 
   <dependencyManagement>
@@ -26,6 +27,13 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
         <version>${springboot.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.kie.kogito</groupId>
+        <artifactId>kogito-bom</artifactId>
+        <version>${project.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -77,6 +85,7 @@
       <plugin>
         <groupId>io.openapitools.swagger</groupId>
         <artifactId>swagger-maven-plugin</artifactId>
+        <version>${version.swagger.plugin}</version>
         <configuration>
           <useResourcePackagesChildren>true</useResourcePackagesChildren>
           <resourcePackages>

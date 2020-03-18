@@ -18,19 +18,27 @@ package org.kie.kogito;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
+import io.quarkus.test.junit.QuarkusTest;
+import javax.inject.Inject;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.rules.DataObserver;
 import org.kie.kogito.rules.DataStream;
+import org.kie.kogito.rules.RuleUnit;
 import org.kie.kogito.rules.RuleUnitInstance;
 import org.kie.kogito.rules.alerting.Event;
 import org.kie.kogito.rules.alerting.LoggerService;
-import org.kie.kogito.rules.alerting.LoggerServiceRuleUnit;
 import org.kie.kogito.rules.alerting.MonitoringService;
-import org.kie.kogito.rules.alerting.MonitoringServiceRuleUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@QuarkusTest
 public class ServicesTest {
+
+    @Inject
+    RuleUnit<MonitoringService> monitoringServiceRuleUnit;
+
+    @Inject
+    RuleUnit<LoggerService> loggerServiceRuleUnit;
 
     @Test
     public void testExplicitly() {
@@ -43,14 +51,14 @@ public class ServicesTest {
         monitoringService.getEventStream().append(new Event("Hello 3!"));
 
         RuleUnitInstance<MonitoringService> monitoringServiceInstance =
-                new MonitoringServiceRuleUnit().createInstance(monitoringService);
+                monitoringServiceRuleUnit.createInstance(monitoringService);
         monitoringServiceInstance.fire();
 
         monitoringService.getEventStream().append(new Event("Hello 4!"));
         monitoringServiceInstance.fire();
 
         RuleUnitInstance<LoggerService> loggerServiceInstance =
-                new LoggerServiceRuleUnit().createInstance(loggerService);
+                loggerServiceRuleUnit.createInstance(loggerService);
         loggerServiceInstance.fire();
 
         CountDownLatch latch = new CountDownLatch(4);
@@ -68,11 +76,11 @@ public class ServicesTest {
         loggerService.getLogger().subscribe(DataObserver.of(v -> latch.countDown()));
 
         RuleUnitInstance<MonitoringService> monitoringServiceInstance =
-                new MonitoringServiceRuleUnit()
+                monitoringServiceRuleUnit
                         .createInstance(monitoringService);
 
         RuleUnitInstance<LoggerService> loggerServiceInstance =
-                new LoggerServiceRuleUnit()
+                loggerServiceRuleUnit
                         .createInstance(loggerService);
 
         Executor executor = Executor.create();

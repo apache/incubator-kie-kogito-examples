@@ -17,31 +17,24 @@
 
   <dependencies>
     <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-resteasy-jackson</artifactId>
-    </dependency>
-
-    <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-api</artifactId>
+      <artifactId>kogito-quarkus</artifactId>
     </dependency>
-    <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-drools</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>jbpm-flow</artifactId>
-    </dependency>
-
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>monitoring-prometheus-addon</artifactId>
     </dependency>
-
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-cloud-workitems</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-resteasy-jackson</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-openapi</artifactId>
     </dependency>
 
     <dependency>
@@ -55,11 +48,13 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
   <build>
     <plugins>
       <plugin>
         <groupId>io.quarkus</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
+        <version>${version.io.quarkus}</version>
         <configuration>
           <debug>false</debug>
           <jvmArgs>-Dquarkus.http.port=8080 -Dlocal=true -Dquarkus.http.host=localhost</jvmArgs>
@@ -68,37 +63,6 @@
           <execution>
             <goals>
               <goal>build</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.kie.kogito</groupId>
-        <artifactId>kogito-maven-plugin</artifactId>
-        <extensions>true</extensions>
-      </plugin>
-      <plugin>
-        <groupId>io.openapitools.swagger</groupId>
-        <artifactId>swagger-maven-plugin</artifactId>
-        <configuration>
-          <resourcePackages>
-            <resourcePackage>org.kie.kogito.examples.onboarding</resourcePackage>
-          </resourcePackages>
-          <outputDirectory>${basedir}/target/classes/META-INF/resources/docs/</outputDirectory>
-          <outputFilename>swagger</outputFilename>
-          <outputFormats>JSON,YAML</outputFormats>
-          <prettyPrint>true</prettyPrint>
-          <swaggerConfig>
-            <info>
-              <title>${project.description}</title>
-              <version>${project.version}</version>
-            </info>
-          </swaggerConfig>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>generate</goal>
             </goals>
           </execution>
         </executions>

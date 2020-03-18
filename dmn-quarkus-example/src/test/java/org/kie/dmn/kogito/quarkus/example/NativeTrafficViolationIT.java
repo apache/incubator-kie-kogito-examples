@@ -16,9 +16,9 @@
 
 package org.kie.dmn.kogito.quarkus.example;
 
-import io.quarkus.test.junit.SubstrateTest;
+import io.quarkus.test.junit.NativeImageTest;
 
-@SubstrateTest
+@NativeImageTest
 public class NativeTrafficViolationIT extends TrafficViolationTest {
 
     // Execute the same tests but in native mode.

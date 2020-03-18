@@ -2,10 +2,10 @@
 
 pipeline {
     agent {
-        label 'kogito-static || kie-rhel7'
+        label 'kie-rhel7 && kie-mem16g'
     }
     tools {
-        maven 'kie-maven-3.5.4'
+        maven 'kie-maven-3.6.0'
         jdk 'kie-jdk1.8'
     }
     options {
@@ -18,16 +18,6 @@ pipeline {
                 sh 'printenv'
             }
         }
-        stage('Build kogito-bom') {
-            steps {
-                dir("kogito-bom") {
-                    script {
-                        githubscm.checkoutIfExists('kogito-bom', "$CHANGE_AUTHOR", "$CHANGE_BRANCH", 'kiegroup', "$CHANGE_TARGET")
-                        maven.runMavenWithSubmarineSettings('clean install', true)
-                    }
-                }
-            }
-        }
         stage('Build kogito-runtimes') {
             steps {
                 dir("kogito-runtimes") {
@@ -38,12 +28,11 @@ pipeline {
                 }
             }
         }
-
-        stage('Build kogito-cloud') {
+        stage('Build kogito-apps') {
             steps {
-                dir("kogito-cloud") {
+                dir("kogito-apps") {
                     script {
-                        githubscm.checkoutIfExists('kogito-cloud', "$CHANGE_AUTHOR", "$CHANGE_BRANCH", 'kiegroup', "$CHANGE_TARGET")
+                        githubscm.checkoutIfExists('kogito-apps', "$CHANGE_AUTHOR", "$CHANGE_BRANCH", 'kiegroup', "$CHANGE_TARGET")
                         maven.runMavenWithSubmarineSettings('clean install', true)
                     }
                 }
