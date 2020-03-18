@@ -1,1 +1,0 @@
-curl --location --request POST 'http://localhost:8080/fraud-scoring' --header 'Content-Type: application/json' -d "{  \"Transactions\" : [{\"tRiskScore\" : 1, \"tCardType\" : \"Debit\", \"tAuthCode\" : \"Authorized\", \"tLocation\" : \"Local\"}]}"
