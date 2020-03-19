@@ -14,15 +14,17 @@ query department
 end
 
 rule "US Employee" when
-    $d: /department[ employee.address.country == "US"]
+    d: /department and
+    DepartmentModel( /employee/address[country == "US"] ) from d
 then
-    modify($d) { setDepartment( "US12345" ) };
+    modify(d) { setDepartment( "US12345" ) };
 end
 
 rule "UK Employee" when
-    $d: /department[ employee.address.country == "UK"]
+    d: /department and
+    DepartmentModel( /employee/address[country == "US"] ) from d
 then
-    modify($d) { setDepartment( "UK9876" ) };
+    modify(d) { setDepartment( "UK9876" ) };
 end
 
 rule "US Department" when

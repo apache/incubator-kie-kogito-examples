@@ -1,38 +1,27 @@
-package org.kie.kogito.examples.hr
+package org.kie.kogito.examples.hr;
 unit EmployeeValidation;
 
-import org.kie.kogito.rules.DataStore;
-import org.kie.kogito.rules.RuleUnitData
-import org.kie.kogito.rules.SingletonStore;
-
-declare EmployeeValidation extends RuleUnitData
-    employee1: DataStore<Employee>
-    employeeValidation: DataStore<EmployeeValidationModel>
+query employeeValidation 
+  v:/validation
 end
 
 rule "Employee exists" 
-
 when
-    emp : /employee1
-    val : /employeeValidation[ emp.personalId == employee.personalId ]
+    emp : /employee and
+    val : /validation[ this.getEmployee().getPersonalId() == emp.personalId ]
 then
-    modify(val) { 
-    	setStatus( "exists" ),
-    	setMessage( "Employee " + val.getEmployee().getFirstName() + " " + val.getEmployee().getLastName() + " is already registered" );
-    };
-    employee1.remove(emp);
+    val.setStatus( "exists" );
+    val.setMessage( "Employee " + val.getEmployee().getFirstName() + " " + val.getEmployee().getLastName() + " is already registered" );
 end
 
 rule "Employee does not exist" 
 
 when
-	emp : /employee1
-    not /employeeValidation[ emp.personalId == employee.personalId ]
+	emp : /employee and
+    not /validation[ this.getEmployee().getPersonalId() == emp.personalId ]
 then
     EmployeeValidationModel val = new EmployeeValidationModel();
     val.setEmployee(emp);
     val.setStatus( "new" );
 	val.setMessage( "Employee " + emp.getFirstName() + " " + emp.getLastName() + " is not yet registered" );
-    employee1.remove(emp);
-    employeeValidation.add(val);
 end

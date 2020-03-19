@@ -1,22 +1,28 @@
 package org.kie.kogito.examples.hr
 unit Id;
 
+import org.kie.kogito.rules.DataSource
+import org.kie.kogito.rules.SingletonStore
 import org.kie.kogito.rules.RuleUnitData
 
 declare Id extends RuleUnitData 
-    idModel: SingletonStore<IdModel>
+    employeeData: SingletonStore<IdModel> = DataSource.createSingleton()
 end
+
+// query id
+//     /employeeData
+// end
 
 rule "Assign Employee ID"
 when
-    $id: /idModel
+    $id: /employeeData
 then
-    modify($id) { setEmployeeId( String.valueOf(($id.getEmployee().getFirstName() + $id.getEmployee().getLastName()).hashCode())) };
+    $id.setEmployeeId( String.valueOf(($id.getEmployee().getFirstName() + $id.getEmployee().getLastName()).hashCode()));
 end
 
 rule "Assign Employee email" 
 when
-    $id: /idModel
+    $id: /employeeData
 then
-    modify($id) { setEmail( $id.getEmployee().getFirstName() + "." + $id.getEmployee().getLastName() + "@company.com") };
+    $id.setEmail( $id.getEmployee().getFirstName() + "." + $id.getEmployee().getLastName() + "@company.com") ;
 end
