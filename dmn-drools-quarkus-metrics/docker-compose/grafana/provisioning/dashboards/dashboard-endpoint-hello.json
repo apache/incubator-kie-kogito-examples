@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 352068335,
+  "id": -406541145,
   "links": [],
   "panels": [
     {
@@ -482,6 +482,6 @@
   },
   "timezone": "",
   "title": "hello endpoint metrics",
-  "uid": "95785166-7bd9-4824-ae7f-31c57fe6fa20",
+  "uid": "87b75627-ee47-45b1-b8e0-9e0df8aeecd6",
   "version": 14
 }
