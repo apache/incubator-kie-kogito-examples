@@ -4,6 +4,6 @@ cd ../
 mvn clean package
 
 cd docker-compose/ 
-cp ../target/generated-sources/kogito/dashboards/* grafana/provisioning/dashboards
+cp ../target/resource/dashboards/* grafana/provisioning/dashboards
 
 sudo docker-compose build && sudo docker-compose up
