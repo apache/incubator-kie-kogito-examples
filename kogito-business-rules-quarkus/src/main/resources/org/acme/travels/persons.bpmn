@@ -67,7 +67,7 @@
       </bpmn2:extensionElements>
       <bpmn2:outgoing>_41D07816-A956-491C-9787-5B8C0B8C4F58</bpmn2:outgoing>
     </bpmn2:startEvent>
-    <bpmn2:businessRuleTask id="_7B8CC121-6F99-464A-93F8-9EAC4BE4601A" drools:ruleFlowGroup="person" name="Evaluate Person" implementation="http://www.jboss.org/drools/rule">
+    <bpmn2:businessRuleTask id="_7B8CC121-6F99-464A-93F8-9EAC4BE4601A" drools:ruleFlowGroup="unit:org.acme.travels.PersonRules" name="Evaluate Person" implementation="http://www.jboss.org/drools/rule">
       <bpmn2:extensionElements>
         <drools:metaData name="elementname">
           <drools:metaValue><![CDATA[Evaluate Person]]></drools:metaValue>

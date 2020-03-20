@@ -1,12 +1,11 @@
-package org.acme.kogito
+package org.acme.travels
+unit PersonValidationService
 
 import org.kie.kogito.examples.demo.Person;
 
-
-rule "Is adult" ruleflow-group "person"
-
+rule "Is adult"
 when
-    $person: Person(age > 18)
+    $person: /persons[age > 18]
 then
     modify($person) { 
     	setAdult(true) 
