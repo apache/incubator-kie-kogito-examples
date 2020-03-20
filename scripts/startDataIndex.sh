@@ -1,7 +1,7 @@
 
 echo "Script requires your maven project to be compiled"
 
-DATA_INDEX_VERSION=0.4.0
+DATA_INDEX_VERSION=0.8.0
 PERSISTENCE_FOLDER=target/classes/persistence
 
 [ ! -d ${PERSISTENCE_FOLDER} ] && echo "Persistence folder is missing. Make sure that your project was compiled" && exit 0
