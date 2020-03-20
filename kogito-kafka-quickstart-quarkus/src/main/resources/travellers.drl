@@ -4,7 +4,7 @@ unit TravellerValidationService
 import org.acme.travel.Traveller;
 
 
-rule "Process travellers" ruleflow-group "travellers"
+rule "Process travellers"
 
 when
     $traveller: /traveller[processed == false, nationality != 'American']
@@ -14,7 +14,7 @@ then
     
 end
 
-rule "Don't process travellers from US" ruleflow-group "travellers"
+rule "Don't process travellers from US"
 
 when
     $traveller: /traveller[processed == false, nationality == 'American']
