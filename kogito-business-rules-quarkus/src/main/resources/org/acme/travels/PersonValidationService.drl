@@ -1,8 +1,6 @@
 package org.acme.travels
 unit PersonValidationService
 
-import org.kie.kogito.examples.demo.Person;
-
 rule "Is adult"
 when
     $person: /persons[age > 18]

@@ -1,6 +1,5 @@
 package org.acme.travels;
 
-import org.kie.kogito.examples.demo.Person;
 import org.kie.kogito.rules.DataSource;
 import org.kie.kogito.rules.DataStore;
 import org.kie.kogito.rules.RuleUnitData;
