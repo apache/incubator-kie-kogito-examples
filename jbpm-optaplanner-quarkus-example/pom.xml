@@ -13,7 +13,7 @@
   <description>Flight assignment process and optimization</description>
 
   <properties>
-    <version.org.optaplanner>7.33.0.Final</version.org.optaplanner>
+    <version.org.optaplanner>7.34.0.Final</version.org.optaplanner>
   </properties>
 
   <dependencyManagement>
@@ -33,22 +33,11 @@
         <scope>import</scope>
       </dependency>
       <dependency>
-        <groupId>javax</groupId>
-        <artifactId>javaee-api</artifactId>
-        <version>8.0</version>
-        <scope>provided</scope>
-      </dependency>
-      <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-bom</artifactId>
         <version>${version.org.optaplanner}</version>
         <type>pom</type>
         <scope>import</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.webjars</groupId>
-        <artifactId>webjars-locator</artifactId>
-        <version>0.37</version>
       </dependency>
       <dependency>
         <groupId>org.webjars</groupId>
@@ -98,6 +87,12 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-optaplanner</artifactId>
     </dependency>
+    
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-optaplanner-jackson</artifactId>
+    </dependency>
+    
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-jackson</artifactId>
@@ -107,16 +102,6 @@
       <artifactId>quarkus-resteasy-jackson</artifactId>
     </dependency>
 
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-optaplanner-jackson</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>javax</groupId>
-      <artifactId>javaee-api</artifactId>
-      <scope>provided</scope>
-    </dependency>
 
     <!-- Testing -->
     <dependency>
@@ -126,11 +111,6 @@
     </dependency>
 
     <!-- JavaScript libraries for frontend -->
-    <dependency>
-      <groupId>org.webjars</groupId>
-      <artifactId>webjars-locator</artifactId>
-      <scope>runtime</scope>
-    </dependency>
     <dependency>
       <groupId>org.webjars</groupId>
       <artifactId>bootstrap</artifactId>
@@ -162,37 +142,6 @@
           <execution>
             <goals>
               <goal>build</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <!-- <plugin>
-        <groupId>org.kie.kogito</groupId>
-        <artifactId>kogito-maven-plugin</artifactId>
-        <extensions>true</extensions>
-      </plugin> -->
-      <plugin>
-        <groupId>io.openapitools.swagger</groupId>
-        <artifactId>swagger-maven-plugin</artifactId>
-        <configuration>
-          <resourcePackages>
-            <resourcePackage>org.kie.kogito.examples</resourcePackage>
-          </resourcePackages>
-          <outputDirectory>${basedir}/target/classes/static/</outputDirectory>
-          <outputFilename>swagger</outputFilename>
-          <outputFormats>JSON,YAML</outputFormats>
-          <prettyPrint>true</prettyPrint>
-          <swaggerConfig>
-            <info>
-              <title>${project.description}</title>
-              <version>${project.version}</version>
-            </info>
-          </swaggerConfig>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>generate</goal>
             </goals>
           </execution>
         </executions>
@@ -230,6 +179,7 @@
       </build>
       <properties>
         <quarkus.package.type>native</quarkus.package.type>
+        <quarkus.native.additional-build-args>--allow-incomplete-classpath</quarkus.native.additional-build-args>
       </properties>
     </profile>
   </profiles>
