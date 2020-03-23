@@ -16,10 +16,6 @@
   <name>Kogito Example :: jBPM and Quarkus</name>
   <description>Order management service</description>
 
-  <properties>
-    <version.surefire>2.22.1</version.surefire>
-  </properties>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -75,7 +71,6 @@
       <plugin>
         <groupId>io.quarkus</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
-        <version>${version.io.quarkus}</version>
         <executions>
           <execution>
             <goals>

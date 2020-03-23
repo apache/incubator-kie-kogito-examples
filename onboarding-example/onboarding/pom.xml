@@ -54,7 +54,6 @@
       <plugin>
         <groupId>io.quarkus</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
-        <version>${version.io.quarkus}</version>
         <configuration>
           <debug>false</debug>
           <jvmArgs>-Dquarkus.http.port=8080 -Dlocal=true -Dquarkus.http.host=localhost</jvmArgs>

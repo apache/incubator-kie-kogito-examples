@@ -11,11 +11,6 @@
   <artifactId>ruleunit-quarkus-example</artifactId>
   <name>Kogito Example :: RuleUnit - Quarkus</name>
 
-  <properties>
-    <version.surefire>2.22.1</version.surefire>
-    <version.swagger.plugin>2.1.0</version.swagger.plugin>
-  </properties>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -36,7 +31,6 @@
       <plugin>
         <groupId>io.quarkus</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
-        <version>${version.io.quarkus}</version>
         <executions>
           <execution>
             <goals>

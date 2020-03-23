@@ -37,11 +37,6 @@
       <artifactId>quarkus-jsonp</artifactId>
     </dependency>
     <dependency>
-      <groupId>io.quarkus.keycloak</groupId>
-      <artifactId>quarkus-keycloak-adapter</artifactId>
-      <version>1.0.0.Alpha1</version>
-    </dependency>
-    <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-quarkus</artifactId>
     </dependency>
@@ -78,7 +73,6 @@
       <plugin>
         <groupId>io.quarkus</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
-        <version>${version.io.quarkus}</version>
         <executions>
           <execution>
             <goals>
@@ -89,14 +83,6 @@
       </plugin>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>${surefire-plugin.version}</version>
-        <!--executions>
-          <execution>
-            <goals>
-              <goal>test</goal>
-            </goals>
-          </execution>
-        </executions-->
         <configuration>
           <systemPropertyVariables>
             <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
@@ -119,7 +105,6 @@
           <plugin>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-maven-plugin</artifactId>
-            <version>${version.io.quarkus}</version>
             <executions>
               <execution>
                 <goals>
@@ -133,7 +118,6 @@
           </plugin>
           <plugin>
             <artifactId>maven-failsafe-plugin</artifactId>
-            <version>${surefire-plugin.version}</version>
             <executions>
               <execution>
                 <goals>

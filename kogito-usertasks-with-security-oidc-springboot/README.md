@@ -22,9 +22,9 @@ This example shows
 ### Prerequisites
  
 You will need:
-  - Java 1.8.0+ installed 
+  - Java 11+ installed 
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.5.4+ installed
+  - Maven 3.6.2+ installed
   - [jq](https://stedolan.github.io/jq) tool installed. You can download it from [here](https://stedolan.github.io/jq/download)
   - Docker to be able to install keycloak server
 

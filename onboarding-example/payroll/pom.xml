@@ -15,12 +15,6 @@
   <name>Kogito Example :: Onboarding Example :: Payroll with DMN</name>
   <description>Payroll related rules and processes for onboarding</description>
 
-  <properties>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-    <version.surefire>2.22.1</version.surefire>
-  </properties>
-
   <dependencies>
     <dependency>
       <groupId>org.kie.kogito</groupId>
@@ -71,7 +65,6 @@
       <plugin>
         <groupId>io.quarkus</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
-        <version>${version.io.quarkus}</version>
         <configuration>
           <debug>false</debug>
           <jvmArgs>-Dquarkus.http.port=8082 -Dquarkus.http.host=localhost</jvmArgs>
@@ -114,7 +107,6 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-failsafe-plugin</artifactId>
-            <version>${version.surefire}</version>
           </plugin>
         </plugins>
       </build>

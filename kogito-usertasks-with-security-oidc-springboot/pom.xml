@@ -13,8 +13,6 @@
   <name>kogito-usertasks-with-security-oidc-springboot</name>
   <description>Kogito usertasks orchestration with security enabled on REST api - Spring Boot</description>
 
-  
-
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -27,7 +25,7 @@
       <dependency>
         <groupId>org.keycloak.bom</groupId>
         <artifactId>keycloak-adapter-bom</artifactId>
-        <version>3.3.0.Final</version>
+        <version>9.0.2</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -46,8 +44,7 @@
     </dependency>
     <dependency>
       <groupId>org.keycloak</groupId>
-      <artifactId>keycloak-spring-boot-2-starter</artifactId>
-      <version>4.0.0.Final</version>
+      <artifactId>keycloak-spring-boot-starter</artifactId>
     </dependency>
 
     <!-- kogito -->
@@ -70,7 +67,6 @@
     <dependency>
       <groupId>org.testcontainers</groupId>
       <artifactId>testcontainers</artifactId>
-      <version>1.12.3</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -80,7 +76,6 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-        <version>${springboot.version}</version>
         <configuration>
           <jvmArguments>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005</jvmArguments>
         </configuration>
@@ -95,13 +90,11 @@
       <plugin>
         <groupId>org.kie.kogito</groupId>
         <artifactId>kogito-maven-plugin</artifactId>
-        <version>${kogito.version}</version>
         <extensions>true</extensions>
       </plugin>
       <plugin>
         <groupId>io.openapitools.swagger</groupId>
         <artifactId>swagger-maven-plugin</artifactId>
-        <version>${swagger-plugin.version}</version>
         <configuration>
           <resourcePackages>
             <resourcePackage>org.acme.travels</resourcePackage>
