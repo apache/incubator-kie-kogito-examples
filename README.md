@@ -10,10 +10,10 @@ Since Kogito aims at supporting both Quarkus and SpringBoot each example usually
 
 ## Contribution
 
-Everyone is encouraged to contribute to this quickstarts by
+Everyone is encouraged to contribute to these examples by
 
 * trying it out and providing feedback and ideas for improvement
-* create new quickstarts -- **in this case, make sure your PR is against the `master` branch!**
+* create new examples -- **in this case, make sure your PR is against the `master` branch!**
 * blogging about it
 * using it on conferences and workshops
 
