@@ -11,10 +11,6 @@
   <artifactId>decisiontable-quarkus-example</artifactId>
   <name>Kogito Example :: Decision Table - Quarkus</name>
 
-  <properties>
-    <version.surefire>2.22.1</version.surefire>
-  </properties>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -35,7 +31,6 @@
       <plugin>
         <groupId>io.quarkus</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
-        <version>${version.io.quarkus}</version>
         <executions>
           <execution>
             <goals>
@@ -110,7 +105,6 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-failsafe-plugin</artifactId>
-            <version>${version.surefire}</version>
           </plugin>
         </plugins>
       </build>

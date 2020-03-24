@@ -13,11 +13,6 @@
   <name>Kogito Example :: jBPM timer and Quarkus</name>
   <description>Simple timer process</description>
 
-
-  <properties>
-    <version.surefire>2.22.1</version.surefire>
-  </properties>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -38,7 +33,6 @@
       <plugin>
         <groupId>io.quarkus</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
-        <version>${version.io.quarkus}</version>
         <executions>
           <execution>
             <goals>

@@ -9,9 +9,9 @@ A simple DMN service to evaluate a traffic violation.
 ### Prerequisites
 
 You will need:
-  - Java 1.8.0+ installed
+  - Java 11+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.5.4+ installed
+  - Maven 3.6.2+ installed
 
 ### Compile and Run
 

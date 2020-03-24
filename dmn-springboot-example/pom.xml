@@ -13,14 +13,6 @@
   <artifactId>dmn-springboot-example</artifactId>
   <name>Kogito Example :: DMN - Spring Boot</name>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-    <springboot.version>2.2.0.RELEASE</springboot.version>
-    <version.swagger.plugin>2.1.0</version.swagger.plugin>
-  </properties>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -85,7 +77,6 @@
       <plugin>
         <groupId>io.openapitools.swagger</groupId>
         <artifactId>swagger-maven-plugin</artifactId>
-        <version>${version.swagger.plugin}</version>
         <configuration>
           <useResourcePackagesChildren>true</useResourcePackagesChildren>
           <resourcePackages>
