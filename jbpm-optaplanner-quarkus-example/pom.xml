@@ -87,12 +87,12 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-optaplanner</artifactId>
     </dependency>
-    
+
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-optaplanner-jackson</artifactId>
     </dependency>
-    
+
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-jackson</artifactId>
@@ -179,7 +179,6 @@
       </build>
       <properties>
         <quarkus.package.type>native</quarkus.package.type>
-        <quarkus.native.additional-build-args>--allow-incomplete-classpath</quarkus.native.additional-build-args>
       </properties>
     </profile>
   </profiles>
