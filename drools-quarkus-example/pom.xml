@@ -101,9 +101,6 @@
                 <goals>
                   <goal>native-image</goal>
                 </goals>
-                <configuration>
-                  <additionalBuildArgs>--allow-incomplete-classpath</additionalBuildArgs>
-                </configuration>
               </execution>
             </executions>
           </plugin>
