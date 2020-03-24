@@ -46,7 +46,7 @@
     <!-- springboot related -->
     <springboot.version>2.2.0.RELEASE</springboot.version>
     <!-- kogito -->
-    <kogito.version>8.0.0-SNAPSHOT</kogito.version>
+    <kogito.version>${project.version}</kogito.version>
 
     <!-- infinispan -->
     <infinispan.version>2.1.7.Final</infinispan.version>

@@ -42,8 +42,8 @@
       <version>1.0.0.Alpha1</version>
     </dependency>
     <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-kogito</artifactId>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-quarkus</artifactId>
     </dependency>
 
     <!--tests -->
