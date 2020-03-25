@@ -101,7 +101,6 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-failsafe-plugin</artifactId>
-            <version>${version.surefire}</version>
           </plugin>
         </plugins>
       </build>
