@@ -12,11 +12,6 @@
   <name>Kogito Example :: jBPM, OptaPlanner and SpringBoot</name>
   <description>Flight assignment process and optimization</description>
 
-  <properties>
-    <springboot.version>2.2.2.RELEASE</springboot.version>
-    <version.org.optaplanner>7.33.0.Final</version.org.optaplanner>
-  </properties>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -134,7 +129,6 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-        <version>${springboot.version}</version>
         <executions>
           <execution>
             <goals>

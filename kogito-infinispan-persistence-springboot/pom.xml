@@ -90,7 +90,6 @@
       <plugin>
         <groupId>io.openapitools.swagger</groupId>
         <artifactId>swagger-maven-plugin</artifactId>
-        <version>${swagger-plugin.version}</version>
         <configuration>
           <resourcePackages>
             <resourcePackage>org.kie.kogito.examples</resourcePackage>

@@ -12,10 +12,6 @@
 
   <name>Kogito Example :: jBPM Polyglot</name>
 
-  <properties>
-    <version.surefire>2.22.1</version.surefire>
-  </properties>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -81,7 +77,6 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-failsafe-plugin</artifactId>
-            <version>${version.surefire}</version>
           </plugin>
         </plugins>
       </build>
