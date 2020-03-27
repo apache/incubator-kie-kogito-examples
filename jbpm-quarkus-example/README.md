@@ -77,15 +77,18 @@ Once Infinispan is up and running you can build this project with `-Ppersistence
 This extra profile in maven configuration adds additional dependencies needed to work with Infinispan as persistent store. 
 
 
-## Swagger documentation
+## OpenAPI (Swagger) documentation
+[Specification at swagger.io](https://swagger.io/docs/specification/about/)
 
-You can take a look at the [swagger definition](http://localhost:8080/docs/swagger.json) - automatically generated and included in this service - to determine all available operations exposed by this service.  For easy readability you can visualize the swagger definition file using a swagger UI like for example available [here](https://editor.swagger.io). In addition, various clients to interact with this service can be easily generated using this swagger definition.
+You can take a look at the [OpenAPI definition](http://localhost:8080/openapi?format=json) - automatically generated and included in this service - to determine all available operations exposed by this service. For easy readability you can visualize the OpenAPI definition file using a UI tool like for example available [Swagger UI](https://editor.swagger.io).
 
-When running in Quarkus development mode, we also leverage the Quarkus openapi extension that exposes [swagger UI](http://localhost:8080/swagger-ui/) that you can use to look at available REST endpoints and send test requests. 
+In addition, various clients to interact with this service can be easily generated using this OpenAPI definition.
+
+When running in Quarkus development mode, we also leverage the [Quarkus OpenAPI extension](https://quarkus.io/guides/openapi-swaggerui#use-swagger-ui-for-development) that exposes [Swagger UI](http://localhost:8080/swagger-ui/) that you can use to look at available REST endpoints and send test requests.
 
 ## Example Usage
 
-Once the service is up and running, you can use the following examples to interact with the service.  Note that rather than using the curl commands below, you can also use the [swagger UI](http://localhost:8080/swagger-ui/) to send requests.
+Once the service is up and running, you can use the following examples to interact with the service. Note that rather than using the curl commands below, you can also use the [Swagger UI](http://localhost:8080/swagger-ui/) to send requests.
 
 ### POST /orders
 
