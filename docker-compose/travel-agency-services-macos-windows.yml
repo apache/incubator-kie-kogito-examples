@@ -10,14 +10,36 @@ services:
     volumes:
       - ./infinispan/infinispan.xml:/opt/infinispan/server/conf/infinispan-demo.xml:z
 
-  kafka:
-    image: spotify/kafka
+  zookeeper:
+    container_name: zookeeper
+    image: strimzi/kafka:0.14.0-kafka-2.3.0
+    command: [
+      "sh", "-c",
+      "bin/zookeeper-server-start.sh config/zookeeper.properties"
+    ]
     ports:
-      - 2181:2181
-      - 9092:9092
+      - "2181:2181"
     environment:
-      - ADVERTISED_HOST=localhost
-      - ADVERTISED_PORT=9092
+      LOG_DIR: /tmp/logs
+
+  kafka:
+    container_name: kafka
+    image: strimzi/kafka:0.14.0-kafka-2.3.0
+    command: [
+      "sh", "-c",
+      "bin/kafka-server-start.sh config/server.properties --override listeners=$${KAFKA_LISTENERS} --override advertised.listeners=$${KAFKA_ADVERTISED_LISTENERS} --override zookeeper.connect=$${KAFKA_ZOOKEEPER_CONNECT}"
+    ]
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+    environment:
+      LOG_DIR: "/tmp/logs"
+      KAFKA_ADVERTISED_HOST_NAME: localhost
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_CREATE_TOPICS: "storage-topic:1:1:compact,global-id-topic:1:1:compact,input-topic:1:1:compact,logx-topic:1:1:compact,dbx-topic:1:1:compact"
 
   prometheus:
     image: prom/prometheus:v2.8.0
