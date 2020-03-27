@@ -2,7 +2,7 @@ package org.kie.kogito.app;
 
 import org.acme.travels.VisaApplication;
 import org.jbpm.workflow.instance.impl.WorkflowProcessInstanceImpl;
-import org.kie.addons.monitoring.process.PrometheusProcessEventListener;
+import org.kie.kogito.monitoring.process.PrometheusProcessEventListener;
 import org.kie.api.event.process.ProcessCompletedEvent;
 
 import io.prometheus.client.CollectorRegistry;
