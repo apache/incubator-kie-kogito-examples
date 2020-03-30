@@ -2,7 +2,7 @@
 
 ## Description
 
-A quickstart project shows use of timer based activities within the process to 
+A quickstart project shows use of timer based activities within the process to
 allow a flexible delays before continuing process execution. There are two types
 of timers used in this quick start
 
@@ -13,8 +13,8 @@ This example shows
 
 * working with timers (both intermediate and boundary)
 * optionally use Job Service that allows to externalize time tracking to separate service and by that offload the runtime service
-	
-	
+
+
 * Intermediate timer event (timers.bpmn)
 <p align="center"><img width=75% height=50% src="docs/images/timers.png"></p>
 
@@ -30,7 +30,7 @@ This example shows
 * Intermediate timer Timer
 <p align="center"><img src="docs/images/timersTimer.png"></p>
 
-* Intermediate timer After Timer 
+* Intermediate timer After Timer
 <p align="center"><img src="docs/images/timersAfterTimerScriptCall.png"></p>
 
 * Boundary timer event (timer-on-task.bpmn)
@@ -42,7 +42,7 @@ This example shows
 * Boundary timer Diagram Properties (bottom)
 <p align="center"><img src="docs/images/timerOnTaskDiagramProperties2.png"></p>
 
-* Boundary timer Before Timer 
+* Boundary timer Before Timer
 <p align="center"><img src="docs/images/timerOnTaskBeforeTimerScriptCall.png"></p>
 
 * Boundary timer User Task (top)
@@ -76,8 +76,8 @@ This example shows
 <p align="center"><img src="docs/images/timersCycleAfterTimerScriptTask.png"></p>
 
 
-Timer expression is expected to be given in ISO-8601 format e.g. PT30S - wait 30 seconds before expiring. 
-This needs to be given when starting process instance as delay attribute of type string. 
+Timer expression is expected to be given in ISO-8601 format e.g. PT30S - wait 30 seconds before expiring.
+This needs to be given when starting process instance as delay attribute of type string.
 
 ## Build and run
 
@@ -92,38 +92,51 @@ By default the [Jobs Service integration](#use-kogito-job-service-as-external-ti
 ```
 
 ### Prerequisites
- 
+
 You will need:
-  - Java 11+ installed 
+  - Java 11+ installed
   - Environment variable JAVA_HOME set accordingly
   - Maven 3.6.2+ installed
 
-When using native image compilation, you will also need: 
+When using native image compilation, you will also need:
   - GraalVM 19.3+ installed
   - Environment variable GRAALVM_HOME set accordingly
-  - GraalVM native image needs as well native-image extension: https://www.graalvm.org/docs/reference-manual/native-image/  
+  - GraalVM native image needs as well native-image extension: https://www.graalvm.org/docs/reference-manual/native-image/
   - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too, please refer to GraalVM installation documentation for more details.
 
 ### Compile and Run in Local Dev Mode
 
-```
-mvn clean package quarkus:dev    
+```sh
+mvn clean compile quarkus:dev
 ```
 
 NOTE: With dev mode of Quarkus you can take advantage of hot reload for business assets like processes, rules, decision tables and java code. No need to redeploy or restart your running application.
 
+### Package and Run in JVM mode
 
-### Compile and Run using Local Native Image
+```sh
+mvn clean package
+java -jar target/process-timer-quarkus-runner.jar
+```
+
+or on windows
+
+```sh
+mvn clean package
+java -jar target\process-timer-quarkus-runner.jar
+```
+
+### Package and Run using Local Native Image
 Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
 
-```
+```sh
 mvn clean package -Pnative
 ```
-  
+
 To run the generated native executable, generated in `target/`, execute
 
 ```
-./target/process-timer-quarkus-{version}-runner
+./target/process-timer-quarkus-runner
 ```
 
 ### OpenAPI (Swagger) documentation
@@ -138,30 +151,30 @@ When running in either Quarkus Development or Native mode, we also leverage the 
 
 ### Submit a request to start new timers process
 
-To make use of this application it is as simple as putting a sending request to `http://localhost:8080/timers`  with following content 
+To make use of this application it is as simple as putting a sending request to `http://localhost:8080/timers`  with following content
 
-```
+```json
 {
-"delay" : "PT30S"
+    "delay" : "PT30S"
 }
 
 ```
 
 Complete curl command can be found below:
 
-```
+```sh
 curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"delay" : "PT30S"}' http://localhost:8080/timers
 ```
 
 ### Show active timer instances
 
-```
+```sh
 curl -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/timers
 ```
 
-### Cancel timer instance 
+### Cancel timer instance
 
-```
+```sh
 curl -X DELETE 'http://localhost:8080/timers/{uuid}'
 ```
 
@@ -170,30 +183,30 @@ where `{uuid}` is the id of the given timer instance
 
 ### Submit a request to start new timers cycle process
 
-To make use of this application it is as simple as putting a sending request to `http://localhost:8080/timerscycle`  with following content 
+To make use of this application it is as simple as putting a sending request to `http://localhost:8080/timerscycle`  with following content
 
-```
+```sh
 {
-"delay" : "R2/PT1S"
+    "delay" : "R2/PT1S"
 }
 
 ```
 
 Complete curl command can be found below:
 
-```
+```sh
 curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"delay" : "R2/PT1S"}' http://localhost:8080/timerscycle
 ```
 
 ### Show active timer instances
 
-```
+```sh
 curl -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/timerscycle
 ```
 
-### Cancel timer cycle instance 
+### Cancel timer cycle instance
 
-```
+```sh
 curl -X DELETE 'http://localhost:8080/timerscycle/{uuid}'
 ```
 
@@ -202,30 +215,30 @@ where `{uuid}` is the id of the given timer cycle instance
 
 ### Submit a request to start new boundary timers process
 
-To make use of this application it is as simple as putting a sending request to `http://localhost:8080/timersOnTask`  with following content 
+To make use of this application it is as simple as putting a sending request to `http://localhost:8080/timersOnTask`  with following content
 
-```
+```json
 {
-"delay" : "PT30S"
+    "delay" : "PT30S"
 }
 
 ```
 
 Complete curl command can be found below:
 
-```
+```sh
 curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"delay" : "PT30S"}' http://localhost:8080/timersOnTask
 ```
 
 ### Show active boundary timer instances
 
-```
+```sh
 curl -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/timersOnTask
 ```
 
-### Cancel boundary timer instance 
+### Cancel boundary timer instance
 
-```
+```sh
 curl -X DELETE 'http://localhost:8080/timersOnTask/{uuid}'
 ```
 
@@ -248,7 +261,10 @@ After Timer
 
 ## Use Kogito Job Service as external timer service
 
-There is additional configuration needed in the `application.properties` file.
+There is additional configuration needed in 
+
+* application.properties
+* pom.xml
 
 ### Configure application.properties
 
@@ -258,6 +274,7 @@ To allow to use Job Service as timer service there is a need to specify addition
 kogito.jobs-service.url=http://localhost:8085
 kogito.service.url=http://localhost:8080
 ```
+
 
 First one is used to direct the Kogito runtime to let it know where is the Kogito Job Service - it needs
 to match the location of the Kogito Job Service when starting it - see below.
@@ -291,7 +308,7 @@ java -Dquarkus.http.port=8085 -jar target/jobs-service-{version}-runner.jar
 
 Note that in the above log infinispan has started on port 11222
 
-In case you'd like to run the job service with enabled persistence then start 
+In case you'd like to run the job service with enabled persistence then start
 Infinispan server before and then run the job service with following command
 
 Download Infinispan Server from
@@ -300,7 +317,7 @@ https://infinispan.org/download/
 Start Infinispan Server
 [Infinispan Directory]/bin/sh server.sh
 
-```sh
+```
 java -Dquarkus.http.port=8085 -Dkogito.jobs-service.persistence=infinispan -jar target/jobs-service-{version}-runner.jar
 ```
 
@@ -311,18 +328,3 @@ in both cases replace `{version}` with actual Kogito version to be used (Job Ser
 <p align="center"><img src="docs/images/infinispanRunning.png"></p>
 
 After that you can redo the timer queries described above
-
-## Deploy on OpenShift
-
-This sample can be ran just on OpenShift 4 instance as it requires communication with Job service.
-Use [Kogito operator](https://github.com/kiegroup/kogito-cloud-operator/blob/master/README.md) to deploy this example and instantiate also Jobs service. Kogito operator will take care of configuring the example deployment to successfully connect to the Jobs service.
-
-### Test your application
-
-Generated application comes with sample test process that allows you to verify if the application is working as expected. Simply execute following command to try it out
-
-```sh
-curl -X POST -H 'Content-Type: application/json' -i 'http://example-route-on-openshift/timer'
-```
-
-Once successfully invoked you should see "Before timer" and "After timer" in the console of the running application.

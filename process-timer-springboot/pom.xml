@@ -103,6 +103,7 @@
   </dependencies>
 
   <build>
+    <finalName>${project.artifactId}</finalName>
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>
@@ -142,6 +143,7 @@
         </configuration>
         <executions>
           <execution>
+            <phase>compile</phase>
             <goals>
               <goal>generate</goal>
             </goals>

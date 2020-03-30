@@ -11,55 +11,55 @@ Based on these two processes (defined using BPMN 2.0 format), the custom data ob
 ## Installing and Running
 
 ### Prerequisites
- 
+
 You will need:
-  - Java 11+ installed 
+  - Java 11+ installed
   - Environment variable JAVA_HOME set accordingly
   - Maven 3.6.2+ installed
 
-When using native image compilation, you will also need: 
-  - [GraalVM 19.1.1](https://github.com/oracle/graal/releases/tag/vm-19.1.1) installed 
+When using native image compilation, you will also need:
+  - [GraalVM 19.1.1](https://github.com/oracle/graal/releases/tag/vm-19.1.1) installed
   - Environment variable GRAALVM_HOME set accordingly
   - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too.  You also need 'native-image' installed in GraalVM (using 'gu install native-image'). Please refer to [GraalVM installation documentation](https://www.graalvm.org/docs/reference-manual/aot-compilation/#prerequisites) for more details.
 
 ### Compile and Run in Local Dev Mode
 
 ```
-mvn clean package quarkus:dev    
+mvn clean compile quarkus:dev
 ```
 
-### Compile and Run in JVM mode
+### Package and Run in JVM mode
 
 ```
-mvn clean package 
-java -jar target/process-quarkus-example-{version}-runner.jar    
+mvn clean package
+java -jar target/process-quarkus-example-runner.jar
 ```
 
 or on windows
 
 ```
 mvn clean package
-java -jar target\process-quarkus-example-{version}-runner.jar
+java -jar target\process-quarkus-example-runner.jar
 ```
 
-### Compile and Run using Local Native Image
+### Package and Run using Local Native Image
 Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
 
 ```
 mvn clean package -Pnative
 ```
-  
+
 To run the generated native executable, generated in `target/`, execute
 
 ```
-./target/process-quarkus-example-{version}-runner
+./target/process-quarkus-example-runner
 ```
 
 Note: This does not yet work on Windows, GraalVM and Quarkus should be rolling out support for Windows soon.
 
 ### Running with persistence enabled
 
-Kogito supports runtime persistence that is backed by Infinispan. So to be able to enable this you need to have 
+Kogito supports runtime persistence that is backed by Infinispan. So to be able to enable this you need to have
 Infinispan server installed and available over the network. By default it expects it to be at (it can be configured via application.properties file located in src/main/resources)
 
 ```
@@ -74,7 +74,7 @@ You can install Infinispan server by downloading it from [Infinispan website](ht
 
 Once Infinispan is up and running you can build this project with `-Ppersistence` to enable additional processing during the build. Next you start it in exact same way as without persistence.
 
-This extra profile in maven configuration adds additional dependencies needed to work with Infinispan as persistent store. 
+This extra profile in maven configuration adds additional dependencies needed to work with Infinispan as persistent store.
 
 
 ## OpenAPI (Swagger) documentation
@@ -94,6 +94,20 @@ Once the service is up and running, you can use the following examples to intera
 
 Allows to create a new order with the given data:
 
+Given data:
+
+```json
+{
+    "approver" : "john",
+    "order" : {
+        "orderNumber" : "12345",
+        "shipped" : false
+    }
+}
+```
+
+Curl command (using the JSON object above):
+
 ```sh
 curl -d '{"approver" : "john", "order" : {"orderNumber" : "12345", "shipped" : false}}' -H "Content-Type: application/json" -X POST http://localhost:8080/orders
 ```
@@ -106,6 +120,7 @@ curl -d "{\"approver\" : \"john\", \"order\" : {\"orderNumber\" : \"12345\", \"s
 As response the updated order is returned.
 
 Example response:
+
 ```json
     {
       "approver": "john",
@@ -126,6 +141,7 @@ Returns list of orders currently active:
 curl -X GET http://localhost:8080/orders
 ```
 Example response:
+
 ```json
     [{
       "approver": "john",
@@ -148,6 +164,7 @@ Returns order with given id (if active):
 curl -X GET http://localhost:8080/orders/b5225020-4cf4-4e91-8f86-dc840589cc22
 ```
 Example response:
+
 ```json
     {
       "approver": "john",
@@ -170,6 +187,7 @@ Cancels order with given id
 curl -X DELETE http://localhost:8080/orders/b5225020-4cf4-4e91-8f86-dc840589cc22
 ```
 Example response:
+
 ```json
     {
       "approver": "john",
@@ -190,6 +208,7 @@ Getting order items sub processes
 curl -X GET http://localhost:8080/orderItems
 ```
 Example response:
+
 ```json
 [
   {
@@ -209,9 +228,10 @@ Example response:
 Getting user tasks awaiting user action
 
 ```sh
-curl -X GET http://localhost:8080/orderItems/66c11e3e-c211-4cee-9a07-848b5e861bc5/tasks
+curl -X GET http://localhost:8080/orderItems/66c11e3e-c211-4cee-9a07-848b5e861bc5/tasks?user=john
 ```
 Example response:
+
 ```json
 {
   "62f1c985-d31c-4ead-9906-2fe8d05937f0":"Verify order"
@@ -223,9 +243,10 @@ Example response:
 Getting user task details
 
 ```sh
-curl -X GET http://localhost:8080/orderItems/66c11e3e-c211-4cee-9a07-848b5e861bc5/Verify_order/62f1c985-d31c-4ead-9906-2fe8d05937f0
+curl -X GET http://localhost:8080/orderItems/66c11e3e-c211-4cee-9a07-848b5e861bc5/Verify_order/62f1c985-d31c-4ead-9906-2fe8d05937f0?user=john
 ```
 Example response:
+
 ```json
 {
   "id":"62f1c985-d31c-4ead-9906-2fe8d05937f0",
@@ -244,13 +265,14 @@ Example response:
 Complete user task
 
 ```sh
-curl -d '{}' -H "Content-Type: application/json" -X POST http://localhost:8080/orderItems/66c11e3e-c211-4cee-9a07-848b5e861bc5/Verify_order/62f1c985-d31c-4ead-9906-2fe8d05937f0
+curl -d '{}' -H "Content-Type: application/json" -X POST http://localhost:8080/orderItems/66c11e3e-c211-4cee-9a07-848b5e861bc5/Verify_order/62f1c985-d31c-4ead-9906-2fe8d05937f0?user=john
 ```
 
 
 As response the updated order is returned.
 
 Example response:
+
 ```json
 {
   "id":"66c11e3e-c211-4cee-9a07-848b5e861bc5",

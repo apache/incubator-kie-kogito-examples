@@ -8,9 +8,9 @@ to load a given user by its username.
 This example shows
 
 * invoking remote REST service
-* control flow based on service calls	
-		
-* Diagram	
+* control flow based on service calls
+
+* Diagram
 <p align="center"><img width=75% height=50% src="docs/images/process.png"></p>
 
 * Diagram Properties
@@ -43,29 +43,29 @@ This example shows
 ## Build and run
 
 ### Prerequisites
- 
+
 You will need:
-  - Java 11+ installed 
+  - Java 11+ installed
   - Environment variable JAVA_HOME set accordingly
   - Maven 3.6.2+ installed
 
 ### Compile and Run in Local Dev Mode
 
-```
-mvn clean package spring-boot:run    
+```sh
+mvn clean compile spring-boot:run
 ```
 
 
-### Compile and Run using uberjar
+### Package and Run using uberjar
 
+```sh
+mvn clean package
 ```
-mvn clean package 
-```
-  
+
 To run the generated native executable, generated in `target/`, execute
 
-```
-java -jar target/process-service-rest-call-sprintboot-{version}.jar
+```sh
+java -jar target/process-service-rest-call-springboot.jar
 ```
 
 ### OpenAPI (Swagger) documentation
@@ -78,18 +78,18 @@ In addition, various clients to interact with this service can be easily generat
 
 ### Submit a user name
 
-To make use of this application it is as simple as putting a sending request to `http://localhost:8080/users`  with following content 
+To make use of this application it is as simple as putting a sending request to `http://localhost:8080/users`  with following content
 
-```
+```json
 {
-"username" : "test"
+    "username" : "test"
 }
 
 ```
 
 Complete curl command can be found below:
 
-```
+```sh
 curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"username" : "test"}' http://localhost:8080/users
 ```
 
@@ -98,11 +98,11 @@ After the above command you should see some log on Springboot sush as following
 * Springboot Log
 <p align="center"><img src="docs/images/springbootLog.png"></p>
 
-To test the other route possible for unknown user send request to `http://localhost:8080/users`  with following content 
+To test the other route possible for unknown user send request to `http://localhost:8080/users`  with following content
 
-```
+```json
 {
-"username" : "nonexisting"
+    "username" : "nonexisting"
 }
 
 ```
@@ -110,7 +110,7 @@ To test the other route possible for unknown user send request to `http://localh
 
 Complete curl command can be found below:
 
-```
+```sh
 curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"username" : "nonexisting"}' http://localhost:8080/users
 ```
 

@@ -34,7 +34,7 @@ You will need:
 ## Installing and Running
 
 ```
-mvn clean package spring-boot:run    
+mvn clean package spring-boot:run
 ```
 
 ## OpenAPI (Swagger) documentation
@@ -195,7 +195,7 @@ curl -d '{ "isPassengerApproved": true }' -X POST http://localhost:8080/rest/fli
 or in Windows
 
 ```sh
-rem Replace {id} with the process id and {taskId} with the id of the task to complete
+# Replace {id} with the process id and {taskId} with the id of the task to complete
 curl -d "{ \"isPassengerApproved\": true }" -X POST http://localhost:8080/rest/flights/{id}/approveDenyPassenger/{taskId}
 ```
 

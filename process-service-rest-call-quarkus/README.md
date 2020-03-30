@@ -8,9 +8,9 @@ to load a given user by its username.
 This example shows
 
 * invoking remote REST service
-* control flow based on service calls	
-	
-* Diagram	
+* control flow based on service calls
+
+* Diagram
 <p align="center"><img width=75% height=50% src="docs/images/process.png"></p>
 
 * Diagram Properties
@@ -46,37 +46,50 @@ during REST service invocation.
 ## Build and run
 
 ### Prerequisites
- 
+
 You will need:
-  - Java 11+ installed 
+  - Java 11+ installed
   - Environment variable JAVA_HOME set accordingly
   - Maven 3.6.2+ installed
 
-When using native image compilation, you will also need: 
+When using native image compilation, you will also need:
   - GraalVM 19.1+ installed
   - Environment variable GRAALVM_HOME set accordingly
   - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too, please refer to GraalVM installation documentation for more details.
 
 ### Compile and Run in Local Dev Mode
 
-```
-mvn clean package quarkus:dev    
+```sh
+mvn clean compile quarkus:dev
 ```
 
 NOTE: With dev mode of Quarkus you can take advantage of hot reload for business assets like processes, rules, decision tables and java code. No need to redeploy or restart your running application.
 
+### Package and Run in JVM mode
 
-### Compile and Run using Local Native Image
+```sh
+mvn clean package
+java -jar target/process-service-rest-call-quarkus-runner.jar
+```
+
+or on windows
+
+```sh
+mvn clean package
+java -jar target\process-service-rest-call-quarkus-runner.jar
+```
+
+### Package and Run using Local Native Image
 Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
 
-```
+```sh
 mvn clean package -Pnative
 ```
-  
+
 To run the generated native executable, generated in `target/`, execute
 
-```
-./target/process-service-rest-call-quarkus-{version}-runner
+```sh
+./target/process-service-rest-call-quarkus-runner
 ```
 
 ### OpenAPI (Swagger) documentation
@@ -91,18 +104,18 @@ When running in either Quarkus Development or Native mode, we also leverage the 
 
 ### Submit a user name
 
-To make use of this application it is as simple as putting a sending request to `http://localhost:8080/users`  with following content 
+To make use of this application it is as simple as putting a sending request to `http://localhost:8080/users`  with following content
 
-```
+```json
 {
-"username" : "test"
+    "username" : "test"
 }
 
 ```
 
 Complete curl command can be found below:
 
-```
+```sh
 curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"username" : "test"}' http://localhost:8080/users
 ```
 
@@ -111,11 +124,11 @@ After the above command you should see some log on Quarkus such as following
 * Quarkus Log
 <p align="center"><img src="docs/images/quarkusLog.png"></p>
 
-To test the other route possible for unknown user send request to `http://localhost:8080/users`  with following content 
+To test the other route possible for unknown user send request to `http://localhost:8080/users`  with following content
 
-```
+```json
 {
-"username" : "nonexisting"
+    "username" : "nonexisting"
 }
 
 ```
@@ -123,7 +136,7 @@ To test the other route possible for unknown user send request to `http://localh
 
 Complete curl command can be found below:
 
-```
+```sh
 curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"username" : "nonexisting"}' http://localhost:8080/users
 ```
 
