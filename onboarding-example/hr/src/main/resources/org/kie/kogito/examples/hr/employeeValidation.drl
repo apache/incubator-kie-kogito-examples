@@ -7,21 +7,22 @@ end
 
 rule "Employee exists" 
 when
-    emp : /employee and
-    val : /validation[ this.getEmployee().getPersonalId() == emp.personalId ]
+    emp : /employee[ EmployeeRepository.get().isRegistered(personalId) ] 
 then
+    EmployeeValidationModel val = new EmployeeValidationModel();
     val.setStatus( "exists" );
     val.setMessage( "Employee " + val.getEmployee().getFirstName() + " " + val.getEmployee().getLastName() + " is already registered" );
+    validation.add(val);
 end
 
 rule "Employee does not exist" 
 
 when
-	emp : /employee and
-    not /validation[ this.getEmployee().getPersonalId() == emp.personalId ]
+    emp : /employee[ ! EmployeeRepository.get().isRegistered(personalId) ]
 then
     EmployeeValidationModel val = new EmployeeValidationModel();
     val.setEmployee(emp);
     val.setStatus( "new" );
 	val.setMessage( "Employee " + emp.getFirstName() + " " + emp.getLastName() + " is not yet registered" );
+    validation.add(val);
 end
