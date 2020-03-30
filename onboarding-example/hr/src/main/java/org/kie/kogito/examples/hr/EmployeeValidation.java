@@ -1,16 +1,16 @@
 package org.kie.kogito.examples.hr;
 
 import org.kie.kogito.rules.DataSource;
-import org.kie.kogito.rules.DataStore;
 import org.kie.kogito.rules.RuleUnitData;
+import org.kie.kogito.rules.SingletonStore;
 
 public class EmployeeValidation implements RuleUnitData {
-    private final DataStore<Employee> employee = DataSource.createStore();
-    private final DataStore<EmployeeValidationModel> validation = DataSource.createStore();
-    public DataStore<Employee> getEmployee() {
+    private final SingletonStore<Employee> employee = DataSource.createSingleton();
+    private final SingletonStore<EmployeeValidationModel> validation = DataSource.createSingleton();
+    public SingletonStore<Employee> getEmployee() {
         return employee;
     }
-    public DataStore<EmployeeValidationModel> getValidation() {
+    public SingletonStore<EmployeeValidationModel> getValidation() {
         return validation;
     }
 }

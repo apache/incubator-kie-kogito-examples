@@ -60,7 +60,22 @@ As response the employee details including the new employee id and email address
 Allows to verify if the given employee requires registration:
 
 ```sh
-curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"employee" : {"firstName" : "Mark", "lastName" : "Test", "personalId" : "xxx-yy-zzz", "birthDate" : "2012-12-10T14:50:12.123+02:00", "address" : {"country" : "US", "city" : "Boston", "street" : "any street 3", "zipCode" : "10001"}}}' http://localhost:8081/employeeValidation
+curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '
+{
+  "employee": {
+    "firstName": "Mark",
+    "lastName": "Test",
+    "personalId": "xxx-yy-zzz",
+    "birthDate": "2012-12-10T14:50:12.123+02:00",
+    "address": {
+      "country": "US",
+      "city": "Boston",
+      "street": "any street 3",
+      "zipCode": "10001"
+    }
+  }
+}
+' http://localhost:8081/employee-validation/first
 ```
 
 ### POST /department

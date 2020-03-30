@@ -5,10 +5,6 @@ import org.kie.kogito.rules.DataSource
 import org.kie.kogito.rules.SingletonStore
 import org.kie.kogito.rules.RuleUnitData
 
-declare Id extends RuleUnitData 
-    employee: SingletonStore<IdModel> = DataSource.createSingleton()
-end
-
 query id
     /employee
 end

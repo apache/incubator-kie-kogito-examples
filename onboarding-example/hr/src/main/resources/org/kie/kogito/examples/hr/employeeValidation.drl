@@ -12,7 +12,7 @@ then
     EmployeeValidationModel val = new EmployeeValidationModel();
     val.setStatus( "exists" );
     val.setMessage( "Employee " + val.getEmployee().getFirstName() + " " + val.getEmployee().getLastName() + " is already registered" );
-    validation.add(val);
+    validation.set(val);
 end
 
 rule "Employee does not exist" 
@@ -24,5 +24,5 @@ then
     val.setEmployee(emp);
     val.setStatus( "new" );
 	val.setMessage( "Employee " + emp.getFirstName() + " " + emp.getLastName() + " is not yet registered" );
-    validation.add(val);
+    validation.set(val);
 end
