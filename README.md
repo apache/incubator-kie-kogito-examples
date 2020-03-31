@@ -97,7 +97,7 @@ shows timers (intermediate and boundary) that allows to introduce delays in proc
 
 ## Other Misc Examples
 
-- Onboarding example combining 1 process and two decision services: see [README.md](onboarding-example/readme.md) 
+- Onboarding example combining 1 process and two decision services: see [README.md](onboarding-example/README.md) 
 - Polyglot Drools with GraalVM: see [README.md](drools-polyglot-example/README.md)
 - Drools on Quarkus: see [README.md](drools-quarkus-example/README.md)
 - Drools on Quarkus with Unit: see [README.md](drools-quarkus-unit-example/README.md)
