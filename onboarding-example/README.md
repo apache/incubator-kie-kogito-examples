@@ -36,9 +36,9 @@ When using native image compilation, you will also need:
 
 Please follow the instruction for each of the individual services
 
-* [hr](hr/readme.md)
-* [payroll](payroll/readme.md)
-* [onboarding](onboarding/readme.md)
+* [hr](hr/README.md)
+* [payroll](payroll/README.md)
+* [onboarding](onboarding/README.md)
 
 ## Example Usage
 

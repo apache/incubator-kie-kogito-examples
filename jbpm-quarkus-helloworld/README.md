@@ -53,10 +53,6 @@ To run the generated native executable, generated in `target/`, execute
 
 Note: This does not yet work on Windows, GraalVM and Quarkus should be rolling out support for Windows soon.
 
-## Swagger documentation
-
-You can take a look at the [swagger definition](http://localhost:8080/docs/swagger.json) - automatically generated and included in this service - to determine all available operations exposed by this service.  For easy readability you can visualize the swagger definition file using a swagger UI like for example available [here](https://editor.swagger.io). In addition, various clients to interact with this service can be easily generated using this swagger definition.
-
 ## Example Usage
 
 Once the service is up and running, you can use the following example to interact with the service.
