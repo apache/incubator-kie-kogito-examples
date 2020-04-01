@@ -68,7 +68,7 @@
            ws.onopen = function() {
 
               // Web Socket is connected, send data using send()
-              ws.send('{"id" : "2", "type" : "start", "payload" : { "query" : "subscription { VisaApplicationsUpdated { id, visaApplication { lastName, firstName, country, city, nationality, duration, passportNumber, approved } processInstances { state  } } }"}}');
+              ws.send('{"id" : "2", "type" : "start", "payload" : { "query" : "subscription { VisaApplicationsUpdated { id, visaApplication { lastName, firstName, country, city, nationality, duration, passportNumber, approved } metadata { processInstances { state } } } }"}}');
 
            };
 
@@ -98,7 +98,7 @@
                 "{ VisaApplications { " +
                 "id " +
                 "visaApplication { lastName, firstName, country, city, nationality, duration, passportNumber, approved } " +
-                "processInstances { state  } " +
+                "metadata { processInstances { state  } } " +
                 "}}\"" +
                 "}";
 
@@ -116,7 +116,7 @@
     }
 
     function appendDataRow(key, val) {
-      var active = $.grep(val.processInstances, function (pi) {
+      var active = $.grep(val.metadata.processInstances, function (pi) {
           return pi.state == "ACTIVE"
       }).length > 0;
       var html =

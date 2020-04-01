@@ -10,59 +10,18 @@
   <properties>
     <surefire-plugin.version>2.22.0</surefire-plugin.version>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <kogito.version>0.4.0</kogito.version>
+    <kogito.version>0.8.0</kogito.version>
     <maven.compiler.source>1.8</maven.compiler.source>
-    <quarkus.version>0.23.2</quarkus.version>
+    <quarkus.version>1.3.0.Final</quarkus.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
-  <repositories>
-    <repository>
-      <id>sonatype-nexus-snapshots</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-      <releases>
-        <enabled>true</enabled>
-        <updatePolicy>never</updatePolicy>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-        <updatePolicy>daily</updatePolicy>
-      </snapshots>
-    </repository>
-    <repository>
-      <id>jboss-snapshots-repository</id>
-      <name>JBoss Snapshot Repository</name>
-      <url>https://repository.jboss.org/nexus/content/repositories/snapshots/</url>
-      <releases>
-        <enabled>true</enabled>
-        <updatePolicy>never</updatePolicy>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-        <updatePolicy>daily</updatePolicy>
-      </snapshots>
-    </repository>
-  </repositories>
-  <pluginRepositories>
-    <pluginRepository>
-      <id>sonatype-nexus-snapshots</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-      <releases>
-        <enabled>true</enabled>
-        <updatePolicy>never</updatePolicy>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-        <updatePolicy>daily</updatePolicy>
-      </snapshots>
-    </pluginRepository>
-  </pluginRepositories>
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>io.quarkus</groupId>
-        <artifactId>quarkus-bom</artifactId>
-        <version>${quarkus.version}</version>
+        <groupId>org.kie.kogito</groupId>
+        <artifactId>kogito-quarkus-bom</artifactId>
+        <version>${kogito.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -76,7 +35,6 @@
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>monitoring-prometheus-addon</artifactId>
-      <version>${kogito.version}</version>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -85,12 +43,10 @@
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>infinispan-persistence-addon</artifactId>
-      <version>${kogito.version}</version>
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-events-reactive-messaging-addon</artifactId>
-      <version>${kogito.version}</version>
     </dependency>
     <dependency>
       <groupId>org.drools</groupId>
@@ -170,6 +126,7 @@
           <plugin>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-maven-plugin</artifactId>
+            <version>${quarkus.version}</version>
             <executions>
               <execution>
                 <goals>

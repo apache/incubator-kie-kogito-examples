@@ -50,7 +50,7 @@ Business logic will be based on business processes
 
 Public process that will be responsible for processing visa application
 
-<p align="center"><img width=75% height=50% src="docs/images/visa-applications-process.png"></p>
+<p align="center"><img width=100% src="docs/images/visa-applications-process.png"></p>
 
 
 # Try out the complete service

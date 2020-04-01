@@ -73,7 +73,7 @@ The decision logic will be implemented as a decision table. The logic will be re
 
 The result will be “yes” or “no”.
 
-<p align="center"><img width=75% height=50% src="docs/images/decisiontable.png"></p>
+<p align="center"><img width=100% src="docs/images/decisiontable.png"></p>
 
 
 ## Business logic
@@ -82,15 +82,15 @@ Business logic will be based on business processes
 
 Public process that will be responsible for orchestrating complete travel request
 
-<p align="center"><img width=75% height=50% src="docs/images/travels-process.png"></p>
+<p align="center"><img width=100% src="docs/images/travels-process.png"></p>
 
 Private process that will be responsible for booking a hotel.
 
-<p align="center"><img width=75% height=50% src="docs/images/book-hotel-process.png"></p>
+<p align="center"><img width=50% src="docs/images/book-hotel-process.png"></p>
 
 Private process that will be responsible for booking a flight.
 
-<p align="center"><img width=75% height=50% src="docs/images/book-flight-process.png"></p>
+<p align="center"><img width=50% src="docs/images/book-flight-process.png"></p>
 
 ## Services
 

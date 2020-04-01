@@ -67,7 +67,7 @@
                 "{ VisaApplications { " +
                 "id " +
                 "visaApplication { lastName, firstName, country, city, nationality, duration, passportNumber } " +
-                "processInstances { state  } " +
+                "metadata { processInstances { state } }" +
                 "}}\"" +
                 "}";
         $.ajax({
@@ -76,7 +76,7 @@
             data: query,
             success: function (data) {
                 $.each(data.data["VisaApplications"], function (key, val) {
-                    var active = $.grep(val.processInstances, function (pi) {
+                    var active = $.grep(val.metadata.processInstances, function (pi) {
                         return pi.state == "ACTIVE"
                     }).length > 0;
                     var html =
