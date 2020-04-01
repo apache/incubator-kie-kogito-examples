@@ -1,0 +1,21 @@
+id: yamlgreet
+version: '1.0'
+name: Greeting workflow
+description: JSON based greeting workflow
+functions:
+  - name: greetFunction
+    type: sysout
+states:
+  - name: greetPerson
+    type: OPERATION
+    start:
+      kind: DEFAULT
+    actions:
+      - name: greetAction
+        functionRef:
+          refName: greetFunction
+          parameters:
+            prefix: 'Hello '
+            message: "$.name"
+    end:
+      kind: TERMINATE
