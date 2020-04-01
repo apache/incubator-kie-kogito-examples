@@ -5,8 +5,8 @@ pipeline {
         label 'kie-rhel7 && kie-mem16g'
     }
     tools {
-        maven 'kie-maven-3.6.0'
-        jdk 'kie-jdk1.8'
+        maven 'kie-maven-3.6.2'
+        jdk 'kie-jdk11'
     }
     options {
         buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '10')
@@ -19,6 +19,9 @@ pipeline {
             }
         }
         stage('Build kogito-runtimes') {
+            when { 
+                not { branch 'stable' } 
+            }
             steps {
                 dir("kogito-runtimes") {
                     script {
@@ -29,6 +32,9 @@ pipeline {
             }
         }
         stage('Build kogito-apps') {
+            when { 
+                not { branch 'stable' } 
+            }
             steps {
                 dir("kogito-apps") {
                     script {
