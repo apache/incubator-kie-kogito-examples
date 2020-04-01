@@ -13,9 +13,12 @@ pipeline {
         timeout(time: 90, unit: 'MINUTES')
     }
     stages {
-        stage('Initialize') {
+        stage('Precheck') {
+            when {
+                changeRequest target: 'stable'
+            }
             steps {
-                sh 'printenv'
+                error message "It is not allowed to create pull requests towards the 'stable' branch. Create a new pull request towards the 'master' branch please."
             }
         }
         stage('Build kogito-runtimes') {
