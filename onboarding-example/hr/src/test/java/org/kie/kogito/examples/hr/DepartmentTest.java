@@ -44,12 +44,12 @@ public class DepartmentTest {
 
     private void evaluateForCountry(String country, String result) {
         given()
-                .body("{ \"department\": {\"employee\" : {\"firstName\" : \"Mark\", \"lastName\" : \"Test\", \"personalId\" : \"xxx-yy-zzz\", \"birthDate\" : \"1995-12-10T14:50:12.123+02:00\", \"address\" : {\"country\" : \""+country+"\", \"city\" : \"Boston\", \"street\" : \"any street 3\", \"zipCode\" : \"10001\"}}}}")
+                .body("{\"employee\" : {\"firstName\" : \"Mark\", \"lastName\" : \"Test\", \"personalId\" : \"xxx-yy-zzz\", \"birthDate\" : \"1995-12-10T14:50:12.123+02:00\", \"address\" : {\"country\" : \""+country+"\", \"city\" : \"Boston\", \"street\" : \"any street 3\", \"zipCode\" : \"10001\"}}}")
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
                 .when()
-                .post("/department")
+                .post("/department/first")
                 .then()
-                .body("[0].manager", is(result));
+                .body("manager", is(result));
     }
 }
