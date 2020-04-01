@@ -1,7 +1,7 @@
 id: yamlgreet
 version: '1.0'
 name: Greeting workflow
-description: JSON based greeting workflow
+description: YAML based greeting workflow
 functions:
   - name: greetFunction
     type: sysout
