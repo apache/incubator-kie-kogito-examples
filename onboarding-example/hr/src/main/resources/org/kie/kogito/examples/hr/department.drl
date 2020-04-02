@@ -6,13 +6,13 @@ query department
 end
 
 rule "US Employee" when
-    /employee[ e: this ]/address[country == "US"] 
+    /employee[ e: this ]/address[country == "US"]
 then
     modify(e) { setDepartment( "US12345" ) };
 end
 
 rule "UK Employee" when
-    /employee[ e: this ]/address[country == "UK"] 
+    /employee[ e: this ]/address[country == "UK"]
 then
     modify(e) { setDepartment( "UK9876" ) };
 end
