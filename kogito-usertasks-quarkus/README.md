@@ -142,7 +142,7 @@ This should return empty response as the admin user was the first approver and b
 Repeating the request with another user will return task
 
 ```
-curl -H 'Content-Type:application/json' -H 'Accept:application/json' 'http://localhost:8080/approvals/{uuid}/tasks?user=john=admin&group=managers'
+curl -H 'Content-Type:application/json' -H 'Accept:application/json' 'http://localhost:8080/approvals/{uuid}/tasks?user=john&group=managers'
 ```
 
 
@@ -182,4 +182,3 @@ You should see a similar message after performing the second line approval after
 ```
 {"id":"f498de73-e02d-4829-905e-2f768479a4f1", "approver":"admin","firstLineApproval:true, "secondLineApproval":true,"traveller":{"firstName":"John","lastName":"Doe","email":"jon.doe@example.com","nationality":"American","address":{"street":"main street","city":"Boston","zipCode":"10005","country":"US"}}}
 ```
-
