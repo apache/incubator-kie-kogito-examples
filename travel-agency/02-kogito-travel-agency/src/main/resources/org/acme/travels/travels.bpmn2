@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- origin at X=0.0 Y=0.0 -->
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:java="http://www.java.com/javaTypes" xmlns:tns="http://www.jboss.org/drools" xmlns="http://www.jboss.org/drools" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd" id="Definition" exporter="org.eclipse.bpmn2.modeler.core" exporterVersion="1.5.0.Final-v20180515-1642-B1" expressionLanguage="http://www.mvel.org/2.0" targetNamespace="http://www.jboss.org/drools" typeLanguage="http://www.java.com/javaTypes">
+  <bpmn2:itemDefinition id="ItemDefinition_1" isCollection="false" structureRef="java.lang.String"/>
+  <bpmn2:itemDefinition id="ItemDefinition_2" isCollection="false" structureRef="java.lang.Integer"/>
+  <bpmn2:itemDefinition id="ItemDefinition_3" isCollection="false" structureRef="java.lang.Boolean"/>
+  <bpmn2:itemDefinition id="ItemDefinition_74" isCollection="false" structureRef="org.acme.travels.Traveller"/>
+  <bpmn2:itemDefinition id="ItemDefinition_243" isCollection="false" structureRef="org.acme.travels.Trip"/>
+  <bpmn2:itemDefinition id="ItemDefinition_391" isCollection="false" structureRef="org.acme.travels.Hotel"/>
+  <bpmn2:itemDefinition id="ItemDefinition_546" isCollection="false" structureRef="org.acme.travels.Flight"/>
+  <bpmn2:process id="travels" tns:packageName="org.acme.travels" name="travels" isExecutable="true" processType="Public">
+    <bpmn2:extensionElements>
+      <tns:import name="org.acme.travels.Traveller"/>
+      <tns:import name="org.acme.travels.Trip"/>
+      <tns:import name="org.acme.travels.Hotel"/>
+      <tns:import name="org.acme.travels.Flight"/>
+    </bpmn2:extensionElements>
+    <bpmn2:property id="traveller" itemSubjectRef="ItemDefinition_74" name="traveller"/>
+    <bpmn2:property id="trip" itemSubjectRef="ItemDefinition_243" name="trip"/>
+    <bpmn2:property id="hotel" itemSubjectRef="ItemDefinition_391" name="hotel"/>
+    <bpmn2:property id="flight" itemSubjectRef="ItemDefinition_546" name="flight"/>
+    <bpmn2:startEvent id="StartEvent_1" name="StartProcess">
+      <bpmn2:extensionElements>
+        <tns:metaData name="elementname">
+          <tns:metaValue><![CDATA[StartProcess]]></tns:metaValue>
+        </tns:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:outgoing>SequenceFlow_1</bpmn2:outgoing>
+    </bpmn2:startEvent>
+    <bpmn2:businessRuleTask id="BusinessRuleTask_1" tns:ruleFlowGroup="visas" name="Visa check">
+      <bpmn2:extensionElements>
+        <tns:metaData name="elementname">
+          <tns:metaValue><![CDATA[Visa check]]></tns:metaValue>
+        </tns:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_1</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="InputOutputSpecification_6">
+        <bpmn2:dataInput id="DataInput_19" itemSubjectRef="ItemDefinition_74" name="traveller"/>
+        <bpmn2:dataInput id="DataInput_20" itemSubjectRef="ItemDefinition_243" name="trip"/>
+        <bpmn2:dataOutput id="DataOutput_1" itemSubjectRef="ItemDefinition_243" name="trip"/>
+        <bpmn2:inputSet id="InputSet_4" name="Input Set 4">
+          <bpmn2:dataInputRefs>DataInput_19</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>DataInput_20</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="OutputSet_6" name="Output Set 6">
+          <bpmn2:dataOutputRefs>DataOutput_1</bpmn2:dataOutputRefs>
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_19">
+        <bpmn2:sourceRef>traveller</bpmn2:sourceRef>
+        <bpmn2:targetRef>DataInput_19</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_20">
+        <bpmn2:sourceRef>trip</bpmn2:sourceRef>
+        <bpmn2:targetRef>DataInput_20</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataOutputAssociation id="DataOutputAssociation_1">
+        <bpmn2:sourceRef>DataOutput_1</bpmn2:sourceRef>
+        <bpmn2:targetRef>trip</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+    </bpmn2:businessRuleTask>
+    <bpmn2:exclusiveGateway id="ExclusiveGateway_1" name="is visa required" gatewayDirection="Diverging">
+      <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
+      <bpmn2:outgoing>SequenceFlow_4</bpmn2:outgoing>
+    </bpmn2:exclusiveGateway>
+    <bpmn2:userTask id="UserTask_1" name="Apply for visa">
+      <bpmn2:extensionElements>
+        <tns:metaData name="elementname">
+          <tns:metaValue><![CDATA[Apply for visa]]></tns:metaValue>
+        </tns:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_5</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="InputOutputSpecification_2">
+        <bpmn2:dataInput id="DataInput_1" itemSubjectRef="ItemDefinition_1" name="TaskName"/>
+        <bpmn2:dataInput id="DataInput_2" itemSubjectRef="ItemDefinition_2" name="Priority"/>
+        <bpmn2:dataInput id="DataInput_3" itemSubjectRef="ItemDefinition_1" name="Comment"/>
+        <bpmn2:dataInput id="DataInput_4" itemSubjectRef="ItemDefinition_1" name="Description"/>
+        <bpmn2:dataInput id="DataInput_5" itemSubjectRef="ItemDefinition_1" name="GroupId"/>
+        <bpmn2:dataInput id="DataInput_6" itemSubjectRef="ItemDefinition_3" name="Skippable"/>
+        <bpmn2:dataInput id="DataInput_7" itemSubjectRef="ItemDefinition_1" name="Content"/>
+        <bpmn2:dataInput id="DataInput_8" itemSubjectRef="ItemDefinition_1" name="Locale"/>
+        <bpmn2:dataInput id="DataInput_9" itemSubjectRef="ItemDefinition_1" name="CreatedBy"/>
+        <bpmn2:dataInput id="DataInput_21" itemSubjectRef="ItemDefinition_243" name="trip"/>
+        <bpmn2:dataInput id="DataInput_22" itemSubjectRef="ItemDefinition_74" name="traveller"/>
+        <bpmn2:inputSet id="_InputSet_2">
+          <bpmn2:dataInputRefs>DataInput_1</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>DataInput_2</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>DataInput_3</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>DataInput_4</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>DataInput_5</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>DataInput_6</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>DataInput_7</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>DataInput_8</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>DataInput_9</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>DataInput_21</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>DataInput_22</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="OutputSet_2" name="Output Set"/>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_1">
+        <bpmn2:targetRef>DataInput_1</bpmn2:targetRef>
+        <bpmn2:assignment id="Assignment_1">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="FormalExpression_1">VisaApplication</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="FormalExpression_2">DataInput_1</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_2">
+        <bpmn2:targetRef>DataInput_2</bpmn2:targetRef>
+        <bpmn2:assignment id="Assignment_2">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="FormalExpression_3">1</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="FormalExpression_4">DataInput_2</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_3">
+        <bpmn2:targetRef>DataInput_3</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_4">
+        <bpmn2:targetRef>DataInput_4</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_5">
+        <bpmn2:targetRef>DataInput_5</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_6">
+        <bpmn2:targetRef>DataInput_6</bpmn2:targetRef>
+        <bpmn2:assignment id="Assignment_6">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="FormalExpression_11">true</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="FormalExpression_12">DataInput_6</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_7">
+        <bpmn2:targetRef>DataInput_7</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_8">
+        <bpmn2:targetRef>DataInput_8</bpmn2:targetRef>
+        <bpmn2:assignment id="Assignment_8">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="FormalExpression_15">en-UK</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="FormalExpression_16">DataInput_8</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_9">
+        <bpmn2:targetRef>DataInput_9</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_21">
+        <bpmn2:sourceRef>trip</bpmn2:sourceRef>
+        <bpmn2:targetRef>DataInput_21</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_22">
+        <bpmn2:sourceRef>traveller</bpmn2:sourceRef>
+        <bpmn2:targetRef>DataInput_22</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+    </bpmn2:userTask>
+    <bpmn2:exclusiveGateway id="ExclusiveGateway_2" gatewayDirection="Converging">
+      <bpmn2:incoming>SequenceFlow_4</bpmn2:incoming>
+      <bpmn2:incoming>SequenceFlow_5</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_6</bpmn2:outgoing>
+    </bpmn2:exclusiveGateway>
+    <bpmn2:sequenceFlow id="SequenceFlow_1" tns:priority="1" sourceRef="StartEvent_1" targetRef="BusinessRuleTask_1"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_2" tns:priority="1" sourceRef="BusinessRuleTask_1" targetRef="ExclusiveGateway_1"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_3" tns:priority="1" name="visa required" sourceRef="ExclusiveGateway_1" targetRef="UserTask_1">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="FormalExpression_5" language="http://www.java.com/java">return trip.isVisaRequired();</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="SequenceFlow_4" tns:priority="1" name="no need for visa" sourceRef="ExclusiveGateway_1" targetRef="ExclusiveGateway_2">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="FormalExpression_6" language="http://www.java.com/java">return !trip.isVisaRequired();</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="SequenceFlow_5" tns:priority="1" sourceRef="UserTask_1" targetRef="ExclusiveGateway_2"/>
+    <bpmn2:parallelGateway id="ParallelGateway_1" name="Book" gatewayDirection="Diverging">
+      <bpmn2:incoming>SequenceFlow_6</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_7</bpmn2:outgoing>
+      <bpmn2:outgoing>SequenceFlow_8</bpmn2:outgoing>
+    </bpmn2:parallelGateway>
+    <bpmn2:sequenceFlow id="SequenceFlow_6" tns:priority="1" sourceRef="ExclusiveGateway_2" targetRef="ParallelGateway_1"/>
+    <bpmn2:callActivity id="CallActivity_1" tns:waitForCompletion="true" tns:independent="true" name="Book Hotel" calledElement="hotelBooking">
+      <bpmn2:extensionElements>
+        <tns:metaData name="elementname">
+          <tns:metaValue><![CDATA[Book Hotel]]></tns:metaValue>
+        </tns:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_7</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_10</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="InputOutputSpecification_8">
+        <bpmn2:dataInput id="DataInput_23" itemSubjectRef="ItemDefinition_74" tns:dtype="org.acme.travels.Traveller" name="traveller"/>
+        <bpmn2:dataInput id="DataInput_24" itemSubjectRef="ItemDefinition_243" tns:dtype="org.acme.travels.Trip" name="trip"/>
+        <bpmn2:dataOutput id="DataOutput_2" itemSubjectRef="ItemDefinition_391" tns:dtype="org.acme.travels.Hotel" name="hotel"/>
+        <bpmn2:inputSet id="InputSet_6" name="Input Set 6">
+          <bpmn2:dataInputRefs>DataInput_23</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>DataInput_24</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="OutputSet_8" name="Output Set 8">
+          <bpmn2:dataOutputRefs>DataOutput_2</bpmn2:dataOutputRefs>
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_23">
+        <bpmn2:sourceRef>traveller</bpmn2:sourceRef>
+        <bpmn2:targetRef>DataInput_23</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_24">
+        <bpmn2:sourceRef>trip</bpmn2:sourceRef>
+        <bpmn2:targetRef>DataInput_24</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataOutputAssociation id="DataOutputAssociation_2">
+        <bpmn2:sourceRef>DataOutput_2</bpmn2:sourceRef>
+        <bpmn2:targetRef>hotel</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+    </bpmn2:callActivity>
+    <bpmn2:callActivity id="CallActivity_2" tns:waitForCompletion="true" tns:independent="true" name="Book Flight" calledElement="flightBooking">
+      <bpmn2:extensionElements>
+        <tns:metaData name="elementname">
+          <tns:metaValue><![CDATA[Book Flight]]></tns:metaValue>
+        </tns:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_8</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_9</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="InputOutputSpecification_9">
+        <bpmn2:dataInput id="DataInput_25" itemSubjectRef="ItemDefinition_74" tns:dtype="org.acme.travels.Traveller" name="traveller"/>
+        <bpmn2:dataInput id="DataInput_26" itemSubjectRef="ItemDefinition_243" tns:dtype="org.acme.travels.Trip" name="trip"/>
+        <bpmn2:dataOutput id="DataOutput_3" itemSubjectRef="ItemDefinition_546" tns:dtype="org.acme.travels.Flight" name="flight"/>
+        <bpmn2:inputSet id="InputSet_7" name="Input Set 7">
+          <bpmn2:dataInputRefs>DataInput_25</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>DataInput_26</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="OutputSet_9" name="Output Set 9">
+          <bpmn2:dataOutputRefs>DataOutput_3</bpmn2:dataOutputRefs>
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_25">
+        <bpmn2:sourceRef>traveller</bpmn2:sourceRef>
+        <bpmn2:targetRef>DataInput_25</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_26">
+        <bpmn2:sourceRef>trip</bpmn2:sourceRef>
+        <bpmn2:targetRef>DataInput_26</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataOutputAssociation id="DataOutputAssociation_3">
+        <bpmn2:sourceRef>DataOutput_3</bpmn2:sourceRef>
+        <bpmn2:targetRef>flight</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+    </bpmn2:callActivity>
+    <bpmn2:sequenceFlow id="SequenceFlow_7" tns:priority="1" sourceRef="ParallelGateway_1" targetRef="CallActivity_1"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_8" tns:priority="1" sourceRef="ParallelGateway_1" targetRef="CallActivity_2"/>
+    <bpmn2:parallelGateway id="ParallelGateway_2" gatewayDirection="Converging">
+      <bpmn2:incoming>SequenceFlow_9</bpmn2:incoming>
+      <bpmn2:incoming>SequenceFlow_10</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_11</bpmn2:outgoing>
+    </bpmn2:parallelGateway>
+    <bpmn2:sequenceFlow id="SequenceFlow_9" tns:priority="1" sourceRef="CallActivity_2" targetRef="ParallelGateway_2"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_10" tns:priority="1" sourceRef="CallActivity_1" targetRef="ParallelGateway_2"/>
+    <bpmn2:userTask id="UserTask_2" name="Confirm travel">
+      <bpmn2:extensionElements>
+        <tns:metaData name="elementname">
+          <tns:metaValue><![CDATA[Confirm travel]]></tns:metaValue>
+        </tns:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_11</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_12</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="InputOutputSpecification_5">
+        <bpmn2:dataInput id="DataInput_10" itemSubjectRef="ItemDefinition_1" name="TaskName"/>
+        <bpmn2:dataInput id="DataInput_11" itemSubjectRef="ItemDefinition_2" name="Priority"/>
+        <bpmn2:dataInput id="DataInput_12" itemSubjectRef="ItemDefinition_1" name="Comment"/>
+        <bpmn2:dataInput id="DataInput_13" itemSubjectRef="ItemDefinition_1" name="Description"/>
+        <bpmn2:dataInput id="DataInput_14" itemSubjectRef="ItemDefinition_1" name="GroupId"/>
+        <bpmn2:dataInput id="DataInput_15" itemSubjectRef="ItemDefinition_3" name="Skippable"/>
+        <bpmn2:dataInput id="DataInput_16" itemSubjectRef="ItemDefinition_1" name="Content"/>
+        <bpmn2:dataInput id="DataInput_17" itemSubjectRef="ItemDefinition_1" name="Locale"/>
+        <bpmn2:dataInput id="DataInput_18" itemSubjectRef="ItemDefinition_1" name="CreatedBy"/>
+        <bpmn2:dataInput id="DataInput_27" itemSubjectRef="ItemDefinition_546" name="flight"/>
+        <bpmn2:dataInput id="DataInput_28" itemSubjectRef="ItemDefinition_391" name="hotel"/>
+        <bpmn2:inputSet id="_InputSet_3">
+          <bpmn2:dataInputRefs>DataInput_10</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>DataInput_11</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>DataInput_12</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>DataInput_13</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>DataInput_14</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>DataInput_15</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>DataInput_16</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>DataInput_17</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>DataInput_18</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>DataInput_27</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>DataInput_28</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="OutputSet_5" name="Output Set"/>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_10">
+        <bpmn2:targetRef>DataInput_10</bpmn2:targetRef>
+        <bpmn2:assignment id="Assignment_10">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="FormalExpression_19">ConfirmTravel</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="FormalExpression_20">DataInput_10</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_11">
+        <bpmn2:targetRef>DataInput_11</bpmn2:targetRef>
+        <bpmn2:assignment id="Assignment_11">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="FormalExpression_21">1</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="FormalExpression_22">DataInput_11</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_12">
+        <bpmn2:targetRef>DataInput_12</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_13">
+        <bpmn2:targetRef>DataInput_13</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_14">
+        <bpmn2:targetRef>DataInput_14</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_15">
+        <bpmn2:targetRef>DataInput_15</bpmn2:targetRef>
+        <bpmn2:assignment id="Assignment_15">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="FormalExpression_29">true</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="FormalExpression_30">DataInput_15</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_16">
+        <bpmn2:targetRef>DataInput_16</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_17">
+        <bpmn2:targetRef>DataInput_17</bpmn2:targetRef>
+        <bpmn2:assignment id="Assignment_17">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="FormalExpression_33">en-UK</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="FormalExpression_34">DataInput_17</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_18">
+        <bpmn2:targetRef>DataInput_18</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_27">
+        <bpmn2:sourceRef>flight</bpmn2:sourceRef>
+        <bpmn2:targetRef>DataInput_27</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_28">
+        <bpmn2:sourceRef>hotel</bpmn2:sourceRef>
+        <bpmn2:targetRef>DataInput_28</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+    </bpmn2:userTask>
+    <bpmn2:sequenceFlow id="SequenceFlow_11" tns:priority="1" sourceRef="ParallelGateway_2" targetRef="UserTask_2"/>
+    <bpmn2:endEvent id="EndEvent_1" name="End Event 1">
+      <bpmn2:extensionElements>
+        <tns:metaData name="elementname">
+          <tns:metaValue><![CDATA[End Event 1]]></tns:metaValue>
+        </tns:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_12</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="SequenceFlow_12" tns:priority="1" sourceRef="UserTask_2" targetRef="EndEvent_1"/>
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_Process_1" bpmnElement="travels">
+      <bpmndi:BPMNShape id="BPMNShape_StartEvent_1" bpmnElement="StartEvent_1">
+        <dc:Bounds height="36.0" width="36.0" x="45.0" y="277.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_1">
+          <dc:Bounds height="11.0" width="52.0" x="37.0" y="313.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_BusinessRuleTask_1" bpmnElement="BusinessRuleTask_1" isExpanded="true">
+        <dc:Bounds height="50.0" width="110.0" x="145.0" y="270.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_2">
+          <dc:Bounds height="11.0" width="44.0" x="178.0" y="289.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_ExclusiveGateway_1" bpmnElement="ExclusiveGateway_1" isMarkerVisible="true">
+        <dc:Bounds height="50.0" width="50.0" x="300.0" y="270.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_3">
+          <dc:Bounds height="11.0" width="61.0" x="295.0" y="320.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_UserTask_1" bpmnElement="UserTask_1" isExpanded="true">
+        <dc:Bounds height="50.0" width="110.0" x="410.0" y="200.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_4">
+          <dc:Bounds height="11.0" width="55.0" x="437.0" y="219.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_ExclusiveGateway_2" bpmnElement="ExclusiveGateway_2" isMarkerVisible="true">
+        <dc:Bounds height="50.0" width="50.0" x="565.0" y="270.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_5"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_ParallelGateway_1" bpmnElement="ParallelGateway_1" isMarkerVisible="true">
+        <dc:Bounds height="50.0" width="50.0" x="690.0" y="270.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_6">
+          <dc:Bounds height="11.0" width="21.0" x="704.0" y="320.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_CallActivity_1" bpmnElement="CallActivity_1" isExpanded="true">
+        <dc:Bounds height="50.0" width="110.0" x="780.0" y="180.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_7">
+          <dc:Bounds height="11.0" width="45.0" x="812.0" y="199.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_CallActivity_2" bpmnElement="CallActivity_2" isExpanded="true">
+        <dc:Bounds height="50.0" width="110.0" x="783.0" y="345.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_8">
+          <dc:Bounds height="11.0" width="46.0" x="815.0" y="364.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_ParallelGateway_2" bpmnElement="ParallelGateway_2" isMarkerVisible="true">
+        <dc:Bounds height="50.0" width="50.0" x="952.0" y="270.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_9"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_UserTask_2" bpmnElement="UserTask_2" isExpanded="true">
+        <dc:Bounds height="50.0" width="110.0" x="1066.0" y="270.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_10">
+          <dc:Bounds height="11.0" width="57.0" x="1092.0" y="289.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_EndEvent_1" bpmnElement="EndEvent_1">
+        <dc:Bounds height="36.0" width="36.0" x="1244.0" y="277.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_11">
+          <dc:Bounds height="11.0" width="50.0" x="1237.0" y="313.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_1" bpmnElement="SequenceFlow_1" sourceElement="BPMNShape_StartEvent_1" targetElement="BPMNShape_BusinessRuleTask_1">
+        <di:waypoint xsi:type="dc:Point" x="81.0" y="295.0"/>
+        <di:waypoint xsi:type="dc:Point" x="113.0" y="295.0"/>
+        <di:waypoint xsi:type="dc:Point" x="145.0" y="295.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_12"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" bpmnElement="SequenceFlow_2" sourceElement="BPMNShape_BusinessRuleTask_1" targetElement="BPMNShape_ExclusiveGateway_1">
+        <di:waypoint xsi:type="dc:Point" x="255.0" y="295.0"/>
+        <di:waypoint xsi:type="dc:Point" x="277.0" y="295.0"/>
+        <di:waypoint xsi:type="dc:Point" x="300.0" y="295.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_13"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_3" bpmnElement="SequenceFlow_3" sourceElement="BPMNShape_ExclusiveGateway_1" targetElement="BPMNShape_UserTask_1">
+        <di:waypoint xsi:type="dc:Point" x="325.0" y="270.0"/>
+        <di:waypoint xsi:type="dc:Point" x="325.0" y="225.0"/>
+        <di:waypoint xsi:type="dc:Point" x="410.0" y="225.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_14">
+          <dc:Bounds height="11.0" width="52.0" x="320.0" y="226.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_4" bpmnElement="SequenceFlow_4" sourceElement="BPMNShape_ExclusiveGateway_1" targetElement="BPMNShape_ExclusiveGateway_2">
+        <di:waypoint xsi:type="dc:Point" x="350.0" y="295.0"/>
+        <di:waypoint xsi:type="dc:Point" x="457.0" y="295.0"/>
+        <di:waypoint xsi:type="dc:Point" x="565.0" y="295.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_15">
+          <dc:Bounds height="11.0" width="65.0" x="426.0" y="296.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_5" bpmnElement="SequenceFlow_5" sourceElement="BPMNShape_UserTask_1" targetElement="BPMNShape_ExclusiveGateway_2">
+        <di:waypoint xsi:type="dc:Point" x="520.0" y="225.0"/>
+        <di:waypoint xsi:type="dc:Point" x="590.0" y="225.0"/>
+        <di:waypoint xsi:type="dc:Point" x="590.0" y="270.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_16"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_6" bpmnElement="SequenceFlow_6" sourceElement="BPMNShape_ExclusiveGateway_2" targetElement="BPMNShape_ParallelGateway_1">
+        <di:waypoint xsi:type="dc:Point" x="615.0" y="295.0"/>
+        <di:waypoint xsi:type="dc:Point" x="652.0" y="295.0"/>
+        <di:waypoint xsi:type="dc:Point" x="690.0" y="295.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_17"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_7" bpmnElement="SequenceFlow_7" sourceElement="BPMNShape_ParallelGateway_1" targetElement="BPMNShape_CallActivity_1">
+        <di:waypoint xsi:type="dc:Point" x="715.0" y="270.0"/>
+        <di:waypoint xsi:type="dc:Point" x="715.0" y="205.0"/>
+        <di:waypoint xsi:type="dc:Point" x="780.0" y="205.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_18"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_8" bpmnElement="SequenceFlow_8" sourceElement="BPMNShape_ParallelGateway_1" targetElement="BPMNShape_CallActivity_2">
+        <di:waypoint xsi:type="dc:Point" x="715.0" y="320.0"/>
+        <di:waypoint xsi:type="dc:Point" x="715.0" y="370.0"/>
+        <di:waypoint xsi:type="dc:Point" x="783.0" y="370.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_19"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_9" bpmnElement="SequenceFlow_9" sourceElement="BPMNShape_CallActivity_2" targetElement="BPMNShape_ParallelGateway_2">
+        <di:waypoint xsi:type="dc:Point" x="893.0" y="370.0"/>
+        <di:waypoint xsi:type="dc:Point" x="977.0" y="370.0"/>
+        <di:waypoint xsi:type="dc:Point" x="977.0" y="320.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_20"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_10" bpmnElement="SequenceFlow_10" sourceElement="BPMNShape_CallActivity_1" targetElement="BPMNShape_ParallelGateway_2">
+        <di:waypoint xsi:type="dc:Point" x="890.0" y="205.0"/>
+        <di:waypoint xsi:type="dc:Point" x="977.0" y="205.0"/>
+        <di:waypoint xsi:type="dc:Point" x="977.0" y="270.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_21"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_11" bpmnElement="SequenceFlow_11" sourceElement="BPMNShape_ParallelGateway_2" targetElement="BPMNShape_UserTask_2">
+        <di:waypoint xsi:type="dc:Point" x="1002.0" y="295.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1034.0" y="295.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1066.0" y="295.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_22"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_12" bpmnElement="SequenceFlow_12" sourceElement="BPMNShape_UserTask_2" targetElement="BPMNShape_EndEvent_1">
+        <di:waypoint xsi:type="dc:Point" x="1176.0" y="295.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1210.0" y="295.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1244.0" y="295.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_23"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn2:definitions>
