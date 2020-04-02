@@ -7,20 +7,11 @@ This example demonstrates how to enable and consume the runtime metrics monitori
 ### Prerequisites
  
 You will need:
-  - Java 1.8.0+ installed 
+  - Java 11+ installed 
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.5.4+ installed
-  - Linux SO (No Windows atm?)
-
-## Installing
-
-[As of 16/03/2020] The PR is not merged yet, so you have to install the feature from the branch: run the following commands that will download the kogito patch containing the modified codegen and install it. 
-
-```sh
-cd docker-compose
-./setup.sh
-```
-
+  - Maven 3.6.2+ installed
+  - Linux SO 
+  
 ### How to enable the feature
 
 Import the following dependency in your `pom.xml`:
@@ -120,53 +111,3 @@ while true; do ./sample-requests/query-dmn-loan.sh; done
 for example. 
 
 Go to `localhost:3000` and have a look at your dashboards.
-
-
-FOR SPRINGBOOT (TBD): 
-
-Add to `application.resources` 
-```
-#server.address=0.0.0.0
-#spring.mvc.servlet.path=/docs
-management.endpoints.web.base-path=/chupa
-resteasy.jaxrs.scan-packages=org.kie.kogito.**,http*
-management.endpoints.web.exposure.include=*
-management.server.port=8081
-logging.level.root=INFO
-management.metrics.web.server.auto-time-requests=false
-management.metrics.distribution.percentiles-histogram.http.server.requests=true
-management.metrics.distribution.sla.http.server.requests=1ms,5ms
-```
-
-Add main class like 
-```
-
-@SpringBootApplication(scanBasePackages={"org.kie.dmn.kogito.**", "org.kie.kogito.app.**", "org.kie.kogito.**"})
-public class MicrometerApplication {
-    public static void main(String[] args) {
-        SpringApplication.run(MicrometerApplication.class, args);
-    }
-}
-```
-
-Add to pom.xml
-```
-    <!-- https://mvnrepository.com/artifact/javax.inject/javax.inject -->
-    <dependency>
-      <groupId>javax.inject</groupId>
-      <artifactId>javax.inject</artifactId>
-      <version>1</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-actuator</artifactId>
-    </dependency>
-
-
-    <!-- https://mvnrepository.com/artifact/io.micrometer/micrometer-registry-prometheus -->
-    <dependency>
-      <groupId>io.micrometer</groupId>
-      <artifactId>micrometer-registry-prometheus</artifactId>
-      <version>1.3.5</version>
-    </dependency>
-```
