@@ -10,7 +10,6 @@ You will need:
   - Java 11+ installed 
   - Environment variable JAVA_HOME set accordingly
   - Maven 3.6.2+ installed
-  - Linux SO 
   
 ### How to enable the feature
 
@@ -45,9 +44,10 @@ public class MyInterceptor extends MetricsInterceptor {
 
 ### Architecture
 
-Once you compile your Quarkus project, a dashboard for each available endpoint will be generated under the path `target/generated-sources/kogito/dashboards/`. You can then inject those grafana dashboards during the deployment of the grafana instance and that's it.
+Once you compile your Quarkus project, a dashboard for each available endpoint will be generated under the path `target/resources/dashboards/`. You can then inject those grafana dashboards during the deployment of the grafana instance.
 
-The use case is summarized in the following schema: 
+The use case is summarized in the following schema:
+ 
 ![RuntimeMetrics](https://user-images.githubusercontent.com/18282531/76740726-a0cbdd80-676e-11ea-8cc3-63ed5cbb3ac8.png)
 
 To summarize, the kogito app will expose by default an endpoint `/metrics` with the prometheus variables, and a prometheus instance will simply fetch the data from there.
@@ -71,12 +71,10 @@ You can use this default dashboards, or you can personalize them and use your cu
 
 ### Compile and Run in Local Dev Mode
 
-Run
-```sh
-cd  docker-compose
-./run-compose.sh
-```
-It will compile the app and spin it up together with a grafana and prometheus instances.
+A script `docker-compose/run-compose.sh` is provided to demonstrate how to inject the generated dashboards in the volume of the grafana container:
+ 1. the generated dashboards are copied from `target/resources/dashboards/` to the directory `docker-compose/grafana/provisioning/dashboards` 
+ 2. The volumes of the grafana container are properly set in the `docker-compose.yml` file, so that the dashboards are properly loaded at startup.
+ 3. `docker-compose` is run. 
 
 ## Example Usage
 
@@ -87,8 +85,7 @@ Once the service is up and running, you can use the following example to interac
 Post "hello":
 
 ```sh
-./sample-requests/query-drl-hello.sh
-
+curl -H "Content-Type: application/json" -X POST -d '{"strings":["world"]}' http://localhost:8080/hello
 ```
 
 the service will return `["hello", "world"]`
@@ -98,16 +95,15 @@ the service will return `["hello", "world"]`
 Post:
 
 ```sh
-./sample-requests/query-dmn-loan.sh
-
+curl -X POST 'http://localhost:8080/LoanEligibility' -H 'Content-Type: application/json' \
+    -d '{
+        "Client": {"age": 43,"salary": 1950, "existing payments": 100},
+        "Loan": {"duration": 15,"installment": 180}, 
+        "SupremeDirector" : "Yes", 
+        "Bribe": 1000
+    }'
 ```
 
-the service will return the decision results. You can generate some traffic with 
+the service will return the decision results.  
 
-```sh
-while true; do ./sample-requests/query-dmn-loan.sh; done
-```
-
-for example. 
-
-Go to `localhost:3000` and have a look at your dashboards.
+If you are using the `docker-compose` script we provided, go to `localhost:3000` and have a look at your dashboards.
