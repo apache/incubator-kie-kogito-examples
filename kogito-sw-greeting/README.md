@@ -1,10 +1,17 @@
-# Kogito Serverless Workflow Simple Greeting Example
+# Kogito Serverless Workflow - Greeting Example
 
 ## Description
 
 This example contains two simple greeting workflow services. 
 The services are described using both JSON and YAML formats as defined in the 
 [CNCF Serverless Workflow specification](https://github.com/cncf/wg-serverless/tree/master/workflow/spec).
+
+The workflow expects as JSON input containing the name of the person to greet 
+(see details in the [Submit a request](#Submit-a-request) section).
+The workflow starts with a RELAY state which injects the greeting "Hello" into the workflow data.
+It then transitions to an OPERATION state which references a sysout function and passes to it
+input parameter containing the greeting and the name of the person to greet: "$.greeting $.name".
+This is then printed out by the function to the console.
 
 ## Installing and Running
 
@@ -13,10 +20,10 @@ The services are described using both JSON and YAML formats as defined in the
 You will need:
   - Java 1.8.0+ installed 
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.5.4+ installed
+  - Maven 3.6.2+ installed
 
 When using native image compilation, you will also need: 
-  - [GraalVM 19.1.1](https://github.com/oracle/graal/releases/tag/vm-19.1.1) installed 
+  - [GraalVm](https://www.graalvm.org/downloads/) 19.3.1+ installed
   - Environment variable GRAALVM_HOME set accordingly
   - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too.  You also need 'native-image' installed in GraalVM (using 'gu install native-image'). Please refer to [GraalVM installation documentation](https://www.graalvm.org/docs/reference-manual/aot-compilation/#prerequisites) for more details.
 
@@ -61,7 +68,7 @@ with following content
 ```json
 {
   "workflowdata": {
-   "name" : "john"
+   "name" : "John"
   }
 }
 ```
@@ -69,19 +76,19 @@ with following content
 Complete curl command can be found below:
 
 ```text
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : {"name": "john"}}' http://localhost:8080/jsongreet
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : {"name": "John"}}' http://localhost:8080/jsongreet
 ```
 
 Log after curl executed:
 
 ```text
-{"id":"c20f04fe-46cya-44a2-9508-c8343a2f63df","workflowdata":{"name":"john"}}
+{"id":"c20f04fe-46cya-44a2-9508-c8343a2f63df","workflowdata":{"name":"John"}}
 ```
 
 In Quarkus you should see the log message printed:
 
 ```text
-Hello john
+Hello from JSON Workflow,  John
 ```
 
 Similarly the service based on the YAML workflow definition can be access by sending a request to http://localhost:8080/yamlgreet'
@@ -90,7 +97,7 @@ using the same content:
 ```json
 {
   "workflowdata": {
-   "name" : "john"
+   "name" : "John"
   }
 }
 ``` 
@@ -98,11 +105,11 @@ using the same content:
 Complete curl command can be found below:
 
 ```text
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : {"name": "john"}}' http://localhost:8080/yamlgreet
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : {"name": "John"}}' http://localhost:8080/yamlgreet
 ```
  
-In Quarkus you should again see the log message:
+In Quarkus you should see the log message:
 
 ```text
-Hello john
+Hello from YAML Workflow, John
 ```

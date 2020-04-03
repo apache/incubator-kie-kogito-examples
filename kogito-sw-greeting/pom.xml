@@ -54,6 +54,11 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-openapi</artifactId>
     </dependency>
+    <dependency>
+      <groupId>com.jayway.jsonpath</groupId>
+      <artifactId>json-path</artifactId>
+      <version>${version.jayway.jsonpath}</version>
+    </dependency>
 
     <dependency>
       <groupId>io.quarkus</groupId>

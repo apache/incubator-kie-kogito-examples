@@ -6,16 +6,21 @@ functions:
   - name: greetFunction
     type: sysout
 states:
-  - name: greetPerson
-    type: OPERATION
+  - name: InjectGreeting
+    type: RELAY
     start:
       kind: DEFAULT
+    inject:
+      greeting: Hello from YAML Workflow,
+    transition:
+      nextState: GreetPerson
+  - name: GreetPerson
+    type: OPERATION
     actions:
       - name: greetAction
         functionRef:
           refName: greetFunction
           parameters:
-            prefix: 'Hello '
-            message: "$.name"
+            message: "$.greeting $.name"
     end:
       kind: TERMINATE

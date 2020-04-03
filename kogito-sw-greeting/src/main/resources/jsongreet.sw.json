@@ -11,19 +11,28 @@
   ],
   "states": [
     {
-      "name": "greetPerson",
-      "type": "OPERATION",
+      "name": "InjectGreeting",
+      "type": "RELAY",
       "start": {
         "kind": "DEFAULT"
       },
+      "inject": {
+        "greeting": "Hello from JSON Workflow, "
+      },
+      "transition": {
+        "nextState": "GreetPerson"
+      }
+    },
+    {
+      "name": "GreetPerson",
+      "type": "OPERATION",
       "actions": [
         {
           "name": "greetAction",
           "functionRef": {
             "refName": "greetFunction",
             "parameters": {
-              "prefix": "Hello ",
-              "message": "$.name"
+              "message": "$.greeting $.name"
             }
           }
         }
