@@ -20,6 +20,13 @@ public class EmployeeRepository {
         return registered.contains(personalId);
     }
 
+        /**
+     * @return false if the employee is already registered 
+     */
+    public boolean isNotRegistered(String personalId) {
+        return !isRegistered(personalId);
+    }
+
     /**
      * @return true if the employee is already registered 
      */

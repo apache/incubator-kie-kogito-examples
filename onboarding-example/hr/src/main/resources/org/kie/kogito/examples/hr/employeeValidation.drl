@@ -18,7 +18,7 @@ end
 rule "Employee does not exist" 
 
 when
-    emp : /employee[ ! EmployeeRepository.get().isRegistered(personalId) ]
+    emp : /employee[ EmployeeRepository.get().isNotRegistered(personalId) ]
 then
     EmployeeValidationModel val = new EmployeeValidationModel();
     val.setEmployee(emp);
