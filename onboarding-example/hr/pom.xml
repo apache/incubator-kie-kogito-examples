@@ -49,10 +49,20 @@
     <plugins>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <systemProperties>
+            <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+            <quarkus.http.test-port>8081</quarkus.http.test-port>
+          </systemProperties>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>io.quarkus</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
+        <configuration>
+          <debug>false</debug>
+          <jvmArgs>-Dquarkus.http.port=8081 -Dquarkus.http.host=localhost</jvmArgs>
+        </configuration>
         <executions>
           <execution>
             <goals>
