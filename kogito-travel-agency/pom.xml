@@ -26,8 +26,8 @@
   </dependencyManagement>
 
   <modules>
-      <module>kogito-travel-agency</module>
-      <module>kogito-visas</module>
+      <module>travels</module>
+      <module>visas</module>
   </modules>
 
 
