@@ -1,4 +1,4 @@
-package org.kie.kogito.tests;
+package org.kie.kogito.springboot;
 
 import org.keycloak.adapters.springboot.KeycloakSpringBootConfigResolver;
 import org.keycloak.adapters.springsecurity.KeycloakConfiguration;
@@ -48,8 +48,9 @@ class DefaultWebSecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
         super.configure(http);
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/*")
+                .antMatchers("/approvals/**")
                 .authenticated()
+                .antMatchers("/docs/**").permitAll()
                 .anyRequest().permitAll();
     }
 }

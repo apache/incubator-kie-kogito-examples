@@ -13,6 +13,12 @@
   <name>kogito-usertasks-with-security-oidc-springboot</name>
   <description>Kogito usertasks orchestration with security enabled on REST api - Spring Boot</description>
 
+  <properties>
+    <container.runtime>docker</container.runtime> <!-- override for Podman -->
+    <container.image.keycloak>quay.io/keycloak/keycloak:${container.image.keycloak.version}</container.image.keycloak>
+    <container.image.keycloak.version>8.0.1</container.image.keycloak.version>
+  </properties>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -64,11 +70,6 @@
       <artifactId>rest-assured</artifactId>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>org.testcontainers</groupId>
-      <artifactId>testcontainers</artifactId>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
 
   <build>
@@ -112,13 +113,76 @@
         </configuration>
         <executions>
           <execution>
+            <phase>compile</phase>
             <goals>
               <goal>generate</goal>
             </goals>
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>integration-test</goal>
+              <goal>verify</goal>
+            </goals>
+            <configuration>
+              <includes>
+                <include>**/*IT.java</include>
+              </includes>
+              <!--
+                  Make failsafe and spring-boot repackage play nice together,
+                  see https://github.com/spring-projects/spring-boot/issues/6254
+              -->
+              <classesDirectory>${project.build.outputDirectory}</classesDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.bazaarvoice.maven.plugins</groupId>
+        <artifactId>process-exec-maven-plugin</artifactId>
+        <executions>
+            <!-- run keycloak container-->
+            <execution>
+                <id>keycloak-container</id>
+                <phase>pre-integration-test</phase>
+                <goals>
+                    <goal>start</goal>
+                </goals>
+                <configuration>
+                    <name>Keycloak in Container</name>
+                    <workingDir>${project.build.directory}/keycloak</workingDir>
+                    <waitForInterrupt>false</waitForInterrupt>
+                    <healthcheckUrl>http://localhost:8281/auth/</healthcheckUrl>
+                    <arguments>
+                        <argument>${container.runtime}</argument>
+                        <argument>run</argument>
+                        <argument>-p</argument>
+                        <argument>8281:8080</argument>
+                        <argument>-e</argument>
+                        <argument>KEYCLOAK_USER=admin</argument>
+                        <argument>-e</argument>
+                        <argument>KEYCLOAK_PASSWORD=admin</argument>
+                        <argument>-e</argument>
+                        <argument>KEYCLOAK_IMPORT=/tmp/realm.json</argument>
+                        <argument>-v</argument>
+                        <argument>${project.basedir}/config/kogito-realm.json:/tmp/realm.json:Z</argument>
+                        <argument>${container.image.keycloak}</argument>
+                    </arguments>
+                </configuration>
+            </execution>
+            <execution>
+              <id>stop-all</id>
+              <phase>post-integration-test</phase>
+              <goals>
+                  <goal>stop-all</goal>
+              </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
-
 </project>

@@ -16,6 +16,15 @@
   <name>kogito-usertasks-with-security-oidc-keycloak</name>
   <description>Kogito user tasks orchestration with security enabled on REST api - open id connect adapter(keycloak)</description>
 
+  <properties>
+    <container.runtime>docker</container.runtime> <!-- override for Podman -->
+    <container.image.keycloak>quay.io/keycloak/keycloak:${container.image.keycloak.version}</container.image.keycloak>
+    <container.image.keycloak.version>8.0.1</container.image.keycloak.version>
+    <failsafe.include>**/*IT.java</failsafe.include>
+    <failsafe.exclude>**/Native*IT.java</failsafe.exclude>
+    <activate.keycloak.profile>true</activate.keycloak.profile>
+  </properties>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -66,12 +75,8 @@
       <artifactId>keycloak-core</artifactId>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>org.testcontainers</groupId>
-      <artifactId>testcontainers</artifactId>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
+
   <build>
     <plugins>
       <plugin>
@@ -86,16 +91,69 @@
         </executions>
       </plugin>
       <plugin>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <configuration>
-          <systemPropertyVariables>
-            <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-            <keycloak.version>8.0.1</keycloak.version>
-          </systemPropertyVariables>
-        </configuration>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>integration-test</goal>
+              <goal>verify</goal>
+            </goals>
+            <configuration>
+              <includes>
+                <include>${failsafe.include}</include>
+              </includes>
+              <excludes>
+                <exclude>${failsafe.exclude}</exclude>
+              </excludes>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.bazaarvoice.maven.plugins</groupId>
+        <artifactId>process-exec-maven-plugin</artifactId>
+        <executions>
+            <!-- run keycloak container-->
+            <execution>
+                <id>keycloak-container</id>
+                <phase>pre-integration-test</phase>
+                <goals>
+                    <goal>start</goal>
+                </goals>
+                <configuration>
+                    <name>Keycloak in Container</name>
+                    <workingDir>${project.build.directory}/keycloak</workingDir>
+                    <waitForInterrupt>false</waitForInterrupt>
+                    <healthcheckUrl>http://localhost:8281/auth/</healthcheckUrl>
+                    <arguments>
+                        <argument>${container.runtime}</argument>
+                        <argument>run</argument>
+                        <argument>-p</argument>
+                        <argument>8281:8080</argument>
+                        <argument>-e</argument>
+                        <argument>KEYCLOAK_USER=admin</argument>
+                        <argument>-e</argument>
+                        <argument>KEYCLOAK_PASSWORD=admin</argument>
+                        <argument>-e</argument>
+                        <argument>KEYCLOAK_IMPORT=/tmp/realm.json</argument>
+                        <argument>-v</argument>
+                        <argument>${project.basedir}/config/kogito-realm.json:/tmp/realm.json:Z</argument>
+                        <argument>${container.image.keycloak}</argument>
+                    </arguments>
+                </configuration>
+            </execution>
+            <execution>
+              <id>stop-all</id>
+              <phase>post-integration-test</phase>
+              <goals>
+                  <goal>stop-all</goal>
+              </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
+
   <profiles>
     <profile>
       <id>native</id>
@@ -104,40 +162,11 @@
           <name>native</name>
         </property>
       </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-maven-plugin</artifactId>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>native-image</goal>
-                </goals>
-                <configuration>
-                  <enableHttpUrlHandler>true</enableHttpUrlHandler>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <artifactId>maven-failsafe-plugin</artifactId>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>integration-test</goal>
-                  <goal>verify</goal>
-                </goals>
-                <configuration>
-                  <systemProperties>
-                    <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
-                  </systemProperties>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
+      <properties>
+        <failsafe.include>**/Native*IT.java</failsafe.include>
+        <failsafe.exclude></failsafe.exclude>
+        <quarkus.package.type>native</quarkus.package.type>
+      </properties>
     </profile>
   </profiles>
 </project>

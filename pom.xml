@@ -48,11 +48,12 @@
     <version.org.optaplanner>7.33.0.Final</version.org.optaplanner>
     <!-- infinispan -->
     <infinispan.version>2.1.7.Final</infinispan.version>
-    <version.testcontainers>1.12.4</version.testcontainers>
 
     <version.swagger.plugin>2.1.0</version.swagger.plugin>
     <version.surefire.plugin>2.22.0</version.surefire.plugin>
     <version.deploy.plugin>2.8.2</version.deploy.plugin>
+
+    <version.process.exec.plugin>0.7</version.process.exec.plugin>
   </properties>
 
   <!-- distributionManagement section -->
@@ -161,16 +162,6 @@
     <module>kogito-timer-quarkus</module>
     <module>kogito-timer-springboot</module>
   </modules>
-  
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.testcontainers</groupId>
-        <artifactId>testcontainers</artifactId>
-        <version>${version.testcontainers}</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
 
   <build>
     <pluginManagement>
@@ -336,6 +327,11 @@
               </configuration>
             </execution>
           </executions>
+        </plugin>
+        <plugin>
+          <groupId>com.bazaarvoice.maven.plugins</groupId>
+          <artifactId>process-exec-maven-plugin</artifactId>
+          <version>${version.process.exec.plugin}</version>
         </plugin>
       </plugins>
     </pluginManagement>
