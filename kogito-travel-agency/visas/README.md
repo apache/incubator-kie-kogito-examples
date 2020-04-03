@@ -60,12 +60,12 @@ Public process that will be responsible for processing visa application
 ### Prerequisites
 
 You will need:
-  - Java 1.8.0+ installed
+  - Java 11+ installed
   - Environment variable JAVA_HOME set accordingly
   - Maven 3.6.2+ installed
 
 When using native image compilation, you will also need:
-  - GraalVM installed
+  - GraalVM 19.3.1+ installed
   - Environment variable GRAALVM_HOME set accordingly
   - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too, please refer to GraalVM installation documentation for more details.
 
@@ -75,7 +75,7 @@ When using native image compilation, you will also need:
 
 This application requires an Infinispan server to be available and by default expects it to be on default port and localhost.
 
-You can install Infinispan server by downloading it from [official website](https://infinispan.org/download) version to be used in 10.0.0.CR1
+You can install Infinispan server by downloading it from [official website](https://infinispan.org/download) version to be used is 10.1.5.Final+
 Here  [https://github.com/kiegroup/kogito-runtimes/wiki/Persistence](https://github.com/kiegroup/kogito-runtimes/wiki/Persistence) the required 
 Infinispan configuration is explained in more detail.
 
@@ -118,9 +118,7 @@ To run the generated native executable, generated in `target/`, execute
 
 ### Start Kogito Data Index Service
 
-It can be downloaded from [Kogito Data Index Service 0.8.0](http://repo2.maven.org/maven2/org/kie/kogito/data-index-service/0.4.0/data-index-service-0.4.0-runner.jar)
-
-NOTE: Here can be found other versions [Kogito Data Index Service versions](http://repo2.maven.org/maven2/org/kie/kogito/data-index-service)
+If you wish to install, configure and start the **Data Index Service** manually, the _runnner_ can be downloaded from [Kogito Data Index Service](https://search.maven.org/artifact/org.kie.kogito/data-index)
 
 After downloading the runner, create a new folder to store the .proto files that will be used by the service. 
 

@@ -114,12 +114,12 @@ There will be services implemented to carry on the hotel and flight booking. Imp
 ### Prerequisites
 
 You will need:
-  - Java 1.8.0+ installed
+  - Java 11+ installed
   - Environment variable JAVA_HOME set accordingly
   - Maven 3.6.2+ installed
 
 When using native image compilation, you will also need:
-  - GraalVM installed
+  - GraalVM 19.3.1+ installed
   - Environment variable GRAALVM_HOME set accordingly
   - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too, please refer to GraalVM installation documentation for more details.
 
@@ -129,7 +129,7 @@ When using native image compilation, you will also need:
 
 This application requires an Infinispan server to be available and by default expects it to be on default port and localhost.
 
-You can install Infinispan server by downloading it from [official website](https://infinispan.org/download) version to be used in 10.0.0.CR1
+You can install Infinispan server by downloading it from [official website](https://infinispan.org/download) version to be used in 10.1.5.Final+
 Here  [https://github.com/kiegroup/kogito-runtimes/wiki/Persistence](https://github.com/kiegroup/kogito-runtimes/wiki/Persistence) the required 
 Infinispan configuration is explained in more detail.
 
@@ -180,9 +180,7 @@ We provide a `startDataIndex.sh` and `startDataIndex.ps1` script in the `scripts
 * Start the **Kogito Data Index Service Runner** with the copied protobuf files.
 
 
-If you wish to install, configure and start the **Data Index Service** manually, the _runnner_ can be downloaded from [Kogito Data Index Service 0.8.0](https://search.maven.org/remotecontent?filepath=org/kie/kogito/data-index-service/0.8.0/data-index-service-0.8.0-runner.jar)
-
-NOTE: Other versions can be found here [Kogito Data Index Service versions](https://search.maven.org/artifact/org.kie.kogito/data-index-service)
+If you wish to install, configure and start the **Data Index Service** manually, the _runnner_ can be downloaded from [Kogito Data Index Service](https://search.maven.org/artifact/org.kie.kogito/data-index)
 
 This service works with .proto (protobuf) files that define the data model. fter downloading the runner, create a new folder to store the .proto files that will be used by the service,  e.g. `persistence`. Copy the protobuf files from the **Kogito Travel Agency** and **Kogito Visas** application to the `persistence` folder. These files can be found in the `target/classes/persistence` folders of these projects.
 
@@ -210,7 +208,7 @@ This will:
 * Compile the back-end.
 * Package the front-end and back-end into a single Java runner.
 
-After the build has completed, you can start the Manaagement Console with the following command: `java -jar target/management-console-0.8.0-runner.jar`
+After the build has completed, you can start the Manaagement Console with the following command: `java -jar target/management-console-*-runner.jar`
 
 By default, the **Management Console** will try to connect to the **Data Index Service** at: http://localhost:8180
 
