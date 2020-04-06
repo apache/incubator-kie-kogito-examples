@@ -126,8 +126,8 @@ NOTE: Make sure that kogito S2I image builders are available to your OpenShift e
 * Create new binary build and start it by uploading content of the current directory
 
 ```sh
-oc new-app hr-service:latest -l department=process,id=process,employeeValidation=process
-oc new-app hr-service:latest -l department/first=process,id=process,employee-validation/first=process
+oc new-build myproject/kogito-quarkus-ubi8-s2i --binary=true --name=hr-service-builder
+oc start-build hr-service-builder --from-dir . --incremental=true 
 ```
 
 Once the build is completed create new build for runtime image
@@ -139,7 +139,7 @@ oc new-build --name hr-service --source-image=hr-service-builder --source-image-
 Next create application for the runtime image
 
 ```sh
-oc new-app hr-service:latest -l department=process,id=process,employeeValidation=process
+oc new-app hr-service:latest -l department/first=process,id=process,employee-validation/first=process
 ```
 
 and lastly create the route for it
