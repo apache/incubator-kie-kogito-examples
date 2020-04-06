@@ -1,13 +1,13 @@
 #!/bin/sh
 echo "Script requires your Kogito Travel Agency and Visas projects to be compiled"
 
-DATA_INDEX_VERSION=0.8.1
+DATA_INDEX_VERSION=0.9.0
 
 PERSISTENCE_FOLDER=target/classes/persistence
 DATA_INDEX_RUNNER=https://search.maven.org/remotecontent?filepath=org/kie/kogito/data-index-service/${DATA_INDEX_VERSION}/data-index-service-${DATA_INDEX_VERSION}-runner.jar
 
-KOGITO_TRAVEL_AGENCY_PERSISTENCE=../08-kogito-travel-agency/target/classes/persistence
-KOGITO_VISAS_PERSISTENCE=../08-kogito-visas/target/classes/persistence
+KOGITO_TRAVEL_AGENCY_PERSISTENCE=../travels/target/classes/persistence
+KOGITO_VISAS_PERSISTENCE=../visas/target/classes/persistence
 
 mkdir -p $PERSISTENCE_FOLDER
 
