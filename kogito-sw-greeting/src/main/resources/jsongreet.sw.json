@@ -52,7 +52,7 @@
       "name": "GreetInSpanish",
       "type": "RELAY",
       "inject": {
-        "greeting": "Hola de JSON Workflow, "
+        "greeting": "Saludos desde JSON Workflow, "
       },
       "transition": {
         "nextState": "GreetPerson"

@@ -32,7 +32,7 @@ states:
   - name: GreetInSpanish
     type: RELAY
     inject:
-      greeting: 'Hola de YAML Workflow, '
+      greeting: 'Saludos desde YAML Workflow, '
     transition:
       nextState: GreetPerson
   - name: GreetPerson

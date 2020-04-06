@@ -118,7 +118,7 @@ curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d 
 In Quarkus you should now see the log message printed: 
 
 ```text
-Hola de JSON Workflow, John
+Saludos desde JSON Workflow, John
 ```
 
 Similarly the service based on the YAML workflow definition can be access by sending a request to http://localhost:8080/yamlgreet'
