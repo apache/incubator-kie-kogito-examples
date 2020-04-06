@@ -97,10 +97,8 @@ shows timers (intermediate and boundary) that allows to introduce delays in proc
 
 ## Other Misc Examples
 
-- Onboarding example combining 1 process and two decision services: see [README.md](onboarding-example/README.md) 
-- Polyglot Drools with GraalVM: see [README.md](drools-polyglot-example/README.md)
-- Drools on Quarkus: see [README.md](drools-quarkus-example/README.md)
-- Drools on Quarkus with Unit: see [README.md](drools-quarkus-unit-example/README.md)
-- jBPM on Quarkus: see [README.md](jbpm-quarkus-example/README.md)
-- jBPM on SpringBoot: see [README.md](jbpm-springboot-example/README.md)
-
+- Onboarding example combining 1 process and two decision services: see [README.md](onboarding-example/README.md)
+- Rules on Quarkus: see [README.md](rules-quarkus-example/README.md)
+- Rules on Quarkus with Unit: see [README.md](ruleunit-quarkus-example/README.md)
+- Business Process on Quarkus: see [README.md](business-process-quarkus-example/README.md)
+- Business Process on SpringBoot: see [README.md](business-process-springboot-example/README.md)
