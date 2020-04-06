@@ -11,13 +11,48 @@
   ],
   "states": [
     {
-      "name": "InjectGreeting",
-      "type": "RELAY",
+      "name": "ChooseOnLanguage",
+      "type": "SWITCH",
       "start": {
         "kind": "DEFAULT"
       },
+      "choices": [
+        {
+          "path": "$.language",
+          "value": "English",
+          "operator": "Equals",
+          "transition": {
+            "nextState": "GreetInEnglish"
+          }
+        },
+        {
+          "path": "$.language",
+          "value": "Spanish",
+          "operator": "Equals",
+          "transition": {
+            "nextState": "GreetInSpanish"
+          }
+        }
+      ],
+      "default": {
+        "nextState": "GreetInEnglish"
+      }
+    },
+    {
+      "name": "GreetInEnglish",
+      "type": "RELAY",
       "inject": {
         "greeting": "Hello from JSON Workflow, "
+      },
+      "transition": {
+        "nextState": "GreetPerson"
+      }
+    },
+    {
+      "name": "GreetInSpanish",
+      "type": "RELAY",
+      "inject": {
+        "greeting": "Hola de JSON Workflow, "
       },
       "transition": {
         "nextState": "GreetPerson"

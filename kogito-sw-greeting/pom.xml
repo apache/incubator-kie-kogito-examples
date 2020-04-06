@@ -10,7 +10,6 @@
     <artifactId>kogito-examples</artifactId>
     <version>8.0.0-SNAPSHOT</version>
   </parent>
-  <groupId>org.kie.kogito.examples</groupId>
   <artifactId>sw-quarkus-greeting</artifactId>
 
   <name>Kogito Example :: Serverless Workflow :: Greeting</name>
@@ -57,7 +56,6 @@
     <dependency>
       <groupId>com.jayway.jsonpath</groupId>
       <artifactId>json-path</artifactId>
-      <version>${version.jayway.jsonpath}</version>
     </dependency>
 
     <dependency>

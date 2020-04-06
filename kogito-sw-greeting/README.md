@@ -6,19 +6,25 @@ This example contains two simple greeting workflow services.
 The services are described using both JSON and YAML formats as defined in the 
 [CNCF Serverless Workflow specification](https://github.com/cncf/wg-serverless/tree/master/workflow/spec).
 
-The workflow expects as JSON input containing the name of the person to greet 
+The workflow expects as JSON input containing the name of the person to greet, and the language in 
+which to greet them in
 (see details in the [Submit a request](#Submit-a-request) section).
-The workflow starts with a RELAY state which injects the greeting "Hello" into the workflow data.
-It then transitions to an OPERATION state which references a sysout function and passes to it
+
+The workflow starts with a SWICH state, which is like a gateway. The switch state 
+decides which language to greet the person in based on the workflow input "language" parameter.
+Depending on the language the workflow then injects the language-based greeting via RELAY states.
+Relay states are just "pass" states which do no execute any functions and only have the ability
+to inject data into the workflow.
+The relay states then transition to the OPERATION state which call a "sysout" function passing it 
 input parameter containing the greeting and the name of the person to greet: "$.greeting $.name".
-This is then printed out by the function to the console.
+The function then prints out the greeting to the console.
 
 ## Installing and Running
 
 ### Prerequisites
  
 You will need:
-  - Java 1.8.0+ installed 
+  - Java 11+ installed
   - Environment variable JAVA_HOME set accordingly
   - Maven 3.6.2+ installed
 
@@ -68,7 +74,8 @@ with following content
 ```json
 {
   "workflowdata": {
-   "name" : "John"
+   "name" : "John",
+   "language": "English"
   }
 }
 ```
@@ -76,19 +83,42 @@ with following content
 Complete curl command can be found below:
 
 ```text
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : {"name": "John"}}' http://localhost:8080/jsongreet
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : {"name": "John", "language": "English"}}' http://localhost:8080/jsongreet
 ```
 
 Log after curl executed:
 
 ```text
-{"id":"c20f04fe-46cya-44a2-9508-c8343a2f63df","workflowdata":{"name":"John"}}
+{"id":"541a5363-1667-4f6d-a8b4-1299eba81eac","workflowdata":{"name":"John","language":"English","greeting":"Hello from JSON Workflow, "}}
 ```
 
 In Quarkus you should see the log message printed:
 
 ```text
-Hello from JSON Workflow,  John
+Hello from JSON Workflow, John
+```
+
+If you would like to greet the person in Spanish, we need to pass the following data on workflow start:
+
+```json
+{
+  "workflowdata": {
+   "name" : "John",
+   "language": "Spanish"
+  }
+}
+```
+
+Complete curl command can be found below:
+
+```text
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : {"name": "John", "language": "Spanish"}}' http://localhost:8080/jsongreet
+```
+
+In Quarkus you should now see the log message printed: 
+
+```text
+Hola de JSON Workflow, John
 ```
 
 Similarly the service based on the YAML workflow definition can be access by sending a request to http://localhost:8080/yamlgreet'
@@ -97,7 +127,8 @@ using the same content:
 ```json
 {
   "workflowdata": {
-   "name" : "John"
+   "name" : "John",
+   "language": "English"
   }
 }
 ``` 
@@ -105,7 +136,7 @@ using the same content:
 Complete curl command can be found below:
 
 ```text
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : {"name": "John"}}' http://localhost:8080/yamlgreet
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : {"name": "John", "language": "English"}}' http://localhost:8080/yamlgreet
 ```
  
 In Quarkus you should see the log message:
@@ -113,3 +144,5 @@ In Quarkus you should see the log message:
 ```text
 Hello from YAML Workflow, John
 ```
+
+You can also change the language parameter value to "Spanish" to get the greeting in Spanish.
