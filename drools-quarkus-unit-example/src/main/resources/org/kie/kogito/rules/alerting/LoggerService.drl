@@ -1,8 +1,0 @@
-package org.kie.kogito.rules.alerting
-unit LoggerService
-
-rule "org.kie.kogito.rules.alerting.LoggerService.IncomingAlert" when
-    $e : /alertStream
-then
-    logger.append($e.getMessage());
-end
