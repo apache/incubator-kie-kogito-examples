@@ -8,10 +8,11 @@ import static org.junit.Assert.assertEquals;
 import java.util.Map;
 
 import org.junit.Before;
+import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.keycloak.representations.AccessTokenResponse;
-import org.kie.kogito.tests.KogitoInfinispanSpringbootApplication;
+import org.kie.kogito.springboot.KogitoSpringbootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.annotation.DirtiesContext;
@@ -22,9 +23,12 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoInfinispanSpringbootApplication.class)
-@DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD) 
-public class ApprovalsRestTest extends KeycloakContainerTest {
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
+@DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
+public class ApprovalsRestIT {
+
+    @ClassRule
+    public static final KeycloakContainerResource keycloak = new KeycloakContainerResource();
 
     @LocalServerPort
     int randomServerPort;
@@ -99,6 +103,7 @@ public class ApprovalsRestTest extends KeycloakContainerTest {
        // thus user and group(s) must be provided
        String payload = "{}";
        given()
+           .auth().oauth2(getAccessToken("mary"))
            .contentType(ContentType.JSON)
            .accept(ContentType.JSON)
            .body(payload)
@@ -110,7 +115,7 @@ public class ApprovalsRestTest extends KeycloakContainerTest {
        
        // lastly abort the approval
        given()
-               .auth().oauth2(getAccessToken("mary"))
+           .auth().oauth2(getAccessToken("mary"))
            .accept(ContentType.JSON)
        .when()
            .delete("/approvals/" + id)
@@ -120,7 +125,6 @@ public class ApprovalsRestTest extends KeycloakContainerTest {
     }
 
     private String getAccessToken(String userName) {
-        //return getAccessToken(userName,userName,"kogito-app","kogito");
         return given()
                 .param("grant_type", "password")
                 .param("username", userName)

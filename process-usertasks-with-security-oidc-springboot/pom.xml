@@ -13,6 +13,11 @@
   <name>Kogito Examples :: Process Usertasks With Security OIDC Spring Boot</name>
   <description>Kogito usertasks orchestration with security enabled on REST api - Spring Boot</description>
 
+  <properties>
+    <container.image.keycloak>quay.io/keycloak/keycloak:${container.image.keycloak.version}</container.image.keycloak>
+    <container.image.keycloak.version>8.0.1</container.image.keycloak.version>
+  </properties>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -120,7 +125,32 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <configuration>
+          <includes>
+            <include>**/*IT.java</include>
+          </includes>
+          <systemPropertyVariables>
+            <container.image.keycloak>${container.image.keycloak}</container.image.keycloak>
+          </systemPropertyVariables>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>integration-test</goal>
+              <goal>verify</goal>
+            </goals>
+            <configuration>
+              <!--
+                  Make failsafe and spring-boot repackage play nice together,
+                  see https://github.com/spring-projects/spring-boot/issues/6254
+              -->
+              <classesDirectory>${project.build.outputDirectory}</classesDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
-
 </project>

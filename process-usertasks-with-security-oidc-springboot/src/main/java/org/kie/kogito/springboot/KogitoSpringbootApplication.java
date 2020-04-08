@@ -1,13 +1,13 @@
-package org.kie.kogito.tests;
+package org.kie.kogito.springboot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication(scanBasePackages={"org.kie.kogito.**","org.acme.travels.**"})
-public class KogitoInfinispanSpringbootApplication {
+public class KogitoSpringbootApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(KogitoInfinispanSpringbootApplication.class, args);
+		SpringApplication.run(KogitoSpringbootApplication.class, args);
 	}
 	
 
