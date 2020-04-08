@@ -1,4 +1,4 @@
-# Kogito user task orchestration
+# Process user task orchestration
 
 ## Description
 
