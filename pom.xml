@@ -120,46 +120,40 @@
   </developers>
 
   <modules>
-    <module>drools-quarkus-example</module>
-    <module>drools-quarkus-unit-example</module>
-    <module>drools-quarkus-helloworld</module>
-    <module>drools-polyglot-example</module>
-    <module>jbpm-quarkus-helloworld</module>
-    <module>jbpm-quarkus-example</module>
-    <module>jbpm-springboot-example</module>
-    <module>jbpm-optaplanner-springboot-example</module>
-    <module>onboarding-example</module>
-    <module>jbpm-polyglot-example</module>
-    <module>dmn-quarkus-example</module>
-    <module>dmn-springboot-example</module>
-    <module>ruleunit-quarkus-example</module>
-    <module>ruleunit-springboot-example</module>
     <module>decisiontable-quarkus-example</module>
     <module>decisiontable-springboot-example</module>
-    <module>timer-quarkus-example</module>
-    <module>timer-springboot-example</module>
-    <module>kogito-kafka-quickstart-quarkus</module>
-    <module>kogito-kafka-quickstart-springboot</module>
-    <module>kogito-infinispan-persistence-quarkus</module>
-    <module>kogito-infinispan-persistence-springboot</module>
-    <module>kogito-business-rules-quarkus</module>
-    <module>kogito-business-rules-springboot</module>
-    <module>kogito-scripts-quarkus</module>
-    <module>kogito-scripts-springboot</module>
-    <module>kogito-service-calls-quarkus</module>
-    <module>kogito-service-calls-springboot</module>
-    <module>kogito-service-rest-call-quarkus</module>
-    <module>kogito-service-rest-call-springboot</module>
-    <module>kogito-usertasks-quarkus</module>
-    <module>kogito-usertasks-springboot</module>
-    <module>kogito-usertasks-custom-lifecycle-quarkus</module>
-    <module>kogito-usertasks-custom-lifecycle-springboot</module>
-    <module>kogito-usertasks-with-security-oidc-quarkus</module>
-    <module>kogito-usertasks-with-security-oidc-springboot</module>
-    <module>kogito-usertasks-with-security-quarkus</module>
-    <module>kogito-usertasks-with-security-springboot</module>
-    <module>kogito-timer-quarkus</module>
-    <module>kogito-timer-springboot</module>
+    <module>dmn-quarkus-example</module>
+    <module>dmn-springboot-example</module>
+    <module>kogito-travel-agency</module>
+    <module>onboarding-example</module>
+    <module>process-business-rules-quarkus</module>
+    <module>process-business-rules-springboot</module>
+    <module>process-infinispan-persistence-quarkus</module>
+    <module>process-infinispan-persistence-springboot</module>
+    <module>process-kafka-quickstart-quarkus</module>
+    <module>process-kafka-quickstart-springboot</module>
+    <module>process-optaplanner-springboot</module>
+    <module>process-quarkus-example</module>
+    <module>process-scripts-quarkus</module>
+    <module>process-scripts-springboot</module>
+    <module>process-service-calls-quarkus</module>
+    <module>process-service-calls-springboot</module>
+    <module>process-service-rest-call-quarkus</module>
+    <module>process-service-rest-call-springboot</module>
+    <module>process-springboot-example</module>
+    <module>process-timer-quarkus</module>
+    <module>process-timer-springboot</module>
+    <module>process-usertasks-custom-lifecycle-quarkus</module>
+    <module>process-usertasks-custom-lifecycle-springboot</module>
+    <module>process-usertasks-quarkus</module>
+    <module>process-usertasks-springboot</module>
+    <module>process-usertasks-with-security-oidc-quarkus</module>
+    <module>process-usertasks-with-security-oidc-springboot</module>
+    <module>process-usertasks-with-security-quarkus</module>
+    <module>process-usertasks-with-security-springboot</module>
+    <module>rules-quarkus-helloworld</module>
+    <module>ruleunit-quarkus-example</module>
+    <module>ruleunit-springboot-example</module>
   </modules>
   
   <dependencyManagement>

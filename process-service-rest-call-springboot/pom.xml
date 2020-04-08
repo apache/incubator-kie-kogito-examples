@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.kie.kogito</groupId>
+    <artifactId>kogito-examples</artifactId>
+    <version>0.9.0</version>
+  </parent>
+
+  <artifactId>process-service-rest-call-springboot</artifactId>
+  <name>Kogito Examples :: Process Service Rest Call Spring Boot</name>
+  <description>Kogito service invocation with REST - Spring Boot</description>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${springboot.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.kie.kogito</groupId>
+        <artifactId>kogito-bom</artifactId>
+        <version>${kogito.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter</artifactId>
+    </dependency>
+
+    <!-- kogito -->
+    <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-springboot-starter</artifactId>
+      <version>${kogito.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${springboot.version}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>repackage</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.kie.kogito</groupId>
+        <artifactId>kogito-maven-plugin</artifactId>
+        <version>${kogito.version}</version>
+        <extensions>true</extensions>
+      </plugin>
+      <plugin>
+        <groupId>io.openapitools.swagger</groupId>
+        <artifactId>swagger-maven-plugin</artifactId>
+        <configuration>
+          <resourcePackages>
+            <resourcePackage>org.acme.travels</resourcePackage>
+          </resourcePackages>
+          <outputDirectory>${basedir}/target/classes/static/</outputDirectory>
+          <outputFilename>swagger</outputFilename>
+          <outputFormats>JSON,YAML</outputFormats>
+          <prettyPrint>true</prettyPrint>
+          <swaggerConfig>
+            <info>
+              <title>${project.description}</title>
+              <version>${project.version}</version>
+            </info>
+          </swaggerConfig>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
