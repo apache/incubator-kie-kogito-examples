@@ -56,7 +56,6 @@
         <configuration>
           <systemProperties>
             <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-            <quarkus.http.test-port>8080</quarkus.http.test-port>
           </systemProperties>
         </configuration>
       </plugin>
@@ -65,7 +64,7 @@
         <artifactId>quarkus-maven-plugin</artifactId>
         <configuration>
           <debug>false</debug>
-          <jvmArgs>-Dquarkus.http.port=8080 -Dlocal=true</jvmArgs>
+          <jvmArgs>-Dlocal=true</jvmArgs>
         </configuration>
         <executions>
           <execution>
