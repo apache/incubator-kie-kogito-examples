@@ -10,10 +10,11 @@
     <artifactId>kogito-examples</artifactId>
     <version>8.0.0-SNAPSHOT</version>
   </parent>
-  <artifactId>sw-quarkus-greeting</artifactId>
 
-  <name>Kogito Example :: Serverless Workflow :: Greeting</name>
-  <description>Greeting service</description>
+  <artifactId>serverless-workflow-greeting-quarkus</artifactId>
+
+  <name>Kogito Examples :: Serverless Workflow Greeting :: Quarkus</name>
+  <description>Kogito Serverless Workflow Example - Quarkus</description>
 
   <dependencyManagement>
     <dependencies>
