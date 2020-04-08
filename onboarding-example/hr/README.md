@@ -50,7 +50,22 @@ Once the service is up and running, you can use the following examples to intera
 Assigns employee id and email address for given employee:
 
 ```sh
-curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"employee" : {"firstName" : "Mark", "lastName" : "Test", "personalId" : "xxx-yy-zzz", "birthDate" : "2012-12-10T14:50:12.123+02:00", "address" : {"country" : "US", "city" : "Boston", "street" : "any street 3", "zipCode" : "10001"}}}' http://localhost:8081/id
+curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '
+{
+  "employee": {
+    "firstName": "Mark",
+    "lastName": "Test",
+    "personalId": "xxx-yy-zzz",
+    "birthDate": "2012-12-10T14:50:12.123+02:00",
+    "address": {
+      "country": "US",
+      "city": "Boston",
+      "street": "any street 3",
+      "zipCode": "10001"
+    }
+  }
+}
+' http://localhost:8081/id
 ```
 
 As response the employee details including the new employee id and email address are returned.
@@ -60,7 +75,22 @@ As response the employee details including the new employee id and email address
 Allows to verify if the given employee requires registration:
 
 ```sh
-curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"employee" : {"firstName" : "Mark", "lastName" : "Test", "personalId" : "xxx-yy-zzz", "birthDate" : "2012-12-10T14:50:12.123+02:00", "address" : {"country" : "US", "city" : "Boston", "street" : "any street 3", "zipCode" : "10001"}}}' http://localhost:8081/employeeValidation
+curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '
+{
+  "employee": {
+    "firstName": "Mark",
+    "lastName": "Test",
+    "personalId": "xxx-yy-zzz",
+    "birthDate": "2012-12-10T14:50:12.123+02:00",
+    "address": {
+      "country": "US",
+      "city": "Boston",
+      "street": "any street 3",
+      "zipCode": "10001"
+    }
+  }
+}
+' http://localhost:8081/employee-validation/first
 ```
 
 ### POST /department
@@ -68,7 +98,22 @@ curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -
 Assigns department and manager for the given employee:
 
 ```sh
-curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"employee" : {"firstName" : "Mark", "lastName" : "Test", "personalId" : "xxx-yy-zzz", "birthDate" : "2012-12-10T14:50:12.123+02:00", "address" : {"country" : "US", "city" : "Boston", "street" : "any street 3", "zipCode" : "10001"}}}' http://localhost:8081/department
+curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '
+{
+  "employee": {
+    "firstName": "Mark",
+    "lastName": "Test",
+    "personalId": "xxx-yy-zzz",
+    "birthDate": "2012-12-10T14:50:12.123+02:00",
+    "address": {
+      "country": "US",
+      "city": "Boston",
+      "street": "any street 3",
+      "zipCode": "10001"
+    }
+  }
+}
+' http://localhost:8081/department/first
 ```
 
 ## Deployment to OpenShift
@@ -82,7 +127,7 @@ NOTE: Make sure that kogito S2I image builders are available to your OpenShift e
 
 ```sh
 oc new-build myproject/kogito-quarkus-ubi8-s2i --binary=true --name=hr-service-builder
-oc start-build hr-service-builder --from-dir . --incremental=true
+oc start-build hr-service-builder --from-dir . --incremental=true 
 ```
 
 Once the build is completed create new build for runtime image
@@ -94,7 +139,7 @@ oc new-build --name hr-service --source-image=hr-service-builder --source-image-
 Next create application for the runtime image
 
 ```sh
-oc new-app hr-service:latest -l department=process,id=process,employeeValidation=process
+oc new-app hr-service:latest -l department/first=process,id=process,employee-validation/first=process
 ```
 
 and lastly create the route for it
