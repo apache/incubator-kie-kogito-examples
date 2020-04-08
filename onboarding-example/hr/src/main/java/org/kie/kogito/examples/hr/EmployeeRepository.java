@@ -1,25 +1,39 @@
 package org.kie.kogito.examples.hr;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
 public class EmployeeRepository {
 
     private static EmployeeRepository INSTANCE = new EmployeeRepository();
     
-    private Map<String, String> registered = new HashMap<>();
+    private Set<String> registered = new HashSet<>();
     
     public static EmployeeRepository get() {
         return INSTANCE;
     }
     
-    public boolean register(Employee emp) {
-        String status = registered.putIfAbsent(emp.getPersonalId(), "exists");
-        if (status == null) {
-            return false;
-        }        
-        
-        return true;
+    /**
+     * @return true if the employee is already registered 
+     */
+    public boolean isRegistered(String personalId) {
+        return registered.contains(personalId);
+    }
+
+        /**
+     * @return false if the employee is already registered 
+     */
+    public boolean isNotRegistered(String personalId) {
+        return !isRegistered(personalId);
+    }
+
+    /**
+     * @return true if the employee is already registered 
+     */
+    public void register(Employee emp) {
+        if (!isRegistered(emp.getPersonalId())) {
+            registered.add(emp.getPersonalId());
+        }
     }
 
 }
