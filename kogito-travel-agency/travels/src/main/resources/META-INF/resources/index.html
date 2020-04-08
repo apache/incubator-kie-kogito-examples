@@ -35,6 +35,7 @@
             <table class="table">
                 <thead>
                 <tr>
+                    <th>Code</th>
                     <th>Traveller name</th>
                     <th>Destination</th>
                     <th>Dates</th>
@@ -82,7 +83,7 @@
            ws.onopen = function() {
 
               // Web Socket is connected, send data using send()
-              ws.send('{"id" : "2", "type" : "start", "payload" : { "query" : "subscription { TravelsUpdated { id, traveller { lastName, firstName, email, nationality } trip { city, country, begin, end, visaRequired } hotel { name, bookingNumber, phone, address { street } } flight { flightNumber, departure, arrival } visaApplication { approved } metadata { processInstances { state } } } }"}}');
+              ws.send('{"id" : "2", "type" : "start", "payload" : { "query" : "subscription { TravelsUpdated { id, traveller { lastName, firstName, email, nationality } trip { city, country, begin, end, visaRequired } hotel { name, bookingNumber, phone, address { street } } flight { flightNumber, departure, arrival } visaApplication { approved } metadata { processInstances { businessKey, state } } } }"}}');
 
            };
 
@@ -107,9 +108,20 @@
     });
 
     function create(travelRequest) {
-        $.post("/travels", travelRequest, function () {
+        var key = makeid();
+        $.post("/travels?businessKey=" + key, travelRequest, function () {
             load();
         }, "json");
+    }
+
+    function makeid() {
+        var result = '';
+        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        var charactersLength = characters.length;
+        for (var i = 0; i < 6; i++) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
     }
 
     function remove(id) {
@@ -155,7 +167,7 @@
                 "hotel { name, bookingNumber, phone, address { street } } " +
                 "flight { flightNumber, departure, arrival } " +
                 "visaApplication { approved } " +
-                "metadata { processInstances { state } } " +
+                "metadata { processInstances { state, businessKey } } " +
                 "}}\"" +
                 "}";
         $.ajax({
@@ -176,7 +188,9 @@
           return pi.state == "ACTIVE"
       }).length > 0;
       var html =
-              "<tr id='" + val.id + "' class='" + (active ? "" : "active") + "'><td>" + val.traveller.lastName + ", " + val.traveller.firstName + "</td>" +
+              "<tr id='" + val.id + "' class='" + (active ? "" : "active") + "'>" +
+              "<td>" + val.metadata.processInstances[0].businessKey + "</td>" +
+              "<td>" + val.traveller.lastName + ", " + val.traveller.firstName + "</td>" +
               "<td>" + val.trip.country + ", " + val.trip.city + "</td>" +
               "<td>" + val.trip.begin.substring(0, 10) + " - " + val.trip.end.substring(0, 10) + "</td>" +
               "<td>" + (val.trip.visaRequired ? 'Yes' : 'No') + "</td>" +
@@ -391,16 +405,13 @@
                         <h3>Traveller</h3>
                         <div class="col-md-6 col-sm-6 col-xs-6">
                             <div class="form-group">
-                                <label for="firstName">First Name</label> <input type="text"
-                                                                                 class="form-control" id="firstName" name="firstName" required>
+                                <label for="firstName">First Name</label> <input type="text" class="form-control" id="firstName" name="firstName" required>
                             </div>
                             <div class="form-group">
-                                <label for="lastName">Last Name</label> <input type="text"
-                                                                               class="form-control" id="lastName" name="lastName" required>
+                                <label for="lastName">Last Name</label> <input type="text" class="form-control" id="lastName" name="lastName" required>
                             </div>
                             <div class="form-group">
-                                <label for="email">Email</label> <input type="text"
-                                                                        class="form-control" id="email" name="email" required>
+                                <label for="email">Email</label> <input type="text" class="form-control" id="email" name="email" required>
                             </div>
                             <div class="form-group">
                                 <label for="nationality">Nationality</label>
@@ -534,20 +545,16 @@
                                 <h3>Hotel</h3>
                             </div>
                             <div class="form-group">
-                                <label for="hotelname">Name</label> <input type="text"
-                                                                           class="form-control" id="hotelname" name="hotelname" readonly>
+                                <label for="hotelname">Name</label> <input type="text" class="form-control" id="hotelname" name="hotelname" readonly>
                             </div>
                             <div class="form-group">
-                                <label for="bookingNumber">Booking Number</label> <input type="text"
-                                                                                         class="form-control" id="bookingNumber" name="bookingNumber" readonly>
+                                <label for="bookingNumber">Booking Number</label> <input type="text" class="form-control" id="bookingNumber" name="bookingNumber" readonly>
                             </div>
                             <div class="form-group">
-                                <label for="address">Address</label> <input type="text"
-                                                                            class="form-control" id="address" name="address" readonly>
+                                <label for="address">Address</label> <input type="text" class="form-control" id="address" name="address" readonly>
                             </div>
                             <div class="form-group">
-                                <label for="phone">Phone</label> <input type="text"
-                                                                        class="form-control" id="phone" name="phone" readonly>
+                                <label for="phone">Phone</label> <input type="text" class="form-control" id="phone" name="phone" readonly>
                             </div>
                         </div>
 
@@ -556,19 +563,13 @@
                                 <h3>Flight</h3>
                             </div>
                             <div class="form-group">
-                                <label for="flightNumber">Flight number</label> <input type="email"
-                                                                                       class="form-control" id="flightNumber" name="flightNumber" readonly>
+                                <label for="flightNumber">Flight number</label> <input type="email" class="form-control" id="flightNumber" name="flightNumber" readonly>
                             </div>
                             <div class="form-group">
-                                <label for="departure">Departure</label> <input type="text"
-                                                                                class="form-control" id="departure" name="departure" readonly>
+                                <label for="departure">Departure</label> <input type="text" class="form-control" id="departure" name="departure" readonly>
                             </div>
                             <div class="form-group">
-                                <label for="arrival">Arrival</label> <input type="text"
-                                                                            class="form-control" id="arrival" name="arrival" readonly>
-                            </div>
-                            <div class="form-group">
-                                &nbsp;
+                                <label for="arrival">Arrival</label> <input type="text" class="form-control" id="arrival" name="arrival" readonly>
                             </div>
                         </div>
                         <div class="modal-footer">
