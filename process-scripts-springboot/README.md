@@ -7,7 +7,7 @@ A quickstart project is the simplest hello world kind of example, it accepts inp
 This example shows
 
 * invoking scripts from within process
-			
+
 <p align="center"><img width=75% height=50% src="docs/images/process.png"></p>
 
 * Diagram Properties (top)
@@ -17,7 +17,7 @@ This example shows
 <p align="center"><img src="docs/images/diagramProperties2.png"></p>
 
 * Hello Script Task
-<p align="center"><img src="docs/images/sayHelloScriptTask.png"></p>	
+<p align="center"><img src="docs/images/sayHelloScriptTask.png"></p>
 
 * Update Message Script Task
 <p align="center"><img src="docs/images/updateMessageScriptTask.png"></p>
@@ -26,29 +26,29 @@ This example shows
 ## Build and run
 
 ### Prerequisites
- 
+
 You will need:
-  - Java 11+ installed 
+  - Java 11+ installed
   - Environment variable JAVA_HOME set accordingly
   - Maven 3.6.2+ installed
 
 ### Compile and Run in Local Dev Mode
 
-```
-mvn clean package spring-boot:run    
+```sh
+mvn clean compile spring-boot:run
 ```
 
 
-### Compile and Run using uberjar
+### Package and Run using uberjar
 
+```sh
+mvn clean package
 ```
-mvn clean package 
-```
-  
+
 To run the generated native executable, generated in `target/`, execute
 
-```
-java -jar target/process-scripts-sprintboot-{version}.jar
+```sh
+java -jar target/process-scripts-springboot.jar
 ```
 
 ### OpenAPI (Swagger) documentation
@@ -61,28 +61,33 @@ In addition, various clients to interact with this service can be easily generat
 
 ### Submit a request
 
-To make use of this application it is as simple as putting a sending request to `http://localhost:8080/scripts`  with following content 
+To make use of this application it is as simple as putting a sending request to `http://localhost:8080/scripts`  with following content
 
-```
+```json
 {
-"name" : "john"
+    "name" : "john"
 }
 
 ```
 
 Complete curl command can be found below:
 
-```
+```sh
 curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"name" : "john"}' http://localhost:8080/scripts
 ```
 
-Log after curl executed
-```
-{"id":"ab5239e2-f497-4684-b337-5a44440b38dd","name":"john","message":"Hello john"}
+Response should be similar to:
+
+```json
+{
+    "id":"ab5239e2-f497-4684-b337-5a44440b38dd",
+    "name":"john",
+    "message":"Hello john"
+}
 ```
 
-Likewise on Springboot you should see a similar log to
+And also in SpringBoot log you should see a log entry:
 
 ```
-Hello john"
+Hello john
 ```

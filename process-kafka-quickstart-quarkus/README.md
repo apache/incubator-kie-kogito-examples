@@ -12,8 +12,8 @@ This example shows
 * traveller is then processed by rules and based on the outcome of the processing (processed or not) traveller is
 	* if successfully processed traveller information is logged and then updated information is send to another Kafka topic
 	* if not processed traveller info is logged and then process instance finishes without sending reply to Kafka topic
-	
-	
+
+
 <p align="center"><img width=75% height=50% src="docs/images/process.png"></p>
 
 * Diagram Properties (top)
@@ -78,7 +78,7 @@ In addition to that two topics are needed
 * travellers
 * processedtravellers
 
-```
+```sh
 bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic travellers
 bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic processedtravellers
 ```
@@ -88,28 +88,41 @@ These topics are expected to be without key
 ## Build and run
 
 ### Prerequisites
- 
+
 You will need:
-  - Java 11+ installed 
+  - Java 11+ installed
   - Environment variable JAVA_HOME set accordingly
   - Maven 3.6.2+ installed
 
-When using native image compilation, you will also need: 
-  - GraalVM 19.3+ installed 
+When using native image compilation, you will also need:
+  - GraalVM 19.3+ installed
   - Environment variable GRAALVM_HOME set accordingly
   - GraalVM native image needs as well native-image extension: https://www.graalvm.org/docs/reference-manual/native-image/
   - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too, please refer to GraalVM installation documentation for more details.
-    
+
 ### Compile and Run in Local Dev Mode
 
-```
-mvn clean package quarkus:dev    
+```sh
+mvn clean compile quarkus:dev
 ```
 
 NOTE: With dev mode of Quarkus you can take advantage of hot reload for business assets like processes, rules, decision tables and java code. No need to redeploy or restart your running application.
 
+### Package and Run in JVM mode
 
-### Compile and Run using Local Native Image
+```sh
+mvn clean package
+java -jar target/process-kafka-quickstart-quarkus-runner.jar
+```
+
+or on windows
+
+```sh
+mvn clean package
+java -jar target\process-kafka-quickstart-quarkus-runner.jar
+```
+
+### Package and Run using Local Native Image
 Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
 
 ```
@@ -119,7 +132,7 @@ mvn clean package -Pnative
 To run the generated native executable, generated in `target/`, execute
 
 ```
-./target/process-kafka-quickstart-{version}-runner
+./target/process-kafka-quickstart-quarkus-runner
 ```
 
 ### OpenAPI (Swagger) documentation
@@ -138,46 +151,49 @@ To make use of this application it is as simple as putting a message on `travell
 * To examine ProcessedTravellers topic and verify upcoming messages will be processed
 
 Execute in a separate terminal session
-```
-bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic processedtravellers 
+
+```sh
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic processedtravellers
 ```
 
 * Send message that should be processed to Topic
-  
-```
+
+```sh
 bin/kafka-console-producer.sh --broker-list localhost:9092 --topic travellers
 ```
 
 Content (cloud event format)
-```
+
+```json
 {
   "specversion": "0.3",
   "id": "21627e26-31eb-43e7-8343-92a696fd96b1",
   "source": "",
-  "type": "TravellersMessageDataEvent_3", 
+  "type": "TravellersMessageDataEvent_3",
   "time": "2019-10-01T12:02:23.812262+02:00[Europe/Warsaw]",
-  "data": { 
-	"firstName" : "Jan", 
-	"lastName" : "Kowalski", 
-	"email" : "jan.kowalski@example.com", 
+  "data": {
+	"firstName" : "Jan",
+	"lastName" : "Kowalski",
+	"email" : "jan.kowalski@example.com",
 	"nationality" : "Polish"
 	}
 }
 ```
 One liner
-```
+
+```json
 {"specversion": "0.3","id": "21627e26-31eb-43e7-8343-92a696fd96b1","source": "","type": "TravellersMessageDataEvent_3", "time": "2019-10-01T12:02:23.812262+02:00[Europe/Warsaw]","data": { "firstName" : "Jan", "lastName" : "Kowalski", "email" : "jan.kowalski@example.com", "nationality" : "Polish"}}
 ```
 
 
 this will then trigger the successful processing of the traveller and put another message on `processedtravellers` topic with following content (cloud event format)
 
-```
+```json
 {
   "specversion": "0.3",
   "id": "86f69dd6-7145-4188-aeaa-e44622eeec86",
   "source": "",
-  "type": "TravellersMessageDataEvent_3", 
+  "type": "TravellersMessageDataEvent_3",
   "time": "2019-10-03T16:22:40.373523+02:00[Europe/Warsaw]",
   "data": {
     "firstName": "Jan",
@@ -201,29 +217,32 @@ there are bunch of extension attributes that starts with `kogito` to provide som
 To take the other path of the process put following message on `travellers` topic
 
 * Send Message that should be skipped to Topic
-```
+
+```sh
 bin/kafka-console-producer.sh --broker-list localhost:9092 --topic travellers
 ```
 
 With the following content (Cloud Event Format)
-```
+
+```json
 {
   "specversion": "0.3",
   "id": "31627e26-31eb-43e7-8343-92a696fd96b1",
   "source": "",
-  "type": "TravellersMessageDataEvent_3", 
+  "type": "TravellersMessageDataEvent_3",
   "time": "2019-10-01T12:02:23.812262+02:00[Europe/Warsaw]",
-  "data": { 
-	"firstName" : "John", 
-	"lastName" : "Doe", 
-    "email" : "john.doe@example.com", 
+  "data": {
+	"firstName" : "John",
+	"lastName" : "Doe",
+    "email" : "john.doe@example.com",
     "nationality" : "American"
 	}
 }
 ```
 
 One Liner
-```
+
+```json
 {"specversion": "0.3","id": "31627e26-31eb-43e7-8343-92a696fd96b1","source": "","type": "TravellersMessageDataEvent_3", "time": "2019-10-01T12:02:23.812262+02:00[Europe/Warsaw]","data": { "firstName" : "John", "lastName" : "Doe", "email" : "john.doe@example.com", "nationality" : "American"}}
 ```
 

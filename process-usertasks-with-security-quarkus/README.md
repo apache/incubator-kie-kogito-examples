@@ -3,30 +3,30 @@
 ## Description
 
 A quickstart project shows very typical user task orchestration. It comes with two tasks assigned
-to human actors via groups assignments - `managers`. So essentially anyone who is a member of that 
-group can act on the tasks. Though this example applies four eye principle which essentially means 
-that user who approved first task cannot approve second one. So there must be always at least two 
+to human actors via groups assignments - `managers`. So essentially anyone who is a member of that
+group can act on the tasks. Though this example applies four eye principle which essentially means
+that user who approved first task cannot approve second one. So there must be always at least two
 distinct manager involved.
 
 This example shows
 
 * working with user tasks
 * four eye principle with user tasks
-	
-	
+
+
 <p align="center"><img width=75% height=50% src="docs/images/process.png"></p>
 
 
 ## Build and run
 
 ### Prerequisites
- 
+
 You will need:
-  - Java 11+ installed 
+  - Java 11+ installed
   - Environment variable JAVA_HOME set accordingly
   - Maven 3.6.2+ installed
 
-When using native image compilation, you will also need: 
+When using native image compilation, you will also need:
   - GraalVM 19.1+ installed
   - Environment variable GRAALVM_HOME set accordingly
   - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too, please refer to GraalVM installation documentation for more details.
@@ -34,23 +34,36 @@ When using native image compilation, you will also need:
 ### Compile and Run in Local Dev Mode
 
 ```
-mvn clean package quarkus:dev    
+mvn clean compile quarkus:dev
 ```
 
 NOTE: With dev mode of Quarkus you can take advantage of hot reload for business assets like processes, rules, decision tables and java code. No need to redeploy or restart your running application.
 
+### Package and Run in JVM mode
 
-### Compile and Run using Local Native Image
+```sh
+mvn clean package
+java -jar target/process-usertasks-with-security-quarkus-runner.jar
+```
+
+or on windows
+
+```sh
+mvn clean package
+java -jar target\process-usertasks-with-security-quarkus-runner.jar
+```
+
+### Package and Run using Local Native Image
 Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
 
-```
+```sh
 mvn clean package -Pnative
 ```
-  
+
 To run the generated native executable, generated in `target/`, execute
 
-```
-./target/process-usertasks-quarkus-{version}-runner
+```sh
+./target/process-usertasks-with-security-quarkus-runner
 ```
 
 ### OpenAPI (Swagger) documentation
@@ -65,19 +78,19 @@ When running in either Quarkus Development or Native mode, we also leverage the 
 
 ### Submit a request to start new approval
 
-To make use of this application it is as simple as putting a sending request to `http://localhost:8080/approvals`  with following content 
+To make use of this application it is as simple as putting a sending request to `http://localhost:8080/approvals`  with following content
 
-```
+```json
 {
-"traveller" : { 
-  "firstName" : "John", 
-  "lastName" : "Doe", 
-  "email" : "jon.doe@example.com", 
+"traveller" : {
+  "firstName" : "John",
+  "lastName" : "Doe",
+  "email" : "jon.doe@example.com",
   "nationality" : "American",
-  "address" : { 
-  	"street" : "main street", 
-  	"city" : "Boston", 
-  	"zipCode" : "10005", 
+  "address" : {
+  	"street" : "main street",
+  	"city" : "Boston",
+  	"zipCode" : "10005",
   	"country" : "US" }
   }
 }
@@ -86,20 +99,20 @@ To make use of this application it is as simple as putting a sending request to 
 
 Complete curl command can be found below:
 
-```
+```sh
 curl -u john:john -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"traveller" : { "firstName" : "John", "lastName" : "Doe", "email" : "jon.doe@example.com", "nationality" : "American","address" : { "street" : "main street", "city" : "Boston", "zipCode" : "10005", "country" : "US" }}}' http://localhost:8080/approvals
 ```
 
 ### Show active approvals
 
-```
+```sh
 curl -u john:john -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/approvals
 ```
 
-### Show tasks 
+### Show tasks
 
-```
-curl -u john:john -H 'Content-Type:application/json' -H 'Accept:application/json' 'http://localhost:8080/approvals/{uuid}/tasks?user=admin&group=managers'
+```sh
+curl -u john:john -H 'Content-Type:application/json' -H 'Accept:application/json' 'http://localhost:8080/approvals/{uuid}/tasks?user=john&group=managers'
 ```
 
 where `{uuid}` is the id of the given approval instance
@@ -107,16 +120,16 @@ where `{uuid}` is the id of the given approval instance
 
 ### Complete first line approval task
 
-```
-curl -X POST -d '{"approved" : true}' -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/approvals/{uuid}/firstLineApproval/{tuuid}?user=admin&group=managers'
+```sh
+curl -u john:john -X POST -d '{"approved" : true}' -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/approvals/{uuid}/firstLineApproval/{tuuid}?user=john&group=managers'
 ```
 
 where `{uuid}` is the id of the given approval instance and `{tuuid}` is the id of the task instance
 
-### Show tasks 
+### Show tasks
 
-```
-curl -u john:john -H 'Content-Type:application/json' -H 'Accept:application/json' 'http://localhost:8080/approvals/{uuid}/tasks?user=admin&group=managers'
+```sh
+curl -u john:john -H 'Content-Type:application/json' -H 'Accept:application/json' 'http://localhost:8080/approvals/{uuid}/tasks?user=john&group=managers'
 ```
 
 where `{uuid}` is the id of the given approval instance
@@ -126,24 +139,24 @@ This should return empty response as the admin user was the first approver and b
 Repeating the request with another user will return task
 
 ```
-curl -H 'Content-Type:application/json' -H 'Accept:application/json' 'http://localhost:8080/approvals/{uuid}/tasks?user=john&group=managers'
+curl -u mary:mary -H 'Content-Type:application/json' -H 'Accept:application/json' 'http://localhost:8080/approvals/{uuid}/tasks?user=mary&group=managers'
 ```
 
 
 ### Complete second line approval task
 
 ```
-curl -X POST -d '{"approved" : true}' -H 'Content-Type:application/json' -H 'Accept:application/json' 'http://localhost:8080/approvals/{uuid}/secondLineApproval/{tuuid}?user=john&group=managers'
+curl -u mary:mary -X POST -d '{"approved" : true}' -H 'Content-Type:application/json' -H 'Accept:application/json' 'http://localhost:8080/approvals/{uuid}/secondLineApproval/{tuuid}?user=mary&group=managers'
 ```
 
 where `{uuid}` is the id of the given approval instance and `{tuuid}` is the id of the task instance
 
-This completes the approval and returns approvals model where both approvals of first and second line can be found, 
+This completes the approval and returns approvals model where both approvals of first and second line can be found,
 plus the approver who made the first one.
 
-```
+```json
 {
-	"approver":"admin",
+	"approver":"john",
 	"firstLineApproval":true,
 	"id":"2eeafa82-d631-4554-8d8e-46614cbe3bdf",
 	"secondLineApproval":true,

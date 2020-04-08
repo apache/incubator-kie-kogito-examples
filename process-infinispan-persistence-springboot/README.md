@@ -18,9 +18,9 @@ This example shows
 Note: The use of this example shows that the data sent to infinispan is saved, you can shut down the application and restart it
 and as long as infinispan is running after you restart you should still see the data
 
-It utilizes Infinispan server as the backend store. 
-	
-* Process (submitDeal.bpmn)	
+It utilizes Infinispan server as the backend store.
+
+* Process (submitDeal.bpmn)
 <p align="center"><img width=75% height=50% src="docs/images/process.png"></p>
 
 * Process Properties (top)
@@ -29,13 +29,13 @@ It utilizes Infinispan server as the backend store.
 * Process Properties (bottom)
 <p align="center"><img src="docs/images/processProperties2.png"></p>
 
-* Call a deal	
+* Call a deal
 <p align="center"><img src="docs/images/callADeal.png"></p>
 
 * Call a deal (Assignments)
 <p align="center"><img src="docs/images/callADeal2.png"></p>
 
-* Print review the Deal	
+* Print review the Deal
 <p align="center"><img src="docs/images/printReviewTheDeal.png"></p>
 
 * Subprocess (reviewDeal.bpmn)
@@ -62,37 +62,34 @@ This quickstart requires an Inifinispan server to be available and by default ex
 
 You can install Inifinispan server by downloading it from [official website](https://infinispan.org/download/) version to be used is at least 10.0.0.Final
 
-* Infinispan installed and running	
+* Infinispan installed and running
 <p align="center"><img src="docs/images/infinispanInstalledAndRunning.png"></p>
 
 ## Build and run
 
 ### Prerequisites
- 
+
 You will need:
-  - Java 11+ installed 
+  - Java 11+ installed
   - Environment variable JAVA_HOME set accordingly
   - Maven 3.6.2+ installed
 
 ### Compile and Run in Local Dev Mode
 
-```
-mvn clean package spring-boot:run    
+```sh
+mvn clean compile spring-boot:run
 ```
 
-NOTE: With dev mode of Quarkus you can take advantage of hot reload for business assets like processes, rules, decision tables and java code. No need to redeploy or restart your running application.
+### Package and Run using uberjar
 
-
-### Compile and Run using uberjar
-
+```sh
+mvn clean package
 ```
-mvn clean package 
-```
-  
+
 To run the generated native executable, generated in `target/`, execute
 
 ```
-java -jar target/process-infinispan-persistence-sprintboot-{version}.jar
+java -jar target/process-infinispan-persistence-springboot.jar
 ```
 
 ### OpenAPI (Swagger) documentation
@@ -105,29 +102,28 @@ In addition, various clients to interact with this service can be easily generat
 
 ### Submit a deal
 
-To make use of this application it is as simple as putting a sending request to `http://localhost:8080/deals`  with following content 
+To make use of this application it is as simple as putting a sending request to `http://localhost:8080/deals`  with following content
 
-```
+```json
 {
 "name" : "my fancy deal",
-"traveller" : { 
-  "firstName" : "John", 
-  "lastName" : "Doe", 
-  "email" : "jon.doe@example.com", 
+"traveller" : {
+  "firstName" : "John",
+  "lastName" : "Doe",
+  "email" : "jon.doe@example.com",
   "nationality" : "American",
-  "address" : { 
-  	"street" : "main street", 
-  	"city" : "Boston", 
-  	"zipCode" : "10005", 
+  "address" : {
+  	"street" : "main street",
+  	"city" : "Boston",
+  	"zipCode" : "10005",
   	"country" : "US" }
   }
 }
-
 ```
 
 Complete curl command can be found below:
 
-```
+```sh
 curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"name" : "my fancy deal", "traveller" : { "firstName" : "John", "lastName" : "Doe", "email" : "jon.doe@example.com", "nationality" : "American","address" : { "street" : "main street", "city" : "Boston", "zipCode" : "10005", "country" : "US" }}}' http://localhost:8080/deals
 ```
 
@@ -137,13 +133,13 @@ this will then trigger the review user task that you can work.
 
 First you can display all active reviews of deals
 
-```
+```sh
 curl -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/dealreviews
 ```
 
 based on the response you can select one of the reviews to see more details
 
-```
+```sh
 curl -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/dealreviews/{uuid}/tasks?user=john
 ```
 
@@ -151,7 +147,7 @@ where uuid is the id of the deal review you want to work with.
 
 Next you can get the details assigned to review user task by
 
-```
+```sh
 curl -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/dealreviews/{uuid}/review/{tuuid}?user=john
 ```
 
@@ -162,13 +158,13 @@ where uuid is the id of the deal review and tuuid is the id of the user task you
 
 Last but not least you can complete review user task by
 
-```
+```sh
 curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"review" : "very good work"}' http://localhost:8080/dealreviews/uuid/review/{tuuid}?user=john
 ```
 
 where uuid is the id of the deal review and tuuid is the id of the user task you want to get
 
-* Review Log should look similar to 	
+* Review Log should look similar to
 
 ```
 Review of the deal very good work for traveller Doe
