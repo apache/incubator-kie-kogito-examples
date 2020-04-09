@@ -39,10 +39,10 @@ When using native image compilation, you will also need:
 To start a Keycloak Server you can use Docker and just run the following command:
 
 ```
-docker run -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin  -e KEYCLOAK_IMPORT=/tmp/kogito-realm.json -v <kogito-quickstarts_absolute_path>/kogito-usertasks-with-security-oidc-quarkus/config/kogito-realm.json:/tmp/kogito-realm.json -p 8280:8080  jboss/keycloak
+docker run -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin  -e KEYCLOAK_IMPORT=/tmp/kogito-realm.json -v <kogito-quickstarts_absolute_path>/kogito-usertasks-with-security-oidc-quarkus/config/kogito-realm.json:/tmp/kogito-realm.json -p 8281:8080  jboss/keycloak
 ```
 
-You should be able to access your Keycloak Server at [localhost:8280/auth](http://localhost:8280).
+You should be able to access your Keycloak Server at [localhost:8281/auth](http://localhost:8281).
 and verify keycloak server is running properly: log in as the admin user to access the Keycloak Administration Console.
 Username should be admin and password admin.
 With the keycloak kogito realm  imported we have defined users to be able to try the different endpoints
@@ -123,7 +123,7 @@ Server in order to access the application resources. Obtain an access token for 
 
 ```sh
 export access_token=$(\
-    curl -X POST http://localhost:8280/auth/realms/kogito/protocol/openid-connect/token \
+    curl -X POST http://localhost:8281/auth/realms/kogito/protocol/openid-connect/token \
     --user kogito-app:secret \
     -H 'content-type: application/x-www-form-urlencoded' \
     -d 'username=john&password=john&grant_type=password' | jq --raw-output '.access_token' \
@@ -150,7 +150,7 @@ Try with the manager Mary
 
 ```sh
 export access_token=$(\
-    curl -X POST http://localhost:8280/auth/realms/kogito/protocol/openid-connect/token \
+    curl -X POST http://localhost:8281/auth/realms/kogito/protocol/openid-connect/token \
     --user kogito-app:secret \
     -H 'content-type: application/x-www-form-urlencoded' \
     -d 'username=mary&password=mary&grant_type=password' | jq --raw-output '.access_token' \
@@ -184,7 +184,7 @@ Repeating the request with another user
 
 ```sh
 export access_token=$(\
-    curl -X POST http://localhost:8280/auth/realms/kogito/protocol/openid-connect/token \
+    curl -X POST http://localhost:8281/auth/realms/kogito/protocol/openid-connect/token \
     --user kogito-app:secret \
     -H 'content-type: application/x-www-form-urlencoded' \
     -d 'username=poul&password=poul&grant_type=password' | jq --raw-output '.access_token' \
