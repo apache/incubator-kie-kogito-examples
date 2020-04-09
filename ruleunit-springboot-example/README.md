@@ -11,19 +11,34 @@ REST endpoints are generated from query rules. You can insert `LoanApplication` 
 ### Prerequisites
 
 You will need:
-  - Java 1.8.0+ installed
+  - Java 11+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.5.4+ installed
+  - Maven 3.6.2+ installed
 
 ### Compile and Run
 
-```
-mvn clean package spring-boot:run
+```sh
+mvn clean compile spring-boot:run
 ```
 
-## Swagger documentation
+### Package and Run using uberjar
 
-You can take a look at the [swagger definition](http://localhost:8080/docs/swagger.json) - automatically generated and included in this service - to determine all available operations exposed by this service.  For easy readability you can visualize the swagger definition file using a swagger UI like for example available [here](https://editor.swagger.io). In addition, various clients to interact with this service can be easily generated using this swagger definition.
+```sh
+mvn clean package
+```
+
+To run the generated native executable, generated in `target/`, execute
+
+```sh
+java -jar target/kogito-usertasks-with-security-oidc-springboot.jar
+```
+
+## OpenAPI (Swagger) documentation
+[Specification at swagger.io](https://swagger.io/docs/specification/about/)
+
+You can take a look at the [OpenAPI definition](http://localhost:8080/docs/swagger.json) - automatically generated and included in this service - to determine all available operations exposed by this service. For easy readability you can visualize the OpenAPI definition file using a UI tool like for example available [Swagger UI](https://editor.swagger.io).
+
+In addition, various clients to interact with this service can be easily generated using this OpenAPI definition.
 
 ## Example Usage
 
@@ -45,6 +60,7 @@ curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" -
 As response an array of loan applications is returned.
 
 Example response:
+
 ```json
 [
   {
@@ -71,6 +87,7 @@ curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -
 As response an array of loan application ids and amount values is returned.
 
 Example response:
+
 ```json
 [
   {

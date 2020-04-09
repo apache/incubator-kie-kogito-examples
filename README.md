@@ -4,7 +4,19 @@ This module contains a number of examples that you can take a look at and try ou
 
 Since Kogito aims at supporting both Quarkus and SpringBoot each example usually provides both type of projects.
 
-**To try it out locally on latest stable version download the released repository content [here](https://github.com/kiegroup/kogito-examples/releases/latest)**
+- Default branch is `stable`, pointing to the latest released version. 
+- **[You can also check all versions by looking at releases.](https://github.com/kiegroup/kogito-examples/releases/latest)**
+
+
+## Contribution
+
+Everyone is encouraged to contribute to these examples by
+
+* trying it out and providing feedback and ideas for improvement
+* create new examples -- **in this case, make sure your PR is against the `master` branch!**
+* blogging about it
+* using it on conferences and workshops
+
 
 ## Kogito hello world with scripts
 
@@ -85,18 +97,8 @@ shows timers (intermediate and boundary) that allows to introduce delays in proc
 
 ## Other Misc Examples
 
-- Onboarding example combining 1 process and two decision services: see [README.md](onboarding-example/readme.md) 
-- Polyglot Drools with GraalVM: see [README.md](drools-polyglot-example/README.md)
-- Drools on Quarkus: see [README.md](drools-quarkus-example/README.md)
-- Drools on Quarkus with Unit: see [README.md](drools-quarkus-unit-example/README.md)
-- jBPM on Quarkus: see [README.md](jbpm-quarkus-example/README.md)
-- jBPM on SpringBoot: see [README.md](jbpm-springboot-example/README.md)
-
-## Contribution
-
-Everyone is encouraged to contribute to this quickstarts by
-
-* trying it out and providing feedback and ideas for improvement
-* create new quickstarts
-* blogging about it
-* using it on conferences and workshops
+- Onboarding example combining 1 process and two decision services: see [README.md](onboarding-example/README.md)
+- Rules on Quarkus: see [README.md](rules-quarkus-example/README.md)
+- Rules on Quarkus with Unit: see [README.md](ruleunit-quarkus-example/README.md)
+- Process on Quarkus: see [README.md](process-quarkus-example/README.md)
+- Process on SpringBoot: see [README.md](process-springboot-example/README.md)

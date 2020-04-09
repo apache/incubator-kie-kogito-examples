@@ -9,28 +9,28 @@ Demonstrates DMN on Kogito capabilities, including REST interface code generatio
 ## Installing and Running
 
 ### Prerequisites
- 
-You will need:
-  - Java 1.8.0+ installed 
-  - Environment variable JAVA_HOME set accordingly
-  - Maven 3.5.4+ installed
 
-When using native image compilation, you will also need: 
-  - [GraalVM 19.3.1](https://github.com/oracle/graal/releases/tag/vm-19.3.1) installed 
+You will need:
+  - Java 11+ installed
+  - Environment variable JAVA_HOME set accordingly
+  - Maven 3.6.2+ installed
+
+When using native image compilation, you will also need:
+  - [GraalVM 19.3.1](https://github.com/oracle/graal/releases/tag/vm-19.3.1) installed
   - Environment variable GRAALVM_HOME set accordingly
   - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too.  You also need 'native-image' installed in GraalVM (using 'gu install native-image'). Please refer to [GraalVM installation documentation](https://www.graalvm.org/docs/reference-manual/aot-compilation/#prerequisites) for more details.
 
 ### Compile and Run in Local Dev Mode
 
 ```
-mvn clean package quarkus:dev    
+mvn clean compile quarkus:dev
 ```
 
-### Compile and Run in JVM mode
+### Package and Run in JVM mode
 
 ```
-mvn clean package 
-java -jar target/dmn-quarkus-example-runner.jar  
+mvn clean package
+java -jar target/dmn-quarkus-example-runner.jar
 ```
 
 or on Windows
@@ -40,20 +40,29 @@ mvn clean package
 java -jar target\dmn-quarkus-example-runner.jar
 ```
 
-### Compile and Run using Local Native Image
+### Package and Run using Local Native Image
 Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
 
 ```
 mvn clean package -Pnative
 ```
-  
+
 To run the generated native executable, generated in `target/`, execute
 
 ```
-./target/dmn-quarkus-example-runner 
+./target/dmn-quarkus-example-runner
 ```
 
 Note: This does not yet work on Windows, GraalVM and Quarkus should be rolling out support for Windows soon.
+
+## OpenAPI (Swagger) documentation
+[Specification at swagger.io](https://swagger.io/docs/specification/about/)
+
+You can take a look at the [OpenAPI definition](http://localhost:8080/openapi?format=json) - automatically generated and included in this service - to determine all available operations exposed by this service. For easy readability you can visualize the OpenAPI definition file using a UI tool like for example available [Swagger UI](https://editor.swagger.io).
+
+In addition, various clients to interact with this service can be easily generated using this OpenAPI definition.
+
+When running in either Quarkus Development or Native mode, we also leverage the [Quarkus OpenAPI extension](https://quarkus.io/guides/openapi-swaggerui#use-swagger-ui-for-development) that exposes [Swagger UI](http://localhost:8080/swagger-ui/) that you can use to look at available REST endpoints and send test requests.
 
 ## Example Usage
 
@@ -63,10 +72,25 @@ Once the service is up and running, you can use the following example to interac
 
 Returns penalty information from the given inputs -- driver and violation:
 
+Given inputs:
+
+```json
+{
+    "Driver":{"Points":2},
+    "Violation":{
+        "Type":"speed",
+        "Actual Speed":120,
+        "Speed Limit":100
+    }
+}
+```
+
+Curl command (using the JSON object above):
+
 ```sh
 curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"Driver":{"Points":2},"Violation":{"Type":"speed","Actual Speed":120,"Speed Limit":100}}' http://localhost:8080/Traffic%20Violation
 ```
-or on Windows
+or on Windows:
 
 ```sh
 curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" -d "{\"Driver\":{\"Points\":2},\"Violation\":{\"Type\":\"speed\",\"Actual Speed\":120,\"Speed Limit\":100}}" http://localhost:8080/Traffic%20Violation
@@ -75,6 +99,7 @@ curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" -
 As response, penalty information is returned.
 
 Example response:
+
 ```json
 {
   "Violation":{

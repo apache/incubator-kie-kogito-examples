@@ -12,7 +12,7 @@
   <groupId>org.kie.kogito.examples</groupId>
   <artifactId>onboarding</artifactId>
   <packaging>jar</packaging>
-  <name>Kogito Example :: Onboarding Example :: Onboarding with jBPM</name>
+  <name>Kogito Example :: Onboarding Example :: Onboarding with Business Process</name>
   <description>Onboarding function and service orchestration</description>
 
   <dependencies>
@@ -52,12 +52,19 @@
   <build>
     <plugins>
       <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <systemProperties>
+            <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+          </systemProperties>
+        </configuration>
+      </plugin>
+      <plugin>
         <groupId>io.quarkus</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
-        <version>${version.io.quarkus}</version>
         <configuration>
           <debug>false</debug>
-          <jvmArgs>-Dquarkus.http.port=8080 -Dlocal=true -Dquarkus.http.host=localhost</jvmArgs>
+          <jvmArgs>-Dlocal=true</jvmArgs>
         </configuration>
         <executions>
           <execution>

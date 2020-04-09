@@ -1,0 +1,20 @@
+package org.acme.travels
+
+import org.acme.travels.VisaApplication;
+
+
+rule "Visit Australia with e-visa up to 90 days" ruleflow-group "visa-approvals"
+
+when
+    $application: VisaApplication(duration <= 90, country == "Australia")
+then
+    $application.setApproved(true);     
+end
+
+rule "Visit US with e-visa up to 15 days" ruleflow-group "visa-approvals"
+
+when
+    $application: VisaApplication(duration <= 15, country == "US")
+then
+    $application.setApproved(true);     
+end
