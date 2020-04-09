@@ -13,7 +13,7 @@
   <artifactId>hr</artifactId>
   <packaging>jar</packaging>
   <name>Kogito Example :: Onboarding Example :: HR with Drools</name>
-  <description>HR related processes and decisions for onboarding</description>
+  <description>HR related rules for onboarding</description>
 
   <dependencies>
     <dependency>

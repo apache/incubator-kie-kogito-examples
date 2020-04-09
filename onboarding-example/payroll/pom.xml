@@ -13,7 +13,7 @@
   <artifactId>payroll</artifactId>
   <packaging>jar</packaging>
   <name>Kogito Example :: Onboarding Example :: Payroll with DMN</name>
-  <description>Payroll related rules and processes for onboarding</description>
+  <description>Payroll related decisions for onboarding</description>
 
   <dependencies>
     <dependency>
