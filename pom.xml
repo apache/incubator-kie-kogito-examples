@@ -124,6 +124,7 @@
     <module>decisiontable-springboot-example</module>
     <module>dmn-quarkus-example</module>
     <module>dmn-springboot-example</module>
+    <module>kogito-travel-agency</module>
     <module>onboarding-example</module>
     <module>process-business-rules-quarkus</module>
     <module>process-business-rules-springboot</module>

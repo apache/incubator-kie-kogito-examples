@@ -31,7 +31,6 @@ target
 # files used for external db testing
 jdbc_driver.jar
 db-settings.xml
-
 quarkus.log
 
 # XTF properties files
@@ -42,3 +41,8 @@ test.properties
 *.tlog
 
 workspace
+
+#Scripts
+data-index-service*.jar
+management-console*.jar
+kogito-travel-agency/scripts/persistence/
