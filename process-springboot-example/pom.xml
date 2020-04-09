@@ -9,7 +9,7 @@
   <groupId>org.kie.kogito.examples</groupId>
   <artifactId>process-springboot-example</artifactId>
 
-  <name>Kogito Example :: Kogito and Spring Boot</name>
+  <name>Kogito Example :: Process and SpringBoot</name>
   <description>Order management service</description>
 
   <dependencyManagement>
