@@ -105,7 +105,7 @@ public class OnboardingEndpointTest {
            .body("department", is("US00099"))
            .body("payroll.paymentDate", is("2019-05-01T23:59:00.123+0000"))
            .body("payroll.vacationDays", is(25))
-           .body("payroll.taxRate", is(new Float(22.0)));
+           .body("payroll.taxRate", is(Float.valueOf(22.0f)));
 }
     
     /*
