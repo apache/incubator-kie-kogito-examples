@@ -34,7 +34,7 @@ When using native image compilation, you will also need:
 
 ### Installation
 
-Please follow the instruction for each of the individual services
+Please follow the instruction for each of the individual services. It is recomended to install them in given order.
 
 * [hr](hr/README.md)
 * [payroll](payroll/README.md)
