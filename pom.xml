@@ -51,7 +51,8 @@
     <!-- infinispan -->
     <infinispan.version>2.1.7.Final</infinispan.version>
     <version.testcontainers>1.12.4</version.testcontainers>
-
+    <!-- jsonpath-->
+    <version.jayway.jsonpath>2.4.0</version.jayway.jsonpath>
     <version.swagger.plugin>2.1.0</version.swagger.plugin>
     <version.surefire.plugin>2.22.0</version.surefire.plugin>
     <version.deploy.plugin>2.8.2</version.deploy.plugin>
@@ -156,14 +157,20 @@
     <module>rules-quarkus-helloworld</module>
     <module>ruleunit-quarkus-example</module>
     <module>ruleunit-springboot-example</module>
+    <module>serverless-workflow-greeting-quarkus</module>
   </modules>
-  
+
   <dependencyManagement>
     <dependencies>
       <dependency>
         <groupId>org.testcontainers</groupId>
         <artifactId>testcontainers</artifactId>
         <version>${version.testcontainers}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.jayway.jsonpath</groupId>
+        <artifactId>json-path</artifactId>
+        <version>${version.jayway.jsonpath}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
