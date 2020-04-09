@@ -267,7 +267,7 @@
       <bpmn2:dataInputAssociation id="_YwdwUFr1EemSce_o1Tqd5Q">
         <bpmn2:targetRef>_DD24B4AE-8804-4D6E-B90B-98689CF6EF37_DecisionInputX</bpmn2:targetRef>
         <bpmn2:assignment id="_YwdwUVr1EemSce_o1Tqd5Q">
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_YwdwUlr1EemSce_o1Tqd5Q"><![CDATA[employeeValidation]]></bpmn2:from>
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_YwdwUlr1EemSce_o1Tqd5Q"><![CDATA[employee-validation/first]]></bpmn2:from>
           <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_YwdwU1r1EemSce_o1Tqd5Q">_DD24B4AE-8804-4D6E-B90B-98689CF6EF37_DecisionInputX</bpmn2:to>
         </bpmn2:assignment>
       </bpmn2:dataInputAssociation>

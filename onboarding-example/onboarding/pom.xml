@@ -12,7 +12,7 @@
   <groupId>org.kie.kogito.examples</groupId>
   <artifactId>onboarding</artifactId>
   <packaging>jar</packaging>
-  <name>Kogito Example :: Onboarding Example :: Onboarding with jBPM</name>
+  <name>Kogito Example :: Onboarding Example :: Onboarding with Business Process</name>
   <description>Onboarding function and service orchestration</description>
 
   <dependencies>
