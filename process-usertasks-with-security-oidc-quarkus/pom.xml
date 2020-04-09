@@ -16,6 +16,13 @@
   <name>Kogito Examples :: Process Usertasks With Security OIDC Keycloak Quarkus</name>
   <description>Kogito user tasks orchestration with security enabled on REST api - open id connect adapter(keycloak)</description>
 
+  <properties>
+    <container.image.keycloak>quay.io/keycloak/keycloak:${container.image.keycloak.version}</container.image.keycloak>
+    <container.image.keycloak.version>8.0.1</container.image.keycloak.version>
+    <failsafe.include>**/*IT.java</failsafe.include>
+    <failsafe.exclude>**/Native*IT.java</failsafe.exclude>
+  </properties>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -72,6 +79,7 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
   <build>
     <finalName>${project.artifactId}</finalName>
     <plugins>
@@ -87,16 +95,30 @@
         </executions>
       </plugin>
       <plugin>
-        <artifactId>maven-surefire-plugin</artifactId>
+        <artifactId>maven-failsafe-plugin</artifactId>
         <configuration>
+          <includes>
+            <include>${failsafe.include}</include>
+          </includes>
+          <excludes>
+            <exclude>${failsafe.exclude}</exclude>
+          </excludes>
           <systemPropertyVariables>
-            <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-            <keycloak.version>8.0.1</keycloak.version>
+            <container.image.keycloak>${container.image.keycloak}</container.image.keycloak>
           </systemPropertyVariables>
         </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>integration-test</goal>
+              <goal>verify</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
+
   <profiles>
     <profile>
       <id>native</id>
@@ -105,40 +127,11 @@
           <name>native</name>
         </property>
       </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-maven-plugin</artifactId>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>native-image</goal>
-                </goals>
-                <configuration>
-                  <enableHttpUrlHandler>true</enableHttpUrlHandler>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <artifactId>maven-failsafe-plugin</artifactId>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>integration-test</goal>
-                  <goal>verify</goal>
-                </goals>
-                <configuration>
-                  <systemProperties>
-                    <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
-                  </systemProperties>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
+      <properties>
+        <failsafe.include>**/Native*IT.java</failsafe.include>
+        <failsafe.exclude></failsafe.exclude>
+        <quarkus.package.type>native</quarkus.package.type>
+      </properties>
     </profile>
   </profiles>
 </project>
