@@ -156,7 +156,7 @@
     <module>ruleunit-quarkus-example</module>
     <module>ruleunit-springboot-example</module>
     <module>serverless-workflow-greeting-quarkus</module>
-  </modules>
+    <module>serverless-workflow-service-calls-quarkus</module>
 
   <dependencyManagement>
     <dependencies>
