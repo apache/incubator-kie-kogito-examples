@@ -28,17 +28,17 @@ public class TaxRateTest {
 
     @Test
     public void testEvaluateTaxRateUS() {
-        evaluateForCountry("US", new Float(35.0));
+        evaluateForCountry("US", Float.valueOf(35.0f));
     }
 
     @Test
     public void testEvaluateTaxRateUK() {
-        evaluateForCountry("UK", new Float(30.0));
+        evaluateForCountry("UK", Float.valueOf(30.0f));
     }
 
     @Test
     public void testEvaluateTaxRateDefault() {
-        evaluateForCountry("aoc", new Float(32.0));
+        evaluateForCountry("aoc", Float.valueOf(32.0f));
     }
 
     private void evaluateForCountry(String country, Number result) {
