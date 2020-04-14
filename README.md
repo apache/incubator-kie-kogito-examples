@@ -2,7 +2,7 @@
 
 This module contains a number of examples that you can take a look at and try out yourself.  Please take a look at the readme of each individual example for more details on how the example works and how to run it yourself (either locally or on Kubernetes).
 
-Since Kogito aims at supporting both Quarkus and SpringBoot each example usually provides both type of projects.
+Since Kogito aims at supporting both Quarkus and Spring Boot each example usually provides both type of projects.
 
 - Default branch is `stable`, pointing to the latest released version. 
 - **[You can also check all versions by looking at releases.](https://github.com/kiegroup/kogito-examples/releases/latest)**
@@ -86,7 +86,7 @@ add additional phases to user tasks to indicate other states.
 shows user task interactions with four eye principle applied with security restrictions on REST api.
 
 * [on Quarkus](process-usertasks-with-security-quarkus)
-* [on SpringBoot](process-usertasks-with-security-springboot)
+* [on Spring Boot](process-usertasks-with-security-springboot)
 
 ## Process with timers
 
@@ -101,4 +101,4 @@ shows timers (intermediate and boundary) that allows to introduce delays in proc
 - Rules on Quarkus: see [README.md](rules-quarkus-example/README.md)
 - Rules on Quarkus with Unit: see [README.md](ruleunit-quarkus-example/README.md)
 - Process on Quarkus: see [README.md](process-quarkus-example/README.md)
-- Process on SpringBoot: see [README.md](process-springboot-example/README.md)
+- Process on Spring Boot: see [README.md](process-springboot-example/README.md)
