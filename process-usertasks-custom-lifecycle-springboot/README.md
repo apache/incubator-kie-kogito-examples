@@ -3,9 +3,9 @@
 ## Description
 
 A quickstart project shows very typical user task orchestration. It comes with two tasks assigned
-to human actors via groups assignments - `managers`. So essentially anyone who is a member of that 
-group can act on the tasks. Though this example applies four eye principle which essentially means 
-that user who approved first task cannot approve second one. So there must be always at least two 
+to human actors via groups assignments - `managers`. So essentially anyone who is a member of that
+group can act on the tasks. Though this example applies four eye principle which essentially means
+that user who approved first task cannot approve second one. So there must be always at least two
 distinct manager involved.
 
 This example shows
@@ -19,7 +19,7 @@ This example shows
 - Complete - extended the default one that allows only to complete started tasks
 
 <p align="center"><img width=75% height=50% src="docs/images/process.png"></p>
-	
+
 Diagram Properties (top)
 <p align="center"><img src="docs/images/diagramProperties.png"></p>
 
@@ -46,35 +46,35 @@ To learn more about custom lifecycle, look at the following classes:
 - `org.acme.travels.config.CustomWorkItemHandlerConfig` - responsible for registering work item handler to deal with user tasks
 - `org.acme.travels.usertasks.CustomHumanTaskLifeCycle` - defines actual the life cycle for user tasks
 - `org.acme.travels.usertasks.Start` - new life cycle phase
-- `org.acme.travels.usertasks.CompleteStartedOnly` - extended Complete life cycle phase to allow only started tasks and reuse all other logic 
+- `org.acme.travels.usertasks.CompleteStartedOnly` - extended Complete life cycle phase to allow only started tasks and reuse all other logic
 
 
 ## Build and run
 
 ### Prerequisites
- 
+
 You will need:
-  - Java 11+ installed 
+  - Java 11+ installed
   - Environment variable JAVA_HOME set accordingly
   - Maven 3.6.2+ installed
 
 ### Compile and Run in Local Dev Mode
 
-```
-mvn clean package spring-boot:run    
+```sh
+mvn clean compile spring-boot:run
 ```
 
 
-### Compile and Run using uberjar
+### Package and Run using uberjar
 
+```sh
+mvn clean package
 ```
-mvn clean package 
-```
-  
+
 To run the generated native executable, generated in `target/`, execute
 
-```
-java -jar target/process-usertasks-sprintboot-{version}.jar
+```sh
+java -jar target/process-usertasks-springboot.jar
 ```
 
 ### OpenAPI (Swagger) documentation
@@ -87,19 +87,19 @@ In addition, various clients to interact with this service can be easily generat
 
 ### Submit a request to start new approval
 
-To make use of this application it is as simple as putting a sending request to `http://localhost:8080/approvals`  with following content 
+To make use of this application it is as simple as putting a sending request to `http://localhost:8080/approvals`  with following content
 
-```
+```json
 {
-"traveller" : { 
-  "firstName" : "John", 
-  "lastName" : "Doe", 
-  "email" : "jon.doe@example.com", 
+"traveller" : {
+  "firstName" : "John",
+  "lastName" : "Doe",
+  "email" : "jon.doe@example.com",
   "nationality" : "American",
-  "address" : { 
-  	"street" : "main street", 
-  	"city" : "Boston", 
-  	"zipCode" : "10005", 
+  "address" : {
+  	"street" : "main street",
+  	"city" : "Boston",
+  	"zipCode" : "10005",
   	"country" : "US" }
   }
 }
@@ -108,19 +108,19 @@ To make use of this application it is as simple as putting a sending request to 
 
 Complete curl command can be found below:
 
-```
+```sh
 curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"traveller" : { "firstName" : "John", "lastName" : "Doe", "email" : "jon.doe@example.com", "nationality" : "American","address" : { "street" : "main street", "city" : "Boston", "zipCode" : "10005", "country" : "US" }}}' http://localhost:8080/approvals
 ```
 
 ### Show active approvals
 
-```
+```sh
 curl -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/approvals
 ```
 
-### Show tasks 
+### Show tasks
 
-```
+```sh
 curl -H 'Content-Type:application/json' -H 'Accept:application/json' 'http://localhost:8080/approvals/{uuid}/tasks?user=admin&group=managers'
 ```
 
@@ -129,8 +129,8 @@ where `{uuid}` is the id of the given approval instance
 
 ### Start first line approval task
 
-```
-curl -X POST -d '{"approved" : true}' -H 'Content-Type:application/json' -H 'Accept:application/json' 'http://localhost:8080/approvals/{uuid}/firstLineApproval/{tuuid}?phase=start&john=admin&group=managers'
+```sh
+curl -X POST -d '{"approved" : true}' -H 'Content-Type:application/json' -H 'Accept:application/json' 'http://localhost:8080/approvals/{uuid}/firstLineApproval/{tuuid}?phase=start&user=admin&group=managers'
 
 ```
 
@@ -139,15 +139,15 @@ where `{uuid}` is the id of the given approval instance and `{tuuid}` is the id 
 
 ### Complete first line approval task
 
-```
+```sh
 curl -X POST -d '{"approved" : true}' -H 'Content-Type:application/json' -H 'Accept:application/json' 'http://localhost:8080/approvals/{uuid}/firstLineApproval/{tuuid}?user=admin&group=managers'
 ```
 
 where `{uuid}` is the id of the given approval instance and `{tuuid}` is the id of the task instance
 
-### Show tasks 
+### Show tasks
 
-```
+```sh
 curl -H 'Content-Type:application/json' -H 'Accept:application/json' 'http://localhost:8080/approvals/{uuid}/tasks?user=admin&group=managers'
 ```
 
@@ -157,14 +157,14 @@ This should return empty response as the admin user was the first approver and b
 
 Repeating the request with another user will return task
 
-```
-curl -H 'Content-Type:application/json' -H 'Accept:application/json' 'http://localhost:8080/approvals/{uuid}/tasks?john=admin&group=managers'
+```sh
+curl -H 'Content-Type:application/json' -H 'Accept:application/json' 'http://localhost:8080/approvals/{uuid}/tasks?user=john&group=managers'
 ```
 
 ### Start second line approval task
 
-```
-curl -X POST -d '{"approved" : true}' -H 'Content-Type:application/json' -H 'Accept:application/json' 'http://localhost:8080/approvals/{uuid}/secondLineApproval/{tuuid}?phase=start&john=admin&group=managers'
+```sh
+curl -X POST -d '{"approved" : true}' -H 'Content-Type:application/json' -H 'Accept:application/json' 'http://localhost:8080/approvals/{uuid}/secondLineApproval/{tuuid}?phase=start&user=john&group=managers'
 
 ```
 
@@ -174,15 +174,15 @@ where `{uuid}` is the id of the given approval instance and `{tuuid}` is the id 
 ### Complete second line approval task
 
 ```
-curl -X POST -d '{"approved" : true}' -H 'Content-Type:application/json' -H 'Accept:application/json' 'http://localhost:8080/approvals/{uuid}/secondLineApproval/{tuuid}?john=admin&group=managers'
+curl -X POST -d '{"approved" : true}' -H 'Content-Type:application/json' -H 'Accept:application/json' 'http://localhost:8080/approvals/{uuid}/secondLineApproval/{tuuid}?user=john&group=managers'
 ```
 
 where `{uuid}` is the id of the given approval instance and `{tuuid}` is the id of the task instance
 
-This completes the approval and returns approvals model where both approvals of first and second line can be found, 
+This completes the approval and returns approvals model where both approvals of first and second line can be found,
 plus the approver who made the first one.
 
-```
+```json
 {
 	"approver":"admin",
 	"firstLineApproval":true,
@@ -204,6 +204,6 @@ plus the approver who made the first one.
 
 You should see a similar message after performing the second line approval after the curl command
 
-```
-{"id":"f498de73-e02d-4829-905e-2f768479a4f1", "approver":"admin","firstLineApproval:true, "secondLineApproval":true,"traveller":{"firstName":"John","lastName":"Doe","email":"jon.doe@example.com","nationality":"American","address":{"street":"main street","city":"Boston","zipCode":"10005","country":"US"}}}
+```json
+{"id":"f498de73-e02d-4829-905e-2f768479a4f1", "approver":"admin","firstLineApproval":true, "secondLineApproval":true,"traveller":{"firstName":"John","lastName":"Doe","email":"jon.doe@example.com","nationality":"American","address":{"street":"main street","city":"Boston","zipCode":"10005","country":"US"}}}
 ```

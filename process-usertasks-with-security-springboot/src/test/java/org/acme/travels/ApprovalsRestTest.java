@@ -97,6 +97,7 @@ public class ApprovalsRestTest {
        // thus user and group(s) must be provided
        String payload = "{}";
        given()
+           .header("Authorization", "Basic am9objpqb2hu")
            .contentType(ContentType.JSON)
            .accept(ContentType.JSON)
            .body(payload)
