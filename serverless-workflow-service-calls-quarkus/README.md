@@ -32,10 +32,10 @@ When using native image compilation, you will also need:
 ### Compile and Run in Local Dev Mode
 
 ```text
-mvn clean package quarkus:dev    
+mvn clean compile quarkus:dev    
 ```
 
-### Compile and Run in JVM mode
+### Package and Run in JVM mode
 
 ```text
 mvn clean package 
@@ -49,7 +49,7 @@ mvn clean package
 java -jar target\serverless-workflow-service-calls-quarkus-runner.jar
 ```
 
-### Compile and Run using Local Native Image
+### Package and Run using Local Native Image
 Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
 
 ```text
