@@ -40,20 +40,26 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-openapi</artifactId>
     </dependency>
+
+    <!-- uncomment to enable jobs service integration -->
+    <!--
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>jobs-management-quarkus-addon</artifactId>
     </dependency>
+    -->
 
     <!-- uncomment these two to enable persistence for kogito -->
-<!--     <dependency>
+    <!--
+    <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-infinispan-client</artifactId>
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>infinispan-persistence-addon</artifactId>
-    </dependency> -->
+    </dependency>
+    -->
 
     <!--tests -->
     <dependency>

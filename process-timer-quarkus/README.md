@@ -81,12 +81,13 @@ This needs to be given when starting process instance as delay attribute of type
 
 ## Build and run
 
-By default the [Jobs Service integration](#use-kogito-job-service-as-external-timer-service) is enabled for this example. To disable it, just comment this dependency in the `pom.xml` file:
+By default the [Jobs Service integration](#use-kogito-job-service-as-external-timer-service) is not enabled for this 
+example. To enable it, just uncomment this dependency in the `pom.xml` file, [see](#configure-pomxml):
 
 ```xml
 <dependency>
   <groupId>org.kie.kogito</groupId>
-  <artifactId>jobs-management-springboot-addon</artifactId>
+  <artifactId>jobs-management-quarkus-addon</artifactId>
   <version>${kogito.version}</version>
 </dependency>
 ```

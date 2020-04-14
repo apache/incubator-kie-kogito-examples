@@ -21,7 +21,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @QuarkusTest
-@Disabled("currently flaky, waiting on upstream fix Quarkus-side, see https://issues.redhat.com/browse/KOGITO-1543")
 public class TimersProcessTest {
 
     @Inject
