@@ -113,7 +113,7 @@ mvn clean package -Pnative
 To run the generated native executable, generated in `target/`, execute
 
 ```
-./target/kogito-visas-{version}-runner
+./target/visas-{version}-runner
 ```
 
 ### Start Kogito Data Index Service
