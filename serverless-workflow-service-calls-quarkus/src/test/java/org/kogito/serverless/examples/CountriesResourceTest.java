@@ -8,14 +8,15 @@ import static org.hamcrest.CoreMatchers.is;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import io.quarkus.test.junit.QuarkusTest;
 
 import javax.inject.Inject;
 
-
 @QuarkusTest
+@Tag("integration")
 public class CountriesResourceTest {
 
     @Inject
