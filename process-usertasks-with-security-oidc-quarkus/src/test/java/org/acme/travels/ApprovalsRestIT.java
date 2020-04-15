@@ -4,8 +4,8 @@ import java.util.Map;
 
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
-import io.restassured.http.ContentType;
 import org.acme.test.KeycloakServerTestResource;
+import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
 import org.keycloak.representations.AccessTokenResponse;
 
@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @QuarkusTest
 @QuarkusTestResource(KeycloakServerTestResource.class)
-public class ApprovalsRestTest {
+public class ApprovalsRestIT {
 
     @Test
     public void testStartApprovalUnauthorized() {

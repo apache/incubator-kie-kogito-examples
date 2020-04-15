@@ -27,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @QuarkusTest
 @QuarkusTestResource(KeycloakServerTestResource.class)
-public class ApprovalsProcessTest {
+public class ApprovalsProcessIT {
 
     @Named("approvals")
     @Inject
