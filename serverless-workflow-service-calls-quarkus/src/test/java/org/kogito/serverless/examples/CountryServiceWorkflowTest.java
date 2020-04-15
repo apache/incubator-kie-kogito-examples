@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import io.quarkus.test.junit.QuarkusTest;
@@ -18,6 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @QuarkusTest
+@Tag("integration")
 public class CountryServiceWorkflowTest {
 
     @Named("jsonservicecall")
