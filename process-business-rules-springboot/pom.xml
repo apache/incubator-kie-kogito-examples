@@ -9,7 +9,7 @@
     <version>0.9.1-SNAPSHOT</version>
   </parent>
 
-  <name>Kogito Examples :: Kogito Business Rules Spring Boot</name>
+  <name>Kogito Examples :: Process Business Rules Spring Boot</name>
   <artifactId>process-business-rules-springboot</artifactId>
   <description>Kogito business rules invocation - Spring Boot</description>
 
