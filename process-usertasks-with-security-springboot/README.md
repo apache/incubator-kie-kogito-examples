@@ -13,8 +13,31 @@ This example shows
 * working with user tasks
 * four eye principle with user tasks
 
+**Screenshots of the Diagram**
+File src/main/resources/org/acme/travels/approval.bpmn
 
 <p align="center"><img width=75% height=50% src="docs/images/process.png"></p>
+
+* Diagram Properties (top)
+<p align="center"><img src="docs/images/diagramProperties.png"></p>
+
+* Diagram Properties (bottom)
+<p align="center"><img src="docs/images/diagramProperties3.png"></p>
+
+* First Line Approval (top)
+<p align="center"><img src="docs/images/firstLineApprovalUserTask.png"></p>
+
+* First Line Approval (bottom)
+<p align="center"><img src="docs/images/firstLineApprovalUserTask2.png"></p>
+
+* First Line Approval (Assignments)
+<p align="center"><img src="docs/images/firstLineApprovalUserTaskAssignments.png"></p>
+
+* Second Line Approval
+<p align="center"><img src="docs/images/secondLineApprovalUserTask.png"></p>
+
+* Second Line Approval (Assignments)
+<p align="center"><img src="docs/images/secondLineApprovalUserTaskAssignments.png"></p>
 
 
 ## Build and run
