@@ -13,6 +13,10 @@ This example shows
 * working with user tasks
 * four eye principle with user tasks
 
+File src/main/resources/org/acme/travels/approval.bpmn
+
+Screenshots below are part of the Diagram
+
 <p align="center"><img width=75% height=50% src="docs/images/process.png"></p>
 
 * Diagram Properties (top)
@@ -169,10 +173,4 @@ plus the approver who made the first one.
 		"nationality":"American"
 	}
 }
-```
-
-You should see a similar message after performing the second line approval after the curl command
-
-```
-{"id":"f498de73-e02d-4829-905e-2f768479a4f1", "approver":"admin","firstLineApproval:true, "secondLineApproval":true,"traveller":{"firstName":"John","lastName":"Doe","email":"jon.doe@example.com","nationality":"American","address":{"street":"main street","city":"Boston","zipCode":"10005","country":"US"}}}
 ```
