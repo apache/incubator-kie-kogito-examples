@@ -9,7 +9,7 @@
     <version>0.9.1-SNAPSHOT</version>
   </parent>
 
-  <artifactId>kogito-travel-agency</artifactId>
+  <artifactId>travels</artifactId>
 
   <dependencyManagement>
     <dependencies>
