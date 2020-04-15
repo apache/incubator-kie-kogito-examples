@@ -1,0 +1,15 @@
+apiVersion: app.kiegroup.org/v1alpha1
+kind: KogitoApp
+metadata:
+  name: rules-quarkus-helloworld
+spec:
+  build:
+    #envs:
+    # envs can be used to set variables during build
+    #- name: MY_CUSTOM_ENV
+    #  value: "my value"
+    gitSource:
+      contextDir: rules-quarkus-helloworld
+      uri: 'https://github.com/kiegroup/kogito-examples'
+    # set your maven nexus repository to speed up the build time
+    #mavenMirrorURL: 

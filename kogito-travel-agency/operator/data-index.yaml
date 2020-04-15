@@ -1,0 +1,14 @@
+apiVersion: app.kiegroup.org/v1alpha1
+kind: KogitoDataIndex
+metadata:
+  name: data-index
+spec:
+  # For more information please read: https://docs.jboss.org/kogito/release/latest/html_single/#con_kogito-travel-agency
+  replicas: 1
+  kafka:
+    # will set this instance to auto provision an infra structure in the namespace
+    useKogitoInfra: true
+  infinispan:
+    # will set this instance to auto provision an infra structure in the namespace and attach Infinispan credentials to it
+    useKogitoInfra: true
+

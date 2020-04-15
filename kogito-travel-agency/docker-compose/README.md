@@ -45,4 +45,3 @@ Prometheus will also be available on http://localhost:9090, no authentication is
   For more details please check the Docker Compose documentation.
   
     docker-compose --help  
-  
