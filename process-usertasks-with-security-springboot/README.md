@@ -13,7 +13,7 @@ This example shows
 * working with user tasks
 * four eye principle with user tasks
 
-*Screenshots of the Diagram*
+**Screenshots of the Diagram**
 File src/main/resources/org/acme/travels/approval.bpmn
 
 <p align="center"><img width=75% height=50% src="docs/images/process.png"></p>
