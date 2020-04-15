@@ -9,7 +9,7 @@
   <groupId>org.kie.kogito.examples</groupId>
   <artifactId>process-springboot-example</artifactId>
 
-  <name>Kogito Example :: Kogito and Spring Boot</name>
+  <name>Kogito Example :: Process and Spring Boot</name>
   <description>Order management service</description>
 
   <dependencyManagement>
@@ -63,6 +63,7 @@
   </dependencies>
 
   <build>
+    <finalName>${project.artifactId}</finalName>
     <plugins>
       <plugin>
         <groupId>org.kie.kogito</groupId>
@@ -79,9 +80,6 @@
             </goals>
           </execution>
         </executions>
-        <configuration>
-          <mainClass>${start-class}</mainClass>
-        </configuration>
       </plugin>
       <plugin>
         <groupId>io.openapitools.swagger</groupId>
@@ -103,6 +101,7 @@
         </configuration>
         <executions>
           <execution>
+            <phase>compile</phase>
             <goals>
               <goal>generate</goal>
             </goals>

@@ -13,8 +13,8 @@ This example shows
 
 * working with timers (both intermediate and boundary)
 * optionally use Job Service that allows to externalize time tracking to separate service and by that offload the runtime service
-	
-	
+
+
 * Intermediate timer event (timers.bpmn)
 <p align="center"><img width=75% height=50% src="docs/images/timers.png"></p>
 
@@ -30,7 +30,7 @@ This example shows
 * Intermediate timer Timer
 <p align="center"><img src="docs/images/timersTimer.png"></p>
 
-* Intermediate timer After Timer 
+* Intermediate timer After Timer
 <p align="center"><img src="docs/images/timersAfterTimerScriptCall.png"></p>
 
 * Boundary timer event (timer-on-task.bpmn)
@@ -42,7 +42,7 @@ This example shows
 * Boundary timer Diagram Properties (bottom)
 <p align="center"><img src="docs/images/timerOnTaskDiagramProperties2.png"></p>
 
-* Boundary timer Before Timer 
+* Boundary timer Before Timer
 <p align="center"><img src="docs/images/timerOnTaskBeforeTimerScriptCall.png"></p>
 
 * Boundary timer User Task (top)
@@ -75,45 +75,36 @@ This example shows
 * Cycle timer AfterTimer
 <p align="center"><img src="docs/images/timersCycleAfterTimerScriptTask.png"></p>
 
-Timer expression is expected to be given in ISO-8601 format e.g. PT30S - wait 30 seconds before expiring. 
-This needs to be given when starting process instance as delay attribute of type string. 
+
+Timer expression is expected to be given in ISO-8601 format e.g. PT30S - wait 30 seconds before expiring.
+This needs to be given when starting process instance as delay attribute of type string.
 
 ## Build and run
 
-By default the [Jobs Service integration](#use-kogito-job-service-as-external-timer-service) is enabled for this example. To disable it, just comment this dependency in the `pom.xml` file:
-
-```xml
-<dependency>
-  <groupId>org.kie.kogito</groupId>
-  <artifactId>jobs-management-springboot-addon</artifactId>
-  <version>${kogito.version}</version>
-</dependency>
-```
-
 ### Prerequisites
- 
+
 You will need:
-  - Java 11+ installed 
+  - Java 11+ installed
   - Environment variable JAVA_HOME set accordingly
   - Maven 3.6.2+ installed
 
 ### Compile and Run in Local Dev Mode
 
-```
-mvn clean package spring-boot:run
+```sh
+mvn clean compile spring-boot:run
 ```
 
 
-### Compile and Run using uberjar
+### Package and Run using uberjar
 
+```sh
+mvn clean package
 ```
-mvn clean package 
-```
-  
+
 To run the generated native executable, generated in `target/`, execute
 
-```
-java -jar target/process-timer-sprintboot-{version}.jar
+```sh
+java -jar target/process-timer-springboot.jar
 ```
 
 ### OpenAPI (Swagger) documentation
@@ -126,30 +117,30 @@ In addition, various clients to interact with this service can be easily generat
 
 ### Submit a request to start new timers process
 
-To make use of this application it is as simple as putting a sending request to `http://localhost:8080/timers`  with following content 
+To make use of this application it is as simple as putting a sending request to `http://localhost:8080/timers`  with following content
 
-```
+```json
 {
-"delay" : "PT30S"
+    "delay" : "PT30S"
 }
 
 ```
 
 Complete curl command can be found below:
 
-```
+```sh
 curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"delay" : "PT30S"}' http://localhost:8080/timers
 ```
 
 ### Show active timer instances
 
-```
+```sh
 curl -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/timers
 ```
 
-### Cancel boundary timer instance 
+### Cancel boundary timer instance
 
-```
+```sh
 curl -X DELETE 'http://localhost:8080/timers/{uuid}'
 ```
 
@@ -158,30 +149,30 @@ where `{uuid}` is the id of the given timer instance
 
 ### Submit a request to start new timers cycle process
 
-To make use of this application it is as simple as putting a sending request to `http://localhost:8080/timerscycle`  with following content 
+To make use of this application it is as simple as putting a sending request to `http://localhost:8080/timerscycle`  with following content
 
-```
+```json
 {
-"delay" : "R2/PT1S"
+    "delay" : "R2/PT1S"
 }
 
 ```
 
 Complete curl command can be found below:
 
-```
+```sh
 curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"delay" : "R2/PT1S"}' http://localhost:8080/timerscycle
 ```
 
 ### Show active timer instances
 
-```
+```sh
 curl -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/timerscycle
 ```
 
-### Cancel timer cycle instance 
+### Cancel timer cycle instance
 
-```
+```sh
 curl -X DELETE 'http://localhost:8080/timerscycle/{uuid}'
 ```
 
@@ -191,30 +182,30 @@ where `{uuid}` is the id of the given timer cycle instance
 
 ### Submit a request to start new boundary timers process
 
-To make use of this application it is as simple as putting a sending request to `http://localhost:8080/timersOnTask`  with following content 
+To make use of this application it is as simple as putting a sending request to `http://localhost:8080/timersOnTask`  with following content
 
-```
+```json
 {
-"delay" : "PT30S"
+    "delay" : "PT30S"
 }
 
 ```
 
 Complete curl command can be found below:
 
-```
+```sh
 curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"delay" : "PT30S"}' http://localhost:8080/timersOnTask
 ```
 
 ### Show active boundary timer instances
 
-```
+```sh
 curl -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/timersOnTask
 ```
 
-### Cancel boundary timer instance 
+### Cancel boundary timer instance
 
-```
+```sh
 curl -X DELETE 'http://localhost:8080/timersOnTask/{uuid}'
 ```
 
@@ -233,14 +224,13 @@ Before timer... waiting for  R2/PT1S
 After Timer
 After Timer
 ```
-
 ## Use Kogito Job Service as external timer service
 
 There is additional configuration needed in the `application.properties` file.
 
 ### Configure application.properties
 
-To allow to use Job Service as timer service there is a need to specify additional properties 
+To allow to use Job Service as timer service there is a need to specify additional properties
 
 ```
 kogito.jobs-service.url=http://localhost:8085
@@ -258,7 +248,7 @@ You need to download the job service and start it locally
 You can download it from [Select Latest Version]
 https://repo.maven.apache.org/maven2/org/kie/kogito/jobs-service/
 
-```
+```sh
 java -Dquarkus.http.port=8085 -jar target/jobs-service-{version}-runner.jar
 ```
 
@@ -268,7 +258,7 @@ java -Dquarkus.http.port=8085 -jar target/jobs-service-{version}-runner.jar
 
 Note that in the above log infinispan has started on port 11222
 
-In case you'd like to run the job service with enabled persistence then start 
+In case you'd like to run the job service with enabled persistence then start
 Infinispan server before and then run the job service with following command
 
 Download Infinispan Server from
@@ -277,7 +267,7 @@ https://infinispan.org/download/
 Start Infinispan Server
 [Infinispan Directory]/bin/sh server.sh
 
-```
+```sh
 java -Dquarkus.http.port=8085 -Dkogito.jobs-service.persistence=infinispan -jar target/jobs-service-{version}-runner.jar
 ```
 

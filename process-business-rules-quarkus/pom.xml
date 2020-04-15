@@ -13,7 +13,7 @@
 
   <artifactId>process-business-rules-quarkus</artifactId>
 
-  <name>Kogito Examples :: Kogito Business Rules Quarkus</name>
+  <name>Kogito Examples :: Process Business Rules Quarkus</name>
   <description>Kogito business rules invocation - Quarkus</description>
 
 
@@ -57,6 +57,7 @@
     </dependency>
   </dependencies>
   <build>
+    <finalName>${project.artifactId}</finalName>
     <plugins>
       <plugin>
         <groupId>io.quarkus</groupId>

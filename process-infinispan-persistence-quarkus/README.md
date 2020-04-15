@@ -18,9 +18,9 @@ This example shows
 Note: The use of this example shows that the data sent to infinispan is saved, you can shut down the application and restart it
 and as long as infinispan is running after you restart you should still see the data
 
-It utilizes Infinispan server as the backend store. 
-	
-* Process (submitDeal.bpmn)	
+It utilizes Infinispan server as the backend store.
+
+* Process (submitDeal.bpmn)
 <p align="center"><img width=75% height=50% src="docs/images/process.png"></p>
 
 * Process Properties (top)
@@ -29,19 +29,19 @@ It utilizes Infinispan server as the backend store.
 * Process Properties (bottom)
 <p align="center"><img src="docs/images/processProperties2.png"></p>
 
-* Call a deal	
+* Call a deal
 <p align="center"><img src="docs/images/callADeal.png"></p>
 
-* Call a deal (Assignments)	
+* Call a deal (Assignments)
 <p align="center"><img src="docs/images/callADeal2.png"></p>
 
-* Print review the Deal	
+* Print review the Deal
 <p align="center"><img src="docs/images/printReviewTheDeal.png"></p>
 
 * Subprocess (reviewDeal.bpmn)
 <p align="center"><img width=75% height=50% src="docs/images/subprocess.png"></p>
 
-* Deal Review (top)	
+* Deal Review (top)
 <p align="center"><img src="docs/images/dealReview.png"></p>
 
 * Deal Review (bottom)
@@ -62,19 +62,19 @@ This quickstart requires an Inifinispan server to be available and by default ex
 
 You can install Inifinispan server by downloading it from [official website](https://infinispan.org/download/) version to be used is at least 10.0.0.Final
 
-* Infinispan installed and running	
+* Infinispan installed and running
 <p align="center"><img src="docs/images/infinispanInstalledAndRunning.png"></p>
 
 ## Build and run
 
 ### Prerequisites
- 
+
 You will need:
-  - Java 11+ installed 
+  - Java 11+ installed
   - Environment variable JAVA_HOME set accordingly
   - Maven 3.6.2+ installed
 
-When using native image compilation, you will also need: 
+When using native image compilation, you will also need:
   - GraalVM 19.3+ installed
   - Environment variable GRAALVM_HOME set accordingly
   - GraalVM native image needs as well native-image extension: https://www.graalvm.org/docs/reference-manual/native-image/
@@ -82,24 +82,37 @@ When using native image compilation, you will also need:
 
 ### Compile and Run in Local Dev Mode
 
-```
-mvn clean package quarkus:dev    
+```sh
+mvn clean compile quarkus:dev
 ```
 
 NOTE: With dev mode of Quarkus you can take advantage of hot reload for business assets like processes, rules, decision tables and java code. No need to redeploy or restart your running application.
 
+### Package and Run in JVM mode
 
-### Compile and Run using Local Native Image
+```sh
+mvn clean package
+java -jar target/process-infinispan-persistence-quarkus-runner.jar
+```
+
+or on windows
+
+```sh
+mvn clean package
+java -jar target\process-infinispan-persistence-quarkus-runner.jar
+```
+
+### Package and Run using Local Native Image
 Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
 
-```
+```sh
 mvn clean package -Pnative
 ```
-  
+
 To run the generated native executable, generated in `target/`, execute
 
 ```
-./target/process-infinispan-persistence-quarkus-{version}-runner
+./target/process-infinispan-persistence-quarkus-runner
 ```
 
 ### OpenAPI (Swagger) documentation
@@ -113,20 +126,20 @@ When running in either Quarkus Development or Native mode, we also leverage the 
 
 ### Submit a deal
 
-To make use of this application it is as simple as putting a sending request to `http://localhost:8080/deals`  with following content 
+To make use of this application it is as simple as putting a sending request to `http://localhost:8080/deals`  with following content
 
-```
+```json
 {
 "name" : "my fancy deal",
-"traveller" : { 
-  "firstName" : "John", 
-  "lastName" : "Doe", 
-  "email" : "jon.doe@example.com", 
+"traveller" : {
+  "firstName" : "John",
+  "lastName" : "Doe",
+  "email" : "jon.doe@example.com",
   "nationality" : "American",
-  "address" : { 
-  	"street" : "main street", 
-  	"city" : "Boston", 
-  	"zipCode" : "10005", 
+  "address" : {
+  	"street" : "main street",
+  	"city" : "Boston",
+  	"zipCode" : "10005",
   	"country" : "US" }
   }
 }
@@ -176,7 +189,7 @@ curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d 
 
 where uuid is the id of the deal review and tuuid is the id of the user task you want to get
 
-* Review Log should look similar to 	
+* Review Log should look similar to
 
 ```
 Review of the deal very good work for traveller Doe

@@ -3,33 +3,33 @@
 ## Description
 
 A quickstart project shows very typical user task orchestration. It comes with two tasks assigned
-to human actors via groups assignments - `managers`. So essentially anyone who is a member of that 
-group can act on the tasks. Though this example applies four eye principle which essentially means 
-that user who approved first task cannot approve second one. So there must be always at least two 
+to human actors via groups assignments - `managers`. So essentially anyone who is a member of that
+group can act on the tasks. Though this example applies four eye principle which essentially means
+that user who approved first task cannot approve second one. So there must be always at least two
 distinct manager involved.
 
 This example shows
 
 * working with user tasks
 * four eye principle with user tasks
-	
-	
+
+
 <p align="center"><img width=75% height=50% src="docs/images/process.png"></p>
 
 
 ## Build and run
 
 ### Prerequisites
- 
+
 You will need:
-  - Java 11+ installed 
+  - Java 11+ installed
   - Environment variable JAVA_HOME set accordingly
   - Maven 3.6.2+ installed
   - [jq](https://stedolan.github.io/jq) tool installed. You can download it from [here](https://stedolan.github.io/jq/download)
   - Docker
 
 
-When using native image compilation, you will also need: 
+When using native image compilation, you will also need:
   - GraalVM 19.1+ installed
   - Environment variable GRAALVM_HOME set accordingly
   - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too, please refer to GraalVM installation documentation for more details.
@@ -39,14 +39,14 @@ When using native image compilation, you will also need:
 To start a Keycloak Server you can use Docker and just run the following command:
 
 ```
-docker run -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin  -e KEYCLOAK_IMPORT=/tmp/kogito-realm.json -v <kogito-quickstarts_absolute_path>/kogito-usertasks-with-security-oidc-quarkus/config/kogito-realm.json:/tmp/kogito-realm.json -p 8280:8080  jboss/keycloak
+docker run -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin  -e KEYCLOAK_IMPORT=/tmp/kogito-realm.json -v <kogito-quickstarts_absolute_path>/kogito-usertasks-with-security-oidc-quarkus/config/kogito-realm.json:/tmp/kogito-realm.json -p 8281:8080  jboss/keycloak
 ```
 
-You should be able to access your Keycloak Server at [localhost:8280/auth](http://localhost:8280).
-and verify keycloak server is running properly: log in as the admin user to access the Keycloak Administration Console. 
+You should be able to access your Keycloak Server at [localhost:8281/auth](http://localhost:8281).
+and verify keycloak server is running properly: log in as the admin user to access the Keycloak Administration Console.
 Username should be admin and password admin.
 With the keycloak kogito realm  imported we have defined users to be able to try the different endpoints
-user: 
+user:
     john with role 'employees'
     mary with role 'managers'
     poul with roles 'interns and managers'
@@ -54,23 +54,36 @@ user:
 ### Compile and Run in Local Dev Mode
 
 ```
-mvn clean package quarkus:dev    
+mvn clean compile quarkus:dev
 ```
 
 NOTE: With dev mode of Quarkus you can take advantage of hot reload for business assets like processes, rules, decision tables and java code. No need to redeploy or restart your running application.
 
+### Package and Run in JVM mode
 
-### Compile and Run using Local Native Image
+```sh
+mvn clean package
+java -jar target/process-usertasks-with-security-oidc-quarkus-runner.jar
+```
+
+or on windows
+
+```sh
+mvn clean package
+java -jar target\process-usertasks-with-security-oidc-quarkus-runner.jar
+```
+
+### Package and Run using Local Native Image
 Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
 
 ```
 mvn clean package -Pnative
 ```
-  
+
 To run the generated native executable, generated in `target/`, execute
 
 ```
-./target/process-usertasks-with-security-oidc-keycloak-{version}-runner
+./target/process-usertasks-with-security-oidc-quarkus-runner
 ```
 
 ### OpenAPI (Swagger) documentation
@@ -84,19 +97,19 @@ When running in either Quarkus Development or Native mode, we also leverage the 
 
 ### Submit a request to start new approval
 
-To make use of this application it is as simple as putting a sending request to `http://localhost:8080/approvals`  with following content 
+To make use of this application it is as simple as putting a sending request to `http://localhost:8080/approvals`  with following content
 
-```
+```json
 {
-"traveller" : { 
-  "firstName" : "John", 
-  "lastName" : "Doe", 
-  "email" : "jon.doe@example.com", 
+"traveller" : {
+  "firstName" : "John",
+  "lastName" : "Doe",
+  "email" : "jon.doe@example.com",
   "nationality" : "American",
-  "address" : { 
-  	"street" : "main street", 
-  	"city" : "Boston", 
-  	"zipCode" : "10005", 
+  "address" : {
+  	"street" : "main street",
+  	"city" : "Boston",
+  	"zipCode" : "10005",
   	"country" : "US" }
   }
 }
@@ -105,45 +118,46 @@ To make use of this application it is as simple as putting a sending request to 
 
 Complete curl command can be found below:
 
-The application is using bearer token authorization and the first thing to do is obtain an access token from the Keycloak 
+The application is using bearer token authorization and the first thing to do is obtain an access token from the Keycloak
 Server in order to access the application resources. Obtain an access token for user john.
 
-```
+```sh
 export access_token=$(\
-    curl -X POST http://localhost:8280/auth/realms/kogito/protocol/openid-connect/token \
+    curl -X POST http://localhost:8281/auth/realms/kogito/protocol/openid-connect/token \
     --user kogito-app:secret \
     -H 'content-type: application/x-www-form-urlencoded' \
     -d 'username=john&password=john&grant_type=password' | jq --raw-output '.access_token' \
  )
 ```
 
-```
+```sh
 curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -H "Authorization: Bearer "$access_token -d '{"traveller" : { "firstName" : "John", "lastName" : "Doe", "email" : "jon.doe@example.com", "nationality" : "American","address" : { "street" : "main street", "city" : "Boston", "zipCode" : "10005", "country" : "US" }}}' http://localhost:8080/approvals
 ```
 
 ### Show active approvals
 
-```
+```sh
 curl -H 'Content-Type:application/json' -H 'Accept:application/json' -H "Authorization: Bearer "$access_token http://localhost:8080/approvals
 ```
 
-### Show tasks 
+### Show tasks
 
-```
+```sh
 curl -H 'Content-Type:application/json' -H 'Accept:application/json' -H "Authorization: Bearer "$access_token 'http://localhost:8080/approvals/{uuid}/tasks?user=john&group=employees'
 ```
 
 Try with the manager Mary
 
-```
+```sh
 export access_token=$(\
-    curl -X POST http://localhost:8280/auth/realms/kogito/protocol/openid-connect/token \
+    curl -X POST http://localhost:8281/auth/realms/kogito/protocol/openid-connect/token \
     --user kogito-app:secret \
     -H 'content-type: application/x-www-form-urlencoded' \
     -d 'username=mary&password=mary&grant_type=password' | jq --raw-output '.access_token' \
  )
 ```
-```
+
+```sh
 curl -H 'Content-Type:application/json' -H 'Accept:application/json' -H "Authorization: Bearer "$access_token 'http://localhost:8080/approvals/{uuid}/tasks?user=mary&group=managers'
 ```
 
@@ -152,15 +166,15 @@ where `{uuid}` is the id of the given approval instance
 
 ### Complete first line approval task
 
-```
+```sh
 curl -H "Authorization: Bearer "$access_token -X POST -d '{"approved" : true}' -H 'Content-Type:application/json' -H 'Accept:application/json' 'http://localhost:8080/approvals/{uuid}/firstLineApproval/{tuuid}?user=mary&group=managers'
 ```
 
 where `{uuid}` is the id of the given approval instance and `{tuuid}` is the id of the task
 
-### Show tasks 
+### Show tasks
 
-```
+```sh
 curl -H 'Content-Type:application/json' -H 'Accept:application/json' -H "Authorization: Bearer "$access_token 'http://localhost:8080/approvals/{uuid}/tasks?user=mary&group=managers'
 ```
 
@@ -168,16 +182,16 @@ where `{uuid}` is the id of the given approval instance. This should return empt
 
 Repeating the request with another user
 
-```
+```sh
 export access_token=$(\
-    curl -X POST http://localhost:8280/auth/realms/kogito/protocol/openid-connect/token \
+    curl -X POST http://localhost:8281/auth/realms/kogito/protocol/openid-connect/token \
     --user kogito-app:secret \
     -H 'content-type: application/x-www-form-urlencoded' \
     -d 'username=poul&password=poul&grant_type=password' | jq --raw-output '.access_token' \
  )
 ```
 
-```
+```sh
 curl -H 'Content-Type:application/json' -H 'Accept:application/json' -H "Authorization: Bearer "$access_token 'http://localhost:8080/approvals/{uuid}/tasks?user=poul&group=managers'
 ```
 
@@ -185,16 +199,16 @@ Now we have the id for the second approval task
 
 ### Complete second line approval task
 
-```
+```sh
 curl -H "Authorization: Bearer "$access_token -X POST -d '{"approved" : true}' -H 'Content-Type:application/json' -H 'Accept:application/json' 'http://localhost:8080/approvals/{uuid}/secondLineApproval/{tuuid}?user=poul&group=managers'
 ```
 
 where `{uuid}` is the id of the given approval instance and `{tuuid}` is the id of the task instance
 
-This completes the approval and returns approvals model where both approvals of first and second line can be found, 
+This completes the approval and returns approvals model where both approvals of first and second line can be found,
 plus the approver who made the first one.
 
-```
+```json
 {
   "approver": "mary",
   "firstLineApproval": true,

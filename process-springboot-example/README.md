@@ -11,21 +11,35 @@ Based on these two processes (defined using BPMN 2.0 format), the custom data ob
 ## Installing and Running
 
 ### Prerequisites
- 
+
 You will need:
-  - Java 11+ installed 
+  - Java 11+ installed
   - Environment variable JAVA_HOME set accordingly
   - Maven 3.6.2+ installed
 
-## Installing and Running
+### Compile and Run in Local Dev Mode
 
 ```
-mvn clean package spring-boot:run    
+mvn clean compile spring-boot:run
+```
+
+### Package and Run in JVM mode
+
+```
+mvn clean package
+java -jar target/jbpm-springboot-example.jar
+```
+
+or on windows
+
+```
+mvn clean package
+java -jar target\jbpm-springboot-example.jar
 ```
 
 ### Running with persistence enabled
 
-Kogito supports runtime persistence that is backed by Inifinispan. So to be able to enable this you need to have 
+Kogito supports runtime persistence that is backed by Inifinispan. So to be able to enable this you need to have
 Infinispan server installed and available over the network. By default it expects it to be at (it can be configured via application.properties file located in src/main/resources)
 
 ```
@@ -124,7 +138,7 @@ Example response:
 Getting user tasks awaiting user action
 
 ```sh
-curl -X GET http://localhost:8080/orderItems/66c11e3e-c211-4cee-9a07-848b5e861bc5/tasks
+curl -X GET http://localhost:8080/orderItems/66c11e3e-c211-4cee-9a07-848b5e861bc5/tasks?user=john
 ```
 Example response:
 ```json
@@ -138,7 +152,7 @@ Example response:
 Getting user task details
 
 ```sh
-curl -X GET http://localhost:8080/orderItems/66c11e3e-c211-4cee-9a07-848b5e861bc5/Verify_order/62f1c985-d31c-4ead-9906-2fe8d05937f0
+curl -X GET http://localhost:8080/orderItems/66c11e3e-c211-4cee-9a07-848b5e861bc5/Verify_order/62f1c985-d31c-4ead-9906-2fe8d05937f0?user=john
 ```
 Example response:
 ```json
@@ -159,7 +173,7 @@ Example response:
 Complete user task
 
 ```sh
-curl -d '{}' -H "Content-Type: application/json" -X POST http://localhost:8080/orderItems/66c11e3e-c211-4cee-9a07-848b5e861bc5/Verify_order/62f1c985-d31c-4ead-9906-2fe8d05937f0
+curl -d '{}' -H "Content-Type: application/json" -X POST http://localhost:8080/orderItems/66c11e3e-c211-4cee-9a07-848b5e861bc5/Verify_order/62f1c985-d31c-4ead-9906-2fe8d05937f0?user=john
 ```
 
 

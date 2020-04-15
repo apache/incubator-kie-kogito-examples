@@ -10,7 +10,7 @@
   </parent>
 
   <artifactId>process-scripts-springboot</artifactId>
-  <name>Kogito Examples :: Kogito Scripts With Spring Boot</name>
+  <name>Kogito Examples :: Process Scripts With Spring Boot</name>
   <description>Kogito script invocation - Spring Boot</description>
 
   <dependencyManagement>
@@ -53,6 +53,7 @@
   </dependencies>
 
   <build>
+    <finalName>${project.artifactId}</finalName>
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>
@@ -92,6 +93,7 @@
         </configuration>
         <executions>
           <execution>
+            <phase>compile</phase>
             <goals>
               <goal>generate</goal>
             </goals>
