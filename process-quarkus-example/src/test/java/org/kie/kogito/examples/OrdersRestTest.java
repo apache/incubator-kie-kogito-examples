@@ -1,5 +1,8 @@
 package org.kie.kogito.examples;
 
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -16,10 +19,6 @@ import org.kie.kogito.process.Process;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-
 @QuarkusTest
 public class OrdersRestTest {
     @Inject
@@ -31,11 +30,8 @@ public class OrdersRestTest {
     Process<? extends Model> orderItemsProcess;
 
     @BeforeEach
-    public void setup() {
-        // abort up all intsances after each test
-        // as other tests might have added instances
-        // needed until Quarkust implements @DirtiesContext similar to springboot
-        // see https://github.com/quarkusio/quarkus/pull/2866
+    public void cleanUp() {
+        // need it when running with persistence
         orderProcess.instances().values().forEach(pi -> pi.abort());
         orderItemsProcess.instances().values().forEach(pi -> pi.abort());
     }
