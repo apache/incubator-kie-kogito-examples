@@ -3,36 +3,53 @@ package org.kie.kogito.examples.demo;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.kie.kogito.Model;
 import org.kie.kogito.examples.DemoApplication;
+import org.kie.kogito.process.Process;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = DemoApplication.class)
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD) // reset spring context after each test method
-public class OrderServiceRestTest {
+public class OrdersRestTest {
 
     // restassured needs to know the random port created for test
     @LocalServerPort
     int port;
 
-    @Before
+    @Inject
+    @Named("demo.orders")
+    Process<? extends Model> orderProcess;
+
+    @Inject
+    @Named("demo.orderItems")
+    Process<? extends Model> orderItemsProcess;
+
+    @BeforeEach
     public void setUp() {
         RestAssured.port = port;
+
+        // need it when running with persistence
+        orderProcess.instances().values().forEach(pi -> pi.abort());
+        orderItemsProcess.instances().values().forEach(pi -> pi.abort());
     }
 
     protected static String orderPayload = "{\"approver\" : \"john\", \"order\" : {\"orderNumber\" : \"12345\", \"shipped\" : false}}";

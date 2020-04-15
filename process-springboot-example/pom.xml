@@ -9,7 +9,7 @@
   <groupId>org.kie.kogito.examples</groupId>
   <artifactId>process-springboot-example</artifactId>
 
-  <name>Kogito Example :: Kogito and SpringBoot</name>
+  <name>Kogito Example :: Process and Spring Boot</name>
   <description>Order management service</description>
 
   <dependencyManagement>
@@ -130,6 +130,19 @@
           <version>2.1.7.Final</version>
         </dependency>
       </dependencies>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <configuration>
+              <systemPropertyVariables>
+                <tests.category>persistence</tests.category>
+              </systemPropertyVariables>
+            </configuration>
+	      </plugin>
+        </plugins>
+      </build>
     </profile>
   </profiles>
 

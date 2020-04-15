@@ -12,7 +12,7 @@ import org.kie.kogito.Application;
 import org.kie.kogito.Model;
 import org.kie.kogito.process.Process;
 import org.kie.kogito.process.ProcessInstance;
-import org.kie.kogito.process.impl.DefaultProcessEventListenerConfig;
+import org.kie.kogito.process.impl.CachedProcessEventListenerConfig;
 import org.kie.kogito.tests.KogitoInfinispanSpringbootApplication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -35,7 +35,7 @@ public class BoundaryTimersProcessTest {
     @Test
     public void testTimersProcess() throws InterruptedException {
         CountDownLatch latch = new CountDownLatch(1);
-        ((DefaultProcessEventListenerConfig) app.config().process().processEventListeners()).register(new CompleteProcessListener(latch));
+        ((CachedProcessEventListenerConfig) app.config().process().processEventListeners()).register(new CompleteProcessListener(latch));
 
         Process<? extends Model> timersOnTaskProcess = app.processes().processById("timersOnTask");
         assertNotNull(timersOnTaskProcess);

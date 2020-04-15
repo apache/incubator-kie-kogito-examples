@@ -1,5 +1,8 @@
 package org.kie.kogito.examples;
 
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -11,15 +14,12 @@ import javax.inject.Named;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
 import org.kie.kogito.Model;
 import org.kie.kogito.process.Process;
 
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
-
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
 
 @SuppressWarnings("rawtypes")
 @QuarkusTest
@@ -29,11 +29,8 @@ public class PersonsRestTest {
     Process<? extends Model> personProcess;
 
     @BeforeEach
-    public void setup() {
-        // abort up all intsances after each test
-        // as other tests might have added instances
-        // needed until Quarkust implements @DirtiesContext similar to springboot
-        // see https://github.com/quarkusio/quarkus/pull/2866
+    public void cleanUp() {
+        // need it when running with persistence
         personProcess.instances().values().forEach(pi -> pi.abort());
     }
 
@@ -187,6 +184,8 @@ public class PersonsRestTest {
                 .body("$.size()", is(0));
     }
     
+    // Disabled until KOGITO-1787 is fixed
+    @DisabledIfSystemProperty(named = "tests.category", matches = "persistence")
     @Test
     public void testPersonsRestStartFromUserTask() {
         assertNotNull(personProcess);
@@ -301,6 +300,8 @@ public class PersonsRestTest {
                 .body("$.size()", is(0));
     }
     
+    // Disabled until KOGITO-1796 is fixed
+    @DisabledIfSystemProperty(named = "tests.category", matches = "persistence")
     @Test
     public void testChildPersonsRestCancelAndTriggerNodeViaMgmtInterface() {
         assertNotNull(personProcess);
