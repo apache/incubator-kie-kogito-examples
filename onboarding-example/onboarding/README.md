@@ -138,5 +138,5 @@ If using [Knative Serving Operator](https://github.com/knative/serving-operator)
 
 ```sh
 oc adm policy add-role-to-user knative-serving-core system:serviceaccount:myproject:default -n default
-oc adm policy add-role-to-user view system:serviceaccount:myproject:default -n istio-system    
+oc adm policy add-role-to-user view system:serviceaccount:myproject:default -n istio-system
 ```

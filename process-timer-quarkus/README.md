@@ -259,7 +259,6 @@ After Timer
 After Timer
 ```
 
-
 ## Use Kogito Job Service as external timer service
 
 There is additional configuration needed in 
@@ -329,3 +328,9 @@ in both cases replace `{version}` with actual Kogito version to be used (Job Ser
 <p align="center"><img src="docs/images/infinispanRunning.png"></p>
 
 After that you can redo the timer queries described above
+
+## Deploy on OpenShift
+
+This example can run on OpenShift 4 instance. Use [Kogito operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift) to deploy this example and instantiate also the Jobs service. Kogito operator will take care of configuring this example to successfully connect to the Jobs service.
+
+In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with the Kogito Operator.
