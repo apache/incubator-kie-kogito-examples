@@ -73,18 +73,6 @@ This quickstart requires an Apache Kafka to be available and by default expects 
 
 https://kafka.apache.org/quickstart
 
-In addition to that two topics are needed
-
-* travellers
-* processedtravellers
-
-```sh
-bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic travellers
-bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic processedtravellers
-```
-
-These topics are expected to be without key
-
 ## Build and run
 
 ### Prerequisites
