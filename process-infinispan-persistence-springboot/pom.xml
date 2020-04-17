@@ -13,10 +13,15 @@
   <name>Kogito Examples :: Process Infinispan Persistence Spring Boot</name>
   <description>Kogito with Infinispan persistence - Spring Boot</description>
 
-  
-
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>org.infinispan</groupId>
+        <artifactId>infinispan-bom</artifactId>
+        <version>${infinispan.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
@@ -42,7 +47,6 @@
     <dependency>
       <groupId>org.infinispan</groupId>
       <artifactId>infinispan-spring-boot-starter-remote</artifactId>
-      <version>${infinispan.version}</version>
     </dependency>
 
     <!-- kogito -->
@@ -58,7 +62,6 @@
       <groupId>org.kie.kogito</groupId>
       <artifactId>infinispan-persistence-addon</artifactId>
     </dependency>
-    
 
     <dependency>
       <groupId>org.springframework.boot</groupId>

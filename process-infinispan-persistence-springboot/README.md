@@ -159,7 +159,7 @@ where uuid is the id of the deal review and tuuid is the id of the user task you
 Last but not least you can complete review user task by
 
 ```sh
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"review" : "very good work"}' http://localhost:8080/dealreviews/uuid/review/{tuuid}?user=john
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"review" : "very good work"}' http://localhost:8080/dealreviews/{uuid}/review/{tuuid}?user=john
 ```
 
 where uuid is the id of the deal review and tuuid is the id of the user task you want to get
