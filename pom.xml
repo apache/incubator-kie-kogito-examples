@@ -49,7 +49,8 @@
     <kogito.version>${project.version}</kogito.version>
     <version.org.optaplanner>7.33.0.Final</version.org.optaplanner>
     <!-- infinispan -->
-    <infinispan.version>2.1.7.Final</infinispan.version>
+    <infinispan.version>10.1.5.Final</infinispan.version>
+    <infinispan.starter.version>2.2.3.Final</infinispan.starter.version>
     <version.testcontainers>1.12.4</version.testcontainers>
     <!-- jsonpath-->
     <version.jayway.jsonpath>2.4.0</version.jayway.jsonpath>
@@ -173,6 +174,11 @@
         <groupId>com.jayway.jsonpath</groupId>
         <artifactId>json-path</artifactId>
         <version>${version.jayway.jsonpath}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.infinispan</groupId>
+        <artifactId>infinispan-spring-boot-starter-remote</artifactId>
+        <version>${infinispan.starter.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

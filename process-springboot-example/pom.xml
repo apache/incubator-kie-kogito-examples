@@ -15,6 +15,13 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
+        <groupId>org.infinispan</groupId>
+        <artifactId>infinispan-bom</artifactId>
+        <version>${infinispan.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
         <version>${springboot.version}</version>
@@ -127,7 +134,6 @@
         <dependency>
           <groupId>org.infinispan</groupId>
           <artifactId>infinispan-spring-boot-starter-remote</artifactId>
-          <version>2.1.7.Final</version>
         </dependency>
       </dependencies>
       <build>
