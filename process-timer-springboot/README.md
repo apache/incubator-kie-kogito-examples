@@ -253,7 +253,7 @@ https://repo.maven.apache.org/maven2/org/kie/kogito/jobs-service/
 java -Dquarkus.http.port=8085 -jar target/jobs-service-{version}-runner.jar
 ```
 
-* After Starting Kogito Web Service you should see a similar Log as follows
+* After Starting Kogito Job Service you should see a similar Log as follows
 
 <p align="center"><img src="docs/images/kogitoWebServiceLog.png"></p>
 
