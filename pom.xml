@@ -51,6 +51,7 @@
     <!-- infinispan -->
     <infinispan.version>10.1.5.Final</infinispan.version>
     <infinispan.starter.version>2.2.3.Final</infinispan.starter.version>
+    <container.image.infinispan>quay.io/infinispan/server:${infinispan.version}</container.image.infinispan>
     <version.testcontainers>1.12.4</version.testcontainers>
     <!-- jsonpath-->
     <version.jayway.jsonpath>2.4.0</version.jayway.jsonpath>
@@ -169,6 +170,11 @@
       <dependency>
         <groupId>org.testcontainers</groupId>
         <artifactId>testcontainers</artifactId>
+        <version>${version.testcontainers}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.testcontainers</groupId>
+        <artifactId>junit-jupiter</artifactId>
         <version>${version.testcontainers}</version>
       </dependency>
       <dependency>
