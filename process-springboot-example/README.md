@@ -39,11 +39,11 @@ java -jar target\jbpm-springboot-example.jar
 
 ### Running with persistence enabled
 
-Kogito supports runtime persistence that is backed by Inifinispan. So to be able to enable this you need to have
+Kogito supports runtime persistence that is backed by Infinispan. So to be able to enable this you need to have
 Infinispan server installed and available over the network. By default it expects it to be at (it can be configured via application.properties file located in src/main/resources)
 
 ```
-localhost:11222
+infinispan.remote.server-list=localhost:11222
 ```
 
 You can install Infinispan server by downloading it from [Infinispan website](https://infinispan.org/download/), you should use version 10.0.x.  To enable our simplified demo setup, go to /server/conf/infinispan.xml and remove the security domain from the endpoints definition:
@@ -56,6 +56,21 @@ Once Infinispan is up and running you can build this project with `-Ppersistence
 
 This extra profile in maven configuration adds additional dependencies needed to work with Infinispan as persistent store.
 
+### Running with events enabled
+
+Kogito supports cloud events using Kafka as message broker. So to be able to enable this you need to have
+Kafka cluster installed and available over the network. Refer to [Kafka Apache site](https://kafka.apache.org/quickstart) to more information about how to install. By default it expects it to be at (it can be configured via application.properties file located in src/main/resources):
+
+```
+kafka.bootstrap.servers=localhost:9092
+```
+
+Kogito will use the following Kafka topics to listen for cloud events:
+
+* `kogito-processinstances-events` - used to emit events by kogito that can be consumed by data index service and other services
+* `kogito-usertaskinstances-events` -used to emit events by kogito that can be consumed by data index service
+
+Once Kafka is up and running you can build this project with `-Pevents` to enable additional processing during the build. This extra profile in maven configuration adds additional dependencies needed to work with Cloud Events.
 
 ## OpenAPI (Swagger) documentation
 [Specification at swagger.io](https://swagger.io/docs/specification/about/)
