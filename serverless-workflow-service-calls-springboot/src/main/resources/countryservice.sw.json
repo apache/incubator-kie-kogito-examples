@@ -1,0 +1,110 @@
+{
+  "id": "jsonservicecall",
+  "version": "1.0",
+  "name": "Service Call Workflow",
+  "description": "JSON based service call workflow",
+  "functions": [
+    {
+      "name": "countryInfoFunction",
+      "type": "service",
+      "metadata": {
+        "interface": "org.kie.kogito.serverless.examples.CountriesService",
+        "operation": "getCountryInfo"
+      }
+    },
+    {
+      "name": "classifySmallMediumFunction",
+      "type": "service",
+      "metadata": {
+        "interface": "org.kie.kogito.serverless.examples.ClassifierService",
+        "operation": "classifySmallMedium"
+      }
+    },
+    {
+      "name": "classifyLargeFunction",
+      "type": "service",
+      "metadata": {
+        "interface": "org.kie.kogito.serverless.examples.ClassifierService",
+        "operation": "classifyLarge"
+      }
+    }
+  ],
+  "states": [
+    {
+      "name": "GetCountryInfo",
+      "type": "OPERATION",
+      "start": {
+        "kind": "DEFAULT"
+      },
+      "actionMode": "SEQUENTIAL",
+      "actions": [
+        {
+          "name": "getCountryInfo",
+          "functionRef": {
+            "refName": "countryInfoFunction"
+          }
+        }
+      ],
+      "transition": {
+        "nextState": "ClassifyByPopulation"
+      }
+    },
+    {
+      "name": "ClassifyByPopulation",
+      "type": "SWITCH",
+      "choices": [
+        {
+          "path": "$.population",
+          "value": "20000000",
+          "operator": "LessThan",
+          "transition": {
+            "nextState": "ClassifyAsSmallOrMedium"
+          }
+        },
+        {
+          "path": "$.population",
+          "value": "20000000",
+          "operator": "GreaterThanEquals",
+          "transition": {
+            "nextState": "ClassifyAsLarge"
+          }
+        }
+      ],
+      "default": {
+        "nextState": "ClassifyAsSmallOrMedium"
+      }
+    },
+    {
+      "name": "ClassifyAsSmallOrMedium",
+      "type": "OPERATION",
+      "actionMode": "SEQUENTIAL",
+      "actions": [
+        {
+          "name": "classifyIntoSmallOrMedium",
+          "functionRef": {
+            "refName": "classifySmallMediumFunction"
+          }
+        }
+      ],
+      "end": {
+        "kind": "DEFAULT"
+      }
+    },
+    {
+      "name": "ClassifyAsLarge",
+      "type": "OPERATION",
+      "actionMode": "SEQUENTIAL",
+      "actions": [
+        {
+          "name": "classifyIntoLarge",
+          "functionRef": {
+            "refName": "classifyLargeFunction"
+          }
+        }
+      ],
+      "end": {
+        "kind": "DEFAULT"
+      }
+    }
+  ]
+}
