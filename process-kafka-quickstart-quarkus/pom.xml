@@ -10,7 +10,7 @@
     <version>8.0.0-SNAPSHOT</version>
   </parent>
 
-  <artifactId>processs-kafka-quickstart-quarkus</artifactId>
+  <artifactId>process-kafka-quickstart-quarkus</artifactId>
   <name>Kogito Examples :: Process with Kafka and Quarkus</name>
   <description>Kogito with Kafka - Quarkus</description>
 
