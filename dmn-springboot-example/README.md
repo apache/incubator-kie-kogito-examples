@@ -26,6 +26,11 @@ mvn clean package
 java -jar ./target/dmn-springboot-example.jar
 ```
 
+### Run Scenario Simulation
+
+```sh
+mvn clean test
+```
 ## Example Usage
 
 Once the service is up and running, you can use the following example to interact with the service.
