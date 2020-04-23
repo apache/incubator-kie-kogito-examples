@@ -1,0 +1,14 @@
+# deploy this service if you wish to enable Jobs Service integration.
+# Make sure to follow "Use Kogito Job Service as external timer service" in the README
+apiVersion: app.kiegroup.org/v1alpha1
+kind: KogitoJobsService
+metadata:
+  name: jobs-service
+spec:
+  replicas: 1
+  kafka:
+    useKogitoInfra: false
+  infinispan:
+    # set to "true" to enable Infinispan to be deployed with this service
+    useKogitoInfra: false
+

@@ -16,9 +16,14 @@
 
 package org.kie.kogito.examples.hr;
 
+import java.util.List;
+
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
+import io.restassured.common.mapper.TypeRef;
+import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
 
 import io.quarkus.test.junit.QuarkusTest;
@@ -43,9 +48,8 @@ public class DepartmentTest {
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
                 .when()
-                .post("/department")
+                .post("/department/first")
                 .then()
-                .statusCode(200)
                 .body("manager", is(result));
     }
 }

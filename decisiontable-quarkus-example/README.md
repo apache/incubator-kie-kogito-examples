@@ -26,21 +26,21 @@ When using native image compilation, you will also need:
 mvn clean compile quarkus:dev
 ```
 
-### Compile and Run in JVM mode
+### Package and Run in JVM mode
 
 ```
 mvn clean package
-java -jar target/decisiontable-quarkus-example-{version}-runner.jar
+java -jar target/decisiontable-quarkus-example-runner.jar
 ```
 
 or on windows
 
 ```
 mvn clean package
-java -jar target\decisiontable-quarkus-example-{version}-runner.jar
+java -jar target\decisiontable-quarkus-example-runner.jar
 ```
 
-### Compile and Run using Local Native Image
+### Package and Run using Local Native Image
 Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
 
 ```
@@ -50,7 +50,7 @@ mvn clean package -Pnative
 To run the generated native executable, generated in `target/`, execute
 
 ```
-./target/decisiontable-quarkus-example-{version}-runner
+./target/decisiontable-quarkus-example-runner
 ```
 
 Note: This does not yet work on Windows, GraalVM and Quarkus should be rolling out support for Windows soon.
@@ -72,10 +72,41 @@ Once the service is up and running, you can use the following examples to intera
 
 Returns approved loan applications from the given facts:
 
+Given facts:
+
+```json
+{
+    "maxAmount":5000,
+    "loanApplications":[
+        {
+            "id":"ABC10001",
+            "amount":2000,
+            "deposit":100,
+            "applicant":{"age":45,"name":"John"}
+        },
+        {
+            "id":"ABC10002",
+            "amount":5000,
+            "deposit":100,
+            "applicant":{"age":25,"name":"Paul"}
+        },
+        {
+            "id":"ABC10015",
+            "amount":1000,
+            "deposit":100,
+            "applicant":{"age":12,"name":"George"}
+        }
+    ]
+}
+```
+
+Example curl request (using the JSON above):
+
 ```sh
 curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"maxAmount":5000,"loanApplications":[{"id":"ABC10001","amount":2000,"deposit":100,"applicant":{"age":45,"name":"John"}}, {"id":"ABC10002","amount":5000,"deposit":100,"applicant":{"age":25,"name":"Paul"}}, {"id":"ABC10015","amount":1000,"deposit":100,"applicant":{"age":12,"name":"George"}}]}' http://localhost:8080/find-approved
 ```
-or on windows
+
+or on windows:
 
 ```sh
 curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" -d "{\"maxAmount\":5000,\"loanApplications\":[{\"id\":\"ABC10001\",\"amount\":2000,\"deposit\":100,\"applicant\":{\"age\":45,\"name\":\"John\"}}, {\"id\":\"ABC10002\",\"amount\":5000,\"deposit\":100,\"applicant\":{\"age\":25,\"name\":\"Paul\"}}, {\"id\":\"ABC10015\",\"amount\":1000,\"deposit\":100,\"applicant\":{\"age\":12,\"name\":\"George\"}}]}" http://localhost:8080/find-approved
@@ -84,6 +115,7 @@ curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" -
 As response an array of loan applications is returned.
 
 Example response:
+
 ```json
 [
   {
@@ -103,6 +135,8 @@ Example response:
 
 Returns ids and amount values of rejected loan applications from the given facts:
 
+Example curl request (using the JSON from previous example):
+
 ```sh
 curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"maxAmount":5000,"loanApplications":[{"id":"ABC10001","amount":2000,"deposit":100,"applicant":{"age":45,"name":"John"}}, {"id":"ABC10002","amount":5000,"deposit":100,"applicant":{"age":25,"name":"Paul"}}, {"id":"ABC10015","amount":1000,"deposit":100,"applicant":{"age":12,"name":"George"}}]}' http://localhost:8080/find-not-approved-id-and-amount
 ```
@@ -110,6 +144,7 @@ curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -
 As response an array of loan application ids and amount values is returned.
 
 Example response:
+
 ```json
 [
   {
@@ -123,3 +158,6 @@ Example response:
 ]
 ```
 
+## Deploying with Kogito Operator
+
+In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).

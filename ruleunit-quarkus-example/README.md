@@ -22,35 +22,35 @@ When using native image compilation, you will also need:
 
 ### Compile and Run in Local Dev Mode
 
-```
+```sh
 mvn clean compile quarkus:dev
 ```
 
-### Compile and Run in JVM mode
+### Package and Run in JVM mode
 
-```
+```sh
 mvn clean package
-java -jar target/ruleunit-quarkus-example-{version}-runner.jar
+java -jar target/ruleunit-quarkus-example-runner.jar
 ```
 
 or on windows
 
-```
+```sh
 mvn clean package
-java -jar target\ruleunit-quarkus-example-{version}-runner.jar
+java -jar target\ruleunit-quarkus-example-runner.jar
 ```
 
-### Compile and Run using Local Native Image
+### Package and Run using Local Native Image
 Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
 
-```
+```sh
 mvn clean package -Pnative
 ```
 
 To run the generated native executable, generated in `target/`, execute
 
-```
-./target/ruleunit-quarkus-example-{version}-runner
+```sh
+./target/ruleunit-quarkus-example-runner
 ```
 
 Note: This does not yet work on Windows, GraalVM and Quarkus should be rolling out support for Windows soon.
@@ -84,6 +84,7 @@ curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" -
 As response an array of loan applications is returned.
 
 Example response:
+
 ```json
 [
   {
@@ -123,3 +124,6 @@ Example response:
 ]
 ```
 
+## Deploying with Kogito Operator
+
+In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).

@@ -17,8 +17,20 @@ You will need:
 
 ### Compile and Run
 
+```sh
+mvn clean compile spring-boot:run
 ```
-mvn clean package spring-boot:run
+
+### Package and Run using uberjar
+
+```sh
+mvn clean package
+```
+
+To run the generated native executable, generated in `target/`, execute
+
+```sh
+java -jar target/kogito-usertasks-with-security-oidc-springboot.jar
 ```
 
 ## OpenAPI (Swagger) documentation
@@ -48,6 +60,7 @@ curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" -
 As response an array of loan applications is returned.
 
 Example response:
+
 ```json
 [
   {
@@ -74,6 +87,7 @@ curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -
 As response an array of loan application ids and amount values is returned.
 
 Example response:
+
 ```json
 [
   {
@@ -87,3 +101,6 @@ Example response:
 ]
 ```
 
+## Deploying with Kogito Operator
+
+In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).

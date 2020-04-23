@@ -13,7 +13,7 @@
   <artifactId>hr</artifactId>
   <packaging>jar</packaging>
   <name>Kogito Example :: Onboarding Example :: HR with Drools</name>
-  <description>HR related processes and decisions for onboarding</description>
+  <description>HR related rules for onboarding</description>
 
   <dependencies>
     <dependency>
@@ -49,10 +49,18 @@
     <plugins>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <systemProperties>
+            <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+          </systemProperties>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>io.quarkus</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
+        <configuration>
+          <debug>false</debug>
+        </configuration>
         <executions>
           <execution>
             <goals>
