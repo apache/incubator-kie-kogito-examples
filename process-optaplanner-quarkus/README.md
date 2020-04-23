@@ -1,4 +1,4 @@
-# jBPM + OptaPlanner + Quarkus example
+# Process + OptaPlanner + Quarkus example
 
 ## Description
 

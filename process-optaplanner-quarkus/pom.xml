@@ -9,7 +9,7 @@
   <groupId>org.kie.kogito.examples</groupId>
   <artifactId>process-optaplanner-quarkus</artifactId>
 
-  <name>Kogito Example :: jBPM, OptaPlanner and Quarkus</name>
+  <name>Kogito Example :: Process, OptaPlanner and Quarkus</name>
   <description>Flight assignment process and optimization</description>
 
   <properties>
