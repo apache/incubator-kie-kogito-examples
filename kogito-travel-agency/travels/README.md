@@ -167,7 +167,7 @@ mvn clean package -Pnative
 To run the generated native executable, generated in `target/`, execute
 
 ```
-./target/kogito-travel-agency-{version}-runner
+./target/travels-{version}-runner
 ```
 
 ### Start Kogito Data Index Service

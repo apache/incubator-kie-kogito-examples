@@ -73,18 +73,6 @@ This quickstart requires an Apache Kafka to be available and by default expects 
 
 https://kafka.apache.org/quickstart
 
-In addition to that two topics are needed
-
-* travellers
-* processedtravellers
-
-```sh
-bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic travellers
-bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic processedtravellers
-```
-
-These topics are expected to be without key
-
 ## Build and run
 
 ### Prerequisites
@@ -247,3 +235,7 @@ One Liner
 ```
 
 this will not result in message being send to `processedtravelers` topic.
+
+## Deploying with Kogito Operator
+
+In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).

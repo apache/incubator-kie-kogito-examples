@@ -1,0 +1,81 @@
+[
+  [
+     "name" : "BusinessRuleTask",
+     "parameters" : [
+       "Service" : new StringDataType()
+     ],
+     "displayName" : "Business Rule Task",
+     "icon" : "defaultbusinessrulesicon.png",
+     "category" : "Decision tasks"
+   ],
+   [
+    "name" : "DecisionTask", 
+    "parameters" : [ 
+        "Namespace" : new StringDataType(),
+        "Model" : new StringDataType(),
+        "Decision" : new StringDataType() 
+    ],
+    "displayName" : "Decision Task", 
+    "icon" : "defaultdecisionicon.png" 
+  ],
+   [
+    "name" : "AssignDepartmentAndManager", 
+    "parameters" : [ 
+        "Namespace" : new StringDataType(),
+        "Model" : new StringDataType(),
+        "Decision" : new StringDataType() 
+    ],
+    "displayName" : "Assign Department and Manager", 
+    "icon" : "defaultdecisionicon.png" 
+  ],
+   [
+    "name" : "CalculatePaymentDate", 
+    "parameters" : [ 
+        "Namespace" : new StringDataType(),
+        "Model" : new StringDataType(),
+        "Decision" : new StringDataType() 
+    ],
+    "displayName" : "Calculate Payment Date", 
+    "icon" : "defaultdecisionicon.png" 
+  ],
+   [
+    "name" : "CalculateVacationDays", 
+    "parameters" : [ 
+        "Namespace" : new StringDataType(),
+        "Model" : new StringDataType(),
+        "Decision" : new StringDataType() 
+    ],
+    "displayName" : "Calculate Vacation Days", 
+    "icon" : "defaultdecisionicon.png" 
+  ],
+   [
+    "name" : "CalculateTaxRate", 
+    "parameters" : [ 
+        "Namespace" : new StringDataType(),
+        "Model" : new StringDataType(),
+        "Decision" : new StringDataType() 
+    ],
+    "displayName" : "Calculate Tax Rate", 
+    "icon" : "defaultdecisionicon.png" 
+  ],
+   [
+    "name" : "ValidateEmployee", 
+    "parameters" : [ 
+        "Namespace" : new StringDataType(),
+        "Model" : new StringDataType(),
+        "Decision" : new StringDataType() 
+    ],
+    "displayName" : "Validate Employee", 
+    "icon" : "defaultdecisionicon.png" 
+  ],
+   [
+    "name" : "AssignIdAndEmail", 
+    "parameters" : [ 
+        "Namespace" : new StringDataType(),
+        "Model" : new StringDataType(),
+        "Decision" : new StringDataType() 
+    ],
+    "displayName" : "Assign Id and Email", 
+    "icon" : "defaultdecisionicon.png" 
+  ]
+]

@@ -224,6 +224,7 @@ Before timer... waiting for  R2/PT1S
 After Timer
 After Timer
 ```
+
 ## Use Kogito Job Service as external timer service
 
 There is additional configuration needed in the `application.properties` file.
@@ -252,7 +253,7 @@ https://repo.maven.apache.org/maven2/org/kie/kogito/jobs-service/
 java -Dquarkus.http.port=8085 -jar target/jobs-service-{version}-runner.jar
 ```
 
-* After Starting Kogito Web Service you should see a similar Log as follows
+* After Starting Kogito Job Service you should see a similar Log as follows
 
 <p align="center"><img src="docs/images/kogitoWebServiceLog.png"></p>
 
@@ -281,8 +282,9 @@ After that you can redo the timer queries described above.
 
 ## Deploy on OpenShift
 
-This sample can be ran just on OpenShift 4 instance as it requires communication with Job service.
-Use [Kogito operator](https://github.com/kiegroup/kogito-cloud-operator/blob/master/README.md) to deploy this example and instantiate also Jobs service. Kogito operator will take care of configuring the example deployment to successfully connect to the Jobs service.
+This example can run on OpenShift 4 instance. Use [Kogito operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift) to deploy this example and instantiate also the Jobs service. Kogito operator will take care of configuring this example to successfully connect to the Jobs service.
+
+In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with the Kogito Operator.
 
 ### Test your application
 

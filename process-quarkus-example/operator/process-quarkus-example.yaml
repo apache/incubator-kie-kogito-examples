@@ -1,0 +1,17 @@
+apiVersion: app.kiegroup.org/v1alpha1
+kind: KogitoApp
+metadata:
+  name: process-quarkus-example
+spec:
+  # uncomment to enable persistence
+  #enablePersistence: true
+  build:
+    # uncomment to enable persistence
+    #envs:
+    #  - name: MAVEN_ARGS_APPEND
+    #    value: "-Ppersistence"
+    gitSource:
+      contextDir: process-quarkus-example
+      uri: 'https://github.com/kiegroup/kogito-examples'
+    # set your maven nexus repository to speed up the build time
+    #mavenMirrorURL: 

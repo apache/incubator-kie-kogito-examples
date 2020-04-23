@@ -1,0 +1,13 @@
+apiVersion: app.kiegroup.org/v1alpha1
+kind: KogitoApp
+metadata:
+  name: travels
+spec:
+  enableEvents: true
+  enablePersistence: true
+  build:
+    gitSource:
+      contextDir: kogito-travel-agency/travels
+      uri: "https://github.com/kiegroup/kogito-examples/"
+    # set your maven nexus repository to speed up the build time
+    #mavenMirrorURL: 

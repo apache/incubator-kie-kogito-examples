@@ -38,8 +38,12 @@ Please follow the instruction for each of the individual services. It is recomen
 
 * [hr](hr/README.md)
 * [payroll](payroll/README.md)
-* [onboarding](onboarding/README.md)
+* [onboarding quarkus](onboarding-quarkus/README.md) or [onboarding spring boot](onboarding-springboot/README.md)
 
 ## Example Usage
 
 Once the services are up and running, please use the sample request as described in the onboarding service readme to start a new onboarding.
+
+## Deploying with Kogito Operator
+
+In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).

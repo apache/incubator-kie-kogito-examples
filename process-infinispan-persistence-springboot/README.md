@@ -159,7 +159,7 @@ where uuid is the id of the deal review and tuuid is the id of the user task you
 Last but not least you can complete review user task by
 
 ```sh
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"review" : "very good work"}' http://localhost:8080/dealreviews/uuid/review/{tuuid}?user=john
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"review" : "very good work"}' http://localhost:8080/dealreviews/{uuid}/review/{tuuid}?user=john
 ```
 
 where uuid is the id of the deal review and tuuid is the id of the user task you want to get
@@ -169,3 +169,7 @@ where uuid is the id of the deal review and tuuid is the id of the user task you
 ```
 Review of the deal very good work for traveller Doe
 ```
+
+## Deploying with Kogito Operator
+
+In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).
