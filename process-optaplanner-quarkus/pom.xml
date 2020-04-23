@@ -13,7 +13,7 @@
   <description>Flight assignment process and optimization</description>
 
   <properties>
-    <version.org.optaplanner>7.34.0.Final</version.org.optaplanner>
+    <version.org.optaplanner>7.36.0.Final</version.org.optaplanner>
   </properties>
 
   <dependencyManagement>
@@ -100,6 +100,11 @@
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-resteasy-jackson</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-openapi</artifactId>
     </dependency>
 
 
