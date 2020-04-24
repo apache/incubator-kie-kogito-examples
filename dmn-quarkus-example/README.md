@@ -55,6 +55,12 @@ To run the generated native executable, generated in `target/`, execute
 
 Note: This does not yet work on Windows, GraalVM and Quarkus should be rolling out support for Windows soon.
 
+### Run Scenario Simulation
+
+```sh
+mvn clean test
+```
+
 ## OpenAPI (Swagger) documentation
 [Specification at swagger.io](https://swagger.io/docs/specification/about/)
 
