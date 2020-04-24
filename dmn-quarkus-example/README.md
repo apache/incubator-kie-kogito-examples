@@ -55,12 +55,6 @@ To run the generated native executable, generated in `target/`, execute
 
 Note: This does not yet work on Windows, GraalVM and Quarkus should be rolling out support for Windows soon.
 
-### Run Scenario Simulation
-
-```sh
-mvn clean test
-```
-
 ## OpenAPI (Swagger) documentation
 [Specification at swagger.io](https://swagger.io/docs/specification/about/)
 
@@ -69,6 +63,16 @@ You can take a look at the [OpenAPI definition](http://localhost:8080/openapi?fo
 In addition, various clients to interact with this service can be easily generated using this OpenAPI definition.
 
 When running in either Quarkus Development or Native mode, we also leverage the [Quarkus OpenAPI extension](https://quarkus.io/guides/openapi-swaggerui#use-swagger-ui-for-development) that exposes [Swagger UI](http://localhost:8080/swagger-ui/) that you can use to look at available REST endpoints and send test requests.
+
+## Scenario simulation
+
+Scenario simulation in Kogito enables you to validate the functionality of DMN models before deploying them into a production environment. 
+
+To define scenario simulation you need to create a .scesim file inside your project and link it to the DMN model you want to be tested. Run all Test Scenarios, executing:
+
+```sh
+mvn clean test
+```
 
 ## Example Usage
 
