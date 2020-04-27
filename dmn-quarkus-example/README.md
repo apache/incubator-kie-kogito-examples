@@ -66,7 +66,7 @@ When running in either Quarkus Development or Native mode, we also leverage the 
 
 ## Test DMN Model using Maven
 
-Validate the functionality of DMN models before deploying them into a production environment by defining test scenarios in KIE Kogito editor. 
+Validate the functionality of DMN models before deploying them into a production environment by defining test scenarios in  Test Scenario Editor. 
 
 To define test scenarios you need to create a .scesim file inside your project and link it to the DMN model you want to be tested. Run all Test Scenarios, executing:
 
