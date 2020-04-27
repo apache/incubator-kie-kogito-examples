@@ -26,11 +26,17 @@ mvn clean package
 java -jar ./target/dmn-springboot-example.jar
 ```
 
-### Run Scenario Simulation
+## Test DMN Model using Maven
+
+Validate the functionality of DMN models before deploying them into a production environment by defining test scenarios in Test Scenario Editor. 
+
+To define test scenarios you need to create a .scesim file inside your project and link it to the DMN model you want to be tested. Run all Test Scenarios, executing:
 
 ```sh
 mvn clean test
 ```
+See results in surefire test report `target/surefire-reports` 
+
 ## Example Usage
 
 Once the service is up and running, you can use the following example to interact with the service.
