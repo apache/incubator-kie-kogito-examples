@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <project
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-  xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+    xmlns="http://maven.apache.org/POM/4.0.0">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
@@ -15,9 +15,6 @@
 
   <name>Kogito Examples :: Process Infinispan Persistence Quarkus</name>
   <description>Process with Infinispan persistence - Quarkus</description>
-
-
-  
 
   <dependencyManagement>
     <dependencies>
@@ -47,7 +44,6 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-openapi</artifactId>
     </dependency>
-
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>infinispan-persistence-addon</artifactId>
@@ -62,7 +58,11 @@
       <artifactId>rest-assured</artifactId>
       <scope>test</scope>
     </dependency>
-
+    <dependency>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
   <build>
     <finalName>${project.artifactId}</finalName>
@@ -83,6 +83,23 @@
         <configuration>
           <systemProperties>
             <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+          </systemProperties>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>integration-test</goal>
+              <goal>verify</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <systemProperties>
+            <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+            <container.image.infinispan>${container.image.infinispan}</container.image.infinispan>
           </systemProperties>
         </configuration>
       </plugin>
