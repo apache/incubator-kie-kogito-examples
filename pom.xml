@@ -137,6 +137,7 @@
     <module>process-infinispan-persistence-springboot</module>
     <module>process-kafka-quickstart-quarkus</module>
     <module>process-kafka-quickstart-springboot</module>
+    <module>process-optaplanner-quarkus</module>
     <module>process-optaplanner-springboot</module>
     <module>process-quarkus-example</module>
     <module>process-scripts-quarkus</module>
