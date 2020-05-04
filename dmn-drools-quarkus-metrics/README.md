@@ -54,7 +54,7 @@ To summarize, the kogito app will expose by default an endpoint `/metrics` with 
 
 ### Dashboards
 
-Two kind of dashboards will be generated depending on the model used on the endpoint: 
+Two kinds of dashboards will be generated depending on the model used on the endpoint: 
 1. DRL: A basic dashboard is exported and it contains: 
 a. Total number of requests on the endpoint.
 b. Average per minute of the number of requests on the endpoint.
@@ -71,10 +71,11 @@ You can use this default dashboards, or you can personalize them and use your cu
 
 ### Compile and Run in Local Dev Mode
 
-A script `docker-compose/run-compose.sh` is provided to demonstrate how to inject the generated dashboards in the volume of the grafana container:
- 1. the generated dashboards are copied from `target/resources/dashboards/` to the directory `docker-compose/grafana/provisioning/dashboards` 
- 2. The volumes of the grafana container are properly set in the `docker-compose.yml` file, so that the dashboards are properly loaded at startup.
- 3. `docker-compose` is run. 
+A script `docker-compose/run-compose.sh` is provided to demonstrate how to inject the generated dashboards in the volume of the grafana container: 
+1. the generated dashboards are copied from `target/resources/dashboards/` to the directory `docker-compose/grafana/provisioning/dashboards`. 
+2. `docker-compose` is run. 
+
+The volumes of the grafana container are properly set in the `docker-compose.yml` file, so that the dashboards are properly loaded at startup.
 
 ## Example Usage
 
