@@ -58,6 +58,10 @@
     <version.swagger.plugin>2.1.0</version.swagger.plugin>
     <version.surefire.plugin>2.22.0</version.surefire.plugin>
     <version.deploy.plugin>2.8.2</version.deploy.plugin>
+
+    <!-- license plugin -->
+    <version.license.plugin>3.0</version.license.plugin>
+    <skipLicensesCheck>false</skipLicensesCheck>
   </properties>
 
   <!-- distributionManagement section -->
@@ -367,6 +371,39 @@
         <!-- Entry needed to create, install and deploy sources jars -->
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>com.mycila</groupId>
+        <artifactId>license-maven-plugin</artifactId>
+        <version>${version.license.plugin}</version>
+        <configuration>
+          <header>file:///${maven.multiModuleProjectDirectory}/licensesheader.txt</header>
+          <includes>
+            <include>**/*.java</include>
+          </includes>
+          <excludes>
+            <exclude>.mvn/**</exclude>
+            <exclude>**/kogito-apps/**</exclude>
+            <exclude>**/kogito-runtimes/**</exclude>
+          </excludes>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>com.mycila</groupId>
+            <artifactId>license-maven-plugin-git</artifactId>
+            <version>${version.license.plugin}</version>
+          </dependency>
+        </dependencies>
+        <executions>
+          <execution>
+            <configuration>
+              <skip>${skipLicensesCheck}</skip>
+            </configuration>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
