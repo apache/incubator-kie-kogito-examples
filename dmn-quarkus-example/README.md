@@ -64,6 +64,17 @@ In addition, various clients to interact with this service can be easily generat
 
 When running in either Quarkus Development or Native mode, we also leverage the [Quarkus OpenAPI extension](https://quarkus.io/guides/openapi-swaggerui#use-swagger-ui-for-development) that exposes [Swagger UI](http://localhost:8080/swagger-ui/) that you can use to look at available REST endpoints and send test requests.
 
+## Test DMN Model using Maven
+
+Validate the functionality of DMN models before deploying them into a production environment by defining test scenarios in Test Scenario Editor. 
+
+To define test scenarios you need to create a .scesim file inside your project and link it to the DMN model you want to be tested. Run all Test Scenarios, executing:
+
+```sh
+mvn clean test
+```
+See results in surefire test report `target/surefire-reports` 
+
 ## Example Usage
 
 Once the service is up and running, you can use the following example to interact with the service.
