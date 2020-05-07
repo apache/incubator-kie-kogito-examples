@@ -47,14 +47,14 @@ mvn clean compile quarkus:dev
 
 ```text
 mvn clean package 
-java -jar target/serverless-workflow-service-calls-quarkus-runner.jar    
+java -jar target/serverless-workflow-events-quarkus-runner.jar    
 ```
 
 or on windows
 
 ```text
 mvn clean package
-java -jar target\serverless-workflow-service-calls-quarkus-runner.jar
+java -jar target\serverless-workflow-events-quarkus-runner.jar
 ```
 
 ### Package and Run using Local Native Image
@@ -67,7 +67,7 @@ mvn clean package -Pnative
 To run the generated native executable, generated in `target/`, execute
 
 ```text
-./target/serverless-workflow-service-calls-quarkus-runner
+./target/serverless-workflow-events-quarkus-runner
 ```
 
 ### Running the Example
