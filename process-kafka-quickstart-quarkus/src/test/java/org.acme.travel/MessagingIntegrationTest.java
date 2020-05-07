@@ -1,0 +1,118 @@
+/**
+ *  Copyright 2020 Red Hat, Inc. and/or its affiliates.
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.acme.travel;
+
+import java.time.ZonedDateTime;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.IntStream;
+
+import javax.inject.Inject;
+
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import io.quarkus.test.common.QuarkusTestResource;
+import io.quarkus.test.junit.QuarkusTest;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.jetbrains.annotations.NotNull;
+import org.junit.After;
+import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+@QuarkusTest
+@QuarkusTestResource(KafkaTestResource.class)
+public class MessagingIntegrationTest {
+
+    public static final String TOPIC_PRODUCER = "travellers";
+    public static final String TOPIC_CONSUMER = "processedtravellers";
+    private static Logger LOGGER = LoggerFactory.getLogger(MessagingIntegrationTest.class);
+
+    @Inject
+    private ObjectMapper objectMapper;
+
+    public KafkaTester kafkaTester;
+
+    @ConfigProperty(name = KafkaTestResource.KAFKA_BOOTSTRAP_SERVERS)
+    private String kafkaBootstrapServers;
+
+    @Test
+    public void testProcess() throws InterruptedException {
+        objectMapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
+        kafkaTester = new KafkaTester(kafkaBootstrapServers);
+
+        //number of generated events to test
+        final int count = 3;
+        final CountDownLatch countDownLatch = new CountDownLatch(count);
+
+        kafkaTester.consume(TOPIC_CONSUMER, s -> {
+            LOGGER.info("Received from kafka: {}", s);
+            try {
+                JsonNode event = objectMapper.readValue(s, JsonNode.class);
+                Traveller traveller = objectMapper.readValue(event.get("data").toString(), Traveller.class);
+                assertTrue(traveller.isProcessed());
+                assertTrue(traveller.getFirstName().matches("Name[0-9]+"));
+                assertTrue(traveller.getLastName().matches("LastName[0-9]+"));
+                assertTrue(traveller.getEmail().matches("email[0-9]+"));
+                assertTrue(traveller.getNationality().matches("Nationality[0-9]+"));
+                countDownLatch.countDown();
+            } catch (JsonProcessingException e) {
+                LOGGER.error("Error parsing {}", s, e);
+                throw new RuntimeException(e);
+            }
+        });
+
+        IntStream.range(0, count)
+                .mapToObj(i -> new Traveller("Name" + i, "LastName" + i, "email" + i, "Nationality" + i))
+                .forEach(traveller -> kafkaTester.produce(generateCloudEvent(traveller), TOPIC_PRODUCER));
+
+        countDownLatch.await(5, TimeUnit.SECONDS);
+        assertEquals(countDownLatch.getCount(), 0);
+        kafkaTester.shutdown();
+    }
+
+    @NotNull
+    public String generateCloudEvent(Traveller traveller) {
+        assertFalse(traveller.isProcessed());
+        try {
+            return JsonNodeFactory.instance
+                    .objectNode()
+                    .put("specversion", "0.3")
+                    .put("id", UUID.randomUUID().toString())
+                    .put("source", "")
+                    .put("type", "TravelersMessageDataEvent_3")
+                    .put("time", ZonedDateTime.now().toString())
+                    .set("data", JsonNodeFactory.instance.pojoNode(traveller))
+                    .toPrettyString();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @After
+    public void stop() {
+        Optional.ofNullable(kafkaTester).ifPresent(KafkaTester::shutdown);
+    }
+}
