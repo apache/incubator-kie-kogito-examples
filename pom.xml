@@ -134,6 +134,7 @@
     <module>dmn-listener-quarkus</module>
     <module>dmn-listener-springboot</module>
     <module>dmn-quarkus-example</module>
+    <module>dmn-drools-quarkus-metrics</module>
     <module>dmn-springboot-example</module>
     <module>kogito-travel-agency</module>
     <module>onboarding-example</module>
