@@ -15,6 +15,7 @@
  */
 package org.acme.travel;
 
+import java.net.URI;
 import java.time.ZonedDateTime;
 import java.util.Optional;
 import java.util.UUID;
@@ -28,11 +29,10 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import io.cloudevents.v03.CloudEventBuilder;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
-import org.jetbrains.annotations.NotNull;
 import org.junit.After;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -90,24 +90,20 @@ public class MessagingIntegrationTest {
 
         countDownLatch.await(5, TimeUnit.SECONDS);
         assertEquals(countDownLatch.getCount(), 0);
-        kafkaTester.shutdown();
     }
 
-    @NotNull
-    public String generateCloudEvent(Traveller traveller) {
+    private String generateCloudEvent(Traveller traveller) {
         assertFalse(traveller.isProcessed());
         try {
-            return JsonNodeFactory.instance
-                    .objectNode()
-                    .put("specversion", "0.3")
-                    .put("id", UUID.randomUUID().toString())
-                    .put("source", "")
-                    .put("type", "TravelersMessageDataEvent_3")
-                    .put("time", ZonedDateTime.now().toString())
-                    .set("data", JsonNodeFactory.instance.pojoNode(traveller))
-                    .toPrettyString();
+            return objectMapper.writeValueAsString(CloudEventBuilder.builder()
+                                                           .withId(UUID.randomUUID().toString())
+                                                           .withSource(URI.create(""))
+                                                           .withType("TravelersMessageDataEvent_3")
+                                                           .withTime(ZonedDateTime.now())
+                                                           .withData(traveller)
+                                                           .build());
         } catch (Exception e) {
-            return null;
+            throw new RuntimeException(e);
         }
     }
 

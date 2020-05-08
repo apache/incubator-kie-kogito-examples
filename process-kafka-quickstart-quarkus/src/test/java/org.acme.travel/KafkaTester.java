@@ -21,6 +21,7 @@ import java.util.Optional;
 import java.util.Properties;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 import java.util.stream.StreamSupport;
@@ -89,11 +90,11 @@ public class KafkaTester {
     }
 
     public void shutdown() {
+        CompletableFuture.runAsync(()-> producer.close());
         try {
             shutdown.set(true);
-            shutdownLatch.await();
+            shutdownLatch.await(1, TimeUnit.MINUTES);
             consumer.close();
-            producer.close();
         } catch (InterruptedException e) {
             LOGGER.error("Error shutting down kafka consumer/producer", e);
         }
