@@ -47,7 +47,7 @@
       "end": {
         "kind": "EVENT",
         "produceEvent": {
-          "nameRef": "ApplicantDecisionEvent"
+          "eventRef": "ApplicantDecisionEvent"
         }
       }
     }
