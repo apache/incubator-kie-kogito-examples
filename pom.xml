@@ -206,11 +206,6 @@
         <artifactId>kafka</artifactId>
         <version>${version.testcontainers}</version>
       </dependency>
-      <dependency>
-        <groupId>io.cloudevents</groupId>
-        <artifactId>cloudevents-api</artifactId>
-        <version>${version.kafka}</version>
-      </dependency>
     </dependencies>
   </dependencyManagement>
 
