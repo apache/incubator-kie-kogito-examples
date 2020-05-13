@@ -52,13 +52,14 @@
     <infinispan.version>10.1.5.Final</infinispan.version>
     <infinispan.starter.version>2.2.3.Final</infinispan.starter.version>
     <container.image.infinispan>quay.io/infinispan/server:${infinispan.version}</container.image.infinispan>
-    <version.testcontainers>1.12.4</version.testcontainers>
+    <version.testcontainers>1.14.1</version.testcontainers>
     <!-- jsonpath-->
     <version.jayway.jsonpath>2.4.0</version.jayway.jsonpath>
     <version.swagger.plugin>2.1.0</version.swagger.plugin>
     <version.surefire.plugin>2.22.0</version.surefire.plugin>
     <version.deploy.plugin>2.8.2</version.deploy.plugin>
-
+    <!-- cloudevents -->
+    <version.cloudevents.api>1.3.0</version.cloudevents.api>
     <!-- license plugin -->
     <version.license.plugin>3.0</version.license.plugin>
     <skipLicensesCheck>false</skipLicensesCheck>
@@ -194,6 +195,16 @@
         <groupId>org.infinispan</groupId>
         <artifactId>infinispan-spring-boot-starter-remote</artifactId>
         <version>${infinispan.starter.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.cloudevents</groupId>
+        <artifactId>cloudevents-api</artifactId>
+        <version>${version.cloudevents.api}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.testcontainers</groupId>
+        <artifactId>kafka</artifactId>
+        <version>${version.testcontainers}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
