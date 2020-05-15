@@ -85,7 +85,7 @@ You should see the following page:
 </p>
 
 Fill in the "Submit New Applicant" form and submit it. This will send a cloud event
-to Kafka which starts a new workflow instance. The workflow include a rule action
+to Kafka which starts a new workflow instance. The workflow includes a rule function call
 which evaluates the salary entered. Before the workflow execution ends
 it sends a cloud event to kafka. The UI subscribes to these events using SSE and 
 updates the "Application Decision" table withe the results, for example:
