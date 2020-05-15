@@ -1,0 +1,55 @@
+---
+- name: Install CRC
+  hosts: localhost
+  gather_facts: true
+
+  vars:
+    crc_version: "1.10.0"
+
+  tasks:
+
+    - name: Create .local/bin/
+      file:
+        path: /home/{{ansible_user_id}}/.local/bin/
+        state: directory
+
+    - name: Check if crc exists in /home/{{ansible_user_id}}/.local/bin/
+      stat:
+        path: "/home/{{ ansible_user_id }}/.local/bin/crc"
+      register: stat_result
+
+    - name: Check if crc-linux-{{crc_version}}-amd64/crc exists in /tmp/
+      stat:
+        path: "/tmp/crc-linux-{{crc_version}}-amd64/crc"
+      register: stat_result
+      when: stat_result.stat.exists == False
+
+    - name: "Download crc {{crc_version}} ~2GB, this takes time and depends on your connection speed"
+      get_url:
+        url: "https://mirror.openshift.com/pub/openshift-v4/clients/crc/{{crc_version}}/crc-linux-amd64.tar.xz"
+        dest: "/tmp/crc-linux-{{crc_version}}-amd64.tar.xz"
+      when: stat_result.stat.exists == False
+
+    - name: Extract crc-linux-{{crc_version}}-amd64.tar.xz into tmp
+      unarchive:
+        src: /tmp/crc-linux-{{crc_version}}-amd64.tar.xz
+        dest: /tmp
+      when: stat_result.stat.exists == False
+
+    - name: Check if crc-linux-{{crc_version}}-amd64/crc exists in /tmp/
+      stat:
+        path: "/tmp/crc-linux-{{crc_version}}-amd64/crc"
+      register: stat_result
+
+    - name: Check if crc exists in /home/{{ansible_user_id}}/.local/bin/
+      stat:
+        path: "/home/{{ ansible_user_id }}/.local/bin/crc"
+      register: stat_result
+      when: stat_result.stat.exists == True
+
+    - name: Move crc from /tmp/crc-linux-{{crc_version}}-amd64 to /home/{{ansible_user_id}}/.local/bin
+      command: "mv /tmp/crc-linux-{{crc_version}}-amd64/crc /home/{{ansible_user_id}}/.local/bin/"
+      when: stat_result.stat.exists == False
+
+    - name: crc libvirt group
+      shell: "crc config set skip-check-user-in-libvirt-group true"

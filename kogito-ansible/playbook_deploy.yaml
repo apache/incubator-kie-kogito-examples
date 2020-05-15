@@ -1,0 +1,55 @@
+---
+  - name: Start CRC 1.10.0 and deploy kogito examples
+    hosts: localhost
+    gather_facts: true
+
+    vars:
+      libvirt_version: "4.4.3"
+      ram: "16384" #MB   
+      kube_password: "{{ lookup('file', '/home/{{ ansible_user_id }}/.crc/cache/crc_libvirt_{{ libvirt_version }}/kubeadmin-password') }}"
+      examples: "{{  lookup('file', '~/.crc/quarkus_examples.txt') }}"
+
+    vars_prompt:
+      - name: "nameSpace"
+        prompt: "Insert your Project Name/ NameSpace"
+        default: "my-kogito-project"
+        private: "no"
+
+      - name: "example"
+        prompt: "Choose the example to deploy"
+        default: "\n{{ examples }}"
+        private: "no"
+
+    tasks:
+
+      - debug: msg="Project Name {{ nameSpace }}"
+
+      - name: Start CRC with {{ ram }}MB (~ 10 minutes)
+        shell: "crc start -m {{ ram }} -p ~/.crc/crc-pull-secret"
+
+      - name: Login crc
+        shell: "oc login -u kubeadmin -p {{ kube_password }} https://api.crc.testing:6443"
+        ignore_errors: yes 
+
+      - name: Kogito use {{ nameSpace }}
+        shell: "kogito use-project {{ nameSpace }}"
+        register: kogito_use_project_result
+        ignore_errors: yes
+
+      - debug: msg="{{ kogito_use_project_result }}"
+
+      - name: Deploy {{ example }}
+        shell: "kogito deploy-service {{ example }} https://github.com/kiegroup/kogito-examples/ --context-dir={{ example }}"
+        register: install_drools_quarkus_example
+        ignore_errors: yes
+
+      - debug: msg="{{ install_drools_quarkus_example }}"
+
+      - debug: msg="Project Name {{ nameSpace }}"
+
+      - debug: msg="Your Kube Password is {{ kube_password }}"
+
+      - name: Open browser
+        shell: "crc console"
+
+
