@@ -1,0 +1,11 @@
+---
+- name: Install libs on Debian/Ubuntu
+  hosts: localhost
+  gather_facts: true
+
+  tasks:
+
+    - name: install
+      shell: "sudo apt install qemu-kvm libvirt-daemon libvirt-daemon-system network-manager -y"
+      become: yes
+      when: ansible_os_family == 'Debian'
