@@ -27,11 +27,6 @@ change the app_name (my-kafka-project) in the file if you want different name
 ansible-playbook ./playbook_crc.yaml
 ```
 
-Configure etc/hosts (default is kafka_cluster_name: "my-cluster-kafka" and app_namespace: "my-kafka-project")
-```sh
-sudo ansible-playbook ./playbook_etc_hosts.yaml
-```
-
 ### Install Kogito on CRC
 The create playbook will create from scratch the crc setup, the project namespace, then download  and install Kogito Operator and Kogito CLI.
 The name of the Project to create and the Pull secret will be asked in the beginning of the run.
@@ -65,13 +60,6 @@ change the app_name (my-kafka-project) in the file if you want different name
 ansible-playbook ./playbook_crc.yaml
 ```
 
-Configure etc/hosts (default is kafka_cluster_name: "my-cluster-kafka" and app_namespace: "my-kafka-project")
-```sh
-sudo ansible-playbook ./playbook_etc_hosts.yaml
-```
-
-
-
 ### Install Kogito on CRC
 
 The create playbook will create from scratch the crc setup, the project namespace, then download  and install Kogito Operator and Kogito CLI.
@@ -87,6 +75,8 @@ the logs from cli will be on the ansible output.
 ```sh
 ansible-playbook ./playbook_deploy.yaml
 ```
+
+
 
 ## Videos
 Note: The CRC start spent 10 minute on a laptop, cut to few seconds in the video recording
