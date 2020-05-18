@@ -1,11 +1,25 @@
 ---
-- name: Install libs on Debian/Ubuntu
+- name: Install libs on Fedora/Ubuntu
   hosts: localhost
-  gather_facts: true
 
   tasks:
 
-    - name: install
-      shell: "sudo apt install qemu-kvm libvirt-daemon libvirt-daemon-system network-manager -y"
+    - name: CheckOS
+      assert:
+        that:
+          - "ansible_os_family == 'Debian' or ansible_os_family == 'RedHat'"
+
+    - name: Install Virtualization on Ubuntu
+      apt:
+        pkg:
+          - qemu-kvm
+          - libvirt-daemon
+          - libvirt-daemon-system
+          - network-manager
       become: yes
       when: ansible_os_family == 'Debian'
+
+    - name: Install Virtualization on Fedora
+      shell: "sudo dnf install @virtualization -y"
+      become: yes
+      when: ansible_os_family == 'RedHat'

@@ -1,7 +1,6 @@
 ---
-  - name: Start CRC 1.10.0 and deploy Kogito Operator and CLI
+  - name: Start CRC and deploy Kogito Operator and CLI
     hosts: localhost
-    gather_facts: true
 
     vars:
       kogito_tag: "0.10.0"
@@ -9,6 +8,8 @@
       libvirt_version: "4.4.3"
       ip_on_etc_hosts: 192.168.130.11
       kube_password: "{{ lookup('file', '/home/{{ ansible_user_id }}/.crc/cache/crc_libvirt_{{ libvirt_version }}/kubeadmin-password') }}"
+      kogito_url_file: "https://github.com/kiegroup/kogito-cloud-operator/releases/download/{{ kogito_tag }}/kogito-cli-{{ kogito_tag }}-linux-amd64.tar.gz"
+      kogito_tmp_dest: "/tmp/kogito-{{ kogito_tag }}-linux-amd64.tar.gz"
 
     vars_prompt:
       - name: "nameSpace"
@@ -21,20 +22,22 @@
     tasks:
       - debug: msg="Project Name {{ nameSpace }}"
 
-      - name: Copy Kogito cli
-        get_url:
-          url: "https://github.com/kiegroup/kogito-cloud-operator/releases/download/{{ kogito_tag }}/kogito-cli-{{ kogito_tag }}-linux-amd64.tar.gz"
-          dest: "/tmp/kogito-{{ kogito_tag }}-linux-amd64.tar.gz"
-
-      - name: Extract Kogito cli archive
-        unarchive:
-          src: "/tmp/kogito-{{ kogito_tag }}-linux-amd64.tar.gz"
-          dest: "/tmp/"
-
-      - name: Check that oc exists in /home/{{ansible_user_id}}/.local/bin/
+      - name: Check that kogito cli exists in /home/{{ansible_user_id}}/.local/bin/
         stat:
           path: "/home/{{ ansible_user_id }}/.local/bin/kogito"
         register: stat_result
+
+      - name: Copy Kogito cli
+        get_url:
+          url: "{{kogito_url_file}}"
+          dest: "{{ kogito_tmp_dest }}"
+        when: stat_result.stat.exists == False
+
+      - name: Extract Kogito cli archive
+        unarchive:
+          src: "{{ kogito_tmp_dest }}"
+          dest: "/tmp/"
+        when: stat_result.stat.exists == False
 
       - name: Creates user home kogito dir
         file:
@@ -57,9 +60,9 @@
           content: "{{ PullSecret }}"
           dest: "~/.crc/crc-pull-secret"
 
-      - name: Download Kogito Examples pom
-        get_url:
-          url: "https://raw.githubusercontent.com/kiegroup/kogito-examples/stable/pom.xml"
+      - name: Copy Kogito Examples pom
+        copy:
+          src: "./../pom.xml"
           dest: "/tmp/examples_pom.xml"
 
       - name: "Get Kogito Examples "

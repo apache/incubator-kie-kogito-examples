@@ -1,13 +1,13 @@
 ---
   - name: Start CRC 1.10.0 and deploy kogito examples
     hosts: localhost
-    gather_facts: true
 
     vars:
       libvirt_version: "4.4.3"
       ram: "16384" #MB   
       kube_password: "{{ lookup('file', '/home/{{ ansible_user_id }}/.crc/cache/crc_libvirt_{{ libvirt_version }}/kubeadmin-password') }}"
       examples: "{{  lookup('file', '~/.crc/quarkus_examples.txt') }}"
+      examples_repo: "https://github.com/kiegroup/kogito-examples/"
 
     vars_prompt:
       - name: "nameSpace"
@@ -39,7 +39,7 @@
       - debug: msg="{{ kogito_use_project_result }}"
 
       - name: Deploy {{ example }}
-        shell: "kogito deploy-service {{ example }} https://github.com/kiegroup/kogito-examples/ --context-dir={{ example }}"
+        shell: "kogito deploy-service {{ example }} {{ examples_repo }} --context-dir={{ example }}"
         register: install_drools_quarkus_example
         ignore_errors: yes
 
