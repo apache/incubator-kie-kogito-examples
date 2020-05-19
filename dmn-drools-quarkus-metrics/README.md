@@ -55,16 +55,15 @@ To summarize, the kogito app will expose by default an endpoint `/metrics` with 
 ### Dashboards
 
 Kogito currently exports two types of dashboards depending on the model used on the endpoint:
-1. Operational dashboard: it contains
-a. Total number of requests on the endpoint.
-b. Average per minute of the number of requests on the endpoint.
-c. Quantiles on the elapsed time to evaluate the requests.
-d. Exception details.
-This dashboard is generated for DMN and DRL endpoints.
+1. Operational dashboard: this dashboard is generated for DMN and DRL endpoints and it contains
+    * Total number of requests on the endpoint.
+    * Average per minute of the number of requests on the endpoint.
+    * Quantiles on the elapsed time to evaluate the requests.
+    * Exception details.
 ![Screenshot from 2020-05-19 15-20-03](https://user-images.githubusercontent.com/18282531/82339837-ca171d00-99ee-11ea-85bc-2681878fb6ab.png)
 2. Domain specific dashboard: currently this dashboard is exported only for DMN endpoints. In particular, the domain specific dashboard contains a graph for each type of decision in the DMN model. At the moment, only the built-in types `number`, `string` and `boolean` are supported:
-a. if the output of the decision is a number, the graph contains the quantiles for that metric (on a sliding window of 3 minutes).
-b. If the output is a boolean or a string, the graph contains the number of occurrences for each output (10 minutes average).
+   * if the output of the decision is a number, the graph contains the quantiles for that metric (on a sliding window of 3 minutes).
+   * If the output is a boolean or a string, the graph contains the number of occurrences for each output (10 minutes average).
 ![Screenshot from 2020-05-19 15-19-48](https://user-images.githubusercontent.com/18282531/82339828-c71c2c80-99ee-11ea-85b6-b5d4a0337f0b.png)
 
 You can use these default dashboards, or you can personalize them and use your custom dashboards.
