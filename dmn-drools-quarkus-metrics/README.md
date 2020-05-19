@@ -54,20 +54,20 @@ To summarize, the kogito app will expose by default an endpoint `/metrics` with 
 
 ### Dashboards
 
-Two kinds of dashboards will be generated depending on the model used on the endpoint: 
-1. DRL: A basic dashboard is exported and it contains: 
+Kogito currently exports two types of dashboards depending on the model used on the endpoint:
+1. Operational dashboard: it contains
 a. Total number of requests on the endpoint.
 b. Average per minute of the number of requests on the endpoint.
 c. Quantiles on the elapsed time to evaluate the requests.
 d. Exception details.
-![Screenshot from 2020-03-16 11-08-21](https://user-images.githubusercontent.com/18282531/76745628-79790e80-6776-11ea-87ca-6f56233c38a8.png)
-2. DMN: A dashboard *containing all the "standard" information already described above for the DRL dashboard* plus a graph for each type of decision in the DMN model depending on the type of the decision:
-a. if the output of the decision is a number, the quantiles for that metric (on a sliding window of 3 minutes).
-b. If the output is a boolean or a string, the number of occurrences for each output (10 minutes average).
-![Screenshot from 2020-03-16 10-58-45](https://user-images.githubusercontent.com/18282531/76744997-674aa080-6775-11ea-801e-5ef0484206ad.png)
+This dashboard is generated for DMN and DRL endpoints.
+![Screenshot from 2020-05-19 15-20-03](https://user-images.githubusercontent.com/18282531/82339837-ca171d00-99ee-11ea-85bc-2681878fb6ab.png)
+2. Domain specific dashboard: currently this dashboard is exported only for DMN endpoints. In particular, the domain specific dashboard contains a graph for each type of decision in the DMN model. At the moment, only the built-in types `number`, `string` and `boolean` are supported:
+a. if the output of the decision is a number, the graph contains the quantiles for that metric (on a sliding window of 3 minutes).
+b. If the output is a boolean or a string, the graph contains the number of occurrences for each output (10 minutes average).
+![Screenshot from 2020-05-19 15-19-48](https://user-images.githubusercontent.com/18282531/82339828-c71c2c80-99ee-11ea-85b6-b5d4a0337f0b.png)
 
-
-You can use this default dashboards, or you can personalize them and use your custom dashboards.
+You can use these default dashboards, or you can personalize them and use your custom dashboards.
 
 ### Compile and Run in Local Dev Mode
 
