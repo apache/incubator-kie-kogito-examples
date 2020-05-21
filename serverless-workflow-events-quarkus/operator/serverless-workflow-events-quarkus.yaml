@@ -3,6 +3,7 @@ kind: KogitoApp
 metadata:
   name: serverless-workflow-events-quarkus
 spec:
+  enableEvents: true
   build:
     #envs:
     # envs can be used to set variables during build
