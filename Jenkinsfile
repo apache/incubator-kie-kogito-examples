@@ -10,14 +10,12 @@ pipeline {
     }
     options {
         buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '10')
-        timeout(time: 90, unit: 'MINUTES')
+        timeout(time: 120, unit: 'MINUTES')
+    }
+    environment {
+        MAVEN_OPTS = '-Xms1024m -Xmx4g'
     }
     stages {
-        stage('Initialize') {
-            steps {
-                sh 'printenv'
-            }
-        }
         stage('Build kogito-runtimes') {
             steps {
                 dir("kogito-runtimes") {
