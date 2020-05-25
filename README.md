@@ -109,7 +109,7 @@ Every example has a directory named `operator` including the YAML files to deplo
 Please refer to the [Kogito Documentation](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift)
 of how to install the operator to your environment in order to try it there.
 
-## Deploying the Kogito example applications on OpenShift CRC using Ansible playbooks
+## Deploying the Kogito example applications locally with OpenShift CRC using Ansible playbooks
 
 In the [Kogito Ansible folder](kogito-ansible/README.md) you find the documentation plus some external videos about how to
 setup Openshift locally (CRC) and deploy the kogito examples using ansible, with few commands
