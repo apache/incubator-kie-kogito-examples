@@ -1,9 +1,5 @@
 ---
-<<<<<<< HEAD
 - name: Install libs on Fedora
-=======
-- name: Install libs on Fedora/Ubuntu
->>>>>>> f3971c0... changes requested by reviewer
   hosts: localhost
 
   tasks:
@@ -11,7 +7,6 @@
     - name: CheckOS
       assert:
         that:
-<<<<<<< HEAD
           - "ansible_os_family == 'RedHat'"
 
 
@@ -19,21 +14,5 @@
       dnf:
         name:
           - "@virtualization"
-=======
-          - "ansible_os_family == 'Debian' or ansible_os_family == 'RedHat'"
-
-    - name: Install Virtualization on Ubuntu
-      apt:
-        pkg:
-          - qemu-kvm
-          - libvirt-daemon
-          - libvirt-daemon-system
-          - network-manager
-      become: yes
-      when: ansible_os_family == 'Debian'
-
-    - name: Install Virtualization on Fedora
-      shell: "sudo dnf install @virtualization -y"
->>>>>>> f3971c0... changes requested by reviewer
       become: yes
       when: ansible_os_family == 'RedHat'
