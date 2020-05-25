@@ -1,10 +1,12 @@
 # Openshift (CRC) Kogito ansible automation
 
-Tested on Fedora 31/32 and Ubuntu 19.10
+### Prerequisite
+Tested on Fedora 31/32 and Ubuntu 19/20
+Default values are 9GB of ram and 22GB of diskspace.
 
 Ansible scripts to automate creation of CRC cluster and the deploy of one of the Kogito examples with just one command line.
-
-Ansible must be installed.
+[Ansible must be installed](https://docs.ansible.com/ansible/latest/installation_guide/index.html)
+.
 
 
 ### Create an account on cloud.redhat.com
