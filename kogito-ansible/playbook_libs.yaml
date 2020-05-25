@@ -20,6 +20,8 @@
       when: ansible_os_family == 'Debian'
 
     - name: Install Virtualization on Fedora
-      shell: "sudo dnf install @virtualization -y"
+      dnf:
+        name:
+          - "@virtualization"
       become: yes
       when: ansible_os_family == 'RedHat'
