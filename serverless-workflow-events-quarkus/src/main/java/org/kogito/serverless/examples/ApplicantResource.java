@@ -30,6 +30,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.net.URI;
 import java.util.Random;
+import java.util.UUID;
 
 @Path("/newapplicant")
 public class ApplicantResource {
@@ -46,7 +47,7 @@ public class ApplicantResource {
     public void submitApplicant(JsonNode newApplicant) {
         CloudEventImpl<JsonNode> applicantEvent =
                 CloudEventBuilder.<JsonNode>builder()
-                        .withId(String.valueOf(rand.nextInt(1000)))
+                        .withId(UUID.randomUUID().toString())
                         .withType("newApplicantEvent")
                         .withSource(URI.create("http://localhost:8080"))
                         .withData(newApplicant)
