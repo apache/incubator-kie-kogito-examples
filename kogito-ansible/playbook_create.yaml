@@ -4,7 +4,7 @@
 
   vars:
     release_file: "https://mirror.openshift.com/pub/openshift-v4/clients/crc/latest/release-info.json"
-    ram: "16384" #MB
+    ram: "13312" #MB
 
   vars_prompt:
     - name: "nameSpace"
@@ -16,14 +16,10 @@
 
   pre_tasks:
 
-    - name: Download latest version file
-      get_url:
-        url: "{{ release_file }}"
-        dest: "/tmp/release-info.json"
-
     - name: read json
       uri:
         url: "{{ release_file }}"
+        timeout: 60
         return_content: yes
       register: jsoncontent
 
