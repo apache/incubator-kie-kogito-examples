@@ -4,7 +4,6 @@
 
   vars:
     release_file: "https://mirror.openshift.com/pub/openshift-v4/clients/crc/latest/release-info.json"
-    ram: "13312" #MB
 
   vars_prompt:
     - name: "nameSpace"
@@ -13,6 +12,14 @@
       private: "no"
     - name: "PullSecret"
       prompt: "Insert your Pull secret"
+    - name: "ram"
+      default: "13312"
+      prompt: "Ram used in #MB"
+      private: "no"
+    - name: "kogitoTag"
+      default: "0.10.0"
+      prompt: "Kogito CLI and Operator tag"
+      private: "no"
 
   pre_tasks:
 
@@ -35,18 +42,7 @@
 
     - debug: msg="Openshift version {{ openshiftVersion }}"
 
-
-    - name: Kogito latest tag
-      uri:
-        url: https://api.github.com/repos/kiegroup/kogito-runtimes/tags
-      register: json_response
-
-    - set_fact:
-        kogitoTag: "0.10.0"
-        #kogitoTag: "{{ json_response.json[0]['name'] }}" uncomment when kogito operator will be released
-        register: kogitoTag
-
-    - debug: msg="Kogito latest tag:{{ kogitoTag }}"
+    - debug: msg="Kogito CLI tag:{{ kogitoTag }}"
 
     - set_fact:
         kogito_url_file: "https://github.com/kiegroup/kogito-cloud-operator/releases/download/{{ kogitoTag }}/kogito-cli-{{ kogitoTag }}-linux-amd64.tar.gz"

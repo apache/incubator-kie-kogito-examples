@@ -3,13 +3,15 @@
     hosts: localhost
 
     vars:
-
       release_file: "https://mirror.openshift.com/pub/openshift-v4/clients/crc/latest/release-info.json"
-      ram: "13312" #MB
       examples: "{{  lookup('file', '~/.crc/kogito-examples.txt') }}"
       examples_repo: "https://github.com/kiegroup/kogito-examples/"
 
     vars_prompt:
+      - name: "ram"
+        default: "13312"
+        prompt: "Ram used in MB, 13312 ->13GB"
+        private: "no"
 
       - name: "nameSpace"
         prompt: "Insert your Project Name/ NameSpace"
