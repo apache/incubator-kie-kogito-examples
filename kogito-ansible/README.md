@@ -2,7 +2,7 @@
 
 ### Prerequisite
 Tested on Fedora 31/32 and Ubuntu 19/20
-Default values are 9GB of ram and 22GB of diskspace.
+Default values for the installation are 13GB of ram and 22GB of diskspace.
 
 Ansible scripts to automate creation of CRC cluster and the deploy of one of the Kogito examples with just one command line.
 [Ansible must be installed](https://docs.ansible.com/ansible/latest/installation_guide/index.html)

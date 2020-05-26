@@ -7,15 +7,12 @@
     crc_url_file: "https://mirror.openshift.com/pub/openshift-v4/clients/crc/latest/crc-linux-amd64.tar.xz"
 
   pre_tasks:
-    - name: Download latest version file
-      get_url:
-        url: "{{ release_file }}"
-        dest: "/tmp/release-info.json"
 
     - name : read json
       uri:
-        url: https://mirror.openshift.com/pub/openshift-v4/clients/crc/latest/release-info.json
+        url: "{{ release_file }}"
         return_content: yes
+        timeout: 60
       register: jsoncontent
 
     - set_fact:
