@@ -1,15 +1,16 @@
 ---
-  - name: Start CRC 1.10.0 and deploy kogito examples
+  - name: Start CRC and deploy kogito examples
     hosts: localhost
 
     vars:
-      libvirt_version: "4.4.3"
-      ram: "16384" #MB   
-      kube_password: "{{ lookup('file', '/home/{{ ansible_user_id }}/.crc/cache/crc_libvirt_{{ libvirt_version }}/kubeadmin-password') }}"
-      examples: "{{  lookup('file', '~/.crc/quarkus_examples.txt') }}"
+
+      release_file: "https://mirror.openshift.com/pub/openshift-v4/clients/crc/latest/release-info.json"
+      ram: "13312" #MB
+      examples: "{{  lookup('file', '~/.crc/kogito-examples.txt') }}"
       examples_repo: "https://github.com/kiegroup/kogito-examples/"
 
     vars_prompt:
+
       - name: "nameSpace"
         prompt: "Insert your Project Name/ NameSpace"
         default: "my-kogito-project"
@@ -19,6 +20,20 @@
         prompt: "Choose the example to deploy"
         default: "\n{{ examples }}"
         private: "no"
+
+    pre_tasks:
+
+      - name: read json
+        uri:
+          url: "{{ release_file }}"
+          return_content: yes
+        register: jsoncontent
+
+      - set_fact:
+          openshiftVersion: "{{ jsoncontent.json.version.openshiftVersion }}"
+          register: openshiftVersion
+
+      - debug: msg="Openshift version {{ openshiftVersion }}"
 
     tasks:
 
@@ -47,9 +62,10 @@
 
       - debug: msg="Project Name {{ nameSpace }}"
 
+      - set_fact:
+          kube_password: "{{ lookup('file', '/home/{{ ansible_user_id }}/.crc/cache/crc_libvirt_{{ openshiftVersion }}/kubeadmin-password') }}"
+
       - debug: msg="Your Kube Password is {{ kube_password }}"
 
       - name: Open browser
         shell: "crc console"
-
-
