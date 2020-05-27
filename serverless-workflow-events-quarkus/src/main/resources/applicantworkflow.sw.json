@@ -1,0 +1,55 @@
+{
+  "id": "applicantworkflow",
+  "name": "Applicant Workflow",
+  "version": "1.0",
+  "events": [
+    {
+      "name": "NewApplicantEvent",
+      "source": "applicants",
+      "type": "kafka"
+    },
+    {
+      "name": "ApplicantDecisionEvent",
+      "source": "decisions",
+      "type": "kafka"
+    }
+  ],
+  "functions": [
+    {
+      "name": "EvalNewApplicationFunction",
+      "type": "rule",
+      "metadata": {
+        "ruleflowgroup": "newapplicant"
+      }
+    }
+  ],
+  "states": [
+    {
+      "name": "HandleNewApplicant",
+      "type": "EVENT",
+      "start": {
+        "kind": "DEFAULT"
+      },
+      "eventsActions": [
+        {
+          "eventRefs": [
+            "NewApplicantEvent"
+          ],
+          "actions": [
+            {
+              "functionRef": {
+                "refName": "EvalNewApplicationFunction"
+              }
+            }
+          ]
+        }
+      ],
+      "end": {
+        "kind": "EVENT",
+        "produceEvent": {
+          "eventRef": "ApplicantDecisionEvent"
+        }
+      }
+    }
+  ]
+}
