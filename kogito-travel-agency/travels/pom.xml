@@ -146,7 +146,8 @@
                 </goals>
                 <configuration>
                   <enableHttpUrlHandler>true</enableHttpUrlHandler>
-                  <additionalBuildArgs>--allow-incomplete-classpath</additionalBuildArgs>
+                  <!-- "-H:ReflectionConfigurationFiles" is a workaround for KOGITO-1893 -->
+                  <additionalBuildArgs>-H:ReflectionConfigurationFiles=../../reflection.json,--allow-incomplete-classpath</additionalBuildArgs>
                 </configuration>
               </execution>
             </executions>
