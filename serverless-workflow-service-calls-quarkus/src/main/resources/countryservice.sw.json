@@ -32,11 +32,11 @@
   "states": [
     {
       "name": "GetCountryInfo",
-      "type": "OPERATION",
+      "type": "operation",
       "start": {
-        "kind": "DEFAULT"
+        "kind": "default"
       },
-      "actionMode": "SEQUENTIAL",
+      "actionMode": "sequential",
       "actions": [
         {
           "name": "getCountryInfo",
@@ -51,12 +51,12 @@
     },
     {
       "name": "ClassifyByPopulation",
-      "type": "SWITCH",
-      "choices": [
+      "type": "switch",
+      "dataConditions": [
         {
           "path": "$.population",
           "value": "20000000",
-          "operator": "LessThan",
+          "operator": "lessthan",
           "transition": {
             "nextState": "ClassifyAsSmallOrMedium"
           }
@@ -64,7 +64,7 @@
         {
           "path": "$.population",
           "value": "20000000",
-          "operator": "GreaterThanEquals",
+          "operator": "greaterthanorequals",
           "transition": {
             "nextState": "ClassifyAsLarge"
           }
@@ -76,8 +76,8 @@
     },
     {
       "name": "ClassifyAsSmallOrMedium",
-      "type": "OPERATION",
-      "actionMode": "SEQUENTIAL",
+      "type": "operation",
+      "actionMode": "sequential",
       "actions": [
         {
           "name": "classifyIntoSmallOrMedium",
@@ -87,13 +87,13 @@
         }
       ],
       "end": {
-        "kind": "DEFAULT"
+        "kind": "default"
       }
     },
     {
       "name": "ClassifyAsLarge",
-      "type": "OPERATION",
-      "actionMode": "SEQUENTIAL",
+      "type": "operation",
+      "actionMode": "sequential",
       "actions": [
         {
           "name": "classifyIntoLarge",
@@ -103,7 +103,7 @@
         }
       ],
       "end": {
-        "kind": "DEFAULT"
+        "kind": "default"
       }
     }
   ]

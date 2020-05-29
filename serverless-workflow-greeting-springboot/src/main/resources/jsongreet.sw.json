@@ -12,15 +12,15 @@
   "states": [
     {
       "name": "ChooseOnLanguage",
-      "type": "SWITCH",
+      "type": "switch",
       "start": {
-        "kind": "DEFAULT"
+        "kind": "default"
       },
-      "choices": [
+      "dataConditions": [
         {
           "path": "$.language",
           "value": "English",
-          "operator": "Equals",
+          "operator": "equals",
           "transition": {
             "nextState": "GreetInEnglish"
           }
@@ -28,7 +28,7 @@
         {
           "path": "$.language",
           "value": "Spanish",
-          "operator": "Equals",
+          "operator": "equals",
           "transition": {
             "nextState": "GreetInSpanish"
           }
@@ -40,7 +40,7 @@
     },
     {
       "name": "GreetInEnglish",
-      "type": "RELAY",
+      "type": "inject",
       "inject": {
         "greeting": "Hello from JSON Workflow, "
       },
@@ -50,7 +50,7 @@
     },
     {
       "name": "GreetInSpanish",
-      "type": "RELAY",
+      "type": "inject",
       "inject": {
         "greeting": "Saludos desde JSON Workflow, "
       },
@@ -60,7 +60,7 @@
     },
     {
       "name": "GreetPerson",
-      "type": "OPERATION",
+      "type": "operation",
       "actions": [
         {
           "name": "greetAction",
@@ -73,7 +73,7 @@
         }
       ],
       "end": {
-        "kind": "TERMINATE"
+        "kind": "terminate"
       }
     }
   ]
