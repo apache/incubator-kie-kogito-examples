@@ -41,7 +41,7 @@
     {
       "name": "GreetInEnglish",
       "type": "inject",
-      "inject": {
+      "data": {
         "greeting": "Hello from JSON Workflow, "
       },
       "transition": {
@@ -51,7 +51,7 @@
     {
       "name": "GreetInSpanish",
       "type": "inject",
-      "inject": {
+      "data": {
         "greeting": "Saludos desde JSON Workflow, "
       },
       "transition": {

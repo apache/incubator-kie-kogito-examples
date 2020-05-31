@@ -25,13 +25,13 @@ states:
       nextState: GreetInEnglish
   - name: GreetInEnglish
     type: inject
-    inject:
+    data:
       greeting: 'Hello from YAML Workflow, '
     transition:
       nextState: GreetPerson
   - name: GreetInSpanish
     type: inject
-    inject:
+    data:
       greeting: 'Saludos desde YAML Workflow, '
     transition:
       nextState: GreetPerson
