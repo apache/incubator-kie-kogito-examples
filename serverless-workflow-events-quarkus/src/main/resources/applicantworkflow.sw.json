@@ -26,9 +26,9 @@
   "states": [
     {
       "name": "HandleNewApplicant",
-      "type": "EVENT",
+      "type": "event",
       "start": {
-        "kind": "DEFAULT"
+        "kind": "default"
       },
       "eventsActions": [
         {
@@ -45,7 +45,7 @@
         }
       ],
       "end": {
-        "kind": "EVENT",
+        "kind": "event",
         "produceEvent": {
           "eventRef": "ApplicantDecisionEvent"
         }
