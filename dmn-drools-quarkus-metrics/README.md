@@ -70,9 +70,9 @@ You can use these default dashboards, or you can personalize them and use your c
 
 ### Compile and Run in Local Dev Mode
 
-A script `docker-compose/run-compose.sh` is provided to demonstrate how to inject the generated dashboards in the volume of the grafana container: 
-1. the generated dashboards are copied from `target/resources/dashboards/` to the directory `docker-compose/grafana/provisioning/dashboards`. 
-2. `docker-compose` is run. 
+It is possible to use `docker-compose` to demonstrate how to inject the generated dashboards in the volume of the grafana container:
+1. Run `mvn clean package` to build the project and generate dashboards. 
+2. `docker-compose up` to start application. 
 
 The volumes of the grafana container are properly set in the `docker-compose.yml` file, so that the dashboards are properly loaded at startup.
 

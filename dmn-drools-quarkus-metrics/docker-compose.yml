@@ -2,14 +2,14 @@ version: '2'
 
 services:
   hello:
-    build: ../
+    build: ./
     ports:
       - 8080:8080
 
   prometheus:
     image: prom/prometheus:v2.8.0
     volumes:
-      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./docker-compose/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
     ports:
@@ -23,6 +23,6 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ./grafana/provisioning/:/etc/grafana/provisioning/
-      - ./grafana/grafana.ini:/etc/grafana/grafana.ini
+      - ./docker-compose/grafana/provisioning/:/etc/grafana/provisioning/
+      - ./docker-compose/grafana/grafana.ini:/etc/grafana/grafana.ini
 
