@@ -5,11 +5,11 @@
 
   <parent>
     <groupId>org.kie.kogito</groupId>
-    <artifactId>kogito-travel-agency-example</artifactId>
+    <artifactId>kogito-examples</artifactId>
     <version>8.0.0-SNAPSHOT</version>
   </parent>
 
-  <artifactId>kogito-travel-agency-example-extended</artifactId>
+  <artifactId>kogito-travel-agency-example</artifactId>
   <packaging>pom</packaging>
 
 
@@ -26,8 +26,8 @@
   </dependencyManagement>
 
   <modules>
-      <module>travels</module>
-      <module>visas</module>
+      <module>basic</module>
+      <module>extended</module>
   </modules>
 
 
