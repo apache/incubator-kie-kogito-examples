@@ -14,8 +14,11 @@ NOTE: Look into individual versions to learn more on how to run it or what does 
 Each version is based on previous one so it allows people perform the implementation at their own pace
 and to start any any place.
 
-[Base travel agency service with persistence](travels) - deals with all the basic steps to book flight and hotel.
-Consists of single service that has both business logic and decision logic included. Preserves data between service restarts and
+[Base travel agency service](basic) - deals with all the basic steps to book flight and hotel.
+Consists of single service that has both business logic and decision logic included. 
+
+[Travel agency and visa services with persistence](travels) - deals with all the basic steps to book flight and hotel.
+Consists of two services that has both business logic and decision logic included. Preserves data between service restarts and
 requires Infinispan server to be available.
 
 ## Contribution
