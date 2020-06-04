@@ -102,12 +102,12 @@ There will be services implemented to carry on the hotel and flight booking. Imp
 ### Prerequisites
 
 You will need:
-  - Java 1.8.0+ installed
+  - Java 11+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.5.4+ installed
+  - Maven 3.5.2+ installed
 
 When using native image compilation, you will also need:
-  - GraalVM installed
+  - GraalVM 20 installed
   - Environment variable GRAALVM_HOME set accordingly
   - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too, please refer to GraalVM installation documentation for more details.
 
