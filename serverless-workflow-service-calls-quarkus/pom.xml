@@ -13,7 +13,7 @@
 
   <artifactId>serverless-workflow-service-calls-quarkus</artifactId>
 
-  <name>Kogito Examples :: Serverless Workflow Service Calls :: Quarkus</name>
+  <name>Kogito Example :: Serverless Workflow Service Calls :: Quarkus</name>
   <description>Kogito Serverless Workflow Example - Quarkus</description>
 
   <dependencyManagement>

@@ -10,10 +10,8 @@
   </parent>
 
   <artifactId>process-usertasks-custom-lifecycle-springboot</artifactId>
-  <name>Kogito Examples :: Process Usertasks With Custom Lifecycle Spring Boot</name>
+  <name>Kogito Example :: Process Usertasks With Custom Lifecycle Spring Boot</name>
   <description>Kogito usertasks orchestration with custom life cycle - Spring Boot</description>
-
-  
 
   <dependencyManagement>
     <dependencies>

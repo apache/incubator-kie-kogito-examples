@@ -13,7 +13,7 @@
 
   <artifactId>serverless-workflow-greeting-quarkus</artifactId>
 
-  <name>Kogito Examples :: Serverless Workflow Greeting :: Quarkus</name>
+  <name>Kogito Example :: Serverless Workflow Greeting :: Quarkus</name>
   <description>Kogito Serverless Workflow Example - Quarkus</description>
 
   <dependencyManagement>

@@ -13,7 +13,7 @@
 
   <artifactId>process-infinispan-persistence-quarkus</artifactId>
 
-  <name>Kogito Examples :: Process Infinispan Persistence Quarkus</name>
+  <name>Kogito Example :: Process Infinispan Persistence Quarkus</name>
   <description>Process with Infinispan persistence - Quarkus</description>
 
   <dependencyManagement>

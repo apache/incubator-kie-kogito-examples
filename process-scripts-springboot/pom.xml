@@ -10,7 +10,7 @@
   </parent>
 
   <artifactId>process-scripts-springboot</artifactId>
-  <name>Kogito Examples :: Process Scripts With Spring Boot</name>
+  <name>Kogito Example :: Process Scripts With Spring Boot</name>
   <description>Kogito script invocation - Spring Boot</description>
 
   <dependencyManagement>

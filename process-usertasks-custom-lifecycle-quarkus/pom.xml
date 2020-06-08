@@ -12,8 +12,7 @@
   </parent>
 
   <artifactId>process-usertasks-custom-lifecycle-quarkus</artifactId>
-
-  <name>Kogito Examples :: Process Usertasks With Custom Lifecycle</name>
+  <name>Kogito Example :: Process Usertasks With Custom Lifecycle</name>
   <description>Kogito user tasks orchestration with custom life cycle - Quarkus</description>
 
   <dependencyManagement>

@@ -10,7 +10,7 @@
   </parent>
 
   <artifactId>process-service-calls-springboot</artifactId>
-  <name>Kogito Examples :: Process Service Calls with Spring Boot</name>
+  <name>Kogito Example :: Process Service Calls with Spring Boot</name>
   <description>Kogito service invocation - Spring Boot</description>
 
   

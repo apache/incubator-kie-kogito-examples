@@ -13,7 +13,7 @@
 
   <artifactId>serverless-workflow-service-calls-springboot</artifactId>
 
-  <name>Kogito Examples :: Serverless Workflow Service Calls :: Spring Boot</name>
+  <name>Kogito Example :: Serverless Workflow Service Calls :: Spring Boot</name>
   <description>Kogito Serverless Workflow Example - Spring Boot</description>
 
   <dependencyManagement>
