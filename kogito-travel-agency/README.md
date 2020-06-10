@@ -17,7 +17,7 @@ and to start any any place.
 [Base travel agency service](basic) - deals with all the basic steps to book flight and hotel.
 Consists of single service that has both business logic and decision logic included. 
 
-[Travel agency and visa services with persistence](travels) - deals with all the basic steps to book flight and hotel.
+[Travel agency and visa services with persistence](extended) - deals with all the basic steps to book flight and hotel.
 Consists of two services that has both business logic and decision logic included. Preserves data between service restarts and
 requires Infinispan server to be available.
 
