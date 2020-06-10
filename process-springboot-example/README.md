@@ -62,7 +62,7 @@ Kogito supports cloud events using Kafka as message broker. So to be able to ena
 Kafka cluster installed and available over the network. Refer to [Kafka Apache site](https://kafka.apache.org/quickstart) to more information about how to install. By default it expects it to be at (it can be configured via application.properties file located in src/main/resources):
 
 ```
-kafka.bootstrap.servers=localhost:9092
+spring.kafka.bootstrap-servers=localhost:9092
 ```
 
 Kogito will use the following Kafka topics to listen for cloud events:

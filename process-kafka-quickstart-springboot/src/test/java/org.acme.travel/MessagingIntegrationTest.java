@@ -66,7 +66,7 @@ public class MessagingIntegrationTest {
 
     @BeforeAll
     public static void init() {
-        System.setProperty("kafka.bootstrap.servers", KAFKA.getBootstrapServers());
+        System.setProperty("spring.kafka.bootstrap-servers", KAFKA.getBootstrapServers());
     }
 
     @Test
