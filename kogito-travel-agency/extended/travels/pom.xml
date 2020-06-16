@@ -64,8 +64,18 @@
       <artifactId>process-management-addon</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.kie.kogito</groupId>
+      <groupId>org.drools</groupId>
       <artifactId>drools-decisiontables</artifactId>
+      <exclusions>
+        <exclusion>
+          <artifactId>drools-core</artifactId>
+          <groupId>org.drools</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>drools-compiler</artifactId>
+          <groupId>org.drools</groupId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
     <dependency>
@@ -136,8 +146,7 @@
                 </goals>
                 <configuration>
                   <enableHttpUrlHandler>true</enableHttpUrlHandler>
-                  <!-- "-H:ReflectionConfigurationFiles" is a workaround for KOGITO-1893 -->
-                  <additionalBuildArgs>-H:ReflectionConfigurationFiles=../../reflection.json,--allow-incomplete-classpath</additionalBuildArgs>
+                  <additionalBuildArgs>--allow-incomplete-classpath</additionalBuildArgs>
                 </configuration>
               </execution>
             </executions>
