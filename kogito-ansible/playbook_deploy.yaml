@@ -3,8 +3,15 @@
     hosts: localhost
 
     vars:
+<<<<<<< HEAD
       release_file: "https://mirror.openshift.com/pub/openshift-v4/clients/crc/latest/release-info.json"
       examples: "{{  lookup('file', '~/.crc/kogito-examples.txt') }}"
+=======
+      libvirt_version: "4.4.3"
+      ram: "16384" #MB   
+      kube_password: "{{ lookup('file', '/home/{{ ansible_user_id }}/.crc/cache/crc_libvirt_{{ libvirt_version }}/kubeadmin-password') }}"
+      examples: "{{  lookup('file', '~/.crc/quarkus_examples.txt') }}"
+>>>>>>> f3971c0... changes requested by reviewer
       examples_repo: "https://github.com/kiegroup/kogito-examples/"
 
     vars_prompt:
