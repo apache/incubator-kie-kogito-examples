@@ -1,5 +1,9 @@
 @Library('jenkins-pipeline-shared-libraries')_
 
+def changeAuthor = env.ghprbPullAuthorLogin ?: CHANGE_AUTHOR
+def changeBranch = env.ghprbSourceBranch ?: CHANGE_BRANCH
+def changeTarget = env.ghprbTargetBranch ?: CHANGE_TARGET
+
 pipeline {
     agent {
         label 'kie-rhel7 && kie-mem16g'
@@ -9,20 +13,18 @@ pipeline {
         jdk 'kie-jdk11'
     }
     options {
-        buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '10')
-        timeout(time: 90, unit: 'MINUTES')
+        buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '10', numToKeepStr: '')
+        timeout(time: 120, unit: 'MINUTES')
+    }
+    environment {
+        MAVEN_OPTS = '-Xms1024m -Xmx4g'
     }
     stages {
-        stage('Initialize') {
-            steps {
-                sh 'printenv'
-            }
-        }
         stage('Build kogito-runtimes') {
             steps {
                 dir("kogito-runtimes") {
                     script {
-                        githubscm.checkoutIfExists('kogito-runtimes', "$CHANGE_AUTHOR", "$CHANGE_BRANCH", 'kiegroup', "$CHANGE_TARGET")
+                        githubscm.checkoutIfExists('kogito-runtimes', changeAuthor, changeBranch, 'kiegroup', changeTarget, true)
                         maven.runMavenWithSubmarineSettings('clean install', true)
                     }
                 }
@@ -32,7 +34,7 @@ pipeline {
             steps {
                 dir("kogito-apps") {
                     script {
-                        githubscm.checkoutIfExists('kogito-apps', "$CHANGE_AUTHOR", "$CHANGE_BRANCH", 'kiegroup', "$CHANGE_TARGET")
+                        githubscm.checkoutIfExists('kogito-apps', changeAuthor, changeBranch, 'kiegroup', changeTarget, true)
                         maven.runMavenWithSubmarineSettings('clean install', true)
                     }
                 }
@@ -40,13 +42,16 @@ pipeline {
         }
         stage('Build kogito-examples') {
             steps {
-                script {
-                    maven.runMavenWithSubmarineSettings('clean install', false)
+                dir("kogito-examples") {
+                    script {
+                        githubscm.checkoutIfExists('kogito-examples', changeAuthor, changeBranch, 'kiegroup', changeTarget, true)
+                        maven.runMavenWithSubmarineSettings('clean install', false)
+                    }
                 }
                 // Use a separate dir for persistence to not overwrite the test results
                 dir("kogito-examples-persistence") {
                     script {
-                        githubscm.checkoutIfExists('kogito-examples', "$CHANGE_AUTHOR", "$CHANGE_BRANCH", 'kiegroup', "$CHANGE_TARGET")
+                        githubscm.checkoutIfExists('kogito-examples', changeAuthor, changeBranch, 'kiegroup', changeTarget, true)
                         // Don't run with tests so far, see: https://github.com/quarkusio/quarkus/issues/6885
                         maven.runMavenWithSubmarineSettings('clean install -Ppersistence', true)
                     }

@@ -26,8 +26,8 @@
   </dependencyManagement>
 
   <modules>
-      <module>travels</module>
-      <module>visas</module>
+      <module>basic</module>
+      <module>extended</module>
   </modules>
 
 

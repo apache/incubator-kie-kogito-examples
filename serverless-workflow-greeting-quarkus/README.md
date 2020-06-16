@@ -15,7 +15,7 @@ decides which language to greet the person in based on the workflow input "langu
 Depending on the language the workflow then injects the language-based greeting via RELAY states.
 Relay states are just "pass" states which do no execute any functions and only have the ability
 to inject data into the workflow.
-The relay states then transition to the OPERATION state which call a "sysout" function passing it 
+The inject states then transition to the OPERATION state which call a "sysout" function passing it 
 input parameter containing the greeting and the name of the person to greet: "$.greeting $.name".
 The function then prints out the greeting to the console.
 

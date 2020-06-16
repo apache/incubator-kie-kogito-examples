@@ -1,0 +1,13 @@
+package org.kie.kogito.examples;
+unit Hello;
+
+rule helloWorld
+when
+    $s: /strings[ this == "hello" ]
+then
+    strings.add("world");
+end
+
+query hello
+  $s : /strings
+end
