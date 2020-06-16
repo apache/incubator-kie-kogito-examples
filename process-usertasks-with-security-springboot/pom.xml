@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.kie.kogito</groupId>
     <artifactId>kogito-examples</artifactId>
-    <version>0.10.0</version>
+    8.0.0-SNAPSHOT
   </parent>
 
   <artifactId>process-usertasks-with-security-springboot</artifactId>
