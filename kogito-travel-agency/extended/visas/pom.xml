@@ -5,8 +5,13 @@
 
   <parent>
     <groupId>org.kie.kogito</groupId>
+<<<<<<< HEAD:kogito-travel-agency/visas/pom.xml
+    <artifactId>kogito-travel-agency-example</artifactId>
+    <version>0.10.0</version>
+=======
     <artifactId>kogito-travel-agency-example-extended</artifactId>
     <version>8.0.0-SNAPSHOT</version>
+>>>>>>> upstream/master:kogito-travel-agency/extended/visas/pom.xml
   </parent>
 
   <artifactId>visas</artifactId>
