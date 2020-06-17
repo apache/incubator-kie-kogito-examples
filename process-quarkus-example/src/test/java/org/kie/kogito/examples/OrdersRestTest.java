@@ -30,12 +30,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.Model;
 import org.kie.kogito.process.Process;
+import org.kie.kogito.testcontainers.quarkus.InfinispanQuarkusResource;
 
+import io.quarkus.test.common.QuarkusTestResource;
+import io.quarkus.test.common.ResourceArg;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
 
 @QuarkusTest
+@QuarkusTestResource(value = InfinispanQuarkusResource.class, initArgs = {@ResourceArg(name = "enableIfTestCategoryIs", value = "persistence")})
 public class OrdersRestTest {
+
     @Inject
     @Named("demo.orders")
     Process<? extends Model> orderProcess;

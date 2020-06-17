@@ -15,46 +15,32 @@
  */
 package org.acme.deals;
 
-import java.util.Map;
-
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.web.server.LocalServerPort;
-import org.testcontainers.containers.FixedHostPortGenericContainer;
-import org.testcontainers.containers.GenericContainer;
-import org.testcontainers.containers.wait.strategy.Wait;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
-
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.util.Map;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.kie.kogito.testcontainers.InfinispanContainer;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.server.LocalServerPort;
+import org.testcontainers.containers.GenericContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
+
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+
 @Testcontainers
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, properties = {
-        "infinispan.remote.use-auth=true",
-        "infinispan.remote.auth-username=admin",
-        "infinispan.remote.auth-password=admin",
-        "infinispan.remote.sasl-mechanism=DIGEST-MD5"
-})
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class DealsRestIT {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DealsRestIT.class);
-
     @Container
-    public static GenericContainer INFINISPAN = new FixedHostPortGenericContainer(System.getProperty("container.image.infinispan"))
-            .withFixedExposedPort(11222, 11222)
-            .withEnv("USER", "admin")
-            .withEnv("PASS", "admin")
-            .waitingFor(Wait.forLogMessage(".*ISPN080001.*", 1));
+    public static GenericContainer<?> INFINISPAN = new InfinispanContainer();
 
     @LocalServerPort
     int randomServerPort;

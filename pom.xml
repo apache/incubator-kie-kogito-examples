@@ -131,6 +131,7 @@
   </developers>
 
   <modules>
+    <module>examples-test-utils</module>
     <module>decisiontable-quarkus-example</module>
     <module>decisiontable-springboot-example</module>
     <module>dmn-listener-quarkus</module>
@@ -207,6 +208,13 @@
         <groupId>org.testcontainers</groupId>
         <artifactId>kafka</artifactId>
         <version>${version.testcontainers}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.kie.kogito</groupId>
+        <artifactId>examples-test-utils</artifactId>
+        <version>${project.version}</version>
+        <scope>test</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>

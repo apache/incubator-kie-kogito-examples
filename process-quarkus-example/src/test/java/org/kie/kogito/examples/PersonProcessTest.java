@@ -17,8 +17,8 @@ package org.kie.kogito.examples;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -36,11 +36,14 @@ import org.kie.kogito.process.Process;
 import org.kie.kogito.process.ProcessInstance;
 import org.kie.kogito.process.WorkItem;
 import org.kie.kogito.services.identity.StaticIdentityProvider;
+import org.kie.kogito.testcontainers.quarkus.InfinispanQuarkusResource;
 
+import io.quarkus.test.common.QuarkusTestResource;
+import io.quarkus.test.common.ResourceArg;
 import io.quarkus.test.junit.QuarkusTest;
 
-
 @QuarkusTest
+@QuarkusTestResource(value = InfinispanQuarkusResource.class, initArgs = {@ResourceArg(name = "enableIfTestCategoryIs", value = "persistence")})
 public class PersonProcessTest {
 
     @Inject
