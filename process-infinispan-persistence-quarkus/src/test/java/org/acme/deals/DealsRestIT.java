@@ -15,41 +15,25 @@
  */
 package org.acme.deals;
 
-import java.util.Map;
-
-import io.quarkus.test.junit.QuarkusTest;
-import io.restassured.http.ContentType;
-import org.junit.jupiter.api.Test;
-import org.kie.api.definition.type.ClassReactive;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.testcontainers.containers.FixedHostPortGenericContainer;
-import org.testcontainers.containers.GenericContainer;
-import org.testcontainers.containers.output.Slf4jLogConsumer;
-import org.testcontainers.containers.wait.strategy.Wait;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
-
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@Testcontainers
+import java.util.Map;
+
+import org.junit.jupiter.api.Test;
+import org.kie.kogito.testcontainers.quarkus.InfinispanQuarkusResource;
+
+import io.quarkus.test.common.QuarkusTestResource;
+import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.http.ContentType;
+
 @QuarkusTest
+@QuarkusTestResource(InfinispanQuarkusResource.class)
 public class DealsRestIT {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DealsRestIT.class);
-    
-    @Container
-    public static GenericContainer INFINISPAN = new FixedHostPortGenericContainer(System.getProperty("container.image.infinispan"))
-            .withFixedExposedPort(11222, 11222)
-            .withEnv("USER", "admin")
-            .withEnv("PASS", "admin")
-            .withLogConsumer(new Slf4jLogConsumer(LOGGER))
-            .waitingFor(Wait.forLogMessage(".*ISPN080001.*", 1));
-    
     @Test
     public void testDealsRest() {
         // test adding new deal

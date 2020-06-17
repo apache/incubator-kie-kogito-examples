@@ -32,13 +32,18 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
 import org.kie.kogito.Model;
 import org.kie.kogito.process.Process;
+import org.kie.kogito.testcontainers.quarkus.InfinispanQuarkusResource;
 
+import io.quarkus.test.common.QuarkusTestResource;
+import io.quarkus.test.common.ResourceArg;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
 
 @SuppressWarnings("rawtypes")
 @QuarkusTest
+@QuarkusTestResource(value = InfinispanQuarkusResource.class, initArgs = {@ResourceArg(name = "enableIfTestCategoryIs", value = "persistence")})
 public class PersonsRestTest {
+
     @Inject
     @Named("persons")
     Process<? extends Model> personProcess;
