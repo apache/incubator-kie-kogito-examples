@@ -15,22 +15,23 @@
  */
 package org.acme.travels;
 
-import java.util.Map;
-
-import io.quarkus.test.common.QuarkusTestResource;
-import io.quarkus.test.junit.QuarkusTest;
-import org.acme.test.KeycloakServerTestResource;
-import io.restassured.http.ContentType;
-import org.junit.jupiter.api.Test;
-import org.keycloak.representations.AccessTokenResponse;
-
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Map;
+
+import org.junit.jupiter.api.Test;
+import org.keycloak.representations.AccessTokenResponse;
+import org.kie.kogito.testcontainers.quarkus.KeycloakQuarkusTestResource;
+
+import io.quarkus.test.common.QuarkusTestResource;
+import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.http.ContentType;
+
 @QuarkusTest
-@QuarkusTestResource(KeycloakServerTestResource.class)
+@QuarkusTestResource(KeycloakQuarkusTestResource.class)
 public class ApprovalsRestIT {
 
     @Test

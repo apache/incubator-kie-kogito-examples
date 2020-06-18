@@ -24,14 +24,14 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
-import org.kie.kogito.testcontainers.quarkus.InfinispanQuarkusResource;
+import org.kie.kogito.testcontainers.quarkus.InfinispanQuarkusTestResource;
 
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
 
 @QuarkusTest
-@QuarkusTestResource(InfinispanQuarkusResource.class)
+@QuarkusTestResource(InfinispanQuarkusTestResource.class)
 public class DealsRestIT {
 
     @Test

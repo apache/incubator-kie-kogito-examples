@@ -13,11 +13,6 @@
   <name>Kogito Examples :: Process Usertasks With Security OIDC Spring Boot</name>
   <description>Kogito usertasks orchestration with security enabled on REST api - Spring Boot</description>
 
-  <properties>
-    <container.image.keycloak>quay.io/keycloak/keycloak:${container.image.keycloak.version}</container.image.keycloak>
-    <container.image.keycloak.version>8.0.1</container.image.keycloak.version>
-  </properties>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -70,8 +65,8 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.testcontainers</groupId>
-      <artifactId>testcontainers</artifactId>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>examples-test-utils</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>

@@ -17,8 +17,6 @@
   <description>Kogito user tasks orchestration with security enabled on REST api - open id connect adapter(keycloak)</description>
 
   <properties>
-    <container.image.keycloak>quay.io/keycloak/keycloak:${container.image.keycloak.version}</container.image.keycloak>
-    <container.image.keycloak.version>8.0.1</container.image.keycloak.version>
     <failsafe.include>**/*IT.java</failsafe.include>
     <failsafe.exclude>**/Native*IT.java</failsafe.exclude>
   </properties>
@@ -74,8 +72,8 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.testcontainers</groupId>
-      <artifactId>testcontainers</artifactId>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>examples-test-utils</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>

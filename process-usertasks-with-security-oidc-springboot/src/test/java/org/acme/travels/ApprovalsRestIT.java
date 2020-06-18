@@ -22,41 +22,42 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.keycloak.representations.AccessTokenResponse;
 import org.kie.kogito.springboot.KogitoSpringbootApplication;
+import org.kie.kogito.testcontainers.KeycloakContainer;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 
-@RunWith(SpringRunner.class)
+@Testcontainers
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 public class ApprovalsRestIT {
 
-    @ClassRule
-    public static final KeycloakContainerResource keycloak = new KeycloakContainerResource();
+    @Container
+    public static final KeycloakContainer KEYCLOAK = new KeycloakContainer();
 
     @LocalServerPort
     int randomServerPort;
     
-    @Before
+    @BeforeEach
     public void before() {
         RestAssured.port = randomServerPort;
     }
     
     @Test
     public void testStartApprovalUnauthorized() {
-
-        
         given()
                .body("{\"traveller\" : {\"firstName\" : \"John\",\"lastName\" : \"Doe\",\"email\" : \"john.doe@example.com\",\"nationality\" : \"American\",\"address\" : {\"street\" : \"main street\",\"city\" : \"Boston\",\"zipCode\" : \"10005\",\"country\" : \"US\"}}")
                .contentType(ContentType.JSON)

@@ -15,38 +15,17 @@
  */
 package org.kie.kogito.testcontainers.quarkus;
 
-import java.util.Collections;
-import java.util.Map;
-import java.util.Optional;
-
+import org.kie.kogito.resources.ConditionalQuarkusTestResource;
 import org.kie.kogito.testcontainers.InfinispanContainer;
-
-import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
 
 /**
  * Infinispan quarkus resource that works within the test lifecycle.
  *
  */
-public class InfinispanQuarkusResource implements QuarkusTestResourceLifecycleManager {
+public class InfinispanQuarkusTestResource extends ConditionalQuarkusTestResource {
 
-    private static final String ENABLE_PROPERTY = "enableIfTestCategoryIs";
-
-    private final InfinispanContainer infinispan = new InfinispanContainer();
-
-    @Override
-    public void init(Map<String, String> initArgs) {
-        Optional.ofNullable(initArgs.get(ENABLE_PROPERTY)).ifPresent(infinispan::enableIfTestCategoryIs);
-    }
-
-    @Override
-    public Map<String, String> start() {
-        infinispan.start();
-        return Collections.emptyMap();
-    }
-
-    @Override
-    public void stop() {
-        infinispan.stop();
+    public InfinispanQuarkusTestResource() {
+        super(new InfinispanContainer());
     }
 
 }
