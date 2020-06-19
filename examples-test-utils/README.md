@@ -1,7 +1,5 @@
 # Common Utils For Kogito Examples
 
-## Infinispan Test Containers Support
-
 Add the common utils dependency in the _pom.xml_ file:
 
 ```xml
@@ -11,6 +9,8 @@ Add the common utils dependency in the _pom.xml_ file:
   <scope>test</scope>
 </dependency>
 ```
+
+## Infinispan Test Containers Support
 
 ### Usage in a Quarkus test:
 
@@ -74,4 +74,35 @@ In case we want to run the container only if some requirements are met, we need 
 ```java
 @Container
 public static GenericContainer<?> INFINISPAN = new InfinispanContainer().enableIfTestCategoryIs("persistence");
+```
+
+## Keycloak Test Containers Support
+
+### Usage in a Quarkus test:
+
+Example:
+
+```java
+@QuarkusTest
+@QuarkusTestResource(KeycloakQuarkusResource.class)
+public class MyTest {
+   // ...
+}
+```
+
+### Usage in a Spring Boot test:
+
+Example:
+
+```java
+@Testcontainers
+@ExtendWith(SpringExtension.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = DemoApplication.class)
+@DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD) // reset spring context after each test method
+public class MyTest {
+    @Container
+    public static KeycloakContainer KEYCLOAK = new KeycloakContainer();
+    
+    // ...
+}
 ```

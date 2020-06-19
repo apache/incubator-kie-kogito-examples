@@ -13,15 +13,19 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.acme.travels;
+package org.kie.kogito.testcontainers.quarkus;
 
-import org.kie.kogito.testcontainers.quarkus.KeycloakQuarkusTestResource;
+import org.kie.kogito.resources.ConditionalQuarkusTestResource;
+import org.kie.kogito.testcontainers.KeycloakContainer;
 
-import io.quarkus.test.common.QuarkusTestResource;
-import io.quarkus.test.junit.NativeImageTest;
+/**
+ * Keycloak quarkus resource that works within the test lifecycle.
+ *
+ */
+public class KeycloakQuarkusTestResource extends ConditionalQuarkusTestResource {
 
-@NativeImageTest
-@QuarkusTestResource(KeycloakQuarkusTestResource.class)
-public class NativeApprovalsRestIT extends ApprovalsRestIT {
-    // run the same tests only against native image
+    public KeycloakQuarkusTestResource() {
+        super(new KeycloakContainer());
+    }
+
 }

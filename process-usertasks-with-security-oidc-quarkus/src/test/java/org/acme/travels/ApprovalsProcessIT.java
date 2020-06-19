@@ -15,6 +15,9 @@
  */
 package org.acme.travels;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -23,9 +26,6 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import io.quarkus.test.common.QuarkusTestResource;
-import io.quarkus.test.junit.QuarkusTest;
-import org.acme.test.KeycloakServerTestResource;
 import org.jbpm.process.instance.impl.humantask.HumanTaskTransition;
 import org.jbpm.process.instance.impl.humantask.phases.Claim;
 import org.jbpm.process.instance.impl.workitem.Complete;
@@ -36,12 +36,13 @@ import org.kie.kogito.process.Process;
 import org.kie.kogito.process.ProcessInstance;
 import org.kie.kogito.process.WorkItem;
 import org.kie.kogito.services.identity.StaticIdentityProvider;
+import org.kie.kogito.testcontainers.quarkus.KeycloakQuarkusTestResource;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import io.quarkus.test.common.QuarkusTestResource;
+import io.quarkus.test.junit.QuarkusTest;
 
 @QuarkusTest
-@QuarkusTestResource(KeycloakServerTestResource.class)
+@QuarkusTestResource(KeycloakQuarkusTestResource.class)
 public class ApprovalsProcessIT {
 
     @Named("approvals")

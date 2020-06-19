@@ -13,15 +13,29 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.acme.travels;
+package org.kie.kogito.resources;
 
-import org.kie.kogito.testcontainers.quarkus.KeycloakQuarkusTestResource;
+/**
+ * Conditional test resource for kogito tests.
+ * 
+ */
+public interface ConditionalTestResource<T> {
 
-import io.quarkus.test.common.QuarkusTestResource;
-import io.quarkus.test.junit.NativeImageTest;
+    /**
+     * Start the test resource.
+     */
+    void start();
 
-@NativeImageTest
-@QuarkusTestResource(KeycloakQuarkusTestResource.class)
-public class NativeApprovalsRestIT extends ApprovalsRestIT {
-    // run the same tests only against native image
+    /**
+     * Stop the test resource.
+     */
+    void stop();
+
+    /**
+     * Enable the test resource only if the test category matches the value.
+     * @param value to match the test category.
+     * @return the test resource.
+     */
+    T enableIfTestCategoryIs(String value);
+
 }
