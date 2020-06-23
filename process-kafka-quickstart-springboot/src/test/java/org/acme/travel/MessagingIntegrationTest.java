@@ -15,6 +15,10 @@
  */
 package org.acme.travel;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.net.URI;
 import java.time.ZonedDateTime;
 import java.util.Optional;
@@ -23,51 +27,57 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
-import javax.inject.Inject;
+import org.junit.After;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.kie.kogito.kafka.KafkaClient;
+import org.kie.kogito.testcontainers.KogitoKafkaContainer;
+import org.kie.kogito.tests.KogitoKafkaQuickstartSpringbootApplication;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import io.cloudevents.v03.CloudEventBuilder;
-import io.quarkus.test.common.QuarkusTestResource;
-import io.quarkus.test.junit.QuarkusTest;
-import org.eclipse.microprofile.config.inject.ConfigProperty;
-import org.junit.After;
-import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-@QuarkusTest
-@QuarkusTestResource(KafkaTestResource.class)
+@Testcontainers
+@SpringBootTest(classes = KogitoKafkaQuickstartSpringbootApplication.class)
 public class MessagingIntegrationTest {
 
     public static final String TOPIC_PRODUCER = "travellers";
     public static final String TOPIC_CONSUMER = "processedtravellers";
     private static Logger LOGGER = LoggerFactory.getLogger(MessagingIntegrationTest.class);
 
-    @Inject
+    @Autowired
     private ObjectMapper objectMapper;
 
-    public KafkaTester kafkaTester;
+    public KafkaClient kafkaClient;
 
-    @ConfigProperty(name = KafkaTestResource.KAFKA_BOOTSTRAP_SERVERS)
-    private String kafkaBootstrapServers;
+    @Container
+    private static final KogitoKafkaContainer KAFKA = new KogitoKafkaContainer();
+
+    @BeforeAll
+    public static void init() {
+        System.setProperty("spring.kafka.bootstrap-servers", KAFKA.getBootstrapServers());
+    }
 
     @Test
     public void testProcess() throws InterruptedException {
         objectMapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
-        kafkaTester = new KafkaTester(kafkaBootstrapServers);
+        kafkaClient = new KafkaClient(KAFKA.getBootstrapServers());
 
         //number of generated events to test
         final int count = 3;
         final CountDownLatch countDownLatch = new CountDownLatch(count);
 
-        kafkaTester.consume(TOPIC_CONSUMER, s -> {
+        kafkaClient.consume(TOPIC_CONSUMER, s -> {
             LOGGER.info("Received from kafka: {}", s);
             try {
                 JsonNode event = objectMapper.readValue(s, JsonNode.class);
@@ -86,7 +96,7 @@ public class MessagingIntegrationTest {
 
         IntStream.range(0, count)
                 .mapToObj(i -> new Traveller("Name" + i, "LastName" + i, "email" + i, "Nationality" + i))
-                .forEach(traveller -> kafkaTester.produce(generateCloudEvent(traveller), TOPIC_PRODUCER));
+                 .forEach(traveller -> kafkaClient.produce(generateCloudEvent(traveller), TOPIC_PRODUCER));
 
         countDownLatch.await(5, TimeUnit.SECONDS);
         assertEquals(countDownLatch.getCount(), 0);
@@ -109,6 +119,6 @@ public class MessagingIntegrationTest {
 
     @After
     public void stop() {
-        Optional.ofNullable(kafkaTester).ifPresent(KafkaTester::shutdown);
+        Optional.ofNullable(kafkaClient).ifPresent(KafkaClient::shutdown);
     }
 }

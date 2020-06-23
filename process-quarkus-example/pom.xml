@@ -141,6 +141,7 @@
             <configuration>
               <systemPropertyVariables>
                 <tests.category>persistence</tests.category>
+                <enable.resource.infinispan>true</enable.resource.infinispan>
                 <container.image.infinispan>${container.image.infinispan}</container.image.infinispan>
               </systemPropertyVariables>
             </configuration>
@@ -165,6 +166,19 @@
           <artifactId>quarkus-smallrye-reactive-messaging-kafka</artifactId>
         </dependency>
       </dependencies>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <configuration>
+              <systemPropertyVariables>
+                <enable.resource.kafka>true</enable.resource.kafka>
+              </systemPropertyVariables>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
     </profile>
   </profiles>
 </project>

@@ -18,6 +18,7 @@ package org.kogito.serverless.examples;
 import static io.restassured.RestAssured.given;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static org.awaitility.Awaitility.await;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -25,19 +26,20 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.sse.SseEventSource;
 
-import javax.ws.rs.core.MediaType;
+import org.junit.jupiter.api.Test;
+import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
-import org.junit.Assert;
-import org.junit.jupiter.api.Test;
 
 @QuarkusTest
-@QuarkusTestResource(KafkaResource.class)
+@QuarkusTestResource(KafkaQuarkusTestResource.class)
 public class ApplicantWorkflowTest {
     private static final String DECISION_SSE_ENDPOINT = "http://localhost:8081/decisions/stream";
 
@@ -65,7 +67,7 @@ public class ApplicantWorkflowTest {
 
         ObjectMapper mapper = new ObjectMapper();
         JsonNode decisionObj = mapper.readTree(received.get(0));
-        Assert.assertEquals("Approved", decisionObj.get("data").get("decision").asText());
+        assertEquals("Approved", decisionObj.get("data").get("decision").asText());
     }
 
 }

@@ -26,7 +26,8 @@ import org.testcontainers.containers.wait.strategy.Wait;
  */
 public class InfinispanContainer extends ConditionalGenericContainer<InfinispanContainer> {
 
-    public static final String INFINISPAN_PROPERTY = "container.image.infinispan";
+    public static final String NAME = "infinispan";
+    public static final String INFINISPAN_PROPERTY = "container.image." + NAME;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(InfinispanContainer.class);
 
@@ -36,6 +37,11 @@ public class InfinispanContainer extends ConditionalGenericContainer<InfinispanC
         withEnv("PASS", "admin");
         withLogConsumer(new Slf4jLogConsumer(LOGGER));
         waitingFor(Wait.forLogMessage(".*ISPN080001.*", 1));
+    }
+
+    @Override
+    protected String getResourceName() {
+        return NAME;
     }
 
     @Override

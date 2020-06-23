@@ -15,9 +15,7 @@
  */
 package org.kie.kogito.testcontainers;
 
-import java.util.Optional;
-
-import org.apache.commons.lang3.StringUtils;
+import org.kie.kogito.resources.ConditionHolder;
 import org.kie.kogito.resources.ConditionalTestResource;
 import org.testcontainers.containers.GenericContainer;
 
@@ -26,17 +24,11 @@ import org.testcontainers.containers.GenericContainer;
  */
 public abstract class ConditionalGenericContainer<SELF extends GenericContainer<SELF>> extends GenericContainer<SELF> implements ConditionalTestResource<GenericContainer<SELF>> {
 
-    private static final String TEST_CATEGORY_PROPERTY = "tests.category";
-
-    private boolean enabled = true;
-
-    public boolean isEnabled() {
-        return enabled;
-    }
+    private final ConditionHolder condition = new ConditionHolder(getResourceName());
 
     @Override
     public void start() {
-        if (isEnabled()) {
+        if (condition.isEnabled()) {
             preStart();
             super.start();
         }
@@ -44,20 +36,18 @@ public abstract class ConditionalGenericContainer<SELF extends GenericContainer<
 
     @Override
     public void stop() {
-        if (isEnabled()) {
+        if (condition.isEnabled()) {
             super.stop();
         }
     }
 
-    public GenericContainer<SELF> enableIfTestCategoryIs(String value) {
-        return enableIfSystemPropertyIs(TEST_CATEGORY_PROPERTY, value);
-    }
-
-    public GenericContainer<SELF> enableIfSystemPropertyIs(String name, String value) {
-        this.enabled = Optional.ofNullable(System.getProperty(name)).map(property -> StringUtils.equalsIgnoreCase(property, value)).orElse(false);
-
+    @Override
+    public GenericContainer<SELF> enableConditional() {
+        condition.enableConditional();
         return this;
     }
+
+    protected abstract String getResourceName();
 
     protected void preStart() {
 

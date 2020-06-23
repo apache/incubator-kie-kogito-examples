@@ -105,7 +105,7 @@
             <artifactId>maven-surefire-plugin</artifactId>
             <configuration>
               <systemPropertyVariables>
-                <tests.category>persistence</tests.category>
+                <enable.resource.infinispan>true</enable.resource.infinispan>
                 <container.image.infinispan>${container.image.infinispan}</container.image.infinispan>
               </systemPropertyVariables>
             </configuration>
