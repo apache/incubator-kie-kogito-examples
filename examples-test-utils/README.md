@@ -37,7 +37,7 @@ quarkus.infinispan-client.auth-password=admin
 In case we want to run the container only if some requirements are met, we need to use it this way:
 
 ```java
-@QuarkusTestResource(value = InfinispanQuarkusResource.class, initArgs = {@ResourceArg(name = "enableIfTestCategoryIs", value = "persistence")})
+@QuarkusTestResource(value = InfinispanQuarkusResource.class, initArgs = {@ResourceArg(name = "conditional", value = "true")})
 ```
 
 ### Usage in Spring Boot test:
@@ -73,7 +73,7 @@ In case we want to run the container only if some requirements are met, we need 
 
 ```java
 @Container
-public static GenericContainer<?> INFINISPAN = new InfinispanContainer().enableIfTestCategoryIs("persistence");
+public static GenericContainer<?> INFINISPAN = new InfinispanContainer().enableConditional();
 ```
 
 ## Keycloak Test Containers Support
@@ -106,3 +106,61 @@ public class MyTest {
     // ...
 }
 ```
+
+## Kafka Test Containers Support
+
+### Usage in a Quarkus test:
+
+Example:
+
+```java
+@QuarkusTest
+@QuarkusTestResource(KafkaQuarkusTestResource.class)
+public class MyTest {
+   
+   @ConfigProperty(name = KafkaQuarkusTestResource.KAFKA_BOOTSTRAP_SERVERS)
+   private String kafkaBootstrapServers;
+   // ...
+}
+```
+
+### Usage in a Spring Boot test:
+
+Example:
+
+```java
+@Testcontainers
+@ExtendWith(SpringExtension.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = DemoApplication.class)
+@DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD) // reset spring context after each test method
+public class MyTest {
+    @Container
+    private static final KogitoKafkaContainer KAFKA = new KogitoKafkaContainer();
+    
+    // ...
+}
+```
+
+## Kafka Client
+
+Add the Kafka Client dependency in the _pom.xml_ file:
+
+```xml
+<dependency>
+  <groupId>org.apache.kafka</groupId>
+  <artifactId>kafka-clients</artifactId>
+  <scope>test</scope>
+</dependency>
+```
+
+And make use of it:
+
+```java
+kafkaClient = new KafkaClient(kafkaBootstrapServers);
+kafkaClient.consume(TOPIC_CONSUMER, s -> {
+            LOGGER.info("Received from kafka: {}", s);
+            // ...
+});
+kafkaClient.produce(generateCloudEvent(traveller), TOPIC_PRODUCER);
+kafkaClient.shutdown();
+``` 

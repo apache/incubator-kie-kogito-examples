@@ -31,6 +31,7 @@ import org.junit.jupiter.api.Test;
 import org.kie.kogito.Model;
 import org.kie.kogito.process.Process;
 import org.kie.kogito.testcontainers.quarkus.InfinispanQuarkusTestResource;
+import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.common.ResourceArg;
@@ -38,7 +39,8 @@ import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
 
 @QuarkusTest
-@QuarkusTestResource(value = InfinispanQuarkusTestResource.class, initArgs = {@ResourceArg(name = "enableIfTestCategoryIs", value = "persistence")})
+@QuarkusTestResource(value = InfinispanQuarkusTestResource.class, initArgs = {@ResourceArg(name = "conditional", value = "true")})
+@QuarkusTestResource(value = KafkaQuarkusTestResource.class, initArgs = {@ResourceArg(name = "conditional", value = "true")})
 public class OrdersRestTest {
 
     @Inject
