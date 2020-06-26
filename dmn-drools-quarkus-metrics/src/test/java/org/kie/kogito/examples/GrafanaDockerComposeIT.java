@@ -13,11 +13,9 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-
 package org.kie.kogito.examples;
 
-import static org.hamcrest.Matchers.hasItem;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.io.File;
 
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
@@ -25,10 +23,9 @@ import org.testcontainers.containers.DockerComposeContainer;
 import org.testcontainers.containers.wait.strategy.Wait;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.arrayContaining;
 
-import java.io.File;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.hasItem;
 
 @Testcontainers
 public class GrafanaDockerComposeIT {
@@ -41,7 +38,7 @@ public class GrafanaDockerComposeIT {
             new DockerComposeContainer(new File("./docker-compose.yml"))
                     .withExposedService("grafana_1", 3000, Wait.forHttp("/")
                             .forStatusCode(200));
-    
+
     @Test
     public void testPrometheusDataSource() {
         given()

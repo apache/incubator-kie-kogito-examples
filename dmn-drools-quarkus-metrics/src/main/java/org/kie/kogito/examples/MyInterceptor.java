@@ -23,6 +23,7 @@ import org.kie.kogito.monitoring.system.interceptor.MetricsInterceptor;
 
 @Provider
 public class MyInterceptor extends MetricsInterceptor {
+
     @Override
     public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) {
         super.filter(requestContext, responseContext);

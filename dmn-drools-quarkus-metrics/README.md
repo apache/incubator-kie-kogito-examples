@@ -72,7 +72,8 @@ You can use these default dashboards, or you can personalize them and use your c
 
 It is possible to use `docker-compose` to demonstrate how to inject the generated dashboards in the volume of the grafana container:
 1. Run `mvn clean package` to build the project and generate dashboards. 
-2. `docker-compose up` to start application. 
+2. Run `docker-compose build` to build the docker images.
+2. Run `docker-compose up` to start the applications. 
 
 The volumes of the grafana container are properly set in the `docker-compose.yml` file, so that the dashboards are properly loaded at startup.
 
