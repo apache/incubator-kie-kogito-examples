@@ -57,14 +57,6 @@
   <build>
     <plugins>
       <plugin>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <configuration>
-          <systemProperties>
-            <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-          </systemProperties>
-        </configuration>
-      </plugin>
-      <plugin>
         <groupId>io.quarkus</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
         <configuration>
@@ -119,6 +111,9 @@
           <name>persistence</name>
         </property>
       </activation>
+      <properties>
+        <enable.resource.infinispan>true</enable.resource.infinispan>
+      </properties>
       <dependencies>
         <dependency>
           <groupId>io.quarkus</groupId>
@@ -130,20 +125,6 @@
           <version>${project.version}</version>
         </dependency>
       </dependencies>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <configuration>
-              <systemPropertyVariables>
-                <enable.resource.infinispan>true</enable.resource.infinispan>
-                <container.image.infinispan>${container.image.infinispan}</container.image.infinispan>
-              </systemPropertyVariables>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
     </profile>
   </profiles>
 </project>

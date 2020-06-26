@@ -32,7 +32,6 @@ import javax.inject.Inject;
 
 
 @QuarkusTest
-@Tag("integration")
 public class CountriesResourceTest {
 
     @Inject

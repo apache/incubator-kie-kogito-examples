@@ -27,15 +27,18 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
-import javax.inject.Inject;
-
-import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.junit.After;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.kafka.KafkaClient;
-import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
+import org.kie.kogito.testcontainers.KogitoKafkaContainer;
+import org.kie.kogito.tests.KogitoKafkaQuickstartSpringbootApplication;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -43,29 +46,32 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.cloudevents.v03.CloudEventBuilder;
-import io.quarkus.test.common.QuarkusTestResource;
-import io.quarkus.test.junit.QuarkusTest;
 
-@QuarkusTest
-@QuarkusTestResource(KafkaQuarkusTestResource.class)
-public class MessagingIntegrationTest {
+@Testcontainers
+@SpringBootTest(classes = KogitoKafkaQuickstartSpringbootApplication.class)
+public class MessagingIT {
 
     public static final String TOPIC_PRODUCER = "travellers";
     public static final String TOPIC_CONSUMER = "processedtravellers";
-    private static Logger LOGGER = LoggerFactory.getLogger(MessagingIntegrationTest.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(MessagingIT.class);
 
-    @Inject
+    @Autowired
     private ObjectMapper objectMapper;
 
     public KafkaClient kafkaClient;
 
-    @ConfigProperty(name = KafkaQuarkusTestResource.KAFKA_BOOTSTRAP_SERVERS)
-    private String kafkaBootstrapServers;
+    @Container
+    private static final KogitoKafkaContainer KAFKA = new KogitoKafkaContainer();
+
+    @BeforeAll
+    public static void init() {
+        System.setProperty("spring.kafka.bootstrap-servers", KAFKA.getBootstrapServers());
+    }
 
     @Test
     public void testProcess() throws InterruptedException {
         objectMapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
-        kafkaClient = new KafkaClient(kafkaBootstrapServers);
+        kafkaClient = new KafkaClient(KAFKA.getBootstrapServers());
 
         //number of generated events to test
         final int count = 3;
@@ -89,7 +95,7 @@ public class MessagingIntegrationTest {
         });
 
         IntStream.range(0, count)
-                .mapToObj(i -> new Traveller("Name" + i, "LastName" + i, "email" + i, "Nationality" + i))
+                 .mapToObj(i -> new Traveller("Name" + i, "LastName" + i, "email" + i, "Nationality" + i))
                  .forEach(traveller -> kafkaClient.produce(generateCloudEvent(traveller), TOPIC_PRODUCER));
 
         countDownLatch.await(5, TimeUnit.SECONDS);
@@ -100,12 +106,12 @@ public class MessagingIntegrationTest {
         assertFalse(traveller.isProcessed());
         try {
             return objectMapper.writeValueAsString(CloudEventBuilder.builder()
-                                                           .withId(UUID.randomUUID().toString())
-                                                           .withSource(URI.create(""))
-                                                           .withType("TravelersMessageDataEvent_3")
-                                                           .withTime(ZonedDateTime.now())
-                                                           .withData(traveller)
-                                                           .build());
+                                                                    .withId(UUID.randomUUID().toString())
+                                                                    .withSource(URI.create(""))
+                                                                    .withType("TravelersMessageDataEvent_3")
+                                                                    .withTime(ZonedDateTime.now())
+                                                                    .withData(traveller)
+                                                                    .build());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

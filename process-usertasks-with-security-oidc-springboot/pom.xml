@@ -120,32 +120,6 @@
           </execution>
         </executions>
       </plugin>
-      <plugin>
-        <artifactId>maven-failsafe-plugin</artifactId>
-        <configuration>
-          <includes>
-            <include>**/*IT.java</include>
-          </includes>
-          <systemPropertyVariables>
-            <container.image.keycloak>${container.image.keycloak}</container.image.keycloak>
-          </systemPropertyVariables>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>integration-test</goal>
-              <goal>verify</goal>
-            </goals>
-            <configuration>
-              <!--
-                  Make failsafe and spring-boot repackage play nice together,
-                  see https://github.com/spring-projects/spring-boot/issues/6254
-              -->
-              <classesDirectory>${project.build.outputDirectory}</classesDirectory>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
     </plugins>
   </build>
 </project>
