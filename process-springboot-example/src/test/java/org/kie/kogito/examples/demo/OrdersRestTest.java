@@ -33,6 +33,7 @@ import org.kie.kogito.Model;
 import org.kie.kogito.examples.DemoApplication;
 import org.kie.kogito.process.Process;
 import org.kie.kogito.testcontainers.InfinispanContainer;
+import org.kie.kogito.testcontainers.KogitoKafkaContainer;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.annotation.DirtiesContext;
@@ -52,7 +53,10 @@ import io.restassured.http.ContentType;
 public class OrdersRestTest {
 
     @Container
-    public static GenericContainer<?> INFINISPAN = new InfinispanContainer().enableIfTestCategoryIs("persistence");
+    private static final GenericContainer<?> INFINISPAN = new InfinispanContainer().enableConditional();
+
+    @Container
+    private static final KogitoKafkaContainer KAFKA = new KogitoKafkaContainer().enableConditional();
 
     // restassured needs to know the random port created for test
     @LocalServerPort

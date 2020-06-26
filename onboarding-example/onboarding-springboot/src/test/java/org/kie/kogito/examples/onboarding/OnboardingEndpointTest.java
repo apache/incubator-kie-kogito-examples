@@ -48,7 +48,7 @@ import io.restassured.http.ContentType;
 public class OnboardingEndpointTest {
     
     @Container
-    public static GenericContainer<?> INFINISPAN = new InfinispanContainer().enableIfTestCategoryIs("persistence");
+    public static GenericContainer<?> INFINISPAN = new InfinispanContainer().enableConditional();
 
     @Autowired
     private Application application;

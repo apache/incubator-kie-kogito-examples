@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.acme.travel;
+package org.kie.kogito.kafka;
 
 import java.time.Duration;
 import java.util.Collections;
@@ -40,15 +40,19 @@ import org.apache.kafka.common.serialization.StringSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class KafkaTester {
+/**
+ * Kafka client for Kogito Example tests.
+ */
+public class KafkaClient {
+
+    private static Logger LOGGER = LoggerFactory.getLogger(KafkaClient.class);
 
     private KafkaProducer<String, String> producer;
     private KafkaConsumer<String, String> consumer;
     private CountDownLatch shutdownLatch = new CountDownLatch(1);
     private AtomicBoolean shutdown = new AtomicBoolean(false);
-    private static Logger LOGGER = LoggerFactory.getLogger(KafkaTester.class);
 
-    public KafkaTester(String hosts) {
+    public KafkaClient(String hosts) {
         Properties producerConfig = new Properties();
         producerConfig.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, hosts);
         producerConfig.put(ProducerConfig.CLIENT_ID_CONFIG, this.getClass().getName() + "Producer");
@@ -74,8 +78,8 @@ public class KafkaTester {
                 ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(500));
 
                 StreamSupport.stream(records.spliterator(), true)
-                        .map(ConsumerRecord::value)
-                        .forEach(callback::accept);
+                             .map(ConsumerRecord::value)
+                             .forEach(callback::accept);
 
                 consumer.commitSync();
             }
@@ -90,7 +94,7 @@ public class KafkaTester {
     }
 
     public void shutdown() {
-        CompletableFuture.runAsync(()-> producer.close());
+        CompletableFuture.runAsync(() -> producer.close());
         try {
             shutdown.set(true);
             shutdownLatch.await(1, TimeUnit.MINUTES);

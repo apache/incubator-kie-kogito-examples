@@ -25,7 +25,9 @@ import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
  * Quarkus resource to be run if and only if it was enabled.
  */
 public abstract class ConditionalQuarkusTestResource implements QuarkusTestResourceLifecycleManager {
-    private static final String ENABLE_PROPERTY = "enableIfTestCategoryIs";
+
+    private static final String ENABLE_PROPERTY = "conditional";
+    private static final String CONDITIONAL_ENABLED = "true";
 
     private final ConditionalTestResource<?> conditionalResource;
     
@@ -35,7 +37,7 @@ public abstract class ConditionalQuarkusTestResource implements QuarkusTestResou
 
     @Override
     public void init(Map<String, String> initArgs) {
-        Optional.ofNullable(initArgs.get(ENABLE_PROPERTY)).ifPresent(conditionalResource::enableIfTestCategoryIs);
+        Optional.ofNullable(initArgs.get(ENABLE_PROPERTY)).filter(CONDITIONAL_ENABLED::equals).ifPresent(p -> conditionalResource.enableConditional());
     }
 
     @Override
@@ -47,5 +49,9 @@ public abstract class ConditionalQuarkusTestResource implements QuarkusTestResou
     @Override
     public void stop() {
         conditionalResource.stop();
+    }
+
+    protected ConditionalTestResource<?> getConditionalResource() {
+        return conditionalResource;
     }
 }
