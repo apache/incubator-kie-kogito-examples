@@ -37,6 +37,7 @@ import org.kie.kogito.process.ProcessInstances;
 import org.kie.kogito.process.WorkItem;
 import org.kie.kogito.services.identity.StaticIdentityProvider;
 import org.kie.kogito.testcontainers.InfinispanContainer;
+import org.kie.kogito.testcontainers.KogitoKafkaContainer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -54,7 +55,10 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 public class OrdersProcessTest {
 
     @Container
-    public static GenericContainer<?> INFINISPAN = new InfinispanContainer().enableIfTestCategoryIs("persistence");
+    private static final GenericContainer<?> INFINISPAN = new InfinispanContainer().enableConditional();
+
+    @Container
+    private static final KogitoKafkaContainer KAFKA = new KogitoKafkaContainer().enableConditional();
 
 	@Autowired
 	@Qualifier("demo.orders")

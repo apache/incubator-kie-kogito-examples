@@ -29,7 +29,8 @@ import org.testcontainers.containers.wait.strategy.Wait;
  */
 public class KeycloakContainer extends ConditionalGenericContainer<KeycloakContainer> {
 
-    public static final String KEYCLOAK_PROPERTY = "container.image.keycloak";
+    public static final String NAME = "keycloak";
+    public static final String KEYCLOAK_PROPERTY = "container.image." + NAME;
 
     private static final String REALM_FILE = "/tmp/realm.json";
     private static final Logger LOGGER = LoggerFactory.getLogger(KeycloakContainer.class);
@@ -42,6 +43,11 @@ public class KeycloakContainer extends ConditionalGenericContainer<KeycloakConta
         withClasspathResourceMapping("testcontainers/keycloak/kogito-realm.json", REALM_FILE, BindMode.READ_ONLY);
         withLogConsumer(new Slf4jLogConsumer(LOGGER));
         waitingFor(Wait.forHttp("/auth").withStartupTimeout(Duration.ofMinutes(5)));
+    }
+
+    @Override
+    protected String getResourceName() {
+        return NAME;
     }
 
     @Override

@@ -13,28 +13,20 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.kie.kogito.resources;
+package org.kie.kogito.testcontainers.quarkus;
+
+import org.kie.kogito.resources.ConditionalQuarkusTestResource;
+import org.kie.kogito.testcontainers.KogitoKafkaContainer;
 
 /**
- * Conditional test resource for kogito tests.
- * 
+ * Kafka quarkus resource that works within the test lifecycle.
+ *
  */
-public interface ConditionalTestResource<T> {
+public class KafkaQuarkusTestResource extends ConditionalQuarkusTestResource {
 
-    /**
-     * Start the test resource.
-     */
-    void start();
+    public static final String KAFKA_BOOTSTRAP_SERVERS = KogitoKafkaContainer.QUARKUS_KAFKA_BOOTSTRAP_SERVERS;
 
-    /**
-     * Stop the test resource.
-     */
-    void stop();
-
-    /**
-     * Enable the test resource only if the property enable.resource.{resource-name} is set to true.
-     * @return the test resource.
-     */
-    T enableConditional();
-
+    public KafkaQuarkusTestResource() {
+        super(new KogitoKafkaContainer());
+    }
 }
