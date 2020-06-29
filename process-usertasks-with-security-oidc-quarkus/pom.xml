@@ -16,11 +16,6 @@
   <name>Kogito Examples :: Process Usertasks With Security OIDC Keycloak Quarkus</name>
   <description>Kogito user tasks orchestration with security enabled on REST api - open id connect adapter(keycloak)</description>
 
-  <properties>
-    <failsafe.include>**/*IT.java</failsafe.include>
-    <failsafe.exclude>**/Native*IT.java</failsafe.exclude>
-  </properties>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -88,28 +83,6 @@
           <execution>
             <goals>
               <goal>build</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <artifactId>maven-failsafe-plugin</artifactId>
-        <configuration>
-          <includes>
-            <include>${failsafe.include}</include>
-          </includes>
-          <excludes>
-            <exclude>${failsafe.exclude}</exclude>
-          </excludes>
-          <systemPropertyVariables>
-            <container.image.keycloak>${container.image.keycloak}</container.image.keycloak>
-          </systemPropertyVariables>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>integration-test</goal>
-              <goal>verify</goal>
             </goals>
           </execution>
         </executions>

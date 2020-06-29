@@ -128,25 +128,6 @@
           </execution>
         </executions>
       </plugin>
-      <plugin>
-        <artifactId>maven-failsafe-plugin</artifactId>
-        <executions>
-          <execution>
-            <goals>
-              <goal>integration-test</goal>
-              <goal>verify</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <!-- Due to spring-boot repackage, without adding this property test classes are not found
-               See https://github.com/spring-projects/spring-boot/issues/6254 -->
-          <classesDirectory>${project.build.outputDirectory}</classesDirectory>
-          <systemProperties>
-            <container.image.infinispan>${container.image.infinispan}</container.image.infinispan>
-          </systemProperties>
-        </configuration>
-      </plugin>
     </plugins>
   </build>
 

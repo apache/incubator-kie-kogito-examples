@@ -49,7 +49,7 @@ import io.quarkus.test.junit.QuarkusTest;
 @QuarkusTest
 @QuarkusTestResource(value = InfinispanQuarkusTestResource.class, initArgs = {@ResourceArg(name = "conditional", value = "true")})
 @QuarkusTestResource(value = KafkaQuarkusTestResource.class, initArgs = {@ResourceArg(name = "conditional", value = "true")})
-public class OrdersProcessTest {
+public class OrdersProcessIT {
 
     @Inject
     @Named("demo.orders")

@@ -52,7 +52,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = DemoApplication.class)
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD) // reset spring context after each test method
-public class OrdersProcessTest {
+public class OrdersProcessIT {
 
     @Container
     private static final GenericContainer<?> INFINISPAN = new InfinispanContainer().enableConditional();

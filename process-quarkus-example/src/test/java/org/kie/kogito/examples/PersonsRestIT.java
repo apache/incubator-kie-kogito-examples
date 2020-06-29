@@ -44,7 +44,7 @@ import io.restassured.http.ContentType;
 @QuarkusTest
 @QuarkusTestResource(value = InfinispanQuarkusTestResource.class, initArgs = {@ResourceArg(name = "conditional", value = "true")})
 @QuarkusTestResource(value = KafkaQuarkusTestResource.class, initArgs = {@ResourceArg(name = "conditional", value = "true")})
-public class PersonsRestTest {
+public class PersonsRestIT {
 
     @Inject
     @Named("persons")

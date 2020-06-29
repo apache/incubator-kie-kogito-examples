@@ -76,9 +76,6 @@
     <finalName>${project.artifactId}</finalName>
     <plugins>
       <plugin>
-        <artifactId>maven-surefire-plugin</artifactId>
-      </plugin>
-      <plugin>
         <groupId>io.quarkus</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
         <executions>
@@ -108,10 +105,6 @@
               </execution>
             </executions>
           </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-failsafe-plugin</artifactId>
-          </plugin>
         </plugins>
       </build>
     </profile>
@@ -123,6 +116,9 @@
           <name>persistence</name>
         </property>
       </activation>
+      <properties>
+        <enable.resource.infinispan>true</enable.resource.infinispan>
+      </properties>
       <dependencies>
         <dependency>
           <groupId>io.quarkus</groupId>
@@ -133,21 +129,6 @@
           <artifactId>infinispan-persistence-addon</artifactId>
         </dependency>
       </dependencies>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <configuration>
-              <systemPropertyVariables>
-                <tests.category>persistence</tests.category>
-                <enable.resource.infinispan>true</enable.resource.infinispan>
-                <container.image.infinispan>${container.image.infinispan}</container.image.infinispan>
-              </systemPropertyVariables>
-            </configuration>
-	      </plugin>
-        </plugins>
-      </build>
     </profile>
     <profile>
       <id>events</id>
@@ -156,6 +137,9 @@
           <name>events</name>
         </property>
       </activation>
+      <properties>
+        <enable.resource.kafka>true</enable.resource.kafka>
+      </properties>
       <dependencies>
         <dependency>
           <groupId>org.kie.kogito</groupId>
