@@ -69,12 +69,7 @@ public class GrafanaDockerComposeIT {
 
     @Test
     public void testKogitoContainerIsDeployedAndResponsive() {
-        String body = "{\n" +
-                "\"Client\": {\"age\": 43,\"salary\": 1950, \"existing payments\": 100},\n" +
-                "\"Loan\": {\"duration\": 15,\"installment\": 180}, \n" +
-                "\"SupremeDirector\" : \"Yes\", \n" +
-                "\"Bribe\": 1000\n" +
-                "}";
+        String body = "{\"Client\": {\"age\": 43,\"salary\": 1950, \"existing payments\": 100}, \"Loan\": {\"duration\": 15,\"installment\": 180}, \"SupremeDirector\" : \"Yes\", \"Bribe\": 1000}";
 
         given()
                 .baseUri(KOGITO_APPLICATION_URL)
