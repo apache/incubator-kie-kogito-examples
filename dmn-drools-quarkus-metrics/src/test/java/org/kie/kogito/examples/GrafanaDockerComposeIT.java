@@ -32,6 +32,7 @@ public class GrafanaDockerComposeIT {
 
     private static final String GRAFANA_URL = "http://localhost:3000";
     private static final String PROMETHEUS_PRIVATE_URL = "http://prometheus:9090";
+    private static final String KOGITO_APPLICATION_URL = "http://localhost:8080";
 
     @Container
     public static DockerComposeContainer environment =
@@ -64,5 +65,24 @@ public class GrafanaDockerComposeIT {
                 .body("title", hasItem("hello - Operational Dashboard"))
                 .body("title", hasItem("LoanEligibility - Domain Dashboard"))
                 .body("title", hasItem("LoanEligibility - Operational Dashboard"));
+    }
+
+    @Test
+    public void testKogitoContainerIsDeployedAndResponsive() {
+        String body = "{\n" +
+                "\"Client\": {\"age\": 43,\"salary\": 1950, \"existing payments\": 100},\n" +
+                "\"Loan\": {\"duration\": 15,\"installment\": 180}, \n" +
+                "\"SupremeDirector\" : \"Yes\", \n" +
+                "\"Bribe\": 1000\n" +
+                "}";
+
+        given()
+                .baseUri(KOGITO_APPLICATION_URL)
+                .contentType(ContentType.JSON)
+                .when()
+                .body(body)
+                .post("/LoanEligibility")
+                .then()
+                .statusCode(200);
     }
 }
