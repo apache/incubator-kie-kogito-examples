@@ -22,28 +22,45 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-import javax.inject.Inject;
-
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.kie.api.runtime.process.WorkItem;
 import org.kie.api.runtime.process.WorkItemHandler;
 import org.kie.kogito.Application;
+import org.kie.kogito.examples.KogitoOnboardingApplication;
 import org.kie.kogito.examples.test.RecordedOutputWorkItemHandler;
-import org.kie.kogito.testcontainers.quarkus.InfinispanQuarkusTestResource;
+import org.kie.kogito.testcontainers.InfinispanContainer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.testcontainers.containers.GenericContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
-import io.quarkus.test.common.QuarkusTestResource;
-import io.quarkus.test.common.ResourceArg;
-import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 
-@QuarkusTest
-@QuarkusTestResource(value = InfinispanQuarkusTestResource.class, initArgs = {@ResourceArg(name = "conditional", value = "true")})
-public class OnboardingEndpointTest {
+@Testcontainers
+@ExtendWith(SpringExtension.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoOnboardingApplication.class)
+public class OnboardingEndpointIT {
     
-    @Inject
-    Application application;
+    @Container
+    public static GenericContainer<?> INFINISPAN = new InfinispanContainer().enableConditional();
 
+    @Autowired
+    private Application application;
     
+    @LocalServerPort
+    private int port;
+
+    @BeforeEach
+    public void setUp() {
+        RestAssured.port = port;
+    }
+
     @Test
     public void testOnboardingProcessUserAlreadyExists() {
         

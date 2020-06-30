@@ -27,18 +27,15 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
+import javax.inject.Inject;
+
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.junit.After;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.kafka.KafkaClient;
-import org.kie.kogito.testcontainers.KogitoKafkaContainer;
-import org.kie.kogito.tests.KogitoKafkaQuickstartSpringbootApplication;
+import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -46,32 +43,29 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.cloudevents.v03.CloudEventBuilder;
+import io.quarkus.test.common.QuarkusTestResource;
+import io.quarkus.test.junit.QuarkusTest;
 
-@Testcontainers
-@SpringBootTest(classes = KogitoKafkaQuickstartSpringbootApplication.class)
-public class MessagingIntegrationTest {
+@QuarkusTest
+@QuarkusTestResource(KafkaQuarkusTestResource.class)
+public class MessagingIT {
 
     public static final String TOPIC_PRODUCER = "travellers";
     public static final String TOPIC_CONSUMER = "processedtravellers";
-    private static Logger LOGGER = LoggerFactory.getLogger(MessagingIntegrationTest.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(MessagingIT.class);
 
-    @Autowired
+    @Inject
     private ObjectMapper objectMapper;
 
     public KafkaClient kafkaClient;
 
-    @Container
-    private static final KogitoKafkaContainer KAFKA = new KogitoKafkaContainer();
-
-    @BeforeAll
-    public static void init() {
-        System.setProperty("spring.kafka.bootstrap-servers", KAFKA.getBootstrapServers());
-    }
+    @ConfigProperty(name = KafkaQuarkusTestResource.KAFKA_BOOTSTRAP_SERVERS)
+    private String kafkaBootstrapServers;
 
     @Test
     public void testProcess() throws InterruptedException {
         objectMapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
-        kafkaClient = new KafkaClient(KAFKA.getBootstrapServers());
+        kafkaClient = new KafkaClient(kafkaBootstrapServers);
 
         //number of generated events to test
         final int count = 3;

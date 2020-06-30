@@ -37,7 +37,10 @@
     <version.jar.plugin>3.1.0</version.jar.plugin>
 
     <surefire.forkCount>1</surefire.forkCount>
+    <failsafe.include>**/*IT.java</failsafe.include>
+    <failsafe.exclude>**/Native*IT.java</failsafe.exclude>
     <alphanetworkCompilerEnabled>false</alphanetworkCompilerEnabled>
+    <tests.category></tests.category>
 
     <version.io.quarkus>1.5.0.Final</version.io.quarkus>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -133,53 +136,93 @@
       <url>http://kogito.kie.org/community/team.html</url>
     </developer>
   </developers>
-
+  
   <modules>
     <module>examples-test-utils</module>
-    <module>decisiontable-quarkus-example</module>
-    <module>decisiontable-springboot-example</module>
-    <module>dmn-listener-quarkus</module>
-    <module>dmn-listener-springboot</module>
-    <module>dmn-quarkus-example</module>
-    <module>dmn-drools-quarkus-metrics</module>
-    <module>dmn-springboot-example</module>
-    <module>kogito-travel-agency</module>
-    <module>onboarding-example</module>
-    <module>process-business-rules-quarkus</module>
-    <module>process-business-rules-springboot</module>
-    <module>process-infinispan-persistence-quarkus</module>
-    <module>process-infinispan-persistence-springboot</module>
-    <module>process-kafka-quickstart-quarkus</module>
-    <module>process-kafka-quickstart-springboot</module>
-    <module>process-optaplanner-quarkus</module>
-    <module>process-optaplanner-springboot</module>
-    <module>process-quarkus-example</module>
-    <module>process-scripts-quarkus</module>
-    <module>process-scripts-springboot</module>
-    <module>process-service-calls-quarkus</module>
-    <module>process-service-calls-springboot</module>
-    <module>process-service-rest-call-quarkus</module>
-    <module>process-service-rest-call-springboot</module>
-    <module>process-springboot-example</module>
-    <module>process-timer-quarkus</module>
-    <module>process-timer-springboot</module>
-    <module>process-usertasks-custom-lifecycle-quarkus</module>
-    <module>process-usertasks-custom-lifecycle-springboot</module>
-    <module>process-usertasks-quarkus</module>
-    <module>process-usertasks-springboot</module>
-    <module>process-usertasks-with-security-oidc-quarkus</module>
-    <module>process-usertasks-with-security-oidc-springboot</module>
-    <module>process-usertasks-with-security-quarkus</module>
-    <module>process-usertasks-with-security-springboot</module>
-    <module>rules-quarkus-helloworld</module>
-    <module>ruleunit-quarkus-example</module>
-    <module>ruleunit-springboot-example</module>
-    <module>serverless-workflow-greeting-quarkus</module>
-    <module>serverless-workflow-greeting-springboot</module>
-    <module>serverless-workflow-service-calls-quarkus</module>
-    <module>serverless-workflow-service-calls-springboot</module>
-    <module>serverless-workflow-events-quarkus</module>
   </modules>
+  
+  <profiles>
+    <profile>
+      <id>default</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <modules>
+        <module>decisiontable-quarkus-example</module>
+        <module>decisiontable-springboot-example</module>
+        <module>dmn-listener-quarkus</module>
+        <module>dmn-listener-springboot</module>
+        <module>dmn-quarkus-example</module>
+        <module>dmn-drools-quarkus-metrics</module>
+        <module>dmn-springboot-example</module>
+        <module>kogito-travel-agency</module>
+        <module>onboarding-example</module>
+        <module>process-business-rules-quarkus</module>
+        <module>process-business-rules-springboot</module>
+        <module>process-infinispan-persistence-quarkus</module>
+        <module>process-infinispan-persistence-springboot</module>
+        <module>process-kafka-quickstart-quarkus</module>
+        <module>process-kafka-quickstart-springboot</module>
+        <module>process-optaplanner-quarkus</module>
+        <module>process-optaplanner-springboot</module>
+        <module>process-quarkus-example</module>
+        <module>process-springboot-example</module>
+        <module>process-scripts-quarkus</module>
+        <module>process-scripts-springboot</module>
+        <module>process-service-calls-quarkus</module>
+        <module>process-service-calls-springboot</module>
+        <module>process-service-rest-call-quarkus</module>
+        <module>process-service-rest-call-springboot</module>
+        <module>process-timer-quarkus</module>
+        <module>process-timer-springboot</module>
+        <module>process-usertasks-custom-lifecycle-quarkus</module>
+        <module>process-usertasks-custom-lifecycle-springboot</module>
+        <module>process-usertasks-quarkus</module>
+        <module>process-usertasks-springboot</module>
+        <module>process-usertasks-with-security-oidc-quarkus</module>
+        <module>process-usertasks-with-security-oidc-springboot</module>
+        <module>process-usertasks-with-security-quarkus</module>
+        <module>process-usertasks-with-security-springboot</module>
+        <module>rules-quarkus-helloworld</module>
+        <module>ruleunit-quarkus-example</module>
+        <module>ruleunit-springboot-example</module>
+        <module>serverless-workflow-greeting-quarkus</module>
+        <module>serverless-workflow-greeting-springboot</module>
+        <module>serverless-workflow-service-calls-quarkus</module>
+        <module>serverless-workflow-service-calls-springboot</module>
+        <module>serverless-workflow-events-quarkus</module>
+      </modules>
+    </profile>
+    <profile>
+      <id>persistence</id>
+      <activation>
+        <property>
+          <name>persistence</name>
+        </property>
+      </activation>
+      <properties>
+        <tests.category>persistence</tests.category>
+      </properties>
+      <modules>
+        <module>onboarding-example</module>
+        <module>process-quarkus-example</module>
+        <module>process-springboot-example</module>
+      </modules>
+    </profile>
+    
+    <profile>
+      <id>events</id>
+      <activation>
+        <property>
+          <name>events</name>
+        </property>
+      </activation>
+      <modules>
+        <module>process-quarkus-example</module>
+        <module>process-springboot-example</module>
+      </modules>
+    </profile>
+  </profiles>
 
   <dependencyManagement>
     <dependencies>
@@ -240,6 +283,32 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-failsafe-plugin</artifactId>
           <version>${version.surefire.plugin}</version>
+          <configuration>
+            <includes>
+              <include>${failsafe.include}</include>
+            </includes>
+            <excludes>
+              <exclude>${failsafe.exclude}</exclude>
+            </excludes>
+            <systemProperties>
+              <tests.category>${tests.category}</tests.category>
+              <enable.resource.infinispan>${enable.resource.infinispan}</enable.resource.infinispan>
+              <enable.resource.kafka>${enable.resource.kafka}</enable.resource.kafka>
+              <container.image.keycloak>${container.image.keycloak}</container.image.keycloak>
+              <container.image.infinispan>${container.image.infinispan}</container.image.infinispan>
+              <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
+              <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+            </systemProperties>
+            <classesDirectory>${project.build.outputDirectory}</classesDirectory>
+          </configuration>
+          <executions>
+            <execution>
+              <goals>
+                <goal>integration-test</goal>
+                <goal>verify</goal>
+              </goals>
+            </execution>
+          </executions>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -284,6 +353,10 @@
             <forkCount>${surefire.forkCount}</forkCount>
             <reuseForks>true</reuseForks>
             <runOrder>hourly</runOrder>
+            <systemProperties>
+              <tests.category>${tests.category}</tests.category>
+              <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+            </systemProperties>
           </configuration>
         </plugin>
         <plugin>
@@ -432,6 +505,14 @@
             </goals>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
       </plugin>
     </plugins>
   </build>

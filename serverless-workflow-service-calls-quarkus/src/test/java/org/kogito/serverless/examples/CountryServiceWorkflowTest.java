@@ -34,7 +34,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @QuarkusTest
-@Tag("integration")
 public class CountryServiceWorkflowTest {
 
     @Named("jsonservicecall")
