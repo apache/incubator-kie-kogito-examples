@@ -50,7 +50,7 @@
     <springboot.version>2.2.0.RELEASE</springboot.version>
     <!-- kogito -->
     <kogito.version>${project.version}</kogito.version>
-    <version.org.optaplanner>7.39.0.CR1</version.org.optaplanner>
+    <version.org.optaplanner>7.39.0.Final</version.org.optaplanner>
     <!-- infinispan -->
     <infinispan.version>10.1.5.Final</infinispan.version>
     <infinispan.starter.version>2.2.3.Final</infinispan.starter.version>
