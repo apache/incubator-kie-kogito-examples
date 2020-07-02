@@ -39,7 +39,7 @@
     <surefire.forkCount>1</surefire.forkCount>
     <alphanetworkCompilerEnabled>false</alphanetworkCompilerEnabled>
 
-    <version.io.quarkus>1.5.0.Final</version.io.quarkus>
+    <version.io.quarkus>1.6.0.Final</version.io.quarkus>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
@@ -47,7 +47,7 @@
     <springboot.version>2.2.0.RELEASE</springboot.version>
     <!-- kogito -->
     <kogito.version>${project.version}</kogito.version>
-    <version.org.optaplanner>7.33.0.Final</version.org.optaplanner>
+    <version.org.optaplanner>7.39.0.Final</version.org.optaplanner>
     <!-- infinispan -->
     <infinispan.version>10.1.5.Final</infinispan.version>
     <infinispan.starter.version>2.2.3.Final</infinispan.starter.version>
