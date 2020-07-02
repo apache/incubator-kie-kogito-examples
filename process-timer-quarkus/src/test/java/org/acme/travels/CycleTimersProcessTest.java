@@ -15,21 +15,19 @@
  */
 package org.acme.travels;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
-import javax.inject.Inject;
-
 import io.quarkus.test.junit.QuarkusTest;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.Application;
 import org.kie.kogito.Model;
 import org.kie.kogito.process.Process;
 import org.kie.kogito.process.ProcessInstance;
-import org.kie.kogito.process.impl.CachedProcessEventListenerConfig;
+
+import javax.inject.Inject;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -44,7 +42,7 @@ public class CycleTimersProcessTest {
     @Test
     public void testTimersCycleProcess() throws InterruptedException {
         CountDownLatch latch = new CountDownLatch(1);
-        ((CachedProcessEventListenerConfig) app.config().process().processEventListeners()).register(new CompleteProcessListener(latch));
+        app.config().process().processEventListeners().listeners().add(new CompleteProcessListener(latch));
 
         Process<? extends Model> timersProcess = app.processes().processById("timerscycle");
         assertNotNull(timersProcess);
