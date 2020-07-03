@@ -93,10 +93,9 @@ public class ApprovalsRestIT {
         assertEquals(1, taskInfo.size());
         taskInfo.containsValue("firstLineApproval");
 
-        // complete first task without authorization header as it authorization is managed on task level
-        // thus user and group(s) must be provided
         String payload = "{}";
         given()
+                .auth().oauth2(getAccessToken("mary"))
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
                 .body(payload)
