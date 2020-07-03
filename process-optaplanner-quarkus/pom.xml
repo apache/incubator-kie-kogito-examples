@@ -4,17 +4,13 @@
   <parent>
     <groupId>org.kie.kogito</groupId>
     <artifactId>kogito-examples</artifactId>
-    <version>0.11.0</version>
+    <version>0.11.1-SNAPSHOT</version>
   </parent>
   <groupId>org.kie.kogito.examples</groupId>
   <artifactId>process-optaplanner-quarkus</artifactId>
 
   <name>Kogito Example :: Process, OptaPlanner and Quarkus</name>
   <description>Flight assignment process and optimization</description>
-
-  <properties>
-    <version.org.optaplanner>7.36.0.Final</version.org.optaplanner>
-  </properties>
 
   <dependencyManagement>
     <dependencies>
@@ -79,13 +75,12 @@
     </dependency>
 
     <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-optaplanner</artifactId>
+      <groupId>org.optaplanner</groupId>
+      <artifactId>optaplanner-quarkus</artifactId>
     </dependency>
-
     <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-optaplanner-jackson</artifactId>
+      <groupId>org.optaplanner</groupId>
+      <artifactId>optaplanner-quarkus-jackson</artifactId>
     </dependency>
 
     <dependency>
