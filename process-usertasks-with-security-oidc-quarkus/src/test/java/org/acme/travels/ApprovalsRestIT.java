@@ -21,6 +21,7 @@ import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import org.acme.test.KeycloakServerTestResource;
 import io.restassured.http.ContentType;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.keycloak.representations.AccessTokenResponse;
 
@@ -47,6 +48,7 @@ public class ApprovalsRestIT {
 
     @SuppressWarnings("rawtypes")
     @Test
+    @Disabled
     public void testStartApprovalAuthorized() {
 
         // start new approval
