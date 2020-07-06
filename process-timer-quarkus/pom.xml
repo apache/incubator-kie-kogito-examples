@@ -127,7 +127,7 @@
             <artifactItem>
               <groupId>org.kie.kogito</groupId>
               <artifactId>jobs-service</artifactId>
-              <version>${parent.version}</version>
+              <version>${kogito.version}</version>
               <classifier>runner</classifier>
               <type>jar</type>
               <overWrite>false</overWrite>
