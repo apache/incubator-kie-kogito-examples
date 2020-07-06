@@ -10,7 +10,7 @@
   </parent>
 
   <artifactId>process-infinispan-persistence-springboot</artifactId>
-  <name>Kogito Examples :: Process Infinispan Persistence Spring Boot</name>
+  <name>Kogito Example :: Process Infinispan Persistence Spring Boot</name>
   <description>Kogito with Infinispan persistence - Spring Boot</description>
 
   <dependencyManagement>

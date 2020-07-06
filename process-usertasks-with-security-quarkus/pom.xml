@@ -13,7 +13,7 @@
 
   <artifactId>process-usertasks-with-security-quarkus</artifactId>
 
-  <name>Kogito Examples :: Process Usertasks With Security Quarkus</name>
+  <name>Kogito Example :: Process Usertasks With Security Quarkus</name>
   <description>Kogito user tasks orchestration with security enabled on REST api - Quarkus</description>
 
   <dependencyManagement>

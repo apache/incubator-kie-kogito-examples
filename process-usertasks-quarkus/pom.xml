@@ -12,12 +12,8 @@
   </parent>
 
   <artifactId>process-usertasks-quarkus</artifactId>
-
-  <name>Kogito Examples :: Process with Usertasks Quarkus</name>
+  <name>Kogito Example :: Process with Usertasks Quarkus</name>
   <description>Kogito user tasks orchestration - Quarkus</description>
-
-
-  
 
   <dependencyManagement>
     <dependencies>

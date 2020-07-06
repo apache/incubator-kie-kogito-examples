@@ -10,7 +10,7 @@
   </parent>
 
   <artifactId>process-usertasks-with-security-oidc-springboot</artifactId>
-  <name>Kogito Examples :: Process Usertasks With Security OIDC Spring Boot</name>
+  <name>Kogito Example :: Process Usertasks With Security OIDC Spring Boot</name>
   <description>Kogito usertasks orchestration with security enabled on REST api - Spring Boot</description>
 
   <dependencyManagement>

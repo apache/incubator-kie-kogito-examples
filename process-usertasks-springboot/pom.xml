@@ -10,7 +10,7 @@
   </parent>
 
   <artifactId>process-usertasks-springboot</artifactId>
-  <name>Kogito Examples :: Process with Usertasks Spring Boot</name>
+  <name>Kogito Example :: Process with Usertasks Spring Boot</name>
   <description>Kogito usertasks orchestration - Spring Boot</description>
 
   

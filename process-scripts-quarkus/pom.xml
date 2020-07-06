@@ -13,7 +13,7 @@
 
   <artifactId>process-scripts-quarkus</artifactId>
 
-  <name>Kogito Examples :: Process Scripts With Quarkus</name>
+  <name>Kogito Example :: Process Scripts With Quarkus</name>
   <description>Kogito scripts invocation - Quarkus</description>
 
   <dependencyManagement>

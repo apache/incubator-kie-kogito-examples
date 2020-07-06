@@ -10,6 +10,7 @@
   </parent>
 
   <artifactId>kogito-travel-agency-example</artifactId>
+  <name>Kogito Example :: Travel Agency</name>
   <packaging>pom</packaging>
 
 

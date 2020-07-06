@@ -13,7 +13,7 @@
 
   <artifactId>process-service-calls-quarkus</artifactId>
 
-  <name>Kogito Examples :: Process Service Calls with Quarkus</name>
+  <name>Kogito Example :: Process Service Calls with Quarkus</name>
   <description>Kogito service invocation - Quarkus</description>
 
 
