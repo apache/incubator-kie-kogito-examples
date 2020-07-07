@@ -13,15 +13,13 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.acme.travels.it;
+package org.kie.kogito.process;
 
 import java.util.Optional;
 
-import org.kie.kogito.local.LocalProcessTestResource;
-import org.kie.kogito.resources.ConditionalQuarkusTestResource;
+public class JobServiceTestResource extends LocalProcessTestResource {
 
-public class JobServiceTestResource extends ConditionalQuarkusTestResource {
-
+    public static final String NAME = "jobs-service";
     //the http port should be set as the same as configured in the application.properties
     public static final String HTTP_PORT = Optional.ofNullable(System.getProperty("jobs.service.port"))
             .orElse("8086");
@@ -30,11 +28,16 @@ public class JobServiceTestResource extends ConditionalQuarkusTestResource {
             .orElse("test-resources/jobs-service.jar");
 
     public JobServiceTestResource() {
-        super(new LocalProcessTestResource(JOBS_SERVICE_PATH,
-                                           getArguments()));
+        super(NAME, JOBS_SERVICE_PATH, getArguments());
     }
 
     private static String getArguments() {
         return "-Dquarkus.http.port=" + HTTP_PORT;
+    }
+
+    @Override
+    public JobServiceTestResource enableConditional() {
+        super.enableConditional();
+        return this;
     }
 }

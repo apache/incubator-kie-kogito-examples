@@ -107,6 +107,7 @@
         <configuration>
           <systemPropertyVariables>
             <jobs.service.path>test-resources/jobs-service.jar</jobs.service.path>
+            <jobs.service.port>8086</jobs.service.port>
           </systemPropertyVariables>
         </configuration>
       </plugin>

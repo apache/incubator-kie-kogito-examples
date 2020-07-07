@@ -45,7 +45,6 @@
           <dependency>
             <groupId>org.kie.kogito</groupId>
             <artifactId>jobs-management-springboot-addon</artifactId>
-            <version>${kogito.version}</version>
           </dependency>
         </dependencies>
       </profile>
@@ -61,14 +60,13 @@
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-springboot-starter</artifactId>
-      <version>${kogito.version}</version>
     </dependency>
-    <!-- uncomment this dependency to enable jobs service integration (or activate the profile above)
+
+    <!-- Comment to disable jobs service integration -->
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>jobs-management-springboot-addon</artifactId>
     </dependency>
-    -->
 
     <dependency>
       <groupId>org.kie.kogito</groupId>
@@ -88,6 +86,26 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.rest-assured</groupId>
+      <artifactId>rest-assured</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>examples-test-utils</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.awaitility</groupId>
+      <artifactId>awaitility</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -140,7 +158,45 @@
           </execution>
         </executions>
       </plugin>
+
+      <!-- Test Resources -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <systemPropertyVariables>
+            <jobs.service.path>test-resources/jobs-service.jar</jobs.service.path>
+            <jobs.service.port>8086</jobs.service.port>
+          </systemPropertyVariables>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy</id>
+            <phase>generate-test-resources</phase>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <artifactItems>
+            <artifactItem>
+              <groupId>org.kie.kogito</groupId>
+              <artifactId>jobs-service</artifactId>
+              <version>${kogito.version}</version>
+              <classifier>runner</classifier>
+              <type>jar</type>
+              <overWrite>false</overWrite>
+              <outputDirectory>${project.build.testOutputDirectory}/test-resources</outputDirectory>
+              <destFileName>jobs-service.jar</destFileName>
+            </artifactItem>
+          </artifactItems>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
-
 </project>

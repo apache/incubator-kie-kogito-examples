@@ -13,24 +13,17 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.acme.travels;
+package org.kie.kogito.tests;
 
-import java.util.concurrent.CountDownLatch;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import org.kie.api.event.process.DefaultProcessEventListener;
-import org.kie.api.event.process.ProcessCompletedEvent;
+@SpringBootApplication(scanBasePackages={"org.kie.kogito.**","org.acme.travels.**"})
+public class KogitoApplication {
 
-public class CompleteProcessListener extends DefaultProcessEventListener {
+	public static void main(String[] args) {
+		SpringApplication.run(KogitoApplication.class, args);
+	}
+	
 
-    private CountDownLatch latch;
-
-    public CompleteProcessListener(CountDownLatch latch) {
-        this.latch = latch;
-    }
-
-    @Override
-    public void afterProcessCompleted(ProcessCompletedEvent event) {
-        latch.countDown();
-    }
 }
-

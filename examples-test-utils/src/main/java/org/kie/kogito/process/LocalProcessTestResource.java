@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.kie.kogito.local;
+package org.kie.kogito.process;
 
 import java.io.IOException;
 import java.net.URL;
@@ -27,11 +27,11 @@ public class LocalProcessTestResource implements ConditionalTestResource<LocalPr
     private URL resource;
     private Process process;
     private final ConditionHolder condition;
-    private String jvmArguments;
+    private final String jvmArguments;
 
-    public LocalProcessTestResource(String path, String jvmArguments) {
+    public LocalProcessTestResource(String name, String path, String jvmArguments) {
         this.resource = this.getClass().getClassLoader().getResource(path);
-        this.condition = new ConditionHolder(path);
+        this.condition = new ConditionHolder(name);
         this.jvmArguments = jvmArguments;
     }
 

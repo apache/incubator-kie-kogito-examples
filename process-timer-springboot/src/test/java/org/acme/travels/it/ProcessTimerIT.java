@@ -15,12 +15,20 @@
  */
 package org.acme.travels.it;
 
-import io.quarkus.test.common.QuarkusTestResource;
-import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.kie.kogito.process.JobServiceQuarkusTestResource;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.kie.kogito.process.JobServiceTestResource;
+import org.kie.kogito.tests.KogitoApplication;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static io.restassured.RestAssured.given;
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -28,9 +36,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.awaitility.Awaitility.with;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
-@QuarkusTest
-@QuarkusTestResource(JobServiceQuarkusTestResource.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT, classes = KogitoApplication.class)
+@ExtendWith(SpringExtension.class)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS) // reset spring context after each test method
 public class ProcessTimerIT {
+
+    @LocalServerPort
+    private Integer httpPort;
 
     /**
      * Simple bean class to send as body on the requests
@@ -51,6 +63,7 @@ public class ProcessTimerIT {
     private static final String TIMERS = "timers";
     private static final String TIMERS_CYCLE = "timerscycle";
     private static final String TIMERS_ON_TASK = "timersOnTask";
+    private static JobServiceTestResource jobServiceTestResource;
 
     //Timers Tests
     @Test
@@ -107,6 +120,22 @@ public class ProcessTimerIT {
         String id2 = getTimerById(id, TIMERS_ON_TASK);
         assertThat(id).isEqualTo(id2);
         deleteTimer(id, TIMERS_ON_TASK);
+    }
+
+    @BeforeAll
+    public static void beforeAll() {
+        jobServiceTestResource = new JobServiceTestResource();
+        jobServiceTestResource.start();
+    }
+
+    @BeforeEach
+    public void beforeEach(){
+        RestAssured.port = httpPort;
+    }
+
+    @AfterAll
+    public static void destroy() {
+        jobServiceTestResource.stop();
     }
 
     private ValidatableResponse getTimerWithStatusCode(String id, int code, String path) {
