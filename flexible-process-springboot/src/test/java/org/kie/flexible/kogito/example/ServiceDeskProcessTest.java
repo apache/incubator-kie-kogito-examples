@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.kie.flexible.kogito.example.model.Product;
 import org.kie.flexible.kogito.example.model.State;
@@ -28,6 +29,7 @@ import org.kie.flexible.kogito.example.model.SupportCase;
 import org.kie.flexible.kogito.example.service.TriageService;
 import org.kie.kogito.tests.KogitoSpringbootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 
@@ -43,14 +45,22 @@ import static org.hamcrest.CoreMatchers.anyOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT, classes = KogitoSpringbootApplication.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD) // reset spring context after each test method
 public class ServiceDeskProcessTest {
     
+    @LocalServerPort
+    int port;
+
     private static final String BASE_PATH = "/serviceDesk";
 
     static {
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+    }
+
+    @BeforeEach
+    public void setUp() {
+        RestAssured.port = port;
     }
 
     @Test
