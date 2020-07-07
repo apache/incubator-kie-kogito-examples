@@ -32,7 +32,7 @@ public class StateService {
         return new SupportCase(supportCase).setState(State.RESOLVED);
     }
 
-    public SupportCase close(SupportCase supportCase, int evaluation, String comment) {
+    public SupportCase close(SupportCase supportCase, Integer evaluation, String comment) {
         return new SupportCase(supportCase)
                 .setQuestionnaire(new Questionnaire().setComment(comment).setEvaluation(evaluation))
                 .setState(State.CLOSED);

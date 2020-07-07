@@ -16,7 +16,6 @@
 package org.kie.flexible.kogito.example;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashMap;
@@ -24,111 +23,168 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import org.junit.jupiter.api.Test;
 import org.kie.flexible.kogito.example.model.Product;
 import org.kie.flexible.kogito.example.model.State;
 import org.kie.flexible.kogito.example.model.SupportCase;
-import org.kie.kogito.Model;
-import org.kie.kogito.process.Process;
-import org.kie.kogito.process.ProcessInstance;
-import org.kie.kogito.process.WorkItem;
-import org.kie.kogito.process.impl.Sig;
+import org.kie.flexible.kogito.example.service.TriageService;
 
 import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+
+import static io.restassured.RestAssured.given;
+
+import static org.hamcrest.CoreMatchers.anyOf;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
 
 @QuarkusTest
 public class ServiceDeskProcessTest {
 
-    
-    @Named("serviceDesk")
-    @Inject
-    Process<? extends Model> serviceDeskProcess;
-    
+    private static final String BASE_PATH = "/serviceDesk";
+
+    static {
+        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+    }
+
     @Test
     public void testSupportCaseExample() {
-        assertNotNull(serviceDeskProcess);
+        String id = createSupportCase();
+        addSupportComment(id);
+        addCustomerComment(id);
+        resolveCase(id);
+        sendQuestionnaire(id);
 
-        ProcessInstance<?> processInstance = createSupportCase();
-        addSupportComment(processInstance);
-        String questionnaireId = resolveCase(processInstance);
-        sendQuestionnaire(processInstance, questionnaireId);
+        checkAllProcessesFinished();
     }
 
-    private ProcessInstance<?> createSupportCase() {
-        Model m = serviceDeskProcess.createModel();
-        Map<String, Object> parameters = new HashMap<>();
-        parameters.put("supportCase", new SupportCase()
-            .setProduct(new Product().setFamily("Middleware").setName("Kogito")));
-        m.fromMap(parameters);
-        
-        ProcessInstance<?> processInstance = serviceDeskProcess.createInstance(m);
-        processInstance.start();
-        assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_ACTIVE, processInstance.status()); 
-        Map<String, Object> result = ((Model)processInstance.variables()).toMap();
-
-        assertEquals(2, result.size());
-        assertEquals(result.get("supportGroup"), "Kogito");
-        SupportCase ticket = (SupportCase) result.get("supportCase");
-        assertEquals(State.WAITING_FOR_OWNER, ticket.getState());
-        return processInstance;
-    }
-
-    private void addSupportComment(ProcessInstance<?> processInstance) {
-        processInstance.send(Sig.of("Receive support comment", null));
-        Optional<WorkItem> item = processInstance.workItems()
-            .stream()
-            .filter(wi -> wi.getName().equals("ReceiveSupportComment"))
-            .findFirst();
-        assertTrue(item.isPresent());
-        String id = item.get().getId();
-        assertNotNull(id);
+    private String createSupportCase() {
+        SupportCase supportCase = new SupportCase()
+                .setProduct(new Product().setFamily("Middleware").setName("Kogito"))
+                .setCustomer("Paco")
+                .setDescription("Something is not working");
         Map<String, Object> params = new HashMap<>();
-        params.put("ActorId", "kelly");
-        params.put("comment", "What's up");
-        processInstance.completeWorkItem(id, params);
+        params.put("supportCase", supportCase);
 
-        SupportCase ticket = (SupportCase) ((Model)processInstance
-            .variables())
-            .toMap()
-            .get("supportCase");
-        assertEquals(State.WAITING_FOR_CUSTOMER, ticket.getState());
-        assertEquals(1, ticket.getComments().size());
-        assertEquals(params.get("ActorId"), ticket.getComments().get(0).getAuthor());
-        assertEquals(params.get("comment"), ticket.getComments().get(0).getText());
-        assertNotNull(ticket.getComments().get(0).getDate());
+        return given()
+                .contentType(ContentType.JSON)
+            .when()
+                .body(params)
+                .post(BASE_PATH)
+            .then()
+                .statusCode(200)
+                .body("id", notNullValue())
+                .body("supportCase.state", is(State.WAITING_FOR_OWNER.name()))
+                .body("supportCase.engineer", anyOf(is(TriageService.KOGITO_ENGINEERS[0]), is(TriageService.KOGITO_ENGINEERS[1])))
+                .body("supportGroup", is("Kogito")).extract().path("id");
     }
 
-    private String resolveCase(ProcessInstance<?> processInstance) {
-        processInstance.send(Sig.of("Resolve Case", null));
-        SupportCase ticket = (SupportCase) ((Model)processInstance
-            .variables())
-            .toMap()
-            .get("supportCase");
-        assertEquals(State.RESOLVED, ticket.getState());
-        Optional<WorkItem> item = processInstance.workItems()
-            .stream()
-            .filter(wi -> wi.getName().equals("Questionnaire"))
-            .findFirst();
-        assertTrue(item.isPresent());
-        return item.get().getId();
-    }
+    private void addSupportComment(String id) {
+        String link = given()
+                .basePath(BASE_PATH + "/" + id)
+                .contentType(ContentType.JSON)
+            .when()
+                .post("/ReceiveSupportComment")
+            .then()
+                .statusCode(200)
+                .header("Link", notNullValue())
+            .extract()
+                .header("Link");
 
-    private void sendQuestionnaire(ProcessInstance<?> processInstance, String questionnaireId) {
+        String taskPath = link.substring(1, link.indexOf(">"));
         Map<String, Object> params = new HashMap<>();
+        params.put("comment", "Have you tried to turn it off and on again?");
+
+        given()
+            .basePath(BASE_PATH)
+            .queryParam("user", "kelly")
+            .queryParam("group", "support")
+            .contentType(ContentType.JSON)
+        .when()
+            .body(params)
+            .post(taskPath)
+        .then()
+            .statusCode(200)
+            .body("supportCase.state", is(State.WAITING_FOR_CUSTOMER.name()))
+            .body("supportCase.comments[0].text", is(params.get("comment")))
+            .body("supportCase.comments[0].author", is("kelly"))
+            .body("supportCase.comments[0].date", notNullValue());
+    }
+
+    private void addCustomerComment(String id) {
+        String link = given().basePath(BASE_PATH + "/" + id).contentType(ContentType.JSON).when()
+                .post("/ReceiveCustomerComment").then().statusCode(200).header("Link", notNullValue()).extract()
+                .header("Link");
+
+        String taskPath = link.substring(1, link.indexOf(">"));
+        Map<String, Object> params = new HashMap<>();
+        params.put("comment", "Great idea!");
+
+        given()
+            .basePath(BASE_PATH)
+            .queryParam("user", "Paco")
+            .queryParam("group", "customer")
+            .contentType(ContentType.JSON)
+        .when()
+            .body(params)
+            .post(taskPath).then().statusCode(200)
+            .body("supportCase.state", is(State.WAITING_FOR_OWNER.name()))
+            .body("supportCase.comments[1].text", is(params.get("comment")))
+            .body("supportCase.comments[1].author", is("Paco"))
+            .body("supportCase.comments[1].date", notNullValue());
+    }
+
+    private void resolveCase(String id) {
+        given().basePath(BASE_PATH + "/" + id).contentType(ContentType.JSON).when().post("/Resolve_Case").then()
+                .statusCode(200).body("supportCase.state", is(State.RESOLVED.name()));
+    }
+
+    @SuppressWarnings("unchecked")
+    private void sendQuestionnaire(String id) {
+        Map<String, String> tasks = given()
+                .basePath(BASE_PATH + "/" + id)
+                .contentType(ContentType.JSON)
+            .when()
+                .get("/tasks")
+                .as(Map.class);
+
+        assertEquals(1, tasks.size());
+        assertTrue(tasks.values().contains("Questionnaire"));
+        Optional<String> taskId = tasks.entrySet().stream()
+            .filter(e -> e.getValue().equals("Questionnaire"))
+            .map(Map.Entry::getKey)
+            .findFirst();
+        assertTrue(taskId.isPresent());
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("comment", "Kogito is great!");
         params.put("evaluation", 10);
-        params.put("comment", "It's great!");
-        processInstance.completeWorkItem(questionnaireId, params);
-        SupportCase ticket = (SupportCase) ((Model)processInstance
-            .variables())
-            .toMap()
-            .get("supportCase");
 
-        assertEquals(params.get("evaluation"), ticket.getQuestionnaire().getEvaluation());
-        assertEquals(params.get("comment"), ticket.getQuestionnaire().getComment());
-        assertNotNull(ticket.getQuestionnaire().getDate());
-        assertEquals(State.CLOSED, ticket.getState());
+        given()
+            .basePath(BASE_PATH + "/" + id)
+            .queryParam("user", "Paco")
+            .queryParam("group", "customer")
+            .contentType(ContentType.JSON)
+        .when()
+            .body(params)
+            .post("/Questionnaire/" + taskId.get())
+        .then()
+            .statusCode(200)
+            .body("supportCase.state", is(State.CLOSED.name()))
+            .body("supportCase.questionnaire.comment", is(params.get("comment")))
+            .body("supportCase.questionnaire.evaluation", is(params.get("evaluation")))
+            .body("supportCase.questionnaire.date", notNullValue());
+    }
+
+    private void checkAllProcessesFinished() {
+        List<?> processes = given()
+                .basePath(BASE_PATH)
+                .contentType(ContentType.JSON)
+            .when()
+                .get("/")
+            .as(List.class);
+
+        assertTrue(processes.isEmpty());
     }
 }

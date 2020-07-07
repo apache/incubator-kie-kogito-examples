@@ -25,11 +25,11 @@ import org.kie.flexible.kogito.example.model.SupportCase;
 @ApplicationScoped
 public class TriageService {
 
-    private static final String[] MIDDLEWARE_ENGINEERS = new String[] { "martin", "manuel" };
-    private static final String[] STORAGE_ENGINEERS = new String[] { "samantha", "sarah" };
-    private static final String[] CLOUD_ENGINEERS = new String[] { "candy", "chris" };
-    private static final String[] KOGITO_ENGINEERS = new String[] { "ken", "kelly" };
-    private static final String[] CEPH_ENGINEERS = new String[] { "connor", "candy" };
+    public static final String[] MIDDLEWARE_ENGINEERS = new String[] { "martin", "manuel" };
+    public static final String[] STORAGE_ENGINEERS = new String[] { "samantha", "sarah" };
+    public static final String[] CLOUD_ENGINEERS = new String[] { "candy", "chris" };
+    public static final String[] KOGITO_ENGINEERS = new String[] { "ken", "kelly" };
+    public static final String[] CEPH_ENGINEERS = new String[] { "connor", "candy" };
 
     private final Random random = new Random();
 

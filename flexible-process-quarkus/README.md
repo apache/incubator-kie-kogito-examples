@@ -172,10 +172,11 @@ Content-Type: application/json
 
 The response returns an HTTP Link header with the relative path of the generated task. `/b3c75b24-2691-4a76-902c-c9bc29ea076c/ReceiveSupportComment/f3b36cf9-3953-43ae-afe6-2a48fea8a79a`
 
-Use this path to create the comment (note the user query parameter):
+Use this path to create the comment. It is important to have in mind the user and group query parameters that provide information about the user performing the task and the group he/she belongs to because
+this task is restricted to the _support_ group
 
 ```{bash}
-curl -H 'Content-Type:application/json' -H 'Accept:application/json' -d @docs/requests/supportComment.json http://localhost:8080/serviceDesk/b3c75b24-2691-4a76-902c-c9bc29ea076c/ReceiveSupportComment/f3b36cf9-3953-43ae-afe6-2a48fea8a79a?user=kelly
+curl -H 'Content-Type:application/json' -H 'Accept:application/json' -d @docs/requests/supportComment.json http://localhost:8080/serviceDesk/b3c75b24-2691-4a76-902c-c9bc29ea076c/ReceiveSupportComment/f3b36cf9-3953-43ae-afe6-2a48fea8a79a?user=kelly&group=support
 ```
 
 And the data containing the comment and the updated state will be returned:
@@ -197,6 +198,63 @@ And the data containing the comment and the updated state will be returned:
         "author": "kelly",
         "date": 1594034179.628926,
         "text": "Have you tried to switch it off and on again?"
+      }
+    ],
+    "questionnaire": null
+  },
+  "supportGroup": "Kogito"
+}
+```
+
+### Add a customer comment
+
+Now it's time for the customer to reply to the engineer's comment. For that an empty post should be sent to
+`/serviceDesk/ReceiveCustomerComment`. Note the extra flag to retreive the response headers.
+
+```{bash}
+$ curl -D - -XPOST -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/serviceDesk/b3c75b24-2691-4a76-902c-c9bc29ea076c/ReceiveCustomerComment
+
+HTTP/1.1 200 OK
+Content-Length: 305
+Link: </b3c75b24-2691-4a76-902c-c9bc29ea076c/ReceiveSupportComment/1ac85d3c-c02c-11ea-b3de-0242ac130004>; rel='instance'
+Content-Type: application/json
+
+{"id":"b3c75b24-2691-4a76-902c-c9bc29ea076c","supportCase":{"product":{"name":"Kogito","family":"Middleware"},"description":"Kogito is not working for some reason.","engineer":"kelly","customer":"Paco the customer","state":"WAITING_FOR_CUSTOMER","comments":null,"questionnaire":null},"supportGroup":"Kogito"}
+```
+
+The response returns an HTTP Link header with the relative path of the generated task. `/b3c75b24-2691-4a76-902c-c9bc29ea076c/ReceiveCustomerComment/1ac85d3c-c02c-11ea-b3de-0242ac130004`
+
+Use this path to create the comment. It is important to have in mind the user and group query parameters that provide information about the user performing the task and the group he/she belongs to because
+this task is restricted to the _customer_ group
+
+```{bash}
+curl -H 'Content-Type:application/json' -H 'Accept:application/json' -d @docs/requests/customerComment.json http://localhost:8080/serviceDesk/b3c75b24-2691-4a76-902c-c9bc29ea076c/ReceiveCustomerComment/1ac85d3c-c02c-11ea-b3de-0242ac130004?user=Paco&group=customer
+```
+
+And the data containing the comment and the updated state will be returned:
+
+```{json}
+{
+  "id": "b3c75b24-2691-4a76-902c-c9bc29ea076c",
+  "supportCase": {
+    "product": {
+      "name": "Kogito",
+      "family": "Middleware"
+    },
+    "description": "Kogito is not working for some reason.",
+    "engineer": "kelly",
+    "customer": "Paco the customer",
+    "state": "WAITING_FOR_OWNER",
+    "comments": [
+      {
+        "author": "kelly",
+        "date": 1594034179.628926,
+        "text": "Have you tried to switch it off and on again?"
+      },
+      {
+        "author": "Paco",
+        "date": 1594034179.628926,
+        "text": "Great idea!"
       }
     ],
     "questionnaire": null
@@ -232,6 +290,11 @@ Check the response where the state is now set as `RESOLVED`.
         "author": "kelly",
         "date": 1594034179.628926,
         "text": "Support: Have you tried to switch it off and on again?"
+      },
+      {
+        "author": "Paco",
+        "date": 1594034179.628926,
+        "text": "Great idea!"
       }
     ],
     "questionnaire": null
@@ -257,5 +320,5 @@ $ curl -H 'Content-Type:application/json' -H 'Accept:application/json' http://lo
 Use this id in the path:
 
 ```{bash}
-curl -XPOST -H 'Content-Type:application/json' -H 'Accept:application/json' -d @docs/requests/questionnaire.json http://localhost:8080/serviceDesk/b3c75b24-2691-4a76-902c-c9bc29ea076c/Questionnaire/2cd185b6-d6db-4984-a0ae-9dc4fa15cb6d
+curl -XPOST -H 'Content-Type:application/json' -H 'Accept:application/json' -d @docs/requests/questionnaire.json http://localhost:8080/serviceDesk/b3c75b24-2691-4a76-902c-c9bc29ea076c/Questionnaire/2cd185b6-d6db-4984-a0ae-9dc4fa15cb6d?user=Paco&group=customer
 ```

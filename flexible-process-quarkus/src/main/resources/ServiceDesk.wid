@@ -1,9 +1,0 @@
-[
-    "name" : "Milestone",
-    "parameters" : [
-      "Condition" : new StringDataType()
-    ],
-    "displayName" : "Milestone",
-    "icon" : "defaultmilestoneicon.png",
-    "category" : "Milestone"
-  ]
