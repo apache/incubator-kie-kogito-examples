@@ -38,27 +38,11 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT, classes = KogitoApplication.class)
 @ExtendWith(SpringExtension.class)
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS) // reset spring context after each test method
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 public class ProcessTimerIT {
 
     @LocalServerPort
     private Integer httpPort;
-
-    /**
-     * Simple bean class to send as body on the requests
-     */
-    private class Delay {
-
-        String delay;
-
-        public Delay(String delay) {
-            this.delay = delay;
-        }
-
-        public String getDelay() {
-            return delay;
-        }
-    }
 
     private static final String TIMERS = "timers";
     private static final String TIMERS_CYCLE = "timerscycle";
@@ -129,7 +113,7 @@ public class ProcessTimerIT {
     }
 
     @BeforeEach
-    public void beforeEach(){
+    public void beforeEach() {
         RestAssured.port = httpPort;
     }
 
@@ -149,7 +133,6 @@ public class ProcessTimerIT {
 
     private String createTimer(Delay delay, String path) {
         return given()
-
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
                 .body(delay)
@@ -179,5 +162,17 @@ public class ProcessTimerIT {
                 .body("id", notNullValue())
                 .extract()
                 .path("id");
+    }
+
+    /**
+     * Simple bean class to send as body on the requests
+     */
+    private class Delay {
+
+        String delay;
+
+        public Delay(String delay) {
+            this.delay = delay;
+        }
     }
 }

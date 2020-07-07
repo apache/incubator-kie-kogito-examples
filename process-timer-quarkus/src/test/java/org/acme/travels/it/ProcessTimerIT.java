@@ -32,22 +32,6 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 @QuarkusTestResource(JobServiceQuarkusTestResource.class)
 public class ProcessTimerIT {
 
-    /**
-     * Simple bean class to send as body on the requests
-     */
-    private class Delay {
-
-        String delay;
-
-        public Delay(String delay) {
-            this.delay = delay;
-        }
-
-        public String getDelay() {
-            return delay;
-        }
-    }
-
     private static final String TIMERS = "timers";
     private static final String TIMERS_CYCLE = "timerscycle";
     private static final String TIMERS_ON_TASK = "timersOnTask";
@@ -120,7 +104,6 @@ public class ProcessTimerIT {
 
     private String createTimer(Delay delay, String path) {
         return given()
-
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
                 .body(delay)
@@ -150,5 +133,17 @@ public class ProcessTimerIT {
                 .body("id", notNullValue())
                 .extract()
                 .path("id");
+    }
+
+    /**
+     * Simple bean class to send as body on the requests
+     */
+    private class Delay {
+
+        String delay;
+
+        public Delay(String delay) {
+            this.delay = delay;
+        }
     }
 }
