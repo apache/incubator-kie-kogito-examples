@@ -169,10 +169,14 @@ public class ProcessTimerIT {
      */
     private class Delay {
 
-        String delay;
+        private String delay;
 
         public Delay(String delay) {
             this.delay = delay;
+        }
+
+        public String getDelay() {
+            return delay;
         }
     }
 }
