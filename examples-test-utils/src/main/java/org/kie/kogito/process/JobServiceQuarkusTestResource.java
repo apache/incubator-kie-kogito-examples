@@ -13,24 +13,12 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.acme.travels;
+package org.kie.kogito.process;
 
-import java.util.concurrent.CountDownLatch;
+import org.kie.kogito.resources.ConditionalQuarkusTestResource;
 
-import org.kie.api.event.process.DefaultProcessEventListener;
-import org.kie.api.event.process.ProcessCompletedEvent;
-
-public class CompleteProcessListener extends DefaultProcessEventListener {
-
-    private CountDownLatch latch;
-
-    public CompleteProcessListener(CountDownLatch latch) {
-        this.latch = latch;
-    }
-
-    @Override
-    public void afterProcessCompleted(ProcessCompletedEvent event) {
-        latch.countDown();
+public class JobServiceQuarkusTestResource extends ConditionalQuarkusTestResource {
+    public JobServiceQuarkusTestResource() {
+        super(new JobServiceTestResource());
     }
 }
-
