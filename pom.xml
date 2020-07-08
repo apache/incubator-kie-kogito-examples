@@ -152,6 +152,7 @@
         <module>decisiontable-springboot-example</module>
         <module>dmn-listener-quarkus</module>
         <module>dmn-listener-springboot</module>
+        <module>dmn-pmml-quarkus-example</module>
         <module>dmn-quarkus-example</module>
         <module>dmn-drools-quarkus-metrics</module>
         <module>dmn-springboot-example</module>
