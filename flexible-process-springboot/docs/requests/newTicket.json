@@ -1,0 +1,10 @@
+{
+  "supportCase": {
+    "customer": "Paco the customer",
+    "description": "Kogito is not working for some reason.",
+    "product": {
+      "family": "Middleware",
+      "name": "Kogito"
+    }
+  }
+}

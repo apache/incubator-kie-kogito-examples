@@ -156,6 +156,7 @@
         <module>dmn-drools-quarkus-metrics</module>
         <module>dmn-springboot-example</module>
         <module>flexible-process-quarkus</module>
+        <module>flexible-process-springboot</module>
         <module>kogito-travel-agency</module>
         <module>onboarding-example</module>
         <module>process-business-rules-quarkus</module>
