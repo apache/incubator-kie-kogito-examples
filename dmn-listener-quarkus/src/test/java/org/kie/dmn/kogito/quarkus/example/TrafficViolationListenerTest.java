@@ -48,7 +48,7 @@ public class TrafficViolationListenerTest {
                 .map(DecisionEventListenerConfig::listeners)
                 .orElseThrow(() -> new IllegalStateException("Can't find injected listeners"));
 
-        assertEquals(4, injectedListeners.size());
+        assertEquals(5, injectedListeners.size());
 
         MockDMNRuntimeEventListener testListener = injectedListeners.stream()
                 .filter(MockDMNRuntimeEventListener.class::isInstance)
