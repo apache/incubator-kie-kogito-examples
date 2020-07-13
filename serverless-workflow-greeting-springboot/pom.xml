@@ -10,7 +10,7 @@
   </parent>
 
   <artifactId>serverless-workflow-greeting-springboot</artifactId>
-  <name>Kogito Examples :: Serverless Workflow Greeting :: Spring Boot</name>
+  <name>Kogito Example :: Serverless Workflow Greeting :: Spring Boot</name>
   <description>Kogito Serverless Workflow Example - Spring Boot</description>
 
   <dependencyManagement>

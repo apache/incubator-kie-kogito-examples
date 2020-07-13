@@ -1,10 +1,6 @@
-<?xml version="1.0"?>
-<project
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-  xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<?xml version="1.0" encoding="UTF-8" ?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
   <parent>
     <groupId>org.kie.kogito</groupId>
     <artifactId>kogito-examples</artifactId>
@@ -12,8 +8,7 @@
   </parent>
 
   <artifactId>process-timer-quarkus</artifactId>
-
-  <name>Kogito Examples :: Process Timer with Quarkus</name>
+  <name>Kogito Example :: Process Timer with Quarkus</name>
   <description>Kogito with timers - Quarkus</description>
   
   <dependencyManagement>
@@ -41,13 +36,11 @@
       <artifactId>quarkus-smallrye-openapi</artifactId>
     </dependency>
 
-    <!-- uncomment to enable jobs service integration -->
-    <!--
+    <!-- Comment to disable jobs service integration -->
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>jobs-management-quarkus-addon</artifactId>
     </dependency>
-    -->
 
     <!-- uncomment these two to enable persistence for kogito -->
     <!--
@@ -60,7 +53,6 @@
       <artifactId>infinispan-persistence-addon</artifactId>
     </dependency>
     -->
-
     <!--tests -->
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -68,8 +60,28 @@
       <scope>test</scope>
     </dependency>
     <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-junit-jupiter</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>io.rest-assured</groupId>
       <artifactId>rest-assured</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>examples-test-utils</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.awaitility</groupId>
+      <artifactId>awaitility</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -87,8 +99,48 @@
           </execution>
         </executions>
       </plugin>
+
+      <!-- Test Resources -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <systemPropertyVariables>
+            <jobs.service.path>test-resources/jobs-service.jar</jobs.service.path>
+            <jobs.service.port>8086</jobs.service.port>
+          </systemPropertyVariables>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy</id>
+            <phase>generate-test-resources</phase>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <artifactItems>
+            <artifactItem>
+              <groupId>org.kie.kogito</groupId>
+              <artifactId>jobs-service</artifactId>
+              <version>${kogito.version}</version>
+              <classifier>runner</classifier>
+              <type>jar</type>
+              <overWrite>false</overWrite>
+              <outputDirectory>${project.build.testOutputDirectory}/test-resources</outputDirectory>
+              <destFileName>jobs-service.jar</destFileName>
+            </artifactItem>
+          </artifactItems>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
+
   <profiles>
     <profile>
       <id>native</id>

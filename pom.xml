@@ -42,15 +42,15 @@
     <alphanetworkCompilerEnabled>false</alphanetworkCompilerEnabled>
     <tests.category></tests.category>
 
-    <version.io.quarkus>1.5.0.Final</version.io.quarkus>
+    <version.io.quarkus>1.6.0.Final</version.io.quarkus>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
     <!-- springboot related -->
-    <springboot.version>2.2.0.RELEASE</springboot.version>
+    <springboot.version>2.3.1.RELEASE</springboot.version>
     <!-- kogito -->
     <kogito.version>${project.version}</kogito.version>
-    <version.org.optaplanner>7.39.0.CR1</version.org.optaplanner>
+    <version.org.optaplanner>7.39.0.Final</version.org.optaplanner>
     <!-- infinispan -->
     <infinispan.version>10.1.5.Final</infinispan.version>
     <infinispan.starter.version>2.2.3.Final</infinispan.starter.version>
@@ -59,7 +59,7 @@
     <container.image.keycloak.version>8.0.1</container.image.keycloak.version>
     <container.image.keycloak>quay.io/keycloak/keycloak:${container.image.keycloak.version}</container.image.keycloak>
     <!-- testcontainers -->
-    <version.testcontainers>1.14.1</version.testcontainers>
+    <version.testcontainers>1.14.3</version.testcontainers>
     <!-- jsonpath-->
     <version.jayway.jsonpath>2.4.0</version.jayway.jsonpath>
     <version.swagger.plugin>2.1.0</version.swagger.plugin>
@@ -155,6 +155,8 @@
         <module>dmn-quarkus-example</module>
         <module>dmn-drools-quarkus-metrics</module>
         <module>dmn-springboot-example</module>
+        <module>flexible-process-quarkus</module>
+        <module>flexible-process-springboot</module>
         <module>kogito-travel-agency</module>
         <module>onboarding-example</module>
         <module>process-business-rules-quarkus</module>

@@ -22,6 +22,7 @@ target
 /lib-jdbc/
 *.db
 *.tlog
+*.log*
 
 # modules that don't exist in this branch
 /jbpm-human-task-war/

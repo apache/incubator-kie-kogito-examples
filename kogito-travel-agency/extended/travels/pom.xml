@@ -10,6 +10,7 @@
   </parent>
 
   <artifactId>travels</artifactId>
+  <name>Kogito Example :: Travel Agency :: Travels</name>
 
   <dependencyManagement>
     <dependencies>

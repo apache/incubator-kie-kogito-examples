@@ -13,17 +13,12 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.kie.kogito.tests;
+package org.kie.kogito.process;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.kie.kogito.resources.ConditionalQuarkusTestResource;
 
-@SpringBootApplication(scanBasePackages={"org.kie.kogito.**","org.acme.travels.**"})
-public class KogitoInfinispanSpringbootApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(KogitoInfinispanSpringbootApplication.class, args);
-	}
-	
-
+public class JobServiceQuarkusTestResource extends ConditionalQuarkusTestResource {
+    public JobServiceQuarkusTestResource() {
+        super(new JobServiceTestResource());
+    }
 }

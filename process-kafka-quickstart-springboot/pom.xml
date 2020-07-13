@@ -10,7 +10,7 @@
   </parent>
 
   <artifactId>process-kafka-quickstart-springboot</artifactId>
-  <name>Kogito Examples :: Process with Kafka and Spring Boot</name>
+  <name>Kogito Example :: Process with Kafka and Spring Boot</name>
   <description>Kogito with Kafka - Spring Boot</description>
 
   <dependencyManagement>
