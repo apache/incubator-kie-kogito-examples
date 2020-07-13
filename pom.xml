@@ -63,7 +63,7 @@
     <!-- jsonpath-->
     <version.jayway.jsonpath>2.4.0</version.jayway.jsonpath>
     <version.swagger.plugin>2.1.0</version.swagger.plugin>
-    <version.surefire.plugin>2.22.0</version.surefire.plugin>
+    <version.surefire.plugin>2.22.2</version.surefire.plugin>
     <version.deploy.plugin>2.8.2</version.deploy.plugin>
     <!-- license plugin -->
     <version.license.plugin>3.0</version.license.plugin>
@@ -286,6 +286,8 @@
           <artifactId>maven-failsafe-plugin</artifactId>
           <version>${version.surefire.plugin}</version>
           <configuration>
+            <forkCount>${surefire.forkCount}</forkCount>
+            <reuseForks>true</reuseForks>
             <includes>
               <include>${failsafe.include}</include>
             </includes>

@@ -25,22 +25,17 @@ import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.kie.kogito.testcontainers.InfinispanContainer;
+import org.kie.kogito.testcontainers.springboot.InfinispanSpringBootTestResource;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.testcontainers.containers.GenericContainer;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
+import org.springframework.test.context.ContextConfiguration;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 
-@Testcontainers
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ContextConfiguration(initializers = InfinispanSpringBootTestResource.class)
 public class DealsRestIT {
-
-    @Container
-    public static GenericContainer<?> INFINISPAN = new InfinispanContainer();
 
     @LocalServerPort
     int randomServerPort;

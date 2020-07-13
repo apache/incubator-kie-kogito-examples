@@ -22,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Map;
 
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.junit.jupiter.api.Test;
 import org.keycloak.representations.AccessTokenResponse;
 import org.kie.kogito.testcontainers.quarkus.KeycloakQuarkusTestResource;
@@ -33,6 +34,9 @@ import io.restassured.http.ContentType;
 @QuarkusTest
 @QuarkusTestResource(KeycloakQuarkusTestResource.class)
 public class ApprovalsRestIT {
+
+    @ConfigProperty(name = "quarkus.oidc.auth-server-url")
+    private String keycloakUrl;
 
     @Test
     public void testStartApprovalUnauthorized() {
@@ -124,7 +128,7 @@ public class ApprovalsRestIT {
                 .param("client_id", "kogito-app")
                 .param("client_secret", "secret")
                 .when()
-                .post("http://localhost:8281/auth/realms/kogito/protocol/openid-connect/token")
+                .post(keycloakUrl + "/protocol/openid-connect/token")
                 .as(AccessTokenResponse.class).getToken();
     }
 }

@@ -13,29 +13,34 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.kie.kogito.testcontainers.quarkus;
+package org.kie.kogito.resources.process.quarkus;
 
 import org.kie.kogito.resources.ConditionalQuarkusTestResource;
-import org.kie.kogito.testcontainers.KogitoKafkaContainer;
+import org.kie.kogito.resources.process.JobServiceLocalProcessTestResource;
 
 /**
- * Kafka quarkus resource that works within the test lifecycle.
+ * Jobs Service quarkus resource that works within the test lifecycle.
  *
  */
-public class KafkaQuarkusTestResource extends ConditionalQuarkusTestResource {
+public class JobsServiceQuarkusTestResource extends ConditionalQuarkusTestResource {
 
-    public static final String KOGITO_KAFKA_PROPERTY = "kafka.bootstrap.servers";
+    private static final String KOGITO_JOBS_SERVICE_PROPERTY = "kogito.jobs-service.url";
 
-    public KafkaQuarkusTestResource() {
-        super(new KogitoKafkaContainer());
+    public JobsServiceQuarkusTestResource() {
+        super(new JobServiceLocalProcessTestResource());
     }
 
     @Override
     protected String getKogitoProperty() {
-        return KOGITO_KAFKA_PROPERTY;
+        return KOGITO_JOBS_SERVICE_PROPERTY;
     }
 
-    public static class Conditional extends KafkaQuarkusTestResource {
+    @Override
+    protected String getKogitoPropertyValue() {
+        return "http://localhost:" + getTestResource().getMappedPort();
+    }
+
+    public static class Conditional extends JobsServiceQuarkusTestResource {
 
         public Conditional() {
             super();

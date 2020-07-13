@@ -13,33 +13,34 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.kie.kogito.testcontainers.quarkus;
+package org.kie.kogito.testcontainers.springboot;
 
-import org.kie.kogito.resources.ConditionalQuarkusTestResource;
-import org.kie.kogito.testcontainers.KogitoKafkaContainer;
+import org.kie.kogito.resources.ConditionalSpringBootTestResource;
+import org.kie.kogito.testcontainers.InfinispanContainer;
 
 /**
- * Kafka quarkus resource that works within the test lifecycle.
+ * Infinispan spring boot resource that works within the test lifecycle.
  *
  */
-public class KafkaQuarkusTestResource extends ConditionalQuarkusTestResource {
+public class InfinispanSpringBootTestResource extends ConditionalSpringBootTestResource {
 
-    public static final String KOGITO_KAFKA_PROPERTY = "kafka.bootstrap.servers";
+    private static final String KOGITO_INFINISPAN_PROPERTY = "infinispan.remote.server-list";
 
-    public KafkaQuarkusTestResource() {
-        super(new KogitoKafkaContainer());
+    public InfinispanSpringBootTestResource() {
+        super(new InfinispanContainer());
     }
 
     @Override
     protected String getKogitoProperty() {
-        return KOGITO_KAFKA_PROPERTY;
+        return KOGITO_INFINISPAN_PROPERTY;
     }
 
-    public static class Conditional extends KafkaQuarkusTestResource {
+    public static class Conditional extends InfinispanSpringBootTestResource {
 
         public Conditional() {
             super();
             enableConditional();
         }
     }
+
 }

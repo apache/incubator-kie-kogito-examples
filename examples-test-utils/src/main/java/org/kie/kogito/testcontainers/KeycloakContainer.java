@@ -17,9 +17,11 @@ package org.kie.kogito.testcontainers;
 
 import java.time.Duration;
 
+import org.kie.kogito.resources.TestResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testcontainers.containers.BindMode;
+import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.output.Slf4jLogConsumer;
 import org.testcontainers.containers.wait.strategy.Wait;
 
@@ -27,16 +29,17 @@ import org.testcontainers.containers.wait.strategy.Wait;
  * This container wraps Keycloak container
  *
  */
-public class KeycloakContainer extends ConditionalGenericContainer<KeycloakContainer> {
+public class KeycloakContainer extends GenericContainer<KeycloakContainer> implements TestResource {
 
     public static final String NAME = "keycloak";
     public static final String KEYCLOAK_PROPERTY = "container.image." + NAME;
+    public static final int PORT = 8080;
 
     private static final String REALM_FILE = "/tmp/realm.json";
     private static final Logger LOGGER = LoggerFactory.getLogger(KeycloakContainer.class);
 
     public KeycloakContainer() {
-        addFixedExposedPort(8281, 8080);
+        addExposedPort(PORT);
         withEnv("KEYCLOAK_USER", "admin");
         withEnv("KEYCLOAK_PASSWORD", "admin");
         withEnv("KEYCLOAK_IMPORT", REALM_FILE);
@@ -46,12 +49,19 @@ public class KeycloakContainer extends ConditionalGenericContainer<KeycloakConta
     }
 
     @Override
-    protected String getResourceName() {
+    public int getMappedPort() {
+        return getMappedPort(PORT);
+    }
+
+    @Override
+    public String getResourceName() {
         return NAME;
     }
 
     @Override
-    protected void preStart() {
+    public void start() {
         setDockerImageName(System.getProperty(KEYCLOAK_PROPERTY));
+        super.start();
     }
+
 }

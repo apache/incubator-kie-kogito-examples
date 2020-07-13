@@ -15,21 +15,22 @@
  */
 package org.acme.travels.it;
 
-import io.quarkus.test.common.QuarkusTestResource;
-import io.quarkus.test.junit.QuarkusTest;
-import io.restassured.http.ContentType;
-import io.restassured.response.ValidatableResponse;
-import org.junit.jupiter.api.Test;
-import org.kie.kogito.process.JobServiceQuarkusTestResource;
-
 import static io.restassured.RestAssured.given;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.awaitility.Awaitility.with;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
+import org.junit.jupiter.api.Test;
+import org.kie.kogito.resources.process.quarkus.JobsServiceQuarkusTestResource;
+
+import io.quarkus.test.common.QuarkusTestResource;
+import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.http.ContentType;
+import io.restassured.response.ValidatableResponse;
+
 @QuarkusTest
-@QuarkusTestResource(JobServiceQuarkusTestResource.class)
+@QuarkusTestResource(JobsServiceQuarkusTestResource.class)
 public class ProcessTimerIT {
 
     private static final String TIMERS = "timers";

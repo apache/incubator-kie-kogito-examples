@@ -13,20 +13,22 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.kie.kogito.testcontainers.quarkus;
+package org.kie.kogito.testcontainers.springboot;
 
-import org.kie.kogito.resources.ConditionalQuarkusTestResource;
+import org.kie.kogito.kafka.KafkaClient;
+import org.kie.kogito.resources.ConditionalSpringBootTestResource;
 import org.kie.kogito.testcontainers.KogitoKafkaContainer;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 
 /**
- * Kafka quarkus resource that works within the test lifecycle.
+ * Kafka spring boot resource that works within the test lifecycle.
  *
  */
-public class KafkaQuarkusTestResource extends ConditionalQuarkusTestResource {
+public class KafkaSpringBootTestResource extends ConditionalSpringBootTestResource {
 
-    public static final String KOGITO_KAFKA_PROPERTY = "kafka.bootstrap.servers";
+    private static final String KOGITO_KAFKA_PROPERTY = "spring.kafka.bootstrap-servers";
 
-    public KafkaQuarkusTestResource() {
+    public KafkaSpringBootTestResource() {
         super(new KogitoKafkaContainer());
     }
 
@@ -35,11 +37,19 @@ public class KafkaQuarkusTestResource extends ConditionalQuarkusTestResource {
         return KOGITO_KAFKA_PROPERTY;
     }
 
-    public static class Conditional extends KafkaQuarkusTestResource {
+    @Override
+    protected void updateBeanFactory(ConfigurableListableBeanFactory beanFactory) {
+        super.updateBeanFactory(beanFactory);
+
+        beanFactory.registerSingleton(KafkaClient.class.getName(), new KafkaClient("localhost:" + getTestResource().getMappedPort()));
+    }
+
+    public static class Conditional extends KafkaSpringBootTestResource {
 
         public Conditional() {
             super();
             enableConditional();
         }
     }
+
 }

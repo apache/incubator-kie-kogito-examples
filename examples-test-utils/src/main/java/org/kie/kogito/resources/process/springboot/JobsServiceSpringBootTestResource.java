@@ -13,34 +13,34 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.kie.kogito.testcontainers.quarkus;
+package org.kie.kogito.resources.process.springboot;
 
-import org.kie.kogito.resources.ConditionalQuarkusTestResource;
-import org.kie.kogito.testcontainers.KeycloakContainer;
+import org.kie.kogito.resources.ConditionalSpringBootTestResource;
+import org.kie.kogito.resources.process.JobServiceLocalProcessTestResource;
 
 /**
- * Keycloak quarkus resource that works within the test lifecycle.
+ * Jobs Service spring boot resource that works within the test lifecycle.
  *
  */
-public class KeycloakQuarkusTestResource extends ConditionalQuarkusTestResource {
+public class JobsServiceSpringBootTestResource extends ConditionalSpringBootTestResource {
 
-    public static final String KOGITO_KEYCLOAK_PROPERTY = "quarkus.oidc.auth-server-url";
+    private static final String KOGITO_JOBS_SERVICE_PROPERTY = "kogito.jobs-service.url";
 
-    public KeycloakQuarkusTestResource() {
-        super(new KeycloakContainer());
+    public JobsServiceSpringBootTestResource() {
+        super(new JobServiceLocalProcessTestResource());
     }
 
     @Override
     protected String getKogitoProperty() {
-        return KOGITO_KEYCLOAK_PROPERTY;
+        return KOGITO_JOBS_SERVICE_PROPERTY;
     }
 
     @Override
     protected String getKogitoPropertyValue() {
-        return String.format("http://localhost:%s/auth/realms/kogito", getTestResource().getMappedPort());
+        return String.format("http://localhost:%s", getTestResource().getMappedPort());
     }
 
-    public static class Conditional extends KeycloakQuarkusTestResource {
+    public static class Conditional extends JobsServiceSpringBootTestResource {
 
         public Conditional() {
             super();
