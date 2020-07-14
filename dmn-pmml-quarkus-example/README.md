@@ -79,20 +79,15 @@ See results in surefire test report `target/surefire-reports`
 
 Once the service is up and running, you can use the following example to interact with the service.
 
-### POST /Traffic Violation
-
-Returns penalty information from the given inputs -- driver and violation:
+### POST /Regression
 
 Given inputs:
 
 ```json
 {
-    "Driver":{"Points":2},
-    "Violation":{
-        "Type":"speed",
-        "Actual Speed":120,
-        "Speed Limit":100
-    }
+  "fld1":3.0, 
+  "fld2":2.0, 
+  "fld3":"y"
 }
 ```
 
@@ -107,27 +102,55 @@ or on Windows:
 curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" -d "{"fld1":3.0, "fld2":2.0, "fld3":"y"}" http://localhost:8080/TestRegressionDMN
 ```
 
-As response, penalty information is returned.
+Example response:
+
+```json
+{
+  "RegressionModelBKM":"function RegressionModelBKM( fld1, fld2, fld3 )",
+  "fld3":"y",
+  "fld2":2.0,
+  "fld1":3.0,
+  "Decision":52.5
+}
+```
+
+### POST /Tree
+
+Given inputs:
+
+```json
+{
+  "temperature":30, 
+  "humidity": 10 
+}
+```
+
+Curl command (using the JSON object above):
+
+```sh
+curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"temperature":30, "humidity":10}' http://localhost:8080/TestTreeDMN
+```
+or on Windows:
+
+```sh
+curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" -d "{"temperature":30, "humidity":10}" http://localhost:8080/TestTreeDMN
+```
 
 Example response:
 
 ```json
 {
-  "Violation":{
-    "Type":"speed",
-    "Speed Limit":100,
-    "Actual Speed":120
-  },
-  "Driver":{
-    "Points":2
-  },
-  "Fine":{
-    "Points":3,
-    "Amount":500
-  },
-  "Should the driver be suspended?":"No"
+  "RegressionModelBKM":"function RegressionModelBKM( fld1, fld2, fld3 )",
+  "fld3":"y",
+  "fld2":2.0,
+  "fld1":3.0,
+  "Decision":52.5
 }
 ```
+
+
+
+
 
 ## Deploying with Kogito Operator
 
