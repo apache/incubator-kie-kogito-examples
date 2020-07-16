@@ -15,21 +15,23 @@
  */
 package org.kie.kogito.examples;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import javax.inject.Singleton;
 
-import org.drools.core.config.DefaultRuleEventListenerConfig;
-import org.kie.kogito.rules.RuleConfig;
-import org.kie.kogito.rules.RuleEventListenerConfig;
+import org.drools.core.event.DefaultAgendaEventListener;
+import org.jboss.logging.Logger;
+import org.kie.api.event.rule.AfterMatchFiredEvent;
 
-/**
- * This is an example custom configuration. You can delete this file entirely
- * if you want just the default settings to be picked up.
- */
 @Singleton
-public class CustomRuleConfig implements RuleConfig {
+public class MyAgendaEventListener extends DefaultAgendaEventListener {
+    private static final Logger LOG = Logger.getLogger(MyAgendaEventListener.class);
+
+    AtomicInteger counter = new AtomicInteger();
 
     @Override
-    public RuleEventListenerConfig ruleEventListeners() {
-        return new DefaultRuleEventListenerConfig();
+    public void afterMatchFired(AfterMatchFiredEvent event) {
+        int count = counter.incrementAndGet();
+        LOG.infof("Event fired %d time(s).", count);
     }
 }
