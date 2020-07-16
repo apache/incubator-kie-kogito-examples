@@ -20,7 +20,10 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.awaitility.Awaitility.with;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.Matchers.anyOf;
+import static org.hamcrest.Matchers.is;
 
+import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.resources.process.quarkus.JobsServiceQuarkusTestResource;
 
@@ -45,7 +48,7 @@ public class ProcessTimerIT {
         assertThat(id).isEqualTo(id2);
         with().pollDelay(2, SECONDS)
                 .atMost(3, SECONDS)
-                .untilAsserted(() -> getTimerWithStatusCode(id, 204, TIMERS));
+                .untilAsserted(() -> getTimerWithValidStatus(id, TIMERS));
     }
 
     @Test
@@ -53,7 +56,7 @@ public class ProcessTimerIT {
         String id = createTimer(new Delay("PT030S"), TIMERS);
         Object id2 = deleteTimer(id, TIMERS);
         assertThat(id).isEqualTo(id2);
-        getTimerWithStatusCode(id, 204, TIMERS);
+        getTimerWithValidStatus(id, TIMERS);
     }
 
     //Cycle Timers Tests
@@ -64,7 +67,7 @@ public class ProcessTimerIT {
         assertThat(id).isEqualTo(id2);
         with().pollDelay(2, SECONDS)
                 .atMost(3, SECONDS)
-                .untilAsserted(() -> getTimerWithStatusCode(id, 204, TIMERS));
+                .untilAsserted(() -> getTimerWithValidStatus(id, TIMERS));
     }
 
     @Test
@@ -83,7 +86,7 @@ public class ProcessTimerIT {
         assertThat(id).isEqualTo(id2);
         with().pollDelay(2, SECONDS)
                 .atMost(3, SECONDS)
-                .untilAsserted(() -> getTimerWithStatusCode(id, 204, TIMERS_ON_TASK));
+                .untilAsserted(() -> getTimerWithValidStatus(id, TIMERS_ON_TASK));
     }
 
     @Test
@@ -94,13 +97,13 @@ public class ProcessTimerIT {
         deleteTimer(id, TIMERS_ON_TASK);
     }
 
-    private ValidatableResponse getTimerWithStatusCode(String id, int code, String path) {
+    private ValidatableResponse getTimerWithValidStatus(String id, String path) {
         return given()
                 .accept(ContentType.JSON)
                 .when()
                 .get("/" + path + "/{id}", id)
                 .then()
-                .statusCode(code);
+                .statusCode(anyOf(is(HttpStatus.SC_OK), is(HttpStatus.SC_NO_CONTENT)));
     }
 
     private String createTimer(Delay delay, String path) {
@@ -118,7 +121,7 @@ public class ProcessTimerIT {
     }
 
     private String getTimerById(String id, String path) {
-        return getTimerWithStatusCode(id, 200, path)
+        return getTimerWithValidStatus(id, path)
                 .body("id", notNullValue())
                 .extract()
                 .path("id");
