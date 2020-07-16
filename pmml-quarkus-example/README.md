@@ -1,10 +1,10 @@
-# DMN + Quarkus example
+# PMML + Quarkus example
 
 ## Description
 
-A simple DMN service to evaluate a traffic violation.
+A simple PMML service
 
-Demonstrates DMN on Kogito capabilities, including REST interface code generation.
+Demonstrates PMML on Kogito capabilities, including REST interface code generation.
 
 ## Installing and Running
 
@@ -94,23 +94,28 @@ Given inputs:
 Curl command (using the JSON object above):
 
 ```sh
-curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"fld1":3.0, "fld2":2.0, "fld3":"y"}' http://localhost:8080/TestRegressionDMN
+curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"fld1":3.0, "fld2":2.0, "fld3":"y"}' http://localhost:8080/LinReg
 ```
 or on Windows:
 
 ```sh
-curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" -d "{"fld1":3.0, "fld2":2.0, "fld3":"y"}" http://localhost:8080/TestRegressionDMN
+curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" -d "{"fld1":3.0, "fld2":2.0, "fld3":"y"}" http://localhost:8080/LinReg
 ```
 
 Example response:
 
 ```json
 {
-  "RegressionModelBKM":"function RegressionModelBKM( fld1, fld2, fld3 )",
-  "fld3":"y",
-  "fld2":2.0,
-  "fld1":3.0,
-  "Decision":52.5
+  "correlationId":null,
+  "segmentationId":null,
+  "segmentId":null,
+  "segmentIndex":0,
+  "resultCode":"OK",
+  "resultObjectName":"fld4",
+  "resultVariables":
+  {
+    "fld4":52.5
+  }
 }
 ```
 
@@ -120,30 +125,37 @@ Given inputs:
 
 ```json
 {
-  "temperature":30, 
-  "humidity": 10 
+  "temperature":30.0, 
+  "humidity": 10.0 
 }
 ```
 
 Curl command (using the JSON object above):
 
 ```sh
-curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"temperature":30, "humidity":10}' http://localhost:8080/TestTreeDMN
+curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"temperature":30.0, "humidity":10.0}' http://localhost:8080/SampleMine
 ```
 or on Windows:
 
 ```sh
-curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" -d "{"temperature":30, "humidity":10}" http://localhost:8080/TestTreeDMN
+curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" -d "{"temperature":30.0, "humidity":10.0}" http://localhost:8080/SampleMine
 ```
 
 Example response:
 
 ```json
-{  
-  "TestTreeBKM":"function TestTreeBKM( humidity, temperature )",
-  "temperature":30,
-  "humidity":10,
-  "Decision":"sunglasses"
+
+{ 
+  "correlationId":null,
+  "segmentationId":null,
+  "segmentId":null,
+  "segmentIndex":0, 
+  "resultCode":"OK",
+  "resultObjectName":"decision",
+  "resultVariables": {
+          "decision":"sunglasses",
+          "weatherdecision":"sunglasses" 
+                      }
 }
 ```
 
