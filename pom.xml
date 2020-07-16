@@ -139,6 +139,7 @@
   
   <modules>
     <module>examples-test-utils</module>
+    <module>pmml-quarkus-example</module>
   </modules>
   
   <profiles>
