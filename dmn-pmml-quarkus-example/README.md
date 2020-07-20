@@ -1,8 +1,8 @@
-# DMN + Quarkus example
+# DMN + PMML +  Quarkus example
 
 ## Description
 
-A simple DMN service to evaluate a traffic violation.
+A simple DMN + PMML service.
 
 Demonstrates DMN on Kogito capabilities, including REST interface code generation.
 
@@ -146,10 +146,6 @@ Example response:
   "Decision":"sunglasses"
 }
 ```
-
-
-
-
 
 ## Deploying with Kogito Operator
 
