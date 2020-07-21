@@ -24,8 +24,22 @@ import org.kie.kogito.testcontainers.InfinispanContainer;
  */
 public class InfinispanQuarkusTestResource extends ConditionalQuarkusTestResource {
 
+    private static final String KOGITO_INFINISPAN_PROPERTY = "quarkus.infinispan-client.server-list";
+
     public InfinispanQuarkusTestResource() {
         super(new InfinispanContainer());
     }
 
+    @Override
+    protected String getKogitoProperty() {
+        return KOGITO_INFINISPAN_PROPERTY;
+    }
+
+    public static class Conditional extends InfinispanQuarkusTestResource {
+
+        public Conditional() {
+            super();
+            enableConditional();
+        }
+    }
 }

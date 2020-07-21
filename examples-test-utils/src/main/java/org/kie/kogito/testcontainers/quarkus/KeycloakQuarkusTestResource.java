@@ -24,8 +24,28 @@ import org.kie.kogito.testcontainers.KeycloakContainer;
  */
 public class KeycloakQuarkusTestResource extends ConditionalQuarkusTestResource {
 
+    public static final String KOGITO_KEYCLOAK_PROPERTY = "quarkus.oidc.auth-server-url";
+
     public KeycloakQuarkusTestResource() {
         super(new KeycloakContainer());
+    }
+
+    @Override
+    protected String getKogitoProperty() {
+        return KOGITO_KEYCLOAK_PROPERTY;
+    }
+
+    @Override
+    protected String getKogitoPropertyValue() {
+        return String.format("http://localhost:%s/auth/realms/kogito", getTestResource().getMappedPort());
+    }
+
+    public static class Conditional extends KeycloakQuarkusTestResource {
+
+        public Conditional() {
+            super();
+            enableConditional();
+        }
     }
 
 }

@@ -16,10 +16,15 @@
 package org.kie.kogito.resources;
 
 /**
- * Conditional test resource for kogito tests.
+ * Test resource for kogito tests.
  * 
  */
-public interface ConditionalTestResource<T> {
+public interface TestResource {
+
+    /**
+     * @return the resource name.
+     */
+    String getResourceName();
 
     /**
      * Start the test resource.
@@ -32,9 +37,8 @@ public interface ConditionalTestResource<T> {
     void stop();
 
     /**
-     * Enable the test resource only if the property enable.resource.{resource-name} is set to true.
-     * @return the test resource.
+     * @return the exposed mapped port.
      */
-    T enableConditional();
+    int getMappedPort();
 
 }
