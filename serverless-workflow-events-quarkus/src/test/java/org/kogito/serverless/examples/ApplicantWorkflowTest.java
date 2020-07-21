@@ -29,6 +29,7 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.sse.SseEventSource;
 
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 
@@ -41,13 +42,17 @@ import io.quarkus.test.junit.QuarkusTest;
 @QuarkusTest
 @QuarkusTestResource(KafkaQuarkusTestResource.class)
 public class ApplicantWorkflowTest {
-    private static final String DECISION_SSE_ENDPOINT = "http://localhost:8081/decisions/stream";
+
+    private static final String DECISION_SSE_ENDPOINT = "http://localhost:%s/decisions/stream";
+
+    @ConfigProperty(name = "quarkus.http.test-port")
+    Integer assignedPort;
 
     @Test
     public void testApplicantProcess() throws Exception {
 
         Client client = ClientBuilder.newClient();
-        WebTarget target = client.target(DECISION_SSE_ENDPOINT);
+        WebTarget target = client.target(String.format(DECISION_SSE_ENDPOINT, assignedPort));
 
         List<String> received = new CopyOnWriteArrayList<>();
 

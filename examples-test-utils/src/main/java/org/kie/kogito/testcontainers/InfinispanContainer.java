@@ -15,8 +15,10 @@
  */
 package org.kie.kogito.testcontainers;
 
+import org.kie.kogito.resources.TestResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.output.Slf4jLogConsumer;
 import org.testcontainers.containers.wait.strategy.Wait;
 
@@ -24,15 +26,16 @@ import org.testcontainers.containers.wait.strategy.Wait;
  * This container wraps Infinispan container
  *
  */
-public class InfinispanContainer extends ConditionalGenericContainer<InfinispanContainer> {
+public class InfinispanContainer extends GenericContainer<InfinispanContainer> implements TestResource {
 
     public static final String NAME = "infinispan";
+    public static final int PORT = 11222;
     public static final String INFINISPAN_PROPERTY = "container.image." + NAME;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(InfinispanContainer.class);
 
     public InfinispanContainer() {
-        addFixedExposedPort(11222, 11222);
+        addExposedPort(PORT);
         withEnv("USER", "admin");
         withEnv("PASS", "admin");
         withLogConsumer(new Slf4jLogConsumer(LOGGER));
@@ -40,12 +43,18 @@ public class InfinispanContainer extends ConditionalGenericContainer<InfinispanC
     }
 
     @Override
-    protected String getResourceName() {
+    public int getMappedPort() {
+        return getMappedPort(PORT);
+    }
+
+    @Override
+    public String getResourceName() {
         return NAME;
     }
 
     @Override
-    protected void preStart() {
+    public void start() {
         setDockerImageName(System.getProperty(INFINISPAN_PROPERTY));
+        super.start();
     }
 }

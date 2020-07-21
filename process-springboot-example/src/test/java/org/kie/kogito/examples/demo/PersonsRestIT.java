@@ -33,32 +33,21 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.kie.kogito.Model;
 import org.kie.kogito.examples.DemoApplication;
 import org.kie.kogito.process.Process;
-import org.kie.kogito.testcontainers.InfinispanContainer;
-import org.kie.kogito.testcontainers.KogitoKafkaContainer;
+import org.kie.kogito.testcontainers.springboot.InfinispanSpringBootTestResource;
+import org.kie.kogito.testcontainers.springboot.KafkaSpringBootTestResource;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.annotation.DirtiesContext.ClassMode;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.testcontainers.containers.GenericContainer;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 
-@Testcontainers
 @SuppressWarnings("rawtypes")
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = DemoApplication.class)
-@DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD) // reset spring context after each test method
+@ContextConfiguration(initializers = {InfinispanSpringBootTestResource.Conditional.class, KafkaSpringBootTestResource.Conditional.class})
 public class PersonsRestIT {
-	
-    @Container
-    private static final GenericContainer<?> INFINISPAN = new InfinispanContainer().enableConditional();
-
-    @Container
-    private static final KogitoKafkaContainer KAFKA = new KogitoKafkaContainer().enableConditional();
 
 	@Inject
 	@Named("persons")

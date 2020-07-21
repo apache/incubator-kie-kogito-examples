@@ -27,30 +27,27 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.keycloak.representations.AccessTokenResponse;
 import org.kie.kogito.springboot.KogitoSpringbootApplication;
-import org.kie.kogito.testcontainers.KeycloakContainer;
+import org.kie.kogito.testcontainers.springboot.KeycloakSpringBootTestResource;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.annotation.DirtiesContext.ClassMode;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 
-@Testcontainers
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
-@DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
+@ContextConfiguration(initializers = KeycloakSpringBootTestResource.class)
 public class ApprovalsRestIT {
-
-    @Container
-    public static final KeycloakContainer KEYCLOAK = new KeycloakContainer();
 
     @LocalServerPort
     int randomServerPort;
     
+    @Value("${keycloak.auth-server-url}")
+    private String keycloakUrl;
+
     @BeforeEach
     public void before() {
         RestAssured.port = randomServerPort;
@@ -148,7 +145,7 @@ public class ApprovalsRestIT {
                 .param("client_id", "kogito-app")
                 .param("client_secret", "secret")
                 .when()
-                .post("http://localhost:8281/auth/realms/kogito/protocol/openid-connect/token")
+                .post(keycloakUrl + "/realms/kogito/protocol/openid-connect/token")
                 .as(AccessTokenResponse.class).getToken();
 
     }

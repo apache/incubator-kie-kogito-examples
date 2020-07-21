@@ -34,13 +34,12 @@ import org.kie.kogito.testcontainers.quarkus.InfinispanQuarkusTestResource;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 
 import io.quarkus.test.common.QuarkusTestResource;
-import io.quarkus.test.common.ResourceArg;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
 
 @QuarkusTest
-@QuarkusTestResource(value = InfinispanQuarkusTestResource.class, initArgs = {@ResourceArg(name = "conditional", value = "true")})
-@QuarkusTestResource(value = KafkaQuarkusTestResource.class, initArgs = {@ResourceArg(name = "conditional", value = "true")})
+@QuarkusTestResource(value = InfinispanQuarkusTestResource.Conditional.class)
+@QuarkusTestResource(value = KafkaQuarkusTestResource.Conditional.class)
 public class OrdersRestIT {
 
     @Inject
