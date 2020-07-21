@@ -13,28 +13,15 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.kie.kogito.resources;
+package org.kie.kogito.resources.process;
 
-/**
- * Conditional test resource for kogito tests.
- * 
- */
-public interface ConditionalTestResource<T> {
+public class JobServiceLocalProcessTestResource extends LocalQuarkusProcessTestResource {
 
-    /**
-     * Start the test resource.
-     */
-    void start();
+    public static final String NAME = "jobs-service";
+    //"test-resources/jobs-service.jar" is fetched during maven build, check on pom.xml
+    public static final String JOBS_SERVICE_PATH = System.getProperty("jobs.service.path", "test-resources/jobs-service.jar");
 
-    /**
-     * Stop the test resource.
-     */
-    void stop();
-
-    /**
-     * Enable the test resource only if the property enable.resource.{resource-name} is set to true.
-     * @return the test resource.
-     */
-    T enableConditional();
-
+    public JobServiceLocalProcessTestResource() {
+        super(NAME, JOBS_SERVICE_PATH);
+    }
 }

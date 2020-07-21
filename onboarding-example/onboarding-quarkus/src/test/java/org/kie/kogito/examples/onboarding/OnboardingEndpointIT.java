@@ -32,12 +32,11 @@ import org.kie.kogito.examples.test.RecordedOutputWorkItemHandler;
 import org.kie.kogito.testcontainers.quarkus.InfinispanQuarkusTestResource;
 
 import io.quarkus.test.common.QuarkusTestResource;
-import io.quarkus.test.common.ResourceArg;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
 
 @QuarkusTest
-@QuarkusTestResource(value = InfinispanQuarkusTestResource.class, initArgs = {@ResourceArg(name = "conditional", value = "true")})
+@QuarkusTestResource(value = InfinispanQuarkusTestResource.Conditional.class)
 public class OnboardingEndpointIT {
     
     @Inject

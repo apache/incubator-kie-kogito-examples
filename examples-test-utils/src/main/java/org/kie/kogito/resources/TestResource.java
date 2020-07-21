@@ -13,23 +13,32 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.kie.kogito.examples;
-
-import javax.inject.Singleton;
-
-import org.drools.core.config.DefaultRuleEventListenerConfig;
-import org.kie.kogito.rules.RuleConfig;
-import org.kie.kogito.rules.RuleEventListenerConfig;
+package org.kie.kogito.resources;
 
 /**
- * This is an example custom configuration. You can delete this file entirely
- * if you want just the default settings to be picked up.
+ * Test resource for kogito tests.
+ * 
  */
-@Singleton
-public class CustomRuleConfig implements RuleConfig {
+public interface TestResource {
 
-    @Override
-    public RuleEventListenerConfig ruleEventListeners() {
-        return new DefaultRuleEventListenerConfig();
-    }
+    /**
+     * @return the resource name.
+     */
+    String getResourceName();
+
+    /**
+     * Start the test resource.
+     */
+    void start();
+
+    /**
+     * Stop the test resource.
+     */
+    void stop();
+
+    /**
+     * @return the exposed mapped port.
+     */
+    int getMappedPort();
+
 }

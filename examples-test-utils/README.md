@@ -18,7 +18,7 @@ Example:
 
 ```java
 @QuarkusTest
-@QuarkusTestResource(InfinispanQuarkusResource.class)
+@QuarkusTestResource(InfinispanQuarkusTestResource.class)
 public class MyTest {
    // ...
 }
@@ -28,30 +28,28 @@ And add the Infinispan properties in the _application.properties_:
 
 ```
 #Infinispan
-quarkus.infinispan-client.server-list=localhost:11222
 quarkus.infinispan-client.use-auth=true
 quarkus.infinispan-client.auth-username=admin
 quarkus.infinispan-client.auth-password=admin
 ```
 
+The property _quarkus.infinispan-client.server-list_ will be automatically populated with a random port.
+
 In case we want to run the container only if some requirements are met, we need to use it this way:
 
 ```java
-@QuarkusTestResource(value = InfinispanQuarkusResource.class, initArgs = {@ResourceArg(name = "conditional", value = "true")})
+@QuarkusTestResource(value = InfinispanQuarkusTestResource.Conditional.class)
 ```
 
 ### Usage in Spring Boot test:
 
 
 ```java
-@Testcontainers
+
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = DemoApplication.class)
-@DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD) // reset spring context after each test method
-public class MyTest {
-    @Container
-    public static GenericContainer<?> INFINISPAN = new InfinispanContainer();
-    
+@ContextConfiguration(initializers = InfinispanSpringBootTestResource.class)
+public class MyTest {    
     // ...
 }
 ```
@@ -60,7 +58,6 @@ And add the Infinispan properties in the _application.properties_:
 
 ```
 # Infinispan
-infinispan.remote.server-list=localhost:11222
 infinispan.remote.sasl-mechanism=PLAIN
 infinispan.remote.auth-server-name=infinispan
 infinispan.remote.use-auth=true
@@ -69,11 +66,18 @@ infinispan.remote.auth-username=admin
 infinispan.remote.auth-password=admin
 ```
 
+The property _infinispan.remote.server-list_ will be automatically populated with a random port.
+
 In case we want to run the container only if some requirements are met, we need to use it this way:
 
 ```java
-@Container
-public static GenericContainer<?> INFINISPAN = new InfinispanContainer().enableConditional();
+
+@ExtendWith(SpringExtension.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = DemoApplication.class)
+@ContextConfiguration(initializers = InfinispanSpringBootTestResource.Conditional.class)
+public class MyTest {    
+    // ...
+}
 ```
 
 ## Keycloak Test Containers Support
@@ -84,7 +88,7 @@ Example:
 
 ```java
 @QuarkusTest
-@QuarkusTestResource(KeycloakQuarkusResource.class)
+@QuarkusTestResource(KeycloakQuarkusTestResource.class)
 public class MyTest {
    // ...
 }
@@ -95,14 +99,10 @@ public class MyTest {
 Example:
 
 ```java
-@Testcontainers
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = DemoApplication.class)
-@DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD) // reset spring context after each test method
+@ContextConfiguration(initializers = KeycloakSpringBootTestResource.class)
 public class MyTest {
-    @Container
-    public static KeycloakContainer KEYCLOAK = new KeycloakContainer();
-    
     // ...
 }
 ```
@@ -118,7 +118,7 @@ Example:
 @QuarkusTestResource(KafkaQuarkusTestResource.class)
 public class MyTest {
    
-   @ConfigProperty(name = KafkaQuarkusTestResource.KAFKA_BOOTSTRAP_SERVERS)
+   @ConfigProperty(name = KafkaQuarkusTestResource.KOGITO_KAFKA_PROPERTY)
    private String kafkaBootstrapServers;
    // ...
 }
@@ -129,14 +129,10 @@ public class MyTest {
 Example:
 
 ```java
-@Testcontainers
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = DemoApplication.class)
-@DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD) // reset spring context after each test method
+@ContextConfiguration(initializers = KafkaSpringBootTestResource.class)
 public class MyTest {
-    @Container
-    private static final KogitoKafkaContainer KAFKA = new KogitoKafkaContainer();
-    
     // ...
 }
 ```
@@ -155,12 +151,22 @@ Add the Kafka Client dependency in the _pom.xml_ file:
 
 And make use of it:
 
+- In Spring:
+
 ```java
-kafkaClient = new KafkaClient(kafkaBootstrapServers);
-kafkaClient.consume(TOPIC_CONSUMER, s -> {
-            LOGGER.info("Received from kafka: {}", s);
-            // ...
-});
-kafkaClient.produce(generateCloudEvent(traveller), TOPIC_PRODUCER);
-kafkaClient.shutdown();
+@Autowired
+private KafkaClient kafkaClient;
 ``` 
+
+- In Kafka:
+
+```java
+@ConfigProperty(name = KafkaQuarkusTestResource.KOGITO_KAFKA_PROPERTY)
+private String kafkaBootstrapServers;
+
+@Test
+public void myTest() {
+    KafkaClient kafkaClient = new KafkaClient(kafkaBootstrapServers);
+    // ...
+}
+```

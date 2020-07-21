@@ -24,9 +24,22 @@ import org.kie.kogito.testcontainers.KogitoKafkaContainer;
  */
 public class KafkaQuarkusTestResource extends ConditionalQuarkusTestResource {
 
-    public static final String KAFKA_BOOTSTRAP_SERVERS = KogitoKafkaContainer.QUARKUS_KAFKA_BOOTSTRAP_SERVERS;
+    public static final String KOGITO_KAFKA_PROPERTY = "kafka.bootstrap.servers";
 
     public KafkaQuarkusTestResource() {
         super(new KogitoKafkaContainer());
+    }
+
+    @Override
+    protected String getKogitoProperty() {
+        return KOGITO_KAFKA_PROPERTY;
+    }
+
+    public static class Conditional extends KafkaQuarkusTestResource {
+
+        public Conditional() {
+            super();
+            enableConditional();
+        }
     }
 }

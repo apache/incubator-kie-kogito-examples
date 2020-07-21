@@ -59,7 +59,7 @@ public class MessagingIT {
 
     public KafkaClient kafkaClient;
 
-    @ConfigProperty(name = KafkaQuarkusTestResource.KAFKA_BOOTSTRAP_SERVERS)
+    @ConfigProperty(name = KafkaQuarkusTestResource.KOGITO_KAFKA_PROPERTY)
     private String kafkaBootstrapServers;
 
     @Test
