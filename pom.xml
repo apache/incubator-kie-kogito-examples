@@ -140,6 +140,8 @@
   <modules>
     <module>examples-test-utils</module>
     <module>pmml-quarkus-example</module>
+    <module>dmn-pmml-springboot-example</module>
+    <module>pmml-springboot-example</module>
   </modules>
   
   <profiles>
