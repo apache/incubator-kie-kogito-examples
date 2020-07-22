@@ -13,7 +13,6 @@
   <name>Kogito Example :: DMN :: PMML - Spring Boot</name>
 
   <properties>
-    <version.org.pmml>7.41.0-SNAPSHOT</version.org.pmml>
     <version.org.jpmml>1.5.1</version.org.jpmml>
   </properties>
 
@@ -35,13 +34,6 @@
       </dependency>
       <!-- PMML -->
       <dependency>
-        <groupId>org.kie.kogito</groupId>
-        <artifactId>kogito-pmml-dependencies</artifactId>
-        <version>${project.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <dependency>
         <groupId>org.jpmml</groupId>
         <artifactId>pmml-model</artifactId>
         <version>${version.org.jpmml}</version>
@@ -61,11 +53,6 @@
     </dependency>
 
     <!-- PMML -->
-    <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-pmml-dependencies</artifactId>
-      <type>pom</type>
-    </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-pmml</artifactId>
