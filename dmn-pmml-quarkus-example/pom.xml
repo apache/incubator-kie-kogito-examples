@@ -27,13 +27,7 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
-      <dependency>
-        <groupId>org.kie.kogito</groupId>
-        <artifactId>kogito-pmml-dependencies</artifactId>
-        <version>${project.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
+      <!-- PMML -->
       <dependency>
         <groupId>org.jpmml</groupId>
         <artifactId>pmml-model</artifactId>
@@ -68,11 +62,6 @@
     </dependency>
 
     <!-- PMML -->
-    <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-pmml-dependencies</artifactId>
-      <type>pom</type>
-    </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-pmml</artifactId>
