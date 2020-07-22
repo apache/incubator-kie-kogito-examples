@@ -22,13 +22,13 @@ public class Traveller {
 	private String email;
 	private String nationality;
 	private Address address;
+	private String visa;
 
 	public Traveller() {
 
 	}
 
 	public Traveller(String firstName, String lastName, String email, String nationality, Address address) {
-		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -76,10 +76,18 @@ public class Traveller {
 		this.address = address;
 	}
 
+	public String getVisa() {
+		return visa;
+	}
+
+	public void setVisa(String visa) {
+		this.visa = visa;
+	}
+
 	@Override
 	public String toString() {
 		return "Traveller [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", nationality="
-				+ nationality + ", address=" + address + "]";
+				+ nationality + ", address=" + address + ", visa=" + visa + "]";
 	}
 
 }
