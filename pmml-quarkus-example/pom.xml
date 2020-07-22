@@ -29,13 +29,6 @@
       </dependency>
       <!-- PMML -->
       <dependency>
-        <groupId>org.kie.kogito</groupId>
-        <artifactId>kogito-pmml-dependencies</artifactId>
-        <version>${project.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <dependency>
         <groupId>org.jpmml</groupId>
         <artifactId>pmml-model</artifactId>
         <version>${version.org.jpmml}</version>
@@ -71,11 +64,6 @@
     <!-- PMML -->
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-pmml-dependencies</artifactId>
-      <type>pom</type>
-    </dependency>
-    <dependency>
-      <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-pmml</artifactId>
     </dependency>
     <dependency>
@@ -91,11 +79,6 @@
     <dependency>
       <groupId>io.rest-assured</groupId>
       <artifactId>rest-assured</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-scenario-simulation</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>

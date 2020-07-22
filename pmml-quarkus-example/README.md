@@ -30,14 +30,14 @@ mvn clean compile quarkus:dev
 
 ```
 mvn clean package
-java -jar target/dmn-pmml-quarkus-example-runner.jar
+java -jar target/pmml-quarkus-example-runner.jar
 ```
 
 or on Windows
 
 ```
 mvn clean package
-java -jar target\dmn-pmml-quarkus-example-runner.jar
+java -jar target\pmml-quarkus-example-runner.jar
 ```
 
 ### Package and Run using Local Native Image
@@ -50,7 +50,7 @@ mvn clean package -Pnative
 To run the generated native executable, generated in `target/`, execute
 
 ```
-./target/dmn-pmml-quarkus-example-runner
+./target/pmml-quarkus-example-runner
 ```
 
 Note: This does not yet work on Windows, GraalVM and Quarkus should be rolling out support for Windows soon.
