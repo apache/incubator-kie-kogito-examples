@@ -270,7 +270,7 @@ curl -X GET http://localhost:8080/travels/{uuid}/VisaApplication/{task-uuid}
 Complete visa application task by sending a valid URL to the VISA document stored in any cloud provider:
 
 ```sh
-curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST http://localhost:8080/travels/{uuid}/VisaApplication/{task-uuid} -d '{"visa": "https://mydrive.example.com/JanVisa.pdf"}'
+curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST http://localhost:8080/travels/{uuid}/VisaApplication/{task-uuid} -d '{"visaApplication": "https://mydrive.example.com/JanVisaApplicationForm.pdf"}'
 ```
 
 ### GET /travels/{id}/ConfirmTravel/{taskId}

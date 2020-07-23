@@ -86,8 +86,8 @@
         }, "json");
     }
 
-    function sendVisa(id, taskName, taskId, visa) {
-        $.post("/travels/" + id + "/" + taskName + "/" + taskId, JSON.stringify({'visa': $('#sendVisa').val()}), function () {
+    function sendVisaApplication(id, taskName, taskId) {
+        $.post("/travels/" + id + "/" + taskName + "/" + taskId, JSON.stringify({'visaApplication': $('#sendVisaApplication').val()}), function () {
             load();
         }, "json");
     }
@@ -110,7 +110,7 @@
                         "data-lastname='" + val.traveller.lastName + "' " +
                         "data-email='" + val.traveller.email + "' " +
                         "data-nationality='" + val.traveller.nationality + "' " +
-                        "data-visa='" + val.traveller.visa + "' " +
+                        "data-visa-application='" + val.traveller.visaApplication + "' " +
                         "data-country='" + val.trip.country + "' " +
                         "data-city='" + val.trip.city + "' " +
                         "data-begin='" + new Date(val.trip.begin).toLocaleDateString() + "' " +
@@ -198,12 +198,12 @@
             modal.find('#lastName').val(button.data("lastname"));
             modal.find('#email').val(button.data("email"));
             modal.find('#nationality').val(button.data("nationality"));
-            if(button.data("visa") !== null && button.data("visa") !== '') {
-                $('#visa-group').show();
-                modal.find('#visa').attr('href', button.data("visa"));
+            if(button.data("visa-application") !== null && button.data("visa-application") !== '') {
+                $('#visa-application-group').show();
+                modal.find('#visaApplication').attr('href', button.data("visa-application"));
             } else {
-                $('#visa-group').hide();
-                modal.find('#visa').attr('href', '#');
+                $('#visa-application-group').hide();
+                modal.find('#visaApplication').attr('href', '#');
             }
             modal.find('#destinationCountry').val(button.data("country"));
             modal.find('#destinationCity').val(button.data("city"));
@@ -223,21 +223,21 @@
         $("#tasksModal").on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget);
             var action = button.data('action');
-            var processInstanceId = button.data('id');
+            var travelId = button.data('id');
             var modal = $(this);
             modal.find('.modal-title').text("Tasks for " + button.data("lastname") + ", " + button.data("firstname"));
 
             $("#taskscontent").children().remove();
-            $.getJSON("/travels/"+ processInstanceId + "/tasks", function (data) {
+            $.getJSON("/travels/"+ travelId + "/tasks", function (data) {
                 $.each(data, function (taskId, taskName) {
                     let element = "<tr><td>" + taskName + "</td><td>";
                     if (taskName === 'VisaApplication') {
-                        element += "<div class='form-group'><label for='sendVisa'>Link to Visa</label><input class='form-control' type='text' id='sendVisa' name='sendVisa' required></div>" +
-                        "<button class='btn btn-primary btn-sm' onclick=\"sendVisa('" + processInstanceId + "', '" + taskName + "', '" + taskId + "')\" data-dismiss=\"modal\" " +
+                        element += "<div class='form-group'><label for='sendVisaApplication'>Link to visa application</label><input class='form-control' type='text' id='sendVisaApplication' name='sendVisaApplication' required></div>" +
+                        "<button class='btn btn-primary btn-sm' onclick=\"sendVisaApplication('" + travelId + "', '" + taskName + "', '" + taskId + "')\" data-dismiss=\"modal\" " +
                         "   <span>Send</span>" +
                         "</button>";
                     } else {
-                        element += "<button class='btn btn-primary btn-sm' onclick=\"completeTask('" + processInstanceId + "', '" + taskName + "', '" + taskId + "')\" data-dismiss=\"modal\" " +
+                        element += "<button class='btn btn-primary btn-sm' onclick=\"completeTask('" + travelId + "', '" + taskName + "', '" + taskId + "')\" data-dismiss=\"modal\" " +
                         "   <span>Complete</span>" +
                         "</button>";
                     }
@@ -362,10 +362,10 @@
                                         type="text" class="form-control" id="nationality"
                                         name="form-control" readonly>
                                 </div>
-                                <div id="visa-group" class="form-group">
-                                    <label for="visa">Visa</label>
+                                <div id="visa-application-group" class="form-group">
+                                    <label for="visaApplication">Visa application</label>
                                     <p>
-                                        <a href="#" id="visa" target="_blank" >Link to Visa</a>
+                                        <a href="#" id="visaApplication" target="_blank" >Link to visa application</a>
                                     </p>
                                 </div>
                             </div>

@@ -22,7 +22,7 @@ public class Traveller {
 	private String email;
 	private String nationality;
 	private Address address;
-	private String visa;
+	private String visaApplication;
 
 	public Traveller() {
 
@@ -76,18 +76,18 @@ public class Traveller {
 		this.address = address;
 	}
 
-	public String getVisa() {
-		return visa;
+	public String getVisaApplication() {
+		return visaApplication;
 	}
 
-	public void setVisa(String visa) {
-		this.visa = visa;
+	public void setVisaApplication(String visaApplication) {
+		this.visaApplication = visaApplication;
 	}
 
 	@Override
 	public String toString() {
 		return "Traveller [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", nationality="
-				+ nationality + ", address=" + address + ", visa=" + visa + "]";
+				+ nationality + ", address=" + address + ", visaApplication=" + visaApplication + "]";
 	}
 
 }

@@ -107,8 +107,8 @@ public class TravelTest {
         assertEquals(1, workItems.size());                
         assertEquals("VisaApplication", workItems.get(0).getName());
         
-        String visa = "http://mydrive.example.com/docs/u324dx";
-        Map<String, Object> params = Collections.singletonMap("visa", visa);
+        String visaApplication = "http://mydrive.example.com/docs/u324dx";
+        Map<String, Object> params = Collections.singletonMap("visaApplication", visaApplication);
         processInstance.completeWorkItem(workItems.get(0).getId(), params);
         
         assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_ACTIVE, processInstance.status());
@@ -126,7 +126,7 @@ public class TravelTest {
         assertEquals(requested.getAddress().getCountry(), traveller.getAddress().getCountry());
         assertEquals(requested.getAddress().getStreet(), traveller.getAddress().getStreet());
         assertEquals(requested.getAddress().getZipCode(), traveller.getAddress().getZipCode());
-        assertEquals(visa, traveller.getVisa());
+        assertEquals(visaApplication, traveller.getVisaApplication());
 
         Hotel hotel = (Hotel) result.toMap().get("hotel");
         assertNotNull(hotel);
