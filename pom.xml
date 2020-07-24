@@ -169,6 +169,7 @@
         <module>process-kafka-quickstart-quarkus</module>
         <module>process-kafka-quickstart-springboot</module>
         <module>process-knative-quickstart-quarkus</module>
+        <module>process-mongodb-persistence-quarkus</module>
         <module>process-mongodb-persistence-springboot</module>
         <module>process-optaplanner-quarkus</module>
         <module>process-optaplanner-springboot</module>
