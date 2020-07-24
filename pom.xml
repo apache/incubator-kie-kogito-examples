@@ -139,9 +139,6 @@
   
   <modules>
     <module>examples-test-utils</module>
-    <module>pmml-quarkus-example</module>
-    <module>dmn-pmml-springboot-example</module>
-    <module>pmml-springboot-example</module>
   </modules>
   
   <profiles>
@@ -156,6 +153,7 @@
         <module>dmn-listener-quarkus</module>
         <module>dmn-listener-springboot</module>
         <module>dmn-pmml-quarkus-example</module>
+        <module>dmn-pmml-springboot-example</module>
         <module>dmn-quarkus-example</module>
         <module>dmn-drools-quarkus-metrics</module>
         <module>dmn-springboot-example</module>
@@ -163,6 +161,8 @@
         <module>flexible-process-springboot</module>
         <module>kogito-travel-agency</module>
         <module>onboarding-example</module>
+        <module>pmml-quarkus-example</module>
+        <module>pmml-springboot-example</module>
         <module>process-business-rules-quarkus</module>
         <module>process-business-rules-springboot</module>
         <module>process-infinispan-persistence-quarkus</module>
