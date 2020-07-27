@@ -18,6 +18,7 @@ package org.acme.travel;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -92,7 +93,8 @@ public class TravelTest {
 		
 		Model m = travelsProcess.createModel();
         Map<String, Object> parameters = new HashMap<>();
-        parameters.put("traveller", new Traveller("Jan", "Kowalski", "jan.kowalski@example.com", "Polish", new Address("polna", "Krakow", "32000", "Poland")));
+        Traveller requested = new Traveller("Jan", "Kowalski", "jan.kowalski@example.com", "Polish", new Address("polna", "Krakow", "32000", "Poland"));
+        parameters.put("traveller", requested);
         parameters.put("trip", new Trip("New York", "US", new Date(), new Date()));
 
         m.fromMap(parameters);
@@ -105,12 +107,27 @@ public class TravelTest {
         assertEquals(1, workItems.size());                
         assertEquals("VisaApplication", workItems.get(0).getName());
         
-        processInstance.completeWorkItem(workItems.get(0).getId(), null);
+        String visaApplication = "http://mydrive.example.com/docs/u324dx";
+        Map<String, Object> params = Collections.singletonMap("visaApplication", visaApplication);
+        processInstance.completeWorkItem(workItems.get(0).getId(), params);
         
         assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_ACTIVE, processInstance.status());
         
         Model result = (Model)processInstance.variables();
         assertEquals(4, result.toMap().size());
+
+        Traveller traveller = (Traveller) result.toMap().get("traveller");
+        assertNotNull(traveller);
+        assertEquals(requested.getFirstName(), traveller.getFirstName());
+        assertEquals(requested.getLastName(), traveller.getLastName());
+        assertEquals(requested.getEmail(), traveller.getEmail());
+        assertEquals(requested.getNationality(), traveller.getNationality());
+        assertEquals(requested.getAddress().getCity(), traveller.getAddress().getCity());
+        assertEquals(requested.getAddress().getCountry(), traveller.getAddress().getCountry());
+        assertEquals(requested.getAddress().getStreet(), traveller.getAddress().getStreet());
+        assertEquals(requested.getAddress().getZipCode(), traveller.getAddress().getZipCode());
+        assertEquals(visaApplication, traveller.getVisaApplication());
+
         Hotel hotel = (Hotel) result.toMap().get("hotel");
         assertNotNull(hotel);
         assertEquals("Perfect hotel", hotel.getName());
