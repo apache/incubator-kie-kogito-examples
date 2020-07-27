@@ -15,18 +15,12 @@
  */
 package org.kie.pmml.kogito.quarkus.example;
 
-import java.util.Map;
-
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
-import org.hamcrest.core.IsNull;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @QuarkusTest
 public class DMNTreeTest {
@@ -34,27 +28,16 @@ public class DMNTreeTest {
     @Test
     public void testEvaluateTreeDMN() {
         String inputData = "{\"temperature\":30.0, \"humidity\":10.0}";
-//        Object resultVariables =  given()
-//                .contentType(ContentType.JSON)
-//                .body(inputData)
-//                .when()
-//                .post("/TestTreeDMN")
-//                .then()
-//                .statusCode(200)
-//                .body("correlationId", is(new IsNull()))
-//                .body("segmentationId", is(new IsNull()))
-//                .body("segmentId", is(new IsNull()))
-//                .body("segmentIndex", is(0)) // as JSON is not schema aware, here we assert the RAW string
-//                .body("resultCode", is("OK"))
-//                .body("resultObjectName", is("decision"))
-//                .extract()
-//                .path("resultVariables");
-//        assertNotNull(resultVariables);
-//        assertTrue(resultVariables instanceof Map);
-//        Map<String, Object> mappedResultVariables = (Map) resultVariables;
-//        assertTrue(mappedResultVariables.containsKey("decision"));
-//        assertEquals("sunglasses", mappedResultVariables.get("decision"));
-//        assertTrue(mappedResultVariables.containsKey("weatherdecision"));
-//        assertEquals("sunglasses", mappedResultVariables.get("weatherdecision"));
+        given()
+                .contentType(ContentType.JSON)
+                .body(inputData)
+                .when()
+                .post("/TestTreeDMN")
+                .then()
+                .statusCode(200)
+                .body("TestTreeBKM", is("function TestTreeBKM( humidity, temperature )"))
+                .body("temperature", is(Float.valueOf("30")))
+                .body("humidity", is(Float.valueOf("10")))
+                .body("Decision", is("sunglasses"));
     }
 }
