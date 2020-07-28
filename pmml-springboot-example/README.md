@@ -110,6 +110,46 @@ Example response:
 }
 ```
 
+### POST /Scorecard
+
+Given inputs:
+
+```json
+{
+  "input1":5.0, 
+  "input2":-10.0
+}
+```
+
+Curl command (using the JSON object above):
+
+```sh
+curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"input1":5.0, "input2":-10.0}' http://localhost:8080/SimpleScorecard
+```
+or on Windows:
+
+```sh
+curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" -d "{"input1":5.0, "input2":-10.0}" http://localhost:8080/SimpleScorecard
+```
+
+Example response:
+
+```json
+{ 
+  "correlationId":null,
+  "segmentationId":null,
+  "segmentId":null,
+  "segmentIndex":0, 
+  "resultCode":"OK",
+  "resultObjectName":"score",
+  "resultVariables": {
+          "score":-15.0,
+          "Score":-15.0,
+          "Reason Code 1":"Input1ReasonCode",
+          "Reason Code 2":"Input2ReasonCode"
+          }
+}
+```
 
 ## Deploying with Kogito Operator
 
