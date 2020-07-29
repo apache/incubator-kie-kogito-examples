@@ -30,6 +30,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.Model;
 import org.kie.kogito.process.Process;
+import org.kie.kogito.process.ProcessInstanceReadMode;
 import org.kie.kogito.testcontainers.quarkus.InfinispanQuarkusTestResource;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 
@@ -53,8 +54,8 @@ public class OrdersRestIT {
     @BeforeEach
     public void cleanUp() {
         // need it when running with persistence
-        orderProcess.instances().values().forEach(pi -> pi.abort());
-        orderItemsProcess.instances().values().forEach(pi -> pi.abort());
+        orderProcess.instances().values(ProcessInstanceReadMode.MUTABLE).forEach(pi -> pi.abort());
+        orderItemsProcess.instances().values(ProcessInstanceReadMode.MUTABLE).forEach(pi -> pi.abort());
     }
 
     @Test
