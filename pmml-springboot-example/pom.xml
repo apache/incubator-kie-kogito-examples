@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
@@ -10,8 +9,8 @@
     <artifactId>kogito-examples</artifactId>
     <version>8.0.0-SNAPSHOT</version>
   </parent>
-  <artifactId>dmn-springboot-example</artifactId>
-  <name>Kogito Example :: DMN - Spring Boot</name>
+  <artifactId>pmml-springboot-example</artifactId>
+  <name>Kogito Example :: PMML - Spring Boot</name>
 
   <dependencyManagement>
     <dependencies>
@@ -33,10 +32,24 @@
   </dependencyManagement>
 
   <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter</artifactId>
+    </dependency>
 
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-springboot-starter</artifactId>
+    </dependency>
+
+    <!-- PMML -->
+    <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-pmml</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.jpmml</groupId>
+      <artifactId>pmml-model</artifactId>
     </dependency>
 
     <dependency>
@@ -47,11 +60,6 @@
     <dependency>
       <groupId>io.rest-assured</groupId>
       <artifactId>rest-assured</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-scenario-simulation</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
