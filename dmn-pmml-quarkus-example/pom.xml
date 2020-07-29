@@ -13,11 +13,6 @@
 
   <name>Kogito Example :: DMN :: PMML</name>
 
-  <properties>
-    <version.org.pmml>7.41.0-SNAPSHOT</version.org.pmml>
-    <version.org.jpmml>1.5.1</version.org.jpmml>
-  </properties>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -26,12 +21,6 @@
         <version>${project.version}</version>
         <type>pom</type>
         <scope>import</scope>
-      </dependency>
-      <!-- PMML -->
-      <dependency>
-        <groupId>org.jpmml</groupId>
-        <artifactId>pmml-model</artifactId>
-        <version>${version.org.jpmml}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -54,8 +43,6 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-resteasy-jackson</artifactId>
     </dependency>
-
-    <!-- TEMP -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-openapi</artifactId>

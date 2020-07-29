@@ -12,10 +12,6 @@
   <artifactId>dmn-pmml-springboot-example</artifactId>
   <name>Kogito Example :: DMN :: PMML - Spring Boot</name>
 
-  <properties>
-    <version.org.jpmml>1.5.1</version.org.jpmml>
-  </properties>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -31,12 +27,6 @@
         <version>${project.version}</version>
         <type>pom</type>
         <scope>import</scope>
-      </dependency>
-      <!-- PMML -->
-      <dependency>
-        <groupId>org.jpmml</groupId>
-        <artifactId>pmml-model</artifactId>
-        <version>${version.org.jpmml}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
