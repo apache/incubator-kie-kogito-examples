@@ -1,15 +1,20 @@
-apiVersion: org.kie.kogito.app.kiegroup.org/v1alpha1
-kind: KogitoApp
+apiVersion: app.kiegroup.org/v1alpha1
+kind: KogitoBuild
 metadata:
   name: pmml-quarkus-example
 spec:
-  build:
-    #envs:
-    # envs can be used to set variables during build
-    #- name: MY_CUSTOM_ENV
-    #  value: "my value"
-    gitSource:
-      contextDir: pmml-quarkus-example
-      uri: 'https://github.com/kiegroup/kogito-examples'
-    # set your maven nexus repository to speed up the build time
-    #mavenMirrorURL: 
+  type: RemoteSource
+  #envs:
+  # envs can be used to set variables during build
+  #- name: MY_CUSTOM_ENV
+  #  value: "my value"
+  gitSource:
+    contextDir: pmml-quarkus-example
+    uri: 'https://github.com/kiegroup/kogito-examples'
+  # set your maven nexus repository to speed up the build time
+  #mavenMirrorURL:
+---
+apiVersion: app.kiegroup.org/v1alpha1
+kind: KogitoRuntime
+metadata:
+  name: pmml-quarkus-example
