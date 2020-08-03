@@ -20,4 +20,4 @@ metadata:
   name: process-kafka-quickstart-quarkus
 spec:
   kafka:
-    UseKogitoInfra: true
+    useKogitoInfra: true

@@ -5,7 +5,7 @@ metadata:
 spec:
   type: RemoteSource
   gitSource:
-    contextDir: kogito-travel-agency/visas
+    contextDir: extended/kogito-travel-agency/visas
     uri: "https://github.com/kiegroup/kogito-examples/"
   # set your maven nexus repository to speed up the build time
   #mavenMirrorURL:
@@ -18,5 +18,5 @@ spec:
   infinispan:
     useKogitoInfra: true
   kafka:
-    UseKogitoInfra: true
+    useKogitoInfra: true
 

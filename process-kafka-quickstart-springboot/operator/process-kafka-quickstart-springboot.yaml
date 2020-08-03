@@ -22,4 +22,4 @@ metadata:
 spec:
   runtime: springboot
   kafka:
-    UseKogitoInfra: true
+    useKogitoInfra: true

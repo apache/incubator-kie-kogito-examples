@@ -20,4 +20,4 @@ metadata:
 #    useKogitoInfra: true
   #envs:
   #  - name: MAVEN_ARGS_APPEND
-  #    value: "-Ppersistence"1
+  #    value: "-Ppersistence"
