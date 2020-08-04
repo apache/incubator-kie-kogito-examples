@@ -1,10 +1,8 @@
-# DMN + Quarkus example
+# DMN Tracing Quarkus example
 
 ## Description
 
-A simple DMN service to evaluate a traffic violation.
-
-Demonstrates DMN on Kogito capabilities, including REST interface code generation.
+A simple DMN service to evaluate a loan approval and generate tracing events that might be consumed by the Trusty service.
 
 ## Installing and Running
 
@@ -30,14 +28,14 @@ mvn clean compile quarkus:dev
 
 ```
 mvn clean package
-java -jar target/dmn-quarkus-example-runner.jar
+java -jar target/dmn-tracing-quarkus-runner.jar
 ```
 
 or on Windows
 
 ```
 mvn clean package
-java -jar target\dmn-quarkus-example-runner.jar
+java -jar target\dmn-tracing-quarkus-runner.jar
 ```
 
 ### Package and Run using Local Native Image
@@ -64,17 +62,6 @@ In addition, various clients to interact with this service can be easily generat
 
 When running in either Quarkus Development or Native mode, we also leverage the [Quarkus OpenAPI extension](https://quarkus.io/guides/openapi-swaggerui#use-swagger-ui-for-development) that exposes [Swagger UI](http://localhost:8080/swagger-ui/) that you can use to look at available REST endpoints and send test requests.
 
-## Test DMN Model using Maven
-
-Validate the functionality of DMN models before deploying them into a production environment by defining test scenarios in Test Scenario Editor. 
-
-To define test scenarios you need to create a .scesim file inside your project and link it to the DMN model you want to be tested. Run all Test Scenarios, executing:
-
-```sh
-mvn clean test
-```
-See results in surefire test report `target/surefire-reports` 
-
 ## Example Usage
 
 Once the service is up and running, you can use the following example to interact with the service.
@@ -87,24 +74,29 @@ Given inputs:
 
 ```json
 {
-    "Driver":{"Points":2},
-    "Violation":{
-        "Type":"speed",
-        "Actual Speed":120,
-        "Speed Limit":100
-    }
+  "Bribe": 0,
+  "Client": {
+    "age": 0,
+    "existing payments": 0,
+    "salary": 0
+  },
+  "Loan": {
+    "duration": 0,
+    "installment": 0
+  },
+  "SupremeDirector": "yes"
 }
 ```
 
 Curl command (using the JSON object above):
 
 ```sh
-curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"Driver":{"Points":2},"Violation":{"Type":"speed","Actual Speed":120,"Speed Limit":100}}' http://localhost:8080/Traffic%20Violation
+curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"Bribe": 0,"Client": {"age": 0,"existing payments": 0,"salary": 0},"Loan": {"duration": 0,"installment": 0},"SupremeDirector": "yes"}' http://localhost:8080/LoanEligibility
 ```
 or on Windows:
 
 ```sh
-curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" -d "{\"Driver\":{\"Points\":2},\"Violation\":{\"Type\":\"speed\",\"Actual Speed\":120,\"Speed Limit\":100}}" http://localhost:8080/Traffic%20Violation
+curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" -d "{\"Bribe\": 0,\"Client\": {\"age\": 0,\"existing payments\": 0,\"salary\": 0},\"Loan\": {\"duration\": 0,\"installment\": 0},\"SupremeDirector\": \"yes\"}" http://localhost:8080/LoanEligibility
 ```
 
 As response, penalty information is returned.
@@ -113,19 +105,21 @@ Example response:
 
 ```json
 {
-  "Violation":{
-    "Type":"speed",
-    "Speed Limit":100,
-    "Actual Speed":120
+  "Eligibility": "No",
+  "Judgement": null,
+  "Loan": {
+    "duration": 0,
+    "installment": 0
   },
-  "Driver":{
-    "Points":2
+  "SupremeDirector": "yes",
+  "Bribe": 0,
+  "Client": {
+    "existing payments": 0,
+    "salary": 0,
+    "age": 0
   },
-  "Fine":{
-    "Points":3,
-    "Amount":500
-  },
-  "Should the driver be suspended?":"No"
+  "Is Enought?": 0,
+  "Decide": null
 }
 ```
 
