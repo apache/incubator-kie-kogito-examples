@@ -47,3 +47,12 @@ Once the services are up and running, please use the sample request as described
 ## Deploying with Kogito Operator
 
 In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).
+
+OnBoarding example could also be deployed on OpenShift using [Kogito command-line interface (CLI)](https://docs.jboss.org/kogito/release/latest/html_single/#con-kogito-operator-and-cli_kogito-deploying-on-openshift). Kogito CLI enables you to deploy Kogito services from source instead of relying on custom resources and YAML files.
+```shell script
+kogito deploy hr-service https://github.com/kiegroup/kogito-examples --context-dir=onboarding-example/hr --svc-labels department=process,id=process,employeeValidation=process
+
+kogito deploy payroll-service https://github.com/kiegroup/kogito-examples --context-dir=onboarding-example/payroll --svc-labels taxRate=process,vacationDays=process,paymentDate=process 
+
+kogito deploy onboarding-service https://github.com/kiegroup/kogito-examples --context-dir=onboarding-example/onboarding-quarkus --svc-labels onboarding=process
+```
