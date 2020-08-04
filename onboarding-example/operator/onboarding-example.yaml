@@ -6,7 +6,7 @@ spec:
   type: RemoteSource
   gitSource:
     uri: https://github.com/kiegroup/kogito-examples
-    contextDir: onboarding-example/onboarding
+    contextDir: onboarding-example/onboarding-quarkus
   # set your maven nexus repository to speed up the build time
   #mavenMirrorURL: 
 ---
