@@ -18,6 +18,8 @@ This example shows
 Note: The use of this example shows that the data sent to infinispan is saved, you can shut down the application and restart it
 and as long as infinispan is running after you restart you should still see the data
 
+Note: The file META-INF/hotrot-client.properties contains a key that has to be removed when used in production. It's needed to run the example locally on docker running on macOS.
+
 It utilizes Infinispan server as the backend store.
 
 * Process (submitDeal.bpmn)
