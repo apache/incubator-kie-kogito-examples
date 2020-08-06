@@ -36,6 +36,7 @@ import org.kie.kogito.auth.SecurityPolicy;
 import org.kie.kogito.examples.demo.Order;
 import org.kie.kogito.process.Process;
 import org.kie.kogito.process.ProcessInstance;
+import org.kie.kogito.process.ProcessInstanceReadMode;
 import org.kie.kogito.process.ProcessInstances;
 import org.kie.kogito.process.WorkItem;
 import org.kie.kogito.services.identity.StaticIdentityProvider;
@@ -62,12 +63,12 @@ public class OrdersProcessIT {
 
     @BeforeEach
     public void setup() {
-        // abort all intsances after each test
+        // abort all instances after each test
         // as other tests might have added instances
-        // needed until Quarkust implements @DirtiesContext similar to springboot
+        // needed until Quarkus implements @DirtiesContext similar to springboot
         // see https://github.com/quarkusio/quarkus/pull/2866
-        orderProcess.instances().values().forEach(pi -> pi.abort());
-        orderItemsProcess.instances().values().forEach(pi -> pi.abort());
+        orderProcess.instances().values(ProcessInstanceReadMode.MUTABLE).forEach(pi -> pi.abort());
+        orderItemsProcess.instances().values(ProcessInstanceReadMode.MUTABLE).forEach(pi -> pi.abort());
     }
 
     @Test
@@ -89,9 +90,9 @@ public class OrdersProcessIT {
         assertTrue(((Order) result.toMap().get("order")).getTotal() > 0);
 
         ProcessInstances<? extends Model> orderItemProcesses = orderItemsProcess.instances();
-        assertEquals(1, orderItemProcesses.values().size());
+        assertEquals(1, orderItemProcesses.size());
 
-        ProcessInstance<?> childProcessInstance = orderItemProcesses.values().iterator().next();
+        ProcessInstance<?> childProcessInstance = orderItemProcesses.values(ProcessInstanceReadMode.MUTABLE).iterator().next();
 
         List<WorkItem> workItems = childProcessInstance.workItems(policy);
         assertEquals(1, workItems.size());
@@ -103,8 +104,8 @@ public class OrdersProcessIT {
         assertFalse(pi.isPresent());
 
         // no active process instances for both orders and order items processes
-        assertEquals(0, orderProcess.instances().values().size());
-        assertEquals(0, orderItemsProcess.instances().values().size());
+        assertEquals(0, orderProcess.instances().size());
+        assertEquals(0, orderItemsProcess.instances().size());
     }
     
     @Test
@@ -136,9 +137,9 @@ public class OrdersProcessIT {
         assertTrue(((Order) result.toMap().get("order")).getTotal() > 0);
 
         ProcessInstances<? extends Model> orderItemProcesses = orderItemsProcess.instances();
-        assertEquals(1, orderItemProcesses.values().size());
+        assertEquals(1, orderItemProcesses.size());
 
-        ProcessInstance<?> childProcessInstance = orderItemProcesses.values().iterator().next();
+        ProcessInstance<?> childProcessInstance = orderItemProcesses.values(ProcessInstanceReadMode.MUTABLE).iterator().next();
 
         List<WorkItem> workItems = childProcessInstance.workItems(policy);
         assertEquals(1, workItems.size());
@@ -149,7 +150,7 @@ public class OrdersProcessIT {
         assertEquals(ProcessInstance.STATE_COMPLETED, processInstance.status());
 
         // no active process instances for both orders and order items processes
-        assertEquals(0, orderProcess.instances().values().size());
-        assertEquals(0, orderItemsProcess.instances().values().size());
+        assertEquals(0, orderProcess.instances().size());
+        assertEquals(0, orderItemsProcess.instances().size());
     }
 }
