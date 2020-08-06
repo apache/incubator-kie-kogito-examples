@@ -24,9 +24,8 @@ mvn clean package -Pnative
 To run the generated native executable, generated in `target/`, execute:
 
 ```
-./target/onboarding-{version}-runner -Dquarkus.http.port=8080 -Dquarkus.http.host=localhost -Dlocal=true
+./target/onboarding-runner -Dquarkus.http.port=8080 -Dquarkus.http.host=localhost -Dlocal=true
 ```
-Please replace {version} with the actual version of kogito you are trying to use, e.g. 8.0.0-SNAPSHOT.
 
 Please note the additional parameter to specify you are running the service locally. When running this service inside kubernetes, it would take advantage of the service lookup feature to find other required service using labels (which isn't available when running locally).
 
