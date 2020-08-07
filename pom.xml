@@ -42,7 +42,7 @@
     <alphanetworkCompilerEnabled>false</alphanetworkCompilerEnabled>
     <tests.category></tests.category>
 
-    <version.io.quarkus>1.6.0.Final</version.io.quarkus>
+    <version.io.quarkus>1.7.0.CR1</version.io.quarkus>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
@@ -56,7 +56,7 @@
     <infinispan.starter.version>2.2.3.Final</infinispan.starter.version>
     <container.image.infinispan>quay.io/infinispan/server:${infinispan.version}</container.image.infinispan>
     <!-- keycloak -->
-    <container.image.keycloak.version>8.0.1</container.image.keycloak.version>
+    <container.image.keycloak.version>11.0.0</container.image.keycloak.version>
     <container.image.keycloak>quay.io/keycloak/keycloak:${container.image.keycloak.version}</container.image.keycloak>
     <!-- testcontainers -->
     <version.testcontainers>1.14.3</version.testcontainers>

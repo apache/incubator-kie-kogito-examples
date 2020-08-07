@@ -39,7 +39,7 @@ public class InfinispanContainer extends GenericContainer<InfinispanContainer> i
         withEnv("USER", "admin");
         withEnv("PASS", "admin");
         withLogConsumer(new Slf4jLogConsumer(LOGGER));
-        waitingFor(Wait.forLogMessage(".*ISPN080001.*", 1));
+        waitingFor(Wait.forHttp("/"));
     }
 
     @Override
