@@ -72,7 +72,9 @@
       <artifactId>resteasy-context-propagation</artifactId>
      </dependency>
   </dependencies>
+
   <build>
+    <finalName>${project.artifactId}</finalName>
     <plugins>
       <plugin>
         <groupId>io.quarkus</groupId>
@@ -88,6 +90,7 @@
       </plugin>
     </plugins>
   </build>
+  
   <profiles>
     <profile>
       <id>native</id>

@@ -28,9 +28,8 @@ mvn clean package -Pnative
 To run the generated native executable, generated in `target/`, execute:
 
 ```
-./target/hr-{version}-runner -Dquarkus.http.port=8081 -Dquarkus.http.host=localhost
+./target/hr-runner -Dquarkus.http.port=8081 -Dquarkus.http.host=localhost
 ```
-Please replace {version} with the actual version of kogito you are trying to use, e.g. 8.0.0-SNAPSHOT.
   
 ## OpenAPI (Swagger) documentation
 [Specification at swagger.io](https://swagger.io/docs/specification/about/)
