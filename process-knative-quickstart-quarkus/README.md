@@ -233,4 +233,39 @@ Skipping traveller Traveller [firstName=Jane, lastName=Doe, email=jane.doe@examp
 
 In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift or Kubernetes with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).
 
-Just make sure your cluster has Knative Eventing available.
+Just make sure your cluster has [Knative Eventing available](https://knative.dev/docs/eventing/getting-started/):
+
+1. [Install Istio](https://knative.dev/development/install/installing-istio/)
+2. [Install Knative with Operators](https://knative.dev/development/install/knative-with-operators/)
+    1. Install Knative Serving
+    2. Install Knative Eventing
+3. [Create and configure](https://knative.dev/docs/eventing/getting-started/#setting-up-knative-eventing-resources) a namespace with Knative Eventing (you will need a Broker)
+4. [Install the Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift)
+5. On Kubernetes, build this example locally with the Dockerfile on [operator/kubernetes/Dockerfile](operator/kubernetes/Dockerfile) path, then [push it](operator/kubernetes/process-knative-quickstart-quarkus.yaml) to a third party registry. 
+For OpenShift, you can let the [cluster build it for you](operator/openshift/process-knative-quickstart-quarkus.yaml)
+6. Update the `ConfigMap` `process-knative-quickstart-quarkus-properties` and add this line to it: `mp.messaging.outgoing.processedtravellers.url=${K_SINK}` 
+so the service can push the generated events to the Knative Broker (or you can update the `application.properties` directly and build the image with it instead).
+7. Expose the service, if on minikube [follow this tutorial](https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/). There's an `Ingress` already pre created in [operator/kubernetes/ingress.yaml](operator/kubernetes/ingress.yaml). [`NodePort` also works](https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/#deploy-a-hello-world-app).
+8. Run `curl` from the terminal like you did in the previoulsy steps. To see what's going on, just query for the Knative service `event-display`. You should see something like: 
+```
+☁️  cloudevents.Event
+Validation: valid
+Context Attributes,
+  specversion: 1.0
+  type: process.travelers.processedtravellers
+  source: /process/Travelers/2f692fd9-fff8-4b0a-bb64-96d1a4772490
+  id: 29e43b17-3a70-4b46-aca0-7ab8e2133eee
+  time: 2020-08-10T20:52:39.383346Z
+Extensions,
+  knativearrivaltime: 2020-08-10T20:52:39.391404032Z
+  knativehistory: default-kne-trigger-kn-channel.kogito.svc.cluster.local
+  kogitoprocessid: Travelers
+  kogitoprocessinstanceid: 2f692fd9-fff8-4b0a-bb64-96d1a4772490
+  kogitoprocessinstancestate: 1
+Data,
+  {"firstName":"Jan","lastName":"Kowalski","email":"jan.kowalski@example.com","nationality":"Polish","processed":true}
+```
+
+The diagram below illustrates the Knative objects architecture for this demo:
+
+![](docs/images/knative-diagram.png)
