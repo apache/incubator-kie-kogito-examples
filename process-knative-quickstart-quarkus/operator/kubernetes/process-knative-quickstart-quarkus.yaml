@@ -7,5 +7,5 @@ spec:
   # see the Dockerfile in this directory to know how to build this app locally
   image:
     domain: quay.io
-    namespace: ricardozanini
+    namespace: <YOUR-NAMESPACE>
     name: process-knative-quickstart-quarkus
