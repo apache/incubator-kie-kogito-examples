@@ -18,6 +18,7 @@ package org.kie.kogito.examples;
 import java.io.File;
 
 import io.restassured.http.ContentType;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.testcontainers.containers.DockerComposeContainer;
 import org.testcontainers.containers.wait.strategy.Wait;
@@ -27,6 +28,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.hasItem;
 
+@Disabled("Flaky test. Must disable temporarily")
 @Testcontainers
 public class GrafanaDockerComposeIT {
 
