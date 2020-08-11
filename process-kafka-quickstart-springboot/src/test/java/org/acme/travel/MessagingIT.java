@@ -27,14 +27,15 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
+import org.acme.travel.utils.KafkaClient;
 import org.junit.After;
 import org.junit.jupiter.api.Test;
-import org.kie.kogito.kafka.KafkaClient;
 import org.kie.kogito.testcontainers.springboot.KafkaSpringBootTestResource;
 import org.kie.kogito.tests.KogitoKafkaQuickstartSpringbootApplication;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 
@@ -56,11 +57,15 @@ public class MessagingIT {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @Autowired
+    @Value("${spring.kafka.bootstrap-servers}")
+    private String kafkaBootstrapServers;
+
     private KafkaClient kafkaClient;
 
     @Test
     public void testProcess() throws InterruptedException {
+        kafkaClient = new KafkaClient(kafkaBootstrapServers);
+
         objectMapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
 
         //number of generated events to test

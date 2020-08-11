@@ -29,10 +29,10 @@ import java.util.stream.IntStream;
 
 import javax.inject.Inject;
 
+import org.acme.travel.utils.KafkaClient;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.junit.After;
 import org.junit.jupiter.api.Test;
-import org.kie.kogito.kafka.KafkaClient;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,10 +57,10 @@ public class MessagingIT {
     @Inject
     private ObjectMapper objectMapper;
 
-    public KafkaClient kafkaClient;
-
     @ConfigProperty(name = KafkaQuarkusTestResource.KOGITO_KAFKA_PROPERTY)
     private String kafkaBootstrapServers;
+
+    private KafkaClient kafkaClient;
 
     @Test
     public void testProcess() throws InterruptedException {
