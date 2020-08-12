@@ -35,7 +35,8 @@
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>examples-test-utils</artifactId>
+      <artifactId>kogito-test-utils</artifactId>
+      <scope>test</scope>
     </dependency>
 
     <dependency>
