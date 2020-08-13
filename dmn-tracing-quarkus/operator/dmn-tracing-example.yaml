@@ -15,5 +15,6 @@ kind: KogitoRuntime
 metadata:
   name: dmn-tracing-quarkus
 spec:
+  enableEvents: true
   kafka:
     useKogitoInfra: true
