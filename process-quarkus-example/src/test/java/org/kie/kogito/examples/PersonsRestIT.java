@@ -321,8 +321,6 @@ public class PersonsRestIT {
                 .body("$.size()", is(0));
     }
     
-    // Disabled until KOGITO-1796 is fixed
-    @DisabledIfSystemProperty(named = "tests.category", matches = "persistence")
     @Test
     public void testChildPersonsRestCancelAndTriggerNodeViaMgmtInterface() {
         assertNotNull(personProcess);
