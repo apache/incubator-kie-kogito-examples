@@ -97,7 +97,6 @@
                   <enableHttpsUrlHandler>true</enableHttpsUrlHandler>
                   <enableJni>true</enableJni>
                   <enableAllSecurityServices>true</enableAllSecurityServices>
-                  <additionalBuildArgs>-H:ReflectionConfigurationFiles=../../reflection.json</additionalBuildArgs>
                 </configuration>
               </execution>
             </executions>
