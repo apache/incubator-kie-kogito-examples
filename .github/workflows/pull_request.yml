@@ -13,7 +13,7 @@ jobs:
         java-version: 11
     - name: Build Chain
       id: build-chain
-      uses: kiegroup/github-action-build-chain@openjdk11
+      uses: kiegroup/github-action-build-chain@master
       with:
         parent-dependencies: 'kogito-apps'
         build-command: 'mvn clean install | mvn clean install -Ppersistence | mvn clean install -Pevents'
