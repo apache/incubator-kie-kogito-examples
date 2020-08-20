@@ -1,16 +1,25 @@
 apiVersion: app.kiegroup.org/v1alpha1
-kind: KogitoApp
+kind: KogitoBuild
+metadata:
+  name: dmn-pmml-springboot-example
+spec:
+  type: RemoteSource
+  runtime: springboot
+  #envs:
+  # envs can be used to set variables during build
+  #- name: MY_CUSTOM_ENV
+  #  value: "my value"
+  gitSource:
+    contextDir: dmn-pmml-springboot-example
+    uri: 'https://github.com/kiegroup/kogito-examples'
+  # set your maven nexus repository to speed up the build time
+  #mavenMirrorURL: 
+---
+apiVersion: app.kiegroup.org/v1alpha1
+kind: KogitoRuntime
 metadata:
   name: dmn-pmml-springboot-example
 spec:
   runtime: springboot
-  build:
-    #envs:
-    # envs can be used to set variables during build
-    #- name: MY_CUSTOM_ENV
-    #  value: "my value"
-    gitSource:
-      contextDir: dmn-pmml-springboot-example
-      uri: 'https://github.com/kiegroup/kogito-examples'
-    # set your maven nexus repository to speed up the build time
-    #mavenMirrorURL: 
+
+
