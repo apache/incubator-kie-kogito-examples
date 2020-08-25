@@ -73,7 +73,7 @@ public class ApprovalsRestTest {
           .when()
                .post("/approvals")
           .then()
-             .statusCode(200)
+             .statusCode(201)
              .body("id", notNullValue()).extract().path("id");
        // get all active approvals
        given()

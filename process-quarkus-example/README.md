@@ -188,7 +188,7 @@ Example response:
     }
 ```
 
-As response a single order is returned if found, otherwise no content (204) is returned.
+As response a single order is returned if found, otherwise 404 Not Found is returned.
 
 ### DELETE /orders/{id}
 

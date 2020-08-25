@@ -117,7 +117,7 @@ Returns flight with given id (if being scheduled):
 curl -X GET http://localhost:8080/rest/flights/{id}
 ```
 
-As response a single flight is returned if found, otherwise no content (204) is returned.
+As response a single flight is returned if found, otherwise 404 Not Found is returned.
 
 ### DELETE /rest/flights/{id}
 

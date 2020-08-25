@@ -62,7 +62,7 @@ public class PersonsRestIT {
         // test new person
         String addPersonPayload = "{\"person\" : {\"name\" : \"John Doe\", \"age\" : 20}}";
         given().contentType(ContentType.JSON).accept(ContentType.JSON).body(addPersonPayload).when()
-                .post("/persons").then().statusCode(200).body("id", notNullValue(), "person.adult", is(true)).extract().path("id");
+                .post("/persons").then().statusCode(201).body("id", notNullValue(), "person.adult", is(true)).extract().path("id");
 
         // get all persons make sure there is zero
         given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)
@@ -76,7 +76,7 @@ public class PersonsRestIT {
         // test new person
         String addPersonPayload = "{\"person\" : {\"name\" : \"Jane Doe\", \"age\" : 16}}";
         String firstCreatedId = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(addPersonPayload).when()
-                .post("/persons").then().statusCode(200).body("id", notNullValue()).extract().path("id");
+                .post("/persons").then().statusCode(201).body("id", notNullValue()).extract().path("id");
 
         // test getting the created order
         given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)
@@ -106,7 +106,7 @@ public class PersonsRestIT {
         // test new person
         String addPersonPayload = "{\"person\" : {\"name\" : \"Jane Doe\", \"age\" : 16}}";
         String firstCreatedId = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(addPersonPayload).when()
-                .post("/persons").then().statusCode(200).body("id", notNullValue()).extract().path("id");
+                .post("/persons").then().statusCode(201).body("id", notNullValue()).extract().path("id");
 
         // test getting the created order
         given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)
@@ -136,7 +136,7 @@ public class PersonsRestIT {
         // test new person
         String addPersonPayload = "{\"person\" : {\"name\" : \"Jane Doe\", \"age\" : 16}}";
         String firstCreatedId = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(addPersonPayload).when()
-                .post("/persons").then().statusCode(200).body("id", notNullValue()).extract().path("id");
+                .post("/persons").then().statusCode(201).body("id", notNullValue()).extract().path("id");
 
         // test getting the created order
         given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)
@@ -174,7 +174,7 @@ public class PersonsRestIT {
         // test new person
         String addPersonPayload = "{\"person\" : {\"name\" : \"Jane Doe\", \"age\" : 16}}";
         String firstCreatedId = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(addPersonPayload).when()
-                .post("/persons").then().statusCode(200).body("id", notNullValue()).extract().path("id");
+                .post("/persons").then().statusCode(201).body("id", notNullValue()).extract().path("id");
 
         // test getting the created order
         given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)
@@ -216,7 +216,7 @@ public class PersonsRestIT {
         String firstCreatedId = given().contentType(ContentType.JSON).accept(ContentType.JSON)
                 .header("X-KOGITO-StartFromNode", "UserTask_1")// this instructs to start from user task and skip any node before it
                 .body(addPersonPayload).when()
-                .post("/persons").then().statusCode(200)
+                .post("/persons").then().statusCode(201)
                 .body("id", notNullValue(), "person.adult", is(false))// since rule evaluation was skipped adult is still false even though age is about the 18 limit
                 .extract().path("id");
 
@@ -249,7 +249,7 @@ public class PersonsRestIT {
         String addPersonPayload = "{\"person\" : {\"name\" : \"Jane Doe\", \"age\" : 16}}";
         String firstCreatedId = given().contentType(ContentType.JSON).accept(ContentType.JSON)
                 .body(addPersonPayload).when()
-                .post("/persons").then().statusCode(200)
+                .post("/persons").then().statusCode(201)
                 .body("id", notNullValue(), "person.adult", is(false))
                 .extract().path("id");
 
@@ -281,7 +281,7 @@ public class PersonsRestIT {
         String addPersonPayload = "{\"person\" : {\"name\" : \"Jane Doe\", \"age\" : 16}}";
         String firstCreatedId = given().contentType(ContentType.JSON).accept(ContentType.JSON)
                 .body(addPersonPayload).when()
-                .post("/persons").then().statusCode(200)
+                .post("/persons").then().statusCode(201)
                 .body("id", notNullValue(), "person.adult", is(false))
                 .extract().path("id");
 
@@ -331,7 +331,7 @@ public class PersonsRestIT {
         String addPersonPayload = "{\"person\" : {\"name\" : \"Jane Doe\", \"age\" : 16}}";
         String firstCreatedId = given().contentType(ContentType.JSON).accept(ContentType.JSON)
                 .body(addPersonPayload).when()
-                .post("/persons").then().statusCode(200)
+                .post("/persons").then().statusCode(201)
                 .body("id", notNullValue(), "person.adult", is(false))
                 .extract().path("id");
 

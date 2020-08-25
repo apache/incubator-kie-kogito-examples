@@ -62,7 +62,7 @@ public class FlightTest {
                 .when()
                 .post("/rest/flights")
                 .then()
-                .statusCode(200)
+                .statusCode(201)
                 .body("params.departureDateTime", is(flightParams.getDepartureDateTime()))
                 .body("params.origin", is(flightParams.getOrigin()))
                 .body("params.destination", is(flightParams.getDestination()))
@@ -209,7 +209,6 @@ public class FlightTest {
                 .when()
                 .get("/rest/flights/" + id)
                 .then()
-                // I would expect a 404, not a 204, for a missing process
-                .statusCode(204);
+                .statusCode(404);
     }
 }

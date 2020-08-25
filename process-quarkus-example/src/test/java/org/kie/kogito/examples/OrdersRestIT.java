@@ -15,17 +15,13 @@
  */
 package org.kie.kogito.examples;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import java.util.Map;
-
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import io.quarkus.test.common.QuarkusTestResource;
+import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.Model;
@@ -34,9 +30,12 @@ import org.kie.kogito.process.ProcessInstanceReadMode;
 import org.kie.kogito.testcontainers.quarkus.InfinispanQuarkusTestResource;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 
-import io.quarkus.test.common.QuarkusTestResource;
-import io.quarkus.test.junit.QuarkusTest;
-import io.restassured.http.ContentType;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @QuarkusTest
 @QuarkusTestResource(value = InfinispanQuarkusTestResource.Conditional.class)
@@ -64,31 +63,72 @@ public class OrdersRestIT {
 
         // test adding new order
         String addOrderPayload = "{\"approver\" : \"john\", \"order\" : {\"orderNumber\" : \"12345\", \"shipped\" : false}}";
-        String firstCreatedId = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(addOrderPayload).when()
-                .post("/orders").then().statusCode(200).body("id", notNullValue()).extract().path("id");
+        String firstCreatedId = given()
+                    .contentType(ContentType.JSON)
+                    .accept(ContentType.JSON)
+                    .body(addOrderPayload).when()
+                    .post("/orders")
+                .then()
+                    .statusCode(201)
+                    .header("Location", notNullValue())
+                .extract().path("id");
 
         // test getting the created order
         given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
                 .body("$.size()", is(1), "[0].id", is(firstCreatedId));
 
         // test getting order by id
-        given().accept(ContentType.JSON).when().get("/orders/" + firstCreatedId).then()
-                .statusCode(200).body("id", is(firstCreatedId));
+        given()
+                .accept(ContentType.JSON)
+            .when()
+                .get("/orders/{id}", firstCreatedId)
+            .then()
+                .statusCode(200)
+                .body("id", is(firstCreatedId));
 
         // test delete order
         // first add second order...
-        String secondCreatedId = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(addOrderPayload)
-                .when().post("/orders").then().statusCode(200).body("id", notNullValue()).extract().path("id");
+        String secondCreatedId =
+                given()
+                    .contentType(ContentType.JSON)
+                    .accept(ContentType.JSON)
+                    .body(addOrderPayload)
+                .when()
+                    .post("/orders")
+                .then()
+                    .statusCode(201)
+                .extract()
+                    .path("id");
         // now delete the first order created
-        given().accept(ContentType.JSON).when().delete("/orders/" + firstCreatedId).then().statusCode(200);
+        given()
+                .accept(ContentType.JSON)
+            .when()
+                .delete("/orders/{id}", firstCreatedId)
+            .then()
+                .statusCode(200);
         // get all orders make sure there is only one
-        given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
+        given()
+                .accept(ContentType.JSON)
+            .when()
+                .get("/orders")
+            .then()
+                .statusCode(200)
                 .body("$.size()", is(1), "[0].id", is(secondCreatedId));
 
         // delete second before finishing
-        given().accept(ContentType.JSON).when().delete("/orders/" + secondCreatedId).then().statusCode(200);
+        given()
+                .accept(ContentType.JSON)
+            .when()
+                .delete("/orders/{id}", secondCreatedId)
+            .then()
+                .statusCode(200);
         // get all orders make sure there is zero
-        given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
+        given()
+                .accept(ContentType.JSON)
+            .when()
+                .get("/orders")
+            .then()
+                .statusCode(200)
                 .body("$.size()", is(0));
     }
     
@@ -98,8 +138,16 @@ public class OrdersRestIT {
 
         // test adding new order
         String addOrderPayload = "{\"order\" : {\"orderNumber\" : \"12345\", \"shipped\" : false}}";
-        String firstCreatedId = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(addOrderPayload).when()
-                .post("/orders").then().statusCode(500).body("id", notNullValue()).extract().path("id");
+        String firstCreatedId = given()
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .body(addOrderPayload).when()
+                .post("/orders")
+            .then()
+                .statusCode(500)
+                .body("id", notNullValue())
+            .extract()
+                .path("id");
 
         // test getting the created order
         given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
@@ -110,8 +158,12 @@ public class OrdersRestIT {
         .statusCode(200).body("id", is(firstCreatedId));
         
         String fixedOrderPayload = "{\"approver\" : \"john\", \"order\" : {\"orderNumber\" : \"12345\", \"shipped\" : false}}";
-        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(fixedOrderPayload).when().post("/orders/" + firstCreatedId).then()
-        .statusCode(200).body("id", is(firstCreatedId));
+        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(fixedOrderPayload).when().put("/orders/" + firstCreatedId).then()
+        .statusCode(200)
+                .body("id", is(firstCreatedId))
+                .body("approver", equalTo("john"))
+                .body("order.orderNumber", equalTo("12345"))
+                .body("order.shipped", equalTo(false));
         
         given().accept(ContentType.JSON).when().post("/management/processes/demo.orders/instances/" + firstCreatedId + "/retrigger").then()
         .statusCode(200);
@@ -119,7 +171,7 @@ public class OrdersRestIT {
         // delete second before finishing
         given().accept(ContentType.JSON).when().delete("/orders/" + firstCreatedId).then().statusCode(200);
         // get all orders make sure there is zero
-        given().accept(ContentType.JSON).body(addOrderPayload).when().get("/orders").then().statusCode(200)
+        given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
                 .body("$.size()", is(0));
     }
     
@@ -130,7 +182,7 @@ public class OrdersRestIT {
         // test adding new order
         String addOrderPayload = "{\"approver\" : \"john\", \"order\" : {\"orderNumber\" : \"12345\", \"shipped\" : false}}";
         String firstCreatedId = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(addOrderPayload).when()
-                .post("/orders").then().statusCode(200).body("id", notNullValue()).extract().path("id");
+                .post("/orders").then().statusCode(201).body("id", notNullValue()).extract().path("id");
 
         // test getting the created order
         given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
@@ -176,7 +228,7 @@ public class OrdersRestIT {
         // test adding new order
         String addOrderPayload = "{\"approver\" : \"john\", \"order\" : {\"orderNumber\" : \"12345\", \"shipped\" : false}}";
         String firstCreatedId = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(addOrderPayload).when()
-                .post("/orders").then().statusCode(200).body("id", notNullValue()).extract().path("id");
+                .post("/orders").then().statusCode(201).body("id", notNullValue()).extract().path("id");
 
         // test getting the created order
         given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
@@ -187,7 +239,7 @@ public class OrdersRestIT {
                 .statusCode(200).body("id", is(firstCreatedId));
 
         // test getting order items subprocess
-        String orderItemsId = given().accept(ContentType.JSON).when().get("/orderItems").then().statusCode(200)
+        String orderItemsId = given().accept(ContentType.JSON).when().get("/orderItems?businessKey=ORD-0001").then().statusCode(200)
                 .body("$.size()", is(1)).extract().path("[0].id");
         
         // test getting order items by id
@@ -212,60 +264,41 @@ public class OrdersRestIT {
         given().accept(ContentType.JSON).when().get("/orderItems").then().statusCode(200)
                 .body("$.size()", is(0));
     }
-    
 
     @Test
-    public void testCreateAndGetOrderByBusinessKey() {
+    public void testCreateAndUpdateOrders() {
         String orderPayload = "{\"approver\" : \"john\", \"order\" : {\"orderNumber\" : \"12345\", \"shipped\" : false}}";
-        String firstCreatedId = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(orderPayload).when()
-                .post("/orders?businessKey=ORD-0001").then().statusCode(200).body("id",
+        String id = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(orderPayload).when()
+                .post("/orders").then().statusCode(201).body("id",
                                                              notNullValue()).extract().path("id");
 
-        assertNotNull(firstCreatedId);
-
-        // get order by its business key and test
-        given().accept(ContentType.JSON).body(orderPayload).when().get("/orders/ORD-0001").then()
-                .statusCode(200).body("id",
-                                      is(firstCreatedId));
-        
-        // test deleting order items by business key
-        given().accept(ContentType.JSON).when().delete("/orders/ORD-0001").then().statusCode(200);
-        
-        // get all orders make sure there is zero
-        given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
-                .body("$.size()", is(0));
-    }
-    
-    @Test
-    public void testCreateDuplicateOrders() {
-        String orderPayload = "{\"approver\" : \"john\", \"order\" : {\"orderNumber\" : \"12345\", \"shipped\" : false}}";
-        String firstCreatedId = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(orderPayload).when()
-                .post("/orders?businessKey=ORD-0001").then().statusCode(200).body("id",
-                                                             notNullValue()).extract().path("id");
-
-        assertNotNull(firstCreatedId);
+        assertNotNull(id);
         // get all orders make sure there is one
         given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
                 .body("$.size()", is(1));
 
-        // get order by its business key and test
-        given().accept(ContentType.JSON).body(orderPayload).when().get("/orders/ORD-0001").then()
+        // get order by its custom ID and test
+        given().accept(ContentType.JSON).body(orderPayload).when().get("/orders/{id}", id).then()
                 .statusCode(200).body("id",
-                                      is(firstCreatedId));
-        // create another instance with same business key which should fail with conflict response code
+                                      is(id));
+        // update the instance
+        orderPayload = "{\"approver\" : \"joe\", \"order\" : {\"orderNumber\" : \"54321\", \"shipped\" : true}}";
         given().contentType(ContentType.JSON).accept(ContentType.JSON).body(orderPayload).when()
-        .post("/orders?businessKey=ORD-0001").then().statusCode(409);
+        .put("/orders/{id}", id).then()
+                .statusCode(200)
+                .body("approver", equalTo("joe"))
+                .body("order.orderNumber", equalTo("54321"))
+                .body("order.shipped", equalTo(true));
         
         // get all orders make sure there is one
         given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
                 .body("$.size()", is(1));
         
-        // test deleting order items by business key
-        given().accept(ContentType.JSON).when().delete("/orders/ORD-0001").then().statusCode(200);
+        // test deleting order items by custom ID
+        given().accept(ContentType.JSON).when().delete("/orders/{id}", id).then().statusCode(200);
         
         // get all orders make sure there is zero
         given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
                 .body("$.size()", is(0));
     }
-
 }
