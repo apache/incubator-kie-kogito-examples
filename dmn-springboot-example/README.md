@@ -89,3 +89,23 @@ Example response:
 
 In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).
 
+## Developer notes
+
+In order to have the DMN generated resources properly scanned by Spring Boot, please ensure the DMN model namespaces is included in the resource scanning configuration files. For example, in `application.properties` file:
+
+```
+resteasy.jaxrs.scan-packages=org.kie.kogito.**,http*
+```
+
+The generated classes must be included in the annotation definitions of the main `Application` class:
+
+```
+@SpringBootApplication(scanBasePackages={"org.kie.dmn.kogito.**", "org.kie.kogito.app.**"})
+public class KogitoSpringbootApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(KogitoSpringbootApplication.class, args);
+    }
+}
+```
+
