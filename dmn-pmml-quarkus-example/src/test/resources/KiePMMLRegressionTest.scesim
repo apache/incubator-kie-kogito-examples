@@ -130,6 +130,7 @@
               <name>Description</name>
               <type>OTHER</type>
             </expressionIdentifier>
+            <rawValue class="string">Alternative for DMNRegressionTest</rawValue>
           </FactMappingValue>
           <FactMappingValue>
             <factIdentifier>
