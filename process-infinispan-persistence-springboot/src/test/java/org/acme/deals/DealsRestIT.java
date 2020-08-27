@@ -51,7 +51,7 @@ public class DealsRestIT {
         String addDealPayload = "{\"name\" : \"my fancy deal\", \"traveller\" : { \"firstName\" : \"John\", \"lastName\" : \"Doe\", \"email\" : \"jon.doe@example.com\", \"nationality\" : \"American\",\"address\" : { \"street\" : \"main street\", \"city\" : \"Boston\", \"zipCode\" : \"10005\", \"country\" : \"US\" }}}";
         String dealId = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(addDealPayload)
                 .when().post("/deals")
-                .then().log().ifValidationFails().statusCode(200).body("id", notNullValue()).extract().path("id");
+                .then().log().ifValidationFails().statusCode(201).body("id", notNullValue()).extract().path("id");
 
         // test getting the created deal
         given().accept(ContentType.JSON)

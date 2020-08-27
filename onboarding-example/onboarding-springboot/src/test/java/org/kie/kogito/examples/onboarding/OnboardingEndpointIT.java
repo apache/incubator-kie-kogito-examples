@@ -73,7 +73,7 @@ public class OnboardingEndpointIT {
           .when()
                .post("/onboarding")
           .then()
-             .statusCode(200)
+             .statusCode(201)
              .body("status", is("exists"))
              .body("message", is("user already exists"));
     }
@@ -127,7 +127,7 @@ public class OnboardingEndpointIT {
        .when()
            .post("/onboarding")
        .then()
-           .statusCode(200)
+           .statusCode(201)
            .body("status", is("new"))
            .body("message", is("user needs to be onboarded"))
            .body("email", is("test@company.com"))

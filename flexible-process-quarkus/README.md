@@ -106,6 +106,7 @@ In the [operator](operator) directory you'll find the custom resources needed to
 
 ## Usage example
 
+
 ### Create a support case
 
 Given the following support case:
@@ -126,14 +127,20 @@ Given the following support case:
 Create a POST request to the service desk endpoint.
 
 ```{bash}
-curl -H 'Content-Type:application/json' -H 'Accept:application/json' -d @docs/requests/newTicket.json http://localhost:8080/serviceDesk
+curl -D -H 'Content-Type:application/json' -H 'Accept:application/json' -d @docs/requests/newTicket.json http://localhost:8080/serviceDesk
 ```
 
-Expect a response containing the ticket id and the current status of the process data where the engineer is assigned and the state is `WAITING_FOR_OWNER`:
+Expect a response containing the ticket id and the current status of the process data where the engineer is assigned and the state is `WAITING_FOR_OWNER`. Note that also a Location HTTP Header
+is present:
 
-```{json}
+```{bash}
+HTTP/1.1 201 Created
+Content-Length: 303
+Content-Type: application/json
+Location: http://localhost:8080/serviceDesk/de42a39a-2711-4d23-a890-aad24fb8e924
+
 {
-  "id": "b3c75b24-2691-4a76-902c-c9bc29ea076c",
+  "id": "de42a39a-2711-4d23-a890-aad24fb8e924",
   "supportCase": {
     "product": {
       "name": "Kogito",
@@ -162,28 +169,28 @@ For that an empty post should be sent to `/serviceDesk/ReceiveSupportComment`. N
 ```{bash}
 $ curl -D - -XPOST -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/serviceDesk/b3c75b24-2691-4a76-902c-c9bc29ea076c/ReceiveSupportComment
 
-HTTP/1.1 200 OK
-Content-Length: 305
-Link: </b3c75b24-2691-4a76-902c-c9bc29ea076c/ReceiveSupportComment/f3b36cf9-3953-43ae-afe6-2a48fea8a79a>; rel='instance'
+HTTP/1.1 201 Created
+Content-Length: 303
 Content-Type: application/json
+Location: http://localhost:8080/serviceDesk/de42a39a-2711-4d23-a890-aad24fb8e924/ReceiveSupportComment/36e69fa2-2e5a-4ac5-9115-b326499ff877
 
-{"id":"b3c75b24-2691-4a76-902c-c9bc29ea076c","supportCase":{"product":{"name":"Kogito","family":"Middleware"},"description":"Kogito is not working for some reason.","engineer":"kelly","customer":"Paco the customer","state":"WAITING_FOR_OWNER","comments":null,"questionnaire":null},"supportGroup":"Kogito"}
+{"id":"de42a39a-2711-4d23-a890-aad24fb8e924","supportCase":{"product":{"name":"Kogito","family":"Middleware"},"description":"Kogito is not working for some reason.","engineer":"kelly","customer":"Paco the customer","state":"WAITING_FOR_OWNER","comments":null,"questionnaire":null},"supportGroup":"Kogito"}
 ```
 
-The response returns an HTTP Link header with the relative path of the generated task. `/b3c75b24-2691-4a76-902c-c9bc29ea076c/ReceiveSupportComment/f3b36cf9-3953-43ae-afe6-2a48fea8a79a`
+The response returns an HTTP Location header with the endpoint of the generated task.
 
 Use this path to create the comment. It is important to have in mind the user and group query parameters that provide information about the user performing the task and the group he/she belongs to because
 this task is restricted to the _support_ group
 
 ```{bash}
-curl -H 'Content-Type:application/json' -H 'Accept:application/json' -d @docs/requests/supportComment.json http://localhost:8080/serviceDesk/b3c75b24-2691-4a76-902c-c9bc29ea076c/ReceiveSupportComment/f3b36cf9-3953-43ae-afe6-2a48fea8a79a?user=kelly&group=support
+curl -H 'Content-Type:application/json' -H 'Accept:application/json' -d @docs/requests/supportComment.json http://localhost:8080/serviceDesk/de42a39a-2711-4d23-a890-aad24fb8e924/ReceiveSupportComment/36e69fa2-2e5a-4ac5-9115-b326499ff877?user=kelly&group=support
 ```
 
 And the data containing the comment and the updated state will be returned:
 
 ```{json}
 {
-  "id": "b3c75b24-2691-4a76-902c-c9bc29ea076c",
+  "id": "de42a39a-2711-4d23-a890-aad24fb8e924",
   "supportCase": {
     "product": {
       "name": "Kogito",
@@ -214,15 +221,15 @@ Now it's time for the customer to reply to the engineer's comment. For that an e
 ```{bash}
 $ curl -D - -XPOST -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/serviceDesk/b3c75b24-2691-4a76-902c-c9bc29ea076c/ReceiveCustomerComment
 
-HTTP/1.1 200 OK
+HTTP/1.1 201 Created
 Content-Length: 305
-Link: </b3c75b24-2691-4a76-902c-c9bc29ea076c/ReceiveSupportComment/1ac85d3c-c02c-11ea-b3de-0242ac130004>; rel='instance'
 Content-Type: application/json
+Location: http://localhost:8080/serviceDesk/b3c75b24-2691-4a76-902c-c9bc29ea076c/ReceiveSupportComment/1ac85d3c-c02c-11ea-b3de-0242ac130004
 
 {"id":"b3c75b24-2691-4a76-902c-c9bc29ea076c","supportCase":{"product":{"name":"Kogito","family":"Middleware"},"description":"Kogito is not working for some reason.","engineer":"kelly","customer":"Paco the customer","state":"WAITING_FOR_CUSTOMER","comments":null,"questionnaire":null},"supportGroup":"Kogito"}
 ```
 
-The response returns an HTTP Link header with the relative path of the generated task. `/b3c75b24-2691-4a76-902c-c9bc29ea076c/ReceiveCustomerComment/1ac85d3c-c02c-11ea-b3de-0242ac130004`
+Similar to the previous operation, the Location HTTP header contains the reference to the task.
 
 Use this path to create the comment. It is important to have in mind the user and group query parameters that provide information about the user performing the task and the group he/she belongs to because
 this task is restricted to the _customer_ group

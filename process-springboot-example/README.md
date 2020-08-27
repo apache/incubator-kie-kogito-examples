@@ -116,7 +116,7 @@ Returns order with given id (if active):
 curl -X GET http://localhost:8080/orders/1
 ```
 
-As response a single order is returned if found, otherwise no content (204) is returned.
+As response a single order is returned if found, otherwise 404 Not Found is returned.
 
 ### DELETE /orders/{id}
 

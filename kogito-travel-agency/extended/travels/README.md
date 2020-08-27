@@ -334,7 +334,7 @@ Returns travel request with given id (if active):
 curl -X GET http://localhost:8080/travels/{uuid}
 ```
 
-As response a single travel request is returned if found, otherwise no content (204) is returned.
+As response a single travel request is returned if found, otherwise 404 Not Found is returned.
 
 ### DELETE /travels/{id}
 
