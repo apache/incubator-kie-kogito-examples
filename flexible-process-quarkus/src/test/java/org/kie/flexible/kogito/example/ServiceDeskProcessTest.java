@@ -18,7 +18,6 @@ package org.kie.flexible.kogito.example;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.RestAssured;
@@ -33,7 +32,6 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.anyOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @QuarkusTest
@@ -52,7 +50,6 @@ class ServiceDeskProcessTest {
         addCustomerComment(id);
         resolveCase(id);
         sendQuestionnaire(id);
-
         checkAllProcessesFinished();
     }
 
@@ -159,23 +156,18 @@ class ServiceDeskProcessTest {
                 .statusCode(200).body("supportCase.state", is(State.RESOLVED.name()));
     }
 
-    @SuppressWarnings("unchecked")
     private void sendQuestionnaire(String id) {
-        Map<String, String> tasks = given()
+        String taskId = given()
                 .basePath(BASE_PATH + "/" + id)
                 .contentType(ContentType.JSON)
             .when()
-                .get("/tasks")
-                .as(Map.class);
-
-        assertEquals(1, tasks.size());
-        assertTrue(tasks.containsValue("Questionnaire"));
-        Optional<String> taskId = tasks.entrySet().stream()
-                .filter(e -> e.getValue().equals("Questionnaire"))
-                .map(Map.Entry::getKey)
-                .findFirst();
-        assertTrue(taskId.isPresent());
-
+            .get("/tasks")
+            .then()
+            .statusCode(200)
+            .body("$.size", is(1))
+            .body("[0].name", is("Questionnaire"))
+            .extract()
+            .path("[0].id");
         Map<String, Object> params = new HashMap<>();
         params.put("comment", "Kogito is great!");
         params.put("evaluation", 10);
@@ -187,7 +179,7 @@ class ServiceDeskProcessTest {
                 .contentType(ContentType.JSON)
             .when()
                 .body(params)
-                .post("/Questionnaire/" + taskId.get())
+            .post("/Questionnaire/" + taskId)
             .then()
                 .statusCode(200)
                 .body("supportCase.state", is(State.CLOSED.name()))

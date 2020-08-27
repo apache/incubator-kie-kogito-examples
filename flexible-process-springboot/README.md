@@ -295,9 +295,9 @@ In order to know the task instance id, the `tasks` endpoint must be queried.
 
 ```{bash}
 $ curl -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/serviceDesk/b3c75b24-2691-4a76-902c-c9bc29ea076c/tasks
-{
-  "2cd185b6-d6db-4984-a0ae-9dc4fa15cb6d": "Questionnaire"
-}
+[
+  {"id:"2cd185b6-d6db-4984-a0ae-9dc4fa15cb6d", "name": "Questionnaire"}
+]
 ```
 
 Use this id in the path:

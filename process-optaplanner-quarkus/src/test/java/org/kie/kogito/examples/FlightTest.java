@@ -28,14 +28,12 @@ import org.junit.jupiter.api.Test;
 import org.kie.kogito.examples.domain.FlightDTO;
 import org.kie.kogito.examples.domain.Passenger;
 import org.kie.kogito.examples.domain.PassengerDTO;
+import org.kie.kogito.process.WorkItem;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @QuarkusTest
@@ -102,27 +100,21 @@ public class FlightTest {
                 .then()
                 .statusCode(200);
 
-        Map<String, String> tasks = given()
+        WorkItem[] tasks = given()
                 .contentType(ContentType.JSON)
                 .when()
                 .get("/rest/flights/" + id + "/tasks")
                 .then()
-                .extract()
-                .body()
-                .jsonPath()
-                .getMap("");
-        assertEquals(2, tasks.size());
-        assertThat(tasks.values(), hasItem("approveDenyPassenger"));
-        assertThat(tasks.values(), hasItem("finalizePassengerList"));
-
-        String approveDenyPassengerTask = tasks.entrySet().stream()
-                .filter(e -> e.getValue().equals("approveDenyPassenger"))
-                .map(Map.Entry::getKey).findAny().get();
-
+                .statusCode(200)
+                .body("$.size", is(2))
+                .extract().as(DefaultWorkItem[].class);
+        
+        String denyId = findIdByName(tasks, "approveDenyPassenger");
+        assertNotNull(denyId, "returned task does not contain approveDenyPassenger");
         given()
                 .contentType(ContentType.JSON)
                 .when()
-                .get("/rest/flights/" + id + "/approveDenyPassenger/" + approveDenyPassengerTask)
+            .get("/rest/flights/" + id + "/approveDenyPassenger/" + denyId)
                 .then()
                 .statusCode(200)
                 .body("passenger.name", is(passengerDTO.getName()));
@@ -134,21 +126,21 @@ public class FlightTest {
                 .body(jsonMapper.writeValueAsString(parameters))
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/rest/flights/" + id + "/approveDenyPassenger/" + approveDenyPassengerTask)
+            .post("/rest/flights/" + id + "/approveDenyPassenger/" + denyId)
                 .then()
                 .statusCode(200);
 
         // close the passenger list so no more passengers can be added
-        String finalizePassengerListTask = tasks.entrySet().stream()
-                .filter(e -> e.getValue().equals("finalizePassengerList"))
-                .map(Map.Entry::getKey).findAny().get();
+        String finalizeId = findIdByName(tasks, "finalizePassengerList");
+        assertNotNull(denyId, "returned task does not contain finalizePassengerList");
+
         parameters = new HashMap<>();
         parameters.put("isPassengerListFinalized", true);
         given()
                 .body(jsonMapper.writeValueAsString(parameters))
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/rest/flights/" + id + "/finalizePassengerList/" + finalizePassengerListTask)
+            .post("/rest/flights/" + id + "/finalizePassengerList/" + finalizeId)
                 .then()
                 .statusCode(200);
 
@@ -158,17 +150,17 @@ public class FlightTest {
 
         }
 
-        tasks = given()
-                .contentType(ContentType.JSON)
-                .when()
-                .get("/rest/flights/" + id + "/tasks")
-                .then()
-                .extract()
-                .body()
-                .jsonPath()
-                .getMap("");
+        String taskId = given()
+            .contentType(ContentType.JSON)
+            .when()
+            .get("/rest/flights/" + id + "/tasks")
+            .then()
+            .statusCode(200)
+            .body("$.size", is(1))
+            .body("[0].name", is("finalizeSeatAssignment"))
+            .extract()
+            .path("[0].id");
 
-        assertEquals(1, tasks.size());
         // Verify flight is assigned
         List<Passenger> passengerList = given()
                 .contentType(ContentType.JSON)
@@ -184,14 +176,14 @@ public class FlightTest {
         assertNotNull(passengerList.get(0).getSeat());
 
         // then complete the flight
-        String finializeSeatAssignmentTask = tasks.keySet().iterator().next();
+       
         parameters = new HashMap<>();
 
         given()
                 .body(jsonMapper.writeValueAsString(parameters))
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/rest/flights/" + id + "/finalizeSeatAssignment/" + finializeSeatAssignmentTask)
+                .post("/rest/flights/" + id + "/finalizeSeatAssignment/" + taskId)
                 .then()
                 .statusCode(200);
 
@@ -210,5 +202,13 @@ public class FlightTest {
                 .get("/rest/flights/" + id)
                 .then()
                 .statusCode(404);
+    }
+    
+    private String findIdByName (WorkItem[] tasks, String taskName) {
+        for (WorkItem task : tasks) {
+            if (taskName.equals(task.getName()))
+                return task.getId();
+        }
+        return null;
     }
 }

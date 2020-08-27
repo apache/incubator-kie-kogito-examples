@@ -140,11 +140,11 @@ curl -X GET http://localhost:8080/rest/flights/{id}/tasks
 Example response:
 
 ```json
-{
-  "66c11e3e-c211-4cee-9a07-848b5e861bc5": "finalizePassengerList",
-  "a2c11e3e-c211-4cee-9a07-848b5e861bc5": "finalizeSeatAssignment",
-  "f4c11e3e-c211-4cee-9a07-848b5e861bc5": "approveDenyPassenger"
-}
+[
+  {"id":"66c11e3e-c211-4cee-9a07-848b5e861bc5", "name":"finalizePassengerList"},
+  {"id":"a2c11e3e-c211-4cee-9a07-848b5e861bc5", "name":"finalizeSeatAssignment"},
+  {"id":"f4c11e3e-c211-4cee-9a07-848b5e861bc5", "name":"approveDenyPassenger"}
+]
 ```
 
 ### POST /rest/flights/{id}/newPassengerRequest

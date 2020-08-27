@@ -15,7 +15,6 @@
  */
 package org.kie.kogito.examples;
 
-import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -34,7 +33,6 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @QuarkusTest
@@ -201,16 +199,28 @@ public class OrdersRestIT {
                 .statusCode(200).body("id", is(orderItemsId));
         
         // test getting task
-        Map taskInfo = given().accept(ContentType.JSON).when().get("/orderItems/" + orderItemsId + "/tasks?user=john").then()
-        .statusCode(200).extract().as(Map.class);
-        
-        assertEquals(1, taskInfo.size());
-        taskInfo.containsValue("Verify_order");
+        String taskId = given()
+            .accept(ContentType.JSON)
+            .when()
+            .get("/orderItems/" + orderItemsId + "/tasks?user=john")
+            .then()
+            .statusCode(200)
+            .body("$.size", is(1))
+            .body("[0].name", is("Verify order"))
+            .extract()
+            .path("[0].id");
         
         // test completing task
         String payload = "{}";
-        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(payload).when().post("/orderItems/" + orderItemsId + "/Verify_order/" + taskInfo.keySet().iterator().next() + "?user=john").then()
-        .statusCode(200).body("id", is(orderItemsId));
+        given()
+            .contentType(ContentType.JSON)
+            .accept(ContentType.JSON)
+            .body(payload)
+            .when()
+            .post("/orderItems/" + orderItemsId + "/Verify_order/" + taskId + "?user=john")
+            .then()
+            .statusCode(200)
+            .body("id", is(orderItemsId));
         
         // get all orders make sure there is zero
         given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
@@ -247,11 +257,15 @@ public class OrdersRestIT {
                 .statusCode(200).body("id", is(orderItemsId));
         
         // test getting task
-        Map taskInfo = given().accept(ContentType.JSON).when().get("/orderItems/" + orderItemsId + "/tasks?user=john").then()
-        .statusCode(200).extract().as(Map.class);
+        given()
+            .accept(ContentType.JSON)
+            .when()
+            .get("/orderItems/" + orderItemsId + "/tasks?user=john")
+            .then()
+            .statusCode(200)
+            .body("$.size", is(1))
+            .body("[0].name", is("Verify order"));
         
-        assertEquals(1, taskInfo.size());
-        taskInfo.containsValue("Verify_order");
         
         // test deleting order items
         given().accept(ContentType.JSON).when().delete("/orderItems/" + orderItemsId).then().statusCode(200);
