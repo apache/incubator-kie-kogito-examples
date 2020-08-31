@@ -10,8 +10,8 @@
   </parent>
 
   <artifactId>kogito-travel-agency-example-extended</artifactId>
+  <name>Kogito Example :: Travel Agency :: Extended</name>
   <packaging>pom</packaging>
-
 
   <dependencyManagement>
     <dependencies>
