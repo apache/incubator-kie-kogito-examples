@@ -169,6 +169,7 @@
         <module>process-kafka-quickstart-quarkus</module>
         <module>process-kafka-quickstart-springboot</module>
         <module>process-knative-quickstart-quarkus</module>
+        <module>process-mongodb-persistence-springboot</module>
         <module>process-optaplanner-quarkus</module>
         <module>process-optaplanner-springboot</module>
         <module>process-quarkus-example</module>
@@ -262,6 +263,7 @@
         <artifactId>kafka</artifactId>
         <version>${version.testcontainers}</version>
       </dependency>
+      
       <!-- PMML -->
       <dependency>
         <groupId>org.jpmml</groupId>
@@ -306,6 +308,7 @@
               <container.image.infinispan>${container.image.infinispan}</container.image.infinispan>
               <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
               <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+              <enable.resource.mongodb>${enable.resource.mongodb}</enable.resource.mongodb>
             </systemProperties>
             <classesDirectory>${project.build.outputDirectory}</classesDirectory>
           </configuration>
