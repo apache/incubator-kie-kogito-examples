@@ -1,0 +1,317 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dmn:definitions xmlns:dmn="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns="https://kiegroup.org/dmn/_71FEF17B-F6EE-4A6A-91B1-72580D9A96A6" xmlns:included1="test_neuralnetwork.pmml" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:kie="http://www.drools.org/kie/dmn/1.2" xmlns:feel="http://www.omg.org/spec/DMN/20180521/FEEL/" xmlns:dmndi="http://www.omg.org/spec/DMN/20180521/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="_688B2CB7-E464-4707-BEF2-2ECA4BB9811E" name="TestNeuralNetworkBKM" expressionLanguage="http://www.omg.org/spec/DMN/20180521/FEEL/" typeLanguage="http://www.omg.org/spec/DMN/20180521/FEEL/" namespace="https://kiegroup.org/dmn/_71FEF17B-F6EE-4A6A-91B1-72580D9A96A6">
+  <dmn:extensionElements/>
+  <dmn:import id="_26E5C8F5-B0EA-47A8-82C5-072CA41F36EE" name="TestNeuralNetwork" namespace="TestNeuralNetwork" locationURI="test_neuralnetwork.pmml" importType="http://www.dmg.org/PMML-4_1"/>
+  <dmn:businessKnowledgeModel id="_ABEE5BF6-93EF-41D5-9DF9-57B73FBA984C" name="NeuralNetworkBKM">
+    <dmn:extensionElements/>
+    <dmn:variable id="_341F8946-1EDA-4C23-A4C9-921F23DC898B" name="NeuralNetworkBKM" typeRef="Any"/>
+    <dmn:encapsulatedLogic id="_5C76B2A7-57C7-4560-854C-D1B1A525CA3B" kind="PMML">
+      <dmn:formalParameter id="_CCBDAD6E-5C39-44BD-8CF7-F47415B3D420" name="Marital" typeRef="Any"/>
+      <dmn:formalParameter id="_CCBDAD6E-5C39-44BD-8CF7-F47415B3D421" name="Gender" typeRef="Any"/>
+      <dmn:formalParameter id="_CCBDAD6E-5C39-44BD-8CF7-F47415B3D422" name="Employment" typeRef="Any"/>
+      <dmn:formalParameter id="_CCBDAD6E-5C39-44BD-8CF7-F47415B3D423" name="Income" typeRef="Any"/>
+      <dmn:formalParameter id="_CCBDAD6E-5C39-44BD-8CF7-F47415B3D424" name="Occupation" typeRef="Any"/>
+      <dmn:formalParameter id="_CCBDAD6E-5C39-44BD-8CF7-F47415B3D425" name="Education" typeRef="Any"/>
+      <dmn:formalParameter id="_CCBDAD6E-5C39-44BD-8CF7-F47415B3D426" name="Deductions" typeRef="Any"/>
+      <dmn:formalParameter id="_CCBDAD6E-5C39-44BD-8CF7-F47415B3D427" name="Age" typeRef="Any"/>
+      <dmn:context id="_43B9E9A4-E721-457A-8077-1BC143C618BF">
+        <dmn:contextEntry>
+          <dmn:variable id="_D7FA0594-B9C4-4251-8921-0B970C8013C8" name="document" typeRef="string"/>
+          <dmn:literalExpression id="_2B5B1DB2-E7AE-4E5E-896E-768CB7EC04D1">
+            <dmn:text>"TestNeuralNetwork"</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_EC10E2AF-311F-4195-8EE1-FF154C46F24E" name="model" typeRef="string"/>
+          <dmn:literalExpression id="_06545571-18EA-43B4-931C-98F283980DB5">
+            <dmn:text>"NeuralNetworkSample"</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+      </dmn:context>
+    </dmn:encapsulatedLogic>
+  </dmn:businessKnowledgeModel>
+  <dmn:decision id="_4F7167A5-32B2-4994-B707-26E9948C0E26" name="Decision">
+    <dmn:extensionElements/>
+    <dmn:variable id="_DF811789-E78D-4316-AF28-65092EBC29AA" name="Decision" typeRef="Any"/>
+    <dmn:informationRequirement id="_737A930E-DE03-4C44-8A61-D25BB5B18501">
+      <dmn:requiredInput href="#_EDB9A6A8-1F66-4A6F-8864-13C06D96F89E"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_737A930E-DE03-4C44-8A61-D25BB5B18502">
+      <dmn:requiredInput href="#_FCD14212-5FB3-49F8-A839-3076AE328665"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_737A930E-DE03-4C44-8A61-D25BB5B18503">
+      <dmn:requiredInput href="#_0618C8BC-C0E1-4A2F-A6FF-08D1699D5637"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_737A930E-DE03-4C44-8A61-D25BB5B18504">
+      <dmn:requiredInput href="#_C4CC4336-1B79-478C-B47B-AC25AB73CD72"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_737A930E-DE03-4C44-8A61-D25BB5B18505">
+      <dmn:requiredInput href="#_2613004F-6A03-4D9A-8768-55232E86EA70"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_737A930E-DE03-4C44-8A61-D25BB5B18506">
+      <dmn:requiredInput href="#_D77F4FCC-14E0-42A7-B083-FC3174FEF2BE"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_737A930E-DE03-4C44-8A61-D25BB5B18507">
+      <dmn:requiredInput href="#_D7F5326D-19FC-49FB-A450-979CCB13B4C8"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_737A930E-DE03-4C44-8A61-D25BB5B18508">
+      <dmn:requiredInput href="#_F16DC5BA-FD3C-474E-9230-A928489CE571"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_737A930E-DE03-4C44-8A61-D25BB5B18509">
+      <dmn:requiredInput href="#_AF11D510-1D57-43F5-B542-EC33102F696B"/>
+    </dmn:informationRequirement>
+    <dmn:knowledgeRequirement id="_056B5F46-0F8C-49B8-940E-2E345D4606B8">
+      <dmn:requiredKnowledge href="#_ABEE5BF6-93EF-41D5-9DF9-57B73FBA984C"/>
+    </dmn:knowledgeRequirement>
+    <dmn:invocation id="_0BD9D396-13F0-4DB7-8329-A85CE43B2A2A">
+      <dmn:literalExpression id="_446C3937-3209-4D2A-AAF2-6F4F5AFE82F9">
+        <dmn:text>NeuralNetworkBKM</dmn:text>
+      </dmn:literalExpression>
+      <dmn:binding>
+        <dmn:parameter id="_FC512B84-AB94-4924-9833-05128F2A23DC" name="Age" typeRef="number"/>
+        <dmn:literalExpression id="_866051DB-BD52-4BE1-9BC8-E0FFA4F80B5F">
+          <dmn:text>Age</dmn:text>
+        </dmn:literalExpression>
+      </dmn:binding>
+      <dmn:binding>
+        <dmn:parameter id="_95D1F93A-D687-4C3C-8AA8-0AF85DD346BA" name="Employment" typeRef="string"/>
+        <dmn:literalExpression id="_6CC20A2A-00BA-4C3B-868C-C5B3DFEA0FEC">
+          <dmn:text>Employment</dmn:text>
+        </dmn:literalExpression>
+      </dmn:binding>
+      <dmn:binding>
+        <dmn:parameter id="_12E47CC8-502B-4D29-939F-5451A407369C" name="Education" typeRef="string"/>
+        <dmn:literalExpression id="_A687E7F0-9FDC-4C9C-990F-120E7A04668F">
+          <dmn:text>Education</dmn:text>
+        </dmn:literalExpression>
+      </dmn:binding>
+      <dmn:binding>
+        <dmn:parameter id="_66344502-9CCA-40D2-90B4-55DD2745167C" name="Marital" typeRef="string"/>
+        <dmn:literalExpression id="_6006893D-619B-40BC-97AF-6D4A02A4CD7C">
+          <dmn:text>Marital</dmn:text>
+        </dmn:literalExpression>
+      </dmn:binding>
+      <dmn:binding>
+        <dmn:parameter id="_D78ABE61-6FF9-4AFE-847F-1DB1FA06AA22" name="Occupation" typeRef="string"/>
+        <dmn:literalExpression id="_06928721-5C2D-44F0-94C8-0335ECA98584">
+          <dmn:text>Occupation</dmn:text>
+        </dmn:literalExpression>
+      </dmn:binding>
+      <dmn:binding>
+        <dmn:parameter id="_FD48907D-5560-4765-8B25-BFDEAA7787AE" name="Income" typeRef="number"/>
+        <dmn:literalExpression id="_3FBE2D9D-1ECC-427B-9BDF-3DF0C2884CE6">
+          <dmn:text>Income</dmn:text>
+        </dmn:literalExpression>
+      </dmn:binding>
+      <dmn:binding>
+        <dmn:parameter id="_AAE0F331-0B58-42CD-ADE9-2F4649BCB66C" name="Gender" typeRef="string"/>
+        <dmn:literalExpression id="_3F23AAE1-2F62-4F64-B8EA-0F4211AED5D4">
+          <dmn:text>Gender</dmn:text>
+        </dmn:literalExpression>
+      </dmn:binding>
+      <dmn:binding>
+        <dmn:parameter id="_D127AB9E-B8BD-4595-B664-3A90FCEA215D" name="Deductions" typeRef="number"/>
+        <dmn:literalExpression id="_2F6E2C45-26FB-4F61-A6C4-A70B6D335C86">
+          <dmn:text>Deductions</dmn:text>
+        </dmn:literalExpression>
+      </dmn:binding>
+      <dmn:binding>
+        <dmn:parameter id="_DF1CF2EB-6A3B-41BB-9C68-9100AC8F490D" name="Hours" typeRef="number"/>
+        <dmn:literalExpression id="_E599F79B-87D6-4254-AF81-11120CE0B199">
+          <dmn:text>Hours</dmn:text>
+        </dmn:literalExpression>
+      </dmn:binding>
+    </dmn:invocation>
+  </dmn:decision>
+  <dmn:inputData id="_EDB9A6A8-1F66-4A6F-8864-13C06D96F89E" name="Marital">
+    <dmn:extensionElements/>
+    <dmn:variable id="_F8724762-6AA2-4644-A600-A1C0B701F697" name="Marital"/>
+  </dmn:inputData>
+  <dmn:inputData id="_FCD14212-5FB3-49F8-A839-3076AE328665" name="Gender">
+    <dmn:extensionElements/>
+    <dmn:variable id="_07E7A260-574E-4AB3-B213-A2F0715BE976" name="Gender"/>
+  </dmn:inputData>
+  <dmn:inputData id="_0618C8BC-C0E1-4A2F-A6FF-08D1699D5637" name="Employment">
+    <dmn:extensionElements/>
+    <dmn:variable id="_E033D298-38C5-4434-9662-830B2C1F6DD1" name="Employment"/>
+  </dmn:inputData>
+  <dmn:inputData id="_C4CC4336-1B79-478C-B47B-AC25AB73CD72" name="Income">
+    <dmn:extensionElements/>
+    <dmn:variable id="_EBC94321-0E7D-4A1A-AAEA-5E45A427D869" name="Income"/>
+  </dmn:inputData>
+  <dmn:inputData id="_2613004F-6A03-4D9A-8768-55232E86EA70" name="Occupation">
+    <dmn:extensionElements/>
+    <dmn:variable id="_8CA71D64-0F0F-4C75-8D35-C669481357A8" name="Occupation"/>
+  </dmn:inputData>
+  <dmn:inputData id="_D77F4FCC-14E0-42A7-B083-FC3174FEF2BE" name="Education">
+    <dmn:extensionElements/>
+    <dmn:variable id="_8CCA149C-F0FD-47E1-B2B3-946B48EE2541" name="Education"/>
+  </dmn:inputData>
+  <dmn:inputData id="_D7F5326D-19FC-49FB-A450-979CCB13B4C8" name="Deductions">
+    <dmn:extensionElements/>
+    <dmn:variable id="_4A7CC49B-0CF9-4D5E-823E-CAFD8907CF8E" name="Deductions"/>
+  </dmn:inputData>
+  <dmn:inputData id="_F16DC5BA-FD3C-474E-9230-A928489CE571" name="Age">
+    <dmn:extensionElements/>
+    <dmn:variable id="_D60FB5DD-60B4-43D6-8512-7E6978887249" name="Age"/>
+  </dmn:inputData>
+  <dmn:inputData id="_AF11D510-1D57-43F5-B542-EC33102F696B" name="Hours">
+    <dmn:extensionElements/>
+    <dmn:variable id="_FC3DB08B-2C0D-4B30-99AB-3248949955A4" name="Hours"/>
+  </dmn:inputData>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <di:extension>
+        <kie:ComponentsWidthsExtension>
+          <kie:ComponentWidths dmnElementRef="_0BD9D396-13F0-4DB7-8329-A85CE43B2A2A">
+            <kie:width>50.0</kie:width>
+            <kie:width>100.0</kie:width>
+            <kie:width>300.0</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_446C3937-3209-4D2A-AAF2-6F4F5AFE82F9"/>
+          <kie:ComponentWidths dmnElementRef="_866051DB-BD52-4BE1-9BC8-E0FFA4F80B5F">
+            <kie:width>300.0</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_6CC20A2A-00BA-4C3B-868C-C5B3DFEA0FEC">
+            <kie:width>300.0</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_A687E7F0-9FDC-4C9C-990F-120E7A04668F">
+            <kie:width>300.0</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_6006893D-619B-40BC-97AF-6D4A02A4CD7C">
+            <kie:width>300.0</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_06928721-5C2D-44F0-94C8-0335ECA98584">
+            <kie:width>300.0</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_3FBE2D9D-1ECC-427B-9BDF-3DF0C2884CE6">
+            <kie:width>300.0</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_3F23AAE1-2F62-4F64-B8EA-0F4211AED5D4">
+            <kie:width>300.0</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_2F6E2C45-26FB-4F61-A6C4-A70B6D335C86">
+            <kie:width>300.0</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_E599F79B-87D6-4254-AF81-11120CE0B199">
+            <kie:width>300.0</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_43B9E9A4-E721-457A-8077-1BC143C618BF">
+            <kie:width>50.0</kie:width>
+            <kie:width>100.0</kie:width>
+            <kie:width>200.0</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_2B5B1DB2-E7AE-4E5E-896E-768CB7EC04D1">
+            <kie:width>200.0</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_06545571-18EA-43B4-931C-98F283980DB5">
+            <kie:width>200.0</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_5C76B2A7-57C7-4560-854C-D1B1A525CA3B">
+            <kie:width>50.0</kie:width>
+            <kie:width>370.0</kie:width>
+          </kie:ComponentWidths>
+        </kie:ComponentsWidthsExtension>
+      </di:extension>
+      <dmndi:DMNShape id="dmnshape-_AF11D510-1D57-43F5-B542-EC33102F696B" dmnElementRef="_AF11D510-1D57-43F5-B542-EC33102F696B" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="938" y="47" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-_0618C8BC-C0E1-4A2F-A6FF-08D1699D5637" dmnElementRef="_0618C8BC-C0E1-4A2F-A6FF-08D1699D5637" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="167.59813084112147" y="47" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-_C4CC4336-1B79-478C-B47B-AC25AB73CD72" dmnElementRef="_C4CC4336-1B79-478C-B47B-AC25AB73CD72" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="608" y="47" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-_2613004F-6A03-4D9A-8768-55232E86EA70" dmnElementRef="_2613004F-6A03-4D9A-8768-55232E86EA70" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="498" y="47" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-_EDB9A6A8-1F66-4A6F-8864-13C06D96F89E" dmnElementRef="_EDB9A6A8-1F66-4A6F-8864-13C06D96F89E" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="387.5981308411215" y="47" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-_D7F5326D-19FC-49FB-A450-979CCB13B4C8" dmnElementRef="_D7F5326D-19FC-49FB-A450-979CCB13B4C8" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="828" y="47" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-_4F7167A5-32B2-4994-B707-26E9948C0E26" dmnElementRef="_4F7167A5-32B2-4994-B707-26E9948C0E26" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="378" y="267" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-_ABEE5BF6-93EF-41D5-9DF9-57B73FBA984C" dmnElementRef="_ABEE5BF6-93EF-41D5-9DF9-57B73FBA984C" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="685" y="212" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-_D77F4FCC-14E0-42A7-B083-FC3174FEF2BE" dmnElementRef="_D77F4FCC-14E0-42A7-B083-FC3174FEF2BE" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="278" y="47" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-_FCD14212-5FB3-49F8-A839-3076AE328665" dmnElementRef="_FCD14212-5FB3-49F8-A839-3076AE328665" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="718" y="47" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-_F16DC5BA-FD3C-474E-9230-A928489CE571" dmnElementRef="_F16DC5BA-FD3C-474E-9230-A928489CE571" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="58" y="47" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</dmn:definitions>

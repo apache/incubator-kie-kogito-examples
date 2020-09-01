@@ -127,6 +127,54 @@ Example response:
 }
 ```
 
+### POST /NeuralNetwork
+
+Given inputs:
+
+```json
+{
+  "Age":40,
+  "Employment":"Private",
+  "Education":"College",
+  "Marital":"Married",
+  "Occupation":"Service",
+  "Income":324035.50,
+  "Gender":"Male",
+  "Deductions":2340,
+  "Hours":48
+}
+```
+
+Curl command (using the JSON object above):
+
+```sh
+curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"Age":40, "Employment":"Private", "Education":"College", "Marital":"Married",  "Occupation":"Service", "Income":324035.50, "Gender":"Male", "Deductions":2340,  "Hours":48 }' http://localhost:8080/TestNeuralNetworkBKM
+
+```
+or on Windows:
+
+```sh
+curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" -d "{"Age":40, "Employment":"Private", "Education":"College", "Marital":"Married",  "Occupation":"Service", "Income":324035.50, "Gender":"Male", "Deductions":2340,  "Hours":48 }" http://localhost:8080/TestNeuralNetworkBKM
+```
+
+Example response:
+
+```json
+{
+  "Occupation": "Service",
+  "Employment": "Private",
+  "Education": "College",
+  "Hours": 48,
+  "NeuralNetworkBKM": "function NeuralNetworkBKM( Marital, Gender, Employment, Income, Occupation, Education, Deductions, Age )",
+  "Income": 324035.5,
+  "Marital": "Married",
+  "Deductions": 2340,
+  "Gender": "Male",
+  "Age": 40,
+  "Decision": 0.11968884558738997
+}
+```
+
 ## Deploying with Kogito Operator
 
 In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).

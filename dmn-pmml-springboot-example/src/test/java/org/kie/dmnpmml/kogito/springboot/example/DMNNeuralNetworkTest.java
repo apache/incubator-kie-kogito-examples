@@ -28,7 +28,7 @@ import static org.hamcrest.Matchers.is;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-public class DMNRegressionTest {
+public class DMNNeuralNetworkTest {
 
     @LocalServerPort
     private int port;
@@ -37,21 +37,35 @@ public class DMNRegressionTest {
     public void setUp() {
         RestAssured.port = port;
     }
-
+    
     @Test
-    public void testEvaluateRegressionDMN() {
-        String inputData = "{\"fld1\":3.0, \"fld2\":2.0, \"fld3\":\"y\"}";
+    public void testEvaluateNeuralNetworkDMN() {
+        String inputData = "{\"Age\":40, " +
+                "\"Employment\":\"Private\", " +
+                "\"Education\":\"College\", " +
+                "\"Marital\":\"Married\", " +
+                "\"Occupation\":\"Service\", " +
+                "\"Income\":324035.50, " +
+                "\"Gender\":\"Male\", " +
+                "\"Deductions\":2340, " +
+                "\"Hours\":48 }";
         given()
                 .contentType(ContentType.JSON)
                 .body(inputData)
                 .when()
-                .post("/TestRegressionDMN")
+                .post("/TestNeuralNetworkBKM")
                 .then()
                 .statusCode(200)
-                .body("RegressionModelBKM", is("function RegressionModelBKM( fld1, fld2, fld3 )"))
-                .body("fld3", is("y"))
-                .body("fld2", is(Float.valueOf("2")))
-                .body("fld1", is(Float.valueOf("3")))
-                .body("Decision", is(Float.valueOf("52.5")));
+                .body("NeuralNetworkBKM", is("function NeuralNetworkBKM( Marital, Gender, Employment, Income, Occupation, Education, Deductions, Age )"))
+                .body("Age", is(Integer.valueOf("40")))
+                .body("Employment", is("Private"))
+                .body("Education", is("College"))
+                .body("Marital", is("Married"))
+                .body("Occupation", is("Service"))
+                .body("Income", is(Float.valueOf("324035.50")))
+                .body("Gender", is("Male"))
+                .body("Deductions", is(Integer.valueOf("2340")))
+                .body("Hours", is(Integer.valueOf("48")))
+                .body("Decision", is(Float.valueOf("0.11968884558738997")));
     }
 }
