@@ -57,15 +57,13 @@ public class DealsRestIT {
                 .then().log().ifValidationFails().statusCode(200).body("$.size()", is(1)).body("[0].id", notNullValue()).extract().path("[0].id");
 
         // get task for john
-        Map<String, String> tasks = given().accept(ContentType.JSON)
+        String taskId = given().accept(ContentType.JSON)
                 .when().get("/dealreviews/{uuid}/tasks?user=john", dealReviewId)
-                .then().log().ifValidationFails().statusCode(200).extract().as(Map.class);
-        assertNotNull(tasks);
-        assertEquals(1, tasks.size());
-
+                .then().log().ifValidationFails().statusCode(200).body("$.size", is(1)).extract().path("[0].id");
+        
         // complete review task
         given().contentType(ContentType.JSON).accept(ContentType.JSON).body("{\"review\" : \"very good work\"}")
-                .when().post("/dealreviews/{uuid}/review/{tuuid}?user=john", dealReviewId, tasks.keySet().iterator().next())
+                .when().post("/dealreviews/{uuid}/review/{tuuid}?user=john", dealReviewId, taskId)
                 .then().log().ifValidationFails().statusCode(200);
 
         //verify no deals to review

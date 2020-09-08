@@ -179,7 +179,7 @@ where uuid is the id returned from the preivous step.
 Should return something like
 
 ```json
-{"c59054b9-aa1d-4771-bc5e-40f8b32d3ff5":"ChildrenHandling"}
+[{"id":"c59054b9-aa1d-4771-bc5e-40f8b32d3ff5","name":"ChildrenHandling".....}]
 ```
 
 

@@ -15,13 +15,8 @@
  */
 package org.acme.travels;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.assertEquals;
-
-import java.util.Map;
-
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -34,8 +29,9 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
@@ -65,7 +61,6 @@ public class ApprovalsRestIT {
              
     }
     
-    @SuppressWarnings("rawtypes")
     @Test
     public void testStartApprovalAuthorized() {
        // start new approval
@@ -101,17 +96,19 @@ public class ApprovalsRestIT {
        
        // tasks assigned in just started approval
        
-       Map taskInfo = given()
-               .auth().oauth2(getAccessToken("mary"))
-               .accept(ContentType.JSON)               
+       String taskInfo = given()
+           .auth()
+           .oauth2(getAccessToken("mary"))
+           .accept(ContentType.JSON)
            .when()
-               .get("/approvals/" + id + "/tasks?user=admin&group=managers")
+           .get("/approvals/" + id + "/tasks?user=admin&group=managers")
            .then()
-               .statusCode(200).extract().as(Map.class);
+           .statusCode(200)
+           .body("$.size", is(1))
+           .body("[0].name", is("firstLineApproval"))
+           .extract()
+           .path("[0].id");
                
-       assertEquals(1, taskInfo.size());
-       taskInfo.containsValue("firstLineApproval");
-       
        // complete first task without authorization header as it authorization is managed on task level
        // thus user and group(s) must be provided
        String payload = "{}";
@@ -121,7 +118,7 @@ public class ApprovalsRestIT {
            .accept(ContentType.JSON)
            .body(payload)
        .when()
-           .post("/approvals/" + id + "/firstLineApproval/" + taskInfo.keySet().iterator().next() + "?user=mary&group=managers")
+           .post("/approvals/" + id + "/firstLineApproval/" + taskInfo + "?user=mary&group=managers")
        .then()
            .statusCode(200)
            .body("id", is(id));

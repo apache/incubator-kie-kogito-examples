@@ -80,16 +80,19 @@ public class ApprovalsRestTest {
        
        // tasks assigned in just started approval
        
-       Map taskInfo = given()
-               .header("Authorization", "Basic am9objpqb2hu")
-               .accept(ContentType.JSON)               
+       String taskInfo = given()
+           .header("Authorization", "Basic am9objpqb2hu")
+           .accept(ContentType.JSON)
            .when()
-               .get("/approvals/" + id + "/tasks?user=admin&group=managers")
+           .get("/approvals/" + id + "/tasks?user=admin&group=managers")
            .then()
-               .statusCode(200).extract().as(Map.class);
+           .statusCode(200)
+           .body("$.size", is(1))
+           .body("[0].name", is("firstLineApproval"))
+           .extract()
+           .path("[0].id");
                
-       assertEquals(1, taskInfo.size());
-       taskInfo.containsValue("firstLineApproval");
+
        
        // complete first task without authorization header as it authorization is managed on task level
        // thus user and group(s) must be provided
@@ -99,7 +102,7 @@ public class ApprovalsRestTest {
            .accept(ContentType.JSON)
            .body(payload)
        .when()
-           .post("/approvals/" + id + "/firstLineApproval/" + taskInfo.keySet().iterator().next() + "?user=mary&group=managers")
+           .post("/approvals/" + id + "/firstLineApproval/" + taskInfo + "?user=mary&group=managers")
        .then()
            .statusCode(200)
            .body("id", is(id));

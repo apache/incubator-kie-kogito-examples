@@ -157,9 +157,9 @@ curl -X GET http://localhost:8080/orderItems/66c11e3e-c211-4cee-9a07-848b5e861bc
 ```
 Example response:
 ```json
-{
-  "62f1c985-d31c-4ead-9906-2fe8d05937f0":"Verify order"
-}
+[
+  {"id":"62f1c985-d31c-4ead-9906-2fe8d05937f0","name":"Verify order"}
+]
 ```
 
 ### GET /orderItems/{id}/Verify_order/{tid}
