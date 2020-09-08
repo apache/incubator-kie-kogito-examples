@@ -151,6 +151,48 @@ Example response:
 }
 ```
 
+### POST /MiningModel
+
+Given inputs:
+
+```json
+{"residenceState":"AP",
+                "validLicense":true,
+                "occupation":"ASTRONAUT",
+                "categoricalY":"classA",
+                "categoricalX":"red",
+                "variable":6.6,
+                "age":25.0
+}
+```
+
+Curl command (using the JSON object above):
+
+```sh
+curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"residenceState":"AP", "validLicense":true, "occupation":"ASTRONAUT", "categoricalY":"classA", "categoricalX":"red", "variable":6.6, "age":25.0}' http://localhost:8080/PredicatesMining
+```
+or on Windows:
+
+```sh
+curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" -d "{"residenceState":"AP", "validLicense":true, "occupation":"ASTRONAUT", "categoricalY":"classA", "categoricalX":"red", "variable":6.6, "age":25.0}" http://localhost:8080/PredicatesMining
+```
+
+Example response:
+
+```json
+{
+  "correlationId": null,
+  "segmentationId": null,
+  "segmentId": null,
+  "segmentIndex": 0,
+  "resultCode": "OK",
+  "resultObjectName": "categoricalResult",
+  "resultVariables": {
+    "categoricalResult": 1.381666666666666
+  }
+}
+```
+
 ## Deploying with Kogito Operator
 
 In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).
