@@ -94,7 +94,7 @@ When using native image compilation, you will also need:
 ### Compile and Run in Local Dev Mode
 
 ```sh
-mvn clean compile quarkus:dev
+K_SINK=localhost:8181 mvn clean compile quarkus:dev
 ```
 
 NOTE: With dev mode of Quarkus you can take advantage of hot reload for business assets like processes, rules, decision tables and java code. No need to redeploy or restart your running application.
@@ -154,7 +154,7 @@ This is the same image used by Knative Eventing demos. It's running on port 8181
 Then run the application with:
 
 ```shell script
-$ mvn clean quarkus:dev
+$ K_SINK=localhost:8181 mvn clean quarkus:dev
 
 __  ____  __  _____   ___  __ ____  ______ 
  --/ __ \/ / / / _ | / _ \/ //_/ / / / __/ 
@@ -207,7 +207,7 @@ Data,
   {"firstName":"Jan","lastName":"Kowalski","email":"jan.kowalski@example.com","nationality":"Polish","processed":true}
 ```
 
-There are bunch of extension attributes that starts with `kogito` to provide some context of the execution and the event producer.
+There are a bunch of extension attributes that starts with `kogito` to provide some context of the execution and the event producer.
 
 To take the other path of the process send this message to your application:
 
@@ -243,10 +243,8 @@ Just make sure your cluster has [Knative Eventing available](https://knative.dev
 4. [Install the Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift)
 5. On Kubernetes, build this example locally with the Dockerfile on [operator/kubernetes/Dockerfile](operator/kubernetes/Dockerfile) path, then [push it](operator/kubernetes/process-knative-quickstart-quarkus.yaml) to a third party registry. 
 For OpenShift, you can let the [cluster build it for you](operator/openshift/process-knative-quickstart-quarkus.yaml)
-6. Update the `ConfigMap` `process-knative-quickstart-quarkus-properties` and add this line to it: `mp.messaging.outgoing.processedtravellers.url=${K_SINK}` 
-so the service can push the generated events to the Knative Broker (or you can update the `application.properties` directly and build the image with it instead).
-7. Expose the service, if on minikube [follow this tutorial](https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/). There's an `Ingress` already pre created in [operator/kubernetes/ingress.yaml](operator/kubernetes/ingress.yaml). [`NodePort` also works](https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/#deploy-a-hello-world-app).
-8. Run `curl` from the terminal like you did in the previoulsy steps. To see what's going on, just query for the Knative service `event-display`. You should see something like: 
+6. Expose the service, if on minikube [follow this tutorial](https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/). There's an `Ingress` already pre created in [operator/kubernetes/ingress.yaml](operator/kubernetes/ingress.yaml). [`NodePort` also works](https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/#deploy-a-hello-world-app).
+7. Run `curl` from the terminal like you did in the previously steps. To see what's going on, just query for the Knative service `event-display`. You should see something like: 
 ```
 ☁️  cloudevents.Event
 Validation: valid

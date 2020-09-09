@@ -16,6 +16,7 @@
 
   <properties>
     <version.cloudevents>2.0.0-milestone1</version.cloudevents>
+    <version.wiremock>2.27.1</version.wiremock>
   </properties>
 
   <dependencyManagement>
@@ -82,6 +83,17 @@
       <artifactId>kogito-test-utils</artifactId>
       <scope>test</scope>
     </dependency>
+    <!-- required to mock the sink server -->
+    <!-- Unfortunately MockWebServer is incompatible with RestEasy:
+    java.lang.NoSuchMethodError: 'com.github.fge.jackson.JsonNumEquals com.github.fge.jackson.JsonNumEquals.getInstance()'
+    -->
+    <dependency>
+      <groupId>com.github.tomakehurst</groupId>
+      <artifactId>wiremock-jre8</artifactId>
+      <version>${version.wiremock}</version>
+      <scope>test</scope>
+    </dependency>
+
   </dependencies>
   <build>
     <finalName>${project.artifactId}</finalName>
