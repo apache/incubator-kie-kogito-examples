@@ -92,7 +92,7 @@ public class CloudEventListenerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(objectMapper.writeValueAsString(traveller)).post("/").then().statusCode(200);
 
-        // have we received the message? We force the sleep since the WoreMock framework doesn't support waiting/timeout verification
+        // have we received the message? We force the sleep since the WireMock framework doesn't support waiting/timeout verification
         LOGGER.info("Waiting 2 seconds to receive the produced message");
         Thread.sleep(2000);
         sink.verify(1, postRequestedFor(urlEqualTo("/")).withRequestBody(containing("specversion")));

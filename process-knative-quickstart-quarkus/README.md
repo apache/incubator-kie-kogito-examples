@@ -97,6 +97,14 @@ When using native image compilation, you will also need:
 K_SINK=localhost:8181 mvn clean compile quarkus:dev
 ```
 
+[`K_SINK` is the environment variable injected by the Knative Eventing platform](https://knative.dev/docs/eventing/samples/sinkbinding/#create-our-sinkbinding)
+once we deploy the application on a Kubernetes cluster.
+Instead of _hardcoding_ the endpoint where we are going to send our produced messages, we rely on Knative to inject this information in runtime.
+
+The environment variable will be assigned to the SmallRye HTTP connector in runtime: `mp.messaging.outgoing.processedtravellers.url=${K_SINK}`.
+
+For local tests we will mock the endpoint where the produced messages supposed to be delivered. 
+
 NOTE: With dev mode of Quarkus you can take advantage of hot reload for business assets like processes, rules, decision tables and java code. No need to redeploy or restart your running application.
 
 ### Package and Run in JVM mode
