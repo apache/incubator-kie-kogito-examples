@@ -229,7 +229,9 @@
 
             $("#taskscontent").children().remove();
             $.getJSON("/travels/"+ travelId + "/tasks", function (data) {
-                $.each(data, function (taskId, taskName) {
+                $.each(data, function (index, task) {
+                    let taskId = task.id;
+                    let taskName = task.name;
                     let element = "<tr><td>" + taskName + "</td><td>";
                     if (taskName === 'VisaApplication') {
                         element += "<div class='form-group'><label for='sendVisaApplication'>Link to visa application</label><input class='form-control' type='text' id='sendVisaApplication' name='sendVisaApplication' required></div>" +

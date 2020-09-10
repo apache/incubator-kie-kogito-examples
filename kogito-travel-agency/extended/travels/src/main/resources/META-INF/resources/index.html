@@ -334,24 +334,23 @@
             $("#taskscontent").children().remove();
             $.getJSON("/travels/" + id + "/tasks", function (data) {
                 $.each(data, function (key, val) {
-
-                    if ("VisaApplication" == val) {
-                        $("<tr><td>" + val + "</td>" +
+                    if ("VisaApplication" == val.name) {
+                        $("<tr><td>" + val.name + "</td>" +
                                 "<td>" +
                                 "<button class='btn btn-primary btn-sm' " +
                                 "data-dismiss=\"modal\" " +
                                 "data-toggle='modal' " +
                                 "data-target='#visaApplicationModal' " +
                                 "data-id='" + id + "' " +
-                                "data-taskid='" + key + "'>" +
+                                "data-taskid='" + val.id + "'>" +
                                 "   <span>Apply</span>" +
                                 "</button>" +
                                 "</td>" +
                                 "</tr>").appendTo("#taskscontent");
                     } else {
-                        $("<tr><td>" + val + "</td>" +
+                        $("<tr><td>" + val.name + "</td>" +
                                 "<td>" +
-                                "<button class='btn btn-primary btn-sm' onclick=\"completeTask('" + id + "', '" + val + "', '" + key + "')\" data-dismiss=\"modal\" " +
+                                "<button class='btn btn-primary btn-sm' onclick=\"completeTask('" + id + "', '" + val.name + "', '" + val.id + "')\" data-dismiss=\"modal\" " +
                                 "   <span>Complete</span>" +
                                 "</button>" +
                                 "</td>" +
