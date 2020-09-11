@@ -86,16 +86,18 @@ public class ApprovalsRestIT {
 
         // tasks assigned in just started approval
 
-        Map taskInfo = given()
-                .auth().oauth2(getAccessToken("mary"))
+        String taskInfo = given()
+                .auth()
+                .oauth2(getAccessToken("mary"))
                 .accept(ContentType.JSON)
                 .when()
                 .get("/approvals/" + id + "/tasks?user=admin&group=managers")
                 .then()
-                .statusCode(200).extract().as(Map.class);
-
-        assertEquals(1, taskInfo.size());
-        taskInfo.containsValue("firstLineApproval");
+                .statusCode(200)
+                .body("$.size", is(1))
+                .body("[0].name", is("firstLineApproval"))
+                .extract()
+                .path("[0].id");
 
         String payload = "{}";
         given()
@@ -104,7 +106,7 @@ public class ApprovalsRestIT {
                 .accept(ContentType.JSON)
                 .body(payload)
                 .when()
-                .post("/approvals/" + id + "/firstLineApproval/" + taskInfo.keySet().iterator().next() + "?user=mary&group=managers")
+                .post("/approvals/" + id + "/firstLineApproval/" + taskInfo + "?user=mary&group=managers")
                 .then()
                 .statusCode(200)
                 .body("id", is(id));
