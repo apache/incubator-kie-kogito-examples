@@ -180,7 +180,7 @@
 
             $.getJSON("/visaApplications/" + id + "/tasks", function (data) {
                 $.each(data, function (key, val) {
-                    if ("ApplicationApproval" == val) {
+                    if ("ApplicationApproval" == val.name) {
                         modal.find('.modal-title').text("Visa application for " + button.data("lastname") + ", " + button.data("firstname"));
                         modal.find('#firstName').val(button.data("firstname"));
                         modal.find('#lastName').val(button.data("lastname"));
@@ -193,7 +193,7 @@
                         modal.find('#nationality').val(button.data("nationality"));
 
                         $("#visa_p_id").val(id);
-                        $("#visa_t_id").val(key);
+                        $("#visa_t_id").val(val.id);
                     }
                 });
 
