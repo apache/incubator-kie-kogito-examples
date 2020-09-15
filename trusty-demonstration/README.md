@@ -2,6 +2,16 @@
 
 This is a demonstration of the trusty AI tracing capabilities. 
 
+## Requirements
+
+- docker version > 19.03.12
+- minikube version  > 1.11.0
+- java version > 1.9
+- maven version > 3.6.3
+- kubernetes version > 1.18
+
+Note: also previous versions of `docker`, `minikube` and `kubernetes`  might work, but they were not tested. 
+
 ## Build your kogito runtime application
 
 In this example, we will use the `dmn-tracing-quarkus` application that you can find in the root of this repository. This kogito application is using the `tracing-addon` so to export the tracing information that will be used by the trusty and explainability services for further analysis.
