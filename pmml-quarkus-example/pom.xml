@@ -106,6 +106,9 @@
                 <goals>
                   <goal>native-image</goal>
                 </goals>
+                <configuration>
+                  <reportErrorsAtRuntime>true</reportErrorsAtRuntime>
+                </configuration>
               </execution>
             </executions>
           </plugin>
