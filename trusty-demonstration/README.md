@@ -1,4 +1,4 @@
-# Awesome Trusty
+# Trusty demonstation
 
 This is a demonstration of the trusty AI tracing capabilities. 
 
@@ -44,11 +44,17 @@ minikube addons enable ingress
 minikube addons enable olm
 ```
 
+Set the Kogito release version 
+
+```bash
+KOGITO_VERSION=0.15.0
+```
+
 and then download/unpack the kogito operator
 
 ```bash
-wget https://github.com/kiegroup/kogito-cloud-operator/releases/download/v0.15.0/kogito-cli-0.15.0-linux-amd64.tar.gz
-tar zxf kogito-cli-0.14.0-linux-amd64.tar.gz
+wget https://github.com/kiegroup/kogito-cloud-operator/releases/download/v${KOGITO_VERSION}/kogito-cli-${KOGITO_VERSION}-linux-amd64.tar.gz
+tar zxf kogito-cli-${KOGITO_VERSION}-linux-amd64.tar.gz
 ```
 
 Create a new project called (for example) `trusty-demo` 
@@ -84,7 +90,7 @@ kubectl apply -f "https://raw.githubusercontent.com/infinispan/infinispan-operat
 
 wget "https://github.com/strimzi/strimzi-kafka-operator/releases/download/${STRIMZI_VERSION}/strimzi-${STRIMZI_VERSION}.tar.gz" -P "$TARGET_DIR/"
 tar zxf "${TARGET_DIR}/strimzi-${STRIMZI_VERSION}.tar.gz" -C "$TARGET_DIR"
-find strimzi-0.17.0/install/cluster-operator -name '*RoleBinding*.yaml' -type f -exec sed -i "s/namespace: .*/namespace: ${PROJECT_NAME}/" {} \;
+find strimzi-${STRIMZI_VERSION}/install/cluster-operator -name '*RoleBinding*.yaml' -type f -exec sed -i "s/namespace: .*/namespace: ${PROJECT_NAME}/" {} \;
 kubectl apply -f strimzi-${STRIMZI_VERSION}/install/cluster-operator/ -n ${PROJECT_NAME}
 ```
 
