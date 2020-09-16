@@ -17,6 +17,7 @@ package org.kie.kogito.serverless.examples;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -46,6 +47,10 @@ public class CountriesService {
 
             ObjectMapper mapper = new ObjectMapper();
             retNode = mapper.convertValue(country, JsonNode.class);
+
+            // population is given as string, but jsonpath needs it as int to be able to compare
+            String population = retNode.get("population").asText();
+            ((ObjectNode)retNode).put("population", Integer.parseInt(population));
 
         } catch (RestClientException e) {
             LOG.error(e.getMessage());

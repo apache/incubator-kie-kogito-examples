@@ -54,24 +54,22 @@
       "type": "switch",
       "dataConditions": [
         {
-          "path": "$.population",
-          "value": "20000000",
-          "operator": "lessthan",
+          "condition": "{{ $.[?(@.population  < 20000000)] }}",
           "transition": {
             "nextState": "ClassifyAsSmallOrMedium"
           }
         },
         {
-          "path": "$.population",
-          "value": "20000000",
-          "operator": "greaterthanorequals",
+          "condition": "{{ $.[?(@.population  >= 20000000)] }}",
           "transition": {
             "nextState": "ClassifyAsLarge"
           }
         }
       ],
       "default": {
-        "nextState": "ClassifyAsSmallOrMedium"
+        "transition": {
+          "nextState": "ClassifyAsSmallOrMedium"
+        }
       }
     },
     {
