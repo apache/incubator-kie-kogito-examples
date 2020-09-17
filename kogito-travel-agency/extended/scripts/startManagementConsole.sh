@@ -1,8 +1,13 @@
 #!/bin/sh
 echo "Starting the Kogito Management Console"
 
-MANAGEMENT_CONSOLE_VERSION=0.9.0
-MANAGEMENT_CONSOLE_RUNNER=https://search.maven.org/remotecontent?filepath=org/kie/kogito/management-console/${MANAGEMENT_CONSOLE_VERSION}/management-console-${MANAGEMENT_CONSOLE_VERSION}-runner.jar
+PROJECT_VERSION=$(cd ../ && mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+
+echo "Project version: ${PROJECT_VERSION}"
+
+MANAGEMENT_CONSOLE_VERSION=${PROJECT_VERSION}
+MANAGEMENT_CONSOLE_RUNNER="https://repository.jboss.org/nexus/service/local/artifact/maven/content?r=public&g=org.kie.kogito&a=management-console&v=${MANAGEMENT_CONSOLE_VERSION}&c=runner"
+
 
 wget -nc -O management-console-${MANAGEMENT_CONSOLE_VERSION}-runner.jar ${MANAGEMENT_CONSOLE_RUNNER}
 
