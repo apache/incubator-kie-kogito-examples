@@ -7,7 +7,7 @@
   <parent>
     <groupId>org.kie.kogito</groupId>
     <artifactId>kogito-examples</artifactId>
-    <version>0.15.0</version>
+    <version>0.15.1-SNAPSHOT</version>
   </parent>
   <artifactId>dmn-tracing-quarkus</artifactId>
   <name>Kogito Example :: Tracing DMN</name>
