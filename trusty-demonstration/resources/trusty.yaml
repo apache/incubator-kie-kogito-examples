@@ -10,7 +10,7 @@ spec:
     domain: quay.io
     namespace: kiegroup 
     name: kogito-trusty
-    tag: 0.15 
+    tag: "0.15" 
   kafka:
     externalURI: my-cluster-kafka-bootstrap:9092 
   infinispan:
