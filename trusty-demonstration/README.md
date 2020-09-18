@@ -208,6 +208,8 @@ A new tab in your browser should be opened automatically. Navigate under the pat
 {"Bribe": 1000,"Client": {"age": 43,"existing payments": 100,"salary": 1950},"Loan": {"duration": 15,"installment": 180}, "SupremeDirector": "Yes"}
 ```
 
+![SwaggerUI](images/swagger-ui.png)
+
 Expose the audit ui (alias trusty-ui) with 
 ```bash
 kubectl expose deployment trusty-ui -n ${PROJECT_NAME}  --type=NodePort --name=trusty-ui-np
@@ -216,3 +218,5 @@ minikube service trusty-ui-np -n ${PROJECT_NAME}
 
 And navigate through the decisions that have been taken by the kogito-runtime service. Enjoy!
 
+![ExecutionList](images/executionsTrustyUI.png)
+![ExecutionDetail](images/executionDetail.png)
