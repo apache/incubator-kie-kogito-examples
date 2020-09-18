@@ -1,0 +1,88 @@
+{
+    "id": "RESTExample",
+    "name": "Rest fun with numbers",
+    "version": "1.0v",
+    "functions": [
+        {
+            "name": "randomNumber",
+            "resource": "http://localhost:8080/numbers/random",
+            "type": "rest",
+            "metadata": {
+                "method": "GET"
+            }
+        },
+        {
+            "name": "multiplyAllByRandomAndSum",
+            "resource": "http://localhost:8080/numbers/{multiplier}/multiplyByAndSum",
+            "type": "rest",
+            "metadata": {
+                "method": "POST"
+            }
+        },
+        {
+            "name": "debug",
+            "type": "sysout"
+        }
+    ],
+    "states": [
+        {
+            "start": {
+                "kind": "default"
+            },
+            "name": "Calculations",
+            "type": "operation",
+            "actionMode": "sequential",
+            "actions": [
+                {
+                    "functionRef": {
+                        "refName": "randomNumber"
+                    }
+                },
+                {
+                    "functionRef": {
+                        "refName": "multiplyAllByRandomAndSum",
+                        "parameters": {
+                            "numbers": "$.inputNumbers",
+                            "multiplier": "$.randomNumber"
+                        }
+                    }
+                }
+            ],
+            "transition": {
+                "nextState": "SetMessage"
+            }
+        },
+        {
+            "name": "SetMessage",
+            "type": "inject",
+            "data": {
+                "message": "The sum is: "
+            },
+            "transition": {
+                "nextState": "PrintResult"
+            }
+        },
+        {
+            "name": "PrintResult",
+            "type": "operation",
+            "actionMode": "sequential",
+            "actions": [
+                {
+                    "name": "printAction",
+                    "functionRef": {
+                        "refName": "debug",
+                        "parameters": {
+                            "message": "$.message $.sum"
+                        }
+                    }
+                }
+            ],
+            "stateDataFilter": {
+                "dataOutputPath": "$.sum"
+            },
+            "end": {
+                "kind": "default"
+            }
+        }
+    ]
+}

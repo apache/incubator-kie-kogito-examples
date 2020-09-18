@@ -199,6 +199,7 @@
         <module>serverless-workflow-service-calls-quarkus</module>
         <module>serverless-workflow-service-calls-springboot</module>
         <module>serverless-workflow-events-quarkus</module>
+        <module>serverless-workflow-functions-quarkus</module>
       </modules>
     </profile>
     <profile>
