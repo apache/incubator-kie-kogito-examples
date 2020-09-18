@@ -20,6 +20,7 @@ import javax.ws.rs.core.MediaType;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.RestAssured;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -42,6 +43,10 @@ public class CloudEventListenerTest {
     private static WireMockServer sink;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CloudEventListenerTest.class);
+
+    static {
+        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+    }
 
     @BeforeAll
     public static void startSink() {
