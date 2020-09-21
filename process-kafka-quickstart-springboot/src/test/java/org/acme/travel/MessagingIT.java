@@ -15,10 +15,6 @@
  */
 package org.acme.travel;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.net.URI;
 import java.time.OffsetDateTime;
 import java.util.Optional;
@@ -27,7 +23,12 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.cloudevents.core.builder.CloudEventBuilder;
+import io.cloudevents.jackson.JsonFormat;
 import org.junit.After;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.kafka.KafkaClient;
@@ -39,10 +40,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 @SpringBootTest(classes = KogitoKafkaQuickstartSpringbootApplication.class)
 @ContextConfiguration(initializers = KafkaSpringBootTestResource.class)
@@ -61,6 +62,7 @@ public class MessagingIT {
     @Test
     public void testProcess() throws InterruptedException {
         objectMapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
+        objectMapper.registerModule(JsonFormat.getCloudEventJacksonModule());
 
         //number of generated events to test
         final int count = 3;
@@ -79,7 +81,7 @@ public class MessagingIT {
                 countDownLatch.countDown();
             } catch (JsonProcessingException e) {
                 LOGGER.error("Error parsing {}", s, e);
-                throw new RuntimeException(e);
+                fail(e);
             }
         });
 
@@ -88,19 +90,19 @@ public class MessagingIT {
                  .forEach(traveller -> kafkaClient.produce(generateCloudEvent(traveller), TOPIC_PRODUCER));
 
         countDownLatch.await(5, TimeUnit.SECONDS);
-        assertEquals(countDownLatch.getCount(), 0);
+        assertEquals(0,countDownLatch.getCount());
     }
 
     private String generateCloudEvent(Traveller traveller) {
         assertFalse(traveller.isProcessed());
         try {
             return objectMapper.writeValueAsString(CloudEventBuilder.v1()
-                                                                    .withId(UUID.randomUUID().toString())
-                                                                    .withSource(URI.create(""))
-                                                                    .withType("TravelersMessageDataEvent_3")
-                                                                    .withTime(OffsetDateTime.now())
-                                                                    .withData(objectMapper.writeValueAsBytes(traveller))
-                                                                    .build());
+                    .withId(UUID.randomUUID().toString())
+                    .withSource(URI.create(""))
+                    .withType("TravelersMessageDataEvent_3")
+                    .withTime(OffsetDateTime.now())
+                    .withData(objectMapper.writeValueAsString(traveller).getBytes())
+                    .build());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

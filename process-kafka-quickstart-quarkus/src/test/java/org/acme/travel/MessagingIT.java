@@ -15,10 +15,6 @@
  */
 package org.acme.travel;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.net.URI;
 import java.time.OffsetDateTime;
 import java.util.Optional;
@@ -26,10 +22,16 @@ import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
-
 import javax.inject.Inject;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.cloudevents.core.builder.CloudEventBuilder;
+import io.cloudevents.jackson.JsonFormat;
+import io.quarkus.test.common.QuarkusTestResource;
+import io.quarkus.test.junit.QuarkusTest;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.junit.After;
 import org.junit.jupiter.api.Test;
@@ -38,13 +40,10 @@ import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import io.quarkus.test.common.QuarkusTestResource;
-import io.quarkus.test.junit.QuarkusTest;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 @QuarkusTest
 @QuarkusTestResource(KafkaQuarkusTestResource.class)
@@ -65,6 +64,7 @@ public class MessagingIT {
     @Test
     public void testProcess() throws InterruptedException {
         objectMapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
+        objectMapper.registerModule(JsonFormat.getCloudEventJacksonModule());
         kafkaClient = new KafkaClient(kafkaBootstrapServers);
 
         //number of generated events to test
@@ -84,7 +84,7 @@ public class MessagingIT {
                 countDownLatch.countDown();
             } catch (JsonProcessingException e) {
                 LOGGER.error("Error parsing {}", s, e);
-                throw new RuntimeException(e);
+                fail(e);
             }
         });
 
@@ -93,19 +93,19 @@ public class MessagingIT {
                  .forEach(traveller -> kafkaClient.produce(generateCloudEvent(traveller), TOPIC_PRODUCER));
 
         countDownLatch.await(5, TimeUnit.SECONDS);
-        assertEquals(countDownLatch.getCount(), 0);
+        assertEquals(0, countDownLatch.getCount());
     }
 
     private String generateCloudEvent(Traveller traveller) {
         assertFalse(traveller.isProcessed());
         try {
             return objectMapper.writeValueAsString(CloudEventBuilder.v1()
-                                                           .withId(UUID.randomUUID().toString())
-                                                           .withSource(URI.create(""))
-                                                           .withType("TravelersMessageDataEvent_3")
-                                                           .withTime(OffsetDateTime.now())
-                                                           .withData(objectMapper.writeValueAsBytes(traveller))
-                                                           .build());
+                    .withId(UUID.randomUUID().toString())
+                    .withSource(URI.create(""))
+                    .withType("TravelersMessageDataEvent_3")
+                    .withTime(OffsetDateTime.now())
+                    .withData(objectMapper.writeValueAsString(traveller).getBytes())
+                    .build());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

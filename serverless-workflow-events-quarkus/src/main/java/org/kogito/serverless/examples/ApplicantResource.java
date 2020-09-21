@@ -17,6 +17,7 @@ package org.kogito.serverless.examples;
 
 import java.net.URI;
 import java.util.UUID;
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.InternalServerErrorException;
@@ -30,6 +31,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.cloudevents.CloudEvent;
 import io.cloudevents.core.builder.CloudEventBuilder;
+import io.cloudevents.jackson.JsonFormat;
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Emitter;
 import org.slf4j.Logger;
@@ -47,6 +49,11 @@ public class ApplicantResource {
     @Channel("out-applicants")
     Emitter<String> newApplicantEmitter;
 
+    @PostConstruct
+    public void init() {
+        mapper.registerModule(JsonFormat.getCloudEventJacksonModule());
+    }
+
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -56,7 +63,7 @@ public class ApplicantResource {
                     .withId(UUID.randomUUID().toString())
                     .withType("newApplicantEvent")
                     .withSource(URI.create("http://localhost:8080"))
-                    .withData(mapper.writeValueAsBytes(newApplicant))
+                    .withData(mapper.writeValueAsString(newApplicant).getBytes())
                     .build();
             newApplicantEmitter.send(mapper.writeValueAsString(applicantEvent));
         } catch (JsonProcessingException e) {
