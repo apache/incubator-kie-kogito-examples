@@ -20,13 +20,14 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.net.URI;
-import java.time.ZonedDateTime;
+import java.time.OffsetDateTime;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
+import io.cloudevents.core.builder.CloudEventBuilder;
 import org.junit.After;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.kafka.KafkaClient;
@@ -42,8 +43,6 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import io.cloudevents.v03.CloudEventBuilder;
 
 @SpringBootTest(classes = KogitoKafkaQuickstartSpringbootApplication.class)
 @ContextConfiguration(initializers = KafkaSpringBootTestResource.class)
@@ -95,12 +94,12 @@ public class MessagingIT {
     private String generateCloudEvent(Traveller traveller) {
         assertFalse(traveller.isProcessed());
         try {
-            return objectMapper.writeValueAsString(CloudEventBuilder.builder()
+            return objectMapper.writeValueAsString(CloudEventBuilder.v1()
                                                                     .withId(UUID.randomUUID().toString())
                                                                     .withSource(URI.create(""))
                                                                     .withType("TravelersMessageDataEvent_3")
-                                                                    .withTime(ZonedDateTime.now())
-                                                                    .withData(traveller)
+                                                                    .withTime(OffsetDateTime.now())
+                                                                    .withData(objectMapper.writeValueAsBytes(traveller))
                                                                     .build());
         } catch (Exception e) {
             throw new RuntimeException(e);

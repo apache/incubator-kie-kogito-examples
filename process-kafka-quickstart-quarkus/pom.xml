@@ -75,6 +75,11 @@
       <artifactId>cloudevents-api</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>io.cloudevents</groupId>
+      <artifactId>cloudevents-core</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
   <build>
     <finalName>${project.artifactId}</finalName>

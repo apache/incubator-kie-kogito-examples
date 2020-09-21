@@ -260,6 +260,11 @@
         <version>${version.cloudevents.api}</version>
       </dependency>
       <dependency>
+        <groupId>io.cloudevents</groupId>
+        <artifactId>cloudevents-core</artifactId>
+        <version>${version.cloudevents.api}</version>
+      </dependency>
+      <dependency>
         <groupId>org.testcontainers</groupId>
         <artifactId>kafka</artifactId>
         <version>${version.testcontainers}</version>
