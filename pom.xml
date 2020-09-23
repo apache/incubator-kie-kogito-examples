@@ -69,7 +69,7 @@
     <version.license.plugin>3.0</version.license.plugin>
     <skipLicensesCheck>false</skipLicensesCheck>
     <!-- cloudevents -->
-    <version.cloudevents.api>1.3.0</version.cloudevents.api>
+    <version.cloudevents.api>2.0.0-milestone2</version.cloudevents.api>
     <!-- pmml -->
     <version.org.jpmml>1.5.1</version.org.jpmml>
 
@@ -260,11 +260,21 @@
         <version>${version.cloudevents.api}</version>
       </dependency>
       <dependency>
+        <groupId>io.cloudevents</groupId>
+        <artifactId>cloudevents-core</artifactId>
+        <version>${version.cloudevents.api}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.cloudevents</groupId>
+        <artifactId>cloudevents-json-jackson</artifactId>
+        <version>${version.cloudevents.api}</version>
+      </dependency>
+      <dependency>
         <groupId>org.testcontainers</groupId>
         <artifactId>kafka</artifactId>
         <version>${version.testcontainers}</version>
       </dependency>
-      
+
       <!-- PMML -->
       <dependency>
         <groupId>org.jpmml</groupId>
