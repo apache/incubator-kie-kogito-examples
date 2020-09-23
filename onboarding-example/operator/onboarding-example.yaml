@@ -18,13 +18,13 @@ metadata:
 #spec:
 #  infinispan:
 #    useKogitoInfra: true
-#  envs:
+#  env:
 #    - name: MAVEN_ARGS_APPEND
 #      value: "-Ppersistence"
 spec:
   serviceLabels:
     onboarding: process
-  envs:
+  env:
     - name: NAMESPACE
       value: "<namespace_where_this_app_is_deployed>"
 ---
