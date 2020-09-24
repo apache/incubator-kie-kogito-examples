@@ -5,8 +5,8 @@ metadata:
 spec:
   type: RemoteSource
   runtime: springboot
-  #envs:
-  # envs can be used to set variables during build
+  #env:
+  # env can be used to set variables during build
   #- name: MY_CUSTOM_ENV
   #  value: "my value"
   gitSource:
@@ -22,7 +22,7 @@ metadata:
 spec:
   runtime: springboot
   # uncomment to enable persistence
-  #envs:
+  #env:
   #  - name: MAVEN_ARGS_APPEND
   #    value: "-Ppersistence"
   #infinispan:
