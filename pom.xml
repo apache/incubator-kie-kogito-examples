@@ -72,6 +72,7 @@
     <version.cloudevents.api>2.0.0-milestone2</version.cloudevents.api>
     <!-- pmml -->
     <version.org.jpmml>1.5.1</version.org.jpmml>
+    <version.wiremock>2.27.2</version.wiremock>
 
   </properties>
 
@@ -199,6 +200,7 @@
         <module>serverless-workflow-service-calls-quarkus</module>
         <module>serverless-workflow-service-calls-springboot</module>
         <module>serverless-workflow-events-quarkus</module>
+        <module>serverless-workflow-functions-quarkus</module>
       </modules>
     </profile>
     <profile>
@@ -281,7 +283,12 @@
         <artifactId>pmml-model</artifactId>
         <version>${version.org.jpmml}</version>
       </dependency>
-
+      <dependency>
+        <groupId>com.github.tomakehurst</groupId>
+        <artifactId>wiremock-jre8</artifactId>
+        <scope>test</scope>
+        <version>${version.wiremock}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
