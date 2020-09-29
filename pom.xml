@@ -318,7 +318,7 @@
             <excludes>
               <exclude>${failsafe.exclude}</exclude>
             </excludes>
-            <systemProperties>
+            <systemPropertyVariables>
               <tests.category>${tests.category}</tests.category>
               <enable.resource.infinispan>${enable.resource.infinispan}</enable.resource.infinispan>
               <enable.resource.kafka>${enable.resource.kafka}</enable.resource.kafka>
@@ -327,7 +327,7 @@
               <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
               <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
               <enable.resource.mongodb>${enable.resource.mongodb}</enable.resource.mongodb>
-            </systemProperties>
+            </systemPropertyVariables>
             <classesDirectory>${project.build.outputDirectory}</classesDirectory>
           </configuration>
           <executions>
@@ -389,10 +389,10 @@
             <forkCount>${surefire.forkCount}</forkCount>
             <reuseForks>true</reuseForks>
             <runOrder>hourly</runOrder>
-            <systemProperties>
+            <systemPropertyVariables>
               <tests.category>${tests.category}</tests.category>
               <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-            </systemProperties>
+            </systemPropertyVariables>
           </configuration>
         </plugin>
         <plugin>

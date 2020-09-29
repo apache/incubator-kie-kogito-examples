@@ -15,66 +15,81 @@
  */
 package org.acme.deals;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-import java.util.Map;
-
+import io.quarkus.test.common.QuarkusTestResource;
+import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.testcontainers.quarkus.InfinispanQuarkusTestResource;
 
-import io.quarkus.test.common.QuarkusTestResource;
-import io.quarkus.test.junit.QuarkusTest;
-import io.restassured.http.ContentType;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
 
 @QuarkusTest
 @QuarkusTestResource(InfinispanQuarkusTestResource.class)
 public class DealsRestIT {
 
+    static {
+        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+    }
+
     @Test
     public void testDealsRest() {
         // test adding new deal
-        String addDealPayload = "{\"name\" : \"my fancy deal\", \"traveller\" : { \"firstName\" : \"John\", \"lastName\" : \"Doe\", \"email\" : \"jon.doe@example.com\", \"nationality\" : \"American\",\"address\" : { \"street\" : \"main street\", \"city\" : \"Boston\", \"zipCode\" : \"10005\", \"country\" : \"US\" }}}";
+        String deal = "my fancy deal";
+        String addDealPayload = "{\"name\" : \"" + deal + "\", \"traveller\" : { \"firstName\" : \"John\", \"lastName\" : \"Doe\", \"email\" : \"jon.doe@example.com\", \"nationality\" : \"American\",\"address\" : { \"street\" : \"main street\", \"city\" : \"Boston\", \"zipCode\" : \"10005\", \"country\" : \"US\" }}}";
         String dealId = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(addDealPayload)
                 .when().post("/deals")
-                .then().log().ifValidationFails().statusCode(201).body("id", notNullValue()).extract().path("id");
+                .then().statusCode(201).body("id", notNullValue()).extract().path("id");
 
         // test getting the created deal
         given().accept(ContentType.JSON)
                 .when().get("/deals")
-                .then().log().ifValidationFails().statusCode(200).body("$.size()", is(1), "[0].id", is(dealId));
+                .then().statusCode(200)
+                .body("$.size()", is(1))
+                .body("[0].id", is(dealId))
+                .body("[0].name", is(deal));
 
         // test getting order by id
         given().accept(ContentType.JSON)
                 .when().get("/deals/" + dealId)
-                .then().log().ifValidationFails().statusCode(200).body("id", is(dealId));
+                .then().statusCode(200).body("id", is(dealId));
 
         // get deals for review
         String dealReviewId = given().accept(ContentType.JSON)
                 .when().get("/dealreviews")
-                .then().log().ifValidationFails().statusCode(200).body("$.size()", is(1)).body("[0].id", notNullValue()).extract().path("[0].id");
+                .then().statusCode(200)
+                .body("$.size()", is(1))
+                .body("[0].id", notNullValue())
+                .body("[0].deal", is(deal))
+                .extract().path("[0].id");
 
         // get task for john
         String taskId = given().accept(ContentType.JSON)
                 .when().get("/dealreviews/{uuid}/tasks?user=john", dealReviewId)
-                .then().log().ifValidationFails().statusCode(200).body("$.size", is(1)).extract().path("[0].id");
-        
+                .then().statusCode(200)
+                .body("$.size", is(1))
+                .body("[0].name", is("review"))
+                .body("[0].parameters.deal", is(deal))
+                .extract().path("[0].id");
+
         // complete review task
-        given().contentType(ContentType.JSON).accept(ContentType.JSON).body("{\"review\" : \"very good work\"}")
+        String review = "very good work";
+        given().contentType(ContentType.JSON).accept(ContentType.JSON).body("{\"review\" : \"" + review + "\"}")
                 .when().post("/dealreviews/{uuid}/review/{tuuid}?user=john", dealReviewId, taskId)
-                .then().log().ifValidationFails().statusCode(200);
+                .then().statusCode(200)
+                .body("review", is(review))
+                .body("deal", is(deal));
 
         //verify no deals to review
         given().accept(ContentType.JSON)
                 .when().get("/dealreviews")
-                .then().log().ifValidationFails().statusCode(200).body("$.size()", is(0));
+                .then().statusCode(200).body("$.size()", is(0));
 
         //verify no deals
         given().accept(ContentType.JSON)
                 .when().get("/deals")
-                .then().log().ifValidationFails().statusCode(200).body("$.size()", is(0));
+                .then().statusCode(200).body("$.size()", is(0));
     }
 }
