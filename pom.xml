@@ -69,7 +69,7 @@
     <version.license.plugin>3.0</version.license.plugin>
     <skipLicensesCheck>false</skipLicensesCheck>
     <!-- cloudevents -->
-    <version.cloudevents.api>2.0.0-milestone2</version.cloudevents.api>
+    <version.cloudevents.api>2.0.0-milestone3</version.cloudevents.api>
     <!-- pmml -->
     <version.org.jpmml>1.5.1</version.org.jpmml>
     <version.wiremock>2.27.2</version.wiremock>
