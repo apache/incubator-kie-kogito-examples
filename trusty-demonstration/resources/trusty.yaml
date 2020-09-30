@@ -1,0 +1,24 @@
+apiVersion: app.kiegroup.org/v1alpha1
+kind: KogitoTrusty
+metadata:
+  name: trusty
+  labels:
+    app: trusty
+spec:
+  replicas: 1
+  image:
+    domain: quay.io
+    namespace: kiegroup 
+    name: kogito-trusty
+    tag: "0.15" 
+  kafka:
+    externalURI: my-cluster-kafka-bootstrap:9092 
+  infinispan:
+    uri: example-infinispan:11222 
+    useAuth: true
+    credentials:
+      secretName: kogito-external-infinispan-secret
+      usernameKey: user 
+      passwordKey: pass 
+    saslMechanism: DIGEST-MD5
+    useKogitoInfra: false

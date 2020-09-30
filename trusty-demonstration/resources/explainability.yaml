@@ -1,0 +1,14 @@
+apiVersion: app.kiegroup.org/v1alpha1
+kind: KogitoExplainability
+metadata:
+  name: explainability
+spec:
+  replicas: 1
+  image:
+    domain: quay.io
+    namespace: kiegroup 
+    name: kogito-explainability
+    tag: latest
+  kafka:
+    externalURI: my-cluster-kafka-bootstrap:9092 
+

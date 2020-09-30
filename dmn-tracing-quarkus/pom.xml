@@ -76,7 +76,7 @@
   <build>
     <finalName>${project.artifactId}</finalName>
     <plugins>
-      <plugin>
+     <plugin>
         <groupId>io.quarkus</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
         <executions>
@@ -87,7 +87,7 @@
           </execution>
         </executions>
       </plugin>
-    </plugins>
+   </plugins>
   </build>
   <profiles>
     <profile>

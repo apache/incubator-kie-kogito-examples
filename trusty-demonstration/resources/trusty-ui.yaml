@@ -1,0 +1,16 @@
+apiVersion: app.kiegroup.org/v1alpha1
+kind: KogitoTrustyUI
+metadata:
+  name: trusty-ui
+spec:
+  replicas: 1
+  image:
+    domain: quay.io
+    namespace: kiegroup 
+    name: kogito-trusty-ui
+    tag: "0.15"
+  envs:
+    - name: KOGITO_TRUSTY_ENDPOINT
+      value: http://172.17.0.2
+    - name: KOGITO_TRUSTY_WS_URL
+      value: ws://172.17.0.2
