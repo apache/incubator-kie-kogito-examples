@@ -1,3 +1,14 @@
+---
+#Strimzi operator should be pre-installed in namespace
+apiVersion: app.kiegroup.org/v1alpha1
+kind: KogitoInfra
+metadata:
+  name: kogito-kafka-infra
+spec:
+  resource:
+    apiVersion: kafka.strimzi.io/v1beta1
+    kind: Kafka
+---
 apiVersion: app.kiegroup.org/v1alpha1
 kind: KogitoBuild
 metadata:
@@ -15,5 +26,5 @@ kind: KogitoRuntime
 metadata:
   name: dmn-tracing-quarkus
 spec:
-  kafka:
-    useKogitoInfra: true
+  infra:
+    - kogito-kafka-infra

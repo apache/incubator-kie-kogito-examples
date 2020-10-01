@@ -9,6 +9,17 @@ spec:
     uri: 'https://github.com/kiegroup/kogito-examples'
   # set your maven nexus repository to speed up the build time
   #mavenMirrorURL:
+#uncomment to enable persistence
+#---
+##Infinispan operator should be pre-installed in namespace
+#apiVersion: app.kiegroup.org/v1alpha1
+#kind: KogitoInfra
+#metadata:
+#  name: kogito-infinispan-infra
+#spec:
+#  resource:
+#    apiVersion: infinispan.org/v1
+#    kind: Infinispan
 ---
 apiVersion: app.kiegroup.org/v1alpha1
 kind: KogitoRuntime
@@ -16,8 +27,8 @@ metadata:
   name: process-quarkus-example
 # uncomment to enable persistence
 #spec:
-#  infinispan:
-#    useKogitoInfra: true
+#  infra:
+#    - kogito-infinispan-infra
   #env:
   #  - name: MAVEN_ARGS_APPEND
   #    value: "-Ppersistence"
