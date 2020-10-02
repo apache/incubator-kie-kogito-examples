@@ -1,3 +1,13 @@
+#Infinispan operator should be pre-installed in namespace
+apiVersion: app.kiegroup.org/v1alpha1
+kind: KogitoInfra
+metadata:
+  name: kogito-infinispan-infra
+spec:
+  resource:
+    apiVersion: infinispan.org/v1
+    kind: Infinispan
+---
 apiVersion: app.kiegroup.org/v1alpha1
 kind: KogitoBuild
 metadata:
@@ -15,5 +25,5 @@ kind: KogitoRuntime
 metadata:
   name: process-infinispan-persistence-quarkus
 spec:
-  infinispan:
-    useKogitoInfra: true
+  infra:
+    - kogito-infinispan-infra
