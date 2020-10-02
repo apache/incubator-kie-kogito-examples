@@ -1,0 +1,91 @@
+{
+  "id": "handle_backend",
+  "name": "HandleBackend",
+  "version": "1.0",
+  "functions": [
+    {
+      "name": "AddLabels",
+      "type": "service",
+      "metadata": {
+        "interface": "org.kogito.examples.sw.github.workflow.GitHubService",
+        "operation": "addLabels"
+      }
+    },
+    {
+      "name": "AddReviewers",
+      "type": "service",
+      "metadata": {
+        "interface": "org.kogito.examples.sw.github.workflow.GitHubService",
+        "operation": "addReviewers"
+      }
+    }
+  ],
+  "events": [
+    {
+      "name": "BackendNewChange",
+      "source": "checker_workflow_backend",
+      "type": "backend_changed",
+      "kind": "produced"
+    }
+  ],
+  "states": [
+    {
+      "name": "CheckBackend",
+      "start": {
+        "kind": "default"
+      },
+      "type": "switch",
+      "dataConditions": [
+        {
+          "condition": "{{ $.files[?(@ =~ /^.*backend.*$/i )] }}",
+          "transition": {
+            "produceEvents": [
+              {
+                "eventRef": "BackendNewChange"
+              }
+            ],
+            "nextState": "InjectBackendData"
+          }
+        },
+        {
+          "condition": "{{ $.files[?(@ =~ /^(?!.*backend).*$/i )] }}",
+          "end": {
+            "kind": "default"
+          }
+        }
+      ]
+    },
+    {
+      "name": "InjectBackendData",
+      "type": "inject",
+      "data": {
+        "labels": "backend",
+        "reviewers": "LCaparelli"
+      },
+      "transition": {
+        "nextState": "HandleBackend"
+      }
+    },
+    {
+      "name": "HandleBackend",
+      "type": "operation",
+      "actions": [
+        {
+          "name": "addBackendLabels",
+          "functionRef": {
+            "refName": "AddLabels"
+          }
+        },
+        {
+          "name": "addBackendReviewers",
+          "functionRef": {
+            "refName": "AddReviewers"
+          }
+        }
+      ],
+      "end": {
+        "kind": "default"
+      }
+    }
+  ]
+}

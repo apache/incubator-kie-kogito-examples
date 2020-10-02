@@ -1,0 +1,6 @@
+- op: replace
+  path: /spec/http/0/route/0/destination/host
+  value: github-event-listener-jr5x7-jx99p.kogito-github.svc.cluster.local
+- op: replace
+  path: /spec/http/0/route/0/headers/request/set/Knative-Serving-Revision
+  value: github-event-listener-jr5x7-jx99p

@@ -1,0 +1,17 @@
+# TODO: remove once https://issues.redhat.com/browse/KOGITO-3516 is solved
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: pr-checker-workflow
+  name: pr-checker-workflow-default-http
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: pr-checker-workflow
+  sessionAffinity: None
+  type: ClusterIP

@@ -1,0 +1,94 @@
+{
+  "id": "prchecker",
+  "name": "Github PR Checker Workflow",
+  "version": "1.0",
+  "functions": [
+    {
+      "name": "FetchPRFiles",
+      "type": "service",
+      "metadata": {
+        "interface": "org.kogito.examples.sw.github.workflow.GitHubService",
+        "operation": "fetchPRFiles"
+      }
+    },
+    {
+      "name": "AddLabels",
+      "type": "service",
+      "metadata": {
+        "interface": "org.kogito.examples.sw.github.workflow.GitHubService",
+        "operation": "addLabels"
+      }
+    },
+    {
+      "name": "AddReviewers",
+      "type": "service",
+      "metadata": {
+        "interface": "org.kogito.examples.sw.github.workflow.GitHubService",
+        "operation": "addReviewers"
+      }
+    }
+  ],
+  "events": [
+    {
+      "name": "PullRequest",
+      "source": "https://github.com/ricardozanini/kogito-sw-demo",
+      "type": "dev.knative.source.github.pull_request",
+      "kind": "consumed"
+    },
+    {
+      "name": "PRVerified",
+      "source": "checker_pr_verified",
+      "type": "pr_verified",
+      "kind": "produced"
+    }
+  ],
+  "states": [
+    {
+      "name": "HandleOpenPR",
+      "type": "event",
+      "start": {
+        "kind": "default"
+      },
+      "onEvents": [
+        {
+          "eventRefs": [
+            "PullRequest"
+          ],
+          "actions": [
+            {
+              "functionRef": {
+                "refName": "FetchPRFiles"
+              }
+            }
+          ]
+        }
+      ],
+      "transition": {
+        "nextState": "DecoratePullRequest"
+      }
+    },
+    {
+      "name": "DecoratePullRequest",
+      "type": "parallel",
+      "branches": [
+        {
+          "name": "HandleBackendSubFlow",
+          "workflowId": "handle_backend"
+        },
+        {
+          "name": "HandleFrontendSubFlow",
+          "workflowId": "handle_frontend"
+        }
+      ],
+      "end": {
+        "kind": "default",
+        "produceEvents": [
+          {
+            "eventRef": "PRVerified"
+          }
+        ]
+      }
+    }
+  ]
+}
+

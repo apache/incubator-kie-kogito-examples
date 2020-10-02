@@ -1,0 +1,27 @@
+@startuml
+title Pull Request Check Workflow
+skinparam backgroundColor White
+skinparam state {
+StartColor Green
+EndColor Red
+}
+[*] --> HandleOpenPR
+
+HandleOpenPR: Type: Event
+HandleOpenPR: OnEvents: PullRequest
+HandleOpenPR: Functions: FetchPRFiles
+HandleOpenPR --> DecoratePullRequest
+
+DecoratePullRequest: Type: Parallel
+DecoratePullRequest --> HandleBackendSubFlow
+DecoratePullRequest --> HandleFrontendSubFlow
+
+HandleBackendSubFlow: Type: Subflow
+HandleBackendSubFlow: Id: handle_backend
+HandleBackendSubFlow --> [*]
+
+HandleFrontendSubFlow: Type: Subflow
+HandleFrontendSubFlow: Id: handle_frontend
+HandleFrontendSubFlow --> [*]
+
+@enduml

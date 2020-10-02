@@ -1,0 +1,26 @@
+@startuml
+title Handle Frontend Workflow
+skinparam backgroundColor White
+skinparam state {
+StartColor Green
+EndColor Red
+}
+[*] --> CheckFrontend
+
+CheckFrontend: Type: Switch State
+CheckFrontend: Conditions: 2
+CheckFrontend: ProduceEvent: FrontendNewChange
+CheckFrontend --> InjectFrontendData : Change
+CheckFrontend --> [*] : No change
+
+InjectFrontendData : Type: Inject State
+InjectFrontendData: Data:
+InjectFrontendData: labels: backend
+InjectFrontendData: reviewers: LCaparelli
+InjectFrontendData --> HandleFrontend
+
+HandleFrontend : Type: Operation State
+HandleFrontend : Functions: addFrontendLabels, addFrontendReviewers
+HandleFrontend --> [*]
+
+@enduml

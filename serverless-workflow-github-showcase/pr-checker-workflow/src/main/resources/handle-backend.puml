@@ -1,0 +1,26 @@
+@startuml
+title Handle Backend Workflow
+skinparam backgroundColor White
+skinparam state {
+StartColor Green
+EndColor Red
+}
+[*] --> CheckBackend
+
+CheckBackend: Type: Switch State
+CheckBackend: Conditions: 2
+CheckBackend: ProduceEvent: BackendNewChange
+CheckBackend --> InjectBackendData : Change
+CheckBackend --> [*] : No change
+
+InjectBackendData : Type: Inject State
+InjectBackendData: Data:
+InjectBackendData: labels: backend
+InjectBackendData: reviewers: LCaparelli
+InjectBackendData --> HandleBackend
+
+HandleBackend : Type: Operation State
+HandleBackend : Functions: addBackendLabels, addBackendReviewers
+HandleBackend --> [*]
+
+@enduml

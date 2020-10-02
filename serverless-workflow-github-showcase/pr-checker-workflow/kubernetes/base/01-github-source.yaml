@@ -1,0 +1,22 @@
+apiVersion: sources.knative.dev/v1alpha1
+kind: GitHubSource
+metadata:
+  name: github-event-listener
+spec:
+  ownerAndRepository: repository_placeholder
+  eventTypes:
+    - pull_request
+  accessToken:
+    secretKeyRef:
+      name: github-webhook-secret
+      key: accessToken
+  secretToken:
+    secretKeyRef:
+      name: github-webhook-secret
+      key: secretToken
+  sink:
+    # we sink the event to the broker
+    ref:
+      apiVersion: eventing.knative.dev/v1
+      kind: Broker
+      name: default

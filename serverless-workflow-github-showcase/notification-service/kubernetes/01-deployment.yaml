@@ -1,0 +1,23 @@
+apiVersion: serving.knative.dev/v1 # Current version of Knative (0.17.x)
+kind: Service
+metadata:
+  name: notification-service
+spec:
+  template:
+    spec:
+      containers:
+        - env:
+            - name: SLACK_WEBHOOK
+              valueFrom:
+                secretKeyRef:
+                  key: slackWebHook
+                  name: slack-ids
+          image: image_placeholder
+          volumeMounts:
+            - name: properties
+              mountPath: "/config/application.properties"
+              subPath: application.properties
+      volumes:
+        - name: properties
+          configMap:
+            name: notification-service-properties

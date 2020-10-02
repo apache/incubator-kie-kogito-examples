@@ -1,0 +1,12 @@
+bases:
+  - ../base
+resources:
+  - 00-github-smee-virtualservice.yaml
+  - 01-kogito-service-ingress.yaml
+patchesJson6902:
+  - target:
+      kind: VirtualService
+      name: github-event-listener-smee
+      version: v1beta1
+      group: networking.istio.io
+    path: patch-virtual-service.yaml

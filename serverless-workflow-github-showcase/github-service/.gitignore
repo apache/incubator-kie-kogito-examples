@@ -1,0 +1,5 @@
+# we don't want sensible information to get exposed
+*.der
+*.pem
+kubernetes/apply_image_ns.yaml
+kubernetes/github-app.env

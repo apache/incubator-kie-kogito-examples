@@ -1,0 +1,24 @@
+namespace: kogito-github
+resources:
+  - 00-broker.yaml
+  - 01-deployment.yaml
+  - 02-trigger.yaml
+generatorOptions:
+  disableNameSuffixHash: true
+  labels:
+    app: notification-service
+patchesJson6902:
+  - path: apply_image_ns.yaml
+    target:
+      kind: Service
+      name: notification-service
+      version: v1
+      group: serving.knative.dev
+configMapGenerator:
+  - files:
+      - application.properties
+    name: notification-service-properties
+secretGenerator:
+  - env: slack.env
+    name: slack-ids
+    type: Opaque

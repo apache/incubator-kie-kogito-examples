@@ -1,0 +1,11 @@
+apiVersion: app.kiegroup.org/v1alpha1
+kind: KogitoRuntime
+metadata:
+  name: pr-checker-workflow
+spec:
+  replicas: 1
+  image:
+    namespace: placeholder
+  envs:
+    - name: GITHUB_SERVICE_URI
+      value: http://github-service.kogito-github.svc.cluster.local
