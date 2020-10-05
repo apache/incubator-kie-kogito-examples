@@ -15,6 +15,8 @@
  */
 package org.kie.kogito.examples;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -33,6 +35,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @QuarkusTest
@@ -318,7 +321,9 @@ public class OrdersRestIT {
 
     @Test
     public void testProtobufListIsAvailable() {
-        given().contentType(ContentType.JSON).accept(ContentType.JSON).when()
-                .get("/persistence/protobuf/list.json").then().statusCode(200);
+        List<String> files = given().contentType(ContentType.JSON).accept(ContentType.JSON).when()
+                .get("/persistence/protobuf/list.json").as(List.class);
+
+        assertEquals(2, files.size());
     }
 }
