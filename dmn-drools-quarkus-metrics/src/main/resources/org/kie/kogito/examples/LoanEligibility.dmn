@@ -144,7 +144,7 @@
           <dmn:text>SupremeDirector</dmn:text>
         </dmn:inputExpression>
       </dmn:input>
-      <dmn:output id="_6CBC7A80-E485-425E-81F9-570E96A64E2E" typeRef="boolean"/>
+      <dmn:output id="_6CBC7A80-E485-425E-81F9-570E96A64E2E"/>
       <dmn:rule id="_E11830D2-F640-4E6B-9680-E28FAF342951">
         <dmn:inputEntry id="_74F3C294-5DCB-4B9A-9271-4972F1612630">
           <dmn:text>"Yes"</dmn:text>

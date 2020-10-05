@@ -55,7 +55,7 @@ public class LoanEligibilityTest {
     private String kafkaBootstrapServers;
 
     @Test
-    public void testEvaluateTrafficViolation() throws InterruptedException {
+    public void testEvaluateLoanEligibility() throws InterruptedException {
         kafkaClient = new KafkaClient(kafkaBootstrapServers);
 
         final CountDownLatch countDownLatch = new CountDownLatch(1);
