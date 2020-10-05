@@ -43,5 +43,21 @@
     <module>onboarding-quarkus</module>
     <module>onboarding-springboot</module>
   </modules>
+
+  <profiles>
+    <profile>
+      <id>native</id>
+      <activation>
+        <property>
+          <name>native</name>
+        </property>
+      </activation>
+      <modules>
+        <module>hr</module>
+        <module>payroll</module>
+        <module>onboarding-quarkus</module>
+      </modules>
+    </profile>
+  </profiles>
   
 </project>
