@@ -315,4 +315,10 @@ public class OrdersRestIT {
         given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
                 .body("$.size()", is(0));
     }
+
+    @Test
+    public void testProtobufListIsAvailable() {
+        given().contentType(ContentType.JSON).accept(ContentType.JSON).when()
+                .get("/persistence/protobuf/list.json").then().statusCode(200);
+    }
 }
