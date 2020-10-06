@@ -1,3 +1,13 @@
+#Strimzi operator should be pre-installed in namespace
+apiVersion: app.kiegroup.org/v1alpha1
+kind: KogitoInfra
+metadata:
+  name: kogito-kafka-infra
+spec:
+  resource:
+    apiVersion: kafka.strimzi.io/v1beta1
+    kind: Kafka
+---
 apiVersion: app.kiegroup.org/v1alpha1
 kind: KogitoBuild
 metadata:
@@ -5,8 +15,8 @@ metadata:
 spec:
   type: RemoteSource
   runtime: springboot
-  #envs:
-  # envs can be used to set variables during build
+  #env:
+  # env can be used to set variables during build
   #- name: MY_CUSTOM_ENV
   #  value: "my value"
   gitSource:
@@ -21,5 +31,5 @@ metadata:
   name: process-kafka-quickstart-springboot
 spec:
   runtime: springboot
-  kafka:
-    useKogitoInfra: true
+  infra:
+    - kogito-kafka-infra

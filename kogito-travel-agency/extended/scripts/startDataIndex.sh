@@ -1,10 +1,14 @@
 #!/bin/sh
 echo "Script requires your Kogito Travel Agency and Visas projects to be compiled"
 
-DATA_INDEX_VERSION=0.9.0
+PROJECT_VERSION=$(cd ../ && mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+
+echo "Project version: ${PROJECT_VERSION}"
+
+DATA_INDEX_VERSION=${PROJECT_VERSION}
 
 PERSISTENCE_FOLDER=target/classes/persistence
-DATA_INDEX_RUNNER=https://search.maven.org/remotecontent?filepath=org/kie/kogito/data-index-service/${DATA_INDEX_VERSION}/data-index-service-${DATA_INDEX_VERSION}-runner.jar
+DATA_INDEX_RUNNER="https://repository.jboss.org/nexus/service/local/artifact/maven/content?r=public&g=org.kie.kogito&a=data-index-service-infinispan&v=${DATA_INDEX_VERSION}&c=runner"
 
 KOGITO_TRAVEL_AGENCY_PERSISTENCE=../travels/target/classes/persistence
 KOGITO_VISAS_PERSISTENCE=../visas/target/classes/persistence
@@ -29,7 +33,7 @@ fi
 
 #[ ! -d ${PERSISTENCE_FOLDER} ] && echo "Persistence folder is missing. Make sure that your project was compiled" && exit 0
 
-#wget -nc https://repo2.maven.org/maven2/org/kie/kogito/data-index-service/${DATA_INDEX_VERSION}/data-index-service-${DATA_INDEX_VERSION}-runner.jar
-wget -nc -O data-index-service-${DATA_INDEX_VERSION}-runner.jar ${DATA_INDEX_RUNNER}
+#wget -nc https://repository.jboss.org/org/kie/kogito/data-index-service-infinispan/${DATA_INDEX_VERSION}/data-index-service-infinispan-${DATA_INDEX_VERSION}-runner.jar
+wget -nc -O data-index-service-infinispan-${DATA_INDEX_VERSION}-runner.jar ${DATA_INDEX_RUNNER}
 cp -rf ${PERSISTENCE_FOLDER} persistence
-java -jar  -Dkogito.protobuf.folder=`pwd`/persistence data-index-service-${DATA_INDEX_VERSION}-runner.jar
+java -jar  -Dkogito.protobuf.folder=`pwd`/persistence data-index-service-infinispan-${DATA_INDEX_VERSION}-runner.jar

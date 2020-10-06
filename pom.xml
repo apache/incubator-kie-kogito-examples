@@ -41,6 +41,8 @@
     <failsafe.exclude>**/Native*IT.java</failsafe.exclude>
     <alphanetworkCompilerEnabled>false</alphanetworkCompilerEnabled>
     <tests.category></tests.category>
+    <!-- Port 0 means dynamic port -->
+    <tests.quarkus.http.port>0</tests.quarkus.http.port> 
 
     <version.io.quarkus>1.8.0.Final</version.io.quarkus>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -50,7 +52,7 @@
     <springboot.version>2.3.1.RELEASE</springboot.version>
     <!-- kogito -->
     <kogito.version>${project.version}</kogito.version>
-    <version.org.optaplanner>7.39.0.Final</version.org.optaplanner>
+    <version.org.optaplanner>8.0.0-SNAPSHOT</version.org.optaplanner>
     <!-- infinispan -->
     <infinispan.version>10.1.5.Final</infinispan.version>
     <infinispan.starter.version>2.2.3.Final</infinispan.starter.version>
@@ -70,9 +72,10 @@
     <version.license.plugin>3.0</version.license.plugin>
     <skipLicensesCheck>false</skipLicensesCheck>
     <!-- cloudevents -->
-    <version.cloudevents.api>1.3.0</version.cloudevents.api>
+    <version.cloudevents.api>2.0.0-milestone3</version.cloudevents.api>
     <!-- pmml -->
     <version.org.jpmml>1.5.1</version.org.jpmml>
+    <version.wiremock>2.27.2</version.wiremock>
 
   </properties>
 
@@ -200,8 +203,10 @@
         <module>serverless-workflow-service-calls-quarkus</module>
         <module>serverless-workflow-service-calls-springboot</module>
         <module>serverless-workflow-events-quarkus</module>
+        <module>serverless-workflow-functions-quarkus</module>
       </modules>
     </profile>
+
     <profile>
       <id>persistence</id>
       <activation>
@@ -230,6 +235,76 @@
         <module>process-quarkus-example</module>
         <module>process-springboot-example</module>
       </modules>
+    </profile>
+
+    <profile>
+      <id>native</id>
+      <properties>
+        <failsafe.include>**/Native*IT.java</failsafe.include>
+        <failsafe.exclude></failsafe.exclude>
+        <quarkus.package.type>native</quarkus.package.type>
+        <!-- Native building needs a fixed port for tests -->
+        <tests.quarkus.http.port>8080</tests.quarkus.http.port>
+      </properties>
+      <activation>
+        <property>
+          <name>native</name>
+        </property>
+      </activation>
+      <modules>
+        <module>decisiontable-quarkus-example</module>
+        <module>dmn-listener-quarkus</module>
+        <module>dmn-pmml-quarkus-example</module>
+        <module>dmn-quarkus-example</module>
+        <module>dmn-drools-quarkus-metrics</module>
+        <module>dmn-tracing-quarkus</module>
+        <module>flexible-process-quarkus</module>
+        <module>kogito-travel-agency</module>
+        <module>onboarding-example</module>
+        <module>pmml-quarkus-example</module>
+        <module>process-business-rules-quarkus</module>
+        <module>process-infinispan-persistence-quarkus</module>
+        <module>process-kafka-quickstart-quarkus</module>
+        <module>process-knative-quickstart-quarkus</module>
+        <module>process-mongodb-persistence-quarkus</module>
+        <module>process-optaplanner-quarkus</module>
+        <module>process-quarkus-example</module>
+        <module>process-scripts-quarkus</module>
+        <module>process-service-calls-quarkus</module>
+        <module>process-service-rest-call-quarkus</module>
+        <module>process-timer-quarkus</module>
+        <module>process-usertasks-custom-lifecycle-quarkus</module>
+        <module>process-usertasks-quarkus</module>
+        <module>process-usertasks-with-security-oidc-quarkus</module>
+        <module>process-usertasks-with-security-quarkus</module>
+        <module>rules-quarkus-helloworld</module>
+        <module>ruleunit-quarkus-example</module>
+        <module>serverless-workflow-greeting-quarkus</module>
+        <module>serverless-workflow-service-calls-quarkus</module>
+        <module>serverless-workflow-events-quarkus</module>
+      </modules>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>native-image</goal>
+                </goals>
+                <configuration>
+                  <enableHttpUrlHandler>true</enableHttpUrlHandler>
+                  <enableHttpsUrlHandler>true</enableHttpsUrlHandler>
+                  <enableJni>true</enableJni>
+                  <enableAllSecurityServices>true</enableAllSecurityServices>
+                  <additionalBuildArgs>--allow-incomplete-classpath</additionalBuildArgs>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
     </profile>
   </profiles>
 
@@ -261,6 +336,16 @@
         <version>${version.cloudevents.api}</version>
       </dependency>
       <dependency>
+        <groupId>io.cloudevents</groupId>
+        <artifactId>cloudevents-core</artifactId>
+        <version>${version.cloudevents.api}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.cloudevents</groupId>
+        <artifactId>cloudevents-json-jackson</artifactId>
+        <version>${version.cloudevents.api}</version>
+      </dependency>
+      <dependency>
         <groupId>org.testcontainers</groupId>
         <artifactId>kafka</artifactId>
         <version>${version.testcontainers}</version>
@@ -277,7 +362,12 @@
         <artifactId>pmml-model</artifactId>
         <version>${version.org.jpmml}</version>
       </dependency>
-
+      <dependency>
+        <groupId>com.github.tomakehurst</groupId>
+        <artifactId>wiremock-jre8</artifactId>
+        <scope>test</scope>
+        <version>${version.wiremock}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -307,7 +397,7 @@
             <excludes>
               <exclude>${failsafe.exclude}</exclude>
             </excludes>
-            <systemProperties>
+            <systemPropertyVariables>
               <tests.category>${tests.category}</tests.category>
               <enable.resource.infinispan>${enable.resource.infinispan}</enable.resource.infinispan>
               <enable.resource.kafka>${enable.resource.kafka}</enable.resource.kafka>
@@ -316,7 +406,8 @@
               <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
               <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
               <enable.resource.mongodb>${enable.resource.mongodb}</enable.resource.mongodb>
-            </systemProperties>
+              <quarkus.http.test-port>${tests.quarkus.http.port}</quarkus.http.test-port>
+            </systemPropertyVariables>
             <classesDirectory>${project.build.outputDirectory}</classesDirectory>
           </configuration>
           <executions>
@@ -378,10 +469,10 @@
             <forkCount>${surefire.forkCount}</forkCount>
             <reuseForks>true</reuseForks>
             <runOrder>hourly</runOrder>
-            <systemProperties>
+            <systemPropertyVariables>
               <tests.category>${tests.category}</tests.category>
               <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-            </systemProperties>
+            </systemPropertyVariables>
           </configuration>
         </plugin>
         <plugin>

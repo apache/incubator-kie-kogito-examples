@@ -15,17 +15,16 @@
  */
 package org.kie.dmn.kogito.quarkus.tracing;
 
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import javax.inject.Inject;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import io.quarkus.test.common.QuarkusTestResource;
-import io.quarkus.test.junit.QuarkusTest;
-import io.restassured.http.ContentType;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.kafka.KafkaClient;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
@@ -33,37 +32,40 @@ import org.kie.kogito.tracing.decision.event.trace.TraceEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import io.quarkus.test.common.QuarkusTestResource;
+import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.http.ContentType;
 
 @QuarkusTest
 @QuarkusTestResource(KafkaQuarkusTestResource.class)
 public class LoanEligibilityTest {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(LoanEligibilityTest.class);
-
     public static final String TOPIC_CONSUMER = "kogito-tracing-decision";
 
-    @Inject
-    private ObjectMapper objectMapper;
+    private static final Logger LOGGER = LoggerFactory.getLogger(LoanEligibilityTest.class);
+    private static final ObjectMapper MAPPER = new ObjectMapper();
 
-    public KafkaClient kafkaClient;
+    private KafkaClient kafkaClient;
 
     @ConfigProperty(name = KafkaQuarkusTestResource.KOGITO_KAFKA_PROPERTY)
     private String kafkaBootstrapServers;
 
-    @Test
-    public void testEvaluateTrafficViolation() throws InterruptedException {
+    @BeforeEach
+    public void setup() {
         kafkaClient = new KafkaClient(kafkaBootstrapServers);
+    }
 
+    @Test
+    public void testEvaluateLoanEligibility() throws InterruptedException {
         final CountDownLatch countDownLatch = new CountDownLatch(1);
 
         kafkaClient.consume(TOPIC_CONSUMER, s -> {
             LOGGER.info("Received from kafka: {}", s);
             try {
-                TraceEvent event = objectMapper.readValue(s, TraceEvent.class);
+                TraceEvent event = MAPPER.readValue(s, TraceEvent.class);
                 assertNotNull(event);
                 countDownLatch.countDown();
             } catch (JsonProcessingException e) {

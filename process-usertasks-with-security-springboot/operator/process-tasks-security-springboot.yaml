@@ -5,8 +5,8 @@ metadata:
 spec:
   type: RemoteSource
   runtime: springboot
-  #envs:
-  # envs can be used to set variables during build
+  #env:
+  # env can be used to set variables during build
   #- name: MY_CUSTOM_ENV
   #  value: "my value"
   gitSource:

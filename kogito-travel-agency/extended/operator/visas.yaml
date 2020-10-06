@@ -15,8 +15,7 @@ kind: KogitoRuntime
 metadata:
   name: visas
 spec:
-  infinispan:
-    useKogitoInfra: true
-  kafka:
-    useKogitoInfra: true
+  infra:
+    - kogito-kafka-infra
+    - kogito-infinispan-infra
 

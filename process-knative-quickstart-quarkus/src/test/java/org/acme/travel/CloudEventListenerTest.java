@@ -20,6 +20,7 @@ import javax.ws.rs.core.MediaType;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.RestAssured;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -42,6 +43,10 @@ public class CloudEventListenerTest {
     private static WireMockServer sink;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CloudEventListenerTest.class);
+
+    static {
+        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+    }
 
     @BeforeAll
     public static void startSink() {
@@ -95,7 +100,29 @@ public class CloudEventListenerTest {
         // have we received the message? We force the sleep since the WireMock framework doesn't support waiting/timeout verification
         LOGGER.info("Waiting 2 seconds to receive the produced message");
         Thread.sleep(2000);
-        sink.verify(1, postRequestedFor(urlEqualTo("/")).withRequestBody(containing("specversion")));
         sink.verify(1, postRequestedFor(urlEqualTo("/")).withRequestBody(containing("jane.doe@example.com")));
+    }
+
+    @Test
+    void checkStartNewProcessInstanceWithSourceField() throws JsonProcessingException, InterruptedException {
+        final ObjectMapper objectMapper = new ObjectMapper();
+        final Traveller traveller = new Traveller();
+        traveller.setFirstName("Jane");
+        traveller.setLastName("Doe");
+        traveller.setEmail("jane.doe2@example.com");
+        traveller.setNationality("German");
+
+        given()
+                .header("ce-specversion", "1.0")
+                .header("ce-id", "000")
+                .header("ce-source", "travellers")
+                .header("ce-type", "whatevertype")
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(objectMapper.writeValueAsString(traveller)).post("/").then().statusCode(200);
+
+        // have we received the message? We force the sleep since the WireMock framework doesn't support waiting/timeout verification
+        LOGGER.info("Waiting 2 seconds to receive the produced message");
+        Thread.sleep(2000);
+        sink.verify(1, postRequestedFor(urlEqualTo("/")).withRequestBody(containing("jane.doe2@example.com")));
     }
 }

@@ -15,7 +15,6 @@
   <description>Kogito with Knative Eventing - Quarkus</description>
 
   <properties>
-    <version.cloudevents>2.0.0-milestone1</version.cloudevents>
     <version.wiremock>2.27.1</version.wiremock>
   </properties>
 
@@ -27,11 +26,6 @@
         <version>${kogito.version}</version>
         <type>pom</type>
         <scope>import</scope>
-      </dependency>
-      <dependency>
-        <groupId>io.cloudevents</groupId>
-        <artifactId>cloudevents-api</artifactId>
-        <version>${version.cloudevents}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -111,32 +105,4 @@
       </plugin>
     </plugins>
   </build>
-  <profiles>
-    <profile>
-      <id>native</id>
-      <activation>
-        <property>
-          <name>native</name>
-        </property>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-maven-plugin</artifactId>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>native-image</goal>
-                </goals>
-                <configuration>
-                  <enableHttpUrlHandler>true</enableHttpUrlHandler>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
 </project>
