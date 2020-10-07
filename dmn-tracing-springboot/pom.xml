@@ -39,6 +39,11 @@
       <artifactId>kogito-springboot-starter</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>tracing-decision-springboot-addon</artifactId>
+    </dependency>
+
+    <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
@@ -50,7 +55,7 @@
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-scenario-simulation</artifactId>
+      <artifactId>kogito-test-utils</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
