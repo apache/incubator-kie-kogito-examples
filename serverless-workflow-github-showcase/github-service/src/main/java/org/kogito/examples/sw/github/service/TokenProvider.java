@@ -34,12 +34,16 @@ import com.google.common.io.Files;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.impl.DefaultJwtBuilder;
+import io.jsonwebtoken.jackson.io.JacksonSerializer;
 import io.quarkus.cache.CacheResult;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.kohsuke.github.GHAppInstallation;
 import org.kohsuke.github.GHPermissionType;
 import org.kohsuke.github.GitHub;
 import org.kohsuke.github.GitHubBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Provides the installation token to interact with the GitHub API via GitHub App Installation
@@ -48,6 +52,8 @@ import org.kohsuke.github.GitHubBuilder;
  */
 @ApplicationScoped
 public class TokenProvider {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(TokenProvider.class);
 
     private static final int expirationMillis = 600000;
     private static final int cacheExpirationMillis = 300000;
@@ -83,26 +89,32 @@ public class TokenProvider {
         //We will sign our JWT with our private key
         Key signingKey = getPrivateKey();
 
+        // creating builder and serializer directly instead of relying on reflection for native use cases
         //Let's set the JWT Claims
-        JwtBuilder builder = Jwts.builder()
+        JwtBuilder builder = new DefaultJwtBuilder()
                 .setIssuedAt(now)
                 .setIssuer(appId)
                 .signWith(signingKey, signatureAlgorithm);
+        builder.serializeToJsonWith(new JacksonSerializer<>());
 
         long expMillis = nowMillis + expirationMillis;
         Date exp = new Date(expMillis);
         builder.setExpiration(exp);
 
         //Builds the JWT and serializes it to a compact, URL-safe string
-        return builder.compact();
+        final String token = builder.compact();
+        LOGGER.info("JWT token generated and signed successfully");
+        return token;
     }
 
     @CacheResult(cacheName = "access_token", lockTimeout = cacheExpirationMillis)
     public String getToken() throws Exception {
         final GitHub gitHubApp = new GitHubBuilder().withJwtToken(createJWT()).build();
         final GHAppInstallation appInstall = gitHubApp.getApp().getInstallationById(installationId);
-
-        return appInstall.createToken(getPermissions()).create().getToken();
+        LOGGER.info("Attempt to generate token to GH Account {}", appInstall.getAccount().getName());
+        final String token = appInstall.createToken(getPermissions()).create().getToken();
+        LOGGER.info("Final token generated successfully");
+        return token;
     }
 
     private Map<String, GHPermissionType> getPermissions() {

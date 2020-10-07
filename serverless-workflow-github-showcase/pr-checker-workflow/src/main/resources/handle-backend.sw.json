@@ -60,7 +60,7 @@
       "type": "inject",
       "data": {
         "labels": "backend",
-        "reviewers": "LCaparelli"
+        "reviewers": "JaneDoe"
       },
       "transition": {
         "nextState": "HandleBackend"

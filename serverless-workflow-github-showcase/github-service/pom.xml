@@ -12,11 +12,6 @@
   <artifactId>github-service</artifactId>
   <name>Kogito Examples :: Serverless Workflow Github Showcase :: GitHub Service</name>
 
-  <properties>
-    <version.kohsuke.github>1.116</version.kohsuke.github>
-    <version.io.jjwt>0.11.2</version.io.jjwt>
-  </properties>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -36,7 +31,6 @@
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-cache</artifactId>
-      <version>${version.io.quarkus}</version>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -53,13 +47,11 @@
       <groupId>io.jsonwebtoken</groupId>
       <artifactId>jjwt-impl</artifactId>
       <version>${version.io.jjwt}</version>
-      <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>io.jsonwebtoken</groupId>
       <artifactId>jjwt-jackson</artifactId>
       <version>${version.io.jjwt}</version>
-      <scope>runtime</scope>
     </dependency>
 
     <!-- GitHub API -->
@@ -118,4 +110,32 @@
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>native</id>
+      <activation>
+        <property>
+          <name>native</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>native-image</goal>
+                </goals>
+                <configuration>
+                  <enableHttpUrlHandler>true</enableHttpUrlHandler>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

@@ -13,6 +13,10 @@
   <properties>
     <surefire-plugin.version>2.22.1</surefire-plugin.version>
     <jandex-plugin.version>1.0.7</jandex-plugin.version>
+    <version.wiremock>2.27.2</version.wiremock>
+    <version.org.camel>1.0.1</version.org.camel>
+    <version.kohsuke.github>1.116</version.kohsuke.github>
+    <version.io.jjwt>0.11.2</version.io.jjwt>
     <version.cloudevents>2.0.0-milestone3</version.cloudevents>
   </properties>
 

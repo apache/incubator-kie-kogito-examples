@@ -16,7 +16,7 @@ CheckBackend --> [*] : No change
 InjectBackendData : Type: Inject State
 InjectBackendData: Data:
 InjectBackendData: labels: backend
-InjectBackendData: reviewers: LCaparelli
+InjectBackendData: reviewers: JohnDoe
 InjectBackendData --> HandleBackend
 
 HandleBackend : Type: Operation State

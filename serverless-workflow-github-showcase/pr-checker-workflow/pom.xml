@@ -10,11 +10,6 @@
   <modelVersion>4.0.0</modelVersion>
   <artifactId>pr-checker-workflow</artifactId>
   <name>Kogito Examples :: Serverless Workflow Github Showcase :: PR Checker Workflow</name>
-
-  <properties>
-    <version.wiremock>2.27.2</version.wiremock>
-  </properties>
-
   <dependencyManagement>
     <dependencies>
       <dependency>

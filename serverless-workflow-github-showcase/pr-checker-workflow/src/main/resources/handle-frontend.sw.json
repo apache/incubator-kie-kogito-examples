@@ -44,7 +44,7 @@
       "type": "inject",
       "data": {
         "labels": "frontend",
-        "reviewers": "Kaitou786"
+        "reviewers": "JohnDoe"
       },
       "transition": {
         "nextState": "HandleFrontend"

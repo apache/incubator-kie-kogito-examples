@@ -37,15 +37,15 @@ public class GitHubServiceMockServer implements QuarkusTestResourceLifecycleMana
         wireMockServer = new WireMockServer(WireMockConfiguration.options().port(8282));
         wireMockServer.start();
 
-        wireMockServer.stubFor(post(urlEqualTo("/repo/ricardozanini/kogito-sw-demo/pr/2/labels"))
+        wireMockServer.stubFor(post(urlEqualTo("/repo/your-username/your-repository/pr/2/labels"))
                         .willReturn(aResponse()
                                             .withStatus(200)
                                             .withHeader("Content-Type", "application/json")));
-        wireMockServer.stubFor(post(urlEqualTo("/repo/ricardozanini/kogito-sw-demo/pr/2/reviewers"))
+        wireMockServer.stubFor(post(urlEqualTo("/repo/your-username/your-repository/pr/2/reviewers"))
                         .willReturn(aResponse()
                                             .withStatus(200)
                                             .withHeader("Content-Type", "application/json")));
-        wireMockServer.stubFor(get(urlEqualTo("/repo/ricardozanini/kogito-sw-demo/pr/2/files"))
+        wireMockServer.stubFor(get(urlEqualTo("/repo/your-username/your-repository/pr/2/files"))
                         .willReturn(aResponse()
                                             .withStatus(200)
                                             .withHeader("Content-Type", "application/json")

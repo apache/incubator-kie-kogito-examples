@@ -12,10 +12,6 @@
   <artifactId>notification-service</artifactId>
   <name>Kogito Examples :: Serverless Workflow Github Showcase :: Notification Service</name>
 
-  <properties>
-    <version.org.camel>1.0.1</version.org.camel>
-  </properties>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -109,4 +105,32 @@
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>native</id>
+      <activation>
+        <property>
+          <name>native</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>native-image</goal>
+                </goals>
+                <configuration>
+                  <enableHttpUrlHandler>true</enableHttpUrlHandler>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

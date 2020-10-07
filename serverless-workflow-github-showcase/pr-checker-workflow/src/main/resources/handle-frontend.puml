@@ -16,7 +16,7 @@ CheckFrontend --> [*] : No change
 InjectFrontendData : Type: Inject State
 InjectFrontendData: Data:
 InjectFrontendData: labels: backend
-InjectFrontendData: reviewers: LCaparelli
+InjectFrontendData: reviewers: JaneDoe
 InjectFrontendData --> HandleFrontend
 
 HandleFrontend : Type: Operation State

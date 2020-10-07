@@ -31,7 +31,7 @@
   "events": [
     {
       "name": "PullRequest",
-      "source": "https://github.com/ricardozanini/kogito-sw-demo",
+      "source": "https://github.com/your-username/your-repository",
       "type": "dev.knative.source.github.pull_request",
       "kind": "consumed"
     },
