@@ -281,7 +281,7 @@ void runMaven(String command, String directory, boolean skipTests = false, List 
             propertiesString = ' -DskipTests'
         }
 
-        def mvnCommand = "mvn -B -fae ${goals}${propertiesString}"
+        def mvnCommand = "mvn -B -fae ${mvnCmd}${propertiesString}"
         sh mvnCommand
     }
 }
