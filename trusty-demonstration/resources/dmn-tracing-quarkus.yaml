@@ -5,9 +5,6 @@ metadata:
 data:
   application.properties: |
     kafka.bootstrap.servers=my-cluster-kafka-bootstrap:9092
-    quarkus.infinispan-client.server-list=example-infinispan:11222
-    quarkus.infinispan-client.use-auth=true
-    quarkus.infinispan-client.sasl-mechanism=DIGEST-MD5
 ---
 apiVersion: app.kiegroup.org/v1alpha1
 kind: KogitoRuntime
