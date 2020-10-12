@@ -50,6 +50,10 @@
             <artifactId>quarkus-smallrye-reactive-messaging-kafka</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.kie.kogito</groupId>
+            <artifactId>kogito-shared-events-quarkus</artifactId>
+        </dependency> 
+        <dependency>
             <groupId>io.cloudevents</groupId>
             <artifactId>cloudevents-api</artifactId>
         </dependency>
