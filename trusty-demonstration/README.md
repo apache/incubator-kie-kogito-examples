@@ -47,7 +47,7 @@ minikube addons enable olm
 Set the Kogito release version 
 
 ```bash
-KOGITO_VERSION=0.15.0
+KOGITO_VERSION=0.16.0
 ```
 
 and then download/unpack the kogito operator
@@ -154,12 +154,8 @@ metadata:
   name: trusty-ui
 spec:
   replicas: 1
-  image:
-    domain: quay.io
-    namespace: kiegroup 
-    name: kogito-trusty-ui
-    tag: latest
-  envs:
+  image: quay.io/kiegroup/kogito-trusty-ui:0.16
+  env:
     - name: KOGITO_TRUSTY_ENDPOINT
       value: http://172.17.0.2
     - name: KOGITO_TRUSTY_WS_URL
@@ -173,18 +169,17 @@ apiVersion: app.kiegroup.org/v1alpha1
 kind: KogitoRuntime
 metadata:
   name: dmn-tracing-quarkus
+  labels:
+    app: dmn-tracing-quarkus
 spec:
   replicas: 1
-  image:
-    domain: quay.io           # <---- replace with the hub you used for the dmn-tracing-quarkus image
-    namespace: jrota          # <---- replace with your namespace/username 
-    name: dmn-tracing-quarkus
-    tag: 1.0.0                # <---- replace with the tag you used
-  kafka:
-    externalURI: my-cluster-kafka-bootstrap:9092 
-  envs:
+  image: quay.io/jrota/dmn-tracing-quarkus:1.0.0-snapshot # <---- replace with your image
+  propertiesConfigMap: dmn-tracing-quarkus-config
+  env:
     - name: KOGITO_SERVICE_URL
       value: http://dmn-tracing-quarkus:8080
+    - name: ENABLE_EVENT
+      value: 'true'
 ```
 
 It's time to deploy all the resources with the commands

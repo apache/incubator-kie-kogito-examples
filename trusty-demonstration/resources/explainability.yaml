@@ -1,14 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: explainability-config
+data:
+  application.properties: |
+    kafka.bootstrap.servers=my-cluster-kafka-bootstrap:9092
+---
 apiVersion: app.kiegroup.org/v1alpha1
 kind: KogitoExplainability
 metadata:
   name: explainability
 spec:
   replicas: 1
-  image:
-    domain: quay.io
-    namespace: kiegroup 
-    name: kogito-explainability
-    tag: latest
-  kafka:
-    externalURI: my-cluster-kafka-bootstrap:9092 
+  image: quay.io/kiegroup/kogito-explainability:0.16
+  propertiesConfigMap: explainability-config
+  env:
+    - name: ENABLE_EVENT
+      value: 'true'
 
