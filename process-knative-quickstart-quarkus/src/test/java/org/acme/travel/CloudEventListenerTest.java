@@ -38,8 +38,7 @@ import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options
 import static io.restassured.RestAssured.given;
 
 @QuarkusTest
-@org.junit.jupiter.api.Disabled("temporarily disable to allow tests to go through")
-public class CloudEventListenerTest {
+    public class CloudEventListenerTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CloudEventListenerTest.class);
     private static WireMockServer sink;
@@ -75,7 +74,7 @@ public class CloudEventListenerTest {
                 .header("ce-specversion", "1.0")
                 .header("ce-id", "000")
                 .header("ce-source", "/from/test")
-                .header("ce-type", "travellers")
+                .header("ce-type", "TravelersMessageDataEvent_7")
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(objectMapper.writeValueAsString(traveller)).post("/").then().statusCode(200);
     }
@@ -93,7 +92,7 @@ public class CloudEventListenerTest {
                 .header("ce-specversion", "1.0")
                 .header("ce-id", "000")
                 .header("ce-source", "/from/test")
-                .header("ce-type", "travellers")
+                .header("ce-type", "TravelersMessageDataEvent_7")
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(objectMapper.writeValueAsString(traveller)).post("/").then().statusCode(200);
 
