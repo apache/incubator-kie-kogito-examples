@@ -32,6 +32,7 @@ pipeline {
         // Release information
         booleanParam(name: 'RELEASE', defaultValue: false, description: 'Is this build for a release?')
         string(name: 'PROJECT_VERSION', defaultValue: '', description: 'Optional if not RELEASE. If RELEASE, cannot be empty.')
+        string(name: 'OPTAPLANNER_VERSION', defaultValue: '', description: 'Optional if not RELEASE. If RELEASE, cannot be empty.')
 
         // Bot author information. Set as params for easy testing.
         string(name: 'GIT_AUTHOR_BOT', defaultValue: 'bsig-gh-bot', description: 'From which author should the PR be created ?')
@@ -106,6 +107,7 @@ pipeline {
                 dir('kogito-examples') {
                     script {
                         maven.mvnVersionsSet(getProjectVersion())
+                        updateOptaPlannerVersion(getOptaPlannerVersion())
                     }
                 }
             }
@@ -245,6 +247,10 @@ String getProjectVersion(){
     return params.PROJECT_VERSION
 }
 
+String getOptaPlannerVersion(){
+    return params.OPTAPLANNER_VERSION
+}
+
 String getBotBranch(){
     return "${getProjectVersion()}-${env.BOT_BRANCH_HASH}"
 }
@@ -261,6 +267,10 @@ void setDeployPropertyIfNeeded(String key, def value){
     if (value != null && value != ''){
         deployProperties[key] = value
     }
+}
+
+void updateOptaPlannerVersion(String newVersion) {
+    sh "mvn versions:update-property -Dproperty=version.org.optaplanner -DnewVersion=[$newVersion] -DallowSnapshots=true -DgenerateBackupPoms=false"
 }
 
 void mavenCleanInstall(String directory, boolean skipTests = false, List profiles = [], String extraArgs = '') {
