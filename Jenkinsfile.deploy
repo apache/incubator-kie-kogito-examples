@@ -281,13 +281,13 @@ void runMaven(String command, String directory, boolean skipTests = false, List 
         mvnCmd += " ${extraArgs}"
     }
     dir(directory) {
-        def propertiesString = ''
-
-        if(skipTests){
-            propertiesString = ' -DskipTests'
+        if(isRelease()){
+            // In case of release, we already have the settings.xml
+            // TODO to activate once https://github.com/kiegroup/jenkins-pipeline-shared-libraries/pull/105/files has been merged
+            // maven.runMaven(mvnCmd, skipTests, ['-fae'])
+            sh "mvn -B -fae ${mvnCmd} -DskipTests=${skipTests}"
+        } else {
+            maven.runMavenWithSubmarineSettings(mvnCmd, skipTests)   
         }
-
-        def mvnCommand = "mvn -B -fae ${mvnCmd}${propertiesString}"
-        sh mvnCommand
     }
 }
