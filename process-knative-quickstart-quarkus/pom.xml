@@ -45,6 +45,10 @@
       <artifactId>knative-eventing-addon</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-shared-events-quarkus</artifactId>
+    </dependency>
+     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-reactive-messaging</artifactId>
     </dependency>
