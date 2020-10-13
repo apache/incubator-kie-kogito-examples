@@ -35,6 +35,7 @@ pipeline {
         // Release information which can override `deployment.properties`
         booleanParam(name: 'RELEASE', defaultValue: false, description: 'Override `deployment.properties`. Is this build for a release?')
         string(name: 'PROJECT_VERSION', defaultValue: '', description: 'Override `deployment.properties`. Optional if not RELEASE. If RELEASE, cannot be empty.')
+        string(name: 'OPTAPLANNER_VERSION', defaultValue: '', description: 'Override `deployment.properties`. Optional if not RELEASE. If RELEASE, cannot be empty.')
         string(name: 'STAGING_REPO_URL', defaultValue: '', description: 'Override `deployment.properties`.')
         string(name: 'GIT_TAG', defaultValue: '', description: 'Git tag to set, if different from PROJECT_VERSION')
         booleanParam(name: 'UPDATE_STABLE_BRANCH', defaultValue: false, description: 'Set to true if you want to update the `stable` branch to new created Git tag.')
@@ -69,6 +70,7 @@ pipeline {
 
                     if (isRelease()) {
                         assert getProjectVersion() != ''
+                        assert getOptaPlannerVersion() != ''
                     }
 
                     installGithubCLI()
@@ -104,6 +106,7 @@ pipeline {
                         prepareForPR('kogito-examples')
                         setupMavenConfig()
                         maven.mvnVersionsSet(getSnapshotVersion(), true)
+                        updateOptaPlannerVersion(util.getNextVersion(getOptaPlannerVersion(), 'micro'))
                         commitAndCreatePR('kogito-examples')
                     }
                     dir('kogito-examples') {
@@ -169,6 +172,10 @@ boolean isRelease() {
 
 String getProjectVersion() {
     return getParamOrDeployProperty('PROJECT_VERSION', 'project.version')
+}
+
+String getOptaPlannerVersion() {
+    return getParamOrDeployProperty('OPTAPLANNER_VERSION', 'optaplanner.version')
 }
 
 String getSnapshotVersion() {
@@ -331,4 +338,8 @@ void deployArtifacts() {
     } else {
         maven.runMavenWithSubmarineSettings(mvnCmd, true)
     }
+}
+
+void updateOptaPlannerVersion(String newVersion) {
+    maven.mvnSetVersionProperty('version.org.optaplanner', newVersion)
 }
