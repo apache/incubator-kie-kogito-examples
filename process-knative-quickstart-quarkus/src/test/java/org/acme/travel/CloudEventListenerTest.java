@@ -38,7 +38,7 @@ import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options
 import static io.restassured.RestAssured.given;
 
 @QuarkusTest
-    public class CloudEventListenerTest {
+public class CloudEventListenerTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CloudEventListenerTest.class);
     private static WireMockServer sink;
@@ -74,7 +74,7 @@ import static io.restassured.RestAssured.given;
                 .header("ce-specversion", "1.0")
                 .header("ce-id", "000")
                 .header("ce-source", "/from/test")
-                .header("ce-type", "TravelersMessageDataEvent_3")
+                .header("ce-type", "travellers")
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(objectMapper.writeValueAsString(traveller)).post("/").then().statusCode(200);
     }
@@ -92,7 +92,7 @@ import static io.restassured.RestAssured.given;
                 .header("ce-specversion", "1.0")
                 .header("ce-id", "000")
                 .header("ce-source", "/from/test")
-                .header("ce-type", "TravelersMessageDataEvent_3")
+                .header("ce-type", "travellers")
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(objectMapper.writeValueAsString(traveller)).post("/").then().statusCode(200);
 
@@ -114,7 +114,7 @@ import static io.restassured.RestAssured.given;
         given()
                 .header("ce-specversion", "1.0")
                 .header("ce-id", "000")
-                .header("ce-source", "TravelersMessageDataEvent_3")
+                .header("ce-source", "travellers")
                 .header("ce-type", "whatevertype")
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(objectMapper.writeValueAsString(traveller)).post("/").then().statusCode(200);
