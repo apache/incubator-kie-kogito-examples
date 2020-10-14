@@ -283,9 +283,7 @@ void runMaven(String command, String directory, boolean skipTests = false, List 
     dir(directory) {
         if(isRelease()){
             // In case of release, we already have the settings.xml
-            // TODO to activate once https://github.com/kiegroup/jenkins-pipeline-shared-libraries/pull/105/files has been merged
-            // maven.runMaven(mvnCmd, skipTests, ['-fae'])
-            sh "mvn -B -fae ${mvnCmd} -DskipTests=${skipTests}"
+            maven.runMaven(mvnCmd, skipTests, ['-fae'])
         } else {
             maven.runMavenWithSubmarineSettings(mvnCmd, skipTests)   
         }
