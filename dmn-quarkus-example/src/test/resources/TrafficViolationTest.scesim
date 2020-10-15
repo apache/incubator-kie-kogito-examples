@@ -73,7 +73,7 @@
             <name>Violation</name>
             <className>Violation</className>
           </factIdentifier>
-          <className>string</className>
+          <className>Type</className>
           <factAlias>Violation</factAlias>
           <expressionAlias>Type</expressionAlias>
           <genericTypes/>
