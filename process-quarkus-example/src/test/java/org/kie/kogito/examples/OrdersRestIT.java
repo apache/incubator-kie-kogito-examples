@@ -324,6 +324,6 @@ public class OrdersRestIT {
         List<String> files = given().contentType(ContentType.JSON).accept(ContentType.JSON).when()
                 .get("/persistence/protobuf/list.json").as(List.class);
 
-        assertEquals(2, files.size());
+        assertEquals(3, files.size());
     }
 }
