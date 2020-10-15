@@ -104,6 +104,7 @@ pipeline {
                         prepareForPR('kogito-examples')
                         setupMavenConfig()
                         maven.mvnVersionsSet(getSnapshotVersion(), true)
+                        updateOptaPlannerVersion(util.getNextVersion(getOptaPlannerVersion(), 'micro'))
                         commitAndCreatePR('kogito-examples')
                     }
                     dir('kogito-examples') {
@@ -169,6 +170,10 @@ boolean isRelease() {
 
 String getProjectVersion() {
     return getParamOrDeployProperty('PROJECT_VERSION', 'project.version')
+}
+
+String getOptaPlannerVersion(){
+    return params.OPTAPLANNER_VERSION
 }
 
 String getSnapshotVersion() {
@@ -331,4 +336,8 @@ void deployArtifacts() {
     } else {
         maven.runMavenWithSubmarineSettings(mvnCmd, true)
     }
+}
+
+void updateOptaPlannerVersion(String newVersion) {
+    maven.mvnSetVersionProperty('version.org.optaplanner',newVersion)
 }
