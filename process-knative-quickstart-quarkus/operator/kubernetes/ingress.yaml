@@ -10,10 +10,10 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-    - host: process-knative-quickstart-quarkus.info
+    - host: process-knative-quickstart-quarkus.kogito
       http:
         paths:
           - path: /
             backend:
               serviceName: process-knative-quickstart-quarkus
-              servicePort: 8080
+              servicePort: 80
