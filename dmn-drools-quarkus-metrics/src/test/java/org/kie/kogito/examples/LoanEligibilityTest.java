@@ -65,6 +65,6 @@ public class LoanEligibilityTest {
         List<String> dashboards = given().contentType(ContentType.JSON).accept(ContentType.JSON).when()
                 .get("/monitoring/dashboards/list.json").as(List.class);
 
-        Assertions.assertEquals(2, dashboards.size());
+        Assertions.assertEquals(3, dashboards.size());
     }
 }
