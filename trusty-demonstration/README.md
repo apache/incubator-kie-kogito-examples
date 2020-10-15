@@ -177,7 +177,7 @@ spec:
   propertiesConfigMap: dmn-tracing-quarkus-config
   env:
     - name: KOGITO_SERVICE_URL
-      value: http://dmn-tracing-quarkus
+      value: http://dmn-tracing-quarkus:8080
     - name: ENABLE_EVENT
       value: 'true'
 ```
