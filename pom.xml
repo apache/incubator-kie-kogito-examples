@@ -160,6 +160,7 @@
         <module>dmn-drools-quarkus-metrics</module>
         <module>dmn-springboot-example</module>
         <module>dmn-tracing-quarkus</module>
+        <module>dmn-tracing-springboot</module>
         <module>flexible-process-quarkus</module>
         <module>flexible-process-springboot</module>
         <module>kogito-travel-agency</module>

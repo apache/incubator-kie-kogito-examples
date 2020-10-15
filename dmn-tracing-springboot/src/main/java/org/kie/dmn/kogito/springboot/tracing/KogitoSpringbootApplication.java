@@ -13,15 +13,15 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.kie.dmn.kogito.quarkus.tracing;
+package org.kie.dmn.kogito.springboot.tracing;
 
-import io.quarkus.test.common.QuarkusTestResource;
-import io.quarkus.test.junit.NativeImageTest;
-import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@NativeImageTest
-@QuarkusTestResource(KafkaQuarkusTestResource.class)
-public class NativeLoanEligibilityIT extends LoanEligibilityIT {
+@SpringBootApplication(scanBasePackages={"org.kie.dmn.kogito.**", "org.kie.kogito.app.**", "org.kie.kogito.tracing.**"})
+public class KogitoSpringbootApplication {
 
-    // Execute the same tests but in native mode.
+	public static void main(String[] args) {
+		SpringApplication.run(KogitoSpringbootApplication.class, args);
+	}
 }
