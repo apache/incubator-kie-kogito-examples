@@ -101,8 +101,8 @@ pipeline {
             }
             steps {
                 script {
-                    checkoutRepo('kogito-runtimes')
                     dir('kogito-runtimes') { // kogito-examples depend on kogito-bom
+                        checkoutRepo('kogito-runtimes')
                         maven.runMavenWithSubmarineSettings("clean install", true)
                     }
                     dir('kogito-examples-bot') {
