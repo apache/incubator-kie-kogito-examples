@@ -340,5 +340,5 @@ void deployArtifacts() {
 }
 
 void updateOptaPlannerVersion(String newVersion) {
-    maven.mvnSetVersionProperty('version.org.optaplanner',newVersion)
+    maven.mvnSetVersionProperty('version.org.optaplanner', newVersion)
 }
