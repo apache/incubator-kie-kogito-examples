@@ -270,7 +270,7 @@ void setDeployPropertyIfNeeded(String key, def value){
 }
 
 void updateOptaPlannerVersion(String newVersion) {
-    sh "mvn versions:update-property -Dproperty=version.org.optaplanner -DnewVersion=[$newVersion] -DallowSnapshots=true -DgenerateBackupPoms=false"
+    sh "mvn versions:set-property -Dproperty=version.org.optaplanner -DnewVersion=$newVersion -DallowSnapshots=true -DgenerateBackupPoms=false"
 }
 
 void mavenCleanInstall(String directory, boolean skipTests = false, List profiles = [], String extraArgs = '') {
