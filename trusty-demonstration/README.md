@@ -119,8 +119,8 @@ Take the `operator` name and password and calculate the `base64` encoding, and r
 ```bash
 $ printf "operator" | base64
 b3BlcmF0b3I=
-printf "mysecretpassword" | base64
-bXlzZWNyZXRwYXNzd29yZA==
+printf "infinispanPassword" | base64
+aW5maW5pc3BhblBhc3N3b3Jk
 ```
 
 and the content of `resources/trusty-secrets.yaml` should look like the following
@@ -131,8 +131,8 @@ metadata:
   name: kogito-external-infinispan-secret
 type: Opaque
 data:
-  user: b3BlcmF0b3I= 
-  pass: bXlzZWNyZXRwYXNzd29yZA==
+  user: b3BlcmF0b3I= # base64 encoding of the string "operator"
+  pass: aW5maW5pc3BhblBhc3N3b3Jk # base64 encoding of the string "infinispanPassword", replace with your infinispan password
 ```
 
 Deploy the secret with 
