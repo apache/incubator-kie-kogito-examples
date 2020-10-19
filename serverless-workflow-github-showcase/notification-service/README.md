@@ -61,6 +61,9 @@ Deployment.
 To make things easier for you, we left a script in this directory to generate the template
 files, build the application and the image, and then deploy it to your Kubernetes cluster.
 
+**IMPORTANT!** You **must** be authenticated to the target Kubernetes cluster as a **cluster administrator** for this script
+to work.
+
 You can run the script once and all the required files will be generated for you in 
 the `kubernetes` directory, and the image will be published to your Quay.io account.
 
@@ -127,7 +130,7 @@ The `READY` column should be true.
 
 #### Exposing the service on Minikube
 
-If you're running on another cluster than Minikube, the service route exposed by Knative Serving probably are accessible for you.
+If you're running on another cluster than Minikube, the service's route exposed by Knative Serving probably is accessible to you.
 On Minikube there are some additional steps to be made. 
 
 Run a new terminal window:
@@ -160,3 +163,7 @@ The first query may take a little time to return since Knative will start the se
 After some time the pod will just terminate. 
 
 Congratulations! The Notification service is now available in the cluster ready to be consumed by the Kogito Workflow.
+
+### Cleaning up!
+
+See the project root's (./README.md)[README] documentation.

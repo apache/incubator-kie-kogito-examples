@@ -5,7 +5,6 @@ resources:
   - 02-kogito-service.yaml
   - 03-pr-checker-trigger.yaml
   - 04-pr-checker-sinkbinding.yaml
-  - 05-pr-checker-default-http-svc.yaml
 patchesJson6902:
   - target:
       kind: KogitoRuntime

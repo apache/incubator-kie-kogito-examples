@@ -21,7 +21,7 @@ CURR_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 source "${CURR_DIR}/../scripts/common.sh"
 
 function print_usage() {
-  echo "---> Script to deploy the GitHub service to the Kubernetes cluster. Usage:"
+  echo "---> Script to deploy the Notification service to the Kubernetes cluster. Usage:"
   echo "---> ./deploy-kubernetes.sh QUAY_NAMESPACE SLACK_WEBHOOK"
   echo "---> Example: "
   echo "---> ./deploy-kubernetes.sh namespace "

@@ -27,7 +27,7 @@ notify a given channel.
 > **IMPORTANT!** Before proceeding, please make sure you have everything listed in this section ready.
 
 You may use CRC or Minikube if you don't have a cluster available with cluster admin rights.
-Or you can ask an administrator to install the prereqs for you.
+Or you can ask an administrator to install the prerequisites for you.
 
 To deploy this example in your Kubernetes/OpenShift cluster, you will need:
 
@@ -42,7 +42,7 @@ through it as described in their documentation.
 
 In your local machine you will need:
 
-1. To clone this repository: `https://github.com/kiegroup/kogito-examples.git && cd serverless-workflow-github-showcase`
+1. To clone this repository and go to `serverless-workflow-github-showcase` directory (`git clone https://github.com/kiegroup/kogito-examples.git && cd serverless-workflow-github-showcase`)
 2. [Java 11 SDK](https://openjdk.java.net/install/)
 3. [Maven 3.6.3+](https://maven.apache.org/install.html)
 4. [Podman](https://podman.io/getting-started/installation.html) or Docker to build the images
@@ -58,3 +58,19 @@ and deploy them in your Kubernetes or OpenShift cluster:
 3. [PR Checker SW Service](pr-checker-workflow/README.md)
 
 Knative and Kogito will bind them together. :heart:
+
+### Cleaning up 
+
+You can easily clean up the demo by deleting the namespace:
+
+```shell script
+kubectl delete ns kogito-github
+```
+
+To clean up your `/etc/hosts` file, run the following script:
+
+```shell script
+./scripts/cleanup-hosts-file.sh
+```
+
+It will remove all the lines added by the `expose-on-minikube.sh` script while deploying the services.

@@ -15,4 +15,4 @@ spec:
     ref:
       apiVersion: v1
       kind: Service
-      name: pr-checker-workflow-default-http
+      name: pr-checker-workflow

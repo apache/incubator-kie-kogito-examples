@@ -1,6 +1,6 @@
 ## GitHub API Wrapper Service
 
-This service responsibility is to manage GitHub API calls and to provide authentication
+This service's responsibility is to manage GitHub API calls and to provide authentication
 tokens every 5 minutes to make valid calls to the App API. It exposes three REST functions to interact with
 the GitHub API. The table below lists the provided endpoints:
 
@@ -23,8 +23,8 @@ service to interact with the GitHub API.
 [Follow the GitHub documentation](https://docs.github.com/en/developers/apps/setting-up-your-development-environment-to-create-a-github-app) to create a new GitHub App and 
 a private key.
 
-When asked to set permissions, choose "Access: Read & Write" for **Issues** and **Pull Requests**. In "Subscribe to Events" section set "Pull request".
-This way you will be able to make changes in the repositories' PRs that you've installed the GitHub App.
+When asked to set permissions, choose "Access: Read & Write" for **Issues** and **Pull Requests**. Then, in "Subscribe to Events" section set "Pull request".
+This way you will be able to make changes in the repositories' PRs where you've installed the GitHub App.
 
 After creating the private key, download it locally in somewhere safe. 
 
@@ -58,12 +58,12 @@ Clone this repo if you haven't yet, edit the file [`src/main/resources/applicati
 and add the following data:
 
 ```properties
-org.kogito.examples.sw.github.service.key=<LOCAL PATH FOR YOUR DER FILE>
+org.kogito.examples.sw.github.service.key=<LOCAL PATH TO YOUR DER FILE>
 org.kogito.examples.sw.github.service.installation_id=<APP INSTALLATION ID>
 org.kogito.examples.sw.github.service.app_id=<APP ID>
 ``` 
 
-Replace `<LOCAL PATH FOR YOUR DER FILE>` with the absolute path of the converted private key file (DER format).
+Replace `<LOCAL PATH TO YOUR DER FILE>` with the absolute path of the converted private key file (DER format).
 
 `<APP INSTALLATION ID>` can be grabbed in the [Installations Dashboard](https://github.com/settings/installations/).
 Just click in "Configure" button next to the app name, and you will be redirected to the Installation page. 
@@ -94,7 +94,10 @@ Then access the Swagger UI to play around with the API: http://localhost:8080/sw
 Deployment.
 
 To make things easier for you, we left a script in this directory to generate the template
-files, build the application and the image, and then deploy it to your Kubernetes cluster.
+files, build the application and the image, and then deploy it to your Kubernetes cluster. 
+
+**IMPORTANT!** You **must** be authenticated to the target Kubernetes cluster as a **cluster administrator** for this script
+to work.
 
 You can run the script once and all the required files will be generated for you in 
 the `kubernetes` directory, and the image will be published to your Quay.io account.
@@ -163,7 +166,7 @@ The `READY` column should be true.
 
 #### Exposing the service on Minikube
 
-If you're running on another cluster than Minikube, the service route exposed by Knative Serving probably are accessible for you.
+If you're running on another cluster than Minikube, the service's route exposed by Knative Serving probably is accessible to you.
 On Minikube there are some additional steps to be made. 
 
 Run a new terminal window:
@@ -196,3 +199,7 @@ The first query may take a little time to return since Knative will start the se
 After some time the pod will just terminate. 
 
 Congratulations! The GitHub functions is now available in the cluster ready to be consumed by the Kogito Workflow.
+
+### Cleaning up!
+
+See the project root's (./README.md)[README] documentation.
