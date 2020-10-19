@@ -4,12 +4,8 @@ metadata:
   name: trusty-ui
 spec:
   replicas: 1
-  image:
-    domain: quay.io
-    namespace: kiegroup 
-    name: kogito-trusty-ui
-    tag: "0.15"
-  envs:
+  image: quay.io/kiegroup/kogito-trusty-ui:0.16
+  env:
     - name: KOGITO_TRUSTY_ENDPOINT
       value: http://172.17.0.2
     - name: KOGITO_TRUSTY_WS_URL

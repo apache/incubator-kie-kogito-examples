@@ -47,7 +47,7 @@ minikube addons enable olm
 Set the Kogito release version 
 
 ```bash
-KOGITO_VERSION=0.15.0
+KOGITO_VERSION=0.16.0
 ```
 
 and then download/unpack the kogito operator
@@ -119,8 +119,8 @@ Take the `operator` name and password and calculate the `base64` encoding, and r
 ```bash
 $ printf "operator" | base64
 b3BlcmF0b3I=
-printf "mysecretpassword" | base64
-bXlzZWNyZXRwYXNzd29yZA==
+printf "infinispanPassword" | base64
+aW5maW5pc3BhblBhc3N3b3Jk
 ```
 
 and the content of `resources/trusty-secrets.yaml` should look like the following
@@ -131,8 +131,8 @@ metadata:
   name: kogito-external-infinispan-secret
 type: Opaque
 data:
-  user: b3BlcmF0b3I= 
-  pass: bXlzZWNyZXRwYXNzd29yZA==
+  user: b3BlcmF0b3I= # base64 encoding of the string "operator"
+  pass: aW5maW5pc3BhblBhc3N3b3Jk # base64 encoding of the string "infinispanPassword", replace with your infinispan password
 ```
 
 Deploy the secret with 
@@ -154,12 +154,8 @@ metadata:
   name: trusty-ui
 spec:
   replicas: 1
-  image:
-    domain: quay.io
-    namespace: kiegroup 
-    name: kogito-trusty-ui
-    tag: latest
-  envs:
+  image: quay.io/kiegroup/kogito-trusty-ui:0.16
+  env:
     - name: KOGITO_TRUSTY_ENDPOINT
       value: http://172.17.0.2
     - name: KOGITO_TRUSTY_WS_URL
@@ -173,18 +169,17 @@ apiVersion: app.kiegroup.org/v1alpha1
 kind: KogitoRuntime
 metadata:
   name: dmn-tracing-quarkus
+  labels:
+    app: dmn-tracing-quarkus
 spec:
   replicas: 1
-  image:
-    domain: quay.io           # <---- replace with the hub you used for the dmn-tracing-quarkus image
-    namespace: jrota          # <---- replace with your namespace/username 
-    name: dmn-tracing-quarkus
-    tag: 1.0.0                # <---- replace with the tag you used
-  kafka:
-    externalURI: my-cluster-kafka-bootstrap:9092 
-  envs:
+  image: quay.io/<YOUR_NAMESPACE>/dmn-tracing-quarkus:1.0.0-snapshot # <---- replace with your image
+  propertiesConfigMap: dmn-tracing-quarkus-config
+  env:
     - name: KOGITO_SERVICE_URL
       value: http://dmn-tracing-quarkus:8080
+    - name: ENABLE_EVENT
+      value: 'true'
 ```
 
 It's time to deploy all the resources with the commands
