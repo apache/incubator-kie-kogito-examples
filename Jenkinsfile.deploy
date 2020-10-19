@@ -69,6 +69,8 @@ pipeline {
                         setDeployPropertyIfNeeded('git.author', getGitAuthor())
                         setDeployPropertyIfNeeded('project.version', getProjectVersion())
                         setDeployPropertyIfNeeded('release', isRelease())
+                        setDeployPropertyIfNeeded('optaplanner.version', getOptaPlannerVersion())
+
                     }
                 }
             }
