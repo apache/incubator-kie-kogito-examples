@@ -101,6 +101,7 @@ pipeline {
             }
             steps {
                 script {
+                    // TODO: remove before merging (for testing purpose only)
                     dir('kogito-runtimes') { // kogito-examples depend on kogito-bom
                         checkoutRepo('kogito-runtimes')
                         maven.runMavenWithSubmarineSettings("clean install", true)
@@ -177,8 +178,8 @@ String getProjectVersion() {
     return getParamOrDeployProperty('PROJECT_VERSION', 'project.version')
 }
 
-String getOptaPlannerVersion(){
-    return params.OPTAPLANNER_VERSION
+String getOptaPlannerVersion() {
+    return getParamOrDeployProperty('OPTAPLANNER_VERSION', 'optaplanner.version')
 }
 
 String getSnapshotVersion() {
