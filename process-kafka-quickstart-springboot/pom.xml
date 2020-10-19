@@ -42,8 +42,8 @@
       <artifactId>spring-kafka</artifactId>
     </dependency>
     <dependency> 
-      <groupId>org.kie.kogito</groupId> 
-      <artifactId>kogito-shared-events-spring</artifactId> 
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-cloudevents-spring-boot-addon</artifactId>
     </dependency> 
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
