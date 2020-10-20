@@ -1,3 +1,3 @@
 - op: replace
-  path: /spec/image/namespace
-  value: {QUAY_NAMESPACE}
+  path: /spec/image
+  value: quay.io/{QUAY_NAMESPACE}/pr-checker-workflow:latest
