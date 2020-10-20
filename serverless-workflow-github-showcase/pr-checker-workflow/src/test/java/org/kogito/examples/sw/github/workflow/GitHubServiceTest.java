@@ -35,13 +35,13 @@ class GitHubServiceTest {
     final ObjectMapper objectMapper = new ObjectMapper();
 
     @Inject
-    GitHubService gitHubService;
+    GitHubServiceBackend gitHubServiceBackend;
 
     @Test
     void addLabels() throws IOException {
         final JsonNode jsonNode = objectMapper.readTree(this.getClass().getResource("/mock/addLabels.json"));
         assertNotNull(jsonNode);
-        final JsonNode reply = gitHubService.addLabels(jsonNode);
+        final JsonNode reply = gitHubServiceBackend.addLabels(jsonNode);
         assertNotNull(reply);
         assertNotNull(reply.get("labels"));
     }
@@ -50,7 +50,7 @@ class GitHubServiceTest {
     void addReviewers() throws IOException {
         final JsonNode jsonNode = objectMapper.readTree(this.getClass().getResource("/mock/addReviewers.json"));
         assertNotNull(jsonNode);
-        final JsonNode reply = gitHubService.addReviewers(jsonNode);
+        final JsonNode reply = gitHubServiceBackend.addReviewers(jsonNode);
         assertNotNull(reply);
         assertNotNull(reply.get("reviewers"));
     }
@@ -59,7 +59,7 @@ class GitHubServiceTest {
     void fetchPRFiles() throws IOException {
         final JsonNode jsonNode = objectMapper.readTree(this.getClass().getResource("/mock/addReviewers.json"));
         assertNotNull(jsonNode);
-        final JsonNode reply = gitHubService.fetchPRFiles(jsonNode);
+        final JsonNode reply = gitHubServiceBackend.fetchPRFiles(jsonNode);
         assertNotNull(reply);
         assertNotNull(reply.get("reviewers"));
         assertNotNull(reply.get("files"));

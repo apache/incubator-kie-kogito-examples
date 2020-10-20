@@ -93,14 +93,14 @@ Then access the Swagger UI to play around with the API: http://localhost:8080/sw
 **Heads up!** This service will be deployed as a Knative Service instead of a regular Kubernetes
 Deployment.
 
-To make things easier for you, we left a script in this directory to generate the template
+To make things easier there is a [script in this directory](deploy-kubernetes.sh) to generate the template
 files, build the application and the image, and then deploy it to your Kubernetes cluster. 
 
 **IMPORTANT!** You **must** be authenticated to the target Kubernetes cluster as a **cluster administrator** for this script
 to work.
 
-You can run the script once and all the required files will be generated for you in 
-the `kubernetes` directory, and the image will be published to your Quay.io account.
+You can run the script once and all the required files will be generated in the `kubernetes` directory, 
+and the image will be published to your Quay.io account.
 
 Fill the value for the variables as shown below and run the script:
 
@@ -116,6 +116,7 @@ DER_FILE=
 
 You should see a similar output like this:
 
+<details><summary>Build logs</summary>
 ```
 // build logs surpressed
 ---> Building and pushing image using tag quay.io/ricardozanini/github-service:latest
@@ -131,17 +132,6 @@ STEP 6: COMMIT quay.io/ricardozanini/github-service:latest
 --> 7c555a3060c
 7c555a3060c666582824552d8824f2787b59b67b506fb933b171764bde894730
 Getting image source signatures
-Copying blob 4b07a7bca5b7 skipped: already exists  
-Copying blob 08aa6bd002c3 skipped: already exists  
-Copying blob 19503f7a9eec skipped: already exists  
-Copying blob bf509d6bc5ec skipped: already exists  
-Copying blob 2af0e1f1e531 skipped: already exists  
-Copying blob 88cc1a200eb9 skipped: already exists  
-Copying blob 20d186c995c3 done  
-Copying blob 3168c26b96c6 done  
-Copying blob 80d01ad5c537 skipped: already exists  
-Copying config 7c555a3060 done  
-Writing manifest to image destination
 Copying config 7c555a3060 [--------------------------------------] 0.0b / 6.2KiB
 Writing manifest to image destination
 Writing manifest to image destination
@@ -152,6 +142,7 @@ secret/github-app-ids unchanged
 secret/github-app-key unchanged
 service.serving.knative.dev/github-service configured
 ```
+</details>
 
 To verify if the service have been correctly deployed run:
 

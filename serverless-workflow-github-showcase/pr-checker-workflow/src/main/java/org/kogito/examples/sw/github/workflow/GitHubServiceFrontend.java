@@ -16,23 +16,14 @@
 
 package org.kogito.examples.sw.github.workflow;
 
-import java.util.Collections;
-import java.util.Objects;
-
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.eclipse.microprofile.rest.client.inject.RestClient;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
- * Simple wrapper class to call the github-service.
+ * Placeholder for the SW file duo to codegen bug.
+ *
+ * JIRA: https://issues.redhat.com/browse/KOGITO-3659
  */
 @ApplicationScoped
-public class GitHubService extends AbstractGitHubService {
-
+public class GitHubServiceFrontend extends AbstractGitHubService {
 
 }

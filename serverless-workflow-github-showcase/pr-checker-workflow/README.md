@@ -77,14 +77,14 @@ $ kubectl apply -f https://github.com/knative/eventing-contrib/releases/download
 
 **Please do not proceed any further if you haven't deployed the [GitHub](../github-service) and [Notification](../notification-service) services.**
 
-To make things easier for you, we left a script in this directory to generate the template
+To make things easier there is a [script in this directory](deploy-kubernetes.sh) to generate the template
 files, build the application and the image, and then deploy it to your Kubernetes cluster.
 
 **IMPORTANT!** You **must** be authenticated to the target Kubernetes cluster as a **cluster administrator** for this script
 to work.
 
-You can run the script once and all the required files will be generated for you in 
-the `kubernetes/base` directory, and the image will be published to your Quay.io account.
+You can run the script once and all the required files will be generated in the `kubernetes/base` directory, 
+and the image will be published to your Quay.io account.
 
 Fill the value for the variables as shown below and run the script:
 
@@ -98,6 +98,7 @@ GITHUB_REPO=
 
 You should see a similar output like this:
 
+<details><summary>Build logs</summary>
 ```
 ---> Building and pushing image using tag quay.io/ricardozanini/pr-checker-workflow:latest
 STEP 1: FROM quay.io/kiegroup/kogito-quarkus-jvm-ubi8:latest
@@ -106,16 +107,6 @@ STEP 2: COPY target/*-runner.jar $KOGITO_HOME/bin
 STEP 3: COPY target/lib $KOGITO_HOME/bin/lib
 STEP 4: COMMIT quay.io/ricardozanini/pr-checker-workflow:latest
 --> 7bea1f647bc
-7bea1f647bc6d530735010efc0a0898c912b76a8654e7c33a34c67edae964299
-Getting image source signatures
-Copying blob 2fcbd7b5b8d2 done  
-Copying blob 26aea9dd861a done  
-Copying blob d8e1f35641ac skipped: already exists  
-Copying blob e9e08b319d50 skipped: already exists  
-Copying blob b6f081e4b2b6 skipped: already exists  
-Copying config 7bea1f647b done  
-Writing manifest to image destination
-Copying config 7bea1f647b [--------------------------------------] 0.0b / 2.8KiB
 Writing manifest to image destination
 Writing manifest to image destination
 Storing signatures
@@ -128,6 +119,7 @@ trigger.eventing.knative.dev/pr-checker-listener unchanged
 githubsource.sources.knative.dev/github-event-listener unchanged
 sinkbinding.sources.knative.dev/pr-checker-sink unchanged
 ```
+</details>
 
 If your cluster is already ready to receive GitHub Webhooks calls, just create
 a new PR in your repository with a file named "backend", and you should see the PR

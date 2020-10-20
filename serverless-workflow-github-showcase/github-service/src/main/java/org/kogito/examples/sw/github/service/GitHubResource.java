@@ -45,7 +45,7 @@ public class GitHubResource {
         try {
             gitHubService.addLabels(user, repoName, prNumber, labels);
             return Response.ok().build();
-        } catch (Exception e) {
+        } catch (final Exception e) {
             return Response.serverError().entity(e.getMessage()).build();
         }
     }
@@ -59,7 +59,7 @@ public class GitHubResource {
         try {
             gitHubService.addReviewers(user, repoName, prNumber, reviewers);
             return Response.ok().build();
-        } catch (Exception e) {
+        } catch (final Exception e) {
             return Response.serverError().entity(e.getMessage()).build();
         }
     }
@@ -71,7 +71,7 @@ public class GitHubResource {
                                @PathParam("number") Integer prNumber) {
         try {
             return Response.ok().entity(gitHubService.fetchChangedFilesPath(user, repoName, prNumber)).build();
-        } catch (Exception e) {
+        } catch (final Exception e) {
             return Response.serverError().entity(e.getMessage()).build();
         }
     }

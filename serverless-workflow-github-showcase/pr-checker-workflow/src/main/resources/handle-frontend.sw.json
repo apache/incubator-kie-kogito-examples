@@ -3,6 +3,22 @@
   "name": "HandleFrontend",
   "version": "1.0",
   "functions": [
+    {
+      "name": "AddLabels",
+      "type": "service",
+      "metadata": {
+        "interface": "org.kogito.examples.sw.github.workflow.GitHubServiceFrontend",
+        "operation": "addLabels"
+      }
+    },
+    {
+      "name": "AddReviewers",
+      "type": "service",
+      "metadata": {
+        "interface": "org.kogito.examples.sw.github.workflow.GitHubServiceFrontend",
+        "operation": "addReviewers"
+      }
+    }
   ],
   "events": [
     {

@@ -14,11 +14,16 @@
  *  limitations under the License.
  */
 
-package org.kogito.examples.sw.github.service;
+package org.kogito.examples.sw.github.workflow;
 
-import io.quarkus.test.junit.NativeImageTest;
+import javax.enterprise.context.ApplicationScoped;
 
-@NativeImageTest
-public class NativeGitHubResourceIT extends GitHubResourceTest {
-    // will run the same tests
+/**
+ * Placeholder for the SW file duo to codegen bug.
+ *
+ * JIRA: https://issues.redhat.com/browse/KOGITO-3659
+ */
+@ApplicationScoped
+public class GitHubServiceBackend extends AbstractGitHubService {
+
 }

@@ -32,13 +32,14 @@ Or you can ask an administrator to install the prerequisites for you.
 To deploy this example in your Kubernetes/OpenShift cluster, you will need:
 
 1. A [Quay.io](https://quay.io/repository/) account
-2. A Kubernetes/OpenShift namespace to deploy the example: `kubectl create ns kogito-github`
-3. [**Istio**](https://istio.io/docs/setup/install/istioctl/) installed. 
+2. A Kubernetes/OpenShift namespace to deploy the example: `kubectl create ns kogito-github` or `oc new-project kogito-github
+3. [**Istio**](https://istio.io/docs/setup/install/istioctl/) installed because it's [required by Knative platform](https://knative.dev/docs/install/any-kubernetes-cluster/). 
 You can follow the [Knative documentation](https://knative.dev/development/install/installing-istio) for a very basic and simple installation.
 4. **Knative** Serving and Eventing components installed. 
 We recommend [installing the Knative Operator](https://knative.dev/docs/install/knative-with-operators/) and install the rest of the components
 through it as described in their documentation.
-5. **Kogito Operator** installed in the namespace `kogito-github`. [Download the latest release](https://github.com/kiegroup/kogito-cloud-operator/releases), and run: `NAMESPACE=kogito-github ./hack/install.sh`
+5. **Kogito Operator** installed in the namespace `kogito-github`. [Download the latest release](https://github.com/kiegroup/kogito-cloud-operator/releases), and run: `NAMESPACE=kogito-github ./hack/install.sh`.
+Alternatively, you can also install it via [OperatorHub](https://operatorhub.io/operator/kogito-operator).
 
 In your local machine you will need:
 
@@ -58,6 +59,8 @@ and deploy them in your Kubernetes or OpenShift cluster:
 3. [PR Checker SW Service](pr-checker-workflow/README.md)
 
 Knative and Kogito will bind them together. :heart:
+
+In case of any problems, please file an issue or reach out to us at the [Kogito Dev Mailing list](https://groups.google.com/forum/?authuser=0#!aboutgroup/kogito-development).
 
 ### Cleaning up 
 
