@@ -57,6 +57,7 @@ pipeline {
 
                     if (isRelease()) {
                         assert getProjectVersion() != ''
+                        assert getOptaPlannerVersion() != ''
                     }
 
                     checkoutRepo('kogito-examples')
@@ -272,7 +273,7 @@ void setDeployPropertyIfNeeded(String key, def value){
 }
 
 void updateOptaPlannerVersion(String newVersion) {
-    sh "mvn versions:set-property -Dproperty=version.org.optaplanner -DnewVersion=$newVersion -DallowSnapshots=true -DgenerateBackupPoms=false"
+    maven.mvnSetVersionProperty('version.org.optaplanner', newVersion)
 }
 
 void mavenCleanInstall(String directory, boolean skipTests = false, List profiles = [], String extraArgs = '') {
