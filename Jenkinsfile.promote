@@ -70,6 +70,7 @@ pipeline {
 
                     if (isRelease()) {
                         assert getProjectVersion() != ''
+                        assert getOptaPlannerVersion() != ''
                     }
 
                     installGithubCLI()
