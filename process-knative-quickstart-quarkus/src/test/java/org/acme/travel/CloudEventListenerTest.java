@@ -18,6 +18,8 @@ package org.acme.travel;
 
 import javax.ws.rs.core.MediaType;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.RestAssured;
@@ -26,8 +28,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.testcontainers.shaded.com.fasterxml.jackson.core.JsonProcessingException;
-import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.containing;
@@ -40,9 +40,8 @@ import static io.restassured.RestAssured.given;
 @QuarkusTest
 public class CloudEventListenerTest {
 
-    private static WireMockServer sink;
-
     private static final Logger LOGGER = LoggerFactory.getLogger(CloudEventListenerTest.class);
+    private static WireMockServer sink;
 
     static {
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();

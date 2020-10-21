@@ -15,10 +15,13 @@
  */
 package org.kie.dmn.kogito.quarkus.tracing;
 
+import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.NativeImageTest;
+import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 
 @NativeImageTest
-public class NativeLoanEligibilityIT extends LoanEligibilityTest {
+@QuarkusTestResource(KafkaQuarkusTestResource.class)
+public class NativeLoanEligibilityIT extends LoanEligibilityIT {
 
     // Execute the same tests but in native mode.
 }

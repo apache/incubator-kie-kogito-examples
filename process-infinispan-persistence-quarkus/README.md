@@ -2,12 +2,12 @@
 
 ## Description
 
-A quickstart project that processes deals for travellers. It utilizes process composition to split the work of
+A quickstart project that processes deals for travellers. It utilizes process composition to split the work of:
 
 * submitting a deal
 * reviewing a deal
 
-At the same time shows simplified version of a approval process that waits for human actor to provide review.
+At the same time shows simplified version of an approval process that waits for a human actor to provide review.
 
 This example shows
 
@@ -15,8 +15,8 @@ This example shows
 * each process instance is going to be evaluated and asks for review
 * at any point in time service can be shutdown and when brought back it will keep the state of the instances
 
-Note: The use of this example shows that the data sent to infinispan is saved, you can shut down the application and restart it
-and as long as infinispan is running after you restart you should still see the data
+Note: The use of this example shows that the data sent to Infinispan is saved, you can shut down the application and restart it
+and as long as Infinispan is running after you restart you should still see the data
 
 Note: The file META-INF/hotrot-client.properties contains a key that has to be removed when used in production. It's needed to run the example locally on docker running on macOS.
 
@@ -60,9 +60,9 @@ It utilizes Infinispan server as the backend store.
 
 ## Infrastructure requirements
 
-This quickstart requires an Inifinispan server to be available and by default expects it to be on default port and localhost.
+This quickstart requires an Infinispan server to be available and by default expects it to be on default port and localhost.
 
-You can install Inifinispan server by downloading it from [official website](https://infinispan.org/download/) version to be used is at least 10.0.0.Final
+You can install Infinispan server by downloading it from [official website](https://infinispan.org/download/) version to be used is at least 10.0.0.Final
 
 * Infinispan installed and running
 <p align="center"><img src="docs/images/infinispanInstalledAndRunning.png"></p>

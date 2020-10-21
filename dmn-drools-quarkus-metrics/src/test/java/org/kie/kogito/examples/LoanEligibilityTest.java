@@ -27,7 +27,7 @@ import static org.hamcrest.Matchers.is;
 public class LoanEligibilityTest {
 
     @Test
-    public void testEvaluateTrafficViolation() {
+    public void testEvaluateLoanEligibility() {
         given()
                 .body("{" +
                               "\"Client\": " +
@@ -46,7 +46,7 @@ public class LoanEligibilityTest {
     }
 
     @Test
-    public void testMetricsTrafficViolation() {
+    public void testMetricsLoanEligibility() {
         given()
                 .when()
                 .get("/metrics")

@@ -1,16 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dmn-tracing-quarkus-config
+data:
+  application.properties: |
+    kafka.bootstrap.servers=my-cluster-kafka-bootstrap:9092
+---
 apiVersion: app.kiegroup.org/v1alpha1
 kind: KogitoRuntime
 metadata:
   name: dmn-tracing-quarkus
+  labels:
+    app: dmn-tracing-quarkus
 spec:
   replicas: 1
-  image:
-    domain: quay.io           # <---- replace with the hub you used for the dmn-tracing-quarkus image
-    namespace: jrota          # <---- replace with your namespace/username 
-    name: dmn-tracing-quarkus
-    tag: 1.0.0-snapshot       # <---- replace with the tag you used
-  kafka:
-    externalURI: my-cluster-kafka-bootstrap:9092 
-  envs:
+  image: quay.io/<YOUR_NAMESPACE>/dmn-tracing-quarkus:1.0.0-snapshot # <---- replace with your image
+  propertiesConfigMap: dmn-tracing-quarkus-config
+  env:
     - name: KOGITO_SERVICE_URL
       value: http://dmn-tracing-quarkus:8080
+    - name: ENABLE_EVENT
+      value: 'true'

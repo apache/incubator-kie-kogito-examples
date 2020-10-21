@@ -36,12 +36,32 @@
       </plugins>
     </pluginManagement>
   </build>
-
+  
   <modules>
     <module>hr</module>
     <module>payroll</module>
     <module>onboarding-quarkus</module>
-    <module>onboarding-springboot</module>
   </modules>
+
+  <profiles>
+    <profile>
+      <id>default</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <!-- This is to disable springboot module in native maven profile -->
+      <modules>
+        <module>onboarding-springboot</module>
+      </modules>
+    </profile>
+    <profile>
+      <id>native</id>
+      <activation>
+        <property>
+          <name>native</name>
+        </property>
+      </activation>
+    </profile>
+  </profiles>
   
 </project>

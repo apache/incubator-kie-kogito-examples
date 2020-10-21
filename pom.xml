@@ -41,6 +41,8 @@
     <failsafe.exclude>**/Native*IT.java</failsafe.exclude>
     <alphanetworkCompilerEnabled>false</alphanetworkCompilerEnabled>
     <tests.category></tests.category>
+    <!-- Port 0 means dynamic port -->
+    <tests.quarkus.http.port>0</tests.quarkus.http.port> 
 
     <version.io.quarkus>1.8.0.Final</version.io.quarkus>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -63,6 +65,7 @@
     <!-- jsonpath-->
     <version.jayway.jsonpath>2.4.0</version.jayway.jsonpath>
     <version.swagger.plugin>2.1.0</version.swagger.plugin>
+    <version.io.swagger.core.v3>2.0.6</version.io.swagger.core.v3>
     <version.surefire.plugin>2.22.2</version.surefire.plugin>
     <version.deploy.plugin>2.8.2</version.deploy.plugin>
     <!-- license plugin -->
@@ -157,6 +160,7 @@
         <module>dmn-drools-quarkus-metrics</module>
         <module>dmn-springboot-example</module>
         <module>dmn-tracing-quarkus</module>
+        <module>dmn-tracing-springboot</module>
         <module>flexible-process-quarkus</module>
         <module>flexible-process-springboot</module>
         <module>kogito-travel-agency</module>
@@ -203,6 +207,7 @@
         <module>serverless-workflow-functions-quarkus</module>
       </modules>
     </profile>
+
     <profile>
       <id>persistence</id>
       <activation>
@@ -231,6 +236,77 @@
         <module>process-quarkus-example</module>
         <module>process-springboot-example</module>
       </modules>
+    </profile>
+
+    <profile>
+      <id>native</id>
+      <properties>
+        <failsafe.include>**/Native*IT.java</failsafe.include>
+        <failsafe.exclude></failsafe.exclude>
+        <quarkus.package.type>native</quarkus.package.type>
+        <!-- Native building needs a fixed port for tests -->
+        <tests.quarkus.http.port>8080</tests.quarkus.http.port>
+      </properties>
+      <activation>
+        <property>
+          <name>native</name>
+        </property>
+      </activation>
+      <modules>
+        <module>decisiontable-quarkus-example</module>
+        <module>dmn-listener-quarkus</module>
+        <module>dmn-pmml-quarkus-example</module>
+        <module>dmn-quarkus-example</module>
+        <module>dmn-drools-quarkus-metrics</module>
+        <module>dmn-tracing-quarkus</module>
+        <module>flexible-process-quarkus</module>
+        <module>kogito-travel-agency</module>
+        <module>onboarding-example</module>
+        <module>pmml-quarkus-example</module>
+        <module>process-business-rules-quarkus</module>
+        <module>process-infinispan-persistence-quarkus</module>
+        <module>process-kafka-quickstart-quarkus</module>
+        <module>process-knative-quickstart-quarkus</module>
+        <module>process-mongodb-persistence-quarkus</module>
+        <!-- Disabled due to https://issues.redhat.com/browse/KOGITO-3577 -->
+        <!-- <module>process-optaplanner-quarkus</module> --> 
+        <module>process-quarkus-example</module>
+        <module>process-scripts-quarkus</module>
+        <module>process-service-calls-quarkus</module>
+        <module>process-service-rest-call-quarkus</module>
+        <module>process-timer-quarkus</module>
+        <module>process-usertasks-custom-lifecycle-quarkus</module>
+        <module>process-usertasks-quarkus</module>
+        <module>process-usertasks-with-security-oidc-quarkus</module>
+        <module>process-usertasks-with-security-quarkus</module>
+        <module>rules-quarkus-helloworld</module>
+        <module>ruleunit-quarkus-example</module>
+        <module>serverless-workflow-greeting-quarkus</module>
+        <module>serverless-workflow-service-calls-quarkus</module>
+        <module>serverless-workflow-events-quarkus</module>
+      </modules>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>native-image</goal>
+                </goals>
+                <configuration>
+                  <enableHttpUrlHandler>true</enableHttpUrlHandler>
+                  <enableHttpsUrlHandler>true</enableHttpsUrlHandler>
+                  <enableJni>true</enableJni>
+                  <enableAllSecurityServices>true</enableAllSecurityServices>
+                  <additionalBuildArgs>--allow-incomplete-classpath</additionalBuildArgs>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
     </profile>
   </profiles>
 
@@ -276,7 +352,12 @@
         <artifactId>kafka</artifactId>
         <version>${version.testcontainers}</version>
       </dependency>
-
+      <dependency>
+        <groupId>io.swagger.core.v3</groupId>
+        <artifactId>swagger-annotations</artifactId>
+        <version>${version.io.swagger.core.v3}</version>
+      </dependency>
+      
       <!-- PMML -->
       <dependency>
         <groupId>org.jpmml</groupId>
@@ -327,6 +408,7 @@
               <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
               <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
               <enable.resource.mongodb>${enable.resource.mongodb}</enable.resource.mongodb>
+              <quarkus.http.test-port>${tests.quarkus.http.port}</quarkus.http.test-port>
             </systemPropertyVariables>
             <classesDirectory>${project.build.outputDirectory}</classesDirectory>
           </configuration>
