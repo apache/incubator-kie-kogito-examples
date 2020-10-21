@@ -59,7 +59,7 @@ It utilizes MongoDB server as the backend store.
 ## Infrastructure requirements
 
 This quickstart requires an MongoDB server to be available and by default expects it to be on default port (27017) and localhost.
-The default database is "Kogito_spring" or you can provide the database name using property - spring.data.mongodb.database.
+The default database is "kogito" or you can provide the database name using property - spring.data.mongodb.database.
 You must set property - kogito.persistence.type=mongodb
 For more details you can check applications.properties.
 
