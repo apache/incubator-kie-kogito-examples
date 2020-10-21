@@ -59,18 +59,15 @@ Note: This does not yet work on Windows, GraalVM and Quarkus should be rolling o
 
 ### Running with persistence enabled
 
-Kogito supports runtime persistence that is backed by Infinispan. So to be able to enable this you need to have
-Infinispan server installed and available over the network. By default it expects it to be at (it can be configured via application.properties file located in src/main/resources):
-
+Kogito runtime supports multiple persistence types, including Infinispan.
+In order to use the Infinispan based persistence, you need to have a Infinispan server installed and available over the network.
+The default configuration, expects the server to be running on:
 ```
 quarkus.infinispan-client.server-list=localhost:11222
 ```
+If you need to change it, you can do so by updating the application.properties file located in src/main/resources.
 
-You can install Infinispan server by downloading it from [Infinispan website](https://infinispan.org/download/), you should use version 10.0.x.  To enable our simplified demo setup, go to /server/conf/infinispan.xml and remove the security domain from the endpoints definition:
-
-```
-<endpoints socket-binding="default">
-```
+You can install Infinispan server by downloading version 11.x from the [official website](https://infinispan.org/download/).
 
 Once Infinispan is up and running you can build this project with `-Ppersistence` to enable additional processing during the build. Next you start it in exact same way as without persistence.
 

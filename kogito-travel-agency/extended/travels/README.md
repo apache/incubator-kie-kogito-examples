@@ -129,8 +129,9 @@ When using native image compilation, you will also need:
 
 This application requires an Infinispan server to be available and by default expects it to be on default port and localhost.
 
-You can install Infinispan server by downloading it from [official website](https://infinispan.org/download) version to be used in 10.1.5.Final+
-Here  [https://github.com/kiegroup/kogito-runtimes/wiki/Persistence](https://github.com/kiegroup/kogito-runtimes/wiki/Persistence) the required 
+You can install Infinispan server by downloading version 11.x from the [official website](https://infinispan.org/download/).
+
+In the section [Persistence in Kogito services](https://docs.jboss.org/kogito/release/latest/html_single/#con-persistence_kogito-developing-process-services) the required 
 Infinispan configuration is explained in more detail.
 
 Alternatively, you can use the Docker Compose template, instructions on how to use it are available in the [README](../docker-compose/README.md) file.
