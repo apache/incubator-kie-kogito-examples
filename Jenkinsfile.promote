@@ -102,15 +102,6 @@ pipeline {
             }
             steps {
                 script {
-                    // TODO: remove before merging (for testing purpose only)
-                    dir('kogito-runtimes') { // kogito-examples depend on kogito-bom
-                        checkoutRepo('kogito-runtimes')
-                        maven.runMavenWithSubmarineSettings("clean install", true)
-                    }
-                    dir('optaplanner') { // kogito-examples depend on kogito-bom
-                        checkoutRepo('optaplanner')
-                        maven.runMavenWithSubmarineSettings("clean install", true)
-                    }
                     dir('kogito-examples-bot') {
                         prepareForPR('kogito-examples')
                         setupMavenConfig()
