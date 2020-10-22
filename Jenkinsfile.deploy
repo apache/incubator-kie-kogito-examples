@@ -80,19 +80,18 @@ pipeline {
                 prepareForPR('kogito-examples')
             }
         }
-        stage('Setup Maven release config'){
-            when {
-                expression { return isRelease() }
-            }
+        stage('Setup Maven config'){
             steps {
                 script {
-                    echo 'Setup Maven release config'
-                    configFileProvider([configFile(fileId: maven.getSubmarineSettingsXmlId(), targetLocation: 'maven-settings.xml', variable: 'MAVEN_SETTINGS_FILE')]){
-                        sh "echo '\n-B -s ${MAVEN_SETTINGS_FILE}' | tee -a kogito-examples/.mvn/maven.config"
-                        if(params.MAVEN_DEPENDENCIES_REPOSITORY != ''){
-                            sh "sed -i 's|<repositories>|<repositories><repository><id>staging</id><name>Staging Repository</name><url>${params.MAVEN_DEPENDENCIES_REPOSITORY}</url><layout>default</layout><snapshots><enabled>true</enabled></snapshots><releases><enabled>true</enabled></releases></repository>|g' ${MAVEN_SETTINGS_FILE}"
-                            sh "sed -i 's|<pluginRepositories>|<pluginRepositories><pluginRepository><id>staging</id><name>Staging Repository</name><url>${params.MAVEN_DEPENDENCIES_REPOSITORY}</url><layout>default</layout><snapshots><enabled>true</enabled></snapshots><releases><enabled>true</enabled></releases></pluginRepository>|g' ${MAVEN_SETTINGS_FILE}"
-                            sh "sed -i 's|external:\\*|external:*,!staging|g' ${MAVEN_SETTINGS_FILE}" // Done to allow Maven to download release artificats from MAVEN_DEPENDENCIES_REPOSITORY
+                    dir('kogito-examples') {
+                        configFileProvider([configFile(fileId: maven.getSubmarineSettingsXmlId(), targetLocation: 'maven-settings.xml', variable: 'MAVEN_SETTINGS_FILE')]){
+                            sh "echo '\n-B -s ${MAVEN_SETTINGS_FILE}' | tee -a .mvn/maven.config"
+                            if(params.MAVEN_DEPENDENCIES_REPOSITORY != ''){
+                                sh "echo '\n-Denforcer.skip=true' | tee -a .mvn/maven.config"
+                                sh "sed -i 's|<repositories>|<repositories><repository><id>staging</id><name>Staging Repository</name><url>${params.MAVEN_DEPENDENCIES_REPOSITORY}</url><layout>default</layout><snapshots><enabled>true</enabled></snapshots><releases><enabled>true</enabled></releases></repository>|g' ${MAVEN_SETTINGS_FILE}"
+                                sh "sed -i 's|<pluginRepositories>|<pluginRepositories><pluginRepository><id>staging</id><name>Staging Repository</name><url>${params.MAVEN_DEPENDENCIES_REPOSITORY}</url><layout>default</layout><snapshots><enabled>true</enabled></snapshots><releases><enabled>true</enabled></releases></pluginRepository>|g' ${MAVEN_SETTINGS_FILE}"
+                                sh "sed -i 's|external:\\*|external:*,!staging|g' ${MAVEN_SETTINGS_FILE}" // Done to allow Maven to download release artificats from MAVEN_DEPENDENCIES_REPOSITORY
+                            }
                         }
                     }
                 }
@@ -282,11 +281,6 @@ void runMaven(String command, String directory, boolean skipTests = false, List 
         mvnCmd += " ${extraArgs}"
     }
     dir(directory) {
-        if(isRelease()){
-            // In case of release, we already have the settings.xml
-            maven.runMaven(mvnCmd, skipTests, ['-fae'])
-        } else {
-            maven.runMavenWithSubmarineSettings(mvnCmd, skipTests)   
-        }
+        maven.runMaven(mvnCmd, skipTests, ['-fae'])
     }
 }
