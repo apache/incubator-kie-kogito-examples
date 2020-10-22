@@ -10,12 +10,13 @@ data:
     quarkus.infinispan-client.sasl-mechanism=DIGEST-MD5
 ---
 apiVersion: app.kiegroup.org/v1alpha1
-kind: KogitoTrusty
+kind: KogitoSupportingService
 metadata:
   name: trusty
   labels:
     app: trusty
 spec:
+  serviceType: TrustyAI
   replicas: 1
   image: quay.io/kiegroup/kogito-trusty:0.16
   propertiesConfigMap: trusty-config

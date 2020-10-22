@@ -149,10 +149,11 @@ minikube ip
 and replace the env variables `KOGITO_TRUSTY_ENDPOINT` and `KOGITO_TRUSTY_WS_URL` in the file `resources/trusty-ui.yaml`. For example, if the ip is `172.17.0.2`, then the content of the file should be 
 ```bash
 apiVersion: app.kiegroup.org/v1alpha1
-kind: KogitoTrustyUI
+kind: KogitoSupportingService
 metadata:
   name: trusty-ui
 spec:
+  serviceType: TrustyUI
   replicas: 1
   image: quay.io/kiegroup/kogito-trusty-ui:0.16
   env:
