@@ -15,6 +15,8 @@
  */
 package org.acme.deals;
 
+import java.util.List;
+
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.RestAssured;
@@ -25,6 +27,7 @@ import org.kie.kogito.testcontainers.quarkus.InfinispanQuarkusTestResource;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @QuarkusTest
 @QuarkusTestResource(InfinispanQuarkusTestResource.class)
@@ -91,5 +94,13 @@ public class DealsRestIT {
         given().accept(ContentType.JSON)
                 .when().get("/deals")
                 .then().statusCode(200).body("$.size()", is(0));
+    }
+
+    @Test
+    public void testProtobufListIsAvailable() {
+        List<String> files = given().contentType(ContentType.JSON).accept(ContentType.JSON).when()
+                .get("/persistence/protobuf/list.json").as(List.class);
+
+        assertEquals(2, files.size());
     }
 }
