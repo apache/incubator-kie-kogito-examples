@@ -15,8 +15,11 @@
  */
 package org.kie.kogito.examples;
 
+import java.util.List;
+
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
@@ -55,5 +58,13 @@ public class LoanEligibilityTest {
                 .body(containsString("string_dmn_result{decision=\"Judgement\",endpoint=\"LoanEligibility\",identifier=\"Yes\",} 1.0"))
                 .body(containsString("number_dmn_result{decision=\"Is Enought?\",endpoint=\"LoanEligibility\",quantile=\"0.1\",} 100.0"))
                 .body(containsString("api_http_response_code{endpoint=\"LoanEligibility\",identifier=\"200\",} 1.0"));
+    }
+
+    @Test
+    public void testDashboardsListIsAvailable() {
+        List<String> dashboards = given().contentType(ContentType.JSON).accept(ContentType.JSON).when()
+                .get("/monitoring/dashboards/list.json").as(List.class);
+
+        Assertions.assertEquals(3, dashboards.size());
     }
 }
