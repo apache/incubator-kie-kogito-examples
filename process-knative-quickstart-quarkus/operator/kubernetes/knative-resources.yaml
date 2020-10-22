@@ -1,38 +1,8 @@
-apiVersion: sources.knative.dev/v1alpha1
-kind: SinkBinding
-metadata:
-  name: process-knative-quickstart-quarkus-sink
-spec:
-  subject:
-    apiVersion: apps/v1
-    kind: Deployment
-    selector:
-      matchLabels:
-        app: process-knative-quickstart-quarkus
-  # any cloud event produced by our application will then be delivered to the Broker
-  sink:
-    ref:
-      apiVersion: eventing.knative.dev/v1
-      kind: Broker
-      name: default
----
+# a default broker
 apiVersion: eventing.knative.dev/v1
-kind: Trigger
+kind: Broker
 metadata:
-  name: travellers-trigger
-spec:
-  # the default broker has been enabled in the cluster since the namespace is labeled with knative-eventing-injection=enabled
-  broker: default
-  filter:
-    attributes:
-      # name of the message node in our process
-      type: travellers
-  # the subscriber is the deployed service, any event that match the filter above in the broker will be sent to us
-  subscriber:
-    ref:
-      apiVersion: v1
-      kind: Service
-      name: process-knative-quickstart-quarkus
+  name: default
 ---
 # simple knative application to display the routed messages
 apiVersion: serving.knative.dev/v1
