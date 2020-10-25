@@ -1,0 +1,91 @@
+{
+  "id": "handle_frontend",
+  "name": "HandleFrontend",
+  "version": "1.0",
+  "functions": [
+    {
+      "name": "AddLabels",
+      "type": "service",
+      "metadata": {
+        "interface": "org.kogito.examples.sw.github.workflow.GitHubServiceFrontend",
+        "operation": "addLabels"
+      }
+    },
+    {
+      "name": "AddReviewers",
+      "type": "service",
+      "metadata": {
+        "interface": "org.kogito.examples.sw.github.workflow.GitHubServiceFrontend",
+        "operation": "addReviewers"
+      }
+    }
+  ],
+  "events": [
+    {
+      "name": "FrontendNewChange",
+      "source": "checker_workflow_frontend",
+      "type": "frontend_changed",
+      "kind": "produced"
+    }
+  ],
+  "states": [
+    {
+      "start": {
+        "kind": "default"
+      },
+      "name": "CheckFrontend",
+      "type": "switch",
+      "dataConditions": [
+        {
+          "condition": "{{ $.files[?(@ =~ /^.*frontend.*$/i )] }}",
+          "transition": {
+            "produceEvents": [
+              {
+                "eventRef": "FrontendNewChange"
+              }
+            ],
+            "nextState": "InjectFrontendData"
+          }
+        },
+        {
+          "condition": "{{ $.files[?(@ =~ /^(?!.*frontend).*$/i )] }}",
+          "end": {
+            "kind": "default"
+          }
+        }
+      ]
+    },
+    {
+      "name": "InjectFrontendData",
+      "type": "inject",
+      "data": {
+        "labels": "frontend",
+        "reviewers": "JohnDoe"
+      },
+      "transition": {
+        "nextState": "HandleFrontend"
+      }
+    },
+    {
+      "name": "HandleFrontend",
+      "type": "operation",
+      "actions": [
+        {
+          "name": "addFrontendLabels",
+          "functionRef": {
+            "refName": "AddLabels"
+          }
+        },
+        {
+          "name": "addFrontendReviewers",
+          "functionRef": {
+            "refName": "AddReviewers"
+          }
+        }
+      ],
+      "end": {
+        "kind": "default"
+      }
+    }
+  ]
+}

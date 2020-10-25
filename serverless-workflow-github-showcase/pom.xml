@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.kie.kogito</groupId>
+    <artifactId>kogito-examples</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+
+  <properties>
+    <surefire-plugin.version>2.22.1</surefire-plugin.version>
+    <jandex-plugin.version>1.0.7</jandex-plugin.version>
+    <version.wiremock>2.27.2</version.wiremock>
+    <version.org.camel>1.0.1</version.org.camel>
+    <version.kohsuke.github>1.116</version.kohsuke.github>
+    <version.io.jjwt>0.11.2</version.io.jjwt>
+    <version.cloudevents>2.0.0-milestone3</version.cloudevents>
+  </properties>
+
+  <artifactId>serverless-workflow-github-showcase</artifactId>
+  <name>Kogito Example :: Serverless Workflow Github Showcase</name>
+  <packaging>pom</packaging>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>io.cloudevents</groupId>
+        <artifactId>cloudevents-api</artifactId>
+        <version>${version.cloudevents}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.cloudevents</groupId>
+        <artifactId>cloudevents-core</artifactId>
+        <version>${version.cloudevents}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <modules>
+    <module>pr-checker-workflow</module>
+    <module>github-service</module>
+    <module>notification-service</module>
+  </modules>
+</project>

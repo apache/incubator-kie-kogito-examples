@@ -1,0 +1,17 @@
+apiVersion: sources.knative.dev/v1alpha1
+kind: SinkBinding
+metadata:
+  name: pr-checker-sink
+spec:
+  subject:
+    apiVersion: apps/v1
+    kind: Deployment
+    selector:
+      matchLabels:
+        app: pr-checker-workflow
+  # any cloud event produced by our application will then be delivered to the Broker
+  sink:
+    ref:
+      apiVersion: eventing.knative.dev/v1
+      kind: Broker
+      name: default

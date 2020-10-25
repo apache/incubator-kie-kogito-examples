@@ -1,0 +1,26 @@
+namespace: kogito-github
+resources:
+  - 00-deployment.yaml
+patchesJson6902:
+  - path: apply_image_ns.yaml
+    target:
+      kind: Service
+      name: github-service
+      version: v1
+      group: serving.knative.dev
+generatorOptions:
+  disableNameSuffixHash: true
+  labels:
+    app: github-service
+configMapGenerator:
+  - files:
+      - application.properties
+    name: github-service-properties
+secretGenerator:
+  - env: github-app.env
+    name: github-app-ids
+    type: Opaque
+  - files:
+      - github-app-key.der
+    name: github-app-key
+    type: Opaque

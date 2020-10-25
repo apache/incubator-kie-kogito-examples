@@ -1,0 +1,34 @@
+apiVersion: serving.knative.dev/v1 # Current version of Knative (0.17.x)
+kind: Service
+metadata:
+  name: github-service
+spec:
+  template:
+    spec:
+      containers:
+        - env:
+            - name: APP_ID
+              valueFrom:
+                secretKeyRef:
+                  key: githubAppId
+                  name: github-app-ids
+            - name: INSTALLATION_ID
+              valueFrom:
+                secretKeyRef:
+                  key: githubInstallationId
+                  name: github-app-ids
+          image: image_placeholder
+          volumeMounts:
+            - name: github-app-key
+              mountPath: "/opt/data"
+              readOnly: true
+            - name: properties
+              mountPath: "/config/application.properties"
+              subPath: application.properties
+      volumes:
+        - name: github-app-key
+          secret:
+            secretName: github-app-key
+        - name: properties
+          configMap:
+            name: github-service-properties

@@ -1,0 +1,23 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: github-event-listener-smee
+spec:
+  gateways:
+    - knative-serving/cluster-local-gateway
+    - knative-serving/knative-ingress-gateway
+  hosts:
+    - smee.io
+  http:
+    - route:
+        - destination:
+            host: placeholder
+            port:
+              number: 80
+          headers:
+            request:
+              set:
+                Knative-Serving-Namespace: kogito-github
+                Knative-Serving-Revision: placeholder
+          weight: 100
+      timeout: 172800s

@@ -1,0 +1,17 @@
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: notification-trigger
+spec:
+  # the default broker has been enabled in the cluster since the namespace is labeled with knative-eventing-injection=enabled
+  broker: default
+  filter:
+    attributes:
+      # this message is produced by the pr-checker-workflow
+      type: process.handle_backend.checker_workflow_backend
+  # the subscriber is the knative service we just deployed
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: notification-service

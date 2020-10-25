@@ -1,0 +1,18 @@
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: pr-checker-listener
+spec:
+  broker: default
+  filter:
+    attributes:
+      # anything from our repo
+      source: placeholder
+      # pull requests events only :)
+      type: dev.knative.source.github.pull_request
+  # the subscriber is the deployed kogito service
+  subscriber:
+    ref:
+      apiVersion: v1
+      kind: Service
+      name: pr-checker-workflow

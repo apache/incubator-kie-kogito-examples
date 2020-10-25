@@ -1,0 +1,6 @@
+# this is where all the messages coming to the cluster will pass
+# we can use triggers and sinkbinding to route/filter the messages as we pleased
+apiVersion: eventing.knative.dev/v1
+kind: Broker
+metadata:
+  name: default

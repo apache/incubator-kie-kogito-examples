@@ -1,0 +1,16 @@
+# See: https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/
+apiVersion: networking.k8s.io/v1beta1 # for versions before 1.14 use extensions/v1beta1
+kind: Ingress
+metadata:
+  name: pr-checker-workflow-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - host: pr-checker-workflow.kogito.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: pr-checker-workflow
+              servicePort: 8080

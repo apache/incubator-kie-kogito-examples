@@ -1,0 +1,36 @@
+namespace: kogito-github
+resources:
+  - 00-broker.yaml
+  - 01-github-source.yaml
+  - 02-kogito-service.yaml
+  - 03-pr-checker-trigger.yaml
+  - 04-pr-checker-sinkbinding.yaml
+patchesJson6902:
+  - target:
+      kind: KogitoRuntime
+      name: pr-checker-workflow
+      version: v1alpha1
+      group: app.kiegroup.org
+    path: apply_image_ns.yaml
+  - target:
+      kind: GitHubSource
+      name: github-event-listener
+      version: v1alpha1
+      group: sources.knative.dev
+    path: patch_repository.yaml
+  - target:
+      kind: Trigger
+      name: pr-checker-listener
+      version: v1
+      group: eventing.knative.dev
+    path: patch_trigger.yaml
+generatorOptions:
+  disableNameSuffixHash: true
+  labels:
+    app: pr-checker-workflow
+secretGenerator:
+  - name: github-webhook-secret
+    type: Opaque
+    literals:
+      - secretToken=super-kogito-demo-secret
+      - accessToken=no_need
