@@ -30,7 +30,7 @@
       "start": {
         "kind": "default"
       },
-      "eventsActions": [
+      "onEvents": [
         {
           "eventRefs": [
             "NewApplicantEvent"
@@ -46,9 +46,11 @@
       ],
       "end": {
         "kind": "event",
-        "produceEvent": {
-          "eventRef": "ApplicantDecisionEvent"
-        }
+        "produceEvents": [
+          {
+            "eventRef": "ApplicantDecisionEvent"
+          }
+        ]
       }
     }
   ]

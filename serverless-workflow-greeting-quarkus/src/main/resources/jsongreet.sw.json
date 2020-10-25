@@ -18,24 +18,22 @@
       },
       "dataConditions": [
         {
-          "path": "$.language",
-          "value": "English",
-          "operator": "equals",
+          "condition": "{{ $.[?(@.language  == 'English')] }}",
           "transition": {
             "nextState": "GreetInEnglish"
           }
         },
         {
-          "path": "$.language",
-          "value": "Spanish",
-          "operator": "equals",
+          "condition": "{{ $.[?(@.language  == 'Spanish')] }}",
           "transition": {
             "nextState": "GreetInSpanish"
           }
         }
       ],
       "default": {
-        "nextState": "GreetInEnglish"
+        "transition": {
+          "nextState": "GreetInEnglish"
+        }
       }
     },
     {
