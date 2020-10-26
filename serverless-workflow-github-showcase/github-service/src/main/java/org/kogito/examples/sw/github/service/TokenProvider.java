@@ -30,13 +30,7 @@ import java.util.Map;
 
 import javax.enterprise.context.ApplicationScoped;
 
-import com.google.common.io.Files;
-import io.jsonwebtoken.JwtBuilder;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.impl.DefaultJwtBuilder;
-import io.jsonwebtoken.jackson.io.JacksonSerializer;
-import io.quarkus.cache.CacheResult;
+import org.apache.commons.io.FileUtils;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.kohsuke.github.GHAppInstallation;
 import org.kohsuke.github.GHPermissionType;
@@ -44,6 +38,12 @@ import org.kohsuke.github.GitHub;
 import org.kohsuke.github.GitHubBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import io.jsonwebtoken.JwtBuilder;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.impl.DefaultJwtBuilder;
+import io.jsonwebtoken.jackson.io.JacksonSerializer;
+import io.quarkus.cache.CacheResult;
 
 /**
  * Provides the installation token to interact with the GitHub API via GitHub App Installation
@@ -72,7 +72,7 @@ public class TokenProvider {
     }
 
     private PrivateKey getPrivateKey() throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
-        byte[] keyBytes = Files.toByteArray(new File(privateKeyPath));
+        byte[] keyBytes = FileUtils.readFileToByteArray(new File(privateKeyPath));
 
         PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(keyBytes);
         KeyFactory kf = KeyFactory.getInstance("RSA");
