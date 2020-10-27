@@ -29,6 +29,10 @@
       <artifactId>kogito-quarkus</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-cloudevents-quarkus-addon</artifactId>
+    </dependency>
+    <dependency>
        <groupId>io.quarkus</groupId>
        <artifactId>quarkus-vertx-web</artifactId>
      </dependency>

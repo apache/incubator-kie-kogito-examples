@@ -61,7 +61,7 @@ public class ApplicantResource {
         try {
             CloudEvent applicantEvent = CloudEventBuilder.v1()
                     .withId(UUID.randomUUID().toString())
-                    .withType("newApplicantEvent")
+                    .withType("applicants")
                     .withSource(URI.create("http://localhost:8080"))
                     .withData(mapper.writeValueAsString(newApplicant).getBytes())
                     .build();
