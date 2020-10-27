@@ -22,7 +22,7 @@ import java.util.List;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.event.Topic;
-import org.kie.kogito.event.TopicType;
+import org.kie.kogito.event.ChannelType;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.hasItem;
@@ -36,7 +36,7 @@ public class TopicsInformationTest {
     void verifyTopicsInformation() {
         final List<Topic> topics = Arrays.asList(given().get("/messaging/topics").as(Topic[].class));
         assertThat(topics, notNullValue());
-        assertThat(topics, hasItem(new Topic("travellers", TopicType.CONSUMED)));
-        assertThat(topics, hasItem(new Topic("processedtravellers", TopicType.PRODUCED)));
+        assertThat(topics, hasItem(new Topic("travellers", ChannelType.INCOMING)));
+        assertThat(topics, hasItem(new Topic("processedtravellers", ChannelType.OUTGOING)));
     }
 }
