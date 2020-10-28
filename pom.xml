@@ -54,8 +54,8 @@
     <kogito.version>${project.version}</kogito.version>
     <version.org.optaplanner>8.0.0-SNAPSHOT</version.org.optaplanner>
     <!-- infinispan -->
-    <infinispan.version>10.1.5.Final</infinispan.version>
-    <infinispan.starter.version>2.2.3.Final</infinispan.starter.version>
+    <infinispan.version>11.0.4.Final</infinispan.version>
+    <infinispan.starter.version>2.3.3.Final</infinispan.starter.version>
     <container.image.infinispan>quay.io/infinispan/server:${infinispan.version}</container.image.infinispan>
     <!-- keycloak -->
     <keycloak.version>11.0.0</keycloak.version>
