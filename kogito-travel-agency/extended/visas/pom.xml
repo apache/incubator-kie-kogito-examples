@@ -70,11 +70,6 @@
       <groupId>org.kie.kogito</groupId>
       <artifactId>process-management-addon</artifactId>
     </dependency>
-    <!-- Needed because of this: https://github.com/quarkusio/quarkus/issues/7809 . Adding the resteasy extension does not fix it. -->
-    <dependency>
-      <groupId>org.jboss.resteasy</groupId>
-      <artifactId>resteasy-context-propagation</artifactId>
-     </dependency>
   </dependencies>
 
   <build>

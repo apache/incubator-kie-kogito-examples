@@ -27,17 +27,14 @@ import org.acme.travels.Address;
 import org.acme.travels.Traveller;
 import org.acme.travels.Trip;
 import org.drools.core.common.InternalAgenda;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.kie.api.runtime.KieSession;
 import org.kie.kogito.rules.KieRuntimeBuilder;
 
 import io.quarkus.test.junit.QuarkusTest;
 
-@Disabled("Disabled by default as it requires inifinispan and kafka")
 @QuarkusTest
-public class VisaRulesTest {
-
+public class VisaRulesIT {
 
 	@Inject
 	KieRuntimeBuilder ruleRuntime;
