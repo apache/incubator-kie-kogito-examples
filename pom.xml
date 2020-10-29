@@ -385,6 +385,28 @@
           <version>${springboot.version}</version>
         </plugin>
         <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>2.5</version>
+          <executions>
+            <execution>
+              <id>add-it-resources</id>
+              <phase>pre-integration-test</phase>
+              <goals>
+                <goal>copy-resources</goal>
+              </goals>
+              <configuration>
+                <outputDirectory>${project.build.directory}/test-run/META-INF</outputDirectory>
+                <resources>
+                  <resource>
+                    <directory>target/classes/META-INF</directory>
+                  </resource>
+                </resources>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-failsafe-plugin</artifactId>
           <version>${version.surefire.plugin}</version>
@@ -409,6 +431,7 @@
               <quarkus.http.test-port>${tests.quarkus.http.port}</quarkus.http.test-port>
             </systemPropertyVariables>
             <classesDirectory>${project.build.outputDirectory}</classesDirectory>
+            <workingDirectory>${project.build.directory}/test-run</workingDirectory>
           </configuration>
           <executions>
             <execution>
