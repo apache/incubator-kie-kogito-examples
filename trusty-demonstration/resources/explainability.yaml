@@ -7,10 +7,11 @@ data:
     kafka.bootstrap.servers=my-cluster-kafka-bootstrap:9092
 ---
 apiVersion: app.kiegroup.org/v1alpha1
-kind: KogitoExplainability
+kind: KogitoSupportingService
 metadata:
   name: explainability
 spec:
+  serviceType: Explainablity
   replicas: 1
   image: quay.io/kiegroup/kogito-explainability:0.16
   propertiesConfigMap: explainability-config
