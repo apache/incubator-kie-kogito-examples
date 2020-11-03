@@ -39,6 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LoanEligibilityIT {
 
     public static final String TRACING_TOPIC_NAME = "kogito-tracing-decision";
+    public static final String TRACING_MODELS_TOPIC_NAME = "kogito-tracing-model";
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LoanEligibilityIT.class);
 
@@ -82,7 +83,29 @@ public class LoanEligibilityIT {
                     .body("'Decide'", is(true));
 
             countDownLatch.await(5, TimeUnit.SECONDS);
-            assertEquals(countDownLatch.getCount(), 0);
+            assertEquals( 0, countDownLatch.getCount());
+        } finally {
+            kafkaClient.shutdown();
+        }
+    }
+
+    @Test
+    public void testEvaluateDMNModel() throws InterruptedException {
+        final KafkaClient kafkaClient = new KafkaClient(kafkaBootstrapServers);
+        final CountDownLatch countDownLatch = new CountDownLatch(1);
+
+        try {
+            kafkaClient.consume(TRACING_MODELS_TOPIC_NAME, s -> {
+                LOGGER.info("Received from kafka: {}", s);
+                Optional.ofNullable(CloudEventUtils.decode(s))
+                        .ifPresentOrElse(
+                                cloudEvent -> countDownLatch.countDown(),
+                                () -> LOGGER.error("Error parsing {}", s)
+                        );
+            });
+
+            countDownLatch.await(5, TimeUnit.SECONDS);
+            assertEquals(0, countDownLatch.getCount());
         } finally {
             kafkaClient.shutdown();
         }
