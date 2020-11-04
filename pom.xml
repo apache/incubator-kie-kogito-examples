@@ -179,6 +179,7 @@
         <module>process-optaplanner-quarkus</module>
         <module>process-optaplanner-springboot</module>
         <module>process-quarkus-example</module>
+        <module>process-saga-quarkus</module>
         <module>process-springboot-example</module>
         <module>process-scripts-quarkus</module>
         <module>process-scripts-springboot</module>
