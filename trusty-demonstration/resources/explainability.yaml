@@ -11,7 +11,7 @@ kind: KogitoSupportingService
 metadata:
   name: explainability
 spec:
-  serviceType: Explainablity
+  serviceType: Explainability
   replicas: 1
   image: quay.io/kiegroup/kogito-explainability:0.16
   propertiesConfigMap: explainability-config
