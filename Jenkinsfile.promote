@@ -1,6 +1,8 @@
 import org.jenkinsci.plugins.workflow.libs.Library
 @Library('jenkins-pipeline-shared-libraries')_
 
+import org.kie.jenkins.MavenCommand
+
 deployProperties = [:]
 pipelineProperties = [:]
 
@@ -29,6 +31,7 @@ pipeline {
         string(name: 'GIT_AUTHOR', defaultValue: '', description: 'Override `deployment.properties`. Which Git author repository ?')
         
         // Build&Deploy information for next snapshots
+        string(name: 'MAVEN_SETTINGS_CONFIG_FILE_ID', defaultValue: 'kogito_release_settings', description: 'Maven settings configfile to use in pipeline for Maven commands')
         string(name: 'MAVEN_DEPENDENCIES_REPOSITORY', defaultValue: '', description: 'Maven repository where to find dependencies if those are not in the default Jboss repository.')
         string(name: 'MAVEN_DEPLOY_REPOSITORY', defaultValue: '', description: 'Specify a Maven repository to deploy the artifacts.')
 
@@ -104,17 +107,17 @@ pipeline {
                 script {
                     dir('kogito-examples-bot') {
                         prepareForPR('kogito-examples')
-                        setupMavenConfig()
-                        maven.mvnVersionsSet(getSnapshotVersion(), true)
-                        updateOptaPlannerVersion(util.getNextVersion(getOptaPlannerVersion(), 'micro'))
+
+                        maven.mvnVersionsSet(getMavenCommand(), getSnapshotVersion(), true)
+                        maven.mvnSetVersionProperty(getMavenCommand(),'version.org.optaplanner', util.getNextVersion(getOptaPlannerVersion(), 'micro'))
+
                         commitAndCreatePR('kogito-examples')
                     }
                     dir('kogito-examples') {
                         sh "git checkout ${getBuildBranch()}"
                         mergeAndPush('kogito-examples', getPipelinePrLink('kogito-examples'))
 
-                        setupMavenConfig()
-                        deployArtifacts()
+                        runMavenDeploy(getMavenCommand())
                     }
                 }
             }
@@ -218,10 +221,6 @@ String getSnapshotBranch(){
     return "${getSnapshotVersion().toLowerCase()}-${env.BOT_BRANCH_HASH}"
 }
 
-boolean isSpecificMavenConfig() {
-    return params.MAVEN_DEPENDENCIES_REPOSITORY != ''
-}
-
 //////////////////////////////////////////////////////////////////////////////
 // Git
 //////////////////////////////////////////////////////////////////////////////
@@ -312,34 +311,19 @@ void forcePushProtectedBranch(String repo, String defaultBranch, String tempBran
     setDefaultBranch(repo, defaultBranch)
 }
 
-void setupMavenConfig() {
-    if (isSpecificMavenConfig()) {
-        echo 'Setup Maven release config'
-        configFileProvider([configFile(fileId: maven.getSubmarineSettingsXmlId(), targetLocation: 'maven-settings.xml', variable: 'MAVEN_SETTINGS_FILE')]){
-            sh "echo '\n-B -s ${MAVEN_SETTINGS_FILE}' | tee -a .mvn/maven.config"
-            if(params.MAVEN_DEPENDENCIES_REPOSITORY != ''){
-                sh "echo '\n-Denforcer.skip=true' | tee -a .mvn/maven.config"
-                sh "sed -i 's|<repositories>|<repositories><repository><id>staging</id><name>Staging Repository</name><url>${params.MAVEN_DEPENDENCIES_REPOSITORY}</url><layout>default</layout><snapshots><enabled>true</enabled></snapshots><releases><enabled>true</enabled></releases></repository>|g' ${MAVEN_SETTINGS_FILE}"
-                sh "sed -i 's|<pluginRepositories>|<pluginRepositories><pluginRepository><id>staging</id><name>Staging Repository</name><url>${params.MAVEN_DEPENDENCIES_REPOSITORY}</url><layout>default</layout><snapshots><enabled>true</enabled></snapshots><releases><enabled>true</enabled></releases></pluginRepository>|g' ${MAVEN_SETTINGS_FILE}"
-                sh "sed -i 's|external:\\*|external:*,!staging|g' ${MAVEN_SETTINGS_FILE}" // Done to allow Maven to download release artificats from MAVEN_DEPENDENCIES_REPOSITORY
-            }
-        }
+MavenCommand getMavenCommand() {
+    mvnCmd = new MavenCommand(this, ['-fae'])
+                    .withSettingsXmlId(params.MAVEN_SETTINGS_CONFIG_FILE_ID)
+    if (params.MAVEN_DEPENDENCIES_REPOSITORY) {
+        mvnCmd.withDependencyRepositoryInSettings('deps-repo', params.MAVEN_DEPENDENCIES_REPOSITORY)
     }
+    return mvnCmd
 }
 
-void deployArtifacts() {
-    def mvnCmd = 'clean deploy'
-    if (params.MAVEN_DEPLOY_REPOSITORY) {
-        mvnCmd += " -DaltDeploymentRepository=runtimes-artifacts::default::${params.MAVEN_DEPLOY_REPOSITORY} -Denforcer.skip=true"
+void runMavenDeploy(MavenCommand mvnCmd){
+    mvnCmd = mvnCmd.clone()
+    if(params.MAVEN_DEPLOY_REPOSITORY){
+        mvnCmd.withDeployRepository(params.MAVEN_DEPLOY_REPOSITORY)
     }
-
-    if (isSpecificMavenConfig()) {
-        maven.runMaven(mvnCmd, true)
-    } else {
-        maven.runMavenWithSubmarineSettings(mvnCmd, true)
-    }
-}
-
-void updateOptaPlannerVersion(String newVersion) {
-    maven.mvnSetVersionProperty('version.org.optaplanner', newVersion)
+    mvnCmd.skipTests(true).run('clean deploy')
 }
