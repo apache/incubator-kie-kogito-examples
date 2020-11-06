@@ -26,12 +26,12 @@ public class TripService {
     private static final Logger LOGGER = LoggerFactory.getLogger(TripService.class);
 
     public Response success(String tripId) {
-        LOGGER.info("Trip Success for tripId {}", tripId);
+        LOGGER.info("Trip Success for trip {}", tripId);
         return Response.success(tripId);
     }
 
     public Response failure(String tripId) {
-        LOGGER.info("Trip Failed for tripId {}", tripId);
+        LOGGER.info("Trip Failed for trip {}", tripId);
         return Response.error(tripId);
     }
 }
