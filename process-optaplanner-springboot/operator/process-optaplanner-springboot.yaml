@@ -1,4 +1,4 @@
-apiVersion: app.kiegroup.org/v1alpha1
+apiVersion: app.kiegroup.org/v1beta1
 kind: KogitoBuild
 metadata:
   name: process-optaplanner-springboot
@@ -11,7 +11,7 @@ spec:
   # set your maven nexus repository to speed up the build time
   #mavenMirrorURL:
 ---
-apiVersion: app.kiegroup.org/v1alpha1
+apiVersion: app.kiegroup.org/v1beta1
 kind: KogitoRuntime
 metadata:
   name: process-optaplanner-springboot
