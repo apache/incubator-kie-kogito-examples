@@ -1,4 +1,4 @@
-apiVersion: app.kiegroup.org/v1alpha1
+apiVersion: app.kiegroup.org/v1beta1
 kind: KogitoInfra
 metadata:
   name: kogito-knative-infra
@@ -9,7 +9,7 @@ spec:
     kind: Broker
     name: default
 ---
-apiVersion: app.kiegroup.org/v1alpha1
+apiVersion: app.kiegroup.org/v1beta1
 kind: KogitoRuntime
 metadata:
   name: process-knative-quickstart-quarkus

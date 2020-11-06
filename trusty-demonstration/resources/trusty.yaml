@@ -9,7 +9,7 @@ data:
     quarkus.infinispan-client.use-auth=true
     quarkus.infinispan-client.sasl-mechanism=DIGEST-MD5
 ---
-apiVersion: app.kiegroup.org/v1alpha1
+apiVersion: app.kiegroup.org/v1beta1
 kind: KogitoSupportingService
 metadata:
   name: trusty

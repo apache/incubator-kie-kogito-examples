@@ -1,4 +1,4 @@
-apiVersion: app.kiegroup.org/v1alpha1
+apiVersion: app.kiegroup.org/v1beta1
 kind: KogitoBuild
 metadata:
   name: process-quarkus-example
@@ -12,7 +12,7 @@ spec:
 #uncomment to enable persistence
 #---
 ##Infinispan operator should be pre-installed in namespace
-#apiVersion: app.kiegroup.org/v1alpha1
+#apiVersion: app.kiegroup.org/v1beta1
 #kind: KogitoInfra
 #metadata:
 #  name: kogito-infinispan-infra
@@ -21,7 +21,7 @@ spec:
 #    apiVersion: infinispan.org/v1
 #    kind: Infinispan
 ---
-apiVersion: app.kiegroup.org/v1alpha1
+apiVersion: app.kiegroup.org/v1beta1
 kind: KogitoRuntime
 metadata:
   name: process-quarkus-example
