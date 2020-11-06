@@ -15,8 +15,6 @@
  */
 package org.kie.kogito;
 
-import java.util.UUID;
-
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
@@ -36,8 +34,8 @@ public class HotelService {
         return mockService.execute(failService, this.getClass());
     }
 
-    public Response cancelHotel(String tripId) {
-        LOGGER.info("Cancel Hotel for trip {}", tripId);
-        return new Response(Response.Type.SUCCESS, UUID.randomUUID().toString());
+    public Response cancelHotel(String id) {
+        LOGGER.info("Cancel Hotel for booking {}", id);
+        return new Response(Response.Type.SUCCESS, id);
     }
 }
