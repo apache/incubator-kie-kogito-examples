@@ -269,8 +269,7 @@
         <module>process-kafka-quickstart-quarkus</module>
         <module>process-knative-quickstart-quarkus</module>
         <module>process-mongodb-persistence-quarkus</module>
-        <!-- Disabled due to https://issues.redhat.com/browse/KOGITO-3577 -->
-        <!-- <module>process-optaplanner-quarkus</module> --> 
+        <module>process-optaplanner-quarkus</module>
         <module>process-quarkus-example</module>
         <module>process-scripts-quarkus</module>
         <module>process-service-calls-quarkus</module>
