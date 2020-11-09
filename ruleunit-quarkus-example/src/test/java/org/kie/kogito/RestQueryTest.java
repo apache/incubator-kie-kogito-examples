@@ -84,4 +84,16 @@ public class RestQueryTest {
              .statusCode(200)
                .body("$id", hasItems("ABC10002", "ABC10015"));
     }
+
+    @Test
+    public void testAllApplicationsAggregation() {
+        given()
+               .body(JSON_PAYLOAD)
+               .contentType(ContentType.JSON)
+          .when()
+               .post("/find-all-application-amounts")
+          .then()
+             .statusCode(200)
+               .body("amounts", hasItems(8000));
+    }
 }
