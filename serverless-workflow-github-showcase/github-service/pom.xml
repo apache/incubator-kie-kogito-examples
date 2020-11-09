@@ -10,7 +10,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>github-service</artifactId>
-  <name>Kogito Examples :: Serverless Workflow Github Showcase :: GitHub Service</name>
+  <name>Kogito Example :: Serverless Workflow Github Showcase :: GitHub Service</name>
 
   <dependencyManagement>
     <dependencies>
