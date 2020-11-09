@@ -9,7 +9,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>pr-checker-workflow</artifactId>
-  <name>Kogito Examples :: Serverless Workflow Github Showcase :: PR Checker Workflow</name>
+  <name>Kogito Example :: Serverless Workflow Github Showcase :: PR Checker Workflow</name>
   <dependencyManagement>
     <dependencies>
       <dependency>
