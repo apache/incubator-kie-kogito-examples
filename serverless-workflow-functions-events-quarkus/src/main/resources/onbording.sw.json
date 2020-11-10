@@ -1,0 +1,67 @@
+{
+  "id": "onboarding",
+  "name": "Patient Onboarding Workflow",
+  "states": [
+    {
+      "name": "LetsOnboard",
+      "type":"event",
+      "start": {"kind":"default"},
+      "onEvents": [
+        {
+          "eventRefs": ["NewPatientEvent"],
+          "actions": [
+            {
+              "functionRef": {
+                "refName": "StoreNewPatient"
+              }
+            },
+            {
+              "functionRef": {
+                "refName": "AssignDoctorToPatient"
+              }
+            },
+            {
+              "functionRef": {
+                "refName": "SchedulePatientAppointment"
+              }
+            }
+          ]
+        }
+      ],
+      "end": {"kind":"default"}
+    }
+  ],
+  "events": [
+    {
+      "name": "NewPatientEvent",
+      "type": "new.patient.events",
+      "source": "newpatient/+"
+    }
+  ],
+  "functions": [
+    {
+      "name": "StoreNewPatient",
+      "resource": "/services/onboarding/patient",
+      "type": "rest",
+      "metadata": {
+        "method": "POST"
+      }
+    },
+    {
+      "name": "AssignDoctorToPatient",
+      "resource": "/services/onboarding/doctor/patient",
+      "type": "rest",
+      "metadata": {
+        "method": "POST"
+      }
+    },
+    {
+      "name": "SchedulePatientAppointment",
+      "resource": "/services/onboarding/schedule/appointment",
+      "type": "rest",
+      "metadata": {
+        "method": "POST"
+      }
+    }
+  ]
+}
