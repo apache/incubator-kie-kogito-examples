@@ -4,16 +4,16 @@ unit AssignmentUnit;
 import org.acme.sw.onboarding.model.Doctor;
 import org.acme.sw.onboarding.model.Patient;
 import org.acme.sw.onboarding.model.SymptomSpecialty;
-import org.acme.sw.onboarding.helpers.DateHelper;
+import org.acme.sw.onboarding.helpers.CalendarHelper;
 import java.util.Collections;
 
 rule PatientIsAChild no-loop
     salience 1
 when
-    $p: /patients[ DateHelper.calculateAge(dateOfBirth) < 18 ]
+    $p: /patients[ CalendarHelper.calculateAge(dateOfBirth) < 18 ]
     $d: /doctors[ specialty == "Pediatrics" ]
 then
-    modify($p) { setAssignedDoctorId($d.getId()) }
+    modify($p) { setAssignedDoctor($d) }
 end
 
 rule SymptomHasAMatch no-loop
@@ -23,7 +23,7 @@ when
     $s: /symptomSpecialties[ !Collections.disjoint(symptoms, $p.symptoms) ]
     $d: /doctors[ specialty == $s.specialty ]
 then
-    modify($p) { setAssignedDoctorId($d.getId()) }
+    modify($p) { setAssignedDoctor($d) }
 end
 
 rule SymptomNotFound no-loop
@@ -32,9 +32,9 @@ when
     $p: /patients
     $d: /doctors[ specialty == "Family medicine" ]
 then
-    modify($p) { setAssignedDoctorId($d.getId()) }
+    modify($p) { setAssignedDoctor($d) }
 end
 
-query FindAssigned
-    $p: /patients[ assignedDoctorId != null && !assignedDoctorId.isEmpty() ]
+query AssignDoctor
+   $patients : /patients[ assignedDoctor != null  ]
 end

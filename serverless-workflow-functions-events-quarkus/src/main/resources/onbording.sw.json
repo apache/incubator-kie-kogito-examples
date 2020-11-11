@@ -4,11 +4,15 @@
   "states": [
     {
       "name": "LetsOnboard",
-      "type":"event",
-      "start": {"kind":"default"},
+      "type": "event",
+      "start": {
+        "kind": "default"
+      },
       "onEvents": [
         {
-          "eventRefs": ["NewPatientEvent"],
+          "eventRefs": [
+            "NewPatientEvent"
+          ],
           "actions": [
             {
               "functionRef": {
@@ -28,20 +32,22 @@
           ]
         }
       ],
-      "end": {"kind":"default"}
+      "end": {
+        "kind": "default"
+      }
     }
   ],
   "events": [
     {
       "name": "NewPatientEvent",
       "type": "new.patient.events",
-      "source": "newpatient/+"
+      "source": "/hospital/entry"
     }
   ],
   "functions": [
     {
       "name": "StoreNewPatient",
-      "resource": "/services/onboarding/patient",
+      "resource": "/onboarding/patient",
       "type": "rest",
       "metadata": {
         "method": "POST"
@@ -49,7 +55,7 @@
     },
     {
       "name": "AssignDoctorToPatient",
-      "resource": "/services/onboarding/doctor/patient",
+      "resource": "/assign-doctor",
       "type": "rest",
       "metadata": {
         "method": "POST"
@@ -57,7 +63,7 @@
     },
     {
       "name": "SchedulePatientAppointment",
-      "resource": "/services/onboarding/schedule/appointment",
+      "resource": "/onboarding/schedule/appointment",
       "type": "rest",
       "metadata": {
         "method": "POST"

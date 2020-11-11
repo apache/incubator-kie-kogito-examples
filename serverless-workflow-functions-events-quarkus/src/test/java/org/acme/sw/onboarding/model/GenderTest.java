@@ -13,23 +13,29 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.acme.sw.onboarding.queries;
+package org.acme.sw.onboarding.model;
 
-import java.util.ArrayList;
+import javax.inject.Inject;
 
-import org.acme.sw.onboarding.model.Doctor;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
-import org.kie.kogito.rules.DataObserver;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-class AssignmentUnitPlainTest {
+@QuarkusTest
+class GenderTest {
+
+    @Inject
+    ObjectMapper mapper;
+
     @Test
-    public void create() {
-        AssignmentUnit assignmentUnit = new AssignmentUnit();
-        ArrayList<Doctor> doctors = new ArrayList<>();
-        assignmentUnit.getDoctors().subscribe(DataObserver.of(doctors::add));
-        assertEquals(doctors.size(), 6);
+    public void verifyJacksonEnumTransformation() throws JsonProcessingException {
+        final String json = "{ \"name\": \"Mick\", \"dateOfBirth\": \"2017-08-15\", \"gender\": \"male\"}";
+        final Patient patient = mapper.readValue(json, Patient.class);
+        assertNotNull(patient);
+        assertEquals(Gender.MALE, patient.getGender());
     }
-
 }

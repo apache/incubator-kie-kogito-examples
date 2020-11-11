@@ -1,3 +1,18 @@
+/**
+ * Copyright 2020 Red Hat, Inc. and/or its affiliates.
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.acme.sw.onboarding.services;
 
 import java.io.IOException;
@@ -14,17 +29,16 @@ public class SymptomSpecialtyService {
 
     private static final String SYMPTOMS_DATA_PATH = "/data/symptom_specialty.json";
     private static final Logger LOGGER = LoggerFactory.getLogger(DoctorService.class);
-    private final List<SymptomSpecialty> symptomSpecialties;
-
     private static final SymptomSpecialtyService INSTANCE = new SymptomSpecialtyService();
-
-    public static SymptomSpecialtyService get() {
-        return INSTANCE;
-    }
+    private final List<SymptomSpecialty> symptomSpecialties;
 
     private SymptomSpecialtyService() {
         this.symptomSpecialties = new ArrayList<>();
         this.populate();
+    }
+
+    public static SymptomSpecialtyService get() {
+        return INSTANCE;
     }
 
     private void populate() {
@@ -32,9 +46,9 @@ public class SymptomSpecialtyService {
             List<SymptomSpecialty> symptomSpecialties = new ObjectMapper().readValue(this.getClass().getResourceAsStream(SYMPTOMS_DATA_PATH), new TypeReference<>() {
             });
             this.symptomSpecialties.addAll(symptomSpecialties);
-            LOGGER.info("Predefined data  from Doctors have been populated");
+            LOGGER.info("Predefined data from SymptomSpecialty have been populated");
         } catch (IOException ex) {
-            throw new IllegalStateException("Problem while populating DoctorService with JSON predefined data", ex);
+            throw new IllegalStateException("Problem while populating SymptomSpecialty with JSON predefined data", ex);
         }
     }
 

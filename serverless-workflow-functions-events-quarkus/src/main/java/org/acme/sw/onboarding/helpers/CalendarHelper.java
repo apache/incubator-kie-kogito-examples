@@ -13,23 +13,21 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.acme.sw.onboarding.queries;
+package org.acme.sw.onboarding.helpers;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.Period;
 
-import org.acme.sw.onboarding.model.Doctor;
-import org.junit.jupiter.api.Test;
-import org.kie.kogito.rules.DataObserver;
+public final class CalendarHelper {
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+    private CalendarHelper() {
 
-class AssignmentUnitPlainTest {
-    @Test
-    public void create() {
-        AssignmentUnit assignmentUnit = new AssignmentUnit();
-        ArrayList<Doctor> doctors = new ArrayList<>();
-        assignmentUnit.getDoctors().subscribe(DataObserver.of(doctors::add));
-        assertEquals(doctors.size(), 6);
     }
 
+    public static int calculateAge(final LocalDate dateOfBirth) {
+        if (dateOfBirth == null) {
+            return 0;
+        }
+        return Period.between(dateOfBirth, LocalDate.now()).getYears();
+    }
 }

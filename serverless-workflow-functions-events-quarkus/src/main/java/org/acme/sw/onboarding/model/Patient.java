@@ -1,12 +1,30 @@
+/**
+ *  Copyright 2020 Red Hat, Inc. and/or its affiliates.
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
 package org.acme.sw.onboarding.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Patient {
 
@@ -15,18 +33,18 @@ public class Patient {
     private List<String> symptoms;
     private Gender gender;
     private LocalDate dateOfBirth;
-    private String assignedDoctorId;
+    private Doctor assignedDoctor;
 
     public Patient() {
         this.symptoms = new ArrayList<>();
     }
 
-    public String getAssignedDoctorId() {
-        return assignedDoctorId;
+    public Doctor getAssignedDoctor() {
+        return assignedDoctor;
     }
 
-    public void setAssignedDoctorId(String assignedDoctorId) {
-        this.assignedDoctorId = assignedDoctorId;
+    public void setAssignedDoctor(Doctor assignedDoctor) {
+        this.assignedDoctor = assignedDoctor;
     }
 
     public String getName() {

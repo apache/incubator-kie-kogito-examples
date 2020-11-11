@@ -13,27 +13,28 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.acme.sw.onboarding.queries;
+package org.acme.sw.onboarding.resources;
 
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.not;
 
 @QuarkusTest
-class AssignmentUnitTest {
+class PatientResourceTest {
 
     @Test
-    void verifyChildAssignment() {
+    void verifyStoreNewPatient() {
         given()
                 .body("{ \"patients\": [{ \"name\": \"Mick\", \"dateOfBirth\": \"1983-08-15\", \"gender\": \"male\", \"symptoms\":[\"seizures\"]}] }")
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/assign-doctor")
+                .post("/onboarding/patient")
                 .then()
                 .statusCode(200)
-                .body("assignedDoctor.specialty", hasItem("Neurology"));
+                .body("patients[0].id", not(empty()));
     }
 }

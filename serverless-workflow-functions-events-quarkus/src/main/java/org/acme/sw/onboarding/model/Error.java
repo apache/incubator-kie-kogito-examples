@@ -13,23 +13,33 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.acme.sw.onboarding.queries;
+package org.acme.sw.onboarding.model;
 
-import java.util.ArrayList;
+public class Error {
 
-import org.acme.sw.onboarding.model.Doctor;
-import org.junit.jupiter.api.Test;
-import org.kie.kogito.rules.DataObserver;
+    private String message;
+    private Exception cause;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-class AssignmentUnitPlainTest {
-    @Test
-    public void create() {
-        AssignmentUnit assignmentUnit = new AssignmentUnit();
-        ArrayList<Doctor> doctors = new ArrayList<>();
-        assignmentUnit.getDoctors().subscribe(DataObserver.of(doctors::add));
-        assertEquals(doctors.size(), 6);
+    public Error() {
     }
 
+    public Error(final String message) {
+        this.message = message;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public Exception getCause() {
+        return cause;
+    }
+
+    public void setCause(Exception cause) {
+        this.cause = cause;
+    }
 }
