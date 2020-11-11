@@ -24,13 +24,15 @@ public class LoanUnit implements RuleUnitData {
     private int maxAmount;
 
     private DataStore<LoanApplication> loanApplications;
+    private DataStore<AllAmounts> allAmounts;
 
     public LoanUnit() {
-        this(DataSource.createStore());
+        this(DataSource.createStore(), DataSource.createStore());
     }
 
-    public LoanUnit(DataStore<LoanApplication> loanApplications) {
+    public LoanUnit(DataStore<LoanApplication> loanApplications, DataStore<AllAmounts> allAmounts) {
         this.loanApplications = loanApplications;
+        this.allAmounts = allAmounts;
     }
 
     public DataStore<LoanApplication> getLoanApplications() {
@@ -39,6 +41,14 @@ public class LoanUnit implements RuleUnitData {
 
     public void setLoanApplications(DataStore<LoanApplication> loanApplications) {
         this.loanApplications = loanApplications;
+    }
+
+    public DataStore<AllAmounts> getAllAmounts() {
+        return allAmounts;
+    }
+
+    public void setAllAmounts(DataStore<AllAmounts> allAmounts) {
+        this.allAmounts = allAmounts;
     }
 
     public int getMaxAmount() {
