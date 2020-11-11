@@ -13,7 +13,7 @@ class AssignmentUnitTest {
     @Test
     public void verifyChildAssignment() {
         given()
-                .body("{ \"patients\": [{ \"name\": \"Mick\", \"dateOfBirth\": \"2017-08-15\", \"gender\": \"male\"}] }")
+                .body("{ \"patients\": [{ \"name\": \"Mick\", \"dateOfBirth\": \"2017-08-15\", \"gender\": \"MALE\"}] }")
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/find-assigned")

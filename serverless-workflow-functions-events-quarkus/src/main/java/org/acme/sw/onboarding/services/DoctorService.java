@@ -4,24 +4,23 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.acme.sw.onboarding.model.Doctor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@ApplicationScoped
 public class DoctorService {
 
-    private static final String DOCTOR_DATA_PATH = "data/doctors.json";
+    private static final String DOCTOR_DATA_PATH = "/data/doctors.json";
     private static final Logger LOGGER = LoggerFactory.getLogger(DoctorService.class);
     private final List<Doctor> doctors;
 
-    @Inject
-    ObjectMapper mapper;
+    private static final DoctorService INSTANCE = new DoctorService();
+
+    public static DoctorService get() {
+        return INSTANCE;
+    }
 
     public DoctorService() {
         this.doctors = new ArrayList<>();
@@ -30,7 +29,7 @@ public class DoctorService {
 
     private void populate() {
         try {
-            List<Doctor> doctors = mapper.readValue(this.getClass().getResourceAsStream(DOCTOR_DATA_PATH), new TypeReference<>() {
+            List<Doctor> doctors = new ObjectMapper().readValue(this.getClass().getResourceAsStream(DOCTOR_DATA_PATH), new TypeReference<>() {
             });
             this.doctors.addAll(doctors);
             LOGGER.info("Predefined data  from Doctors have been populated");

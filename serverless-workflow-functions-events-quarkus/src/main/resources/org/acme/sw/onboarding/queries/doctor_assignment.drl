@@ -7,7 +7,7 @@ import org.acme.sw.onboarding.model.SymptomSpecialty;
 import org.acme.sw.onboarding.helpers.DateHelper;
 import java.util.Collections;
 
-rule PatientIsAChild
+rule PatientIsAChild no-loop
     salience 1
 when
     $p: /patients[ DateHelper.calculateAge(dateOfBirth) < 18 ]
@@ -16,7 +16,7 @@ then
     modify($p) { setAssignedDoctorId($d.getId()) }
 end
 
-rule SymptomHasAMatch
+rule SymptomHasAMatch no-loop
     salience 2
 when
     $p: /patients[ !symptoms.isEmpty() ]
@@ -26,7 +26,7 @@ then
     modify($p) { setAssignedDoctorId($d.getId()) }
 end
 
-rule SymptomNotFound
+rule SymptomNotFound no-loop
     salience 3
 when
     $p: /patients

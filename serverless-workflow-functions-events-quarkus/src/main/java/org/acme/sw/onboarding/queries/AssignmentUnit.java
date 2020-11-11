@@ -1,8 +1,5 @@
 package org.acme.sw.onboarding.queries;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.acme.sw.onboarding.model.Doctor;
@@ -14,14 +11,9 @@ import org.kie.kogito.rules.DataSource;
 import org.kie.kogito.rules.DataStore;
 import org.kie.kogito.rules.RuleUnitData;
 
-@ApplicationScoped
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AssignmentUnit implements RuleUnitData {
 
-    @Inject
-    DoctorService doctorService;
-    @Inject
-    SymptomSpecialtyService symptomSpecialtyService;
     private DataStore<Patient> patients;
     private DataStore<Doctor> doctors;
     private DataStore<SymptomSpecialty> symptomSpecialties;
@@ -34,8 +26,8 @@ public class AssignmentUnit implements RuleUnitData {
     }
 
     private void populate() {
-        this.doctorService.getDoctors().forEach(this.doctors::add);
-        this.symptomSpecialtyService.getSymptomSpecialties().forEach(this.symptomSpecialties::add);
+        DoctorService.get().getDoctors().forEach(this.doctors::add);
+        SymptomSpecialtyService.get().getSymptomSpecialties().forEach(this.symptomSpecialties::add);
     }
 
     public DataStore<Patient> getPatients() {
