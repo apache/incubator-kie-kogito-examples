@@ -1,6 +1,6 @@
 #uncomment to enable persistence
 ##Infinispan operator should be pre-installed in namespace
-#apiVersion: app.kiegroup.org/v1alpha1
+#apiVersion: app.kiegroup.org/v1beta1
 #kind: KogitoInfra
 #metadata:
 #  name: kogito-infinispan-infra
@@ -11,7 +11,7 @@
 #---
 # deploy this service if you wish to enable Jobs Service integration.
 # Make sure to follow "Use Kogito Job Service as external timer service" in the README
-apiVersion: app.kiegroup.org/v1alpha1
+apiVersion: app.kiegroup.org/v1beta1
 kind: KogitoSupportingService
 metadata:
   name: jobs-service

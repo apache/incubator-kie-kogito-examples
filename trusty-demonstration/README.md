@@ -47,7 +47,7 @@ minikube addons enable olm
 Set the Kogito release version 
 
 ```bash
-KOGITO_VERSION=0.16.0
+KOGITO_VERSION=0.17.0
 ```
 
 and then download/unpack the kogito operator
@@ -148,14 +148,14 @@ minikube ip
 
 and replace the env variables `KOGITO_TRUSTY_ENDPOINT` and `KOGITO_TRUSTY_WS_URL` in the file `resources/trusty-ui.yaml`. For example, if the ip is `172.17.0.2`, then the content of the file should be 
 ```bash
-apiVersion: app.kiegroup.org/v1alpha1
+apiVersion: app.kiegroup.org/v1beta1
 kind: KogitoSupportingService
 metadata:
   name: trusty-ui
 spec:
   serviceType: TrustyUI
   replicas: 1
-  image: quay.io/kiegroup/kogito-trusty-ui:0.16
+  image: quay.io/kiegroup/kogito-trusty-ui:0.17
   env:
     - name: KOGITO_TRUSTY_ENDPOINT
       value: http://172.17.0.2
@@ -166,7 +166,7 @@ spec:
 Modify the content of the file `resources/dmn-tracing-quarkus.yaml` with the information you used in the first section. The content should look like the following 
 
 ```yaml
-apiVersion: app.kiegroup.org/v1alpha1
+apiVersion: app.kiegroup.org/v1beta1
 kind: KogitoRuntime
 metadata:
   name: dmn-tracing-quarkus
@@ -174,7 +174,7 @@ metadata:
     app: dmn-tracing-quarkus
 spec:
   replicas: 1
-  image: quay.io/<YOUR_NAMESPACE>/dmn-tracing-quarkus:1.0.0-snapshot # <---- replace with your image
+  image: quay.io/<YOUR_NAMESPACE>/dmn-tracing-quarkus:2.0.0-snapshot # <---- replace with your image
   propertiesConfigMap: dmn-tracing-quarkus-config
   env:
     - name: KOGITO_SERVICE_URL

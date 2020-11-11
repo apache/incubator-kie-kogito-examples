@@ -38,11 +38,13 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.kie.dmn.kogito.springboot.tracing.matcher.StringMatchesUUIDPattern.matchesThePatternOfAUUID;
 
 @Testcontainers
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
 public class LoanEligibilityIT {
 
+    public static final String KOGITO_EXECUTION_ID_HEADER = "X-Kogito-execution-id";
     public static final String TRACING_TOPIC_NAME = "kogito-tracing-decision";
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LoanEligibilityIT.class);
@@ -97,6 +99,7 @@ public class LoanEligibilityIT {
                     .post("/LoanEligibility")
                     .then()
                     .statusCode(200)
+                    .header(KOGITO_EXECUTION_ID_HEADER, matchesThePatternOfAUUID())
                     .body("'Decide'", is(true));
 
             countDownLatch.await(5, TimeUnit.SECONDS);

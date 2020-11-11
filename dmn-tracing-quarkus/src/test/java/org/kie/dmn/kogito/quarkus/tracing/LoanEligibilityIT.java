@@ -33,11 +33,13 @@ import org.slf4j.LoggerFactory;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.kie.dmn.kogito.quarkus.tracing.matcher.StringMatchesUUIDPattern.matchesThePatternOfAUUID;
 
 @QuarkusTest
 @QuarkusTestResource(KafkaQuarkusTestResource.class)
 public class LoanEligibilityIT {
 
+    public static final String KOGITO_EXECUTION_ID_HEADER = "X-Kogito-execution-id";
     public static final String TRACING_TOPIC_NAME = "kogito-tracing-decision";
     public static final String TRACING_MODELS_TOPIC_NAME = "kogito-tracing-model";
 
@@ -80,6 +82,7 @@ public class LoanEligibilityIT {
                     .post("/LoanEligibility")
                     .then()
                     .statusCode(200)
+                    .header(KOGITO_EXECUTION_ID_HEADER, matchesThePatternOfAUUID())
                     .body("'Decide'", is(true));
 
             countDownLatch.await(5, TimeUnit.SECONDS);

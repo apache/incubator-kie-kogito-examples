@@ -7,7 +7,7 @@
 
   <groupId>org.kie.kogito</groupId>
   <artifactId>kogito-examples</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>2.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Kogito Example</name>
@@ -269,8 +269,7 @@
         <module>process-kafka-quickstart-quarkus</module>
         <module>process-knative-quickstart-quarkus</module>
         <module>process-mongodb-persistence-quarkus</module>
-        <!-- Disabled due to https://issues.redhat.com/browse/KOGITO-3577 -->
-        <!-- <module>process-optaplanner-quarkus</module> --> 
+        <module>process-optaplanner-quarkus</module>
         <module>process-quarkus-example</module>
         <module>process-scripts-quarkus</module>
         <module>process-service-calls-quarkus</module>
