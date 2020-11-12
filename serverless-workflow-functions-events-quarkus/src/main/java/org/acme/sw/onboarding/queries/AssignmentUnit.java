@@ -15,6 +15,8 @@
  */
 package org.acme.sw.onboarding.queries;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -53,6 +55,12 @@ public class AssignmentUnit implements RuleUnitData {
 
     public void setPatients(DataStore<Patient> patients) {
         this.patients = patients;
+    }
+
+    public void addPatients(final List<Patient> patientList) {
+        for (Patient p : patientList) {
+            this.patients.add(p);
+        }
     }
 
     @JsonIgnore

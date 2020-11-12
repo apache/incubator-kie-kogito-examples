@@ -20,13 +20,14 @@ import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasItem;
 
 @QuarkusTest
 class AssignmentUnitTest {
 
     @Test
-    void verifyChildAssignment() {
+    void verifyNeurologyAssignmentCollection() {
         given()
                 .body("{ \"patients\": [{ \"name\": \"Mick\", \"dateOfBirth\": \"1983-08-15\", \"gender\": \"male\", \"symptoms\":[\"seizures\"]}] }")
                 .contentType(ContentType.JSON)
@@ -35,5 +36,17 @@ class AssignmentUnitTest {
                 .then()
                 .statusCode(200)
                 .body("assignedDoctor.specialty", hasItem("Neurology"));
+    }
+
+    @Test
+    void verifyNeurologyAssignment() {
+        given()
+                .body("{ \"patients\": [{ \"name\": \"Mick\", \"dateOfBirth\": \"1983-08-15\", \"gender\": \"male\", \"symptoms\":[\"seizures\"]}] }")
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/assign-doctor/first")
+                .then()
+                .statusCode(200)
+                .body("assignedDoctor.specialty", equalTo("Neurology"));
     }
 }

@@ -53,20 +53,12 @@ public class PatientResource {
     }
 
     @POST
-    public Response storeNewPatient(@NotNull final Assignment assignment) {
-        LOGGER.debug("Received patients to store in the internal in memory database: {}", assignment);
-        if (assignment.getPatients().isEmpty()) {
-            return Response
-                    .status(Response.Status.BAD_REQUEST)
-                    .entity(new Error("Received an empty Patient list. At least one patient is expected."))
-                    .build();
-        }
-        assignment.getPatients().forEach(p -> {
-            p.setId(UUID.randomUUID().toString());
-        });
-        patients.addAll(assignment.getPatients());
-        LOGGER.debug("All patients have been stored in the internal memory: {}", assignment);
-        return Response.ok(assignment).build();
+    public Response storeNewPatient(@NotNull final Patient patient) {
+        LOGGER.debug("Received patient to store in the internal in memory database: {}", patient);
+        patient.setId(UUID.randomUUID().toString());
+        patients.add(patient);
+        LOGGER.debug("Patient has been stored in the internal memory: {}", patient);
+        return Response.ok(patient).build();
     }
 
     @GET

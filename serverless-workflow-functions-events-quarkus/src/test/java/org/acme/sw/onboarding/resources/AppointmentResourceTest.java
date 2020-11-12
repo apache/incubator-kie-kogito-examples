@@ -15,14 +15,20 @@
  */
 package org.acme.sw.onboarding.resources;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.ws.rs.core.MediaType;
 
 import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.hasSize;
@@ -34,7 +40,7 @@ class AppointmentResourceTest {
     @Test
     void verifySchedulePatientAppointmentWithoutDoctor() {
         given()
-                .body("{ \"patients\": [{ \"id\": \"12345\", \"name\": \"Mick\", \"dateOfBirth\": \"1983-08-15\", \"gender\": \"male\", \"symptoms\":[\"seizures\"]}] }")
+                .body("{ \"id\": \"12345\", \"name\": \"Mick\", \"dateOfBirth\": \"1983-08-15\", \"gender\": \"male\", \"symptoms\":[\"seizures\"]}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .when()
                 .post("/onboarding/schedule/appointment")
@@ -44,25 +50,28 @@ class AppointmentResourceTest {
     }
 
     @Test
-    void verifySchedulePatientAppointment() {
+    void verifySchedulePatientAppointment() throws ParseException {
         given()
-                .body("{ \"patients\": [{ \"assignedDoctor\": {\"id\": \"54321\"} , \"id\": \"12345\", \"name\": \"Mick\", \"dateOfBirth\": \"1983-08-15\", \"gender\": \"male\", \"symptoms\":[\"seizures\"]}] }")
+                .body("{ \"assignedDoctor\": {\"id\": \"54321\"} , \"id\": \"12345\", \"name\": \"Mick\", \"dateOfBirth\": \"1983-08-15\", \"gender\": \"male\", \"symptoms\":[\"seizures\"]}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .when()
                 .post("/onboarding/schedule/appointment")
                 .then()
                 .statusCode(200)
-                .body("patients[0].id", equalTo("12345"));
+                .body("id", equalTo("12345"));
 
-        given()
+        final ValidatableResponse response = given()
                 .contentType(MediaType.APPLICATION_JSON)
                 .when()
                 .get("/onboarding/schedule/appointment/patient/12345")
                 .then()
                 .statusCode(200)
                 .body("", hasSize(1))
-                .body("[0].patientId", equalTo("12345"))
-                .body("[0].doctorId", equalTo("54321"))
-                .body("[0].date", greaterThanOrEqualTo(new Date().getTime()));
+                .body("[0].patient.id", equalTo("12345"))
+                .body("[0].doctor.id", equalTo("54321"));
+
+        final String date = JsonPath.from(response.extract().asString()).get("[0].date");
+        final DateFormat dt = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        assertThat(dt.parse(date), greaterThanOrEqualTo(new Date()));
     }
 }

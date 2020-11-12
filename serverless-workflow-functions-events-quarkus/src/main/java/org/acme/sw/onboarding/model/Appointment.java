@@ -18,14 +18,15 @@ package org.acme.sw.onboarding.model;
 import java.util.Date;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Appointment {
 
-    private String doctorId;
-    private String patientId;
-
+    private Doctor doctor;
+    private Patient patient;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     private Date date;
 
     public Date getDate() {
@@ -36,29 +37,20 @@ public class Appointment {
         this.date = date;
     }
 
-    public String getDoctorId() {
-        return doctorId;
+    public Doctor getDoctor() {
+        return doctor;
     }
 
-    public void setDoctorId(String doctorId) {
-        this.doctorId = doctorId;
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
     }
 
-    @Override
-    public String toString() {
-        return "Appointment{" +
-                "doctorId='" + doctorId + '\'' +
-                ", patientId='" + patientId + '\'' +
-                ", date=" + date +
-                '}';
+    public Patient getPatient() {
+        return patient;
     }
 
-    public String getPatientId() {
-        return patientId;
-    }
-
-    public void setPatientId(String patientId) {
-        this.patientId = patientId;
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 
     @Override
@@ -70,13 +62,23 @@ public class Appointment {
             return false;
         }
         Appointment that = (Appointment) o;
-        return Objects.equals(doctorId, that.doctorId) &&
-                Objects.equals(patientId, that.patientId) &&
+        return Objects.equals(doctor, that.doctor) &&
+                Objects.equals(patient, that.patient) &&
                 Objects.equals(date, that.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(doctorId, patientId, date);
+        return Objects.hash(doctor, patient, date);
+    }
+
+    @Override
+    public String toString() {
+        return "Appointment{" +
+                "doctor=" + doctor +
+                ", patient=" + patient +
+                ", date=" + date +
+                '}';
     }
 }
+

@@ -33,7 +33,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.acme.sw.onboarding.model.Appointment;
-import org.acme.sw.onboarding.model.Assignment;
 import org.acme.sw.onboarding.model.Error;
 import org.acme.sw.onboarding.model.Patient;
 import org.acme.sw.onboarding.services.ScheduleService;
@@ -55,27 +54,22 @@ public class AppointmentResource {
     }
 
     @POST
-    public Response schedulePatientAppointment(@NotNull final Assignment assignment) {
-        LOGGER.debug("Receive assignments to schedule appointments: {}", assignment);
-        // make sure our list is safe to start processing
-        for (Patient p : assignment.getPatients()) {
-            if (p.getId() == null || p.getId().isEmpty()) {
-                return Response.status(Response.Status.BAD_REQUEST)
-                        .entity(new Error("Patient has not been processed! Patients need to have an ID."))
-                        .build();
-            }
-            if (p.getAssignedDoctor() == null) {
-                return Response.status(Response.Status.BAD_REQUEST)
-                        .entity(new Error("Doctor has not been assigned! Impossible to schedule an appointment. Please assign a doctor first."))
-                        .build();
-            }
+    public Response schedulePatientAppointment(@NotNull final Patient patient) {
+        LOGGER.debug("Receive patient to schedule appointments: {}", patient);
+        if (patient.getId() == null || patient.getId().isEmpty()) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new Error("Patient has not been processed! Patients need to have an ID."))
+                    .build();
+        }
+        if (patient.getAssignedDoctor() == null) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new Error("Doctor has not been assigned! Impossible to schedule an appointment. Please assign a doctor first."))
+                    .build();
         }
         // now we can go
-        assignment.getPatients().forEach(p -> {
-            this.appointments.add(scheduleService.createAppointment(p));
-        });
-        LOGGER.debug("Processed all assignments: {}", assignment);
-        return Response.ok(assignment).build();
+        this.appointments.add(scheduleService.createAppointment(patient));
+        LOGGER.debug("Processed patient: {}", patient);
+        return Response.ok(patient).build();
     }
 
     @GET
@@ -86,14 +80,14 @@ public class AppointmentResource {
     @GET
     @Path("/doctor/{id}")
     public List<Appointment> getScheduleForDoctor(@NotEmpty @PathParam("id") final String doctorId) {
-        return this.appointments.stream().filter(a -> a.getDoctorId().equals(doctorId)).collect(Collectors.toList());
+        return this.appointments.stream().filter(a -> a.getDoctor().equals(doctorId)).collect(Collectors.toList());
     }
 
     @GET
     @Path("/patient/{id}")
     public List<Appointment> getScheduleForPatient(@NotEmpty @PathParam("id") final String patientId) {
         return this.appointments.stream()
-                .filter(a -> a.getPatientId().equals(patientId) && a.getDate().after(new Date()))
+                .filter(a -> a.getPatient().getId().equals(patientId) && a.getDate().after(new Date()))
                 .collect(Collectors.toList());
     }
 }

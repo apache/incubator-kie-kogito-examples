@@ -51,10 +51,10 @@ public class ScheduleService {
     public Appointment createAppointment(final Patient patient) {
         final Appointment appointment = new Appointment();
         final String doctorId = patient.getAssignedDoctor().getId();
-        appointment.setPatientId(patient.getId());
+        appointment.setPatient(patient);
         // better case scenario we set an appointment today an hour from now :)
         appointment.setDate(this.addOneHour(new Date()));
-        appointment.setDoctorId(doctorId);
+        appointment.setDoctor(patient.getAssignedDoctor());
 
         // let's find room for our patient
         if (this.schedule.get(doctorId) != null) {

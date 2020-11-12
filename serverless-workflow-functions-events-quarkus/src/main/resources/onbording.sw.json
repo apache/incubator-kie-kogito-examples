@@ -55,7 +55,7 @@
     },
     {
       "name": "AssignDoctorToPatient",
-      "resource": "/assign-doctor",
+      "resource": "/onboarding/assignment",
       "type": "rest",
       "metadata": {
         "method": "POST"

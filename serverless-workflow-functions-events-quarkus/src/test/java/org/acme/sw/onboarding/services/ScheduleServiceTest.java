@@ -52,12 +52,12 @@ class ScheduleServiceTest {
 
         final Appointment michaelAppointment = scheduleService.createAppointment(michael);
         assertNotNull(michaelAppointment);
-        assertEquals(michaelAppointment.getDoctorId(), michael.getAssignedDoctor().getId());
+        assertEquals(michaelAppointment.getDoctor(), michael.getAssignedDoctor());
         assertNotNull(michaelAppointment.getDate());
 
         final Appointment markAppointment = scheduleService.createAppointment(mark);
         assertNotNull(markAppointment);
-        assertEquals(markAppointment.getDoctorId(), mark.getAssignedDoctor().getId());
+        assertEquals(markAppointment.getDoctor(), mark.getAssignedDoctor());
         assertNotNull(markAppointment.getDate());
 
         assertTrue(markAppointment.getDate().after(michaelAppointment.getDate()));

@@ -15,26 +15,30 @@
  */
 package org.acme.sw.onboarding.resources;
 
+import javax.ws.rs.core.MediaType;
+
 import io.quarkus.test.junit.QuarkusTest;
-import io.restassured.http.ContentType;
+import io.restassured.RestAssured;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.stringContainsInOrder;
+import static org.junit.jupiter.api.Assertions.*;
 
 @QuarkusTest
-class PatientResourceTest {
+class AssignmentResourceTest {
 
     @Test
-    void verifyStoreNewPatient() {
+    void verifyAssignPatientToDoctor() {
         given()
-                .body("{ \"name\": \"Mick\", \"dateOfBirth\": \"1983-08-15\", \"gender\": \"male\", \"symptoms\":[\"seizures\"]}")
-                .contentType(ContentType.JSON)
+                .body("{ \"id\": \"12345\", \"name\": \"Mick\", \"dateOfBirth\": \"1983-08-15\", \"gender\": \"male\", \"symptoms\":[\"seizures\"]}")
+                .contentType(MediaType.APPLICATION_JSON)
                 .when()
-                .post("/onboarding/patient")
+                .post("/onboarding/assignment")
                 .then()
                 .statusCode(200)
-                .body("id", not(empty()));
+                .body("assignedDoctor.id", stringContainsInOrder("8293dc94-2386-11eb-adc1-0242ac120002"));
     }
 }
