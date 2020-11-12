@@ -54,7 +54,7 @@ public class TrafficViolationTest {
                      "}")
                .contentType(ContentType.JSON)
           .when()
-               .post("/Traffic%20Violation")
+               .post("/Traffic Violation")
           .then()
              .statusCode(200)
                .body("'Should the driver be suspended?'", is("No"));
