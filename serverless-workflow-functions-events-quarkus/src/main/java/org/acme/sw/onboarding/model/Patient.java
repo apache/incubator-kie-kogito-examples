@@ -17,7 +17,6 @@ package org.acme.sw.onboarding.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -32,7 +31,6 @@ public class Patient {
     private String name;
     private String id;
     private List<String> symptoms;
-    private Gender gender;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth;
     private Doctor assignedDoctor;
@@ -73,14 +71,6 @@ public class Patient {
         this.symptoms = symptoms;
     }
 
-    public Gender getGender() {
-        return gender;
-    }
-
-    public void setGender(Gender gender) {
-        this.gender = gender;
-    }
-
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
@@ -100,13 +90,12 @@ public class Patient {
         Patient patient = (Patient) o;
         return Objects.equals(name, patient.name) &&
                 Objects.equals(id, patient.id) &&
-                gender == patient.gender &&
                 Objects.equals(dateOfBirth, patient.dateOfBirth);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, id, gender, dateOfBirth);
+        return Objects.hash(name, id, dateOfBirth);
     }
 
     @Override
@@ -115,7 +104,6 @@ public class Patient {
                 "name='" + name + '\'' +
                 ", id='" + id + '\'' +
                 ", symptoms=" + symptoms +
-                ", gender=" + gender +
                 ", dateOfBirth=" + dateOfBirth +
                 '}';
     }

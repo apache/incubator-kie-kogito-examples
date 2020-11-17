@@ -19,7 +19,6 @@ The workflow starts with a CloudEvent informing a new patient entry:
    "data":{
       "name":"John",
       "dateOfBirth":"2017-08-15",
-      "gender":"male",
       "symptoms":[
          "seizures"
       ]

@@ -33,7 +33,7 @@ class AssignmentResourceTest {
     @Test
     void verifyAssignPatientToDoctor() {
         given()
-                .body("{ \"id\": \"12345\", \"name\": \"Mick\", \"dateOfBirth\": \"1983-08-15\", \"gender\": \"male\", \"symptoms\":[\"seizures\"]}")
+                .body("{ \"id\": \"12345\", \"name\": \"Mick\", \"dateOfBirth\": \"1983-08-15\", \"symptoms\":[\"seizures\"]}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .when()
                 .post("/onboarding/assignment")

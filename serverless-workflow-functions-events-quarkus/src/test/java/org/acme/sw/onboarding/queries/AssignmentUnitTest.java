@@ -29,7 +29,7 @@ class AssignmentUnitTest {
     @Test
     void verifyNeurologyAssignmentCollection() {
         given()
-                .body("{ \"patients\": [{ \"name\": \"Mick\", \"dateOfBirth\": \"1983-08-15\", \"gender\": \"male\", \"symptoms\":[\"seizures\"]}] }")
+                .body("{ \"patients\": [{ \"name\": \"Mick\", \"dateOfBirth\": \"1983-08-15\", \"symptoms\":[\"seizures\"]}] }")
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/assign-doctor")
@@ -41,7 +41,7 @@ class AssignmentUnitTest {
     @Test
     void verifyNeurologyAssignment() {
         given()
-                .body("{ \"patients\": [{ \"name\": \"Mick\", \"dateOfBirth\": \"1983-08-15\", \"gender\": \"male\", \"symptoms\":[\"seizures\"]}] }")
+                .body("{ \"patients\": [{ \"name\": \"Mick\", \"dateOfBirth\": \"1983-08-15\", \"symptoms\":[\"seizures\"]}] }")
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/assign-doctor/first")

@@ -29,7 +29,7 @@ class PatientResourceTest {
     @Test
     void verifyStoreNewPatient() {
         given()
-                .body("{ \"name\": \"Mick\", \"dateOfBirth\": \"1983-08-15\", \"gender\": \"male\", \"symptoms\":[\"seizures\"]}")
+                .body("{ \"name\": \"Mick\", \"dateOfBirth\": \"1983-08-15\", \"symptoms\":[\"seizures\"]}")
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/onboarding/patient")

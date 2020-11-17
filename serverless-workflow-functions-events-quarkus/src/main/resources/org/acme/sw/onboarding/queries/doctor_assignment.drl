@@ -7,29 +7,26 @@ import org.acme.sw.onboarding.model.SymptomSpecialty;
 import org.acme.sw.onboarding.helpers.CalendarHelper;
 import java.util.Collections;
 
-rule PatientIsAChild no-loop
-    salience 1
+rule PatientIsAChild
 when
-    $p: /patients[ CalendarHelper.calculateAge(dateOfBirth) < 18 ]
+    $p: /patients[ assignedDoctor == null && CalendarHelper.calculateAge(dateOfBirth) < 18 ]
     $d: /doctors[ specialty == "Pediatrics" ]
 then
     modify($p) { setAssignedDoctor($d) }
 end
 
-rule SymptomHasAMatch no-loop
-    salience 2
+rule SymptomHasAMatch
 when
-    $p: /patients[ !symptoms.isEmpty() ]
+    $p: /patients[ assignedDoctor == null && !symptoms.isEmpty() ]
     $s: /symptomSpecialties[ !Collections.disjoint(symptoms, $p.symptoms) ]
     $d: /doctors[ specialty == $s.specialty ]
 then
     modify($p) { setAssignedDoctor($d) }
 end
 
-rule SymptomNotFound no-loop
-    salience 3
+rule SymptomNotFound
 when
-    $p: /patients
+    $p: /patients[ assignedDoctor == null ]
     $d: /doctors[ specialty == "Family medicine" ]
 then
     modify($p) { setAssignedDoctor($d) }

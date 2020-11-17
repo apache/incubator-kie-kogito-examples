@@ -40,7 +40,7 @@ class AppointmentResourceTest {
     @Test
     void verifySchedulePatientAppointmentWithoutDoctor() {
         given()
-                .body("{ \"id\": \"12345\", \"name\": \"Mick\", \"dateOfBirth\": \"1983-08-15\", \"gender\": \"male\", \"symptoms\":[\"seizures\"]}")
+                .body("{ \"id\": \"12345\", \"name\": \"Mick\", \"dateOfBirth\": \"1983-08-15\", \"symptoms\":[\"seizures\"]}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .when()
                 .post("/onboarding/schedule/appointment")
@@ -52,7 +52,7 @@ class AppointmentResourceTest {
     @Test
     void verifySchedulePatientAppointment() throws ParseException {
         given()
-                .body("{ \"assignedDoctor\": {\"id\": \"54321\"} , \"id\": \"12345\", \"name\": \"Mick\", \"dateOfBirth\": \"1983-08-15\", \"gender\": \"male\", \"symptoms\":[\"seizures\"]}")
+                .body("{ \"assignedDoctor\": {\"id\": \"54321\"} , \"id\": \"12345\", \"name\": \"Mick\", \"dateOfBirth\": \"1983-08-15\", \"symptoms\":[\"seizures\"]}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .when()
                 .post("/onboarding/schedule/appointment")

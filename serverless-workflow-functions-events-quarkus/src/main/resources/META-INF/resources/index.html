@@ -20,7 +20,6 @@
                 name: "",
                 symptoms: "",
                 dateOfBirth: "",
-                gender: ""
             };
 
             //Now load the data from server
@@ -32,7 +31,6 @@
                     "name": $scope.form.name,
                     "symptoms": $scope.form.symptoms.split(","),
                     "dateOfBirth": $scope.form.dateOfBirth,
-                    "gender": $scope.form.gender,
                 };
                 let ceId = uuidv4();
                 $http({
@@ -77,7 +75,6 @@
             function _clearForm() {
                 $scope.form.name = "";
                 $scope.form.symptoms = "";
-                $scope.form.gender = "";
                 $scope.form.dateOfBirth = "";
             }
         });
@@ -97,10 +94,7 @@
             <div class="col-6"><input type="text" placeholder="Symptoms" ng-model="form.symptoms" size="60"/></div>
         </div>
         <div class="row">
-            <div class="col-6"><input type="text" placeholder="Date of Birth" ng-model="form.dateOfBirth" size="60"/></div>
-        </div>
-        <div class="row">
-            <div class="col-6"><input type="text" placeholder="Gender" ng-model="form.gender" size="60"/></div>
+            <div class="col-6"><input type="text" placeholder="Date of Birth (YYYY-MM-DD)" ng-model="form.dateOfBirth" size="60"/></div>
         </div>
         <input type="submit" value="Send Onboarding Event"/>
     </form>
