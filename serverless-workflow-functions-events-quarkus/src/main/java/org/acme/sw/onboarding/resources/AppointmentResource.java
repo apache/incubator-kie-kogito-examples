@@ -15,8 +15,8 @@
  */
 package org.acme.sw.onboarding.resources;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -80,14 +80,14 @@ public class AppointmentResource {
     @GET
     @Path("/doctor/{id}")
     public List<Appointment> getScheduleForDoctor(@NotEmpty @PathParam("id") final String doctorId) {
-        return this.appointments.stream().filter(a -> a.getDoctor().equals(doctorId)).collect(Collectors.toList());
+        return this.appointments.stream().filter(a -> a.getDoctor().getId().equals(doctorId)).collect(Collectors.toList());
     }
 
     @GET
     @Path("/patient/{id}")
     public List<Appointment> getScheduleForPatient(@NotEmpty @PathParam("id") final String patientId) {
         return this.appointments.stream()
-                .filter(a -> a.getPatient().getId().equals(patientId) && a.getDate().after(new Date()))
+                .filter(a -> a.getPatient().getId().equals(patientId) && a.getDate().isAfter(LocalDateTime.now()))
                 .collect(Collectors.toList());
     }
 }

@@ -15,10 +15,9 @@
  */
 package org.acme.sw.onboarding.services;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -37,7 +36,7 @@ public class ScheduleService {
     /*
     Our doctors can attend one patient per day only :)
     */
-    private final Map<String, List<Date>> schedule;
+    private final Map<String, List<LocalDateTime>> schedule;
 
     public ScheduleService() {
         this.schedule = new ConcurrentHashMap<>();
@@ -53,12 +52,12 @@ public class ScheduleService {
         final String doctorId = patient.getAssignedDoctor().getId();
         appointment.setPatient(patient);
         // better case scenario we set an appointment today an hour from now :)
-        appointment.setDate(this.addOneHour(new Date()));
+        appointment.setDate(LocalDateTime.now().plusHours(1));
         appointment.setDoctor(patient.getAssignedDoctor());
 
         // let's find room for our patient
         if (this.schedule.get(doctorId) != null) {
-            final Optional<Date> lastDate = this.schedule.get(doctorId).stream().max(Comparator.nullsFirst(Comparator.naturalOrder()));
+            final Optional<LocalDateTime> lastDate = this.schedule.get(doctorId).stream().max(Comparator.nullsFirst(Comparator.naturalOrder()));
             appointment.setDate(this.addOneDayFirstHourInMorning(lastDate.orElseThrow(IllegalStateException::new)));
         } else { // this doctor hasn't been set an appointment yet
             this.schedule.put(doctorId, new ArrayList<>());
@@ -68,19 +67,7 @@ public class ScheduleService {
         return appointment;
     }
 
-    private Date addOneHour(final Date targetDate) {
-        final Calendar calendar = Calendar.getInstance();
-        calendar.setTime(targetDate);
-        calendar.add(Calendar.HOUR, 1);
-        return calendar.getTime();
-    }
-
-    private Date addOneDayFirstHourInMorning(final Date targetDate) {
-        final Calendar calendar = Calendar.getInstance();
-        calendar.setTime(targetDate);
-        calendar.add(Calendar.DATE, 1);
-        calendar.set(Calendar.HOUR_OF_DAY, FIRST_HOUR_MORNING);
-        calendar.set(Calendar.MINUTE, 0);
-        return calendar.getTime();
+    private LocalDateTime addOneDayFirstHourInMorning(final LocalDateTime targetDate) {
+        return targetDate.plusDays(1).withHour(FIRST_HOUR_MORNING).withMinute(0);
     }
 }

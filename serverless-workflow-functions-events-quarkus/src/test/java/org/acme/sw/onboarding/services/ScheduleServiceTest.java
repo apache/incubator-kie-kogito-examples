@@ -15,8 +15,7 @@
  */
 package org.acme.sw.onboarding.services;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -60,10 +59,8 @@ class ScheduleServiceTest {
         assertEquals(markAppointment.getDoctor(), mark.getAssignedDoctor());
         assertNotNull(markAppointment.getDate());
 
-        assertTrue(markAppointment.getDate().after(michaelAppointment.getDate()));
-        assertEquals(new Calendar.Builder().setInstant(markAppointment.getDate()).build().get(Calendar.HOUR_OF_DAY),
-                     ScheduleService.FIRST_HOUR_MORNING);
-        assertEquals(new Calendar.Builder().setInstant(michaelAppointment.getDate()).build().get(Calendar.DATE),
-                     new Calendar.Builder().setInstant(new Date()).build().get(Calendar.DATE));
+        assertTrue(markAppointment.getDate().isAfter(michaelAppointment.getDate()));
+        assertEquals(ScheduleService.FIRST_HOUR_MORNING, markAppointment.getDate().getHour());
+        assertEquals(LocalDateTime.now().getDayOfMonth(), michaelAppointment.getDate().getDayOfMonth());
     }
 }

@@ -26,6 +26,19 @@ The workflow starts with a CloudEvent informing a new patient entry:
 }
 ```
 
+Or you can use CURL and set the CloudEvents parameters in the request headers:
+
+```shell script
+$ curl -X POST \
+      -H "content-type: application/json"  \
+      -H "ce-specversion: 1.0"  \
+      -H "ce-source: /hospital/entry"  \
+      -H "ce-type: new.patients.events"  \
+      -H "ce-id: 12346"  \
+      -d "{ \"name\": \"Mick\", \"dateOfBirth\": \"1983-08-15\", \"symptoms\":[\"seizures\"]}" \
+  http://localhost:8080
+```
+
 The [workflow](src/main/resources/onbording.sw.json) will then call a sequence of REST services:
 
 1. `StoreNewPatient` will store the patient in the internal database for later processing, generating a new ID for they
@@ -62,6 +75,60 @@ When using native image compilation, you will also need:
 ```text
 mvn clean package quarkus:dev    
 ```
+
+Use `curl` to send the CloudEvent through HTTP to the application:
+
+```shell script
+$ curl -X POST \
+      -H "content-type: application/json"  \
+      -H "ce-specversion: 1.0"  \
+      -H "ce-source: /hospital/entry"  \
+      -H "ce-type: new.patients.events"  \
+      -H "ce-id: 12346"  \
+      -d "{ \"name\": \"Mick\", \"dateOfBirth\": \"1983-08-15\", \"symptoms\":[\"seizures\"]}" \
+  http://localhost:8080
+```
+
+In the application log, you will see something like:
+
+```log
+2020-11-17 12:51:11,581 DEBUG [org.acm.sw.onb.res.PatientResource] (executor-thread-198) Received patient to store in the internal in memory database: Patient{name='Mick', id='null', symptoms=[seizures], dateOfBirth=1983-08-15}
+2020-11-17 12:51:11,581 DEBUG [org.acm.sw.onb.res.PatientResource] (executor-thread-198) Patient has been stored in the internal memory: Patient{name='Mick', id='5560ed3d-becb-4f35-8c6a-2816338bf8fd', symptoms=[seizures], dateOfBirth=1983-08-15}
+2020-11-17 12:51:11,600 DEBUG [org.acm.sw.onb.res.AppointmentResource] (executor-thread-198) Receive patient to schedule appointments: Patient{name='Mick', id='5560ed3d-becb-4f35-8c6a-2816338bf8fd', symptoms=[seizures], dateOfBirth=1983-08-15}
+2020-11-17 12:51:11,600 DEBUG [org.acm.sw.onb.res.AppointmentResource] (executor-thread-198) Processed patient: Patient{name='Mick', id='5560ed3d-becb-4f35-8c6a-2816338bf8fd', symptoms=[seizures], dateOfBirth=1983-08-15}
+```
+
+Then query the appointments' resource to see the assigned doctor:
+
+```shell script
+$ curl http://localhost:8080/onboarding/schedule/appointment | jq '.'
+
+[
+  {
+    "doctor": {
+      "id": "8293dc94-2386-11eb-adc1-0242ac120002",
+      "name": "Maria Mind",
+      "specialty": "Neurology"
+    },
+    "patient": {
+      "name": "Mick",
+      "id": "5560ed3d-becb-4f35-8c6a-2816338bf8fd",
+      "symptoms": [
+        "seizures"
+      ],
+      "dateOfBirth": "1983-08-15",
+      "assignedDoctor": {
+        "id": "8293dc94-2386-11eb-adc1-0242ac120002",
+        "name": "Maria Mind",
+        "specialty": "Neurology"
+      }
+    },
+    "date": "2020-11-18 09:00"
+  }
+]
+```
+
+_**Note:** Please make sure you have [jq](https://stedolan.github.io/jq/download/) installed in your system to see the formatted output._
 
 ### Compile and Run in JVM mode
 

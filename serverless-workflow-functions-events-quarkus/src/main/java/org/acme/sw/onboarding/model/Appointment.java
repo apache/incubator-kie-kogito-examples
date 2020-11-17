@@ -15,7 +15,7 @@
  */
 package org.acme.sw.onboarding.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -27,13 +27,13 @@ public class Appointment {
     private Doctor doctor;
     private Patient patient;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
-    private Date date;
+    private LocalDateTime date;
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
