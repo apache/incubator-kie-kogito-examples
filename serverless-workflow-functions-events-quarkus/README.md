@@ -41,7 +41,7 @@ $ curl -X POST \
 
 The [workflow](src/main/resources/onbording.sw.json) will then call a sequence of REST services:
 
-1. `StoreNewPatient` will store the patient in the internal database for later processing, generating a new ID for they
+1. `StoreNewPatient` will store the patient in the internal database for later processing
 2. `AssignDoctorToPatient` will run a set of [rules](https://docs.jboss.org/kogito/release/latest/html_single/#con-drl-rule-units_drl-rules) 
 to determine to which doctor this patient should be assigned, based on their symptoms or general characteristics (children always go to Pediatrics, for example)
 3. `SchedulePatientAppointment` will find a time slot for this patient based on the agenda of the assigned doctor
