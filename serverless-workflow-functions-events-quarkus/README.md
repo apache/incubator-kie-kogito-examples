@@ -26,7 +26,7 @@ The workflow starts with a CloudEvent informing a new patient entry:
 }
 ```
 
-Or you can use CURL and set the CloudEvents parameters in the request headers:
+Or you can use cURL and set the CloudEvents parameters in the request headers:
 
 ```shell script
 $ curl -X POST \
@@ -42,9 +42,9 @@ $ curl -X POST \
 The [workflow](src/main/resources/onbording.sw.json) will then call a sequence of REST services:
 
 1. `StoreNewPatient` will store the patient in the internal database for later processing, generating a new ID for they
-2. `AssignDoctorToPatient` service will run a set of [rules](https://docs.jboss.org/kogito/release/latest/html_single/#con-drl-rule-units_drl-rules) 
-to determine which doctor this patient should be assigned based on their symptoms or general characteristics (children always go to Pediatrics, for example)
-3. `SchedulePatientAppointment` will find a schedule for this patient based on the agenda of the doctor assigned
+2. `AssignDoctorToPatient` will run a set of [rules](https://docs.jboss.org/kogito/release/latest/html_single/#con-drl-rule-units_drl-rules) 
+to determine to which doctor this patient should be assigned, based on their symptoms or general characteristics (children always go to Pediatrics, for example)
+3. `SchedulePatientAppointment` will find a time slot for this patient based on the agenda of the assigned doctor
 
 After executing the workflow, the appointments' data can be fetched using the `/onboarding/schedule/appointment` endpoint.
 
@@ -54,7 +54,7 @@ There's a nice web interface for you to try the example available in the root ur
 
 Enter the data into the provided form to see the example in action! Date of Birth must be in `YYYY-MM-DD` format.
 
-Also, there's the Swagger UI that can also be used to explore the APIs in this example: http://localhost:8080/swagger-ui/
+Also, there is the Swagger UI that can also be used to explore the APIs in this example: http://localhost:8080/swagger-ui/
 
 ## Installing and Running
 
@@ -76,7 +76,7 @@ When using native image compilation, you will also need:
 mvn clean package quarkus:dev    
 ```
 
-Use `curl` to send the CloudEvent through HTTP to the application:
+Use `curl` command to send the CloudEvent through HTTP to the application:
 
 ```shell script
 $ curl -X POST \
@@ -89,7 +89,7 @@ $ curl -X POST \
   http://localhost:8080
 ```
 
-In the application log, you will see something like:
+In the application's log, you will see something like:
 
 ```log
 2020-11-17 12:51:11,581 DEBUG [org.acm.sw.onb.res.PatientResource] (executor-thread-198) Received patient to store in the internal in memory database: Patient{name='Mick', id='null', symptoms=[seizures], dateOfBirth=1983-08-15}
@@ -159,7 +159,9 @@ To run the generated native executable, generated in `target/`, execute
 
 ## Deploying with Kogito Operator
 
-In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift or Kubernetes with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).
+In the [`operator`](operator) directory you can find the custom resources needed to deploy this example on OpenShift or Kubernetes with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).
+
+Don't forget to replace the `<namespace>` placeholder in yaml files
 
 ## Credits
 
