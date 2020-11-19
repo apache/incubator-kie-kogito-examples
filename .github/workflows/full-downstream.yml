@@ -1,4 +1,4 @@
-name: Build Chain Pull Request
+name: Build Chain Full Downstream
 
 on: [pull_request]
 
@@ -28,5 +28,6 @@ jobs:
         uses: kiegroup/github-action-build-chain@v2.3
         with:
           definition-file: https://raw.githubusercontent.com/${GROUP}/kogito-examples/${BRANCH}/.ci/pull-request-config.yaml
+          flow-type: full-downstream
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"

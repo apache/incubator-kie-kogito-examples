@@ -1,0 +1,34 @@
+version: "2.0"
+
+dependencies: ./project-dependencies.yaml
+
+build:
+  - project: kiegroup/kogito-runtimes
+    build-command:
+      upstream: |
+        mvn clean install -Dmaven.wagon.httpconnectionManager.ttlSeconds=25 -Dmaven.wagon.http.retryHandler.count=3
+      current: |
+        mvn clean install -Prun-code-coverage -Dmaven.wagon.httpconnectionManager.ttlSeconds=25 -Dmaven.wagon.http.retryHandler.count=3
+        mvn validate -Psonarcloud-analysis -e -nsu -Dmaven.wagon.httpconnectionManager.ttlSeconds=25 -Dmaven.wagon.http.retryHandler.count=3
+        mvn -f kogito-runtimes-integration-tests/pom.xml clean
+    clone:
+      - kogito-runtimes-integration-tests
+
+  - project: kiegroup/kogito-apps
+    build-command:
+      upstream: |
+        mvn clean install -Dmaven.wagon.httpconnectionManager.ttlSeconds=25 -Dmaven.wagon.http.retryHandler.count=3
+      current: |
+        mvn clean install -Prun-code-coverage -Dmaven.wagon.httpconnectionManager.ttlSeconds=25 -Dmaven.wagon.http.retryHandler.count=3
+        mvn validate -Psonarcloud-analysis -e -nsu -Dmaven.wagon.httpconnectionManager.ttlSeconds=25 -Dmaven.wagon.http.retryHandler.count=3
+
+  - project: kiegroup/kogito-examples
+    build-command:
+      current: |
+        mvn clean install -Dmaven.wagon.httpconnectionManager.ttlSeconds=25 -Dmaven.wagon.http.retryHandler.count=3
+        mvn -f kogito-examples-persistence/pom.xml clean install -Ppersistence -Dmaven.wagon.httpconnectionManager.ttlSeconds=25 -Dmaven.wagon.http.retryHandler.count=3
+        mvn -f kogito-examples-events/pom.xml clean install -Pevents -Dmaven.wagon.httpconnectionManager.ttlSeconds=25 -Dmaven.wagon.http.retryHandler.count=3
+    clone:
+      - kogito-examples-persistence
+      - kogito-examples-events
+            
