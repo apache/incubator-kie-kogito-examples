@@ -17,7 +17,7 @@
 package org.kie.kogito.app;
 
 import org.drools.core.config.DefaultRuleEventListenerConfig;
-import org.kie.kogito.monitoring.rule.PrometheusMetricsDroolsListener;
+import org.kie.kogito.monitoring.prometheus.rule.PrometheusMetricsDroolsListener;
 
 public class RuleEventListenerConfig extends DefaultRuleEventListenerConfig {
 

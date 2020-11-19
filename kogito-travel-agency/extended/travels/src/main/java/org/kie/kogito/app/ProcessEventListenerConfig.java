@@ -17,7 +17,7 @@ package org.kie.kogito.app;
 
 import javax.enterprise.context.ApplicationScoped;
 
-import org.kie.kogito.monitoring.process.PrometheusProcessEventListener;
+import org.kie.kogito.monitoring.prometheus.process.PrometheusProcessEventListener;
 import org.kie.kogito.process.impl.DefaultProcessEventListenerConfig;
 
 @ApplicationScoped
