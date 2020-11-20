@@ -58,7 +58,7 @@
     <infinispan.starter.version>2.3.3.Final</infinispan.starter.version>
     <container.image.infinispan>quay.io/infinispan/server:${infinispan.version}</container.image.infinispan>
     <!-- keycloak -->
-    <keycloak.version>11.0.0</keycloak.version>
+    <keycloak.version>11.0.2</keycloak.version>
     <container.image.keycloak>quay.io/keycloak/keycloak:${keycloak.version}</container.image.keycloak>
     <!-- testcontainers -->
     <version.testcontainers>1.14.3</version.testcontainers>
