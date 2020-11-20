@@ -87,10 +87,10 @@ Alternatively, you can use the Docker Compose template, instructions on how to u
 This application requires a [Apache Kafka](https://kafka.apache.org/) installed and following topics created
 
 * `visaapplications` - used to send visa application that are consumed and processed by Kogito Visas service
-* `visasapproved` - used to send visa applications that were approved
-* `visasrejected` - used to send visa applications that were rejected
+* `visasresponses` - used to send visa applications that were were approved or rejected
 * `kogito-processinstances-events` - used to emit events by kogito that can be consumed by data index service and other services
 * `kogito-usertaskinstances-events` -used to emit events by kogito that can be consumed by data index service
+* `kogito-variables-events` - used to emit events by kogito that can be consumed by data index service
 
 Alternatively, you can use the Docker Compose template, instructions on how to use it are available in the [README](../docker-compose/README.md) file.
 
