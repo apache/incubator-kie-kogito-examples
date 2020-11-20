@@ -2,9 +2,8 @@
 
 This is a demonstration of the trusty AI tracing capabilities. 
 
-NOTE: the master branch is aligned to the latest changes in all the repositories. This means that master might be using some new operator features not included in the latest release of the operator. 
-In order to play with the demo, remember to checkout the branch of the release your are using. For example, if the version of the kogito release is `0.17.0`, 
-you have to checkout this repository to the branch `0.17.x`.
+NOTE: In order to play with the demo, ensure that you are on the stable branch or on the branch of a specific release (for example the branch for the release `0.17` is `0.17.x`).
+The `master` branch is aligned to the latest changes in all the repositories. This means that `master` might be using some new operator features not included in the release that we use in this demo: don't use it!
 
 ## Requirements
 
