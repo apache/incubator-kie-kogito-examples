@@ -18,7 +18,7 @@ metadata:
 spec:
   serviceType: TrustyAI
   replicas: 1
-  image: quay.io/kiegroup/kogito-trusty:0.17
+  image: quay.io/kiegroup/kogito-trusty:1.0
   propertiesConfigMap: trusty-config
   env:
     - name: ENABLE_PERSISTENCE
