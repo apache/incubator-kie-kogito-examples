@@ -13,7 +13,7 @@ metadata:
 spec:
   serviceType: Explainability
   replicas: 1
-  image: quay.io/kiegroup/kogito-explainability:0.17
+  image: quay.io/kiegroup/kogito-explainability:1.0
   propertiesConfigMap: explainability-config
   env:
     - name: ENABLE_EVENT
