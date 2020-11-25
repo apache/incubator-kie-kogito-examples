@@ -15,7 +15,7 @@
  */
 package org.kie.kogito.examples;
 
-import org.kie.kogito.monitoring.process.PrometheusProcessEventListener;
+import org.kie.kogito.monitoring.prometheus.process.PrometheusProcessEventListener;
 import org.kie.kogito.process.impl.DefaultProcessEventListenerConfig;
 import org.springframework.stereotype.Component;
 

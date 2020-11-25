@@ -15,54 +15,73 @@
  */
 package org.kie.kogito.app;
 
+import java.util.Arrays;
+
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.Tag;
 import org.acme.travels.VisaApplication;
 import org.jbpm.workflow.instance.impl.WorkflowProcessInstanceImpl;
-import org.kie.kogito.monitoring.process.PrometheusProcessEventListener;
 import org.kie.api.event.process.ProcessCompletedEvent;
-
-import io.prometheus.client.CollectorRegistry;
-import io.prometheus.client.Counter;
+import org.kie.kogito.monitoring.core.MonitoringRegistry;
+import org.kie.kogito.monitoring.prometheus.PrometheusRegistryProvider;
+import org.kie.kogito.monitoring.prometheus.process.PrometheusProcessEventListener;
 
 public class VisaApplicationPrometheusProcessEventListener extends PrometheusProcessEventListener {
-	
-	protected final Counter numberOfVisaApplicationsApproved = Counter.build()
-            .name("acme_travels_visas_approved_total")
-            .help("Approved visa applications")
-            .labelNames("app_id", "country", "duration", "nationality")
-            .register();
-	
-	protected final Counter numberOfVisaApplicationsRejected = Counter.build()
-            .name("acme_travels_visas_rejected_total")
-            .help("Rejected visa applications")
-            .labelNames("app_id", "country", "duration", "nationality")
-            .register();
+
+	private static final String NUMBER_OF_VISA_APPROVED_COUNTER_NAME = "acme_travels_visas_approved_total";
+	private static final String NUMBER_OF_VISA_REJECTED_COUNTER_NAME = "acme_travels_visas_rejected_total";
+
+	private static Counter getNumberOfVisaApplicationsApprovedCounter(String appId, String country, String duration, String nationality) {
+		return Counter
+				.builder(NUMBER_OF_VISA_APPROVED_COUNTER_NAME)
+				.description("Approved visa applications")
+				.tags(Arrays.asList(Tag.of("app_id", appId), Tag.of("country", country), Tag.of("duration", duration), Tag.of("nationality", nationality)))
+				.register(MonitoringRegistry.getDefaultMeterRegistry());
+	}
+
+	private static Counter getNumberOfVisaApplicationsRejected(String appId, String country, String duration, String nationality) {
+		return Counter
+				.builder(NUMBER_OF_VISA_REJECTED_COUNTER_NAME)
+				.description("Rejected visa applications")
+				.tags(Arrays.asList(Tag.of("app_id", appId), Tag.of("country", country), Tag.of("duration", duration), Tag.of("nationality", nationality)))
+				.register(MonitoringRegistry.getDefaultMeterRegistry());
+	}
 
 	private String identifier;
-	
+
 	public VisaApplicationPrometheusProcessEventListener(String identifier) {
 		super(identifier);
 		this.identifier = identifier;
 	}
-	
+
 	public void cleanup() {
-		CollectorRegistry.defaultRegistry.unregister(numberOfVisaApplicationsApproved);
-		CollectorRegistry.defaultRegistry.unregister(numberOfVisaApplicationsRejected);
+		PrometheusRegistryProvider
+				.getPrometheusMeterRegistry()
+				.find(NUMBER_OF_VISA_APPROVED_COUNTER_NAME)
+				.counters()
+				.forEach(x -> MonitoringRegistry.getDefaultMeterRegistry().remove(x));
+		PrometheusRegistryProvider
+				.getPrometheusMeterRegistry()
+				.find(NUMBER_OF_VISA_REJECTED_COUNTER_NAME)
+				.counters()
+				.forEach(x -> MonitoringRegistry.getDefaultMeterRegistry().remove(x));
 	}
 
 	@Override
 	public void afterProcessCompleted(ProcessCompletedEvent event) {
 		super.afterProcessCompleted(event);
 		final WorkflowProcessInstanceImpl processInstance = (WorkflowProcessInstanceImpl) event.getProcessInstance();
-		
+
 		if (processInstance.getProcessId().equals("visaApplications")) {
 			VisaApplication application = (VisaApplication) processInstance.getVariable("visaApplication");
-		
+
 			if (application.isApproved()) {
-				numberOfVisaApplicationsApproved.labels(identifier, safeValue(application.getCountry()), String.valueOf(application.getDuration()), safeValue(application.getNationality())).inc();
+				getNumberOfVisaApplicationsApprovedCounter(identifier, safeValue(application.getCountry()), String.valueOf(application.getDuration()), safeValue(application.getNationality()))
+						.increment();
 			} else {
-				numberOfVisaApplicationsRejected.labels(identifier, safeValue(application.getCountry()), String.valueOf(application.getDuration()), safeValue(application.getNationality())).inc();
+				getNumberOfVisaApplicationsRejected(identifier, safeValue(application.getCountry()), String.valueOf(application.getDuration()), safeValue(application.getNationality()))
+						.increment();
 			}
-		
 		}
 	}
 
@@ -70,7 +89,7 @@ public class VisaApplicationPrometheusProcessEventListener extends PrometheusPro
 		if (value == null) {
 			return "unknown";
 		}
-		
+
 		return value;
 	}
 }
