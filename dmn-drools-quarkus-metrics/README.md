@@ -13,13 +13,20 @@ You will need:
   
 ### How to enable the feature
 
-Import the following dependency in your `pom.xml`:
+Import the following dependency in your `pom.xml` if you are using quarkus:
 
 ```XML
 <dependency>
  <groupId>org.kie.kogito</groupId>
- <artifactId>monitoring-prometheus-addon</artifactId>
+ <artifactId>monitoring-prometheus-quarkus</artifactId>
 </dependency>
+```
+
+Otherwise, if you are using springboot import
+```XML
+<dependency>
+ <groupId>org.kie.kogito</groupId>
+ <artifactId>monitoring-prometheus-springboot</artifactId></dependency>
 ```
 
 And add the following class in your quarkus project: 

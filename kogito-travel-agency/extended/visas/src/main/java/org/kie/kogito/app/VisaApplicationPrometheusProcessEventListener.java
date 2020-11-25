@@ -22,9 +22,9 @@ import io.micrometer.core.instrument.Tag;
 import org.acme.travels.VisaApplication;
 import org.jbpm.workflow.instance.impl.WorkflowProcessInstanceImpl;
 import org.kie.api.event.process.ProcessCompletedEvent;
-import org.kie.kogito.monitoring.core.MonitoringRegistry;
-import org.kie.kogito.monitoring.prometheus.PrometheusRegistryProvider;
-import org.kie.kogito.monitoring.prometheus.process.PrometheusProcessEventListener;
+import org.kie.kogito.monitoring.core.common.MonitoringRegistry;
+import org.kie.kogito.monitoring.prometheus.common.PrometheusRegistryProvider;
+import org.kie.kogito.monitoring.prometheus.common.process.PrometheusProcessEventListener;
 
 public class VisaApplicationPrometheusProcessEventListener extends PrometheusProcessEventListener {
 
