@@ -40,6 +40,7 @@ class ScheduleServiceTest {
     void verifyAppointments() {
         final List<Doctor> doctors = DoctorService.get().getDoctors();
         // Michael and Mark are assigned to the same doctor, let's see the outcome.
+        final LocalDateTime beforeAppointment = LocalDateTime.now();
         final Patient michael = new Patient();
         michael.setName("Michael");
         michael.setAssignedDoctor(doctors.get(0));
@@ -61,6 +62,6 @@ class ScheduleServiceTest {
 
         assertTrue(markAppointment.getDate().isAfter(michaelAppointment.getDate()));
         assertEquals(ScheduleService.FIRST_HOUR_MORNING, markAppointment.getDate().getHour());
-        assertEquals(LocalDateTime.now().getDayOfMonth(), michaelAppointment.getDate().getDayOfMonth());
+        assertTrue(michaelAppointment.getDate().isAfter(beforeAppointment));
     }
 }
