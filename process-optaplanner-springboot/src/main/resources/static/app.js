@@ -30,7 +30,7 @@ function renderFlight(flight, tasks) {
                 role: "button",
                 style: "margin: 5px;",
                 onClick: () => {
-                    $.post(`/rest/flights/${flight.id}/finalizePassengerList/${finalizePassengerListTasks[0]}`, JSON.stringify({}), () => {
+                    $.post(`/rest/flights/${flight.id}/finalizePassengerList/${finalizePassengerListTasks[0].id}`, JSON.stringify({}), () => {
                         const refreshFlight = () => {
                             $.getJSON(`/rest/flights/${flight.id}`, flight => {
                                 $.getJSON(`/rest/flights/${flight.id}/tasks`, tasks => {
@@ -58,7 +58,7 @@ function renderFlight(flight, tasks) {
             class: "btn btn-primary",
             role: "button",
             onClick: () => {
-                $.post(`/rest/flights/${flight.id}/finalizeSeatAssignment/${finalizeSeatAssignmentTasks[0]}`, JSON.stringify({}), () => {
+                $.post(`/rest/flights/${flight.id}/finalizeSeatAssignment/${finalizeSeatAssignmentTasks[0].id}`, JSON.stringify({}), () => {
                     refresh();
                 });
             }
@@ -87,7 +87,7 @@ function renderFlight(flight, tasks) {
                     // Passenger Request List
                     suspense(element("div", {}, "is loading"),
                     element("div", { class: "list-group" }, ...findTasks("approveDenyPassenger", tasks).map(futureTask => future(futureTask, { isLoading: true },
-                        resolve => $.getJSON(`/rest/flights/${flight.id}/approveDenyPassenger/${futureTask}`, resolve),
+                        resolve => $.getJSON(`/rest/flights/${flight.id}/approveDenyPassenger/${futureTask.id}`, resolve),
                         task => element(
                         "div", { class: "list-group-item list-group-item-action flex-column align-items-start d-flex w-100 justify-content-between" },
                         // Note: we take advantage that undefined is falsey here (task doesn't have property "isLoading")
@@ -215,7 +215,7 @@ function flightSeats(flight, flightSeatToElementMap) {
 }
 
 function getFlightScore(flight) {
-    return `${flight.score.hardScore} Hard/${flight.score.softScore} Soft`;
+    return flight.score? `${flight.score.hardScore}hard/${flight.score.softScore}soft` : null;
 }
 
 function getSeatIndictment(seat, passengerList) {
@@ -296,23 +296,16 @@ function refresh() {
 }
 
 function getFlightName(flight) {
-    return `${flight.flight.origin} -> ${flight.flight.destination}, departing on ${getMomentDate(flight.flight.departureDateTime).format("LLL")}`;
-}
-
-function getMomentDate(javaDate) {
-    return moment().year(javaDate.year)
-        .dayOfYear(javaDate.dayOfYear)
-        .hour(javaDate.hour)
-        .minute(javaDate.minute);
+    return `${flight.flight.origin} -> ${flight.flight.destination}, departing on ${moment(flight.params.departureDateTime).format("LLL")}`;
 }
 
 function findTasks(taskName, tasks) {
-    return Object.keys(tasks).filter(key => tasks[key] === taskName);
+    return tasks.filter(task => task.name === taskName);
 }
 
 function getPassengersToApproveDeny(flight, tasks, map) {
     findTasks("approveDenyPassenger", tasks).map(task => {
-        return $.getJSON(`/rest/flights/${flight.id}/approveDenyPassenger/${task}`, map);
+        return $.getJSON(`/rest/flights/${flight.id}/approveDenyPassenger/${task.id}`, map);
     });
 }
 
@@ -328,9 +321,8 @@ function generatePassengersForFlight(flight) {
         }));
     }
     Promise.all(passengersToAddList.map(newPassengerRequest => $.post(`/rest/flights/${flight.id}/newPassengerRequest`, newPassengerRequest, () => {}, "json"))).then(() => {
-        console.log("Hi");
         $.getJSON(`/rest/flights/${flight.id}/tasks`, tasks => {
-            Promise.all(findTasks("approveDenyPassenger", tasks).map(task => $.post(`/rest/flights/${flight.id}/approveDenyPassenger/${task}`, JSON.stringify({
+            Promise.all(findTasks("approveDenyPassenger", tasks).map(task => $.post(`/rest/flights/${flight.id}/approveDenyPassenger/${task.id}`, JSON.stringify({
                 isPassengerApproved: true
             }), () => {}, "json"))).then(() => refresh());
         });
