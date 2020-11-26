@@ -151,16 +151,16 @@
       </activation>
       <modules>
         <module>decisiontable-quarkus-example</module>
-<!--        <module>decisiontable-springboot-example</module>-->
+        <module>decisiontable-springboot-example</module>
         <module>dmn-listener-quarkus</module>
-<!--        <module>dmn-listener-springboot</module>-->
+        <module>dmn-listener-springboot</module>
         <module>dmn-pmml-quarkus-example</module>
         <module>dmn-pmml-springboot-example</module>
         <module>dmn-quarkus-example</module>
         <module>dmn-drools-quarkus-metrics</module>
         <module>dmn-springboot-example</module>
         <module>dmn-tracing-quarkus</module>
-<!--        <module>dmn-tracing-springboot</module>-->
+        <module>dmn-tracing-springboot</module>
         <module>flexible-process-quarkus</module>
         <module>flexible-process-springboot</module>
         <module>kogito-travel-agency</module>
@@ -198,7 +198,7 @@
         <module>process-usertasks-with-security-springboot</module>
         <module>rules-quarkus-helloworld</module>
         <module>ruleunit-quarkus-example</module>
-<!--        <module>ruleunit-springboot-example</module>-->
+        <module>ruleunit-springboot-example</module>
         <module>serverless-workflow-greeting-quarkus</module>
         <module>serverless-workflow-greeting-springboot</module>
         <module>serverless-workflow-service-calls-quarkus</module>
