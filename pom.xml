@@ -7,7 +7,7 @@
 
   <groupId>org.kie.kogito</groupId>
   <artifactId>kogito-examples</artifactId>
-  <version>1.0.0.Final</version>
+  <version>1.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Kogito Example</name>
@@ -52,7 +52,7 @@
     <springboot.version>2.3.1.RELEASE</springboot.version>
     <!-- kogito -->
     <kogito.version>${project.version}</kogito.version>
-    <version.org.optaplanner>8.0.0.Final</version.org.optaplanner>
+    <version.org.optaplanner>8.0.1-SNAPSHOT</version.org.optaplanner>
     <!-- infinispan -->
     <infinispan.version>11.0.4.Final</infinispan.version>
     <infinispan.starter.version>2.3.3.Final</infinispan.starter.version>
