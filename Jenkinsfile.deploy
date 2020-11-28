@@ -35,6 +35,7 @@ pipeline {
 
         // Deploy information
         string(name: 'MAVEN_DEPLOY_REPOSITORY', defaultValue: '', description: 'Specify a Maven repository to deploy the artifacts.')
+        string(name: 'MAVEN_REPO_CREDS_ID', defaultValue: '', description: 'Credentials for Maven repository to deploy the artifacts.')
 
         // Release information
         booleanParam(name: 'RELEASE', defaultValue: false, description: 'Is this build for a release?')
@@ -53,6 +54,8 @@ pipeline {
     }
 
     environment {
+        REPO_NAME = 'kogito-examples'
+
         MAVEN_OPTS = '-Xms1024m -Xmx4g'
 
         BOT_BRANCH_HASH = "${util.generateHash(10)}"
@@ -76,7 +79,7 @@ pipeline {
                         assert getOptaPlannerVersion() != ''
                     }
 
-                    checkoutRepo('kogito-examples')
+                    checkoutRepo(getRepoName())
                 }
             }
             post {
@@ -98,7 +101,7 @@ pipeline {
                 expression { return isRelease() }
             }
             steps {
-                prepareForPR('kogito-examples')
+                prepareForPR(getRepoName())
             }
         }
         stage('Update project version'){
@@ -107,16 +110,16 @@ pipeline {
             }
             steps {
                 script {
-                    maven.mvnVersionsSet(getMavenCommand(), getProjectVersion())
+                    maven.mvnVersionsSet(getMavenCommand(getRepoName()), getProjectVersion())
                     // Update Optaplanner version
-                    maven.mvnSetVersionProperty(getMavenCommand(), 'version.org.optaplanner', getOptaPlannerVersion())
+                    maven.mvnSetVersionProperty(getMavenCommand(getRepoName()), 'version.org.optaplanner', getOptaPlannerVersion())
                 }
             }
         }
         stage('Build kogito-examples') {
             steps {
                 script {
-                    getMavenCommand().skipTests(params.SKIP_TESTS).run('clean install')
+                    getMavenCommand(getRepoName()).skipTests(params.SKIP_TESTS).run('clean install')
                 }
             }
             post {
@@ -128,8 +131,8 @@ pipeline {
         stage('Check kogito-examples with persistence') {
             steps {
                 script {
-                    sh 'cp -r kogito-examples kogito-examples-persistence'
-                    getMavenCommand('kogito-examples-persistence')
+                    sh "cp -r ${getRepoName()} ${getRepoName()}-persistence"
+                    getMavenCommand("${getRepoName()}-persistence")
                         .skipTests(params.SKIP_TESTS)
                         .withProfiles(['persistence'])
                         .run('clean install')
@@ -144,8 +147,8 @@ pipeline {
         stage('Check kogito-examples with events') {
             steps {
                 script {
-                    sh 'cp -r kogito-examples kogito-examples-events'
-                    getMavenCommand()
+                    sh "cp -r ${getRepoName()} ${getRepoName()}-events"
+                    getMavenCommand("${getRepoName()}-events")
                         .skipTests(params.SKIP_TESTS)
                         .withProfiles(['events'])
                         .run('clean install')
@@ -160,12 +163,17 @@ pipeline {
         stage('Deploy artifacts') {
             steps {
                 script {
-                    if(!isRelease() || params.MAVEN_DEPLOY_REPOSITORY){
-                        runMavenDeploy(getMavenCommand())
+                    if (params.MAVEN_DEPLOY_REPOSITORY && params.MAVEN_REPO_CREDS_ID) {
+                        // Deploy to specific repository with credentials
+                        runMavenDeployLocally(getMavenCommand(getRepoName()))
+                        maven.uploadLocalArtifacts(params.MAVEN_REPO_CREDS_ID, getLocalDeploymentFolder(), getMavenRepoZipUrl())
+                    } else if(!isRelease() || params.MAVEN_DEPLOY_REPOSITORY){
+                        // Normal deploy
+                        runMavenDeploy(getMavenCommand(getRepoName()))
                     } else {
                          // Deploy locally and then to staging
-                        runMavenDeployLocally(getMavenCommand())
-                        runMavenStage(getMavenCommand())
+                        runMavenDeployLocally(getMavenCommand(getRepoName()))
+                        runMavenStage(getMavenCommand(getRepoName()))
                     }
                 }
             }
@@ -175,15 +183,15 @@ pipeline {
                 expression { return isRelease() }
             }
             steps {
-                commitAndCreatePR('kogito-examples')
+                commitAndCreatePR(getRepoName())
             }
             post {
                 success {
                     script {
-                        setDeployPropertyIfNeeded('kogito-examples.pr.source.uri', "https://github.com/${getBotAuthor()}/kogito-examples")
-                        setDeployPropertyIfNeeded('kogito-examples.pr.source.ref', getBotBranch())
-                        setDeployPropertyIfNeeded('kogito-examples.pr.target.uri', "https://github.com/${getGitAuthor()}/kogito-examples")
-                        setDeployPropertyIfNeeded('kogito-examples.pr.target.ref', getBuildBranch())
+                        setDeployPropertyIfNeeded("${getRepoName()}.pr.source.uri", "https://github.com/${getBotAuthor()}/${getRepoName()}")
+                        setDeployPropertyIfNeeded("${getRepoName()}.pr.source.ref", getBotBranch())
+                        setDeployPropertyIfNeeded("${getRepoName()}.pr.target.uri", "https://github.com/${getGitAuthor()}/${getRepoName()}")
+                        setDeployPropertyIfNeeded("${getRepoName()}.pr.target.ref", getBuildBranch())
                     }
                 }
             }
@@ -252,6 +260,10 @@ boolean isRelease() {
     return params.RELEASE
 }
 
+String getRepoName(){
+    return env.REPO_NAME
+}
+
 String getGitAuthor(){
     return params.GIT_AUTHOR
 }
@@ -286,11 +298,11 @@ void setDeployPropertyIfNeeded(String key, def value){
     }
 }
 
-MavenCommand getMavenCommand(String directory = 'kogito-examples'){
+MavenCommand getMavenCommand(String directory){
     MavenCommand mvnCmd = new MavenCommand(this, ['-fae'])
-                .withSettingsXmlId(params.MAVEN_SETTINGS_CONFIG_FILE_ID)
-                .inDirectory(directory)
-                .withProperty('full')
+                                .withSettingsXmlId(params.MAVEN_SETTINGS_CONFIG_FILE_ID)
+                                .inDirectory(directory)
+                                .withProperty('full')
     if (params.MAVEN_DEPENDENCIES_REPOSITORY) {
         mvnCmd.withDependencyRepositoryInSettings('deps-repo', params.MAVEN_DEPENDENCIES_REPOSITORY)
     }
@@ -327,5 +339,9 @@ MavenStagingHelper getStagingHelper(MavenCommand mvnCmd) {
 }
 
 String getLocalDeploymentFolder(){
-    return "${env.MAVEN_DEPLOY_LOCAL_DIR}/kogito-examples"
+    return "${env.MAVEN_DEPLOY_LOCAL_DIR}/${getRepoName()}"
 } 
+
+String getMavenRepoZipUrl() {
+     return "${params.MAVEN_DEPLOY_REPOSITORY.replaceAll('/content/', '/service/local/').replaceFirst('/*$', '')}/content-compressed"
+}
