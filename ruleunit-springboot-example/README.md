@@ -21,16 +21,11 @@ You will need:
 mvn clean compile spring-boot:run
 ```
 
-### Package and Run using uberjar
+### Package and Run
 
 ```sh
 mvn clean package
-```
-
-To run the generated native executable, generated in `target/`, execute
-
-```sh
-java -jar target/kogito-usertasks-with-security-oidc-springboot.jar
+java -jar target/ruleunit-springboot-example.jar
 ```
 
 ## OpenAPI (Swagger) documentation
