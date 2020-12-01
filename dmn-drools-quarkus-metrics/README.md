@@ -29,26 +29,6 @@ Otherwise, if you are using springboot import
  <artifactId>monitoring-prometheus-springboot</artifactId></dependency>
 ```
 
-And add the following class in your quarkus project: 
-
-```Java
-package org.kie.kogito.examples;
-
-import javax.ws.rs.container.ContainerRequestContext;
-import javax.ws.rs.container.ContainerResponseContext;
-import javax.ws.rs.ext.Provider;
-
-import org.kie.addons.monitoring.system.interceptor.MetricsInterceptor;
-
-@Provider
-public class MyInterceptor extends MetricsInterceptor {
-    @Override
-    public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) {
-        super.filter(requestContext, responseContext);
-    }
-}
-```
-
 ### Architecture
 
 Once you compile your Quarkus project, a dashboard for each available endpoint will be generated under the path `target/resources/dashboards/`. You can then inject those grafana dashboards during the deployment of the grafana instance.
