@@ -44,7 +44,7 @@
     <!-- Port 0 means dynamic port -->
     <tests.quarkus.http.port>0</tests.quarkus.http.port> 
 
-    <version.io.quarkus>1.10.0.Final</version.io.quarkus>
+    <version.io.quarkus>1.10.3.Final</version.io.quarkus>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
