@@ -195,9 +195,9 @@
     <dmn:extensionElements/>
     <dmn:variable id="_A396BC6B-CEC4-4431-8940-41B57520378E" name="Bribe" typeRef="number"/>
   </dmn:inputData>
-  <dmn:decision id="_884FEC17-CE43-4C3D-A331-A5D1515D1FD9" name="Is Enought?">
+  <dmn:decision id="_884FEC17-CE43-4C3D-A331-A5D1515D1FD9" name="Is Enough?">
     <dmn:extensionElements/>
-    <dmn:variable id="_E00D1E77-C93F-4660-BF40-94FDC8262644" name="Is Enought?" typeRef="number"/>
+    <dmn:variable id="_E00D1E77-C93F-4660-BF40-94FDC8262644" name="Is Enough?" typeRef="number"/>
     <dmn:informationRequirement id="_986FC7F9-E9C0-40C8-BE1B-E9575A95F376">
       <dmn:requiredInput href="#_62EE020F-ECA8-455A-8E97-8496137E68B4"/>
     </dmn:informationRequirement>
@@ -238,7 +238,7 @@
     <dmn:decisionTable id="_6E77FA9A-EB09-4203-A6B3-EE891DC4ADDC" hitPolicy="UNIQUE" preferredOrientation="Rule-as-Row">
       <dmn:input id="_4DB09638-72A4-4D52-91F1-26CC9189F3A1">
         <dmn:inputExpression id="_5F451E1A-4B8F-4E03-BD2A-7EB29AE36014" typeRef="number">
-          <dmn:text>Is Enought?</dmn:text>
+          <dmn:text>Is Enough?</dmn:text>
         </dmn:inputExpression>
       </dmn:input>
       <dmn:input id="_FAB42BC6-C21B-4F80-AA1F-06E5E8C4D14F">
