@@ -1,0 +1,29 @@
+## MongoDB operator should be pre-installed in namespace
+apiVersion: app.kiegroup.org/v1alpha1
+kind: KogitoInfra
+metadata:
+  name: kogito-mongodb
+spec:
+  resource:
+    apiVersion: mongodb.com/v1
+    kind: MongoDB
+---
+apiVersion: app.kiegroup.org/v1alpha1
+kind: KogitoBuild
+metadata:
+  name: process-mongodb
+spec:
+  type: RemoteSource
+  gitSource:
+    contextDir: process-mongodb-persistence-quarkus
+    uri: 'https://github.com/kiegroup/kogito-examples'
+  # set your maven nexus repository to speed up the build time
+  #mavenMirrorURL:
+---
+apiVersion: app.kiegroup.org/v1alpha1
+kind: KogitoRuntime
+metadata:
+  name: process-mongodb
+spec:
+  infra:
+    - kogito-mongodb

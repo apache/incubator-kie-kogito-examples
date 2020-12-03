@@ -75,6 +75,11 @@ You will need:
   - Environment variable JAVA_HOME set accordingly
   - Maven 3.6.2+ installed
 
+### Enable MongoDB configuration
+
+By default, MongoDB configuration properties are commented, due to conflict if configuration is coming from outside the code.  
+You should uncomment the commented `spring.data.mongodb` variables from [properties](./src/main/resources/application.properties) file.
+
 ### Compile and Run in Local Dev Mode
 
 ```
