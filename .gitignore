@@ -50,6 +50,3 @@ kogito-travel-agency/scripts/persistence/
 
 #Grafana generated dashboards
 **/docker-compose/grafana/provisioning/dashboards/*.json
-
-# Jenkins
-!.jenkins
