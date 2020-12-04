@@ -18,7 +18,7 @@ package org.kie.dmnpmml.kogito.springboot.example;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication(scanBasePackages={"org.kie.dmnpmml.kogito.**", "org.kie.kogito.app.**"})
+@SpringBootApplication(scanBasePackages = {"org.kie.dmnpmml.kogito.**", "org.kie.kogito.**", "http**"})
 public class KogitoSpringbootApplication {
 
 	public static void main(String[] args) {
