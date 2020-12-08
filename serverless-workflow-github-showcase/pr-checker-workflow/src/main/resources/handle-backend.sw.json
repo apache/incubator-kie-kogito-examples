@@ -7,7 +7,7 @@
       "name": "AddLabels",
       "type": "service",
       "metadata": {
-        "interface": "org.kogito.examples.sw.github.workflow.GitHubServiceBackend",
+        "interface": "org.kogito.examples.sw.github.workflow.GitHubService",
         "operation": "addLabels"
       }
     },
@@ -15,7 +15,7 @@
       "name": "AddReviewers",
       "type": "service",
       "metadata": {
-        "interface": "org.kogito.examples.sw.github.workflow.GitHubServiceBackend",
+        "interface": "org.kogito.examples.sw.github.workflow.GitHubService",
         "operation": "addReviewers"
       }
     }

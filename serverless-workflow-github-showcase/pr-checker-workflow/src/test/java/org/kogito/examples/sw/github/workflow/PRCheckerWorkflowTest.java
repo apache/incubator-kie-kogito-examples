@@ -19,20 +19,17 @@ package org.kogito.examples.sw.github.workflow;
 import java.io.IOException;
 import java.nio.charset.Charset;
 
-import javax.ws.rs.core.MediaType;
-
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.jknack.handlebars.internal.Files;
 import io.cloudevents.jackson.JsonFormat;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import static io.restassured.RestAssured.given;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @QuarkusTest
 @QuarkusTestResource(GitHubServiceMockServer.class) // mock the GitHub API
@@ -51,5 +48,4 @@ class PRCheckerWorkflowTest {
                 .contentType(JsonFormat.CONTENT_TYPE)
                 .body(pullRequestEvent).post("/").then().statusCode(200);
     }
-
 }
