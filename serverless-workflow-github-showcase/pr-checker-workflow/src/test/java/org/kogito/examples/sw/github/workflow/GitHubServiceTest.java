@@ -26,7 +26,7 @@ import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @QuarkusTest
 @QuarkusTestResource(GitHubServiceMockServer.class)
@@ -35,7 +35,7 @@ class GitHubServiceTest {
     final ObjectMapper objectMapper = new ObjectMapper();
 
     @Inject
-    GitHubServiceBackend gitHubServiceBackend;
+    GitHubService gitHubServiceBackend;
 
     @Test
     void addLabels() throws IOException {
