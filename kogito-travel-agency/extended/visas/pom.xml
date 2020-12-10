@@ -63,14 +63,6 @@
       <artifactId>monitoring-prometheus-addon</artifactId>
     </dependency>
     <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-infinispan-client</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>infinispan-persistence-addon</artifactId>
-    </dependency>
-    <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-events-reactive-messaging-addon</artifactId>
     </dependency>

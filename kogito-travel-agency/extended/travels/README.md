@@ -123,19 +123,6 @@ When using native image compilation, you will also need:
   - Environment variable GRAALVM_HOME set accordingly
   - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too, please refer to GraalVM installation documentation for more details.
 
-### Infrastructure requirements
-
-#### Infinispan
-
-This application requires an Infinispan server to be available and by default expects it to be on default port and localhost.
-
-You can install Infinispan server by downloading version 11.x from the [official website](https://infinispan.org/download/).
-
-In the section [Persistence in Kogito services](https://docs.jboss.org/kogito/release/latest/html_single/#con-persistence_kogito-developing-process-services) the required 
-Infinispan configuration is explained in more detail.
-
-Alternatively, you can use the Docker Compose template, instructions on how to use it are available in the [README](../docker-compose/README.md) file.
-
 #### Apache Kafka
 
 This application requires a [Apache Kafka](https://kafka.apache.org/) installed and following topics created
