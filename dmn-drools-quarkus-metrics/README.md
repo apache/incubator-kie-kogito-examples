@@ -18,7 +18,7 @@ Import the following dependency in your `pom.xml` if you are using quarkus:
 ```XML
 <dependency>
  <groupId>org.kie.kogito</groupId>
- <artifactId>monitoring-prometheus-quarkus</artifactId>
+ <artifactId>monitoring-prometheus-quarkus-addon</artifactId>
 </dependency>
 ```
 
@@ -26,7 +26,7 @@ Otherwise, if you are using springboot import
 ```XML
 <dependency>
  <groupId>org.kie.kogito</groupId>
- <artifactId>monitoring-prometheus-springboot</artifactId></dependency>
+ <artifactId>monitoring-prometheus-springboot-addon</artifactId></dependency>
 ```
 
 ### Architecture
