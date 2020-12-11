@@ -13,33 +13,20 @@ You will need:
   
 ### How to enable the feature
 
-Import the following dependency in your `pom.xml`:
+Import the following dependency in your `pom.xml` if you are using quarkus:
 
 ```XML
 <dependency>
  <groupId>org.kie.kogito</groupId>
- <artifactId>monitoring-prometheus-addon</artifactId>
+ <artifactId>monitoring-prometheus-quarkus-addon</artifactId>
 </dependency>
 ```
 
-And add the following class in your quarkus project: 
-
-```Java
-package org.kie.kogito.examples;
-
-import javax.ws.rs.container.ContainerRequestContext;
-import javax.ws.rs.container.ContainerResponseContext;
-import javax.ws.rs.ext.Provider;
-
-import org.kie.addons.monitoring.system.interceptor.MetricsInterceptor;
-
-@Provider
-public class MyInterceptor extends MetricsInterceptor {
-    @Override
-    public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) {
-        super.filter(requestContext, responseContext);
-    }
-}
+Otherwise, if you are using springboot import
+```XML
+<dependency>
+ <groupId>org.kie.kogito</groupId>
+ <artifactId>monitoring-prometheus-springboot-addon</artifactId></dependency>
 ```
 
 ### Architecture
