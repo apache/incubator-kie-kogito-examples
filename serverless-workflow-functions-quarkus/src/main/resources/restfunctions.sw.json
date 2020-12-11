@@ -77,9 +77,6 @@
                     }
                 }
             ],
-            "stateDataFilter": {
-                "dataOutputPath": "$.sum"
-            },
             "end": {
                 "kind": "default"
             }

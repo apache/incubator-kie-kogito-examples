@@ -86,7 +86,7 @@ with following content
 Complete curl command can be found below:
 
 ```text
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : {"inputNumbers": [1,2,3,4,5,6,7,8,7]]}}' http://localhost:8080/RESTExample
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : {"inputNumbers": [1,2,3,4,5,6,7,8,7]}}' http://localhost:8080/RestExample
 ```
 
 Log after curl executed:
@@ -107,7 +107,6 @@ Log after curl executed:
         ],
     }
 }
-
 ```
 
 In Quarkus you should see the log message printed:
