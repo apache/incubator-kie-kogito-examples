@@ -29,6 +29,10 @@ import static org.hamcrest.Matchers.is;
 
 @QuarkusTest
 public class DMNRegressionTest {
+
+    static {
+        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+    }
     
     @Test
     public void testEvaluateRegressionDMN() {
