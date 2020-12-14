@@ -63,5 +63,5 @@ $ curl -X POST \
 And expect a reply like this:
 
 ```json
-{"leftElement":5.0,"rightElement":2.0,"difference":3.0}
+{"subtraction":{"leftElement":5.0,"rightElement":2.0,"difference":3.0}} 
 ```

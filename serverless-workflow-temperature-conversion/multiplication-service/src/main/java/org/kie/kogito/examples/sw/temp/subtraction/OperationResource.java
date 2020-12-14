@@ -32,6 +32,26 @@ public class OperationResource {
     @POST
     public Response doOperation(@NotNull MultiplicationOperation operation) {
         operation.setProduct(operation.getLeftElement() * operation.getRightElement());
-        return Response.ok(operation).build();
+        return Response.ok(new Result(operation)).build();
+    }
+
+    public static final class Result {
+
+        MultiplicationOperation multiplication;
+
+        public Result() {
+        }
+
+        public Result(final MultiplicationOperation multiplication) {
+            this.multiplication = multiplication;
+        }
+
+        public MultiplicationOperation getMultiplication() {
+            return multiplication;
+        }
+
+        public void setMultiplication(MultiplicationOperation multiplication) {
+            this.multiplication = multiplication;
+        }
     }
 }

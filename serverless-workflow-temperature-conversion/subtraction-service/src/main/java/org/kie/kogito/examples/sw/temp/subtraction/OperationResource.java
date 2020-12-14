@@ -32,6 +32,26 @@ public class OperationResource {
     @POST
     public Response doOperation(@NotNull SubtractionOperation operation) {
         operation.setDifference(operation.getLeftElement() - operation.getRightElement());
-        return Response.ok(operation).build();
+        return Response.ok(new Result(operation)).build();
+    }
+
+    public static final class Result {
+
+        SubtractionOperation subtraction;
+
+        public Result() {
+        }
+
+        public Result(final SubtractionOperation subtraction) {
+            this.subtraction = subtraction;
+        }
+
+        public SubtractionOperation getSubtraction() {
+            return subtraction;
+        }
+
+        public void setSubtraction(SubtractionOperation subtraction) {
+            this.subtraction = subtraction;
+        }
     }
 }

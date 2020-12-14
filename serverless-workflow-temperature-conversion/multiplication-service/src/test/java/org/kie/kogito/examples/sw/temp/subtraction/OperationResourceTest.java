@@ -29,13 +29,13 @@ class OperationResourceTest {
 
     @Test
     void testRestExample() {
-        final MultiplicationOperation operation = given()
+        final OperationResource.Result result = given()
                 .contentType(ContentType.JSON)
                 .when()
                 .body(new MultiplicationOperation(2, 2))
                 .post("/")
                 .then()
-                .statusCode(200).extract().as(MultiplicationOperation.class);
-        assertThat(operation.getProduct(), is(4f));
+                .statusCode(200).extract().as(OperationResource.Result.class);
+        assertThat(result.multiplication.getProduct(), is(4f));
     }
 }

@@ -9,8 +9,7 @@
   </parent>
 
   <artifactId>subtraction-service</artifactId>
-  <name>Kogito Example :: Serverless Workflow Temperature Conversion :: Subtraction Service :: Quarkus</name>
-  <description>Subtraction Service to play around with the Temperature Conversion example</description>
+  <name>Kogito Example :: Serverless Workflow Temperature Conversion :: Subtraction Service</name>
   <dependencyManagement>
     <dependencies>
       <dependency>
