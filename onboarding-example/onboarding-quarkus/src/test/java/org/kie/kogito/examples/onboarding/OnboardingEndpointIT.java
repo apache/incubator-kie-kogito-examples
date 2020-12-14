@@ -27,8 +27,8 @@ import javax.inject.Inject;
 import org.junit.jupiter.api.Test;
 import org.kie.api.runtime.process.WorkItem;
 import org.kie.api.runtime.process.WorkItemHandler;
-import org.kie.kogito.Application;
 import org.kie.kogito.examples.test.RecordedOutputWorkItemHandler;
+import org.kie.kogito.process.ProcessConfig;
 import org.kie.kogito.testcontainers.quarkus.InfinispanQuarkusTestResource;
 
 import io.quarkus.test.common.QuarkusTestResource;
@@ -40,7 +40,7 @@ import io.restassured.http.ContentType;
 public class OnboardingEndpointIT {
     
     @Inject
-    Application application;
+    ProcessConfig processConfig;
 
     
     @Test
@@ -130,7 +130,7 @@ public class OnboardingEndpointIT {
      * Helper methods
      */        
     protected void registerHandler(String name, Function<WorkItem, Map<String, Object>> item) {
-        WorkItemHandler handler = application.config().process().workItemHandlers().forName(name);
+        WorkItemHandler handler = processConfig.workItemHandlers().forName(name);
         ((RecordedOutputWorkItemHandler) handler).record(name, item);
     }
 }

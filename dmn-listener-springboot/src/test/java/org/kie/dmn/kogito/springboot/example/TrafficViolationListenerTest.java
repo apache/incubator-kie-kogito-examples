@@ -28,7 +28,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.kie.dmn.api.core.event.DMNRuntimeEventListener;
 import org.kie.dmn.kogito.springboot.example.mock.MockDMNRuntimeEventListener;
-import org.kie.kogito.Config;
 import org.kie.kogito.decision.DecisionConfig;
 import org.kie.kogito.decision.DecisionEventListenerConfig;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +43,7 @@ import io.restassured.http.ContentType;
 public class TrafficViolationListenerTest {
 
     @Autowired
-    private Config cfg;
+    private DecisionConfig decisionConfig;
 
     @LocalServerPort
     private int port;
@@ -56,8 +55,7 @@ public class TrafficViolationListenerTest {
 
     @Test
     public void testEvaluateTrafficViolation() {
-        List<DMNRuntimeEventListener> injectedListeners = Optional.ofNullable(cfg)
-                .map(Config::decision)
+        List<DMNRuntimeEventListener> injectedListeners = Optional.ofNullable(decisionConfig)
                 .map(DecisionConfig::decisionEventListeners)
                 .map(DecisionEventListenerConfig::listeners)
                 .orElseThrow(() -> new IllegalStateException("Can't find injected listeners"));
