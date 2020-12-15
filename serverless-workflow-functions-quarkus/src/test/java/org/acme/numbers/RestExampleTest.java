@@ -25,8 +25,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.Matchers.isEmptyOrNullString;;
+import static org.hamcrest.Matchers.emptyOrNullString;
 
 @QuarkusTest
 @QuarkusTestResource(NumbersMockService.class)
@@ -47,10 +48,11 @@ class RestExampleTest {
                       .singletonMap(
                                     "workflowdata",
                                     Collections.singletonMap("inputNumbers", new int[]{1, 2, 3, 4, 5, 6, 7})))
-            .post("/RestExample")
+            .post("/RestExample?forceSync=true")
             .then()
             .statusCode(201)
-            .body("id", not(isEmptyOrNullString()))
-            .body("workflowdata", not(isEmptyOrNullString()));
+            .body("id", not(is(emptyOrNullString())))
+            .body("workflowdata", not(is(emptyOrNullString())))
+            .body("workflowdata.sum" , not(is(emptyOrNullString())));
     }
 }
