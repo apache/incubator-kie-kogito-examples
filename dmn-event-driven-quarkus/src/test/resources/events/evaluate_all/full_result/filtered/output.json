@@ -1,0 +1,41 @@
+{
+  "specversion": "1.0",
+  "id": "07246b8d-46b9-4a40-a8cf-7b9b6e8ee0c0",
+  "source": "Traffic+Violation",
+  "type": "DecisionResponseFull",
+  "subject": "TheSubject",
+  "kogitodmnmodelnamespace": "https://github.com/kiegroup/drools/kie-dmn/_A4BCA8B8-CF08-433F-93B2-A2598F19ECFF",
+  "kogitodmnmodelname": "Traffic Violation",
+  "data": {
+    "namespace": "https://github.com/kiegroup/drools/kie-dmn/_A4BCA8B8-CF08-433F-93B2-A2598F19ECFF",
+    "modelName": "Traffic Violation",
+    "dmnContext": {
+      "calculateTotalPoints": "function calculateTotalPoints( driver, fine )",
+      "Fine": {
+        "Points": 3,
+        "Amount": 500
+      },
+      "Should the driver be suspended?": "No"
+    },
+    "messages": [],
+    "decisionResults": [
+      {
+        "decisionId": "_4055D956-1C47-479C-B3F4-BAEB61F1C929",
+        "decisionName": "Fine",
+        "result": {
+          "Points": 3,
+          "Amount": 500
+        },
+        "messages": [],
+        "evaluationStatus": "SUCCEEDED"
+      },
+      {
+        "decisionId": "_8A408366-D8E9-4626-ABF3-5F69AA01F880",
+        "decisionName": "Should the driver be suspended?",
+        "result": "No",
+        "messages": [],
+        "evaluationStatus": "SUCCEEDED"
+      }
+    ]
+  }
+}

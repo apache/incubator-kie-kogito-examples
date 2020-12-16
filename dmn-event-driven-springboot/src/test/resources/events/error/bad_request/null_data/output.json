@@ -1,0 +1,10 @@
+{
+  "specversion": "1.0",
+  "id": "b5cf8477-53ed-400c-94ea-09c0bfa3fb3f",
+  "source": "aName",
+  "type": "DecisionResponseError",
+  "subject": "TheSubject",
+  "kogitodmnmodelnamespace": "aNamespace",
+  "kogitodmnmodelname": "aName",
+  "data": "BAD_REQUEST"
+}

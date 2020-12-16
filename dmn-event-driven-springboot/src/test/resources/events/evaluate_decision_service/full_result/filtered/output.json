@@ -1,0 +1,33 @@
+{
+  "specversion": "1.0",
+  "id": "4b241026-bc3e-4d09-b622-6d07c7c33a88",
+  "source": "Traffic+Violation/FineService",
+  "type": "DecisionResponseFull",
+  "subject": "TheSubject",
+  "kogitodmnmodelnamespace": "https://github.com/kiegroup/drools/kie-dmn/_A4BCA8B8-CF08-433F-93B2-A2598F19ECFF",
+  "kogitodmnmodelname": "Traffic Violation",
+  "kogitodmnevaldecision": "FineService",
+  "data": {
+    "namespace": "https://github.com/kiegroup/drools/kie-dmn/_A4BCA8B8-CF08-433F-93B2-A2598F19ECFF",
+    "modelName": "Traffic Violation",
+    "dmnContext": {
+      "Fine": {
+        "Points": 3,
+        "Amount": 500
+      }
+    },
+    "messages": [],
+    "decisionResults": [
+      {
+        "decisionId": "_4055D956-1C47-479C-B3F4-BAEB61F1C929",
+        "decisionName": "Fine",
+        "result": {
+          "Points": 3,
+          "Amount": 500
+        },
+        "messages": [],
+        "evaluationStatus": "SUCCEEDED"
+      }
+    ]
+  }
+}

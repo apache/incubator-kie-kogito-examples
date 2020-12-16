@@ -1,0 +1,26 @@
+{
+  "specversion": "1.0",
+  "id": "d54ace84-6788-46b6-a359-b308f8b21778",
+  "source": "Traffic+Violation",
+  "type": "DecisionResponse",
+  "subject": "TheSubject",
+  "kogitodmnmodelnamespace": "https://github.com/kiegroup/drools/kie-dmn/_A4BCA8B8-CF08-433F-93B2-A2598F19ECFF",
+  "kogitodmnmodelname": "Traffic Violation",
+  "data": {
+    "Violation": {
+      "Type": "speed",
+      "Speed Limit": 100,
+      "Actual Speed": 115
+    },
+    "calculateTotalPoints": "function calculateTotalPoints( driver, fine )",
+    "Driver": {
+      "Points": 13,
+      "Age": 25
+    },
+    "Fine": {
+      "Points": 3,
+      "Amount": 500
+    },
+    "Should the driver be suspended?": "No"
+  }
+}

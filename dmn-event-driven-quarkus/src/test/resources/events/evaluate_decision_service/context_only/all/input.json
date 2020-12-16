@@ -1,0 +1,17 @@
+{
+  "specversion": "1.0",
+  "id": "a89b61a2-5644-487a-8a86-144855c5dce8",
+  "source": "SomeEventSource",
+  "type": "DecisionRequest",
+  "subject": "TheSubject",
+  "kogitodmnmodelname": "Traffic Violation",
+  "kogitodmnmodelnamespace": "https://github.com/kiegroup/drools/kie-dmn/_A4BCA8B8-CF08-433F-93B2-A2598F19ECFF",
+  "kogitodmnevaldecision": "FineService",
+  "data": {
+    "Violation": {
+      "Type": "speed",
+      "Actual Speed": 115,
+      "Speed Limit": 100
+    }
+  }
+}
