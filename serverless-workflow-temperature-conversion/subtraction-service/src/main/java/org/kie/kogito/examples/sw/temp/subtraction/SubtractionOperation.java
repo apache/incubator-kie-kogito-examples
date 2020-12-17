@@ -18,9 +18,12 @@ package org.kie.kogito.examples.sw.temp.subtraction;
 
 import java.util.Objects;
 
+import io.quarkus.runtime.annotations.RegisterForReflection;
+
 /**
  * See: <a href="https://en.wikipedia.org/wiki/Subtraction">Subtraction</a>
  */
+@RegisterForReflection
 public class SubtractionOperation {
 
     private float leftElement;

@@ -26,6 +26,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
 
 @QuarkusTest
 @QuarkusTestResource(OperationsMockService.class)
@@ -48,6 +50,9 @@ class ConversationFlowTest {
                                         Collections.singletonMap("fahrenheit", "100")))
                 .post("/fahrenheit_to_celsius?forceSync=true")
                 .then()
-                .statusCode(201);
+                .statusCode(201)
+                .body("id", notNullValue())
+                .body("workflowdata.fahrenheit", is("100"))
+                .body("workflowdata.multiplication.product", is("37.808")); //values from mock server
     }
 }

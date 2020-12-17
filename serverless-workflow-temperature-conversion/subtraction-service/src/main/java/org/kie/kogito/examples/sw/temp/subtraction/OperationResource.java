@@ -24,6 +24,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import io.quarkus.runtime.annotations.RegisterForReflection;
+
 @Path("/")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -35,6 +37,7 @@ public class OperationResource {
         return Response.ok(new Result(operation)).build();
     }
 
+    @RegisterForReflection
     public static final class Result {
 
         SubtractionOperation subtraction;

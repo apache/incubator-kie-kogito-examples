@@ -5,7 +5,7 @@ curl -X POST \
     -H 'Content-Type:application/json' \
     -H 'Accept:application/json' \
     -d '{"workflowdata" : { "fahrenheit": 100  } }' \
-    http://localhost:8080/fahrenheit_to_celsius\?forceSync\=true | jq .
+    http://localhost:8080/fahrenheit_to_celsius | jq .
     
 {
   "id": "54498577-b367-43c7-b840-d0ada6f2b02a",

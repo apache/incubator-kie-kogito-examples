@@ -1,0 +1,22 @@
+# Our Subtraction and Multiplication services are Knative Services, meaning that they will scale to 0 when the workflow is not running
+# Requires OpenShift Serverless operator installed or Knative Service on Kubernetes environments
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+ name: subtraction-service
+spec:
+ template:
+  spec:
+   containers:
+    - image: quay.io/<your_namespace>/subtraction-service:latest
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+ name: multiplication-service
+spec:
+ template:
+  spec:
+   containers:
+    - image: quay.io/<your_namespace>/multiplication-service:latest
