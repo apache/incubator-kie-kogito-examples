@@ -10,7 +10,7 @@
   </parent>
   <groupId>org.kie.kogito.examples</groupId>
   <artifactId>dmn-drools-quarkus-metrics</artifactId>
-  <name>Kogito Example :: DMN Metrics</name>
+  <name>Kogito Example :: DMN Metrics Quarkus</name>
 
   <dependencyManagement>
     <dependencies>

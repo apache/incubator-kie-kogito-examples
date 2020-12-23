@@ -17,17 +17,35 @@ package org.kie.kogito.examples;
 
 import java.util.List;
 
-import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.test.annotation.DirtiesContext;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 
-@QuarkusTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class LoanEligibilityTest {
+
+    @LocalServerPort
+    private int port;
+
+    @BeforeEach
+    public void setUp() {
+        RestAssured.port = port;
+    }
+
+    static {
+        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+    }
 
     @Test
     public void testEvaluateLoanEligibility() {
@@ -60,6 +78,7 @@ public class LoanEligibilityTest {
                 .body(containsString("api_http_response_code_total{endpoint=\"LoanEligibility\",identifier=\"200\",} 1.0"));
     }
 
+    @Disabled("Fixed by KOGITO-4073 https://github.com/kiegroup/kogito-runtimes/pull/953")
     @Test
     @SuppressWarnings("unchecked")
     public void testDashboardsListIsAvailable() {
