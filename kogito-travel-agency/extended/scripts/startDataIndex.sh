@@ -7,11 +7,11 @@ echo "Project version: ${PROJECT_VERSION}"
 
 DATA_INDEX_VERSION=${PROJECT_VERSION}
 
-PERSISTENCE_FOLDER=target/classes/persistence
+PERSISTENCE_FOLDER=target/classes/META-INF/resources/persistence/protobuf
 DATA_INDEX_RUNNER="https://repository.jboss.org/nexus/service/local/artifact/maven/content?r=public&g=org.kie.kogito&a=data-index-service-infinispan&v=${DATA_INDEX_VERSION}&c=runner"
 
-KOGITO_TRAVEL_AGENCY_PERSISTENCE=../travels/target/classes/persistence
-KOGITO_VISAS_PERSISTENCE=../visas/target/classes/persistence
+KOGITO_TRAVEL_AGENCY_PERSISTENCE=../travels/target/classes/META-INF/resources/persistence/protobuf
+KOGITO_VISAS_PERSISTENCE=../visas/target/classes/META-INF/resources/persistence/protobuf
 
 mkdir -p $PERSISTENCE_FOLDER
 
