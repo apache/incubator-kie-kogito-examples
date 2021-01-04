@@ -98,6 +98,7 @@ public class DealsRestIT {
 
     @Test
     public void testProtobufListIsAvailable() {
+        @SuppressWarnings("unchecked")
         List<String> files = given().contentType(ContentType.JSON).accept(ContentType.JSON).when()
                 .get("/persistence/protobuf/list.json").as(List.class);
 
