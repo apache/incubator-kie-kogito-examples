@@ -183,7 +183,7 @@ We provide a `startDataIndex.sh` and `startDataIndex.ps1` script in the `scripts
 
 If you wish to install, configure and start the **Data Index Service** manually, the _runnner_ can be downloaded from [Kogito Data Index Service](https://search.maven.org/artifact/org.kie.kogito/data-index)
 
-This service works with .proto (protobuf) files that define the data model. fter downloading the runner, create a new folder to store the .proto files that will be used by the service,  e.g. `persistence`. Copy the protobuf files from the **Kogito Travel Agency** and **Kogito Visas** application to the `persistence` folder. These files can be found in the `target/classes/persistence` folders of these projects.
+This service works with .proto (protobuf) files that define the data model. fter downloading the runner, create a new folder to store the .proto files that will be used by the service,  e.g. `persistence`. Copy the protobuf files from the **Kogito Travel Agency** and **Kogito Visas** application to the `persistence` folder. These files can be found in the `target/classes/META-INF/resources/persistence/protobuf` folders of these projects.
 
 To start the **Kogito Data Index Service**, execute the Java runner JAR of the service, providing it the location of the protobuf files:
 

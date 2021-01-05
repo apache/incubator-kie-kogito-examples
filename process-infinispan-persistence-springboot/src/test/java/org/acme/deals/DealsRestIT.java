@@ -1,5 +1,5 @@
 /**
- *  Copyright 2020 Red Hat, Inc. and/or its affiliates.
+ *  Copyright 2021 Red Hat, Inc. and/or its affiliates.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ package org.acme.deals;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.testcontainers.springboot.InfinispanSpringBootTestResource;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -107,10 +106,9 @@ public class DealsRestIT {
                 .then().statusCode(200).body("$.size()", is(0));
     }
 
-    @Disabled("Fixed by KOGITO-4073 https://github.com/kiegroup/kogito-runtimes/pull/953")
     @Test
-    @SuppressWarnings("unchecked")
     public void testProtobufListIsAvailable() {
+        @SuppressWarnings("unchecked")
         List<String> files = given().contentType(ContentType.JSON).accept(ContentType.JSON).when()
                 .get("/persistence/protobuf/list.json").as(List.class);
 
