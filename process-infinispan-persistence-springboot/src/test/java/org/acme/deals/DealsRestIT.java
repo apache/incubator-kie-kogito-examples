@@ -1,5 +1,5 @@
 /**
- *  Copyright 2020 Red Hat, Inc. and/or its affiliates.
+ *  Copyright 2021 Red Hat, Inc. and/or its affiliates.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -24,9 +24,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.ContextConfiguration;
 
+import java.util.List;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ContextConfiguration(initializers = InfinispanSpringBootTestResource.class)
@@ -101,5 +104,14 @@ public class DealsRestIT {
         given().accept(ContentType.JSON)
                 .when().get("/deals")
                 .then().statusCode(200).body("$.size()", is(0));
+    }
+
+    @Test
+    public void testProtobufListIsAvailable() {
+        @SuppressWarnings("unchecked")
+        List<String> files = given().contentType(ContentType.JSON).accept(ContentType.JSON).when()
+                .get("/persistence/protobuf/list.json").as(List.class);
+
+        assertEquals(2, files.size());
     }
 }
