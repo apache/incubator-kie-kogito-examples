@@ -21,7 +21,6 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
@@ -78,7 +77,6 @@ public class LoanEligibilityTest {
                 .body(containsString("api_http_response_code_total{endpoint=\"LoanEligibility\",identifier=\"200\",} 1.0"));
     }
 
-    @Disabled("Fixed by KOGITO-4073 https://github.com/kiegroup/kogito-runtimes/pull/953")
     @Test
     @SuppressWarnings("unchecked")
     public void testDashboardsListIsAvailable() {
