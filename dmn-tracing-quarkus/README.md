@@ -21,7 +21,7 @@ When using native image compilation, you will also need:
 ### Configuration of the tracing addon
 
 The default configuration pushes the decision tracing events to the kafka topic `kogito-tracing-decision` and the DMN models used by the kogito application to `kogito-tracing-model` under the group-id `kogito-runtimes`. 
-The configuration can be customized according to https://quarkus.io/guides/kafka and https://kafka.apache.org/documentation/#producerconfigs using the prefix `mp.messaging.outgoing.kogito-tracing-decision.<property_name>`. 
+The configuration can be customized according to [https://quarkus.io/guides/kafka](https://quarkus.io/guides/kafka) and [https://kafka.apache.org/documentation/#producerconfigs](https://kafka.apache.org/documentation/#producerconfigs) using the prefix `mp.messaging.outgoing.kogito-tracing-decision.<property_name>`. 
 For example, in order to change the topic name for the decision tracing events, add the following line to the `application.properties` file:
  ```
 mp.messaging.outgoing.kogito-tracing-decision.topic=my-kogito-tracing-decision
