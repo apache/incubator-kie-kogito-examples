@@ -13,6 +13,18 @@ You will need:
   - Environment variable JAVA_HOME set accordingly
   - Maven 3.6.2+ installed
 
+### Configuration of the tracing addon
+
+The default configuration pushes the tracing events to the kafka topic `kogito-tracing-decision` and the DMN models used by the kogito application to `kogito-tracing-model` under the group-id `kogito-runtimes`. 
+Edit the `application.properties` file to change the configuration. The property names are the following: 
+
+- `kogito.addon.tracing.decision.kafka.bootstrapAddress`: The address used in the initial connection to find a bootstrap server on the cluster of `n` brokers (no default value, this is mandatory).
+- `kogito.addon.tracing.decision.kafka.topic.name` : The topic name for the decision tracing events (default `kogito-tracing-decision`).  
+- `kogito.addon.tracing.decision.kafka.topic.partitions` : How many partitions to use for the decision tracing events topic (default `1`).
+- `kogito.addon.tracing.decision.kafka.topic.replicationFactor` : The replication factor of the data for the decision tracing events topic (default `1`).
+- `kogito.addon.tracing.decision.asyncEnabled`: Use an asynchronous callback with the results of the send (success or failure) instead of waiting for the `Future` to complete (default `true`).
+- `kogito.addon.tracing.model.kafka.topic.name` : The topic name for the DMN models used by the kogito application (default `kogito-tracing-model`).
+
 ### Compile and Run in Local Dev Mode
 
 ```
