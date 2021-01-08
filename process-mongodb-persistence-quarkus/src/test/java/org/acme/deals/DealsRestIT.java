@@ -15,6 +15,7 @@
  */
 package org.acme.deals;
 
+import java.util.List;
 import java.util.Map;
 
 import io.quarkus.test.common.QuarkusTestResource;
@@ -75,5 +76,14 @@ public class DealsRestIT {
         given().accept(ContentType.JSON)
                 .when().get("/deals")
                 .then().log().ifValidationFails().statusCode(200).body("$.size()", is(0));
+    }
+
+    @Test
+    public void testProtobufListIsAvailable() {
+        @SuppressWarnings("unchecked")
+        List<String> files = given().contentType(ContentType.JSON).accept(ContentType.JSON).when()
+                .get("/persistence/protobuf/list.json").as(List.class);
+
+        assertEquals(2, files.size());
     }
 }
