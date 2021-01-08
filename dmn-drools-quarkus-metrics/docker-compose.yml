@@ -2,7 +2,7 @@ version: '2'
 
 services:
   hello:
-    build: ./
+    image: org.kie.kogito/dmn-drools-quarkus-metrics-example:1.0
     ports:
       - 8080:8080
 
