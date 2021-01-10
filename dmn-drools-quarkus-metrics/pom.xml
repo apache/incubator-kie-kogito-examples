@@ -104,7 +104,7 @@
               <outputDirectory>${project.basedir}/docker-compose/grafana/provisioning/dashboards</outputDirectory>
               <resources>
                 <resource>
-                  <directory>${project.build.directory}/generated-resources/kogito/dashboards</directory>
+                  <directory>${project.build.directory}/classes/META-INF/resources/monitoring/dashboards</directory>
                   <filtering>false</filtering>
                 </resource>
               </resources>
