@@ -12,11 +12,6 @@
   <artifactId>serverless-workflow-temperature-conversion</artifactId>
   <packaging>pom</packaging>
 
-  <properties>
-    <compiler-plugin.version>3.8.1</compiler-plugin.version>
-    <surefire-plugin.version>2.22.1</surefire-plugin.version>
-  </properties>
-
   <modules>
     <module>subtraction-service</module>
     <module>multiplication-service</module>

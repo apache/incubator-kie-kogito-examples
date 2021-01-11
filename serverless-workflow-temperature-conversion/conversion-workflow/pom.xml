@@ -12,11 +12,6 @@
   <artifactId>conversion-workflow</artifactId>
   <name>Kogito Example :: Serverless Workflow Temperature Conversion :: Conversion Service</name>
 
-  <properties>
-    <maven.compiler.source>11</maven.compiler.source>
-    <maven.compiler.target>11</maven.compiler.target>
-  </properties>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
