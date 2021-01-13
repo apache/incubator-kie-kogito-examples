@@ -16,14 +16,14 @@
       <dependency>
         <groupId>org.infinispan</groupId>
         <artifactId>infinispan-bom</artifactId>
-        <version>${infinispan.version}</version>
+        <version>${version.org.infinispan}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
-        <version>${springboot.version}</version>
+        <version>${version.springboot}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -91,7 +91,7 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-        <version>${springboot.version}</version>
+        <version>${version.springboot}</version>
         <executions>
           <execution>
             <goals>
