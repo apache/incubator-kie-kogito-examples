@@ -52,16 +52,6 @@ pipeline {
                 }
             }
         }
-        stage('Build Apps') {
-            steps {
-                script {
-                    getMavenCommand('kogito-apps')
-                        .skipTests(true)
-                        .withProperty('skipITs', true)
-                        .run('clean install')
-                }
-            }
-        }
         stage('Build kogito-examples') {
             steps {
                 script {
