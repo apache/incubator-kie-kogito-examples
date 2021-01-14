@@ -6,7 +6,9 @@
   "functions": [
     {
       "name": "greetFunction",
-      "type": "sysout"
+      "metadata": {
+        "type": "sysout"
+      }
     }
   ],
   "states": [

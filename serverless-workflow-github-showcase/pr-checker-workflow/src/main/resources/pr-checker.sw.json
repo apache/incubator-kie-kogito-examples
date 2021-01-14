@@ -5,10 +5,10 @@
   "functions": [
     {
       "name": "FetchPRFiles",
-      "type": "service",
       "metadata": {
         "interface": "org.kogito.examples.sw.github.workflow.GitHubService",
-        "operation": "fetchPRFiles"
+        "operation": "fetchPRFiles",
+        "type": "service"
       }
     }
   ],

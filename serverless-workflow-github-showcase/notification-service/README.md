@@ -159,4 +159,4 @@ Congratulations! The Notification service is now available in the cluster ready 
 
 ### Cleaning up!
 
-See the project root's (./README.md)[README] documentation.
+See the project root's [README](./README.md) documentation.

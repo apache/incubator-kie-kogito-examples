@@ -176,4 +176,4 @@ Talk to the cluster administrator to understand how your cluster and Istio Ingre
 
 ### Cleaning up!
 
-See the project root's (./README.md)[README] documentation.
+See the project root's [README](./README.md) documentation.

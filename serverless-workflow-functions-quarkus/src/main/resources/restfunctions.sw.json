@@ -5,23 +5,25 @@
     "functions": [
         {
             "name": "randomNumber",
-            "resource": "/numbers/random",
-            "type": "rest",
+            "operation": "/numbers/random",
             "metadata": {
-                "method": "GET"
+                "method": "GET",
+                "type": "rest"
             }
         },
         {
             "name": "multiplyAllByRandomAndSum",
-            "resource": "/numbers/{multiplier}/multiplyByAndSum",
-            "type": "rest",
+            "operation": "/numbers/{multiplier}/multiplyByAndSum",
             "metadata": {
-                "method": "POST"
+                "method": "POST",
+                "type": "rest"
             }
         },
         {
             "name": "debug",
-            "type": "sysout"
+            "metadata": {
+                "type": "sysout"
+            }
         }
     ],
     "states": [

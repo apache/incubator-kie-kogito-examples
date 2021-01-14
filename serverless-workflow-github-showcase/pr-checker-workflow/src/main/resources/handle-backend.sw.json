@@ -5,18 +5,18 @@
   "functions": [
     {
       "name": "AddLabels",
-      "type": "service",
       "metadata": {
         "interface": "org.kogito.examples.sw.github.workflow.GitHubService",
-        "operation": "addLabels"
+        "operation": "addLabels",
+        "type": "service"
       }
     },
     {
       "name": "AddReviewers",
-      "type": "service",
       "metadata": {
         "interface": "org.kogito.examples.sw.github.workflow.GitHubService",
-        "operation": "addReviewers"
+        "operation": "addReviewers",
+        "type": "service"
       }
     }
   ],
