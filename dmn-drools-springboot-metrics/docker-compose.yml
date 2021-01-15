@@ -2,7 +2,7 @@ version: '2'
 
 services:
   hello:
-    build: ./
+    image: org.kie.kogito.examples/dmn-drools-sprintboot-metrics:1.0
     ports:
       - 8080:8080
 
@@ -25,4 +25,3 @@ services:
     volumes:
       - ./docker-compose/grafana/provisioning/:/etc/grafana/provisioning/
       - ./docker-compose/grafana/grafana.ini:/etc/grafana/grafana.ini
-
