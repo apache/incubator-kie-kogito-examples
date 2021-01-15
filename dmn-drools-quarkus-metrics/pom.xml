@@ -50,12 +50,6 @@
       <artifactId>monitoring-prometheus-quarkus-addon</artifactId>
     </dependency>
 
-    <!-- Build container image -->
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-container-image-jib</artifactId>
-    </dependency>
-
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-junit5</artifactId>
@@ -127,6 +121,33 @@
                   </includes>
                 </resource>
               </resources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <executions>
+          <!--
+            Create new docker image using Dockerfile which must be present in current working directory.
+            Tag the image using maven project version information.
+          -->
+          <execution>
+            <id>docker-build</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <executable>docker</executable>
+              <workingDirectory>${project.basedir}</workingDirectory>
+              <arguments>
+                <argument>build</argument>
+                <argument>-t</argument>
+                <argument>${project.groupId}/${project.artifactId}:1.0</argument>
+                <argument>.</argument>
+              </arguments>
             </configuration>
           </execution>
         </executions>
