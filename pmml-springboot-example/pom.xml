@@ -7,7 +7,7 @@
   <parent>
     <groupId>org.kie.kogito</groupId>
     <artifactId>kogito-examples</artifactId>
-    <version>1.1.0.Final</version>
+    <version>1.1.1-SNAPSHOT</version>
   </parent>
   <artifactId>pmml-springboot-example</artifactId>
   <name>Kogito Example :: PMML - Spring Boot</name>
