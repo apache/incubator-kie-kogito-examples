@@ -18,14 +18,14 @@
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
-        <version>${springboot.version}</version>
+        <version>${version.springboot}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>org.keycloak.bom</groupId>
         <artifactId>keycloak-adapter-bom</artifactId>
-        <version>${keycloak.version}</version>
+        <version>${version.org.keycloak}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -68,6 +68,7 @@
     <dependency>
       <groupId>io.rest-assured</groupId>
       <artifactId>rest-assured</artifactId>
+      <version>${version.io.restassured.springboot}</version>
       <scope>test</scope>
     </dependency>
     <dependency>

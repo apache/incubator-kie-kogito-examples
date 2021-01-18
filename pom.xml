@@ -4,10 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.kie.kogito</groupId>
+    <artifactId>kogito-build-parent</artifactId>
+    <version>2.0.0-SNAPSHOT</version>
+  </parent>
 
   <groupId>org.kie.kogito</groupId>
   <artifactId>kogito-examples</artifactId>
-  <version>2.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Kogito Example</name>
@@ -28,13 +32,8 @@
   </licenses>
 
   <properties>
-    <version.maven>3.6.2</version.maven>
-    <version.compiler.plugin>3.8.1</version.compiler.plugin>
-    <version.enforcer.plugin>3.0.0-M2</version.enforcer.plugin>
     <maven.compiler.release>11</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <version.source.plugin>3.0.1</version.source.plugin>
-    <version.jar.plugin>3.1.0</version.jar.plugin>
 
     <surefire.forkCount>1</surefire.forkCount>
     <failsafe.include>**/*IT.java</failsafe.include>
@@ -42,41 +41,17 @@
     <alphanetworkCompilerEnabled>false</alphanetworkCompilerEnabled>
     <tests.category></tests.category>
     <!-- Port 0 means dynamic port -->
-    <tests.quarkus.http.port>0</tests.quarkus.http.port> 
-
-    <version.io.quarkus>1.11.0.Beta2</version.io.quarkus>
+    <tests.quarkus.http.port>0</tests.quarkus.http.port>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
-    <!-- springboot related -->
-    <springboot.version>2.3.1.RELEASE</springboot.version>
     <!-- kogito -->
     <kogito.version>${project.version}</kogito.version>
     <version.org.optaplanner>8.1.0-SNAPSHOT</version.org.optaplanner>
-    <!-- infinispan -->
-    <infinispan.version>11.0.4.Final</infinispan.version>
-    <infinispan.starter.version>2.3.3.Final</infinispan.starter.version>
-    <container.image.infinispan>infinispan/server:${infinispan.version}</container.image.infinispan>
-    <!-- keycloak -->
-    <keycloak.version>11.0.2</keycloak.version>
-    <container.image.keycloak>jboss/keycloak:${keycloak.version}</container.image.keycloak>
-    <!-- testcontainers -->
-    <version.testcontainers>1.15.1</version.testcontainers>
-    <!-- jsonpath-->
-    <version.jayway.jsonpath>2.4.0</version.jayway.jsonpath>
-    <version.swagger.plugin>2.1.0</version.swagger.plugin>
-    <version.io.swagger.core.v3>2.0.6</version.io.swagger.core.v3>
-    <version.surefire.plugin>2.22.2</version.surefire.plugin>
-    <version.deploy.plugin>2.8.2</version.deploy.plugin>
     <!-- license plugin -->
     <version.license.plugin>3.0</version.license.plugin>
     <skipLicensesCheck>false</skipLicensesCheck>
-    <!-- cloudevents -->
-    <version.cloudevents.api>2.0.0-milestone3</version.cloudevents.api>
     <!-- pmml -->
     <version.org.jpmml>1.5.1</version.org.jpmml>
-    <version.wiremock>2.27.2</version.wiremock>
-
   </properties>
 
   <!-- distributionManagement section -->
@@ -111,7 +86,6 @@
       </snapshots>
     </repository>
   </repositories>
-
 
   <pluginRepositories>
     <pluginRepository>
@@ -286,6 +260,7 @@
         <module>serverless-workflow-greeting-quarkus</module>
         <module>serverless-workflow-service-calls-quarkus</module>
         <module>serverless-workflow-events-quarkus</module>
+        <module>serverless-workflow-temperature-conversion</module>
       </modules>
       <build>
         <plugins>
@@ -329,22 +304,22 @@
       <dependency>
         <groupId>org.infinispan</groupId>
         <artifactId>infinispan-spring-boot-starter-remote</artifactId>
-        <version>${infinispan.starter.version}</version>
+        <version>${version.org.infinispan.starter}</version>
       </dependency>
       <dependency>
         <groupId>io.cloudevents</groupId>
         <artifactId>cloudevents-api</artifactId>
-        <version>${version.cloudevents.api}</version>
+        <version>${version.io.cloudevents}</version>
       </dependency>
       <dependency>
         <groupId>io.cloudevents</groupId>
         <artifactId>cloudevents-core</artifactId>
-        <version>${version.cloudevents.api}</version>
+        <version>${version.io.cloudevents}</version>
       </dependency>
       <dependency>
         <groupId>io.cloudevents</groupId>
         <artifactId>cloudevents-json-jackson</artifactId>
-        <version>${version.cloudevents.api}</version>
+        <version>${version.io.cloudevents}</version>
       </dependency>
       <dependency>
         <groupId>org.testcontainers</groupId>
@@ -383,7 +358,7 @@
         <plugin>
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-maven-plugin</artifactId>
-          <version>${springboot.version}</version>
+          <version>${version.springboot}</version>
         </plugin>
         <plugin>
         <groupId>org.apache.maven.plugins</groupId>
