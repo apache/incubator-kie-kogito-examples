@@ -53,9 +53,7 @@ public class GrafanaDockerComposeIT {
 
     @BeforeAll
     void setup(){
-        environment
-                .withBuild(true)
-                .start();
+        environment.start();
     }
 
     @Test
