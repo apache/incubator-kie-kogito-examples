@@ -52,7 +52,7 @@ You can use these default dashboards, or you can personalize them and use your c
 ### Compile and Run in Local Dev Mode
 
 It is possible to use `docker-compose` to demonstrate how to inject the generated dashboards in the volume of the grafana container:
-1. Run `mvn clean package` to build the project and generate dashboards.  A docker image tagged `org.kie.kogito.examples/dmn-drools-sprintboot-metrics-example:1.0` will be built (docker must be installed on your system).
+1. Run `mvn clean package` to build the project and generate dashboards.  A docker image tagged `org.kie.kogito.examples/dmn-drools-springboot-metrics-example:1.0` will be built (docker must be installed on your system).
 2. Run `docker-compose up` to start the applications. 
 
 The volumes of the grafana container are properly set in the `docker-compose.yml` file, so that the dashboards are properly loaded at startup.

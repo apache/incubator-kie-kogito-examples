@@ -2,7 +2,7 @@ version: '2'
 
 services:
   hello:
-    image: org.kie.kogito.examples/dmn-drools-sprintboot-metrics:1.0
+    image: org.kie.kogito.examples/dmn-drools-springboot-metrics:1.0
     ports:
       - 8080:8080
 
