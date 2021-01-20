@@ -6,7 +6,7 @@ This Quickstart showcases a basic implementation of the **Hiring** process.
 
 For simplicity, this example doesn't include any authentication mechanism, so all tasks in will be assigned to a default user `john`.
 
-The required *Kogito and Infrastructure Services* for this example is:
+The required *Kogito and Infrastructure Services* for this example are:
 
 - Infinispan
 - Kafka
