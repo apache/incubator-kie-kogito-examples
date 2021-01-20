@@ -1,5 +1,5 @@
 /**
- *  Copyright 2020 Red Hat, Inc. and/or its affiliates.
+ *  Copyright 2021 Red Hat, Inc. and/or its affiliates.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -28,8 +28,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.kie.api.runtime.process.WorkItem;
 import org.kie.api.runtime.process.WorkItemHandler;
 import org.kie.kogito.examples.KogitoOnboardingApplication;
-import org.kie.kogito.examples.ProcessConfig;
 import org.kie.kogito.examples.test.RecordedOutputWorkItemHandler;
+import org.kie.kogito.process.ProcessConfig;
 import org.kie.kogito.testcontainers.springboot.InfinispanSpringBootTestResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
