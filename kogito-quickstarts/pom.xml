@@ -9,8 +9,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>kogito-consoles-quickstarts</artifactId>
-    <name>Kogito Example :: Kogito Consoles Quickstarts</name>
+    <artifactId>kogito-quickstarts</artifactId>
+    <name>Kogito Example :: Kogito Quickstarts</name>
     <packaging>pom</packaging>
 
     <modules>

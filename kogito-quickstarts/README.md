@@ -1,4 +1,4 @@
-# Kogito Consoles Quickstarts
+# Kogito Quickstarts
 
 ## Description
 
