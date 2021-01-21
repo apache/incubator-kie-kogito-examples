@@ -15,9 +15,6 @@
  */
 package org.kie.kogito.examples.demo;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,6 +27,8 @@ import org.kie.kogito.process.Process;
 import org.kie.kogito.process.ProcessInstanceReadMode;
 import org.kie.kogito.testcontainers.springboot.InfinispanSpringBootTestResource;
 import org.kie.kogito.testcontainers.springboot.KafkaSpringBootTestResource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.ContextConfiguration;
@@ -47,8 +46,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @ContextConfiguration(initializers = {InfinispanSpringBootTestResource.Conditional.class, KafkaSpringBootTestResource.Conditional.class})
 public class PersonsRestIT {
 
-    @Inject
-    @Named("persons")
+    @Autowired
+    @Qualifier("persons")
     Process<? extends Model> personProcess;
 
     @LocalServerPort

@@ -91,16 +91,13 @@ In the [`operator`](operator) directory you'll find the custom resources needed 
 
 ## Developer notes
 
-In order to have the DMN generated resources properly scanned by Spring Boot, please ensure the DMN model namespaces is included in the resource scanning configuration files. For example, in `application.properties` file:
-
-```
-resteasy.jaxrs.scan-packages=org.kie.kogito.**,http*
-```
+In order to have the DMN generated resources properly scanned by Spring Boot, please ensure the DMN model namespaces
+ is included in the String application configuration.
 
 The generated classes must be included in the annotation definitions of the main `Application` class:
 
 ```
-@SpringBootApplication(scanBasePackages={"org.kie.dmn.kogito.**", "org.kie.kogito.app.**"})
+@SpringBootApplication(scanBasePackages={"org.kie.dmn.kogito.**", "org.kie.kogito.app.**", "http*"})
 public class KogitoSpringbootApplication {
 
     public static void main(String[] args) {

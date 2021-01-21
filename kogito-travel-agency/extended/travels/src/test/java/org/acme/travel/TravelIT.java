@@ -15,9 +15,6 @@
  */
 package org.acme.travel;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +23,8 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import io.quarkus.test.common.QuarkusTestResource;
+import io.quarkus.test.junit.QuarkusTest;
 import org.acme.travels.Address;
 import org.acme.travels.Flight;
 import org.acme.travels.Hotel;
@@ -42,8 +41,10 @@ import org.kie.kogito.process.WorkItem;
 import org.kie.kogito.testcontainers.quarkus.InfinispanQuarkusTestResource;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 
-import io.quarkus.test.common.QuarkusTestResource;
-import io.quarkus.test.junit.QuarkusTest;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.core.StringContains.containsString;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @QuarkusTest
 @QuarkusTestResource(value = InfinispanQuarkusTestResource.class)
@@ -86,6 +87,17 @@ public class TravelIT {
 
         whenAddVisaApplication();
         thenProcessIsActive();
+    }
+
+    @Test
+    public void testProcessMetrics() {
+        whenNewTravel(TRAVELLER_FROM_POLAND, TRIP_TO_POLAND);
+        given()
+                .when()
+                .get("/metrics")
+                .then()
+                .statusCode(200)
+                .body(containsString("kie_process_instance_running_total{app_id=\"default-process-monitoring-listener\",process_id=\"travels\",} 1.0"));
     }
 
     private void whenNewTravel(Traveller traveller, Trip trip) {

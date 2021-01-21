@@ -1,0 +1,37 @@
+package org.acme.sw.onboarding.queries;
+unit AssignmentUnit;
+
+import org.acme.sw.onboarding.model.Doctor;
+import org.acme.sw.onboarding.model.Patient;
+import org.acme.sw.onboarding.model.SymptomSpecialty;
+import org.acme.sw.onboarding.helpers.CalendarHelper;
+import java.util.Collections;
+
+rule PatientIsAChild
+when
+    $p: /patients[ assignedDoctor == null && CalendarHelper.calculateAge(dateOfBirth) < 18 ]
+    $d: /doctors[ specialty == "Pediatrics" ]
+then
+    modify($p) { setAssignedDoctor($d) }
+end
+
+rule SymptomHasAMatch
+when
+    $p: /patients[ assignedDoctor == null && !symptoms.isEmpty() ]
+    $s: /symptomSpecialties[ !Collections.disjoint(symptoms, $p.symptoms) ]
+    $d: /doctors[ specialty == $s.specialty ]
+then
+    modify($p) { setAssignedDoctor($d) }
+end
+
+rule SymptomNotFound
+when
+    $p: /patients[ assignedDoctor == null ]
+    $d: /doctors[ specialty == "Family medicine" ]
+then
+    modify($p) { setAssignedDoctor($d) }
+end
+
+query AssignDoctor
+   $patients : /patients[ assignedDoctor != null  ]
+end

@@ -25,7 +25,6 @@ import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
 import org.kie.dmn.api.core.event.DMNRuntimeEventListener;
 import org.kie.dmn.kogito.quarkus.example.mock.MockDMNRuntimeEventListener;
-import org.kie.kogito.Config;
 import org.kie.kogito.decision.DecisionConfig;
 import org.kie.kogito.decision.DecisionEventListenerConfig;
 
@@ -38,12 +37,11 @@ import static org.kie.dmn.kogito.quarkus.example.TrafficViolationTest.TRAFFIC_VI
 public class TrafficViolationListenerTest {
 
     @Inject
-    Config cfg;
+    DecisionConfig decisionConfig;
 
     @Test
     public void testEvaluateTrafficViolation() {
-        List<DMNRuntimeEventListener> injectedListeners = Optional.ofNullable(cfg)
-                .map(Config::decision)
+        List<DMNRuntimeEventListener> injectedListeners = Optional.ofNullable(decisionConfig)
                 .map(DecisionConfig::decisionEventListeners)
                 .map(DecisionEventListenerConfig::listeners)
                 .orElseThrow(() -> new IllegalStateException("Can't find injected listeners"));

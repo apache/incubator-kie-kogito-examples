@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.kie.kogito</groupId>
     <artifactId>kogito-travel-agency-example-extended</artifactId>
-    <version>1.0.0.Final</version>
+    <version>1.1.0.Final</version>
   </parent>
 
   <artifactId>visas</artifactId>
@@ -33,6 +33,10 @@
       <artifactId>kogito-cloudevents-quarkus-addon</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>process-svg-quarkus-addon</artifactId>
+    </dependency>
+    <dependency>
        <groupId>io.quarkus</groupId>
        <artifactId>quarkus-vertx-web</artifactId>
      </dependency>
@@ -51,8 +55,16 @@
       <artifactId>quarkus-smallrye-reactive-messaging-kafka</artifactId>
     </dependency>
     <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-openapi</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>monitoring-prometheus-addon</artifactId>
+      <artifactId>monitoring-prometheus-quarkus-addon</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-qute</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>

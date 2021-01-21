@@ -17,7 +17,8 @@ package org.kie.kogito.serverless.examples;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.ApplicationScope;
 
@@ -28,7 +29,7 @@ import java.util.Set;
 @Component
 @ApplicationScope
 public class ClassifierService {
-    private static final Logger LOG = Logger.getLogger(ClassifierService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ClassifierService.class);
 
     private Set<Country> classifiedCountries = Collections.newSetFromMap(Collections.synchronizedMap(new LinkedHashMap<>()));
 

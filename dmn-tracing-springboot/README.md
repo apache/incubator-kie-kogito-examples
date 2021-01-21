@@ -89,7 +89,7 @@ Example response:
     "salary": 0,
     "age": 0
   },
-  "Is Enought?": 0,
+  "Is Enough?": 0,
   "Decide": null
 }
 ```

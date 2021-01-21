@@ -18,7 +18,8 @@ package org.kie.kogito.serverless.examples;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -28,7 +29,7 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class CountriesService {
 
-    private static final Logger LOG = Logger.getLogger(CountriesService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CountriesService.class);
 
     @Autowired
     private RestTemplate restTemplate;

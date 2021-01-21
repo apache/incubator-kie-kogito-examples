@@ -55,9 +55,9 @@ public class LoanEligibilityTest {
                 .get("/metrics")
                 .then()
                 .statusCode(200)
-                .body(containsString("string_dmn_result{decision=\"Judgement\",endpoint=\"LoanEligibility\",identifier=\"Yes\",} 1.0"))
-                .body(containsString("number_dmn_result{decision=\"Is Enought?\",endpoint=\"LoanEligibility\",quantile=\"0.1\",} 100.0"))
-                .body(containsString("api_http_response_code{endpoint=\"LoanEligibility\",identifier=\"200\",} 1.0"));
+                .body(containsString("string_dmn_result_total{decision=\"Judgement\",endpoint=\"LoanEligibility\",identifier=\"Yes\",} 1.0"))
+                .body(containsString("number_dmn_result{decision=\"Is Enough?\",endpoint=\"LoanEligibility\",quantile=\"0.1\",} 100.0"))
+                .body(containsString("api_http_response_code_total{endpoint=\"LoanEligibility\",identifier=\"200\",} 1.0"));
     }
 
     @Test

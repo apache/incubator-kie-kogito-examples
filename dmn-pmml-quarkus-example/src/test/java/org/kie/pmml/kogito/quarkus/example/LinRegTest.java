@@ -18,6 +18,7 @@ package org.kie.pmml.kogito.quarkus.example;
 import java.util.Map;
 
 import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.hamcrest.core.IsNull;
 import org.junit.jupiter.api.Test;
@@ -30,6 +31,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @QuarkusTest
 public class LinRegTest {
+
+    static {
+        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+    }
 
     @Test
     public void testEvaluateLinReg() {
