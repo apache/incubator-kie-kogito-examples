@@ -80,7 +80,7 @@ kogito-operator-9f575f64-zp56t   1/1     Running   0          98s
 ```
 
 Install the [Infinispan operator](https://operatorhub.io/operator/infinispan/2.0.x/infinispan-operator.v2.0.6) version 2.0.6. 
-Pay attention that by default the infinispan operator is installed on the namespace `my-infinispan`. You have to download the `yaml` file and change the namespace of the custom resources accordingly to your namespace.
+Pay attention that by default the Infinispan operator is installed on the namespace `my-infinispan`. You have to download the `yaml` file and change the namespace of the custom resources accordingly to your namespace.
 
 Install `strimzi` operator with 
 
@@ -94,9 +94,9 @@ find strimzi-${STRIMZI_VERSION}/install/cluster-operator -name '*RoleBinding*.ya
 kubectl apply -f strimzi-${STRIMZI_VERSION}/install/cluster-operator/ -n ${PROJECT_NAME}
 ```
 
-Deploy the `KogitoInfra` custom resources, so that the Kogito operator will take or managing the infinispan and kafka resources.
+Deploy the `KogitoInfra` custom resources, so that the Kogito operator will take or managing the Infinispan and kafka resources.
 ```bash
-kubectl apply -f resources/kogito-infra.yaml
+kubectl apply -f resources/kogito-infra.yaml -n ${PROJECT_NAME}
 ```
 
 Deploy the Trusty service and expose it
