@@ -128,6 +128,9 @@
                 <resource>
                   <directory>${project.build.directory}/classes/META-INF/resources/monitoring/dashboards</directory>
                   <filtering>false</filtering>
+                  <excludes>
+                    <exclude>**/list.json</exclude>
+                  </excludes>
                 </resource>
               </resources>
             </configuration>
@@ -157,6 +160,10 @@
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
         <executions>
+          <!--
+            Create new docker image using Dockerfile which must be present in current working directory.
+            Tag the image using maven project version information.
+          -->
           <execution>
             <id>docker-build</id>
             <phase>pre-integration-test</phase>
@@ -164,6 +171,7 @@
               <goal>exec</goal>
             </goals>
             <configuration>
+              <skip>${skipTests}</skip>
               <executable>docker</executable>
               <workingDirectory>${project.basedir}</workingDirectory>
               <arguments>

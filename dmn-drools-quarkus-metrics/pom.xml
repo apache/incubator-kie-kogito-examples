@@ -100,6 +100,9 @@
                 <resource>
                   <directory>${project.build.directory}/classes/META-INF/resources/monitoring/dashboards</directory>
                   <filtering>false</filtering>
+                  <excludes>
+                    <exclude>**/list.json</exclude>
+                  </excludes>
                 </resource>
               </resources>
             </configuration>
@@ -140,6 +143,7 @@
               <goal>exec</goal>
             </goals>
             <configuration>
+              <skip>${skipTests}</skip>
               <executable>docker</executable>
               <workingDirectory>${project.basedir}</workingDirectory>
               <arguments>
