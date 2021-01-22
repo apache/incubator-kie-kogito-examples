@@ -1,5 +1,5 @@
 /**
- *  Copyright 2020 Red Hat, Inc. and/or its affiliates.
+ *  Copyright 2021 Red Hat, Inc. and/or its affiliates.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -39,7 +39,7 @@ public class TopicsInformationTest {
     void verifyTopicsInformation() {
         final Topic expectedIncomingTopic = new Topic("kogito_incoming_stream", ChannelType.INCOMING);
         expectedIncomingTopic.setEventsMeta(Collections.singletonList(new CloudEventMeta("travellers", "", EventKind.CONSUMED)));
-        final Topic expectedOutgoingTopic = new Topic("processedtravellers", ChannelType.OUTGOING);
+        final Topic expectedOutgoingTopic = new Topic("kogito_outgoing_stream", ChannelType.OUTGOING);
         expectedOutgoingTopic.setEventsMeta(Collections.singletonList(new CloudEventMeta("process.travelers.processedtravellers", "/process/travelers", EventKind.PRODUCED)));
 
         final List<Topic> topics = Arrays.asList(given().get("/messaging/topics").as(Topic[].class));
