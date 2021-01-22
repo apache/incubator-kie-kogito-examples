@@ -97,6 +97,7 @@ public class DealsRestIT {
     }
 
     @Test
+    @SuppressWarnings("unchecked")
     public void testProtobufListIsAvailable() {
         @SuppressWarnings("unchecked")
         List<String> files = given().contentType(ContentType.JSON).accept(ContentType.JSON).when()
