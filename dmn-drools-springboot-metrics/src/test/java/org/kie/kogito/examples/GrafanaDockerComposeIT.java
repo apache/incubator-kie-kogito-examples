@@ -31,6 +31,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.hasItem;
 
+@org.junit.jupiter.api.Disabled
 @Testcontainers
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class GrafanaDockerComposeIT {
