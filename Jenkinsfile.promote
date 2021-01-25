@@ -109,7 +109,7 @@ pipeline {
                     dir('kogito-examples-bot') {
                         prepareForPR('kogito-examples')
 
-                        maven.mvnVersionsSet(getMavenCommand(), getSnapshotVersion(), true)
+                        maven.mvnVersionsUpdateParentAndChildModules(getMavenCommand(), getSnapshotVersion(), true)
                         maven.mvnSetVersionProperty(getMavenCommand(),'version.org.optaplanner', util.getNextVersion(getOptaPlannerVersion(), 'micro'))
 
                         commitAndCreatePR('kogito-examples')
