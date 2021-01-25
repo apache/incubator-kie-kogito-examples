@@ -36,6 +36,7 @@ import static org.hamcrest.Matchers.hasItem;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class GrafanaDockerComposeIT {
 
+    private static final int STARTUP_MINUTES_TIMEOUT = 8;
     private static final String GRAFANA_URL = "http://localhost:3000";
     private static final String PROMETHEUS_PRIVATE_URL = "http://prometheus:9090";
     private static final String KOGITO_APPLICATION_URL = "http://localhost:8080";
@@ -46,7 +47,9 @@ public class GrafanaDockerComposeIT {
     static {
         try {
             environment = new DockerComposeContainer(new File(GrafanaDockerComposeIT.class.getClassLoader().getResource("./docker-compose.yml").toURI()))
-                    .withExposedService("grafana_1", 3000, Wait.forListeningPort().withStartupTimeout(Duration.ofMinutes(8)));
+                    .withExposedService("grafana_1", 3000, Wait.forListeningPort().withStartupTimeout(Duration.ofMinutes(STARTUP_MINUTES_TIMEOUT)))
+                    .withExposedService("hello_1", 8080, Wait.forListeningPort().withStartupTimeout(Duration.ofMinutes(STARTUP_MINUTES_TIMEOUT)))
+                    .withExposedService("prometheus_1", 9090, Wait.forListeningPort().withStartupTimeout(Duration.ofMinutes(STARTUP_MINUTES_TIMEOUT)));
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
