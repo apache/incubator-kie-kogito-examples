@@ -123,7 +123,7 @@ If you wish to install, configure and start the **Data Index Service** manually,
 
 After downloading the runner, create a new folder to store the .proto files that will be used by the service. 
 
-This service works with .proto files that define the data model. Once **Kogito Travel Service** is started, /target/classes/persistence/travels.proto is generated and it has to be copied to the new proto files folder.
+This service works with .proto files that define the data model. Once **Kogito Travel Service** is started, /target/classes/META-INF/resources/persistence/protobuf/travels.proto is generated and it has to be copied to the new proto files folder.
 
 To start the **Kogito Data Index Service** just past the full path of the proto files folder and execute 
 

@@ -1,5 +1,5 @@
 /**
- *  Copyright 2020 Red Hat, Inc. and/or its affiliates.
+ *  Copyright 2021 Red Hat, Inc. and/or its affiliates.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -36,6 +36,7 @@ import org.kie.kogito.process.workitem.LifeCyclePhase;
 import org.kie.kogito.process.workitem.NotAuthorizedException;
 import org.kie.kogito.process.workitem.Policy;
 import org.kie.kogito.process.workitem.Transition;
+import org.kie.kogito.process.workitems.KogitoWorkItemManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -125,7 +126,7 @@ public class CustomHumanTaskLifeCycle implements LifeCycle<Map<String, Object>> 
         if (targetPhase.isTerminating()) {
             logger.debug("Target life cycle phase '{}' is terminiating, completing work item {}", targetPhase.id(), humanTaskWorkItem.getId());
             // since target life cycle phase is terminating completing work item
-            ((org.drools.core.process.instance.KogitoWorkItemManager)manager).internalCompleteWorkItem(humanTaskWorkItem);
+            ((KogitoWorkItemManager)manager).internalCompleteWorkItem(humanTaskWorkItem);
         }
         
         return data(humanTaskWorkItem);

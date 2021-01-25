@@ -10,23 +10,17 @@ You will need:
   - Java 11+ installed 
   - Environment variable JAVA_HOME set accordingly
   - Maven 3.6.2+ installed
+  - Docker 19+ (only if you want to run the integration tests and/or you want to use the `docker-compose` script provided in this example).
   
 ### How to enable the feature
 
-Import the following dependency in your `pom.xml` if you are using quarkus:
+Import the following dependency in your `pom.xml`:
 
 ```XML
 <dependency>
  <groupId>org.kie.kogito</groupId>
  <artifactId>monitoring-prometheus-quarkus-addon</artifactId>
 </dependency>
-```
-
-Otherwise, if you are using springboot import
-```XML
-<dependency>
- <groupId>org.kie.kogito</groupId>
- <artifactId>monitoring-prometheus-springboot-addon</artifactId></dependency>
 ```
 
 ### Architecture
@@ -58,8 +52,7 @@ You can use these default dashboards, or you can personalize them and use your c
 ### Compile and Run in Local Dev Mode
 
 It is possible to use `docker-compose` to demonstrate how to inject the generated dashboards in the volume of the grafana container:
-1. Run `mvn clean package` to build the project and generate dashboards. 
-2. Run `docker-compose build` to build the docker images.
+1. Run `mvn clean package` to build the project and generate dashboards. A docker image tagged `org.kie.kogito.examples/dmn-drools-quarkus-metrics-example:1.0` will be built (docker must be installed on your system).
 2. Run `docker-compose up` to start the applications. 
 
 The volumes of the grafana container are properly set in the `docker-compose.yml` file, so that the dashboards are properly loaded at startup.

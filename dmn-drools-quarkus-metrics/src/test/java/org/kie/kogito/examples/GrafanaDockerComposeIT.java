@@ -1,5 +1,5 @@
 /**
- *  Copyright 2020 Red Hat, Inc. and/or its affiliates.
+ *  Copyright 2021 Red Hat, Inc. and/or its affiliates.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -16,10 +16,13 @@
 package org.kie.kogito.examples;
 
 import java.io.File;
+import java.net.URISyntaxException;
+import java.time.Duration;
 
 import io.restassured.http.ContentType;
-import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.testcontainers.containers.DockerComposeContainer;
 import org.testcontainers.containers.wait.strategy.Wait;
 import org.testcontainers.junit.jupiter.Container;
@@ -28,8 +31,8 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.hasItem;
 
-@Disabled("Flaky test. Must disable temporarily")
 @Testcontainers
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class GrafanaDockerComposeIT {
 
     private static final String GRAFANA_URL = "http://localhost:3000";
@@ -37,10 +40,21 @@ public class GrafanaDockerComposeIT {
     private static final String KOGITO_APPLICATION_URL = "http://localhost:8080";
 
     @Container
-    public static DockerComposeContainer environment =
-            new DockerComposeContainer(new File("./docker-compose.yml"))
-                    .withExposedService("grafana_1", 3000, Wait.forHttp("/")
-                            .forStatusCode(200));
+    public static DockerComposeContainer environment;
+
+    static {
+        try {
+            environment = new DockerComposeContainer(new File(GrafanaDockerComposeIT.class.getClassLoader().getResource("./docker-compose.yml").toURI()))
+                    .withExposedService("grafana_1", 3000, Wait.forListeningPort().withStartupTimeout(Duration.ofMinutes(8)));
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @BeforeAll
+    void setup(){
+        environment.start();
+    }
 
     @Test
     public void testPrometheusDataSource() {

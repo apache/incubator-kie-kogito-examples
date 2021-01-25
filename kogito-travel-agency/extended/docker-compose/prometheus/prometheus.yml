@@ -1,0 +1,28 @@
+# A scrape configuration containing exactly one endpoint to scrape:
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: 'travels'
+
+    scrape_interval: 10s
+
+    metrics_path: /metrics
+
+    # basic_auth:
+    #   username: 'kieserver'
+    #   password: 'kieserver1!'
+
+    static_configs:
+      - targets: ['172.17.0.1:8080']
+
+  - job_name: 'visas'
+
+    scrape_interval: 10s
+
+    metrics_path: /metrics
+
+    # basic_auth:
+    #   username: 'kieserver'
+    #   password: 'kieserver1!'
+
+    static_configs:
+      - targets: ['172.17.0.1:8090']
