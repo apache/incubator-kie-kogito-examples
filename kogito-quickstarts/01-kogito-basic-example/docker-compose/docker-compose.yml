@@ -73,7 +73,8 @@ services:
    ports:
      - 8280:8080
    depends_on:
-     - data-index
+     data-index:
+       condition: service_started
 
   task-console:
     container_name: task-console
@@ -81,6 +82,7 @@ services:
     ports:
       - 8380:8080
     depends_on:
-      - data-index
+      data-index:
+        condition: service_started
     environment:
       KOGITO_TASK_CONSOLE_PROPS: -Dkogito.test.user-system.enabled=true
