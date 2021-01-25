@@ -442,11 +442,6 @@
           </executions>
         </plugin>
         <plugin>
-          <groupId>io.openapitools.swagger</groupId>
-          <artifactId>swagger-maven-plugin</artifactId>
-          <version>${version.swagger.plugin}</version>
-        </plugin>
-        <plugin>
           <artifactId>maven-deploy-plugin</artifactId>
           <version>${version.deploy.plugin}</version>
           <configuration>
