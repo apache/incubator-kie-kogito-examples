@@ -110,7 +110,7 @@ pipeline {
             }
             steps {
                 script {
-                    maven.mvnVersionsSet(getMavenCommand(getRepoName()), getProjectVersion())
+                    maven.mvnVersionsUpdateParentAndChildModules(getMavenCommand(getRepoName()), getProjectVersion(), true)
                     // Update Optaplanner version
                     maven.mvnSetVersionProperty(getMavenCommand(getRepoName()), 'version.org.optaplanner', getOptaPlannerVersion())
                 }
