@@ -56,6 +56,11 @@ public class GrafanaDockerComposeIT {
         environment.start();
     }
 
+    @AfterAll
+    void cleanup() {
+        environment.stop();
+    }
+
     @Test
     public void testPrometheusDataSource() {
         given()
