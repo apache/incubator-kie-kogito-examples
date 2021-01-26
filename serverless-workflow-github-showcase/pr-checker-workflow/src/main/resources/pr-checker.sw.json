@@ -30,9 +30,7 @@
     {
       "name": "HandleOpenPR",
       "type": "event",
-      "start": {
-        "kind": "default"
-      },
+      "start": true,
       "onEvents": [
         {
           "eventRefs": [
@@ -65,7 +63,6 @@
         }
       ],
       "end": {
-        "kind": "default",
         "produceEvents": [
           {
             "eventRef": "PRVerified"

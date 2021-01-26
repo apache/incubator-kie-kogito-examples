@@ -33,9 +33,7 @@
     {
       "name": "GetCountryInfo",
       "type": "operation",
-      "start": {
-        "kind": "default"
-      },
+      "start": true,
       "actionMode": "sequential",
       "actions": [
         {
@@ -84,9 +82,7 @@
           }
         }
       ],
-      "end": {
-        "kind": "default"
-      }
+      "end": true
     },
     {
       "name": "ClassifyAsLarge",
@@ -100,9 +96,7 @@
           }
         }
       ],
-      "end": {
-        "kind": "default"
-      }
+      "end": true
     }
   ]
 }

@@ -22,9 +22,7 @@
   ],
   "states": [
     {
-      "start": {
-        "kind": "default"
-      },
+      "start": true,
       "name": "SetConstants",
       "type": "inject",
       "data": {
@@ -62,7 +60,7 @@
         }
       ],
       "end": {
-        "kind": "terminate"
+        "terminate": "true"
       }
     }
   ]

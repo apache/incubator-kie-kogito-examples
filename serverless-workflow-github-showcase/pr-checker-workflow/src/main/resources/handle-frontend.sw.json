@@ -30,9 +30,7 @@
   ],
   "states": [
     {
-      "start": {
-        "kind": "default"
-      },
+      "start": true,
       "name": "CheckFrontend",
       "type": "switch",
       "dataConditions": [
@@ -49,9 +47,7 @@
         },
         {
           "condition": "{{ $.files[?(@ =~ /^(?!.*frontend).*$/i )] }}",
-          "end": {
-            "kind": "default"
-          }
+          "end": true
         }
       ]
     },
@@ -83,9 +79,7 @@
           }
         }
       ],
-      "end": {
-        "kind": "default"
-      }
+      "end": true
     }
   ]
 }

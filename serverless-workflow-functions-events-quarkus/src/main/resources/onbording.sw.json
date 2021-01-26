@@ -5,9 +5,7 @@
     {
       "name": "LetsOnboard",
       "type": "event",
-      "start": {
-        "kind": "default"
-      },
+      "start": true,
       "onEvents": [
         {
           "eventRefs": [
@@ -32,9 +30,7 @@
           ]
         }
       ],
-      "end": {
-        "kind": "default"
-      }
+      "end": true
     }
   ],
   "events": [

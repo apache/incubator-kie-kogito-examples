@@ -18,9 +18,7 @@
     {
       "name": "HandleNewApplicant",
       "type": "event",
-      "start": {
-        "kind": "default"
-      },
+      "start": true,
       "onEvents": [
         {
           "eventRefs": ["NewApplicantEvent"],
@@ -56,7 +54,6 @@
         "decision": "Approved"
       },
       "end": {
-        "kind": "event",
         "produceEvents": [
           {
             "eventRef": "ApplicantDecisionEvent"
@@ -71,7 +68,6 @@
         "decision": "Denied"
       },
       "end": {
-        "kind": "event",
         "produceEvents": [
           {
             "eventRef": "ApplicantDecisionEvent"

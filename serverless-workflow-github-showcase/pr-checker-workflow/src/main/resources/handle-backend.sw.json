@@ -31,9 +31,7 @@
   "states": [
     {
       "name": "CheckBackend",
-      "start": {
-        "kind": "default"
-      },
+      "start": true,
       "type": "switch",
       "dataConditions": [
         {
@@ -49,9 +47,7 @@
         },
         {
           "condition": "{{ $.files[?(@ =~ /^(?!.*backend).*$/i )] }}",
-          "end": {
-            "kind": "default"
-          }
+          "end": true
         }
       ]
     },
@@ -83,9 +79,7 @@
           }
         }
       ],
-      "end": {
-        "kind": "default"
-      }
+      "end": true
     }
   ]
 }
