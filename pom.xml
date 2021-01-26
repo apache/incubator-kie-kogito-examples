@@ -46,7 +46,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <!-- kogito -->
     <kogito.version>${project.version}</kogito.version>
-    <version.org.optaplanner>8.1.0-SNAPSHOT</version.org.optaplanner>
+    <version.org.optaplanner>8.3.0-SNAPSHOT</version.org.optaplanner>
     <!-- license plugin -->
     <version.license.plugin>3.0</version.license.plugin>
     <skipLicensesCheck>false</skipLicensesCheck>
