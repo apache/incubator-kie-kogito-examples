@@ -20,6 +20,7 @@ import java.net.URISyntaxException;
 import java.time.Duration;
 
 import io.restassured.http.ContentType;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -35,9 +36,14 @@ import static org.hamcrest.Matchers.hasItem;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class GrafanaDockerComposeIT {
 
-    private static final String GRAFANA_URL = "http://localhost:3000";
-    private static final String PROMETHEUS_PRIVATE_URL = "http://prometheus:9090";
-    private static final String KOGITO_APPLICATION_URL = "http://localhost:8080";
+    private static final int STARTUP_MINUTES_TIMEOUT = 8;
+    private static final int GRAFANA_PORT = 3000;
+    private static final int PROMETHEUS_PORT = 9090;
+    private static final int KOGITO_APPLICATION_PORT = 8080;
+    private static final String GRAFANA_URL = "http://localhost:" + GRAFANA_PORT;
+    private static final String PROMETHEUS_PRIVATE_URL = "http://prometheus:" + PROMETHEUS_PORT;
+    private static final String KOGITO_APPLICATION_URL = "http://localhost:" + KOGITO_APPLICATION_PORT;
+
 
     @Container
     public static DockerComposeContainer environment;
@@ -45,15 +51,22 @@ public class GrafanaDockerComposeIT {
     static {
         try {
             environment = new DockerComposeContainer(new File(GrafanaDockerComposeIT.class.getClassLoader().getResource("./docker-compose.yml").toURI()))
-                    .withExposedService("grafana_1", 3000, Wait.forListeningPort().withStartupTimeout(Duration.ofMinutes(8)));
+                    .withExposedService("grafana_1", GRAFANA_PORT, Wait.forListeningPort().withStartupTimeout(Duration.ofMinutes(STARTUP_MINUTES_TIMEOUT)))
+                    .withExposedService("hello_1", KOGITO_APPLICATION_PORT, Wait.forListeningPort().withStartupTimeout(Duration.ofMinutes(STARTUP_MINUTES_TIMEOUT)))
+                    .withExposedService("prometheus_1", PROMETHEUS_PORT, Wait.forListeningPort().withStartupTimeout(Duration.ofMinutes(STARTUP_MINUTES_TIMEOUT)));
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
     }
 
     @BeforeAll
-    void setup(){
+    void setup() {
         environment.start();
+    }
+
+    @AfterAll
+    void cleanup() {
+        environment.stop();
     }
 
     @Test
