@@ -62,7 +62,7 @@ public class ApplicantWorkflowTest {
         source.open();
 
         given()
-                .body("{\"name\":\"Cristiano\",\"position\":\"iOS Engineer\",\"office\":\"Berlin\",\"salary\":\"20000\"}")
+                .body("{\"name\":\"Cristiano\",\"position\":\"iOS Engineer\",\"office\":\"Berlin\",\"salary\": 20000}")
                 .header("Content-Type", MediaType.APPLICATION_JSON)
                 .when()
                 .post("/newapplicant")
