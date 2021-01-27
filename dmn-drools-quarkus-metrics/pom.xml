@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-
   <parent>
     <groupId>org.kie.kogito</groupId>
     <artifactId>kogito-examples</artifactId>
@@ -11,7 +10,6 @@
   <groupId>org.kie.kogito.examples</groupId>
   <artifactId>dmn-drools-quarkus-metrics</artifactId>
   <name>Kogito Example :: DMN Metrics Quarkus</name>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -23,7 +21,6 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-
   <dependencies>
     <dependency>
       <groupId>org.kie.kogito</groupId>
@@ -49,7 +46,6 @@
       <groupId>org.kie.kogito</groupId>
       <artifactId>monitoring-prometheus-quarkus-addon</artifactId>
     </dependency>
-
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-junit5</artifactId>
@@ -69,8 +65,11 @@
       <artifactId>junit-jupiter</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-health</artifactId>
+    </dependency>
   </dependencies>
-
   <build>
     <finalName>${project.artifactId}</finalName>
     <plugins>
@@ -132,11 +131,11 @@
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
         <executions>
-          <!--
-            Create new docker image using Dockerfile which must be present in current working directory.
-            Tag the image using maven project version information.
-          -->
           <execution>
+            <!--
+              Create new docker image using Dockerfile which must be present in current working directory.
+              Tag the image using maven project version information.
+            -->
             <id>docker-build</id>
             <phase>pre-integration-test</phase>
             <goals>

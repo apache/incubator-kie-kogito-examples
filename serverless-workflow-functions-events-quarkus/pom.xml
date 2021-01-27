@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
   <parent>
-    <artifactId>kogito-examples</artifactId>
     <groupId>org.kie.kogito</groupId>
+    <artifactId>kogito-examples</artifactId>
     <version>2.0.0-SNAPSHOT</version>
   </parent>
-  <modelVersion>4.0.0</modelVersion>
-
   <artifactId>serverless-workflow-functions-events-quarkus</artifactId>
-
   <name>Kogito Example :: Serverless Workflow Functions And Events :: Quarkus</name>
   <description>Kogito Serverless Workflow Functions And Events Example - Quarkus</description>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -25,7 +21,6 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-
   <dependencies>
     <dependency>
       <groupId>org.kie.kogito</groupId>
@@ -39,7 +34,6 @@
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-drools</artifactId>
     </dependency>
-
     <!-- Knative dependencies -->
     <dependency>
       <groupId>org.kie.kogito</groupId>
@@ -58,7 +52,6 @@
       <artifactId>smallrye-reactive-messaging-http</artifactId>
     </dependency>
     <!-- /Knative dependencies -->
-
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-vertx</artifactId>
@@ -83,7 +76,6 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-rest-client</artifactId>
     </dependency>
-
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-junit5</artifactId>
@@ -99,8 +91,11 @@
       <artifactId>wiremock-jre8</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-health</artifactId>
+    </dependency>
   </dependencies>
-
   <build>
     <finalName>${project.artifactId}</finalName>
     <plugins>
@@ -117,7 +112,6 @@
       </plugin>
     </plugins>
   </build>
-
   <profiles>
     <profile>
       <id>native</id>
@@ -133,7 +127,6 @@
                 </goals>
               </execution>
             </executions>
-
           </plugin>
         </plugins>
       </build>
