@@ -113,7 +113,7 @@
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            data : JSON.stringify($("#newApplicantForm").serializeToJSON()),
+            data : JSON.stringify($("#newApplicantForm").serializeToJSON({parseFloat: { condition: "input[type='number']"}})),
             success : function(result) {
                 console.log(result);
             },

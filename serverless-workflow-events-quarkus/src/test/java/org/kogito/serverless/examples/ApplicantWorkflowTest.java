@@ -1,5 +1,5 @@
 /**
- *  Copyright 2020 Red Hat, Inc. and/or its affiliates.
+ *  Copyright 2021 Red Hat, Inc. and/or its affiliates.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -62,7 +62,7 @@ public class ApplicantWorkflowTest {
         source.open();
 
         given()
-                .body("{\"name\":\"Cristiano\",\"position\":\"iOS Engineer\",\"office\":\"Berlin\",\"salary\":\"20000\"}")
+                .body("{\"name\":\"Cristiano\",\"position\":\"iOS Engineer\",\"office\":\"Berlin\",\"salary\": 20000}")
                 .header("Content-Type", MediaType.APPLICATION_JSON)
                 .when()
                 .post("/newapplicant")

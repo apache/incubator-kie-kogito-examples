@@ -5,26 +5,24 @@
   "functions": [
     {
       "name": "multiplication",
-      "resource": "/",
-      "type": "rest",
+      "operation": "/",
       "metadata": {
-        "method": "POST"
+        "method": "POST",
+        "type": "rest"
       }
     },
     {
       "name": "subtraction",
-      "resource": "/",
-      "type": "rest",
+      "operation": "/",
       "metadata": {
-        "method": "POST"
+        "method": "POST",
+        "type": "rest"
       }
     }
   ],
   "states": [
     {
-      "start": {
-        "kind": "default"
-      },
+      "start": true,
       "name": "SetConstants",
       "type": "inject",
       "data": {
@@ -62,7 +60,7 @@
         }
       ],
       "end": {
-        "kind": "terminate"
+        "terminate": "true"
       }
     }
   ]

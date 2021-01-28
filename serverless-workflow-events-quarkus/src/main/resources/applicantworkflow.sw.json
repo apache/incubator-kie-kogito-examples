@@ -14,38 +14,60 @@
       "type": "kafka"
     }
   ],
-  "functions": [
-    {
-      "name": "EvalNewApplicationFunction",
-      "type": "rule",
-      "metadata": {
-        "ruleflowgroup": "newapplicant"
-      }
-    }
-  ],
   "states": [
     {
       "name": "HandleNewApplicant",
       "type": "event",
-      "start": {
-        "kind": "default"
-      },
+      "start": true,
       "onEvents": [
         {
-          "eventRefs": [
-            "NewApplicantEvent"
-          ],
-          "actions": [
-            {
-              "functionRef": {
-                "refName": "EvalNewApplicationFunction"
-              }
-            }
-          ]
+          "eventRefs": ["NewApplicantEvent"],
+          "actions": []
         }
       ],
+      "transition": {
+        "nextState": "VerifyNewApplicant"
+      }
+    },
+    {
+      "name": "VerifyNewApplicant",
+      "type": "switch",
+      "dataConditions": [
+        {
+          "condition": "{{ $.[?(@.salary >= 3000)] }}",
+          "transition": {
+            "nextState": "HandleApproved"
+          }
+        },
+        {
+          "condition": "{{ $.[?(@.salary < 3000)] }}",
+          "transition": {
+            "nextState": "HandleDenied"
+          }
+        }
+      ]
+    },
+    {
+      "name": "HandleApproved",
+      "type": "inject",
+      "data": {
+        "decision": "Approved"
+      },
       "end": {
-        "kind": "event",
+        "produceEvents": [
+          {
+            "eventRef": "ApplicantDecisionEvent"
+          }
+        ]
+      }
+    },
+    {
+      "name": "HandleDenied",
+      "type": "inject",
+      "data": {
+        "decision": "Denied"
+      },
+      "end": {
         "produceEvents": [
           {
             "eventRef": "ApplicantDecisionEvent"

@@ -1,5 +1,5 @@
 /**
- *  Copyright 2020 Red Hat, Inc. and/or its affiliates.
+ *  Copyright 2021 Red Hat, Inc. and/or its affiliates.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.Matchers.isEmptyOrNullString;;
+import static org.hamcrest.Matchers.emptyOrNullString;
 
 @QuarkusTest
 @QuarkusTestResource(NumbersMockService.class)
@@ -40,17 +40,17 @@ class RestExampleTest {
     @Test
     void testRestExample() {
         given()
-            .contentType(ContentType.JSON)
-            .when()
-            .body(
-                  Collections
-                      .singletonMap(
-                                    "workflowdata",
-                                    Collections.singletonMap("inputNumbers", new int[]{1, 2, 3, 4, 5, 6, 7})))
-            .post("/RestExample")
-            .then()
-            .statusCode(201)
-            .body("id", not(isEmptyOrNullString()))
-            .body("workflowdata", not(isEmptyOrNullString()));
+                .contentType(ContentType.JSON)
+                .when()
+                .body(
+                        Collections
+                                .singletonMap(
+                                        "workflowdata",
+                                        Collections.singletonMap("inputNumbers", new int[]{1, 2, 3, 4, 5, 6, 7})))
+                .post("/RestExample")
+                .then()
+                .statusCode(201)
+                .body("id", not(emptyOrNullString()))
+                .body("workflowdata", not(emptyOrNullString()));
     }
 }

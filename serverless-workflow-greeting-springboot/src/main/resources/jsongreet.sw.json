@@ -6,16 +6,16 @@
   "functions": [
     {
       "name": "greetFunction",
-      "type": "sysout"
+      "metadata": {
+        "type": "sysout"
+      }
     }
   ],
   "states": [
     {
       "name": "ChooseOnLanguage",
       "type": "switch",
-      "start": {
-        "kind": "default"
-      },
+      "start": true,
       "dataConditions": [
         {
           "condition": "{{ $.[?(@.language  == 'English')] }}",
@@ -71,7 +71,7 @@
         }
       ],
       "end": {
-        "kind": "terminate"
+        "terminate": "true"
       }
     }
   ]

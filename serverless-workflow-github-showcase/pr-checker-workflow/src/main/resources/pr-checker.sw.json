@@ -5,10 +5,10 @@
   "functions": [
     {
       "name": "FetchPRFiles",
-      "type": "service",
       "metadata": {
         "interface": "org.kogito.examples.sw.github.workflow.GitHubService",
-        "operation": "fetchPRFiles"
+        "operation": "fetchPRFiles",
+        "type": "service"
       }
     }
   ],
@@ -30,9 +30,7 @@
     {
       "name": "HandleOpenPR",
       "type": "event",
-      "start": {
-        "kind": "default"
-      },
+      "start": true,
       "onEvents": [
         {
           "eventRefs": [
@@ -65,7 +63,6 @@
         }
       ],
       "end": {
-        "kind": "default",
         "produceEvents": [
           {
             "eventRef": "PRVerified"

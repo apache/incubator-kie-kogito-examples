@@ -4,12 +4,12 @@ name: Greeting workflow
 description: YAML based greeting workflow
 functions:
   - name: greetFunction
-    type: sysout
+    metadata:
+      type: sysout
 states:
   - name: ChooseOnLanguage
     type: switch
-    start:
-      kind: default
+    start: true
     dataConditions:
       - condition: "{{ $.[?(@.language  == 'English')] }}"
         transition:
@@ -41,4 +41,4 @@ states:
           parameters:
             message: "$.greeting $.name"
     end:
-      kind: terminate
+      terminate: true

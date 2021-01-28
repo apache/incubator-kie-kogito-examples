@@ -6,26 +6,26 @@
   "functions": [
     {
       "name": "countryInfoFunction",
-      "type": "service",
       "metadata": {
         "interface": "org.kie.kogito.serverless.examples.CountriesService",
-        "operation": "getCountryInfo"
+        "operation": "getCountryInfo",
+        "type": "service"
       }
     },
     {
       "name": "classifySmallMediumFunction",
-      "type": "service",
       "metadata": {
         "interface": "org.kie.kogito.serverless.examples.ClassifierService",
-        "operation": "classifySmallMedium"
+        "operation": "classifySmallMedium",
+        "type": "service"
       }
     },
     {
       "name": "classifyLargeFunction",
-      "type": "service",
       "metadata": {
         "interface": "org.kie.kogito.serverless.examples.ClassifierService",
-        "operation": "classifyLarge"
+        "operation": "classifyLarge",
+        "type": "service"
       }
     }
   ],
@@ -33,9 +33,7 @@
     {
       "name": "GetCountryInfo",
       "type": "operation",
-      "start": {
-        "kind": "default"
-      },
+      "start": true,
       "actionMode": "sequential",
       "actions": [
         {
@@ -84,9 +82,7 @@
           }
         }
       ],
-      "end": {
-        "kind": "default"
-      }
+      "end": true
     },
     {
       "name": "ClassifyAsLarge",
@@ -100,9 +96,7 @@
           }
         }
       ],
-      "end": {
-        "kind": "default"
-      }
+      "end": true
     }
   ]
 }

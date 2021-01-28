@@ -5,9 +5,7 @@
     {
       "name": "LetsOnboard",
       "type": "event",
-      "start": {
-        "kind": "default"
-      },
+      "start": true,
       "onEvents": [
         {
           "eventRefs": [
@@ -32,9 +30,7 @@
           ]
         }
       ],
-      "end": {
-        "kind": "default"
-      }
+      "end": true
     }
   ],
   "events": [
@@ -47,26 +43,26 @@
   "functions": [
     {
       "name": "StoreNewPatient",
-      "resource": "/onboarding/patient",
-      "type": "rest",
+      "operation": "/onboarding/patient",
       "metadata": {
-        "method": "POST"
+        "method": "POST",
+        "type": "rest"
       }
     },
     {
       "name": "AssignDoctorToPatient",
-      "resource": "/onboarding/assignment",
-      "type": "rest",
+      "operation": "/onboarding/assignment",
       "metadata": {
-        "method": "POST"
+        "method": "POST",
+        "type": "rest"
       }
     },
     {
       "name": "SchedulePatientAppointment",
-      "resource": "/onboarding/schedule/appointment",
-      "type": "rest",
+      "operation": "/onboarding/schedule/appointment",
       "metadata": {
-        "method": "POST"
+        "method": "POST",
+        "type": "rest"
       }
     }
   ]
