@@ -3,6 +3,7 @@
 To allow a quick setup of all services required to run this demo, we provide a docker compose template that starts the following services:
 - Infinispan
 - Kafka
+- Keycloak
 - Kogito Data Index
 - Kogito Management Console
 - Kogito Task Console
@@ -33,6 +34,7 @@ In order to use it, please ensure you have Docker Compose installed on your mach
   Once all services bootstrap, the following ports will be assigned on your local machine:
   - Infinispan: 11222
   - Kafka: 9092
+  - Keycloak: 8480
   - Data Index: 8180
   - Management Console: 8280
   - Task Console: 8380
