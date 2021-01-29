@@ -15,7 +15,7 @@ In order to use it, please ensure you have Docker Compose installed on your mach
  
 ### Starting required services
 
-  You should start all the services before you execute any of the Travel Agency applications, to do that please execute:
+  Before you execute the **Hiring** example, start all the services by following these steps:
 
   For Linux and MacOS:
 
@@ -45,7 +45,7 @@ In order to use it, please ensure you have Docker Compose installed on your mach
 
     docker-compose stop
     
-  It is also recommended removing any of stopped containers by running:
+  It is also recommended to remove any of stopped containers by running:
   
     docker-compose rm
     

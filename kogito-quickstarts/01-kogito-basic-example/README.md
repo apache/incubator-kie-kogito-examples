@@ -20,7 +20,7 @@ The required *Kogito and Infrastructure Services* for this example are:
 
 * Java 11+ installed
 * Environment variable JAVA_HOME set accordingly
-* Maven 3.5.2+ installed
+* Maven 3.6.2+ installed
 * Docker and Docker Compose to run the required example infrastructure.
 
 ### Starting the Kogito and Infrastructure Services
@@ -72,7 +72,7 @@ mvn clean package quarkus:dev
 
 ### Starting a Hiring Process
 
-Once the service is up and running you can making use of the **Hiring** application by a sending request to `http://localhost:8080/hiring`  with following content:
+Once the service is up and running you can make use of the **Hiring** application by a sending request to `http://localhost:8080/hiring`  with following content:
 ```json
 {   
     "candidate": {

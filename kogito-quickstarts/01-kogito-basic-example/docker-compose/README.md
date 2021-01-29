@@ -7,14 +7,12 @@ To allow a quick setup of all services required to run this demo, we provide a d
 - Kogito Management Console
 - Kogito Task Console
 
-This setup ensures that all services are connected using the default configuration as well as provisioning the Travel Agency dashboard to Grafana.  
-
 In order to use it, please ensure you have Docker Compose installed on your machine, otherwise follow the instructions available
  in [here](https://docs.docker.com/compose/install/).
  
 ### Starting required services
 
-  You should start all the services before you execute any of the Travel Agency applications, to do that please execute:
+  Before you execute the **Hiring** example, start all the services by following these steps:
 
   For Linux and MacOS:
 
@@ -42,8 +40,8 @@ In order to use it, please ensure you have Docker Compose installed on your mach
   To stop all services, simply run:
 
     docker-compose stop
-    
-  It is also recommended removing any of stopped containers by running:
+
+  It is also recommended to remove any of stopped containers by running:
   
     docker-compose rm
     

@@ -2,7 +2,7 @@
 
 ## Description
 
-In the [Basic Example](../01-kogito-basic-example) we saw a basic setup for the **Hiring** process using. In this Quickstart we are going to enhance it adding security to our setup using [Keycloak](https://www.keycloak.org/).
+In the [Basic Example](../01-kogito-basic-example) we saw a basic setup for the **Hiring** process. In this Quickstart we are going to enhance it adding security to our setup using [Keycloak](https://www.keycloak.org/).
 
 The required *Kogito and Infrastructure Services* for this example are:
 
@@ -32,7 +32,7 @@ It will install the *Kogito Realm* that comes with a predefined set of users:
 |    alice      |   alice    | *HR*                |
 |    jdoe       |   jdoe     | *IT*                |
 
-Once started, you should be able to access your *Keycloak Server* at [localhost:8480/auth](http://localhost:8480/auth) with *admin* user.
+Once server is started, you should be able to access your *Keycloak Server* at [localhost:8480/auth](http://localhost:8480/auth) with *admin* user.
 
 ### Security using OpenID Connect
 
@@ -58,7 +58,7 @@ quarkus.http.auth.permission.authenticated.policy=authenticated
 
 > **_NOTE:_**  For more information about securing Quarkus applications with OpenID Connect, please refer to [Quarkus Documentation](https://quarkus.io/guides/security-openid-connect)
 
-It is also possible enabling authentication *Kogito Management Console* & *Kogito Task Console* using OpenID Connect, to do that you must start the consoles using the *keycloak* quarkus profile as a parameter (`-Dquarkus.profile=keycloak`). You can check the configuration on the project [docker-compose.yml](./docker-compose/docker-compose.yml) in [docker-compose](./docker-compose) folder.
+It is also possible to enable authentication *Kogito Management Console* & *Kogito Task Console* using OpenID Connect, to do that you must start the consoles using the *keycloak* quarkus profile as a parameter (`-Dquarkus.profile=keycloak`). You can check the configuration on the project [docker-compose.yml](./docker-compose/docker-compose.yml) in [docker-compose](./docker-compose) folder.
 
 > **_NOTE:_** For more information about how to secure Kogito Management Console with OpenID Connect, please refer to [Kogito Documentation](https://docs.jboss.org/kogito/release/latest/html_single/#proc-management-console-security_kogito-developing-process-services).
 > 
@@ -72,7 +72,7 @@ It is also possible enabling authentication *Kogito Management Console* & *Kogit
 
 * Java 11+ installed
 * Environment variable JAVA_HOME set accordingly
-* Maven 3.5.2+ installed
+* Maven 3.6.2+ installed
 * [jq](https://stedolan.github.io/jq) tool installed. You can download it from [here](https://stedolan.github.io/jq/download)
 * Docker and Docker Compose to run the required example infrastructure.
 
@@ -80,7 +80,7 @@ It is also possible enabling authentication *Kogito Management Console* & *Kogit
 
 This quickstart provides a docker compose template that starts all the required services. This setup ensures that all services are connected with a default configuration.
 
-You should start all the services before you execute any of the **Hiring** example, to do that please execute:
+Before you execute the **Hiring** example, start all the services by following these steps:
 
 For Linux and MacOS:
 
@@ -108,7 +108,7 @@ Once all services bootstrap, the following ports will be assigned on your local 
 
 > **_NOTE:_**  This step requires the project to be compiled, please consider runing a ```mvn clean compile``` command on the project root before running the ```startServices.sh``` script for the first time or any time you modify the project.
 
-Once started you can simply stop all services by executing the ```docker-compose stop```.
+To stop all services, execute ```docker-compose stop```.
 
 ### Starting the Hiring example
 
@@ -126,7 +126,7 @@ mvn clean package quarkus:dev
 
 ### Starting a Hiring Process
 
-Once the service is up and running you can making use of the **Hiring** application by a sending request to `http://localhost:8080/hiring`  with following content:
+Once the service is up and running you can make use of the **Hiring** application by a sending request to `http://localhost:8080/hiring`  with following content:
 ```json
 {   
     "candidate": {
@@ -166,13 +166,13 @@ EOF
 
 ### Kogito Management Console
 
-To access the Kogito Management Console just open your browser and navigate to ``http://localhost:8280``. You'll be redirected to the *Keycloak* login page
+To access the Kogito Management Console just open your browser and navigate to ``http://localhost:8280``. You'll be redirected to the *Keycloak* log in page.
 
 <p align="center">
     <img width=75%  src="docs/images/keycloak-login.png">
 </p>
 
-Once there, login using any of the users specified in the [Using Keycloak as Authentication Server](#using-keycloak-as-authentication-server)
+Once there, log in using any of the users specified in the [Using Keycloak as Authentication Server](#using-keycloak-as-authentication-server)
 
 <p align="center">
     <img width=75%  src="docs/images/management-console.png">
@@ -182,13 +182,13 @@ Once there, login using any of the users specified in the [Using Keycloak as Aut
 
 ### Kogito Task Console
 
-To access the Kogito Task Console just open your browser and navigate to ``http://localhost:8380``. You'll be redirected to the *Keycloak* login page
+To access the Kogito Task Console just open your browser and navigate to ``http://localhost:8380``. You'll be redirected to the *Keycloak* log in page.
 
 <p align="center">
     <img width=75%  src="docs/images/keycloak-login.png">
 </p>
 
-Once there, login with an *HR* user (for example *alice*) and you should be redirected to the user **Task Inbox**:
+Once there, log in with an *HR* user (for example *alice*) and you should be redirected to the user **Task Inbox**:
 
 <p align="center">
     <img width=75%  src="docs/images/task-console.png">
@@ -200,13 +200,13 @@ There you'll see all the tasks assigned to the user or to any of the group he be
     <img width=75%  src="docs/images/task-console-form.png">
 </p>
 
-Now the task should be completed and a new *IT Interview* task has started, let's login as an *IT* user to see it. To do that, first logout by clicking on the top-right username and press **Log out**. 
+Now the task should be completed and a new *IT Interview* task has started, let's log in as an *IT* user to see it. To do that, first log out by clicking on the top-right username and press **Log out**. 
 
 <p align="center">
     <img width=75%  src="docs/images/task-console-logout.png">
 </p>
 
-Now you'll be redirected again to the login page, login with an *IT* user (for example *jdoe*) and you'll get to it's **Task Inbox**
+Now you'll be redirected again to the log in page, log in with an *IT* user (for example *jdoe*) and you'll get to it's **Task Inbox**
 
 <p align="center">
     <img width=75%  src="docs/images/task-console-IT-inbox.png">
