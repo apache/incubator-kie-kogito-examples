@@ -61,7 +61,9 @@ quarkus.http.auth.permission.authenticated.policy=authenticated
 It is also possible enabling authentication *Kogito Management Console* & *Kogito Task Console* using OpenID Connect, to do that you must start the consoles using the *keycloak* quarkus profile as a parameter (`-Dquarkus.profile=keycloak`). You can check the configuration on the project [docker-compose.yml](./docker-compose/docker-compose.yml) in [docker-compose](./docker-compose) folder.
 
 > **_NOTE:_** For more information about how to secure Kogito Management Console with OpenID Connect, please refer to [Kogito Documentation](https://docs.jboss.org/kogito/release/latest/html_single/#proc-management-console-security_kogito-developing-process-services).
-> For more information about how to secure Kogito Task Console with OpenID Connect, please refer to [Kogito Documentation](https://docs.jboss.org/kogito/release/latest/html_single/#proc-task-console-security_kogito-developing-process-services)  
+> 
+> For more information about how to secure Kogito Task Console with OpenID Connect, please refer to [Kogito Documentation](https://docs.jboss.org/kogito/release/latest/html_single/#proc-task-console-security_kogito-developing-process-services)
+> 
 > For more information about authorization on Quarkus applications with OpenID Connect, please refer to [Quarkus Documentation](https://quarkus.io/guides/security-openid-connect-web-authentication)
 
 ## Running the Quickstart
@@ -71,6 +73,7 @@ It is also possible enabling authentication *Kogito Management Console* & *Kogit
 * Java 11+ installed
 * Environment variable JAVA_HOME set accordingly
 * Maven 3.5.2+ installed
+* [jq](https://stedolan.github.io/jq) tool installed. You can download it from [here](https://stedolan.github.io/jq/download)
 * Docker and Docker Compose to run the required example infrastructure.
 
 ### Starting the Kogito and Infrastructure Services
@@ -197,7 +200,13 @@ There you'll see all the tasks assigned to the user or to any of the group he be
     <img width=75%  src="docs/images/task-console-form.png">
 </p>
 
-Now the task should be completed and a new *IT Interview* task has started, let's login as an *IT* user to see it. To do that, first logout by clicking on the top-right username and press **Log out**. Now you'll be redirected again to the login page, login with an *IT* user (for example *jdoe*) and you'll get to it's **Task Inbox**
+Now the task should be completed and a new *IT Interview* task has started, let's login as an *IT* user to see it. To do that, first logout by clicking on the top-right username and press **Log out**. 
+
+<p align="center">
+    <img width=75%  src="docs/images/task-console-logout.png">
+</p>
+
+Now you'll be redirected again to the login page, login with an *IT* user (for example *jdoe*) and you'll get to it's **Task Inbox**
 
 <p align="center">
     <img width=75%  src="docs/images/task-console-IT-inbox.png">
