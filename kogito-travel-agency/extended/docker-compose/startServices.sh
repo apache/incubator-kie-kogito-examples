@@ -53,4 +53,27 @@ else
     exit 1
 fi
 
+SVG_FOLDER=./svg
+
+KOGITO_TRAVEL_SVG_FOLDER=../travels/target/classes/META-INF/processSVG
+KOGITO_VISAS_SVG_FOLDER=../visas/target/classes/META-INF/processSVG
+
+mkdir -p $SVG_FOLDER
+
+if [ -d "$KOGITO_TRAVEL_SVG_FOLDER" ]
+then
+    cp $KOGITO_TRAVEL_SVG_FOLDER/*.svg $SVG_FOLDER
+else
+    echo "$KOGITO_TRAVEL_SVG_FOLDER does not exist. Have you compiled Kogito Travel Agency project?"
+    exit 1
+fi
+
+if [ -d "$KOGITO_VISAS_SVG_FOLDER" ]
+then
+    cp $KOGITO_VISAS_SVG_FOLDER/*.svg $SVG_FOLDER
+else
+    echo "$KOGITO_VISAS_SVG_FOLDER does not exist. Have you compiled Kogito Visas project?"
+    exit 1
+fi
+
 docker-compose up
