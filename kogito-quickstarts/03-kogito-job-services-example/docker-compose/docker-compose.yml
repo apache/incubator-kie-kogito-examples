@@ -67,6 +67,24 @@ services:
       KAFKA_BOOTSTRAP_SERVERS: kafka:29092
       KOGITO_DATA_INDEX_PROPS: -Dkogito.protobuf.folder=/home/kogito/data/protobufs/
 
+  jobs-service:
+    container_name: jobs-service
+    network_mode: "host"
+    image: quay.io/kiegroup/kogito-jobs-service-nightly:${KOGITO_VERSION}
+    ports:
+      - "8580:8080"
+    depends_on:
+      kafka:
+        condition: service_started
+      infinispan:
+        condition: service_healthy
+      data-index:
+        condition: service_started
+    environment: 
+      ENABLE_EVENTS: "true"
+      KOGITO_JOBS_PROPS: -Dquarkus-profile=events-support -D%events-support.quarkus.http.port=8580 -D%events-support.kafka.bootstrap.servers=localhost:9092
+                         -D%events-support.mp.messaging.outgoing.kogito-job-service-job-status-events.bootstrap.servers=localhost:9092
+                         
   management-console:
    container_name: management-console
    image: quay.io/kiegroup/kogito-management-console-nightly:${KOGITO_VERSION}
@@ -74,6 +92,8 @@ services:
      - 8280:8080
    depends_on:
      data-index:
+       condition: service_started
+     jobs-service:
        condition: service_started
 
   task-console:

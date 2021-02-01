@@ -16,6 +16,7 @@
     <modules>
         <module>01-kogito-basic-example</module>
         <module>02-kogito-auth-example</module>
+        <module>03-kogito-job-services-example</module>
     </modules>
 
 </project>
