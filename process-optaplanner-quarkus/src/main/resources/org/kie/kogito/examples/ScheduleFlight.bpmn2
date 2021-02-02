@@ -164,7 +164,7 @@
       <bpmn2:outgoing>_4F515548-C937-4BA7-84D5-21776CFD70D5</bpmn2:outgoing>
       <bpmn2:script>kcontext.setVariable("isPassengerListFinalized", false);
 kcontext.setVariable("isSolving", true);
-kcontext.setVariable("processId", (( org.kie.kogito.process.runtime.KogitoProcessInstance )kcontext.getProcessInstance()).getStringId());</bpmn2:script>
+kcontext.setVariable("processId", (( org.kie.kogito.internal.process.runtime.KogitoProcessInstance )kcontext.getProcessInstance()).getStringId());</bpmn2:script>
     </bpmn2:scriptTask>
     <bpmn2:serviceTask id="_33D305B7-7E3C-4704-860C-F3B6C4262B37" drools:serviceimplementation="Java" drools:serviceinterface="org.kie.kogito.examples.service.FlightSeatingSolveService" drools:serviceoperation="assignSeats" name="Create Seat Assignments" implementation="Java" operationRef="_33D305B7-7E3C-4704-860C-F3B6C4262B37_ServiceOperation">
       <bpmn2:extensionElements>

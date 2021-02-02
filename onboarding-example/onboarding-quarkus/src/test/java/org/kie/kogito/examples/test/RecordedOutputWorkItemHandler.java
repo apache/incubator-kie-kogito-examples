@@ -20,9 +20,9 @@ import java.util.Map;
 import java.util.function.Function;
 
 import org.kie.api.runtime.process.WorkItem;
-import org.kie.kogito.process.runtime.KogitoWorkItem;
-import org.kie.kogito.process.runtime.KogitoWorkItemHandler;
-import org.kie.kogito.process.runtime.KogitoWorkItemManager;
+import org.kie.kogito.internal.process.runtime.KogitoWorkItem;
+import org.kie.kogito.internal.process.runtime.KogitoWorkItemHandler;
+import org.kie.kogito.internal.process.runtime.KogitoWorkItemManager;
 
 
 public class RecordedOutputWorkItemHandler implements KogitoWorkItemHandler {

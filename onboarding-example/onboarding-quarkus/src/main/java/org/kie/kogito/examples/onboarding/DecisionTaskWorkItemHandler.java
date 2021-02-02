@@ -20,8 +20,8 @@ import java.util.Map;
 import org.kie.kogito.cloud.workitems.DiscoveredServiceWorkItemHandler;
 import org.kie.kogito.cloud.workitems.HttpMethods;
 import org.kie.kogito.cloud.workitems.ServiceInfo;
-import org.kie.kogito.process.runtime.KogitoWorkItem;
-import org.kie.kogito.process.runtime.KogitoWorkItemManager;
+import org.kie.kogito.internal.process.runtime.KogitoWorkItem;
+import org.kie.kogito.internal.process.runtime.KogitoWorkItemManager;
 
 public class DecisionTaskWorkItemHandler extends DiscoveredServiceWorkItemHandler {
 
