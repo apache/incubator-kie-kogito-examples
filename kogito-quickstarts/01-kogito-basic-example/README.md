@@ -20,7 +20,7 @@ The required *Kogito and Infrastructure Services* for this example are:
 
 * Java 11+ installed
 * Environment variable JAVA_HOME set accordingly
-* Maven 3.5.2+ installed
+* Maven 3.6.2+ installed
 * Docker and Docker Compose to run the required example infrastructure.
 
 ### Starting the Kogito and Infrastructure Services
@@ -70,19 +70,29 @@ cd <path_to_kogito_quickstart>/
 mvn clean package quarkus:dev
 ```
 
-Once the service is up and running you can POST to `http://localhost:8080/hiring` to start creating instances of the 
-**Hiring**.
+### Starting a Hiring Process
 
-For example on a Terminal by executing:
+Once the service is up and running you can make use of the **Hiring** application by a sending request to `http://localhost:8080/hiring`  with following content:
+```json
+{   
+    "candidate": {
+        "name": "Jon Snow",
+        "email": "jsnow@example.com",
+        "salary": 30000,
+        "skills": "Java, Kogito"
+    }
+}
+```
 
+In a Terminal you can execute this command to start a **Hiring** process for the "Jon Snow" candidate:
 ```bash
 curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST http://localhost:8080/hiring -d @- << EOF
 {   
     "candidate": {
-        "name": "John Doe",
+        "name": "Jon Snow",
         "email": "jdoe@example.com",
         "salary": 30000,
-        "skills": "Java, Kogito", 
+        "skills": "Java, Kogito"
     }
 }
 EOF
@@ -100,8 +110,7 @@ To access the Kogito Management Console just open your browser and navigate to `
 
 ### Kogito Task Console
 
-To access the Kogito Task Console just open your browser and navigate to ``http://localhost:8380`` and you should be
-redirected to the Task Inbox.
+To access the Kogito Task Console just open your browser and navigate to ``http://localhost:8380`` and you should be redirected to the **Task Inbox**.
 
 <p align="center">
     <img width=75%  src="docs/images/task-console.png">
