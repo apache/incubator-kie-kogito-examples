@@ -1,5 +1,5 @@
 /**
- *  Copyright 2020 Red Hat, Inc. and/or its affiliates.
+ *  Copyright 2021 Red Hat, Inc. and/or its affiliates.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -17,11 +17,11 @@ package org.kie.kogito.examples.onboarding;
 
 import java.util.Map;
 
-import org.kie.api.runtime.process.WorkItem;
-import org.kie.api.runtime.process.WorkItemManager;
 import org.kie.kogito.cloud.workitems.DiscoveredServiceWorkItemHandler;
 import org.kie.kogito.cloud.workitems.HttpMethods;
 import org.kie.kogito.cloud.workitems.ServiceInfo;
+import org.kie.kogito.process.runtime.KogitoWorkItem;
+import org.kie.kogito.process.runtime.KogitoWorkItemManager;
 
 public class DecisionTaskWorkItemHandler extends DiscoveredServiceWorkItemHandler {
 
@@ -37,14 +37,14 @@ public class DecisionTaskWorkItemHandler extends DiscoveredServiceWorkItemHandle
     }
 
     @Override
-    public void executeWorkItem(WorkItem workItem, WorkItemManager manager) {
+    public void executeWorkItem( KogitoWorkItem workItem, KogitoWorkItemManager manager) {
         Map<String, Object> results = discoverAndCall(workItem, System.getenv("NAMESPACE"), "Decision", HttpMethods.POST);
 
         manager.completeWorkItem(workItem.getId(), results);
     }
 
     @Override
-    public void abortWorkItem(WorkItem workItem, WorkItemManager manager) {
+    public void abortWorkItem(KogitoWorkItem workItem, KogitoWorkItemManager manager) {
 
     }
 
