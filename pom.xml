@@ -48,7 +48,7 @@
     <kogito.version>${project.version}</kogito.version>
     <version.org.optaplanner>8.3.0-SNAPSHOT</version.org.optaplanner>
     <!-- license plugin -->
-    <version.license.plugin>3.0</version.license.plugin>
+    <version.license.plugin>4.0.rc2</version.license.plugin>
     <skipLicensesCheck>false</skipLicensesCheck>
     <!-- pmml -->
     <version.org.jpmml>1.5.1</version.org.jpmml>
