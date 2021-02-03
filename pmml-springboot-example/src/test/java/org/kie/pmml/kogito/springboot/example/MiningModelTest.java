@@ -15,26 +15,27 @@
  */
 package org.kie.pmml.kogito.springboot.example;
 
+import java.util.Collections;
 import java.util.Map;
 
 import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
-import org.hamcrest.core.IsNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.annotation.DirtiesContext;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.kie.pmml.kogito.springboot.example.CommonTestUtils.testDescriptive;
+import static org.kie.pmml.kogito.springboot.example.CommonTestUtils.testDescriptiveWrongData;
+import static org.kie.pmml.kogito.springboot.example.CommonTestUtils.testResult;
+import static org.kie.pmml.kogito.springboot.example.CommonTestUtils.testResultWrongData;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class MiningModelTest {
+
+    private static final String BASE_PATH = "/PredicatesMining/";
+    private static final String TARGET = "categoricalResult";
 
     @LocalServerPort
     private int port;
@@ -45,7 +46,7 @@ public class MiningModelTest {
     }
 
     @Test
-    public void testEvaluatePredicatesMining() {
+    void testEvaluatePredicatesMiningResult() {
         String inputData = "{\"residenceState\":\"AP\", " +
                 "\"validLicense\":true, " +
                 "\"occupation\":\"ASTRONAUT\", " +
@@ -53,25 +54,43 @@ public class MiningModelTest {
                 "\"categoricalX\":\"red\", " +
                 "\"variable\":6.6, " +
                 "\"age\":25.0}";
-        Object resultVariables =  given()
-                .contentType(ContentType.JSON)
-                .body(inputData)
-                .when()
-                .post("/PredicatesMining")
-                .then()
-                .statusCode(200)
-                .body("correlationId", is(new IsNull()))
-                .body("segmentationId", is(new IsNull()))
-                .body("segmentId", is(new IsNull()))
-                .body("segmentIndex", is(0)) // as JSON is not schema aware, here we assert the RAW string
-                .body("resultCode", is("OK"))
-                .body("resultObjectName", is("categoricalResult"))
-                .extract()
-                .path("resultVariables");
-        assertNotNull(resultVariables);
-        assertTrue(resultVariables instanceof Map);
-        Map<String, Object> mappedResultVariables = (Map) resultVariables;
-        assertTrue(mappedResultVariables.containsKey("categoricalResult"));
-        assertEquals( 1.381666666666666f, mappedResultVariables.get("categoricalResult"));
+        testResult(inputData, BASE_PATH, TARGET, 1.381666666666666f);
+    }
+
+    @Test
+    void testEvaluatePredicatesMiningResultWrongData() {
+        String inputData = "{\"residenceState\":\"AP\", " +
+                "\"validLicense\":true, " +
+                "\"occupation\":\"ASTRONAUT\", " +
+                "\"categoricalY\":\"classA\", " +
+                "\"categoricalX\":\"red\", " +
+                "\"variable\":6.6, " +
+                "\"age\":\"b\"}";
+        testResultWrongData(inputData, BASE_PATH);
+    }
+
+    @Test
+    void testEvaluatePredicatesMiningDescriptive() {
+        String inputData = "{\"residenceState\":\"AP\", " +
+                "\"validLicense\":true, " +
+                "\"occupation\":\"ASTRONAUT\", " +
+                "\"categoricalY\":\"classA\", " +
+                "\"categoricalX\":\"red\", " +
+                "\"variable\":6.6, " +
+                "\"age\":25.0}";
+        final Map<String, Object> expectedResultMap = Collections.singletonMap(TARGET, 1.381666666666666f);
+        testDescriptive(inputData, BASE_PATH, TARGET, expectedResultMap);
+    }
+
+    @Test
+    void testEvaluatePredicatesMiningDescriptiveWrongData() {
+        String inputData = "{\"residenceState\":\"AP\", " +
+                "\"validLicense\":true, " +
+                "\"occupation\":\"ASTRONAUT\", " +
+                "\"categoricalY\":\"classA\", " +
+                "\"categoricalX\":\"red\", " +
+                "\"variable\":6.6, " +
+                "\"age\":\"b\"}";
+        testDescriptiveWrongData(inputData, BASE_PATH);
     }
 }

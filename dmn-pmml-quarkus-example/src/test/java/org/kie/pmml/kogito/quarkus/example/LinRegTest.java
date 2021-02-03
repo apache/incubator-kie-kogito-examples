@@ -15,6 +15,7 @@
  */
 package org.kie.pmml.kogito.quarkus.example;
 
+import java.util.Collections;
 import java.util.Map;
 
 import io.quarkus.test.junit.QuarkusTest;
@@ -28,36 +29,43 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.kie.pmml.kogito.quarkus.example.CommonTestUtils.testDescriptive;
+import static org.kie.pmml.kogito.quarkus.example.CommonTestUtils.testDescriptiveWrongData;
+import static org.kie.pmml.kogito.quarkus.example.CommonTestUtils.testResult;
+import static org.kie.pmml.kogito.quarkus.example.CommonTestUtils.testResultWrongData;
 
 @QuarkusTest
 public class LinRegTest {
+
+    private static final String BASE_PATH = "/LinReg";
+    private static final String TARGET = "fld4";
 
     static {
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
     }
 
     @Test
-    public void testEvaluateLinReg() {
+    void testEvaluateLinRegResult() {
         String inputData = "{\"fld1\":3.0, \"fld2\":2.0, \"fld3\":\"y\"}";
-        Object resultVariables =  given()
-                .contentType(ContentType.JSON)
-                .body(inputData)
-                .when()
-                .post("/LinReg")
-                .then()
-                .statusCode(200)
-                .body("correlationId", is(new IsNull()))
-                .body("segmentationId", is(new IsNull()))
-                .body("segmentId", is(new IsNull()))
-                .body("segmentIndex", is(0)) // as JSON is not schema aware, here we assert the RAW string
-                .body("resultCode", is("OK"))
-                .body("resultObjectName", is("fld4"))
-                .extract()
-                .path("resultVariables");
-        assertNotNull(resultVariables);
-        assertTrue(resultVariables instanceof Map);
-        Map<String, Object> mappedResultVariables = (Map) resultVariables;
-        assertTrue(mappedResultVariables.containsKey("fld4"));
-        assertEquals(52.5f, mappedResultVariables.get("fld4"));
+        testResult(inputData, BASE_PATH, TARGET, 52.5f);
+    }
+
+    @Test
+    void testEvaluateLinRegResultWrongData() {
+        String inputData = "{\"fld1\":\"a\", \"fld2\":2, \"fld3\":\"y\"}";
+        testResultWrongData(inputData, BASE_PATH);
+    }
+
+    @Test
+    void testEvaluateLinRegDescriptive() {
+        String inputData = "{\"fld1\":3.0, \"fld2\":2.0, \"fld3\":\"y\"}";
+        final Map<String, Object> expectedResultMap = Collections.singletonMap(TARGET, 52.5f);
+        testDescriptive(inputData, BASE_PATH, TARGET, expectedResultMap);
+    }
+
+    @Test
+    void testEvaluateLinRegDescriptiveWrongData() {
+        String inputData = "{\"fld1\":\"a\", \"fld2\":2, \"fld3\":\"y\"}";
+        testDescriptiveWrongData(inputData, BASE_PATH);
     }
 }

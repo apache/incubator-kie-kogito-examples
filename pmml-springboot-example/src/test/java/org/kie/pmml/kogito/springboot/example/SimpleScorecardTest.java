@@ -15,6 +15,7 @@
  */
 package org.kie.pmml.kogito.springboot.example;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import io.restassured.RestAssured;
@@ -32,10 +33,17 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.kie.pmml.kogito.springboot.example.CommonTestUtils.testDescriptive;
+import static org.kie.pmml.kogito.springboot.example.CommonTestUtils.testDescriptiveWrongData;
+import static org.kie.pmml.kogito.springboot.example.CommonTestUtils.testResult;
+import static org.kie.pmml.kogito.springboot.example.CommonTestUtils.testResultWrongData;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class SimpleScorecardTest {
+
+    private static final String BASE_PATH = "/SimpleScorecard/";
+    private static final String TARGET = "score";
 
     @LocalServerPort
     private int port;
@@ -46,33 +54,31 @@ public class SimpleScorecardTest {
     }
 
     @Test
-    public void testEvaluateSimpleScorecard() {
+    void testEvaluateSimpleScorecardResult() {
         String inputData = "{\"input1\":5.0, \"input2\":-10.0}";
-        Object resultVariables =  given()
-                .contentType(ContentType.JSON)
-                .body(inputData)
-                .when()
-                .post("/SimpleScorecard")
-                .then()
-                .statusCode(200)
-                .body("correlationId", is(new IsNull()))
-                .body("segmentationId", is(new IsNull()))
-                .body("segmentId", is(new IsNull()))
-                .body("segmentIndex", is(0)) // as JSON is not schema aware, here we assert the RAW string
-                .body("resultCode", is("OK"))
-                .body("resultObjectName", is("score"))
-                .extract()
-                .path("resultVariables");
-        assertNotNull(resultVariables);
-        assertTrue(resultVariables instanceof Map);
-        Map<String, Object> mappedResultVariables = (Map) resultVariables;
-        assertTrue(mappedResultVariables.containsKey("score"));
-        assertEquals(-15.0f, mappedResultVariables.get("score"));
-        assertTrue(mappedResultVariables.containsKey("Score"));
-        assertEquals(-15.0f, mappedResultVariables.get("Score"));
-        assertTrue(mappedResultVariables.containsKey("Reason Code 1"));
-        assertEquals("Input1ReasonCode", mappedResultVariables.get("Reason Code 1"));
-        assertTrue(mappedResultVariables.containsKey("Reason Code 2"));
-        assertEquals("Input2ReasonCode", mappedResultVariables.get("Reason Code 2"));
+        testResult(inputData, BASE_PATH, TARGET, -15.0f);
     }
+
+    @Test
+    void testEvaluateSimpleScorecardResultWrongData() {
+        String inputData = "{\"input1\":\"b\", \"input2\":-10.0}";
+        testResultWrongData(inputData, BASE_PATH);
+    }
+
+    @Test
+    void testEvaluateSimpleScorecardDescriptive() {
+        String inputData = "{\"input1\":5.0, \"input2\":-10.0}";
+        final Map<String, Object> expectedResultMap = new HashMap<>();
+        expectedResultMap.put(TARGET, -15.0f);
+        expectedResultMap.put("Reason Code 1", "Input1ReasonCode");
+        expectedResultMap.put("Reason Code 2", "Input2ReasonCode");
+        testDescriptive(inputData, BASE_PATH, TARGET, expectedResultMap);
+    }
+
+    @Test
+    void testEvaluateSimpleScorecardDescriptiveWrongData() {
+        String inputData = "{\"input1\":\"b\", \"input2\":-10.0}";
+        testDescriptiveWrongData(inputData, BASE_PATH);
+    }
+
 }

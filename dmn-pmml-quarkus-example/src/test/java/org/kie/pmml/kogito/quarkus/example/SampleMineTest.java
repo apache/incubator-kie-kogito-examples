@@ -15,6 +15,7 @@
  */
 package org.kie.pmml.kogito.quarkus.example;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import io.quarkus.test.junit.QuarkusTest;
@@ -28,38 +29,45 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.kie.pmml.kogito.quarkus.example.CommonTestUtils.testDescriptive;
+import static org.kie.pmml.kogito.quarkus.example.CommonTestUtils.testDescriptiveWrongData;
+import static org.kie.pmml.kogito.quarkus.example.CommonTestUtils.testResult;
+import static org.kie.pmml.kogito.quarkus.example.CommonTestUtils.testResultWrongData;
 
 @QuarkusTest
 public class SampleMineTest {
+
+    private static final String BASE_PATH = "/SampleMine";
+    private static final String TARGET = "decision";
 
     static {
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
     }
 
     @Test
-    public void testEvaluateSampleMine() {
+    void testEvaluateSampleMineResult() {
         String inputData = "{\"temperature\":30.0, \"humidity\":10.0}";
-        Object resultVariables =  given()
-                .contentType(ContentType.JSON)
-                .body(inputData)
-                .when()
-                .post("/SampleMine")
-                .then()
-                .statusCode(200)
-                .body("correlationId", is(new IsNull()))
-                .body("segmentationId", is(new IsNull()))
-                .body("segmentId", is(new IsNull()))
-                .body("segmentIndex", is(0)) // as JSON is not schema aware, here we assert the RAW string
-                .body("resultCode", is("OK"))
-                .body("resultObjectName", is("decision"))
-                .extract()
-                .path("resultVariables");
-        assertNotNull(resultVariables);
-        assertTrue(resultVariables instanceof Map);
-        Map<String, Object> mappedResultVariables = (Map) resultVariables;
-        assertTrue(mappedResultVariables.containsKey("decision"));
-        assertEquals("sunglasses", mappedResultVariables.get("decision"));
-        assertTrue(mappedResultVariables.containsKey("weatherdecision"));
-        assertEquals("sunglasses", mappedResultVariables.get("weatherdecision"));
+        testResult(inputData, BASE_PATH, TARGET, "sunglasses");
+    }
+
+    @Test
+    void testEvaluateSampleMineResultWrongData() {
+        String inputData = "{\"temperature\":\"b\", \"humidity\":10.0}";
+        testResultWrongData(inputData, BASE_PATH);
+    }
+
+    @Test
+    void testEvaluateSampleMineDescriptive() {
+        String inputData = "{\"temperature\":30.0, \"humidity\":10.0}";
+        final Map<String, Object> expectedResultMap = new HashMap<>();
+        expectedResultMap.put(TARGET, "sunglasses");
+        expectedResultMap.put("weatherdecision", "sunglasses");
+        testDescriptive(inputData, BASE_PATH, TARGET, expectedResultMap);
+    }
+
+    @Test
+    void testEvaluateSampleMineDescriptiveWrongData() {
+        String inputData = "{\"temperature\":\"b\", \"humidity\":10.0}";
+        testDescriptiveWrongData(inputData, BASE_PATH);
     }
 }
