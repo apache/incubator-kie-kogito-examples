@@ -50,7 +50,7 @@ minikube addons enable olm
 Set the Kogito release version 
 
 ```bash
-KOGITO_VERSION=1.1.0
+KOGITO_VERSION=1.2.0
 ```
 
 and then download/unpack the kogito operator
@@ -116,7 +116,7 @@ metadata:
 spec:
   serviceType: TrustyUI
   replicas: 1
-  image: quay.io/kiegroup/kogito-trusty-ui:1.1
+  image: quay.io/kiegroup/kogito-trusty-ui:1.2
   env:
     - name: KOGITO_TRUSTY_ENDPOINT
       value: http://172.17.0.2:1337
