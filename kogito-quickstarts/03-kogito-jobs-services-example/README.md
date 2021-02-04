@@ -1,16 +1,15 @@
-# 01.- Kogito Basic Example
+# 03.- Kogito Jobs Services Example
 
 ## Description
 
-This Quickstart showcases a basic implementation of the **Hiring** process. 
-
-For simplicity, this example doesn't include any authentication mechanism, so all tasks in will be assigned to a default user `john`.
+This Quickstart showcases a implementation of the **Hiring** process with **Jobs Services**, to add timer between nodes of a process and to execute a job. Those jobs can be rescheduled or cancelled by interacting with Management console application.
 
 The required *Kogito and Infrastructure Services* for this example are:
 
 - Infinispan
 - Kafka
 - Kogito Data Index
+- Kogito Jobs Services
 - Kogito Management Console
 - Kogito Task Console
 
@@ -49,6 +48,7 @@ Once all services bootstrap, the following ports will be assigned on your local 
 - Infinispan: 11222
 - Kafka: 9092
 - Data Index: 8180
+- Jobs Services: 8580
 - Management Console: 8280
 - Task Console: 8380
 
@@ -78,7 +78,12 @@ Jobs Service is a dedicated lightweight service responsible for scheduling jobs 
 
 * Adding job to a process
 
-You can add an intermediate timer to the hiring.bpmn file between the nodes and set a timer on the timer's properties. After adding a timer, create a new hiring process like below
+In this example, a timer is added between *HR interview* and *IT interview* which executes a job. This job can be rescheduled or cancelled on Management console application
+
+<p align="center">
+    <img width=75%  src="docs/images/process-with-job.png">
+</p>
+
 
 In a Terminal you can execute this command to start a **Hiring** process for the "Harry Potter" candidate:
 ```bash
@@ -119,6 +124,19 @@ To access the Kogito Management Console just open your browser and navigate to `
 
 > **_NOTE:_**  For more information about how to work with Kogito Management Console, please refer to the [Kogito Documentation](https://docs.jboss.org/kogito/release/latest/html_single/#con-management-console_kogito-developing-process-services) page.
 
+Jobs can be accessed in two ways on Management console:
+
+You can navigate to process details page which has dedicated panel showing a list of jobs assocaited with the process instance.
+
+<p align="center">
+    <img width=75%  src="docs/images/JobsPanel.png">
+</p>
+
+You can also check list of all the jobs available by navigating to jobs section.
+
+<p align="center">
+    <img width=75%  src="docs/images/JobsManagement.png">
+</p>
 
 ### Kogito Task Console
 
