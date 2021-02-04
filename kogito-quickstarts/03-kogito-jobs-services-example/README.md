@@ -74,9 +74,9 @@ mvn clean package quarkus:dev
 
 Jobs Service is a dedicated lightweight service responsible for scheduling jobs that aim to be fired at a given time.
 
+> **_NOTE:_**  For more information about how to work with Jobs service on Management Console, please refer to the [Kogito Documentation](https://docs.jboss.org/kogito/release/latest/html_single/
+#con-jobs-service_kogito-configuring) page.
 ### Starting a Hiring Process with Job service
-
-* Adding job to a process
 
 In this example, a timer is added between *HR interview* and *IT interview* which executes a job. This job can be rescheduled or cancelled on Management console application
 
@@ -123,6 +123,7 @@ To access the Kogito Management Console just open your browser and navigate to `
 </p>
 
 > **_NOTE:_**  For more information about how to work with Kogito Management Console, please refer to the [Kogito Documentation](https://docs.jboss.org/kogito/release/latest/html_single/#con-management-console_kogito-developing-process-services) page.
+
 
 Jobs can be accessed in two ways on Management console:
 
