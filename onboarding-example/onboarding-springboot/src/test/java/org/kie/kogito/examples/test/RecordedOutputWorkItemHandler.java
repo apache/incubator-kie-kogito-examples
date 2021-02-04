@@ -1,5 +1,5 @@
 /**
- *  Copyright 2020 Red Hat, Inc. and/or its affiliates.
+ *  Copyright 2021 Red Hat, Inc. and/or its affiliates.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -20,22 +20,24 @@ import java.util.Map;
 import java.util.function.Function;
 
 import org.kie.api.runtime.process.WorkItem;
-import org.kie.api.runtime.process.WorkItemHandler;
-import org.kie.api.runtime.process.WorkItemManager;
+import org.kie.kogito.internal.process.runtime.KogitoWorkItem;
+import org.kie.kogito.internal.process.runtime.KogitoWorkItemHandler;
+import org.kie.kogito.internal.process.runtime.KogitoWorkItemManager;
 
-public class RecordedOutputWorkItemHandler implements WorkItemHandler {
-    
+
+public class RecordedOutputWorkItemHandler implements KogitoWorkItemHandler {
+
     private Map<String, Function<WorkItem, Map<String, Object>>> recorded = new HashMap<>();
 
     @Override
-    public void executeWorkItem(WorkItem workItem, WorkItemManager manager) {
+    public void executeWorkItem( KogitoWorkItem workItem, KogitoWorkItemManager manager) {
         Map<String, Object> results = recorded.remove(workItem.getParameter("TaskName")).apply(workItem);
 
-        manager.completeWorkItem(workItem.getId(), results);
+        manager.completeWorkItem(workItem.getStringId(), results);
     }
 
     @Override
-    public void abortWorkItem(WorkItem workItem, WorkItemManager manager) {
+    public void abortWorkItem(KogitoWorkItem workItem, KogitoWorkItemManager manager) {
 
     }
 
