@@ -1,6 +1,6 @@
 ## Kogito and Infrastructure services
 
-To allow a quick setup of all the required services to run this demo, we provide a Docker Compose template that starts the following services:
+To allow a quick setup of all services required to run this demo, we provide a docker compose template that starts the following services:
 - Infinispan
 - Kafka
 - Kogito Data Index
@@ -21,12 +21,11 @@ In order to use it, please ensure you have Docker Compose installed on your mach
 
   For Windows:
    
-  1. Create a .env file with the content containing the version of the Kogito images you would like to run, 
-  for example:
+  Create a .env file with the content containing the version of the Kogito images you would like to run, example:
 
     KOGITO_VERSION=1.0.0
 
-  2. Execute the following command. 
+  Then run
 
     docker-compose up
 
