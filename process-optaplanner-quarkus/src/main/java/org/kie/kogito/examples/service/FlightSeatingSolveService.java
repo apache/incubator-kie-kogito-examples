@@ -37,16 +37,16 @@ public class FlightSeatingSolveService {
 
     public void assignSeats(String id, Flight problem) {
         solverManager.solveAndListen(id, (problemId) -> problem, bestSolution -> {
-                                         process.instances().findById(id).ifPresent(pi -> {
-                                             pi.send(Sig.of("newSolution", bestSolution));
-                                         });
-                                     }, finalBestSolution -> {
-                                         process.instances().findById(id).ifPresent(pi -> {
-                                             pi.send(Sig.of("solvingTerminated", finalBestSolution));
-                                         });
-                                     },
-                                     (message, exception) -> {
-                                         process.instances().findById(id).ifPresent(ProcessInstance::abort);
-                                     });
+            process.instances().findById(id).ifPresent(pi -> {
+                pi.send(Sig.of("newSolution", bestSolution));
+            });
+        }, finalBestSolution -> {
+            process.instances().findById(id).ifPresent(pi -> {
+                pi.send(Sig.of("solvingTerminated", finalBestSolution));
+            });
+        },
+                (message, exception) -> {
+                    process.instances().findById(id).ifPresent(ProcessInstance::abort);
+                });
     }
 }

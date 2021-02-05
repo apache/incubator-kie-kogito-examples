@@ -23,11 +23,11 @@ public class Payroll implements java.io.Serializable {
 
     static final long serialVersionUID = 1L;
 
-	private java.math.BigDecimal vacationDays;
-	private java.math.BigDecimal taxRate;
-	private String paymentDate;
-	
-	private org.kie.kogito.examples.payroll.Employee employee;
+    private java.math.BigDecimal vacationDays;
+    private java.math.BigDecimal taxRate;
+    private String paymentDate;
+
+    private org.kie.kogito.examples.payroll.Employee employee;
 
     public org.kie.kogito.examples.payroll.Employee getEmployee() {
         return employee;
@@ -37,37 +37,37 @@ public class Payroll implements java.io.Serializable {
         this.employee = employee;
     }
 
-	public Payroll() {
-	}
+    public Payroll() {
+    }
 
-	public java.math.BigDecimal getVacationDays() {
-		return this.vacationDays;
-	}
+    public java.math.BigDecimal getVacationDays() {
+        return this.vacationDays;
+    }
 
-	public void setVacationDays(java.math.BigDecimal vacationDays) {
-		this.vacationDays = vacationDays;
-	}
+    public void setVacationDays(java.math.BigDecimal vacationDays) {
+        this.vacationDays = vacationDays;
+    }
 
-	public java.math.BigDecimal getTaxRate() {
-		return this.taxRate;
-	}
+    public java.math.BigDecimal getTaxRate() {
+        return this.taxRate;
+    }
 
-	public void setTaxRate(java.math.BigDecimal taxRate) {
-		this.taxRate = taxRate;
-	}
+    public void setTaxRate(java.math.BigDecimal taxRate) {
+        this.taxRate = taxRate;
+    }
 
-	public String getPaymentDate() {
-		return this.paymentDate;
-	}
+    public String getPaymentDate() {
+        return this.paymentDate;
+    }
 
-	public void setPaymentDate(String paymentDate) {
-		this.paymentDate = paymentDate;
-	}
+    public void setPaymentDate(String paymentDate) {
+        this.paymentDate = paymentDate;
+    }
 
-	public Payroll(java.math.BigDecimal vacationDays, java.math.BigDecimal taxRate,
-	               String paymentDate) {
-		this.vacationDays = vacationDays;
-		this.taxRate = taxRate;
-		this.paymentDate = paymentDate;
-	}
+    public Payroll(java.math.BigDecimal vacationDays, java.math.BigDecimal taxRate,
+            String paymentDate) {
+        this.vacationDays = vacationDays;
+        this.taxRate = taxRate;
+        this.paymentDate = paymentDate;
+    }
 }

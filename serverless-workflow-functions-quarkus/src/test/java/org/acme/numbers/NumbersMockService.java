@@ -15,37 +15,38 @@
  */
 package org.acme.numbers;
 
-import java.util.Collections;
-import java.util.Map;
-
-import com.github.tomakehurst.wiremock.WireMockServer;
-import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
-
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.get;
 import static com.github.tomakehurst.wiremock.client.WireMock.post;
 import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 
-public class NumbersMockService implements QuarkusTestResourceLifecycleManager{
+import java.util.Collections;
+import java.util.Map;
+
+import com.github.tomakehurst.wiremock.WireMockServer;
+
+import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
+
+public class NumbersMockService implements QuarkusTestResourceLifecycleManager {
 
     private WireMockServer wireMockServer;
-    
+
     @Override
     public Map<String, String> start() {
         wireMockServer = new WireMockServer(8080);
-        wireMockServer.start(); 
-        stubFor(get(urlEqualTo("/numbers/random"))   
-               .willReturn(aResponse()
-                       .withHeader("Content-Type", "application/json")
-                       .withBody("{\"randomNumber\": 1}")));
-        
+        wireMockServer.start();
+        stubFor(get(urlEqualTo("/numbers/random"))
+                .willReturn(aResponse()
+                        .withHeader("Content-Type", "application/json")
+                        .withBody("{\"randomNumber\": 1}")));
+
         stubFor(post(urlEqualTo("/numbers/1/multiplyByAndSum"))
                 .willReturn(aResponse()
                         .withHeader("Content-Type", "application/json")
                         .withBody("{\"sum\": 34}")));
-        
-      return Collections.emptyMap();
+
+        return Collections.emptyMap();
     }
 
     @Override

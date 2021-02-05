@@ -613,7 +613,7 @@
               <skip>${skipLicensesCheck}</skip>
             </configuration>
             <goals>
-              <goal>check</goal>
+              <goal>format</goal>
             </goals>
           </execution>
         </executions>

@@ -15,9 +15,10 @@
  */
 package org.kie.dmn.kogito.quarkus.tracing;
 
+import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
+
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.NativeImageTest;
-import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 
 @NativeImageTest
 @QuarkusTestResource(KafkaQuarkusTestResource.class)

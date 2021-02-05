@@ -19,13 +19,9 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.inject.Inject;
-import javax.inject.Named;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,12 +29,11 @@ import org.kie.kogito.Model;
 import org.kie.kogito.examples.domain.FlightDTO;
 import org.kie.kogito.examples.domain.PassengerDTO;
 import org.kie.kogito.process.Process;
-import org.kie.kogito.process.Processes;
 import org.kie.kogito.process.ProcessInstance;
+import org.kie.kogito.process.Processes;
 import org.kie.kogito.process.WorkItem;
 import org.kie.kogito.process.impl.Sig;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;

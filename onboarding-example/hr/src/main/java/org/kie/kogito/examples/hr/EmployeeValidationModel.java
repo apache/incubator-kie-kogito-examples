@@ -16,7 +16,7 @@
 package org.kie.kogito.examples.hr;
 
 public class EmployeeValidationModel {
-   
+
     private org.kie.kogito.examples.hr.Employee employee;
 
     public org.kie.kogito.examples.hr.Employee getEmployee() {

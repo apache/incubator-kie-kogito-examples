@@ -42,21 +42,21 @@ public class TrafficViolationTest {
     @Test
     public void testEvaluateTrafficViolation() {
         given()
-               .body("{\n" +
-                     "    \"Driver\": {\n" +
-                     "        \"Points\": 2\n" +
-                     "    },\n" +
-                     "    \"Violation\": {\n" +
-                     "        \"Type\": \"speed\",\n" +
-                     "        \"Actual Speed\": 120,\n" +
-                     "        \"Speed Limit\": 100\n" +
-                     "    }\n" +
-                     "}")
-               .contentType(ContentType.JSON)
-          .when()
-               .post("/Traffic Violation")
-          .then()
-             .statusCode(200)
-               .body("'Should the driver be suspended?'", is("No"));
+                .body("{\n" +
+                        "    \"Driver\": {\n" +
+                        "        \"Points\": 2\n" +
+                        "    },\n" +
+                        "    \"Violation\": {\n" +
+                        "        \"Type\": \"speed\",\n" +
+                        "        \"Actual Speed\": 120,\n" +
+                        "        \"Speed Limit\": 100\n" +
+                        "    }\n" +
+                        "}")
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/Traffic Violation")
+                .then()
+                .statusCode(200)
+                .body("'Should the driver be suspended?'", is("No"));
     }
 }

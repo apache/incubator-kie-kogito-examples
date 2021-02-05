@@ -15,12 +15,12 @@
  */
 package org.kie.flexible.kogito.example.service;
 
+import static org.kie.flexible.kogito.example.model.State.WAITING_FOR_CUSTOMER;
+import static org.kie.flexible.kogito.example.model.State.WAITING_FOR_OWNER;
+
 import org.kie.flexible.kogito.example.model.Comment;
 import org.kie.flexible.kogito.example.model.State;
 import org.kie.flexible.kogito.example.model.SupportCase;
-
-import static org.kie.flexible.kogito.example.model.State.WAITING_FOR_CUSTOMER;
-import static org.kie.flexible.kogito.example.model.State.WAITING_FOR_OWNER;
 import org.springframework.stereotype.Component;
 
 @Component

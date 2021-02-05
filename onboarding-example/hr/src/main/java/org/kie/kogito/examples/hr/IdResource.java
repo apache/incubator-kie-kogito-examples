@@ -27,7 +27,7 @@ public class IdResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public IdModel hello(IdModel id) {
-        id.setEmployeeId( String.valueOf((id.getEmployee().getFirstName() + id.getEmployee().getLastName()).hashCode()));
+        id.setEmployeeId(String.valueOf((id.getEmployee().getFirstName() + id.getEmployee().getLastName()).hashCode()));
         return id;
     }
 }

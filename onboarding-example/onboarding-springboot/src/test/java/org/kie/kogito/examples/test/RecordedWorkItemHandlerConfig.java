@@ -31,12 +31,12 @@ public class RecordedWorkItemHandlerConfig extends DefaultWorkItemHandlerConfig 
 
     private RecordedOutputWorkItemHandler handler = new RecordedOutputWorkItemHandler();
     private final List<String> supportedHandlers = Arrays.asList("AssignDepartmentAndManager",
-                                                                 "CalculatePaymentDate",
-                                                                 "CalculateVacationDays",
-                                                                 "CalculateTaxRate",
-                                                                 "ValidateEmployee",
-                                                                 "AssignIdAndEmail",
-                                                                 "DecisionTask");
+            "CalculatePaymentDate",
+            "CalculateVacationDays",
+            "CalculateTaxRate",
+            "ValidateEmployee",
+            "AssignIdAndEmail",
+            "DecisionTask");
 
     @Override
     public WorkItemHandler forName(String name) {

@@ -54,12 +54,12 @@ public class TrafficViolationTest {
     @Test
     public void testEvaluateTrafficViolation() {
         given()
-               .body(TRAFFIC_VIOLATION_TEST_BODY)
-               .contentType(ContentType.JSON)
-          .when()
-               .post("/Traffic Violation")
-          .then()
-             .statusCode(200)
-               .body("'Should the driver be suspended?'", is("No"));
+                .body(TRAFFIC_VIOLATION_TEST_BODY)
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/Traffic Violation")
+                .then()
+                .statusCode(200)
+                .body("'Should the driver be suspended?'", is("No"));
     }
 }
