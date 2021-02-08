@@ -15,10 +15,6 @@
  */
 package org.acme.travel;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.util.Date;
 
 import javax.inject.Inject;
@@ -32,6 +28,10 @@ import org.kie.api.runtime.KieSession;
 import org.kie.kogito.rules.KieRuntimeBuilder;
 
 import io.quarkus.test.junit.QuarkusTest;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @QuarkusTest
 public class VisaRulesTest {

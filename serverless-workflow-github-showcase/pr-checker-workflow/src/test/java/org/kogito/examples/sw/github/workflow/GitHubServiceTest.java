@@ -15,8 +15,6 @@
  */
 package org.kogito.examples.sw.github.workflow;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import java.io.IOException;
 
 import javax.inject.Inject;
@@ -28,6 +26,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @QuarkusTest
 @QuarkusTestResource(GitHubServiceMockServer.class)

@@ -15,11 +15,6 @@
  */
 package org.kie.dmn.kogito.springboot.example;
 
-import static io.restassured.RestAssured.given;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.kie.dmn.kogito.springboot.example.TrafficViolationTest.TRAFFIC_VIOLATION_TEST_BODY;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -37,6 +32,11 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+
+import static io.restassured.RestAssured.given;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.kie.dmn.kogito.springboot.example.TrafficViolationTest.TRAFFIC_VIOLATION_TEST_BODY;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)

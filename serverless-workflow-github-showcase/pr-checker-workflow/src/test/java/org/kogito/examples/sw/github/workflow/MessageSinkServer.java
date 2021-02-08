@@ -15,9 +15,6 @@
  */
 package org.kogito.examples.sw.github.workflow;
 
-import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
-import static com.github.tomakehurst.wiremock.client.WireMock.post;
-
 import java.util.Map;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -27,6 +24,9 @@ import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 
 import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
+
+import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
+import static com.github.tomakehurst.wiremock.client.WireMock.post;
 
 /**
  * Mocked server to receive the produced messages by our SW.

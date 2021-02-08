@@ -15,12 +15,6 @@
  */
 package org.kie.flexible.kogito.example;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.anyOf;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +28,12 @@ import org.kie.flexible.kogito.example.service.TriageService;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.anyOf;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @QuarkusTest
 class ServiceDeskProcessTest {

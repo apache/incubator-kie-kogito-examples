@@ -15,8 +15,6 @@
  */
 package org.kogito.examples.sw.github.service;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -27,6 +25,8 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import io.quarkus.test.junit.QuarkusTest;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 // This test is just to perform quick and dirty smoke tests against the API
 // change the constants to your real repos if you need to give it a try

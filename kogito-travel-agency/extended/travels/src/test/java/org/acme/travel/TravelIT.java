@@ -15,11 +15,6 @@
  */
 package org.acme.travel;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.core.StringContains.containsString;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -46,6 +41,11 @@ import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
+
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.core.StringContains.containsString;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @QuarkusTest
 @QuarkusTestResource(value = InfinispanQuarkusTestResource.class)

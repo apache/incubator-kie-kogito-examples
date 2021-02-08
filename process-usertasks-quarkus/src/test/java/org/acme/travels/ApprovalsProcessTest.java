@@ -15,9 +15,6 @@
  */
 package org.acme.travels;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -38,6 +35,9 @@ import org.kie.kogito.process.WorkItem;
 import org.kie.kogito.services.identity.StaticIdentityProvider;
 
 import io.quarkus.test.junit.QuarkusTest;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @QuarkusTest
 public class ApprovalsProcessTest {

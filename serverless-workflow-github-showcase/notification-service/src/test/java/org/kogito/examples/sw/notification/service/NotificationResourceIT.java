@@ -15,14 +15,14 @@
  */
 package org.kogito.examples.sw.notification.service;
 
-import static io.restassured.RestAssured.given;
-
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+
+import static io.restassured.RestAssured.given;
 
 // Those are simple tests to verify if the integration is running.
 // Edit the application.properties file with the right credentials, disabled this test and run.

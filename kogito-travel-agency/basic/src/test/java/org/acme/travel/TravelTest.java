@@ -15,9 +15,6 @@
  */
 package org.acme.travel;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -39,6 +36,9 @@ import org.kie.kogito.process.ProcessInstance;
 import org.kie.kogito.process.WorkItem;
 
 import io.quarkus.test.junit.QuarkusTest;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @QuarkusTest
 public class TravelTest {

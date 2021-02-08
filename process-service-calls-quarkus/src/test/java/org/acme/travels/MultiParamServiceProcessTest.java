@@ -15,9 +15,6 @@
  */
 package org.acme.travels;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,6 +27,9 @@ import org.kie.kogito.process.Process;
 import org.kie.kogito.process.ProcessInstance;
 
 import io.quarkus.test.junit.QuarkusTest;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @QuarkusTest
 public class MultiParamServiceProcessTest {

@@ -15,11 +15,6 @@
  */
 package org.kie.dmn.kogito.quarkus.tracing;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.kie.dmn.kogito.quarkus.tracing.matcher.StringMatchesUUIDPattern.matchesThePatternOfAUUID;
-
 import java.util.Optional;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -35,6 +30,11 @@ import org.slf4j.LoggerFactory;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
+
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.kie.dmn.kogito.quarkus.tracing.matcher.StringMatchesUUIDPattern.matchesThePatternOfAUUID;
 
 @QuarkusTest
 @QuarkusTestResource(KafkaQuarkusTestResource.class)

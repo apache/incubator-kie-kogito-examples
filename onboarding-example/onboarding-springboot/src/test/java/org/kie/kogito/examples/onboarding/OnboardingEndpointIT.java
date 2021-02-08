@@ -15,9 +15,6 @@
  */
 package org.kie.kogito.examples.onboarding;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.core.Is.is;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
@@ -39,6 +36,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.core.Is.is;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoOnboardingApplication.class)
