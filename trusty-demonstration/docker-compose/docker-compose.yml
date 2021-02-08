@@ -45,7 +45,7 @@ services:
       - ./infinispan/infinispan.xml:/opt/infinispan/server/conf/infinispan-demo.xml:z
 
   kogito-app:
-    image: quay.io/<your_namespace>/dmn-quarkus-example:1.0.0
+    image: quay.io/<your_namespace>/dmn-tracing-quarkus:1.0.0
     ports:
       - 8080:8080
     environment:

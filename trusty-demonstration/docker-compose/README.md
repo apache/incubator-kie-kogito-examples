@@ -23,7 +23,7 @@ Navigate under the folder `kogito-examples/dmn-tracing-quarkus` and run
 mvn clean package -DskipTests
 ```
 
-Copy the generated dashboards from `target/classes/META-INF/resources/monitoring/dashboards/*` to the current subdirectory `grafana/provisioning/dashboards`.
+Copy the generated dashboards from `dmn-tracing-quarkus/target/classes/META-INF/resources/monitoring/dashboards/*` to the directory `trusty-demonstration/docker-compose/grafana/provisioning/dashboards`.
 
 Now you need to have an account on a remote hub like `quay` or `dockerhub` for example. Assuming that you have an account on `quay` and you are using `docker`, build the image with 
 ```bash
@@ -38,7 +38,7 @@ docker push quay.io/<your_namespace>/dmn-tracing-quarkus:1.0.0
 
 ## Deploy the services with docker-compose
 
-Edit the `docker-compose.yml` file and replace the image for the service `kogito-app` with the image tag you've just created (`quay.io/<your_namespace>/dmn-tracing-quarkus:1.0.0`).
+Switch to the current directory `trusty-demonstration/docker-compose` and edit the `docker-compose.yml` file and replace the image for the service `kogito-app` with the image tag you've just created (`quay.io/<your_namespace>/dmn-tracing-quarkus:1.0.0`).
 
 Then simply start it with 
 
@@ -47,6 +47,11 @@ docker-compose up
 ```
 
 The applications will be available in few minutes at the following addresses: 
-- Kogito application: [http://localhost:8080](http://localhost:8080)
-- AuditUI: [http://localhost:1338](http://localhost:1338)
-- Grafana: [http://localhost:3000](http://localhost:3000)
+- Kogito application: [http://localhost:8080](http://localhost:8080). You can use the swagger-ui at the address [http://localhost:8080/swagger-ui](http://localhost:8080/swagger-ui) and execute a simple request for example with the following payload
+```JSON
+{"Bribe": 1000,"Client": {"age": 43,"existing payments": 100,"salary": 1950},"Loan": {"duration": 15,"installment": 180}, "SupremeDirector": "Yes"}
+```
+- AuditUI: [http://localhost:1338](http://localhost:1338).
+- Grafana: [http://localhost:3000](http://localhost:3000).
+
+For more info about the AuditUI, you can have a look at the [official documentation](https://docs.jboss.org/kogito/release/latest/html_single/#proc-audit-console-using_kogito-dmn-models). Note that the documentation covers the scenario of the AuditUI deployed with the Kogito Operator on Openshift, but the part specific for the AuditUI (alias for trusty-ui) is valid for this scenario as well.
