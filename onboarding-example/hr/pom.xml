@@ -7,7 +7,7 @@
   <parent>
     <groupId>org.kie.kogito</groupId>
     <artifactId>onboarding-example</artifactId>
-    <version>1.2.0.Final</version>
+    <version>1.2.1-SNAPSHOT</version>
   </parent>
   <groupId>org.kie.kogito.examples</groupId>
   <artifactId>hr</artifactId>
