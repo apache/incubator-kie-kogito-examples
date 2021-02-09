@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-  xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.kie.kogito</groupId>
@@ -11,10 +9,8 @@
   </parent>
   <groupId>org.kie.kogito.examples</groupId>
   <artifactId>hr</artifactId>
-  <packaging>jar</packaging>
   <name>Kogito Example :: Onboarding Example :: HR with Drools</name>
   <description>HR related rules for onboarding</description>
-
   <dependencies>
     <dependency>
       <groupId>org.kie.kogito</groupId>
@@ -32,7 +28,6 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-openapi</artifactId>
     </dependency>
-
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-junit5</artifactId>
@@ -43,17 +38,17 @@
       <artifactId>rest-assured</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-health</artifactId>
+    </dependency>
   </dependencies>
-
   <build>
     <finalName>${project.artifactId}</finalName>
     <plugins>
       <plugin>
         <groupId>io.quarkus</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
-        <configuration>
-          <debug>false</debug>
-        </configuration>
         <executions>
           <execution>
             <goals>
@@ -61,6 +56,9 @@
             </goals>
           </execution>
         </executions>
+        <configuration>
+          <debug>false</debug>
+        </configuration>
       </plugin>
     </plugins>
   </build>

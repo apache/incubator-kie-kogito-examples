@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
   <parent>
-    <artifactId>serverless-workflow-github-showcase</artifactId>
     <groupId>org.kie.kogito</groupId>
+    <artifactId>serverless-workflow-github-showcase</artifactId>
     <version>2.0.0-SNAPSHOT</version>
   </parent>
-  <modelVersion>4.0.0</modelVersion>
-
   <artifactId>github-service</artifactId>
   <name>Kogito Example :: Serverless Workflow Github Showcase :: GitHub Service</name>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -36,7 +33,6 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-openapi</artifactId>
     </dependency>
-
     <!-- JWT Token Generation -->
     <dependency>
       <groupId>io.jsonwebtoken</groupId>
@@ -53,14 +49,11 @@
       <artifactId>jjwt-jackson</artifactId>
       <version>${version.io.jjwt}</version>
     </dependency>
-
-    <!-- GitHub API -->
     <dependency>
       <groupId>org.kohsuke</groupId>
       <artifactId>github-api</artifactId>
       <version>${version.kohsuke.github}</version>
     </dependency>
-
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-junit5</artifactId>
@@ -70,6 +63,10 @@
       <groupId>io.rest-assured</groupId>
       <artifactId>rest-assured</artifactId>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-health</artifactId>
     </dependency>
   </dependencies>
   <build>
