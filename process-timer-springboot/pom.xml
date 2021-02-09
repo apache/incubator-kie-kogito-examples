@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.kie.kogito</groupId>
     <artifactId>kogito-examples</artifactId>
-    <version>1.2.0.Final</version>
+    <version>1.2.1-SNAPSHOT</version>
   </parent>
 
   <artifactId>process-timer-springboot</artifactId>
