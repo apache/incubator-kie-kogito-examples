@@ -159,6 +159,8 @@
         <module>process-monitoring-springboot</module>
         <module>process-mongodb-persistence-quarkus</module>
         <module>process-mongodb-persistence-springboot</module>
+        <module>process-mongodb-transaction-quarkus</module>
+        <module>process-mongodb-transaction-springboot</module>
         <module>process-optaplanner-quarkus</module>
         <module>process-optaplanner-springboot</module>
         <module>process-postgresql-persistence-quarkus</module>
