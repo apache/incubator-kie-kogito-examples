@@ -31,10 +31,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.kie.dmn.kogito.springboot.example.KogitoSpringbootApplication;
-import org.kie.kogito.cloudevents.extension.KogitoExtension;
 import org.kie.kogito.kafka.KafkaClient;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
@@ -73,11 +71,6 @@ public class DmnEventDrivenIT {
         registry.add("spring.kafka.bootstrap-servers", kafkaContainer::getBootstrapServers);
     }
 
-    @BeforeAll
-    static void registerExtension() {
-        KogitoExtension.register();
-    }
-
     @Test
     public void test() {
         for (String evaluationType : List.of("evaluate_all", "evaluate_decision_service")) {
@@ -95,18 +88,20 @@ public class DmnEventDrivenIT {
         }
     }
 
-    private void assertJsonEquals(String expectedJson, String actualJson) throws Exception {
-        String normalizedExpectedJson = normalizeJson(expectedJson);
-        String normalizedActualJson = normalizeJson(actualJson);
+    private void assertCloudEventJsonEquals(String expectedJson, String actualJson) throws Exception {
+        String normalizedExpectedJson = prepareCloudEventJsonForJSONAssert(expectedJson);
+        String normalizedActualJson = prepareCloudEventJsonForJSONAssert(actualJson);
 
-        LOG.info("Normalized expected: " + normalizedExpectedJson);
-        LOG.info("Normalized actual..: " + normalizedActualJson);
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Normalized expected: " + normalizedExpectedJson);
+            LOG.debug("Normalized actual..: " + normalizedActualJson);
+        }
 
         JSONAssert.assertEquals(normalizedExpectedJson, normalizedActualJson, JSONCompareMode.NON_EXTENSIBLE);
     }
 
     private void doTest(String basePath) {
-        LOG.info("Processing \"{}\"...", basePath);
+        LOG.debug("Processing \"{}\"...", basePath);
 
         String inputJson = readResource(basePath + "/input.json");
         String outputJson = readResource(basePath + "/output.json");
@@ -117,7 +112,7 @@ public class DmnEventDrivenIT {
 
         try {
             kafkaClient.consume(RESPONSES_TOPIC_NAME, eventString -> {
-                LOG.info("Received from kafka: {}", eventString);
+                LOG.debug("Received from kafka: {}", eventString);
                 Optional.ofNullable(eventString).filter(s -> !s.isBlank()).ifPresentOrElse(
                         e -> {
                             outputEventRef.set(e);
@@ -135,14 +130,28 @@ public class DmnEventDrivenIT {
                         kafkaClient.produce(inputJson, REQUESTS_TOPIC_NAME);
 
                         assertTrue(countDownLatch.await(5, SECONDS));
-                        assertJsonEquals(outputJson, outputEventRef.get());
+                        assertCloudEventJsonEquals(outputJson, outputEventRef.get());
                     });
         } finally {
             kafkaClient.shutdown();
         }
     }
 
-    private static String normalizeJson(String jsonString) throws JsonProcessingException {
+    /**
+     * This method receives a CloudEvent Json representation as input and returns a modified version that is suitable
+     * to be evaluated with {@link JSONAssert#assertEquals(String, String, JSONCompareMode)} the way we need.
+     *
+     * The first change is set the value of the "id" field to a default one, only if present, to prevent the assertion
+     * to fail since the actual id is randomly generated and will never be the same as the hardcoded expected one.
+     *
+     * The second change is the prune of "null" nodes from the tree, since the assertion would fail if in the expected
+     * event a specific field is "null" and in the actual one is missing (or viceversa), but for us it's perfectly fine.
+     *
+     * @param jsonString input CloudEvent Json representation
+     * @return modified CloudEvent Json representation
+     * @throws JsonProcessingException if the input is not a valid Json string
+     */
+    private static String prepareCloudEventJsonForJSONAssert(String jsonString) throws JsonProcessingException {
         JsonNode jsonNode = MAPPER.reader().readTree(jsonString);
 
         Iterator<Map.Entry<String, JsonNode>> it = jsonNode.fields();
