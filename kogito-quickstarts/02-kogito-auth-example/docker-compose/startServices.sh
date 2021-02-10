@@ -31,4 +31,19 @@ else
     exit 1
 fi
 
+SVG_FOLDER=./svg
+
+KOGITO_HIRING_SVG_FOLDER=../target/classes/META-INF/processSVG
+
+mkdir -p $SVG_FOLDER
+
+if [ -d "$KOGITO_HIRING_SVG_FOLDER" ]
+then
+    cp $KOGITO_HIRING_SVG_FOLDER/*.svg $SVG_FOLDER
+else
+    echo "$KOGITO_HIRING_SVG_FOLDER does not exist. Have you compiled 02-kogito-auth-example project?"
+    exit 1
+fi
+
+export DOCKER_GATEWAY_HOST=172.17.0.1
 docker-compose up

@@ -91,11 +91,13 @@ services:
 
   management-console:
     container_name: management-console
-    network_mode: "host"
     image: quay.io/kiegroup/kogito-management-console-nightly:${KOGITO_VERSION}
+    ports:
+      - 8280:8080
     depends_on:
       - data-index
     volumes:
       - ./svg/:/home/kogito/data/svg/
     environment:
-      KOGITO_MANAGEMENT_CONSOLE_PROPS: -Dquarkus.profile=host-network-mode -D%host-network-mode.quarkus.http.port=8280  -D%host-network-mode.kogito.svg.folder.path=/home/kogito/data/svg
+      KOGITO_DATAINDEX_HTTP_URL: http://${DOCKER_GATEWAY_HOST:-host.docker.internal}:8180
+      KOGITO_MANAGEMENT_CONSOLE_PROPS:  -Dkogito.svg.folder.path=/home/kogito/data/svg

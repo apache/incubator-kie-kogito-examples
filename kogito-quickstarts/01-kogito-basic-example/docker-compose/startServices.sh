@@ -45,5 +45,5 @@ else
     exit 1
 fi
 
-
+export DOCKER_GATEWAY_HOST=172.17.0.1
 docker-compose up
