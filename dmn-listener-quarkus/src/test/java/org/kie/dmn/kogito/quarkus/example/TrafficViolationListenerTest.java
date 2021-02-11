@@ -15,6 +15,11 @@
  */
 package org.kie.dmn.kogito.quarkus.example;
 
+import static io.restassured.RestAssured.given;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.kie.dmn.kogito.quarkus.example.TrafficViolationTest.TRAFFIC_VIOLATION_TEST_BODY;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -29,11 +34,6 @@ import org.kie.kogito.decision.DecisionEventListenerConfig;
 
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
-
-import static io.restassured.RestAssured.given;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.kie.dmn.kogito.quarkus.example.TrafficViolationTest.TRAFFIC_VIOLATION_TEST_BODY;
 
 @QuarkusTest
 public class TrafficViolationListenerTest {

@@ -15,6 +15,9 @@
  */
 package org.kogito.examples.sw.github.workflow;
 
+import static io.restassured.RestAssured.given;
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.io.IOException;
 import java.nio.charset.Charset;
 
@@ -27,9 +30,6 @@ import com.github.jknack.handlebars.internal.Files;
 import io.cloudevents.jackson.JsonFormat;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
-
-import static io.restassured.RestAssured.given;
-import static org.junit.jupiter.api.Assertions.*;
 
 @QuarkusTest
 @QuarkusTestResource(GitHubServiceMockServer.class) // mock the GitHub API

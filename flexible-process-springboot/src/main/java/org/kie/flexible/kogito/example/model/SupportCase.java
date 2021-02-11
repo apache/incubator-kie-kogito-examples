@@ -15,11 +15,11 @@
  */
 package org.kie.flexible.kogito.example.model;
 
+import static org.kie.flexible.kogito.example.model.State.NEW;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static org.kie.flexible.kogito.example.model.State.NEW;
 
 public class SupportCase {
 

@@ -15,6 +15,11 @@
  */
 package org.acme.travel;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.net.URI;
 import java.time.OffsetDateTime;
 import java.util.Optional;
@@ -41,11 +46,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.cloudevents.core.builder.CloudEventBuilder;
 import io.cloudevents.jackson.JsonFormat;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 @SpringBootTest(classes = KogitoKafkaQuickstartSpringbootApplication.class)
 @ContextConfiguration(initializers = KafkaSpringBootTestResource.class)

@@ -15,6 +15,9 @@
  */
 package org.kie.kogito.examples;
 
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.hasItem;
+
 import java.io.File;
 import java.net.URISyntaxException;
 import java.time.Duration;
@@ -29,9 +32,6 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import io.restassured.http.ContentType;
-
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.hasItem;
 
 @Testcontainers
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)

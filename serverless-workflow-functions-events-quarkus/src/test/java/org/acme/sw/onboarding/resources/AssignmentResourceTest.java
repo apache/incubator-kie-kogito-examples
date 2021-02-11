@@ -15,15 +15,15 @@
  */
 package org.acme.sw.onboarding.resources;
 
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.stringContainsInOrder;
+import static org.junit.jupiter.api.Assertions.*;
+
 import javax.ws.rs.core.MediaType;
 
 import org.junit.jupiter.api.Test;
 
 import io.quarkus.test.junit.QuarkusTest;
-
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.stringContainsInOrder;
-import static org.junit.jupiter.api.Assertions.*;
 
 @QuarkusTest
 class AssignmentResourceTest {

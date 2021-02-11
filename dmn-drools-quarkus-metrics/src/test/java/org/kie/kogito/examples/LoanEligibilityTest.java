@@ -15,6 +15,10 @@
  */
 package org.kie.kogito.examples;
 
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.is;
+
 import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
@@ -22,10 +26,6 @@ import org.junit.jupiter.api.Test;
 
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
-
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.is;
 
 @QuarkusTest
 public class LoanEligibilityTest {

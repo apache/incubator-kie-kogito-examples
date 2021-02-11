@@ -15,6 +15,8 @@
  */
 package org.kie.kogito.examples.solver;
 
+import static org.optaplanner.core.api.score.stream.Joiners.equal;
+
 import java.awt.geom.Point2D;
 
 import org.kie.kogito.examples.domain.FlightInfo;
@@ -24,8 +26,6 @@ import org.optaplanner.core.api.score.stream.Constraint;
 import org.optaplanner.core.api.score.stream.ConstraintCollectors;
 import org.optaplanner.core.api.score.stream.ConstraintFactory;
 import org.optaplanner.core.api.score.stream.ConstraintProvider;
-
-import static org.optaplanner.core.api.score.stream.Joiners.equal;
 
 public class FlightSeatingConstraintProvider implements ConstraintProvider {
 

@@ -15,6 +15,10 @@
  */
 package org.acme.numbers;
 
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.Matchers.emptyOrNullString;
+
 import java.util.Collections;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -24,10 +28,6 @@ import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.Matchers.emptyOrNullString;
 
 @QuarkusTest
 @QuarkusTestResource(NumbersMockService.class)

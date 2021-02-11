@@ -15,6 +15,9 @@
  */
 package org.acme.travels;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -37,9 +40,6 @@ import org.kie.kogito.testcontainers.quarkus.KeycloakQuarkusTestResource;
 
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @QuarkusTest
 @QuarkusTestResource(KeycloakQuarkusTestResource.class)
