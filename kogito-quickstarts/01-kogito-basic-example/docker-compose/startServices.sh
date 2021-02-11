@@ -45,5 +45,10 @@ else
     exit 1
 fi
 
-export DOCKER_GATEWAY_HOST=172.17.0.1
+if [ "$(uname)" == "Darwin" ]; then
+    export DOCKER_GATEWAY_HOST=$host.docker.internal
+elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+   export DOCKER_GATEWAY_HOST=172.17.0.1
+fi
+
 docker-compose up

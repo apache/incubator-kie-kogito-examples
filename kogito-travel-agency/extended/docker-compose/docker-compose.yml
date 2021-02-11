@@ -91,7 +91,7 @@ services:
 
   management-console:
     container_name: management-console
-    image: quay.io/kiegroup/kogito-management-console-nightly:${KOGITO_VERSION}
+    image: quay.io/kiegroup/kogito-management-console:${KOGITO_VERSION}
     ports:
       - 8280:8080
     depends_on:
@@ -99,5 +99,5 @@ services:
     volumes:
       - ./svg/:/home/kogito/data/svg/
     environment:
-      KOGITO_DATAINDEX_HTTP_URL: http://${DOCKER_GATEWAY_HOST:-host.docker.internal}:8180
+      KOGITO_DATAINDEX_HTTP_URL: http://${DOCKER_GATEWAY_HOST}:8180
       KOGITO_MANAGEMENT_CONSOLE_PROPS:  -Dkogito.svg.folder.path=/home/kogito/data/svg

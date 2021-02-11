@@ -52,7 +52,7 @@ services:
 
   data-index:
     container_name: data-index
-    image: quay.io/kiegroup/kogito-data-index-infinispan-nightly:${KOGITO_VERSION}
+    image: quay.io/kiegroup/kogito-data-index-infinispan:${KOGITO_VERSION}
     ports:
       - "8180:8080"
     depends_on:
@@ -69,7 +69,7 @@ services:
 
   management-console:
    container_name: management-console
-   image: quay.io/kiegroup/kogito-management-console-nightly:${KOGITO_VERSION}
+   image: quay.io/kiegroup/kogito-management-console:${KOGITO_VERSION}
    ports:
      - 8280:8080
    depends_on:
@@ -78,12 +78,12 @@ services:
    volumes:
      - ./svg/:/home/kogito/data/svg/
    environment:
-     KOGITO_DATAINDEX_HTTP_URL: http://${DOCKER_GATEWAY_HOST:-host.docker.internal}:8180
+     KOGITO_DATAINDEX_HTTP_URL: http://${DOCKER_GATEWAY_HOST}:8180
      KOGITO_MANAGEMENT_CONSOLE_PROPS: -Dkogito.svg.folder.path=/home/kogito/data/svg
 
   task-console:
     container_name: task-console
-    image: quay.io/kiegroup/kogito-task-console-nightly:${KOGITO_VERSION}
+    image: quay.io/kiegroup/kogito-task-console:${KOGITO_VERSION}
     ports:
       - 8380:8080
     depends_on:
