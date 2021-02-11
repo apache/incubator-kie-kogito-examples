@@ -15,15 +15,17 @@
  */
 package org.acme.sw.onboarding.resources;
 
+import javax.ws.rs.core.MediaType;
+
+import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.RestAssured;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.stringContainsInOrder;
 import static org.junit.jupiter.api.Assertions.*;
-
-import javax.ws.rs.core.MediaType;
-
-import org.junit.jupiter.api.Test;
-
-import io.quarkus.test.junit.QuarkusTest;
 
 @QuarkusTest
 class AssignmentResourceTest {

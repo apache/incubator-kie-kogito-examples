@@ -25,7 +25,7 @@ import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 @ApplicationScoped
 public class UserService {
-
+    
     @Inject
     @RestClient
     UsersRemoteService usersRemoteService;
@@ -34,7 +34,7 @@ public class UserService {
     public User get(String username) {
         return usersRemoteService.get(username);
     }
-
+    
     public User missingUser(String username) {
         return null;
     }

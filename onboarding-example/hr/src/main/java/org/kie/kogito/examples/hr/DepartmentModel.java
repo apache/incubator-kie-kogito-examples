@@ -47,3 +47,4 @@ public class DepartmentModel {
         this.department = department;
     }
 }
+

@@ -21,29 +21,29 @@ import java.util.Set;
 public class EmployeeRepository {
 
     private static EmployeeRepository INSTANCE = new EmployeeRepository();
-
+    
     private Set<String> registered = new HashSet<>();
-
+    
     public static EmployeeRepository get() {
         return INSTANCE;
     }
-
+    
     /**
-     * @return true if the employee is already registered
+     * @return true if the employee is already registered 
      */
     public boolean isRegistered(String personalId) {
         return registered.contains(personalId);
     }
 
-    /**
-     * @return false if the employee is already registered
+        /**
+     * @return false if the employee is already registered 
      */
     public boolean isNotRegistered(String personalId) {
         return !isRegistered(personalId);
     }
 
     /**
-     * @return true if the employee is already registered
+     * @return true if the employee is already registered 
      */
     public void register(Employee emp) {
         if (!isRegistered(emp.getPersonalId())) {

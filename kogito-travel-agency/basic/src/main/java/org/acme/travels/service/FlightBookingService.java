@@ -23,7 +23,7 @@ import org.acme.travels.Trip;
 @ApplicationScoped
 public class FlightBookingService {
 
-    public Flight bookFlight(Trip trip) {
-        return new Flight("MX555", trip.getBegin(), trip.getEnd());
-    }
+	public Flight bookFlight(Trip trip) {
+		return new Flight("MX555", trip.getBegin(), trip.getEnd());
+	}
 }

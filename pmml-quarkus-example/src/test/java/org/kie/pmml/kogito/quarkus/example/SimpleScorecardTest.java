@@ -15,19 +15,18 @@
  */
 package org.kie.pmml.kogito.quarkus.example;
 
+import java.util.Map;
+
+import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.http.ContentType;
+import org.hamcrest.core.IsNull;
+import org.junit.jupiter.api.Test;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.Map;
-
-import org.hamcrest.core.IsNull;
-import org.junit.jupiter.api.Test;
-
-import io.quarkus.test.junit.QuarkusTest;
-import io.restassured.http.ContentType;
 
 @QuarkusTest
 public class SimpleScorecardTest {
@@ -35,7 +34,7 @@ public class SimpleScorecardTest {
     @Test
     public void testEvaluateSimpleScorecard() {
         String inputData = "{\"input1\":5.0, \"input2\":-10.0}";
-        Object resultVariables = given()
+        Object resultVariables =  given()
                 .contentType(ContentType.JSON)
                 .body(inputData)
                 .when()

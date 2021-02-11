@@ -43,7 +43,7 @@ public class GitHubWrapperServiceImpl implements GitHubWrapperService {
     public void addLabels(String user, String repository, int issueId, List<String> labels) throws Exception {
         LOGGER.info("Adding labels for the repo {}/{} issue {} labels {}", user, repository, issueId, labels);
         final GitHub gitHub = new GitHubBuilder().withAppInstallationToken(tokenProvider.getToken()).build();
-        gitHub.getRepository(toRepositoryName(user, repository)).getIssue(issueId).addLabels(labels.toArray(new String[] {}));
+        gitHub.getRepository(toRepositoryName(user, repository)).getIssue(issueId).addLabels(labels.toArray(new String[]{}));
         LOGGER.info("Labels {} added to the Issue/PR {}", labels, issueId);
     }
 

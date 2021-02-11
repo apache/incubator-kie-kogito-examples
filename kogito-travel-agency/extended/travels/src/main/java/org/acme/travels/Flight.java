@@ -19,66 +19,66 @@ import java.util.Date;
 
 public class Flight {
 
-    private String flightNumber;
-    private String seat;
-    private String gate;
-    private Date departure;
-    private Date arrival;
+	private String flightNumber;
+	private String seat;
+	private String gate;
+	private Date departure;
+	private Date arrival;
+	
+	public Flight() {
+		
+	}
 
-    public Flight() {
+	public Flight(String flightNumber, Date departure, Date arrival) {
+		super();
+		this.flightNumber = flightNumber;
+		this.departure = departure;
+		this.arrival = arrival;
+	}
 
-    }
+	public String getFlightNumber() {
+		return flightNumber;
+	}
 
-    public Flight(String flightNumber, Date departure, Date arrival) {
-        super();
-        this.flightNumber = flightNumber;
-        this.departure = departure;
-        this.arrival = arrival;
-    }
+	public void setFlightNumber(String flightNumber) {
+		this.flightNumber = flightNumber;
+	}
 
-    public String getFlightNumber() {
-        return flightNumber;
-    }
+	public String getSeat() {
+		return seat;
+	}
 
-    public void setFlightNumber(String flightNumber) {
-        this.flightNumber = flightNumber;
-    }
+	public void setSeat(String seat) {
+		this.seat = seat;
+	}
 
-    public String getSeat() {
-        return seat;
-    }
+	public String getGate() {
+		return gate;
+	}
 
-    public void setSeat(String seat) {
-        this.seat = seat;
-    }
+	public void setGate(String gate) {
+		this.gate = gate;
+	}
 
-    public String getGate() {
-        return gate;
-    }
+	public Date getDeparture() {
+		return departure;
+	}
 
-    public void setGate(String gate) {
-        this.gate = gate;
-    }
+	public void setDeparture(Date departure) {
+		this.departure = departure;
+	}
 
-    public Date getDeparture() {
-        return departure;
-    }
+	public Date getArrival() {
+		return arrival;
+	}
 
-    public void setDeparture(Date departure) {
-        this.departure = departure;
-    }
+	public void setArrival(Date arrival) {
+		this.arrival = arrival;
+	}
 
-    public Date getArrival() {
-        return arrival;
-    }
-
-    public void setArrival(Date arrival) {
-        this.arrival = arrival;
-    }
-
-    @Override
-    public String toString() {
-        return "Flight [flightNumber=" + flightNumber + ", seat=" + seat + ", gate=" + gate + ", departure=" + departure
-                + ", arrival=" + arrival + "]";
-    }
+	@Override
+	public String toString() {
+		return "Flight [flightNumber=" + flightNumber + ", seat=" + seat + ", gate=" + gate + ", departure=" + departure
+				+ ", arrival=" + arrival + "]";
+	}
 }

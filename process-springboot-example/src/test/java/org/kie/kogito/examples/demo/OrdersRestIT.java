@@ -15,12 +15,8 @@
  */
 package org.kie.kogito.examples.demo;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -37,17 +33,18 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = DemoApplication.class)
-@ContextConfiguration(
-        initializers = { InfinispanSpringBootTestResource.Conditional.class, KafkaSpringBootTestResource.Conditional.class })
+@ContextConfiguration(initializers = {InfinispanSpringBootTestResource.Conditional.class, KafkaSpringBootTestResource.Conditional.class})
 public class OrdersRestIT {
 
-    protected static String orderPayload =
-            "{\"approver\" : \"john\", \"order\" : {\"orderNumber\" : \"12345\", \"shipped\" : false}}";
+    protected static String orderPayload = "{\"approver\" : \"john\", \"order\" : {\"orderNumber\" : \"12345\", \"shipped\" : false}}";
 
     // restassured needs to know the random port created for test
     @LocalServerPort
@@ -77,13 +74,13 @@ public class OrdersRestIT {
         // test adding new order
         String addOrderPayload = "{\"approver\" : \"john\", \"order\" : {\"orderNumber\" : \"12345\", \"shipped\" : false}}";
         String firstCreatedId = given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .body(addOrderPayload).when()
-                .post("/orders")
+                    .contentType(ContentType.JSON)
+                    .accept(ContentType.JSON)
+                    .body(addOrderPayload).when()
+                    .post("/orders")
                 .then()
-                .statusCode(201)
-                .header("Location", notNullValue())
+                    .statusCode(201)
+                    .header("Location", notNullValue())
                 .extract().path("id");
 
         // test getting the created order
@@ -93,9 +90,9 @@ public class OrdersRestIT {
         // test getting order by id
         given()
                 .accept(ContentType.JSON)
-                .when()
+            .when()
                 .get("/orders/{id}", firstCreatedId)
-                .then()
+            .then()
                 .statusCode(200)
                 .body("id", is(firstCreatedId));
 
@@ -103,44 +100,44 @@ public class OrdersRestIT {
         // first add second order...
         String secondCreatedId =
                 given()
-                        .contentType(ContentType.JSON)
-                        .accept(ContentType.JSON)
-                        .body(addOrderPayload)
-                        .when()
-                        .post("/orders")
-                        .then()
-                        .statusCode(201)
-                        .extract()
-                        .path("id");
+                    .contentType(ContentType.JSON)
+                    .accept(ContentType.JSON)
+                    .body(addOrderPayload)
+                .when()
+                    .post("/orders")
+                .then()
+                    .statusCode(201)
+                .extract()
+                    .path("id");
         // now delete the first order created
         given()
                 .accept(ContentType.JSON)
-                .when()
+            .when()
                 .delete("/orders/{id}", firstCreatedId)
-                .then()
+            .then()
                 .statusCode(200);
         // get all orders make sure there is only one
         given()
                 .accept(ContentType.JSON)
-                .when()
+            .when()
                 .get("/orders")
-                .then()
+            .then()
                 .statusCode(200)
                 .body("$.size()", is(1), "[0].id", is(secondCreatedId));
 
         // delete second before finishing
         given()
                 .accept(ContentType.JSON)
-                .when()
+            .when()
                 .delete("/orders/{id}", secondCreatedId)
-                .then()
+            .then()
                 .statusCode(200);
         // get all orders make sure there is zero
         given()
                 .accept(ContentType.JSON)
-                .when()
+            .when()
                 .get("/orders")
-                .then()
+            .then()
                 .statusCode(200)
                 .body("$.size()", is(0));
     }
@@ -156,10 +153,10 @@ public class OrdersRestIT {
                 .accept(ContentType.JSON)
                 .body(addOrderPayload).when()
                 .post("/orders")
-                .then()
+            .then()
                 .statusCode(500)
                 .body("id", notNullValue())
-                .extract()
+            .extract()
                 .path("id");
 
         // test getting the created order
@@ -167,22 +164,19 @@ public class OrdersRestIT {
                 .body("$.size()", is(1), "[0].id", is(firstCreatedId));
 
         // test retrieving error info using process management addon
-        given().accept(ContentType.JSON).when().get("/management/processes/demo.orders/instances/" + firstCreatedId + "/error")
-                .then()
-                .statusCode(200).body("id", is(firstCreatedId));
+        given().accept(ContentType.JSON).when().get("/management/processes/demo.orders/instances/" + firstCreatedId + "/error").then()
+        .statusCode(200).body("id", is(firstCreatedId));
 
         String fixedOrderPayload = "{\"approver\" : \"john\", \"order\" : {\"orderNumber\" : \"12345\", \"shipped\" : false}}";
-        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(fixedOrderPayload).when()
-                .put("/orders/" + firstCreatedId).then()
-                .statusCode(200)
+        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(fixedOrderPayload).when().put("/orders/" + firstCreatedId).then()
+        .statusCode(200)
                 .body("id", is(firstCreatedId))
                 .body("approver", equalTo("john"))
                 .body("order.orderNumber", equalTo("12345"))
                 .body("order.shipped", equalTo(false));
 
-        given().accept(ContentType.JSON).when()
-                .post("/management/processes/demo.orders/instances/" + firstCreatedId + "/retrigger").then()
-                .statusCode(200);
+        given().accept(ContentType.JSON).when().post("/management/processes/demo.orders/instances/" + firstCreatedId + "/retrigger").then()
+        .statusCode(200);
 
         // delete second before finishing
         given().accept(ContentType.JSON).when().delete("/orders/" + firstCreatedId).then().statusCode(200);
@@ -218,26 +212,26 @@ public class OrdersRestIT {
 
         // test getting task
         String taskInfo = given()
-                .accept(ContentType.JSON)
-                .when()
-                .get("/orderItems/" + orderItemsId + "/tasks?user=john")
-                .then()
-                .statusCode(200)
-                .body("$.size", is(1))
-                .body("[0].name", is("Verify order"))
-                .extract()
-                .path("[0].id");
+            .accept(ContentType.JSON)
+            .when()
+            .get("/orderItems/" + orderItemsId + "/tasks?user=john")
+            .then()
+            .statusCode(200)
+            .body("$.size", is(1))
+            .body("[0].name", is("Verify order"))
+            .extract()
+            .path("[0].id");
 
         // test completing task
         String payload = "{}";
         given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .body(payload)
-                .when()
-                .post("/orderItems/" + orderItemsId + "/Verify_order/" + taskInfo + "?user=john")
-                .then()
-                .statusCode(200).body("id", is(orderItemsId));
+            .contentType(ContentType.JSON)
+            .accept(ContentType.JSON)
+            .body(payload)
+            .when()
+            .post("/orderItems/" + orderItemsId + "/Verify_order/" + taskInfo + "?user=john")
+            .then()
+        .statusCode(200).body("id", is(orderItemsId));
 
         // get all orders make sure there is zero
         given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
@@ -275,13 +269,13 @@ public class OrdersRestIT {
 
         // test getting task
         given()
-                .accept(ContentType.JSON)
-                .when()
-                .get("/orderItems/" + orderItemsId + "/tasks?user=john")
-                .then()
-                .statusCode(200)
-                .body("$.size", is(1))
-                .body("[0].name", is("Verify order"));
+            .accept(ContentType.JSON)
+            .when()
+            .get("/orderItems/" + orderItemsId + "/tasks?user=john")
+            .then()
+            .statusCode(200)
+            .body("$.size", is(1))
+            .body("[0].name", is("Verify order"));
 
         // test deleting order items
         given().accept(ContentType.JSON).when().delete("/orderItems/" + orderItemsId).then().statusCode(200);
@@ -300,8 +294,7 @@ public class OrdersRestIT {
         String orderPayload = "{\"approver\" : \"john\", \"order\" : {\"orderNumber\" : \"12345\", \"shipped\" : false}}";
         String id = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(orderPayload).when()
                 .post("/orders").then().statusCode(201).body("id",
-                        notNullValue())
-                .extract().path("id");
+                                                             notNullValue()).extract().path("id");
 
         assertNotNull(id);
         // get all orders make sure there is one
@@ -311,11 +304,11 @@ public class OrdersRestIT {
         // get order by its custom ID and test
         given().accept(ContentType.JSON).body(orderPayload).when().get("/orders/{id}", id).then()
                 .statusCode(200).body("id",
-                        is(id));
+                                      is(id));
         // update the instance
         orderPayload = "{\"approver\" : \"joe\", \"order\" : {\"orderNumber\" : \"54321\", \"shipped\" : true}}";
         given().contentType(ContentType.JSON).accept(ContentType.JSON).body(orderPayload).when()
-                .put("/orders/{id}", id).then()
+        .put("/orders/{id}", id).then()
                 .statusCode(200)
                 .body("approver", equalTo("joe"))
                 .body("order.orderNumber", equalTo("54321"))

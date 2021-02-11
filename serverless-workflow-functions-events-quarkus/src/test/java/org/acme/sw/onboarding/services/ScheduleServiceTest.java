@@ -15,21 +15,20 @@
  */
 package org.acme.sw.onboarding.services;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import io.quarkus.test.junit.QuarkusTest;
 import org.acme.sw.onboarding.model.Appointment;
 import org.acme.sw.onboarding.model.Doctor;
 import org.acme.sw.onboarding.model.Patient;
 import org.junit.jupiter.api.Test;
 
-import io.quarkus.test.junit.QuarkusTest;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @QuarkusTest
 class ScheduleServiceTest {
