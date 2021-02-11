@@ -15,6 +15,11 @@ fi
 
 echo "Kogito Image version: ${KOGITO_VERSION}"
 echo "KOGITO_VERSION=${KOGITO_VERSION}" > ".env"
+if [ "$(uname)" == "Darwin" ]; then
+   echo "DOCKER_GATEWAY_HOST=${host.docker.internal}" >> ".env"
+elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+   echo "DOCKER_GATEWAY_HOST=172.17.0.1" >> ".env"
+fi
 
 PERSISTENCE_FOLDER=./persistence
 KOGITO_EXAMPLE_PERSISTENCE=../target/classes/META-INF/resources/persistence/protobuf
@@ -43,12 +48,6 @@ then
 else
     echo "$KOGITO_HIRING_SVG_FOLDER does not exist. Have you compiled 02-kogito-auth-example project?"
     exit 1
-fi
-
-if [ "$(uname)" == "Darwin" ]; then
-    export DOCKER_GATEWAY_HOST=$host.docker.internal
-elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-   export DOCKER_GATEWAY_HOST=172.17.0.1
 fi
 
 docker-compose up
