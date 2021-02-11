@@ -13,15 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.dmn.kogito.springboot.example;
+package org.kie.kogito.examples;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import io.quarkus.test.common.QuarkusTestResource;
+import io.quarkus.test.junit.NativeImageTest;
+import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 
-@SpringBootApplication(scanBasePackages = {"org.kie.dmn.kogito.**", "org.kie.kogito.app.**", "org.kie.kogito.**", "http**"})
-public class KogitoSpringbootApplication {
+@NativeImageTest
+@QuarkusTestResource(KafkaQuarkusTestResource.class)
+public class NativeDmnEventDrivenIT extends DmnEventDrivenIT {
 
-	public static void main(String[] args) {
-		SpringApplication.run(KogitoSpringbootApplication.class, args);
-	}
 }
