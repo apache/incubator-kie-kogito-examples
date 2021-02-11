@@ -6,6 +6,7 @@ bin/
 .*
 !.gitignore
 !.jenkins
+!.github
 nbproject
 target
 /*.ipr
