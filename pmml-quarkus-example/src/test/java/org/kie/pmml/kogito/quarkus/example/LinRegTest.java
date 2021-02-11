@@ -22,21 +22,14 @@ import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
 
 import static org.kie.pmml.kogito.quarkus.example.CommonTestUtils.testDescriptive;
-import static org.kie.pmml.kogito.quarkus.example.CommonTestUtils.testDescriptiveWrongData;
-import static org.kie.pmml.kogito.quarkus.example.CommonTestUtils.testResult;
 import static org.kie.pmml.kogito.quarkus.example.CommonTestUtils.testResultWrongData;
 
 @QuarkusTest
-public class LinRegTest {
+class LinRegTest {
 
     private static final String BASE_PATH = "/LinReg";
     private static final String TARGET = "fld4";
 
-    @Test
-    void testEvaluateLinRegResult() {
-        String inputData = "{\"fld1\":3.0, \"fld2\":2.0, \"fld3\":\"y\"}";
-        testResult(inputData, BASE_PATH, TARGET, 52.5f);
-    }
 
     @Test
     void testEvaluateLinRegResultWrongData() {
@@ -51,9 +44,4 @@ public class LinRegTest {
         testDescriptive(inputData, BASE_PATH, TARGET, expectedResultMap);
     }
 
-    @Test
-    void testEvaluateLinRegDescriptiveWrongData() {
-        String inputData = "{\"fld1\":\"a\", \"fld2\":2, \"fld3\":\"y\"}";
-        testDescriptiveWrongData(inputData, BASE_PATH);
-    }
 }

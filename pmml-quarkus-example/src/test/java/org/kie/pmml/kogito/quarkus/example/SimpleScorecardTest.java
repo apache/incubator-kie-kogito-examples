@@ -22,12 +22,10 @@ import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
 
 import static org.kie.pmml.kogito.quarkus.example.CommonTestUtils.testDescriptive;
-import static org.kie.pmml.kogito.quarkus.example.CommonTestUtils.testDescriptiveWrongData;
 import static org.kie.pmml.kogito.quarkus.example.CommonTestUtils.testResult;
-import static org.kie.pmml.kogito.quarkus.example.CommonTestUtils.testResultWrongData;
 
 @QuarkusTest
-public class SimpleScorecardTest {
+class SimpleScorecardTest {
 
     private static final String BASE_PATH = "/SimpleScorecard";
     private static final String TARGET = "score";
@@ -36,12 +34,6 @@ public class SimpleScorecardTest {
     void testEvaluateSimpleScorecardResult() {
         String inputData = "{\"input1\":5.0, \"input2\":-10.0}";
         testResult(inputData, BASE_PATH, TARGET, -15.0f);
-    }
-
-    @Test
-    void testEvaluateSimpleScorecardResultWrongData() {
-        String inputData = "{\"input1\":\"b\", \"input2\":-10.0}";
-        testResultWrongData(inputData, BASE_PATH);
     }
 
     @Test
@@ -54,9 +46,4 @@ public class SimpleScorecardTest {
         testDescriptive(inputData, BASE_PATH, TARGET, expectedResultMap);
     }
 
-    @Test
-    void testEvaluateSimpleScorecardDescriptiveWrongData() {
-        String inputData = "{\"input1\":\"b\", \"input2\":-10.0}";
-        testDescriptiveWrongData(inputData, BASE_PATH);
-    }
 }

@@ -11,7 +11,7 @@
   </parent>
   <artifactId>dmn-pmml-quarkus-example</artifactId>
 
-  <name>Kogito Example :: DMN :: PMML</name>
+  <name>Kogito Example :: DMN :: PMML - QUARKUS</name>
 
   <dependencyManagement>
     <dependencies>

@@ -19,23 +19,14 @@ import java.util.Collections;
 import java.util.Map;
 
 import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
-import org.hamcrest.core.IsNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.annotation.DirtiesContext;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.kie.dmnpmml.kogito.springboot.example.CommonTestUtils.testDescriptive;
-import static org.kie.dmnpmml.kogito.springboot.example.CommonTestUtils.testDescriptiveWrongData;
 import static org.kie.dmnpmml.kogito.springboot.example.CommonTestUtils.testResult;
-import static org.kie.dmnpmml.kogito.springboot.example.CommonTestUtils.testResultWrongData;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
@@ -59,21 +50,10 @@ public class LinRegTest {
     }
 
     @Test
-    void testEvaluateLinRegResultWrongData() {
-        String inputData = "{\"fld1\":\"a\", \"fld2\":2, \"fld3\":\"y\"}";
-        testResultWrongData(inputData, BASE_PATH);
-    }
-
-    @Test
     void testEvaluateLinRegDescriptive() {
         String inputData = "{\"fld1\":3.0, \"fld2\":2.0, \"fld3\":\"y\"}";
         final Map<String, Object> expectedResultMap = Collections.singletonMap(TARGET, 52.5f);
         testDescriptive(inputData, BASE_PATH, TARGET, expectedResultMap);
     }
 
-    @Test
-    void testEvaluateLinRegDescriptiveWrongData() {
-        String inputData = "{\"fld1\":\"a\", \"fld2\":2, \"fld3\":\"y\"}";
-        testDescriptiveWrongData(inputData, BASE_PATH);
-    }
 }

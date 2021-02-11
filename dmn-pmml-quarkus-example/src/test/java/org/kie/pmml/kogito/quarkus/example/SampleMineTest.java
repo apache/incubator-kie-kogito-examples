@@ -35,7 +35,7 @@ import static org.kie.pmml.kogito.quarkus.example.CommonTestUtils.testResult;
 import static org.kie.pmml.kogito.quarkus.example.CommonTestUtils.testResultWrongData;
 
 @QuarkusTest
-public class SampleMineTest {
+class SampleMineTest {
 
     private static final String BASE_PATH = "/SampleMine";
     private static final String TARGET = "decision";
@@ -51,12 +51,6 @@ public class SampleMineTest {
     }
 
     @Test
-    void testEvaluateSampleMineResultWrongData() {
-        String inputData = "{\"temperature\":\"b\", \"humidity\":10.0}";
-        testResultWrongData(inputData, BASE_PATH);
-    }
-
-    @Test
     void testEvaluateSampleMineDescriptive() {
         String inputData = "{\"temperature\":30.0, \"humidity\":10.0}";
         final Map<String, Object> expectedResultMap = new HashMap<>();
@@ -65,9 +59,4 @@ public class SampleMineTest {
         testDescriptive(inputData, BASE_PATH, TARGET, expectedResultMap);
     }
 
-    @Test
-    void testEvaluateSampleMineDescriptiveWrongData() {
-        String inputData = "{\"temperature\":\"b\", \"humidity\":10.0}";
-        testDescriptiveWrongData(inputData, BASE_PATH);
-    }
 }
