@@ -11,7 +11,7 @@
   <name>Kogito Example :: Process with Knative Eventing and Quarkus</name>
   <description>Kogito with Knative Eventing - Quarkus</description>
   <properties>
-    <version.wiremock>2.27.1</version.wiremock>
+    <version.com.github.tomakehurst>2.27.1</version.com.github.tomakehurst>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -81,7 +81,7 @@
     <dependency>
       <groupId>com.github.tomakehurst</groupId>
       <artifactId>wiremock-jre8</artifactId>
-      <version>${version.wiremock}</version>
+      <version>${version.com.github.tomakehurst}</version>
       <scope>test</scope>
     </dependency>
     <dependency>

@@ -293,12 +293,12 @@
       <dependency>
         <groupId>org.testcontainers</groupId>
         <artifactId>testcontainers</artifactId>
-        <version>${version.testcontainers}</version>
+        <version>${version.org.testcontainers}</version>
       </dependency>
       <dependency>
         <groupId>org.testcontainers</groupId>
         <artifactId>junit-jupiter</artifactId>
-        <version>${version.testcontainers}</version>
+        <version>${version.org.testcontainers}</version>
       </dependency>
       <dependency>
         <groupId>com.jayway.jsonpath</groupId>
@@ -328,7 +328,7 @@
       <dependency>
         <groupId>org.testcontainers</groupId>
         <artifactId>kafka</artifactId>
-        <version>${version.testcontainers}</version>
+        <version>${version.org.testcontainers}</version>
       </dependency>
       <dependency>
         <groupId>io.swagger.core.v3</groupId>
@@ -346,7 +346,7 @@
         <groupId>com.github.tomakehurst</groupId>
         <artifactId>wiremock-jre8</artifactId>
         <scope>test</scope>
-        <version>${version.wiremock}</version>
+        <version>${version.com.github.tomakehurst}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -362,7 +362,7 @@
         <plugin>
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-maven-plugin</artifactId>
-          <version>${version.springboot}</version>
+          <version>${version.org.springframework.boot}</version>
         </plugin>
         <plugin>
         <groupId>org.apache.maven.plugins</groupId>
