@@ -1,21 +1,15 @@
 <?xml version="1.0"?>
-<project
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-    xmlns="http://maven.apache.org/POM/4.0.0">
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-
   <parent>
     <groupId>org.kie.kogito</groupId>
     <artifactId>kogito-examples</artifactId>
     <version>2.0.0-SNAPSHOT</version>
   </parent>
-
   <artifactId>process-infinispan-persistence-quarkus</artifactId>
-
   <name>Kogito Example :: Process Infinispan Persistence Quarkus</name>
   <description>Process with Infinispan persistence - Quarkus</description>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -62,6 +56,10 @@
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-test-utils</artifactId>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-health</artifactId>
     </dependency>
   </dependencies>
   <build>
