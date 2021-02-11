@@ -18,9 +18,6 @@ package org.kie.kogito.examples;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import io.quarkus.test.common.QuarkusTestResource;
-import io.quarkus.test.junit.QuarkusTest;
-import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.Model;
@@ -28,6 +25,10 @@ import org.kie.kogito.process.Process;
 import org.kie.kogito.process.ProcessInstanceReadMode;
 import org.kie.kogito.testcontainers.quarkus.InfinispanQuarkusTestResource;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
+
+import io.quarkus.test.common.QuarkusTestResource;
+import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -152,18 +153,21 @@ public class OrdersRestIT {
                 .body("$.size()", is(1), "[0].id", is(firstCreatedId));
 
         // test retrieving error info using process management addon
-        given().accept(ContentType.JSON).when().get("/management/processes/demo.orders/instances/" + firstCreatedId + "/error").then()
+        given().accept(ContentType.JSON).when().get("/management/processes/demo.orders/instances/" + firstCreatedId + "/error")
+                .then()
                 .statusCode(200).body("id", is(firstCreatedId));
 
         String fixedOrderPayload = "{\"approver\" : \"john\", \"order\" : {\"orderNumber\" : \"12345\", \"shipped\" : false}}";
-        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(fixedOrderPayload).when().put("/orders/" + firstCreatedId).then()
+        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(fixedOrderPayload).when()
+                .put("/orders/" + firstCreatedId).then()
                 .statusCode(200)
                 .body("id", is(firstCreatedId))
                 .body("approver", equalTo("john"))
                 .body("order.orderNumber", equalTo("12345"))
                 .body("order.shipped", equalTo(false));
 
-        given().accept(ContentType.JSON).when().post("/management/processes/demo.orders/instances/" + firstCreatedId + "/retrigger").then()
+        given().accept(ContentType.JSON).when()
+                .post("/management/processes/demo.orders/instances/" + firstCreatedId + "/retrigger").then()
                 .statusCode(200);
 
         // delete second before finishing
@@ -249,8 +253,9 @@ public class OrdersRestIT {
                 .statusCode(200).body("id", is(firstCreatedId));
 
         // test getting order items subprocess
-        String orderItemsId = given().accept(ContentType.JSON).when().get("/orderItems?businessKey=ORD-0001").then().statusCode(200)
-                .body("$.size()", is(1)).extract().path("[0].id");
+        String orderItemsId =
+                given().accept(ContentType.JSON).when().get("/orderItems?businessKey=ORD-0001").then().statusCode(200)
+                        .body("$.size()", is(1)).extract().path("[0].id");
 
         // test getting order items by id
         given().accept(ContentType.JSON).when().get("/orderItems/" + orderItemsId).then()
@@ -283,7 +288,8 @@ public class OrdersRestIT {
         String orderPayload = "{\"approver\" : \"john\", \"order\" : {\"orderNumber\" : \"12345\", \"shipped\" : false}}";
         String id = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(orderPayload).when()
                 .post("/orders").then().statusCode(201).body("id",
-                                                             notNullValue()).extract().path("id");
+                        notNullValue())
+                .extract().path("id");
 
         assertNotNull(id);
         // get all orders make sure there is one
@@ -293,7 +299,7 @@ public class OrdersRestIT {
         // get order by its custom ID and test
         given().accept(ContentType.JSON).body(orderPayload).when().get("/orders/{id}", id).then()
                 .statusCode(200).body("id",
-                                      is(id));
+                        is(id));
         // update the instance
         orderPayload = "{\"approver\" : \"joe\", \"order\" : {\"orderNumber\" : \"54321\", \"shipped\" : true}}";
         given().contentType(ContentType.JSON).accept(ContentType.JSON).body(orderPayload).when()

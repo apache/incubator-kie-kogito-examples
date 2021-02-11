@@ -38,7 +38,7 @@ public class CorsConfig {
         config.addAllowedMethod("PUT");
         config.addAllowedMethod("DELETE");
         source.registerCorsConfiguration("/**",
-                                         config);
+                config);
 
         return new CorsFilter(source);
     }

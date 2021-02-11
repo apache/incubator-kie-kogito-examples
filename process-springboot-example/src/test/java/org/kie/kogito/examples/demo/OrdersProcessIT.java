@@ -47,7 +47,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = DemoApplication.class)
-@ContextConfiguration(initializers = {InfinispanSpringBootTestResource.Conditional.class, KafkaSpringBootTestResource.Conditional.class})
+@ContextConfiguration(
+        initializers = { InfinispanSpringBootTestResource.Conditional.class, KafkaSpringBootTestResource.Conditional.class })
 public class OrdersProcessIT {
 
     @Autowired
@@ -58,7 +59,8 @@ public class OrdersProcessIT {
     @Qualifier("demo.orderItems")
     Process<? extends Model> orderItemsProcess;
 
-    private SecurityPolicy policy = SecurityPolicy.of(new StaticIdentityProvider("john", Collections.singletonList("managers")));
+    private SecurityPolicy policy =
+            SecurityPolicy.of(new StaticIdentityProvider("john", Collections.singletonList("managers")));
 
     @Test
     public void testOrderProcess() {

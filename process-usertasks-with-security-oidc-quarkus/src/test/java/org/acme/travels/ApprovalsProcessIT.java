@@ -15,9 +15,6 @@
  */
 package org.acme.travels;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -41,6 +38,9 @@ import org.kie.kogito.testcontainers.quarkus.KeycloakQuarkusTestResource;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 @QuarkusTest
 @QuarkusTestResource(KeycloakQuarkusTestResource.class)
 public class ApprovalsProcessIT {
@@ -56,7 +56,8 @@ public class ApprovalsProcessIT {
 
         Model m = approvalsProcess.createModel();
         Map<String, Object> parameters = new HashMap<>();
-        parameters.put("traveller", new Traveller("John", "Doe", "john.doe@example.com", "American", new Address("main street", "Boston", "10005", "US")));
+        parameters.put("traveller", new Traveller("John", "Doe", "john.doe@example.com", "American",
+                new Address("main street", "Boston", "10005", "US")));
         m.fromMap(parameters);
 
         ProcessInstance<?> processInstance = approvalsProcess.createInstance(m);
@@ -103,7 +104,8 @@ public class ApprovalsProcessIT {
 
         Model m = approvalsProcess.createModel();
         Map<String, Object> parameters = new HashMap<>();
-        parameters.put("traveller", new Traveller("John", "Doe", "john.doe@example.com", "American", new Address("main street", "Boston", "10005", "US")));
+        parameters.put("traveller", new Traveller("John", "Doe", "john.doe@example.com", "American",
+                new Address("main street", "Boston", "10005", "US")));
         m.fromMap(parameters);
 
         ProcessInstance<?> processInstance = approvalsProcess.createInstance(m);
@@ -119,7 +121,8 @@ public class ApprovalsProcessIT {
         assertEquals(1, workItems.size());
 
         processInstance.transitionWorkItem(workItems.get(0).getId(), new HumanTaskTransition(Claim.ID, null, policy));
-        processInstance.transitionWorkItem(workItems.get(0).getId(), new HumanTaskTransition(Complete.ID, Collections.singletonMap("approved", true), policy));
+        processInstance.transitionWorkItem(workItems.get(0).getId(),
+                new HumanTaskTransition(Complete.ID, Collections.singletonMap("approved", true), policy));
 
         workItems = processInstance.workItems(policy);
         assertEquals(0, workItems.size());
@@ -133,7 +136,8 @@ public class ApprovalsProcessIT {
         assertEquals(1, workItems.size());
 
         processInstance.transitionWorkItem(workItems.get(0).getId(), new HumanTaskTransition(Claim.ID, null, policy));
-        processInstance.transitionWorkItem(workItems.get(0).getId(), new HumanTaskTransition(Complete.ID, Collections.singletonMap("approved", false), policy));
+        processInstance.transitionWorkItem(workItems.get(0).getId(),
+                new HumanTaskTransition(Complete.ID, Collections.singletonMap("approved", false), policy));
 
         assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_COMPLETED, processInstance.status());
 

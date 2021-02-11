@@ -19,7 +19,6 @@ import java.io.File;
 import java.net.URISyntaxException;
 import java.time.Duration;
 
-import io.restassured.http.ContentType;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -28,6 +27,8 @@ import org.testcontainers.containers.DockerComposeContainer;
 import org.testcontainers.containers.wait.strategy.Wait;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
+
+import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.hasItem;
@@ -49,10 +50,14 @@ public class GrafanaDockerComposeIT {
 
     static {
         try {
-            environment = new DockerComposeContainer(new File(GrafanaDockerComposeIT.class.getClassLoader().getResource("./docker-compose.yml").toURI()))
-                    .withExposedService("grafana_1", GRAFANA_PORT, Wait.forListeningPort().withStartupTimeout(Duration.ofMinutes(STARTUP_MINUTES_TIMEOUT)))
-                    .withExposedService("hello_1", KOGITO_APPLICATION_PORT, Wait.forListeningPort().withStartupTimeout(Duration.ofMinutes(STARTUP_MINUTES_TIMEOUT)))
-                    .withExposedService("prometheus_1", PROMETHEUS_PORT, Wait.forListeningPort().withStartupTimeout(Duration.ofMinutes(STARTUP_MINUTES_TIMEOUT)));
+            environment = new DockerComposeContainer(
+                    new File(GrafanaDockerComposeIT.class.getClassLoader().getResource("./docker-compose.yml").toURI()))
+                            .withExposedService("grafana_1", GRAFANA_PORT,
+                                    Wait.forListeningPort().withStartupTimeout(Duration.ofMinutes(STARTUP_MINUTES_TIMEOUT)))
+                            .withExposedService("hello_1", KOGITO_APPLICATION_PORT,
+                                    Wait.forListeningPort().withStartupTimeout(Duration.ofMinutes(STARTUP_MINUTES_TIMEOUT)))
+                            .withExposedService("prometheus_1", PROMETHEUS_PORT,
+                                    Wait.forListeningPort().withStartupTimeout(Duration.ofMinutes(STARTUP_MINUTES_TIMEOUT)));
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
@@ -97,7 +102,8 @@ public class GrafanaDockerComposeIT {
 
     @Test
     public void testKogitoContainerIsDeployedAndResponsive() {
-        String body = "{\"Client\": {\"age\": 43,\"salary\": 1950, \"existing payments\": 100}, \"Loan\": {\"duration\": 15,\"installment\": 180}, \"SupremeDirector\" : \"Yes\", \"Bribe\": 1000}";
+        String body =
+                "{\"Client\": {\"age\": 43,\"salary\": 1950, \"existing payments\": 100}, \"Loan\": {\"duration\": 15,\"installment\": 180}, \"SupremeDirector\" : \"Yes\", \"Bribe\": 1000}";
 
         given()
                 .baseUri(KOGITO_APPLICATION_URL)

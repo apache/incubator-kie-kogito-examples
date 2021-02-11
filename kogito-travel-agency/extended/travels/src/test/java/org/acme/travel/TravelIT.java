@@ -23,8 +23,6 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import io.quarkus.test.common.QuarkusTestResource;
-import io.quarkus.test.junit.QuarkusTest;
 import org.acme.travels.Address;
 import org.acme.travels.Flight;
 import org.acme.travels.Hotel;
@@ -41,6 +39,9 @@ import org.kie.kogito.process.WorkItem;
 import org.kie.kogito.testcontainers.quarkus.InfinispanQuarkusTestResource;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 
+import io.quarkus.test.common.QuarkusTestResource;
+import io.quarkus.test.junit.QuarkusTest;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.core.StringContains.containsString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -51,7 +52,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @QuarkusTestResource(value = KafkaQuarkusTestResource.class)
 public class TravelIT {
 
-    private static final Traveller TRAVELLER_FROM_POLAND = new Traveller("Jan", "Kowalski", "jan.kowalski@example.com", "Polish", new Address("polna", "Krakow", "32000", "Poland"));
+    private static final Traveller TRAVELLER_FROM_POLAND = new Traveller("Jan", "Kowalski", "jan.kowalski@example.com",
+            "Polish", new Address("polna", "Krakow", "32000", "Poland"));
     private static final Trip TRIP_TO_POLAND = new Trip("Another City", "Poland", new Date(), new Date());
     private static final Trip TRIP_TO_US = new Trip("New York", "US", new Date(), new Date());
 
@@ -97,7 +99,8 @@ public class TravelIT {
                 .get("/metrics")
                 .then()
                 .statusCode(200)
-                .body(containsString("kie_process_instance_running_total{app_id=\"default-process-monitoring-listener\",process_id=\"travels\",} 1.0"));
+                .body(containsString(
+                        "kie_process_instance_running_total{app_id=\"default-process-monitoring-listener\",process_id=\"travels\",} 1.0"));
     }
 
     private void whenNewTravel(Traveller traveller, Trip trip) {

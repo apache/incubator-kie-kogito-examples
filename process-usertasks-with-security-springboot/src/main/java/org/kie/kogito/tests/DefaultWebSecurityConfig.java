@@ -25,7 +25,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-
 @Configuration("kieServerSecurity")
 @EnableWebSecurity
 public class DefaultWebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -33,11 +32,11 @@ public class DefaultWebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-        .csrf().disable()
-        .authorizeRequests()
-        .antMatchers("/**").authenticated()
-        .and()
-        .httpBasic();
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/**").authenticated()
+                .and()
+                .httpBasic();
     }
 
     @Autowired
@@ -46,7 +45,7 @@ public class DefaultWebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication().withUser("mary").password("mary").roles("managers");
         auth.inMemoryAuthentication().withUser("poul").password("poul").roles("interns");
     }
-    
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance();

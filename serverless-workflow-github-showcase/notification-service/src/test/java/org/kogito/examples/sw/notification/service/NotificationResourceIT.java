@@ -15,11 +15,12 @@
  */
 package org.kogito.examples.sw.notification.service;
 
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
 
@@ -41,7 +42,8 @@ class NotificationResourceIT {
 
     @Test
     void simpleCheckSendSlackMessageCloudEvent() {
-        given().config(RestAssured.config().encoderConfig(RestAssured.config().getEncoderConfig().encodeContentTypeAs("application/cloudevents", ContentType.TEXT)))
+        given().config(RestAssured.config().encoderConfig(
+                RestAssured.config().getEncoderConfig().encodeContentTypeAs("application/cloudevents", ContentType.TEXT)))
                 .when()
                 .body("{ \"number\": 1000, \"pull_request\": { \"title\": \"Hello from cloud events! :cloud:\" } }")
                 .header("ce-specversion", "1.0")

@@ -34,8 +34,8 @@ public class ScheduleService {
     public final static int FIRST_HOUR_MORNING = 9;
 
     /*
-    Our doctors can attend one patient per day only :)
-    */
+     * Our doctors can attend one patient per day only :)
+     */
     private final Map<String, List<LocalDateTime>> schedule;
 
     public ScheduleService() {
@@ -43,9 +43,9 @@ public class ScheduleService {
     }
 
     /*
-    In a real world scenario this can get far more complex, we should have a transactions and sync access to the schedule.
-    We don't want to mess with our doctors schedule, right? :)
-    To make it simple and less error prone, we are using a simple Map to hold our data.
+     * In a real world scenario this can get far more complex, we should have a transactions and sync access to the schedule.
+     * We don't want to mess with our doctors schedule, right? :)
+     * To make it simple and less error prone, we are using a simple Map to hold our data.
      */
     public Appointment createAppointment(final Patient patient) {
         final Appointment appointment = new Appointment();
@@ -57,7 +57,8 @@ public class ScheduleService {
 
         // let's find room for our patient
         if (this.schedule.get(doctorId) != null) {
-            final Optional<LocalDateTime> lastDate = this.schedule.get(doctorId).stream().max(Comparator.nullsFirst(Comparator.naturalOrder()));
+            final Optional<LocalDateTime> lastDate =
+                    this.schedule.get(doctorId).stream().max(Comparator.nullsFirst(Comparator.naturalOrder()));
             appointment.setDate(this.addOneDayFirstHourInMorning(lastDate.orElseThrow(IllegalStateException::new)));
         } else { // this doctor hasn't been set an appointment yet
             this.schedule.put(doctorId, new ArrayList<>());

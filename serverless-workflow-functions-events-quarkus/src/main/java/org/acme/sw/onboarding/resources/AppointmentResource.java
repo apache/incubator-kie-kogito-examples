@@ -63,7 +63,8 @@ public class AppointmentResource {
         }
         if (patient.getAssignedDoctor() == null) {
             return Response.status(Response.Status.BAD_REQUEST)
-                    .entity(new Error("Doctor has not been assigned! Impossible to schedule an appointment. Please assign a doctor first."))
+                    .entity(new Error(
+                            "Doctor has not been assigned! Impossible to schedule an appointment. Please assign a doctor first."))
                     .build();
         }
         // now we can go

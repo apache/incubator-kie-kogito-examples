@@ -21,7 +21,7 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
-@SpringBootApplication(scanBasePackages = {"org.kie.kogito.**"})
+@SpringBootApplication(scanBasePackages = { "org.kie.kogito.**" })
 public class ServerlessServiceCallsExampleApplication {
     public static void main(String[] args) {
         SpringApplication.run(ServerlessServiceCallsExampleApplication.class, args);

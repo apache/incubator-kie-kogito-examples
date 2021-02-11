@@ -15,6 +15,8 @@
  */
 package org.kie.kogito.examples.solver;
 
+import java.awt.geom.Point2D;
+
 import org.kie.kogito.examples.domain.FlightInfo;
 import org.kie.kogito.examples.domain.Passenger;
 import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScore;
@@ -25,13 +27,11 @@ import org.optaplanner.core.api.score.stream.ConstraintProvider;
 
 import static org.optaplanner.core.api.score.stream.Joiners.equal;
 
-import java.awt.geom.Point2D;
-
 public class FlightSeatingConstraintProvider implements ConstraintProvider {
 
     @Override
     public Constraint[] defineConstraints(ConstraintFactory factory) {
-        return new Constraint[]{
+        return new Constraint[] {
                 seatConflict(factory),
                 emergencyExitRow(factory),
                 seatTypePreference(factory),

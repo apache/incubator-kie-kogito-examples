@@ -21,12 +21,12 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 @Path("/country")
 public class CountriesResource {
@@ -34,7 +34,6 @@ public class CountriesResource {
     @Inject
     @RestClient
     CountriesService countriesService;
-
 
     @GET
     @Path("/name/{name}")
@@ -50,7 +49,7 @@ public class CountriesResource {
 
         // population is given as string, but jsonpath needs it as int to be able to compare
         String population = retNode.get("population").asText();
-        ((ObjectNode)retNode).put("population", Integer.parseInt(population));
+        ((ObjectNode) retNode).put("population", Integer.parseInt(population));
 
         return retNode;
     }
