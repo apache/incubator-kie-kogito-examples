@@ -231,6 +231,7 @@
       </activation>
       <modules>
         <module>decisiontable-quarkus-example</module>
+        <module>dmn-event-driven-quarkus</module>
         <module>dmn-listener-quarkus</module>
         <module>dmn-pmml-quarkus-example</module>
         <module>dmn-quarkus-example</module>
