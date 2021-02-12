@@ -15,26 +15,25 @@
  */
 package org.kie.pmml.kogito.springboot.example;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
-import org.hamcrest.core.IsNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.annotation.DirtiesContext;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.kie.pmml.kogito.springboot.example.CommonTestUtils.testDescriptive;
+import static org.kie.pmml.kogito.springboot.example.CommonTestUtils.testResult;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-public class SampleMineTest {
+class SampleMineTest {
+
+    private static final String BASE_PATH = "/SampleMine/";
+    private static final String TARGET = "decision";
 
     @LocalServerPort
     private int port;
@@ -45,29 +44,18 @@ public class SampleMineTest {
     }
 
     @Test
-    public void testEvaluateSampleMine() {
+    void testEvaluateSampleMineResult() {
         String inputData = "{\"temperature\":30.0, \"humidity\":10.0}";
-        Object resultVariables =  given()
-                .contentType(ContentType.JSON)
-                .body(inputData)
-                .when()
-                .post("/SampleMine")
-                .then()
-                .statusCode(200)
-                .body("correlationId", is(new IsNull()))
-                .body("segmentationId", is(new IsNull()))
-                .body("segmentId", is(new IsNull()))
-                .body("segmentIndex", is(0)) // as JSON is not schema aware, here we assert the RAW string
-                .body("resultCode", is("OK"))
-                .body("resultObjectName", is("decision"))
-                .extract()
-                .path("resultVariables");
-        assertNotNull(resultVariables);
-        assertTrue(resultVariables instanceof Map);
-        Map<String, Object> mappedResultVariables = (Map) resultVariables;
-        assertTrue(mappedResultVariables.containsKey("decision"));
-        assertEquals("sunglasses", mappedResultVariables.get("decision"));
-        assertTrue(mappedResultVariables.containsKey("weatherdecision"));
-        assertEquals("sunglasses", mappedResultVariables.get("weatherdecision"));
+        testResult(inputData, BASE_PATH, TARGET, "sunglasses");
     }
+
+    @Test
+    void testEvaluateSampleMineDescriptive() {
+        String inputData = "{\"temperature\":30.0, \"humidity\":10.0}";
+        final Map<String, Object> expectedResultMap = new HashMap<>();
+        expectedResultMap.put(TARGET, "sunglasses");
+        expectedResultMap.put("weatherdecision", "sunglasses");
+        testDescriptive(inputData, BASE_PATH, TARGET, expectedResultMap);
+    }
+
 }

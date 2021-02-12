@@ -8,7 +8,7 @@
     <version>2.0.0-SNAPSHOT</version>
   </parent>
   <artifactId>dmn-pmml-quarkus-example</artifactId>
-  <name>Kogito Example :: DMN :: PMML</name>
+  <name>Kogito Example :: DMN :: PMML - QUARKUS</name>
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -41,6 +41,7 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-openapi</artifactId>
     </dependency>
+    <!-- PMML -->
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-pmml</artifactId>
