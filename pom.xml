@@ -47,9 +47,6 @@
     <!-- kogito -->
     <kogito.version>${project.version}</kogito.version>
     <version.org.optaplanner>8.3.0-SNAPSHOT</version.org.optaplanner>
-    <!-- license plugin -->
-    <version.license.plugin>3.0</version.license.plugin>
-    <skipLicensesCheck>false</skipLicensesCheck>
     <!-- pmml -->
     <version.org.jpmml>1.5.1</version.org.jpmml>
   </properties>
@@ -584,39 +581,6 @@
         <!-- Entry needed to create, install and deploy sources jars -->
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <groupId>com.mycila</groupId>
-        <artifactId>license-maven-plugin</artifactId>
-        <version>${version.license.plugin}</version>
-        <configuration>
-          <header>file:///${maven.multiModuleProjectDirectory}/licensesheader.txt</header>
-          <includes>
-            <include>**/*.java</include>
-          </includes>
-          <excludes>
-            <exclude>.mvn/**</exclude>
-            <exclude>**/kogito-apps/**</exclude>
-            <exclude>**/kogito-runtimes/**</exclude>
-          </excludes>
-        </configuration>
-        <dependencies>
-          <dependency>
-            <groupId>com.mycila</groupId>
-            <artifactId>license-maven-plugin-git</artifactId>
-            <version>${version.license.plugin}</version>
-          </dependency>
-        </dependencies>
-        <executions>
-          <execution>
-            <configuration>
-              <skip>${skipLicensesCheck}</skip>
-            </configuration>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

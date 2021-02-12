@@ -1,5 +1,5 @@
-/**
- *  Copyright 2021 Red Hat, Inc. and/or its affiliates.
+/*
+ *  Copyright 2020 Red Hat, Inc. and/or its affiliates.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -28,7 +28,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.cloudevents.core.builder.CloudEventBuilder;
-import io.cloudevents.jackson.JsonFormat;
 import org.junit.After;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.kafka.KafkaClient;
@@ -62,7 +61,6 @@ public class MessagingIT {
     @Test
     public void testProcess() throws InterruptedException {
         objectMapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
-        objectMapper.registerModule(JsonFormat.getCloudEventJacksonModule());
 
         //number of generated events to test
         final int count = 3;
