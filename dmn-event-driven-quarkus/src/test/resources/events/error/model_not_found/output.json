@@ -1,0 +1,10 @@
+{
+  "specversion": "1.0",
+  "id": "25c2d7d1-f66f-4301-8503-b8843cbb844b",
+  "source": "aName",
+  "type": "DecisionResponseError",
+  "subject": "TheSubject",
+  "kogitodmnmodelnamespace": "aNamespace",
+  "kogitodmnmodelname": "aName",
+  "data": "MODEL_NOT_FOUND"
+}

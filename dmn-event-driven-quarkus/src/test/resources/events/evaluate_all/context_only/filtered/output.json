@@ -1,0 +1,17 @@
+{
+  "specversion": "1.0",
+  "id": "e7c4aeb5-4081-41a1-a593-9173ac35d193",
+  "source": "Traffic+Violation",
+  "type": "DecisionResponse",
+  "subject": "TheSubject",
+  "kogitodmnmodelnamespace": "https://github.com/kiegroup/drools/kie-dmn/_A4BCA8B8-CF08-433F-93B2-A2598F19ECFF",
+  "kogitodmnmodelname": "Traffic Violation",
+  "data": {
+    "calculateTotalPoints": "function calculateTotalPoints( driver, fine )",
+    "Fine": {
+      "Points": 3,
+      "Amount": 500
+    },
+    "Should the driver be suspended?": "No"
+  }
+}
