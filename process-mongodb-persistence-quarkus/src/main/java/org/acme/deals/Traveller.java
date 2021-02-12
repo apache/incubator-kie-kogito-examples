@@ -77,6 +77,7 @@ public class Traveller {
 
     @Override
     public String toString() {
-        return "Traveller [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", nationality=" + nationality + ", address=" + address + "]";
+        return "Traveller [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", nationality="
+                + nationality + ", address=" + address + "]";
     }
 }

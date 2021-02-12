@@ -36,15 +36,16 @@ import io.quarkus.test.junit.QuarkusTest;
 @QuarkusTest
 public class VisaRulesIT {
 
-	@Inject
-	KieRuntimeBuilder ruleRuntime;
-	
-	@Test
-	public void testVisaNotRequiredRule() {
-		
-		assertNotNull(ruleRuntime);
-		
-		Traveller traveller = new Traveller("John", "Doe", "john.doe@example.com", "American", new Address("main street", "Boston", "10005", "US"));
+    @Inject
+    KieRuntimeBuilder ruleRuntime;
+
+    @Test
+    public void testVisaNotRequiredRule() {
+
+        assertNotNull(ruleRuntime);
+
+        Traveller traveller = new Traveller("John", "Doe", "john.doe@example.com", "American",
+                new Address("main street", "Boston", "10005", "US"));
         Trip trip = new Trip("New York", "US", new Date(), new Date());
 
         KieSession ksession = ruleRuntime.newKieSession();
@@ -52,18 +53,19 @@ public class VisaRulesIT {
         ksession.insert(trip);
         ksession.insert(traveller);
         ksession.fireAllRules();
-        
+
         ksession.dispose();
-        
-        assertFalse(trip.isVisaRequired());                
-	}
-	
-	@Test
-	public void testVisaRequiredRule() {
-		
-		assertNotNull(ruleRuntime);
-		
-		Traveller traveller = new Traveller("Jan", "Kowalski", "jan.kowalski@example.com", "Polish", new Address("polna", "Krakow", "32000", "Poland"));
+
+        assertFalse(trip.isVisaRequired());
+    }
+
+    @Test
+    public void testVisaRequiredRule() {
+
+        assertNotNull(ruleRuntime);
+
+        Traveller traveller = new Traveller("Jan", "Kowalski", "jan.kowalski@example.com", "Polish",
+                new Address("polna", "Krakow", "32000", "Poland"));
         Trip trip = new Trip("New York", "US", new Date(), new Date());
 
         KieSession ksession = ruleRuntime.newKieSession();
@@ -71,9 +73,9 @@ public class VisaRulesIT {
         ksession.insert(trip);
         ksession.insert(traveller);
         ksession.fireAllRules();
-        
+
         ksession.dispose();
-        
-        assertTrue(trip.isVisaRequired());                
-	}
+
+        assertTrue(trip.isVisaRequired());
+    }
 }

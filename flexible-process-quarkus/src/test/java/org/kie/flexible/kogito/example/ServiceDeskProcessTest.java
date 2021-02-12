@@ -15,24 +15,25 @@
  */
 package org.kie.flexible.kogito.example;
 
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.anyOf;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import io.quarkus.test.junit.QuarkusTest;
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
 import org.kie.flexible.kogito.example.model.Product;
 import org.kie.flexible.kogito.example.model.State;
 import org.kie.flexible.kogito.example.model.SupportCase;
 import org.kie.flexible.kogito.example.service.TriageService;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.anyOf;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 
 @QuarkusTest
 class ServiceDeskProcessTest {
@@ -63,25 +64,26 @@ class ServiceDeskProcessTest {
 
         String id = given()
                 .contentType(ContentType.JSON)
-            .when()
+                .when()
                 .body(params)
                 .post(BASE_PATH)
-            .then()
+                .then()
                 .statusCode(201)
                 .header("Location", notNullValue())
                 .body("id", notNullValue())
                 .body("supportCase.state", is(State.WAITING_FOR_OWNER.name()))
-                .body("supportCase.engineer", anyOf(is(TriageService.KOGITO_ENGINEERS[0]), is(TriageService.KOGITO_ENGINEERS[1])))
+                .body("supportCase.engineer",
+                        anyOf(is(TriageService.KOGITO_ENGINEERS[0]), is(TriageService.KOGITO_ENGINEERS[1])))
                 .body("supportGroup", is("Kogito"))
-            .extract()
+                .extract()
                 .path("id");
 
         given()
                 .contentType(ContentType.JSON)
                 .basePath(BASE_PATH)
-            .when()
+                .when()
                 .get(id)
-            .then()
+                .then()
                 .statusCode(200);
         return id;
     }
@@ -90,12 +92,12 @@ class ServiceDeskProcessTest {
         String location = given()
                 .basePath(BASE_PATH)
                 .contentType(ContentType.JSON)
-            .when()
+                .when()
                 .post("/{id}/ReceiveSupportComment", id)
-            .then()
+                .then()
                 .statusCode(201)
                 .header("Location", notNullValue())
-            .extract()
+                .extract()
                 .header("Location");
 
         String taskId = location.substring(location.lastIndexOf("/") + 1);
@@ -108,10 +110,10 @@ class ServiceDeskProcessTest {
                 .queryParam("user", "kelly")
                 .queryParam("group", "support")
                 .contentType(ContentType.JSON)
-            .when()
+                .when()
                 .body(params)
                 .post("/{id}/ReceiveSupportComment/{taskId}", id, taskId)
-            .then()
+                .then()
                 .statusCode(200)
                 .body("supportCase.state", is(State.WAITING_FOR_CUSTOMER.name()))
                 .body("supportCase.comments[0].text", is(params.get("comment")))
@@ -122,12 +124,12 @@ class ServiceDeskProcessTest {
     private void addCustomerComment(String id) {
         String location = given()
                 .basePath(BASE_PATH + "/" + id).contentType(ContentType.JSON)
-            .when()
+                .when()
                 .post("/ReceiveCustomerComment")
-            .then()
+                .then()
                 .statusCode(201)
                 .header("Location", notNullValue())
-            .extract()
+                .extract()
                 .header("Location");
 
         String taskId = location.substring(location.lastIndexOf("/") + 1);
@@ -140,10 +142,10 @@ class ServiceDeskProcessTest {
                 .queryParam("user", "Paco")
                 .queryParam("group", "customer")
                 .contentType(ContentType.JSON)
-            .when()
+                .when()
                 .body(params)
                 .post("/{id}/ReceiveCustomerComment/{taskId}", id, taskId)
-            .then()
+                .then()
                 .statusCode(200)
                 .body("supportCase.state", is(State.WAITING_FOR_OWNER.name()))
                 .body("supportCase.comments[1].text", is(params.get("comment")))
@@ -160,14 +162,14 @@ class ServiceDeskProcessTest {
         String taskId = given()
                 .basePath(BASE_PATH + "/" + id)
                 .contentType(ContentType.JSON)
-            .when()
-            .get("/tasks")
-            .then()
-            .statusCode(200)
-            .body("$.size", is(1))
-            .body("[0].name", is("Questionnaire"))
-            .extract()
-            .path("[0].id");
+                .when()
+                .get("/tasks")
+                .then()
+                .statusCode(200)
+                .body("$.size", is(1))
+                .body("[0].name", is("Questionnaire"))
+                .extract()
+                .path("[0].id");
         Map<String, Object> params = new HashMap<>();
         params.put("comment", "Kogito is great!");
         params.put("evaluation", 10);
@@ -177,10 +179,10 @@ class ServiceDeskProcessTest {
                 .queryParam("user", "Paco")
                 .queryParam("group", "customer")
                 .contentType(ContentType.JSON)
-            .when()
+                .when()
                 .body(params)
-            .post("/Questionnaire/" + taskId)
-            .then()
+                .post("/Questionnaire/" + taskId)
+                .then()
                 .statusCode(200)
                 .body("supportCase.state", is(State.CLOSED.name()))
                 .body("supportCase.questionnaire.comment", is(params.get("comment")))
@@ -192,7 +194,7 @@ class ServiceDeskProcessTest {
         List<?> processes = given()
                 .basePath(BASE_PATH)
                 .contentType(ContentType.JSON)
-            .when()
+                .when()
                 .get("/")
                 .as(List.class);
 

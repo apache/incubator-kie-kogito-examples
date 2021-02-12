@@ -15,18 +15,19 @@
  */
 package org.kie.dmnpmml.kogito.springboot.example;
 
+import static org.kie.dmnpmml.kogito.springboot.example.CommonTestUtils.testDescriptive;
+import static org.kie.dmnpmml.kogito.springboot.example.CommonTestUtils.testResult;
+
 import java.util.Collections;
 import java.util.Map;
 
-import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.annotation.DirtiesContext;
 
-import static org.kie.dmnpmml.kogito.springboot.example.CommonTestUtils.testDescriptive;
-import static org.kie.dmnpmml.kogito.springboot.example.CommonTestUtils.testResult;
+import io.restassured.RestAssured;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)

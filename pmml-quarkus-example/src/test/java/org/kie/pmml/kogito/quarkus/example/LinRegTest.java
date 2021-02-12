@@ -15,21 +15,21 @@
  */
 package org.kie.pmml.kogito.quarkus.example;
 
+import static org.kie.pmml.kogito.quarkus.example.CommonTestUtils.testDescriptive;
+import static org.kie.pmml.kogito.quarkus.example.CommonTestUtils.testResult;
+
 import java.util.Collections;
 import java.util.Map;
 
-import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
 
-import static org.kie.pmml.kogito.quarkus.example.CommonTestUtils.testDescriptive;
-import static org.kie.pmml.kogito.quarkus.example.CommonTestUtils.testResult;
+import io.quarkus.test.junit.QuarkusTest;
 
 @QuarkusTest
 class LinRegTest {
 
     private static final String BASE_PATH = "/LinReg";
     private static final String TARGET = "fld4";
-
 
     @Test
     void testEvaluateLinRegResult() {

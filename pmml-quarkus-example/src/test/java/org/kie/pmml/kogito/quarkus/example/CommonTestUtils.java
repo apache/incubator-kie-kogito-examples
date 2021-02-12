@@ -15,12 +15,6 @@
  */
 package org.kie.pmml.kogito.quarkus.example;
 
-import java.util.Map;
-import java.util.function.BiConsumer;
-
-import io.restassured.http.ContentType;
-import org.hamcrest.core.IsNull;
-
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.isA;
@@ -28,12 +22,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Map;
+
+import org.hamcrest.core.IsNull;
+
+import io.restassured.http.ContentType;
+
 public class CommonTestUtils {
 
     public static void testResult(final String inputData,
-                                  final String path,
-                                  final String targetField,
-                                  final Object expectedResult) {
+            final String path,
+            final String targetField,
+            final Object expectedResult) {
         given()
                 .contentType(ContentType.JSON)
                 .body(inputData)
@@ -45,7 +45,7 @@ public class CommonTestUtils {
     }
 
     public static void testResultWrongData(final String inputData,
-                                  final String path) {
+            final String path) {
         given()
                 .contentType(ContentType.JSON)
                 .body(inputData)
@@ -57,11 +57,11 @@ public class CommonTestUtils {
     }
 
     public static void testDescriptive(final String inputData,
-                                  final String basePath,
-                                  final String targetField,
-                                  final Map<String, Object> expectedResultMap) {
+            final String basePath,
+            final String targetField,
+            final Map<String, Object> expectedResultMap) {
         String path = basePath + "/descriptive";
-        Object resultVariables =  given()
+        Object resultVariables = given()
                 .contentType(ContentType.JSON)
                 .body(inputData)
                 .when()
@@ -87,7 +87,7 @@ public class CommonTestUtils {
     }
 
     public static void testDescriptiveWrongData(final String inputData,
-                                           final String basePath) {
+            final String basePath) {
         String path = basePath + "/descriptive";
         given()
                 .contentType(ContentType.JSON)

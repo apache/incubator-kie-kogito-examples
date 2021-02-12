@@ -15,24 +15,16 @@
  */
 package org.kie.pmml.kogito.quarkus.example;
 
+import static org.kie.pmml.kogito.quarkus.example.CommonTestUtils.testDescriptive;
+import static org.kie.pmml.kogito.quarkus.example.CommonTestUtils.testResult;
+
 import java.util.HashMap;
 import java.util.Map;
 
-import io.quarkus.test.junit.QuarkusTest;
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
-import org.hamcrest.core.IsNull;
 import org.junit.jupiter.api.Test;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.kie.pmml.kogito.quarkus.example.CommonTestUtils.testDescriptive;
-import static org.kie.pmml.kogito.quarkus.example.CommonTestUtils.testDescriptiveWrongData;
-import static org.kie.pmml.kogito.quarkus.example.CommonTestUtils.testResult;
-import static org.kie.pmml.kogito.quarkus.example.CommonTestUtils.testResultWrongData;
+import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.RestAssured;
 
 @QuarkusTest
 class SampleMineTest {

@@ -15,23 +15,25 @@
  */
 package org.kie.dmn.kogito.quarkus.example;
 
+import static io.restassured.RestAssured.given;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.kie.dmn.kogito.quarkus.example.TrafficViolationTest.TRAFFIC_VIOLATION_TEST_BODY;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
 import javax.inject.Inject;
 
-import io.quarkus.test.junit.QuarkusTest;
-import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
 import org.kie.dmn.api.core.event.DMNRuntimeEventListener;
 import org.kie.dmn.kogito.quarkus.example.mock.MockDMNRuntimeEventListener;
 import org.kie.kogito.decision.DecisionConfig;
 import org.kie.kogito.decision.DecisionEventListenerConfig;
 
-import static io.restassured.RestAssured.given;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.kie.dmn.kogito.quarkus.example.TrafficViolationTest.TRAFFIC_VIOLATION_TEST_BODY;
+import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.http.ContentType;
 
 @QuarkusTest
 public class TrafficViolationListenerTest {

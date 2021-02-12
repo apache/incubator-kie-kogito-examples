@@ -15,9 +15,10 @@
  */
 package org.kie.kogito.app;
 
+import static io.vertx.core.http.HttpMethod.GET;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
-import javax.inject.Inject;
 
 import io.quarkus.qute.Template;
 import io.quarkus.qute.api.ResourcePath;
@@ -25,8 +26,6 @@ import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.FaviconHandler;
 import io.vertx.ext.web.handler.LoggerHandler;
 import io.vertx.ext.web.handler.StaticHandler;
-
-import static io.vertx.core.http.HttpMethod.GET;
 
 @ApplicationScoped
 public class VertxRouter {

@@ -15,17 +15,18 @@
  */
 package org.kie.pmml.kogito.quarkus.example;
 
-import io.quarkus.test.junit.QuarkusTest;
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
-import io.restassured.path.json.config.JsonPathConfig;
-import org.junit.jupiter.api.Test;
-
 import static io.restassured.RestAssured.given;
 import static io.restassured.config.JsonConfig.jsonConfig;
 import static org.hamcrest.Matchers.closeTo;
 import static org.hamcrest.Matchers.comparesEqualTo;
 import static org.hamcrest.Matchers.is;
+
+import org.junit.jupiter.api.Test;
+
+import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import io.restassured.path.json.config.JsonPathConfig;
 
 @QuarkusTest
 public class DMNRegressionTest {
@@ -33,7 +34,7 @@ public class DMNRegressionTest {
     static {
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
     }
-    
+
     @Test
     public void testEvaluateRegressionDMN() {
         String inputData = "{\"fld1\":3.0, \"fld2\":2.0, \"fld3\":\"y\"}";
@@ -50,6 +51,6 @@ public class DMNRegressionTest {
                 .body("fld2", is(comparesEqualTo(2))) // was input
                 .body("fld1", is(comparesEqualTo(3))) // was input
                 .body("Decision", is(closeTo(52.5, 0))) // real decision output 
-                ;
+        ;
     }
 }

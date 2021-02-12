@@ -15,6 +15,11 @@
  */
 package org.acme.travel;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.net.URI;
 import java.time.OffsetDateTime;
 import java.util.Optional;
@@ -23,11 +28,6 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import io.cloudevents.core.builder.CloudEventBuilder;
 import org.junit.After;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.kafka.KafkaClient;
@@ -39,10 +39,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import io.cloudevents.core.builder.CloudEventBuilder;
 
 @SpringBootTest(classes = KogitoKafkaQuickstartSpringbootApplication.class)
 @ContextConfiguration(initializers = KafkaSpringBootTestResource.class)
@@ -84,11 +86,11 @@ public class MessagingIT {
         });
 
         IntStream.range(0, count)
-                 .mapToObj(i -> new Traveller("Name" + i, "LastName" + i, "email" + i, "Nationality" + i))
-                 .forEach(traveller -> kafkaClient.produce(generateCloudEvent(traveller), TOPIC_PRODUCER));
+                .mapToObj(i -> new Traveller("Name" + i, "LastName" + i, "email" + i, "Nationality" + i))
+                .forEach(traveller -> kafkaClient.produce(generateCloudEvent(traveller), TOPIC_PRODUCER));
 
         countDownLatch.await(5, TimeUnit.SECONDS);
-        assertEquals(0,countDownLatch.getCount());
+        assertEquals(0, countDownLatch.getCount());
     }
 
     private String generateCloudEvent(Traveller traveller) {

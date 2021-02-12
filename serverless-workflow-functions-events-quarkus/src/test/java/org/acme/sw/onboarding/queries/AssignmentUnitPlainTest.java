@@ -15,13 +15,13 @@
  */
 package org.acme.sw.onboarding.queries;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.ArrayList;
 
 import org.acme.sw.onboarding.model.Doctor;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.rules.DataObserver;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AssignmentUnitPlainTest {
     @Test

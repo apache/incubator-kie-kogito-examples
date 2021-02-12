@@ -15,10 +15,12 @@
  */
 package org.kie.kogito.examples;
 
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.is;
+
 import java.util.List;
 
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,9 +28,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.annotation.DirtiesContext;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.is;
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
@@ -50,13 +51,12 @@ public class LoanEligibilityTest {
     public void testEvaluateLoanEligibility() {
         given()
                 .body("{" +
-                              "\"Client\": " +
-                              "{\"age\": 43,\"salary\": 1950,\"existing payments\": 100}," +
-                              "\"Loan\": {\"duration\": 15,\"installment\": 180}, " +
-                              "\"SupremeDirector\" : \"Yes\", " +
-                              "\"Bribe\": 1000" +
-                              "}"
-                )
+                        "\"Client\": " +
+                        "{\"age\": 43,\"salary\": 1950,\"existing payments\": 100}," +
+                        "\"Loan\": {\"duration\": 15,\"installment\": 180}, " +
+                        "\"SupremeDirector\" : \"Yes\", " +
+                        "\"Bribe\": 1000" +
+                        "}")
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/LoanEligibility")
@@ -72,8 +72,10 @@ public class LoanEligibilityTest {
                 .get("/metrics")
                 .then()
                 .statusCode(200)
-                .body(containsString("string_dmn_result_total{decision=\"Judgement\",endpoint=\"LoanEligibility\",identifier=\"Yes\",} 1.0"))
-                .body(containsString("number_dmn_result{decision=\"Is Enough?\",endpoint=\"LoanEligibility\",quantile=\"0.1\",} 100.0"))
+                .body(containsString(
+                        "string_dmn_result_total{decision=\"Judgement\",endpoint=\"LoanEligibility\",identifier=\"Yes\",} 1.0"))
+                .body(containsString(
+                        "number_dmn_result{decision=\"Is Enough?\",endpoint=\"LoanEligibility\",quantile=\"0.1\",} 100.0"))
                 .body(containsString("api_http_response_code_total{endpoint=\"LoanEligibility\",identifier=\"200\",} 1.0"));
     }
 

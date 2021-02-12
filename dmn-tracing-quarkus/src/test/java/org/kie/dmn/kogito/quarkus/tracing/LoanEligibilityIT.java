@@ -15,13 +15,15 @@
  */
 package org.kie.dmn.kogito.quarkus.tracing;
 
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.kie.dmn.kogito.quarkus.tracing.matcher.StringMatchesUUIDPattern.matchesThePatternOfAUUID;
+
 import java.util.Optional;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import io.quarkus.test.common.QuarkusTestResource;
-import io.quarkus.test.junit.QuarkusTest;
-import io.restassured.http.ContentType;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.cloudevents.CloudEventUtils;
@@ -30,10 +32,9 @@ import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.kie.dmn.kogito.quarkus.tracing.matcher.StringMatchesUUIDPattern.matchesThePatternOfAUUID;
+import io.quarkus.test.common.QuarkusTestResource;
+import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.http.ContentType;
 
 @QuarkusTest
 @QuarkusTestResource(KafkaQuarkusTestResource.class)
@@ -59,8 +60,7 @@ public class LoanEligibilityIT {
                 Optional.ofNullable(CloudEventUtils.decode(s))
                         .ifPresentOrElse(
                                 cloudEvent -> countDownLatch.countDown(),
-                                () -> LOGGER.error("Error parsing {}", s)
-                        );
+                                () -> LOGGER.error("Error parsing {}", s));
             });
 
             given()
@@ -86,7 +86,7 @@ public class LoanEligibilityIT {
                     .body("'Decide'", is(true));
 
             countDownLatch.await(5, TimeUnit.SECONDS);
-            assertEquals( 0, countDownLatch.getCount());
+            assertEquals(0, countDownLatch.getCount());
         } finally {
             kafkaClient.shutdown();
         }
@@ -103,8 +103,7 @@ public class LoanEligibilityIT {
                 Optional.ofNullable(CloudEventUtils.decode(s))
                         .ifPresentOrElse(
                                 cloudEvent -> countDownLatch.countDown(),
-                                () -> LOGGER.error("Error parsing {}", s)
-                        );
+                                () -> LOGGER.error("Error parsing {}", s));
             });
 
             countDownLatch.await(5, TimeUnit.SECONDS);

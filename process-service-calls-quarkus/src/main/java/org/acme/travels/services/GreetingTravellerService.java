@@ -25,10 +25,11 @@ import org.slf4j.LoggerFactory;
 public class GreetingTravellerService {
 
     private static final Logger logger = LoggerFactory.getLogger(GreetingTravellerService.class);
-    
+
     public Traveller greetTraveller(Traveller traveller) {
-        logger.info("Sending greeting email to {} on email address {}", traveller.getLastName() +", " + traveller.getFirstName(), traveller.getEmail());
-        
+        logger.info("Sending greeting email to {} on email address {}",
+                traveller.getLastName() + ", " + traveller.getFirstName(), traveller.getEmail());
+
         return traveller;
     }
 }

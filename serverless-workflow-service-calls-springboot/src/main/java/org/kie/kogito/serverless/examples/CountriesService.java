@@ -15,9 +15,6 @@
  */
 package org.kie.kogito.serverless.examples;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +22,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 @Component
 public class CountriesService {
@@ -51,7 +52,7 @@ public class CountriesService {
 
             // population is given as string, but jsonpath needs it as int to be able to compare
             String population = retNode.get("population").asText();
-            ((ObjectNode)retNode).put("population", Integer.parseInt(population));
+            ((ObjectNode) retNode).put("population", Integer.parseInt(population));
 
         } catch (RestClientException e) {
             LOG.error(e.getMessage());

@@ -38,9 +38,9 @@ public class GitHubResource {
     @POST
     @Path("/{user}/{name}/pr/{number}/labels")
     public Response addLabels(@PathParam("user") String user,
-                              @PathParam("name") String repoName,
-                              @PathParam("number") Integer prNumber,
-                              List<String> labels) {
+            @PathParam("name") String repoName,
+            @PathParam("number") Integer prNumber,
+            List<String> labels) {
         try {
             gitHubService.addLabels(user, repoName, prNumber, labels);
             return Response.ok().build();
@@ -52,9 +52,9 @@ public class GitHubResource {
     @POST
     @Path("/{user}/{name}/pr/{number}/reviewers")
     public Response addReviewers(@PathParam("user") String user,
-                                 @PathParam("name") String repoName,
-                                 @PathParam("number") Integer prNumber,
-                                 List<String> reviewers) {
+            @PathParam("name") String repoName,
+            @PathParam("number") Integer prNumber,
+            List<String> reviewers) {
         try {
             gitHubService.addReviewers(user, repoName, prNumber, reviewers);
             return Response.ok().build();
@@ -66,8 +66,8 @@ public class GitHubResource {
     @GET
     @Path("/{user}/{name}/pr/{number}/files")
     public Response fetchFiles(@PathParam("user") String user,
-                               @PathParam("name") String repoName,
-                               @PathParam("number") Integer prNumber) {
+            @PathParam("name") String repoName,
+            @PathParam("number") Integer prNumber) {
         try {
             return Response.ok().entity(gitHubService.fetchChangedFilesPath(user, repoName, prNumber)).build();
         } catch (final Exception e) {
