@@ -17,15 +17,14 @@ package org.kie.dmnpmml.kogito.springboot.example;
 
 import java.util.Map;
 
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import org.hamcrest.core.IsNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.annotation.DirtiesContext;
-
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
@@ -48,7 +47,7 @@ public class LinRegTest {
     @Test
     public void testEvaluateLinReg() {
         String inputData = "{\"fld1\":3.0, \"fld2\":2.0, \"fld3\":\"y\"}";
-        Object resultVariables = given()
+        Object resultVariables =  given()
                 .contentType(ContentType.JSON)
                 .body(inputData)
                 .when()

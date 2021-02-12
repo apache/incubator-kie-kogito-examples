@@ -25,23 +25,24 @@ import org.kie.kogito.examples.test.RecordedOutputWorkItemHandler;
 import org.kie.kogito.process.impl.DefaultWorkItemHandlerConfig;
 
 public class WorkItemHandlerConfig extends DefaultWorkItemHandlerConfig {
-
+    
     private RecordedOutputWorkItemHandler handler = new RecordedOutputWorkItemHandler();
     private final List<String> supportedHandlers = Arrays.asList("AssignDepartmentAndManager",
-            "CalculatePaymentDate",
-            "CalculateVacationDays",
-            "CalculateTaxRate",
-            "ValidateEmployee",
-            "AssignIdAndEmail",
-            "DecisionTask");
-
+                                                                "CalculatePaymentDate",
+                                                                "CalculateVacationDays",
+                                                                "CalculateTaxRate",
+                                                                "ValidateEmployee",
+                                                                "AssignIdAndEmail",
+                                                                "DecisionTask");
+    
     @Override
     public WorkItemHandler forName(String name) {
-
-        if (supportedHandlers.contains(name)) {
+                
+ 
+        if (supportedHandlers.contains(name)) {            
             return handler;
         }
-
+        
         return super.forName(name);
     }
 

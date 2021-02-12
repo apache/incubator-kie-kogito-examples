@@ -17,12 +17,11 @@ package org.kie.pmml.kogito.quarkus.example;
 
 import java.util.Map;
 
-import org.hamcrest.core.IsNull;
-import org.junit.jupiter.api.Test;
-
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import org.hamcrest.core.IsNull;
+import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
@@ -40,7 +39,7 @@ public class LinRegTest {
     @Test
     public void testEvaluateLinReg() {
         String inputData = "{\"fld1\":3.0, \"fld2\":2.0, \"fld3\":\"y\"}";
-        Object resultVariables = given()
+        Object resultVariables =  given()
                 .contentType(ContentType.JSON)
                 .body(inputData)
                 .when()

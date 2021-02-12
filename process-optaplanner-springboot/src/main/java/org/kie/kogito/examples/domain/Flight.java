@@ -28,7 +28,7 @@ import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScore;
 
 @PlanningSolution
 public class Flight {
-
+    
     @ProblemFactProperty
     private FlightInfo flightInfo = new FlightInfo();
 

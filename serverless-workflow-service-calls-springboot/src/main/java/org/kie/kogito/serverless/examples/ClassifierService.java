@@ -15,17 +15,16 @@
  */
 package org.kie.kogito.serverless.examples;
 
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.Set;
-
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.ApplicationScope;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.Set;
 
 @Component
 @ApplicationScope
@@ -43,7 +42,7 @@ public class ClassifierService {
             JsonNode retNode = mapper.convertValue(classifiedCountry, JsonNode.class);
 
             return retNode;
-        } catch (Exception e) {
+        } catch(Exception e) {
             LOG.error("unable to classify country: " + classifiedCountryNode.toString());
             return classifiedCountryNode;
         }
@@ -59,7 +58,7 @@ public class ClassifierService {
             JsonNode retNode = mapper.convertValue(classifiedCountry, JsonNode.class);
 
             return retNode;
-        } catch (Exception e) {
+        } catch(Exception e) {
             LOG.error("unable to classify country: " + classifiedCountryNode.toString());
             return classifiedCountryNode;
         }

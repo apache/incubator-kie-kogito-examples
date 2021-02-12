@@ -18,10 +18,10 @@ package org.kie.pmml.kogito.springboot.example;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication(scanBasePackages = { "org.kie.pmml.kogito.**", "org.kie.kogito.**", "test**" })
+@SpringBootApplication(scanBasePackages={"org.kie.pmml.kogito.**", "org.kie.kogito.**", "test**"})
 public class KogitoSpringbootApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(KogitoSpringbootApplication.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(KogitoSpringbootApplication.class, args);
+	}
 }

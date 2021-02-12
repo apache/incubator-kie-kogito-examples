@@ -40,8 +40,7 @@ public class Passenger {
     public Passenger() {
     }
 
-    public Passenger(Long id, String name, SeatType seatTypePreference, boolean emergencyExitRowCapable, boolean paidForSeat,
-            Seat seat) {
+    public Passenger(Long id, String name, SeatType seatTypePreference, boolean emergencyExitRowCapable, boolean paidForSeat, Seat seat) {
         this.id = id;
         this.name = name;
         this.seatTypePreference = seatTypePreference;

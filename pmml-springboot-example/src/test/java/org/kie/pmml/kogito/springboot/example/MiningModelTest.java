@@ -17,15 +17,14 @@ package org.kie.pmml.kogito.springboot.example;
 
 import java.util.Map;
 
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import org.hamcrest.core.IsNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.annotation.DirtiesContext;
-
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
@@ -54,7 +53,7 @@ public class MiningModelTest {
                 "\"categoricalX\":\"red\", " +
                 "\"variable\":6.6, " +
                 "\"age\":25.0}";
-        Object resultVariables = given()
+        Object resultVariables =  given()
                 .contentType(ContentType.JSON)
                 .body(inputData)
                 .when()
@@ -73,6 +72,6 @@ public class MiningModelTest {
         assertTrue(resultVariables instanceof Map);
         Map<String, Object> mappedResultVariables = (Map) resultVariables;
         assertTrue(mappedResultVariables.containsKey("categoricalResult"));
-        assertEquals(1.381666666666666f, mappedResultVariables.get("categoricalResult"));
+        assertEquals( 1.381666666666666f, mappedResultVariables.get("categoricalResult"));
     }
 }

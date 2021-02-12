@@ -24,10 +24,10 @@ import org.springframework.stereotype.Component;
 public class CalculationService {
 
     private Random random = new Random();
-
-    public Order calculateTotal(Order order) {
+    
+    public Order calculateTotal(Order order) {        
         order.setTotal(random.nextDouble());
-
+        
         return order;
     }
 }

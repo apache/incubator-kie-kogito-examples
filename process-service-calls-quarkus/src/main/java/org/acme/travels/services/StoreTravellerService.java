@@ -26,14 +26,15 @@ import org.acme.travels.Traveller;
 public class StoreTravellerService {
 
     private Map<String, Traveller> store = new HashMap<>();
-
+    
+    
     public boolean storeTraveller(Traveller traveller) {
         Traveller stored = store.putIfAbsent(traveller.getEmail(), traveller);
-
+        
         if (stored == null) {
             return true;
         }
-
+        
         return false;
     }
 }

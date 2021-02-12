@@ -15,8 +15,8 @@
  */
 package org.acme.deals;
 
-import java.util.List;
-
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.testcontainers.springboot.InfinispanSpringBootTestResource;
@@ -24,8 +24,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.ContextConfiguration;
 
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
+import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
@@ -39,10 +38,10 @@ public class DealsRestIT {
     static {
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
     }
-
+    
     @LocalServerPort
     int randomServerPort;
-
+    
     @BeforeEach
     public void setup() {
         RestAssured.port = randomServerPort;
@@ -52,8 +51,7 @@ public class DealsRestIT {
     public void testDealsRest() {
         // test adding new deal
         String deal = "my fancy deal";
-        String addDealPayload = "{\"name\" : \"" + deal
-                + "\", \"traveller\" : { \"firstName\" : \"John\", \"lastName\" : \"Doe\", \"email\" : \"jon.doe@example.com\", \"nationality\" : \"American\",\"address\" : { \"street\" : \"main street\", \"city\" : \"Boston\", \"zipCode\" : \"10005\", \"country\" : \"US\" }}}";
+        String addDealPayload = "{\"name\" : \"" + deal + "\", \"traveller\" : { \"firstName\" : \"John\", \"lastName\" : \"Doe\", \"email\" : \"jon.doe@example.com\", \"nationality\" : \"American\",\"address\" : { \"street\" : \"main street\", \"city\" : \"Boston\", \"zipCode\" : \"10005\", \"country\" : \"US\" }}}";
         String dealId = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(addDealPayload)
                 .when().post("/deals")
                 .then().statusCode(201).body("id", notNullValue()).extract().path("id");

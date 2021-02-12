@@ -15,6 +15,8 @@
  */
 package org.kie.kogito.examples.demo;
 
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
@@ -32,9 +34,6 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
-
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -44,8 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @SuppressWarnings("rawtypes")
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = DemoApplication.class)
-@ContextConfiguration(
-        initializers = { InfinispanSpringBootTestResource.Conditional.class, KafkaSpringBootTestResource.Conditional.class })
+@ContextConfiguration(initializers = {InfinispanSpringBootTestResource.Conditional.class, KafkaSpringBootTestResource.Conditional.class})
 public class PersonsRestIT {
 
     @Autowired
@@ -70,8 +68,7 @@ public class PersonsRestIT {
         // test new person
         String addPersonPayload = "{\"person\" : {\"name\" : \"John Doe\", \"age\" : 20}}";
         given().contentType(ContentType.JSON).accept(ContentType.JSON).body(addPersonPayload).when()
-                .post("/persons").then().statusCode(201).body("id", notNullValue(), "person.adult", is(true)).extract()
-                .path("id");
+                .post("/persons").then().statusCode(201).body("id", notNullValue(), "person.adult", is(true)).extract().path("id");
 
         // get all persons make sure there is zero
         given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)
@@ -93,26 +90,27 @@ public class PersonsRestIT {
 
         // test getting task
         String taskInfo = given()
-                .accept(ContentType.JSON)
-                .when()
-                .get("/persons/" + firstCreatedId + "/tasks?user=admin")
-                .then()
-                .statusCode(200)
-                .body("$.size", is(1))
-                .body("[0].name", is("ChildrenHandling"))
-                .extract()
-                .path("[0].id");
+            .accept(ContentType.JSON)
+            .when()
+            .get("/persons/" + firstCreatedId + "/tasks?user=admin")
+            .then()
+            .statusCode(200)
+            .body("$.size", is(1))
+            .body("[0].name", is("ChildrenHandling"))
+            .extract()
+            .path("[0].id");
+
 
         // test completing task
         String fixedOrderPayload = "{}";
         given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .body(fixedOrderPayload)
-                .when()
-                .post("/persons/" + firstCreatedId + "/ChildrenHandling/" + taskInfo + "?user=admin")
-                .then()
-                .statusCode(200).body("id", is(firstCreatedId));
+            .contentType(ContentType.JSON)
+            .accept(ContentType.JSON)
+            .body(fixedOrderPayload)
+            .when()
+            .post("/persons/" + firstCreatedId + "/ChildrenHandling/" + taskInfo + "?user=admin")
+            .then()
+        .statusCode(200).body("id", is(firstCreatedId));
 
         // get all persons make sure there is zero
         given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)
@@ -134,25 +132,25 @@ public class PersonsRestIT {
 
         // test getting task
         String taskInfo = given()
-                .accept(ContentType.JSON)
-                .when()
-                .get("/persons/" + firstCreatedId + "/tasks?user=admin")
-                .then()
-                .statusCode(200)
-                .body("$.size", is(1))
-                .body("[0].name", is("ChildrenHandling"))
-                .extract()
-                .path("[0].id");
+            .accept(ContentType.JSON)
+            .when()
+            .get("/persons/" + firstCreatedId + "/tasks?user=admin")
+            .then()
+            .statusCode(200)
+            .body("$.size", is(1))
+            .body("[0].name", is("ChildrenHandling"))
+            .extract()
+            .path("[0].id");
         // test completing task
         String fixedOrderPayload = "{}";
         given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .body(fixedOrderPayload)
-                .when()
-                .post("/persons/" + firstCreatedId + "/ChildrenHandling/" + taskInfo + "?user=admin")
-                .then()
-                .statusCode(200).body("id", is(firstCreatedId));
+            .contentType(ContentType.JSON)
+            .accept(ContentType.JSON)
+            .body(fixedOrderPayload)
+            .when()
+            .post("/persons/" + firstCreatedId + "/ChildrenHandling/" + taskInfo + "?user=admin")
+            .then()
+        .statusCode(200).body("id", is(firstCreatedId));
 
         // get all persons make sure there is zero
         given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)
@@ -174,44 +172,46 @@ public class PersonsRestIT {
 
         // test getting task with wrong user
         given()
-                .accept(ContentType.JSON)
-                .when()
-                .get("/persons/" + firstCreatedId + "/tasks?user=john")
-                .then()
-                .statusCode(200)
-                .body("$.size", is(0));
+            .accept(ContentType.JSON)
+            .when()
+            .get("/persons/" + firstCreatedId + "/tasks?user=john")
+            .then()
+            .statusCode(200)
+            .body("$.size", is(0));
 
         String taskInfo = given()
-                .accept(ContentType.JSON)
-                .when()
-                .get("/persons/" + firstCreatedId + "/tasks?user=admin")
-                .then()
-                .statusCode(200)
-                .body("$.size", is(1))
-                .body("[0].name", is("ChildrenHandling"))
-                .extract()
-                .path("[0].id");
+            .accept(ContentType.JSON)
+            .when()
+            .get("/persons/" + firstCreatedId + "/tasks?user=admin")
+            .then()
+            .statusCode(200)
+            .body("$.size", is(1))
+            .body("[0].name", is("ChildrenHandling"))
+            .extract()
+            .path("[0].id");
+
+
 
         // test completing task with wrong user
         String fixedOrderPayload = "{}";
         given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .body(fixedOrderPayload)
-                .when()
-                .post("/persons/" + firstCreatedId + "/ChildrenHandling/" + taskInfo + "?user=john")
-                .then()
-                .statusCode(403);
+            .contentType(ContentType.JSON)
+            .accept(ContentType.JSON)
+            .body(fixedOrderPayload)
+            .when()
+            .post("/persons/" + firstCreatedId + "/ChildrenHandling/" + taskInfo + "?user=john")
+            .then()
+        .statusCode(403);
 
         // test completing task with correct user
         given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .body(fixedOrderPayload)
-                .when()
-                .post("/persons/" + firstCreatedId + "/ChildrenHandling/" + taskInfo + "?user=admin")
-                .then()
-                .statusCode(200).body("id", is(firstCreatedId));
+            .contentType(ContentType.JSON)
+            .accept(ContentType.JSON)
+            .body(fixedOrderPayload)
+            .when()
+            .post("/persons/" + firstCreatedId + "/ChildrenHandling/" + taskInfo + "?user=admin")
+            .then()
+        .statusCode(200).body("id", is(firstCreatedId));
 
         // get all persons make sure there is zero
         given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)
@@ -233,29 +233,27 @@ public class PersonsRestIT {
 
         // test getting task
         String taskId = given()
-                .accept(ContentType.JSON)
-                .when()
-                .get("/persons/" + firstCreatedId + "/tasks?user=admin")
-                .then()
-                .statusCode(200)
-                .body("$.size", is(1))
-                .body("[0].name", is("ChildrenHandling"))
-                .extract()
-                .path("[0].id");
+            .accept(ContentType.JSON)
+            .when()
+            .get("/persons/" + firstCreatedId + "/tasks?user=admin")
+            .then()
+            .statusCode(200)
+            .body("$.size", is(1))
+            .body("[0].name", is("ChildrenHandling"))
+            .extract()
+            .path("[0].id");
+
 
         // test claim task
         String fixedOrderPayload = "{}";
-        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(fixedOrderPayload).when()
-                .post("/persons/" + firstCreatedId + "/ChildrenHandling/" + taskId + "?phase=claim&user=admin").then()
-                .statusCode(200).body("id", is(firstCreatedId));
+        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(fixedOrderPayload).when().post("/persons/" + firstCreatedId + "/ChildrenHandling/" + taskId + "?phase=claim&user=admin").then()
+        .statusCode(200).body("id", is(firstCreatedId));
         // test release task
-        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(fixedOrderPayload).when()
-                .post("/persons/" + firstCreatedId + "/ChildrenHandling/" + taskId + "?phase=release&user=admin").then()
-                .statusCode(200).body("id", is(firstCreatedId));
+        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(fixedOrderPayload).when().post("/persons/" + firstCreatedId + "/ChildrenHandling/" + taskId + "?phase=release&user=admin").then()
+        .statusCode(200).body("id", is(firstCreatedId));
         // test skip
-        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(fixedOrderPayload).when()
-                .post("/persons/" + firstCreatedId + "/ChildrenHandling/" + taskId + "?phase=skip&user=admin").then()
-                .statusCode(200).body("id", is(firstCreatedId));
+        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(fixedOrderPayload).when().post("/persons/" + firstCreatedId + "/ChildrenHandling/" + taskId + "?phase=skip&user=admin").then()
+        .statusCode(200).body("id", is(firstCreatedId));
 
         // get all persons make sure there is zero
         given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)
@@ -283,26 +281,26 @@ public class PersonsRestIT {
 
         // test getting task
         String taskInfo = given()
-                .accept(ContentType.JSON)
-                .when()
-                .get("/persons/" + firstCreatedId + "/tasks?user=admin")
-                .then()
-                .statusCode(200)
-                .body("$.size", is(1))
-                .body("[0].name", is("ChildrenHandling"))
-                .extract()
-                .path("[0].id");
+            .accept(ContentType.JSON)
+            .when()
+            .get("/persons/" + firstCreatedId + "/tasks?user=admin")
+            .then()
+            .statusCode(200)
+            .body("$.size", is(1))
+            .body("[0].name", is("ChildrenHandling"))
+            .extract()
+            .path("[0].id");
 
         // test completing task
         String fixedOrderPayload = "{}";
         given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .body(fixedOrderPayload)
-                .when()
-                .post("/persons/" + firstCreatedId + "/ChildrenHandling/" + taskInfo + "?user=admin")
-                .then()
-                .statusCode(200).body("id", is(firstCreatedId));
+            .contentType(ContentType.JSON)
+            .accept(ContentType.JSON)
+            .body(fixedOrderPayload)
+            .when()
+            .post("/persons/" + firstCreatedId + "/ChildrenHandling/" + taskInfo + "?user=admin")
+            .then()
+        .statusCode(200).body("id", is(firstCreatedId));
 
         // get all persons make sure there is zero
         given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)
@@ -327,18 +325,19 @@ public class PersonsRestIT {
 
         // test getting task
         given()
-                .accept(ContentType.JSON)
-                .when()
-                .get("/persons/" + firstCreatedId + "/tasks?user=admin")
-                .then()
-                .statusCode(200)
-                .body("$.size", is(1))
-                .body("[0].name", is("ChildrenHandling"));
+            .accept(ContentType.JSON)
+            .when()
+            .get("/persons/" + firstCreatedId + "/tasks?user=admin")
+            .then()
+            .statusCode(200)
+            .body("$.size", is(1))
+            .body("[0].name", is("ChildrenHandling"));
+
+
 
         // abort process instance via management interface
-        given().contentType(ContentType.JSON).accept(ContentType.JSON).when()
-                .delete("/management/processes/persons/instances/" + firstCreatedId).then()
-                .statusCode(200).body("id", is(firstCreatedId));
+        given().contentType(ContentType.JSON).accept(ContentType.JSON).when().delete("/management/processes/persons/instances/" + firstCreatedId).then()
+        .statusCode(200).body("id", is(firstCreatedId));
 
         // get all persons make sure there is zero
         given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)
@@ -363,34 +362,31 @@ public class PersonsRestIT {
 
         // test getting task
         String taskInfo = given()
-                .accept(ContentType.JSON)
-                .when()
-                .get("/persons/" + firstCreatedId + "/tasks?user=admin")
-                .then()
-                .statusCode(200)
-                .body("$.size", is(1))
-                .body("[0].name", is("ChildrenHandling"))
-                .extract()
-                .path("[0].id");
+            .accept(ContentType.JSON)
+            .when()
+            .get("/persons/" + firstCreatedId + "/tasks?user=admin")
+            .then()
+            .statusCode(200)
+            .body("$.size", is(1))
+            .body("[0].name", is("ChildrenHandling"))
+            .extract()
+            .path("[0].id");
 
-        String nodeInstanceId = given().contentType(ContentType.JSON).accept(ContentType.JSON).when()
-                .get("/management/processes/persons/instances/" + firstCreatedId + "/nodeInstances").then()
-                .statusCode(200).body("$.size()", is(1)).extract().path("[0].nodeInstanceId");
+        String nodeInstanceId = given().contentType(ContentType.JSON).accept(ContentType.JSON).when().get("/management/processes/persons/instances/" + firstCreatedId + "/nodeInstances").then()
+        .statusCode(200).body("$.size()", is(1)).extract().path("[0].nodeInstanceId");
 
         // retrigger node instance via management interface
-        given().contentType(ContentType.JSON).accept(ContentType.JSON).when()
-                .post("/management/processes/persons/instances/" + firstCreatedId + "/nodeInstances/" + nodeInstanceId).then()
-                .statusCode(200);
+        given().contentType(ContentType.JSON).accept(ContentType.JSON).when().post("/management/processes/persons/instances/" + firstCreatedId + "/nodeInstances/" + nodeInstanceId).then()
+        .statusCode(200);
 
         taskInfo = given().accept(ContentType.JSON).when().get("/persons/" + firstCreatedId + "/tasks?user=admin").then()
-                .statusCode(200)
-                .body("$.size", is(1))
-                .body("[0].name", is("ChildrenHandling"))
-                .extract()
-                .path("[0].id");
+            .statusCode(200)
+            .body("$.size", is(1))
+            .body("[0].name", is("ChildrenHandling"))
+            .extract()
+            .path("[0].id");
 
-        String retriggeredNodeInstanceId = given().contentType(ContentType.JSON).accept(ContentType.JSON).when()
-                .get("/management/processes/persons/instances/" + firstCreatedId + "/nodeInstances").then()
+        String retriggeredNodeInstanceId = given().contentType(ContentType.JSON).accept(ContentType.JSON).when().get("/management/processes/persons/instances/" + firstCreatedId + "/nodeInstances").then()
                 .statusCode(200).body("$.size()", is(1)).extract().path("[0].nodeInstanceId");
         // since node instance was retriggered it must have different ids
         assertNotEquals(nodeInstanceId, retriggeredNodeInstanceId);
@@ -398,13 +394,13 @@ public class PersonsRestIT {
         // test completing task
         String fixedOrderPayload = "{}";
         given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .body(fixedOrderPayload)
-                .when()
-                .post("/persons/" + firstCreatedId + "/ChildrenHandling/" + taskInfo + "?user=admin")
-                .then()
-                .statusCode(200).body("id", is(firstCreatedId));
+            .contentType(ContentType.JSON)
+            .accept(ContentType.JSON)
+            .body(fixedOrderPayload)
+            .when()
+            .post("/persons/" + firstCreatedId + "/ChildrenHandling/" + taskInfo + "?user=admin")
+            .then()
+        .statusCode(200).body("id", is(firstCreatedId));
 
         // get all persons make sure there is zero
         given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)
@@ -429,43 +425,40 @@ public class PersonsRestIT {
 
         // test getting task
         String taskId = given()
-                .accept(ContentType.JSON)
-                .when()
-                .get("/persons/" + firstCreatedId + "/tasks?user=admin")
-                .then()
-                .statusCode(200)
-                .body("$.size", is(1))
-                .body("[0].name", is("ChildrenHandling"))
-                .extract()
-                .path("[0].id");
+            .accept(ContentType.JSON)
+            .when()
+            .get("/persons/" + firstCreatedId + "/tasks?user=admin")
+            .then()
+            .statusCode(200)
+            .body("$.size", is(1))
+            .body("[0].name", is("ChildrenHandling"))
+            .extract()
+            .path("[0].id");
 
-        String nodeInstanceId = given().contentType(ContentType.JSON).accept(ContentType.JSON).when()
-                .get("/management/processes/persons/instances/" + firstCreatedId + "/nodeInstances").then()
-                .statusCode(200).body("$.size()", is(1)).extract().path("[0].nodeInstanceId");
+
+        String nodeInstanceId = given().contentType(ContentType.JSON).accept(ContentType.JSON).when().get("/management/processes/persons/instances/" + firstCreatedId + "/nodeInstances").then()
+        .statusCode(200).body("$.size()", is(1)).extract().path("[0].nodeInstanceId");
 
         // cancel node instance
-        given().contentType(ContentType.JSON).accept(ContentType.JSON).when()
-                .delete("/management/processes/persons/instances/" + firstCreatedId + "/nodeInstances/" + nodeInstanceId).then()
-                .statusCode(200);
+        given().contentType(ContentType.JSON).accept(ContentType.JSON).when().delete("/management/processes/persons/instances/" + firstCreatedId + "/nodeInstances/" + nodeInstanceId).then()
+        .statusCode(200);
 
         // then trigger new node instance via management interface
-        given().contentType(ContentType.JSON).accept(ContentType.JSON).when()
-                .post("/management/processes/persons/instances/" + firstCreatedId + "/nodes/UserTask_1").then()
-                .statusCode(200);
+        given().contentType(ContentType.JSON).accept(ContentType.JSON).when().post("/management/processes/persons/instances/" + firstCreatedId + "/nodes/UserTask_1").then()
+        .statusCode(200);
 
         taskId = given()
-                .accept(ContentType.JSON)
-                .when()
-                .get("/persons/" + firstCreatedId + "/tasks?user=admin")
-                .then()
-                .statusCode(200)
-                .body("$.size", is(1))
-                .body("[0].name", is("ChildrenHandling"))
-                .extract()
-                .path("[0].id");
+            .accept(ContentType.JSON)
+            .when()
+            .get("/persons/" + firstCreatedId + "/tasks?user=admin")
+            .then()
+            .statusCode(200)
+            .body("$.size", is(1))
+            .body("[0].name", is("ChildrenHandling"))
+            .extract()
+            .path("[0].id");
 
-        String retriggeredNodeInstanceId = given().contentType(ContentType.JSON).accept(ContentType.JSON).when()
-                .get("/management/processes/persons/instances/" + firstCreatedId + "/nodeInstances").then()
+        String retriggeredNodeInstanceId = given().contentType(ContentType.JSON).accept(ContentType.JSON).when().get("/management/processes/persons/instances/" + firstCreatedId + "/nodeInstances").then()
                 .statusCode(200).body("$.size()", is(1)).extract().path("[0].nodeInstanceId");
         // since node instance was retriggered it must have different ids
         assertNotEquals(nodeInstanceId, retriggeredNodeInstanceId);
@@ -473,13 +466,13 @@ public class PersonsRestIT {
         // test completing task
         String fixedOrderPayload = "{}";
         given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .body(fixedOrderPayload)
-                .when()
-                .post("/persons/" + firstCreatedId + "/ChildrenHandling/" + taskId + "?user=admin")
-                .then()
-                .statusCode(200).body("id", is(firstCreatedId));
+            .contentType(ContentType.JSON)
+            .accept(ContentType.JSON)
+            .body(fixedOrderPayload)
+            .when()
+            .post("/persons/" + firstCreatedId + "/ChildrenHandling/" + taskId + "?user=admin")
+            .then()
+        .statusCode(200).body("id", is(firstCreatedId));
 
         // get all persons make sure there is zero
         given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)
