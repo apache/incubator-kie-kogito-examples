@@ -45,20 +45,26 @@ import org.slf4j.LoggerFactory;
  * Custom life cycle definition for human tasks. It comes with following phases
  *
  * <ul>
- *  <li>Active</li>
- *  <li>Claim</li>
- *  <li>Release</li>
- *  <li>Start</li>
- *  <li>Complete - extended one that allows to only complete started tasks</li>
- *  <li>Skip</li>
- *  <li>Abort</li>
+ * <li>Active</li>
+ * <li>Claim</li>
+ * <li>Release</li>
+ * <li>Start</li>
+ * <li>Complete - extended one that allows to only complete started tasks</li>
+ * <li>Skip</li>
+ * <li>Abort</li>
  * </ul>
- * At the beginning human task enters <pre>Active</pre> phase. From there it can go to
+ * At the beginning human task enters
+ * 
+ * <pre>
+ * Active
+ * </pre>
+ * 
+ * phase. From there it can go to
  *
  * <ul>
- *  <li>Claim</li>
- *  <li>Skip</li>
- *  <li>Abort</li>
+ * <li>Claim</li>
+ * <li>Skip</li>
+ * <li>Abort</li>
  * </ul>
  *
  * at any time. At each phase data can be associated and by that set on work item.
@@ -93,7 +99,8 @@ public class CustomHumanTaskLifeCycle implements LifeCycle<Map<String, Object>> 
 
     @Override
     public Map<String, Object> transitionTo(KogitoWorkItem workItem, WorkItemManager manager, Transition<Map<String, Object>> transition) {
-        logger.debug("Transition method invoked for work item {} to transition to {}, currently in phase {} and status {}", workItem.getStringId(), transition.phase(), workItem.getPhaseId(), workItem.getPhaseStatus());
+        logger.debug("Transition method invoked for work item {} to transition to {}, currently in phase {} and status {}", workItem.getStringId(), transition.phase(), workItem.getPhaseId(),
+                workItem.getPhaseStatus());
 
         HumanTaskWorkItemImpl humanTaskWorkItem = (HumanTaskWorkItemImpl) workItem;
 
@@ -127,7 +134,7 @@ public class CustomHumanTaskLifeCycle implements LifeCycle<Map<String, Object>> 
         if (targetPhase.isTerminating()) {
             logger.debug("Target life cycle phase '{}' is terminiating, completing work item {}", targetPhase.id(), humanTaskWorkItem.getStringId());
             // since target life cycle phase is terminating completing work item
-            ((KogitoWorkItemManager)manager).internalCompleteWorkItem(humanTaskWorkItem);
+            ((KogitoWorkItemManager) manager).internalCompleteWorkItem(humanTaskWorkItem);
         }
 
         return data(humanTaskWorkItem);

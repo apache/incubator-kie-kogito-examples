@@ -15,11 +15,8 @@
  */
 package org.kie.kogito.examples.hr;
 
-import java.util.Map;
-import java.util.HashMap;
-
 public class IdModel {
-    
+
     private org.kie.kogito.examples.hr.Employee employee;
 
     public org.kie.kogito.examples.hr.Employee getEmployee() {

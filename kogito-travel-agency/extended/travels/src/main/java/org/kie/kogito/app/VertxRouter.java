@@ -17,7 +17,6 @@ package org.kie.kogito.app;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
-import javax.inject.Inject;
 
 import io.quarkus.qute.Template;
 import io.quarkus.qute.api.ResourcePath;

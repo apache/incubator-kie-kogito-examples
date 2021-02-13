@@ -15,10 +15,6 @@
  */
 package org.acme.deals;
 
-import java.util.Map;
-
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 import org.acme.travels.KogitoApplication;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,11 +23,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.ContextConfiguration;
 
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest(classes = KogitoApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ContextConfiguration(initializers = MongoDBSpringBootTestResource.Conditional.class)
@@ -51,30 +48,30 @@ public class DealsRestIT {
         String addDealPayload =
                 "{\"name\" : \"my fancy deal\", \"traveller\" : { \"firstName\" : \"John\", \"lastName\" : \"Doe\", \"email\" : \"jon.doe@example.com\", \"nationality\" : \"American\",\"address\" : { \"street\" : \"main street\", \"city\" : \"Boston\", \"zipCode\" : \"10005\", \"country\" : \"US\" }}}";
         String dealId = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(
-                                                                                            addDealPayload)
-                               .when().post(
-                                            "/deals")
-                               .then().log().ifValidationFails().statusCode(201).body("id", notNullValue()).extract().path("id");
+                addDealPayload)
+                .when().post(
+                        "/deals")
+                .then().log().ifValidationFails().statusCode(201).body("id", notNullValue()).extract().path("id");
         // test getting the created deal
         given().accept(ContentType.JSON)
-               .when().get("/deals")
-               .then().log().ifValidationFails().statusCode(200).body("$.size()", is(1), "[0].id", is(dealId));
+                .when().get("/deals")
+                .then().log().ifValidationFails().statusCode(200).body("$.size()", is(1), "[0].id", is(dealId));
 
         // test getting order by id
         given().accept(ContentType.JSON)
-               .when().get("/deals/" + dealId)
-               .then().log().ifValidationFails().statusCode(200).body("id", is(dealId));
+                .when().get("/deals/" + dealId)
+                .then().log().ifValidationFails().statusCode(200).body("id", is(dealId));
 
         // get deals for review
         String dealReviewId = given().accept(ContentType.JSON)
-                                     .when().get("/dealreviews")
-                                     .then().log().ifValidationFails().statusCode(200).body("$.size()", is(1)).body("[0].id", notNullValue()).extract().path("[0].id");
+                .when().get("/dealreviews")
+                .then().log().ifValidationFails().statusCode(200).body("$.size()", is(1)).body("[0].id", notNullValue()).extract().path("[0].id");
 
         // get task for john
         String taskId = given().accept(ContentType.JSON)
                 .when().get("/dealreviews/{uuid}/tasks?user=john", dealReviewId)
                 .then().log().ifValidationFails().statusCode(200).body("$.size", is(1)).extract().path("[0].id");
-        
+
         // complete review task
         given().contentType(ContentType.JSON).accept(ContentType.JSON).body("{\"review\" : \"very good work\"}")
                 .when().post("/dealreviews/{uuid}/review/{tuuid}?user=john", dealReviewId, taskId)
@@ -82,12 +79,12 @@ public class DealsRestIT {
 
         //verify no deals to review
         given().accept(ContentType.JSON)
-               .when().get("/dealreviews")
-               .then().log().ifValidationFails().statusCode(200).body("$.size()", is(0));
+                .when().get("/dealreviews")
+                .then().log().ifValidationFails().statusCode(200).body("$.size()", is(0));
 
         //verify no deals
         given().accept(ContentType.JSON)
-               .when().get("/deals")
-               .then().log().ifValidationFails().statusCode(200).body("$.size()", is(0));
+                .when().get("/deals")
+                .then().log().ifValidationFails().statusCode(200).body("$.size()", is(0));
     }
 }

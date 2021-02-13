@@ -15,10 +15,6 @@
  */
 package org.kogito.serverless.examples;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.jboss.logging.Logger;
-
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Set;
@@ -28,6 +24,11 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
+import org.jboss.logging.Logger;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Path("/countryclassifier")
 @Produces(MediaType.APPLICATION_JSON)
@@ -43,7 +44,6 @@ public class CountriesClassifierResource {
         return classifiedCountries;
     }
 
-
     public JsonNode classifySmallMedium(JsonNode classifiedCountryNode) {
         try {
             ObjectMapper mapper = new ObjectMapper();
@@ -53,7 +53,7 @@ public class CountriesClassifierResource {
             JsonNode retNode = mapper.convertValue(classifiedCountry, JsonNode.class);
 
             return retNode;
-        } catch(Exception e) {
+        } catch (Exception e) {
             LOG.error("unable to classify country: " + classifiedCountryNode.toString());
             return classifiedCountryNode;
         }
@@ -69,7 +69,7 @@ public class CountriesClassifierResource {
             JsonNode retNode = mapper.convertValue(classifiedCountry, JsonNode.class);
 
             return retNode;
-        } catch(Exception e) {
+        } catch (Exception e) {
             LOG.error("unable to classify country: " + classifiedCountryNode.toString());
             return classifiedCountryNode;
         }
