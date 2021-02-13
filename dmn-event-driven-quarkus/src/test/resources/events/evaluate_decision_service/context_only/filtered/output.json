@@ -1,0 +1,16 @@
+{
+  "specversion": "1.0",
+  "id": "2c9b4bf1-1434-47df-b2b6-e298b3308c5f",
+  "source": "Traffic+Violation/FineService",
+  "type": "DecisionResponse",
+  "subject": "TheSubject",
+  "kogitodmnmodelnamespace": "https://github.com/kiegroup/drools/kie-dmn/_A4BCA8B8-CF08-433F-93B2-A2598F19ECFF",
+  "kogitodmnmodelname": "Traffic Violation",
+  "kogitodmnevaldecision": "FineService",
+  "data": {
+    "Fine": {
+      "Points": 3,
+      "Amount": 500
+    }
+  }
+}

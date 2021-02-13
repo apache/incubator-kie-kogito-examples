@@ -1,0 +1,8 @@
+{
+  "specversion": "1.0",
+  "id": "46f2d50f-5d27-4e41-9ca5-0b1c69b58ec0",
+  "source": "__UNKNOWN_SOURCE__",
+  "type": "DecisionResponseError",
+  "subject": "TheSubject",
+  "data": "BAD_REQUEST"
+}
