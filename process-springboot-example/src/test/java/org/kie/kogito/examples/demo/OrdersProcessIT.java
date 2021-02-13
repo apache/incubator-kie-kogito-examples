@@ -15,11 +15,6 @@
  */
 package org.kie.kogito.examples.demo;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -45,10 +40,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = DemoApplication.class)
-@ContextConfiguration(
-        initializers = { InfinispanSpringBootTestResource.Conditional.class, KafkaSpringBootTestResource.Conditional.class })
+@ContextConfiguration(initializers = {InfinispanSpringBootTestResource.Conditional.class, KafkaSpringBootTestResource.Conditional.class})
 public class OrdersProcessIT {
 
     @Autowired
@@ -59,8 +58,7 @@ public class OrdersProcessIT {
     @Qualifier("demo.orderItems")
     Process<? extends Model> orderItemsProcess;
 
-    private SecurityPolicy policy =
-            SecurityPolicy.of(new StaticIdentityProvider("john", Collections.singletonList("managers")));
+    private SecurityPolicy policy = SecurityPolicy.of(new StaticIdentityProvider("john", Collections.singletonList("managers")));
 
     @Test
     public void testOrderProcess() {

@@ -22,46 +22,46 @@ import com.fasterxml.jackson.annotation.JsonFormat;
  */
 public class Payroll implements java.io.Serializable {
 
-    static final long serialVersionUID = 1L;
+	static final long serialVersionUID = 1L;
 
-    private java.lang.Integer vacationDays;
-    private java.lang.Double taxRate;
+	private java.lang.Integer vacationDays;
+	private java.lang.Double taxRate;
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING)
+	private java.util.Date paymentDate;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING)
-    private java.util.Date paymentDate;
+	public Payroll() {
+	}
 
-    public Payroll() {
-    }
+	public java.lang.Integer getVacationDays() {
+		return this.vacationDays;
+	}
 
-    public java.lang.Integer getVacationDays() {
-        return this.vacationDays;
-    }
+	public void setVacationDays(java.lang.Integer vacationDays) {
+		this.vacationDays = vacationDays;
+	}
 
-    public void setVacationDays(java.lang.Integer vacationDays) {
-        this.vacationDays = vacationDays;
-    }
+	public java.lang.Double getTaxRate() {
+		return this.taxRate;
+	}
 
-    public java.lang.Double getTaxRate() {
-        return this.taxRate;
-    }
+	public void setTaxRate(java.lang.Double taxRate) {
+		this.taxRate = taxRate;
+	}
 
-    public void setTaxRate(java.lang.Double taxRate) {
-        this.taxRate = taxRate;
-    }
+	public java.util.Date getPaymentDate() {
+		return this.paymentDate;
+	}
 
-    public java.util.Date getPaymentDate() {
-        return this.paymentDate;
-    }
+	public void setPaymentDate(java.util.Date paymentDate) {
+		this.paymentDate = paymentDate;
+	}
 
-    public void setPaymentDate(java.util.Date paymentDate) {
-        this.paymentDate = paymentDate;
-    }
-
-    public Payroll(java.lang.Integer vacationDays, java.lang.Double taxRate,
-            java.util.Date paymentDate) {
-        this.vacationDays = vacationDays;
-        this.taxRate = taxRate;
-        this.paymentDate = paymentDate;
-    }
+	public Payroll(java.lang.Integer vacationDays, java.lang.Double taxRate,
+			java.util.Date paymentDate) {
+		this.vacationDays = vacationDays;
+		this.taxRate = taxRate;
+		this.paymentDate = paymentDate;
+	}
 
 }

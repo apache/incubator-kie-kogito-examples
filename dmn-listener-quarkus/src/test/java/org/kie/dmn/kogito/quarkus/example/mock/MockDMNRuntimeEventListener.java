@@ -17,7 +17,6 @@ package org.kie.dmn.kogito.quarkus.example.mock;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.enterprise.context.ApplicationScoped;
 
 import org.kie.dmn.api.core.event.AfterEvaluateAllEvent;

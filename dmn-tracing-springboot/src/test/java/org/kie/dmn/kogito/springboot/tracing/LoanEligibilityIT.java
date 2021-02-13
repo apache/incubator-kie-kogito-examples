@@ -15,15 +15,12 @@
  */
 package org.kie.dmn.kogito.springboot.tracing;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.kie.dmn.kogito.springboot.tracing.matcher.StringMatchesUUIDPattern.matchesThePatternOfAUUID;
-
 import java.util.Optional;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.cloudevents.CloudEventUtils;
@@ -38,8 +35,10 @@ import org.testcontainers.containers.KafkaContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.kie.dmn.kogito.springboot.tracing.matcher.StringMatchesUUIDPattern.matchesThePatternOfAUUID;
 
 @Testcontainers
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
@@ -78,23 +77,24 @@ public class LoanEligibilityIT {
                 Optional.ofNullable(CloudEventUtils.decode(s))
                         .ifPresentOrElse(
                                 cloudEvent -> countDownLatch.countDown(),
-                                () -> LOGGER.error("Error parsing {}", s));
+                                () -> LOGGER.error("Error parsing {}", s)
+                        );
             });
 
             given()
                     .body("{" +
-                            "    \"Client\": {" +
-                            "        \"age\": 43," +
-                            "        \"salary\": 1950," +
-                            "        \"existing payments\": 100" +
-                            "    }," +
-                            "    \"Loan\": {" +
-                            "        \"duration\": 15," +
-                            "        \"installment\": 180" +
-                            "    }," +
-                            "    \"SupremeDirector\" : \"Yes\"," +
-                            "    \"Bribe\": 1000" +
-                            "}")
+                                  "    \"Client\": {" +
+                                  "        \"age\": 43," +
+                                  "        \"salary\": 1950," +
+                                  "        \"existing payments\": 100" +
+                                  "    }," +
+                                  "    \"Loan\": {" +
+                                  "        \"duration\": 15," +
+                                  "        \"installment\": 180" +
+                                  "    }," +
+                                  "    \"SupremeDirector\" : \"Yes\"," +
+                                  "    \"Bribe\": 1000" +
+                                  "}")
                     .contentType(ContentType.JSON)
                     .when()
                     .post("/LoanEligibility")
@@ -104,7 +104,7 @@ public class LoanEligibilityIT {
                     .body("'Decide'", is(true));
 
             countDownLatch.await(5, TimeUnit.SECONDS);
-            assertEquals(0, countDownLatch.getCount());
+            assertEquals( 0, countDownLatch.getCount());
         } finally {
             kafkaClient.shutdown();
         }
@@ -121,7 +121,8 @@ public class LoanEligibilityIT {
                 Optional.ofNullable(CloudEventUtils.decode(s))
                         .ifPresentOrElse(
                                 cloudEvent -> countDownLatch.countDown(),
-                                () -> LOGGER.error("Error parsing {}", s));
+                                () -> LOGGER.error("Error parsing {}", s)
+                        );
             });
 
             countDownLatch.await(5, TimeUnit.SECONDS);

@@ -31,8 +31,7 @@ public class PassengerDTO {
     public PassengerDTO() {
     }
 
-    public PassengerDTO(String name, String seatTypePreference, boolean emergencyExitRowCapable, boolean paidForSeat,
-            String seat) {
+    public PassengerDTO(String name, String seatTypePreference, boolean emergencyExitRowCapable, boolean paidForSeat, String seat) {
         this.name = name;
         this.seatTypePreference = seatTypePreference;
         this.emergencyExitRowCapable = emergencyExitRowCapable;

@@ -26,9 +26,9 @@ public class UserService {
 
     @Autowired
     private RestTemplate restTemplate;
-
+    
     public User get(String username) {
-
+        
         try {
             return restTemplate.getForObject("https://petstore.swagger.io/v2/user/{username}", User.class, username);
         } catch (RestClientException e) {

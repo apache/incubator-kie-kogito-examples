@@ -24,11 +24,11 @@ import org.springframework.stereotype.Component;
 public class AuditService {
 
     private static final Logger logger = LoggerFactory.getLogger(AuditService.class);
-
+    
     public User auditUser(User user) {
-
+     
         logger.info("User {} is being processed", user.toString());
-
+        
         return user;
     }
 }

@@ -17,6 +17,9 @@ package org.acme.sw.onboarding.queries;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.acme.sw.onboarding.model.Doctor;
 import org.acme.sw.onboarding.model.Patient;
 import org.acme.sw.onboarding.model.SymptomSpecialty;
@@ -25,10 +28,6 @@ import org.acme.sw.onboarding.services.SymptomSpecialtyService;
 import org.kie.kogito.rules.DataSource;
 import org.kie.kogito.rules.DataStore;
 import org.kie.kogito.rules.RuleUnitData;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

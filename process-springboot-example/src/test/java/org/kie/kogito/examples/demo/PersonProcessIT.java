@@ -43,34 +43,32 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = DemoApplication.class)
-@ContextConfiguration(
-        initializers = { InfinispanSpringBootTestResource.Conditional.class, KafkaSpringBootTestResource.Conditional.class })
+@ContextConfiguration(initializers = {InfinispanSpringBootTestResource.Conditional.class, KafkaSpringBootTestResource.Conditional.class})
 public class PersonProcessIT {
 
     @Autowired
     @Qualifier("persons")
     Process<? extends Model> personProcess;
-
-    private SecurityPolicy policy =
-            SecurityPolicy.of(new StaticIdentityProvider("admin", Collections.singletonList("managers")));
+    
+    private SecurityPolicy policy = SecurityPolicy.of(new StaticIdentityProvider("admin", Collections.singletonList("managers")));
 
     @Test
     public void testPersonsProcessIsAdult() {
         Model m = personProcess.createModel();
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("person",
-                new Person("John Doe",
-                        20));
+                       new Person("John Doe",
+                                  20));
         m.fromMap(parameters);
 
         ProcessInstance<?> processInstance = personProcess.createInstance(m);
         processInstance.start();
 
         assertEquals(ProcessInstance.STATE_COMPLETED,
-                processInstance.status());
+                     processInstance.status());
         Model result = (Model) processInstance.variables();
         assertEquals(1,
-                result.toMap().size());
+                     result.toMap().size());
         assertTrue(((Person) result.toMap().get("person")).isAdult());
     }
 
@@ -79,77 +77,78 @@ public class PersonProcessIT {
         Model m = personProcess.createModel();
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("person",
-                new Person("Jenny Quark",
-                        14));
+                       new Person("Jenny Quark",
+                                  14));
         m.fromMap(parameters);
 
         ProcessInstance<?> processInstance = personProcess.createInstance(m);
         processInstance.start();
 
         assertEquals(ProcessInstance.STATE_ACTIVE,
-                processInstance.status());
+                     processInstance.status());
         Model result = (Model) processInstance.variables();
         assertEquals(1,
-                result.toMap().size());
+                     result.toMap().size());
         assertFalse(((Person) result.toMap().get("person")).isAdult());
 
         List<WorkItem> workItems = processInstance.workItems(policy);
         assertEquals(1,
-                workItems.size());
+                     workItems.size());
 
         processInstance.completeWorkItem(workItems.get(0).getId(),
-                null,
-                policy);
+                                         null,
+                                         policy);
 
         assertEquals(ProcessInstance.STATE_COMPLETED,
-                processInstance.status());
+                     processInstance.status());
     }
-
+    
+    
     @Test
     public void testChildWithSecurityPolicy() {
         Model m = personProcess.createModel();
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("person", new Person("Jenny Quark", 14));
         m.fromMap(parameters);
-
+        
         ProcessInstance<?> processInstance = personProcess.createInstance(m);
         processInstance.start();
-
+        
         assertEquals(ProcessInstance.STATE_ACTIVE, processInstance.status());
-        Model result = (Model) processInstance.variables();
+        Model result = (Model)processInstance.variables();
         assertEquals(1, result.toMap().size());
-        assertFalse(((Person) result.toMap().get("person")).isAdult());
+        assertFalse(((Person)result.toMap().get("person")).isAdult());
 
         List<WorkItem> workItems = processInstance.workItems(policy);
         assertEquals(1, workItems.size());
-
+        
         processInstance.completeWorkItem(workItems.get(0).getId(), null, policy);
-
-        assertEquals(ProcessInstance.STATE_COMPLETED, processInstance.status());
+        
+        assertEquals(ProcessInstance.STATE_COMPLETED, processInstance.status()); 
     }
-
+    
     @Test
     public void testChildWithSecurityPolicyNotAuthorized() {
         Model m = personProcess.createModel();
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("person", new Person("Jenny Quark", 14));
         m.fromMap(parameters);
-
+        
         ProcessInstance<?> processInstance = personProcess.createInstance(m);
         processInstance.start();
-
+        
         assertEquals(ProcessInstance.STATE_ACTIVE, processInstance.status());
-        Model result = (Model) processInstance.variables();
+        Model result = (Model)processInstance.variables();
         assertEquals(1, result.toMap().size());
-        assertFalse(((Person) result.toMap().get("person")).isAdult());
-
+        assertFalse(((Person)result.toMap().get("person")).isAdult());
+        
         SecurityPolicy johnPolicy = SecurityPolicy.of(new StaticIdentityProvider("john"));
-
+        
         List<WorkItem> workItems = processInstance.workItems(johnPolicy);
         assertEquals(0, workItems.size());
-
+        
         processInstance.abort();
-
-        assertEquals(ProcessInstance.STATE_ABORTED, processInstance.status());
+        
+        assertEquals(ProcessInstance.STATE_ABORTED, processInstance.status()); 
     }
 }

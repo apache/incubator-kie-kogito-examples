@@ -37,6 +37,7 @@ import io.quarkus.test.junit.QuarkusTest;
 @QuarkusTest
 public class UsersProcessTest {
 
+
     @Named("users")
     @Inject
     Process<? extends Model> usersProcess;
@@ -54,7 +55,7 @@ public class UsersProcessTest {
         ProcessInstance<?> processInstance = usersProcess.createInstance(m);
         processInstance.start();
         assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_COMPLETED, processInstance.status());
-        Model result = (Model) processInstance.variables();
+        Model result = (Model)processInstance.variables();
         assertEquals(2, result.toMap().size());
 
         User user = (User) result.toMap().get("traveller");
@@ -79,7 +80,7 @@ public class UsersProcessTest {
         ProcessInstance<?> processInstance = usersProcess.createInstance(m);
         processInstance.start();
         assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_COMPLETED, processInstance.status());
-        Model result = (Model) processInstance.variables();
+        Model result = (Model)processInstance.variables();
         assertEquals(2, result.toMap().size());
 
         User user = (User) result.toMap().get("traveller");

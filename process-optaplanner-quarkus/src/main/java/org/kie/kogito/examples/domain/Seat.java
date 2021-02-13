@@ -15,6 +15,8 @@
  */
 package org.kie.kogito.examples.domain;
 
+import java.util.Objects;
+
 import org.optaplanner.core.api.domain.lookup.PlanningId;
 
 public class Seat {

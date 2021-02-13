@@ -19,12 +19,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.acme.sw.onboarding.model.SymptomSpecialty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class SymptomSpecialtyService {
 
@@ -44,9 +43,8 @@ public class SymptomSpecialtyService {
 
     private void populate() {
         try {
-            List<SymptomSpecialty> symptomSpecialties = new ObjectMapper()
-                    .readValue(this.getClass().getResourceAsStream(SYMPTOMS_DATA_PATH), new TypeReference<>() {
-                    });
+            List<SymptomSpecialty> symptomSpecialties = new ObjectMapper().readValue(this.getClass().getResourceAsStream(SYMPTOMS_DATA_PATH), new TypeReference<>() {
+            });
             this.symptomSpecialties.addAll(symptomSpecialties);
             LOGGER.info("Predefined data from SymptomSpecialty have been populated");
         } catch (IOException ex) {
