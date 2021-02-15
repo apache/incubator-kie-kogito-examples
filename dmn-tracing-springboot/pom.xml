@@ -46,6 +46,10 @@
       <groupId>org.kie.kogito</groupId>
       <artifactId>tracing-decision-springboot-addon</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>monitoring-prometheus-springboot-addon</artifactId>
+    </dependency>
 
     <dependency>
       <groupId>org.springframework.boot</groupId>
