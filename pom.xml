@@ -218,6 +218,7 @@
     <profile>
       <id>native</id>
       <properties>
+        <quarkus.package.type>native</quarkus.package.type>
         <failsafe.include>**/Native*IT.java</failsafe.include>
         <failsafe.exclude></failsafe.exclude>
         <quarkus.package.type>native</quarkus.package.type>
@@ -264,25 +265,6 @@
         <module>serverless-workflow-events-quarkus</module>
         <module>serverless-workflow-temperature-conversion</module>
       </modules>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-maven-plugin</artifactId>
-            <executions>
-              <execution>
-                <configuration>
-                  <enableHttpUrlHandler>true</enableHttpUrlHandler>
-                  <enableHttpsUrlHandler>true</enableHttpsUrlHandler>
-                  <enableJni>true</enableJni>
-                  <enableAllSecurityServices>true</enableAllSecurityServices>
-                  <additionalBuildArgs>--allow-incomplete-classpath</additionalBuildArgs>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
     </profile>
   </profiles>
 
