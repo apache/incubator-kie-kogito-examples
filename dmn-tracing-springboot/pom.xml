@@ -48,7 +48,7 @@
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>monitoring-prometheus-springboot</artifactId>
+      <artifactId>monitoring-prometheus-springboot-addon</artifactId>
     </dependency>
 
     <dependency>
