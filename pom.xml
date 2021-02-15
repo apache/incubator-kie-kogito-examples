@@ -146,6 +146,7 @@
         <module>process-business-rules-springboot</module>
         <module>process-infinispan-persistence-quarkus</module>
         <module>process-infinispan-persistence-springboot</module>
+        <module>process-kafka-persistence-quarkus</module>
         <module>process-kafka-quickstart-quarkus</module>
         <module>process-kafka-quickstart-springboot</module>
         <module>process-knative-quickstart-quarkus</module>
@@ -244,6 +245,7 @@
         <module>pmml-quarkus-example</module>
         <module>process-business-rules-quarkus</module>
         <module>process-infinispan-persistence-quarkus</module>
+        <module>process-kafka-persistence-quarkus</module>
         <module>process-kafka-quickstart-quarkus</module>
         <module>process-knative-quickstart-quarkus</module>
         <module>process-mongodb-persistence-quarkus</module>
