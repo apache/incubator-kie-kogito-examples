@@ -346,7 +346,7 @@
         <groupId>com.github.tomakehurst</groupId>
         <artifactId>wiremock-jre8</artifactId>
         <scope>test</scope>
-        <version>${version.com.github.tomakehurst}</version>
+        <version>${version.com.github.tomakehurst.wiremock}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

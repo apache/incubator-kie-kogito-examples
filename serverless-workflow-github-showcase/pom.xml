@@ -22,7 +22,7 @@
     <version.io.jjwt>0.11.2</version.io.jjwt>
     <version.kohsuke.github>1.116</version.kohsuke.github>
     <version.org.camel>1.0.1</version.org.camel>
-    <version.com.github.tomakehurst>2.27.2</version.com.github.tomakehurst>
+    <version.com.github.tomakehurst.wiremock>2.27.2</version.com.github.tomakehurst.wiremock>
   </properties>
   <dependencyManagement>
     <dependencies>
