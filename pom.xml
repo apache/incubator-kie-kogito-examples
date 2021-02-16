@@ -286,6 +286,29 @@
         </plugins>
       </build>
     </profile>
+    <profile>
+      <id>prod</id>
+      <activation>
+        <property>
+          <name>prod</name>
+        </property>
+      </activation>
+      <modules>
+        <module>dmn-listener-quarkus</module>
+        <module>dmn-listener-springboot</module>
+        <module>dmn-pmml-quarkus-example</module>
+        <module>dmn-pmml-springboot-example</module>
+        <module>dmn-quarkus-example</module>
+        <module>dmn-drools-quarkus-metrics</module>
+        <module>dmn-drools-springboot-metrics</module>
+        <module>dmn-springboot-example</module>
+        <module>pmml-quarkus-example</module>
+        <module>pmml-springboot-example</module>
+        <module>rules-quarkus-helloworld</module>
+        <module>ruleunit-quarkus-example</module>
+        <module>ruleunit-springboot-example</module>
+      </modules>
+    </profile>
   </profiles>
 
   <dependencyManagement>
