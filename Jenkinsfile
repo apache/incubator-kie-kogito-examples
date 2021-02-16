@@ -80,8 +80,11 @@ pipeline {
     }
     post {
         always {
-            junit '**/target/surefire-reports/**/*.xml'
-            cleanWs()
+            script {
+                junit '**/target/surefire-reports/**/*.xml'
+                cleanWs()
+                cloud.cleanContainersAndImages('docker')
+            }
         }
         failure {
             script {
