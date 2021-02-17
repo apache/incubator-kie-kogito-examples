@@ -287,7 +287,7 @@
       </build>
     </profile>
     <profile>
-      <id>prod</id>
+      <id>productized</id>
       <activation>
         <property>
           <name>productized</name>
