@@ -43,6 +43,7 @@ public class GrafanaDockerComposeIT {
     private static final int KOGITO_APPLICATION_PORT = 8080;
     private static final String GRAFANA_URL = "http://localhost:" + GRAFANA_PORT;
     private static final String PROMETHEUS_PRIVATE_URL = "http://prometheus:" + PROMETHEUS_PORT;
+    private static final String PROMETHEUS_PUBLIC_URL = "http://localhost:" + PROMETHEUS_PORT;
     private static final String KOGITO_APPLICATION_URL = "http://localhost:" + KOGITO_APPLICATION_PORT;
 
 
