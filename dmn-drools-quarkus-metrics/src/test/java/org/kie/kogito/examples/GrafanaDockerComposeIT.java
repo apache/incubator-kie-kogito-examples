@@ -30,6 +30,7 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.hasItem;
 
 @Testcontainers
@@ -108,5 +109,15 @@ public class GrafanaDockerComposeIT {
                 .post("/LoanEligibility")
                 .then()
                 .statusCode(200);
+    }
+
+    @Test
+    public void testPrometheusTargetsAreGreen() {
+        given()
+                .baseUri(PROMETHEUS_PUBLIC_URL)
+                .when()
+                .get("/api/v1/targets")
+                .then()
+                .body(containsString("\"health\":\"up\""));
     }
 }
