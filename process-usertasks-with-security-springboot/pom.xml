@@ -20,7 +20,7 @@
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
-        <version>${version.springboot}</version>
+        <version>${version.org.springframework.boot}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -63,7 +63,7 @@
     <dependency>
       <groupId>io.rest-assured</groupId>
       <artifactId>rest-assured</artifactId>
-      <version>${version.io.restassured.springboot}</version>
+      <version>${version.io.rest-assured.springboot}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -74,7 +74,7 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-        <version>${version.springboot}</version>
+        <version>${version.org.springframework.boot}</version>
         <executions>
           <execution>
             <goals>
