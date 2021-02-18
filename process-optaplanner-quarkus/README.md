@@ -128,7 +128,7 @@ curl -X GET http://localhost:8080/rest/flights
 
 As response an array of flights is returned.
 
-### GET  /rest/flight/{id}
+### GET  /rest/flights/{id}
 
 Returns flight with given id (if being scheduled):
 
@@ -173,13 +173,13 @@ Create a new Ticket request for a passenger, who must be approved by security.
 
 ```sh
 # Replace {id} with the process id
-curl -d '{ "passenger": { "name": "Amy Cole", "seatTypePreference": "WINDOW", "emergencyExitRowCapable": true, "paidForSeat": true, "seat": "3A" } }' -X POST http://localhost:8080/rest/flights/{id}/newPassengerRequest
+curl -d '{"name": "Amy Cole", "seatTypePreference": "WINDOW", "emergencyExitRowCapable": true, "paidForSeat": true, "seat": "3A"}' -X POST http://localhost:8080/rest/flights/{id}/newPassengerRequest
 ```
 or on Windows:
 
 ```sh
 rem Replace {id} with the process id
-curl -d "{ \"passenger\": { \"name\": \"Amy Cole\", \"seatTypePreference\": \"WINDOW\", \"emergencyExitRowCapable\": true, \"paidForSeat\": true, \"seat\": \"3A\" } }" -X POST http://localhost:8080/rest/flights/{id}/newPassengerRequest
+curl -d "{\"name\": \"Amy Cole\", \"seatTypePreference\": \"WINDOW\", \"emergencyExitRowCapable\": true, \"paidForSeat\": true, \"seat\": \"3A\"}" -X POST http://localhost:8080/rest/flights/{id}/newPassengerRequest
 ```
 
 ### GET /rest/flights/{id}/approveDenyPassenger/{workItemId}
