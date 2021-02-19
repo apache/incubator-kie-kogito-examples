@@ -23,7 +23,7 @@ mvn clean compile spring-boot:run
 
 ```sh
 mvn clean package
-java -jar ./target/dmn-springboot-example.jar
+java -jar ./target/dmn-pmml-springboot-example.jar
 ```
 
 ## Test DMN Model using Maven
