@@ -16,6 +16,12 @@ fi
 echo "Kogito Image version: ${KOGITO_VERSION}"
 echo "KOGITO_VERSION=${KOGITO_VERSION}" > ".env"
 
+if [ "$(uname)" == "Darwin" ]; then
+   echo "DOCKER_GATEWAY_HOST=${host.docker.internal}" >> ".env"
+elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+   echo "DOCKER_GATEWAY_HOST=172.17.0.1" >> ".env"
+fi
+
 PERSISTENCE_FOLDER=./persistence
 KOGITO_EXAMPLE_PERSISTENCE=../target/classes/META-INF/resources/persistence/protobuf
 
@@ -30,5 +36,20 @@ else
     echo "$KOGITO_EXAMPLE_PERSISTENCE does not exist. Have you compiled Kogito Quickstart project?"
     exit 1
 fi
+
+SVG_FOLDER=./svg
+
+KOGITO_HIRING_SVG_FOLDER=../target/classes/META-INF/processSVG
+
+mkdir -p $SVG_FOLDER
+
+if [ -d "$KOGITO_HIRING_SVG_FOLDER" ]
+then
+    cp $KOGITO_HIRING_SVG_FOLDER/*.svg $SVG_FOLDER
+else
+    echo "$KOGITO_HIRING_SVG_FOLDER does not exist. Have you compiled 03-kogito-jobs-service-example project?"
+    exit 1
+fi
+
 
 docker-compose up

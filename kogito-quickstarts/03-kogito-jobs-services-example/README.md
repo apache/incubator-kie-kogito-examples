@@ -98,23 +98,7 @@ curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST h
 EOF
 ```
 
-In order to get to the job created on this example, you must complete the *HR interview* node which is a human task on the *Task Console*.
-
-### Kogito Task Console
-
-To access the Kogito Task Console, open your browser and navigate to ``http://localhost:8380``, and you are redirected to the **Task Inbox**.
-
-<p align="center">
-    <img width=75%  src="docs/images/task-console.png">
-</p>
-
-The human task can be cancelled on the Task Inbox.
-
-<p align="center">
-    <img width=75%  src="docs/images/task-inbox.png">
-</p>
-
-> **_NOTE:_**  For more information about how to work with Kogito Task Console, please refer to the [Kogito Documentation](https://docs.jboss.org/kogito/release/latest/html_single/#con-task-console_kogito-developing-process-services) page.
+You can check the available jobs and its status on *Management Console* application. 
 
 ### Kogito Management Console
 
@@ -140,3 +124,33 @@ You can navigate to the process details page which has dedicated panel showing a
 <p align="center">
     <img width=75%  src="docs/images/JobsManagement.png">
 </p>
+
+In this example, timers are added next to each node. The timers are executed in 10 seconds and you can check the logs upon completion.
+
+<p align="center">
+    <img width=75%  src="docs/images/CompletedMessage.png">
+</p>
+
+When the first timer completes, the process reaches HR Interview which is an human task. You can complete this task by navigating to *Task Console*.
+
+### Kogito Task Console
+
+To access the Kogito Task Console, open your browser and navigate to ``http://localhost:8380``, and you are redirected to the **Task Inbox**.
+
+> **_NOTE:_**  For more information about how to work with Kogito Task Console, please refer to the [Kogito Documentation](https://docs.jboss.org/kogito/release/latest/html_single/#con-task-console_kogito-developing-process-services) page.
+
+<p align="center">
+    <img width=75%  src="docs/images/task-console.png">
+</p>
+
+The *HR Interview* human task can be completed on the Task Inbox.
+
+<p align="center">
+    <img width=75%  src="docs/images/task-inbox.png">
+</p>
+
+Then comes the second job that executes within 10 seconds after the HR interview.
+
+The process reaches another human task *IT interview*, which can be completed on Task Console.
+
+Finally, the third timer executes after completion of IT interview human task.
