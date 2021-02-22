@@ -32,7 +32,7 @@ import static org.kie.pmml.kogito.springboot.example.CommonTestUtils.testResult;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 class SampleMineTest {
 
-    private static final String BASE_PATH = "/SampleMine/";
+    private static final String BASE_PATH = "/SampleMine";
     private static final String TARGET = "decision";
 
     @LocalServerPort

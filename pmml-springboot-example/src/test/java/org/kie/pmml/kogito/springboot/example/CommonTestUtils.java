@@ -62,7 +62,7 @@ public class CommonTestUtils {
                                   final String basePath,
                                   final String targetField,
                                   final Map<String, Object> expectedResultMap) {
-        String path = basePath + "descriptive";
+        String path = basePath + "/descriptive";
         final Response response = given()
                 .contentType(ContentType.JSON)
                 .body(inputData)
@@ -92,7 +92,7 @@ public class CommonTestUtils {
 
     public static void testDescriptiveWrongData(final String inputData,
                                            final String basePath) {
-        String path = basePath + "descriptive";
+        String path = basePath + "/descriptive";
         final Response response = given()
                 .contentType(ContentType.JSON)
                 .body(inputData)
