@@ -82,8 +82,6 @@ pipeline {
         always {
             script {
                 junit '**/target/surefire-reports/**/*.xml'
-                cleanWs()
-                cloud.cleanContainersAndImages('docker')
             }
         }
         failure {
@@ -99,6 +97,11 @@ pipeline {
         fixed {
             script {
                 mailer.sendEmail_fixedPR()
+            }
+        }
+        cleanup {
+            script {
+                util.cleanNode('docker')
             }
         }
     }
