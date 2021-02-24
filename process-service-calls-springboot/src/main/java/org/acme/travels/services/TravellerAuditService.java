@@ -24,11 +24,11 @@ import org.springframework.stereotype.Component;
 public class TravellerAuditService {
 
     private static final Logger logger = LoggerFactory.getLogger(TravellerAuditService.class);
-
+    
     public Traveller auditTraveller(Traveller traveller) {
-
+     
         logger.info("Traveller {} is being processed", traveller.toString());
-
+        
         return traveller;
     }
 }

@@ -19,6 +19,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.kie.flexible.kogito.example.model.Product;
@@ -31,9 +33,6 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
-
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.anyOf;
 import static org.hamcrest.CoreMatchers.is;
@@ -43,7 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD) // reset spring context after each test method
 class ServiceDeskProcessTest {
-
+    
     @LocalServerPort
     int port;
 
@@ -79,25 +78,25 @@ class ServiceDeskProcessTest {
 
         String id = given()
                 .contentType(ContentType.JSON)
-                .when()
+            .when()
                 .body(params)
                 .post(BASE_PATH)
-                .then()
+            .then()
                 .statusCode(201)
                 .header("Location", notNullValue())
                 .body("id", notNullValue())
                 .body("supportCase.state", is(State.WAITING_FOR_OWNER.name()))
                 .body("supportCase.engineer", anyOf(is(TriageService.KOGITO_ENGINEERS[0]), is(TriageService.KOGITO_ENGINEERS[1])))
                 .body("supportGroup", is("Kogito"))
-                .extract()
+            .extract()
                 .path("id");
 
         given()
                 .contentType(ContentType.JSON)
                 .basePath(BASE_PATH)
-                .when()
+            .when()
                 .get(id)
-                .then()
+            .then()
                 .statusCode(200);
         return id;
     }
@@ -124,10 +123,10 @@ class ServiceDeskProcessTest {
                 .queryParam("user", "kelly")
                 .queryParam("group", "support")
                 .contentType(ContentType.JSON)
-                .when()
+            .when()
                 .body(params)
                 .post("/{id}/ReceiveSupportComment/{taskId}", id, taskId)
-                .then()
+            .then()
                 .statusCode(200)
                 .body("supportCase.state", is(State.WAITING_FOR_CUSTOMER.name()))
                 .body("supportCase.comments[0].text", is(params.get("comment")))
@@ -138,12 +137,12 @@ class ServiceDeskProcessTest {
     private void addCustomerComment(String id) {
         String location = given()
                 .basePath(BASE_PATH + "/" + id).contentType(ContentType.JSON)
-                .when()
+            .when()
                 .post("/ReceiveCustomerComment")
-                .then()
+            .then()
                 .statusCode(201)
                 .header("Location", notNullValue())
-                .extract()
+            .extract()
                 .header("Location");
 
         String taskId = location.substring(location.lastIndexOf("/") + 1);
@@ -156,10 +155,10 @@ class ServiceDeskProcessTest {
                 .queryParam("user", "Paco")
                 .queryParam("group", "customer")
                 .contentType(ContentType.JSON)
-                .when()
+            .when()
                 .body(params)
                 .post("/{id}/ReceiveCustomerComment/{taskId}", id, taskId)
-                .then()
+            .then()
                 .statusCode(200)
                 .body("supportCase.state", is(State.WAITING_FOR_OWNER.name()))
                 .body("supportCase.comments[1].text", is(params.get("comment")))
@@ -177,15 +176,15 @@ class ServiceDeskProcessTest {
         String taskId = given()
                 .basePath(BASE_PATH + "/" + id)
                 .contentType(ContentType.JSON)
-                .when()
-                .get("/tasks")
-                .then()
-                .statusCode(200)
-                .body("$.size", is(1))
-                .body("[0].name", is("Questionnaire"))
-                .extract()
-                .path("[0].id");
-        ;
+            .when()
+            .get("/tasks")
+            .then()
+            .statusCode(200)
+            .body("$.size", is(1))
+            .body("[0].name", is("Questionnaire"))
+            .extract()
+            .path("[0].id");;
+
 
         Map<String, Object> params = new HashMap<>();
         params.put("comment", "Kogito is great!");
@@ -196,10 +195,10 @@ class ServiceDeskProcessTest {
                 .queryParam("user", "Paco")
                 .queryParam("group", "customer")
                 .contentType(ContentType.JSON)
-                .when()
+            .when()
                 .body(params)
-                .post("/Questionnaire/" + taskId)
-                .then()
+            .post("/Questionnaire/" + taskId)
+            .then()
                 .statusCode(200)
                 .body("supportCase.state", is(State.CLOSED.name()))
                 .body("supportCase.questionnaire.comment", is(params.get("comment")))
@@ -211,7 +210,7 @@ class ServiceDeskProcessTest {
         List<?> processes = given()
                 .basePath(BASE_PATH)
                 .contentType(ContentType.JSON)
-                .when()
+            .when()
                 .get("/")
                 .as(List.class);
 

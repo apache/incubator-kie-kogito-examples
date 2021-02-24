@@ -19,13 +19,12 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
-import org.kie.kogito.event.ChannelType;
 import org.kie.kogito.event.CloudEventMeta;
 import org.kie.kogito.event.EventKind;
 import org.kie.kogito.event.Topic;
-
-import io.quarkus.test.junit.QuarkusTest;
+import org.kie.kogito.event.ChannelType;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.hasItem;

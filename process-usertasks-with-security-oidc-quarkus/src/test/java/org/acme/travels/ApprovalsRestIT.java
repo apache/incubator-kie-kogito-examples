@@ -15,6 +15,13 @@
  */
 package org.acme.travels;
 
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.Map;
+
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.junit.jupiter.api.Test;
 import org.keycloak.representations.AccessTokenResponse;
@@ -23,10 +30,6 @@ import org.kie.kogito.testcontainers.quarkus.KeycloakQuarkusTestResource;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
-
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
 
 @QuarkusTest
 @QuarkusTestResource(KeycloakQuarkusTestResource.class)

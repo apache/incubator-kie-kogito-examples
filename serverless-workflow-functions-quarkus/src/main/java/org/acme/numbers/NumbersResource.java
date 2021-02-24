@@ -36,30 +36,31 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Produces(MediaType.APPLICATION_JSON)
 @ApplicationScoped
 public class NumbersResource {
-
+    
+    
     private ObjectMapper objectMapper;
-    private Random rand;
-
-    @PostConstruct
-    void init() {
+    private Random rand; 
+    
+    @PostConstruct 
+    void init () {
         objectMapper = new ObjectMapper();
-        rand = new Random();
+        rand = new Random(); 
     }
-
+    
     @GET
     @Path("random")
     public Response getRandom(@QueryParam("bound") @DefaultValue("10") int bound) {
         return fromNumber("randomNumber", rand.nextInt(bound));
     }
-
+    
     @POST
-    @Path("{number}/multiplyByAndSum")
-    public Response multiplyByAndSum(@PathParam("number") int multiplier, Numbers numbers) {
-        return fromNumber("sum", numbers.getNumbers().stream().map(n -> n.intValue() * multiplier).collect(Collectors.summingInt(Integer::intValue)));
+    @Path ("{number}/multiplyByAndSum")
+    public Response multiplyByAndSum (@PathParam("number") int multiplier, Numbers numbers) {
+        return fromNumber("sum", numbers.getNumbers().stream().map(n -> n.intValue()*multiplier).collect(Collectors.summingInt(Integer::intValue)));
     }
-
+    
     private Response fromNumber(String name, int number) {
-        return Response.ok().entity(objectMapper.createObjectNode().put(name, number)).build();
+        return Response.ok().entity(objectMapper.createObjectNode().put(name,number)).build();
     }
 
 }

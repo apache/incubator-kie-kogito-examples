@@ -19,68 +19,68 @@ import java.util.Date;
 
 public class Trip {
 
-    private String city;
-    private String country;
-    private Date begin;
-    private Date end;
-    private boolean visaRequired;
+	private String city;
+	private String country;
+	private Date begin;
+	private Date end;
+	private boolean visaRequired;
+	
+	public Trip() {
+		
+	}
 
-    public Trip() {
+	public Trip(String city, String country, Date begin, Date end) {
+		super();
+		this.city = city;
+		this.country = country;
+		this.begin = begin;
+		this.end = end;
+	}
 
-    }
+	public String getCity() {
+		return city;
+	}
 
-    public Trip(String city, String country, Date begin, Date end) {
-        super();
-        this.city = city;
-        this.country = country;
-        this.begin = begin;
-        this.end = end;
-    }
+	public void setCity(String city) {
+		this.city = city;
+	}
 
-    public String getCity() {
-        return city;
-    }
+	public String getCountry() {
+		return country;
+	}
 
-    public void setCity(String city) {
-        this.city = city;
-    }
+	public void setCountry(String country) {
+		this.country = country;
+	}
 
-    public String getCountry() {
-        return country;
-    }
+	public Date getBegin() {
+		return begin;
+	}
 
-    public void setCountry(String country) {
-        this.country = country;
-    }
+	public void setBegin(Date begin) {
+		this.begin = begin;
+	}
 
-    public Date getBegin() {
-        return begin;
-    }
+	public Date getEnd() {
+		return end;
+	}
 
-    public void setBegin(Date begin) {
-        this.begin = begin;
-    }
+	public void setEnd(Date end) {
+		this.end = end;
+	}
 
-    public Date getEnd() {
-        return end;
-    }
+	public boolean isVisaRequired() {
+		return visaRequired;
+	}
 
-    public void setEnd(Date end) {
-        this.end = end;
-    }
+	public void setVisaRequired(boolean visaRequired) {
+		this.visaRequired = visaRequired;
+	}
 
-    public boolean isVisaRequired() {
-        return visaRequired;
-    }
-
-    public void setVisaRequired(boolean visaRequired) {
-        this.visaRequired = visaRequired;
-    }
-
-    @Override
-    public String toString() {
-        return "Trip [city=" + city + ", country=" + country + ", begin=" + begin + ", end=" + end + ", visaRequired="
-                + visaRequired + "]";
-    }
+	@Override
+	public String toString() {
+		return "Trip [city=" + city + ", country=" + country + ", begin=" + begin + ", end=" + end + ", visaRequired="
+				+ visaRequired + "]";
+	}
 
 }

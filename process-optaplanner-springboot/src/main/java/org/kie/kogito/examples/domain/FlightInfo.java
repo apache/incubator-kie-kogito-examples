@@ -23,7 +23,7 @@ public class FlightInfo {
     private LocalDateTime departureDateTime;
     private int seatRowSize;
     private int seatColumnSize;
-
+    
     public String getOrigin() {
         return origin;
     }

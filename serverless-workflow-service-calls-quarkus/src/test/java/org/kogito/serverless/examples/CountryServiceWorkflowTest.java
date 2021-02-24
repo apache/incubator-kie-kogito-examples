@@ -15,24 +15,22 @@
  */
 package org.kogito.serverless.examples;
 
-import java.util.HashMap;
-import java.util.Map;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
+
+import io.quarkus.test.junit.QuarkusTest;
 import org.kie.kogito.Model;
 import org.kie.kogito.process.Process;
 import org.kie.kogito.process.ProcessInstance;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import io.quarkus.test.junit.QuarkusTest;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import javax.inject.Inject;
+import javax.inject.Named;
+import java.util.HashMap;
+import java.util.Map;
 
 @QuarkusTest
 public class CountryServiceWorkflowTest {
@@ -60,7 +58,7 @@ public class CountryServiceWorkflowTest {
         processInstance.start();
         assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_COMPLETED, processInstance.status());
 
-        Model result = (Model) processInstance.variables();
+        Model result = (Model)processInstance.variables();
         assertEquals(1, result.toMap().size());
 
         JsonNode workflowDataNode = (JsonNode) result.toMap().get("workflowdata");

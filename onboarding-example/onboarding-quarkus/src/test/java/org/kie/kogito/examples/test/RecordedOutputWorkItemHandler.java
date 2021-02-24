@@ -24,12 +24,13 @@ import org.kie.kogito.internal.process.runtime.KogitoWorkItem;
 import org.kie.kogito.internal.process.runtime.KogitoWorkItemHandler;
 import org.kie.kogito.internal.process.runtime.KogitoWorkItemManager;
 
-public class RecordedOutputWorkItemHandler implements KogitoWorkItemHandler {
 
+public class RecordedOutputWorkItemHandler implements KogitoWorkItemHandler {
+    
     private Map<String, Function<WorkItem, Map<String, Object>>> recorded = new HashMap<>();
 
     @Override
-    public void executeWorkItem(KogitoWorkItem workItem, KogitoWorkItemManager manager) {
+    public void executeWorkItem( KogitoWorkItem workItem, KogitoWorkItemManager manager) {
         Map<String, Object> results = recorded.remove(workItem.getParameter("TaskName")).apply(workItem);
 
         manager.completeWorkItem(workItem.getStringId(), results);

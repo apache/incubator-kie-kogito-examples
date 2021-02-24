@@ -25,13 +25,13 @@ import org.kie.kogito.process.workitem.LifeCyclePhase;
 
 /**
  * Start life cycle phase that applies to any human task.
- * It will set the status to "Started"
+ * It will set the status to "Started" 
  *
  * It can transition from
  * <ul>
- * <li>Active</li>
- * <li>Claim</li>
- * <li>Release</li>
+ *  <li>Active</li>
+ *  <li>Claim</li>
+ *  <li>Release</li> 
  * </ul>
  * 
  */
@@ -39,9 +39,9 @@ public class Start implements LifeCyclePhase {
 
     public static final String ID = "start";
     public static final String STATUS = "Started";
-
+    
     private List<String> allowedTransitions = Arrays.asList(Active.ID, Claim.ID, Release.ID);
-
+    
     @Override
     public String id() {
         return ID;
@@ -59,6 +59,6 @@ public class Start implements LifeCyclePhase {
 
     @Override
     public boolean canTransition(LifeCyclePhase phase) {
-        return allowedTransitions.contains(phase.id());
+        return allowedTransitions.contains(phase.id());        
     }
 }
