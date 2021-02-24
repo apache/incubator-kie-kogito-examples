@@ -1,0 +1,36 @@
+syntax = "proto2"; 
+package org.kie.kogito.hr.hiring; 
+import "kogito-index.proto";
+import "kogito-types.proto";
+option kogito_model = "Hiring";
+option kogito_id = "hiring";
+
+/* @Indexed */ 
+message Candidate { 
+	option java_package = "org.kie.kogito.hr.hiring";
+	/* @Field(store = Store.YES) @SortableField */ 
+	optional string email = 1; 
+	/* @Field(store = Store.YES) @SortableField */ 
+	optional string name = 2; 
+	/* @Field(store = Store.YES) @SortableField */ 
+	optional int32 salary = 3; 
+	/* @Field(store = Store.YES) @SortableField */ 
+	optional string skills = 4; 
+}
+/* @Indexed */ 
+message Hiring { 
+	option java_package = "org.kie.kogito.hr.hiring";
+	/* @Field(store = Store.YES) @SortableField
+ @VariableInfo(tags="") */ 
+	optional Candidate candidate = 1; 
+	/* @Field(store = Store.YES) @SortableField
+ @VariableInfo(tags="") */ 
+	optional bool hr_approval = 2; 
+	/* @Field(store = Store.YES) @SortableField */ 
+	optional string id = 3; 
+	/* @Field(store = Store.YES) @SortableField
+ @VariableInfo(tags="") */ 
+	optional bool it_approval = 4; 
+	/* @Field(store = Store.YES) @SortableField */ 
+	optional org.kie.kogito.index.model.KogitoMetadata metadata = 5; 
+}
