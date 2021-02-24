@@ -1,0 +1,10 @@
+# A scrape configuration containing exactly one endpoint to scrape:
+scrape_configs:
+  - job_name: 'kogito-app'
+
+    scrape_interval: 10s
+
+    metrics_path: /metrics
+
+    static_configs:
+      - targets: ['kogito-app:8080']

@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *       http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -62,7 +62,7 @@ public class CommonTestUtils {
                                   final String basePath,
                                   final String targetField,
                                   final Map<String, Object> expectedResultMap) {
-        String path = basePath + "descriptive";
+        String path = basePath + "/descriptive";
         final Response response = given()
                 .contentType(ContentType.JSON)
                 .body(inputData)
@@ -92,7 +92,7 @@ public class CommonTestUtils {
 
     public static void testDescriptiveWrongData(final String inputData,
                                            final String basePath) {
-        String path = basePath + "descriptive";
+        String path = basePath + "/descriptive";
         final Response response = given()
                 .contentType(ContentType.JSON)
                 .body(inputData)

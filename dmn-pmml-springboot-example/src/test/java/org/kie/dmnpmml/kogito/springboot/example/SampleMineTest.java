@@ -41,7 +41,7 @@ import static org.kie.dmnpmml.kogito.springboot.example.CommonTestUtils.testResu
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class SampleMineTest {
 
-    private static final String BASE_PATH = "/SampleMine/";
+    private static final String BASE_PATH = "/SampleMine";
     private static final String TARGET = "decision";
 
     @LocalServerPort

@@ -82,8 +82,9 @@ pipeline {
     }
     post {
         always {
-            junit '**/target/surefire-reports/**/*.xml'
-            cleanWs()
+            script {
+                junit '**/target/surefire-reports/**/*.xml'
+            }
         }
         failure {
             script {
@@ -98,6 +99,11 @@ pipeline {
         fixed {
             script {
                 mailer.sendEmail_fixedPR()
+            }
+        }
+        cleanup {
+            script {
+                util.cleanNode('docker')
             }
         }
     }
