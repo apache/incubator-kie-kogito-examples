@@ -16,7 +16,6 @@
 package org.kogito.examples.sw.notification.service;
 
 import java.io.IOException;
-import java.nio.charset.Charset;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -27,16 +26,18 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import io.cloudevents.CloudEvent;
 import org.apache.camel.ProducerTemplate;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import io.cloudevents.CloudEvent;
 
 @Path("")
 @ApplicationScoped
 public class NotificationResource {
-    
+
     @Inject
     ObjectMapper mapper;
 

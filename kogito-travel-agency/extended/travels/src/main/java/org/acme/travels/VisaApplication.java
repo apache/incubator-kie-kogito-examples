@@ -17,99 +17,99 @@ package org.acme.travels;
 
 public class VisaApplication {
 
-	private String firstName;
-	private String lastName;
-	private String city;
-	private String country;
-	private int duration;
-	private String passportNumber;
-	private String nationality;
-	
-	private boolean approved;
+    private String firstName;
+    private String lastName;
+    private String city;
+    private String country;
+    private int duration;
+    private String passportNumber;
+    private String nationality;
 
-	public VisaApplication() {
+    private boolean approved;
 
-	}
+    public VisaApplication() {
 
-	public VisaApplication(String firstName, String lastName, String city, String country, int duration,
-			String passportNumber) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.city = city;
-		this.country = country;
-		this.duration = duration;
-		this.passportNumber = passportNumber;
-	}
+    }
 
-	public String getFirstName() {
-		return firstName;
-	}
+    public VisaApplication(String firstName, String lastName, String city, String country, int duration,
+            String passportNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.city = city;
+        this.country = country;
+        this.duration = duration;
+        this.passportNumber = passportNumber;
+    }
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    public String getFirstName() {
+        return firstName;
+    }
 
-	public String getLastName() {
-		return lastName;
-	}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    public String getLastName() {
+        return lastName;
+    }
 
-	public String getCity() {
-		return city;
-	}
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-	public void setCity(String city) {
-		this.city = city;
-	}
+    public String getCity() {
+        return city;
+    }
 
-	public String getCountry() {
-		return country;
-	}
+    public void setCity(String city) {
+        this.city = city;
+    }
 
-	public void setCountry(String country) {
-		this.country = country;
-	}
+    public String getCountry() {
+        return country;
+    }
 
-	public int getDuration() {
-		return duration;
-	}
+    public void setCountry(String country) {
+        this.country = country;
+    }
 
-	public void setDuration(int duration) {
-		this.duration = duration;
-	}
+    public int getDuration() {
+        return duration;
+    }
 
-	public String getPassportNumber() {
-		return passportNumber;
-	}
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
 
-	public void setPassportNumber(String passportNumber) {
-		this.passportNumber = passportNumber;
-	}
+    public String getPassportNumber() {
+        return passportNumber;
+    }
 
-	public String getNationality() {
-		return nationality;
-	}
+    public void setPassportNumber(String passportNumber) {
+        this.passportNumber = passportNumber;
+    }
 
-	public void setNationality(String nationality) {
-		this.nationality = nationality;
-	}
+    public String getNationality() {
+        return nationality;
+    }
 
-	public boolean isApproved() {
-		return approved;
-	}
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
+    }
 
-	public void setApproved(boolean approved) {
-		this.approved = approved;
-	}
+    public boolean isApproved() {
+        return approved;
+    }
 
-	@Override
-	public String toString() {
-		return "VisaApplication [firstName=" + firstName + ", lastName=" + lastName + ", city=" + city + ", country="
-				+ country + ", duration=" + duration + ", passportNumber=" + passportNumber + ", approved=" + approved
-				+ "]";
-	}
+    public void setApproved(boolean approved) {
+        this.approved = approved;
+    }
+
+    @Override
+    public String toString() {
+        return "VisaApplication [firstName=" + firstName + ", lastName=" + lastName + ", city=" + city + ", country="
+                + country + ", duration=" + duration + ", passportNumber=" + passportNumber + ", approved=" + approved
+                + "]";
+    }
 
 }
