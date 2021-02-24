@@ -112,6 +112,16 @@ public class GrafanaDockerComposeIT {
     }
 
     @Test
+    public void testMetricsContentTypeHeader() {
+        given()
+                .baseUri(KOGITO_APPLICATION_URL)
+                .when()
+                .get("/metrics")
+                .then()
+                .header("Content-Type", "text/plain;charset=UTF-8");
+    }
+
+    @Test
     public void testPrometheusTargetsAreGreen() {
         given()
                 .baseUri(PROMETHEUS_PUBLIC_URL)
