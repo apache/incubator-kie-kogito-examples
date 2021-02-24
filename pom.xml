@@ -286,6 +286,29 @@
         </plugins>
       </build>
     </profile>
+    <profile>
+      <id>productized</id>
+      <activation>
+        <property>
+          <name>productized</name>
+        </property>
+      </activation>
+      <modules>
+        <module>dmn-listener-quarkus</module>
+        <module>dmn-listener-springboot</module>
+        <module>dmn-pmml-quarkus-example</module>
+        <module>dmn-pmml-springboot-example</module>
+        <module>dmn-quarkus-example</module>
+        <module>dmn-drools-quarkus-metrics</module>
+        <module>dmn-drools-springboot-metrics</module>
+        <module>dmn-springboot-example</module>
+        <module>pmml-quarkus-example</module>
+        <module>pmml-springboot-example</module>
+        <module>rules-quarkus-helloworld</module>
+        <module>ruleunit-quarkus-example</module>
+        <module>ruleunit-springboot-example</module>
+      </modules>
+    </profile>
   </profiles>
 
   <dependencyManagement>
@@ -293,12 +316,12 @@
       <dependency>
         <groupId>org.testcontainers</groupId>
         <artifactId>testcontainers</artifactId>
-        <version>${version.testcontainers}</version>
+        <version>${version.org.testcontainers}</version>
       </dependency>
       <dependency>
         <groupId>org.testcontainers</groupId>
         <artifactId>junit-jupiter</artifactId>
-        <version>${version.testcontainers}</version>
+        <version>${version.org.testcontainers}</version>
       </dependency>
       <dependency>
         <groupId>com.jayway.jsonpath</groupId>
@@ -328,7 +351,7 @@
       <dependency>
         <groupId>org.testcontainers</groupId>
         <artifactId>kafka</artifactId>
-        <version>${version.testcontainers}</version>
+        <version>${version.org.testcontainers}</version>
       </dependency>
       <dependency>
         <groupId>io.swagger.core.v3</groupId>
@@ -346,7 +369,7 @@
         <groupId>com.github.tomakehurst</groupId>
         <artifactId>wiremock-jre8</artifactId>
         <scope>test</scope>
-        <version>${version.wiremock}</version>
+        <version>${version.com.github.tomakehurst.wiremock}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -362,7 +385,7 @@
         <plugin>
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-maven-plugin</artifactId>
-          <version>${version.springboot}</version>
+          <version>${version.org.springframework.boot}</version>
         </plugin>
         <plugin>
         <groupId>org.apache.maven.plugins</groupId>

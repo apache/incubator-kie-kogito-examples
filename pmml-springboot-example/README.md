@@ -23,7 +23,7 @@ mvn clean compile spring-boot:run
 
 ```sh
 mvn clean package
-java -jar ./target/dmn-springboot-example.jar
+java -jar ./target/pmml-springboot-example.jar
 ```
 
 ## Example Usage
@@ -57,16 +57,7 @@ Example response:
 
 ```json
 {
-  "correlationId":null,
-  "segmentationId":null,
-  "segmentId":null,
-  "segmentIndex":0,
-  "resultCode":"OK",
-  "resultObjectName":"fld4",
-  "resultVariables":
-  {
-    "fld4":52.5
-  }
+  "fld4":52.5
 }
 ```
 
@@ -95,18 +86,8 @@ curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" -
 Example response:
 
 ```json
-
-{ 
-  "correlationId":null,
-  "segmentationId":null,
-  "segmentId":null,
-  "segmentIndex":0, 
-  "resultCode":"OK",
-  "resultObjectName":"decision",
-  "resultVariables": {
-          "decision":"sunglasses",
-          "weatherdecision":"sunglasses" 
-                      }
+{
+  "decision":"sunglasses"
 }
 ```
 
@@ -135,19 +116,8 @@ curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" -
 Example response:
 
 ```json
-{ 
-  "correlationId":null,
-  "segmentationId":null,
-  "segmentId":null,
-  "segmentIndex":0, 
-  "resultCode":"OK",
-  "resultObjectName":"score",
-  "resultVariables": {
-          "score":-15.0,
-          "Score":-15.0,
-          "Reason Code 1":"Input1ReasonCode",
-          "Reason Code 2":"Input2ReasonCode"
-          }
+{
+  "score":-15.0
 }
 ```
 
@@ -181,15 +151,7 @@ Example response:
 
 ```json
 {
-  "correlationId": null,
-  "segmentationId": null,
-  "segmentId": null,
-  "segmentIndex": 0,
-  "resultCode": "OK",
-  "resultObjectName": "categoricalResult",
-  "resultVariables": {
-    "categoricalResult": 1.381666666666666
-  }
+  "categoricalResult":1.381666666666666
 }
 ```
 

@@ -99,8 +99,10 @@ pipeline {
         }
     }
     post {
-        always {
-            cleanWs()
+        cleanup {
+            script {
+                util.cleanNode('docker')
+            }
         }
     }
 }
