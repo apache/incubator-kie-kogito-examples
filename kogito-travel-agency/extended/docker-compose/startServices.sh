@@ -31,6 +31,12 @@ fi
 echo "Kogito Image version: ${KOGITO_VERSION}"
 echo "KOGITO_VERSION=${KOGITO_VERSION}" > ".env"
 
+if [ "$(uname)" == "Darwin" ]; then
+   echo "DOCKER_GATEWAY_HOST=${host.docker.internal}" >> ".env"
+elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+   echo "DOCKER_GATEWAY_HOST=172.17.0.1" >> ".env"
+fi
+
 PERSISTENCE_FOLDER=./target/protobuf
 KOGITO_TRAVEL_AGENCY_PERSISTENCE=../travels/target/classes/META-INF/resources/persistence/protobuf
 KOGITO_VISAS_PERSISTENCE=../visas/target/classes/META-INF/resources/persistence/protobuf
@@ -50,6 +56,29 @@ then
     cp $KOGITO_VISAS_PERSISTENCE/*.proto $PERSISTENCE_FOLDER
 else
     echo "$KOGITO_VISAS_PERSISTENCE does not exist. Have you compiled your Kogito Visas project?"
+    exit 1
+fi
+
+SVG_FOLDER=./svg
+
+KOGITO_TRAVEL_SVG_FOLDER=../travels/target/classes/META-INF/processSVG
+KOGITO_VISAS_SVG_FOLDER=../visas/target/classes/META-INF/processSVG
+
+mkdir -p $SVG_FOLDER
+
+if [ -d "$KOGITO_TRAVEL_SVG_FOLDER" ]
+then
+    cp $KOGITO_TRAVEL_SVG_FOLDER/*.svg $SVG_FOLDER
+else
+    echo "$KOGITO_TRAVEL_SVG_FOLDER does not exist. Have you compiled Kogito Travel Agency project?"
+    exit 1
+fi
+
+if [ -d "$KOGITO_VISAS_SVG_FOLDER" ]
+then
+    cp $KOGITO_VISAS_SVG_FOLDER/*.svg $SVG_FOLDER
+else
+    echo "$KOGITO_VISAS_SVG_FOLDER does not exist. Have you compiled Kogito Visas project?"
     exit 1
 fi
 
