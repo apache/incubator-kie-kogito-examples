@@ -31,6 +31,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.hasItem;
 
 @Testcontainers
@@ -43,6 +44,7 @@ public class GrafanaDockerComposeIT {
     private static final int KOGITO_APPLICATION_PORT = 8080;
     private static final String GRAFANA_URL = "http://localhost:" + GRAFANA_PORT;
     private static final String PROMETHEUS_PRIVATE_URL = "http://prometheus:" + PROMETHEUS_PORT;
+    private static final String PROMETHEUS_PUBLIC_URL = "http://localhost:" + PROMETHEUS_PORT;
     private static final String KOGITO_APPLICATION_URL = "http://localhost:" + KOGITO_APPLICATION_PORT;
 
     @Container
@@ -108,5 +110,25 @@ public class GrafanaDockerComposeIT {
                 .post("/LoanEligibility")
                 .then()
                 .statusCode(200);
+    }
+
+    @Test
+    public void testMetricsContentTypeHeader() {
+        given()
+                .baseUri(KOGITO_APPLICATION_URL)
+                .when()
+                .get("/metrics")
+                .then()
+                .header("Content-Type", "text/plain;charset=UTF-8");
+    }
+
+    @Test
+    public void testPrometheusTargetsAreGreen() {
+        given()
+                .baseUri(PROMETHEUS_PUBLIC_URL)
+                .when()
+                .get("/api/v1/targets")
+                .then()
+                .body(containsString("\"health\":\"up\""));
     }
 }
