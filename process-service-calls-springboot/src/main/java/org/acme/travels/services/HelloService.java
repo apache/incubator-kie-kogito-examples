@@ -23,10 +23,10 @@ import org.springframework.stereotype.Component;
 public class HelloService {
 
     private static final Logger logger = LoggerFactory.getLogger(GreetingTravellerService.class);
-    
+
     public Object hello(String name, Integer age) {
         logger.info("Saying hello to {} with age {}", name, age);
-        
+
         return "";
     }
 }

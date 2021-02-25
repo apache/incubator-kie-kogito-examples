@@ -25,11 +25,12 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import io.quarkus.runtime.Startup;
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import io.quarkus.runtime.Startup;
 
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
@@ -39,7 +40,7 @@ import static java.util.stream.Collectors.toList;
 public class Application {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Application.class);
-    
+
     @Inject
     @Named("default-kafka-broker")
     Map<String, Object> kafkaConfig;

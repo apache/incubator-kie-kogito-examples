@@ -19,7 +19,6 @@ import java.util.Map;
 
 import org.kie.kogito.process.WorkItem;
 
-
 public class DefaultWorkItem implements WorkItem {
 
     private String id;

@@ -55,7 +55,9 @@ pipeline {
         stage('Build kogito-examples') {
             steps {
                 script {
-                    getMavenCommand('kogito-examples').run('clean install')
+                    getMavenCommand('kogito-examples')
+                        .withProperty('validate-formatting')
+                        .run('clean install')
                 }
             }
         }

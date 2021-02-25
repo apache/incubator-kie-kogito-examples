@@ -23,8 +23,6 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import io.quarkus.test.common.QuarkusTestResource;
-import io.quarkus.test.junit.QuarkusTest;
 import org.acme.travels.Address;
 import org.acme.travels.Flight;
 import org.acme.travels.Hotel;
@@ -40,6 +38,9 @@ import org.kie.kogito.process.ProcessInstanceReadMode;
 import org.kie.kogito.process.WorkItem;
 import org.kie.kogito.testcontainers.quarkus.InfinispanQuarkusTestResource;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
+
+import io.quarkus.test.common.QuarkusTestResource;
+import io.quarkus.test.junit.QuarkusTest;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.core.StringContains.containsString;
