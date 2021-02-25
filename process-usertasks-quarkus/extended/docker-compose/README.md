@@ -41,7 +41,7 @@ In order to use it, please ensure you have Docker Compose installed on your mach
 
     docker-compose stop
 
-  It is also recommended to remove any of stopped containers by running:
+  It is also recommended removing any of stopped containers by running:
   
     docker-compose rm
     

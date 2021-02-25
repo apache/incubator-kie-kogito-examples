@@ -64,14 +64,14 @@ NOTE: With dev mode of Quarkus you can take advantage of hot reload for business
 
 ```sh
 mvn clean package
-java -jar ./target/process-usertasks-quarkus-basic-runner.jar
+java -jar ./target/process-usertasks-quarkus-runner.jar
 ```
 
 or on windows
 
 ```sh
 mvn clean package
-java -jar target\process-usertasks-quarkus-basic-runner.jar
+java -jar target\process-usertasks-quarkus-runner.jar
 ```
 
 ### Package and Run using Local Native Image
@@ -84,7 +84,7 @@ mvn clean package -Pnative
 To run the generated native executable, generated in `target/`, execute
 
 ```sh
-./target/process-usertasks-quarkus-basic-runner
+./target/process-usertasks-quarkus-runner
 ```
 
 ### OpenAPI (Swagger) documentation

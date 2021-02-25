@@ -15,9 +15,6 @@
  */
 package org.acme.travels;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -62,10 +59,10 @@ public class ApprovalsProcessTest {
 
         ProcessInstance<?> processInstance = approvalsProcess.createInstance(m);
         processInstance.start();
-        assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_ACTIVE, processInstance.status()); 
+        assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_ACTIVE, processInstance.status());
 
         SecurityPolicy policy = SecurityPolicy.of(IdentityProviders.of("admin", Collections.singletonList("managers")));
-        
+
         processInstance.workItems(policy);
 
         List<WorkItem> workItems = processInstance.workItems(policy);
@@ -76,7 +73,7 @@ public class ApprovalsProcessTest {
 
         workItems = processInstance.workItems(policy);
         assertEquals(0, workItems.size());
-        
+
         policy = SecurityPolicy.of(IdentityProviders.of("john", Collections.singletonList("managers")));
 
         processInstance.workItems(policy);

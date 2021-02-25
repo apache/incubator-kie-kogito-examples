@@ -81,5 +81,4 @@ public class Traveller {
         return "Traveller [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", nationality="
                 + nationality + ", address=" + address + "]";
     }
-
 }

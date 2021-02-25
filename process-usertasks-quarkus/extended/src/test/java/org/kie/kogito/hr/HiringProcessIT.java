@@ -15,11 +15,7 @@
  */
 package org.kie.kogito.hr;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,9 +23,6 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.jbpm.process.instance.impl.humantask.HumanTaskTransition;
-import org.jbpm.process.instance.impl.humantask.phases.Claim;
-import org.jbpm.process.instance.impl.workitem.Complete;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.Model;
 import org.kie.kogito.auth.IdentityProviders;
@@ -37,30 +30,37 @@ import org.kie.kogito.auth.SecurityPolicy;
 import org.kie.kogito.process.Process;
 import org.kie.kogito.process.ProcessInstance;
 import org.kie.kogito.process.WorkItem;
+import org.kie.kogito.testcontainers.quarkus.InfinispanQuarkusTestResource;
+import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 
+import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 
-@QuarkusTest
-public class HiringProcessTest {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-    
+@QuarkusTest
+@QuarkusTestResource(value = InfinispanQuarkusTestResource.class)
+@QuarkusTestResource(value = KafkaQuarkusTestResource.class)
+public class HiringProcessIT {
+
     @Named("hiring")
     @Inject
     Process<? extends Model> hiringProcess;
-    
+
     @Test
     public void testApprovalProcess() {
-                
+
         assertNotNull(hiringProcess);
 
         Model m = hiringProcess.createModel();
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("candidate", new Candidate("Jon Snow", "jsnow@example.com", 30000, "Java, Kogito"));
         m.fromMap(parameters);
-        
+
         ProcessInstance<?> processInstance = hiringProcess.createInstance(m);
         processInstance.start();
-        assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_ACTIVE, processInstance.status()); 
+        assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_ACTIVE, processInstance.status());
 
         SecurityPolicy policy = SecurityPolicy.of(IdentityProviders.of("john", Arrays.asList("HR", "IT")));
 
@@ -73,18 +73,17 @@ public class HiringProcessTest {
         processInstance.completeWorkItem(workItems.get(0).getId(), results, policy);
 
         processInstance.workItems(policy);
-        
+
         workItems = processInstance.workItems(policy);
         assertEquals(1, workItems.size());
-        
+
         results.put("approve", false);
         processInstance.completeWorkItem(workItems.get(0).getId(), results, policy);
         assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_COMPLETED, processInstance.status());
-        
-        Model result = (Model)processInstance.variables();
+
+        Model result = (Model) processInstance.variables();
         assertEquals(3, result.toMap().size());
-        assertEquals(true , result.toMap().get("hr_approval"));
+        assertEquals(true, result.toMap().get("hr_approval"));
         assertEquals(false, result.toMap().get("it_approval"));
     }
-
 }
