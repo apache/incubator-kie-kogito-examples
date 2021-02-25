@@ -22,15 +22,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.kie.api.runtime.process.WorkItemHandler;
 import org.kie.kogito.examples.onboarding.DecisionTaskWorkItemHandler;
+import org.kie.kogito.internal.process.runtime.KogitoWorkItemHandler;
 import org.kie.kogito.process.impl.DefaultWorkItemHandlerConfig;
 import org.springframework.stereotype.Component;
 
 @Component
 public class WorkItemHandlerConfig extends DefaultWorkItemHandlerConfig {
 
-    private final Map<String, WorkItemHandler> workItemHandlers = new HashMap<>();
+    private final Map<String, KogitoWorkItemHandler> workItemHandlers = new HashMap<>();
     private final List<String> supportedHandlers = Arrays.asList("AssignDepartmentAndManager",
             "CalculatePaymentDate",
             "CalculateVacationDays",
@@ -40,7 +40,7 @@ public class WorkItemHandlerConfig extends DefaultWorkItemHandlerConfig {
             "DecisionTask");
 
     @Override
-    public WorkItemHandler forName(String name) {
+    public KogitoWorkItemHandler forName(String name) {
 
         workItemHandlers.putIfAbsent("DecisionTask", new DecisionTaskWorkItemHandler());
         if (supportedHandlers.contains(name)) {

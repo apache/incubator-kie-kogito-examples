@@ -20,7 +20,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import org.kie.api.runtime.process.WorkItemHandler;
+import org.kie.kogito.internal.process.runtime.KogitoWorkItemHandler;
 import org.kie.kogito.process.impl.DefaultWorkItemHandlerConfig;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
@@ -39,7 +39,7 @@ public class RecordedWorkItemHandlerConfig extends DefaultWorkItemHandlerConfig 
             "DecisionTask");
 
     @Override
-    public WorkItemHandler forName(String name) {
+    public KogitoWorkItemHandler forName(String name) {
         if (supportedHandlers.contains(name)) {
             return handler;
         }
