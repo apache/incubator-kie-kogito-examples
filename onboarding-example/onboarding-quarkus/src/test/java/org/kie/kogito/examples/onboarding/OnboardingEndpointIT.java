@@ -22,9 +22,9 @@ import java.util.function.Function;
 import javax.inject.Inject;
 
 import org.junit.jupiter.api.Test;
-import org.kie.api.runtime.process.WorkItem;
-import org.kie.api.runtime.process.WorkItemHandler;
 import org.kie.kogito.examples.test.RecordedOutputWorkItemHandler;
+import org.kie.kogito.internal.process.runtime.KogitoWorkItem;
+import org.kie.kogito.internal.process.runtime.KogitoWorkItemHandler;
 import org.kie.kogito.process.ProcessConfig;
 import org.kie.kogito.testcontainers.quarkus.InfinispanQuarkusTestResource;
 
@@ -128,8 +128,8 @@ public class OnboardingEndpointIT {
     /*
      * Helper methods
      */
-    protected void registerHandler(String name, Function<WorkItem, Map<String, Object>> item) {
-        WorkItemHandler handler = processConfig.workItemHandlers().forName(name);
+    protected void registerHandler(String name, Function<KogitoWorkItem, Map<String, Object>> item) {
+        KogitoWorkItemHandler handler = processConfig.workItemHandlers().forName(name);
         ((RecordedOutputWorkItemHandler) handler).record(name, item);
     }
 }
