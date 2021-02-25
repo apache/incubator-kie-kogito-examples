@@ -17,10 +17,11 @@ package org.kie.kogito.examples;
 
 import java.util.List;
 
-import io.quarkus.test.junit.QuarkusTest;
-import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
@@ -33,13 +34,12 @@ public class LoanEligibilityTest {
     public void testEvaluateLoanEligibility() {
         given()
                 .body("{" +
-                              "\"Client\": " +
-                              "{\"age\": 43,\"salary\": 1950,\"existing payments\": 100}," +
-                              "\"Loan\": {\"duration\": 15,\"installment\": 180}, " +
-                              "\"SupremeDirector\" : \"Yes\", " +
-                              "\"Bribe\": 1000" +
-                              "}"
-                )
+                        "\"Client\": " +
+                        "{\"age\": 43,\"salary\": 1950,\"existing payments\": 100}," +
+                        "\"Loan\": {\"duration\": 15,\"installment\": 180}, " +
+                        "\"SupremeDirector\" : \"Yes\", " +
+                        "\"Bribe\": 1000" +
+                        "}")
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/LoanEligibility")

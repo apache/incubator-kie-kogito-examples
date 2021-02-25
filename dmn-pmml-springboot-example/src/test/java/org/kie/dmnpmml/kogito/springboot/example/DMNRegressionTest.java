@@ -15,14 +15,15 @@
  */
 package org.kie.dmnpmml.kogito.springboot.example;
 
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
-import io.restassured.path.json.config.JsonPathConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.annotation.DirtiesContext;
+
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import io.restassured.path.json.config.JsonPathConfig;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.config.JsonConfig.jsonConfig;
@@ -58,6 +59,6 @@ public class DMNRegressionTest {
                 .body("fld2", is(comparesEqualTo(2))) // was input
                 .body("fld1", is(comparesEqualTo(3))) // was input
                 .body("Decision", is(closeTo(52.5, 0))) // real decision output 
-         ;
+        ;
     }
 }

@@ -15,9 +15,6 @@
  */
 package org.acme.travels;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,6 +31,8 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoInfinispanSpringbootApplication.class)
@@ -44,22 +43,21 @@ public class MultiParamServiceProcessTest {
     @Qualifier("multiparams")
     Process<? extends Model> multiparamsProcess;
 
-
     @Test
     public void testOrderProcess() {
         assertNotNull(multiparamsProcess);
-        
+
         Model m = multiparamsProcess.createModel();
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("name", "john");
         parameters.put("age", 44);
         m.fromMap(parameters);
-        
+
         ProcessInstance<?> processInstance = multiparamsProcess.createInstance(m);
         processInstance.start();
-        assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_COMPLETED, processInstance.status()); 
-        Model result = (Model)processInstance.variables();
-        assertEquals(2, result.toMap().size());        
+        assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_COMPLETED, processInstance.status());
+        Model result = (Model) processInstance.variables();
+        assertEquals(2, result.toMap().size());
     }
 
 }

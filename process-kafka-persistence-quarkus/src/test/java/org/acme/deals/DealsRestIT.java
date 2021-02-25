@@ -17,14 +17,15 @@ package org.acme.deals;
 
 import javax.inject.Inject;
 
-import io.quarkus.test.common.QuarkusTestResource;
-import io.quarkus.test.junit.QuarkusTest;
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 import org.apache.kafka.streams.KafkaStreams;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
+
+import io.quarkus.test.common.QuarkusTestResource;
+import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
@@ -40,7 +41,7 @@ public class DealsRestIT {
 
     @Inject
     KafkaStreams streams;
-    
+
     @BeforeEach
     public void setup() {
         streams.cleanUp();
@@ -50,7 +51,8 @@ public class DealsRestIT {
     public void testDealsRest() {
         // test adding new deal
         String deal = "my fancy deal";
-        String addDealPayload = "{\"name\" : \"" + deal + "\", \"traveller\" : { \"firstName\" : \"John\", \"lastName\" : \"Doe\", \"email\" : \"jon.doe@example.com\", \"nationality\" : \"American\",\"address\" : { \"street\" : \"main street\", \"city\" : \"Boston\", \"zipCode\" : \"10005\", \"country\" : \"US\" }}}";
+        String addDealPayload = "{\"name\" : \"" + deal
+                + "\", \"traveller\" : { \"firstName\" : \"John\", \"lastName\" : \"Doe\", \"email\" : \"jon.doe@example.com\", \"nationality\" : \"American\",\"address\" : { \"street\" : \"main street\", \"city\" : \"Boston\", \"zipCode\" : \"10005\", \"country\" : \"US\" }}}";
         String dealId = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(addDealPayload)
                 .when().post("/deals")
                 .then().statusCode(201).body("id", notNullValue()).extract().path("id");

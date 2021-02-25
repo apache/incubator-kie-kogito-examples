@@ -31,7 +31,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.acme.sw.onboarding.model.Assignment;
 import org.acme.sw.onboarding.model.Patient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,8 +42,8 @@ public class PatientResource {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PatientResource.class);
     /*
-    In a real world we would have a Database.
-    See: https://quarkus.io/guides/hibernate-orm-panache
+     * In a real world we would have a Database.
+     * See: https://quarkus.io/guides/hibernate-orm-panache
      */
     private final List<Patient> patients;
 
