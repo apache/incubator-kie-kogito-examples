@@ -71,7 +71,7 @@ To run the generated native executable, generated in `target/`, execute
 Before submitting a request, run the [Subtraction](../subtraction-service) and [Multiplication](../multiplication-service) on separate terminals
 on ports `8181` and `8282` respectively (use the property `quarkus.http.port`).
 
-The service based on the JSON workflow definition can be access by sending a POST request to [http://localhost:8080/fahrenheit_to_celsius](http://localhost:8080/fahrenheit_to_celsius)' with following content:
+The service based on the JSON workflow definition can be access by sending a POST request to [http://localhost:8080/fahrenheit_to_celsius](http://localhost:8080/fahrenheit_to_celsius) with the following content:
 
 ```json
 {
@@ -95,7 +95,7 @@ You should have a reply similar to this one:
 
 ```json
 {
-  "id": "54498577-b367-43c7-b840-d0ada6f2b02a",
+  "id": "2287167f-1392-480e-8e20-6acd5922dfac",
   "workflowdata": {
     "fahrenheit": 100,
     "subtractValue": "32.0",

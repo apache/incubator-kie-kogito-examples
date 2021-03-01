@@ -79,7 +79,8 @@ public class SubtractionOperation {
             return false;
         }
         SubtractionOperation subtractionOperation = (SubtractionOperation) o;
-        return Float.compare(subtractionOperation.leftElement, leftElement) == 0 && Float.compare(subtractionOperation.rightElement, rightElement) == 0 && Float.compare(subtractionOperation.difference, difference) == 0;
+        return Float.compare(subtractionOperation.leftElement, leftElement) == 0 && Float.compare(subtractionOperation.rightElement, rightElement) == 0
+                && Float.compare(subtractionOperation.difference, difference) == 0;
     }
 
     @Override

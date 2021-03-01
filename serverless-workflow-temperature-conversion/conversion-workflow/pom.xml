@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.kie.kogito</groupId>
@@ -9,6 +9,7 @@
   </parent>
   <artifactId>conversion-workflow</artifactId>
   <name>Kogito Example :: Serverless Workflow Temperature Conversion :: Conversion Service</name>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -24,10 +25,6 @@
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-quarkus</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-rest-workitem</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -55,6 +52,25 @@
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-health</artifactId>
+    </dependency>
+    <!-- Serverless Workflow -->
+    <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-openapi-workitem</artifactId>
+    </dependency>
+    <!-- HTTP client: jersey-client -->
+    <dependency>
+      <groupId>org.jboss.resteasy</groupId>
+      <artifactId>resteasy-client</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.resteasy</groupId>
+      <artifactId>resteasy-multipart-provider</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.openapitools</groupId>
+      <artifactId>jackson-databind-nullable</artifactId>
+      <version>${version.org.openapitools.jackson.databind.nullable}</version>
     </dependency>
   </dependencies>
   <build>
