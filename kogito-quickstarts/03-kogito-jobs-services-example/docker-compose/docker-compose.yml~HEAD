@@ -52,7 +52,7 @@ services:
 
   data-index:
     container_name: data-index
-    image: quay.io/kiegroup/kogito-data-index-infinispan:${KOGITO_VERSION}
+    image: quay.io/kiegroup/kogito-data-index-infinispan-nightly:${KOGITO_VERSION}
     ports:
       - "8180:8080"
     depends_on:
@@ -67,23 +67,37 @@ services:
       KAFKA_BOOTSTRAP_SERVERS: kafka:29092
       KOGITO_DATA_INDEX_PROPS: -Dkogito.protobuf.folder=/home/kogito/data/protobufs/
 
+  jobs-service:
+    container_name: jobs-service
+    network_mode: "host"
+    image: quay.io/kiegroup/kogito-jobs-service-nightly:${KOGITO_VERSION}
+    depends_on:
+      kafka:
+        condition: service_started
+      infinispan:
+        condition: service_healthy
+      data-index:
+        condition: service_started
+    environment: 
+      ENABLE_EVENTS: "true"
+      KOGITO_JOBS_PROPS: -Dquarkus-profile=events-support -D%events-support.quarkus.http.port=8580 -D%events-support.kafka.bootstrap.servers=localhost:9092
+                         -D%events-support.mp.messaging.outgoing.kogito-job-service-job-status-events.bootstrap.servers=localhost:9092
+                         -Dkogito.service.url=http://localhost:8580
+                         
   management-console:
    container_name: management-console
-   image: quay.io/kiegroup/kogito-management-console:${KOGITO_VERSION}
+   image: quay.io/kiegroup/kogito-management-console-nightly:${KOGITO_VERSION}
    ports:
      - 8280:8080
    depends_on:
      data-index:
        condition: service_started
-   volumes:
-     - ./svg/:/home/kogito/data/svg/
-   environment:
-     KOGITO_DATAINDEX_HTTP_URL: http://${DOCKER_GATEWAY_HOST}:8180
-     KOGITO_MANAGEMENT_CONSOLE_PROPS: -Dkogito.svg.folder.path=/home/kogito/data/svg
+     jobs-service:
+       condition: service_started
 
   task-console:
     container_name: task-console
-    image: quay.io/kiegroup/kogito-task-console:${KOGITO_VERSION}
+    image: quay.io/kiegroup/kogito-task-console-nightly:${KOGITO_VERSION}
     ports:
       - 8380:8080
     depends_on:
