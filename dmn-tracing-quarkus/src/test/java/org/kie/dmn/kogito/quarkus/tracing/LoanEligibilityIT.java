@@ -15,7 +15,6 @@
  */
 package org.kie.dmn.kogito.quarkus.tracing;
 
-import java.util.Optional;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -24,6 +23,7 @@ import org.junit.jupiter.api.Test;
 import org.kie.kogito.cloudevents.CloudEventUtils;
 import org.kie.kogito.kafka.KafkaClient;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
+import org.kie.kogito.tracing.decision.event.model.ModelEvent;
 import org.kie.kogito.tracing.decision.event.trace.TraceEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,7 +59,7 @@ public class LoanEligibilityIT {
             kafkaClient.consume(TRACING_TOPIC_NAME, s -> {
                 LOGGER.info("Received from kafka: {}", s);
 
-                if (checkDeserialization(s) && isTraceEventComplete(s)) {
+                if (checkDeserialization(s, TraceEvent.class) && isTraceEventComplete(s)) {
                     countDownLatch.countDown();
                 } else {
                     LOGGER.error("Trace event is not valid {}", s);
@@ -103,10 +103,12 @@ public class LoanEligibilityIT {
         try {
             kafkaClient.consume(TRACING_MODELS_TOPIC_NAME, s -> {
                 LOGGER.info("Received from kafka: {}", s);
-                Optional.ofNullable(CloudEventUtils.decode(s))
-                        .ifPresentOrElse(
-                                cloudEvent -> countDownLatch.countDown(),
-                                () -> LOGGER.error("Error parsing {}", s));
+
+                if (checkDeserialization(s, ModelEvent.class) && isModelEventComplete(s)) {
+                    countDownLatch.countDown();
+                } else {
+                    LOGGER.error("Model event is not valid {}", s);
+                }
             });
 
             countDownLatch.await(5, TimeUnit.SECONDS);
@@ -116,14 +118,19 @@ public class LoanEligibilityIT {
         }
     }
 
-    private boolean checkDeserialization(String s) {
+    private <T> boolean checkDeserialization(String s, Class<T> clazz) {
         try {
-            CloudEventUtils.decodeData(CloudEventUtils.decode(s).get(), TraceEvent.class).get();
+            CloudEventUtils.decodeData(CloudEventUtils.decode(s).get(), clazz).get();
             return true;
         } catch (Exception e) {
             LOGGER.error("Failed to deserialize the CloudEvent", e);
             return false;
         }
+    }
+
+    private boolean isModelEventComplete(String s) {
+        return s.contains("definitions") && s.contains("DMNDiagram") && s.contains("0.0")
+                && s.contains("gav") && s.contains("MODEL");
     }
 
     private boolean isTraceEventComplete(String s) {
