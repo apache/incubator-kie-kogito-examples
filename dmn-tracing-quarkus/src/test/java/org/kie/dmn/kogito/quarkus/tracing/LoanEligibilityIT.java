@@ -35,6 +35,7 @@ import io.restassured.http.ContentType;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.kie.dmn.kogito.quarkus.tracing.matcher.StringMatchesUUIDPattern.matchesThePatternOfAUUID;
 
 @QuarkusTest
@@ -62,7 +63,7 @@ public class LoanEligibilityIT {
                 if (checkDeserialization(s, TraceEvent.class) && isTraceEventComplete(s)) {
                     countDownLatch.countDown();
                 } else {
-                    LOGGER.error("Trace event is not valid {}", s);
+                    fail("Decision trace event is not valid");
                 }
             });
 
@@ -107,7 +108,7 @@ public class LoanEligibilityIT {
                 if (checkDeserialization(s, ModelEvent.class) && isModelEventComplete(s)) {
                     countDownLatch.countDown();
                 } else {
-                    LOGGER.error("Model event is not valid {}", s);
+                    fail("Model event is not valid");
                 }
             });
 
