@@ -14,7 +14,6 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>02-kogito-auth-example</module>
         <module>03-kogito-jobs-services-example</module>
     </modules>
 

@@ -15,6 +15,7 @@
  */
 package org.acme.travels;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -33,15 +34,17 @@ import org.kie.kogito.auth.SecurityPolicy;
 import org.kie.kogito.process.Process;
 import org.kie.kogito.process.ProcessInstance;
 import org.kie.kogito.process.WorkItem;
-import org.kie.kogito.services.identity.StaticIdentityProvider;
+import org.kie.kogito.testcontainers.quarkus.KeycloakQuarkusTestResource;
 
+import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @QuarkusTest
-public class ApprovalsProcessTest {
+@QuarkusTestResource(KeycloakQuarkusTestResource.class)
+public class ApprovalsProcessIT {
 
     @Named("approvals")
     @Inject
@@ -61,7 +64,7 @@ public class ApprovalsProcessTest {
         processInstance.start();
         assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_ACTIVE, processInstance.status());
 
-        SecurityPolicy policy = SecurityPolicy.of(IdentityProviders.of("admin", Collections.singletonList("managers")));
+        SecurityPolicy policy = SecurityPolicy.of(IdentityProviders.of("admin", Arrays.asList("managers")));
 
         processInstance.workItems(policy);
 
@@ -74,8 +77,7 @@ public class ApprovalsProcessTest {
         workItems = processInstance.workItems(policy);
         assertEquals(0, workItems.size());
 
-        policy = SecurityPolicy.of(IdentityProviders.of("john", Collections.singletonList("managers")));
-
+        policy = SecurityPolicy.of(IdentityProviders.of("john", Arrays.asList("managers")));
         processInstance.workItems(policy);
 
         workItems = processInstance.workItems(policy);
@@ -106,8 +108,7 @@ public class ApprovalsProcessTest {
         processInstance.start();
         assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_ACTIVE, processInstance.status());
 
-        StaticIdentityProvider identity = new StaticIdentityProvider("admin", Collections.singletonList("managers"));
-        SecurityPolicy policy = SecurityPolicy.of(identity);
+        SecurityPolicy policy = SecurityPolicy.of(IdentityProviders.of("admin", Arrays.asList("managers")));
 
         processInstance.workItems(policy);
 
@@ -120,8 +121,7 @@ public class ApprovalsProcessTest {
         workItems = processInstance.workItems(policy);
         assertEquals(0, workItems.size());
 
-        identity = new StaticIdentityProvider("john", Collections.singletonList("managers"));
-        policy = SecurityPolicy.of(identity);
+        policy = SecurityPolicy.of(IdentityProviders.of("john", Arrays.asList("managers")));
 
         processInstance.workItems(policy);
 

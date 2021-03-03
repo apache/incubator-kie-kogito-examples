@@ -174,7 +174,7 @@ Access to HR Interview task and complete
     <img width=75%  src="docs/images/TC_HRInterview.png">
 </p>
 
-Check the process instance details at Kogito Management console to see the execution path reflects the completed task
+Check the process instance details at Kogito Management Console to see the execution path reflects the completed task
 
 <p align="center">
     <img width=75%  src="docs/images/MC_details2.png">
