@@ -64,7 +64,7 @@ NOTE: With dev mode of Quarkus you can take advantage of hot reload for business
 
 ```sh
 mvn clean package
-java -jar target/process-usertasks-quarkus-runner.jar
+java -jar ./target/process-usertasks-quarkus-runner.jar
 ```
 
 or on windows

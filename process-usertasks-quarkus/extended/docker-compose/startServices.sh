@@ -33,7 +33,7 @@ if [ -d "$KOGITO_EXAMPLE_PERSISTENCE" ]
 then
     cp $KOGITO_EXAMPLE_PERSISTENCE/*.proto $PERSISTENCE_FOLDER/
 else
-    echo "$KOGITO_EXAMPLE_PERSISTENCE does not exist. Have you compiled Kogito Quickstart project?"
+    echo "$KOGITO_EXAMPLE_PERSISTENCE does not exist. Have you compiled process-usertask-quarkus-extended project?"
     exit 1
 fi
 
@@ -47,7 +47,7 @@ if [ -d "$KOGITO_HIRING_SVG_FOLDER" ]
 then
     cp $KOGITO_HIRING_SVG_FOLDER/*.svg $SVG_FOLDER
 else
-    echo "$KOGITO_HIRING_SVG_FOLDER does not exist. Have you compiled 01-kogito-basic-example project?"
+    echo "$KOGITO_HIRING_SVG_FOLDER does not exist. Have you compiled process-usertask-quarkus-extended project?"
     exit 1
 fi
 
