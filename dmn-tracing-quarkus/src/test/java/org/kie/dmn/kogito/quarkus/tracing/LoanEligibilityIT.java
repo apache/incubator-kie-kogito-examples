@@ -24,6 +24,7 @@ import org.junit.jupiter.api.Test;
 import org.kie.kogito.cloudevents.CloudEventUtils;
 import org.kie.kogito.kafka.KafkaClient;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
+import org.kie.kogito.tracing.decision.event.trace.TraceEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -57,26 +58,28 @@ public class LoanEligibilityIT {
         try {
             kafkaClient.consume(TRACING_TOPIC_NAME, s -> {
                 LOGGER.info("Received from kafka: {}", s);
-                Optional.ofNullable(CloudEventUtils.decode(s))
-                        .ifPresentOrElse(
-                                cloudEvent -> countDownLatch.countDown(),
-                                () -> LOGGER.error("Error parsing {}", s));
+
+                if (checkDeserialization(s) && isTraceEventComplete(s)) {
+                    countDownLatch.countDown();
+                } else {
+                    LOGGER.error("Trace event is not valid {}", s);
+                }
             });
 
             given()
                     .body("{" +
-                            "    \"Client\": {" +
-                            "        \"age\": 43," +
-                            "        \"salary\": 1950," +
-                            "        \"existing payments\": 100" +
-                            "    }," +
-                            "    \"Loan\": {" +
-                            "        \"duration\": 15," +
-                            "        \"installment\": 180" +
-                            "    }," +
-                            "    \"SupremeDirector\" : \"Yes\"," +
-                            "    \"Bribe\": 1000" +
-                            "}")
+                                  "    \"Client\": {" +
+                                  "        \"age\": 43," +
+                                  "        \"salary\": 1950," +
+                                  "        \"existing payments\": 100" +
+                                  "    }," +
+                                  "    \"Loan\": {" +
+                                  "        \"duration\": 15," +
+                                  "        \"installment\": 180" +
+                                  "    }," +
+                                  "    \"SupremeDirector\" : \"Yes\"," +
+                                  "    \"Bribe\": 1000" +
+                                  "}")
                     .contentType(ContentType.JSON)
                     .when()
                     .post("/LoanEligibility")
@@ -111,5 +114,21 @@ public class LoanEligibilityIT {
         } finally {
             kafkaClient.shutdown();
         }
+    }
+
+    private boolean checkDeserialization(String s) {
+        try {
+            CloudEventUtils.decodeData(CloudEventUtils.decode(s).get(), TraceEvent.class).get();
+            return true;
+        } catch (Exception e) {
+            LOGGER.error("Failed to deserialize the CloudEvent", e);
+            return false;
+        }
+    }
+
+    private boolean isTraceEventComplete(String s) {
+        return s.contains("existing payments") && s.contains("inputs") && s.contains("outputs")
+                && s.contains("executionSteps") && s.contains("additionalData")
+                && s.contains("\"baseType\":\"number\"");
     }
 }
