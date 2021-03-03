@@ -68,18 +68,18 @@ public class LoanEligibilityIT {
 
             given()
                     .body("{" +
-                                  "    \"Client\": {" +
-                                  "        \"age\": 43," +
-                                  "        \"salary\": 1950," +
-                                  "        \"existing payments\": 100" +
-                                  "    }," +
-                                  "    \"Loan\": {" +
-                                  "        \"duration\": 15," +
-                                  "        \"installment\": 180" +
-                                  "    }," +
-                                  "    \"SupremeDirector\" : \"Yes\"," +
-                                  "    \"Bribe\": 1000" +
-                                  "}")
+                            "    \"Client\": {" +
+                            "        \"age\": 43," +
+                            "        \"salary\": 1950," +
+                            "        \"existing payments\": 100" +
+                            "    }," +
+                            "    \"Loan\": {" +
+                            "        \"duration\": 15," +
+                            "        \"installment\": 180" +
+                            "    }," +
+                            "    \"SupremeDirector\" : \"Yes\"," +
+                            "    \"Bribe\": 1000" +
+                            "}")
                     .contentType(ContentType.JSON)
                     .when()
                     .post("/LoanEligibility")
