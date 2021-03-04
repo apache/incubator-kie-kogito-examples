@@ -140,7 +140,6 @@
         <module>flexible-process-quarkus</module>
         <module>flexible-process-springboot</module>
         <module>kogito-travel-agency</module>
-        <module>kogito-quickstarts</module>
         <module>onboarding-example</module>
         <module>pmml-quarkus-example</module>
         <module>pmml-springboot-example</module>
@@ -242,7 +241,6 @@
         <module>dmn-tracing-quarkus</module>
         <module>flexible-process-quarkus</module>
         <module>kogito-travel-agency</module>
-        <module>kogito-quickstarts</module>
         <module>onboarding-example</module>
         <module>pmml-quarkus-example</module>
         <module>process-business-rules-quarkus</module>
