@@ -8,7 +8,7 @@
     <version>2.0.0-SNAPSHOT</version>
   </parent>
   <artifactId>process-timer-quarkus-extended</artifactId>
-  <name>Kogito Example :: Process Timer with Quarkus Extended</name>
+  <name>Kogito Example :: Process Timer with Quarkus :: Extended</name>
   <description>Kogito with timers - Quarkus - Extended</description>
   <dependencyManagement>
     <dependencies>

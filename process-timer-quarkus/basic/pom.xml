@@ -8,7 +8,7 @@
   </parent>
 
   <artifactId>process-timer-quarkus-basic</artifactId>
-  <name>Kogito Example :: Process with Usertasks Quarkus :: Basic</name>
+  <name>Kogito Example :: Process UserTasks with Timer Quarkus :: Basic</name>
 
   <dependencyManagement>
     <dependencies>
