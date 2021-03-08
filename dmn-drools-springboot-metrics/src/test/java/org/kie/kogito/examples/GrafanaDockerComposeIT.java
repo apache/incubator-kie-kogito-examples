@@ -31,7 +31,6 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.hasItem;
 
 @Testcontainers
@@ -55,7 +54,10 @@ public class GrafanaDockerComposeIT {
             environment = new DockerComposeContainer(new File(GrafanaDockerComposeIT.class.getClassLoader().getResource("./docker-compose.yml").toURI()))
                     .withExposedService("grafana_1", GRAFANA_PORT, Wait.forListeningPort().withStartupTimeout(Duration.ofMinutes(STARTUP_MINUTES_TIMEOUT)))
                     .withExposedService("hello_1", KOGITO_APPLICATION_PORT, Wait.forListeningPort().withStartupTimeout(Duration.ofMinutes(STARTUP_MINUTES_TIMEOUT)))
-                    .withExposedService("prometheus_1", PROMETHEUS_PORT, Wait.forListeningPort().withStartupTimeout(Duration.ofMinutes(STARTUP_MINUTES_TIMEOUT)));
+                    .withExposedService("prometheus_1", PROMETHEUS_PORT,
+                            Wait.forHttp("/api/v1/targets")
+                                    .forResponsePredicate(x -> x.contains("\"health\":\"up\""))
+                                    .withStartupTimeout(Duration.ofMinutes(STARTUP_MINUTES_TIMEOUT)));
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
@@ -120,15 +122,5 @@ public class GrafanaDockerComposeIT {
                 .get("/metrics")
                 .then()
                 .header("Content-Type", "text/plain;charset=UTF-8");
-    }
-
-    @Test
-    public void testPrometheusTargetsAreGreen() {
-        given()
-                .baseUri(PROMETHEUS_PUBLIC_URL)
-                .when()
-                .get("/api/v1/targets")
-                .then()
-                .body(containsString("\"health\":\"up\""));
     }
 }

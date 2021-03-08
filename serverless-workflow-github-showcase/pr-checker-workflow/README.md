@@ -100,12 +100,13 @@ You should see a similar output like this:
 
 <details><summary>Build logs</summary>
 ```
----> Building and pushing image using tag quay.io/ricardozanini/pr-checker-workflow:latest
-STEP 1: FROM quay.io/kiegroup/kogito-quarkus-jvm-ubi8:latest
-STEP 2: COPY target/*-runner.jar $KOGITO_HOME/bin
+---> Building and pushing image using tag quay.io/your_namespace/pr-checker-workflow:latest
+STEP 1: FROM quay.io/kiegroup/kogito-runtime-jvm:latest
+STEP 2: ENV RUNTIME_TYPE quarkus
+STEP 3: COPY target/*-runner.jar $KOGITO_HOME/bin
 --> 58760d128d8
-STEP 3: COPY target/lib $KOGITO_HOME/bin/lib
-STEP 4: COMMIT quay.io/ricardozanini/pr-checker-workflow:latest
+STEP 4: COPY target/lib $KOGITO_HOME/bin/lib
+STEP 5: COMMIT quay.io/your_namespace/pr-checker-workflow:latest
 --> 7bea1f647bc
 Writing manifest to image destination
 Writing manifest to image destination

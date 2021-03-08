@@ -82,3 +82,5 @@ After completing the *HR Interview* the candidate moves to the *IT Interview* ta
 [01.- Kogito Basic Example](01-kogito-basic-example)
 
 [02.- Kogito Example with Authentication](02-kogito-auth-example)
+
+[03.- Kogito Example with Jobs Services](03-kogito-jobs-services-example)

@@ -1,4 +1,6 @@
-FROM quay.io/kiegroup/kogito-quarkus-jvm-ubi8:latest
+FROM quay.io/kiegroup/kogito-runtime-jvm:latest
+
+ENV RUNTIME_TYPE quarkus
 
 # How to use this image with a simple example:
 # 1. Clone kogito-examples repository
