@@ -66,19 +66,6 @@
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-openapi-workitem</artifactId>
     </dependency>
-    <!-- HTTP client: jersey-client -->
-    <dependency>
-      <groupId>org.jboss.resteasy</groupId>
-      <artifactId>resteasy-client</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.jboss.resteasy</groupId>
-      <artifactId>resteasy-multipart-provider</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.openapitools</groupId>
-      <artifactId>jackson-databind-nullable</artifactId>
-    </dependency>
 
   </dependencies>
   <build>
