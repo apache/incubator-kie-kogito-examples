@@ -151,6 +151,8 @@
               <workingDirectory>${project.basedir}</workingDirectory>
               <arguments>
                 <argument>build</argument>
+                <argument>-f</argument>
+                <argument>${project.basedir}/src/test/resources/DockerfileTest.legacy-jar</argument>
                 <argument>-t</argument>
                 <argument>${project.groupId}/${project.artifactId}:1.0</argument>
                 <argument>.</argument>
