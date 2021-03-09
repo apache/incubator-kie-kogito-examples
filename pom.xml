@@ -49,6 +49,9 @@
     <version.org.optaplanner>8.4.0-SNAPSHOT</version.org.optaplanner>
     <!-- pmml -->
     <version.org.jpmml>1.5.1</version.org.jpmml>
+
+    <!-- override default to fast-jar packaging for forward-compatibility -->
+    <quarkus.package.type>fast-jar</quarkus.package.type>
   </properties>
 
   <!-- distributionManagement section -->
