@@ -68,27 +68,48 @@ pipeline {
         stage('Build kogito-examples') {
             steps {
                 script {
-                    getMavenCommand('kogito-examples')
+                    getMavenCommand('kogito-examples', true, true)
                         .withProperty('validate-formatting')
                         .run('clean install')
+                }
+            }
+            post {
+                cleanup {
+                    script {
+                        cleanContainers()
+                    }
                 }
             }
         }
         stage('Build kogito-examples with persistence') {
             steps {
                 script {
-                    getMavenCommand('kogito-examples-persistence')
+                    getMavenCommand('kogito-examples-persistence', true, true)
                         .withProfiles(['persistence'])
                         .run('clean verify')
+                }
+            }
+            post {
+                cleanup {
+                    script {
+                        cleanContainers()
+                    }
                 }
             }
         }
         stage('Build kogito-examples with events') {
             steps {
                 script {
-                    getMavenCommand('kogito-examples-events')
+                    getMavenCommand('kogito-examples-events', true, true)
                         .withProfiles(['events'])
                         .run('clean verify')
+                }
+            }
+            post {
+                cleanup {
+                    script {
+                        cleanContainers()
+                    }
                 }
             }
         }
@@ -150,7 +171,7 @@ void checkoutOptaplannerRepo() {
     }
 }
 
-MavenCommand getMavenCommand(String directory, boolean addQuarkusVersion=true){
+MavenCommand getMavenCommand(String directory, boolean addQuarkusVersion=true, boolean canNative = false){
     mvnCmd = new MavenCommand(this, ['-fae'])
                 .withSettingsXmlId('kogito_release_settings')
                 // add timestamp to Maven logs
@@ -159,7 +180,18 @@ MavenCommand getMavenCommand(String directory, boolean addQuarkusVersion=true){
     if (addQuarkusVersion && getQuarkusBranch()) {
         mvnCmd.withProperty('version.io.quarkus', '999-SNAPSHOT')
     }
+    if(canNative && isNative()) {
+        mvnCmd.withProfiles(['native'])
+    }
     return mvnCmd
+}
+
+void cleanContainers() {
+    cloud.cleanContainersAndImages('docker')
+}
+
+boolean isNative() {
+    return env['NATIVE'] && env['NATIVE'].toBoolean()
 }
 
 String getQuarkusBranch() {
