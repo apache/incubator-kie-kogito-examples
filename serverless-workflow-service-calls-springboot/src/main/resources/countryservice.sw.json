@@ -6,11 +6,7 @@
   "functions": [
     {
       "name": "countryInfoFunction",
-      "metadata": {
-        "interface": "org.kie.kogito.serverless.examples.CountriesService",
-        "operation": "getCountryInfo",
-        "type": "service"
-      }
+      "operation": "restcountries.json#getByName1"
     },
     {
       "name": "classifySmallMediumFunction",
@@ -39,7 +35,10 @@
         {
           "name": "getCountryInfo",
           "functionRef": {
-            "refName": "countryInfoFunction"
+            "refName": "countryInfoFunction",
+            "parameters": {
+              "name": "$.name"
+            }
           }
         }
       ],
@@ -52,13 +51,13 @@
       "type": "switch",
       "dataConditions": [
         {
-          "condition": "{{ $.[?(@.population  < 20000000)] }}",
+          "condition": "{{ $.response[0].[?(@.population < 20000000)] }}",
           "transition": {
             "nextState": "ClassifyAsSmallOrMedium"
           }
         },
         {
-          "condition": "{{ $.[?(@.population  >= 20000000)] }}",
+          "condition": "{{ $.response[0].[?(@.population >= 20000000)] }}",
           "transition": {
             "nextState": "ClassifyAsLarge"
           }

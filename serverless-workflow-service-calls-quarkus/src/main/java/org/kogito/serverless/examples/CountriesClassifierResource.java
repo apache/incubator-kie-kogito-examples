@@ -47,7 +47,7 @@ public class CountriesClassifierResource {
     public JsonNode classifySmallMedium(JsonNode classifiedCountryNode) {
         try {
             ObjectMapper mapper = new ObjectMapper();
-            Country classifiedCountry = mapper.treeToValue(classifiedCountryNode, Country.class);
+            Country classifiedCountry = mapper.treeToValue(classifiedCountryNode.get("response").get(0), Country.class);
             classifiedCountry.setClassifier("Small/Medium");
             classifiedCountries.add(classifiedCountry);
             JsonNode retNode = mapper.convertValue(classifiedCountry, JsonNode.class);
@@ -62,7 +62,7 @@ public class CountriesClassifierResource {
     public JsonNode classifyLarge(JsonNode classifiedCountryNode) {
         try {
             ObjectMapper mapper = new ObjectMapper();
-            Country classifiedCountry = mapper.treeToValue(classifiedCountryNode, Country.class);
+            Country classifiedCountry = mapper.treeToValue(classifiedCountryNode.get("response").get(0), Country.class);
             classifiedCountry.setClassifier("Large");
             classifiedCountries.add(classifiedCountry);
 

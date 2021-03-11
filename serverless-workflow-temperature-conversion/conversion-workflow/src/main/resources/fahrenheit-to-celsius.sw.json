@@ -5,19 +5,11 @@
   "functions": [
     {
       "name": "multiplication",
-      "operation": "/",
-      "metadata": {
-        "method": "POST",
-        "type": "rest"
-      }
+      "operation": "specs/multiplication.yaml#doOperation"
     },
     {
       "name": "subtraction",
-      "operation": "/",
-      "metadata": {
-        "method": "POST",
-        "type": "rest"
-      }
+      "operation": "specs/subtraction.yaml#doOperation"
     }
   ],
   "states": [
@@ -43,8 +35,7 @@
           "functionRef": {
             "refName": "subtraction",
             "parameters": {
-              "leftElement": "$.fahrenheit",
-              "rightElement": "$.subtractValue"
+              "subtractionOperation": "{ \\\"leftElement\\\": \\\"$.fahrenheit\\\", \\\"rightElement\\\": \\\"$.subtractValue\\\" }"
             }
           }
         },
@@ -53,8 +44,7 @@
           "functionRef": {
             "refName": "multiplication",
             "parameters": {
-              "leftElement": "$.subtraction.difference",
-              "rightElement": "$.multiplyValue"
+              "multiplicationOperation": "{ \\\"leftElement\\\": \\\"$.subtraction.difference\\\", \\\"rightElement\\\": \\\"$.multiplyValue\\\" }"
             }
           }
         }

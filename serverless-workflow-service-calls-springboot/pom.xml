@@ -55,6 +55,13 @@
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
+
+    <!-- Serverless Workflow -->
+    <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-openapi-workitem</artifactId>
+    </dependency>
+
   </dependencies>
 
   <build>
