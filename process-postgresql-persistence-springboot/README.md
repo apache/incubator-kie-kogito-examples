@@ -60,21 +60,26 @@ It utilizes PostgreSQL server as the backend store.
 
 ## Infrastructure requirements
 
-This quickstart requires a PostgreSQL server to be available with a database, user and credentials already created with
- the proper connection URI configured in application properties with the key `postgresql.connection.uri`, following
-  the [full settings for URI](https://www.postgresql.org/docs/9.6/static/libpq-connect.html#LIBPQ-CONNSTRING)
+This quickstart requires a PostgreSQL server to be available with a database, a user and credentials already created
+, these configurations should then be set in the connection URI parameter in [applications.properties](src/main/resources/application.properties) file with the key
+ `postgresql.connection.uri`, i.e `postgresql.connection.uri=postgresql://kogito-user:kogito-pass@localhost:5432
+ /kogito` here are the [full settings for URI](https://www.postgresql.org/docs/9.6/static/libpq-connect.html#LIBPQ-CONNSTRING)    
  
-You must set property - `kogito.persistence.type=postgresql`.
+You must set property - `kogito.persistence.type=postgresql` to enable PostgreSQL persistence. There is also a
+ configuration to allow the application to run DDL scripts during the initialization, this can be enabled with the
+  property `kogito.persistence.auto.ddl=true`.
 For more details you can check [applications.properties](src/main/resources/application.properties).
 
 Optionally and for convenience, a docker-compose [configuration file](docker-compose.yml) is provided in the
  root path
 , where you can just run the command:
   ```sh
-  docker-compose
+  docker-compose up
   ```  
   In this way a container for PostgreSQL running on port 5432, along with PgAdmin, running on port
    8055 to allow the database management.
+  
+  The default admin user is `postgres` with password `pass` as defined in [configuration file](docker-compose.yml).
 
 ## Build and run
 
