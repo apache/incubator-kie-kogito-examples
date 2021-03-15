@@ -1,4 +1,8 @@
-# Process with persistence powered by MongoDB
+[database]: PostgreSQL
+[database_port]: 5432
+[pgadmin_port]: 8055
+
+# Process with persistence powered by [database]
 
 ## Description
 
@@ -15,10 +19,12 @@ This example shows
 * each process instance is going to be evaluated and asks for review
 * at any point in time service can be shutdown and when brought back it will keep the state of the instances
 
-Note: The use of this example shows that the data sent to MongoDB is saved, you can shut down the application and restart it
-and as long as MongoDB is running after you restart you should still see the data
+Note: The use of this example shows that the data sent to [database] is saved, you can shut down the
+ application and
+ restart it
+and as long as [database] is running after you restart you should still see the data
 
-It utilizes PostgreSQL server as the backend store.
+It utilizes [database] server as the backend store.
 
 * Process (submitDeal.bpmn)
 <p align="center"><img width=75% height=50% src="docs/images/process.png"></p>
@@ -58,13 +64,22 @@ It utilizes PostgreSQL server as the backend store.
 
 ## Infrastructure requirements
 
-This quickstart requires a PostgreSQL server to be available with a database already created with the proper
- connection  URI configured in application
- properties with the key `postgresql.connection.uri`, following the settings https://www.postgresql.org/docs/9.6/static/libpq-connect.html#LIBPQ-CONNSTRING.
+This quickstart requires a [database] server to be available with a database, user and credentials already created with
+ the proper connection URI configured in application properties with the key `postgresql.connection.uri`, following
+  the [full settings for URI](https://www.postgresql.org/docs/9.6/static/libpq-connect.html#LIBPQ-CONNSTRING)
  
-You must set property - kogito.persistence.type=postgresql 
-For more details you can check applications.properties.
+You must set property - `kogito.persistence.type=postgresql`.
+For more details you can check [applications.properties](src/main/resources/application.properties).
 
+Optionally and for convenience, a docker-compose [configuration file](docker-compose.yml) is provided in the
+ root path
+, where you can just run the command:
+  ```sh
+  docker-compose
+  ```  
+  In this way a container for [database] running on port [database_port], along with PgAdmin, running on port
+   [pgadmin_port] to allow the database management.
+  
 ## Build and run
 
 ### Prerequisites
