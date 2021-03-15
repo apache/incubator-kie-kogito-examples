@@ -1,8 +1,4 @@
-[database]: PostgreSQL
-[database_port]: 5432
-[pgadmin_port]: 8055
-
-# Process with persistence powered by [database]
+# Process with persistence powered by PostgreSQL 
 
 ## Description
 
@@ -19,12 +15,12 @@ This example shows
 * each process instance is going to be evaluated and asks for review
 * at any point in time service can be shutdown and when brought back it will keep the state of the instances
 
-Note: The use of this example shows that the data sent to [database] is saved, you can shut down the
+Note: The use of this example shows that the data sent to PostgreSQL is saved, you can shut down the
  application and
  restart it
-and as long as [database] is running after you restart you should still see the data
+and as long as PostgreSQL is running after you restart you should still see the data
 
-It utilizes [database] server as the backend store.
+It utilizes PostgreSQL server as the backend store.
 
 * Process (submitDeal.bpmn)
 <p align="center"><img width=75% height=50% src="docs/images/process.png"></p>
@@ -64,7 +60,7 @@ It utilizes [database] server as the backend store.
 
 ## Infrastructure requirements
 
-This quickstart requires a [database] server to be available with a database, user and credentials already created with
+This quickstart requires a PostgreSQL server to be available with a database, user and credentials already created with
  the proper connection URI configured in application properties with the key `postgresql.connection.uri`, following
   the [full settings for URI](https://www.postgresql.org/docs/9.6/static/libpq-connect.html#LIBPQ-CONNSTRING)
  
@@ -77,8 +73,8 @@ Optionally and for convenience, a docker-compose [configuration file](docker-com
   ```sh
   docker-compose
   ```  
-  In this way a container for [database] running on port [database_port], along with PgAdmin, running on port
-   [pgadmin_port] to allow the database management.
+  In this way a container for PostgreSQL running on port 5432, along with PgAdmin, running on port
+   8055 to allow the database management.
   
 ## Build and run
 

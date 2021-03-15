@@ -1,4 +1,4 @@
-# Kogito with persistence powered by PostgreSQL
+# Process with persistence powered by PostgreSQL 
 
 ## Description
 
@@ -15,12 +15,14 @@ This example shows
 * each process instance is going to be evaluated and asks for review
 * at any point in time service can be shutdown and when brought back it will keep the state of the instances
 
-Note: The use of this example shows that the data sent to postgresql is saved, you can shut down the application and restart it
-and as long as postgresql is running after you restart you should still see the data
+Note: The use of this example shows that the data sent to PostgreSQL is saved, you can shut down the
+ application and
+ restart it
+and as long as PostgreSQL is running after you restart you should still see the data
 
-It utilizes PostgreSQL server as the backend store. 
-	
-* Process (submitDeal.bpmn)	
+It utilizes PostgreSQL server as the backend store.
+
+* Process (submitDeal.bpmn)
 <p align="center"><img width=75% height=50% src="docs/images/process.png"></p>
 
 * Process Properties (top)
@@ -29,13 +31,13 @@ It utilizes PostgreSQL server as the backend store.
 * Process Properties (bottom)
 <p align="center"><img src="docs/images/processProperties2.png"></p>
 
-* Call a deal	
+* Call a deal
 <p align="center"><img src="docs/images/callADeal.png"></p>
 
 * Call a deal (Assignments)
 <p align="center"><img src="docs/images/callADeal2.png"></p>
 
-* Print review the Deal	
+* Print review the Deal
 <p align="center"><img src="docs/images/printReviewTheDeal.png"></p>
 
 * Subprocess (reviewDeal.bpmn)
@@ -50,7 +52,7 @@ It utilizes PostgreSQL server as the backend store.
 * Review deal user task	(top)
 <p align="center"><img src="docs/images/reviewDealUserTask.png"></p>
 
-* Review deal user task (bottom)
+* Review deal user task	(botom)
 <p align="center"><img src="docs/images/reviewDealUserTask2.png"></p>
 
 * Review deal user task	(Assignments)
@@ -58,12 +60,21 @@ It utilizes PostgreSQL server as the backend store.
 
 ## Infrastructure requirements
 
-This quickstart requires a PostgreSQL server to be available with a database already created with the proper
- connection  URI configured in application
- properties with the key `postgresql.connection.uri`, following the settings https://www.postgresql.org/docs/9.6/static/libpq-connect.html#LIBPQ-CONNSTRING.
+This quickstart requires a PostgreSQL server to be available with a database, user and credentials already created with
+ the proper connection URI configured in application properties with the key `postgresql.connection.uri`, following
+  the [full settings for URI](https://www.postgresql.org/docs/9.6/static/libpq-connect.html#LIBPQ-CONNSTRING)
  
-You must set property - kogito.persistence.type=postgresql 
-For more details you can check applications.properties.
+You must set property - `kogito.persistence.type=postgresql`.
+For more details you can check [applications.properties](src/main/resources/application.properties).
+
+Optionally and for convenience, a docker-compose [configuration file](docker-compose.yml) is provided in the
+ root path
+, where you can just run the command:
+  ```sh
+  docker-compose
+  ```  
+  In this way a container for PostgreSQL running on port 5432, along with PgAdmin, running on port
+   8055 to allow the database management.
 
 ## Build and run
 
