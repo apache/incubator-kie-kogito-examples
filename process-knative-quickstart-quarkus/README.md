@@ -94,7 +94,7 @@ When using native image compilation, you will also need:
 ### Compile and Run in Local Dev Mode
 
 ```sh
-K_SINK=localhost:8181 mvn clean compile quarkus:dev
+K_SINK=http://localhost:8181 mvn clean compile quarkus:dev
 ```
 
 [`K_SINK` is the environment variable injected by the Knative Eventing platform](https://knative.dev/docs/eventing/samples/sinkbinding/#create-our-sinkbinding)
@@ -162,7 +162,7 @@ This is the same image used by Knative Eventing demos. It's running on port 8181
 Then run the application with:
 
 ```shell script
-$ K_SINK=localhost:8181 mvn clean quarkus:dev
+$ K_SINK=http://localhost:8181 mvn clean quarkus:dev
 
 __  ____  __  _____   ___  __ ____  ______ 
  --/ __ \/ / / / _ | / _ \/ //_/ / / / __/ 
