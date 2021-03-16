@@ -56,7 +56,7 @@ KOGITO_VERSION=1.1.0
 and then download/unpack the kogito operator
 
 ```bash
-wget https://github.com/kiegroup/kogito-cloud-operator/releases/download/v${KOGITO_VERSION}/kogito-cli-${KOGITO_VERSION}-linux-amd64.tar.gz
+wget https://github.com/kiegroup/kogito-operator/releases/download/v${KOGITO_VERSION}/kogito-cli-${KOGITO_VERSION}-linux-amd64.tar.gz
 tar zxf kogito-cli-${KOGITO_VERSION}-linux-amd64.tar.gz
 ```
 
