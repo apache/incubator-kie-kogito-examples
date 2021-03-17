@@ -25,6 +25,18 @@
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-quarkus-workflows</artifactId>
+      <!-- Kafka and Knative doesn't play well together for now -->
+      <!-- This problem will be handled by https://issues.redhat.com/browse/KOGITO-4457 -->
+      <exclusions>
+        <exclusion>
+          <groupId>org.kie.kogito</groupId>
+          <artifactId>knative-eventing-addon</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>io.smallrye.reactive</groupId>
+          <artifactId>smallrye-reactive-messaging-http</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
