@@ -122,30 +122,30 @@ mvn clean compile quarkus:dev
 
 NOTE: With dev mode of Quarkus you can take advantage of hot reload for business assets like processes, rules, decision tables and java code. No need to redeploy or restart your running application.
 
-### Package and Run Using fast-jar
+### Package and Run in JVM mode
 
 ```sh
-mvn clean package -Dquarkus.package.type=fast-jar
+mvn clean package
 java -jar target/quarkus-app/quarkus-run.jar
 ```
 
 or on windows
 
 ```sh
-mvn clean package -Dquarkus.package.type=fast-jar
+mvn clean package
 java -jar target\quarkus-app\quarkus-run.jar
 ```
 
 ### Package and Run using Local Native Image
 Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
 
-```
+```sh
 mvn clean package -Pnative
 ```
 
 To run the generated native executable, generated in `target/`, execute
 
-```
+```sh
 ./target/process-usertasks-with-security-oidc-quarkus-with-console 
 ```
 
