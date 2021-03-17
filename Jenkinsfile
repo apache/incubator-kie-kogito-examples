@@ -182,6 +182,8 @@ MavenCommand getMavenCommand(String directory, boolean addQuarkusVersion=true, b
     }
     if(canNative && isNative()) {
         mvnCmd.withProfiles(['native'])
+        // Added due to https://github.com/quarkusio/quarkus/issues/13341
+        mvnCmd.withProperty('quarkus.profile', 'native')
     }
     return mvnCmd
 }
