@@ -8,7 +8,7 @@
   <parent>
     <groupId>org.kie.kogito</groupId>
     <artifactId>kogito-examples</artifactId>
-    <version>1.4.0.Final</version>
+    <version>1.4.1-SNAPSHOT</version>
   </parent>
   <artifactId>dmn-event-driven-springboot</artifactId>
   <name>Kogito Example :: DMN Event-Driven :: Spring Boot</name>
