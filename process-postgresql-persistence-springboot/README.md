@@ -62,7 +62,7 @@ It utilizes PostgreSQL server as the backend store.
 
 This quickstart requires a PostgreSQL server to be available with a database, a user and credentials already created
 , these configurations should then be set in the connection URI parameter in [applications.properties](src/main/resources/application.properties) file with the key
- `postgresql.connection.uri`, i.e `postgresql.connection.uri=postgresql://kogito-user:kogito-pass@localhost:5432
+ `kogito.persistence.postgresql.connection.uri`, i.e `postgresql.connection.uri=postgresql://kogito-user:kogito-pass@localhost:5432
  /kogito` here are the [full settings for URI](https://www.postgresql.org/docs/9.6/static/libpq-connect.html#LIBPQ-CONNSTRING)    
  
 You must set property - `kogito.persistence.type=postgresql` to enable PostgreSQL persistence. There is also a
