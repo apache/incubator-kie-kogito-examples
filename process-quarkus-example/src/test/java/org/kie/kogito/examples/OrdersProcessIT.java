@@ -15,11 +15,6 @@
  */
 package org.kie.kogito.examples;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -46,6 +41,11 @@ import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 @QuarkusTest
 @QuarkusTestResource(value = InfinispanQuarkusTestResource.Conditional.class)
 @QuarkusTestResource(value = KafkaQuarkusTestResource.Conditional.class)
@@ -58,7 +58,7 @@ public class OrdersProcessIT {
     @Inject
     @Named("demo.orderItems")
     Process<? extends Model> orderItemsProcess;
-    
+
     private SecurityPolicy policy = SecurityPolicy.of(new StaticIdentityProvider("john", Collections.singletonList("managers")));
 
     @BeforeEach
@@ -107,31 +107,31 @@ public class OrdersProcessIT {
         assertEquals(0, orderProcess.instances().size());
         assertEquals(0, orderItemsProcess.instances().size());
     }
-    
+
     @Test
     public void testOrderProcessWithError() {
         assertNotNull(orderProcess);
 
         Model m = orderProcess.createModel();
-        Map<String, Object> parameters = new HashMap<>();        
+        Map<String, Object> parameters = new HashMap<>();
         parameters.put("order", new Order("12345", false, 0.0));
         m.fromMap(parameters);
 
         ProcessInstance<?> processInstance = orderProcess.createInstance(m);
         processInstance.start();
 
-        assertEquals(ProcessInstance.STATE_ERROR, processInstance.status());               
+        assertEquals(ProcessInstance.STATE_ERROR, processInstance.status());
         assertTrue(processInstance.error().isPresent());
-        
+
         parameters = new HashMap<>();
         parameters.put("approver", "john");
         parameters.put("order", new Order("12345", false, 0.0));
         m.fromMap(parameters);
-        ((ProcessInstance)processInstance).updateVariables(m);
-        
+        ((ProcessInstance) processInstance).updateVariables(m);
+
         processInstance.error().get().retrigger();
         assertEquals(ProcessInstance.STATE_ACTIVE, processInstance.status());
-        
+
         Model result = (Model) processInstance.variables();
         assertEquals(2, result.toMap().size());
         assertTrue(((Order) result.toMap().get("order")).getTotal() > 0);

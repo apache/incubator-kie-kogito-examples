@@ -41,6 +41,7 @@ if (isMainBranch()) {
     folder(KogitoConstants.KOGITO_DSL_PULLREQUEST_FOLDER)
 
     setupPrJob(KogitoConstants.KOGITO_DSL_PULLREQUEST_FOLDER)
+    setupQuarkusLTSPrJob(KogitoConstants.KOGITO_DSL_PULLREQUEST_FOLDER)
 
     // For BDD runtimes PR job
     folder(bddRuntimesPrFolder)
@@ -70,6 +71,12 @@ void setupPrJob(String jobFolder) {
     def jobParams = getDefaultJobParams()
     jobParams.job.folder = jobFolder
     KogitoJobTemplate.createPRJob(this, jobParams)
+}
+
+void setupQuarkusLTSPrJob(String jobFolder) {
+    def jobParams = getDefaultJobParams()
+    jobParams.job.folder = jobFolder
+    KogitoJobTemplate.createQuarkusLTSPRJob(this, jobParams)
 }
 
 /*

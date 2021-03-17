@@ -18,12 +18,13 @@ package org.kie.pmml.kogito.springboot.example;
 import java.util.HashMap;
 import java.util.Map;
 
-import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.annotation.DirtiesContext;
+
+import io.restassured.RestAssured;
 
 import static org.kie.pmml.kogito.springboot.example.CommonTestUtils.testDescriptive;
 import static org.kie.pmml.kogito.springboot.example.CommonTestUtils.testResult;
@@ -32,7 +33,7 @@ import static org.kie.pmml.kogito.springboot.example.CommonTestUtils.testResult;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 class SimpleScorecardTest {
 
-    private static final String BASE_PATH = "/SimpleScorecard/";
+    private static final String BASE_PATH = "/SimpleScorecard";
     private static final String TARGET = "score";
 
     @LocalServerPort

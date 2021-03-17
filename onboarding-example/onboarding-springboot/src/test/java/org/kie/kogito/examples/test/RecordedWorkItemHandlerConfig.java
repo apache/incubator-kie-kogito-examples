@@ -20,7 +20,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import org.kie.api.runtime.process.WorkItemHandler;
+import org.kie.kogito.internal.process.runtime.KogitoWorkItemHandler;
 import org.kie.kogito.process.impl.DefaultWorkItemHandlerConfig;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
@@ -31,15 +31,15 @@ public class RecordedWorkItemHandlerConfig extends DefaultWorkItemHandlerConfig 
 
     private RecordedOutputWorkItemHandler handler = new RecordedOutputWorkItemHandler();
     private final List<String> supportedHandlers = Arrays.asList("AssignDepartmentAndManager",
-                                                                 "CalculatePaymentDate",
-                                                                 "CalculateVacationDays",
-                                                                 "CalculateTaxRate",
-                                                                 "ValidateEmployee",
-                                                                 "AssignIdAndEmail",
-                                                                 "DecisionTask");
+            "CalculatePaymentDate",
+            "CalculateVacationDays",
+            "CalculateTaxRate",
+            "ValidateEmployee",
+            "AssignIdAndEmail",
+            "DecisionTask");
 
     @Override
-    public WorkItemHandler forName(String name) {
+    public KogitoWorkItemHandler forName(String name) {
         if (supportedHandlers.contains(name)) {
             return handler;
         }

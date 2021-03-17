@@ -42,7 +42,7 @@
         function _refreshPageData() {
           $http({
             method: 'GET',
-            url: '/example/countryclassifier'
+            url: '/countryclassifier'
           }).then(function successCallback(response) {
             $scope.countries = response.data;
           }, function errorCallback(response) {

@@ -21,7 +21,7 @@
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
-        <version>${version.springboot}</version>
+        <version>${version.org.springframework.boot}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -55,6 +55,13 @@
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
+
+    <!-- Serverless Workflow -->
+    <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-openapi-workitem</artifactId>
+    </dependency>
+
   </dependencies>
 
   <build>
@@ -63,7 +70,7 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-        <version>${version.springboot}</version>
+        <version>${version.org.springframework.boot}</version>
         <executions>
           <execution>
             <goals>

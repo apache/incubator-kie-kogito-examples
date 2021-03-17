@@ -32,6 +32,19 @@ pipeline {
                 checkoutRepo('kogito-examples', 'kogito-examples-events')
             }
         }
+        stage('Build quarkus') {
+            when {
+                expression { return getQuarkusBranch() }
+            }
+            steps {
+                script {
+                    checkoutQuarkusRepo()
+                    getMavenCommand('quarkus', false)
+                        .withProperty('quickly')
+                        .run('clean install')
+                }
+            }
+        }
         stage('Build Runtimes') {
             steps {
                 script {
@@ -55,7 +68,9 @@ pipeline {
         stage('Build kogito-examples') {
             steps {
                 script {
-                    getMavenCommand('kogito-examples').run('clean install')
+                    getMavenCommand('kogito-examples')
+                        .withProperty('validate-formatting')
+                        .run('clean install')
                 }
             }
         }
@@ -80,8 +95,9 @@ pipeline {
     }
     post {
         always {
-            junit '**/target/surefire-reports/**/*.xml'
-            cleanWs()
+            script {
+                junit '**/target/surefire-reports/**/*.xml'
+            }
         }
         failure {
             script {
@@ -98,12 +114,23 @@ pipeline {
                 mailer.sendEmail_fixedPR()
             }
         }
+        cleanup {
+            script {
+                util.cleanNode('docker')
+            }
+        }
     }
 }
 
 void checkoutRepo(String repo, String dirName=repo) {
     dir(dirName) {
         githubscm.checkoutIfExists(repo, changeAuthor, changeBranch, 'kiegroup', changeTarget, true)
+    }
+}
+
+void checkoutQuarkusRepo() {
+    dir('quarkus') {
+        checkout(githubscm.resolveRepository('quarkus', 'quarkusio', getQuarkusBranch(), false))
     }
 }
 
@@ -123,8 +150,18 @@ void checkoutOptaplannerRepo() {
     }
 }
 
-MavenCommand getMavenCommand(String directory){
-    return new MavenCommand(this, ['-fae'])
+MavenCommand getMavenCommand(String directory, boolean addQuarkusVersion=true){
+    mvnCmd = new MavenCommand(this, ['-fae'])
                 .withSettingsXmlId('kogito_release_settings')
+                // add timestamp to Maven logs
+                .withOptions(['-Dorg.slf4j.simpleLogger.showDateTime=true', '-Dorg.slf4j.simpleLogger.dateTimeFormat=HH:mm:ss,SSS'])
                 .inDirectory(directory)
+    if (addQuarkusVersion && getQuarkusBranch()) {
+        mvnCmd.withProperty('version.io.quarkus', '999-SNAPSHOT')
+    }
+    return mvnCmd
+}
+
+String getQuarkusBranch() {
+    return env['QUARKUS_BRANCH']
 }

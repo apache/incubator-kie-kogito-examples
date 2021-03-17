@@ -99,8 +99,10 @@ pipeline {
         }
     }
     post {
-        always {
-            cleanWs()
+        cleanup {
+            script {
+                util.cleanNode('docker')
+            }
         }
     }
 }
@@ -279,7 +281,7 @@ void setDefaultBranch(String defaultBranch) {
 }
 
 void forcePushProtectedBranch(String defaultBranch, String tempBranch) {
-    setDefaultBranch(getRepoName(), tempBranch)
+    setDefaultBranch(tempBranch)
     withCredentials([usernamePassword(credentialsId: getGitAuthorCredsID(), usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
         sh """
         git config --local credential.helper \"!f() { echo username=\\$GIT_USERNAME; echo password=\\$GIT_PASSWORD; }; f\"
@@ -287,7 +289,7 @@ void forcePushProtectedBranch(String defaultBranch, String tempBranch) {
         git push origin ${defaultBranch}
         """
     }
-    setDefaultBranch(getRepoName(), defaultBranch)
+    setDefaultBranch(defaultBranch)
 }
 
 MavenCommand getMavenCommand() {

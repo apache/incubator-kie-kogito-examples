@@ -19,7 +19,6 @@ import java.io.File;
 import java.net.URISyntaxException;
 import java.time.Duration;
 
-import io.restassured.http.ContentType;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -28,6 +27,8 @@ import org.testcontainers.containers.DockerComposeContainer;
 import org.testcontainers.containers.wait.strategy.Wait;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
+
+import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.hasItem;
@@ -42,6 +43,7 @@ public class GrafanaDockerComposeIT {
     private static final int KOGITO_APPLICATION_PORT = 8080;
     private static final String GRAFANA_URL = "http://localhost:" + GRAFANA_PORT;
     private static final String PROMETHEUS_PRIVATE_URL = "http://prometheus:" + PROMETHEUS_PORT;
+    private static final String PROMETHEUS_PUBLIC_URL = "http://localhost:" + PROMETHEUS_PORT;
     private static final String KOGITO_APPLICATION_URL = "http://localhost:" + KOGITO_APPLICATION_PORT;
 
     @Container
@@ -52,7 +54,10 @@ public class GrafanaDockerComposeIT {
             environment = new DockerComposeContainer(new File(GrafanaDockerComposeIT.class.getClassLoader().getResource("./docker-compose.yml").toURI()))
                     .withExposedService("grafana_1", GRAFANA_PORT, Wait.forListeningPort().withStartupTimeout(Duration.ofMinutes(STARTUP_MINUTES_TIMEOUT)))
                     .withExposedService("hello_1", KOGITO_APPLICATION_PORT, Wait.forListeningPort().withStartupTimeout(Duration.ofMinutes(STARTUP_MINUTES_TIMEOUT)))
-                    .withExposedService("prometheus_1", PROMETHEUS_PORT, Wait.forListeningPort().withStartupTimeout(Duration.ofMinutes(STARTUP_MINUTES_TIMEOUT)));
+                    .withExposedService("prometheus_1", PROMETHEUS_PORT,
+                            Wait.forHttp("/api/v1/targets")
+                                    .forResponsePredicate(x -> x.contains("\"health\":\"up\""))
+                                    .withStartupTimeout(Duration.ofMinutes(STARTUP_MINUTES_TIMEOUT)));
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
@@ -107,5 +112,15 @@ public class GrafanaDockerComposeIT {
                 .post("/LoanEligibility")
                 .then()
                 .statusCode(200);
+    }
+
+    @Test
+    public void testMetricsContentTypeHeader() {
+        given()
+                .baseUri(KOGITO_APPLICATION_URL)
+                .when()
+                .get("/metrics")
+                .then()
+                .header("Content-Type", "text/plain;charset=UTF-8");
     }
 }

@@ -37,10 +37,10 @@ public class DecisionTaskWorkItemHandler extends DiscoveredServiceWorkItemHandle
     }
 
     @Override
-    public void executeWorkItem( KogitoWorkItem workItem, KogitoWorkItemManager manager) {
+    public void executeWorkItem(KogitoWorkItem workItem, KogitoWorkItemManager manager) {
         Map<String, Object> results = discoverAndCall(workItem, System.getenv("NAMESPACE"), "Decision", HttpMethods.POST);
 
-        manager.completeWorkItem(workItem.getId(), results);
+        manager.completeWorkItem(workItem.getStringId(), results);
     }
 
     @Override

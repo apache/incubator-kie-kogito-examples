@@ -24,7 +24,11 @@
   <dependencies>
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-quarkus</artifactId>
+      <artifactId>kogito-quarkus-rules</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-quarkus-decisions</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -147,6 +151,8 @@
               <workingDirectory>${project.basedir}</workingDirectory>
               <arguments>
                 <argument>build</argument>
+                <argument>-f</argument>
+                <argument>${project.basedir}/src/test/resources/DockerfileTest.jvm</argument>
                 <argument>-t</argument>
                 <argument>${project.groupId}/${project.artifactId}:1.0</argument>
                 <argument>.</argument>

@@ -58,14 +58,14 @@ NOTE: Make sure that kogito S2I image builders are available to your OpenShift e
 * Create new binary build and start it by uploading content of the current directory
 
 ```sh
-oc new-build myproject/kogito-springboot-ubi8-s2i --binary=true --name=onboarding-service-builder
+oc new-build myproject/kogito-builder --env RUNTIME_TYPE=springboot --binary=true --name=onboarding-service-builder
 oc start-build onboarding-service-builder --from-dir . --incremental=true
 ```
 
 Once the build is completed create new build for runtime image
 
 ```sh
-oc new-build --name onboarding-service --source-image=onboarding-service-builder --source-image-path=/home/kogito/bin:. --image-stream=kogito-springboot-ubi8
+oc new-build --name onboarding-service --source-image=onboarding-service-builder --source-image-path=/home/kogito/bin:. --image-stream=kogito-runtime-jvm --env RUNTIME_TYPE=springboot
 ```
 
 Next create application for the runtime image

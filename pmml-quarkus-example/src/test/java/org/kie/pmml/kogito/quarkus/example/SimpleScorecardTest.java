@@ -18,8 +18,9 @@ package org.kie.pmml.kogito.quarkus.example;
 import java.util.HashMap;
 import java.util.Map;
 
-import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
+
+import io.quarkus.test.junit.QuarkusTest;
 
 import static org.kie.pmml.kogito.quarkus.example.CommonTestUtils.testDescriptive;
 import static org.kie.pmml.kogito.quarkus.example.CommonTestUtils.testResult;

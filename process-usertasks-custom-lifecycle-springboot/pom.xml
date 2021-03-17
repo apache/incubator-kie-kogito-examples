@@ -18,7 +18,7 @@
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
-        <version>${version.springboot}</version>
+        <version>${version.org.springframework.boot}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -45,6 +45,10 @@
       <version>${kogito.version}</version>
     </dependency>
     <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>process-workitems</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.springdoc</groupId>
       <artifactId>springdoc-openapi-ui</artifactId>
     </dependency>
@@ -62,7 +66,7 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-        <version>${version.springboot}</version>
+        <version>${version.org.springframework.boot}</version>
         <executions>
           <execution>
             <goals>

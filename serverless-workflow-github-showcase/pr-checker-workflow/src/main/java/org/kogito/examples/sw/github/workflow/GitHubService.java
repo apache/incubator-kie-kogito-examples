@@ -21,11 +21,12 @@ import java.util.Objects;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
  * Simple wrapper class to call the github-service.
@@ -88,7 +89,7 @@ public class GitHubService {
                 repoName.split("/")[1],
                 Objects.requireNonNull(pullRequest.get("number")).asInt());
         if (pullRequest.isObject()) {
-            ((ObjectNode)pullRequest).replace("files", jsonNode);
+            ((ObjectNode) pullRequest).replace("files", jsonNode);
         } else {
             LOGGER.error("Pull Request JsonNode is not an object: {}", pullRequest);
         }

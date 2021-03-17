@@ -27,9 +27,8 @@ import org.jbpm.process.instance.impl.humantask.phases.Skip;
 import org.jbpm.process.instance.impl.workitem.Abort;
 import org.jbpm.process.instance.impl.workitem.Active;
 import org.jbpm.process.instance.impl.workitem.Complete;
-import org.kie.api.runtime.process.WorkItem;
-import org.kie.api.runtime.process.WorkItemManager;
 import org.kie.kogito.internal.process.runtime.KogitoWorkItem;
+import org.kie.kogito.internal.process.runtime.KogitoWorkItemManager;
 import org.kie.kogito.process.workitem.InvalidLifeCyclePhaseException;
 import org.kie.kogito.process.workitem.InvalidTransitionException;
 import org.kie.kogito.process.workitem.LifeCycle;
@@ -37,7 +36,7 @@ import org.kie.kogito.process.workitem.LifeCyclePhase;
 import org.kie.kogito.process.workitem.NotAuthorizedException;
 import org.kie.kogito.process.workitem.Policy;
 import org.kie.kogito.process.workitem.Transition;
-import org.kie.kogito.process.workitems.KogitoWorkItemManager;
+import org.kie.kogito.process.workitems.InternalKogitoWorkItemManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,20 +44,26 @@ import org.slf4j.LoggerFactory;
  * Custom life cycle definition for human tasks. It comes with following phases
  *
  * <ul>
- *  <li>Active</li>
- *  <li>Claim</li>
- *  <li>Release</li>
- *  <li>Start</li>
- *  <li>Complete - extended one that allows to only complete started tasks</li>
- *  <li>Skip</li>
- *  <li>Abort</li>
+ * <li>Active</li>
+ * <li>Claim</li>
+ * <li>Release</li>
+ * <li>Start</li>
+ * <li>Complete - extended one that allows to only complete started tasks</li>
+ * <li>Skip</li>
+ * <li>Abort</li>
  * </ul>
- * At the beginning human task enters <pre>Active</pre> phase. From there it can go to
+ * At the beginning human task enters
+ * 
+ * <pre>
+ * Active
+ * </pre>
+ * 
+ * phase. From there it can go to
  *
  * <ul>
- *  <li>Claim</li>
- *  <li>Skip</li>
- *  <li>Abort</li>
+ * <li>Claim</li>
+ * <li>Skip</li>
+ * <li>Abort</li>
  * </ul>
  *
  * at any time. At each phase data can be associated and by that set on work item.
@@ -92,8 +97,9 @@ public class CustomHumanTaskLifeCycle implements LifeCycle<Map<String, Object>> 
     }
 
     @Override
-    public Map<String, Object> transitionTo(KogitoWorkItem workItem, WorkItemManager manager, Transition<Map<String, Object>> transition) {
-        logger.debug("Transition method invoked for work item {} to transition to {}, currently in phase {} and status {}", workItem.getStringId(), transition.phase(), workItem.getPhaseId(), workItem.getPhaseStatus());
+    public Map<String, Object> transitionTo(KogitoWorkItem workItem, KogitoWorkItemManager manager, Transition<Map<String, Object>> transition) {
+        logger.debug("Transition method invoked for work item {} to transition to {}, currently in phase {} and status {}", workItem.getStringId(), transition.phase(), workItem.getPhaseId(),
+                workItem.getPhaseStatus());
 
         HumanTaskWorkItemImpl humanTaskWorkItem = (HumanTaskWorkItemImpl) workItem;
 
@@ -119,7 +125,7 @@ public class CustomHumanTaskLifeCycle implements LifeCycle<Map<String, Object>> 
 
         targetPhase.apply(humanTaskWorkItem, transition);
         if (transition.data() != null) {
-            logger.debug("Updating data for work item {}", targetPhase.id(), humanTaskWorkItem.getStringId());
+            logger.debug("Updating data for phase {} and work item {}", targetPhase.id(), humanTaskWorkItem.getStringId());
             humanTaskWorkItem.getResults().putAll(transition.data());
         }
         logger.debug("Transition for work item {} to {} done, currently in phase {} and status {}", workItem.getStringId(), transition.phase(), workItem.getPhaseId(), workItem.getPhaseStatus());
@@ -127,14 +133,14 @@ public class CustomHumanTaskLifeCycle implements LifeCycle<Map<String, Object>> 
         if (targetPhase.isTerminating()) {
             logger.debug("Target life cycle phase '{}' is terminiating, completing work item {}", targetPhase.id(), humanTaskWorkItem.getStringId());
             // since target life cycle phase is terminating completing work item
-            ((KogitoWorkItemManager)manager).internalCompleteWorkItem(humanTaskWorkItem);
+            ((InternalKogitoWorkItemManager) manager).internalCompleteWorkItem(humanTaskWorkItem);
         }
 
         return data(humanTaskWorkItem);
     }
 
     @Override
-    public Map<String, Object> data(WorkItem workItem) {
+    public Map<String, Object> data(KogitoWorkItem workItem) {
 
         return ((HumanTaskWorkItemImpl) workItem).getResults();
     }

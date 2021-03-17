@@ -15,6 +15,13 @@
  */
 package org.kie.kogito.examples.service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.enterprise.context.ApplicationScoped;
+
 import org.kie.kogito.examples.domain.Flight;
 import org.kie.kogito.examples.domain.FlightDTO;
 import org.kie.kogito.examples.domain.FlightInfo;
@@ -22,13 +29,6 @@ import org.kie.kogito.examples.domain.Passenger;
 import org.kie.kogito.examples.domain.PassengerDTO;
 import org.kie.kogito.examples.domain.Seat;
 import org.kie.kogito.examples.domain.SeatType;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
-
-import javax.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class FlightService {
@@ -81,8 +81,8 @@ public class FlightService {
             seat = flight.getSeatList().stream().filter(s -> s.getRow() == row && s.getColumn() == col).findAny().get();
         }
         flight.getPassengerList().add(new Passenger(Long.valueOf(flight.getPassengerList().size()), passenger.getName(),
-                                                    (passenger.getSeatTypePreference().equals("NONE")) ? null : SeatType.valueOf(passenger.getSeatTypePreference()),
-                                                    passenger.isEmergencyExitRowCapable(), passenger.hasPaidForSeat(), seat));
+                (passenger.getSeatTypePreference().equals("NONE")) ? null : SeatType.valueOf(passenger.getSeatTypePreference()),
+                passenger.isEmergencyExitRowCapable(), passenger.hasPaidForSeat(), seat));
         return flight;
     }
 }

@@ -18,12 +18,13 @@ package org.kie.pmml.kogito.springboot.example;
 import java.util.Collections;
 import java.util.Map;
 
-import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.annotation.DirtiesContext;
+
+import io.restassured.RestAssured;
 
 import static org.kie.pmml.kogito.springboot.example.CommonTestUtils.testDescriptive;
 import static org.kie.pmml.kogito.springboot.example.CommonTestUtils.testDescriptiveWrongData;
@@ -34,7 +35,7 @@ import static org.kie.pmml.kogito.springboot.example.CommonTestUtils.testResultW
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 class MiningModelTest {
 
-    private static final String BASE_PATH = "/PredicatesMining/";
+    private static final String BASE_PATH = "/PredicatesMining";
     private static final String TARGET = "categoricalResult";
 
     @LocalServerPort
