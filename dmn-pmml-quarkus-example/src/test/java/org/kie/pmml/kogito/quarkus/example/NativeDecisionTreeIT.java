@@ -18,7 +18,7 @@ package org.kie.pmml.kogito.quarkus.example;
 import io.quarkus.test.junit.NativeImageTest;
 
 @NativeImageTest
-public class NativeSampleMineIT extends SampleMineTest {
+public class NativeDecisionTreeIT extends DecisionTreeTest {
 
     // Execute the same tests but in native mode.
 }

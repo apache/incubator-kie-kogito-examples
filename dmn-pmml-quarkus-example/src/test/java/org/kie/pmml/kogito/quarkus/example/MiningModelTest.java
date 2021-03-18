@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Red Hat, Inc. and/or its affiliates.
+ * Copyright 2021 Red Hat, Inc. and/or its affiliates.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  */
 package org.kie.pmml.kogito.quarkus.example;
 
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
@@ -27,28 +27,25 @@ import static org.kie.pmml.kogito.quarkus.example.CommonTestUtils.testDescriptiv
 import static org.kie.pmml.kogito.quarkus.example.CommonTestUtils.testResult;
 
 @QuarkusTest
-class SampleMineTest {
+public class MiningModelTest {
 
-    private static final String BASE_PATH = "/SampleMine";
-    private static final String TARGET = "decision";
+    private static final String BASE_PATH = "/MiningModelSum";
+    private static final String TARGET = "result";
 
     static {
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
     }
 
     @Test
-    void testEvaluateSampleMineResult() {
-        String inputData = "{\"temperature\":30.0, \"humidity\":10.0}";
-        testResult(inputData, BASE_PATH, TARGET, "sunglasses");
+    void testEvaluateMiningModelResult() {
+        String inputData = "{\"input1\":200.0, \"input2\":-1.0, \"input3\":2.0}";
+        testResult(inputData, BASE_PATH, TARGET, -299.0f);
     }
 
     @Test
-    void testEvaluateSampleMineDescriptive() {
-        String inputData = "{\"temperature\":30.0, \"humidity\":10.0}";
-        final Map<String, Object> expectedResultMap = new HashMap<>();
-        expectedResultMap.put(TARGET, "sunglasses");
-        expectedResultMap.put("weatherdecision", "sunglasses");
+    void testEvaluateMiningModelResultDescriptive() {
+        String inputData = "{\"input1\":200.0, \"input2\":-1.0, \"input3\":2.0}";
+        final Map<String, Object> expectedResultMap = Collections.singletonMap(TARGET, -299.0f);
         testDescriptive(inputData, BASE_PATH, TARGET, expectedResultMap);
     }
-
 }
