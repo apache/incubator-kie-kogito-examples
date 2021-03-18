@@ -27,7 +27,9 @@ import org.springframework.test.annotation.DirtiesContext;
 import io.restassured.RestAssured;
 
 import static org.kie.dmnpmml.kogito.springboot.example.CommonTestUtils.testDescriptive;
+import static org.kie.dmnpmml.kogito.springboot.example.CommonTestUtils.testDescriptiveWrongData;
 import static org.kie.dmnpmml.kogito.springboot.example.CommonTestUtils.testResult;
+import static org.kie.dmnpmml.kogito.springboot.example.CommonTestUtils.testResultWrongData;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
@@ -51,9 +53,21 @@ public class MiningModelTest {
     }
 
     @Test
+    void testEvaluateMiningModelResultWrongData() {
+        String inputData = "{\"input1\":wrong-data, \"input2\":-1.0, \"input3\":2.0}";
+        testResultWrongData(inputData, BASE_PATH);
+    }
+
+    @Test
     void testEvaluateMiningModelResultDescriptive() {
         String inputData = "{\"input1\":200.0, \"input2\":-1.0, \"input3\":2.0}";
         final Map<String, Object> expectedResultMap = Collections.singletonMap(TARGET, -299.0f);
         testDescriptive(inputData, BASE_PATH, TARGET, expectedResultMap);
+    }
+
+    @Test
+    void testEvaluateMiningModelResultDescriptiveWrongData() {
+        String inputData = "{\"input1\":wrong-data, \"input2\":-1.0, \"input3\":2.0}";
+        testDescriptiveWrongData(inputData, BASE_PATH);
     }
 }
