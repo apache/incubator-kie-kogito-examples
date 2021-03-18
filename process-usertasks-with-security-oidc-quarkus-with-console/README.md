@@ -31,7 +31,7 @@ You will need:
   - Docker and Docker Compose to run the required example infrastructure.
 
 When using native image compilation, you will also need:
-  - GraalVM 19.1+ installed
+  - GraalVM 20.3+ installed
   - Environment variable GRAALVM_HOME set accordingly
   - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too, please refer to GraalVM installation documentation for more details.
 
