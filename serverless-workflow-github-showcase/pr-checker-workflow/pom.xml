@@ -23,7 +23,7 @@
   <dependencies>
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-quarkus-workflows</artifactId>
+      <artifactId>kogito-quarkus-serverless-workflow</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
