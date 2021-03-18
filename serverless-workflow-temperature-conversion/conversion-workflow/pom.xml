@@ -58,6 +58,14 @@
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-openapi-workitem</artifactId>
     </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-rest-client</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-rest-client-jackson</artifactId>
+    </dependency>
 
   </dependencies>
   <build>
