@@ -15,7 +15,7 @@
  */
 package org.kie.dmnpmml.kogito.springboot.example;
 
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -33,10 +33,10 @@ import static org.kie.dmnpmml.kogito.springboot.example.CommonTestUtils.testResu
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-public class LinRegTest {
+public class DecisionTreeTest {
 
-    private static final String BASE_PATH = "/LinReg";
-    private static final String TARGET = "fld4";
+    private static final String BASE_PATH = "/DecisionTree";
+    private static final String TARGET = "decision";
 
     @LocalServerPort
     private int port;
@@ -47,27 +47,29 @@ public class LinRegTest {
     }
 
     @Test
-    void testEvaluateLinRegResult() {
-        String inputData = "{\"fld1\":3.0, \"fld2\":2.0, \"fld3\":\"y\"}";
-        testResult(inputData, BASE_PATH, TARGET, 52.5f);
+    void testEvaluateDecisionTreeResult() {
+        String inputData = "{\"temperature\":30.0, \"humidity\":10.0}";
+        testResult(inputData, BASE_PATH, TARGET, "sunglasses");
     }
 
     @Test
-    void testEvaluateLinRegResultWrongData() {
-        String inputData = "{\"fld1\":\"wrong-input\", \"fld2\":2.0, \"fld3\":\"y\"}";
+    void testEvaluateDecisionTreeResultWrongData() {
+        String inputData = "{\"temperature\":\"b\", \"humidity\":10.0}";
         testResultWrongData(inputData, BASE_PATH);
     }
 
     @Test
-    void testEvaluateLinRegDescriptive() {
-        String inputData = "{\"fld1\":3.0, \"fld2\":2.0, \"fld3\":\"y\"}";
-        final Map<String, Object> expectedResultMap = Collections.singletonMap(TARGET, 52.5f);
+    void testEvaluateDecisionTreeDescriptive() {
+        String inputData = "{\"temperature\":30.0, \"humidity\":10.0}";
+        final Map<String, Object> expectedResultMap = new HashMap<>();
+        expectedResultMap.put(TARGET, "sunglasses");
+        expectedResultMap.put("weatherdecision", "sunglasses");
         testDescriptive(inputData, BASE_PATH, TARGET, expectedResultMap);
     }
 
     @Test
-    void testEvaluateLinRegDescriptiveWrongData() {
-        String inputData = "{\"fld1\":\"wrong-input\", \"fld2\":2.0, \"fld3\":\"y\"}";
+    void testEvaluateDecisionTreeDecriptiveWrongData() {
+        String inputData = "{\"temperature\":\"b\", \"humidity\":10.0}";
         testDescriptiveWrongData(inputData, BASE_PATH);
     }
 }

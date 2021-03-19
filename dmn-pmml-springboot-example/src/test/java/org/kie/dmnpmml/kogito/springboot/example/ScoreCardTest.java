@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Red Hat, Inc. and/or its affiliates.
+ * Copyright 2021 Red Hat, Inc. and/or its affiliates.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,10 +33,10 @@ import static org.kie.dmnpmml.kogito.springboot.example.CommonTestUtils.testResu
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-public class LinRegTest {
+public class ScoreCardTest {
 
-    private static final String BASE_PATH = "/LinReg";
-    private static final String TARGET = "fld4";
+    private static final String BASE_PATH = "/SampleScore";
+    private static final String TARGET = "overallScore";
 
     @LocalServerPort
     private int port;
@@ -47,27 +47,27 @@ public class LinRegTest {
     }
 
     @Test
-    void testEvaluateLinRegResult() {
-        String inputData = "{\"fld1\":3.0, \"fld2\":2.0, \"fld3\":\"y\"}";
-        testResult(inputData, BASE_PATH, TARGET, 52.5f);
+    public void testEvaluateScoreCardResult() {
+        String inputData = "{\"age\": 23.0, \"occupation\": \"SKYDIVER\", \"residenceState\": \"AP\", \"validLicense\": true}";
+        testResult(inputData, BASE_PATH, TARGET, 21.345f);
     }
 
     @Test
-    void testEvaluateLinRegResultWrongData() {
-        String inputData = "{\"fld1\":\"wrong-input\", \"fld2\":2.0, \"fld3\":\"y\"}";
+    public void testEvaluateScoreCardResultWrongData() {
+        String inputData = "{\"age\": wrong-data, \"occupation\": \"SKYDIVER\", \"residenceState\": \"AP\", \"validLicense\": true}";
         testResultWrongData(inputData, BASE_PATH);
     }
 
     @Test
-    void testEvaluateLinRegDescriptive() {
-        String inputData = "{\"fld1\":3.0, \"fld2\":2.0, \"fld3\":\"y\"}";
-        final Map<String, Object> expectedResultMap = Collections.singletonMap(TARGET, 52.5f);
+    public void testEvaluateScoreCardResultDescriptive() {
+        String inputData = "{\"age\": 23.0, \"occupation\": \"SKYDIVER\", \"residenceState\": \"AP\", \"validLicense\": true}";
+        final Map<String, Object> expectedResultMap = Collections.singletonMap(TARGET, 21.345f);
         testDescriptive(inputData, BASE_PATH, TARGET, expectedResultMap);
     }
 
     @Test
-    void testEvaluateLinRegDescriptiveWrongData() {
-        String inputData = "{\"fld1\":\"wrong-input\", \"fld2\":2.0, \"fld3\":\"y\"}";
+    public void testEvaluateScoreCardResultDescriptiveWrongData() {
+        String inputData = "{\"age\": wrong-data, \"occupation\": \"SKYDIVER\", \"residenceState\": \"AP\", \"validLicense\": true}";
         testDescriptiveWrongData(inputData, BASE_PATH);
     }
 }

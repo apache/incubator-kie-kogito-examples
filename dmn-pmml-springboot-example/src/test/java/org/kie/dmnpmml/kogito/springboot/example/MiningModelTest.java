@@ -15,7 +15,7 @@
  */
 package org.kie.dmnpmml.kogito.springboot.example;
 
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -33,10 +33,10 @@ import static org.kie.dmnpmml.kogito.springboot.example.CommonTestUtils.testResu
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-public class SampleMineTest {
+public class MiningModelTest {
 
-    private static final String BASE_PATH = "/SampleMine";
-    private static final String TARGET = "decision";
+    private static final String BASE_PATH = "/MiningModelSum";
+    private static final String TARGET = "result";
 
     @LocalServerPort
     private int port;
@@ -47,29 +47,27 @@ public class SampleMineTest {
     }
 
     @Test
-    void testEvaluateSampleMineResult() {
-        String inputData = "{\"temperature\":30.0, \"humidity\":10.0}";
-        testResult(inputData, BASE_PATH, TARGET, "sunglasses");
+    void testEvaluateMiningModelResult() {
+        String inputData = "{\"input1\":200.0, \"input2\":-1.0, \"input3\":2.0}";
+        testResult(inputData, BASE_PATH, TARGET, -299.0f);
     }
 
     @Test
-    void testEvaluateSampleMineResultWrongData() {
-        String inputData = "{\"temperature\":\"b\", \"humidity\":10.0}";
+    void testEvaluateMiningModelResultWrongData() {
+        String inputData = "{\"input1\":wrong-data, \"input2\":-1.0, \"input3\":2.0}";
         testResultWrongData(inputData, BASE_PATH);
     }
 
     @Test
-    void testEvaluateSampleMineDescriptive() {
-        String inputData = "{\"temperature\":30.0, \"humidity\":10.0}";
-        final Map<String, Object> expectedResultMap = new HashMap<>();
-        expectedResultMap.put(TARGET, "sunglasses");
-        expectedResultMap.put("weatherdecision", "sunglasses");
+    void testEvaluateMiningModelResultDescriptive() {
+        String inputData = "{\"input1\":200.0, \"input2\":-1.0, \"input3\":2.0}";
+        final Map<String, Object> expectedResultMap = Collections.singletonMap(TARGET, -299.0f);
         testDescriptive(inputData, BASE_PATH, TARGET, expectedResultMap);
     }
 
     @Test
-    void testEvaluateSampleMineDescriptiveWrongData() {
-        String inputData = "{\"temperature\":\"b\", \"humidity\":10.0}";
+    void testEvaluateMiningModelResultDescriptiveWrongData() {
+        String inputData = "{\"input1\":wrong-data, \"input2\":-1.0, \"input3\":2.0}";
         testDescriptiveWrongData(inputData, BASE_PATH);
     }
 }
