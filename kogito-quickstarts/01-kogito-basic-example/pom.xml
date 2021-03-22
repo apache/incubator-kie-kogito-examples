@@ -4,7 +4,7 @@
   <parent>
     <artifactId>kogito-quickstarts</artifactId>
     <groupId>org.kie.kogito</groupId>
-    <version>1.4.1-SNAPSHOT</version>
+    <version>1.4.1.Final</version>
   </parent>
 
   <artifactId>01-kogito-basic-example</artifactId>
