@@ -2,6 +2,7 @@
   "id": "handle_frontend",
   "name": "HandleFrontend",
   "version": "1.0",
+  "start": "CheckFrontend",
   "functions": [
     {
       "name": "AddLabels",
@@ -30,7 +31,6 @@
   ],
   "states": [
     {
-      "start": true,
       "name": "CheckFrontend",
       "type": "switch",
       "dataConditions": [
@@ -58,9 +58,7 @@
         "labels": "frontend",
         "reviewers": "JohnDoe"
       },
-      "transition": {
-        "nextState": "HandleFrontend"
-      }
+      "transition": "HandleFrontend"
     },
     {
       "name": "HandleFrontend",
@@ -68,15 +66,11 @@
       "actions": [
         {
           "name": "addFrontendLabels",
-          "functionRef": {
-            "refName": "AddLabels"
-          }
+          "functionRef": "AddLabels"
         },
         {
           "name": "addFrontendReviewers",
-          "functionRef": {
-            "refName": "AddReviewers"
-          }
+          "functionRef": "AddReviewers"
         }
       ],
       "end": true

@@ -2,6 +2,7 @@
   "id": "handle_backend",
   "name": "HandleBackend",
   "version": "1.0",
+  "start": "CheckBackend",
   "functions": [
     {
       "name": "AddLabels",
@@ -31,7 +32,6 @@
   "states": [
     {
       "name": "CheckBackend",
-      "start": true,
       "type": "switch",
       "dataConditions": [
         {
@@ -58,9 +58,7 @@
         "labels": "backend",
         "reviewers": "JaneDoe"
       },
-      "transition": {
-        "nextState": "HandleBackend"
-      }
+      "transition": "HandleBackend"
     },
     {
       "name": "HandleBackend",
@@ -68,15 +66,11 @@
       "actions": [
         {
           "name": "addBackendLabels",
-          "functionRef": {
-            "refName": "AddLabels"
-          }
+          "functionRef": "AddLabels"
         },
         {
           "name": "addBackendReviewers",
-          "functionRef": {
-            "refName": "AddReviewers"
-          }
+          "functionRef": "AddReviewers"
         }
       ],
       "end": true

@@ -2,6 +2,7 @@
   "id": "applicantworkflow",
   "name": "Applicant Workflow",
   "version": "1.0",
+  "start": "HandleNewApplicant",
   "events": [
     {
       "name": "NewApplicantEvent",
@@ -18,16 +19,13 @@
     {
       "name": "HandleNewApplicant",
       "type": "event",
-      "start": true,
       "onEvents": [
         {
           "eventRefs": ["NewApplicantEvent"],
           "actions": []
         }
       ],
-      "transition": {
-        "nextState": "VerifyNewApplicant"
-      }
+      "transition": "VerifyNewApplicant"
     },
     {
       "name": "VerifyNewApplicant",
@@ -35,15 +33,11 @@
       "dataConditions": [
         {
           "condition": "{{ $.[?(@.salary >= 3000)] }}",
-          "transition": {
-            "nextState": "HandleApproved"
-          }
+          "transition": "HandleApproved"
         },
         {
           "condition": "{{ $.[?(@.salary < 3000)] }}",
-          "transition": {
-            "nextState": "HandleDenied"
-          }
+          "transition": "HandleDenied"
         }
       ]
     },
