@@ -2,6 +2,7 @@
   "id": "prchecker",
   "name": "Github PR Checker Workflow",
   "version": "1.0",
+  "start": "HandleOpenPR",
   "functions": [
     {
       "name": "FetchPRFiles",
@@ -30,7 +31,6 @@
     {
       "name": "HandleOpenPR",
       "type": "event",
-      "start": true,
       "onEvents": [
         {
           "eventRefs": [
@@ -38,16 +38,12 @@
           ],
           "actions": [
             {
-              "functionRef": {
-                "refName": "FetchPRFiles"
-              }
+              "functionRef": "FetchPRFiles"
             }
           ]
         }
       ],
-      "transition": {
-        "nextState": "DecoratePullRequest"
-      }
+      "transition": "DecoratePullRequest"
     },
     {
       "name": "DecoratePullRequest",
