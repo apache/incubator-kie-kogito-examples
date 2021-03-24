@@ -7,7 +7,7 @@ markup to call Funqy services via OpenAPi.
 
 This example is composed of two modules, namely `sw-funqy-services` and `sw-funqy-workflow`.
 `sw-funqy-services` contains the 3 Funqy functions and runs on port 8080.
-`sw-funqy-workflow` contains just the workflow, the OpenApi definition and a simple UI.
+`sw-funqy-workflow` contains just the workflow, the OpenApi definition and a simple UI and runs on port 8081.
 
 This showcases that just with a workflow definition and an OpenApi definition you can 
 orchestrate any services you want.
@@ -47,7 +47,7 @@ mvn clean install quarkus:dev
 Now access the demo UI on:
 
 ```text
-http://localhost:80801
+http://localhost:8081
 ```
 
 Type in a country name into the form (note currently only "Germany", "USA", "Brazil" and "Serbia" are supported).
