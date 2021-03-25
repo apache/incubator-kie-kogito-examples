@@ -7,18 +7,15 @@ A quickstart project that processes deals for travellers. It utilizes process co
 * submitting a deal
 * reviewing a deal
 
-At the same time shows simplified version of a approval process that waits for human actor to provide review.
+At the same time shows a simplified version of an approval process that waits for a human actor to provide a review.
 
-This example shows
+This example shows:
 
 * exposing Submit Deal as public service
 * each process instance is going to be evaluated and asks for review
-* at any point in time service can be shutdown and when brought back it will keep the state of the instances
+* at any point in time, the service can be shutdown, and when brought back, it will keep the state of the instances
 
-Note: The use of this example shows that the data sent to PostgreSQL is saved, you can shut down the
- application and
- restart it
-and as long as PostgreSQL is running after you restart you should still see the data
+Note: The use of this example shows that the data sent to PostgreSQL is saved. You can shut down the application and restart it, and as long as PostgreSQL is running after you restart you should still see the data.
 
 It utilizes PostgreSQL server as the backend store.
 
@@ -60,14 +57,13 @@ It utilizes PostgreSQL server as the backend store.
 
 ## Infrastructure requirements
 
-
 This quickstart requires a PostgreSQL server to be available with a database, a user and credentials already created
 , these configurations should then be set in the connection URI parameter in [applications.properties](src/main/resources/application.properties) file with the key
  `kogito.persistence.postgresql.connection.uri`, i.e `postgresql.connection.uri=postgresql://kogito-user:kogito-pass@localhost:5432/kogito` here are the [full settings for URI](https://www.postgresql.org/docs/9.6/static/libpq-connect.html#LIBPQ-CONNSTRING)    
  
-You must set property - `kogito.persistence.type=postgresql` to enable PostgreSQL persistence. There is also a
- configuration to allow the application to run DDL scripts during the initialization, this can be enabled with the
-  property `kogito.persistence.auto.ddl=true`.
+You must set the property `kogito.persistence.type=postgresql` to enable PostgreSQL persistence. There is also a
+configuration to allow the application to run DDL scripts during the initialization, which you can enable with the
+property `kogito.persistence.auto.ddl=true`.
 For more details you can check [applications.properties](src/main/resources/application.properties).
 
 Optionally and for convenience, a docker-compose [configuration file](docker-compose/docker-compose.yml) is
