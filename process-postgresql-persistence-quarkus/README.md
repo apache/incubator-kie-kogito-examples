@@ -15,10 +15,7 @@ This example shows
 * each process instance is going to be evaluated and asks for review
 * at any point in time service can be shutdown and when brought back it will keep the state of the instances
 
-Note: The use of this example shows that the data sent to PostgreSQL is saved, you can shut down the
- application and
- restart it
-and as long as PostgreSQL is running after you restart you should still see the data
+Note: The use of this example shows that the data sent to PostgreSQL is saved. You can shut down the application and restart it, and as long as PostgreSQL is running after you restart you should still see the data.
 
 It utilizes PostgreSQL server as the backend store.
 
