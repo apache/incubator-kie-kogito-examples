@@ -66,8 +66,8 @@ You must set property - `kogito.persistence.type=postgresql` to enable PostgreSQ
   property `kogito.persistence.auto.ddl=true`.
 For more details you can check [applications.properties](src/main/resources/application.properties).
 
-Optionally and for convenience, a docker-compose [configuration file](dockerdocker-compose/docker-compose.yml) is
- provided in the path [dockerdocker-compose/](dockerdocker-compose/), where you can just run the command from there:
+Optionally and for convenience, a docker-compose [configuration file](docker-compose/docker-compose.yml) is
+ provided in the path [dockerdocker-compose/](docker-compose/), where you can just run the command from there:
   ```sh
   docker-compose up
   ```  
@@ -76,7 +76,7 @@ Optionally and for convenience, a docker-compose [configuration file](dockerdock
   
   The default admin user for PostgreSQL is `postgres` with password `pass`, for PgAdmin the default user created is
    `user@user.org` with password `pass`, the database connection could be set in PgAdmin using the hostname 
-   `postgres-container` for the PostgreSQL server, details defined in [configuration file](dockerdocker-compose  mpose.yml),  an initializer script is executed to create the `kogito` database and `kogito-user`.
+   `postgres-container` for the PostgreSQL server, details defined in [configuration file](docker-compose/docker-compose.yml),  an initializer script is executed to create the `kogito` database and `kogito-user`.
   
 ## Build and run
 
