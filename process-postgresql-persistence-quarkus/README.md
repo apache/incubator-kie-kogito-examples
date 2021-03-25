@@ -200,7 +200,7 @@ Last but not least, you can complete the review user task by:
 curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"review" : "very good work"}' http://localhost:8080/dealreviews/{uuid}/review/{tuuid}?user=john
 ```
 
-where uuid is the id of the deal review and tuuid is the id of the user task you want to get
+Where `{uuid}` is the id of the deal review and `{tuuid}` is the id of the user task you want to get.
 
 * Review Log should look similar to
 
