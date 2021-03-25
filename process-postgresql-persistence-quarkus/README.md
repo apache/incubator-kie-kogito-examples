@@ -9,11 +9,11 @@ A quickstart project that processes deals for travellers. It utilizes process co
 
 At the same time shows a simplified version of an approval process that waits for a human actor to provide a review.
 
-This example shows
+This example shows:
 
 * exposing Submit Deal as public service
 * each process instance is going to be evaluated and asks for review
-* at any point in time service can be shutdown and when brought back it will keep the state of the instances
+* at any point in time, the service can be shutdown, and when brought back, it will keep the state of the instances
 
 Note: The use of this example shows that the data sent to PostgreSQL is saved. You can shut down the application and restart it, and as long as PostgreSQL is running after you restart you should still see the data.
 
