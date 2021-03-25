@@ -202,7 +202,7 @@ curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d 
 
 Where `{uuid}` is the id of the deal review and `{tuuid}` is the id of the user task you want to get.
 
-* Review Log should look similar to
+The review Log should look similar to:
 
 ```
 Review of the deal very good work for traveller Doe
