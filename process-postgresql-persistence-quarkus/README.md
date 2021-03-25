@@ -61,9 +61,9 @@ This quickstart requires a PostgreSQL server to be available with a database, a 
 , these configurations should then be set in the connection URI parameter in [applications.properties](src/main/resources/application.properties) file with the key
  `kogito.persistence.postgresql.connection.uri`, i.e `postgresql.connection.uri=postgresql://kogito-user:kogito-pass@localhost:5432/kogito` here are the [full settings for URI](https://www.postgresql.org/docs/9.6/static/libpq-connect.html#LIBPQ-CONNSTRING)    
  
-You must set property - `kogito.persistence.type=postgresql` to enable PostgreSQL persistence. There is also a
- configuration to allow the application to run DDL scripts during the initialization, this can be enabled with the
-  property `kogito.persistence.auto.ddl=true`.
+You must set the property `kogito.persistence.type=postgresql` to enable PostgreSQL persistence. There is also a
+configuration to allow the application to run DDL scripts during the initialization, which you can enable with the
+property `kogito.persistence.auto.ddl=true`.
 For more details you can check [applications.properties](src/main/resources/application.properties).
 
 Optionally and for convenience, a docker-compose [configuration file](docker-compose/docker-compose.yml) is
