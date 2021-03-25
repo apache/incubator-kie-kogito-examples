@@ -7,7 +7,7 @@ A quickstart project that processes deals for travellers. It utilizes process co
 * submitting a deal
 * reviewing a deal
 
-At the same time shows simplified version of a approval process that waits for human actor to provide review.
+At the same time shows a simplified version of an approval process that waits for a human actor to provide a review.
 
 This example shows
 
