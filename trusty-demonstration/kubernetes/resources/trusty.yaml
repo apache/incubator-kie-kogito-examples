@@ -7,7 +7,7 @@ metadata:
 spec:
   serviceType: TrustyAI
   replicas: 1
-  image: quay.io/kiegroup/kogito-trusty:1.1
+  image: quay.io/kiegroup/kogito-trusty-infinispan:1.4
   infra:
     - kogito-kafka-infra
     - kogito-infinispan-infra
