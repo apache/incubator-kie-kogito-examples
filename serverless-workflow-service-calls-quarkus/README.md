@@ -67,7 +67,7 @@ To run the generated native executable, generated in `target/`, execute
 After starting the example application you can access the AngularJS page at:
 
 ```text
-http://localhost:8080/countries.html
+http://localhost:8080/
 ```
 
 You should see the following page:

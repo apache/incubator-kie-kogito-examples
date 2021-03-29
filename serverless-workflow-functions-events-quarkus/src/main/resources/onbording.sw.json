@@ -1,11 +1,11 @@
 {
   "id": "onboarding",
   "name": "Patient Onboarding Workflow",
+  "start": "LetsOnboard",
   "states": [
     {
       "name": "LetsOnboard",
       "type": "event",
-      "start": true,
       "onEvents": [
         {
           "eventRefs": [
@@ -13,19 +13,13 @@
           ],
           "actions": [
             {
-              "functionRef": {
-                "refName": "StoreNewPatient"
-              }
+              "functionRef": "StoreNewPatient"
             },
             {
-              "functionRef": {
-                "refName": "AssignDoctorToPatient"
-              }
+              "functionRef": "AssignDoctorToPatient"
             },
             {
-              "functionRef": {
-                "refName": "SchedulePatientAppointment"
-              }
+              "functionRef": "SchedulePatientAppointment"
             }
           ]
         }

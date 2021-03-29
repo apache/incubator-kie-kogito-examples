@@ -14,7 +14,7 @@
     </DataField>
   </DataDictionary>
   
-  <TreeModel modelName="SampleMine" functionName="classification">
+  <TreeModel modelName="DecisionTree" functionName="classification">
     <MiningSchema>
       <MiningField name="temperature"  usageType="active" />
       <MiningField name="humidity"  usageType="active" />
