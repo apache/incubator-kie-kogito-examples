@@ -58,6 +58,6 @@ public class DroolsMetricsTest {
                 .get("/metrics")
                 .then()
                 .statusCode(200)
-                .body(containsString("drl_match_fired_nanosecond_count{app_id=\"default-rule-monitoring-listener\",process_id=\"helloWorld\",} 1.0"));
+                .body(containsString("drl_match_fired_nanosecond_count{app_id=\"default-rule-monitoring-listener\",rule=\"helloWorld\",} 1.0"));
     }
 }

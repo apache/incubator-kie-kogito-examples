@@ -18,7 +18,10 @@ package org.kie.kogito.examples;
 import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
@@ -28,9 +31,11 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 
 @QuarkusTest
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class LoanEligibilityTest {
 
     @Test
+    @Order(1)
     public void testEvaluateLoanEligibility() {
         given()
                 .body("{" +
@@ -49,6 +54,7 @@ public class LoanEligibilityTest {
     }
 
     @Test
+    @Order(2)
     public void testMetricsLoanEligibility() {
         given()
                 .when()
@@ -66,6 +72,6 @@ public class LoanEligibilityTest {
         List<String> dashboards = given().contentType(ContentType.JSON).accept(ContentType.JSON).when()
                 .get("/monitoring/dashboards/list.json").as(List.class);
 
-        Assertions.assertEquals(3, dashboards.size());
+        Assertions.assertEquals(4, dashboards.size());
     }
 }

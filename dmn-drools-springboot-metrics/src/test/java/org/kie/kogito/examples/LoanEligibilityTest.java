@@ -19,7 +19,10 @@ import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.annotation.DirtiesContext;
@@ -33,6 +36,7 @@ import static org.hamcrest.Matchers.is;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class LoanEligibilityTest {
 
     @LocalServerPort
@@ -48,6 +52,7 @@ public class LoanEligibilityTest {
     }
 
     @Test
+    @Order(1)
     public void testEvaluateLoanEligibility() {
         given()
                 .body("{" +
@@ -66,6 +71,7 @@ public class LoanEligibilityTest {
     }
 
     @Test
+    @Order(2)
     public void testMetricsLoanEligibility() {
         given()
                 .when()
@@ -83,6 +89,6 @@ public class LoanEligibilityTest {
         List<String> dashboards = given().contentType(ContentType.JSON).accept(ContentType.JSON).when()
                 .get("/monitoring/dashboards/list.json").as(List.class);
 
-        Assertions.assertEquals(3, dashboards.size());
+        Assertions.assertEquals(4, dashboards.size());
     }
 }
