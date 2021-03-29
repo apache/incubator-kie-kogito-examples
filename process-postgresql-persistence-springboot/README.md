@@ -67,7 +67,7 @@ property `kogito.persistence.auto.ddl=true`.
 For more details you can check [applications.properties](src/main/resources/application.properties).
 
 Optionally and for convenience, a docker-compose [configuration file](docker-compose/docker-compose.yml) is
- provided in the path [dockerdocker-compose/](docker-compose/), where you can just run the command from there:
+ provided in the path [docker-compose/](docker-compose/), where you can just run the command from there:
   ```sh
   docker-compose up
   ```  
