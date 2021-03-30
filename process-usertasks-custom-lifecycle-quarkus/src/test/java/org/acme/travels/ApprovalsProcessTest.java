@@ -29,12 +29,13 @@ import org.jbpm.process.instance.impl.humantask.phases.Claim;
 import org.jbpm.process.instance.impl.workitem.Complete;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.Model;
+import org.kie.kogito.auth.IdentityProvider;
+import org.kie.kogito.auth.IdentityProviders;
 import org.kie.kogito.auth.SecurityPolicy;
 import org.kie.kogito.process.Process;
 import org.kie.kogito.process.ProcessInstance;
 import org.kie.kogito.process.WorkItem;
 import org.kie.kogito.process.workitem.InvalidTransitionException;
-import org.kie.kogito.services.identity.StaticIdentityProvider;
 
 import io.quarkus.test.junit.QuarkusTest;
 
@@ -63,7 +64,7 @@ public class ApprovalsProcessTest {
         processInstance.start();
         assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_ACTIVE, processInstance.status());
 
-        StaticIdentityProvider identity = new StaticIdentityProvider("admin", Collections.singletonList("managers"));
+        IdentityProvider identity = IdentityProviders.of("admin", Collections.singletonList("managers"));
         SecurityPolicy policy = SecurityPolicy.of(identity);
 
         processInstance.workItems(policy);
@@ -78,7 +79,7 @@ public class ApprovalsProcessTest {
         workItems = processInstance.workItems(policy);
         assertEquals(0, workItems.size());
 
-        identity = new StaticIdentityProvider("john", Collections.singletonList("managers"));
+        identity = IdentityProviders.of("john", Collections.singletonList("managers"));
         policy = SecurityPolicy.of(identity);
 
         processInstance.workItems(policy);
@@ -112,7 +113,7 @@ public class ApprovalsProcessTest {
         processInstance.start();
         assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_ACTIVE, processInstance.status());
 
-        StaticIdentityProvider identity = new StaticIdentityProvider("admin", Collections.singletonList("managers"));
+        IdentityProvider identity = IdentityProviders.of("admin", Collections.singletonList("managers"));
         SecurityPolicy policy = SecurityPolicy.of(identity);
 
         processInstance.workItems(policy);
@@ -125,7 +126,7 @@ public class ApprovalsProcessTest {
         // test to make sure you can't complete if the task is not in started state
         assertThrows(InvalidTransitionException.class, () -> processInstance.transitionWorkItem(wiId, new HumanTaskTransition(Complete.ID,
                 Collections.singletonMap("approved", true),
-                SecurityPolicy.of(new StaticIdentityProvider("admin", Collections.singletonList("managers"))))));
+                SecurityPolicy.of(IdentityProviders.of("admin", Collections.singletonList("managers"))))));
 
         // now test going through phases
         processInstance.transitionWorkItem(workItems.get(0).getId(), new HumanTaskTransition(Claim.ID, null, policy));
@@ -135,7 +136,7 @@ public class ApprovalsProcessTest {
         workItems = processInstance.workItems(policy);
         assertEquals(0, workItems.size());
 
-        identity = new StaticIdentityProvider("john", Collections.singletonList("managers"));
+        identity = IdentityProviders.of("john", Collections.singletonList("managers"));
         policy = SecurityPolicy.of(identity);
 
         processInstance.workItems(policy);

@@ -99,6 +99,40 @@ To run the generated native executable, generated in `target/`, execute
 ```sh
 ./target/process-usertasks-quarkus-runner
 ```
+### Running with deadlines enabled
+
+Kogito supports sending notifications when a task has been idle for a while, according to the information included in the process, in "NotStartedNotify" and "NotCompletedNotify" task input parameters
+
+In this example we are going to use Kafka to publish these deadlines notifications to a certain topic and Kogito mail addon to subscribe a listener to that topic, so an e-mail will be sent if 30 seconds has passed after
+the task was created (but not transition was performed) or every minute till the task  is not completed.  
+ 
+You  need to link incoming (`kogito-deadline-events`) and outgoing (`kogito-deadline-consumer`) channels to a kafka topic and also define certain required propeties for using kafka and proper deserialization. 
+
+This is done in application.properties, below we are telling Kogito to use topic `kogito-deadline-events`
+
+```
+mp.messaging.outgoing.kogito-deadline-events.connector=smallrye-kafka
+mp.messaging.outgoing.kogito-deadline-events.topic=kogito-deadline-events
+mp.messaging.outgoing.kogito-deadline-events.value.serializer=io.quarkus.kafka.client.serialization.ObjectMapperSerializer
+
+
+mp.messaging.incoming.kogito-deadline-consumer.connector=smallrye-kafka
+mp.messaging.incoming.kogito-deadline-consumer.topic=kogito-deadline-events
+mp.messaging.incoming.kogito-deadline-consumer.value.deserializer=org.kie.kogito.mail.DeadlineEventDeserializer
+```
+
+Finally, to send the mail you need to set up these properties with proper values. Refer to [Quakus mailer configuration](https://quarkus.io/guides/mailer#configuring-the-mailer)
+ 
+ ```
+quarkus.mailer.host=smtp.gmail.com
+quarkus.mailer.port=587
+quarkus.mailer.username=
+quarkus.mailer.password=
+quarkus.mailer.ssl=true
+```
+You need to have Kafka cluster installed and available over the network. Refer to [Kafka Apache site](https://kafka.apache.org/quickstart) to more information about how to install.
+
+Once Kafka is up and running you can build this project with `-Pnotification` to enable additional required dependencies during the build. 
 
 ### OpenAPI (Swagger) documentation
 [Specification at swagger.io](https://swagger.io/docs/specification/about/)
