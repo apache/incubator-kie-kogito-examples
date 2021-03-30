@@ -30,14 +30,14 @@ mvn clean compile quarkus:dev
 
 ```
 mvn clean package
-java -jar target/decisiontable-quarkus-example-runner.jar
+java -jar target/quarkus-app/quarkus-run.jar
 ```
 
 or on windows
 
 ```
 mvn clean package
-java -jar target\decisiontable-quarkus-example-runner.jar
+java -jar target\quarkus-app\quarkus-run.jar
 ```
 
 ### Package and Run using Local Native Image

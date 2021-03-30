@@ -31,14 +31,14 @@ mvn clean compile quarkus:dev
 
 ```
 mvn clean package
-java -jar target/pmml-quarkus-example-runner.jar
+java -jar target/quarkus-app/quarkus-run.jar
 ```
 
 or on Windows
 
 ```
 mvn clean package
-java -jar target\pmml-quarkus-example-runner.jar
+java -jar target\quarkus-app\quarkus-run.jar
 ```
 
 ### Package and Run using Local Native Image
