@@ -134,14 +134,14 @@ _**Note:** Please make sure you have [jq](https://stedolan.github.io/jq/download
 
 ```text
 mvn clean package 
-java -jar target/serverless-workflow-functions-quarkus-runner.jar   
+java -jar target/quarkus-app/quarkus-run.jar
 ```
 
 or on windows
 
 ```text
 mvn clean package
-java -jar target\serverless-workflow-functions-quarkus-runner.jar
+java -jar target\quarkus-app\quarkus-run.jar
 ```
 
 ### Compile and Run using Local Native Image
