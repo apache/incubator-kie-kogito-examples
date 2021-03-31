@@ -37,14 +37,14 @@ mvn clean package quarkus:dev
 
 ```text
 mvn clean package 
-java -jar target/sw-quarkus-greeting-{version}-runner.jar    
+java -jar target/quarkus-app/quarkus-run.jar
 ```
 
 or on windows
 
 ```text
 mvn clean package
-java -jar target\sw-quarkus-greeting-{version}-runner.jar
+java -jar target\quarkus-app\quarkus-run.jar
 ```
 
 ### Compile and Run using Local Native Image
