@@ -437,6 +437,7 @@
               <enable.resource.kafka>${enable.resource.kafka}</enable.resource.kafka>
               <container.image.keycloak>${container.image.keycloak}</container.image.keycloak>
               <container.image.infinispan>${container.image.infinispan}</container.image.infinispan>
+              <container.image.kafka>${container.image.kafka}</container.image.kafka>
               <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
               <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
               <enable.resource.mongodb>${enable.resource.mongodb}</enable.resource.mongodb>
