@@ -46,7 +46,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <!-- kogito -->
     <kogito.version>${project.version}</kogito.version>
-    <version.org.optaplanner>8.5.0-SNAPSHOT</version.org.optaplanner>
+    <version.org.optaplanner>8.6.0-SNAPSHOT</version.org.optaplanner>
     <!-- pmml -->
     <version.org.jpmml>1.5.1</version.org.jpmml>
     <!-- override default to fast-jar packaging for forward-compatibility -->
