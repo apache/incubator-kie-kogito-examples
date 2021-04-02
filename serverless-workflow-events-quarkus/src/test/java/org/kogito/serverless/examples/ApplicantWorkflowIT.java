@@ -41,7 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @QuarkusTest
 @QuarkusTestResource(KafkaQuarkusTestResource.class)
-public class ApplicantWorkflowTest {
+public class ApplicantWorkflowIT {
 
     private static final String DECISION_SSE_ENDPOINT = "http://localhost:%s/decisions/stream";
 

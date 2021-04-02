@@ -94,14 +94,14 @@ NOTE: With dev mode of Quarkus you can take advantage of hot reload for business
 
 ```sh
 mvn clean package
-java -jar target/process-infinispan-persistence-quarkus-runner.jar
+java -jar target/quarkus-app/quarkus-run.jar
 ```
 
 or on windows
 
 ```sh
 mvn clean package
-java -jar target\process-infinispan-persistence-quarkus-runner.jar
+java -jar target\quarkus-app\quarkus-run.jar
 ```
 
 ### Package and Run using Local Native Image

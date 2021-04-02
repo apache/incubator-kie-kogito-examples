@@ -46,7 +46,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <!-- kogito -->
     <kogito.version>${project.version}</kogito.version>
-    <version.org.optaplanner>8.5.0-SNAPSHOT</version.org.optaplanner>
+    <version.org.optaplanner>8.6.0-SNAPSHOT</version.org.optaplanner>
     <!-- pmml -->
     <version.org.jpmml>1.5.1</version.org.jpmml>
     <!-- override default to fast-jar packaging for forward-compatibility -->
@@ -155,6 +155,8 @@
         <module>process-mongodb-persistence-springboot</module>
         <module>process-optaplanner-quarkus</module>
         <module>process-optaplanner-springboot</module>
+        <module>process-postgresql-persistence-quarkus</module>
+        <module>process-postgresql-persistence-springboot</module>
         <module>process-quarkus-example</module>
         <module>process-springboot-example</module>
         <module>process-scripts-quarkus</module>
@@ -417,6 +419,7 @@
               <enable.resource.kafka>${enable.resource.kafka}</enable.resource.kafka>
               <container.image.keycloak>${container.image.keycloak}</container.image.keycloak>
               <container.image.infinispan>${container.image.infinispan}</container.image.infinispan>
+              <container.image.kafka>${container.image.kafka}</container.image.kafka>
               <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
               <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
               <enable.resource.mongodb>${enable.resource.mongodb}</enable.resource.mongodb>
