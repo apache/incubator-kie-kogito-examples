@@ -277,6 +277,7 @@
         <module>serverless-workflow-temperature-conversion</module>
       </modules>
     </profile>
+
     <profile>
       <id>productized</id>
       <activation>
