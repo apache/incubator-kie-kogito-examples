@@ -49,6 +49,7 @@ public class LoanEligibilityTest {
 
     @Test
     public void testEvaluateLoanEligibility() {
+        // Approved loan
         given()
                 .body("{" +
                         "\"Client\": " +
@@ -63,6 +64,22 @@ public class LoanEligibilityTest {
                 .then()
                 .statusCode(200)
                 .body("'Decide'", is(true));
+
+        // Not approved loan
+        given()
+                .body("{" +
+                        "\"Client\": " +
+                        "{\"age\": 43,\"salary\": 1950,\"existing payments\": 100}," +
+                        "\"Loan\": {\"duration\": 15,\"installment\": 180}, " +
+                        "\"SupremeDirector\" : \"No\", " +
+                        "\"Bribe\": 0" +
+                        "}")
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/LoanEligibility")
+                .then()
+                .statusCode(200)
+                .body("'Decide'", is(false));
     }
 
     @Test
@@ -72,9 +89,16 @@ public class LoanEligibilityTest {
                 .get("/metrics")
                 .then()
                 .statusCode(200)
+                .body(containsString("string_dmn_result_total{decision=\"Eligibility\",endpoint=\"LoanEligibility\",identifier=\"Yes\",} 2.0"))
                 .body(containsString("string_dmn_result_total{decision=\"Judgement\",endpoint=\"LoanEligibility\",identifier=\"Yes\",} 1.0"))
-                .body(containsString("number_dmn_result{decision=\"Is Enough?\",endpoint=\"LoanEligibility\",quantile=\"0.1\",} 100.0"))
-                .body(containsString("api_http_response_code_total{endpoint=\"LoanEligibility\",identifier=\"200\",} 1.0"));
+                .body(containsString("string_dmn_result_total{decision=\"Judgement\",endpoint=\"LoanEligibility\",identifier=\"No\",} 1.0"))
+                .body(containsString("boolean_dmn_result_total{decision=\"Decide\",endpoint=\"LoanEligibility\",identifier=\"true\",} 1.0"))
+                .body(containsString("boolean_dmn_result_total{decision=\"Decide\",endpoint=\"LoanEligibility\",identifier=\"false\",} 1.0\n"))
+                .body(containsString("number_dmn_result{decision=\"Is Enough?\",endpoint=\"LoanEligibility\",quantile=\"0.5\",} 0.0"))
+                .body(containsString("number_dmn_result_count{decision=\"Is Enough?\",endpoint=\"LoanEligibility\",} 2.0"))
+                .body(containsString("number_dmn_result_sum{decision=\"Is Enough?\",endpoint=\"LoanEligibility\",} 100.0"))
+                .body(containsString("number_dmn_result{decision=\"Is Enough?\",endpoint=\"LoanEligibility\",quantile=\"0.75\",} 100.0"))
+                .body(containsString("number_dmn_result_max{decision=\"Is Enough?\",endpoint=\"LoanEligibility\",} 100.0"));
     }
 
     @Test
