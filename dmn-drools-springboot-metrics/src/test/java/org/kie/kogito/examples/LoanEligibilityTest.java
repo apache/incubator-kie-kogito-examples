@@ -19,13 +19,9 @@ import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.test.annotation.DirtiesContext;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -35,8 +31,6 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class LoanEligibilityTest {
 
     @LocalServerPort
@@ -52,7 +46,6 @@ public class LoanEligibilityTest {
     }
 
     @Test
-    @Order(1)
     public void testEvaluateLoanEligibility() {
         given()
                 .body("{" +
@@ -68,11 +61,7 @@ public class LoanEligibilityTest {
                 .then()
                 .statusCode(200)
                 .body("'Decide'", is(true));
-    }
 
-    @Test
-    @Order(2)
-    public void testMetricsLoanEligibility() {
         given()
                 .when()
                 .get("/metrics")
