@@ -3,6 +3,7 @@
   "version": "1.0",
   "name": "Service Call Workflow",
   "description": "JSON based service call workflow",
+  "start": "GetCountryInfo",
   "functions": [
     {
       "name": "countryInfoFunction",
@@ -29,22 +30,19 @@
     {
       "name": "GetCountryInfo",
       "type": "operation",
-      "start": true,
       "actionMode": "sequential",
       "actions": [
         {
           "name": "getCountryInfo",
           "functionRef": {
             "refName": "countryInfoFunction",
-            "parameters": {
+            "arguments": {
               "name": "$.name"
             }
           }
         }
       ],
-      "transition": {
-        "nextState": "ClassifyByPopulation"
-      }
+      "transition": "ClassifyByPopulation"
     },
     {
       "name": "ClassifyByPopulation",
@@ -52,21 +50,15 @@
       "dataConditions": [
         {
           "condition": "{{ $.response[0].[?(@.population < 20000000)] }}",
-          "transition": {
-            "nextState": "ClassifyAsSmallOrMedium"
-          }
+          "transition": "ClassifyAsSmallOrMedium"
         },
         {
           "condition": "{{ $.response[0].[?(@.population >= 20000000)] }}",
-          "transition": {
-            "nextState": "ClassifyAsLarge"
-          }
+          "transition": "ClassifyAsLarge"
         }
       ],
       "default": {
-        "transition": {
-          "nextState": "ClassifyAsSmallOrMedium"
-        }
+        "transition": "ClassifyAsSmallOrMedium"
       }
     },
     {
@@ -76,9 +68,7 @@
       "actions": [
         {
           "name": "classifyIntoSmallOrMedium",
-          "functionRef": {
-            "refName": "classifySmallMediumFunction"
-          }
+          "functionRef": "classifySmallMediumFunction"
         }
       ],
       "end": true
@@ -90,9 +80,7 @@
       "actions": [
         {
           "name": "classifyIntoLarge",
-          "functionRef": {
-            "refName": "classifyLargeFunction"
-          }
+          "functionRef": "classifyLargeFunction"
         }
       ],
       "end": true

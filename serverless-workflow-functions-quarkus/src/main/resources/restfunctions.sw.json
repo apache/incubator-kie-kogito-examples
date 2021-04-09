@@ -2,6 +2,7 @@
     "id": "RestExample",
     "name": "Rest fun with numbers",
     "version": "1.0v",
+    "start": "Calculations",
     "functions": [
         {
             "name": "randomNumber",
@@ -28,29 +29,24 @@
     ],
     "states": [
         {
-            "start": true,
             "name": "Calculations",
             "type": "operation",
             "actionMode": "sequential",
             "actions": [
                 {
-                    "functionRef": {
-                        "refName": "randomNumber"
-                    }
+                    "functionRef": "randomNumber"
                 },
                 {
                     "functionRef": {
                         "refName": "multiplyAllByRandomAndSum",
-                        "parameters": {
+                        "arguments": {
                             "numbers": "$.inputNumbers",
                             "multiplier": "$.randomNumber"
                         }
                     }
                 }
             ],
-            "transition": {
-                "nextState": "SetMessage"
-            }
+            "transition": "SetMessage"
         },
         {
             "name": "SetMessage",
@@ -58,9 +54,7 @@
             "data": {
                 "message": "The sum is: "
             },
-            "transition": {
-                "nextState": "PrintResult"
-            }
+            "transition": "PrintResult"
         },
         {
             "name": "PrintResult",
@@ -71,7 +65,7 @@
                     "name": "printAction",
                     "functionRef": {
                         "refName": "debug",
-                        "parameters": {
+                        "arguments": {
                             "message": "$.message $.sum"
                         }
                     }

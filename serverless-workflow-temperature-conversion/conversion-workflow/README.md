@@ -42,14 +42,14 @@ mvn clean package quarkus:dev
 
 ```bash
 mvn clean package 
-java -jar target/convertion-workflow-runner.jar    
+java -jar target/quarkus-app/quarkus-run.jar
 ```
 
 or on windows
 
 ```bash
 mvn clean package
-java -jar target/conversion-workflow-runner.jar
+java -jar target\quarkus-app\quarkus-run.jar
 ```
 
 ### Compile and Run using Local Native Image

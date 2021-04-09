@@ -16,8 +16,8 @@ The application can be packaged using:
 ```shell script
 ./mvn package
 ```
-It produces the `multiplication-service-{version}-runner.jar` file in the `/target` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/lib` directory.
+It produces the `quarkus-app/quarkus-run.jar` file in the `/target` directory.
+Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib` directory.
 
 If you want to build an _über-jar_, execute the following command:
 ```shell script

@@ -30,14 +30,14 @@ mvn clean compile quarkus:dev
 
 ```sh
 mvn clean package
-java -jar target/ruleunit-quarkus-example-runner.jar
+java -jar target/quarkus-app/quarkus-run.jar
 ```
 
 or on windows
 
 ```sh
 mvn clean package
-java -jar target\ruleunit-quarkus-example-runner.jar
+java -jar target\quarkus-app\quarkus-run.jar
 ```
 
 ### Package and Run using Local Native Image

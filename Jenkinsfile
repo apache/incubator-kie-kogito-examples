@@ -16,7 +16,7 @@ pipeline {
     }
     options {
         buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '10', numToKeepStr: '')
-        timeout(time: 360, unit: 'MINUTES')
+        timeout(time: 600, unit: 'MINUTES')
     }
     environment {
         MAVEN_OPTS = '-Xms1024m -Xmx4g'
@@ -182,8 +182,9 @@ MavenCommand getMavenCommand(String directory, boolean addQuarkusVersion=true, b
     }
     if(canNative && isNative()) {
         mvnCmd.withProfiles(['native'])
-        // Added due to https://github.com/quarkusio/quarkus/issues/13341
-        mvnCmd.withProperty('quarkus.profile', 'native')
+            .withProperty('quarkus.native.container-build', true)
+            .withProperty('quarkus.native.container-runtime', 'docker')
+            .withProperty('quarkus.profile', 'native') // Added due to https://github.com/quarkusio/quarkus/issues/13341
     }
     return mvnCmd
 }

@@ -25,14 +25,14 @@ mvn clean compile quarkus:dev
 
 ```
 mvn clean package
-java -jar target/dmn-pmml-quarkus-example-runner.jar
+java -jar target/quarkus-app/quarkus-run.jar
 ```
 
 or on Windows
 
 ```
 mvn clean package
-java -jar target\dmn-pmml-quarkus-example-runner.jar
+java -jar target\quarkus-app\quarkus-run.jar
 ```
 
 ## OpenAPI (Swagger) documentation

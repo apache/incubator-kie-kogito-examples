@@ -39,14 +39,14 @@ mvn clean compile quarkus:dev
 
 ```text
 mvn clean package 
-java -jar target/serverless-workflow-service-calls-quarkus-runner.jar    
+java -jar target/quarkus-app/quarkus-run.jar
 ```
 
 or on windows
 
 ```text
 mvn clean package
-java -jar target\serverless-workflow-service-calls-quarkus-runner.jar
+java -jar target\quarkus-app\quarkus-run.jar
 ```
 
 ### Package and Run using Local Native Image
