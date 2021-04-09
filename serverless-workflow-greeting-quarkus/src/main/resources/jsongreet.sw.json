@@ -3,6 +3,7 @@
   "version": "1.0",
   "name": "Greeting workflow",
   "description": "JSON based greeting workflow",
+  "start": "ChooseOnLanguage",
   "functions": [
     {
       "name": "greetFunction",
@@ -15,25 +16,18 @@
     {
       "name": "ChooseOnLanguage",
       "type": "switch",
-      "start": true,
       "dataConditions": [
         {
           "condition": "{{ $.[?(@.language  == 'English')] }}",
-          "transition": {
-            "nextState": "GreetInEnglish"
-          }
+          "transition": "GreetInEnglish"
         },
         {
           "condition": "{{ $.[?(@.language  == 'Spanish')] }}",
-          "transition": {
-            "nextState": "GreetInSpanish"
-          }
+          "transition": "GreetInSpanish"
         }
       ],
       "default": {
-        "transition": {
-          "nextState": "GreetInEnglish"
-        }
+        "transition": "GreetInEnglish"
       }
     },
     {
@@ -42,9 +36,7 @@
       "data": {
         "greeting": "Hello from JSON Workflow, "
       },
-      "transition": {
-        "nextState": "GreetPerson"
-      }
+      "transition": "GreetPerson"
     },
     {
       "name": "GreetInSpanish",
@@ -52,9 +44,7 @@
       "data": {
         "greeting": "Saludos desde JSON Workflow, "
       },
-      "transition": {
-        "nextState": "GreetPerson"
-      }
+      "transition": "GreetPerson"
     },
     {
       "name": "GreetPerson",
@@ -64,7 +54,7 @@
           "name": "greetAction",
           "functionRef": {
             "refName": "greetFunction",
-            "parameters": {
+            "arguments": {
               "message": "$.greeting $.name"
             }
           }
