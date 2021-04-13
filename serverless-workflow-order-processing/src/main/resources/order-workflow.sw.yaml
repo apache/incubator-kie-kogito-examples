@@ -1,0 +1,26 @@
+name: Order Workflow
+id: orderworkflow
+version: "1.0"
+description: Workflow for processing Orders and produce Logistics Events
+start: ReceiveOrder
+events:
+  - kind: consumed
+    name: OrderEvent
+    type: orderEvent
+    source: orderEvent
+states:
+  - name: ReceiveOrder
+    type: event
+    onEvents:
+      - eventRefs:
+          - "OrderEvent"
+    transition: ProcessOrder
+  - name: ProcessOrder
+    type: parallel
+    branches:
+      - name: HandleFraudEvaluation
+        workflowId: fraudhandling
+      - name: HandleShippingType
+        workflowId: shippinghandling
+    completionType: and
+    end: true
