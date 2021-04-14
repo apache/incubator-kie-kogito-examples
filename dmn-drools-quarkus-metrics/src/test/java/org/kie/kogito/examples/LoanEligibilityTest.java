@@ -63,10 +63,7 @@ public class LoanEligibilityTest {
                 .then()
                 .statusCode(200)
                 .body("'Decide'", is(false));
-    }
 
-    @Test
-    public void testMetricsLoanEligibility() {
         given()
                 .when()
                 .get("/metrics")
@@ -90,6 +87,6 @@ public class LoanEligibilityTest {
         List<String> dashboards = given().contentType(ContentType.JSON).accept(ContentType.JSON).when()
                 .get("/monitoring/dashboards/list.json").as(List.class);
 
-        Assertions.assertEquals(3, dashboards.size());
+        Assertions.assertEquals(4, dashboards.size());
     }
 }

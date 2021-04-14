@@ -22,7 +22,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.test.annotation.DirtiesContext;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -32,7 +31,6 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class LoanEligibilityTest {
 
     @LocalServerPort
@@ -80,10 +78,7 @@ public class LoanEligibilityTest {
                 .then()
                 .statusCode(200)
                 .body("'Decide'", is(false));
-    }
 
-    @Test
-    public void testMetricsLoanEligibility() {
         given()
                 .when()
                 .get("/metrics")
@@ -107,6 +102,6 @@ public class LoanEligibilityTest {
         List<String> dashboards = given().contentType(ContentType.JSON).accept(ContentType.JSON).when()
                 .get("/monitoring/dashboards/list.json").as(List.class);
 
-        Assertions.assertEquals(3, dashboards.size());
+        Assertions.assertEquals(4, dashboards.size());
     }
 }
