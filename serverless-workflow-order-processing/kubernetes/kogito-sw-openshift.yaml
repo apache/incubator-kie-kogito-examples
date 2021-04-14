@@ -1,0 +1,27 @@
+apiVersion: app.kiegroup.org/v1beta1
+kind: KogitoInfra
+metadata:
+  name: kogito-knative-infra
+spec:
+  # bind Knative Broker with our own service
+  resource:
+    apiVersion: eventing.knative.dev/v1
+    kind: Broker
+    name: default
+---
+apiVersion: app.kiegroup.org/v1beta1
+kind: KogitoBuild
+metadata:
+  name: order-processing-workflow
+spec:
+  type: RemoteSource
+  #env:
+  # env can be used to set variables during build
+  #- name: MY_CUSTOM_ENV
+  #  value: "my value"
+  gitSource:
+    contextDir: serverless-workflow-order-processing
+    uri: 'https://github.com/kiegroup/kogito-examples'
+  # set your maven nexus repository to speed up the build time
+  #mavenMirrorURL:
+

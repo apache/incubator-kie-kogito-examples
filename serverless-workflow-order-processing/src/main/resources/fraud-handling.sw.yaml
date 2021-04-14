@@ -6,7 +6,7 @@ events:
    - kind: produced
      name: FraudEvaluation
      type: orders.fraudEvaluation
-     source: fraudEvaluationProcess
+     source: fraudEvaluation
 states:
   - name: FraudHandling
     type: switch

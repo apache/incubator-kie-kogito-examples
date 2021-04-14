@@ -160,7 +160,7 @@ You should see an output like this one in the running container terminal:
 Validation: valid
 Context Attributes,
   specversion: 1.0
-  type: fraudEvaluationProcess
+  type: fraudEvaluation
   source: /process/fraudhandling
   id: 2acd4329-a215-4460-9750-d7f07eb2d5e5
   time: 2021-04-13T20:40:38.394409Z
@@ -244,10 +244,14 @@ Just make sure your cluster has [Knative Eventing available](https://knative.dev
     2. Install Knative Eventing
 3. [Create and configure](https://knative.dev/docs/eventing/getting-started/#setting-up-knative-eventing-resources) a namespace with Knative Eventing (you will need a Broker)
 4. [Install the Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift)
-5. On Kubernetes, build this example locally with the Dockerfile on [kubernetes/Dockerfile](kubernetes/Dockerfile) path, then [push it](operator/kubernetes/process-knative-quickstart-quarkus.yaml) to a third party registry.
-   For OpenShift, you can let the [cluster build it for you](kubernetes/openshift-build.yaml)
-6. Expose the service, if on minikube [follow this tutorial](https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/). There's an `Ingress` already pre created in [kubernetes/ingress.yaml](kubernetes/ingress.yaml). [`NodePort` also works](https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/#deploy-a-hello-world-app).
-7. Run `curl` from the terminal like you did in the previously steps. To see what's going on, just query for the Knative service `event-display`. You should see something like:
+5. Create the [Knative eventing sinks](kubernetes/knative-sinks.yaml) (simply run `kubectl apply -f` using this file)
+6. On Kubernetes, build this example locally with the [Dockerfile](Dockerfile), then [push it](kogito-sw-openshift.yaml) to a third party registry.
+   For OpenShift, you can let the [cluster build it for you](kubernetes/kogito-sw-openshift.yaml)
+7. Expose the service, if on minikube [follow this tutorial](https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/). There's an `Ingress` already pre created in [kubernetes/ingress.yaml](kubernetes/ingress.yaml). [`NodePort` also works](https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/#deploy-a-hello-world-app).
+   On OpenShift, the operator will automatically expose the service for you.
+8. Run `curl` from the terminal like you did in the previously steps. 
+   To see what's going on, just query for one of the Knative service sinks created on step #5. 
+   You should see something like:
 
 ```
 // replace with output
