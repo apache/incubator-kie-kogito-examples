@@ -36,21 +36,8 @@
     <!-- Knative dependencies -->
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>knative-eventing-addon</artifactId>
+      <artifactId>kogito-quarkus-serverless-workflow</artifactId>
     </dependency>
-    <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-cloudevents-quarkus-addon</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-smallrye-reactive-messaging</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.smallrye.reactive</groupId>
-      <artifactId>smallrye-reactive-messaging-http</artifactId>
-    </dependency>
-    <!-- /Knative dependencies -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-openapi</artifactId>

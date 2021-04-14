@@ -50,7 +50,7 @@ public class ApplicantWorkflowIT {
 
     @Test
     public void testApplicantProcess() throws Exception {
-
+        ObjectMapper mapper = new ObjectMapper();
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target(String.format(DECISION_SSE_ENDPOINT, assignedPort));
 
@@ -60,6 +60,7 @@ public class ApplicantWorkflowIT {
         source.register(inboundSseEvent -> received.add(String.valueOf(inboundSseEvent.readData())));
         source.open();
 
+        // Call the exposed domain endpoint
         given()
                 .body("{\"name\":\"Cristiano\",\"position\":\"iOS Engineer\",\"office\":\"Berlin\",\"salary\": 20000}")
                 .header("Content-Type", MediaType.APPLICATION_JSON)
@@ -68,11 +69,26 @@ public class ApplicantWorkflowIT {
                 .then()
                 .statusCode(204);
         await().atMost(10000, MILLISECONDS).until(() -> received.size() == 1);
+
+        JsonNode approvedDecision = mapper.readTree(received.get(0));
+        assertEquals("Approved", approvedDecision.get("data").get("decision").asText());
+
+        // Produce an HTTP CE Event in the root path
+        given()
+                .header("ce-specversion", "1.0")
+                .header("ce-id", "000")
+                .header("ce-source", "/from/test")
+                .header("ce-type", "applicants")
+                .contentType(MediaType.APPLICATION_JSON)
+                .body("{\"name\":\"Zanini\",\"position\":\"Android Engineer\",\"office\":\"Tokio\",\"salary\": 1000}")
+                .post("/")
+                .then()
+                .statusCode(200);
+        await().atMost(10000, MILLISECONDS).until(() -> received.size() == 2);
+        JsonNode deniedDecision = mapper.readTree(received.get(1));
+        assertEquals("Denied", deniedDecision.get("data").get("decision").asText());
+
         source.close();
-
-        ObjectMapper mapper = new ObjectMapper();
-        JsonNode decisionObj = mapper.readTree(received.get(0));
-        assertEquals("Approved", decisionObj.get("data").get("decision").asText());
+        client.close();
     }
-
 }
