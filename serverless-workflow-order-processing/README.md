@@ -254,5 +254,22 @@ Just make sure your cluster has [Knative Eventing available](https://knative.dev
    You should see something like:
 
 ```
-// replace with output
+☁️  cloudevents.Event
+Validation: valid
+Context Attributes,
+  specversion: 1.0
+  type: internationalShipping
+  source: /process/shippinghandling
+  id: f1193deb-9c4e-4e90-8aab-27fdba4ed740
+  time: 2021-04-15T16:12:04.455905Z
+Extensions,
+  knativearrivaltime: 2021-04-15T16:12:04.657355879Z
+  kogitoparentprociid: 836fbb3b-a68f-487b-9d96-cc93ca387ab9
+  kogitoprocid: shippinghandling
+  kogitoprocinstanceid: 1cc0d2b9-c5fb-445c-8229-5790e7a7b254
+  kogitorootprocid: orderworkflow
+  kogitorootprociid: 836fbb3b-a68f-487b-9d96-cc93ca387ab9
+  kogitousertaskist: 1
+Data,
+  {"id":"f0643c68-609c-48aa-a820-5df423fa4fe0","country":"Brazil","total":500,"description":"iPhone 7","shipping":"international"}
 ```

@@ -24,4 +24,13 @@ spec:
     uri: 'https://github.com/kiegroup/kogito-examples'
   # set your maven nexus repository to speed up the build time
   #mavenMirrorURL:
-
+---
+apiVersion: app.kiegroup.org/v1beta1
+kind: KogitoRuntime
+metadata:
+  name: order-processing-workflow
+spec:
+  replicas: 1
+  # we bind our application with Knative env
+  infra:
+    - kogito-knative-infra
