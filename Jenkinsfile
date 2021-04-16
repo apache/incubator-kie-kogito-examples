@@ -26,7 +26,6 @@ pipeline {
             steps {
                 checkoutRepo('kogito-runtimes')
                 checkoutOptaplannerRepo()
-                checkoutRepo('kogito-apps')
                 checkoutRepo('kogito-examples')
                 checkoutRepo('kogito-examples', 'kogito-examples-persistence')
                 checkoutRepo('kogito-examples', 'kogito-examples-events')
