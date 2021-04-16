@@ -119,7 +119,7 @@ public class FlightTest {
                 .get("/rest/flights/" + id + "/approveDenyPassenger/" + denyId)
                 .then()
                 .statusCode(200)
-                .body("passenger.name", is(passengerDTO.getName()));
+                .body("parameters.passenger.name", is(passengerDTO.getName()));
 
         // approve passenger
         parameters = new HashMap<>();
