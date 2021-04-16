@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.kie.kogito</groupId>
     <artifactId>kogito-travel-agency-example</artifactId>
-    <version>1.5.0.Final</version>
+    <version>1.5.1-SNAPSHOT</version>
   </parent>
   <artifactId>kogito-travel-agency-example-basic</artifactId>
   <name>Kogito Example :: Travel Agency :: Basic</name>
