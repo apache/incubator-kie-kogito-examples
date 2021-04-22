@@ -58,6 +58,7 @@ public class DroolsMetricsTest {
                 .get("/metrics")
                 .then()
                 .statusCode(200)
-                .body(containsString("drl_match_fired_nanosecond_count{app_id=\"default-rule-monitoring-listener\",rule=\"helloWorld\",} 1.0"));
+                .body(containsString(
+                        "drl_match_fired_nanosecond_count{app_id=\"default-rule-monitoring-listener\",artifactId=\"dmn-drools-springboot-metrics\",rule=\"helloWorld\",version=\"2.0.0-SNAPSHOT\",} 1.0"));
     }
 }
