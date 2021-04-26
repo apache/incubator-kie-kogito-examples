@@ -71,7 +71,7 @@ You should see that the `kogito-operator` has one pod running within some minute
 
 ```bash
 NAME                                                  READY   STATUS              RESTARTS   AGE
-kogito-operator-controller-manager-6bff9bb855-v7x9t   0/2     ContainerCreating   0          24s
+kogito-operator-controller-manager-6bff9bb855-v7x9t   2/2     Running             0          24s
 ```
 
 Install the [Infinispan operator](https://operatorhub.io/operator/infinispan/2.0.x/infinispan-operator.v2.0.6) version 2.0.6. 
