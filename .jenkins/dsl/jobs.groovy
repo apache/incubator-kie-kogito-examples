@@ -18,7 +18,8 @@ def getDefaultJobParams() {
             repository: 'kogito-examples',
             credentials: "${GIT_AUTHOR_CREDENTIALS_ID}",
             token_credentials: "${GIT_AUTHOR_TOKEN_CREDENTIALS_ID}"
-        ]
+        ],
+        env: [:]
     ]
 }
 
@@ -71,18 +72,21 @@ if (!isMainBranch()) {
 void setupPrJob(String jobFolder) {
     def jobParams = getDefaultJobParams()
     jobParams.job.folder = jobFolder
+    jobParams.env.put('TIMEOUT_VALUE', 120)
     KogitoJobTemplate.createPRJob(this, jobParams)
 }
 
 void setupQuarkusLTSPrJob(String jobFolder) {
     def jobParams = getDefaultJobParams()
     jobParams.job.folder = jobFolder
+    jobParams.env.put('TIMEOUT_VALUE', 120)
     KogitoJobTemplate.createQuarkusLTSPRJob(this, jobParams)
 }
 
 void setupNativePrJob(String jobFolder) {
     def jobParams = getDefaultJobParams()
     jobParams.job.folder = jobFolder
+    jobParams.env.put('TIMEOUT_VALUE', 600)
     KogitoJobTemplate.createNativePRJob(this, jobParams)
 }
 
