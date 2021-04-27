@@ -60,18 +60,18 @@ Set the Kogito release version
 KOGITO_VERSION=v1.6.0
 ```
 
-Deploy the kogito operator
+Deploy the kogito operator in the cluster
 ```bash
 wget https://github.com/kiegroup/kogito-operator/releases/download/${KOGITO_VERSION}/kogito-operator.yaml
-sed -i "s/kogito-operator-system/${PROJECT_NAME}/g" kogito-operator.yaml
-kubectl apply -f kogito-operator.yaml -n ${PROJECT_NAME}
+kubectl apply -f kogito-operator.yaml
 ```
 
-You should see that the `kogito-operator` has one pod running within some minutes: the command `kubectl get pods -n ${PROJECT_NAME}` should return something like 
+You should see that the `kogito-operator` has one pod running within some minutes: the command `kubectl get pods -n kogito-operator-system` should return something like 
 
 ```bash
-NAME                                                  READY   STATUS              RESTARTS   AGE
-kogito-operator-controller-manager-6bff9bb855-v7x9t   2/2     Running             0          24s
+NAME                                                  READY   STATUS    RESTARTS   AGE
+kogito-operator-controller-manager-7456474485-hn89d   2/2     Running   0          63s
+
 ```
 
 Install the [Infinispan operator](https://operatorhub.io/operator/infinispan/2.0.x/infinispan-operator.v2.0.6) version 2.0.6. 
@@ -84,7 +84,7 @@ sed -i "s/- my-infinispan/- ${PROJECT_NAME}/g" infinispan.yaml
 kubectl apply -f infinispan.yaml -n ${PROJECT_NAME}
 ```
 
-If the infinispan operator does not show under your namespace, please ensure that all the pods under the namespace `olm` are up and running.
+If the infinispan operator does not show under your namespace, please ensure that all the pods under the namespace `olm` are up and running. If the catalog pod is in Crashloop status, the workaround is to delete the pod and wait until it gets redeployed automatically.
 
 Install `strimzi` operator with 
 
