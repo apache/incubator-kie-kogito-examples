@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-  xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.kie.kogito</groupId>
@@ -11,22 +9,19 @@
   </parent>
   <groupId>org.kie.kogito.examples</groupId>
   <artifactId>onboarding-springboot</artifactId>
-  <packaging>jar</packaging>
   <name>Kogito Example :: Onboarding Example :: Onboarding with Business Process Spring Boot</name>
   <description>Onboarding function and service orchestration</description>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
-        <version>${springboot.version}</version>
+        <version>${version.org.springframework.boot}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
-
   <dependencies>
     <dependency>
       <groupId>org.kie.kogito</groupId>
@@ -34,14 +29,12 @@
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>monitoring-prometheus-addon</artifactId>
+      <artifactId>monitoring-prometheus-springboot-addon</artifactId>
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-cloud-workitems</artifactId>
     </dependency>
-
-    <!-- test related -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
@@ -50,6 +43,7 @@
     <dependency>
       <groupId>io.rest-assured</groupId>
       <artifactId>rest-assured</artifactId>
+      <version>${version.io.rest-assured.springboot}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -58,7 +52,6 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-
   <build>
     <finalName>${project.artifactId}</finalName>
     <plugins>
@@ -80,7 +73,6 @@
       </plugin>
     </plugins>
   </build>
-
   <profiles>
     <profile>
       <id>persistence</id>

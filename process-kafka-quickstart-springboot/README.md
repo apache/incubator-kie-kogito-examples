@@ -104,7 +104,7 @@ java -jar target/process-kafka-quickstart-springboot.jar
 ### OpenAPI (Swagger) documentation
 [Specification at swagger.io](https://swagger.io/docs/specification/about/)
 
-You can take a look at the [OpenAPI definition](http://localhost:8080/docs/swagger.json) - automatically generated and included in this service - to determine all available operations exposed by this service. For easy readability you can visualize the OpenAPI definition file using a UI tool like for example available [Swagger UI](https://editor.swagger.io).
+You can take a look at the [OpenAPI definition](http://localhost:8080/v3/api-docs) - automatically generated and included in this service - to determine all available operations exposed by this service. For easy readability you can visualize the OpenAPI definition file using a UI tool like for example available [Swagger UI](https://editor.swagger.io).
 
 In addition, various clients to interact with this service can be easily generated using this OpenAPI definition.
 
@@ -133,7 +133,7 @@ Content (cloud event format)
   "specversion": "0.3",
   "id": "21627e26-31eb-43e7-8343-92a696fd96b1",
   "source": "",
-  "type": "TravellersMessageDataEvent_3",
+  "type": "travellers",
   "time": "2019-10-01T12:02:23.812262+02:00[Europe/Warsaw]",
   "data": {
 	"firstName" : "Jan",
@@ -146,7 +146,7 @@ Content (cloud event format)
 One liner
 
 ```json
-{"specversion": "0.3","id": "21627e26-31eb-43e7-8343-92a696fd96b1","source": "","type": "TravellersMessageDataEvent_3", "time": "2019-10-01T12:02:23.812262+02:00[Europe/Warsaw]","data": { "firstName" : "Jan", "lastName" : "Kowalski", "email" : "jan.kowalski@example.com", "nationality" : "Polish"}}
+{"specversion": "0.3","id": "21627e26-31eb-43e7-8343-92a696fd96b1","source": "","type": "travellers", "time": "2019-10-01T12:02:23.812262+02:00[Europe/Warsaw]","data": { "firstName" : "Jan", "lastName" : "Kowalski", "email" : "jan.kowalski@example.com", "nationality" : "Polish"}}
 ```
 
 this will then trigger the successful processing of the traveller and put another message on `processedtravellers` topic.
@@ -165,7 +165,7 @@ With the following content (Cloud Event Format)
   "specversion": "0.3",
   "id": "31627e26-31eb-43e7-8343-92a696fd96b1",
   "source": "",
-  "type": "TravellersMessageDataEvent_3",
+  "type": "travellers",
   "time": "2019-10-01T12:02:23.812262+02:00[Europe/Warsaw]",
   "data": {
 	"firstName" : "John",
@@ -179,7 +179,7 @@ With the following content (Cloud Event Format)
 One Liner
 
 ```json
-{"specversion": "0.3","id": "31627e26-31eb-43e7-8343-92a696fd96b1","source": "","type": "TravellersMessageDataEvent_3", "time": "2019-10-01T12:02:23.812262+02:00[Europe/Warsaw]","data": { "firstName" : "John", "lastName" : "Doe", "email" : "john.doe@example.com", "nationality" : "American"}}
+{"specversion": "0.3","id": "31627e26-31eb-43e7-8343-92a696fd96b1","source": "","type": "travellers", "time": "2019-10-01T12:02:23.812262+02:00[Europe/Warsaw]","data": { "firstName" : "John", "lastName" : "Doe", "email" : "john.doe@example.com", "nationality" : "American"}}
 ```
 
 this will not result in message being send to `processedtravelers` topic.

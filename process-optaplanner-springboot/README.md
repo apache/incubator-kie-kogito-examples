@@ -40,7 +40,7 @@ mvn clean package spring-boot:run
 ## OpenAPI (Swagger) documentation
 [Specification at swagger.io](https://swagger.io/docs/specification/about/)
 
-You can take a look at the [OpenAPI definition](http://localhost:8080/swagger.json) - automatically generated and included in this service - to determine all available operations exposed by this service. For easy readability you can visualize the OpenAPI definition file using a UI tool like for example available [Swagger UI](https://editor.swagger.io).
+You can take a look at the [OpenAPI definition](http://localhost:8080/v3/api-docs) - automatically generated and included in this service - to determine all available operations exposed by this service. For easy readability you can visualize the OpenAPI definition file using a UI tool like for example available [Swagger UI](https://editor.swagger.io).
 
 In addition, various clients to interact with this service can be easily generated using this OpenAPI definition.
 
@@ -108,7 +108,7 @@ curl -X GET http://localhost:8080/rest/flights
 
 As response an array of flights is returned.
 
-### GET  /rest/flight/{id}
+### GET  /rest/flights/{id}
 
 Returns flight with given id (if being scheduled):
 
@@ -153,13 +153,13 @@ Create a new Ticket request for a passenger, who must be approved by security.
 
 ```sh
 # Replace {id} with the process id
-curl -d '{ "passenger": { "name": "Amy Cole", "seatTypePreference": "WINDOW", "emergencyExitRowCapable": true, "paidForSeat": true, "seat": "3A" } }' -X POST http://localhost:8080/rest/flights/{id}/newPassengerRequest
+curl -d '{"name": "Amy Cole", "seatTypePreference": "WINDOW", "emergencyExitRowCapable": true, "paidForSeat": true, "seat": "3A"}' -X POST http://localhost:8080/rest/flights/{id}/newPassengerRequest
 ```
 or on Windows:
 
 ```sh
 rem Replace {id} with the process id
-curl -d "{ \"passenger\": { \"name\": \"Amy Cole\", \"seatTypePreference\": \"WINDOW\", \"emergencyExitRowCapable\": true, \"paidForSeat\": true, \"seat\": \"3A\" } }" -X POST http://localhost:8080/rest/flights/{id}/newPassengerRequest
+curl -d "{\"name\": \"Amy Cole\", \"seatTypePreference\": \"WINDOW\", \"emergencyExitRowCapable\": true, \"paidForSeat\": true, \"seat\": \"3A\"}" -X POST http://localhost:8080/rest/flights/{id}/newPassengerRequest
 ```
 
 ### GET /rest/flights/{id}/approveDenyPassenger/{workItemId}

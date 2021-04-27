@@ -1,22 +1,19 @@
-/**
- *  Copyright 2020 Red Hat, Inc. and/or its affiliates.
+/*
+ * Copyright 2020 Red Hat, Inc. and/or its affiliates.
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *       http://www.apache.org/licenses/LICENSE-2.0
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.acme.travel;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -44,6 +41,11 @@ import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
+
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.core.StringContains.containsString;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @QuarkusTest
 @QuarkusTestResource(value = InfinispanQuarkusTestResource.class)
@@ -86,6 +88,17 @@ public class TravelIT {
 
         whenAddVisaApplication();
         thenProcessIsActive();
+    }
+
+    @Test
+    public void testProcessMetrics() {
+        whenNewTravel(TRAVELLER_FROM_POLAND, TRIP_TO_POLAND);
+        given()
+                .when()
+                .get("/metrics")
+                .then()
+                .statusCode(200)
+                .body(containsString("kie_process_instance_running_total{app_id=\"default-process-monitoring-listener\",process_id=\"travels\",} 1.0"));
     }
 
     private void whenNewTravel(Traveller traveller, Trip trip) {

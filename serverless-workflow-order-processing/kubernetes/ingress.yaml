@@ -1,0 +1,19 @@
+# OPTIONAL! You should have your own way to expose the service, this is just a suggestion
+# After deploying your service, use this file to expose it
+# Ref.: https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/#create-an-ingress-resource
+# don't forget to edit your /etc/hosts file!!
+apiVersion: networking.k8s.io/v1beta1 # for versions before 1.14 use extensions/v1beta1
+kind: Ingress
+metadata:
+  name: order-processing-workflow-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - host: order-processing-workflow.kogito
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: order-processing-workflow
+              servicePort: 80

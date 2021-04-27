@@ -1,0 +1,13 @@
+apiVersion: app.kiegroup.org/v1beta1
+kind: KogitoSupportingService
+metadata:
+  name: trusty
+  labels:
+    app: trusty
+spec:
+  serviceType: TrustyAI
+  replicas: 1
+  image: quay.io/kiegroup/kogito-trusty-infinispan:1.4
+  infra:
+    - kogito-kafka-infra
+    - kogito-infinispan-infra

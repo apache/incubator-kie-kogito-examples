@@ -18,6 +18,15 @@ When using native image compilation, you will also need:
   - Environment variable GRAALVM_HOME set accordingly
   - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too.  You also need 'native-image' installed in GraalVM (using 'gu install native-image'). Please refer to [GraalVM installation documentation](https://www.graalvm.org/docs/reference-manual/aot-compilation/#prerequisites) for more details.
 
+### Configuration of the tracing addon
+
+The default configuration pushes the decision tracing events to the kafka topic `kogito-tracing-decision` and the DMN models used by the kogito application to `kogito-tracing-model` under the group-id `kogito-runtimes`. 
+The configuration can be customized according to [https://quarkus.io/guides/kafka](https://quarkus.io/guides/kafka) and [https://kafka.apache.org/documentation/#producerconfigs](https://kafka.apache.org/documentation/#producerconfigs) using the prefix `mp.messaging.outgoing.kogito-tracing-decision.<property_name>`. 
+For example, in order to change the topic name for the decision tracing events, add the following line to the `application.properties` file:
+ ```
+mp.messaging.outgoing.kogito-tracing-decision.topic=my-kogito-tracing-decision
+```
+
 ### Compile and Run in Local Dev Mode
 
 ```
@@ -28,14 +37,14 @@ mvn clean compile quarkus:dev
 
 ```
 mvn clean package
-java -jar target/dmn-tracing-quarkus-runner.jar
+java -jar target/quarkus-app/quarkus-run.jar
 ```
 
 or on Windows
 
 ```
 mvn clean package
-java -jar target\dmn-tracing-quarkus-runner.jar
+java -jar target\quarkus-app\quarkus-run.jar
 ```
 
 ### Package and Run using Local Native Image
@@ -118,7 +127,7 @@ Example response:
     "salary": 0,
     "age": 0
   },
-  "Is Enought?": 0,
+  "Is Enough?": 0,
   "Decide": null
 }
 ```

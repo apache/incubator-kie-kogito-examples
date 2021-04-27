@@ -1,19 +1,18 @@
-/**
- *  Copyright 2020 Red Hat, Inc. and/or its affiliates.
+/*
+ * Copyright 2020 Red Hat, Inc. and/or its affiliates.
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *       http://www.apache.org/licenses/LICENSE-2.0
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
-
 package org.kogito.examples.sw.github.workflow;
 
 import java.util.List;
@@ -27,8 +26,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
+
+import com.fasterxml.jackson.databind.JsonNode;
 
 @Path("/repo")
 @Produces(MediaType.APPLICATION_JSON)
@@ -39,20 +39,20 @@ public interface GitHubClient {
     @POST
     @Path("/{user}/{name}/pr/{number}/labels")
     Response addLabels(@PathParam("user") String user,
-                       @PathParam("name") String repoName,
-                       @PathParam("number") Integer prNumber,
-                       List<String> labels);
+            @PathParam("name") String repoName,
+            @PathParam("number") Integer prNumber,
+            List<String> labels);
 
     @POST
     @Path("/{user}/{name}/pr/{number}/reviewers")
     Response addReviewers(@PathParam("user") String user,
-                          @PathParam("name") String repoName,
-                          @PathParam("number") Integer prNumber,
-                          List<String> reviewers);
+            @PathParam("name") String repoName,
+            @PathParam("number") Integer prNumber,
+            List<String> reviewers);
 
     @GET
     @Path("/{user}/{name}/pr/{number}/files")
     JsonNode fetchFiles(@PathParam("user") String user,
-                        @PathParam("name") String repoName,
-                        @PathParam("number") Integer prNumber);
+            @PathParam("name") String repoName,
+            @PathParam("number") Integer prNumber);
 }

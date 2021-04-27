@@ -110,7 +110,7 @@ java -jar target/process-timer-springboot.jar
 ### OpenAPI (Swagger) documentation
 [Specification at swagger.io](https://swagger.io/docs/specification/about/)
 
-You can take a look at the [OpenAPI definition](http://localhost:8080/docs/swagger.json) - automatically generated and included in this service - to determine all available operations exposed by this service. For easy readability you can visualize the OpenAPI definition file using a UI tool like for example available [Swagger UI](https://editor.swagger.io).
+You can take a look at the [OpenAPI definition](http://localhost:8080/v3/api-docs) - automatically generated and included in this service - to determine all available operations exposed by this service. For easy readability you can visualize the OpenAPI definition file using a UI tool like for example available [Swagger UI](https://editor.swagger.io).
 
 In addition, various clients to interact with this service can be easily generated using this OpenAPI definition.
 
@@ -250,14 +250,12 @@ You can download it from [Select Latest Version]
 https://repo.maven.apache.org/maven2/org/kie/kogito/jobs-service/
 
 ```sh
-java -Dquarkus.http.port=8085 -jar target/jobs-service-{version}-runner.jar
+java -Dquarkus.http.port=8085 -jar jobs-service-common/target/jobs-service-common-{version}-runner.jar
 ```
 
 * After Starting Kogito Job Service you should see a similar Log as follows
 
 <p align="center"><img src="docs/images/kogitoWebServiceLog.png"></p>
-
-Note that in the above log infinispan has started on port 11222
 
 In case you'd like to run the job service with enabled persistence then start
 Infinispan server before and then run the job service with following command
@@ -269,14 +267,20 @@ Start Infinispan Server
 [Infinispan Directory]/bin/sh server.sh
 
 ```sh
-java -Dquarkus.http.port=8085 -Dkogito.jobs-service.persistence=infinispan -jar target/jobs-service-{version}-runner.jar
+java -Dquarkus.http.port=8085 -jar jobs-service-infinispan/target/jobs-service-infinispan-{version}-runner.jar
 ```
-
-in both cases replace `{version}` with actual Kogito version to be used (Job Service is available from 0.6.0)
 
 * After Starting Infinispan you should see a similar Log as follows
 
 <p align="center"><img src="docs/images/infinispanRunning.png"></p>
+
+If you'd like to use PostgresSQL as persistence, start the PostgreSQL server, then start job service with following command
+
+```sh
+java -Dquarkus.http.port=8085 -Dquarkus.datasource.username={username} -Dquarkus.datasource.password={password} -Dquarkus.datasource.reactive.url=postgresql://{host}:{port}/{db} -Dquarkus.datasource.jdbc.url=jdbc:postgresql://{host}:{port}/{db}  -jar jobs-service-postgresql/target/jobs-service-postgresql-{version}-runner.jar
+```
+
+In all cases replace `{version}` with actual Kogito version to be used (Job Service is available from 0.6.0)
 
 After that you can redo the timer queries described above.
 

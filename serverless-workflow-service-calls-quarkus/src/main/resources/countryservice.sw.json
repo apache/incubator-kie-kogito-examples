@@ -3,29 +3,26 @@
   "version": "1.0",
   "name": "Service Call Workflow",
   "description": "JSON based service call workflow",
+  "start": "GetCountryInfo",
   "functions": [
     {
       "name": "countryInfoFunction",
-      "type": "service",
-      "metadata": {
-        "interface": "org.kogito.serverless.examples.CountriesResource",
-        "operation": "jsonName"
-      }
+      "operation": "restcountries.json#getByName1"
     },
     {
       "name": "classifySmallMediumFunction",
-      "type": "service",
       "metadata": {
         "interface": "org.kogito.serverless.examples.CountriesClassifierResource",
-        "operation": "classifySmallMedium"
+        "operation": "classifySmallMedium",
+        "type": "service"
       }
     },
     {
       "name": "classifyLargeFunction",
-      "type": "service",
       "metadata": {
         "interface": "org.kogito.serverless.examples.CountriesClassifierResource",
-        "operation": "classifyLarge"
+        "operation": "classifyLarge",
+        "type": "service"
       }
     }
   ],
@@ -33,43 +30,35 @@
     {
       "name": "GetCountryInfo",
       "type": "operation",
-      "start": {
-        "kind": "default"
-      },
       "actionMode": "sequential",
       "actions": [
         {
           "name": "getCountryInfo",
           "functionRef": {
-            "refName": "countryInfoFunction"
+            "refName": "countryInfoFunction",
+            "arguments": {
+              "name": "$.name"
+            }
           }
         }
       ],
-      "transition": {
-        "nextState": "ClassifyByPopulation"
-      }
+      "transition": "ClassifyByPopulation"
     },
     {
       "name": "ClassifyByPopulation",
       "type": "switch",
       "dataConditions": [
         {
-          "condition": "{{ $.[?(@.population  < 20000000)] }}",
-          "transition": {
-            "nextState": "ClassifyAsSmallOrMedium"
-          }
+          "condition": "{{ $.response[0].[?(@.population < 20000000)] }}",
+          "transition": "ClassifyAsSmallOrMedium"
         },
         {
-          "condition": "{{ $.[?(@.population  >= 20000000)] }}",
-          "transition": {
-            "nextState": "ClassifyAsLarge"
-          }
+          "condition": "{{ $.response[0].[?(@.population >= 20000000)] }}",
+          "transition": "ClassifyAsLarge"
         }
       ],
       "default": {
-        "transition": {
-          "nextState": "ClassifyAsSmallOrMedium"
-        }
+        "transition": "ClassifyAsSmallOrMedium"
       }
     },
     {
@@ -79,14 +68,10 @@
       "actions": [
         {
           "name": "classifyIntoSmallOrMedium",
-          "functionRef": {
-            "refName": "classifySmallMediumFunction"
-          }
+          "functionRef": "classifySmallMediumFunction"
         }
       ],
-      "end": {
-        "kind": "default"
-      }
+      "end": true
     },
     {
       "name": "ClassifyAsLarge",
@@ -95,14 +80,10 @@
       "actions": [
         {
           "name": "classifyIntoLarge",
-          "functionRef": {
-            "refName": "classifyLargeFunction"
-          }
+          "functionRef": "classifyLargeFunction"
         }
       ],
-      "end": {
-        "kind": "default"
-      }
+      "end": true
     }
   ]
 }

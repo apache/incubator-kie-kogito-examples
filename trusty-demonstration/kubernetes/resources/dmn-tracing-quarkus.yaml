@@ -1,0 +1,11 @@
+apiVersion: app.kiegroup.org/v1beta1
+kind: KogitoRuntime
+metadata:
+  name: dmn-tracing-quarkus
+  labels:
+    app: dmn-tracing-quarkus
+spec:
+  replicas: 1
+  image: quay.io/<YOUR_NAMESPACE>/dmn-tracing-quarkus:2.0.0-snapshot # <---- replace with your image
+  infra:
+    - kogito-kafka-infra

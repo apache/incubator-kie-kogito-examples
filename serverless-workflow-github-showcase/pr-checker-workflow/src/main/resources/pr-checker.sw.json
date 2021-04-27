@@ -2,13 +2,14 @@
   "id": "prchecker",
   "name": "Github PR Checker Workflow",
   "version": "1.0",
+  "start": "HandleOpenPR",
   "functions": [
     {
       "name": "FetchPRFiles",
-      "type": "service",
       "metadata": {
         "interface": "org.kogito.examples.sw.github.workflow.GitHubService",
-        "operation": "fetchPRFiles"
+        "operation": "fetchPRFiles",
+        "type": "service"
       }
     }
   ],
@@ -30,9 +31,6 @@
     {
       "name": "HandleOpenPR",
       "type": "event",
-      "start": {
-        "kind": "default"
-      },
       "onEvents": [
         {
           "eventRefs": [
@@ -40,16 +38,12 @@
           ],
           "actions": [
             {
-              "functionRef": {
-                "refName": "FetchPRFiles"
-              }
+              "functionRef": "FetchPRFiles"
             }
           ]
         }
       ],
-      "transition": {
-        "nextState": "DecoratePullRequest"
-      }
+      "transition": "DecoratePullRequest"
     },
     {
       "name": "DecoratePullRequest",
@@ -65,7 +59,6 @@
         }
       ],
       "end": {
-        "kind": "default",
         "produceEvents": [
           {
             "eventRef": "PRVerified"

@@ -5,6 +5,8 @@ bin/
 # Eclipse, Netbeans and IntelliJ files
 .*
 !.gitignore
+!.jenkins
+!.github
 nbproject
 target
 /*.ipr
@@ -46,7 +48,7 @@ workspace
 #Scripts
 data-index-service*.jar
 management-console*.jar
-kogito-travel-agency/scripts/persistence/
+kogito-travel-agency/extended/scripts/persistence/
 
 #Grafana generated dashboards
 **/docker-compose/grafana/provisioning/dashboards/*.json

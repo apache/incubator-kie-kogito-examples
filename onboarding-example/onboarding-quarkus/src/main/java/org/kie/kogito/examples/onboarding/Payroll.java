@@ -1,17 +1,17 @@
-/**
- *  Copyright 2020 Red Hat, Inc. and/or its affiliates.
+/*
+ * Copyright 2020 Red Hat, Inc. and/or its affiliates.
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *       http://www.apache.org/licenses/LICENSE-2.0
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.kie.kogito.examples.onboarding;
 
@@ -23,46 +23,46 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Payroll implements java.io.Serializable {
 
-	static final long serialVersionUID = 1L;
+    static final long serialVersionUID = 1L;
 
-	private java.lang.Integer vacationDays;
-	private java.lang.Double taxRate;
-	
-	@JsonFormat(shape = JsonFormat.Shape.STRING)
-	private java.util.Date paymentDate;
+    private java.lang.Integer vacationDays;
+    private java.lang.Double taxRate;
 
-	public Payroll() {
-	}
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    private java.util.Date paymentDate;
 
-	public java.lang.Integer getVacationDays() {
-		return this.vacationDays;
-	}
+    public Payroll() {
+    }
 
-	public void setVacationDays(java.lang.Integer vacationDays) {
-		this.vacationDays = vacationDays;
-	}
+    public java.lang.Integer getVacationDays() {
+        return this.vacationDays;
+    }
 
-	public java.lang.Double getTaxRate() {
-		return this.taxRate;
-	}
+    public void setVacationDays(java.lang.Integer vacationDays) {
+        this.vacationDays = vacationDays;
+    }
 
-	public void setTaxRate(java.lang.Double taxRate) {
-		this.taxRate = taxRate;
-	}
+    public java.lang.Double getTaxRate() {
+        return this.taxRate;
+    }
 
-	public java.util.Date getPaymentDate() {
-		return this.paymentDate;
-	}
+    public void setTaxRate(java.lang.Double taxRate) {
+        this.taxRate = taxRate;
+    }
 
-	public void setPaymentDate(java.util.Date paymentDate) {
-		this.paymentDate = paymentDate;
-	}
+    public java.util.Date getPaymentDate() {
+        return this.paymentDate;
+    }
 
-	public Payroll(java.lang.Integer vacationDays, java.lang.Double taxRate,
-			java.util.Date paymentDate) {
-		this.vacationDays = vacationDays;
-		this.taxRate = taxRate;
-		this.paymentDate = paymentDate;
-	}
+    public void setPaymentDate(java.util.Date paymentDate) {
+        this.paymentDate = paymentDate;
+    }
+
+    public Payroll(java.lang.Integer vacationDays, java.lang.Double taxRate,
+            java.util.Date paymentDate) {
+        this.vacationDays = vacationDays;
+        this.taxRate = taxRate;
+        this.paymentDate = paymentDate;
+    }
 
 }

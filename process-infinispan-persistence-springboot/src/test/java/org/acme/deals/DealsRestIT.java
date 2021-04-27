@@ -1,22 +1,22 @@
-/**
- *  Copyright 2020 Red Hat, Inc. and/or its affiliates.
+/*
+ * Copyright 2020 Red Hat, Inc. and/or its affiliates.
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *       http://www.apache.org/licenses/LICENSE-2.0
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.acme.deals;
 
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.testcontainers.springboot.InfinispanSpringBootTestResource;
@@ -24,9 +24,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.ContextConfiguration;
 
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ContextConfiguration(initializers = InfinispanSpringBootTestResource.class)
@@ -35,10 +39,10 @@ public class DealsRestIT {
     static {
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
     }
-    
+
     @LocalServerPort
     int randomServerPort;
-    
+
     @BeforeEach
     public void setup() {
         RestAssured.port = randomServerPort;
@@ -48,7 +52,8 @@ public class DealsRestIT {
     public void testDealsRest() {
         // test adding new deal
         String deal = "my fancy deal";
-        String addDealPayload = "{\"name\" : \"" + deal + "\", \"traveller\" : { \"firstName\" : \"John\", \"lastName\" : \"Doe\", \"email\" : \"jon.doe@example.com\", \"nationality\" : \"American\",\"address\" : { \"street\" : \"main street\", \"city\" : \"Boston\", \"zipCode\" : \"10005\", \"country\" : \"US\" }}}";
+        String addDealPayload = "{\"name\" : \"" + deal
+                + "\", \"traveller\" : { \"firstName\" : \"John\", \"lastName\" : \"Doe\", \"email\" : \"jon.doe@example.com\", \"nationality\" : \"American\",\"address\" : { \"street\" : \"main street\", \"city\" : \"Boston\", \"zipCode\" : \"10005\", \"country\" : \"US\" }}}";
         String dealId = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(addDealPayload)
                 .when().post("/deals")
                 .then().statusCode(201).body("id", notNullValue()).extract().path("id");
@@ -101,5 +106,14 @@ public class DealsRestIT {
         given().accept(ContentType.JSON)
                 .when().get("/deals")
                 .then().statusCode(200).body("$.size()", is(0));
+    }
+
+    @Test
+    public void testProtobufListIsAvailable() {
+        @SuppressWarnings("unchecked")
+        List<String> files = given().contentType(ContentType.JSON).accept(ContentType.JSON).when()
+                .get("/persistence/protobuf/list.json").as(List.class);
+
+        assertEquals(2, files.size());
     }
 }

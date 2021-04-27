@@ -193,4 +193,4 @@ Congratulations! The GitHub functions is now available in the cluster ready to b
 
 ### Cleaning up!
 
-See the project root's (./README.md)[README] documentation.
+See the project root's [README](./README.md) documentation.

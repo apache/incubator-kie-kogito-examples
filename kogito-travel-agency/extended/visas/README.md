@@ -87,10 +87,10 @@ Alternatively, you can use the Docker Compose template, instructions on how to u
 This application requires a [Apache Kafka](https://kafka.apache.org/) installed and following topics created
 
 * `visaapplications` - used to send visa application that are consumed and processed by Kogito Visas service
-* `visasapproved` - used to send visa applications that were approved
-* `visasrejected` - used to send visa applications that were rejected
+* `visasresponses` - used to send visa applications that were were approved or rejected
 * `kogito-processinstances-events` - used to emit events by kogito that can be consumed by data index service and other services
 * `kogito-usertaskinstances-events` -used to emit events by kogito that can be consumed by data index service
+* `kogito-variables-events` - used to emit events by kogito that can be consumed by data index service
 
 Alternatively, you can use the Docker Compose template, instructions on how to use it are available in the [README](../docker-compose/README.md) file.
 
@@ -123,7 +123,7 @@ If you wish to install, configure and start the **Data Index Service** manually,
 
 After downloading the runner, create a new folder to store the .proto files that will be used by the service. 
 
-This service works with .proto files that define the data model. Once **Kogito Travel Service** is started, /target/classes/persistence/travels.proto is generated and it has to be copied to the new proto files folder.
+This service works with .proto files that define the data model. Once **Kogito Travel Service** is started, /target/classes/META-INF/resources/persistence/protobuf/travels.proto is generated and it has to be copied to the new proto files folder.
 
 To start the **Kogito Data Index Service** just past the full path of the proto files folder and execute 
 

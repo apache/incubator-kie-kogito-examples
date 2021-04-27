@@ -1,26 +1,23 @@
-/**
- *  Copyright 2020 Red Hat, Inc. and/or its affiliates.
+/*
+ * Copyright 2020 Red Hat, Inc. and/or its affiliates.
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *       http://www.apache.org/licenses/LICENSE-2.0
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.kie.kogito.examples;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import io.quarkus.test.common.QuarkusTestResource;
-import io.quarkus.test.junit.QuarkusTest;
-import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.Model;
@@ -28,6 +25,10 @@ import org.kie.kogito.process.Process;
 import org.kie.kogito.process.ProcessInstanceReadMode;
 import org.kie.kogito.testcontainers.quarkus.InfinispanQuarkusTestResource;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
+
+import io.quarkus.test.common.QuarkusTestResource;
+import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -283,7 +284,8 @@ public class OrdersRestIT {
         String orderPayload = "{\"approver\" : \"john\", \"order\" : {\"orderNumber\" : \"12345\", \"shipped\" : false}}";
         String id = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(orderPayload).when()
                 .post("/orders").then().statusCode(201).body("id",
-                                                             notNullValue()).extract().path("id");
+                        notNullValue())
+                .extract().path("id");
 
         assertNotNull(id);
         // get all orders make sure there is one
@@ -293,7 +295,7 @@ public class OrdersRestIT {
         // get order by its custom ID and test
         given().accept(ContentType.JSON).body(orderPayload).when().get("/orders/{id}", id).then()
                 .statusCode(200).body("id",
-                                      is(id));
+                        is(id));
         // update the instance
         orderPayload = "{\"approver\" : \"joe\", \"order\" : {\"orderNumber\" : \"54321\", \"shipped\" : true}}";
         given().contentType(ContentType.JSON).accept(ContentType.JSON).body(orderPayload).when()

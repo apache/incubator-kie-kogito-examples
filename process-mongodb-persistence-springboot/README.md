@@ -75,6 +75,11 @@ You will need:
   - Environment variable JAVA_HOME set accordingly
   - Maven 3.6.2+ installed
 
+### Enable MongoDB configuration
+
+By default, MongoDB configuration properties are commented, due to conflict if configuration is coming from outside the code.  
+You should uncomment the commented `spring.data.mongodb` variables from [properties](./src/main/resources/application.properties) file.
+
 ### Compile and Run in Local Dev Mode
 
 ```
@@ -99,7 +104,7 @@ java -jar target/process-mongodb-persistence-springboot.jar
 ### OpenAPI (Swagger) documentation
 [Specification at swagger.io](https://swagger.io/docs/specification/about/)
 
-You can take a look at the [OpenAPI definition](http://localhost:8080/docs/swagger.json) - automatically generated and included in this service - to determine all available operations exposed by this service. For easy readability you can visualize the OpenAPI definition file using a UI tool like for example available [Swagger UI](https://editor.swagger.io).
+You can take a look at the [OpenAPI definition](http://localhost:8080/v3/api-docs) - automatically generated and included in this service - to determine all available operations exposed by this service. For easy readability you can visualize the OpenAPI definition file using a UI tool like for example available [Swagger UI](https://editor.swagger.io).
 
 In addition, various clients to interact with this service can be easily generated using this OpenAPI definition.
 

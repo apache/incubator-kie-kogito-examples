@@ -1,17 +1,17 @@
-/**
- *  Copyright 2020 Red Hat, Inc. and/or its affiliates.
+/*
+ * Copyright 2020 Red Hat, Inc. and/or its affiliates.
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *       http://www.apache.org/licenses/LICENSE-2.0
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.kie.kogito.examples;
 
@@ -20,15 +20,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import io.quarkus.test.junit.QuarkusTest;
-import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.examples.domain.FlightDTO;
 import org.kie.kogito.examples.domain.Passenger;
 import org.kie.kogito.examples.domain.PassengerDTO;
 import org.kie.kogito.process.WorkItem;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
@@ -108,16 +110,16 @@ public class FlightTest {
                 .statusCode(200)
                 .body("$.size", is(2))
                 .extract().as(DefaultWorkItem[].class);
-        
+
         String denyId = findIdByName(tasks, "approveDenyPassenger");
         assertNotNull(denyId, "returned task does not contain approveDenyPassenger");
         given()
                 .contentType(ContentType.JSON)
                 .when()
-            .get("/rest/flights/" + id + "/approveDenyPassenger/" + denyId)
+                .get("/rest/flights/" + id + "/approveDenyPassenger/" + denyId)
                 .then()
                 .statusCode(200)
-                .body("passenger.name", is(passengerDTO.getName()));
+                .body("parameters.passenger.name", is(passengerDTO.getName()));
 
         // approve passenger
         parameters = new HashMap<>();
@@ -126,7 +128,7 @@ public class FlightTest {
                 .body(jsonMapper.writeValueAsString(parameters))
                 .contentType(ContentType.JSON)
                 .when()
-            .post("/rest/flights/" + id + "/approveDenyPassenger/" + denyId)
+                .post("/rest/flights/" + id + "/approveDenyPassenger/" + denyId)
                 .then()
                 .statusCode(200);
 
@@ -140,7 +142,7 @@ public class FlightTest {
                 .body(jsonMapper.writeValueAsString(parameters))
                 .contentType(ContentType.JSON)
                 .when()
-            .post("/rest/flights/" + id + "/finalizePassengerList/" + finalizeId)
+                .post("/rest/flights/" + id + "/finalizePassengerList/" + finalizeId)
                 .then()
                 .statusCode(200);
 
@@ -151,15 +153,15 @@ public class FlightTest {
         }
 
         String taskId = given()
-            .contentType(ContentType.JSON)
-            .when()
-            .get("/rest/flights/" + id + "/tasks")
-            .then()
-            .statusCode(200)
-            .body("$.size", is(1))
-            .body("[0].name", is("finalizeSeatAssignment"))
-            .extract()
-            .path("[0].id");
+                .contentType(ContentType.JSON)
+                .when()
+                .get("/rest/flights/" + id + "/tasks")
+                .then()
+                .statusCode(200)
+                .body("$.size", is(1))
+                .body("[0].name", is("finalizeSeatAssignment"))
+                .extract()
+                .path("[0].id");
 
         // Verify flight is assigned
         List<Passenger> passengerList = given()
@@ -176,7 +178,7 @@ public class FlightTest {
         assertNotNull(passengerList.get(0).getSeat());
 
         // then complete the flight
-       
+
         parameters = new HashMap<>();
 
         given()
@@ -203,8 +205,8 @@ public class FlightTest {
                 .then()
                 .statusCode(404);
     }
-    
-    private String findIdByName (WorkItem[] tasks, String taskName) {
+
+    private String findIdByName(WorkItem[] tasks, String taskName) {
         for (WorkItem task : tasks) {
             if (taskName.equals(task.getName()))
                 return task.getId();

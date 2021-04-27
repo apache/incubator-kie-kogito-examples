@@ -2,21 +2,22 @@
   "id": "handle_backend",
   "name": "HandleBackend",
   "version": "1.0",
+  "start": "CheckBackend",
   "functions": [
     {
       "name": "AddLabels",
-      "type": "service",
       "metadata": {
-        "interface": "org.kogito.examples.sw.github.workflow.GitHubServiceBackend",
-        "operation": "addLabels"
+        "interface": "org.kogito.examples.sw.github.workflow.GitHubService",
+        "operation": "addLabels",
+        "type": "service"
       }
     },
     {
       "name": "AddReviewers",
-      "type": "service",
       "metadata": {
-        "interface": "org.kogito.examples.sw.github.workflow.GitHubServiceBackend",
-        "operation": "addReviewers"
+        "interface": "org.kogito.examples.sw.github.workflow.GitHubService",
+        "operation": "addReviewers",
+        "type": "service"
       }
     }
   ],
@@ -31,9 +32,6 @@
   "states": [
     {
       "name": "CheckBackend",
-      "start": {
-        "kind": "default"
-      },
       "type": "switch",
       "dataConditions": [
         {
@@ -49,9 +47,7 @@
         },
         {
           "condition": "{{ $.files[?(@ =~ /^(?!.*backend).*$/i )] }}",
-          "end": {
-            "kind": "default"
-          }
+          "end": true
         }
       ]
     },
@@ -62,9 +58,7 @@
         "labels": "backend",
         "reviewers": "JaneDoe"
       },
-      "transition": {
-        "nextState": "HandleBackend"
-      }
+      "transition": "HandleBackend"
     },
     {
       "name": "HandleBackend",
@@ -72,20 +66,14 @@
       "actions": [
         {
           "name": "addBackendLabels",
-          "functionRef": {
-            "refName": "AddLabels"
-          }
+          "functionRef": "AddLabels"
         },
         {
           "name": "addBackendReviewers",
-          "functionRef": {
-            "refName": "AddReviewers"
-          }
+          "functionRef": "AddReviewers"
         }
       ],
-      "end": {
-        "kind": "default"
-      }
+      "end": true
     }
   ]
 }

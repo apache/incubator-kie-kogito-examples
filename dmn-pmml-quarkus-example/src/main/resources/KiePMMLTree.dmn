@@ -18,7 +18,7 @@
         <dmn:contextEntry>
           <dmn:variable id="_EE0AC6DF-7B6E-4AF0-ADB7-F5B86D314059" name="model" typeRef="string"/>
           <dmn:literalExpression id="_285D66BE-757B-4A75-9C53-AA773C7F2F5A">
-            <dmn:text>"SampleMine"</dmn:text>
+            <dmn:text>"DecisionTree"</dmn:text>
           </dmn:literalExpression>
         </dmn:contextEntry>
       </dmn:context>

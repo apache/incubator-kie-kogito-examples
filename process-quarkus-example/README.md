@@ -32,14 +32,14 @@ mvn clean compile quarkus:dev
 
 ```
 mvn clean package
-java -jar target/process-quarkus-example-runner.jar
+java -jar target/quarkus-app/quarkus-run.jar
 ```
 
 or on windows
 
 ```
 mvn clean package
-java -jar target\process-quarkus-example-runner.jar
+java -jar target\quarkus-app\quarkus-run.jar
 ```
 
 ### Package and Run using Local Native Image
@@ -80,8 +80,8 @@ Kafka cluster installed and available over the network. Refer to [Kafka Apache s
 
 Kogito will use the following Kafka topics to listen for cloud events:
 
-* `kogito-processinstances-events` - used to emit events by kogito that can be consumed by data index service and other services
-* `kogito-usertaskinstances-events` -used to emit events by kogito that can be consumed by data index service
+* `kogito-processinstances-events` - used to emit events by Kogito that can be consumed by data index service and other services
+* `kogito-usertaskinstances-events` - used to emit events by Kogito that can be consumed by data index service and other services
 
 Once Kafka is up and running you can build this project with `-Pevents` to enable additional processing during the build. This extra profile in maven configuration adds additional dependencies needed to work with Cloud Events.
 

@@ -38,7 +38,7 @@ You can follow the [Knative documentation](https://knative.dev/development/insta
 4. **Knative** Serving and Eventing components installed. 
 We recommend [installing the Knative Operator](https://knative.dev/docs/install/knative-with-operators/) and install the rest of the components
 through it as described in their documentation.
-5. **Kogito Operator** installed in the namespace `kogito-github`. [Download the latest release](https://github.com/kiegroup/kogito-cloud-operator/releases), and run: `NAMESPACE=kogito-github ./hack/install.sh`.
+5. **Kogito Operator** installed in the namespace `kogito-github`. [Download the latest release](https://github.com/kiegroup/kogito-operator/releases), and run: `NAMESPACE=kogito-github ./hack/install.sh`.
 Alternatively, you can also install it via [OperatorHub](https://operatorhub.io/operator/kogito-operator).
 
 In your local machine you will need:

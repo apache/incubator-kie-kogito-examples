@@ -1,38 +1,41 @@
-/**
- *  Copyright 2020 Red Hat, Inc. and/or its affiliates.
+/*
+ * Copyright 2020 Red Hat, Inc. and/or its affiliates.
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *       http://www.apache.org/licenses/LICENSE-2.0
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.kie.dmn.kogito.quarkus.tracing;
 
-import java.util.Optional;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+
+import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.junit.jupiter.api.Test;
+import org.kie.kogito.cloudevents.CloudEventUtils;
+import org.kie.kogito.kafka.KafkaClient;
+import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
+import org.kie.kogito.tracing.decision.event.model.ModelEvent;
+import org.kie.kogito.tracing.decision.event.trace.TraceEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
-import org.eclipse.microprofile.config.inject.ConfigProperty;
-import org.junit.jupiter.api.Test;
-import org.kie.kogito.kafka.KafkaClient;
-import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
-import org.kie.kogito.tracing.decision.event.CloudEventUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.kie.dmn.kogito.quarkus.tracing.matcher.StringMatchesUUIDPattern.matchesThePatternOfAUUID;
 
 @QuarkusTest
@@ -56,11 +59,12 @@ public class LoanEligibilityIT {
         try {
             kafkaClient.consume(TRACING_TOPIC_NAME, s -> {
                 LOGGER.info("Received from kafka: {}", s);
-                Optional.ofNullable(CloudEventUtils.decode(s))
-                        .ifPresentOrElse(
-                                cloudEvent -> countDownLatch.countDown(),
-                                () -> LOGGER.error("Error parsing {}", s)
-                        );
+
+                if (checkDeserialization(s, TraceEvent.class) && isTraceEventComplete(s)) {
+                    countDownLatch.countDown();
+                } else {
+                    fail("Decision trace event is not valid");
+                }
             });
 
             given()
@@ -86,7 +90,7 @@ public class LoanEligibilityIT {
                     .body("'Decide'", is(true));
 
             countDownLatch.await(5, TimeUnit.SECONDS);
-            assertEquals( 0, countDownLatch.getCount());
+            assertEquals(0, countDownLatch.getCount());
         } finally {
             kafkaClient.shutdown();
         }
@@ -100,11 +104,12 @@ public class LoanEligibilityIT {
         try {
             kafkaClient.consume(TRACING_MODELS_TOPIC_NAME, s -> {
                 LOGGER.info("Received from kafka: {}", s);
-                Optional.ofNullable(CloudEventUtils.decode(s))
-                        .ifPresentOrElse(
-                                cloudEvent -> countDownLatch.countDown(),
-                                () -> LOGGER.error("Error parsing {}", s)
-                        );
+
+                if (checkDeserialization(s, ModelEvent.class) && isModelEventComplete(s)) {
+                    countDownLatch.countDown();
+                } else {
+                    fail("Model event is not valid");
+                }
             });
 
             countDownLatch.await(5, TimeUnit.SECONDS);
@@ -112,5 +117,26 @@ public class LoanEligibilityIT {
         } finally {
             kafkaClient.shutdown();
         }
+    }
+
+    private <T> boolean checkDeserialization(String s, Class<T> clazz) {
+        try {
+            CloudEventUtils.decodeData(CloudEventUtils.decode(s).get(), clazz).get();
+            return true;
+        } catch (Exception e) {
+            LOGGER.error("Failed to deserialize the CloudEvent", e);
+            return false;
+        }
+    }
+
+    private boolean isModelEventComplete(String s) {
+        return s.contains("definitions") && s.contains("DMNDiagram") && s.contains("0.0")
+                && s.contains("gav") && s.contains("MODEL");
+    }
+
+    private boolean isTraceEventComplete(String s) {
+        return s.contains("existing payments") && s.contains("inputs") && s.contains("outputs")
+                && s.contains("executionSteps") && s.contains("additionalData")
+                && s.contains("\"baseType\":\"number\"");
     }
 }

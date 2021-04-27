@@ -18,7 +18,7 @@
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
-        <version>${springboot.version}</version>
+        <version>${version.org.springframework.boot}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -38,6 +38,10 @@
       <artifactId>spring-boot-starter</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.springframework.kafka</groupId>
       <artifactId>spring-kafka</artifactId>
     </dependency>
@@ -55,6 +59,10 @@
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-springboot-starter</artifactId>
       <version>${kogito.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-ui</artifactId>
     </dependency>
 
     <dependency>
@@ -91,7 +99,7 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-        <version>${springboot.version}</version>
+        <version>${version.org.springframework.boot}</version>
         <executions>
           <execution>
             <goals>
@@ -105,33 +113,6 @@
         <artifactId>kogito-maven-plugin</artifactId>
         <version>${kogito.version}</version>
         <extensions>true</extensions>
-      </plugin>
-      <plugin>
-        <groupId>io.openapitools.swagger</groupId>
-        <artifactId>swagger-maven-plugin</artifactId>
-        <configuration>
-          <resourcePackages>
-            <resourcePackage>org.kie.kogito.examples</resourcePackage>
-          </resourcePackages>
-          <outputDirectory>${basedir}/target/classes/static/</outputDirectory>
-          <outputFilename>swagger</outputFilename>
-          <outputFormats>JSON,YAML</outputFormats>
-          <prettyPrint>true</prettyPrint>
-          <swaggerConfig>
-            <info>
-              <title>${project.description}</title>
-              <version>${project.version}</version>
-            </info>
-          </swaggerConfig>
-        </configuration>
-        <executions>
-          <execution>
-            <phase>compile</phase>
-            <goals>
-              <goal>generate</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
     </plugins>
   </build>

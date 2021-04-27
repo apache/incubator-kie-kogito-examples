@@ -13,12 +13,16 @@
   <name>Kogito Example :: Process MongoDB Persistence Spring Boot</name>
   <description>Kogito with MongoDB persistence - Spring Boot</description>
 
+  <properties>
+    <enable.resource.mongodb>true</enable.resource.mongodb>
+  </properties>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
-        <version>${springboot.version}</version>
+        <version>${version.org.springframework.boot}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -39,6 +43,10 @@
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-mongodb</artifactId>
     </dependency>
 
@@ -46,6 +54,10 @@
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-springboot-starter</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-ui</artifactId>
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
@@ -65,6 +77,7 @@
     <dependency>
       <groupId>io.rest-assured</groupId>
       <artifactId>rest-assured</artifactId>
+      <version>${version.io.rest-assured.springboot}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -81,7 +94,7 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-        <version>${springboot.version}</version>
+        <version>${version.org.springframework.boot}</version>
         <executions>
           <execution>
             <goals>
@@ -96,55 +109,39 @@
         <version>${kogito.version}</version>
         <extensions>true</extensions>
       </plugin>
-      <plugin>
-        <groupId>io.openapitools.swagger</groupId>
-        <artifactId>swagger-maven-plugin</artifactId>
-        <configuration>
-          <resourcePackages>
-            <resourcePackage>org.kie.kogito.examples</resourcePackage>
-          </resourcePackages>
-          <outputDirectory>${basedir}/target/classes/static/</outputDirectory>
-          <outputFilename>swagger</outputFilename>
-          <outputFormats>JSON,YAML</outputFormats>
-          <prettyPrint>true</prettyPrint>
-          <swaggerConfig>
-            <info>
-              <title>${project.description}</title>
-              <version>${project.version}</version>
-            </info>
-          </swaggerConfig>
-        </configuration>
-        <executions>
-          <execution>
-            <phase>compile</phase>
-            <goals>
-              <goal>generate</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
     </plugins>
   </build>
 
   <profiles>
     <profile>
-      <id>default</id>
+      <id>events</id>
       <activation>
-        <activeByDefault>true</activeByDefault>
+        <property>
+          <name>events</name>
+        </property>
       </activation>
       <properties>
-        <enable.resource.mongodb>true</enable.resource.mongodb>
+        <enable.resource.kafka>true</enable.resource.kafka>
       </properties>
       <dependencies>
         <dependency>
           <groupId>org.kie.kogito</groupId>
-          <artifactId>mongodb-persistence-addon</artifactId>
-        </dependency>
-        <dependency>
-           <groupId>org.springframework.boot</groupId>
-           <artifactId>spring-boot-starter-test</artifactId>
+          <artifactId>kogito-events-spring-boot-addon</artifactId>
         </dependency>
       </dependencies>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <configuration>
+              <systemPropertyVariables>
+                <enable.resource.kafka>true</enable.resource.kafka>
+              </systemPropertyVariables>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
     </profile>
   </profiles>
 </project>

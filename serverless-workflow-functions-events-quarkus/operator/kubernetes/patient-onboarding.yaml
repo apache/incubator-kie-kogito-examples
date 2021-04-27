@@ -1,0 +1,25 @@
+#Knative Eventing MUST be pre-installed in namespace
+apiVersion: eventing.knative.dev/v1
+kind: Broker
+metadata:
+  name: default
+---
+apiVersion: app.kiegroup.org/v1beta1
+kind: KogitoInfra
+metadata:
+  name: kogito-knative-infra
+spec:
+  resource:
+    apiVersion: eventing.knative.dev/v1
+    kind: Broker
+    name: default
+---
+apiVersion: app.kiegroup.org/v1beta1
+kind: KogitoRuntime
+metadata:
+  name: patient-onboarding
+spec:
+  # build with the docker image in this directory and push to your quay namespace
+  image: quay.io/<namespace>/patient-onboarding:latest
+  infra:
+    - kogito-knative-infra

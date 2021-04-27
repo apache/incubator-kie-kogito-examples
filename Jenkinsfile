@@ -1,5 +1,7 @@
 @Library('jenkins-pipeline-shared-libraries')_
 
+import org.kie.jenkins.MavenCommand
+
 changeAuthor = env.ghprbPullAuthorLogin ?: CHANGE_AUTHOR
 changeBranch = env.ghprbSourceBranch ?: CHANGE_BRANCH
 changeTarget = env.ghprbTargetBranch ?: CHANGE_TARGET
@@ -14,51 +16,108 @@ pipeline {
     }
     options {
         buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '10', numToKeepStr: '')
-        timeout(time: 360, unit: 'MINUTES')
+        timeout(time: 600, unit: 'MINUTES')
     }
     environment {
         MAVEN_OPTS = '-Xms1024m -Xmx4g'
     }
     stages {
-        stage("Initialize") {
+        stage('Initialize') {
             steps {
-                checkoutRepo("kogito-runtimes")
-                checkoutRepo("kogito-apps")
-                checkoutRepo("kogito-examples")
-                checkoutRepo("kogito-examples", "kogito-examples-persistence")
-                checkoutRepo("kogito-examples", "kogito-examples-events")
+                checkoutRepo('kogito-runtimes')
+                checkoutOptaplannerRepo()
+                checkoutRepo('kogito-examples')
+                checkoutRepo('kogito-examples', 'kogito-examples-persistence')
+                checkoutRepo('kogito-examples', 'kogito-examples-events')
             }
         }
-        stage('Build kogito-runtimes') {
+        stage('Build quarkus') {
+            when {
+                expression { return getQuarkusBranch() }
+            }
             steps {
-                mavenCleanInstall("kogito-runtimes")
+                script {
+                    checkoutQuarkusRepo()
+                    getMavenCommand('quarkus', false)
+                        .withProperty('quickly')
+                        .run('clean install')
+                }
             }
         }
-        stage('Build kogito-apps') {
+        stage('Build Runtimes') {
             steps {
-                mavenCleanInstall("kogito-apps")
+                script {
+                    getMavenCommand('kogito-runtimes')
+                        .skipTests(true)
+                        .withProperty('skipITs', true)
+                        .run('clean install')
+                }
+            }
+        }
+        stage('Build Optaplanner') {
+            steps {
+                script {
+                    // Skip unnecessary plugins to save time.
+                    getMavenCommand('optaplanner')
+                        .withProperty('quickly')
+                        .run('clean install')
+                }
             }
         }
         stage('Build kogito-examples') {
             steps {
-                mavenCleanInstall("kogito-examples")
+                script {
+                    getMavenCommand('kogito-examples', true, true)
+                        .withProperty('validate-formatting')
+                        .run('clean install')
+                }
+            }
+            post {
+                cleanup {
+                    script {
+                        cleanContainers()
+                    }
+                }
             }
         }
         stage('Build kogito-examples with persistence') {
             steps {
-                mavenCleanInstall("kogito-examples-persistence", false, ["persistence"])
+                script {
+                    getMavenCommand('kogito-examples-persistence', true, true)
+                        .withProfiles(['persistence'])
+                        .run('clean verify')
+                }
+            }
+            post {
+                cleanup {
+                    script {
+                        cleanContainers()
+                    }
+                }
             }
         }
         stage('Build kogito-examples with events') {
             steps {
-                mavenCleanInstall("kogito-examples-events", false, ["events"])
+                script {
+                    getMavenCommand('kogito-examples-events', true, true)
+                        .withProfiles(['events'])
+                        .run('clean verify')
+                }
+            }
+            post {
+                cleanup {
+                    script {
+                        cleanContainers()
+                    }
+                }
             }
         }
     }
     post {
         always {
-            junit '**/target/surefire-reports/**/*.xml'
-            cleanWs()
+            script {
+                junit '**/target/surefire-reports/**/*.xml'
+            }
         }
         failure {
             script {
@@ -75,6 +134,11 @@ pipeline {
                 mailer.sendEmail_fixedPR()
             }
         }
+        cleanup {
+            script {
+                util.cleanNode('docker')
+            }
+        }
     }
 }
 
@@ -84,19 +148,54 @@ void checkoutRepo(String repo, String dirName=repo) {
     }
 }
 
-void mavenCleanInstall(String directory, boolean skipTests = false, List profiles = [], String extraArgs = "") {
-    runMaven("clean install", directory, skipTests, profiles, extraArgs)
+void checkoutQuarkusRepo() {
+    dir('quarkus') {
+        checkout(githubscm.resolveRepository('quarkus', 'quarkusio', getQuarkusBranch(), false))
+    }
 }
 
-void runMaven(String command, String directory, boolean skipTests = false, List profiles = [], String extraArgs = "") {
-    mvnCmd = command
-    if(profiles.size() > 0){
-        mvnCmd += " -P${profiles.join(',')}"
+void checkoutOptaplannerRepo() {
+    String targetBranch = changeTarget
+    String [] versionSplit = targetBranch.split("\\.")
+    if(versionSplit.length == 3 
+        && versionSplit[0].isNumber()
+        && versionSplit[1].isNumber()
+       && versionSplit[2] == 'x') {
+        targetBranch = "${Integer.parseInt(versionSplit[0]) + 7}.${versionSplit[1]}.x"
+    } else {
+        echo "Cannot parse changeTarget as release branch so going further with current value: ${changeTarget}"
     }
-    if(extraArgs != ""){
-        mvnCmd += " ${extraArgs}"
+    dir('optaplanner') {
+        githubscm.checkoutIfExists('optaplanner', changeAuthor, changeBranch, 'kiegroup', targetBranch, true)
     }
-    dir(directory) {
-        maven.runMavenWithSubmarineSettings(mvnCmd, skipTests)
+}
+
+MavenCommand getMavenCommand(String directory, boolean addQuarkusVersion=true, boolean canNative = false){
+    mvnCmd = new MavenCommand(this, ['-fae'])
+                .withSettingsXmlId('kogito_release_settings')
+                // add timestamp to Maven logs
+                .withOptions(['-Dorg.slf4j.simpleLogger.showDateTime=true', '-Dorg.slf4j.simpleLogger.dateTimeFormat=HH:mm:ss,SSS'])
+                .inDirectory(directory)
+    if (addQuarkusVersion && getQuarkusBranch()) {
+        mvnCmd.withProperty('version.io.quarkus', '999-SNAPSHOT')
     }
+    if(canNative && isNative()) {
+        mvnCmd.withProfiles(['native'])
+            .withProperty('quarkus.native.container-build', true)
+            .withProperty('quarkus.native.container-runtime', 'docker')
+            .withProperty('quarkus.profile', 'native') // Added due to https://github.com/quarkusio/quarkus/issues/13341
+    }
+    return mvnCmd
+}
+
+void cleanContainers() {
+    cloud.cleanContainersAndImages('docker')
+}
+
+boolean isNative() {
+    return env['NATIVE'] && env['NATIVE'].toBoolean()
+}
+
+String getQuarkusBranch() {
+    return env['QUARKUS_BRANCH']
 }

@@ -77,10 +77,43 @@ To run the generated native executable, generated in `target/`, execute
 java -jar target/process-usertasks-springboot.jar
 ```
 
+### Running with deadlines enabled
+
+Kogito supports sending notifications when a task has been idle for a while, according to the information included in the process, in "NotStartedNotify" and "NotCompletedNotify" task input parameters
+
+In this example we are going to use Kafka to publish these deadlines notifications to a certain topic and Kogito mail addon to subscribe a listener to that topic, so an e-mail will be sent if 30 seconds has passed after
+the task was created (but not transition was performed) or every minute till the task  is not completed.  
+ 
+By default, Springboot uses topic `kogito-deadline-events`, you can change topic name in application.properties using property `kogito.events.deadline.topic` 
+
+Regardless the topic chosen, in all cases, you need to specify proper json serializer-deserializers and trusted packages in application.properties
+
+``` 
+spring.kafka.producer.value-serializer=org.springframework.kafka.support.serializer.JsonSerializer
+spring.kafka.consumer.value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+spring.kafka.consumer.properties.spring.json.trusted.packages=*
+```
+
+
+To send the mail you need to set up these properties with proper values. For more info, see [Springboot mail properties](https://github.com/spring-projects/spring-boot/blob/v2.1.18.RELEASE/spring-boot-project/spring-boot-autoconfigure/src/main/java/org/springframework/boot/autoconfigure/mail/MailProperties.java)
+ 
+ ```
+spring.mail.host=smtp.gmail.com
+spring.mail.port=587
+spring.mail.username=
+spring.mail.password=
+spring.mail.properties.mail.smtp.auth=true
+spring.mail.properties.mail.smtp.starttls.enable=true
+```
+
+You need to have Kafka cluster installed and available over the network. Refer to [Kafka Apache site](https://kafka.apache.org/quickstart) to more information about how to install.
+
+Once Kafka is up and running you can build this project with `-Pnotification` to enable additional required dependencies during the build.  
+
 ### OpenAPI (Swagger) documentation
 [Specification at swagger.io](https://swagger.io/docs/specification/about/)
 
-You can take a look at the [OpenAPI definition](http://localhost:8080/docs/swagger.json) - automatically generated and included in this service - to determine all available operations exposed by this service. For easy readability you can visualize the OpenAPI definition file using a UI tool like for example available [Swagger UI](https://editor.swagger.io).
+You can take a look at the [OpenAPI definition](http://localhost:8080/v3/api-docs) - automatically generated and included in this service - to determine all available operations exposed by this service. For easy readability you can visualize the OpenAPI definition file using a UI tool like for example available [Swagger UI](https://editor.swagger.io).
 
 In addition, various clients to interact with this service can be easily generated using this OpenAPI definition.
 

@@ -2,21 +2,22 @@
   "id": "handle_frontend",
   "name": "HandleFrontend",
   "version": "1.0",
+  "start": "CheckFrontend",
   "functions": [
     {
       "name": "AddLabels",
-      "type": "service",
       "metadata": {
-        "interface": "org.kogito.examples.sw.github.workflow.GitHubServiceFrontend",
-        "operation": "addLabels"
+        "interface": "org.kogito.examples.sw.github.workflow.GitHubService",
+        "operation": "addLabels",
+        "type": "service"
       }
     },
     {
       "name": "AddReviewers",
-      "type": "service",
       "metadata": {
-        "interface": "org.kogito.examples.sw.github.workflow.GitHubServiceFrontend",
-        "operation": "addReviewers"
+        "interface": "org.kogito.examples.sw.github.workflow.GitHubService",
+        "operation": "addReviewers",
+        "type": "service"
       }
     }
   ],
@@ -30,9 +31,6 @@
   ],
   "states": [
     {
-      "start": {
-        "kind": "default"
-      },
       "name": "CheckFrontend",
       "type": "switch",
       "dataConditions": [
@@ -49,9 +47,7 @@
         },
         {
           "condition": "{{ $.files[?(@ =~ /^(?!.*frontend).*$/i )] }}",
-          "end": {
-            "kind": "default"
-          }
+          "end": true
         }
       ]
     },
@@ -62,9 +58,7 @@
         "labels": "frontend",
         "reviewers": "JohnDoe"
       },
-      "transition": {
-        "nextState": "HandleFrontend"
-      }
+      "transition": "HandleFrontend"
     },
     {
       "name": "HandleFrontend",
@@ -72,20 +66,14 @@
       "actions": [
         {
           "name": "addFrontendLabels",
-          "functionRef": {
-            "refName": "AddLabels"
-          }
+          "functionRef": "AddLabels"
         },
         {
           "name": "addFrontendReviewers",
-          "functionRef": {
-            "refName": "AddReviewers"
-          }
+          "functionRef": "AddReviewers"
         }
       ],
-      "end": {
-        "kind": "default"
-      }
+      "end": true
     }
   ]
 }

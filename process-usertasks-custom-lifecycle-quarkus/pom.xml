@@ -1,20 +1,15 @@
 <?xml version="1.0"?>
-<project
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-  xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-
   <parent>
     <groupId>org.kie.kogito</groupId>
     <artifactId>kogito-examples</artifactId>
     <version>2.0.0-SNAPSHOT</version>
   </parent>
-
   <artifactId>process-usertasks-custom-lifecycle-quarkus</artifactId>
   <name>Kogito Example :: Process Usertasks With Custom Lifecycle</name>
   <description>Kogito user tasks orchestration with custom life cycle - Quarkus</description>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -36,11 +31,17 @@
       <artifactId>kogito-quarkus</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>process-workitems</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>task-management-quarkus-addon</artifactId>
+    </dependency>
+    <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-openapi</artifactId>
-    </dependency>
-
-    <!--tests -->
+    </dependency> 
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-junit5</artifactId>
@@ -52,6 +53,25 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  <profiles>
+     <profile>
+      <id>notification</id>
+      <dependencies>
+      <dependency>
+          <groupId>org.kie.kogito</groupId>
+          <artifactId>mail-quarkus-addon</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>org.kie.kogito</groupId>
+          <artifactId>task-notification-quarkus-addon</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>io.quarkus</groupId>
+          <artifactId>quarkus-smallrye-reactive-messaging-kafka</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
+  </profiles>
   <build>
     <finalName>${project.artifactId}</finalName>
     <plugins>
@@ -68,4 +88,5 @@
       </plugin>
     </plugins>
   </build>
+ 
 </project>

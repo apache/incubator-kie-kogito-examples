@@ -109,10 +109,9 @@
             <name>Decision</name>
             <className>Decision</className>
           </factIdentifier>
-          <className>Any</className>
+          <className>number</className>
           <factAlias>Decision</factAlias>
           <expressionAlias>value</expressionAlias>
-          <genericTypes/>
           <columnWidth>114</columnWidth>
           <factMappingValueType>NOT_EXPRESSION</factMappingValueType>
         </FactMapping>
@@ -130,7 +129,7 @@
               <name>Description</name>
               <type>OTHER</type>
             </expressionIdentifier>
-            <rawValue class="string">Alternative for DMNRegressionTest</rawValue>
+            <rawValue class="string">First Case</rawValue>
           </FactMappingValue>
           <FactMappingValue>
             <factIdentifier>
@@ -167,6 +166,17 @@
           </FactMappingValue>
           <FactMappingValue>
             <factIdentifier>
+              <name>#</name>
+              <className>java.lang.Integer</className>
+            </factIdentifier>
+            <expressionIdentifier>
+              <name>Index</name>
+              <type>OTHER</type>
+            </expressionIdentifier>
+            <rawValue class="string">1</rawValue>
+          </FactMappingValue>
+          <FactMappingValue>
+            <factIdentifier>
               <name>Decision</name>
               <className>Decision</className>
             </factIdentifier>
@@ -175,6 +185,65 @@
               <type>EXPECT</type>
             </expressionIdentifier>
             <rawValue class="string">52.5</rawValue>
+          </FactMappingValue>
+        </factMappingValues>
+      </Scenario>
+      <Scenario>
+        <factMappingValues>
+          <FactMappingValue>
+            <factIdentifier>
+              <name>Scenario description</name>
+              <className>java.lang.String</className>
+            </factIdentifier>
+            <expressionIdentifier>
+              <name>Description</name>
+              <type>OTHER</type>
+            </expressionIdentifier>
+            <rawValue class="string">Second Case</rawValue>
+          </FactMappingValue>
+          <FactMappingValue>
+            <factIdentifier>
+              <name>fld1</name>
+              <className>fld1</className>
+            </factIdentifier>
+            <expressionIdentifier>
+              <name>1|1</name>
+              <type>GIVEN</type>
+            </expressionIdentifier>
+            <rawValue class="string">3.0</rawValue>
+          </FactMappingValue>
+          <FactMappingValue>
+            <factIdentifier>
+              <name>fld2</name>
+              <className>fld2</className>
+            </factIdentifier>
+            <expressionIdentifier>
+              <name>1|2</name>
+              <type>GIVEN</type>
+            </expressionIdentifier>
+            <rawValue class="string">2.0</rawValue>
+          </FactMappingValue>
+          <FactMappingValue>
+            <factIdentifier>
+              <name>fld3</name>
+              <className>fld3</className>
+            </factIdentifier>
+            <expressionIdentifier>
+              <name>1|3</name>
+              <type>GIVEN</type>
+            </expressionIdentifier>
+            <rawValue class="string">"x"</rawValue>
+          </FactMappingValue>
+          <FactMappingValue>
+            <factIdentifier>
+              <name>Decision</name>
+              <className>Decision</className>
+            </factIdentifier>
+            <expressionIdentifier>
+              <name>1|4</name>
+              <type>EXPECT</type>
+            </expressionIdentifier>
+            <rawValue class="string">46.5</rawValue>
           </FactMappingValue>
           <FactMappingValue>
             <factIdentifier>
@@ -185,7 +254,147 @@
               <name>Index</name>
               <type>OTHER</type>
             </expressionIdentifier>
-            <rawValue class="string">1</rawValue>
+            <rawValue class="string">2</rawValue>
+          </FactMappingValue>
+        </factMappingValues>
+      </Scenario>
+      <Scenario>
+        <factMappingValues>
+          <FactMappingValue>
+            <factIdentifier>
+              <name>Scenario description</name>
+              <className>java.lang.String</className>
+            </factIdentifier>
+            <expressionIdentifier>
+              <name>Description</name>
+              <type>OTHER</type>
+            </expressionIdentifier>
+            <rawValue class="string">Third Case</rawValue>
+          </FactMappingValue>
+          <FactMappingValue>
+            <factIdentifier>
+              <name>fld1</name>
+              <className>fld1</className>
+            </factIdentifier>
+            <expressionIdentifier>
+              <name>1|1</name>
+              <type>GIVEN</type>
+            </expressionIdentifier>
+            <rawValue class="string">4.0</rawValue>
+          </FactMappingValue>
+          <FactMappingValue>
+            <factIdentifier>
+              <name>fld2</name>
+              <className>fld2</className>
+            </factIdentifier>
+            <expressionIdentifier>
+              <name>1|2</name>
+              <type>GIVEN</type>
+            </expressionIdentifier>
+            <rawValue class="string">3.0</rawValue>
+          </FactMappingValue>
+          <FactMappingValue>
+            <factIdentifier>
+              <name>fld3</name>
+              <className>fld3</className>
+            </factIdentifier>
+            <expressionIdentifier>
+              <name>1|3</name>
+              <type>GIVEN</type>
+            </expressionIdentifier>
+            <rawValue class="string">"y"</rawValue>
+          </FactMappingValue>
+          <FactMappingValue>
+            <factIdentifier>
+              <name>Decision</name>
+              <className>Decision</className>
+            </factIdentifier>
+            <expressionIdentifier>
+              <name>1|4</name>
+              <type>EXPECT</type>
+            </expressionIdentifier>
+            <rawValue class="string">89.5</rawValue>
+          </FactMappingValue>
+          <FactMappingValue>
+            <factIdentifier>
+              <name>#</name>
+              <className>java.lang.Integer</className>
+            </factIdentifier>
+            <expressionIdentifier>
+              <name>Index</name>
+              <type>OTHER</type>
+            </expressionIdentifier>
+            <rawValue class="string">3</rawValue>
+          </FactMappingValue>
+        </factMappingValues>
+      </Scenario>
+      <Scenario>
+        <factMappingValues>
+          <FactMappingValue>
+            <factIdentifier>
+              <name>Scenario description</name>
+              <className>java.lang.String</className>
+            </factIdentifier>
+            <expressionIdentifier>
+              <name>Description</name>
+              <type>OTHER</type>
+            </expressionIdentifier>
+            <rawValue class="string">Forth Case</rawValue>
+          </FactMappingValue>
+          <FactMappingValue>
+            <factIdentifier>
+              <name>fld1</name>
+              <className>fld1</className>
+            </factIdentifier>
+            <expressionIdentifier>
+              <name>1|1</name>
+              <type>GIVEN</type>
+            </expressionIdentifier>
+            <rawValue class="string">4.0</rawValue>
+          </FactMappingValue>
+          <FactMappingValue>
+            <factIdentifier>
+              <name>fld2</name>
+              <className>fld2</className>
+            </factIdentifier>
+            <expressionIdentifier>
+              <name>1|2</name>
+              <type>GIVEN</type>
+            </expressionIdentifier>
+            <rawValue class="string">3.0</rawValue>
+          </FactMappingValue>
+          <FactMappingValue>
+            <factIdentifier>
+              <name>fld3</name>
+              <className>fld3</className>
+            </factIdentifier>
+            <expressionIdentifier>
+              <name>1|3</name>
+              <type>GIVEN</type>
+            </expressionIdentifier>
+            <rawValue class="string">"x"</rawValue>
+          </FactMappingValue>
+          <FactMappingValue>
+            <factIdentifier>
+              <name>Decision</name>
+              <className>Decision</className>
+            </factIdentifier>
+            <expressionIdentifier>
+              <name>1|4</name>
+              <type>EXPECT</type>
+            </expressionIdentifier>
+            <rawValue class="string">83.5</rawValue>
+          </FactMappingValue>
+          <FactMappingValue>
+            <factIdentifier>
+              <name>#</name>
+              <className>java.lang.Integer</className>
+            </factIdentifier>
+            <expressionIdentifier>
+              <name>Index</name>
+              <type>OTHER</type>
+            </expressionIdentifier>
+            <rawValue class="string">4</rawValue>
           </FactMappingValue>
         </factMappingValues>
       </Scenario>

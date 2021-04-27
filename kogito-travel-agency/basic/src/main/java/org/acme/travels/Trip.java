@@ -1,17 +1,17 @@
-/**
- *  Copyright 2020 Red Hat, Inc. and/or its affiliates.
+/*
+ * Copyright 2020 Red Hat, Inc. and/or its affiliates.
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *       http://www.apache.org/licenses/LICENSE-2.0
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.acme.travels;
 
@@ -19,68 +19,68 @@ import java.util.Date;
 
 public class Trip {
 
-	private String city;
-	private String country;
-	private Date begin;
-	private Date end;
-	private boolean visaRequired;
-	
-	public Trip() {
-		
-	}
+    private String city;
+    private String country;
+    private Date begin;
+    private Date end;
+    private boolean visaRequired;
 
-	public Trip(String city, String country, Date begin, Date end) {
-		super();
-		this.city = city;
-		this.country = country;
-		this.begin = begin;
-		this.end = end;
-	}
+    public Trip() {
 
-	public String getCity() {
-		return city;
-	}
+    }
 
-	public void setCity(String city) {
-		this.city = city;
-	}
+    public Trip(String city, String country, Date begin, Date end) {
+        super();
+        this.city = city;
+        this.country = country;
+        this.begin = begin;
+        this.end = end;
+    }
 
-	public String getCountry() {
-		return country;
-	}
+    public String getCity() {
+        return city;
+    }
 
-	public void setCountry(String country) {
-		this.country = country;
-	}
+    public void setCity(String city) {
+        this.city = city;
+    }
 
-	public Date getBegin() {
-		return begin;
-	}
+    public String getCountry() {
+        return country;
+    }
 
-	public void setBegin(Date begin) {
-		this.begin = begin;
-	}
+    public void setCountry(String country) {
+        this.country = country;
+    }
 
-	public Date getEnd() {
-		return end;
-	}
+    public Date getBegin() {
+        return begin;
+    }
 
-	public void setEnd(Date end) {
-		this.end = end;
-	}
+    public void setBegin(Date begin) {
+        this.begin = begin;
+    }
 
-	public boolean isVisaRequired() {
-		return visaRequired;
-	}
+    public Date getEnd() {
+        return end;
+    }
 
-	public void setVisaRequired(boolean visaRequired) {
-		this.visaRequired = visaRequired;
-	}
+    public void setEnd(Date end) {
+        this.end = end;
+    }
 
-	@Override
-	public String toString() {
-		return "Trip [city=" + city + ", country=" + country + ", begin=" + begin + ", end=" + end + ", visaRequired="
-				+ visaRequired + "]";
-	}
+    public boolean isVisaRequired() {
+        return visaRequired;
+    }
+
+    public void setVisaRequired(boolean visaRequired) {
+        this.visaRequired = visaRequired;
+    }
+
+    @Override
+    public String toString() {
+        return "Trip [city=" + city + ", country=" + country + ", begin=" + begin + ", end=" + end + ", visaRequired="
+                + visaRequired + "]";
+    }
 
 }

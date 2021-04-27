@@ -2,55 +2,51 @@
     "id": "RestExample",
     "name": "Rest fun with numbers",
     "version": "1.0v",
+    "start": "Calculations",
     "functions": [
         {
             "name": "randomNumber",
-            "resource": "/numbers/random",
-            "type": "rest",
+            "operation": "/numbers/random",
             "metadata": {
-                "method": "GET"
+                "method": "GET",
+                "type": "rest"
             }
         },
         {
             "name": "multiplyAllByRandomAndSum",
-            "resource": "/numbers/{multiplier}/multiplyByAndSum",
-            "type": "rest",
+            "operation": "/numbers/{multiplier}/multiplyByAndSum",
             "metadata": {
-                "method": "POST"
+                "method": "POST",
+                "type": "rest"
             }
         },
         {
             "name": "debug",
-            "type": "sysout"
+            "metadata": {
+                "type": "sysout"
+            }
         }
     ],
     "states": [
         {
-            "start": {
-                "kind": "default"
-            },
             "name": "Calculations",
             "type": "operation",
             "actionMode": "sequential",
             "actions": [
                 {
-                    "functionRef": {
-                        "refName": "randomNumber"
-                    }
+                    "functionRef": "randomNumber"
                 },
                 {
                     "functionRef": {
                         "refName": "multiplyAllByRandomAndSum",
-                        "parameters": {
+                        "arguments": {
                             "numbers": "$.inputNumbers",
                             "multiplier": "$.randomNumber"
                         }
                     }
                 }
             ],
-            "transition": {
-                "nextState": "SetMessage"
-            }
+            "transition": "SetMessage"
         },
         {
             "name": "SetMessage",
@@ -58,9 +54,7 @@
             "data": {
                 "message": "The sum is: "
             },
-            "transition": {
-                "nextState": "PrintResult"
-            }
+            "transition": "PrintResult"
         },
         {
             "name": "PrintResult",
@@ -71,18 +65,13 @@
                     "name": "printAction",
                     "functionRef": {
                         "refName": "debug",
-                        "parameters": {
+                        "arguments": {
                             "message": "$.message $.sum"
                         }
                     }
                 }
             ],
-            "stateDataFilter": {
-                "dataOutputPath": "$.sum"
-            },
-            "end": {
-                "kind": "default"
-            }
+            "end": true
         }
     ]
 }

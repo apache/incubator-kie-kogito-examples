@@ -16,14 +16,14 @@
       <dependency>
         <groupId>org.infinispan</groupId>
         <artifactId>infinispan-bom</artifactId>
-        <version>${infinispan.version}</version>
+        <version>${version.org.infinispan}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
-        <version>${springboot.version}</version>
+        <version>${version.org.springframework.boot}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -55,11 +55,19 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
 
     <!-- kogito -->
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-springboot-starter</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-ui</artifactId>
     </dependency>
 
     <!-- Comment to disable jobs service integration -->
@@ -70,7 +78,7 @@
 
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>process-management-addon</artifactId>
+      <artifactId>process-management-springboot-addon</artifactId>
     </dependency>
 
     <!-- uncomment these two to enable persistence for kogito -->
@@ -91,7 +99,7 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-        <version>${springboot.version}</version>
+        <version>${version.org.springframework.boot}</version>
         <executions>
           <execution>
             <goals>
@@ -105,33 +113,6 @@
         <artifactId>kogito-maven-plugin</artifactId>
         <version>${kogito.version}</version>
         <extensions>true</extensions>
-      </plugin>
-      <plugin>
-        <groupId>io.openapitools.swagger</groupId>
-        <artifactId>swagger-maven-plugin</artifactId>
-        <configuration>
-          <resourcePackages>
-            <resourcePackage>org.acme.travels</resourcePackage>
-          </resourcePackages>
-          <outputDirectory>${basedir}/target/classes/static/</outputDirectory>
-          <outputFilename>swagger</outputFilename>
-          <outputFormats>JSON,YAML</outputFormats>
-          <prettyPrint>true</prettyPrint>
-          <swaggerConfig>
-            <info>
-              <title>${project.description}</title>
-              <version>${project.version}</version>
-            </info>
-          </swaggerConfig>
-        </configuration>
-        <executions>
-          <execution>
-            <phase>compile</phase>
-            <goals>
-              <goal>generate</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
     </plugins>
   </build>
