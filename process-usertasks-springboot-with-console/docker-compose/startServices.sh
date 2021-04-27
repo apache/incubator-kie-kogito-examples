@@ -33,21 +33,21 @@ if [ -d "$KOGITO_EXAMPLE_PERSISTENCE" ]
 then
     cp $KOGITO_EXAMPLE_PERSISTENCE/*.proto $PERSISTENCE_FOLDER/
 else
-    echo "$KOGITO_EXAMPLE_PERSISTENCE does not exist. Have you compiled process-usertask-quarkus-extended project?"
+    echo "$KOGITO_EXAMPLE_PERSISTENCE does not exist. Have you compiled process-usertask-springboot-with-console project?"
 #    exit 1
 fi
 
 SVG_FOLDER=./svg
 
-KOGITO_HIRING_SVG_FOLDER=../target/classes/META-INF/processSVG
+KOGITO_SVG_FOLDER=../target/classes/META-INF/processSVG
 
 mkdir -p $SVG_FOLDER
 
-if [ -d "$KOGITO_HIRING_SVG_FOLDER" ]
+if [ -d "$KOGITO_SVG_FOLDER" ]
 then
-    cp $KOGITO_HIRING_SVG_FOLDER/*.svg $SVG_FOLDER
+    cp $KOGITO_SVG_FOLDER/*.svg $SVG_FOLDER
 else
-    echo "$KOGITO_HIRING_SVG_FOLDER does not exist. Have you compiled process-usertask-quarkus-extended project?"
+    echo "$KOGITO_SVG_FOLDER does not exist. Have you compiled process-usertask-springboot-with-console project?"
 #    exit 1
 fi
 
