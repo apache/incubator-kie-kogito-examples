@@ -5,8 +5,3 @@ dependencies:
   - project: kiegroup/kogito-apps
     dependencies:
       - project: kiegroup/kogito-runtimes
-
-  - project: kiegroup/kogito-examples
-    dependencies:
-      - project: kiegroup/kogito-apps
-      - project: kiegroup/kogito-runtimes
