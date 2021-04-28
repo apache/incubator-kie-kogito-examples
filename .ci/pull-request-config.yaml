@@ -20,7 +20,6 @@ build:
         mvn clean install -Dmaven.wagon.httpconnectionManager.ttlSeconds=25 -Dmaven.wagon.http.retryHandler.count=3
       current: |
         mvn clean install -Prun-code-coverage -Dmaven.wagon.httpconnectionManager.ttlSeconds=25 -Dmaven.wagon.http.retryHandler.count=3
-        mvn validate -Psonarcloud-analysis -e -nsu -Dmaven.wagon.httpconnectionManager.ttlSeconds=25 -Dmaven.wagon.http.retryHandler.count=3
 
   - project: kiegroup/kogito-examples
     build-command:
