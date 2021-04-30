@@ -7,6 +7,7 @@ spec:
   resource:
     apiVersion: kafka.strimzi.io/v1beta1
     kind: Kafka
+    name: my-cluster
 ---
 #Infinispan operator should be pre-installed in namespace
 apiVersion: app.kiegroup.org/v1beta1
@@ -17,3 +18,4 @@ spec:
   resource:
     apiVersion: infinispan.org/v1
     kind: Infinispan
+    name: example-infinispan
