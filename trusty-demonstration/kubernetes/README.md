@@ -47,19 +47,6 @@ minikube addons enable ingress
 minikube addons enable olm
 ```
 
-Set the Kogito release version 
-
-```bash
-KOGITO_VERSION=1.4.0
-```
-
-and then download/unpack the kogito operator
-
-```bash
-wget https://github.com/kiegroup/kogito-operator/releases/download/v${KOGITO_VERSION}/kogito-cli-${KOGITO_VERSION}-linux-amd64.tar.gz
-tar zxf kogito-cli-${KOGITO_VERSION}-linux-amd64.tar.gz
-```
-
 Create a new project called (for example) `trusty-demo` 
 
 ```bash 
@@ -67,20 +54,37 @@ PROJECT_NAME=trusty-demo
 kubectl create namespace "$PROJECT_NAME"
 ```
 
-Deploy the kogito operator
+Set the Kogito release version
+
 ```bash
-./kogito install operator
+KOGITO_VERSION=v1.5.0
 ```
 
-You should see that the `kogito-operator` has one pod running within some minutes: the command `kubectl get pods -n "operators"` should return something like 
+Deploy the kogito operator in the cluster
+```bash
+wget https://github.com/kiegroup/kogito-operator/releases/download/${KOGITO_VERSION}/kogito-operator.yaml
+kubectl apply -f kogito-operator.yaml
+```
+
+You should see that the `kogito-operator` has one pod running within some minutes: the command `kubectl get pods -n kogito-operator-system` should return something like 
 
 ```bash
-NAME                             READY   STATUS    RESTARTS   AGE
-kogito-operator-9f575f64-zp56t   1/1     Running   0          98s
+NAME                                                  READY   STATUS    RESTARTS   AGE
+kogito-operator-controller-manager-7456474485-hn89d   2/2     Running   0          63s
+
 ```
 
 Install the [Infinispan operator](https://operatorhub.io/operator/infinispan/2.0.x/infinispan-operator.v2.0.6) version 2.0.6. 
 Pay attention that by default the Infinispan operator is installed on the namespace `my-infinispan`. You have to download the `yaml` file and change the namespace of the custom resources accordingly to your namespace.
+
+```bash
+wget https://operatorhub.io/install/2.0.x/infinispan.yaml
+sed -i "s/namespace: my-infinispan/namespace: ${PROJECT_NAME}/g" infinispan.yaml
+sed -i "s/- my-infinispan/- ${PROJECT_NAME}/g" infinispan.yaml
+kubectl apply -f infinispan.yaml -n ${PROJECT_NAME}
+```
+
+If the infinispan operator does not show under your namespace, please ensure that all the pods under the namespace `olm` are up and running. If the catalog pod is in Crashloop status, the workaround is to delete the pod and wait until it gets redeployed automatically.
 
 Install `strimzi` operator with 
 
@@ -94,14 +98,21 @@ find strimzi-${STRIMZI_VERSION}/install/cluster-operator -name '*RoleBinding*.ya
 kubectl apply -f strimzi-${STRIMZI_VERSION}/install/cluster-operator/ -n ${PROJECT_NAME}
 ```
 
-Deploy the `KogitoInfra` custom resources, so that the Kogito operator will take or managing the Infinispan and kafka resources.
+Deploy kafka and infinispan resources with 
+```bash
+kubectl apply -f resources/kafka.yaml -n ${PROJECT_NAME}
+kubectl apply -f resources/kafka-topics.yaml -n ${PROJECT_NAME}
+kubectl apply -f resources/infinispan-minimal.yaml -n ${PROJECT_NAME}
+```
+
+Deploy the `KogitoInfra` custom resources, so that the Kogito operator bind the kogito applications with the infinispan and kafka resources.
 ```bash
 kubectl apply -f resources/kogito-infra.yaml -n ${PROJECT_NAME}
 ```
 
 Deploy the Trusty service and expose it
 
-```
+```bash
 kubectl apply -f resources/trusty.yaml -n ${PROJECT_NAME}
 kubectl expose deployment trusty -n ${PROJECT_NAME}  --type=NodePort --name=trusty-np
 minikube service trusty-np -n ${PROJECT_NAME}
@@ -138,6 +149,9 @@ spec:
   image: quay.io/<YOUR_NAMESPACE>/dmn-tracing-quarkus:2.0.0-snapshot # <---- replace with your image
   infra:
     - kogito-kafka-infra
+  env:
+    - name: KOGITO_SERVICE_URL
+      value: http://dmn-tracing-quarkus:8080
 ```
 
 It's time to deploy all the resources with the commands
