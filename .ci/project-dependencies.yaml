@@ -1,7 +1,0 @@
-version: "2.0"
-dependencies:
-  - project: kiegroup/kogito-runtimes
-
-  - project: kiegroup/kogito-apps
-    dependencies:
-      - project: kiegroup/kogito-runtimes
