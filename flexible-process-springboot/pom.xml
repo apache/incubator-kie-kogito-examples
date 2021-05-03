@@ -49,7 +49,6 @@
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-springboot-starter</artifactId>
-      <version>${kogito.version}</version>
     </dependency>
 
     <dependency>
