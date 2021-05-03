@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.kie.kogito</groupId>
     <artifactId>serverless-workflow-temperature-conversion</artifactId>
-    <version>1.6.0-SNAPSHOT</version>
+    <version>1.6.0.Final</version>
   </parent>
   <artifactId>multiplication-service</artifactId>
   <name>Kogito Example :: Serverless Workflow Temperature Conversion :: Multiplication Service</name>
