@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.kie.kogito</groupId>
@@ -37,22 +37,22 @@
       <dependency>
         <groupId>org.webjars</groupId>
         <artifactId>bootstrap</artifactId>
-        <version>4.3.1</version>
+        <version>4.6.0-1</version>
       </dependency>
       <dependency>
         <groupId>org.webjars</groupId>
         <artifactId>jquery</artifactId>
-        <version>3.4.1</version>
+        <version>3.6.0</version>
       </dependency>
       <dependency>
         <groupId>org.webjars</groupId>
         <artifactId>font-awesome</artifactId>
-        <version>5.11.2</version>
+        <version>5.15.2</version>
       </dependency>
       <dependency>
         <groupId>org.webjars</groupId>
         <artifactId>momentjs</artifactId>
-        <version>2.24.0</version>
+        <version>2.29.1</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -97,6 +97,10 @@
       <scope>test</scope>
     </dependency>
     <!-- JavaScript libraries for frontend -->
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-webjars-locator</artifactId>
+    </dependency>
     <dependency>
       <groupId>org.webjars</groupId>
       <artifactId>bootstrap</artifactId>
