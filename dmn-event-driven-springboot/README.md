@@ -70,14 +70,14 @@ mvn clean compile spring-boot:run
 
 ```
 mvn clean package
-java -jar target/dmn-tracing-springboot.jar
+java -jar target/dmn-event-driven-springboot.jar
 ```
 
 or on Windows
 
 ```
 mvn clean package
-java -jar target\dmn-tracing-springboot.jar
+java -jar target\dmn-event-driven-springboot.jar
 ```
 
 ## Example Usage

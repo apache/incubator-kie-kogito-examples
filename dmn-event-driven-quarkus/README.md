@@ -81,14 +81,14 @@ mvn clean compile quarkus:dev
 
 ```
 mvn clean package
-java -jar target/dmn-tracing-quarkus-runner.jar
+java -jar target/quarkus-app/quarkus-run.jar
 ```
 
 or on Windows
 
 ```
 mvn clean package
-java -jar target\dmn-tracing-quarkus-runner.jar
+java -jar target\quarkus-app\quarkus-run.jar
 ```
 
 ### Package and Run using Local Native Image
