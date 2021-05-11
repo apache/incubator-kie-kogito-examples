@@ -1,4 +1,4 @@
-name: Build Chain Full Downstream
+name: Examples Build Chain Full Downstream
 
 on: [pull_request]
 
