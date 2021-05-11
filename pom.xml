@@ -212,7 +212,6 @@
         <module>process-springboot-example</module>
       </modules>
     </profile>
-    
     <profile>
       <id>events</id>
       <activation>
@@ -288,6 +287,8 @@
         </property>
       </activation>
       <modules>
+        <module>dmn-event-driven-quarkus</module>
+        <module>dmn-event-driven-springboot</module>
         <module>dmn-listener-quarkus</module>
         <module>dmn-listener-springboot</module>
         <module>dmn-pmml-quarkus-example</module>
@@ -352,7 +353,7 @@
         <artifactId>swagger-annotations</artifactId>
         <version>${version.io.swagger.core.v3}</version>
       </dependency>
-      
+
       <!-- PMML -->
       <dependency>
         <groupId>org.jpmml</groupId>
