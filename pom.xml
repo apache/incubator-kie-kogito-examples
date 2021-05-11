@@ -39,7 +39,7 @@
     <failsafe.include>**/*IT.java</failsafe.include>
     <failsafe.exclude>**/Native*IT.java</failsafe.exclude>
     <alphanetworkCompilerEnabled>false</alphanetworkCompilerEnabled>
-    <tests.category></tests.category>
+    <tests.category/>
     <!-- Port 0 means dynamic port -->
     <tests.quarkus.http.port>0</tests.quarkus.http.port>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -48,7 +48,7 @@
     <kogito.version>${project.version}</kogito.version>
     <version.org.optaplanner>8.6.0.Final</version.org.optaplanner>
     <!-- pmml -->
-    <version.org.jpmml>1.5.1</version.org.jpmml>
+    <version.org.jpmml>1.5.15</version.org.jpmml>
     <!-- override default to fast-jar packaging for forward-compatibility -->
     <quarkus.package.type>fast-jar</quarkus.package.type>
   </properties>
@@ -228,7 +228,7 @@
       <id>native</id>
       <properties>
         <failsafe.include>**/Native*IT.java</failsafe.include>
-        <failsafe.exclude></failsafe.exclude>
+        <failsafe.exclude/>
         <quarkus.package.type>native</quarkus.package.type>
         <!-- Native building needs a fixed port for tests -->
         <tests.quarkus.http.port>8080</tests.quarkus.http.port>
