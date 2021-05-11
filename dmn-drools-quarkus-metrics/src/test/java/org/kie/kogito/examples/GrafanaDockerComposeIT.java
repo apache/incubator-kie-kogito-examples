@@ -103,9 +103,10 @@ public class GrafanaDockerComposeIT {
                 .get("/api/search")
                 .then()
                 .statusCode(200)
-                .body("title", hasItem("hello - Operational Dashboard"))
-                .body("title", hasItem("LoanEligibility - Domain Dashboard"))
-                .body("title", hasItem("LoanEligibility - Operational Dashboard"));
+                .body("title", hasItem("dmn-drools-quarkus-metrics:2.0.0-SNAPSHOT - hello - Operational Dashboard"))
+                .body("title", hasItem("dmn-drools-quarkus-metrics:2.0.0-SNAPSHOT - LoanEligibility - Domain Dashboard"))
+                .body("title", hasItem("dmn-drools-quarkus-metrics:2.0.0-SNAPSHOT - Hello - Domain Dashboard"))
+                .body("title", hasItem("dmn-drools-quarkus-metrics:2.0.0-SNAPSHOT - LoanEligibility - Operational Dashboard"));
     }
 
     @Test
