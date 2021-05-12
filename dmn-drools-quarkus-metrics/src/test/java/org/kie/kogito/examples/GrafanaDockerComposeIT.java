@@ -23,7 +23,11 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
+import org.kie.kogito.testcontainers.Constants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testcontainers.containers.DockerComposeContainer;
+import org.testcontainers.containers.output.Slf4jLogConsumer;
 import org.testcontainers.containers.wait.strategy.Wait;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -37,7 +41,8 @@ import static org.hamcrest.Matchers.hasItem;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class GrafanaDockerComposeIT {
 
-    private static final int STARTUP_MINUTES_TIMEOUT = 8;
+    private static final Logger LOGGER = LoggerFactory.getLogger(GrafanaDockerComposeIT.class);
+    private static final Duration STARTUP_MINUTES_TIMEOUT = Constants.CONTAINER_START_TIMEOUT;
     private static final int GRAFANA_PORT = 3000;
     private static final int PROMETHEUS_PORT = 9090;
     private static final int KOGITO_APPLICATION_PORT = 8080;
@@ -52,12 +57,15 @@ public class GrafanaDockerComposeIT {
     static {
         try {
             environment = new DockerComposeContainer(new File(GrafanaDockerComposeIT.class.getClassLoader().getResource("./docker-compose.yml").toURI()))
-                    .withExposedService("grafana_1", GRAFANA_PORT, Wait.forListeningPort().withStartupTimeout(Duration.ofMinutes(STARTUP_MINUTES_TIMEOUT)))
-                    .withExposedService("hello_1", KOGITO_APPLICATION_PORT, Wait.forListeningPort().withStartupTimeout(Duration.ofMinutes(STARTUP_MINUTES_TIMEOUT)))
+                    .withExposedService("grafana_1", GRAFANA_PORT, Wait.forListeningPort().withStartupTimeout(STARTUP_MINUTES_TIMEOUT))
+                    .withLogConsumer("grafana_1", new Slf4jLogConsumer(LOGGER))
+                    .withExposedService("hello_1", KOGITO_APPLICATION_PORT, Wait.forListeningPort().withStartupTimeout(STARTUP_MINUTES_TIMEOUT))
+                    .withLogConsumer("hello_1", new Slf4jLogConsumer(LOGGER))
                     .withExposedService("prometheus_1", PROMETHEUS_PORT,
                             Wait.forHttp("/api/v1/targets")
                                     .forResponsePredicate(x -> x.contains("\"health\":\"up\""))
-                                    .withStartupTimeout(Duration.ofMinutes(STARTUP_MINUTES_TIMEOUT)));
+                                    .withStartupTimeout(STARTUP_MINUTES_TIMEOUT))
+                    .withLogConsumer("prometheus_1", new Slf4jLogConsumer(LOGGER));
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }

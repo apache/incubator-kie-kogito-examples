@@ -29,16 +29,14 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.junit.jupiter.api.Test;
 import org.kie.dmn.kogito.springboot.example.KogitoSpringbootApplication;
 import org.kie.kogito.kafka.KafkaClient;
+import org.kie.kogito.testcontainers.springboot.KafkaSpringBootTestResource;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
-import org.testcontainers.containers.KafkaContainer;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
+import org.springframework.test.context.ContextConfiguration;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -50,8 +48,8 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@Testcontainers
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
+@ContextConfiguration(initializers = KafkaSpringBootTestResource.class)
 public class DmnEventDrivenIT {
 
     public static final String REQUESTS_TOPIC_NAME = "dmn-event-driven-requests";
@@ -63,14 +61,8 @@ public class DmnEventDrivenIT {
             .setSerializationInclusion(JsonInclude.Include.NON_NULL);
     private static final String DEFAULT_EVENT_ID = "d54ace84-6788-46b6-a359-b308f8b21778";
 
-    @Container
-    public static KafkaContainer kafkaContainer = new KafkaContainer();
-
-    @DynamicPropertySource
-    static void kafkaProperties(DynamicPropertyRegistry registry) {
-        registry.add("kogito.addon.tracing.decision.kafka.bootstrapAddress", kafkaContainer::getBootstrapServers);
-        registry.add("spring.kafka.bootstrap-servers", kafkaContainer::getBootstrapServers);
-    }
+    @Value("${spring.kafka.bootstrap-servers}")
+    private String kafkaBootstrapServers;
 
     @Test
     public void test() {
@@ -107,7 +99,7 @@ public class DmnEventDrivenIT {
         String inputJson = readResource(basePath + "/input.json");
         String outputJson = readResource(basePath + "/output.json");
 
-        final KafkaClient kafkaClient = new KafkaClient(kafkaContainer.getBootstrapServers());
+        final KafkaClient kafkaClient = new KafkaClient(kafkaBootstrapServers);
         final CountDownLatch countDownLatch = new CountDownLatch(1);
         final AtomicReference<String> outputEventRef = new AtomicReference<>();
 

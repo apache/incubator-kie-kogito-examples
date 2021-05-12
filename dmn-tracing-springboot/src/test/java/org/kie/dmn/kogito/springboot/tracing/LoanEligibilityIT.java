@@ -23,15 +23,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.cloudevents.CloudEventUtils;
 import org.kie.kogito.kafka.KafkaClient;
+import org.kie.kogito.testcontainers.springboot.KafkaSpringBootTestResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
-import org.testcontainers.containers.KafkaContainer;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
+import org.springframework.test.context.ContextConfiguration;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -41,8 +39,8 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.kie.dmn.kogito.springboot.tracing.matcher.StringMatchesUUIDPattern.matchesThePatternOfAUUID;
 
-@Testcontainers
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
+@ContextConfiguration(initializers = KafkaSpringBootTestResource.class)
 public class LoanEligibilityIT {
 
     public static final String KOGITO_EXECUTION_ID_HEADER = "X-Kogito-execution-id";
@@ -51,16 +49,11 @@ public class LoanEligibilityIT {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LoanEligibilityIT.class);
 
-    @Container
-    public static KafkaContainer kafkaContainer = new KafkaContainer();
-
-    @DynamicPropertySource
-    static void kafkaProperties(DynamicPropertyRegistry registry) {
-        registry.add("kogito.addon.tracing.decision.kafka.bootstrapAddress", kafkaContainer::getBootstrapServers);
-    }
-
     @LocalServerPort
     private int port;
+
+    @Value("${spring.kafka.bootstrap-servers}")
+    private String kafkaBootstrapServers;
 
     @BeforeEach
     public void setUp() {
@@ -69,7 +62,7 @@ public class LoanEligibilityIT {
 
     @Test
     public void testEvaluateLoanEligibility() throws InterruptedException {
-        final KafkaClient kafkaClient = new KafkaClient(kafkaContainer.getBootstrapServers());
+        final KafkaClient kafkaClient = new KafkaClient(kafkaBootstrapServers);
         final CountDownLatch countDownLatch = new CountDownLatch(1);
 
         try {
@@ -112,7 +105,7 @@ public class LoanEligibilityIT {
 
     @Test
     public void testEvaluateDMNModel() throws InterruptedException {
-        final KafkaClient kafkaClient = new KafkaClient(kafkaContainer.getBootstrapServers());
+        final KafkaClient kafkaClient = new KafkaClient(kafkaBootstrapServers);
         final CountDownLatch countDownLatch = new CountDownLatch(1);
 
         try {
