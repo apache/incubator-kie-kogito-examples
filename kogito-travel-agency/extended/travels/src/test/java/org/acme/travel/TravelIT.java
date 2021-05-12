@@ -98,7 +98,8 @@ public class TravelIT {
                 .get("/metrics")
                 .then()
                 .statusCode(200)
-                .body(containsString("kie_process_instance_running_total{app_id=\"default-process-monitoring-listener\",process_id=\"travels\",} 1.0"));
+                .body(containsString(
+                        "kie_process_instance_running_total{app_id=\"default-process-monitoring-listener\",artifactId=\"travels\",process_id=\"travels\",version=\"2.0.0-SNAPSHOT\",} 1.0"));
     }
 
     private void whenNewTravel(Traveller traveller, Trip trip) {
