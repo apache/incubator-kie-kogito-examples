@@ -382,7 +382,6 @@
             <systemPropertyVariables>
               <tests.category>${tests.category}</tests.category>
               <enable.resource.infinispan>${enable.resource.infinispan}</enable.resource.infinispan>
-              <kogito.persistence.type>${kogito.persistence.type}</kogito.persistence.type>
               <enable.resource.kafka>${enable.resource.kafka}</enable.resource.kafka>
               <container.image.keycloak>${container.image.keycloak}</container.image.keycloak>
               <container.image.infinispan>${container.image.infinispan}</container.image.infinispan>
