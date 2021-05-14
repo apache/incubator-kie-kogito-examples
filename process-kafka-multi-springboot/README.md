@@ -3,7 +3,7 @@
 ## Description
 
 A quickstart project that deals with traveller processing carried by rules. It illustrates
-how easy it is to make the Kogito processes and rules to work with Apache Kafka
+how easy it is to make the Kogito processes and rules to work with Apache Kafka sending messages to different topics. 
 
 This example shows
 
@@ -11,8 +11,7 @@ This example shows
 * each process instance is expecting a traveller information in JSON format
 * traveller is then processed by rules and based on the outcome of the processing (processed or not) traveller is
 	* if successfully processed traveller information is logged and then updated information is send to another Kafka topic
-	* if not processed traveller info is logged and then process instance finishes without sending reply to Kafka topic
-
+	* if not processed traveller info is logged and then process instance finishes  sending reply to a different Kafka topic
 
 <p align="center"><img width=75% height=50% src="docs/images/process.png"></p>
 
@@ -82,59 +81,35 @@ You will need:
   - Environment variable JAVA_HOME set accordingly
   - Maven 3.6.2+ installed
 
-When using native image compilation, you will also need:
-  - GraalVM 19.3+ installed
-  - Environment variable GRAALVM_HOME set accordingly
-  - GraalVM native image needs as well native-image extension: https://www.graalvm.org/docs/reference-manual/native-image/
-  - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too, please refer to GraalVM installation documentation for more details.
-
 ### Compile and Run in Local Dev Mode
 
 ```sh
-mvn clean compile quarkus:dev
+mvn clean compile spring-boot:run
 ```
 
-NOTE: With dev mode of Quarkus you can take advantage of hot reload for business assets like processes, rules, decision tables and java code. No need to redeploy or restart your running application.
 
-### Package and Run in JVM mode
+### Package and Run using uberjar
 
 ```sh
 mvn clean package
-java -jar target/quarkus-app/quarkus-run.jar
 ```
 
-or on windows
-
-```sh
-mvn clean package
-java -jar target\quarkus-app\quarkus-run.jar
-```
-
-### Package and Run using Local Native Image
-Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
-
-```
-mvn clean package -Pnative
-```
-  
 To run the generated native executable, generated in `target/`, execute
 
-```
-./target/process-kafka-quickstart-quarkus-runner
+```sh
+java -jar target/process-kafka-quickstart-springboot.jar
 ```
 
 ### OpenAPI (Swagger) documentation
 [Specification at swagger.io](https://swagger.io/docs/specification/about/)
 
-You can take a look at the [OpenAPI definition](http://localhost:8080/openapi?format=json) - automatically generated and included in this service - to determine all available operations exposed by this service. For easy readability you can visualize the OpenAPI definition file using a UI tool like for example available [Swagger UI](https://editor.swagger.io).
+You can take a look at the [OpenAPI definition](http://localhost:8080/v3/api-docs) - automatically generated and included in this service - to determine all available operations exposed by this service. For easy readability you can visualize the OpenAPI definition file using a UI tool like for example available [Swagger UI](https://editor.swagger.io).
 
 In addition, various clients to interact with this service can be easily generated using this OpenAPI definition.
 
-When running in either Quarkus Development or Native mode, we also leverage the [Quarkus OpenAPI extension](https://quarkus.io/guides/openapi-swaggerui#use-swagger-ui-for-development) that exposes [Swagger UI](http://localhost:8080/swagger-ui/) that you can use to look at available REST endpoints and send test requests.
-
 ### Use the application
 
-To make use of this application it is as simple as putting a message on `travellers` topic with following content  (cloud event format)
+To make use of this application it is as simple as putting a message on `travellers` topic with following content
 
 * To examine ProcessedTravellers topic and verify upcoming messages will be processed
 
@@ -143,6 +118,14 @@ Execute in a separate terminal session
 ```sh
 bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic processedtravellers
 ```
+
+Execute in a separate terminal session
+
+```sh
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic cancelledtravellers
+```
+
+
 
 * Send message that should be processed to Topic
 
@@ -173,43 +156,15 @@ One liner
 {"specversion": "0.3","id": "21627e26-31eb-43e7-8343-92a696fd96b1","source": "","type": "travellers", "time": "2019-10-01T12:02:23.812262+02:00[Europe/Warsaw]","data": { "firstName" : "Jan", "lastName" : "Kowalski", "email" : "jan.kowalski@example.com", "nationality" : "Polish"}}
 ```
 
-
-this will then trigger the successful processing of the traveller and put another message on `processedtravellers` topic with following content (cloud event format)
-
-```json
-{
-  "specversion": "0.3",
-  "id": "86f69dd6-7145-4188-aeaa-e44622eeec86",
-  "source": "",
-  "type": "TravellersMessageDataEvent_3",
-  "time": "2019-10-03T16:22:40.373523+02:00[Europe/Warsaw]",
-  "data": {
-    "firstName": "Jan",
-    "lastName": "Kowalski",
-    "email": "jan.kowalski@example.com",
-    "nationality": "Polish",
-    "processed": true
-  },
-  "kogitoProcessinstanceId": "4fb091c2-82f7-4655-8687-245a4ab07483",
-  "kogitoParentProcessinstanceId": null,
-  "kogitoRootProcessinstanceId": null,
-  "kogitoProcessId": "Travellers",
-  "kogitoRootProcessId": null,
-  "kogitoProcessinstanceState": "1",
-  "kogitoReferenceId": null
-}
-```
-
-there are bunch of extension attributes that starts with `kogito` to provide some context of the execution and the event producer.
+this will then trigger the successful processing of the traveller and put another message on `processedtravellers` topic.
 
 To take the other path of the process put following message on `travellers` topic
 
-* Send Message that should be skipped to Topic
+* Send Message to Topic
 
 ```sh
 bin/kafka-console-producer.sh --broker-list localhost:9092 --topic travellers
 ```
-
 With the following content (Cloud Event Format)
 
 ```json
@@ -234,7 +189,7 @@ One Liner
 {"specversion": "0.3","id": "31627e26-31eb-43e7-8343-92a696fd96b1","source": "","type": "travellers", "time": "2019-10-01T12:02:23.812262+02:00[Europe/Warsaw]","data": { "firstName" : "John", "lastName" : "Doe", "email" : "john.doe@example.com", "nationality" : "American"}}
 ```
 
-this will not result in message being send to `processedtravelers` topic.
+this will  result in message being send to `cancelledtravelers` topic.
 
 ## Deploying with Kogito Operator
 

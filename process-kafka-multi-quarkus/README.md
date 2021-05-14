@@ -3,7 +3,7 @@
 ## Description
 
 A quickstart project that deals with traveller processing carried by rules. It illustrates
-how easy it is to make the Kogito processes and rules to work with Apache Kafka
+how easy it is to make the Kogito processes and rules to work with Apache Kafka sending messages to different topics. 
 
 This example shows
 
@@ -11,7 +11,7 @@ This example shows
 * each process instance is expecting a traveller information in JSON format
 * traveller is then processed by rules and based on the outcome of the processing (processed or not) traveller is
 	* if successfully processed traveller information is logged and then updated information is send to another Kafka topic
-	* if not processed traveller info is logged and then process instance finishes without sending reply to Kafka topic
+	* if not processed traveller info is logged and then process instance finishes  sending reply to a different Kafka topic
 
 
 <p align="center"><img width=75% height=50% src="docs/images/process.png"></p>
@@ -144,6 +144,13 @@ Execute in a separate terminal session
 bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic processedtravellers
 ```
 
+Execute in a separate terminal session
+
+```sh
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic cancelledtravellers
+```
+
+
 * Send message that should be processed to Topic
 
 ```sh
@@ -157,7 +164,7 @@ Content (cloud event format)
   "specversion": "0.3",
   "id": "21627e26-31eb-43e7-8343-92a696fd96b1",
   "source": "",
-  "type": "travellers",
+  "type": "TravellersMessageDataEvent_3",
   "time": "2019-10-01T12:02:23.812262+02:00[Europe/Warsaw]",
   "data": {
 	"firstName" : "Jan",
@@ -204,7 +211,7 @@ there are bunch of extension attributes that starts with `kogito` to provide som
 
 To take the other path of the process put following message on `travellers` topic
 
-* Send Message that should be skipped to Topic
+* Send Message to Topic
 
 ```sh
 bin/kafka-console-producer.sh --broker-list localhost:9092 --topic travellers
@@ -234,8 +241,13 @@ One Liner
 {"specversion": "0.3","id": "31627e26-31eb-43e7-8343-92a696fd96b1","source": "","type": "travellers", "time": "2019-10-01T12:02:23.812262+02:00[Europe/Warsaw]","data": { "firstName" : "John", "lastName" : "Doe", "email" : "john.doe@example.com", "nationality" : "American"}}
 ```
 
-this will not result in message being send to `processedtravelers` topic.
+this will result in message being send to `cancelledtravelers` topic, according to this configuration
 
+```
+mp.messaging.outgoing.no\u0020travel.connector=smallrye-kafka
+mp.messaging.outgoing.no\u0020travel.topic=cancelledtravellers
+mp.messaging.outgoing.no\u0020travel.value.serializer=org.apache.kafka.common.serialization.StringSerializer
+```
 ## Deploying with Kogito Operator
 
 In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).
