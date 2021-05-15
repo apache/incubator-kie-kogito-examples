@@ -157,7 +157,7 @@ Content (cloud event format)
   "specversion": "0.3",
   "id": "21627e26-31eb-43e7-8343-92a696fd96b1",
   "source": "",
-  "type": "TravellersMessageDataEvent_3",
+  "type": "travellers",
   "time": "2019-10-01T12:02:23.812262+02:00[Europe/Warsaw]",
   "data": {
 	"firstName" : "Jan",
