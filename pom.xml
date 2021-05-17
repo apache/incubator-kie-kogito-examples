@@ -47,8 +47,6 @@
     <!-- kogito -->
     <kogito.version>${project.version}</kogito.version>
     <version.org.optaplanner>8.8.0-SNAPSHOT</version.org.optaplanner>
-    <!-- pmml -->
-    <version.org.jpmml>1.5.1</version.org.jpmml>
     <!-- override default to fast-jar packaging for forward-compatibility -->
     <quarkus.package.type>fast-jar</quarkus.package.type>
   </properties>
@@ -149,6 +147,7 @@
         <module>process-infinispan-persistence-springboot</module>
         <module>process-kafka-persistence-quarkus</module>
         <module>process-kafka-quickstart-quarkus</module>
+        <module>process-kafka-multi-quarkus</module>
         <module>process-kafka-quickstart-springboot</module>
         <module>process-knative-quickstart-quarkus</module>
         <module>process-mongodb-persistence-quarkus</module>
@@ -212,7 +211,6 @@
         <module>process-springboot-example</module>
       </modules>
     </profile>
-    
     <profile>
       <id>events</id>
       <activation>
@@ -288,6 +286,8 @@
         </property>
       </activation>
       <modules>
+        <module>dmn-event-driven-quarkus</module>
+        <module>dmn-event-driven-springboot</module>
         <module>dmn-listener-quarkus</module>
         <module>dmn-listener-springboot</module>
         <module>dmn-pmml-quarkus-example</module>
@@ -308,62 +308,9 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>org.testcontainers</groupId>
-        <artifactId>testcontainers</artifactId>
-        <version>${version.org.testcontainers}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.testcontainers</groupId>
-        <artifactId>junit-jupiter</artifactId>
-        <version>${version.org.testcontainers}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.jayway.jsonpath</groupId>
-        <artifactId>json-path</artifactId>
-        <version>${version.jayway.jsonpath}</version>
-      </dependency>
-      <dependency>
         <groupId>org.infinispan</groupId>
         <artifactId>infinispan-spring-boot-starter-remote</artifactId>
         <version>${version.org.infinispan.starter}</version>
-      </dependency>
-      <dependency>
-        <groupId>io.cloudevents</groupId>
-        <artifactId>cloudevents-api</artifactId>
-        <version>${version.io.cloudevents}</version>
-      </dependency>
-      <dependency>
-        <groupId>io.cloudevents</groupId>
-        <artifactId>cloudevents-core</artifactId>
-        <version>${version.io.cloudevents}</version>
-      </dependency>
-      <dependency>
-        <groupId>io.cloudevents</groupId>
-        <artifactId>cloudevents-json-jackson</artifactId>
-        <version>${version.io.cloudevents}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.testcontainers</groupId>
-        <artifactId>kafka</artifactId>
-        <version>${version.org.testcontainers}</version>
-      </dependency>
-      <dependency>
-        <groupId>io.swagger.core.v3</groupId>
-        <artifactId>swagger-annotations</artifactId>
-        <version>${version.io.swagger.core.v3}</version>
-      </dependency>
-      
-      <!-- PMML -->
-      <dependency>
-        <groupId>org.jpmml</groupId>
-        <artifactId>pmml-model</artifactId>
-        <version>${version.org.jpmml}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.github.tomakehurst</groupId>
-        <artifactId>wiremock-jre8</artifactId>
-        <scope>test</scope>
-        <version>${version.com.github.tomakehurst.wiremock}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

@@ -45,10 +45,6 @@
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-springboot-starter</artifactId>
     </dependency>
-    <dependency>
-      <groupId>org.springdoc</groupId>
-      <artifactId>springdoc-openapi-ui</artifactId>
-    </dependency>
 
     <dependency>
       <groupId>org.kie.kogito</groupId>
@@ -63,12 +59,12 @@
     <dependency>
       <groupId>io.rest-assured</groupId>
       <artifactId>rest-assured</artifactId>
-      <version>${version.io.rest-assured.springboot}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.testcontainers</groupId>
       <artifactId>junit-jupiter</artifactId>
+      <version>${version.org.testcontainers}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
