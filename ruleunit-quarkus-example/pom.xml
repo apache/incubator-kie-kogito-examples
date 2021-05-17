@@ -3,11 +3,10 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.kie.kogito</groupId>
+    <groupId>org.kie.kogito.examples</groupId>
     <artifactId>kogito-examples</artifactId>
     <version>1.5.1-SNAPSHOT</version>
   </parent>
-  <groupId>org.kie.kogito.examples</groupId>
   <artifactId>ruleunit-quarkus-example</artifactId>
   <name>Kogito Example :: RuleUnit - Quarkus</name>
   <dependencyManagement>
