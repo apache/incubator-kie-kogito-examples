@@ -4,11 +4,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.kie.kogito</groupId>
+    <groupId>org.kie.kogito.examples</groupId>
     <artifactId>kogito-examples</artifactId>
     <version>1.5.1-SNAPSHOT</version>
   </parent>
-  <groupId>org.kie.kogito.examples</groupId>
   <artifactId>dmn-drools-springboot-metrics</artifactId>
   <name>Kogito Example :: DMN Metrics SpringBoot</name>
 

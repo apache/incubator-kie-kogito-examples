@@ -10,7 +10,7 @@
     <version>1.5.1-SNAPSHOT</version>
   </parent>
 
-  <groupId>org.kie.kogito</groupId>
+  <groupId>org.kie.kogito.examples</groupId>
   <artifactId>kogito-examples</artifactId>
   <packaging>pom</packaging>
 
