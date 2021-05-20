@@ -113,11 +113,7 @@ pipeline {
 }
 
 void checkoutRepo(String repo) {
-    if (repo == optaplannerRepo) {
-        checkoutRepo(repo, changeAuthor, changeBranch, getOptaplannerReleaseBranch(changeTarget))
-    } else {
-        checkoutRepo(repo, changeAuthor, changeBranch, changeTarget)
-    }
+    checkoutRepo(repo, changeAuthor, changeBranch, repo == optaplannerRepo ? getOptaplannerReleaseBranch(changeTarget) : changeTarget)
 }
 
 String getOptaplannerReleaseBranch(String branch) {
