@@ -86,8 +86,8 @@
           <artifactId>postgresql-persistence-addon</artifactId>
         </dependency>
         <dependency>
-          <groupId>io.vertx</groupId>
-          <artifactId>vertx-pg-client</artifactId>
+          <groupId>io.quarkus</groupId>
+          <artifactId>quarkus-reactive-pg-client</artifactId>
         </dependency>
       </dependencies>
       <build>
