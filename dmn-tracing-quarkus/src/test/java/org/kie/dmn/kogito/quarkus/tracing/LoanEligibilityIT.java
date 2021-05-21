@@ -51,7 +51,7 @@ public class LoanEligibilityIT {
     @ConfigProperty(name = KafkaQuarkusTestResource.KOGITO_KAFKA_PROPERTY)
     private String kafkaBootstrapServers;
 
-    //    @Test
+    @Test
     public void testEvaluateLoanEligibility() throws InterruptedException {
         final KafkaClient kafkaClient = new KafkaClient(kafkaBootstrapServers);
         final CountDownLatch countDownLatch = new CountDownLatch(1);
