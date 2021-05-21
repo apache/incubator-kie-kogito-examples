@@ -104,6 +104,7 @@ public class LoanEligibilityIT {
         try {
             kafkaClient.consume(TRACING_MODELS_TOPIC_NAME, s -> {
                 LOGGER.info("Received from kafka: {}", s);
+
                 if (checkDeserialization(s, ModelEvent.class) && isModelEventComplete(s)) {
                     countDownLatch.countDown();
                 } else {
