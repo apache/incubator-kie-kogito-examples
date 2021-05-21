@@ -69,7 +69,7 @@ pipeline {
         stage('Examples Integration Tests') {
             steps {
                 script {
-                    runIntegrationTests(kogitoExamplesRepo, ['persistence'])
+                    runIntegrationTests(kogitoExamplesRepo)
                 }
             }
         }
