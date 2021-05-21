@@ -130,7 +130,7 @@ public class LoanEligibilityIT {
     }
 
     private boolean isModelEventComplete(String s) {
-        return s.contains("definitions") && s.contains("DMNDiagram") && s.contains("0.0")
+        return s.contains("definitions") && s.contains("DMNDiagram") && s.contains("dmn-tracing-quarkus")
                 && s.contains("gav") && s.contains("MODEL");
     }
 
