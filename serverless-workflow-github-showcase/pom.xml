@@ -20,7 +20,7 @@
     <surefire-plugin.version>2.22.1</surefire-plugin.version>
     <version.cloudevents>2.0.0-milestone3</version.cloudevents>
     <version.io.jjwt>0.11.2</version.io.jjwt>
-    <version.kohsuke.github>1.116</version.kohsuke.github>
+    <version.kohsuke.github>1.129</version.kohsuke.github>
     <version.org.camel>1.0.1</version.org.camel>
     <version.com.github.tomakehurst.wiremock>2.27.2</version.com.github.tomakehurst.wiremock>
   </properties>
