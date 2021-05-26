@@ -172,6 +172,20 @@ pipeline {
                 }
             }
         }
+        stage('Update nightly branch'){
+            when {
+                expression { return isUpdateNightlyBranch() && !isCreatePr() && !isRelease() }
+            }
+            steps {
+                script {
+                    String nightlyBranch = "nightly-${getBuildBranch()}"
+                    dir(getRepoName()) {
+                        githubscm.createBranch(nightlyBranch)
+                        githubscm.pushObject('origin', nightlyBranch, getGitAuthorCredsID())
+                    }
+                }
+            }
+        }
     }
     post {
         always {
@@ -249,6 +263,10 @@ boolean isCreatePr() {
     return params.CREATE_PR
 }
 
+boolean isUpdateNightlyBranch() {
+    return params.UPDATE_NIGHTLY_BRANCH
+} 
+
 String getRepoName(){
     return env.REPO_NAME
 }
@@ -276,6 +294,10 @@ String getBotBranch(){
 
 String getBotAuthor(){
     return env.GIT_AUTHOR_BOT
+}
+
+String getGitAuthorCredsID(){
+    return env.AUTHOR_CREDS_ID
 }
 
 String getBotAuthorCredsID(){
