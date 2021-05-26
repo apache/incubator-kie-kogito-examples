@@ -114,7 +114,6 @@ public class GrafanaDockerComposeIT {
     }
 
     @Test
-    @Disabled
     public void testGrafanaDashboards() {
         given()
                 .baseUri(GRAFANA_URL)
