@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.examples.domain.FlightDTO;
 import org.kie.kogito.examples.domain.Passenger;
@@ -42,6 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class FlightTest {
 
     @Test
+    @Disabled
     public void testFlightsProcess() throws JsonProcessingException {
         ObjectMapper jsonMapper = new ObjectMapper();
 
