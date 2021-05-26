@@ -177,10 +177,12 @@ pipeline {
                 expression { return isUpdateNightlyBranch() && !isCreatePr() && !isRelease() }
             }
             steps {
-                String nightlyBranch = "nightly-${getBuildBranch()}"
-                dir(getRepoName()) {
-                    githubscm.createBranch(nightlyBranch)
-                    githubscm.pushObject('origin', nightlyBranch, getGitAuthorCredsID())
+                script {
+                    String nightlyBranch = "nightly-${getBuildBranch()}"
+                    dir(getRepoName()) {
+                        githubscm.createBranch(nightlyBranch)
+                        githubscm.pushObject('origin', nightlyBranch, getGitAuthorCredsID())
+                    }
                 }
             }
         }
