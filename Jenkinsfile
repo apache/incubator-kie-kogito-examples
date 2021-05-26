@@ -62,7 +62,7 @@ pipeline {
         stage('Examples Build&Test') {
             steps {
                 script {
-                    runUnitTests(kogitoExamplesRepo)
+                    runUnitTests(kogitoExamplesRepo, { mvnCmd -> mvnCmd.withProperty('validate-formatting') })
                 }
             }
         }
@@ -183,7 +183,7 @@ void runQuickBuild(String project) {
             .run('clean install')
 }
 
-void runUnitTests(String project) {
+void runUnitTests(String project, Closure alterMvnCmd = null) {
     def mvnCmd = getMavenCommand(project)
     if (project == 'optaplanner') {
         mvnCmd.withProperty('enforcer.skip')
@@ -192,6 +192,10 @@ void runUnitTests(String project) {
             .withProperty('revapi.skip')
     } else {
         mvnCmd.withProperty('quickTests')
+    }
+
+    if (alterMvnCmd) {
+        alterMvnCmd(mvnCmd)
     }
 
     runMavenTests(mvnCmd, 'clean install')
