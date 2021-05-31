@@ -326,7 +326,7 @@
       <dependency>
         <groupId>org.infinispan</groupId>
         <artifactId>infinispan-spring-boot-starter-remote</artifactId>
-        <version>${version.org.infinispan.starter}</version>
+        <version>${version.org.infinispan}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
