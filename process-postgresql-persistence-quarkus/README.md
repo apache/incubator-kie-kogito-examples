@@ -101,6 +101,8 @@ mvn clean compile quarkus:dev
 
 NOTE: With dev mode of Quarkus you can take advantage of hot reload for business assets like processes, rules, decision tables and java code. No need to redeploy or restart your running application.
 
+Once PostgreSQL is up and running you can build this project with -Ppersistence OR -Pjdbc-persistence in an exact same way as without persistence. These extra profile in maven configuration add additional dependencies needed to work with Postgres as persistent store using Reactive or JDBC based postgres clients.
+
 ### Package and Run in JVM mode
 
 ```sh

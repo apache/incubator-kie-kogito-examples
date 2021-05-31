@@ -209,6 +209,22 @@
         <module>onboarding-example</module>
         <module>process-quarkus-example</module>
         <module>process-springboot-example</module>
+        <module>process-postgresql-persistence-quarkus</module>
+        <module>process-postgresql-persistence-springboot</module>
+      </modules>
+    </profile>
+    
+    <profile>
+      <id>jdbc-persistence</id>
+      <activation>
+        <property>
+          <name>jdbc-persistence</name>
+        </property>
+      </activation>
+     
+      <modules>
+         <module>process-postgresql-persistence-quarkus</module>
+         <module>process-postgresql-persistence-springboot</module>
       </modules>
     </profile>
     <profile>
