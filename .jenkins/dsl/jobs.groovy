@@ -90,18 +90,21 @@ if (!isMainBranch()) {
 void setupPrJob() {
     def jobParams = getDefaultJobParams()
     jobParams.pr.whiteListTargetBranches = ['1.5.x', '1.7.x']
+    jobParams.env.put('TIMEOUT_VALUE', 120)
     KogitoJobTemplate.createPRJob(this, jobParams)
 }
 
-void setupQuarkusLTSPrJob(String jobFolder) {
+void setupQuarkusLTSPrJob() {
     def jobParams = getDefaultJobParams()
     jobParams.pr.whiteListTargetBranches = ['1.5.x', '1.7.x']
+    jobParams.env.put('TIMEOUT_VALUE', 120)
     KogitoJobTemplate.createQuarkusLTSPRJob(this, jobParams)
 }
 
-void setupNativePrJob(String jobFolder) {
+void setupNativePrJob() {
     def jobParams = getDefaultJobParams()
     jobParams.pr.whiteListTargetBranches = ['1.5.x', '1.7.x']
+    jobParams.env.put('TIMEOUT_VALUE', 600)
     KogitoJobTemplate.createNativePRJob(this, jobParams)
 }
 
