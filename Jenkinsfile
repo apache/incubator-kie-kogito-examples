@@ -21,7 +21,7 @@ pipeline {
     }
     options {
         timestamps()
-        timeout(time: env.TIMEOUT_VALUE, unit: 'MINUTES')
+        timeout(time: getTimeoutValue(), unit: 'MINUTES')
     }
     environment {
         MAVEN_OPTS = '-Xms1024m -Xmx4g'
@@ -29,9 +29,9 @@ pipeline {
     stages {
         stage('Initialize') {
             steps {
-                checkoutRepo(kogitoRuntimesRepo)
-                checkoutRepo(optaplannerRepo)
-                checkoutRepo(kogitoExamplesRepo)
+                checkoutKogitoRepo(kogitoRuntimesRepo)
+                checkoutOptaplannerRepo()
+                checkoutKogitoRepo(kogitoExamplesRepo)
             }
         }
         stage('Build quarkus') {
@@ -112,40 +112,48 @@ pipeline {
     }
 }
 
-void checkoutRepo(String repo) {
-    checkoutRepo(repo, changeAuthor, changeBranch, repo == optaplannerRepo ? getOptaplannerReleaseBranch(changeTarget) : changeTarget)
+void checkoutKogitoRepo(String repo, String dirName=repo) {
+    dir(dirName) {
+        githubscm.checkoutIfExists(repo, changeAuthor, changeBranch, 'kiegroup', getKogitoTargetBranch(), true)
+    }
 }
 
-String getOptaplannerReleaseBranch(String branch) {
-    String checkedBranch = branch
-    String [] versionSplit = checkedBranch.split("\\.")
-    if (versionSplit.length == 3
-        && versionSplit[0].isNumber()
-        && versionSplit[1].isNumber()
-       && versionSplit[2] == 'x') {
-        checkedBranch = "${Integer.parseInt(versionSplit[0]) + 7}.${versionSplit[1]}.x"
-    } else {
-        echo "Cannot parse branch as release branch so going further with current value: ${checkedBranch}"
-       }
-    return checkedBranch
-}
-
-void checkoutRepo(String repo, String author, String branch, String targetBranch = '') {
-    dir(repo) {
-        if (targetBranch) {
-            githubscm.checkoutIfExists(repo, author, branch, 'kiegroup', targetBranch, true)
-        } else {
-            checkout(githubscm.resolveRepository(repo, author, branch, false))
-        }
+void checkoutOptaplannerRepo() {
+    dir('optaplanner') {
+        githubscm.checkoutIfExists('optaplanner', changeAuthor, changeBranch, 'kiegroup', getOptaplannerTargetBranch(), true)
     }
 }
 
 void checkoutQuarkusRepo() {
-    checkoutRepo(quarkusRepo, 'quarkusio', getQuarkusBranch())
+    dir('quarkus') {
+        checkout(githubscm.resolveRepository('quarkus', 'quarkusio', getQuarkusBranch(), false))
+    }
 }
 
-MavenCommand getMavenCommand(String directory, boolean addQuarkusVersion = true, boolean canNative = true) {
-    def mvnCmd = new MavenCommand(this, ['-fae'])
+String getKogitoTargetBranch() {
+    return getTargetBranch(isUpstreamOptaplannerProject() ? -7 : 0)
+}
+
+String getOptaplannerTargetBranch() {
+    return getTargetBranch(isUpstreamOptaplannerProject() ? 0 : 7)
+}
+
+String getTargetBranch(Integer addToMajor) {
+    String targetBranch = changeTarget
+    String [] versionSplit = targetBranch.split("\\.")
+    if (versionSplit.length == 3
+        && versionSplit[0].isNumber()
+        && versionSplit[1].isNumber()
+        && versionSplit[2] == 'x') {
+        targetBranch = "${Integer.parseInt(versionSplit[0]) + addToMajor}.${versionSplit[1]}.x"
+    } else {
+        echo "Cannot parse changeTarget as release branch so going further with current value: ${changeTarget}"
+        }
+    return targetBranch
+}
+
+MavenCommand getMavenCommand(String directory, boolean addQuarkusVersion=true, boolean canNative = false) {
+    mvnCmd = new MavenCommand(this, ['-fae'])
                 .withSettingsXmlId('kogito_release_settings')
                 .withProperty('java.net.preferIPv4Stack', true)
                 .inDirectory(directory)
@@ -162,19 +170,44 @@ MavenCommand getMavenCommand(String directory, boolean addQuarkusVersion = true,
 }
 
 void saveReports() {
-    junit '**/target/surefire-reports/**/*.xml, **/target/failsafe-reports/**/*.xml'
+    junit(testResults: '**/target/surefire-reports/**/*.xml', allowEmptyResults: true)
+    junit(testResults: '**/target/failsafe-reports/**/*.xml', allowEmptyResults: true)
 }
 
 void cleanContainers() {
     cloud.cleanContainersAndImages('docker')
 }
 
+String getQuarkusBranch() {
+    return env['QUARKUS_BRANCH']
+}
+
 boolean isNative() {
     return env['NATIVE'] && env['NATIVE'].toBoolean()
 }
 
-String getQuarkusBranch() {
-    return env['QUARKUS_BRANCH']
+boolean isDownstreamJob() {
+    return env['DOWNSTREAM_BUILD'] && env['DOWNSTREAM_BUILD'].toBoolean()
+}
+
+String getUpstreamTriggerProject() {
+    return env['UPSTREAM_TRIGGER_PROJECT']
+}
+
+boolean isNormalPRCheck() {
+    return !(isDownstreamJob() || getQuarkusBranch() || isNative())
+}
+
+boolean isUpstreamKogitoProject() {
+    return getUpstreamTriggerProject() && getUpstreamTriggerProject().startsWith('kogito')
+}
+
+boolean isUpstreamOptaplannerProject() {
+    return getUpstreamTriggerProject() && getUpstreamTriggerProject().startsWith('opta')
+}
+
+Integer getTimeoutValue() {
+    return isNative() ? 600 : 180
 }
 
 void runQuickBuild(String project) {
