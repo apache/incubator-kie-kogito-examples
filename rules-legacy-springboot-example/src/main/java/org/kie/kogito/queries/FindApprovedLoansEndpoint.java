@@ -18,25 +18,22 @@ package org.kie.kogito.queries;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-
-import org.kie.kogito.legacy.rules.KieRuntimeBuilder;
 import org.kie.kogito.legacy.rules.KieSession;
+import org.kie.kogito.legacy.rules.KieRuntimeBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Path("/find-approved")
+@RestController
+@RequestMapping("/find-approved")
 public class FindApprovedLoansEndpoint {
 
-    @Inject
+    @Autowired
     KieRuntimeBuilder kieRuntimeBuilder;
 
-    @POST()
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public List<LoanApplication> executeQuery(LoanUnit loanUnit) {
         KieSession session = kieRuntimeBuilder.newKieSession();
 
