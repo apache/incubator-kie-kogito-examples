@@ -15,31 +15,13 @@
  */
 package org.kie.kogito.queries;
 
-import org.kie.kogito.rules.DataSource;
-import org.kie.kogito.rules.DataStore;
-import org.kie.kogito.rules.RuleUnitData;
+import java.util.List;
 
-public class LoanUnit implements RuleUnitData {
+public class LoanUnit {
 
     private int maxAmount;
 
-    private DataStore<LoanApplication> loanApplications;
-
-    public LoanUnit() {
-        this(DataSource.createStore());
-    }
-
-    public LoanUnit(DataStore<LoanApplication> loanApplications) {
-        this.loanApplications = loanApplications;
-    }
-
-    public DataStore<LoanApplication> getLoanApplications() {
-        return loanApplications;
-    }
-
-    public void setLoanApplications(DataStore<LoanApplication> loanApplications) {
-        this.loanApplications = loanApplications;
-    }
+    private List<LoanApplication> loanApplications;
 
     public int getMaxAmount() {
         return maxAmount;
@@ -49,4 +31,11 @@ public class LoanUnit implements RuleUnitData {
         this.maxAmount = maxAmount;
     }
 
+    public List<LoanApplication> getLoanApplications() {
+        return loanApplications;
+    }
+
+    public void setLoanApplications(List<LoanApplication> loanApplications) {
+        this.loanApplications = loanApplications;
+    }
 }

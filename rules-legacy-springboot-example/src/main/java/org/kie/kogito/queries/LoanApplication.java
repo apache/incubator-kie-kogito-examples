@@ -77,4 +77,14 @@ public class LoanApplication {
         this.deposit = deposit;
     }
 
+    @Override
+    public String toString() {
+        return "LoanApplication{" +
+                "id='" + id + '\'' +
+                ", applicant=" + applicant +
+                ", amount=" + amount +
+                ", deposit=" + deposit +
+                ", approved=" + approved +
+                '}';
+    }
 }
