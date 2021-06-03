@@ -78,10 +78,10 @@
     <finalName>${project.artifactId}</finalName>
     <resources>
       <resource>
-        <directory>src/main/resources</directory>
+        <directory>src/test/resources</directory>
       </resource>
       <resource>
-        <directory>src/main/filtered-resources</directory>
+        <directory>src/test/filtered-resources</directory>
         <filtering>true</filtering>
       </resource>
     </resources>
