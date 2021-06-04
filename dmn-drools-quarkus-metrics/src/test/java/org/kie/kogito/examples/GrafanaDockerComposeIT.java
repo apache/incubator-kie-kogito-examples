@@ -16,8 +16,10 @@
 package org.kie.kogito.examples;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.time.Duration;
+import java.util.Properties;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -51,6 +53,20 @@ public class GrafanaDockerComposeIT {
     private static final String PROMETHEUS_PUBLIC_URL = "http://localhost:" + PROMETHEUS_PORT;
     private static final String KOGITO_APPLICATION_URL = "http://localhost:" + KOGITO_APPLICATION_PORT;
 
+    private Properties props = new Properties();
+
+    {
+        String propertyFileName = "project.properties";
+        try {
+            props.load(GrafanaDockerComposeIT.class.getClassLoader().getResourceAsStream(propertyFileName));
+        } catch (IOException e) {
+            throw new IllegalStateException("Impossible to retrieve property file " + propertyFileName, e);
+        }
+    }
+
+    private String projectVersion;
+    private String projectArtifactId;
+
     @Container
     public static DockerComposeContainer environment;
 
@@ -74,6 +90,8 @@ public class GrafanaDockerComposeIT {
     @BeforeAll
     void setup() {
         environment.start();
+        projectVersion = props.getProperty("project.version");
+        projectArtifactId = props.getProperty("project.artifactId");
     }
 
     @AfterAll
@@ -103,10 +121,10 @@ public class GrafanaDockerComposeIT {
                 .get("/api/search")
                 .then()
                 .statusCode(200)
-                .body("title", hasItem("dmn-drools-quarkus-metrics:2.0.0-SNAPSHOT - hello - Operational Dashboard"))
-                .body("title", hasItem("dmn-drools-quarkus-metrics:2.0.0-SNAPSHOT - LoanEligibility - Domain Dashboard"))
-                .body("title", hasItem("dmn-drools-quarkus-metrics:2.0.0-SNAPSHOT - Hello - Domain Dashboard"))
-                .body("title", hasItem("dmn-drools-quarkus-metrics:2.0.0-SNAPSHOT - LoanEligibility - Operational Dashboard"));
+                .body("title", hasItem(String.format("%s:%s - hello - Operational Dashboard", projectArtifactId, projectVersion)))
+                .body("title", hasItem(String.format("%s:%s - LoanEligibility - Domain Dashboard", projectArtifactId, projectVersion)))
+                .body("title", hasItem(String.format("%s:%s - Hello - Domain Dashboard", projectArtifactId, projectVersion)))
+                .body("title", hasItem(String.format("%s:%s - LoanEligibility - Operational Dashboard", projectArtifactId, projectVersion)));
     }
 
     @Test
