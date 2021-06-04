@@ -22,6 +22,7 @@ import org.kie.kogito.legacy.rules.KieRuntimeBuilder;
 import org.kie.kogito.legacy.rules.KieSession;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,7 +37,7 @@ public class FindApprovedLoansEndpoint {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public List<LoanApplication> executeQuery(LoanUnit loanUnit) {
+    public List<LoanApplication> executeQuery(@RequestBody(required = true) LoanUnit loanUnit) {
         KieSession session = kieRuntimeBuilder.newKieSession();
 
         List<LoanApplication> approvedApplications = new ArrayList<>();

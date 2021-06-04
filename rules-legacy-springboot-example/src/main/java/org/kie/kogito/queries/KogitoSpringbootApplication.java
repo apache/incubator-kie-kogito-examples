@@ -18,7 +18,7 @@ package org.kie.kogito.queries;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication(scanBasePackages = { "org.kie.kogito.**" })
+@SpringBootApplication(scanBasePackages = { "org.kie.kogito.**", "org.drools.**" })
 public class KogitoSpringbootApplication {
 
     public static void main(String[] args) {
