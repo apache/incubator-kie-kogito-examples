@@ -18,8 +18,8 @@ package org.kie.kogito.queries;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.kie.api.runtime.KieSession;
 import org.kie.kogito.legacy.rules.KieRuntimeBuilder;
-import org.kie.kogito.legacy.rules.KieSession;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
