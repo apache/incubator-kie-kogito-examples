@@ -1,4 +1,4 @@
-<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_iGooIHqdEDmBfsdh2QclNw" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd http://www.omg.org/spec/DD/20100524/DC DC.xsd http://www.omg.org/spec/DD/20100524/DI DI.xsd " exporter="jBPM Process Modeler" exporterVersion="2.0" targetNamespace="http://www.omg.org/bpmn20">
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_mtGjcKeAEDmjuIQt_6-hOA" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd http://www.omg.org/spec/DD/20100524/DC DC.xsd http://www.omg.org/spec/DD/20100524/DI DI.xsd " exporter="jBPM Process Modeler" exporterVersion="2.0" targetNamespace="http://www.omg.org/bpmn20">
   <bpmn2:itemDefinition id="_approverItem" structureRef="String"/>
   <bpmn2:itemDefinition id="_travellerItem" structureRef="org.acme.travels.Traveller"/>
   <bpmn2:itemDefinition id="_firstLineApprovalItem" structureRef="Boolean"/>
@@ -115,14 +115,14 @@
       <bpmn2:dataInputAssociation>
         <bpmn2:targetRef>_8B62D3CA-5D03-4B2B-832B-126469288BB4_NotStartedNotifyInputX</bpmn2:targetRef>
         <bpmn2:assignment>
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression"><![CDATA[[from:Pepe|tousers:|togroups:|toemails:ftirados@redhat.com|replyTo:|subject:please start me|body:do not be lazy man, Im just going to say this once]@[PT30S]]]></bpmn2:from>
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression"><![CDATA[[from:ftirados@localhost.localdomain|tousers:|togroups:|toemails:javierito@gmail.com|replyTo:ftirados@localhost.localdomain|subject:please start me|body:do not be lazy man, Im just going to say this once]@[PT30S]]]></bpmn2:from>
           <bpmn2:to xsi:type="bpmn2:tFormalExpression"><![CDATA[_8B62D3CA-5D03-4B2B-832B-126469288BB4_NotStartedNotifyInputX]]></bpmn2:to>
         </bpmn2:assignment>
       </bpmn2:dataInputAssociation>
       <bpmn2:dataInputAssociation>
         <bpmn2:targetRef>_8B62D3CA-5D03-4B2B-832B-126469288BB4_NotCompletedNotifyInputX</bpmn2:targetRef>
         <bpmn2:assignment>
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression"><![CDATA[[from:Pepe|tousers:|togroups:|toemails:ftirados@redhat.com|replyTo:|subject:Still not completed!!!|body:Come on come on]@[R/PT1M]]]></bpmn2:from>
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression"><![CDATA[[from:pepe@mydomain.com|tousers:|togroups:|toemails:ftirados@redhat.com|replyTo:pepe@mydomain.com|subject:Still not completed!!!|body:Come on come on]@[R/PT1M]]]></bpmn2:from>
           <bpmn2:to xsi:type="bpmn2:tFormalExpression"><![CDATA[_8B62D3CA-5D03-4B2B-832B-126469288BB4_NotCompletedNotifyInputX]]></bpmn2:to>
         </bpmn2:assignment>
       </bpmn2:dataInputAssociation>
@@ -148,8 +148,8 @@
         <bpmn2:sourceRef>_8B62D3CA-5D03-4B2B-832B-126469288BB4_approvedOutputX</bpmn2:sourceRef>
         <bpmn2:targetRef>firstLineApproval</bpmn2:targetRef>
       </bpmn2:dataOutputAssociation>
-      <bpmn2:potentialOwner id="_iGvV0HqdEDmBfsdh2QclNw">
-        <bpmn2:resourceAssignmentExpression id="_iGvV0XqdEDmBfsdh2QclNw">
+      <bpmn2:potentialOwner id="_mtPtYKeAEDmjuIQt_6-hOA">
+        <bpmn2:resourceAssignmentExpression id="_mtQUcKeAEDmjuIQt_6-hOA">
           <bpmn2:formalExpression>manager</bpmn2:formalExpression>
         </bpmn2:resourceAssignmentExpression>
       </bpmn2:potentialOwner>
@@ -314,7 +314,7 @@
         </bpsim:Scenario>
       </bpsim:BPSimData>
     </bpmn2:extensionElements>
-    <bpmn2:source>_iGooIHqdEDmBfsdh2QclNw</bpmn2:source>
-    <bpmn2:target>_iGooIHqdEDmBfsdh2QclNw</bpmn2:target>
+    <bpmn2:source>_mtGjcKeAEDmjuIQt_6-hOA</bpmn2:source>
+    <bpmn2:target>_mtGjcKeAEDmjuIQt_6-hOA</bpmn2:target>
   </bpmn2:relationship>
 </bpmn2:definitions>
