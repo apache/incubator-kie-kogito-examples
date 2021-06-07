@@ -31,6 +31,9 @@ import static org.hamcrest.Matchers.containsString;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class DroolsMetricsTest {
 
+    private static final String PROJECT_VERSION = ProjectMetadataProvider.getProjectVersion();
+    private static final String PROJECT_ARTIFACT_ID = ProjectMetadataProvider.getProjectArtifactId();
+
     @LocalServerPort
     private int port;
 
@@ -58,6 +61,8 @@ public class DroolsMetricsTest {
                 .get("/metrics")
                 .then()
                 .statusCode(200)
-                .body(containsString("drl_match_fired_nanosecond_count{app_id=\"default-rule-monitoring-listener\",rule=\"helloWorld\",} 1.0"));
+                .body(containsString(
+                        String.format("drl_match_fired_nanosecond_count{app_id=\"default-rule-monitoring-listener\",artifactId=\"%s\",rule=\"helloWorld\",version=\"%s\",} 1.0", PROJECT_ARTIFACT_ID,
+                                PROJECT_VERSION)));
     }
 }

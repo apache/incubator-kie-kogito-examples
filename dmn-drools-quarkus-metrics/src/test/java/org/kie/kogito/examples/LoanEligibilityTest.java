@@ -30,6 +30,9 @@ import static org.hamcrest.Matchers.is;
 @QuarkusTest
 public class LoanEligibilityTest {
 
+    private static final String PROJECT_VERSION = ProjectMetadataProvider.getProjectVersion();
+    private static final String PROJECT_ARTIFACT_ID = ProjectMetadataProvider.getProjectArtifactId();
+
     @Test
     public void testEvaluateLoanEligibility() {
         // Approved Loan
@@ -69,16 +72,35 @@ public class LoanEligibilityTest {
                 .get("/metrics")
                 .then()
                 .statusCode(200)
-                .body(containsString("string_dmn_result_total{decision=\"Eligibility\",endpoint=\"LoanEligibility\",identifier=\"Yes\",} 2.0"))
-                .body(containsString("string_dmn_result_total{decision=\"Judgement\",endpoint=\"LoanEligibility\",identifier=\"Yes\",} 1.0"))
-                .body(containsString("string_dmn_result_total{decision=\"Judgement\",endpoint=\"LoanEligibility\",identifier=\"No\",} 1.0"))
-                .body(containsString("boolean_dmn_result_total{decision=\"Decide\",endpoint=\"LoanEligibility\",identifier=\"true\",} 1.0"))
-                .body(containsString("boolean_dmn_result_total{decision=\"Decide\",endpoint=\"LoanEligibility\",identifier=\"false\",} 1.0\n"))
-                .body(containsString("number_dmn_result{decision=\"Is Enough?\",endpoint=\"LoanEligibility\",quantile=\"0.5\",} 0.0"))
-                .body(containsString("number_dmn_result_count{decision=\"Is Enough?\",endpoint=\"LoanEligibility\",} 2.0"))
-                .body(containsString("number_dmn_result_sum{decision=\"Is Enough?\",endpoint=\"LoanEligibility\",} 100.0"))
-                .body(containsString("number_dmn_result{decision=\"Is Enough?\",endpoint=\"LoanEligibility\",quantile=\"0.75\",} 100.0"))
-                .body(containsString("number_dmn_result_max{decision=\"Is Enough?\",endpoint=\"LoanEligibility\",} 100.0"));
+                .body(containsString(
+                        String.format("string_dmn_result_total{artifactId=\"%s\",decision=\"Eligibility\",endpoint=\"LoanEligibility\",identifier=\"Yes\",version=\"%s\",} 2.0", PROJECT_ARTIFACT_ID,
+                                PROJECT_VERSION)))
+                .body(containsString(
+                        String.format("string_dmn_result_total{artifactId=\"%s\",decision=\"Judgement\",endpoint=\"LoanEligibility\",identifier=\"Yes\",version=\"%s\",} 1.0", PROJECT_ARTIFACT_ID,
+                                PROJECT_VERSION)))
+                .body(containsString(
+                        String.format("string_dmn_result_total{artifactId=\"%s\",decision=\"Judgement\",endpoint=\"LoanEligibility\",identifier=\"No\",version=\"%s\",} 1.0", PROJECT_ARTIFACT_ID,
+                                PROJECT_VERSION)))
+                .body(containsString(
+                        String.format("boolean_dmn_result_total{artifactId=\"%s\",decision=\"Decide\",endpoint=\"LoanEligibility\",identifier=\"true\",version=\"%s\",} 1.0", PROJECT_ARTIFACT_ID,
+                                PROJECT_VERSION)))
+                .body(containsString(
+                        String.format("boolean_dmn_result_total{artifactId=\"%s\",decision=\"Decide\",endpoint=\"LoanEligibility\",identifier=\"false\",version=\"%s\",} 1.0\n", PROJECT_ARTIFACT_ID,
+                                PROJECT_VERSION)))
+                .body(containsString(
+                        String.format("number_dmn_result{artifactId=\"%s\",decision=\"Is Enough?\",endpoint=\"LoanEligibility\",version=\"%s\",quantile=\"0.5\",} 0.0", PROJECT_ARTIFACT_ID,
+                                PROJECT_VERSION)))
+                .body(containsString(
+                        String.format("number_dmn_result_max{artifactId=\"%s\",decision=\"Is Enough?\",endpoint=\"LoanEligibility\",version=\"%s\",} 100.0", PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
+                .body(containsString(
+                        String.format("number_dmn_result_count{artifactId=\"%s\",decision=\"Is Enough?\",endpoint=\"LoanEligibility\",version=\"%s\",} 2.0", PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
+                .body(containsString(
+                        String.format("number_dmn_result_sum{artifactId=\"%s\",decision=\"Is Enough?\",endpoint=\"LoanEligibility\",version=\"%s\",} 100.0", PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
+                .body(containsString(
+                        String.format("number_dmn_result{artifactId=\"%s\",decision=\"Is Enough?\",endpoint=\"LoanEligibility\",version=\"%s\",quantile=\"0.75\",} 100.0", PROJECT_ARTIFACT_ID,
+                                PROJECT_VERSION)))
+                .body(containsString(
+                        String.format("api_execution_elapsed_seconds{artifactId=\"%s\",endpoint=\"LoanEligibility\",version=\"%s\",quantile=\"0.5\",}", PROJECT_ARTIFACT_ID, PROJECT_VERSION)));
     }
 
     @Test

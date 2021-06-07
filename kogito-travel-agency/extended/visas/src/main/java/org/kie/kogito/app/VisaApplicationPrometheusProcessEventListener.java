@@ -20,14 +20,16 @@ import java.util.Arrays;
 import org.acme.travels.VisaApplication;
 import org.jbpm.workflow.instance.impl.WorkflowProcessInstanceImpl;
 import org.kie.api.event.process.ProcessCompletedEvent;
+import org.kie.kogito.KogitoGAV;
 import org.kie.kogito.monitoring.core.common.MonitoringRegistry;
+import org.kie.kogito.monitoring.core.common.process.MetricsProcessEventListener;
 import org.kie.kogito.monitoring.prometheus.common.PrometheusRegistryProvider;
-import org.kie.kogito.monitoring.prometheus.common.process.PrometheusProcessEventListener;
 
 import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.Tag;
 
-public class VisaApplicationPrometheusProcessEventListener extends PrometheusProcessEventListener {
+public class VisaApplicationPrometheusProcessEventListener extends MetricsProcessEventListener {
 
     private static final String NUMBER_OF_VISA_APPROVED_COUNTER_NAME = "acme_travels_visas_approved_total";
     private static final String NUMBER_OF_VISA_REJECTED_COUNTER_NAME = "acme_travels_visas_rejected_total";
@@ -50,8 +52,8 @@ public class VisaApplicationPrometheusProcessEventListener extends PrometheusPro
 
     private String identifier;
 
-    public VisaApplicationPrometheusProcessEventListener(String identifier) {
-        super(identifier);
+    public VisaApplicationPrometheusProcessEventListener(String identifier, KogitoGAV kogitoGAV, MeterRegistry meterRegistry) {
+        super(identifier, kogitoGAV, meterRegistry);
         this.identifier = identifier;
     }
 
