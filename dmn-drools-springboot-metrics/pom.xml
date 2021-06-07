@@ -4,11 +4,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.kie.kogito</groupId>
+    <groupId>org.kie.kogito.examples</groupId>
     <artifactId>kogito-examples</artifactId>
     <version>2.0.0-SNAPSHOT</version>
   </parent>
-  <groupId>org.kie.kogito.examples</groupId>
   <artifactId>dmn-drools-springboot-metrics</artifactId>
   <name>Kogito Example :: DMN Metrics SpringBoot</name>
 
@@ -46,10 +45,6 @@
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-springboot-starter</artifactId>
     </dependency>
-    <dependency>
-      <groupId>org.springdoc</groupId>
-      <artifactId>springdoc-openapi-ui</artifactId>
-    </dependency>
 
     <dependency>
       <groupId>org.kie.kogito</groupId>
@@ -64,12 +59,12 @@
     <dependency>
       <groupId>io.rest-assured</groupId>
       <artifactId>rest-assured</artifactId>
-      <version>${version.io.rest-assured.springboot}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.testcontainers</groupId>
       <artifactId>junit-jupiter</artifactId>
+      <version>${version.org.testcontainers}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -82,6 +77,15 @@
 
   <build>
     <finalName>${project.artifactId}</finalName>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+      <resource>
+        <directory>src/test/filtered-resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
     <plugins>
       <plugin>
         <groupId>org.kie.kogito</groupId>

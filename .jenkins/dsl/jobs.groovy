@@ -19,7 +19,8 @@ def getDefaultJobParams() {
             credentials: "${GIT_AUTHOR_CREDENTIALS_ID}",
             token_credentials: "${GIT_AUTHOR_TOKEN_CREDENTIALS_ID}"
         ],
-        env: [:]
+        env: [:],
+        pr: [:]
     ]
 }
 
@@ -34,18 +35,35 @@ def getJobParams(String jobName, String jobFolder, String jenkinsfileName, Strin
     return jobParams
 }
 
+Map getMultijobPRConfig() {
+    return [
+        parallel: true,
+        jobs : [
+            [
+                id: 'Examples',
+                primary: true,
+            ]
+        ]
+    ]
+}
+
 def bddRuntimesPrFolder = "${KogitoConstants.KOGITO_DSL_PULLREQUEST_FOLDER}/${KogitoConstants.KOGITO_DSL_RUNTIMES_BDD_FOLDER}"
 def nightlyBranchFolder = "${KogitoConstants.KOGITO_DSL_NIGHTLY_FOLDER}/${JOB_BRANCH_FOLDER}"
 def releaseBranchFolder = "${KogitoConstants.KOGITO_DSL_RELEASE_FOLDER}/${JOB_BRANCH_FOLDER}"
 
 if (isMainBranch()) {
-    folder(KogitoConstants.KOGITO_DSL_PULLREQUEST_FOLDER)
+    // Old PR checks. To be removed once supported release branches (<= 1.7.x) are no more there.
+    setupPrJob()
+    setupQuarkusLTSPrJob()
+    setupNativePrJob()
 
-    setupPrJob(KogitoConstants.KOGITO_DSL_PULLREQUEST_FOLDER)
-    setupQuarkusLTSPrJob(KogitoConstants.KOGITO_DSL_PULLREQUEST_FOLDER)
-    setupNativePrJob(KogitoConstants.KOGITO_DSL_PULLREQUEST_FOLDER)
+    // PR checks for 1.8+
+    setupMultijobPrDefaultChecks()
+    setupMultijobPrNativeChecks()
+    setupMultijobPrLTSChecks()
 
     // For BDD runtimes PR job
+    folder(KogitoConstants.KOGITO_DSL_PULLREQUEST_FOLDER)
     folder(bddRuntimesPrFolder)
 
     setupDeployJob(bddRuntimesPrFolder, KogitoJobType.PR)
@@ -69,25 +87,49 @@ if (!isMainBranch()) {
 // Methods
 /////////////////////////////////////////////////////////////////
 
-void setupPrJob(String jobFolder) {
+void setupPrJob() {
     def jobParams = getDefaultJobParams()
-    jobParams.job.folder = jobFolder
+    jobParams.pr.whiteListTargetBranches = ['1.5.x', '1.7.x']
     jobParams.env.put('TIMEOUT_VALUE', 120)
     KogitoJobTemplate.createPRJob(this, jobParams)
 }
 
-void setupQuarkusLTSPrJob(String jobFolder) {
+void setupQuarkusLTSPrJob() {
     def jobParams = getDefaultJobParams()
-    jobParams.job.folder = jobFolder
+    jobParams.pr.whiteListTargetBranches = ['1.5.x', '1.7.x']
     jobParams.env.put('TIMEOUT_VALUE', 120)
     KogitoJobTemplate.createQuarkusLTSPRJob(this, jobParams)
 }
 
-void setupNativePrJob(String jobFolder) {
+void setupNativePrJob() {
     def jobParams = getDefaultJobParams()
-    jobParams.job.folder = jobFolder
+    jobParams.pr.whiteListTargetBranches = ['1.5.x', '1.7.x']
     jobParams.env.put('TIMEOUT_VALUE', 600)
     KogitoJobTemplate.createNativePRJob(this, jobParams)
+}
+
+void setupMultijobPrDefaultChecks() {
+    KogitoJobTemplate.createMultijobPRJobs(this, getMultijobPRConfig()) {
+        def jobParams = getDefaultJobParams()
+        jobParams.pr.blackListTargetBranches = ['1.5.x', '1.7.x']
+        return jobParams
+    }
+}
+
+void setupMultijobPrNativeChecks() {
+    KogitoJobTemplate.createMultijobNativePRJobs(this, getMultijobPRConfig()) {
+        def jobParams = getDefaultJobParams()
+        jobParams.pr.blackListTargetBranches = ['1.5.x', '1.7.x']
+        return jobParams
+    }
+}
+
+void setupMultijobPrLTSChecks() {
+    KogitoJobTemplate.createMultijobLTSPRJobs(this, getMultijobPRConfig()) {
+        def jobParams = getDefaultJobParams()
+        jobParams.pr.blackListTargetBranches = ['1.5.x', '1.7.x']
+        return jobParams
+    }
 }
 
 /*
@@ -116,6 +158,8 @@ void setupDeployJob(String jobFolder, KogitoJobType jobType) {
             booleanParam('SKIP_TESTS', false, 'Skip tests')
 
             booleanParam('CREATE_PR', false, 'Should we create a PR with the changes ?')
+            booleanParam('UPDATE_NIGHTLY_BRANCH', false, 'Set to true if at the end of the run, the nightly branch should be updated. This CANNOT be used with `CREATE_PR` parameter also enabled (this latter one has priority). It is also disabled for release job.')
+            
             stringParam('PROJECT_VERSION', '', 'Optional if not RELEASE. If RELEASE, cannot be empty.')
             stringParam('OPTAPLANNER_VERSION', '', 'Optional if not RELEASE. If RELEASE, cannot be empty.')
         }
@@ -127,7 +171,7 @@ void setupDeployJob(String jobFolder, KogitoJobType jobType) {
             env('RELEASE', jobType == KogitoJobType.RELEASE)
             env('JENKINS_EMAIL_CREDS_ID', "${JENKINS_EMAIL_CREDS_ID}")
             env('MAVEN_SETTINGS_CONFIG_FILE_ID', "${MAVEN_SETTINGS_FILE_ID}")
-            
+
             if (jobType == KogitoJobType.PR) {
                 env('MAVEN_DEPENDENCIES_REPOSITORY', "${MAVEN_PR_CHECKS_REPOSITORY_URL}")
                 env('MAVEN_DEPLOY_REPOSITORY', "${MAVEN_PR_CHECKS_REPOSITORY_URL}")
@@ -148,7 +192,6 @@ void setupDeployJob(String jobFolder, KogitoJobType jobType) {
                     env('NEXUS_STAGING_PROFILE_ID', "${MAVEN_NEXUS_STAGING_PROFILE_ID}")
                     env('NEXUS_BUILD_PROMOTION_PROFILE_ID', "${MAVEN_NEXUS_BUILD_PROMOTION_PROFILE_ID}")
                 }
-                
             }
         }
     }
@@ -172,7 +215,7 @@ void setupPromoteJob(String jobFolder, KogitoJobType jobType) {
         }
 
         environmentVariables {
-            env('REPO_NAME', 'kogito-examples')            
+            env('REPO_NAME', 'kogito-examples')
             env('PROPERTIES_FILE_NAME', 'deployment.properties')
 
             env('RELEASE', jobType == KogitoJobType.RELEASE)

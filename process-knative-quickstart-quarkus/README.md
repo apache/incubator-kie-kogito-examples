@@ -164,23 +164,22 @@ Then run the application with:
 ```shell script
 $ K_SINK=http://localhost:8181 mvn clean quarkus:dev
 
+2021-05-18 14:50:47,574 INFO  [org.kie.kog.cod.api.uti.AddonsConfigDiscovery] (build-24) Performed addonsConfig discovery, found: AddonsConfig{usePersistence=false, useTracing=false, useMonitoring=false, usePrometheusMonitoring=false, useCloudEvents=true, useExplainability=false, useProcessSVG=false}
+2021-05-18 14:50:47,777 INFO  [org.kie.kog.cod.cor.uti.ApplicationGeneratorDiscovery] (build-24) Generator discovery performed, found [openapispecs, processes, rules, decisions, predictions]
+2021-05-18 14:50:48,726 INFO  [org.kie.kog.cod.api.uti.AddonsConfigDiscovery] (build-31) Performed addonsConfig discovery, found: AddonsConfig{usePersistence=false, useTracing=false, useMonitoring=false, usePrometheusMonitoring=false, useCloudEvents=true, useExplainability=false, useProcessSVG=false}
+2021-05-18 14:50:48,730 INFO  [org.kie.kog.qua.com.dep.KogitoQuarkusResourceUtils] (build-31) No Java source to compile
 __  ____  __  _____   ___  __ ____  ______ 
  --/ __ \/ / / / _ | / _ \/ //_/ / / / __/ 
  -/ /_/ / /_/ / __ |/ , _/ ,< / /_/ /\ \   
 --\___\_\____/_/ |_/_/|_/_/|_|\____/___/   
-2020-08-04 17:50:08,685 INFO  [org.kie.kog.cod.pro.ProcessCodegen] (build-24) Knative Eventing addon enabled, generating CloudEvent HTTP listener
-2020-08-04 17:50:11,350 INFO  [io.sma.rea.mes.provider] (Quarkus Main Thread) SRMSG00208: Deployment done... start processing
-2020-08-04 17:50:11,353 INFO  [io.sma.rea.mes.provider] (Quarkus Main Thread) SRMSG00226: Found incoming connectors: [smallrye-http]
-2020-08-04 17:50:11,355 INFO  [io.sma.rea.mes.provider] (Quarkus Main Thread) SRMSG00227: Found outgoing connectors: [smallrye-http]
-2020-08-04 17:50:11,355 INFO  [io.sma.rea.mes.provider] (Quarkus Main Thread) SRMSG00229: Channel manager initializing...
-2020-08-04 17:50:11,384 INFO  [io.sma.rea.mes.provider] (Quarkus Main Thread) SRMSG00209: Initializing mediators
-2020-08-04 17:50:11,386 INFO  [io.sma.rea.mes.provider] (Quarkus Main Thread) SRMSG00215: Connecting mediators
-2020-08-04 17:50:11,386 INFO  [io.sma.rea.mes.provider] (Quarkus Main Thread) SRMSG00216: Attempt to resolve org.kie.kogito.test.TravelersMessageConsumer_3#consume
-2020-08-04 17:50:11,387 INFO  [io.sma.rea.mes.provider] (Quarkus Main Thread) SRMSG00217: Connecting org.kie.kogito.test.TravelersMessageConsumer_3#consume to `[travellers]` (org.eclipse.microprofile.reactive.streams.operators.core.PublisherBuilderImpl@fb1ed7a)
-2020-08-04 17:50:11,421 INFO  [io.sma.rea.mes.provider] (Quarkus Main Thread) SRMSG00222: Connecting emitter to sink processedtravellers
-2020-08-04 17:50:11,510 INFO  [io.quarkus] (Quarkus Main Thread) process-knative-quickstart-quarkus 8.0.0-SNAPSHOT on JVM (powered by Quarkus 1.6.0.Final) started in 4.222s. Listening on: http://0.0.0.0:8080
-2020-08-04 17:50:11,510 INFO  [io.quarkus] (Quarkus Main Thread) Profile dev activated. Live Coding activated.
-2020-08-04 17:50:11,510 INFO  [io.quarkus] (Quarkus Main Thread) Installed features: [cdi, kogito, mutiny, resteasy, resteasy-jackson, smallrye-context-propagation, smallrye-openapi, smallrye-reactive-messaging, swagger-ui, vertx]
+2021-05-18 14:50:50,046 WARN  [io.sma.rea.mes.provider] (Quarkus Main Thread) SRMSG00207: Some components are not connected to either downstream consumers or upstream producers:
+	- SubscriberMethod{method:'org.kie.kogito.addon.cloudevents.quarkus.QuarkusCloudEventPublisher#onEvent', incoming:'kogito_incoming_stream'} has no upstream
+
+2021-05-18 14:50:50,111 INFO  [org.kie.kog.add.clo.qua.QuarkusKogitoExtensionInitializer] (Quarkus Main Thread) Registered Kogito CloudEvent extension
+2021-05-18 14:50:50,114 INFO  [org.kie.kog.ser.eve.imp.AbstractMessageConsumer] (Quarkus Main Thread) Consumer for class org.acme.travel.Traveller started.
+2021-05-18 14:50:50,164 INFO  [io.quarkus] (Quarkus Main Thread) process-knative-quickstart-quarkus 2.0.0-SNAPSHOT on JVM (powered by Quarkus 1.13.3.Final) started in 3.118s. Listening on: http://localhost:8080
+2021-05-18 14:50:50,164 INFO  [io.quarkus] (Quarkus Main Thread) Profile dev activated. Live Coding activated.
+2021-05-18 14:50:50,164 INFO  [io.quarkus] (Quarkus Main Thread) Installed features: [cdi, kogito-decisions, kogito-predictions, kogito-processes, kogito-rules, mutiny, rest-client, rest-client-jackson, resteasy, resteasy-jackson, servlet, smallrye-context-propagation, smallrye-health, smallrye-openapi, smallrye-reactive-messaging, swagger-ui, vertx, vertx-web]
 ``` 
 
 Now send a message to the application on 8080 port using the [cloud event format](https://github.com/cloudevents/spec) with `curl`:
@@ -203,14 +202,14 @@ You should see an output like this one in the running container terminal:
 Validation: valid
 Context Attributes,
   specversion: 1.0
-  type: process.travelers.processedtravellers
-  source: /process/Travelers/57faaf75-959e-4b09-a6c8-b53ee33fb2f0
-  id: e8bddf03-e05c-4884-bd82-6fb1acc6e805
-  time: 2020-08-04T20:55:07.215083Z
+  type: processedtravellers
+  source: /process/Travelers
+  id: f37c3856-3ee4-47ed-8daf-d81ff6c8d695
+  time: 2021-05-18T17:51:50.056553Z
 Extensions,
-  kogitoprocessid: Travelers
-  kogitoprocessinstanceid: 57faaf75-959e-4b09-a6c8-b53ee33fb2f0
-  kogitoprocessinstancestate: 1
+  kogitoprocid: Travelers
+  kogitoprocinstanceid: c70a8abc-eaa6-4be9-85e9-2ebf9bcb101b
+  kogitousertaskist: 1
 Data,
   {"firstName":"Jan","lastName":"Kowalski","email":"jan.kowalski@example.com","nationality":"Polish","processed":true}
 ```

@@ -36,7 +36,7 @@ services:
       SERVER_SERVLET_CONTEXTPATH: "/"
 
   infinispan:
-    image: infinispan/server:11.0.4.Final
+    image: infinispan/server:12.1.3.Final
     container_name: infinispan
     ports:
       - 11222:11222
@@ -73,6 +73,9 @@ services:
       KAFKA_BOOTSTRAP_SERVERS: kafka:9093
       QUARKUS_INFINISPAN_CLIENT_SERVER_LIST: infinispan:11222
       QUARKUS_INFINISPAN_CLIENT_USE_AUTH: "false"
+      MP_MESSAGING_INCOMING_TRUSTY_EXPLAINABILITY_RESULT_FAILURE_STRATEGY: "ignore"
+      MP_MESSAGING_INCOMING_KOGITO_TRACING_DECISION_FAILURE_STRATEGY: "ignore"
+      MP_MESSAGING_INCOMING_KOGITO_TRACING_MODEL_FAILURE_STRATEGY: "ignore"
     ports:
       - 1337:8080
 
