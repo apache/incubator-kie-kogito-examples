@@ -30,6 +30,9 @@ import static org.hamcrest.Matchers.is;
 @QuarkusTest
 public class LoanEligibilityTest {
 
+    private static final String PROJECT_VERSION = ProjectMetadataProvider.getProjectVersion();
+    private static final String PROJECT_ARTIFACT_ID = ProjectMetadataProvider.getProjectArtifactId();
+
     @Test
     public void testEvaluateLoanEligibility() {
         // Approved Loan
@@ -70,23 +73,34 @@ public class LoanEligibilityTest {
                 .then()
                 .statusCode(200)
                 .body(containsString(
-                        "string_dmn_result_total{artifactId=\"dmn-drools-quarkus-metrics\",decision=\"Eligibility\",endpoint=\"LoanEligibility\",identifier=\"Yes\",version=\"2.0.0-SNAPSHOT\",} 2.0"))
+                        String.format("string_dmn_result_total{artifactId=\"%s\",decision=\"Eligibility\",endpoint=\"LoanEligibility\",identifier=\"Yes\",version=\"%s\",} 2.0", PROJECT_ARTIFACT_ID,
+                                PROJECT_VERSION)))
                 .body(containsString(
-                        "string_dmn_result_total{artifactId=\"dmn-drools-quarkus-metrics\",decision=\"Judgement\",endpoint=\"LoanEligibility\",identifier=\"Yes\",version=\"2.0.0-SNAPSHOT\",} 1.0"))
+                        String.format("string_dmn_result_total{artifactId=\"%s\",decision=\"Judgement\",endpoint=\"LoanEligibility\",identifier=\"Yes\",version=\"%s\",} 1.0", PROJECT_ARTIFACT_ID,
+                                PROJECT_VERSION)))
                 .body(containsString(
-                        "string_dmn_result_total{artifactId=\"dmn-drools-quarkus-metrics\",decision=\"Judgement\",endpoint=\"LoanEligibility\",identifier=\"No\",version=\"2.0.0-SNAPSHOT\",} 1.0"))
+                        String.format("string_dmn_result_total{artifactId=\"%s\",decision=\"Judgement\",endpoint=\"LoanEligibility\",identifier=\"No\",version=\"%s\",} 1.0", PROJECT_ARTIFACT_ID,
+                                PROJECT_VERSION)))
                 .body(containsString(
-                        "boolean_dmn_result_total{artifactId=\"dmn-drools-quarkus-metrics\",decision=\"Decide\",endpoint=\"LoanEligibility\",identifier=\"true\",version=\"2.0.0-SNAPSHOT\",} 1.0"))
+                        String.format("boolean_dmn_result_total{artifactId=\"%s\",decision=\"Decide\",endpoint=\"LoanEligibility\",identifier=\"true\",version=\"%s\",} 1.0", PROJECT_ARTIFACT_ID,
+                                PROJECT_VERSION)))
                 .body(containsString(
-                        "boolean_dmn_result_total{artifactId=\"dmn-drools-quarkus-metrics\",decision=\"Decide\",endpoint=\"LoanEligibility\",identifier=\"false\",version=\"2.0.0-SNAPSHOT\",} 1.0\n"))
+                        String.format("boolean_dmn_result_total{artifactId=\"%s\",decision=\"Decide\",endpoint=\"LoanEligibility\",identifier=\"false\",version=\"%s\",} 1.0\n", PROJECT_ARTIFACT_ID,
+                                PROJECT_VERSION)))
                 .body(containsString(
-                        "number_dmn_result{artifactId=\"dmn-drools-quarkus-metrics\",decision=\"Is Enough?\",endpoint=\"LoanEligibility\",version=\"2.0.0-SNAPSHOT\",quantile=\"0.5\",} 0.0"))
-                .body(containsString("number_dmn_result_max{artifactId=\"dmn-drools-quarkus-metrics\",decision=\"Is Enough?\",endpoint=\"LoanEligibility\",version=\"2.0.0-SNAPSHOT\",} 100.0"))
-                .body(containsString("number_dmn_result_count{artifactId=\"dmn-drools-quarkus-metrics\",decision=\"Is Enough?\",endpoint=\"LoanEligibility\",version=\"2.0.0-SNAPSHOT\",} 2.0"))
-                .body(containsString("number_dmn_result_sum{artifactId=\"dmn-drools-quarkus-metrics\",decision=\"Is Enough?\",endpoint=\"LoanEligibility\",version=\"2.0.0-SNAPSHOT\",} 100.0"))
+                        String.format("number_dmn_result{artifactId=\"%s\",decision=\"Is Enough?\",endpoint=\"LoanEligibility\",version=\"%s\",quantile=\"0.5\",} 0.0", PROJECT_ARTIFACT_ID,
+                                PROJECT_VERSION)))
                 .body(containsString(
-                        "number_dmn_result{artifactId=\"dmn-drools-quarkus-metrics\",decision=\"Is Enough?\",endpoint=\"LoanEligibility\",version=\"2.0.0-SNAPSHOT\",quantile=\"0.75\",} 100.0"))
-                .body(containsString("api_execution_elapsed_seconds{artifactId=\"dmn-drools-quarkus-metrics\",endpoint=\"LoanEligibility\",version=\"2.0.0-SNAPSHOT\",quantile=\"0.5\",}"));
+                        String.format("number_dmn_result_max{artifactId=\"%s\",decision=\"Is Enough?\",endpoint=\"LoanEligibility\",version=\"%s\",} 100.0", PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
+                .body(containsString(
+                        String.format("number_dmn_result_count{artifactId=\"%s\",decision=\"Is Enough?\",endpoint=\"LoanEligibility\",version=\"%s\",} 2.0", PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
+                .body(containsString(
+                        String.format("number_dmn_result_sum{artifactId=\"%s\",decision=\"Is Enough?\",endpoint=\"LoanEligibility\",version=\"%s\",} 100.0", PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
+                .body(containsString(
+                        String.format("number_dmn_result{artifactId=\"%s\",decision=\"Is Enough?\",endpoint=\"LoanEligibility\",version=\"%s\",quantile=\"0.75\",} 100.0", PROJECT_ARTIFACT_ID,
+                                PROJECT_VERSION)))
+                .body(containsString(
+                        String.format("api_execution_elapsed_seconds{artifactId=\"%s\",endpoint=\"LoanEligibility\",version=\"%s\",quantile=\"0.5\",}", PROJECT_ARTIFACT_ID, PROJECT_VERSION)));
     }
 
     @Test

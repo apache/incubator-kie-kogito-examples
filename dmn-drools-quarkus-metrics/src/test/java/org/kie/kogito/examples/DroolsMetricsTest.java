@@ -26,6 +26,9 @@ import static org.hamcrest.Matchers.containsString;
 @QuarkusTest
 public class DroolsMetricsTest {
 
+    private static final String PROJECT_VERSION = ProjectMetadataProvider.getProjectVersion();
+    private static final String PROJECT_ARTIFACT_ID = ProjectMetadataProvider.getProjectArtifactId();
+
     @Test
     public void testDrlMetrics() {
         given()
@@ -42,6 +45,7 @@ public class DroolsMetricsTest {
                 .then()
                 .statusCode(200)
                 .body(containsString(
-                        "drl_match_fired_nanosecond_count{app_id=\"default-rule-monitoring-listener\",artifactId=\"dmn-drools-quarkus-metrics\",rule=\"helloWorld\",version=\"2.0.0-SNAPSHOT\",} 1.0"));
+                        String.format("drl_match_fired_nanosecond_count{app_id=\"default-rule-monitoring-listener\",artifactId=\"%s\",rule=\"helloWorld\",version=\"%s\",} 1.0", PROJECT_ARTIFACT_ID,
+                                PROJECT_VERSION)));
     }
 }
