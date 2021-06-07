@@ -34,6 +34,9 @@ public class ProjectMetadataProvider {
         } catch (IOException e) {
             throw new IllegalStateException("Impossible to retrieve property file " + propertyFileName, e);
         }
+        if (projectVersion == null || projectArtifactId == null || projectVersion.startsWith("${") || projectArtifactId.startsWith("${")){
+            throw new IllegalStateException("The projectVersion and/or the projectArtifactId maven properties are not configured properly.");
+        }
     }
 
     public static String getProjectVersion() {
