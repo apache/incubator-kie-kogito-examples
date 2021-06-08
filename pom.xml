@@ -295,6 +295,38 @@
     </profile>
 
     <profile>
+      <id>optaplanner</id>
+      <activation>
+        <property>
+          <name>optaplanner</name>
+        </property>
+      </activation>
+      <modules>
+        <module>process-optaplanner-quarkus</module>
+        <module>process-optaplanner-springboot</module>
+      </modules>
+    </profile>
+
+    <profile>
+      <id>optaplanner-native</id>
+      <properties>
+        <failsafe.include>**/Native*IT.java</failsafe.include>
+        <failsafe.exclude></failsafe.exclude>
+        <quarkus.package.type>native</quarkus.package.type>
+        <!-- Native building needs a fixed port for tests -->
+        <tests.quarkus.http.port>8080</tests.quarkus.http.port>
+      </properties>
+      <activation>
+        <property>
+          <name>optaplanner-native</name>
+        </property>
+      </activation>
+      <modules>
+        <module>process-optaplanner-quarkus</module>
+      </modules>
+    </profile>
+
+    <profile>
       <id>productized</id>
       <activation>
         <property>
