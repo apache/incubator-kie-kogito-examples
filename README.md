@@ -108,3 +108,4 @@ shows timers (intermediate and boundary) that allows to introduce delays in proc
 Every example has a directory named `operator` including the YAML files to deploy it using the Kogito Operator in an OpenShift cluster.
 Please refer to the [Kogito Documentation](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift)
 of how to install the operator to your environment in order to try it there.
+
