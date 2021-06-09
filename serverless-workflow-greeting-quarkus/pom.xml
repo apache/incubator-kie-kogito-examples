@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.kie.kogito</groupId>
     <artifactId>kogito-examples</artifactId>
-    <version>1.7.0-SNAPSHOT</version>
+    <version>1.7.0.Final</version>
   </parent>
   <artifactId>serverless-workflow-greeting-quarkus</artifactId>
   <name>Kogito Example :: Serverless Workflow Greeting :: Quarkus</name>
