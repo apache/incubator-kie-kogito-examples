@@ -81,7 +81,7 @@
         <directory>src/main/resources</directory>
       </resource>
       <resource>
-        <directory>src/main/filtered-resources</directory>
+        <directory>src/test/filtered-resources</directory>
         <filtering>true</filtering>
       </resource>
     </resources>
