@@ -24,7 +24,7 @@ infinispan.remote.server-list=localhost:11222
 ```
 If you need to change it, you can do so by updating the application.properties file located in src/main/resources.
 
-You can install Infinispan server by downloading version 11.x from the [official website](https://infinispan.org/download/).
+You can install Infinispan server by downloading version 12.x from the [official website](https://infinispan.org/download/).
 
 
 Once Inifispan is up and running you can build this project with `-Ppersistence` to enable additional processing
