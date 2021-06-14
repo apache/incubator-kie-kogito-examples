@@ -13,14 +13,16 @@ def getDefaultJobParams() {
             name: 'kogito-examples'
         ],
         git: [
-            author: "${GIT_AUTHOR_NAME}",
-            branch: "${GIT_BRANCH}",
+            author: "kiegroup",
+            branch: 'master',
             repository: 'kogito-examples',
             credentials: "${GIT_AUTHOR_CREDENTIALS_ID}",
             token_credentials: "${GIT_AUTHOR_TOKEN_CREDENTIALS_ID}"
         ],
         env: [:],
-        pr: [:]
+        pr: [
+            run_only_for_labels : ['invalid'],
+        ]
     ]
 }
 
@@ -40,48 +42,49 @@ Map getMultijobPRConfig() {
         parallel: true,
         jobs : [
             [
-                id: 'Examples',
+                id: 'testpr',
                 primary: true,
             ]
         ]
     ]
 }
 
-def bddRuntimesPrFolder = "${KogitoConstants.KOGITO_DSL_PULLREQUEST_FOLDER}/${KogitoConstants.KOGITO_DSL_RUNTIMES_BDD_FOLDER}"
-def nightlyBranchFolder = "${KogitoConstants.KOGITO_DSL_NIGHTLY_FOLDER}/${JOB_BRANCH_FOLDER}"
-def releaseBranchFolder = "${KogitoConstants.KOGITO_DSL_RELEASE_FOLDER}/${JOB_BRANCH_FOLDER}"
+// def bddRuntimesPrFolder = "${KogitoConstants.KOGITO_DSL_PULLREQUEST_FOLDER}/${KogitoConstants.KOGITO_DSL_RUNTIMES_BDD_FOLDER}"
+// def nightlyBranchFolder = "${KogitoConstants.KOGITO_DSL_NIGHTLY_FOLDER}/${JOB_BRANCH_FOLDER}"
+// def releaseBranchFolder = "${KogitoConstants.KOGITO_DSL_RELEASE_FOLDER}/${JOB_BRANCH_FOLDER}"
 
 if (isMainBranch()) {
     // Old PR checks. To be removed once supported release branches (<= 1.7.x) are no more there.
-    setupPrJob()
-    setupQuarkusLTSPrJob()
-    setupNativePrJob()
+    // setupPrJob()
+    // setupQuarkusLTSPrJob()
+    // setupNativePrJob()
 
     // PR checks for 1.8+
-    setupMultijobPrDefaultChecks()
-    setupMultijobPrNativeChecks()
-    setupMultijobPrLTSChecks()
-
-    // For BDD runtimes PR job
     folder(KogitoConstants.KOGITO_DSL_PULLREQUEST_FOLDER)
-    folder(bddRuntimesPrFolder)
+    setupMultijobPrDefaultChecks()
+    // setupMultijobPrNativeChecks()
+    // setupMultijobPrLTSChecks()
 
-    setupDeployJob(bddRuntimesPrFolder, KogitoJobType.PR)
+    // // For BDD runtimes PR job
+    // folder(KogitoConstants.KOGITO_DSL_PULLREQUEST_FOLDER)
+    // folder(bddRuntimesPrFolder)
+
+    // setupDeployJob(bddRuntimesPrFolder, KogitoJobType.PR)
 }
 
-// Nightly jobs
-folder(KogitoConstants.KOGITO_DSL_NIGHTLY_FOLDER)
-folder(nightlyBranchFolder)
-setupDeployJob(nightlyBranchFolder, KogitoJobType.NIGHTLY)
-setupPromoteJob(nightlyBranchFolder, KogitoJobType.NIGHTLY)
+// // Nightly jobs
+// folder(KogitoConstants.KOGITO_DSL_NIGHTLY_FOLDER)
+// folder(nightlyBranchFolder)
+// setupDeployJob(nightlyBranchFolder, KogitoJobType.NIGHTLY)
+// setupPromoteJob(nightlyBranchFolder, KogitoJobType.NIGHTLY)
 
-// No release directly on main branch
-if (!isMainBranch()) {
-    folder(KogitoConstants.KOGITO_DSL_RELEASE_FOLDER)
-    folder(releaseBranchFolder)
-    setupDeployJob(releaseBranchFolder, KogitoJobType.RELEASE)
-    setupPromoteJob(releaseBranchFolder, KogitoJobType.RELEASE)
-}
+// // No release directly on main branch
+// if (!isMainBranch()) {
+//     folder(KogitoConstants.KOGITO_DSL_RELEASE_FOLDER)
+//     folder(releaseBranchFolder)
+//     setupDeployJob(releaseBranchFolder, KogitoJobType.RELEASE)
+//     setupPromoteJob(releaseBranchFolder, KogitoJobType.RELEASE)
+// }
 
 /////////////////////////////////////////////////////////////////
 // Methods
@@ -159,7 +162,7 @@ void setupDeployJob(String jobFolder, KogitoJobType jobType) {
 
             booleanParam('CREATE_PR', false, 'Should we create a PR with the changes ?')
             booleanParam('UPDATE_NIGHTLY_BRANCH', false, 'Set to true if at the end of the run, the nightly branch should be updated. This CANNOT be used with `CREATE_PR` parameter also enabled (this latter one has priority). It is also disabled for release job.')
-            
+
             stringParam('PROJECT_VERSION', '', 'Optional if not RELEASE. If RELEASE, cannot be empty.')
             stringParam('OPTAPLANNER_VERSION', '', 'Optional if not RELEASE. If RELEASE, cannot be empty.')
         }
