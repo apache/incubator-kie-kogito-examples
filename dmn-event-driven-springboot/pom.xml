@@ -44,7 +44,7 @@
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-event-driven-decisions-springboot-addon</artifactId>
+      <artifactId>kogito-addons-springboot-events-decisions</artifactId>
     </dependency>
 
     <dependency>

@@ -68,7 +68,7 @@
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>mongodb-persistence-addon</artifactId>
+      <artifactId>kogito-addons-persistence-mongodb</artifactId>
     </dependency>
 
     <dependency>
