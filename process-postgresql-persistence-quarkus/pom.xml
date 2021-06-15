@@ -87,7 +87,7 @@
       <dependencies>
         <dependency>
           <groupId>org.kie.kogito</groupId>
-          <artifactId>postgresql-persistence-addon</artifactId>
+          <artifactId>kogito-addons-persistence-postgresql</artifactId>
         </dependency>
         <dependency>
           <groupId>io.quarkus</groupId>
