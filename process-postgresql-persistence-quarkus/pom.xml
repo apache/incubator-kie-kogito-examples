@@ -122,7 +122,7 @@
      <dependencies>
         <dependency>
           <groupId>org.kie.kogito</groupId>
-          <artifactId>jdbc-persistence-addon</artifactId>
+          <artifactId>kogito-addons-persistence-jdbc</artifactId>
         </dependency>
         <dependency>
           <groupId>io.quarkus</groupId>

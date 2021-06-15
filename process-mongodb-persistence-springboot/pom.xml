@@ -128,7 +128,7 @@
       <dependencies>
         <dependency>
           <groupId>org.kie.kogito</groupId>
-          <artifactId>kogito-events-spring-boot-addon</artifactId>
+          <artifactId>kogito-addons-springboot-events-kafka</artifactId>
         </dependency>
       </dependencies>
       <build>

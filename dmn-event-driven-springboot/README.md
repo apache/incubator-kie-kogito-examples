@@ -26,7 +26,7 @@ Like the other Kogito AddOns, the only required step to enable it is to include 
 ```xml
 <dependency>
   <groupId>org.kie.kogito</groupId>
-  <artifactId>kogito-event-driven-decisions-springboot-addon</artifactId>
+  <artifactId>kogito-addons-springboot-event-decisions</artifactId>
 </dependency>
 ```
 

@@ -89,7 +89,7 @@
         </dependency>
         <dependency>
           <groupId>org.kie.kogito</groupId>
-          <artifactId>infinispan-persistence-addon</artifactId>
+          <artifactId>kogito-addons-persistence-infinispan</artifactId>
           <version>${project.version}</version>
         </dependency>
       </dependencies>
