@@ -1,0 +1,379 @@
+<dmn:definitions xmlns:dmn="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns="https://kiegroup.org/dmn/_DFB33A22-A201-47B7-B438-41B5E5D24955" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:kie="http://www.drools.org/kie/dmn/1.2" xmlns:feel="http://www.omg.org/spec/DMN/20180521/FEEL/" xmlns:dmndi="http://www.omg.org/spec/DMN/20180521/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="_C436BAA3-D5D5-41F9-85C6-105184FA3F3D" name="garbage fee" expressionLanguage="http://www.omg.org/spec/DMN/20180521/FEEL/" typeLanguage="http://www.omg.org/spec/DMN/20180521/FEEL/" namespace="https://kiegroup.org/dmn/_DFB33A22-A201-47B7-B438-41B5E5D24955">
+  <dmn:extensionElements/>
+  <dmn:itemDefinition id="_4A7CC893-0AC6-4441-AC70-C61AD4232F1F" name="tGarbageFee" isCollection="false">
+    <dmn:itemComponent id="_4BEB0774-CCF1-4162-B417-BD7E5629B9E7" name="amount" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_C5CF5445-1A62-49DC-94DB-FFA0661D2D8A" name="period" isCollection="false">
+      <dmn:typeRef>tPeriod</dmn:typeRef>
+    </dmn:itemComponent>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_F98659D4-51C3-4EA5-BCCB-F00E6F111F13" name="tPeriod" isCollection="false">
+    <dmn:itemComponent id="_B49F8AE0-0047-408A-965B-C80901CDDE02" name="lastingFor" isCollection="false">
+      <dmn:typeRef>years and months duration</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_FFBC411E-3834-468F-A141-CA6543E5C50B" name="startingFrom" isCollection="false">
+      <dmn:typeRef>date</dmn:typeRef>
+    </dmn:itemComponent>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_3287DA0E-6CB8-4136-A534-A06CDFED03AC" name="tResidence" isCollection="false">
+    <dmn:itemComponent id="_A210850A-9B29-4963-8322-3F6EF45EE423" name="city" isCollection="false">
+      <dmn:typeRef>string</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_BDB4072F-0E2D-4F99-8140-F8368B5F926C" name="type" isCollection="false">
+      <dmn:typeRef>string</dmn:typeRef>
+      <dmn:allowedValues kie:constraintType="enumeration" id="_5424825A-5208-4F37-8502-D23CD888F3F1">
+        <dmn:text>"temporal", "permanent"</dmn:text>
+      </dmn:allowedValues>
+    </dmn:itemComponent>
+  </dmn:itemDefinition>
+  <dmn:inputData id="_ECCB82C2-49AB-4E85-B11F-F59CFC844ED2" name="Number of People in the Household">
+    <dmn:extensionElements/>
+    <dmn:variable id="_57C8FA03-58DA-4315-8066-A7273532FBF5" name="Number of People in the Household" typeRef="number"/>
+  </dmn:inputData>
+  <dmn:decision id="_C3765925-E292-4689-8CBF-6A149079A947" name="Garbage Fee">
+    <dmn:extensionElements/>
+    <dmn:variable id="_20DD7068-1F44-4E44-9700-4B0FAA094637" name="Garbage Fee" typeRef="tGarbageFee"/>
+    <dmn:informationRequirement id="_1391B0C6-7FFA-44A2-8EA4-F1B4F05E3731">
+      <dmn:requiredDecision href="#_CA863588-C864-4F2E-A6BC-1240DC401DCA"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_334AD54F-E784-4F86-B028-1191F6E7DA7A">
+      <dmn:requiredDecision href="#_5ED552AD-CDEF-4B7C-9908-66BC3B9E9FD1"/>
+    </dmn:informationRequirement>
+    <dmn:context id="_E645A9D2-A7BC-4312-BA6D-8F0C4AFAAD73">
+      <dmn:contextEntry>
+        <dmn:variable id="_AF0A5B2C-D66E-42EF-AD15-44351E4EAEE2" name="period" typeRef="tPeriod"/>
+        <dmn:context id="_11237166-A2D0-4F46-9B96-F3B5D95BA4A9">
+          <dmn:contextEntry>
+            <dmn:variable id="_F34A8B4D-FA78-4E9A-83F7-9F3CAD1EE63C" name="lastingFor" typeRef="years and months duration"/>
+            <dmn:literalExpression id="_67EB158B-9389-43BB-BCCC-1361E08CF827">
+              <dmn:text>duration("P1Y")</dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+          <dmn:contextEntry>
+            <dmn:variable id="_7F0CB54C-7014-4B88-B5FD-4ED593AEA476" name="startingFrom" typeRef="date"/>
+            <dmn:literalExpression id="_958D693F-CC82-442A-88B4-DAE041028129">
+              <dmn:text>date(2022, 1, 1)</dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+        </dmn:context>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:variable id="_3D96415D-6FEB-4F90-9EEA-FCE328AFEA13" name="amount" typeRef="number"/>
+        <dmn:literalExpression id="_3245E294-1661-484E-8B62-67048CC4D021">
+          <dmn:text>People Factor + Residence Factor</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+    </dmn:context>
+  </dmn:decision>
+  <dmn:decision id="_CA863588-C864-4F2E-A6BC-1240DC401DCA" name="People Factor">
+    <dmn:extensionElements/>
+    <dmn:variable id="_58C48646-9DB3-46FE-97F4-D20507E17B8A" name="People Factor" typeRef="number"/>
+    <dmn:informationRequirement id="_2A03CBF6-4D82-441A-86CD-ED57351B48BB">
+      <dmn:requiredInput href="#_ECCB82C2-49AB-4E85-B11F-F59CFC844ED2"/>
+    </dmn:informationRequirement>
+    <dmn:decisionTable id="_6936CB69-2249-455A-858E-D6D6138AD264" hitPolicy="UNIQUE" preferredOrientation="Rule-as-Row">
+      <dmn:input id="_6C067821-C132-42C5-BC90-4824394B09EA">
+        <dmn:inputExpression id="_9C89CCBC-6D44-45AE-9710-71AD66C78619" typeRef="number">
+          <dmn:text>Number of People in the Household</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:output id="_D9F4D621-088C-4805-8DE7-4BB7FA14AA26"/>
+      <dmn:annotation name="annotation-1"/>
+      <dmn:rule id="_2BB252B9-A6EB-44DE-AF8F-BF67B69DE31F">
+        <dmn:inputEntry id="_DF78756E-1B29-4C6C-9002-50CFFEE8D37E">
+          <dmn:text>&gt; 2</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_ED729635-A3DE-432D-946F-A50B4EC38561">
+          <dmn:text>90 * Number of People in the Household</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_73AF0B4C-8493-4B2C-8A7E-F26024962987">
+        <dmn:inputEntry id="_F8644108-28FD-4E4A-A173-5846A1ECBDA2">
+          <dmn:text>&lt;= 2</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_B8AFDDD4-095C-4314-A7D0-BD168856EE8E">
+          <dmn:text>100 * Number of People in the Household</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+    </dmn:decisionTable>
+  </dmn:decision>
+  <dmn:decision id="_5ED552AD-CDEF-4B7C-9908-66BC3B9E9FD1" name="Residence Factor">
+    <dmn:extensionElements/>
+    <dmn:variable id="_CF97BA74-70C0-4B98-892C-4663FB1C386C" name="Residence Factor" typeRef="number"/>
+    <dmn:informationRequirement id="_CBED5871-EDB7-4C41-9BFF-AF962D1A918F">
+      <dmn:requiredInput href="#_C885DC21-B6CC-4748-A307-39FDF0E03D36"/>
+    </dmn:informationRequirement>
+    <dmn:knowledgeRequirement id="_70EEDEBF-150E-4512-B138-CA9175C5B018">
+      <dmn:requiredKnowledge href="#_F2ECA8A5-6564-4841-9A5D-5943341810C8"/>
+    </dmn:knowledgeRequirement>
+    <dmn:context id="_CC301EC4-0C3E-4D34-9680-F7BDA22670E5">
+      <dmn:contextEntry>
+        <dmn:variable id="_83B1261C-6455-4D4D-A6DC-F50E963C3EEB" name="City Factor" typeRef="number"/>
+        <dmn:invocation id="_265A1974-54D4-4AF3-9FCA-EC2BE774F7FB">
+          <dmn:literalExpression id="_C013EB85-C832-4BD0-A72A-87A31F763153">
+            <dmn:text>City Garbage Fee</dmn:text>
+          </dmn:literalExpression>
+          <dmn:binding>
+            <dmn:parameter id="_CCA1162D-6288-43AA-9DBB-A1861CA88AC8" name="city"/>
+            <dmn:literalExpression id="_B9364EAD-986D-4779-BFD5-F8A66D614D64">
+              <dmn:text>Residence.city</dmn:text>
+            </dmn:literalExpression>
+          </dmn:binding>
+        </dmn:invocation>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:variable id="_EE419FEE-A406-4803-8DBE-B7DBCC9C32B8" name="Residence Type Factor" typeRef="number"/>
+        <dmn:decisionTable id="_72059530-AAA8-472F-B5DF-0680750B9F2E" hitPolicy="UNIQUE" preferredOrientation="Rule-as-Row">
+          <dmn:input id="_8F1E8BF8-A799-4F64-83F8-58F61A957436">
+            <dmn:inputExpression id="_A9D4D531-7A81-465B-BF1B-11B29AB46066" typeRef="string">
+              <dmn:text>Residence.type</dmn:text>
+            </dmn:inputExpression>
+            <dmn:inputValues kie:constraintType="enumeration" id="_121937C5-DFE8-4010-88AA-BA99EC44DB40">
+              <dmn:text>"temporal","permanent"</dmn:text>
+            </dmn:inputValues>
+          </dmn:input>
+          <dmn:output id="_C9B8309C-1550-4497-BEEB-DFE7E8E9FB4D"/>
+          <dmn:annotation name="annotation-1"/>
+          <dmn:rule id="_79FF145D-46DA-4BB9-B70A-F9CCD9EF7448">
+            <dmn:inputEntry id="_F6B27A71-6519-4377-8634-DC7EFD3D905C">
+              <dmn:text>"temporal"</dmn:text>
+            </dmn:inputEntry>
+            <dmn:outputEntry id="_DAEC7ADA-77D1-4BF1-99EA-A43FD33A6ED9">
+              <dmn:text>0.75</dmn:text>
+            </dmn:outputEntry>
+            <dmn:annotationEntry>
+              <dmn:text/>
+            </dmn:annotationEntry>
+          </dmn:rule>
+          <dmn:rule id="_9C25374A-8D49-477F-B558-EBDDDB3D77F4">
+            <dmn:inputEntry id="_FDA274A6-8BC7-422E-BACF-8DE38F4E24F2">
+              <dmn:text>"permanent"</dmn:text>
+            </dmn:inputEntry>
+            <dmn:outputEntry id="_0B75E19B-4015-4410-B5FD-38DE8404DB46">
+              <dmn:text>1</dmn:text>
+            </dmn:outputEntry>
+            <dmn:annotationEntry>
+              <dmn:text/>
+            </dmn:annotationEntry>
+          </dmn:rule>
+        </dmn:decisionTable>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:literalExpression id="_7425EF3F-3A88-4DFA-BB89-3EF510B20255">
+          <dmn:text>City Factor * Residence Type Factor</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+    </dmn:context>
+  </dmn:decision>
+  <dmn:businessKnowledgeModel id="_F2ECA8A5-6564-4841-9A5D-5943341810C8" name="City Garbage Fee">
+    <dmn:extensionElements/>
+    <dmn:variable id="_10D0B066-5057-48B6-B1C2-0A7A56D7DD8C" name="City Garbage Fee" typeRef="number"/>
+    <dmn:encapsulatedLogic id="_999F293A-A66F-4334-9F64-2C7A0A4A6FF9" kind="FEEL">
+      <dmn:formalParameter id="_4F401057-65DA-4821-87EB-2071086921C2" name="city" typeRef="string"/>
+      <dmn:decisionTable id="_CC37A805-7167-4DD9-AFF6-9DE08CF1EA7C" hitPolicy="FIRST" preferredOrientation="Rule-as-Row">
+        <dmn:input id="_551DF89E-E872-4444-A974-4458D8A201C1">
+          <dmn:inputExpression id="_596514DC-EE01-49D2-AF60-9F62DB94A2B1" typeRef="string">
+            <dmn:text>city</dmn:text>
+          </dmn:inputExpression>
+        </dmn:input>
+        <dmn:output id="_72EDD529-1008-4309-B2D0-95BAA94560D6"/>
+        <dmn:annotation name="annotation-1"/>
+        <dmn:rule id="_B31917E0-A489-4D83-8168-2BCB179A8428">
+          <dmn:inputEntry id="_E60E28F9-3291-4092-A186-FA64A9BFE8CF">
+            <dmn:text>"London"</dmn:text>
+          </dmn:inputEntry>
+          <dmn:outputEntry id="_B04488F5-7BEF-4261-BF2A-B23EB79F85CC">
+            <dmn:text>1500</dmn:text>
+          </dmn:outputEntry>
+          <dmn:annotationEntry>
+            <dmn:text/>
+          </dmn:annotationEntry>
+        </dmn:rule>
+        <dmn:rule id="_953DCC92-02BF-4A29-8686-8D12A384AA0F">
+          <dmn:inputEntry id="_3CE5583B-2BD5-4913-8F4B-6E4AFED38E25">
+            <dmn:text>"Prague"</dmn:text>
+          </dmn:inputEntry>
+          <dmn:outputEntry id="_C42B37BE-96EA-4A1A-A219-C50782B57FBB">
+            <dmn:text>900</dmn:text>
+          </dmn:outputEntry>
+          <dmn:annotationEntry>
+            <dmn:text/>
+          </dmn:annotationEntry>
+        </dmn:rule>
+        <dmn:rule id="_9C9A8B76-5B20-4590-81B0-BCC01A428F82">
+          <dmn:inputEntry id="_F85EE6A0-FA88-4610-9ED7-507DA9E19426">
+            <dmn:text>"Roma"</dmn:text>
+          </dmn:inputEntry>
+          <dmn:outputEntry id="_C96C52A9-2DCB-450E-87B7-3DD673CACA88">
+            <dmn:text>1100</dmn:text>
+          </dmn:outputEntry>
+          <dmn:annotationEntry>
+            <dmn:text/>
+          </dmn:annotationEntry>
+        </dmn:rule>
+        <dmn:rule id="_8E89D533-4BF7-475F-925E-2181B38D938F">
+          <dmn:inputEntry id="_0C8AA0D0-7BDA-470E-B737-AEDDE3F8F9C4">
+            <dmn:text>-</dmn:text>
+          </dmn:inputEntry>
+          <dmn:outputEntry id="_FA2818E5-2D2E-4AB7-A2B2-0ED1F302D3E1">
+            <dmn:text>500</dmn:text>
+          </dmn:outputEntry>
+          <dmn:annotationEntry>
+            <dmn:text/>
+          </dmn:annotationEntry>
+        </dmn:rule>
+      </dmn:decisionTable>
+    </dmn:encapsulatedLogic>
+  </dmn:businessKnowledgeModel>
+  <dmn:inputData id="_C885DC21-B6CC-4748-A307-39FDF0E03D36" name="Residence">
+    <dmn:extensionElements/>
+    <dmn:variable id="_1C7881E6-1CFF-4841-B714-A3F42750DFB9" name="Residence" typeRef="tResidence"/>
+  </dmn:inputData>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="_3F14E7B5-05C4-4BC6-A327-1EB3A5C9D412" name="DRG">
+      <di:extension>
+        <kie:ComponentsWidthsExtension>
+          <kie:ComponentWidths dmnElementRef="_E645A9D2-A7BC-4312-BA6D-8F0C4AFAAD73">
+            <kie:width>50</kie:width>
+            <kie:width>201</kie:width>
+            <kie:width>585</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_11237166-A2D0-4F46-9B96-F3B5D95BA4A9">
+            <kie:width>50</kie:width>
+            <kie:width>215</kie:width>
+            <kie:width>300</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_67EB158B-9389-43BB-BCCC-1361E08CF827">
+            <kie:width>300</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_958D693F-CC82-442A-88B4-DAE041028129">
+            <kie:width>300</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_3245E294-1661-484E-8B62-67048CC4D021">
+            <kie:width>585</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_6936CB69-2249-455A-858E-D6D6138AD264">
+            <kie:width>50</kie:width>
+            <kie:width>273</kie:width>
+            <kie:width>342</kie:width>
+            <kie:width>100</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_CC301EC4-0C3E-4D34-9680-F7BDA22670E5">
+            <kie:width>50</kie:width>
+            <kie:width>156</kie:width>
+            <kie:width>523</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_265A1974-54D4-4AF3-9FCA-EC2BE774F7FB">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>353</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_C013EB85-C832-4BD0-A72A-87A31F763153"/>
+          <kie:ComponentWidths dmnElementRef="_B9364EAD-986D-4779-BFD5-F8A66D614D64">
+            <kie:width>353</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_72059530-AAA8-472F-B5DF-0680750B9F2E">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>232</kie:width>
+            <kie:width>121</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_7425EF3F-3A88-4DFA-BB89-3EF510B20255">
+            <kie:width>523</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_CC37A805-7167-4DD9-AFF6-9DE08CF1EA7C">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_999F293A-A66F-4334-9F64-2C7A0A4A6FF9">
+            <kie:width>50</kie:width>
+            <kie:width>370</kie:width>
+          </kie:ComponentWidths>
+        </kie:ComponentsWidthsExtension>
+      </di:extension>
+      <dmndi:DMNShape id="dmnshape-drg-_ECCB82C2-49AB-4E85-B11F-F59CFC844ED2" dmnElementRef="_ECCB82C2-49AB-4E85-B11F-F59CFC844ED2" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="182" y="362" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_C3765925-E292-4689-8CBF-6A149079A947" dmnElementRef="_C3765925-E292-4689-8CBF-6A149079A947" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="373" y="113" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_CA863588-C864-4F2E-A6BC-1240DC401DCA" dmnElementRef="_CA863588-C864-4F2E-A6BC-1240DC401DCA" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="182" y="228" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_5ED552AD-CDEF-4B7C-9908-66BC3B9E9FD1" dmnElementRef="_5ED552AD-CDEF-4B7C-9908-66BC3B9E9FD1" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="373" y="228" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_F2ECA8A5-6564-4841-9A5D-5943341810C8" dmnElementRef="_F2ECA8A5-6564-4841-9A5D-5943341810C8" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="606" y="227" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_C885DC21-B6CC-4748-A307-39FDF0E03D36" dmnElementRef="_C885DC21-B6CC-4748-A307-39FDF0E03D36" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="372" y="362" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="dmnedge-drg-_1391B0C6-7FFA-44A2-8EA4-F1B4F05E3731-AUTO-TARGET" dmnElementRef="_1391B0C6-7FFA-44A2-8EA4-F1B4F05E3731">
+        <di:waypoint x="232" y="253"/>
+        <di:waypoint x="423" y="163"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_334AD54F-E784-4F86-B028-1191F6E7DA7A" dmnElementRef="_334AD54F-E784-4F86-B028-1191F6E7DA7A">
+        <di:waypoint x="423" y="253"/>
+        <di:waypoint x="423" y="138"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_2A03CBF6-4D82-441A-86CD-ED57351B48BB" dmnElementRef="_2A03CBF6-4D82-441A-86CD-ED57351B48BB">
+        <di:waypoint x="232" y="387"/>
+        <di:waypoint x="232" y="253"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_CBED5871-EDB7-4C41-9BFF-AF962D1A918F" dmnElementRef="_CBED5871-EDB7-4C41-9BFF-AF962D1A918F">
+        <di:waypoint x="422" y="387"/>
+        <di:waypoint x="423" y="253"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_70EEDEBF-150E-4512-B138-CA9175C5B018-AUTO-TARGET" dmnElementRef="_70EEDEBF-150E-4512-B138-CA9175C5B018">
+        <di:waypoint x="656" y="252"/>
+        <di:waypoint x="473" y="253"/>
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</dmn:definitions>
