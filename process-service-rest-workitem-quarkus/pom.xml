@@ -7,9 +7,9 @@
     <artifactId>kogito-examples</artifactId>
     <version>2.0.0-SNAPSHOT</version>
   </parent>
-  <artifactId>process-rest-service-call-quarkus</artifactId>
-  <name>Kogito Example :: Process Service Rest Cal with Quarkus</name>
-  <description>Kogito service invocation using REST - Quarkus</description>
+  <artifactId>process-rest-workitem-quarkus</artifactId>
+  <name>Kogito Example :: Process Service Rest WorkItem call with Quarkus</name>
+  <description>Kogito service invocation using REST work item and Quarkus</description>
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -32,20 +32,15 @@
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-vertx</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-openapi</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-rest-client</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-smallrye-fault-tolerance</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.smallrye</groupId>
-      <artifactId>smallrye-context-propagation-propagators-rxjava2</artifactId>
-      <version>1.0.7</version>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -60,6 +55,10 @@
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-health</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-rest-workitem</artifactId>
     </dependency>
   </dependencies>
   <build>
