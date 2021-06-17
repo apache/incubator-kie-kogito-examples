@@ -100,7 +100,11 @@ public class LoanEligibilityTest {
                         String.format("number_dmn_result{artifactId=\"%s\",decision=\"Is Enough?\",endpoint=\"LoanEligibility\",version=\"%s\",quantile=\"0.75\",} 100.0", PROJECT_ARTIFACT_ID,
                                 PROJECT_VERSION)))
                 .body(containsString(
-                        String.format("api_execution_elapsed_seconds{artifactId=\"%s\",endpoint=\"LoanEligibility\",version=\"%s\",quantile=\"0.5\",}", PROJECT_ARTIFACT_ID, PROJECT_VERSION)));
+                        String.format("api_execution_elapsed_seconds{artifactId=\"%s\",endpoint=\"LoanEligibility\",version=\"%s\",quantile=\"0.5\",}", PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
+                .body(containsString(
+                        String.format("api_http_response_code_total{artifactId=\"%s\",endpoint=\"LoanEligibility\",identifier=\"200\",version=\"%s\",} 2.0", PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
+                .body(containsString(
+                        String.format("api_execution_elapsed_seconds_count{artifactId=\"%s\",endpoint=\"LoanEligibility\",version=\"%s\",} 2.0", PROJECT_ARTIFACT_ID, PROJECT_VERSION)));
     }
 
     @Test
