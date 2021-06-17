@@ -126,7 +126,12 @@ public class LoanEligibilityTest {
                                 PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
                 .body(containsString(
                         String.format("api_execution_elapsed_seconds{artifactId=\"dmn-drools-springboot-metrics\",endpoint=\"LoanEligibility\",version=\"2.0.0-SNAPSHOT\",quantile=\"0.5\",}",
-                                PROJECT_ARTIFACT_ID, PROJECT_VERSION)));
+                                PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
+                .body(containsString(
+                        String.format("api_http_response_code_total{artifactId=\"%s\",endpoint=\"LoanEligibility\",identifier=\"200\",version=\"%s\",} 2.0", PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
+                .body(containsString(
+                        String.format("api_execution_elapsed_seconds_count{artifactId=\"%s\",endpoint=\"LoanEligibility\",version=\"%s\",} 2.0", PROJECT_ARTIFACT_ID, PROJECT_VERSION)));
+
     }
 
     @Test
