@@ -37,7 +37,7 @@
     <!-- Comment to disable jobs service integration -->
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>jobs-management-quarkus-addon</artifactId>
+      <artifactId>kogito-addons-quarkus-jobs-management</artifactId>
     </dependency>
     <!-- uncomment these two to enable persistence for kogito -->
     <!--
@@ -47,7 +47,7 @@
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>infinispan-persistence-addon</artifactId>
+      <artifactId>kogito-addons-persistence-infinispan</artifactId>
     </dependency>
     -->
     <dependency>

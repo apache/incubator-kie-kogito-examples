@@ -105,7 +105,7 @@
       <dependencies>
         <dependency>
           <groupId>org.kie.kogito</groupId>
-          <artifactId>postgresql-persistence-addon</artifactId>
+          <artifactId>kogito-addons-persistence-postgresql</artifactId>
         </dependency>
       </dependencies>
       <build>
@@ -136,7 +136,7 @@
      <dependencies>
         <dependency>
           <groupId>org.kie.kogito</groupId>
-          <artifactId>jdbc-persistence-addon</artifactId>
+          <artifactId>kogito-addons-persistence-jdbc</artifactId>
         </dependency>
         <dependency>
           <groupId>org.postgresql</groupId>

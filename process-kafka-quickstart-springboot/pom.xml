@@ -47,7 +47,7 @@
     </dependency>
     <dependency> 
       <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-cloudevents-spring-boot-addon</artifactId>
+      <artifactId>kogito-addons-springboot-cloudevents</artifactId>
     </dependency> 
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>

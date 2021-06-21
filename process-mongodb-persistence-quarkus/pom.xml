@@ -40,7 +40,7 @@
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>mongodb-persistence-addon</artifactId>
+      <artifactId>kogito-addons-persistence-mongodb</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -104,7 +104,7 @@
       <dependencies>
         <dependency>
           <groupId>org.kie.kogito</groupId>
-          <artifactId>kogito-events-reactive-messaging-addon</artifactId>
+          <artifactId>kogito-addons-quarkus-events-smallrye</artifactId>
         </dependency>
         <dependency>
           <groupId>io.quarkus</groupId>

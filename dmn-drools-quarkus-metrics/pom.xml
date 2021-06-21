@@ -47,7 +47,7 @@
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>monitoring-prometheus-quarkus-addon</artifactId>
+      <artifactId>kogito-addons-quarkus-monitoring-prometheus</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>

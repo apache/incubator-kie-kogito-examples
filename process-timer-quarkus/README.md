@@ -87,7 +87,7 @@ example. To enable it, just uncomment this dependency in the `pom.xml` file, [se
 ```xml
 <dependency>
   <groupId>org.kie.kogito</groupId>
-  <artifactId>jobs-management-quarkus-addon</artifactId>
+  <artifactId>kogito-addons-quarkus-jobs-management</artifactId>
   <version>${kogito.version}</version>
 </dependency>
 ```
@@ -287,7 +287,7 @@ To be able to use Kogito Job Service as timer service additional dependency need
 ```xml
 <dependency>
   <groupId>org.kie.kogito</groupId>
-  <artifactId>jobs-management-quarkus-addon</artifactId>
+  <artifactId>kogito-addons-quarkus-jobs-management</artifactId>
 </dependency>
 ```
 
