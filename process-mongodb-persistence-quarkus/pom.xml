@@ -104,7 +104,7 @@
       <dependencies>
         <dependency>
           <groupId>org.kie.kogito</groupId>
-          <artifactId>kogito-addons-quarkus-events-reactive</artifactId>
+          <artifactId>kogito-addons-quarkus-events-smallrye</artifactId>
         </dependency>
         <dependency>
           <groupId>io.quarkus</groupId>
