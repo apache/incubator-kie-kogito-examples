@@ -15,20 +15,22 @@
  */
 package org.acme.deals;
 
-import io.quarkus.runtime.Startup;
-import io.smallrye.common.annotation.Identifier;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
+import io.quarkus.runtime.Startup;
+import io.smallrye.common.annotation.Identifier;
 
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
