@@ -18,6 +18,7 @@ package org.kie.kogito.examples;
 import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import io.quarkus.test.junit.QuarkusTest;
@@ -34,6 +35,7 @@ public class LoanEligibilityTest {
     private static final String PROJECT_ARTIFACT_ID = ProjectMetadataProvider.getProjectArtifactId();
 
     @Test
+    @Disabled("Uses 2.0.0-SNAPSHOT in 1.8.0-SNAPSHOT")
     public void testEvaluateLoanEligibility() {
         // Approved Loan
         given()

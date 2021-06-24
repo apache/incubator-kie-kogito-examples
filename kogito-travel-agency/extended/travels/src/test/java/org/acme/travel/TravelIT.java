@@ -30,6 +30,7 @@ import org.acme.travels.Traveller;
 import org.acme.travels.Trip;
 import org.acme.travels.VisaApplication;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.Model;
 import org.kie.kogito.process.Process;
@@ -91,6 +92,7 @@ public class TravelIT {
     }
 
     @Test
+    @Disabled("Uses 2.0.0-SNAPSHOT in 1.8.0-SNAPSHOT")
     public void testProcessMetrics() {
         whenNewTravel(TRAVELLER_FROM_POLAND, TRIP_TO_POLAND);
         given()
