@@ -1,0 +1,19 @@
+[
+  [
+    "name" : "Rest",
+    "parameters" : [
+        "Url" : new StringDataType(),
+        "ContentData" : new ObjectDataType(),
+        "Method": new StringDataType,
+        "Host" : new StringDataType(),
+        "Port" : new IntegerDataType(),
+        "Username" : new StringDataType(),
+        "Password" : new StringDataType()
+    ],
+    "results" : [
+        "Result" : new ObjectDataType(),
+    ],
+    "displayName" : "REST",
+    "icon" : "defaultservicenodeicon.png"
+  ]
+ ]

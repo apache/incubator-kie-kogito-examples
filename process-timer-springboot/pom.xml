@@ -39,15 +39,15 @@
 
   <!-- activate this profile to enable jobs-service -->
   <profiles>
-      <profile>
-        <id>jobs-service</id>
-        <dependencies>
-          <dependency>
-            <groupId>org.kie.kogito</groupId>
-            <artifactId>jobs-management-springboot-addon</artifactId>
-          </dependency>
-        </dependencies>
-      </profile>
+    <profile>
+      <id>jobs-service</id>
+      <dependencies>
+        <dependency>
+          <groupId>org.kie.kogito</groupId>
+          <artifactId>kogito-addons-springboot-jobs-management</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
   </profiles>
 
   <dependencies>
@@ -69,12 +69,12 @@
     <!-- Comment to disable jobs service integration -->
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>jobs-management-springboot-addon</artifactId>
+      <artifactId>kogito-addons-springboot-jobs-management</artifactId>
     </dependency>
 
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>process-management-springboot-addon</artifactId>
+      <artifactId>kogito-addons-springboot-process-management</artifactId>
     </dependency>
 
     <!-- uncomment these two to enable persistence for kogito -->
@@ -84,7 +84,7 @@
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>infinispan-persistence-addon</artifactId>
+      <artifactId>kogito-addons-persistence-infinispan</artifactId>
     </dependency> -->
 
   </dependencies>

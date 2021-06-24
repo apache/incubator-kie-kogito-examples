@@ -42,7 +42,7 @@
     <!-- Persistence -->
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>infinispan-persistence-addon</artifactId>
+      <artifactId>kogito-addons-persistence-infinispan</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -64,20 +64,20 @@
 
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-events-reactive-messaging-addon</artifactId>
+      <artifactId>kogito-addons-quarkus-events-smallrye</artifactId>
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>process-management-addon</artifactId>
+      <artifactId>kogito-addons-quarkus-process-management</artifactId>
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>jobs-management-quarkus-addon</artifactId>
+      <artifactId>kogito-addons-quarkus-jobs-management</artifactId>
     </dependency>
 
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>process-svg-quarkus-addon</artifactId>
+      <artifactId>kogito-addons-quarkus-process-svg</artifactId>
     </dependency>
 
     <dependency>

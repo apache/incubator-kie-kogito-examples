@@ -87,7 +87,7 @@ example. To enable it, just uncomment this dependency in the `pom.xml` file, [se
 ```xml
 <dependency>
   <groupId>org.kie.kogito</groupId>
-  <artifactId>jobs-management-quarkus-addon</artifactId>
+  <artifactId>kogito-addons-quarkus-jobs-management</artifactId>
   <version>${kogito.version}</version>
 </dependency>
 ```
@@ -287,7 +287,7 @@ To be able to use Kogito Job Service as timer service additional dependency need
 ```xml
 <dependency>
   <groupId>org.kie.kogito</groupId>
-  <artifactId>jobs-management-quarkus-addon</artifactId>
+  <artifactId>kogito-addons-quarkus-jobs-management</artifactId>
 </dependency>
 ```
 
@@ -315,7 +315,7 @@ https://infinispan.org/download/
 Start Infinispan Server
 [Infinispan Directory]/bin/sh server.sh
 
-```
+```sh
 java -Dquarkus.http.port=8085 -jar jobs-service-infinispan/target/jobs-service-infinispan-{version}-runner.jar
 ```
 
@@ -323,10 +323,16 @@ java -Dquarkus.http.port=8085 -jar jobs-service-infinispan/target/jobs-service-i
 
 <p align="center"><img src="docs/images/infinispanRunning.png"></p>
 
-If you'd like to use PostgresSQL as persistence, start the PostgreSQL server, then start job service with following command
+If you'd like to use PostgresSQL or MongoDB as persistence, start the PostgreSQL or MongoDB server, then start job service with following command
 
-```
+For PostgreSQL:
+```sh
 java -Dquarkus.http.port=8085 -Dquarkus.datasource.username={username} -Dquarkus.datasource.password={password} -Dquarkus.datasource.reactive.url=postgresql://{host}:{port}/{db} -Dquarkus.datasource.jdbc.url=jdbc:postgresql://{host}:{port}/{db}  -jar jobs-service-postgresql/target/jobs-service-postgresql-{version}-runner.jar
+```
+
+For MongoDB:
+```sh
+java -Dquarkus.http.port=8085 -Dquarkus.mongodb.connection-string=mongodb://{username}:{password}@{host}:{port} -Dquarkus.mongodb.database={db} -jar jobs-service-mongodb/target/jobs-service-mongodb-{version}-runner.jar
 ```
 
 In all cases replace `{version}` with actual Kogito version to be used (Job Service is available from 0.6.0)

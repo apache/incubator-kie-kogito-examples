@@ -46,7 +46,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <!-- kogito -->
     <kogito.version>${project.version}</kogito.version>
-    <version.org.optaplanner>8.8.0-SNAPSHOT</version.org.optaplanner>
+    <version.org.optaplanner>8.9.0-SNAPSHOT</version.org.optaplanner>
     <!-- override default to fast-jar packaging for forward-compatibility -->
     <quarkus.package.type>fast-jar</quarkus.package.type>
   </properties>
@@ -162,8 +162,10 @@
         <module>process-scripts-springboot</module>
         <module>process-service-calls-quarkus</module>
         <module>process-service-calls-springboot</module>
-        <module>process-service-rest-call-quarkus</module>
-        <module>process-service-rest-call-springboot</module>
+        <module>process-rest-workitem-multi-quarkus</module>
+        <module>process-rest-workitem-quarkus</module>
+        <module>process-rest-service-call-quarkus</module>
+        <module>process-rest-service-call-springboot</module>
         <module>process-timer-quarkus</module>
         <module>process-timer-springboot</module>
         <module>process-usertasks-custom-lifecycle-quarkus</module>
@@ -276,7 +278,9 @@
         <module>process-quarkus-example</module>
         <module>process-scripts-quarkus</module>
         <module>process-service-calls-quarkus</module>
-        <module>process-service-rest-call-quarkus</module>
+        <module>process-rest-workitem-multi-quarkus</module>
+        <module>process-rest-workitem-quarkus</module>
+        <module>process-rest-service-call-quarkus</module>
         <module>process-timer-quarkus</module>
         <module>process-usertasks-custom-lifecycle-quarkus</module>
         <module>process-usertasks-quarkus</module>

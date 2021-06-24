@@ -17,7 +17,7 @@
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>monitoring-prometheus-quarkus-addon</artifactId>
+      <artifactId>kogito-addons-quarkus-monitoring-prometheus</artifactId>
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
@@ -89,7 +89,7 @@
         </dependency>
         <dependency>
           <groupId>org.kie.kogito</groupId>
-          <artifactId>infinispan-persistence-addon</artifactId>
+          <artifactId>kogito-addons-persistence-infinispan</artifactId>
           <version>${project.version}</version>
         </dependency>
       </dependencies>

@@ -31,7 +31,7 @@ Like the other Kogito AddOns, the only required step to enable it is to include 
 ```xml
 <dependency>
   <groupId>org.kie.kogito</groupId>
-  <artifactId>kogito-event-driven-decisions-quarkus-addon</artifactId>
+  <artifactId>kogito-addons-quarkus-events-decisions</artifactId>
 </dependency>
 ```
 

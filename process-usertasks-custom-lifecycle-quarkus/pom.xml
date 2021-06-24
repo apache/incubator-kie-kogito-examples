@@ -36,7 +36,7 @@
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>task-management-quarkus-addon</artifactId>
+      <artifactId>kogito-addons-quarkus-task-management</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -63,11 +63,11 @@
       <dependencies>
       <dependency>
           <groupId>org.kie.kogito</groupId>
-          <artifactId>mail-quarkus-addon</artifactId>
+          <artifactId>kogito-addons-quarkus-mail</artifactId>
         </dependency>
         <dependency>
           <groupId>org.kie.kogito</groupId>
-          <artifactId>task-notification-quarkus-addon</artifactId>
+          <artifactId>kogito-addons-quarkus-task-notification</artifactId>
         </dependency>
         <dependency>
           <groupId>io.quarkus</groupId>
