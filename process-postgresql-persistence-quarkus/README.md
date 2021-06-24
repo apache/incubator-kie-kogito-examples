@@ -103,6 +103,24 @@ NOTE: With dev mode of Quarkus you can take advantage of hot reload for business
 
 Once PostgreSQL is up and running you can build this project with -Ppersistence OR -Pjdbc-persistence in an exact same way as without persistence. These extra profile in maven configuration add additional dependencies needed to work with Postgres as persistent store using Reactive or JDBC based postgres clients.
 
+Kogito runtimes need to be able to safely handle concurrent requests to shared instances such as process instances, tasks, etc.
+This feature is optional and can be pluggable with persistence using the following property and value to the src/main/resources/application.properties file.
+
+```
+kogito.persistence.optimistic.lock=true 
+```
+Additionally, you can use below commands to set this property at runtime and build and run the application 
+
+```
+mvn clean compile quarkus:dev -Dkogito.persistence.optimistic.lock=true -Ppersistence
+```
+or 
+
+```
+mvn clean package -Ppersistence
+java -Dkogito.persistence.optimistic.lock=true -jar target/quarkus-app/quarkus-run.jar
+```
+
 ### Package and Run in JVM mode
 
 ```sh
