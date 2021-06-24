@@ -58,6 +58,8 @@ public class TravelIT {
 
     private static final String STEP_CONFIRM_TRAVEL = "ConfirmTravel";
     private static final String STEP_VISA_APPLICATION = "VisaApplication";
+    private static final String PROJECT_VERSION = ProjectMetadataProvider.getProjectVersion();
+    private static final String PROJECT_ARTIFACT_ID = ProjectMetadataProvider.getProjectArtifactId();
 
     @Inject
     @Named("travels")
@@ -99,7 +101,8 @@ public class TravelIT {
                 .then()
                 .statusCode(200)
                 .body(containsString(
-                        "kie_process_instance_running_total{app_id=\"default-process-monitoring-listener\",artifactId=\"travels\",process_id=\"travels\",version=\"2.0.0-SNAPSHOT\",} 1.0"));
+                        String.format("kie_process_instance_running_total{app_id=\"default-process-monitoring-listener\",artifactId=\"%s\",process_id=\"travels\",version=\"%s\",} 1.0",
+                                PROJECT_ARTIFACT_ID, PROJECT_VERSION)));
     }
 
     private void whenNewTravel(Traveller traveller, Trip trip) {
