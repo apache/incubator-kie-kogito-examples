@@ -19,6 +19,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
@@ -49,6 +50,7 @@ public class LoanEligibilityTest {
     }
 
     @Test
+    @Disabled("Uses 2.0.0-SNAPSHOT in 1.8.0-SNAPSHOT")
     public void testEvaluateLoanEligibility() {
         // Approved loan
         given()
