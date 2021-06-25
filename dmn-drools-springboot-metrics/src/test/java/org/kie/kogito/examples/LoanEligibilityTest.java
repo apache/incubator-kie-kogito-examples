@@ -89,49 +89,48 @@ public class LoanEligibilityTest {
                 .statusCode(200)
                 .body(containsString(
                         String.format(
-                                "string_dmn_result_total{artifactId=\"dmn-drools-springboot-metrics\",decision=\"Eligibility\",endpoint=\"LoanEligibility\",identifier=\"Yes\",version=\"2.0.0-SNAPSHOT\",} 2.0",
+                                "string_dmn_result_total{artifactId=\"%s\",decision=\"Eligibility\",endpoint=\"LoanEligibility\",identifier=\"Yes\",version=\"%s\",} 2.0",
                                 PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
                 .body(containsString(
                         String.format(
-                                "string_dmn_result_total{artifactId=\"dmn-drools-springboot-metrics\",decision=\"Judgement\",endpoint=\"LoanEligibility\",identifier=\"Yes\",version=\"2.0.0-SNAPSHOT\",} 1.0",
+                                "string_dmn_result_total{artifactId=\"%s\",decision=\"Judgement\",endpoint=\"LoanEligibility\",identifier=\"Yes\",version=\"%s\",} 1.0",
                                 PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
                 .body(containsString(
                         String.format(
-                                "string_dmn_result_total{artifactId=\"dmn-drools-springboot-metrics\",decision=\"Judgement\",endpoint=\"LoanEligibility\",identifier=\"No\",version=\"2.0.0-SNAPSHOT\",} 1.0",
+                                "string_dmn_result_total{artifactId=\"%s\",decision=\"Judgement\",endpoint=\"LoanEligibility\",identifier=\"No\",version=\"%s\",} 1.0",
                                 PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
                 .body(containsString(
                         String.format(
-                                "boolean_dmn_result_total{artifactId=\"dmn-drools-springboot-metrics\",decision=\"Decide\",endpoint=\"LoanEligibility\",identifier=\"true\",version=\"2.0.0-SNAPSHOT\",} 1.0",
+                                "boolean_dmn_result_total{artifactId=\"%s\",decision=\"Decide\",endpoint=\"LoanEligibility\",identifier=\"true\",version=\"%s\",} 1.0",
                                 PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
                 .body(containsString(
                         String.format(
-                                "boolean_dmn_result_total{artifactId=\"dmn-drools-springboot-metrics\",decision=\"Decide\",endpoint=\"LoanEligibility\",identifier=\"false\",version=\"2.0.0-SNAPSHOT\",} 1.0\n",
+                                "boolean_dmn_result_total{artifactId=\"%s\",decision=\"Decide\",endpoint=\"LoanEligibility\",identifier=\"false\",version=\"%s\",} 1.0\n",
                                 PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
                 .body(containsString(
                         String.format(
-                                "number_dmn_result{artifactId=\"dmn-drools-springboot-metrics\",decision=\"Is Enough?\",endpoint=\"LoanEligibility\",version=\"2.0.0-SNAPSHOT\",quantile=\"0.5\",} 0.0",
+                                "number_dmn_result{artifactId=\"%s\",decision=\"Is Enough?\",endpoint=\"LoanEligibility\",version=\"%s\",quantile=\"0.5\",} 0.0",
                                 PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
                 .body(containsString(
-                        String.format("number_dmn_result_max{artifactId=\"dmn-drools-springboot-metrics\",decision=\"Is Enough?\",endpoint=\"LoanEligibility\",version=\"2.0.0-SNAPSHOT\",} 100.0",
+                        String.format("number_dmn_result_max{artifactId=\"%s\",decision=\"Is Enough?\",endpoint=\"LoanEligibility\",version=\"%s\",} 100.0",
                                 PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
                 .body(containsString(
-                        String.format("number_dmn_result_count{artifactId=\"dmn-drools-springboot-metrics\",decision=\"Is Enough?\",endpoint=\"LoanEligibility\",version=\"2.0.0-SNAPSHOT\",} 2.0",
+                        String.format("number_dmn_result_count{artifactId=\"%s\",decision=\"Is Enough?\",endpoint=\"LoanEligibility\",version=\"%s\",} 2.0",
                                 PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
                 .body(containsString(
-                        String.format("number_dmn_result_sum{artifactId=\"dmn-drools-springboot-metrics\",decision=\"Is Enough?\",endpoint=\"LoanEligibility\",version=\"2.0.0-SNAPSHOT\",} 100.0",
+                        String.format("number_dmn_result_sum{artifactId=\"%s\",decision=\"Is Enough?\",endpoint=\"LoanEligibility\",version=\"%s\",} 100.0",
                                 PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
                 .body(containsString(
                         String.format(
-                                "number_dmn_result{artifactId=\"dmn-drools-springboot-metrics\",decision=\"Is Enough?\",endpoint=\"LoanEligibility\",version=\"2.0.0-SNAPSHOT\",quantile=\"0.75\",} 100.0",
+                                "number_dmn_result{artifactId=\"%s\",decision=\"Is Enough?\",endpoint=\"LoanEligibility\",version=\"%s\",quantile=\"0.75\",} 100.0",
                                 PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
                 .body(containsString(
-                        String.format("api_execution_elapsed_seconds{artifactId=\"dmn-drools-springboot-metrics\",endpoint=\"LoanEligibility\",version=\"2.0.0-SNAPSHOT\",quantile=\"0.5\",}",
+                        String.format("api_execution_elapsed_seconds{artifactId=\"%s\",endpoint=\"LoanEligibility\",version=\"%s\",quantile=\"0.5\",}",
                                 PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
                 .body(containsString(
                         String.format("api_http_response_code_total{artifactId=\"%s\",endpoint=\"LoanEligibility\",identifier=\"200\",version=\"%s\",} 2.0", PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
                 .body(containsString(
                         String.format("api_execution_elapsed_seconds_count{artifactId=\"%s\",endpoint=\"LoanEligibility\",version=\"%s\",} 2.0", PROJECT_ARTIFACT_ID, PROJECT_VERSION)));
-
     }
 
     @Test
