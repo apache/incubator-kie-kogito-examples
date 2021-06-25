@@ -97,23 +97,25 @@
            var ws = new WebSocket('{config:property('kogito.dataindex.ws.url') or 'ws://localhost:8180'}/graphql');
 
            ws.onopen = function() {
-
               // Web Socket is connected, send data using send()
-              ws.send('{"id" : "2", "type" : "start", "payload" : { "query" : "subscription { TravelsUpdated { id, traveller { lastName, firstName, email, nationality } trip { city, country, begin, end, visaRequired } hotel { name, bookingNumber, phone, address { street } } flight { flightNumber, departure, arrival } visaApplication { approved } metadata { processInstances { businessKey, state } } } }"}}');
-
+               ws.send('{"id" : "1", "type" : "connection_init"}');
            };
 
            ws.onmessage = function (evt) {
               var received_msg = evt.data;
               let jsonObject = JSON.parse(received_msg);
-              var val = jsonObject.payload.data.TravelsUpdated;
+               if(jsonObject.type === 'connection_ack'){
+                   ws.send('{"id" : "2", "type" : "start", "payload" : { "query" : "subscription { TravelsUpdated { id, traveller { lastName, firstName, email, nationality } trip { city, country, begin, end, visaRequired } hotel { name, bookingNumber, phone, address { street } } flight { flightNumber, departure, arrival } visaApplication { approved } metadata { processInstances { businessKey, state } } } }"}}');
+               } else if(jsonObject.type === 'data') {
+                   var val = jsonObject.payload.data.TravelsUpdated;
 
-              var existing = document.getElementById(val.id);
-              if (existing != null) {
-                existing.remove();
-              }
+                   var existing = document.getElementById(val.id);
+                   if (existing != null) {
+                       existing.remove();
+                   }
 
-              appendDataRow(null, val);
+                   appendDataRow(null, val);
+               }
            };
 
            ws.onclose = function() {
@@ -386,15 +388,15 @@
 
                 $.getJSON("/travels/" + id + "/VisaApplication/" + taskid, function (data) {
 
-                    $("#visa_firstName").val(data.traveller.firstName);
-                    $("#visa_lastName").val(data.traveller.lastName);
-                    $("#visa_email").val(data.traveller.email);
-                    $("#visa_nationality").val(data.traveller.nationality);
+                    $("#visa_firstName").val(data.parameters.traveller.firstName);
+                    $("#visa_lastName").val(data.parameters.traveller.lastName);
+                    $("#visa_email").val(data.parameters.traveller.email);
+                    $("#visa_nationality").val(data.parameters.traveller.nationality);
 
-                    $("#visa_destinationCity").val(data.trip.city);
-                    $("#visa_destinationCountry").val(data.trip.country);
-                    $("#visa_tripBegin").val(data.trip.begin);
-                    $("#visa_tripEnd").val(data.trip.end);
+                    $("#visa_destinationCity").val(data.parameters.trip.city);
+                    $("#visa_destinationCountry").val(data.parameters.trip.country);
+                    $("#visa_tripBegin").val(data.parameters.trip.begin);
+                    $("#visa_tripEnd").val(data.parameters.trip.end);
 
                     $("#visa_p_id").val(id);
                     $("#visa_t_id").val(taskid);
