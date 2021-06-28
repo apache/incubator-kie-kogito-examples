@@ -18,15 +18,15 @@ package org.kie.kogito.serverless.examples;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.kie.kogito.Model;
 import org.kie.kogito.process.Process;
 import org.kie.kogito.process.ProcessInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -35,7 +35,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest(classes = ServerlessServiceCallsExampleApplication.class)
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 public class CountriesWorkflowIntegrationTest {
 
     @Autowired
@@ -72,5 +72,4 @@ public class CountriesWorkflowIntegrationTest {
         assertEquals("Greece", workflowDataNode.get("name").textValue());
         assertEquals("Small/Medium", workflowDataNode.get("classifier").textValue());
     }
-
 }

@@ -215,7 +215,7 @@
         <module>process-postgresql-persistence-springboot</module>
       </modules>
     </profile>
-    
+
     <profile>
       <id>jdbc-persistence</id>
       <activation>
@@ -223,12 +223,13 @@
           <name>jdbc-persistence</name>
         </property>
       </activation>
-     
+
       <modules>
-         <module>process-postgresql-persistence-quarkus</module>
-         <module>process-postgresql-persistence-springboot</module>
+        <module>process-postgresql-persistence-quarkus</module>
+        <module>process-postgresql-persistence-springboot</module>
       </modules>
     </profile>
+
     <profile>
       <id>events</id>
       <activation>
@@ -323,6 +324,47 @@
         <module>ruleunit-springboot-example</module>
       </modules>
     </profile>
+
+    <profile>
+      <id>springboot</id>
+      <activation>
+        <property>
+          <name>springboot</name>
+        </property>
+      </activation>
+      <modules>
+        <module>decisiontable-springboot-example</module>
+        <module>dmn-drools-springboot-metrics</module>
+        <module>dmn-event-driven-springboot</module>
+        <module>dmn-listener-springboot</module>
+        <module>dmn-pmml-springboot-example</module>
+        <module>dmn-springboot-example</module>
+        <module>dmn-tracing-springboot</module>
+        <module>flexible-process-springboot</module>
+        <module>pmml-springboot-example</module>
+        <module>process-business-rules-springboot</module>
+        <module>process-infinispan-persistence-springboot</module>
+        <module>process-kafka-quickstart-springboot</module>
+        <module>process-mongodb-persistence-springboot</module>
+        <module>process-optaplanner-springboot</module>
+        <module>process-postgresql-persistence-springboot</module>
+        <module>process-rest-service-call-springboot</module>
+        <module>process-scripts-springboot</module>
+        <module>process-service-calls-springboot</module>
+        <module>process-springboot-example</module>
+        <module>process-timer-springboot</module>
+        <module>process-usertasks-custom-lifecycle-springboot</module>
+        <module>process-usertasks-springboot</module>
+        <module>process-usertasks-springboot-with-console</module>
+        <module>process-usertasks-with-security-oidc-springboot</module>
+        <module>process-usertasks-with-security-oidc-springboot-with-console</module>
+        <module>process-usertasks-with-security-springboot</module>
+        <module>ruleunit-springboot-example</module>
+        <module>serverless-workflow-greeting-springboot</module>
+        <module>serverless-workflow-service-calls-springboot</module>
+
+      </modules>
+    </profile>
   </profiles>
 
   <dependencyManagement>
@@ -349,7 +391,7 @@
           <version>${version.org.springframework.boot}</version>
         </plugin>
         <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-resources-plugin</artifactId>
           <version>2.5</version>
           <executions>
