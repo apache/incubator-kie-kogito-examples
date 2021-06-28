@@ -20,6 +20,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Driver {
 
+    private String id;
+
     @JsonProperty("Name")
     private String name;
 
@@ -34,6 +36,18 @@ public class Driver {
 
     @JsonProperty("Age")
     private Integer age;
+
+    public Driver() {
+    }
+
+    public Driver(String id, String name, String state, String city, Integer points, Integer age) {
+        this.id = id;
+        this.name = name;
+        this.state = state;
+        this.city = city;
+        this.points = points;
+        this.age = age;
+    }
 
     public String getName() {
         return name;

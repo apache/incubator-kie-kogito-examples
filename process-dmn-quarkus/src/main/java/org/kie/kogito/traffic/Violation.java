@@ -16,26 +16,30 @@
 
 package org.kie.kogito.traffic;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Violation {
 
-    @JsonProperty("Code")
+    //@JsonProperty("Code")
+    @JsonIgnore
     private String code;
 
-    @JsonProperty("Date")
+    //@JsonProperty("Date")
+    @JsonIgnore
     private Date date;
 
     @JsonProperty("Type")
     private String type;
 
     @JsonProperty("Speed Limit")
-    private Double speedLimit;
+    private BigDecimal speedLimit;
 
     @JsonProperty("Actual Speed")
-    private Double actualSpeed;
+    private BigDecimal actualSpeed;
 
     public String getCode() {
         return code;
@@ -61,19 +65,19 @@ public class Violation {
         this.type = type;
     }
 
-    public Double getSpeedLimit() {
+    public BigDecimal getSpeedLimit() {
         return speedLimit;
     }
 
-    public void setSpeedLimit(Double speedLimit) {
+    public void setSpeedLimit(BigDecimal speedLimit) {
         this.speedLimit = speedLimit;
     }
 
-    public Double getActualSpeed() {
+    public BigDecimal getActualSpeed() {
         return actualSpeed;
     }
 
-    public void setActualSpeed(Double actualSpeed) {
+    public void setActualSpeed(BigDecimal actualSpeed) {
         this.actualSpeed = actualSpeed;
     }
 }

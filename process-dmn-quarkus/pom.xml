@@ -34,6 +34,27 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-openapi</artifactId>
     </dependency>
+
+    <!-- REST Client DMN -->
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-rest-client</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-rest-client-jackson</artifactId>
+    </dependency>
+
+    <!-- Messaging DMN -->
+    <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-addons-events-decisions</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-reactive-messaging-kafka</artifactId>
+    </dependency>
+
     <!--tests -->
     <dependency>
       <groupId>io.quarkus</groupId>
