@@ -82,23 +82,25 @@
            var ws = new WebSocket('{config:property('kogito.dataindex.ws.url') or 'ws://localhost:8180'}/graphql');
 
            ws.onopen = function() {
-
               // Web Socket is connected, send data using send()
-              ws.send('{"id" : "2", "type" : "start", "payload" : { "query" : "subscription { VisaApplicationsUpdated { id, visaApplication { lastName, firstName, country, city, nationality, duration, passportNumber, approved } metadata { processInstances { state  } } } }"}}');
-
+               ws.send('{"id" : "1", "type" : "connection_init"}');
            };
 
            ws.onmessage = function (evt) {
               var received_msg = evt.data;
               let jsonObject = JSON.parse(received_msg);
-              var val = jsonObject.payload.data.VisaApplicationsUpdated;
+               if(jsonObject.type === 'connection_ack'){
+                   ws.send('{"id" : "2", "type" : "start", "payload" : { "query" : "subscription { VisaApplicationsUpdated { id, visaApplication { lastName, firstName, country, city, nationality, duration, passportNumber, approved } metadata { processInstances { state  } } } }"}}');
+               } else if(jsonObject.type === 'data') {
+                   var val = jsonObject.payload.data.VisaApplicationsUpdated;
 
-              var existing = document.getElementById(val.id);
-              if (existing != null) {
-                existing.remove();
-              }
+                   var existing = document.getElementById(val.id);
+                   if (existing != null) {
+                       existing.remove();
+                   }
 
-              appendDataRow(null, val);
+                   appendDataRow(null, val);
+               }
            };
 
            ws.onclose = function() {
