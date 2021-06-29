@@ -31,7 +31,7 @@ The required *Kogito and Infrastructure Services* for this example are:
 And when using native image compilation, you will also need: 
   - GraalVM 20.3+ installed
   - Environment variable GRAALVM_HOME set accordingly
-  - GraalVM native image needs as well native-image extension: https://www.graalvm.org/docs/reference-manual/native-image/
+  - GraalVM native image needs as well native-image extension: https://www.graalvm.org/reference-manual/native-image/
   - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too, please refer to GraalVM installation documentation for more details.
 
 ### Starting the Kogito and Infrastructure Services
