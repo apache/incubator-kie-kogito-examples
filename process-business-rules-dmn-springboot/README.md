@@ -9,6 +9,16 @@ This example shows
 * make use of DMN to define rules
 * make use of business rules task in the process to evaluate rules
 
+## Invoking DMN from a process
+Is done via business rule task. For business rule task you need to set:
+* Rule Language: "DMN"
+* Namespace: "use value from the dmn model you want to invoke"
+* DMN Model Name: "use value from the dmn model you want to invoke"
+* Decision Name: "use decision node name that returns demanded result"
+
+Next for the business rule task you need to set:
+* input assignments: "define one input per an InputData node in your dmn model"
+* output assignment: "define one output variable, that will store result of given decision node"
 
 ### Garbage Fee Domain Details
 We prepared demo application for paying garbage fee. The fee is computed according to the number of people in the household and their residence. The fee computation logic is defined in the 'garbage fee.dmn' file.
