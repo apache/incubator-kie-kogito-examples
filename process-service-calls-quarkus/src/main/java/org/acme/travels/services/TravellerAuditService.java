@@ -17,7 +17,7 @@ package org.acme.travels.services;
 
 import javax.enterprise.context.ApplicationScoped;
 
-import org.acme.travels.Traveller;
+import org.acme.travels.quarkus.Traveller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

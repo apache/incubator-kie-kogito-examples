@@ -20,7 +20,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
-import org.acme.travels.User;
+import org.acme.travels.quarkus.User;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 @Path("/v2")

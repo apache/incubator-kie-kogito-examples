@@ -18,7 +18,7 @@ package org.acme.travels.services;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.acme.travels.Traveller;
+import org.acme.travels.springboot.Traveller;
 import org.springframework.stereotype.Component;
 
 @Component
