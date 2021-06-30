@@ -24,7 +24,7 @@
       </dependency>
       <dependency>
         <groupId>org.kie.kogito</groupId>
-        <artifactId>kogito-bom</artifactId>
+        <artifactId>kogito-springboot</artifactId>
         <version>${kogito.version}</version>
         <type>pom</type>
         <scope>import</scope>
@@ -47,7 +47,7 @@
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-addons-springboot-cloudevents-multi</artifactId>
+      <artifactId>kogito-addons-springboot-cloudevents</artifactId>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
