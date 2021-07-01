@@ -25,7 +25,7 @@ import org.acme.travels.Trip;
 import org.drools.core.common.InternalAgenda;
 import org.junit.jupiter.api.Test;
 import org.kie.api.runtime.KieSession;
-import org.kie.kogito.rules.KieRuntimeBuilder;
+import org.kie.kogito.legacy.rules.KieRuntimeBuilder;
 
 import io.quarkus.test.junit.QuarkusTest;
 
