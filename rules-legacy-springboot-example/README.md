@@ -4,7 +4,7 @@
 
 A simple rule service to validate `LoanApplication` fact.
 
-REST endpoints are generated from query rules. You can insert `LoanApplication` facts and query a result via the REST endpoints. Rule resources are assembled as a RuleUnit.
+An injectable KieRuntimeBuilder is generated, so you can create Drools v7 KieBase and KieSession out of it.
 
 ## Installing and Running
 
