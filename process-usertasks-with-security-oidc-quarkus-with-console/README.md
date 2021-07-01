@@ -95,7 +95,11 @@ Enabling it in the project can be done by adding the following *maven* dependenc
 
 And adding the right configuration on the *application.properties* file:
 ```properties
-quarkus.oidc.auth-server-url=http://localhost:8480/auth/realms/kogito
+## Other OS
+## keycloak.auth-server-url=http://${host.docker.internal}:8480/auth
+## Linux
+quarkus.oidc.auth-server-url=http://172.17.0.1:8480/auth/realms/kogito
+
 quarkus.oidc.client-id=kogito-app
 quarkus.oidc.credentials.secret=secret
 
@@ -187,9 +191,20 @@ There you'll see all the tasks assigned to the user or to any of the group he be
 The application is using bearer token authorization, the first thing to do is obtain an access token from the Keycloak
 Server in order to access the application resources. Obtain an access token for user jdoe executing in a terminal:
 
+In Linux:
 ```sh
 export access_token=$(\
-    curl -X POST http://localhost:8480/auth/realms/kogito/protocol/openid-connect/token \
+    curl -X POST http://172.17.0.1:8480/auth/realms/kogito/protocol/openid-connect/token \
+    --user kogito-app:secret \
+    -H 'content-type: application/x-www-form-urlencoded' \
+    -d 'username=jdoe&password=jdoe&grant_type=password' | jq --raw-output '.access_token' \
+ )
+```
+
+Other OS
+```sh
+export access_token=$(\
+    curl -X POST http://${host.docker.internal}:8480/auth/realms/kogito/protocol/openid-connect/token \
     --user kogito-app:secret \
     -H 'content-type: application/x-www-form-urlencoded' \
     -d 'username=jdoe&password=jdoe&grant_type=password' | jq --raw-output '.access_token' \
