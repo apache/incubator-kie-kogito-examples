@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.queries;
+package org.kie.kogito.legacy;
 
-import org.kie.kogito.queries.LoanApplication;
+import org.kie.kogito.legacy.LoanApplication;
 
 global Integer maxAmount;
 global java.util.List approvedApplications;

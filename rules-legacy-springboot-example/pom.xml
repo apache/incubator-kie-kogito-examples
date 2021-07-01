@@ -10,7 +10,7 @@
     <version>2.0.0-SNAPSHOT</version>
   </parent>
   <artifactId>rules-legacy-springboot-example</artifactId>
-  <name>Kogito Example :: RuleUnit - Spring Boot</name>
+  <name>Kogito Example :: Rules Legacy API - Spring Boot</name>
 
   <dependencyManagement>
     <dependencies>

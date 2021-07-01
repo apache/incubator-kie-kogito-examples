@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.queries;
+package org.kie.kogito.legacy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,14 +37,14 @@ public class FindApprovedLoansEndpoint {
     @POST()
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public List<LoanApplication> executeQuery(LoanUnit loanUnit) {
+    public List<LoanApplication> executeQuery(LoanDto loanDto) {
         KieSession session = kieRuntimeBuilder.newKieSession();
 
         List<LoanApplication> approvedApplications = new ArrayList<>();
         session.setGlobal("approvedApplications", approvedApplications);
-        session.setGlobal("maxAmount", loanUnit.getMaxAmount());
+        session.setGlobal("maxAmount", loanDto.getMaxAmount());
 
-        loanUnit.getLoanApplications().forEach(session::insert);
+        loanDto.getLoanApplications().forEach(session::insert);
         session.fireAllRules();
 
         return approvedApplications;

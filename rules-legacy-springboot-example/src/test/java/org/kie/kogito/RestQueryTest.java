@@ -17,7 +17,7 @@ package org.kie.kogito;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.kie.kogito.queries.KogitoSpringbootApplication;
+import org.kie.kogito.legacy.KogitoSpringbootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.annotation.DirtiesContext;

@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.queries;
+package org.kie.kogito.legacy;
 
 import java.util.List;
 
-public class LoanUnit {
+public class LoanDto {
 
     private int maxAmount;
 
