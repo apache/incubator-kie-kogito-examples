@@ -108,3 +108,15 @@ shows timers (intermediate and boundary) that allows to introduce delays in proc
 Every example has a directory named `operator` including the YAML files to deploy it using the Kogito Operator in an OpenShift cluster.
 Please refer to the [Kogito Documentation](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift)
 of how to install the operator to your environment in order to try it there.
+
+## Getting Help
+### Issues
+- Do you have a [minimal, reproducible example](https://stackoverflow.com/help/minimal-reproducible-example) for your issue?
+  - If so, please open a Jira for it in the [Kogito project](https://issues.redhat.com/projects/KOGITO/summary) with the details of your issue and example.
+- Are you encountering an issue but unsure of what is going on? 
+  - Start a new conversation in the Kogito [Google Group](https://groups.google.com/g/kogito-development), or open a new thread in the [Kogito stream](https://kie.zulipchat.com/#narrow/stream/232676-kogito) of the KIE Zulip chat.
+  - Please provide as much relevant information as you can as to what could be causing the issue, and our developers will help you figure out what's going wrong.
+
+### Requests
+- Do you have a feature/enhancement request?
+  - Please open a new thread in the [Kogito stream](https://kie.zulipchat.com/#narrow/stream/232676-kogito) of the KIE Zulip chat to start a discussion there.
