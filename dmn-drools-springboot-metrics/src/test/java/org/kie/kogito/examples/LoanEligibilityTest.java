@@ -50,7 +50,6 @@ public class LoanEligibilityTest {
     }
 
     @Test
-    @Disabled("Uses 2.0.0-SNAPSHOT in 1.8.0-SNAPSHOT")
     public void testEvaluateLoanEligibility() {
         // Approved loan
         given()

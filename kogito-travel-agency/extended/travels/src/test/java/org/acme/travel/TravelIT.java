@@ -94,7 +94,6 @@ public class TravelIT {
     }
 
     @Test
-    @Disabled("Uses 2.0.0-SNAPSHOT in 1.8.0-SNAPSHOT")
     public void testProcessMetrics() {
         whenNewTravel(TRAVELLER_FROM_POLAND, TRIP_TO_POLAND);
         given()
