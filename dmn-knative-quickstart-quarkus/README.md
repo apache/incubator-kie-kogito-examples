@@ -48,7 +48,7 @@ K_SINK=http://localhost:8181 mvn clean compile quarkus:dev
 once we deploy the application on a Kubernetes cluster. Instead of _hardcoding_ the endpoint where we are going to send our produced messages, we rely
 on Knative to inject this information in runtime.
 
-The environment variable will be assigned to the Quarkus HTTP connector in runtime: `mp.messaging.outgoing.processedtravellers.url=${K_SINK}`.
+The environment variable will be assigned to the Quarkus HTTP connector in runtime: `mp.messaging.outgoing.kogito_outgoing_stream.url=${K_SINK}`.
 
 For local tests we will mock the endpoint where the produced messages supposed to be delivered.
 
