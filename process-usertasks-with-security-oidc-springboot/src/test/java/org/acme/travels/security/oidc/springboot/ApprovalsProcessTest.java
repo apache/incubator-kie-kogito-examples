@@ -20,6 +20,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.acme.travels.Address;
+import org.acme.travels.Traveller;
 import org.jbpm.process.instance.impl.humantask.HumanTaskTransition;
 import org.jbpm.process.instance.impl.humantask.phases.Claim;
 import org.jbpm.process.instance.impl.workitem.Complete;

@@ -13,11 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.examples;
+package org.kie.dmn.kogito.quarkus.example.listener;
 
 import io.quarkus.test.junit.NativeImageTest;
 
 @NativeImageTest
-public class NativeFlightIT extends FlightTest {
-    // Run the same test, but in native mode
+public class NativeTrafficViolationIT extends TrafficViolationTest {
+
+    // Execute the same tests but in native mode.
 }

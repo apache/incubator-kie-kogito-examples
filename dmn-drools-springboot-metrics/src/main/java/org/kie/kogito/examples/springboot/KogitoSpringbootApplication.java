@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Red Hat, Inc. and/or its affiliates.
+ * Copyright 2021 Red Hat, Inc. and/or its affiliates.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,12 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito;
+package org.kie.kogito.examples.springboot;
 
-import io.quarkus.test.junit.NativeImageTest;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@NativeImageTest
-public class NativeRestQueryTestIT extends RestQueryTest {
+@SpringBootApplication(scanBasePackages = { "org.kie.kogito.**", "http**" })
+public class KogitoSpringbootApplication {
 
-    // Execute the same tests but in native mode.
+    public static void main(String[] args) {
+        SpringApplication.run(KogitoSpringbootApplication.class, args);
+    }
 }

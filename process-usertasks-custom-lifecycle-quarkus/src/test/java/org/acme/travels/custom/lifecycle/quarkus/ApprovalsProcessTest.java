@@ -23,6 +23,8 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.acme.travels.Address;
+import org.acme.travels.Traveller;
 import org.acme.travels.usertasks.Start;
 import org.jbpm.process.instance.impl.humantask.HumanTaskTransition;
 import org.jbpm.process.instance.impl.humantask.phases.Claim;

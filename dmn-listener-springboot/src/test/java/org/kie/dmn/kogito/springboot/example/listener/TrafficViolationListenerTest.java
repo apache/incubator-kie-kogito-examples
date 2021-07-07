@@ -13,33 +13,45 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.dmn.kogito.quarkus.example;
+package org.kie.dmn.kogito.springboot.example.listener;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import javax.inject.Inject;
-
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.kie.dmn.api.core.event.DMNRuntimeEventListener;
-import org.kie.dmn.kogito.quarkus.example.mock.MockDMNRuntimeEventListener;
+import org.kie.dmn.kogito.springboot.example.mock.MockDMNRuntimeEventListener;
 import org.kie.kogito.decision.DecisionConfig;
 import org.kie.kogito.decision.DecisionEventListenerConfig;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.test.annotation.DirtiesContext;
 
-import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.kie.dmn.kogito.quarkus.example.TrafficViolationTest.TRAFFIC_VIOLATION_TEST_BODY;
+import static org.kie.dmn.kogito.springboot.example.listener.TrafficViolationTest.TRAFFIC_VIOLATION_TEST_BODY;
 
-@QuarkusTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class TrafficViolationListenerTest {
 
-    @Inject
-    DecisionConfig decisionConfig;
+    @Autowired
+    private DecisionConfig decisionConfig;
+
+    @LocalServerPort
+    private int port;
+
+    @BeforeEach
+    public void setUp() {
+        RestAssured.port = port;
+    }
 
     @Test
     public void testEvaluateTrafficViolation() {

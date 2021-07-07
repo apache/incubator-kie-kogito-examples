@@ -23,8 +23,8 @@ import org.junit.jupiter.api.Test;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.RestAssured;
 
-import static org.kie.pmml.kogito.quarkus.example.CommonTestUtils.testDescriptive;
-import static org.kie.pmml.kogito.quarkus.example.CommonTestUtils.testResult;
+import static org.kie.dmnpmml.kogito.quarkus.example.CommonTestUtils.testDescriptive;
+import static org.kie.dmnpmml.kogito.quarkus.example.CommonTestUtils.testResult;
 
 @QuarkusTest
 public class ScoreCardTest {

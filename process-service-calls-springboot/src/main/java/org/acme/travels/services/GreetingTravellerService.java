@@ -15,7 +15,7 @@
  */
 package org.acme.travels.services;
 
-import org.acme.travels.Traveller;
+import org.acme.travels.springboot.Traveller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;

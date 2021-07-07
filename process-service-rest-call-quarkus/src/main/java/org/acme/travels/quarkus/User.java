@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.acme.travels;
+package org.acme.travels.quarkus;
 
 public class User {
 
@@ -24,7 +24,7 @@ public class User {
     private String email;
     private String password;
     private String phone;
-    private int status;
+    private int userStatus;
 
     public long getId() {
         return id;
@@ -82,12 +82,11 @@ public class User {
         this.phone = phone;
     }
 
-    public int getStatus() {
-        return status;
+    public int getUserStatus() {
+        return userStatus;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setUserStatus(int userStatus) {
+        this.userStatus = userStatus;
     }
-
 }

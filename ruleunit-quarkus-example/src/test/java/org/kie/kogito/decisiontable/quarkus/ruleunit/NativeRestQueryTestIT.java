@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.dmn.kogito.quarkus.example;
+package org.kie.kogito.decisiontable.quarkus.ruleunit;
 
 import io.quarkus.test.junit.NativeImageTest;
 
 @NativeImageTest
-public class NativeTrafficViolationIT extends TrafficViolationTest {
+public class NativeRestQueryTestIT extends RestQueryTest {
 
     // Execute the same tests but in native mode.
 }

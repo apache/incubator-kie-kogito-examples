@@ -13,27 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.acme.travels;
+package org.acme.travels.springboot;
 
-public class Traveller {
+public class User {
 
+    private long id;
+    private String username;
     private String firstName;
     private String lastName;
     private String email;
-    private String nationality;
-    private Address address;
+    private String password;
+    private String phone;
+    private int status;
 
-    public Traveller() {
-
+    public long getId() {
+        return id;
     }
 
-    public Traveller(String firstName, String lastName, String email, String nationality, Address address) {
-        super();
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.nationality = nationality;
-        this.address = address;
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getFirstName() {
@@ -60,26 +66,28 @@ public class Traveller {
         this.email = email;
     }
 
-    public String getNationality() {
-        return nationality;
+    public String getPassword() {
+        return password;
     }
 
-    public void setNationality(String nationality) {
-        this.nationality = nationality;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public Address getAddress() {
-        return address;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    @Override
-    public String toString() {
-        return "Traveller [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", nationality="
-                + nationality + ", address=" + address + "]";
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
 }

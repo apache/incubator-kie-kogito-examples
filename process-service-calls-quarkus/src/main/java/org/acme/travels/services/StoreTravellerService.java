@@ -20,7 +20,7 @@ import java.util.Map;
 
 import javax.enterprise.context.ApplicationScoped;
 
-import org.acme.travels.Traveller;
+import org.acme.travels.quarkus.Traveller;
 
 @ApplicationScoped
 public class StoreTravellerService {

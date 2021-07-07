@@ -15,7 +15,7 @@
  */
 package org.acme.travels.services;
 
-import org.acme.travels.User;
+import org.acme.travels.springboot.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;

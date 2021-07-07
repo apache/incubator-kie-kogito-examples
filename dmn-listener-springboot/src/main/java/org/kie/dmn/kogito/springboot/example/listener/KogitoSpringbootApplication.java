@@ -13,12 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito;
+package org.kie.dmn.kogito.springboot.example.listener;
 
-import io.quarkus.test.junit.NativeImageTest;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@NativeImageTest
-public class NativeRestQueryIT extends RestQueryTest {
+@SpringBootApplication(scanBasePackages = { "org.kie.dmn.kogito.**", "org.kie.kogito.**", "http**" })
+public class KogitoSpringbootApplication {
 
-    // Execute the same tests but in native mode.
+    public static void main(String[] args) {
+        SpringApplication.run(KogitoSpringbootApplication.class, args);
+    }
 }

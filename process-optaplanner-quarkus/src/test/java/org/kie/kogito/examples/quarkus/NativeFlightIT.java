@@ -13,18 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.examples;
+package org.kie.kogito.examples.quarkus;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import io.quarkus.test.junit.NativeImageTest;
 
-@SpringBootApplication(scanBasePackages = { "org.kie.kogito.**" })
-public class FlightSeatingApplication {
-
-    public static void main(String[] args) {
-        // Spring-boot dev tools class loader cannot detect generated sources
-        // so we need to disable restart if we want to take advantage of live-reload
-        System.setProperty("spring.devtools.restart.enabled", "false");
-        SpringApplication.run(FlightSeatingApplication.class, args);
-    }
+@NativeImageTest
+public class NativeFlightIT extends FlightTest {
+    // Run the same test, but in native mode
 }
