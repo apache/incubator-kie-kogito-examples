@@ -4,9 +4,10 @@
 
 This Quickstart showcases a basic implementation of the **Hiring** process. 
 
-For simplicity, this example doesn't include any authentication mechanism, so all tasks will be assigned to a default user `john`.
 This quickstart project shows very typical user task orchestration with a timer that avoids to execute the HR Interview task 
 after some reasonable time.(configured for test purposes to 40 seconds)
+
+> **_NOTE:_** This example uses keycloak authentication to enable security only in the consoles and not in runtime.
 
 <p align="center"><img width=75% height=50% src="docs/images/Process-with-job.png"></p>
 
@@ -18,6 +19,7 @@ The required *Kogito and Infrastructure Services* for this example are:
 - Kogito Jobs Service 
 - Kogito Management Console
 - Kogito Task Console
+- Keycloak
 
 ## Running the Quickstart
 
@@ -60,6 +62,7 @@ Once all services bootstrap, the following ports will be assigned on your local 
 - Jobs Service: 8580
 - Management Console: 8280
 - Task Console: 8380
+- Keycloak: 8480
 
 > **_NOTE:_**  This step requires the project to be compiled, please consider running a ```mvn clean compile``` command on the project root before running the ```startServices.sh``` script for the first time or any time you modify the project.
 
@@ -67,6 +70,18 @@ Once started you can simply stop all services by executing the ```docker-compose
 
 All created containers can be removed by executing the ```docker-compose rm```.
 
+### Using Keycloak as Authentication Server
+
+In this Quickstart we'll be using [Keycloak](https://www.keycloak.org/) as *Authentication Server*. It will be started as a part of the project *Infrastructure Services*, you can check the configuration on the project [docker-compose.yml](docker-compose/docker-compose.yml) in [docker-compose](docker-compose) folder.
+
+It will install the *Kogito Realm* that comes with a predefined set of users:
+| Login         | Password   | Roles               |
+| ------------- | ---------- | ------------------- |
+|    admin      |   admin    | *admin*, *managers* |
+|    alice      |   alice    | *user*              |
+|    jdoe       |   jdoe     | *managers*          |
+
+Once Keycloak is started, you should be able to access your *Keycloak Server* at [localhost:8480/auth](http://localhost:8480/auth) with *admin* user.
 
 ### Compile and Run Hiring example process in Local Dev Mode
 
@@ -138,7 +153,13 @@ EOF
 
 ### Show active Hiring process instance at Kogito Management Console
 
-To access the Kogito Management Console just open your browser and navigate to ``http://localhost:8280``.
+To access the Kogito Management Console just open your browser and navigate to ``http://localhost:8280``. You'll be redirected to the *Keycloak* log in page.
+
+<p align="center">
+    <img width=75%  src="docs/images/keycloak-login.png">
+</p>
+
+Once there, log in using any of the users specified in the [Using Keycloak as Authentication Server](#using-keycloak-as-authentication-server) 
 
 <p align="center">
     <img width=75%  src="docs/images/MC_list.png">
@@ -170,7 +191,13 @@ Job panel shows the job details related to the timer execution:
 
 ### Execute IT Interview task at Kogito Task Console
 
-To access the Kogito Task Console, open your browser and navigate to ``http://localhost:8380``, and you are redirected to the **Task Inbox**.
+To access the Kogito Task Console just open your browser and navigate to ``http://localhost:8280``. You'll be redirected to the *Keycloak* log in page.
+
+<p align="center">
+    <img width=75%  src="docs/images/keycloak-login.png">
+</p>
+
+Once there, log in using any of the users specified in the [Using Keycloak as Authentication Server](#using-keycloak-as-authentication-server) 
 
 > **_NOTE:_**  For more information about how to work with Kogito Task Console, please refer to the [Kogito Documentation](https://docs.jboss.org/kogito/release/latest/html_single/#con-task-console_kogito-developing-process-services) page.
 
