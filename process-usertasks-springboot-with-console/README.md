@@ -8,6 +8,8 @@ group can act on the tasks. Though this example applies four eye principle which
 that user who approved first task cannot approve second one. So there must be always at least two
 distinct manager involved.
 
+> **_NOTE:_** This example uses keycloak authentication to enable security only in the consoles and not in runtime.
+
 This example shows
 
 * working with user tasks
@@ -75,6 +77,7 @@ Once all services bootstrap, the following ports will be assigned on your local 
 - Data Index: 8180
 - Management Console: 8280
 - Task Console: 8380
+- Keycloak: 8480
 
 > **_NOTE:_**  This step requires the project to be compiled, please consider running a ```mvn clean compile``` command on the project root before running the ```startServices.sh``` script for the first time or any time you modify the project.
 
@@ -82,6 +85,18 @@ Once started you can simply stop all services by executing the ```docker-compose
 
 All created containers can be removed by executing the ```docker-compose rm```.
 
+### Using Keycloak as Authentication Server
+
+In this Quickstart we'll be using [Keycloak](https://www.keycloak.org/) as *Authentication Server*. It will be started as a part of the project *Infrastructure Services*, you can check the configuration on the project [docker-compose.yml](docker-compose/docker-compose.yml) in [docker-compose](docker-compose) folder.
+
+It will install the *Kogito Realm* that comes with a predefined set of users:
+| Login         | Password   | Roles               |
+| ------------- | ---------- | ------------------- |
+|    admin      |   admin    | *admin*, *managers* |
+|    alice      |   alice    | *user*              |
+|    jdoe       |   jdoe     | *managers*          |
+
+Once Keycloak is started, you should be able to access your *Keycloak Server* at [localhost:8480/auth](http://localhost:8480/auth) with *admin* user.
 
 ### Compile and Run in Local Dev Mode
 
@@ -138,7 +153,13 @@ curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d 
 
 ### Show active process instances at Kogito Management Console
 
-To access the Kogito Management Console open your browser and navigate to ``http://localhost:8280``. 
+To access the Kogito Management Console just open your browser and navigate to ``http://localhost:8280``. You'll be redirected to the *Keycloak* log in page.
+
+<p align="center">
+    <img width=75%  src="docs/images/keycloak-login.png">
+</p>
+
+Once there, log in using any of the users specified in the [Using Keycloak as Authentication Server](#using-keycloak-as-authentication-server) 
 
 <p align="center">
     <img width=75%  src="docs/images/MC_list1.png">
@@ -154,16 +175,13 @@ Check the process instance details to see where is the execution path
 
 ### Execute 'First Line approval' task at Kogito Task Console
 
-To access the Kogito Task Console open your browser and navigate to ``http://localhost:8380`` and you should be redirected to the **Task Inbox**.
-Ensure you are logged as a user with role manager to be able to see the First Line approval.
+To access the Kogito Task Console just open your browser and navigate to ``http://localhost:8380``. You'll be redirected to the *Keycloak* log in page.
 
-To be able to run the process, we need to create two Test users at Task Console, for testing purposes. Both users 
-have to belong to group `managers`.  
 <p align="center">
-    <img width=75%  src="docs/images/AddTestUsers.png">
+    <img width=75%  src="docs/images/keycloak-login.png">
 </p>
 
-Then change to one of the new created users. 
+Ensure you are logged as a user with role manager to be able to see the First Line approval.
 
 <p align="center">
     <img width=75%  src="docs/images/TC_list1.png">
