@@ -30,12 +30,8 @@
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-addons-quarkus-cloudevents</artifactId>
+      <artifactId>kogito-addons-quarkus-messaging</artifactId>
     </dependency>
-<!--     <dependency> -->
-<!--     <groupId>org.kie.kogito</groupId> -->
-<!--     <artifactId>kogito-addons-quarkus-cloudevents-multi</artifactId> -->
-<!--     </dependency> -->
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-quarkus</artifactId>

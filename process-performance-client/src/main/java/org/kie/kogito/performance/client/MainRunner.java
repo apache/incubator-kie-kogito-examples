@@ -22,11 +22,11 @@ import org.slf4j.LoggerFactory;
 
 public class MainRunner {
 
-    private final static Logger logger = LoggerFactory.getLogger(MainRunner.class);
+    private static final Logger logger = LoggerFactory.getLogger(MainRunner.class);
 
     public static void main(String[] args) {
         try (RequestDispatcher dispatcher = RequestDispatcherFactory.getDispatcher(RequestType.KAFKA, "test")) {
-            new RequestDispatcherRunner(dispatcher, 100, 1000).call();
+            new RequestDispatcherRunner(dispatcher, 1, 1000).call();
         } catch (Exception ex) {
             logger.error("Execution error ", ex);
             System.exit(-1);

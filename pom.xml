@@ -156,6 +156,7 @@
         <module>process-optaplanner-quarkus</module>
         <module>process-optaplanner-springboot</module>
         <module>process-performance-quarkus</module>
+        <module>process-performance-springboot</module>
         <module>process-postgresql-persistence-quarkus</module>
         <module>process-postgresql-persistence-springboot</module>
         <module>process-quarkus-example</module>

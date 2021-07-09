@@ -1,8 +1,16 @@
-# Process + Quarkus example
+# Process Quarkus Performance
 
 ## Description
 
-A simple process service used to run throughput tests. This test relies on Kafka. So to be able to run this you need to have
+A set of BPMN processes used to manually run throughput tests on Quarkus in order to check performance.
+All BPMN files share the same structure. They consist on one script, which invokes ``Thread.sleep`` to stop process execution as much time as indicated on ``delay`` argument and they all publish a message 
+to channel  _done_  when ended. 
+The difference between them is the way they are started: 
+* test.bpmn2 is started through a regular REST invocation
+* kafkaTest.bpmn2 is started through a message on channel  _test_
+* kafkaTestOtherChannel.bpmn2 is started through a message on channel  _test2_
+ 
+This project is configured to run on Kafka (you can change broker and topic on application.properties). Therefore, you need to have
 Kafka cluster installed and available over the network. Refer to [Kafka Apache site](https://kafka.apache.org/quickstart) to more information about how to install. 
 
 ## Installing and Running
@@ -53,16 +61,7 @@ To run the generated native executable, generated in `target/`, execute
 ./target/process-quarkus-example-runner
 ```
 
-## OpenAPI (Swagger) documentation
-[Specification at swagger.io](https://swagger.io/docs/specification/about/)
-
-You can take a look at the [OpenAPI definition](http://localhost:8080/openapi?format=json) - automatically generated and included in this service - to determine all available operations exposed by this service. For easy readability you can visualize the OpenAPI definition file using a UI tool like for example available [Swagger UI](https://editor.swagger.io).
-
-In addition, various clients to interact with this service can be easily generated using this OpenAPI definition.
-
-When running in either Quarkus Development or Native mode, we also leverage the [Quarkus OpenAPI extension](https://quarkus.io/guides/openapi-swaggerui#use-swagger-ui-for-development) that exposes [Swagger UI](http://localhost:8080/swagger-ui/) that you can use to look at available REST endpoints and send test requests.
-
 ## Example Usage
 
-Once the service is up and running, to collect throughput numbers you need to manually change parameters in code of, compile and  run class ```org.kie.kogito.performance.client.MainRunner``` in process-performace-client project
+Once the service is up and running, to collect throughput numbers you need to manually change parameters in code of, compile and  run class ```org.kie.kogito.performance.client.MainRunner``` in process-performance-client project
 

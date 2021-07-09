@@ -52,7 +52,7 @@ public class KafkaDispatcher implements RequestDispatcher {
     public void dispatch(long delay, Consumer<Throwable> consumer) {
 
         try {
-            kafkaProducer.send(new ProducerRecord<byte[], byte[]>(trigger, objectMapper.writeValueAsBytes(
+            kafkaProducer.send(new ProducerRecord<>("test", objectMapper.writeValueAsBytes(
                     new ObjectCloudEvent(trigger, delay))), (r, e) -> {
                         if (e != null) {
                             consumer.accept(e);
