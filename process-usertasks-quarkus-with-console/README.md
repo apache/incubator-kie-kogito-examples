@@ -242,7 +242,7 @@ To access the Kogito Task Console just open your browser and navigate to ``http:
     <img width=75%  src="docs/images/keycloak-login.png">
 </p>
 
-Once there, log in with an *managers* user (for example *admin*) and you should be redirected to the user **Task Inbox**:
+Once there, log in with an *managers* user (for example *jdoe*) and you should be redirected to the user **Task Inbox**:
 
 <p align="center">
     <img width=75%  src="docs/images/TC_list1.png">
