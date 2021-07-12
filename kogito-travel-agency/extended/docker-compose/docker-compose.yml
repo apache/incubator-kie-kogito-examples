@@ -74,7 +74,7 @@ services:
 
   data-index:
     container_name: data-index
-    image: quay.io/kiegroup/kogito-data-index-infinispan:${KOGITO_VERSION}
+    image: quay.io/kiegroup/kogito-data-index-infinispan-nightly:${KOGITO_VERSION}
     ports:
       - "8180:8080"
     depends_on:
