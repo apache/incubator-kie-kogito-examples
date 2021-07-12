@@ -5,7 +5,7 @@ bin/
 # Eclipse, Netbeans and IntelliJ files
 .*
 !.gitignore
-!.jenkins
+!.ci
 !.github
 nbproject
 target
