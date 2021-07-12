@@ -102,7 +102,7 @@ services:
 
   task-console:
     container_name: task-console
-    image: quay.io/kiegroup/kogito-task-console:${KOGITO_VERSION}/graphql
+    image: quay.io/kiegroup/kogito-task-console:${KOGITO_VERSION}
     ports:
       - 8380:8080
     depends_on:
