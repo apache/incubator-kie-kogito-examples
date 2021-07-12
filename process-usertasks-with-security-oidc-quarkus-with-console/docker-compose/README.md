@@ -17,9 +17,15 @@ In order to use it, please ensure you have Docker Compose installed on your mach
 
   Before you execute the **Approvals** example, start all the services by following these steps:
 
-  For Linux and MacOS:
+  For Linux:
 
     ./startServices.sh
+
+  For MacOS:
+
+    sudo echo '127.0.0.1  host.docker.internal' >> /etc/hosts
+    ./startServices.sh
+    
 
   For Windows:
    

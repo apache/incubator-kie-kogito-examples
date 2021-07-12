@@ -18,6 +18,11 @@ In order to use it, please ensure you have Docker Compose installed on your mach
 
     ./startServices.sh
 
+  For MacOS:
+
+    sudo echo '127.0.0.1  host.docker.internal' >> /etc/hosts
+    ./startServices.sh
+
   For Windows:
    
   Create a .env file with the content containing the version of the Kogito images you would like to run, example:

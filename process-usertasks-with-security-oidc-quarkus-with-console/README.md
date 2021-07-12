@@ -201,6 +201,17 @@ export access_token=$(\
  )
 ```
 
+In Mac OS:
+    need to run under bash.
+```sh
+export access_token=$(\
+    curl -X POST http://${host.docker.internal}:8480/auth/realms/kogito/protocol/openid-connect/token \
+    --user kogito-app:secret \
+    -H 'content-type: application/x-www-form-urlencoded' \
+    -d 'username=jdoe&password=jdoe&grant_type=password' | jq --raw-output '.access_token' \
+ )
+```
+
 Other OS
 ```sh
 export access_token=$(\

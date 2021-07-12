@@ -17,8 +17,13 @@ In order to use it, please ensure you have Docker Compose installed on your mach
 
   You should start all the services before you execute any of the Travel Agency applications, to do that please execute:
 
-  For Linux and MacOS:
+  For Linux:
 
+    ./startServices.sh
+
+  For MacOS:
+
+    sudo echo '127.0.0.1  host.docker.internal' >> /etc/hosts
     ./startServices.sh
 
   For Windows:
