@@ -9,7 +9,7 @@ services:
         - 11222:11222
     command: "/opt/infinispan/bin/server.sh -c infinispan-demo.xml"
     volumes:
-      - ./infinispan/infinispan.xml:/opt/infinispan/server/conf/infinispan-demo.xml:z
+      - ../../config/infinispan/infinispan.xml:/opt/infinispan/server/conf/infinispan-demo.xml:z
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:11222/rest/v2/cache-managers/default/health/status" ]
       interval: 1s
@@ -56,7 +56,7 @@ services:
     ports:
       - "8480:8080"
     volumes:
-      - ./keycloak/kogito-realm.json:/tmp/kogito-realm.json
+      - ../../config/keycloak/kogito-realm.json:/tmp/kogito-realm.json
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8080/auth/realms/kogito" ]
       interval: 1s
@@ -78,7 +78,7 @@ services:
       infinispan:
         condition: service_healthy
     volumes:
-      - ./persistence/:/home/kogito/data/protobufs/
+      - ../../config/persistence/:/home/kogito/data/protobufs/
     environment:
       QUARKUS_INFINISPAN_CLIENT_SERVER_LIST: infinispan:11222
       KAFKA_BOOTSTRAP_SERVERS: kafka:29092
