@@ -190,21 +190,21 @@ Once the service is up and running you can make use of the **Hiring** applicatio
 ```json
 {   
     "candidate": {
-        "name": "jdoe",
-        "email": "jdoe@example.com",
+        "name": "Jon Snow",
+        "email": "jsnow@example.com",
         "salary": 30000,
         "skills": "Java, Kogito"
     }
 }
 ```
 
-In a Terminal you can execute this command to start a **Hiring** process for the "jdoe" candidate:
+In a Terminal you can execute this command to start a **Hiring** process for the "Jon Snow" candidate:
 ```bash
 curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST http://localhost:8080/hiring -d @- << EOF
 {   
     "candidate": {
-        "name": "jdoe",
-        "email": "jdoe@example.com",
+        "name": "Jon Snow",
+        "email": "jsnow@example.com",
         "salary": 30000,
         "skills": "Java, Kogito"
     }

@@ -7,6 +7,7 @@ To allow a quick setup of all the required services to run this demo, we provide
 - Kogito Jobs Service: 8580
 - Kogito Management Console
 - Kogito Task Console
+- Keycloak
 
 In order to use it, please ensure you have Docker Compose installed on your machine, otherwise follow the instructions available
  in [here](https://docs.docker.com/compose/install/).
