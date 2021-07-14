@@ -35,7 +35,7 @@
       <artifactId>quarkus-smallrye-openapi</artifactId>
     </dependency>
 
-    <!-- REST Client DMN -->
+    <!-- REST Client to call DMN - Service Task -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-rest-client</artifactId>
@@ -45,21 +45,25 @@
       <artifactId>quarkus-rest-client-jackson</artifactId>
     </dependency>
 
-    <!-- Messaging DMN -->
-    <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-addons-events-decisions</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-smallrye-reactive-messaging-kafka</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-addons-quarkus-cloudevents</artifactId>
-    </dependency>
+    <!-- REST WIH to call DMN -->
 
-    <!--tests -->
+
+
+    <!-- Messaging DMN -->
+<!--    <dependency>-->
+<!--      <groupId>org.kie.kogito</groupId>-->
+<!--      <artifactId>kogito-addons-events-decisions</artifactId>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>io.quarkus</groupId>-->
+<!--      <artifactId>quarkus-smallrye-reactive-messaging-kafka</artifactId>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>org.kie.kogito</groupId>-->
+<!--      <artifactId>kogito-addons-quarkus-cloudevents</artifactId>-->
+<!--    </dependency>-->
+
+    <!--Tests -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-junit5</artifactId>

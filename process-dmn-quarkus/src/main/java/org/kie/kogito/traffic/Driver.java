@@ -16,8 +16,12 @@
 
 package org.kie.kogito.traffic;
 
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Driver {
 
     private String id;
@@ -37,16 +41,21 @@ public class Driver {
     @JsonProperty("Age")
     private Integer age;
 
+    private Date licenseExpiration;
+
+    private Boolean validLicense = Boolean.FALSE;
+
     public Driver() {
     }
 
-    public Driver(String id, String name, String state, String city, Integer points, Integer age) {
+    public Driver(String id, String name, String state, String city, Integer points, Integer age, Date licenseExpiration) {
         this.id = id;
         this.name = name;
         this.state = state;
         this.city = city;
         this.points = points;
         this.age = age;
+        this.licenseExpiration = licenseExpiration;
     }
 
     public String getName() {
@@ -88,4 +97,25 @@ public class Driver {
     public void setAge(Integer age) {
         this.age = age;
     }
+
+    public Date getLicenseExpiration() {
+        return licenseExpiration;
+    }
+
+    public void setLicenseExpiration(Date licenseExpiration) {
+        this.licenseExpiration = licenseExpiration;
+    }
+
+    public Boolean isValidLicense() {
+        return validLicense;
+    }
+
+    public void setValidLicense(Boolean validLicense) {
+        this.validLicense = validLicense;
+    }
+
+    //    @JsonIgnore
+    //    public Date currentTime() {
+    //        return new Date();
+    //    }
 }

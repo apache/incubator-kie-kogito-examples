@@ -16,6 +16,8 @@
 
 package org.kie.kogito.traffic;
 
+import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.Random;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -31,6 +33,6 @@ public class DriverService {
     public Driver getDriver(String driverId) {
         LOGGER.info("Get Driver Information for id = {}", driverId);
         //Could call an external service, database, etc...
-        return new Driver(driverId, "Arthur", "SP", "Campinas", new Random().ints(10, 20).findAny().getAsInt(), 30);
+        return new Driver(driverId, "Arthur", "SP", "Campinas", new Random().ints(10, 20).findAny().getAsInt(), 30, new Date(ZonedDateTime.now().plusDays( new Random().ints(-2, 2).findAny().getAsInt()).toInstant().toEpochMilli()));
     }
 }
