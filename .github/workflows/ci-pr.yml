@@ -12,15 +12,16 @@ jobs:
       matrix:
         # keep ubuntu build only for now, to enable windows builds just replace this array with
         # [ubuntu-latest, windows-latest]
+        # and uncomment include windows-latest conf
         os: [ubuntu-latest]
         java-version: [11]
         include:
           - os: ubuntu-latest
             BUILD_MVN_OPTS: "-Dvalidate-formatting"
-          - os: windows-latest
-            # let's skip integration test because docker is not configured on windows runners
-            # see https://github.com/actions/virtual-environments/issues/1143
-            BUILD_MVN_OPTS: "-DquickTests"
+#          - os: windows-latest
+#            # let's skip integration test because docker is not configured on windows runners
+#            # see https://github.com/actions/virtual-environments/issues/1143
+#            BUILD_MVN_OPTS: "-DquickTests"
       fail-fast: false
     runs-on: ${{ matrix.os }}
     name: Maven Build
