@@ -46,7 +46,10 @@
     </dependency>
 
     <!-- REST WIH to call DMN -->
-
+    <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-rest-workitem</artifactId>
+    </dependency>
 
 
     <!-- Messaging DMN -->

@@ -113,9 +113,4 @@ public class Driver {
     public void setValidLicense(Boolean validLicense) {
         this.validLicense = validLicense;
     }
-
-    //    @JsonIgnore
-    //    public Date currentTime() {
-    //        return new Date();
-    //    }
 }

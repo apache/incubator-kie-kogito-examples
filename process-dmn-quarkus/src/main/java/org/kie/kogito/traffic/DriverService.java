@@ -33,6 +33,13 @@ public class DriverService {
     public Driver getDriver(String driverId) {
         LOGGER.info("Get Driver Information for id = {}", driverId);
         //Could call an external service, database, etc...
-        return new Driver(driverId, "Arthur", "SP", "Campinas", new Random().ints(10, 20).findAny().getAsInt(), 30, new Date(ZonedDateTime.now().plusDays( new Random().ints(-2, 2).findAny().getAsInt()).toInstant().toEpochMilli()));
+
+        //Mocking driver details
+        //random expiration
+        int days = new Random().ints(0, 2).findAny().getAsInt();
+        Date licenseExpiration = new Date(ZonedDateTime.now().plusDays(days).toInstant().toEpochMilli());
+        //random points
+        int points = new Random().ints(10, 20).findAny().getAsInt();
+        return new Driver(driverId, "Arthur", "SP", "Campinas", points, 30, licenseExpiration);
     }
 }
