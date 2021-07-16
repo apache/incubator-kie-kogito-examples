@@ -1,5 +1,5 @@
-/**
- * Copyright 2020 Red Hat, Inc. and/or its affiliates.
+/*
+ * Copyright 2021 Red Hat, Inc. and/or its affiliates.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,24 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.traffic
+package org.kie.kogito.traffic;
 
-unit LicenseValidationService
+import java.util.Collections;
 
-rule "Is driver license valid"
-when            
-    $driver: /drivers[licenseExpiration.after(currentTime)]
-then
-    modify($driver) { 
-    	setValidLicense(true);
-    };
-end
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 
-rule "Is driver license expired"
-when            
-    $driver: /drivers[licenseExpiration.before(currentTime)]
-then
-    modify($driver) { 
-    	setValidLicense(false);
-    };
-end
+import org.eclipse.microprofile.rest.client.inject.RestClient;
+
+@ApplicationScoped
+public class LicenseValidationRestService {
+
+    @Inject
+    @RestClient
+    LicenseValidationRestClient client;
+
+    public Driver evaluate(Driver driver) {
+        return client.post(Collections.singletonMap("drivers", Collections.singletonList(driver)));
+    }
+}

@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Red Hat, Inc. and/or its affiliates.
+ * Copyright 2021 Red Hat, Inc. and/or its affiliates.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,20 +15,23 @@
  */
 package org.kie.kogito.traffic;
 
-import java.util.Date;
+import java.util.Map;
 
-import org.kie.kogito.rules.DataSource;
-import org.kie.kogito.rules.DataStore;
-import org.kie.kogito.rules.RuleUnitData;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
-public class LicenseValidationService implements RuleUnitData {
-    private DataStore<Driver> drivers = DataSource.createStore();
+import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
-    public DataStore<Driver> getDrivers() {
-        return drivers;
-    }
+@Path("/Traffic%20Violation")
+@RegisterRestClient
+public interface TrafficViolationRestClient {
 
-    public Date getCurrentTime() {
-        return new Date();
-    }
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    Map<String, Object> post(Map<String, Object> parameters);
+
 }

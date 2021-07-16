@@ -142,7 +142,8 @@
         <module>pmml-springboot-example</module>
         <module>process-business-rules-quarkus</module>
         <module>process-business-rules-springboot</module>
-        <module>process-dmn-quarkus</module>
+        <module>process-decisions-quarkus</module>
+        <module>process-decisions-rest-quarkus</module>
         <module>process-infinispan-persistence-quarkus</module>
         <module>process-infinispan-persistence-springboot</module>
         <module>process-kafka-persistence-quarkus</module>

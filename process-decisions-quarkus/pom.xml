@@ -7,9 +7,9 @@
     <artifactId>kogito-examples</artifactId>
     <version>2.0.0-SNAPSHOT</version>
   </parent>
-  <artifactId>process-dmn-quarkus</artifactId>
-  <name>Kogito Example :: Process :: DMN Quarkus</name>
-  <description>Process with DMN integration - Quarkus</description>
+  <artifactId>process-decisions-quarkus</artifactId>
+  <name>Kogito Example :: Process :: Decisions :: Quarkus</name>
+  <description>Process with DMN and DRL integration - Quarkus</description>
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -35,37 +35,6 @@
       <artifactId>quarkus-smallrye-openapi</artifactId>
     </dependency>
 
-    <!-- REST Client to call DMN - Service Task -->
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-rest-client</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-rest-client-jackson</artifactId>
-    </dependency>
-
-    <!-- REST WIH to call DMN -->
-    <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-rest-workitem</artifactId>
-    </dependency>
-
-
-    <!-- Messaging DMN -->
-<!--    <dependency>-->
-<!--      <groupId>org.kie.kogito</groupId>-->
-<!--      <artifactId>kogito-addons-events-decisions</artifactId>-->
-<!--    </dependency>-->
-<!--    <dependency>-->
-<!--      <groupId>io.quarkus</groupId>-->
-<!--      <artifactId>quarkus-smallrye-reactive-messaging-kafka</artifactId>-->
-<!--    </dependency>-->
-<!--    <dependency>-->
-<!--      <groupId>org.kie.kogito</groupId>-->
-<!--      <artifactId>kogito-addons-quarkus-cloudevents</artifactId>-->
-<!--    </dependency>-->
-
     <!--Tests -->
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -76,10 +45,6 @@
       <groupId>io.rest-assured</groupId>
       <artifactId>rest-assured</artifactId>
       <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-smallrye-health</artifactId>
     </dependency>
   </dependencies>
   <build>
