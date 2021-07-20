@@ -80,6 +80,13 @@ You will need:
 mvn clean compile spring-boot:run
 ```
 
+Kogito runtimes need to be able to safely handle concurrent requests to shared instances such as process instances, tasks, etc. This feature is optional and can be pluggable with persistence using the following property and value to the src/main/resources/application.properties file.
+
+```
+kogito.persistence.optimistic.lock=true 
+```
+Additionally, you can build this project with -PpersistenceWithLock  profile to run with persistence and lock on.
+
 ### Package and Run using uberjar
 
 ```sh
