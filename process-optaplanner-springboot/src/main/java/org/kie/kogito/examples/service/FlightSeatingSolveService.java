@@ -22,7 +22,6 @@ import org.kie.kogito.process.impl.Sig;
 import org.optaplanner.core.api.solver.SolverManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -34,9 +33,6 @@ public class FlightSeatingSolveService {
     @Autowired
     @Qualifier("flights")
     private Process<?> process;
-
-    @Autowired
-    private AsyncTaskExecutor taskExecutor;
 
     public void assignSeats(String id, Flight problem) {
         solverManager.solveAndListen(id, (problemId) -> problem, bestSolution -> {
