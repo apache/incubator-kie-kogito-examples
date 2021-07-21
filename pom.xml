@@ -278,6 +278,7 @@
         <module>process-knative-quickstart-quarkus</module>
         <module>process-mongodb-persistence-quarkus</module>
         <module>process-optaplanner-quarkus</module>
+        <module>process-postgresql-persistence-quarkus</module>
         <module>process-quarkus-example</module>
         <module>process-scripts-quarkus</module>
         <module>process-service-calls-quarkus</module>
@@ -365,7 +366,6 @@
         <module>ruleunit-springboot-example</module>
         <module>serverless-workflow-greeting-springboot</module>
         <module>serverless-workflow-service-calls-springboot</module>
-
       </modules>
     </profile>
   </profiles>

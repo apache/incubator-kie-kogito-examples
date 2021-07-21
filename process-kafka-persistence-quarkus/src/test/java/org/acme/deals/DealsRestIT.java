@@ -15,10 +15,6 @@
  */
 package org.acme.deals;
 
-import javax.inject.Inject;
-
-import org.apache.kafka.streams.KafkaStreams;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 
@@ -37,14 +33,6 @@ public class DealsRestIT {
 
     static {
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
-    }
-
-    @Inject
-    KafkaStreams streams;
-
-    @BeforeEach
-    public void setup() {
-        streams.cleanUp();
     }
 
     @Test
