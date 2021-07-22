@@ -60,6 +60,10 @@
       <scope>test</scope>
     </dependency>
     <dependency>
+  <groupId>org.kie.kogito</groupId>
+  <artifactId>kogito-addons-quarkus-events-smallrye</artifactId>
+</dependency>
+    <dependency>
       <groupId>io.cloudevents</groupId>
       <artifactId>cloudevents-json-jackson</artifactId>
       <scope>test</scope>
