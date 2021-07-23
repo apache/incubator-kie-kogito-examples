@@ -207,7 +207,7 @@ boolean isUpstreamOptaplannerProject() {
 }
 
 Integer getTimeoutValue() {
-    return isNative() ? 600 : 180
+    return isNative() ? 600 : 240
 }
 
 void runQuickBuild(String project) {
