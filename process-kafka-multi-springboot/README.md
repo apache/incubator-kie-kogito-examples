@@ -97,7 +97,7 @@ mvn clean package
 To run the generated native executable, generated in `target/`, execute
 
 ```sh
-java -jar target/process-kafka-quickstart-springboot.jar
+java -jar target/process-kafka-multi-springboot.jar
 ```
 
 ### OpenAPI (Swagger) documentation
