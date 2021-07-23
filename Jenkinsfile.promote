@@ -119,7 +119,7 @@ pipeline {
 
 void sendNotification() {
     if (params.SEND_NOTIFICATION) {
-        emailext body: "**Deploy job** #${BUILD_NUMBER} was: ${currentBuild.currentResult}\nPlease look here: ${BUILD_URL}",
+        emailext body: "**Promote job** #${BUILD_NUMBER} was: ${currentBuild.currentResult}\nPlease look here: ${BUILD_URL}",
              subject: "[${getBuildBranch()}] Kogito Examples",
              to: env.KOGITO_CI_EMAIL_TO
     } else {
