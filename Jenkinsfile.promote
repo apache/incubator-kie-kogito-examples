@@ -69,7 +69,7 @@ pipeline {
 
                         if(params.UPDATE_STABLE_BRANCH) {
                             githubscm.createBranch('stable')
-                            forcePushProtectedBranch('stable', 'master')
+                            forcePushProtectedBranch('stable', 'main')
                         }
                     }
                 }
