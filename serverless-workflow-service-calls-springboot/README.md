@@ -2,7 +2,7 @@
 
 ## Description
 
-This example showcases the use of [Serverless Workflow specification](https://github.com/cncf/wg-serverless/tree/master/workflow/spec) 
+This example showcases the use of [Serverless Workflow specification](https://github.com/cncf/wg-serverless/tree/main/workflow/spec) 
 markup to create country information
 classification workflow. It also showcases how easy it is to create a simple AngularJS app/page 
 which you can use to start workflow instances and show the country information classified by the example

@@ -2,7 +2,7 @@
 
 ## Description
 
-This example showcases the use of [Serverless Workflow specification](https://github.com/cncf/wg-serverless/tree/master/workflow/spec) 
+This example showcases the use of [Serverless Workflow specification](https://github.com/cncf/wg-serverless/tree/main/workflow/spec) 
 markup to call Funqy services via OpenAPi.
 
 This example is composed of two modules, namely `sw-funqy-services` and `sw-funqy-workflow`.

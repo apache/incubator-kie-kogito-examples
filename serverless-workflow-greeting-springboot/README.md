@@ -4,7 +4,7 @@
 
 This example contains two simple greeting workflow services. 
 The services are described using both JSON and YAML formats as defined in the 
-[CNCF Serverless Workflow specification](https://github.com/cncf/wg-serverless/tree/master/workflow/spec).
+[CNCF Serverless Workflow specification](https://github.com/cncf/wg-serverless/tree/main/workflow/spec).
 
 The workflow expects as JSON input containing the name of the person to greet, and the language in 
 which to greet them in
