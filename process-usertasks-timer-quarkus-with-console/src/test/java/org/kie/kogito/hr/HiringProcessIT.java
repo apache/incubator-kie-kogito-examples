@@ -55,14 +55,14 @@ public class HiringProcessIT {
 
         Model m = hiringProcess.createModel();
         Map<String, Object> parameters = new HashMap<>();
-        parameters.put("candidate", new Candidate("Jon Snow", "jsnow@example.com", 30000, "Java, Kogito"));
+        parameters.put("candidate", new Candidate("jdoe", "jdoe@example.com", 30000, "Java, Kogito"));
         m.fromMap(parameters);
 
         ProcessInstance<?> processInstance = hiringProcess.createInstance(m);
         processInstance.start();
         assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_ACTIVE, processInstance.status());
 
-        SecurityPolicy policy = SecurityPolicy.of(IdentityProviders.of("john", Arrays.asList("HR", "IT")));
+        SecurityPolicy policy = SecurityPolicy.of(IdentityProviders.of("jdoe", Arrays.asList("HR", "IT")));
 
         processInstance.workItems(policy);
 

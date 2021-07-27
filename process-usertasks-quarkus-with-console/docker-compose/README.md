@@ -6,6 +6,7 @@ To allow a quick setup of all services required to run this demo, we provide a d
 - Kogito Data Index
 - Kogito Management Console
 - Kogito Task Console
+- Keycloak
 
 In order to use it, please ensure you have Docker Compose installed on your machine, otherwise follow the instructions available
  in [here](https://docs.docker.com/compose/install/).
@@ -34,6 +35,7 @@ In order to use it, please ensure you have Docker Compose installed on your mach
   - Data Index: 8180
   - Management Console: 8280
   - Task Console: 8380
+  - Keycloak: 8480
 
 ### Stopping and removing volume data
   
