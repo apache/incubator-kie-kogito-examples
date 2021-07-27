@@ -279,7 +279,7 @@ void commitAndCreatePR() {
     addNotIgnoredPoms()
     sh "git commit -m '${commitMsg}'"
     githubscm.pushObject('origin', getSnapshotBranch(), getBotAuthorCredsID())
-    setPipelinePrLink(githubscm.createPR(commitMsg, prBody, getBuildBranch(), getBotAuthorCredsID()))
+    setPipelinePrLink(githubscm.createPRWithLabels(commitMsg, prBody, getBuildBranch(), [ 'skip-ci' ] as String[], getBotAuthorCredsID()))
 }
 
 void installGithubCLI() {

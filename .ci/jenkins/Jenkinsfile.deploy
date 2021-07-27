@@ -290,7 +290,7 @@ void commitAndCreatePR() {
         addNotIgnoredPoms()
         sh "git commit -m '${commitMsg}'"
         githubscm.pushObject('origin', getBotBranch(), getBotAuthorCredsID())
-        deployProperties["${getRepoName()}.pr.link"] = githubscm.createPR(commitMsg, prBody, getBuildBranch(), getBotAuthorCredsID())
+        deployProperties["${getRepoName()}.pr.link"] = githubscm.createPRWithLabels(commitMsg, prBody, getBuildBranch(), [ 'skip-ci' ] as String[], getBotAuthorCredsID())
     }
 }
 
