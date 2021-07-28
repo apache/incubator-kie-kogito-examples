@@ -71,7 +71,7 @@ public class NotificationResource {
     }
 
     private String formatMessageFromCE(CloudEvent message) throws IOException {
-        final JsonNode jsonNode = mapper.readTree(message.getData());
+        final JsonNode jsonNode = mapper.readTree(message.getData().toBytes());
         return String.format("Heads Up! *%s* event on PR *#%s*, named *%s*", message.getType(), jsonNode.get("number").asText(), jsonNode.get("pull_request").get("title").asText());
     }
 }
