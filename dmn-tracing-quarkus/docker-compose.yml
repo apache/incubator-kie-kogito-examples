@@ -37,7 +37,7 @@ services:
       SERVER_SERVLET_CONTEXTPATH: "/"
 
   infinispan:
-    image: infinispan/server:12.1.4.Final
+    image: infinispan/server:12.1.7.Final
     expose:
       - "11222"
     command: "/opt/infinispan/bin/server.sh -c infinispan-demo.xml"
