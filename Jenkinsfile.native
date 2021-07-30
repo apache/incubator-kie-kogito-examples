@@ -99,7 +99,7 @@ void sendNotification() {
 
 void checkoutKogitoRepo(String repo, String dirName=repo) {
     dir(dirName) {
-        checkout(githubscm.resolveRepository(kogitoRuntimesRepo, params.GIT_AUTHOR, getKogitoTargetBranch(), false))
+        checkout(githubscm.resolveRepository(repo, params.GIT_AUTHOR, getKogitoTargetBranch(), false))
     }
 }
 
@@ -132,13 +132,13 @@ String getTargetBranch(Integer addToMajor) {
 }
 
 void runQuickBuild(String project) {
-    getMavenCommand(project, false, false)
+    getMavenCommand(project)
             .withProperty('quickly')
             .run('clean install')
 }
 
 void runUnitTests(String project, Closure alterMvnCmd = null) {
-    def mvnCmd = getMavenCommand(project)
+    def mvnCmd = getNativeMavenCommand(project)
     if (project == 'optaplanner') {
         mvnCmd.withProperty('enforcer.skip')
             .withProperty('formatter.skip')
@@ -160,14 +160,14 @@ void runIntegrationTests(String project, List profiles=[]) {
     String itFolder = "${project}-it${profileSuffix}"
     sh "cp -r ${project} ${itFolder}"
 
-    runMavenTests(getMavenCommand(itFolder).withProfiles(profiles), 'verify')
+    runMavenTests(getNativeMavenCommand(itFolder).withProfiles(profiles), 'verify')
 }
 
 void runMavenTests(MavenCommand mvnCmd, String mvnRunCmd) {
     try {
         mvnCmd.run(mvnRunCmd)
     } catch (err) {
-        throw err
+        unstable("${mvnRunCmd} did not finish correctly")
     } finally {
         saveReports()
         cleanContainers()
@@ -191,4 +191,8 @@ MavenCommand getNativeMavenCommand(String directory) {
 
 void cleanContainers() {
     cloud.cleanContainersAndImages('docker')
+}
+
+void saveReports(boolean allowEmpty=false) {
+    junit testResults: '**/target/surefire-reports/**/*.xml, **/target/failsafe-reports/**/*.xml', allowEmptyResults: allowEmpty
 }
