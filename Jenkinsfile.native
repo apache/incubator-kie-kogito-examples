@@ -16,7 +16,7 @@ pipeline {
     }
     options {
         timestamps()
-        timeout(time: 360, unit: 'MINUTES')
+        timeout(time: 720, unit: 'MINUTES')
     }
     environment {
         KOGITO_CI_EMAIL_TO = credentials("${JENKINS_EMAIL_CREDS_ID}")
