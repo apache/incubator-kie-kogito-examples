@@ -156,5 +156,49 @@
        </plugins>
      </build>
    </profile>
+    <profile>
+      <id>events</id>
+      <activation>
+        <property>
+          <name>events</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+         <plugin>
+           <artifactId>maven-antrun-plugin</artifactId>
+           <executions>
+             <execution>
+               <id>append-events</id>
+               <phase>generate-sources</phase>
+               <goals>
+                 <goal>run</goal>
+               </goals>
+               <configuration>
+                 <target>
+                   <concat destfile="src/main/resources/application-temp.properties">
+                     <fileset file="src/main/resources/application.properties" />
+                     <fileset file="src/main/resources/events.properties" />
+                   </concat>
+                   <delete file="src/main/resources/application.properties"/>
+                   <move file="src/main/resources/application-temp.properties" tofile="src/main/resources/application.properties"/>
+                 </target>
+               </configuration>
+             </execution>
+           </executions>
+         </plugin>
+        </plugins>
+      </build>
+      <dependencies>
+        <dependency>
+          <groupId>org.kie.kogito</groupId>
+          <artifactId>kogito-addons-quarkus-events-smallrye</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>io.quarkus</groupId>
+          <artifactId>quarkus-smallrye-reactive-messaging-kafka</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
   </profiles>
 </project>

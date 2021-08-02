@@ -4,7 +4,7 @@
 
 This example contains a workflow that performs two consecutive REST invocations defined as functions.  
 The workflow is described using JSON format as defined in the
-[CNCF Serverless Workflow specification](https://github.com/cncf/wg-serverless/tree/master/workflow/spec).
+[CNCF Serverless Workflow specification](https://github.com/cncf/wg-serverless/tree/main/workflow/spec).
 
 The workflow expects a JSON input containing the temperature in Fahrenheits:
 

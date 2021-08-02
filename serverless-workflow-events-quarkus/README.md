@@ -2,7 +2,7 @@
 
 ## Description
 
-This example showcases the use of [Serverless Workflow specification](https://github.com/cncf/wg-serverless/tree/master/workflow/spec) 
+This example showcases the use of [Serverless Workflow specification](https://github.com/cncf/wg-serverless/tree/main/workflow/spec) 
 markup to create a job application decision workflow.
 It also showcases the power of Kogito to create a completely event-driven services example.
 The UI and workflow service communicate only over events (CloudEvents format) that are streamed
