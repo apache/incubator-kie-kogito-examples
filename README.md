@@ -4,8 +4,18 @@ This module contains a number of examples that you can take a look at and try ou
 
 Since Kogito aims at supporting both Quarkus and Spring Boot each example usually provides both type of projects.
 
-- Default branch is `stable`, pointing to the latest released version. 
+- Default branch is `stable`, pointing to the latest released version.
 - **[You can also check all versions by looking at releases.](https://github.com/kiegroup/kogito-examples/releases/latest)**
+
+## Use alternative Quarkus platforms
+
+The Quarkus quickstarts by default currently use the Quarkus core BOM.
+
+If you want to use an alternative BOM when building the Quarkus quickstarts you can override the `quarkus.platform.*` properties. The following example shows how to set `quarkus.platform.artifact-id` to use the quarkus-universe-bom.
+
+```
+mvn -Dquarkus.platform.artifact-id=quarkus-universe-bom clean install
+```
 
 
 ## Contribution
@@ -113,7 +123,7 @@ of how to install the operator to your environment in order to try it there.
 ### Issues
 - Do you have a [minimal, reproducible example](https://stackoverflow.com/help/minimal-reproducible-example) for your issue?
   - If so, please open a Jira for it in the [Kogito project](https://issues.redhat.com/projects/KOGITO/summary) with the details of your issue and example.
-- Are you encountering an issue but unsure of what is going on? 
+- Are you encountering an issue but unsure of what is going on?
   - Start a new conversation in the Kogito [Google Group](https://groups.google.com/g/kogito-development), or open a new thread in the [Kogito stream](https://kie.zulipchat.com/#narrow/stream/232676-kogito) of the KIE Zulip chat.
   - Please provide as much relevant information as you can as to what could be causing the issue, and our developers will help you figure out what's going wrong.
 

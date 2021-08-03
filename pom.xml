@@ -122,7 +122,7 @@
       <modules>
         <module>decisiontable-quarkus-example</module>
         <module>decisiontable-springboot-example</module>
-        <module>dmn-event-driven-quarkus</module>
+        <!-- <module>dmn-event-driven-quarkus</module> -->
         <module>dmn-event-driven-springboot</module>
         <module>dmn-listener-quarkus</module>
         <module>dmn-listener-springboot</module>
@@ -386,7 +386,7 @@
         <plugin>
           <groupId>io.quarkus</groupId>
           <artifactId>quarkus-maven-plugin</artifactId>
-          <version>${version.io.quarkus}</version>
+          <version>${quarkus-plugin.version}</version>
         </plugin>
         <plugin>
           <groupId>org.springframework.boot</groupId>
