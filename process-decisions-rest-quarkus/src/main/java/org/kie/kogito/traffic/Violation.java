@@ -38,6 +38,16 @@ public class Violation {
     @JsonProperty("Actual Speed")
     private BigDecimal actualSpeed;
 
+    public Violation() {
+    }
+
+    public Violation(String type, BigDecimal speedLimit, BigDecimal actualSpeed) {
+        this.type = type;
+        this.speedLimit = speedLimit;
+        this.actualSpeed = actualSpeed;
+        this.date = new Date();
+    }
+
     public String getCode() {
         return code;
     }

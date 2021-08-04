@@ -30,6 +30,6 @@ public class LicenseValidationRestService {
     LicenseValidationRestClient client;
 
     public Driver evaluate(Driver driver) {
-        return client.post(Collections.singletonMap("drivers", Collections.singletonList(driver)));
+        return client.post(Collections.singletonMap("driver", driver));
     }
 }

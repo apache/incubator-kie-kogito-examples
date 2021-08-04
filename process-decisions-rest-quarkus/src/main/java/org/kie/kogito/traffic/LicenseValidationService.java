@@ -18,26 +18,26 @@ package org.kie.kogito.traffic;
 import java.util.Date;
 
 import org.kie.kogito.rules.DataSource;
-import org.kie.kogito.rules.DataStore;
 import org.kie.kogito.rules.RuleUnitData;
+import org.kie.kogito.rules.SingletonStore;
 
 public class LicenseValidationService implements RuleUnitData {
-    private DataStore<Driver> drivers;
-
-    public void setDrivers(DataStore<Driver> drivers) {
-        this.drivers = drivers;
-    }
+    private SingletonStore<Driver> driver;
 
     public LicenseValidationService() {
-        this(DataSource.createStore());
+        this(DataSource.createSingleton());
     }
 
-    public LicenseValidationService(DataStore<Driver> drivers) {
-        this.drivers = drivers;
+    public LicenseValidationService(SingletonStore<Driver> driver) {
+        this.driver = driver;
     }
 
-    public DataStore<Driver> getDrivers() {
-        return drivers;
+    public void setDriver(SingletonStore<Driver> driver) {
+        this.driver = driver;
+    }
+
+    public SingletonStore<Driver> getDriver() {
+        return driver;
     }
 
     public Date getCurrentTime() {

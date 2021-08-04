@@ -15,23 +15,33 @@
  */
 package org.kie.kogito.traffic;
 
-import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+public class TrafficViolationResponse {
 
-import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
+    @JsonProperty("Fine")
+    private Fine fine;
 
-@Path("/Traffic%20Violation")
-@RegisterRestClient
-public interface TrafficViolationRestClient {
+    @JsonProperty("Suspended")
+    private String suspended;
 
-    @POST
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    TrafficViolationResponse post(Map<String, Object> parameters);
+    public Fine getFine() {
+        return fine;
+    }
 
+    public void setFine(Fine fine) {
+        this.fine = fine;
+    }
+
+    public String getSuspended() {
+        return suspended;
+    }
+
+    public Boolean isSuspended() {
+        return "Yes".equals(suspended);
+    }
+
+    public void setSuspended(String suspended) {
+        this.suspended = suspended;
+    }
 }

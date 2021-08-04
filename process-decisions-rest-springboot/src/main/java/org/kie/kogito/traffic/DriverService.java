@@ -18,7 +18,6 @@ package org.kie.kogito.traffic;
 
 import java.time.ZonedDateTime;
 import java.util.Date;
-import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,14 +30,12 @@ public class DriverService {
 
     public Driver getDriver(String driverId) {
         LOGGER.info("Get Driver Information for id = {}", driverId);
-        //Could call an external service, database, etc...
+        //Could call an external service, database, etc.
 
         //Mocking driver details
-        //random expiration
-        int days = new Random().ints(0, 2).findAny().getAsInt();
+        //random expiration based on id, even number will be expired and odd number will be valid
+        long days = Long.parseLong(driverId) % 2;
         Date licenseExpiration = new Date(ZonedDateTime.now().plusDays(days).toInstant().toEpochMilli());
-        //random points
-        int points = new Random().ints(10, 20).findAny().getAsInt();
-        return new Driver(driverId, "Arthur", "SP", "Campinas", points, 30, licenseExpiration);
+        return new Driver(driverId, "Arthur", "SP", "Campinas", 13, 30, licenseExpiration);
     }
 }

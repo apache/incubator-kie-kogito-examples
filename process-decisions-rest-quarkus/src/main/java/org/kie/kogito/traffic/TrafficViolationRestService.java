@@ -30,8 +30,8 @@ public class TrafficViolationRestService {
     @RestClient
     TrafficViolationRestClient client;
 
-    public String evaluate(Driver driver, Violation violation) {
-        return String.valueOf(client.post(toMap(driver, violation)).get("Suspended"));
+    public TrafficViolationResponse evaluate(Driver driver, Violation violation) {
+        return client.post(toMap(driver, violation));
     }
 
     public Map<String, Object> toMap(Driver driver, Violation violation) {
