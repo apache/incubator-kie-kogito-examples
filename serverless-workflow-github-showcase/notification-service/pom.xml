@@ -28,7 +28,6 @@
     <dependency>
       <groupId>io.cloudevents</groupId>
       <artifactId>cloudevents-http-restful-ws</artifactId>
-      <version>${version.cloudevents}</version>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
