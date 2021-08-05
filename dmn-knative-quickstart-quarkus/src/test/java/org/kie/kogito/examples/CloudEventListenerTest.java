@@ -22,17 +22,17 @@ import javax.ws.rs.core.MediaType;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tomakehurst.wiremock.WireMockServer;
+import com.github.tomakehurst.wiremock.matching.EqualToPattern;
 
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.RestAssured;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
+import static com.github.tomakehurst.wiremock.client.WireMock.matchingJsonPath;
 import static com.github.tomakehurst.wiremock.client.WireMock.post;
 import static com.github.tomakehurst.wiremock.client.WireMock.postRequestedFor;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
@@ -44,7 +44,9 @@ import static org.awaitility.Awaitility.await;
 @QuarkusTest
 public class CloudEventListenerTest {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CloudEventListenerTest.class);
+    private static final String KOGITO_MODEL_NAME = "Traffic Violation";
+    private static final String KOGITO_MODEL_NAMESPACE = "https://github.com/kiegroup/drools/kie-dmn/_A4BCA8B8-CF08-433F-93B2-A2598F19ECFF";
+
     private static WireMockServer sink;
 
     static {
@@ -76,8 +78,8 @@ public class CloudEventListenerTest {
                 .header("ce-id", "000")
                 .header("ce-source", "/from/test")
                 .header("ce-type", "DecisionRequest")
-                .header("ce-kogitodmnmodelname", "Traffic Violation")
-                .header("ce-kogitodmnmodelnamespace", "https://github.com/kiegroup/drools/kie-dmn/_A4BCA8B8-CF08-433F-93B2-A2598F19ECFF")
+                .header("ce-kogitodmnmodelname", KOGITO_MODEL_NAME)
+                .header("ce-kogitodmnmodelnamespace", KOGITO_MODEL_NAMESPACE)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(new ObjectMapper().writeValueAsString(decisionInput)).post("/").then().statusCode(200);
 
@@ -85,6 +87,11 @@ public class CloudEventListenerTest {
                 .atLeast(2, SECONDS)
                 .atMost(10, SECONDS)
                 .with().pollInterval(2, SECONDS)
-                .untilAsserted(() -> sink.verify(1, postRequestedFor(urlEqualTo("/"))));
+                .untilAsserted(() -> sink.verify(1, postRequestedFor(urlEqualTo("/"))
+                        .withRequestBody(matchingJsonPath("$.specversion", new EqualToPattern("1.0")))
+                        .withRequestBody(matchingJsonPath("$.source", new EqualToPattern(KOGITO_MODEL_NAME.replace(" ", "+"))))
+                        .withRequestBody(matchingJsonPath("$.type", new EqualToPattern("DecisionResponse")))
+                        .withRequestBody(matchingJsonPath("$.kogitodmnmodelnamespace", new EqualToPattern(KOGITO_MODEL_NAMESPACE)))
+                        .withRequestBody(matchingJsonPath("$.kogitodmnmodelname", new EqualToPattern(KOGITO_MODEL_NAME)))));
     }
 }
