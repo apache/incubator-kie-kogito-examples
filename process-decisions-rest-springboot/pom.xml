@@ -31,7 +31,15 @@
 
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-springboot-starter</artifactId>
+      <artifactId>kogito-processes-spring-boot-starter</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-decisions-spring-boot-starter</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-predictions-spring-boot-starter</artifactId>
     </dependency>
 
     <!-- REST WIH to call DMN -->
@@ -39,16 +47,16 @@
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-rest-workitem</artifactId>
     </dependency>
-<!--    <dependency>-->
-<!--      <groupId>io.smallrye.reactive</groupId>-->
-<!--      <artifactId>smallrye-mutiny-vertx-web-client</artifactId>-->
-<!--      <version>2.7.0</version>-->
-<!--    </dependency>-->
 
     <!--Tests -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.rest-assured</groupId>
+      <artifactId>rest-assured</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -73,6 +81,16 @@
         <artifactId>kogito-maven-plugin</artifactId>
         <version>${kogito.version}</version>
         <extensions>true</extensions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <version>${version.surefire.plugin}</version>
+        <configuration>
+          <systemPropertyVariables>
+            <java.util.logging.manager>java.util.logging.LogManager</java.util.logging.manager>
+          </systemPropertyVariables>
+        </configuration>
       </plugin>
     </plugins>
   </build>

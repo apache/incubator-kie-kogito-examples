@@ -19,7 +19,7 @@ unit LicenseValidationService
 
 rule "Is driver license valid"
 when            
-    $driver: /drivers[licenseExpiration.after(currentTime)]
+    $driver: /driver[licenseExpiration.after(currentTime)]
 then
     modify($driver) { 
     	setValidLicense(true);
@@ -28,7 +28,7 @@ end
 
 rule "Is driver license expired"
 when            
-    $driver: /drivers[licenseExpiration.before(currentTime)]
+    $driver: /driver[licenseExpiration.before(currentTime)]
 then
     modify($driver) { 
     	setValidLicense(false);
@@ -36,5 +36,5 @@ then
 end
 
 query "validation"
-  $driver : /drivers
+  $driver : /driver
 end

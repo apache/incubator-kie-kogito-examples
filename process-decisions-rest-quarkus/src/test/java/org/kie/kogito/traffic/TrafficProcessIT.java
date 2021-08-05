@@ -15,9 +15,6 @@
  */
 package org.kie.kogito.traffic;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.is;
-
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,16 +24,26 @@ import org.junit.jupiter.api.Test;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
 
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.is;
+
 @QuarkusTest
-public class TrafficTest {
+public class TrafficProcessIT {
 
     public static final BigDecimal SPEED_LIMIT = new BigDecimal(100);
 
     @Test
-    public void testTrafficViolationEmbeddedDecision() {
-        testTrafficProcess("traffic", "12345", 120d, "No", true);
-        testTrafficProcess("traffic", "12345", 140d, "Yes", true);
-        testTrafficProcess("traffic", "1234", 140d, null, false);
+    public void testTrafficViolationRestWIHDecision() {
+        testTrafficProcess("traffic_wih", "12345", 120d, "No", true);
+        testTrafficProcess("traffic_wih", "12345", 140d, "Yes", true);
+        testTrafficProcess("traffic_wih", "1234", 140d, null, false);
+    }
+
+    @Test
+    public void testTrafficViolationRestServiceDecision() {
+        testTrafficProcess("traffic_service", "12345", 120d, "No", true);
+        testTrafficProcess("traffic_service", "12345", 140d, "Yes", true);
+        testTrafficProcess("traffic_service", "1234", 140d, null, false);
     }
 
     private void testTrafficProcess(String processId, String driverId, Double speed, String suspended, Boolean validLicense) {
@@ -50,7 +57,7 @@ public class TrafficTest {
                 .post("/" + processId)
                 .then()
                 .statusCode(201)
-                .body("suspended", is(suspended))
+                .body("trafficViolationResponse.Suspended", is(suspended))
                 .body("driver.validLicense", is(validLicense));
     }
 }

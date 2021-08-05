@@ -19,31 +19,39 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.server.LocalServerPort;
 
-import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
 
-@QuarkusTest
-public class TrafficTest {
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoApplication.class)
+public class TrafficProcessIT {
 
     public static final BigDecimal SPEED_LIMIT = new BigDecimal(100);
 
-    @Test
-    public void testTrafficViolationEmbeddedDecision() {
-        testTrafficProcess("traffic_wih", "12345", 120d, "No", true);
-        testTrafficProcess("traffic_wih", "12345", 140d, "Yes", true);
-        testTrafficProcess("traffic_wih", "1234", 140d, null, false);
+    static {
+        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+    }
+
+    @LocalServerPort
+    int randomServerPort;
+
+    @BeforeEach
+    public void setup() {
+        RestAssured.port = randomServerPort;
     }
 
     @Test
-    public void testTrafficViolationRestServiceDecision() {
-        testTrafficProcess("traffic_service", "12345", 120d, "No", true);
-        testTrafficProcess("traffic_service", "12345", 140d, "Yes", true);
-        testTrafficProcess("traffic_service", "1234", 140d, null, false);
+    public void testTrafficViolationEmbeddedDecision() {
+        testTrafficProcess("traffic", "12345", 120d, "No", true);
+        testTrafficProcess("traffic", "12345", 140d, "Yes", true);
+        testTrafficProcess("traffic", "1234", 140d, null, false);
     }
 
     private void testTrafficProcess(String processId, String driverId, Double speed, String suspended, Boolean validLicense) {
@@ -57,7 +65,7 @@ public class TrafficTest {
                 .post("/" + processId)
                 .then()
                 .statusCode(201)
-                .body("trafficViolationResponse.Suspended", is(suspended))
+                .body("suspended", is(suspended))
                 .body("driver.validLicense", is(validLicense));
     }
 }

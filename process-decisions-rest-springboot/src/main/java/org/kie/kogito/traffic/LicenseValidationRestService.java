@@ -35,7 +35,7 @@ public class LicenseValidationRestService {
 
     @Autowired
     public LicenseValidationRestService(@Value("${license.validation.url}") String url) {
-        uri = UriComponentsBuilder.fromHttpUrl(url)
+        uri = UriComponentsBuilder.fromUriString(url)
                 .path("/validation/first")
                 .build()
                 .toUri();
@@ -44,6 +44,6 @@ public class LicenseValidationRestService {
     public Driver evaluate(Driver driver) {
         return new RestTemplateBuilder()
                 .build()
-                .postForObject(uri, Collections.singletonMap("drivers", Collections.singletonList(driver)), Driver.class);
+                .postForObject(uri, Collections.singletonMap("driver", driver), Driver.class);
     }
 }

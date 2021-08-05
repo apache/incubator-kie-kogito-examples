@@ -22,16 +22,19 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import io.vertx.mutiny.core.Vertx;
 
 @Service
 public class TrafficViolationRestService {
 
-    //    @Bean
-    //    public Vertx vertx() {
-    //        return Vertx.vertx();
-    //    }
+    @Bean
+    public Vertx vertx() {
+        return Vertx.vertx();
+    }
 
     private final URI uri;
 
@@ -41,17 +44,16 @@ public class TrafficViolationRestService {
 
     @Autowired
     public TrafficViolationRestService(@Value("${traffic.violation.url}") String url) {
-        uri = UriComponentsBuilder.fromHttpUrl(url)
-                .path("/Traffic%20Violation")
+        uri = UriComponentsBuilder.fromUriString(url)
+                .path("/Traffic Violation")
                 .build()
                 .toUri();
     }
 
-    public String evaluate(Driver driver, Violation violation) {
-        return String.valueOf(new RestTemplateBuilder()
+    public TrafficViolationResponse evaluate(Driver driver, Violation violation) {
+        return new RestTemplateBuilder()
                 .build()
-                .postForObject(uri, toMap(driver, violation), Map.class)
-                .get("Suspended"));
+                .postForObject(uri, toMap(driver, violation), TrafficViolationResponse.class);
     }
 
     public Map<String, Object> toMap(Driver driver, Violation violation) {
