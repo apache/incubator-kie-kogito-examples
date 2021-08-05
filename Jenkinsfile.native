@@ -45,13 +45,6 @@ pipeline {
                 }
             }
         }
-        stage('Examples Build&Test') {
-            steps {
-                script {
-                    runUnitTests(kogitoExamplesRepo)
-                }
-            }
-        }
         stage('Examples Integration Tests') {
             steps {
                 script {
@@ -135,24 +128,6 @@ void runQuickBuild(String project) {
     getMavenCommand(project)
             .withProperty('quickly')
             .run('clean install')
-}
-
-void runUnitTests(String project, Closure alterMvnCmd = null) {
-    def mvnCmd = getNativeMavenCommand(project)
-    if (project == 'optaplanner') {
-        mvnCmd.withProperty('enforcer.skip')
-            .withProperty('formatter.skip')
-            .withProperty('impsort.skip')
-            .withProperty('revapi.skip')
-    } else {
-        mvnCmd.withProperty('quickTests')
-    }
-
-    if (alterMvnCmd) {
-        alterMvnCmd(mvnCmd)
-    }
-
-    runMavenTests(mvnCmd, 'clean install')
 }
 
 void runIntegrationTests(String project, List profiles=[]) {
