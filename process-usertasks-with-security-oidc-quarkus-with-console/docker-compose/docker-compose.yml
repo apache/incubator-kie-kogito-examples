@@ -3,7 +3,7 @@ version: '2.1'
 services:
 
   infinispan:
-    image: infinispan/server:12.1.4.Final
+    image: infinispan/server:12.1.7.Final
     container_name: infinispan
     ports:
       - 11222:11222
@@ -103,8 +103,8 @@ services:
     volumes:
       - ./svg/:/home/kogito/data/svg/
     environment:
-      KOGITO_DATAINDEX_HTTP_URL: http://${DOCKER_GATEWAY_HOST}:8180
-      KOGITO_MANAGEMENT_CONSOLE_PROPS: -Dquarkus.profile=keycloak -D%keycloak.quarkus.oidc.auth-server-url=http://${DOCKER_GATEWAY_HOST}:8480/auth/realms/kogito -Dkogito.svg.folder.path=/home/kogito/data/svg
+      KOGITO_DATAINDEX_HTTP_URL: http://${DOCKER_GATEWAY_HOST}:8180/graphql
+      KOGITO_MANAGEMENT_CONSOLE_PROPS: -Dkogito.consoles.keycloak.config.url=http://${DOCKER_GATEWAY_HOST}:8480/auth -Dkogito.consoles.keycloak.config.health-check-url=http://${DOCKER_GATEWAY_HOST}:8480/auth/realms/kogito/.well-known/openid-configuration -Dkogito.svg.folder.path=/home/kogito/data/svg
 
   task-console:
     container_name: task-console
@@ -117,4 +117,5 @@ services:
       keycloak:
         condition: service_healthy
     environment:
-      KOGITO_TASK_CONSOLE_PROPS: -Dquarkus.profile=keycloak -D%keycloak.quarkus.oidc.auth-server-url=http://${DOCKER_GATEWAY_HOST}:8480/auth/realms/kogito
+      KOGITO_DATAINDEX_HTTP_URL: http://${DOCKER_GATEWAY_HOST}:8180/graphql
+      KOGITO_TASK_CONSOLE_PROPS: -Dkogito.consoles.keycloak.config.url=http://${DOCKER_GATEWAY_HOST}:8480/auth -Dkogito.consoles.keycloak.config.health-check-url=http://${DOCKER_GATEWAY_HOST}:8480/auth/realms/kogito/.well-known/openid-configuration

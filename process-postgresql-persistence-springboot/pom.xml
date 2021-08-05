@@ -15,28 +15,17 @@
 
   <dependencyManagement>
     <dependencies>
-      <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-dependencies</artifactId>
-        <version>${version.org.springframework.boot}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.kie.kogito</groupId>
-        <artifactId>kogito-bom</artifactId>
-        <version>${kogito.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
+    <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-springboot-bom</artifactId>
+      <version>${project.version}</version>
+      <type>pom</type>
+      <scope>import</scope>
+    </dependency>
     </dependencies>
   </dependencyManagement>
 
   <dependencies>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter</artifactId>
-    </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
@@ -45,7 +34,7 @@
     <!-- kogito -->
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-springboot-starter</artifactId>
+      <artifactId>kogito-processes-spring-boot-starter</artifactId>
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
@@ -170,5 +159,45 @@
        </plugins>
      </build>
    </profile>
+    <profile>
+      <id>events</id>
+      <activation>
+        <property>
+          <name>events</name>
+        </property>
+      </activation>
+      <dependencies>
+        <dependency>
+          <groupId>org.kie.kogito</groupId>
+          <artifactId>kogito-addons-springboot-events-kafka</artifactId>
+        </dependency>
+      </dependencies>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>append-events</id>
+                <phase>generate-sources</phase>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+                <configuration>
+                   <target>
+                    <concat destfile="src/main/resources/application-temp.properties">
+                      <fileset file="src/main/resources/application.properties" />
+                      <fileset file="src/main/resources/events.properties" />
+                    </concat>
+                    <delete file="src/main/resources/application.properties"/>
+                    <move file="src/main/resources/application-temp.properties" tofile="src/main/resources/application.properties"/>
+                  </target>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
   </profiles>
 </project>

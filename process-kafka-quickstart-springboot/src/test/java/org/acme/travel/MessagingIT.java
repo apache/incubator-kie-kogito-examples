@@ -89,7 +89,7 @@ public class MessagingIT {
                 .mapToObj(i -> new Traveller("Name" + i, "LastName" + i, "email" + i, "Nationality" + i))
                 .forEach(traveller -> kafkaClient.produce(generateCloudEvent(traveller), TOPIC_PRODUCER));
 
-        countDownLatch.await(5, TimeUnit.SECONDS);
+        countDownLatch.await(10, TimeUnit.SECONDS);
         assertEquals(0, countDownLatch.getCount());
     }
 

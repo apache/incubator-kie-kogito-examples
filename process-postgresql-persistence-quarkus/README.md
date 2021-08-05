@@ -58,8 +58,8 @@ It utilizes PostgreSQL server as the backend store.
 ## Infrastructure requirements
 
 This quickstart requires a PostgreSQL server to be available with a database, a user and credentials already created
-, these configurations should then be set in the connection URI parameter in [applications.properties](src/main/resources/application.properties) file with the key
- `kogito.persistence.postgresql.connection.uri`, i.e `postgresql.connection.uri=postgresql://kogito-user:kogito-pass@localhost:5432/kogito` here are the [full settings for URI](https://www.postgresql.org/docs/9.6/static/libpq-connect.html#LIBPQ-CONNSTRING)    
+, these configurations should then be set in the data source URL parameter in [applications.properties](src/main/resources/application.properties) file with the key
+ `quarkus.datasource.reactive.url`, i.e `quarkus.datasource.reactive.url=postgresql://localhost:5432/kogito` here are the [full settings for URI](https://quarkus.io/guides/reactive-sql-clients#reactive-datasource)
  
 You must set the property `kogito.persistence.type=postgresql` to enable PostgreSQL persistence. There is also a
 configuration to allow the application to run DDL scripts during the initialization, which you can enable with the
@@ -102,6 +102,24 @@ mvn clean compile quarkus:dev
 NOTE: With dev mode of Quarkus you can take advantage of hot reload for business assets like processes, rules, decision tables and java code. No need to redeploy or restart your running application.
 
 Once PostgreSQL is up and running you can build this project with -Ppersistence OR -Pjdbc-persistence in an exact same way as without persistence. These extra profile in maven configuration add additional dependencies needed to work with Postgres as persistent store using Reactive or JDBC based postgres clients.
+
+Kogito runtimes need to be able to safely handle concurrent requests to shared instances such as process instances, tasks, etc.
+This feature is optional and can be pluggable with persistence using the following property and value to the src/main/resources/application.properties file.
+
+```
+kogito.persistence.optimistic.lock=true 
+```
+Additionally, you can use below commands to set this property at runtime and build and run the application 
+
+```
+mvn clean compile quarkus:dev -Dkogito.persistence.optimistic.lock=true -Ppersistence
+```
+or 
+
+```
+mvn clean package -Ppersistence
+java -Dkogito.persistence.optimistic.lock=true -jar target/quarkus-app/quarkus-run.jar
+```
 
 ### Package and Run in JVM mode
 

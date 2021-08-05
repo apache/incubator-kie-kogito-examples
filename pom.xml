@@ -45,7 +45,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <!-- kogito -->
     <kogito.version>${project.version}</kogito.version>
-    <version.org.optaplanner>8.10.0-SNAPSHOT</version.org.optaplanner>
+    <version.org.optaplanner>8.11.0-SNAPSHOT</version.org.optaplanner>
     <!-- override default to fast-jar packaging for forward-compatibility -->
     <quarkus.package.type>fast-jar</quarkus.package.type>
   </properties>
@@ -280,6 +280,7 @@
         <module>process-knative-quickstart-quarkus</module>
         <module>process-mongodb-persistence-quarkus</module>
         <module>process-optaplanner-quarkus</module>
+        <module>process-postgresql-persistence-quarkus</module>
         <module>process-quarkus-example</module>
         <module>process-scripts-quarkus</module>
         <module>process-service-calls-quarkus</module>
@@ -367,7 +368,6 @@
         <module>ruleunit-springboot-example</module>
         <module>serverless-workflow-greeting-springboot</module>
         <module>serverless-workflow-service-calls-springboot</module>
-
       </modules>
     </profile>
   </profiles>

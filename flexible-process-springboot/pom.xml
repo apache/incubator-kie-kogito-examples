@@ -13,21 +13,12 @@
   <name>Kogito Example :: Flexible process with Spring Boot</name>
   <description>Kogito service invocation - Spring Boot</description>
 
-  
-
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-dependencies</artifactId>
-        <version>${version.org.springframework.boot}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <dependency>
         <groupId>org.kie.kogito</groupId>
-        <artifactId>kogito-bom</artifactId>
-        <version>${kogito.version}</version>
+        <artifactId>kogito-springboot-bom</artifactId>
+        <version>${project.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -35,10 +26,6 @@
   </dependencyManagement>
 
   <dependencies>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter</artifactId>
-    </dependency>
 
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -48,9 +35,8 @@
     <!-- kogito -->
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-springboot-starter</artifactId>
+      <artifactId>kogito-processes-spring-boot-starter</artifactId>
     </dependency>
-
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>

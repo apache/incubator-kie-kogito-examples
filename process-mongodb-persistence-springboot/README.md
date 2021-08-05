@@ -88,6 +88,12 @@ mvn clean package spring-boot:run
 
 NOTE: With dev mode of Quarkus you can take advantage of hot reload for business assets like processes, rules, decision tables and java code. No need to redeploy or restart your running application.
 
+Kogito runtimes need to be able to safely handle concurrent requests to shared instances such as process instances, tasks, etc. This feature is optional and can be pluggable with persistence using the following property and value to the src/main/resources/application.properties file.
+
+```
+kogito.persistence.optimistic.lock=true 
+```
+Additionally, you can build this project with -PpersistenceWithLock  profile to run with persistence and lock on.
 
 ### Compile and Run using uberjar
 

@@ -62,7 +62,7 @@ Once all services bootstrap, the following ports will be assigned on your local 
 - Task Console: 8380
 - Keycloak server: 8480
 
-> **_NOTE:_**  This step requires the project to be compiled, please consider running a ```mvn clean compile``` command on the project root before running the ```startServices.sh``` script for the first time or any time you modify the project.
+> **_NOTE:_**  This step requires the project to be compiled, please consider running a ```mvn clean install``` command on the project root before running the ```startServices.sh``` script for the first time or any time you modify the project.
 
 Once started you can simply stop all services by executing the ```docker-compose stop```.
 
@@ -177,7 +177,7 @@ To access the Kogito Task Console just open your browser and navigate to ``http:
     <img width=75%  src="docs/images/keycloak-login.png">
 </p>
 
-Once there, log in with an *managers* user (for example *admin*) and you should be redirected to the user **Task Inbox**:
+Once there, log in with an *managers* user (for example *jdoe*) and you should be redirected to the user **Task Inbox**:
 
 <p align="center">
     <img width=75%  src="docs/images/task-console.png">

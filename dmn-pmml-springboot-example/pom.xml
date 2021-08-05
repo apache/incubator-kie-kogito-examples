@@ -15,15 +15,8 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-dependencies</artifactId>
-        <version>${version.org.springframework.boot}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <dependency>
         <groupId>org.kie.kogito</groupId>
-        <artifactId>kogito-bom</artifactId>
+        <artifactId>kogito-springboot-bom</artifactId>
         <version>${project.version}</version>
         <type>pom</type>
         <scope>import</scope>
@@ -34,18 +27,18 @@
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
     </dependency>
 
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-springboot-starter</artifactId>
+      <artifactId>kogito-decisions-spring-boot-starter</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-predictions-spring-boot-starter</artifactId>
+    </dependency>
+
 
     <!-- PMML -->
     <dependency>

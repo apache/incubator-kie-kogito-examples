@@ -2,7 +2,7 @@
 
 import org.kie.jenkins.MavenCommand
 
-changeAuthor = env.ghprbPullAuthorLogin ?: CHANGE_AUTHOR
+changeAuthor = env.ghprbAuthorRepoGitUrl ? util.getGroup(env.ghprbAuthorRepoGitUrl) : (env.ghprbPullAuthorLogin ?: CHANGE_AUTHOR)
 changeBranch = env.ghprbSourceBranch ?: CHANGE_BRANCH
 changeTarget = env.ghprbTargetBranch ?: CHANGE_TARGET
 
@@ -207,7 +207,7 @@ boolean isUpstreamOptaplannerProject() {
 }
 
 Integer getTimeoutValue() {
-    return isNative() ? 600 : 180
+    return isNative() ? 600 : 240
 }
 
 void runQuickBuild(String project) {

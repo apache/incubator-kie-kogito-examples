@@ -2,11 +2,11 @@ Many thanks for submitting your Pull Request :heart:!
 
 Please make sure that your PR meets the following requirements:
 
-**WARNING! Please make sure you are opening your PR against `master` branch!**
+**WARNING! Please make sure you are opening your PR against `main` branch!**
 
 - [ ] You have read the [contributors guide](https://github.com/kiegroup/kogito-runtimes#contributing-to-kogito)
 - [ ] Pull Request title is properly formatted: `KOGITO-XYZ Subject`
-- [ ] Pull Request title contains the target branch if not targeting master: `[0.9.x] KOGITO-XYZ Subject`
+- [ ] Pull Request title contains the target branch if not targeting main: `[0.9.x] KOGITO-XYZ Subject`
 - [ ] Pull Request contains link to the JIRA issue
 - [ ] Pull Request contains link to any dependent or related Pull Request
 - [ ] Pull Request contains description of the issue

@@ -8,7 +8,6 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - ${HOME}/postgresql/data:/var/lib/postgresql/data
       - ./sql:/docker-entrypoint-initdb.d/
     networks:
       - postgres-compose-network

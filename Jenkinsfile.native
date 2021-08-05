@@ -1,0 +1,208 @@
+@Library('jenkins-pipeline-shared-libraries')_
+
+import org.kie.jenkins.MavenCommand
+
+kogitoRuntimesRepo = 'kogito-runtimes'
+optaplannerRepo = 'optaplanner'
+kogitoExamplesRepo = 'kogito-examples'
+
+pipeline {
+    agent {
+        label 'kie-rhel7 && kie-mem16g'
+    }
+    tools {
+        maven 'kie-maven-3.6.2'
+        jdk 'kie-jdk11'
+    }
+    options {
+        timestamps()
+        timeout(time: 720, unit: 'MINUTES')
+    }
+    environment {
+        KOGITO_CI_EMAIL_TO = credentials("${JENKINS_EMAIL_CREDS_ID}")
+    }
+    stages {
+        stage('Initialize') {
+            steps {
+                script {
+                    checkoutKogitoRepo(kogitoRuntimesRepo)
+                    checkoutOptaplannerRepo()
+                    checkoutKogitoRepo(kogitoExamplesRepo)
+                }
+            }
+        }
+        stage('Build Runtimes') {
+            steps {
+                script {
+                    runQuickBuild(kogitoRuntimesRepo)
+                }
+            }
+        }
+        stage('Build Optaplanner') {
+            steps {
+                script {
+                    runQuickBuild(optaplannerRepo)
+                }
+            }
+        }
+        stage('Examples Build&Test') {
+            steps {
+                script {
+                    runUnitTests(kogitoExamplesRepo)
+                }
+            }
+        }
+        stage('Examples Integration Tests') {
+            steps {
+                script {
+                    runIntegrationTests(kogitoExamplesRepo)
+                }
+            }
+        }
+        stage('Examples Integration Tests with persistence') {
+            steps {
+                script {
+                    runIntegrationTests(kogitoExamplesRepo, ['persistence'])
+                }
+            }
+        }
+        stage('Examples Integration Tests with events') {
+            steps {
+                script {
+                    runIntegrationTests(kogitoExamplesRepo, ['events'])
+                }
+            }
+        }
+    }
+    post {
+        unsuccessful {
+            sendNotification()
+        }
+        always {
+            script {
+                junit '**/target/surefire-reports/**/*.xml, **/target/failsafe-reports/**/*.xml'
+            }
+        }
+        cleanup {
+            script {
+                util.cleanNode('docker')
+            }
+        }
+    }
+}
+
+void sendNotification() {
+    emailext body: "**${NOTIFICATION_JOB_NAME}** #${BUILD_NUMBER} was: ${currentBuild.currentResult}\nPlease look here: ${BUILD_URL}",
+             subject: "[${params.BUILD_BRANCH_NAME}] Kogito Examples",
+             to: env.KOGITO_CI_EMAIL_TO
+}
+
+void checkoutKogitoRepo(String repo, String dirName=repo) {
+    dir(dirName) {
+        checkout(githubscm.resolveRepository(repo, params.GIT_AUTHOR, getKogitoTargetBranch(), false))
+    }
+}
+
+void checkoutOptaplannerRepo() {
+    dir('optaplanner') {
+        checkout(githubscm.resolveRepository(optaplannerRepo, params.GIT_AUTHOR, getOptaplannerTargetBranch(), false))
+    }
+}
+
+String getKogitoTargetBranch() {
+    return getTargetBranch(0)
+}
+
+String getOptaplannerTargetBranch() {
+    return getTargetBranch(7)
+}
+
+String getTargetBranch(Integer addToMajor) {
+    String targetBranch = params.BUILD_BRANCH_NAME
+    String [] versionSplit = targetBranch.split("\\.")
+    if (versionSplit.length == 3
+        && versionSplit[0].isNumber()
+        && versionSplit[1].isNumber()
+        && versionSplit[2] == 'x') {
+        targetBranch = "${Integer.parseInt(versionSplit[0]) + addToMajor}.${versionSplit[1]}.x"
+    } else {
+        echo "Cannot parse targetBranch as release branch so going further with current value: ${targetBranch}"
+        }
+    return targetBranch
+}
+
+void runQuickBuild(String project) {
+    getMavenCommand(project)
+            .withProperty('quickly')
+            .run('clean install')
+}
+
+void runUnitTests(String project, Closure alterMvnCmd = null) {
+    def mvnCmd = getNativeMavenCommand(project)
+    if (project == 'optaplanner') {
+        mvnCmd.withProperty('enforcer.skip')
+            .withProperty('formatter.skip')
+            .withProperty('impsort.skip')
+            .withProperty('revapi.skip')
+    } else {
+        mvnCmd.withProperty('quickTests')
+    }
+
+    if (alterMvnCmd) {
+        alterMvnCmd(mvnCmd)
+    }
+
+    runMavenTests(mvnCmd, 'clean install')
+}
+
+void runIntegrationTests(String project, List profiles=[]) {
+    String profileSuffix = profiles ? "-${profiles.join('-')}" : ''
+    String itFolder = "${project}-it${profileSuffix}"
+    sh "cp -r ${project} ${itFolder}"
+
+    runMavenTests(getNativeMavenCommand(itFolder).withProfiles(profiles), 'verify')
+}
+
+void runMavenTests(MavenCommand mvnCmd, String mvnRunCmd) {
+    try {
+        mvnCmd.run(mvnRunCmd)
+    } catch (err) {
+        unstable("${mvnRunCmd} did not finish correctly")
+    } finally {
+        saveReports()
+        cleanContainers()
+    }
+}
+
+MavenCommand getMavenCommand(String directory) {
+    return new MavenCommand(this, ['-fae'])
+                .withSettingsXmlId('kogito_release_settings')
+                .withProperty('java.net.preferIPv4Stack', true)
+                .inDirectory(directory)
+}
+
+MavenCommand getNativeMavenCommand(String directory, String builderImage = getNativeBuilderImage()) {
+    def mvnCmd = getMavenCommand(directory)
+                .withProfiles(['native'])
+                .withProperty('quarkus.native.container-build', true)
+                .withProperty('quarkus.native.container-runtime', 'docker')
+                .withProperty('quarkus.profile', 'native') // Added due to https://github.com/quarkusio/quarkus/issues/13341
+    
+    if (builderImage) {
+        mvnCmd.withProperty('quarkus.native.builder-image', builderImage)
+    }
+
+    return mvnCmd
+}
+
+void cleanContainers() {
+    cloud.cleanContainersAndImages('docker')
+}
+
+void saveReports(boolean allowEmpty=false) {
+    junit testResults: '**/target/surefire-reports/**/*.xml, **/target/failsafe-reports/**/*.xml', allowEmptyResults: allowEmpty
+}
+
+String getNativeBuilderImage() {
+    return params.NATIVE_BUILDER_IMAGE
+}
