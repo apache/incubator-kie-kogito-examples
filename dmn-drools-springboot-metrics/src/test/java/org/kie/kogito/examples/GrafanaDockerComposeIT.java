@@ -105,10 +105,10 @@ public class GrafanaDockerComposeIT {
                 .get("/api/search")
                 .then()
                 .statusCode(200)
-                .body("title", hasItem(String.format("%s:%s - hello - Operational Dashboard", PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
-                .body("title", hasItem(String.format("%s:%s - LoanEligibility - Domain Dashboard", PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
-                .body("title", hasItem(String.format("%s:%s - Hello - Domain Dashboard", PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
-                .body("title", hasItem(String.format("%s:%s - LoanEligibility - Operational Dashboard", PROJECT_ARTIFACT_ID, PROJECT_VERSION)));
+                .body("title", hasItem(String.format("%s_%s - hello - Operational Dashboard", PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
+                .body("title", hasItem(String.format("%s_%s - LoanEligibility - Domain Dashboard", PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
+                .body("title", hasItem(String.format("%s_%s - Hello - Domain Dashboard", PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
+                .body("title", hasItem(String.format("%s_%s - LoanEligibility - Operational Dashboard", PROJECT_ARTIFACT_ID, PROJECT_VERSION)));
     }
 
     @Test
