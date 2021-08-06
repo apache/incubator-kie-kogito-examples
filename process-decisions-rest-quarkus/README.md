@@ -1,52 +1,77 @@
-# Process with Business Rules
+# Process with Decisions Integration through REST
 
 ## Description
 
-A quickstart project that shows the use of business rules and processes
+This is an example project that shows the usage of decisions within processes. Decisions can be expressed in different domains or assets, such as DMN and DRL. 
+The focus is to show how to integrate decisions in a remote way using REST APIs from the decision services that can be deployed decoupled from the process service, for instance, in different microservices with its own build and deployment pipelines. For convenience, in this example,  the decision assets are under the same project as the process, but in a real use case it would be ideal they are placed in a different project.
 
-This example shows
+This example covers the following items:
 
-* make use of DRL to define rules
-* make use of business rules task in the process to evaluate rules
+* DMN to define a decision service
+* DRL to define rules decision service
+* How to integrate the process with decisions using REST
+    * Service Task to call an external decision service
+    * REST Work Item to call an external decision service
+
+### The Traffic Process example:
+
+It is based on traffic violation evaluation process, where it is required to fetch Driver information, and based on this, it is first performed the license validation to check if the driver has a valid license (using a RuleUnit in a DRL) after the license validation it is then executed the violation evaluation defined as a DMN decision and following, it is checked in the process if the output contains information whether the driver was suspended or not, completing the process.
+
+There are two examples to show different approaches to do integration with decisions, they are pretty similar from the process definition perspective, the difference in related to the task that performs the call to the decision evaluation, either using a Service Task or a Rest Work item.
+
+* Process using Service Tasks
+![Traffic Process](docs/images/process.png)
+In this apporach it requires to have an implementation in the application to execute the task, that in this case is a REST/HTTP call. The implementation is up to the user, in this example we are using what the platform provides, like the [Quarkus REST Client](https://quarkus.io/guides/rest-client). See [LicenseValidationRestClient](src/main/java/org/kie/kogito/traffic/LicenseValidationRestClient.java) and [LicenseValidationRestClient](src/main/java/org/kie/kogito/traffic/TrafficViolationRestClient.java).
+
+* Process using REST Work Item
+![Traffic Process](docs/images/process.png)
+This is a declarative apporach, it does not require to have any extra implementation, the REST/HTTP call is executed out-of-the-box by the engine. The information needed to execute the REST call, like the URL and HTTP method should be set in the Data Assignments in the REST Work Item.
 
 
-<p align="center"><img width=75% height=50% src="docs/images/process.png"></p>
+* #### Process Properties
+![Process Properties](docs/images/diagramProperties.png)
 
-* Diagram Properties (top)
-<p align="center"><img src="docs/images/diagramProperties.png"></p>
+These are the properties defined for the process, the most important one in this section to pay attention is the ID beause it is used in the REST end point generation reffering to the path to interact with this process.
 
-* Diagram Properties (bottom)
-<p align="center"><img src="docs/images/diagramProperties2.png"></p>
+* #### Proces Variables
 
-* Evaluate Person Business Rule (top)
-<p align="center"><img src="docs/images/evaluatePersonBusinessRule.png"></p>
+The variables used in the process itself, but the focus in this example are the classes that are used to define the POJOs to interact the process with decisions, that are the [Violation](src/main/java/org/kie/kogito/traffic/Violation.java), [Driver](src/main/java/org/kie/kogito/traffic/Driver.java), [Fine](src/main/java/org/kie/kogito/traffic/Fine.java) and [TrafficViolationResponse](src/main/java/org/kie/kogito/traffic/TrafficViolationResponse.java).
 
-* Evaluate Person Business Rule (bottom)
-<p align="center"><img src="docs/images/evaluatePersonBusinessRule2.png"></p>
+![Process Variables](docs/images/diagramProperties2.png)
 
-* Evaluate Person Business Rule (Assignments)
-<p align="center"><img src="docs/images/evaluatePersonBusinessRuleDataAssignments.png"></p>
+<b>Mapping data from Process to/from DMN</b>
 
-* Exclusive Gateway
-<p align="center"><img src="docs/images/exclusiveGateway.png"></p>
+Is is important to mention DMN for instance can define the Data Type in its own structure, but we can align all attributes names in a Java class that is used as process variables, in case the attribute names contains spaces or are not follwing java conventions we can use Jackson Annotations to make the process variable POJOs aligned with DMN data types, for instance in the [Violation](src/main/java/org/kie/kogito/traffic/Violation.java) class, where it is mapped the `speedLimit` attribute as `Speed Limit` using `@JsonProperty` annotation, in this case this attribute from the process variable with Violation can be seamsly integrated Violation Data Type defined in DMN.
 
-* Exclusive Gateway For Adult Connector
-<p align="center"><img src="docs/images/exclusiveGatewayForAdult.png"></p>
+DMN Violation Data Type
 
-* Exclusive Gateway For Children Connector
-<p align="center"><img src="docs/images/exclusiveGatewayForChildren.png"></p>
+![DMN Violation Data Type](docs/images/diagramProperties2.png)
 
-* Special Handling for Children (top)
-<p align="center"><img src="docs/images/specialHandlingForChildren.png"></p>
 
-* Special Handling for Children (middle)
-<p align="center"><img src="docs/images/specialHandlingForChildren2.png"></p>
+* #### Get Driver Task
 
-* Special Handling for Children (bottom)
-<p align="center"><img src="docs/images/specialHandlingForChildren3.png"></p>
+Fetch for driver information, in this implementation it is just mocking a result, that simply fill with an expired license date in case the driverId is an odd number and with a valid date in case of an even number. In a real use case it could be performing an external call to a service or a database to get this information.
 
-* Special Handling for Children (Assignments)
-<p align="center"><img src="docs/images/specialHandlingForChildrenAssignments.png"></p>
+The service task implementation is done in the [DriverService] (src/main/java/org/kie/kogito/traffic/DriverService.java) class.
+
+* #### License Validation Task (DRL)
+
+Represents the task to do the call to the DRL service.
+
+
+* #### Traffic Violation Task (DMN)
+Represents the task to do the call to the DMN service.
+
+
+* #### Suspended Task
+Just a task example where it could be performend and action based on the driver suspension. Here it is just logging the information in the console.
+
+<p align="left"><img src="docs/images/evaluatePersonBusinessRule.png"></p>
+
+* #### Not Suspended Task
+Just a task example where it could be performend and action based on the driver not suspension. Here it is just logging the information in the console.
+
+<p align="left"><img src="docs/images/evaluatePersonBusinessRule.png"></p>
 
 
 ## Build and run
@@ -96,7 +121,7 @@ mvn clean package -Pnative
 To run the generated native executable, generated in `target/`, execute
 
 ```
-./target/process-business-rules-quarkus-runner
+./target/process-decision-rest-quarkus-runner
 ```
 
 ## OpenAPI (Swagger) documentation
@@ -114,37 +139,57 @@ Once the service is up and running we can invoke the REST endpoints and examine 
 
 ### Submit a request
 
-To make use of this application it is as simple as putting a sending request to `http://localhost:8080/persons`  with appropriate contents. See the following two cases:
+To make use of this application it is as simple as putting a sending request to `http://localhost:8080/traffic_service`  with appropriate contents. See the following two cases:
 
-#### Adult person
+#### Valid License and Suspended Driver
 
 Given data:
 
 ```json
 {
-  "person" : {
-    "name" : "john",
-    "age" : 20
-  }
+    "driverId": "12345",
+    "violation":{
+        "Type":"speed",
+        "Speed Limit": 100,
+        "Actual Speed":140
+    }
 }
-
 ```
 
 Submit the JSON object from above:
 
 ```sh
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"person" : {"name" : "john", "age" : 20}}' http://localhost:8080/persons
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"driverId": "12345","violation":{"Type":"speed","Speed Limit": 100,"Actual Speed":140}}' http://localhost:8080/traffic_service
 ```
 
 After the Curl command you should see a similar console log
 
 ```json
 {
-    "id":"fd4f629d-6822-4ca2-a8a6-a74f5f81e83d",
-    "person":{
-        "name":"john",
-        "age":20,
-        "adult":true
+    "id": "331fc19b-5af4-4735-a6f2-8a94ab37d067",
+    "driverId": "12345",
+    "driver": {
+        "licenseExpiration": "2021-08-06T15:07:44.455+00:00",
+        "validLicense": true,
+        "Name": "Arthur",
+        "State": "SP",
+        "City": "Campinas",
+        "Points": 13,
+        "Age": 30
+    },
+    "trafficViolationResponse": {
+        "Fine": {
+            "Amount": 500.0,
+            "Points": 3
+        },
+        "Suspended": "No"
+    },
+    "violation": {
+        "Code": null,
+        "Date": null,
+        "Type": "speed",
+        "Speed Limit": 100,
+        "Actual Speed": 120
     }
 }
 ```
