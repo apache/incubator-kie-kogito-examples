@@ -22,13 +22,18 @@
     </dependencies>
   </dependencyManagement>
   <dependencies>
+  <!--  this is included to verify both events addons are compatible -->
     <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-smallrye-reactive-messaging-kafka</artifactId>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-addons-quarkus-events-process</artifactId>
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-addons-quarkus-cloudevents</artifactId>
+      <artifactId>kogito-addons-quarkus-messaging</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-reactive-messaging-kafka</artifactId>
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
@@ -59,10 +64,6 @@
       <artifactId>cloudevents-api</artifactId>
       <scope>test</scope>
     </dependency>
-    <dependency>
-  <groupId>org.kie.kogito</groupId>
-  <artifactId>kogito-addons-quarkus-events-smallrye</artifactId>
-</dependency>
     <dependency>
       <groupId>io.cloudevents</groupId>
       <artifactId>cloudevents-json-jackson</artifactId>
