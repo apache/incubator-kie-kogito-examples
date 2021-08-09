@@ -96,7 +96,7 @@ When using native image compilation, you will also need:
 ### Compile and Run in Local Dev Mode
 
 ```sh
-mvn clean compile quarkus:dev
+mvn clean compile quarkus:dev -Ppersistence
 ```
 
 NOTE: With dev mode of Quarkus you can take advantage of hot reload for business assets like processes, rules, decision tables and java code. No need to redeploy or restart your running application.
@@ -124,14 +124,14 @@ java -Dkogito.persistence.optimistic.lock=true -jar target/quarkus-app/quarkus-r
 ### Package and Run in JVM mode
 
 ```sh
-mvn clean package
+mvn clean package -Ppersistence
 java -jar target/quarkus-app/quarkus-run.jar  
 ```
 
 or on windows
 
 ```sh
-mvn clean package
+mvn clean package -Ppersistence
 java -jar target\quarkus-app\quarkus-run.jar
 ```
 
@@ -139,7 +139,7 @@ java -jar target\quarkus-app\quarkus-run.jar
 Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
 
 ```sh
-mvn clean package -Pnative
+mvn clean package -Ppersistence,native
 ```
 
 To run the generated native executable, generated in `target/`, execute

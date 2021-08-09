@@ -90,7 +90,7 @@ You will need:
 ### Compile and Run in Local Dev Mode
 
 ```
-mvn clean package spring-boot:run    
+mvn clean package spring-boot:run -Ppersistence
 ```
 
 NOTE: With dev mode of Quarkus you can take advantage of hot reload for business assets like processes, rules, decision tables and java code. No need to redeploy or restart your running application.
@@ -105,7 +105,7 @@ kogito.persistence.optimistic.lock=true
 ### Compile and Run using uberjar
 
 ```
-mvn clean package 
+mvn clean package -Ppersistence 
 ```
   
 To run the generated native executable, generated in `target/`, execute
