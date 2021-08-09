@@ -110,6 +110,10 @@ public class Driver {
         return validLicense;
     }
 
+    public Boolean getValidLicense() {
+        return validLicense;
+    }
+
     public void setValidLicense(Boolean validLicense) {
         this.validLicense = validLicense;
     }
