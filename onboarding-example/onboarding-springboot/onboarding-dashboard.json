@@ -122,7 +122,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(kie_process_instance_started_total)",
+          "expr": "sum(kogito_process_instance_started_total)",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
@@ -203,7 +203,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(kie_process_instance_running_total)",
+          "expr": "sum(kogito_process_instance_running_total)",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
@@ -284,7 +284,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(kie_process_instance_completed_total{status=\"3\"})",
+          "expr": "sum(kogito_process_instance_completed_total{status=\"3\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
@@ -365,7 +365,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(kie_process_instance_completed_total{status=\"2\"})",
+          "expr": "sum(kogito_process_instance_completed_total{status=\"2\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
@@ -505,7 +505,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "increase(kie_process_instance_started_total[1m])",
+          "expr": "increase(kogito_process_instance_started_total[1m])",
           "format": "time_series",
           "instant": false,
           "interval": "",
@@ -593,7 +593,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "avg_over_time(kie_process_instance_duration_seconds_sum[1m])",
+          "expr": "avg_over_time(kogito_process_instance_duration_seconds_sum[1m])",
           "format": "time_series",
           "instant": false,
           "intervalFactor": 1,
@@ -719,7 +719,7 @@
       ],
       "targets": [
         {
-          "expr": "kie_work_item_duration_seconds_count",
+          "expr": "kogito_work_item_duration_seconds_count",
           "format": "table",
           "instant": true,
           "intervalFactor": 1,
@@ -856,7 +856,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "avg_over_time(kie_work_item_duration_seconds_sum[1m])",
+          "expr": "avg_over_time(kogito_work_item_duration_seconds_sum[1m])",
           "format": "time_series",
           "instant": false,
           "intervalFactor": 1,
