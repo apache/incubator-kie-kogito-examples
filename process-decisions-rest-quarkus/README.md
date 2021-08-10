@@ -21,7 +21,7 @@ There are two examples to show different approaches to do integration with decis
 
 * Process using Service Tasks
 ![Traffic Process](docs/images/process.png)
-In this apporach it requires to have an implementation in the application to execute the task, that in this case is a REST/HTTP call. The implementation is up to the user, in this example we are using what the platform provides, like the [Quarkus REST Client](https://quarkus.io/guides/rest-client). See [LicenseValidationRestClient](src/main/java/org/kie/kogito/traffic/LicenseValidationRestClient.java) and [LicenseValidationRestClient](src/main/java/org/kie/kogito/traffic/TrafficViolationRestClient.java).
+In this apporach it requires coding, to provide an implementation in the application responsible to execute the task, in this case, a REST/HTTP call. The implementation is up to the user, but here it's been used what the platform provides, like the [Quarkus REST Client](https://quarkus.io/guides/rest-client). Details can be seen in the classes [LicenseValidationRestClient](src/main/java/org/kie/kogito/traffic/LicenseValidationRestClient.java) and [LicenseValidationRestClient](src/main/java/org/kie/kogito/traffic/TrafficViolationRestClient.java).
 
 * Process using REST Work Item
 ![Traffic Process](docs/images/process.png)
@@ -56,12 +56,17 @@ The service task implementation is done in the [DriverService] (src/main/java/or
 
 * #### License Validation Task (DRL)
 
-Represents the task to do the call to the DRL service.
+Represents the task to do the call to the DRL service. 
+
+Rest Work Item
+Service Task
 
 
 * #### Traffic Violation Task (DMN)
 Represents the task to do the call to the DMN service.
 
+Rest Work Item
+Service Task
 
 * #### Suspended Task
 Just a task example where it could be performend and action based on the driver suspension. Here it is just logging the information in the console.
