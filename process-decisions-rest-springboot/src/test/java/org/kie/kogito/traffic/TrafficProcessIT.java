@@ -37,20 +37,6 @@ public class TrafficProcessIT {
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
     }
 
-    //    @DynamicPropertySource
-    //    static void dynamicProperties(DynamicPropertyRegistry registry) {
-    //        //            registry.add("server.port", () -> {
-    //        //                randomServerPort = SocketUtils.findAvailableTcpPort();
-    //        //                return randomServerPort;
-    //        //            });
-    //        registry.add("traffic.violation.url", getObjectSupplier());
-    //        registry.add("license.validation.url", getObjectSupplier());
-    //    }
-    //
-    //    private static Supplier<Object> getObjectSupplier() {
-    //        return () -> "http://localhost: " + randomServerPort + "/";
-    //    }
-
     @Test
     public void testTrafficViolationRestServiceDecision() {
         testTrafficProcess("traffic_service", "12345", 120d, "No", true);

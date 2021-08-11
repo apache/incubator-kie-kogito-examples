@@ -21,18 +21,14 @@ rule "Is driver license valid"
 when            
     $driver: /driver[licenseExpiration.after(currentTime)]
 then
-    modify($driver) { 
-    	setValidLicense(true);
-    };
+    $driver.setValidLicense(true);
 end
 
 rule "Is driver license expired"
 when            
     $driver: /driver[licenseExpiration.before(currentTime)]
 then
-    modify($driver) { 
-    	setValidLicense(false);
-    };
+    $driver.setValidLicense(false);
 end
 
 query "validation"
