@@ -17,9 +17,9 @@ This example covers the following items:
 
 It is based on the traffic violation evaluation process, where it is required to fetch Driver information, and based on this, it is first performed the license validation to check if the driver has a valid license (using a RuleUnit in a DRL) after the license validation it is then executed the violation evaluation defined as a DMN decision and following, it is checked in the process if the output contains information whether the driver was suspended or not, completing the process.
 
-There are two examples to show different approaches to do integration with decisions, they are pretty similar from the process definition perspective, the difference is related to the task that performs the call to the decision evaluation, either using a Service Task or a Rest Work item.
+> There are two examples to show different approaches to do integration with decisions, they are pretty similar from the process definition perspective, the difference is related to the task that performs the call to the decision evaluation, either using a Service Task or a Rest Work item.
 
-* Process using Service Tasks
+#### * Process using Service Tasks
   
 ![Traffic Process](docs/images/traffic-rules-dmn-service-task.png)
 
@@ -27,13 +27,15 @@ In this approach it requires coding, to provide an implementation in the applica
 
 The BPMN file where this process is declared is [traffic-rules-dmn-service-task.bpmn](src/main/resources/.traffic-rules-dmn-service-task.bpmn)
 
-* Process using REST Work Item
+#### * Process using REST Work Item
   
 ![Traffic Process](docs/images/traffic-rules-dmn-wih.png)
 
 This is a declarative approach, it does not require to have any extra implementation, the REST/HTTP call is executed out-of-the-box by the engine. The information needed to execute the REST call, like the URL and HTTP method should be set in the Data Assignments in the REST Work Item.
 
 The BPMN file where this process is declared is [traffic-rules-dmn-wih.bpmn](src/main/resources/.traffic-rules-dmn-wih.bpmn)
+
+---
 
 * #### Process Properties
 <img src="docs/images/process-properties.png" width=300/>
@@ -46,11 +48,11 @@ The variables used in the process itself, but the focus in this example are the 
 
 <img src="docs/images/process-variables.png" width=300/>
 
-<b>Mapping data from Process to/from DMN</b>
+**Mapping data from Process to/from DMN**
 
 It is important to mention DMN for instance can define the Data Type in its structure, but we can align all attributes names in a Java class that is used as process variables, in case the attribute names contain spaces or are not following java conventions we can use [Jackson](https://github.com/FasterXML/jackson) annotations to make the process variable POJOs aligned with DMN data types, for instance in the [Violation](src/main/java/org/kie/kogito/traffic/Violation.java) class, where it is mapped the `speedLimit` attribute as `Speed Limit` using `@JsonProperty` annotation, in this case, this attribute from the process variable with Violation can be seamlessly integrated Violation Data Type defined in DMN.
 
-DMN Violation Data Type
+**Violation Data Type in DMN**
 
 <img src="docs/images/violation-dmn-data-types.png" width=600/>
 
@@ -67,7 +69,7 @@ In the data assignment the input is the `driverId` and output is the `driver` va
 
 Represents the task to do the call to the DRL service.
 
-Service Task
+**Service Task**
 
 <img src="docs/images/license-validation-drl-service-task.png" width=150/>
 
@@ -80,7 +82,7 @@ The input and output mapping for this task is just the driver variable that is f
 ![License Validation Service Data](docs/images/license-drl-service-task-data-mapping.png)
 
 
-Rest Work Item
+**Rest Work Item**
 
 <img src="docs/images/license-validation-drl-wih.png" width=150/>
 
@@ -92,7 +94,7 @@ The input and output mapping for this task is just the driver variable that is f
 * #### Traffic Violation Task (DMN)
 Similar to the License Validation Task, but it represents the task to do the call to the DMN service.
 
-Service Task
+**Service Task**
 
 <img src="docs/images/traffic-violation-drl-service-task.png" width=150/>
 
@@ -105,7 +107,7 @@ The input for this task is the `Driver` and `Violation` variables, and the outpu
 ![Traffic Violation Service Data](docs/images/traffic-violation-drl-service-task-data.png)
 
 
-Rest Work Item
+**Rest Work Item**
 
 <img src="docs/images/traffic-violation-drl-wih.png" width=150/>
 
