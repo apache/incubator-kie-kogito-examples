@@ -203,8 +203,8 @@ When running in either Quarkus Development or Native mode, we also leverage the 
 
 Once the service is up and running we can invoke the REST endpoints and examine the logic.
 There should be two process running under the following URLs:
-* Service Task: `http://localhost:8080/traffic_service`
-* REST Work Item: `http://localhost:8080/traffic_wih`
+* Process using Service Tasks: `http://localhost:8080/traffic_service`
+* Process using REST Work Item: `http://localhost:8080/traffic_wih`
 
 ### Submit a request
 
