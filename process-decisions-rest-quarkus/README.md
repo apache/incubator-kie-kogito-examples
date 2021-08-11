@@ -36,7 +36,7 @@ This is a declarative approach, it does not require to have any extra implementa
 The BPMN file where this process is declared is [traffic-rules-dmn-wih.bpmn](src/main/resources/.traffic-rules-dmn-wih.bpmn)
 
 * #### Process Properties
-![Process Properties](docs/images/process-properties.png){width=70%}
+<img src="docs/images/process-properties.png" width=300/>
 
 These are the properties defined for the process, the most important one in this section to pay attention is the ID because it is used in the REST endpoint generation referring to the path to interact with this process.
 
@@ -44,7 +44,7 @@ These are the properties defined for the process, the most important one in this
 
 The variables used in the process itself, but the focus in this example are the classes that are used to define the POJOs to interact the process with decisions, that are the [Violation](src/main/java/org/kie/kogito/traffic/Violation.java), [Driver](src/main/java/org/kie/kogito/traffic/Driver.java), [Fine](src/main/java/org/kie/kogito/traffic/Fine.java) and [TrafficViolationResponse](src/main/java/org/kie/kogito/traffic/TrafficViolationResponse.java).
 
-![Process Variables](docs/images/process-variables.png){width=70%}
+<img src="docs/images/process-variables.png" width=300/>
 
 <b>Mapping data from Process to/from DMN</b>
 
@@ -52,7 +52,7 @@ It is important to mention DMN for instance can define the Data Type in its stru
 
 DMN Violation Data Type
 
-![DMN Violation Data Type](docs/images/violation-dmn-data-types.png)
+<img src="docs/images/violation-dmn-data-types.png" width=600/>
 
 
 * #### Get Driver Task
@@ -69,11 +69,11 @@ Represents the task to do the call to the DRL service.
 
 Service Task
 
-![License Validation Service](docs/images/license-validation-drl-service-task.png)
+<img src="docs/images/license-validation-drl-service-task.png" width=150/>
 
 The implementation properties where it is necessary to set the Java class implementing the task that executes the call should be set alongside the method. The URL configuration is done in the [application.properties](src/main/resources/application.properties).
 
-![License Validation Service Properties](docs/images/license-validation-drl-service-task-properties.png)
+<img src="docs/images/license-validation-drl-service-task-properties.png" width=300/>
 
 The input and output mapping for this task is just the driver variable that is filled with license validation information.
 
@@ -82,7 +82,7 @@ The input and output mapping for this task is just the driver variable that is f
 
 Rest Work Item
 
-![License Validation WIH](docs/images/license-validation-drl-wih.png)
+<img src="docs/images/license-validation-drl-wih.png" width=150/>
 
 The input and output mapping for this task is just the driver variable that is filled with license validation information. For Rest Work Item the URL and HTTP Method are set as input parameters in the process itselt, that is differnt from the Service Task apporach.
 
@@ -94,11 +94,11 @@ Similar to the License Validation Task, but it represents the task to do the cal
 
 Service Task
 
-![Traffic Violation Service](docs/images/traffic-violation-drl-service-task.png)
+<img src="docs/images/traffic-violation-drl-service-task.png" width=150/>
 
 The implementation properties where it is necessary to set the Java class implementing the task that executes the call should be set alongside the method.
 
-![Traffic Violation Service Properties](docs/images/traffic-violation-drl-service-task-properties.png)
+<img src="docs/images/traffic-violation-drl-service-task-properties.png" width=300/>
 
 The input for this task is the `Driver` and `Violation` variables, and the output is the `Suspended` and `Fine` that are wrapped into the [TrafficViolationResponse](src/main/java/org/kie/kogito/traffic/TrafficViolationResponse.java).
 
@@ -107,7 +107,7 @@ The input for this task is the `Driver` and `Violation` variables, and the outpu
 
 Rest Work Item
 
-![Traffic Violation WIH](docs/images/traffic-violation-drl-wih.png)
+<img src="docs/images/traffic-violation-drl-wih.png" width=150/>
 
 The input for this task is the `Driver` and `Violation` variables, and the output is the `Suspended` and `Fine` that are wrapped into the [TrafficViolationResponse](src/main/java/org/kie/kogito/traffic/TrafficViolationResponse.java). For Rest Work Item the URL and HTTP Method are set as input parameters in the process itselt, that is different from the Service Task approaach.
 
