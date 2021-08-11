@@ -150,6 +150,8 @@
         <module>process-kafka-multi-springboot</module>
         <module>process-kafka-quickstart-springboot</module>
         <module>process-knative-quickstart-quarkus</module>
+        <module>process-monitoring-quarkus</module>
+        <module>process-monitoring-springboot</module>
         <module>process-mongodb-persistence-quarkus</module>
         <module>process-mongodb-persistence-springboot</module>
         <module>process-optaplanner-quarkus</module>
@@ -276,6 +278,7 @@
         <module>process-kafka-persistence-quarkus</module>
         <module>process-kafka-quickstart-quarkus</module>
         <module>process-knative-quickstart-quarkus</module>
+        <module>process-monitoring-quarkus</module>
         <module>process-mongodb-persistence-quarkus</module>
         <module>process-optaplanner-quarkus</module>
         <module>process-postgresql-persistence-quarkus</module>
@@ -349,6 +352,7 @@
         <module>process-infinispan-persistence-springboot</module>
         <module>process-kafka-quickstart-springboot</module>
         <module>process-kafka-multi-springboot</module>
+        <module>process-monitoring-springboot</module>
         <module>process-mongodb-persistence-springboot</module>
         <module>process-optaplanner-springboot</module>
         <module>process-postgresql-persistence-springboot</module>
