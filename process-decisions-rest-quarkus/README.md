@@ -19,7 +19,7 @@ It is based on the traffic violation evaluation process, where it is required to
 
 > There are two examples to show different approaches to do integration with decisions, they are pretty similar from the process definition perspective, the difference is related to the task that performs the call to the decision evaluation, either using a Service Task or a Rest Work item.
 
-#### * Process using Service Tasks
+#### Process using Service Tasks
   
 ![Traffic Process](docs/images/traffic-rules-dmn-service-task.png)
 
@@ -27,7 +27,7 @@ In this approach it requires coding, to provide an implementation in the applica
 
 The BPMN file where this process is declared is [traffic-rules-dmn-service-task.bpmn](src/main/resources/.traffic-rules-dmn-service-task.bpmn)
 
-#### * Process using REST Work Item
+#### Process using REST Work Item
   
 ![Traffic Process](docs/images/traffic-rules-dmn-wih.png)
 
