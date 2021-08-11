@@ -52,14 +52,14 @@ It is important to mention DMN for instance can define the Data Type in its stru
 
 DMN Violation Data Type
 
-![DMN Violation Data Type](docs/images/violation-dmn-data-types.png){width=50%}
+![DMN Violation Data Type](docs/images/violation-dmn-data-types.png)
 
 
 * #### Get Driver Task
 
 Fetch for driver information, in this implementation it is just mocking a result, that simply fill with an expired license date in case the `driverId` is an odd number and with a valid date in case of an even number. In a real use case, it could be performing an external call to a service or a database to get this information.
 
-The service task implementation is done in the [DriverService] (src/main/java/org/kie/kogito/traffic/DriverService.java) class.
+The service task implementation is done in the [DriverService](src/main/java/org/kie/kogito/traffic/DriverService.java) class.
 
 In the data assignment the input is the `driverId` and output is the `driver` variable, filled with all driver information.
 
@@ -69,24 +69,24 @@ Represents the task to do the call to the DRL service.
 
 Service Task
 
-![License Validation Service](docs/images/license-validation-drl-service-task.png){width=50%}
+![License Validation Service](docs/images/license-validation-drl-service-task.png)
 
 The implementation properties where it is necessary to set the Java class implementing the task that executes the call should be set alongside the method. The URL configuration is done in the [application.properties](src/main/resources/application.properties).
 
-![License Validation Service Properties](docs/images/license-validation-drl-service-task-properties.png){width=50%}
+![License Validation Service Properties](docs/images/license-validation-drl-service-task-properties.png)
 
 The input and output mapping for this task is just the driver variable that is filled with license validation information.
 
-![License Validation Service Data](docs/images/license-drl-service-task-data-mapping.png){width=50%}
+![License Validation Service Data](docs/images/license-drl-service-task-data-mapping.png)
 
 
 Rest Work Item
 
-![License Validation WIH](docs/images/license-validation-drl-wih.png){width=50%}
+![License Validation WIH](docs/images/license-validation-drl-wih.png)
 
 The input and output mapping for this task is just the driver variable that is filled with license validation information. For Rest Work Item the URL and HTTP Method are set as input parameters in the process itselt, that is differnt from the Service Task apporach.
 
-![License Validation WIH Data](docs/images/license-validation-drl-wih-data-mapping.png){width=50%}
+![License Validation WIH Data](docs/images/license-validation-drl-wih-data-mapping.png)
 
 
 * #### Traffic Violation Task (DMN)
@@ -94,24 +94,24 @@ Similar to the License Validation Task, but it represents the task to do the cal
 
 Service Task
 
-![Traffic Violation Service](docs/images/traffic-violation-drl-service-task.png){width=50%}
+![Traffic Violation Service](docs/images/traffic-violation-drl-service-task.png)
 
 The implementation properties where it is necessary to set the Java class implementing the task that executes the call should be set alongside the method.
 
-![Traffic Violation Service Properties](docs/images/traffic-violation-drl-service-task-properties.png){width=50%}
+![Traffic Violation Service Properties](docs/images/traffic-violation-drl-service-task-properties.png)
 
 The input for this task is the `Driver` and `Violation` variables, and the output is the `Suspended` and `Fine` that are wrapped into the [TrafficViolationResponse](src/main/java/org/kie/kogito/traffic/TrafficViolationResponse.java).
 
-![Traffic Violation Service Data](docs/images/traffic-violation-drl-service-task-data.png){width=50%}
+![Traffic Violation Service Data](docs/images/traffic-violation-drl-service-task-data.png)
 
 
 Rest Work Item
 
-![Traffic Violation WIH](docs/images/traffic-violation-drl-wih.png){width=50%}
+![Traffic Violation WIH](docs/images/traffic-violation-drl-wih.png)
 
 The input for this task is the `Driver` and `Violation` variables, and the output is the `Suspended` and `Fine` that are wrapped into the [TrafficViolationResponse](src/main/java/org/kie/kogito/traffic/TrafficViolationResponse.java). For Rest Work Item the URL and HTTP Method are set as input parameters in the process itselt, that is different from the Service Task approaach.
 
-![Traffic Violation WIH Data](docs/images/traffic-violation-drl-wih-data.png){width=50%}
+![Traffic Violation WIH Data](docs/images/traffic-violation-drl-wih-data.png)
 
 
 * #### Suspended Task
@@ -200,10 +200,13 @@ When running in either Quarkus Development or Native mode, we also leverage the 
 ## Example Usage
 
 Once the service is up and running we can invoke the REST endpoints and examine the logic.
+There should be two process running under the following URLs:
+* Service Task: `http://localhost:8080/traffic_service`
+* REST Work Item: `http://localhost:8080/traffic_wih`
 
 ### Submit a request
 
-To make use of this application it is as simple as putting a sending request to `http://localhost:8080/traffic_service`  with appropriate contents. See the following two cases:
+To make use of this application it is as simple as putting a sending request to `http://localhost:8080/traffic_service` or  `http://localhost:8080/traffic_wih`  with appropriate contents. See the following two cases:
 
 #### Valid License and Suspended Driver
 
@@ -230,10 +233,10 @@ After the Curl command you should see a similar console log
 
 ```json
 {
-    "id": "331fc19b-5af4-4735-a6f2-8a94ab37d067",
+    "id": "e499326d-3bd2-4ddb-93b7-0f68f74a9673",
     "driverId": "12345",
     "driver": {
-        "licenseExpiration": "2021-08-06T15:07:44.455+00:00",
+        "licenseExpiration": "2021-08-12T19:35:48.971+00:00",
         "validLicense": true,
         "Name": "Arthur",
         "State": "SP",
@@ -243,39 +246,36 @@ After the Curl command you should see a similar console log
     },
     "trafficViolationResponse": {
         "Fine": {
-            "Amount": 500.0,
-            "Points": 3
+            "Amount": 1000.0,
+            "Points": 7
         },
-        "Suspended": "No"
+        "Suspended": "Yes"
     },
     "violation": {
         "Code": null,
         "Date": null,
         "Type": "speed",
         "Speed Limit": 100,
-        "Actual Speed": 120
+        "Actual Speed": 140
     }
 }
 ```
 
-Because the person is evaluated as an adult, no outstanding tasks should be here for given person.
+You can play with different attributes, if the `driverId` is an odd number in this case `12345` the license will be evaluated as valid because the DriverService generates a valid expiration date and DMN is evaluated, you can change the actual speed to 140 or 100 to simulate the driver suspension on the DMN evaluation.
 
-We can verify there is no task running for Children Handling using following command:
+If the `driverId` is an even number like `1234` the license will be evaluated as expired and the DMN will not be evaluated, so Suspended response attribute should be `null`.
 
-```sh
-curl http://localhost:8080/persons/{uuid}/tasks
-```
-where uuid is the id returned in the previous step.
-
-#### A Child
+#### Expired Valid License
 
 Given data:
 
 ```json
 {
-    "person" : {
-        "name" : "john",
-        "age" : 5
+    "driverId": "1234",
+    "violation":{
+        "Type":"speed",
+        "Speed Limit": 100,
+        "Actual Speed":110
     }
 }
 ```
@@ -283,81 +283,36 @@ Given data:
 Submit the JSON object from above:
 
 ```sh
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"person" : {"name" : "john", "age" : 5}}' http://localhost:8080/persons
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"driverId": "1234","violation":{"Type":"speed","Speed Limit": 100,"Actual Speed":110}}' http://localhost:8080/traffic_service
 ```
 
-After the Curl command you should see a similar console log
+After the Curl command, you should see a similar console log
 
 ```json
 {
-    "id":"c59054b9-aa1d-4771-bc5e-40f8b32d3ff5",
-    "person":{
-        "name":"john",
-        "age":5,
-        "adult":false
-    }
-}
-```
-
-Because the person is not evaluated as an adult, there should be outstanding tasks for given person.
-
-To verify there is a running task for Children
-
-```sh
-curl http://localhost:8080/persons/{uuid}/tasks
-```
-where uuid is the id returned from the preivous step.
-
-Should return something like
-
-```json
-[{"id":"c59054b9-aa1d-4771-bc5e-40f8b32d3ff5","name":"ChildrenHandling".....}]
-```
-
-
-Then to see the Task created perfor the following command
-
-```
-curl http://localhost:8080/persons/{uuid}/ChildrenHandling/{tuuid}
-```
-
-where uuid is persons id and tuuid is task id.
-
-It should return something similar to
-
-```json
-{
-    "person":{
-        "name":"john",
-        "age":5,
-        "adult":false
+    "id": "fffd3f08-045b-4935-a312-0901c4120f19",
+    "driverId": "1234",
+    "driver": {
+        "licenseExpiration": "2021-08-11T19:43:44.130+00:00",
+        "validLicense": false,
+        "Name": "Arthur",
+        "State": "SP",
+        "City": "Campinas",
+        "Points": 13,
+        "Age": 30
     },
-    "id":"c59054b9-aa1d-4771-bc5e-40f8b32d3ff5",
-    "name":"ChildrenHandling"
-}
-```
-
-Then we can complete the task and validate child with
-
-```sh
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{}' http://localhost:8080/persons/{uuid}/ChildrenHandling/{tuuid}
-```
-
-Where uuid is persons id and tuuid is task id
-
-Should return something similar to
-
-```json
-{
-    "id":"09f98756-b273-4ceb-9308-fae7cc423904",
-    "person":{
-        "name":"john",
-        "age":5,
-        "adult":false
+    "trafficViolationResponse": null,
+    "violation": {
+        "Code": null,
+        "Date": null,
+        "Type": "speed",
+        "Speed Limit": 100,
+        "Actual Speed": 110
     }
 }
 ```
-and there should be no outstanding task for the person anymore.
+In this case the driver license is expired when the DRL is evaludated because the DriverService generated an expired date for the driver's license thus DMN is not evaluated, so the `validLicense` is `false` and  `trafficViolationResponse` is `null`. 
+
 
 ## Deploying with Kogito Operator
 
