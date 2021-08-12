@@ -59,7 +59,7 @@ Represents the task to do the call to the DRL service.
 
 <img src="docs/images/license-validation-drl-businessrule.png" width=150/>
 
-The properties to be set are mainly the `Rule Language`that should be set as `DRL` and the `Rule Flow Group` with `unit:` + `[the FQCN of the Rule Unit Data class]`, in this case [src/main/java/org/kie/kogito/traffic/LicenseValidationService.java](src/main/java/org/kie/kogito/traffic/LicenseValidationService.java).
+The properties to be set are mainly the `Rule Language`that should be set as `DRL` and the `Rule Flow Group` with `unit:` + `[the FQCN of the Rule Unit Data class]`, in this case [org.kie.kogito.traffic.LicenseValidationService](src/main/java/org/kie/kogito/traffic/LicenseValidationService.java).
 
 <img src="docs/images/license-validation-dmn-businessrule-properties.png" width=300/>
 
