@@ -17,7 +17,7 @@ This example covers the following items:
 
 It is based on the traffic violation evaluation process, where it is required to fetch Driver information, and based on this, it is first performed the license validation to check if the driver has a valid license (using a RuleUnit in a DRL) after the license validation it is then executed the violation evaluation defined as a DMN decision and following, it is checked in the process if the output contains information whether the driver was suspended or not, completing the process.
 
-> There are two examples to show different approaches to do integration with decisions, they are pretty similar from the process definition perspective, the difference is related to the task that performs the call to the decision evaluation, either using a Service Task or a Rest Work item.
+> There are two examples to show different approaches to do integration with decisions, they are pretty similar from the process definition perspective, the difference is related to the task that performs the call to the decision evaluation, either using a Service Task or a REST Work item.
 
 #### Process using Service Tasks
   
@@ -82,11 +82,11 @@ The input and output mapping for this task is just the driver variable that is f
 ![License Validation Service Data](docs/images/license-drl-service-task-data-mapping.png)
 
 
-**Rest Work Item**
+**REST Work Item**
 
 <img src="docs/images/license-validation-drl-wih.png" width=150/>
 
-The input and output mapping for this task is just the driver variable that is filled with license validation information. For Rest Work Item the URL and HTTP Method are set as input parameters in the process itselt, that is differnt from the Service Task apporach.
+The input and output mapping for this task is just the driver variable that is filled with license validation information. For REST Work Item the URL and HTTP Method are set as input parameters in the process itselt, that is differnt from the Service Task approach.
 
 ![License Validation WIH Data](docs/images/license-validation-drl-wih-data-mapping.png)
 
@@ -107,11 +107,11 @@ The input for this task is the `Driver` and `Violation` variables, and the outpu
 ![Traffic Violation Service Data](docs/images/traffic-violation-drl-service-task-data.png)
 
 
-**Rest Work Item**
+**REST Work Item**
 
 <img src="docs/images/traffic-violation-drl-wih.png" width=150/>
 
-The input for this task is the `Driver` and `Violation` variables, and the output is the `Suspended` and `Fine` that are wrapped into the [TrafficViolationResponse](src/main/java/org/kie/kogito/traffic/TrafficViolationResponse.java). For Rest Work Item the URL and HTTP Method are set as input parameters in the process itselt, that is different from the Service Task approaach.
+The input for this task is the `Driver` and `Violation` variables, and the output is the `Suspended` and `Fine` that are wrapped into the [TrafficViolationResponse](src/main/java/org/kie/kogito/traffic/TrafficViolationResponse.java). For REST Work Item the URL and HTTP Method are set as input parameters in the process itselt, that is different from the Service Task approaach.
 
 ![Traffic Violation WIH Data](docs/images/traffic-violation-drl-wih-data.png)
 
