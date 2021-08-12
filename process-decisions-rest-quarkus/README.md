@@ -25,7 +25,7 @@ It is based on the traffic violation evaluation process, where it is required to
 
 In this approach it requires coding, to provide an implementation in the application responsible to execute the task, in this case, a REST/HTTP call. The implementation is up to the user, but here it's been used what the platform provides, like the [Quarkus REST Client](https://quarkus.io/guides/rest-client). Details can be seen in the classes [LicenseValidationRestClient](src/main/java/org/kie/kogito/traffic/LicenseValidationRestClient.java) and [TrafficViolationRestClient](src/main/java/org/kie/kogito/traffic/TrafficViolationRestClient.java).
 
-The BPMN file where this process is declared is [traffic-rules-dmn-service-task.bpmn](src/main/resources/.traffic-rules-dmn-service-task.bpmn)
+The BPMN file where this process is declared is [traffic-rules-dmn-service-task.bpmn](src/main/resources/traffic-rules-dmn-service-task.bpmn)
 
 #### Process using REST Work Item
   
@@ -33,7 +33,7 @@ The BPMN file where this process is declared is [traffic-rules-dmn-service-task.
 
 This is a declarative approach, it does not require to have any extra implementation, the REST/HTTP call is executed out-of-the-box by the engine. The information needed to execute the REST call, like the URL and HTTP method should be set in the Data Assignments in the REST Work Item.
 
-The BPMN file where this process is declared is [traffic-rules-dmn-wih.bpmn](src/main/resources/.traffic-rules-dmn-wih.bpmn)
+The BPMN file where this process is declared is [traffic-rules-dmn-wih.bpmn](src/main/resources/traffic-rules-dmn-wih.bpmn)
 
 ---
 
@@ -193,11 +193,11 @@ To run the generated native executable, generated in `target/`, execute
 ## OpenAPI (Swagger) documentation
 [Specification at swagger.io](https://swagger.io/docs/specification/about/)
 
-You can take a look at the [OpenAPI definition](http://localhost:8080/openapi?format=json) - automatically generated and included in this service - to determine all available operations exposed by this service. For easy readability you can visualize the OpenAPI definition file using a UI tool like for example available [Swagger UI](https://editor.swagger.io).
+You can take a look at the [OpenAPI definition](http://localhost:8080/q/openapi?format=json) - automatically generated and included in this service - to determine all available operations exposed by this service. For easy readability you can visualize the OpenAPI definition file using a UI tool like for example available [Swagger UI](https://editor.swagger.io).
 
 In addition, various clients to interact with this service can be easily generated using this OpenAPI definition.
 
-When running in either Quarkus Development or Native mode, we also leverage the [Quarkus OpenAPI extension](https://quarkus.io/guides/openapi-swaggerui#use-swagger-ui-for-development) that exposes [Swagger UI](http://localhost:8080/swagger-ui/) that you can use to look at available REST endpoints and send test requests.
+When running in either Quarkus Development or Native mode, we also leverage the [Quarkus OpenAPI extension](https://quarkus.io/guides/openapi-swaggerui#use-swagger-ui-for-development) that exposes [Swagger UI](http://localhost:8080/q/swagger-ui/) that you can use to look at available REST endpoints and send test requests.
 
 ## Example Usage
 
@@ -208,7 +208,7 @@ There should be two process running under the following URLs:
 
 ### Submit a request
 
-To make use of this application it is as simple as putting a sending request to `http://localhost:8080/traffic_service` or  `http://localhost:8080/traffic_wih`  with appropriate contents. See the following two cases:
+To make use of this application it is as simple as putting a sending request to `http://localhost:8080/traffic_service` or  `http://localhost:8080/traffic_wih`  with appropriate contents. See the following cases:
 
 #### Valid License and Suspended Driver
 
@@ -229,6 +229,12 @@ Submit the JSON object from above:
 
 ```sh
 curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"driverId": "12345","violation":{"Type":"speed","Speed Limit": 100,"Actual Speed":140}}' http://localhost:8080/traffic_service
+```
+
+or
+
+```sh
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"driverId": "12345","violation":{"Type":"speed","Speed Limit": 100,"Actual Speed":140}}' http://localhost:8080/traffic_wih
 ```
 
 After the Curl command you should see a similar console log
@@ -288,6 +294,12 @@ Submit the JSON object from above:
 curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"driverId": "1234","violation":{"Type":"speed","Speed Limit": 100,"Actual Speed":110}}' http://localhost:8080/traffic_service
 ```
 
+or
+
+```sh
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"driverId": "1234","violation":{"Type":"speed","Speed Limit": 100,"Actual Speed":110}}' http://localhost:8080/traffic_wih
+```
+
 After the Curl command, you should see a similar console log
 
 ```json
@@ -313,7 +325,7 @@ After the Curl command, you should see a similar console log
     }
 }
 ```
-In this case the driver license is expired when the DRL is evaludated because the DriverService generated an expired date for the driver's license thus DMN is not evaluated, so the `validLicense` is `false` and  `trafficViolationResponse` is `null`. 
+In this case the driver license is expired when the DRL is evaluated because the  DriverService generated an expired date for the driver's license thus DMN is not evaluated, so the `validLicense` is `false` and  `trafficViolationResponse` is `null`. 
 
 
 ## Deploying with Kogito Operator

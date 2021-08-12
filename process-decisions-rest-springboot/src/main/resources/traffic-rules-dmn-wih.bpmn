@@ -1,4 +1,4 @@
-<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_XDaE0N0BEDmsN9WlO3txdg" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd http://www.omg.org/spec/DD/20100524/DC DC.xsd http://www.omg.org/spec/DD/20100524/DI DI.xsd " exporter="jBPM Process Modeler" exporterVersion="2.0" targetNamespace="http://www.omg.org/bpmn20">
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_04BrQN2dEDmWOtnbRc-NJw" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd http://www.omg.org/spec/DD/20100524/DC DC.xsd http://www.omg.org/spec/DD/20100524/DI DI.xsd " exporter="jBPM Process Modeler" exporterVersion="2.0" targetNamespace="http://www.omg.org/bpmn20">
   <bpmn2:itemDefinition id="_driverIdItem" structureRef="String"/>
   <bpmn2:itemDefinition id="_violationItem" structureRef="org.kie.kogito.traffic.Violation"/>
   <bpmn2:itemDefinition id="_driverItem" structureRef="org.kie.kogito.traffic.Driver"/>
@@ -31,14 +31,6 @@
     <bpmn2:property id="violation" itemSubjectRef="_violationItem" name="violation"/>
     <bpmn2:property id="driver" itemSubjectRef="_driverItem" name="driver"/>
     <bpmn2:property id="trafficViolationResponse" itemSubjectRef="_trafficViolationResponseItem" name="trafficViolationResponse"/>
-    <bpmn2:sequenceFlow id="_8A36870E-651D-4E0A-B345-D5CFF2182F0F" name="license is valid" sourceRef="_7229480F-BC4D-4406-B27C-8FF46C5C9042" targetRef="_38F4877F-50AD-4500-98E1-9B4FD3972291">
-      <bpmn2:extensionElements>
-        <drools:metaData name="elementname">
-          <drools:metaValue><![CDATA[license is valid]]></drools:metaValue>
-        </drools:metaData>
-      </bpmn2:extensionElements>
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java"><![CDATA[return driver.isValidLicense();]]></bpmn2:conditionExpression>
-    </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="_044AA388-325A-45DE-B783-4F48421B788B" name="license is expired" sourceRef="_7229480F-BC4D-4406-B27C-8FF46C5C9042" targetRef="_E2A8304B-68A0-4CCC-8D47-1FA9352D4853">
       <bpmn2:extensionElements>
         <drools:metaData name="elementname">
@@ -46,6 +38,14 @@
         </drools:metaData>
       </bpmn2:extensionElements>
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java"><![CDATA[return !driver.isValidLicense();]]></bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="_8A36870E-651D-4E0A-B345-D5CFF2182F0F" name="license is valid" sourceRef="_7229480F-BC4D-4406-B27C-8FF46C5C9042" targetRef="_38F4877F-50AD-4500-98E1-9B4FD3972291">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[license is valid]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java"><![CDATA[return driver.isValidLicense();]]></bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="_53D4F783-4C4F-45F7-A73B-25A582C41A09" sourceRef="_D8D9E6BA-5940-41F5-BF3A-1A08ADA72A4C" targetRef="_7229480F-BC4D-4406-B27C-8FF46C5C9042"/>
     <bpmn2:sequenceFlow id="_A19108FE-08A2-4E80-B7A8-0254C49209A6" sourceRef="_93FFD317-476E-4624-84EF-994617572560" targetRef="_D8D9E6BA-5940-41F5-BF3A-1A08ADA72A4C"/>
@@ -242,8 +242,8 @@ DRL]]></drools:metaValue>
     </bpmn2:endEvent>
     <bpmn2:exclusiveGateway id="_7229480F-BC4D-4406-B27C-8FF46C5C9042" gatewayDirection="Diverging">
       <bpmn2:incoming>_53D4F783-4C4F-45F7-A73B-25A582C41A09</bpmn2:incoming>
-      <bpmn2:outgoing>_044AA388-325A-45DE-B783-4F48421B788B</bpmn2:outgoing>
       <bpmn2:outgoing>_8A36870E-651D-4E0A-B345-D5CFF2182F0F</bpmn2:outgoing>
+      <bpmn2:outgoing>_044AA388-325A-45DE-B783-4F48421B788B</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
     <bpmn2:serviceTask id="_93FFD317-476E-4624-84EF-994617572560" drools:serviceimplementation="Java" drools:serviceinterface="org.kie.kogito.traffic.DriverService" drools:serviceoperation="getDriver" name="Get Driver Details" implementation="Java" operationRef="_93FFD317-476E-4624-84EF-994617572560_ServiceOperation">
       <bpmn2:extensionElements>
@@ -284,8 +284,7 @@ Task]]></drools:metaValue>
       </bpmn2:extensionElements>
       <bpmn2:incoming>_249EB7E9-5847-47C9-8B4D-8BEFED257600</bpmn2:incoming>
       <bpmn2:outgoing>_1287C97D-3568-458A-A907-0123A64A93BE</bpmn2:outgoing>
-      <bpmn2:script>System.out.println("Driver is suspended!");
-kcontext.setVariable("suspended", ((org.kie.kogito.traffic.TrafficViolationResponse) kcontext.getVariable("trafficViolationResponse")).getSuspended());</bpmn2:script>
+      <bpmn2:script>System.out.println("Driver is suspended!");</bpmn2:script>
     </bpmn2:scriptTask>
     <bpmn2:exclusiveGateway id="_8A66FABC-E538-4F50-9DAC-BC9069D19942" drools:dg="_19CC68B6-D2DC-4E39-99E5-CE5B30C5FEE6" gatewayDirection="Diverging" default="_19CC68B6-D2DC-4E39-99E5-CE5B30C5FEE6">
       <bpmn2:incoming>_4C002D81-1A8E-4D60-A740-9630D94215EB</bpmn2:incoming>
@@ -304,8 +303,7 @@ kcontext.setVariable("suspended", ((org.kie.kogito.traffic.TrafficViolationRespo
       </bpmn2:extensionElements>
       <bpmn2:incoming>_19CC68B6-D2DC-4E39-99E5-CE5B30C5FEE6</bpmn2:incoming>
       <bpmn2:outgoing>_521A00FC-6A79-44ED-8485-45DB97A621F2</bpmn2:outgoing>
-      <bpmn2:script>System.out.println("Driver is NOT suspended!");
-kcontext.setVariable("suspended", ((org.kie.kogito.traffic.TrafficViolationResponse) kcontext.getVariable("trafficViolationResponse")).getSuspended());</bpmn2:script>
+      <bpmn2:script>System.out.println("Driver is NOT suspended!");</bpmn2:script>
     </bpmn2:scriptTask>
     <bpmn2:startEvent id="_905F0834-19CC-423B-B90E-B38C6D80329F">
       <bpmn2:outgoing>_2C2FFD79-4241-4F9E-A486-2482F817595E</bpmn2:outgoing>
@@ -381,15 +379,15 @@ kcontext.setVariable("suspended", ((org.kie.kogito.traffic.TrafficViolationRespo
         <di:waypoint x="508" y="257.5"/>
         <di:waypoint x="637" y="255"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="edge_shape__7229480F-BC4D-4406-B27C-8FF46C5C9042_to_shape__E2A8304B-68A0-4CCC-8D47-1FA9352D4853" bpmnElement="_044AA388-325A-45DE-B783-4F48421B788B">
-        <di:waypoint x="665" y="255"/>
-        <di:waypoint x="665" y="435"/>
-        <di:waypoint x="841" y="436"/>
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="edge_shape__7229480F-BC4D-4406-B27C-8FF46C5C9042_to_shape__38F4877F-50AD-4500-98E1-9B4FD3972291" bpmnElement="_8A36870E-651D-4E0A-B345-D5CFF2182F0F">
         <di:waypoint x="665" y="255"/>
         <di:waypoint x="758" y="254.99988608153723"/>
         <di:waypoint x="867" y="255"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="edge_shape__7229480F-BC4D-4406-B27C-8FF46C5C9042_to_shape__E2A8304B-68A0-4CCC-8D47-1FA9352D4853" bpmnElement="_044AA388-325A-45DE-B783-4F48421B788B">
+        <di:waypoint x="665" y="255"/>
+        <di:waypoint x="665" y="435"/>
+        <di:waypoint x="841" y="436"/>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
@@ -508,7 +506,7 @@ kcontext.setVariable("suspended", ((org.kie.kogito.traffic.TrafficViolationRespo
         </bpsim:Scenario>
       </bpsim:BPSimData>
     </bpmn2:extensionElements>
-    <bpmn2:source>_XDaE0N0BEDmsN9WlO3txdg</bpmn2:source>
-    <bpmn2:target>_XDaE0N0BEDmsN9WlO3txdg</bpmn2:target>
+    <bpmn2:source>_04BrQN2dEDmWOtnbRc-NJw</bpmn2:source>
+    <bpmn2:target>_04BrQN2dEDmWOtnbRc-NJw</bpmn2:target>
   </bpmn2:relationship>
 </bpmn2:definitions>
