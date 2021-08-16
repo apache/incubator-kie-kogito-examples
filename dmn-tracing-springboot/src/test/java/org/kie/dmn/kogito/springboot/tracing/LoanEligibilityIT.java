@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.cloudevents.CloudEventUtils;
-import org.kie.kogito.kafka.KafkaClient;
+import org.kie.kogito.test.kafka.KafkaTestClient;
 import org.kie.kogito.testcontainers.springboot.KafkaSpringBootTestResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,7 +62,7 @@ public class LoanEligibilityIT {
 
     @Test
     public void testEvaluateLoanEligibility() throws InterruptedException {
-        final KafkaClient kafkaClient = new KafkaClient(kafkaBootstrapServers);
+        final KafkaTestClient kafkaClient = new KafkaTestClient(kafkaBootstrapServers);
         final CountDownLatch countDownLatch = new CountDownLatch(1);
 
         try {
@@ -105,7 +105,7 @@ public class LoanEligibilityIT {
 
     @Test
     public void testEvaluateDMNModel() throws InterruptedException {
-        final KafkaClient kafkaClient = new KafkaClient(kafkaBootstrapServers);
+        final KafkaTestClient kafkaClient = new KafkaTestClient(kafkaBootstrapServers);
         final CountDownLatch countDownLatch = new CountDownLatch(1);
 
         try {

@@ -25,7 +25,7 @@ import java.util.stream.IntStream;
 
 import org.junit.After;
 import org.junit.jupiter.api.Test;
-import org.kie.kogito.kafka.KafkaClient;
+import org.kie.kogito.test.kafka.KafkaTestClient;
 import org.kie.kogito.testcontainers.springboot.KafkaSpringBootTestResource;
 import org.kie.kogito.tests.KogitoKafkaQuickstartSpringbootApplication;
 import org.slf4j.Logger;
@@ -58,7 +58,7 @@ public class MessagingIT {
     private ObjectMapper objectMapper;
 
     @Autowired
-    private KafkaClient kafkaClient;
+    private KafkaTestClient kafkaClient;
 
     @Test
     public void testProcess() throws InterruptedException {
@@ -111,6 +111,6 @@ public class MessagingIT {
 
     @After
     public void stop() {
-        Optional.ofNullable(kafkaClient).ifPresent(KafkaClient::shutdown);
+        Optional.ofNullable(kafkaClient).ifPresent(KafkaTestClient::shutdown);
     }
 }
