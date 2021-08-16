@@ -17,7 +17,7 @@ It is based on the traffic violation evaluation process, where it is required to
 
 #### Process using Business Rule Task
   
-![Traffic Process](docs/images/traffic-rules-dmn-wih.png)
+![Traffic Process](docs/images/traffic-rules-dmn.png)
 
 This is a declarative approach, it does not require to have any extra implementation, the interaction with decisions is executed out-of-the-box by the engine. The information needed to execute the decision evaluation should be set in the Data Assignments in the Business Rule Task.
 
