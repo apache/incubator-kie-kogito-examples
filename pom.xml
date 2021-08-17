@@ -333,6 +333,18 @@
         <module>process-decisions-springboot</module>
         <module>process-decisions-rest-quarkus</module>
         <module>process-decisions-rest-springboot</module>
+        <module>process-kafka-quickstart-quarkus</module>
+        <module>process-kafka-multi-quarkus</module>
+        <module>process-kafka-multi-springboot</module>
+        <module>process-kafka-quickstart-springboot</module>
+        <module>process-scripts-quarkus</module>
+        <module>process-scripts-springboot</module>
+        <module>process-service-calls-quarkus</module>
+        <module>process-service-calls-springboot</module>
+        <module>process-rest-workitem-multi-quarkus</module>
+        <module>process-rest-workitem-quarkus</module>
+        <module>process-rest-service-call-quarkus</module>
+        <module>process-rest-service-call-springboot</module>
       </modules>
     </profile>
 
