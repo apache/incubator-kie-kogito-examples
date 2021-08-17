@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>kogito-examples</artifactId>
-    <version>1.10.0.Final</version>
+    <version>1.10.1-SNAPSHOT</version>
   </parent>
   <artifactId>process-quarkus-example</artifactId>
   <name>Kogito Example :: Process and Quarkus</name>
