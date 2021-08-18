@@ -15,6 +15,10 @@
  */
 package org.kie.kogito.examples.onboarding;
 
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
@@ -66,6 +70,7 @@ public class OnboardingEndpointIT {
 
     @Test
     public void testOnboardingProcessNewUserUS() {
+        ZonedDateTime paymentDate = ZonedDateTime.now().truncatedTo(ChronoUnit.MILLIS);
 
         registerHandler("ValidateEmployee", (workitem) -> {
 
@@ -91,7 +96,7 @@ public class OnboardingEndpointIT {
         registerHandler("CalculatePaymentDate", (workitem) -> {
 
             Map<String, Object> results = new HashMap<>();
-            results.put("paymentDate", "2019-05-01T23:59:00.123Z[UTC]");
+            results.put("paymentDate", Date.from(paymentDate.toInstant()));
             return results;
         });
         registerHandler("CalculateVacationDays", (workitem) -> {
@@ -107,6 +112,8 @@ public class OnboardingEndpointIT {
             return results;
         });
 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
+
         given()
                 .body("{\"employee\" : {\"firstName\" : \"Mark\", \"lastName\" : \"Test\", \"personalId\" : \"xxx-yy-zzz\", \"birthDate\" : \"1995-12-10T14:50:12.123+02:00\", \"address\" : {\"country\" : \"US\", \"city\" : \"Boston\", \"street\" : \"any street 3\", \"zipCode\" : \"10001\"}}}")
                 .contentType(ContentType.JSON)
@@ -120,7 +127,7 @@ public class OnboardingEndpointIT {
                 .body("employeeId", is("acb123"))
                 .body("manager", is("mary frog"))
                 .body("department", is("US00099"))
-                .body("payroll.paymentDate", is("2019-05-01T23:59:00.123+00:00"))
+                .body("payroll.paymentDate", is(paymentDate.format(formatter)))
                 .body("payroll.vacationDays", is(25))
                 .body("payroll.taxRate", is(Float.valueOf(22.0f)));
     }
