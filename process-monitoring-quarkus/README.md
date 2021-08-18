@@ -1,102 +1,69 @@
-# Process + Quarkus example
+# Process + Quarkus + Runtime metrics
 
 ## Description
 
-A simple process service for ordering items, as a sequence of a script task (writing out some debug info) and a call activity invoking a sub-process, using a custom `Order` data element.
-
-The sub-process invokes a custom Java service `CalculationService.calculateTotal`, followed by a user task to verify the order.
-
-Based on these two processes (defined using BPMN 2.0 format), the custom data object and custom Java service, a new service is generated that exposes REST operations to create new orders (following the steps as defined in the main and sub-process), or to list and delete active orders.
-
-## Installing and Running
+This example demonstrates how to enable and consume the runtime metrics monitoring feature in Kogito with processes.
 
 ### Prerequisites
 
 You will need:
-  - Java 11+ installed
-  - Environment variable JAVA_HOME set accordingly
-  - Maven 3.6.2+ installed
 
-When using native image compilation, you will also need:
-  - [GraalVM 19.1.1](https://github.com/oracle/graal/releases/tag/vm-19.1.1) installed
-  - Environment variable GRAALVM_HOME set accordingly
-  - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too.  You also need 'native-image' installed in GraalVM (using 'gu install native-image'). Please refer to [GraalVM installation documentation](https://www.graalvm.org/docs/reference-manual/aot-compilation/#prerequisites) for more details.
+- Java 11+ installed
+- Environment variable JAVA_HOME set accordingly
+- Maven 3.6.2+ installed
+- Docker 19+ (only if you want to run the integration tests and/or you want to use the `docker-compose` script provided in this example).
+
+### How to enable the feature
+
+Import the following dependency in your `pom.xml`:
+
+```XML
+
+<dependency>
+  <groupId>org.kie.kogito</groupId>
+  <artifactId>kogito-addons-quarkus-monitoring-prometheus</artifactId>
+</dependency>
+```
+
+### Architecture
+
+Once you compile your Quarkus project, a dashboard for each available process plus a global one will be generated under the
+path `target/resources/dashboards/`. You can then inject those grafana dashboards during the deployment of the grafana instance.
+
+The use case is summarized in the following schema:
+
+![RuntimeMetrics](https://user-images.githubusercontent.com/18282531/76740726-a0cbdd80-676e-11ea-8cc3-63ed5cbb3ac8.png)
+
+To summarize, the kogito app will expose by default an endpoint `/metrics` with the prometheus variables, and a prometheus instance will simply fetch
+the data from there.
+
+### Dashboards
+
+Kogito currently exports one **operational** dashboard per process, which contains:
+
+* Total number of created instances
+* Total number of running instances
+* Total number of completed instances
+* Total number of instances that violated SLAs
+* Average process execution time, counted as delta between the completion instant and the creation instant.
+
+There's also a **Global** operational dashboard that contains the same graphs but with aggregated metrics for all the process types.
+
+You can use these default dashboards, or you can personalize them and use your custom dashboards.
 
 ### Compile and Run in Local Dev Mode
 
-```
-mvn clean compile quarkus:dev
-```
+It is possible to use `docker-compose` to demonstrate how to inject the generated dashboards in the volume of the grafana container:
 
-### Package and Run in JVM mode
+1. Run `mvn clean package` to build the project and generate dashboards.
+2. Run `docker-compose up` to start the applications.
 
-```
-mvn clean package
-java -jar target/quarkus-app/quarkus-run.jar
-```
-
-or on windows
-
-```
-mvn clean package
-java -jar target\quarkus-app\quarkus-run.jar
-```
-
-### Package and Run using Local Native Image
-Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
-
-```
-mvn clean package -Pnative
-```
-
-To run the generated native executable, generated in `target/`, execute
-
-```
-./target/process-quarkus-example-runner
-```
-
-Note: This does not yet work on Windows, GraalVM and Quarkus should be rolling out support for Windows soon.
-
-### Running with persistence enabled
-
-Kogito runtime supports multiple persistence types, including Infinispan.
-In order to use the Infinispan based persistence, you need to have a Infinispan server installed and available over the network.
-The default configuration, expects the server to be running on:
-```
-quarkus.infinispan-client.server-list=localhost:11222
-```
-If you need to change it, you can do so by updating the application.properties file located in src/main/resources.
-
-You can install Infinispan server by downloading version 12.x from the [official website](https://infinispan.org/download/).
-
-Once Infinispan is up and running you can build this project with `-Ppersistence` to enable additional processing during the build. Next you start it in exact same way as without persistence.
-
-This extra profile in maven configuration adds additional dependencies needed to work with Infinispan as persistent store.
-
-### Running with events enabled
-
-Kogito supports cloud events using Kafka as message broker. So to be able to enable this you need to have
-Kafka cluster installed and available over the network. Refer to [Kafka Apache site](https://kafka.apache.org/quickstart) to more information about how to install. 
-
-Kogito will use the following Kafka topics to listen for cloud events:
-
-* `kogito-processinstances-events` - used to emit events by Kogito that can be consumed by data index service and other services
-* `kogito-usertaskinstances-events` - used to emit events by Kogito that can be consumed by data index service and other services
-
-Once Kafka is up and running you can build this project with `-Pevents` to enable additional processing during the build. This extra profile in maven configuration adds additional dependencies needed to work with Cloud Events.
-
-## OpenAPI (Swagger) documentation
-[Specification at swagger.io](https://swagger.io/docs/specification/about/)
-
-You can take a look at the [OpenAPI definition](http://localhost:8080/openapi?format=json) - automatically generated and included in this service - to determine all available operations exposed by this service. For easy readability you can visualize the OpenAPI definition file using a UI tool like for example available [Swagger UI](https://editor.swagger.io).
-
-In addition, various clients to interact with this service can be easily generated using this OpenAPI definition.
-
-When running in either Quarkus Development or Native mode, we also leverage the [Quarkus OpenAPI extension](https://quarkus.io/guides/openapi-swaggerui#use-swagger-ui-for-development) that exposes [Swagger UI](http://localhost:8080/swagger-ui/) that you can use to look at available REST endpoints and send test requests.
+The volumes of the grafana container are properly set in the `docker-compose.yml` file, so that the dashboards are properly loaded at startup.
 
 ## Example Usage
 
-Once the service is up and running, you can use the following examples to interact with the service. Note that rather than using the curl commands below, you can also use the [Swagger UI](http://localhost:8080/swagger-ui/) to send requests.
+Once the service is up and running, you can use the following examples to interact with the service. Note that rather than using the curl commands
+below, you can also use the [Swagger UI](http://localhost:8080/swagger-ui/) to send requests.
 
 ### POST /orders
 
@@ -292,7 +259,3 @@ Example response:
   }
 }
 ```
-
-## Deploying with Kogito Operator
-
-In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).
