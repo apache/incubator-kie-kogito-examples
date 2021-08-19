@@ -30,7 +30,7 @@ import io.quarkus.test.junit.QuarkusTest;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 @QuarkusTest
 public class TopicsInformationTest {

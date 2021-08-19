@@ -64,7 +64,7 @@
 
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-addons-quarkus-events-smallrye</artifactId>
+      <artifactId>kogito-addons-quarkus-events-process</artifactId>
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
@@ -88,7 +88,7 @@
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-test-utils</artifactId>
+      <artifactId>kogito-quarkus-test-utils</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>

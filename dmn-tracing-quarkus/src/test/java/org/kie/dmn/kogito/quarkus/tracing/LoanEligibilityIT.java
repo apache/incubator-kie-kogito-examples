@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.cloudevents.CloudEventUtils;
-import org.kie.kogito.kafka.KafkaClient;
+import org.kie.kogito.test.kafka.KafkaTestClient;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 import org.kie.kogito.tracing.decision.event.model.ModelEvent;
 import org.kie.kogito.tracing.decision.event.trace.TraceEvent;
@@ -53,7 +53,7 @@ public class LoanEligibilityIT {
 
     @Test
     public void testEvaluateLoanEligibility() throws InterruptedException {
-        final KafkaClient kafkaClient = new KafkaClient(kafkaBootstrapServers);
+        final KafkaTestClient kafkaClient = new KafkaTestClient(kafkaBootstrapServers);
         final CountDownLatch countDownLatch = new CountDownLatch(1);
 
         try {
@@ -98,7 +98,7 @@ public class LoanEligibilityIT {
 
     @Test
     public void testEvaluateDMNModel() throws InterruptedException {
-        final KafkaClient kafkaClient = new KafkaClient(kafkaBootstrapServers);
+        final KafkaTestClient kafkaClient = new KafkaTestClient(kafkaBootstrapServers);
         final CountDownLatch countDownLatch = new CountDownLatch(1);
 
         try {
