@@ -15,13 +15,6 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>org.infinispan</groupId>
-        <artifactId>infinispan-bom</artifactId>
-        <version>${version.org.infinispan}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <dependency>
         <groupId>org.kie.kogito</groupId>
         <artifactId>kogito-springboot-bom</artifactId>
         <version>${project.version}</version>
