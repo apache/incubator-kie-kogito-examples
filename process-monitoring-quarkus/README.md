@@ -63,7 +63,7 @@ The volumes of the grafana container are properly set in the `docker-compose.yml
 ## Example Usage
 
 Once the service is up and running, you can use the following examples to interact with the service. Note that rather than using the curl commands
-below, you can also use the [Swagger UI](http://localhost:8080/swagger-ui/) to send requests.
+below, you can also use the [Swagger UI](http://localhost:8080/q/swagger-ui) to send requests.
 
 ### POST /orders
 
