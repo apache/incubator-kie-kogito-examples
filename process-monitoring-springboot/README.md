@@ -28,7 +28,7 @@ Import the following dependency in your `pom.xml`:
 ### Architecture
 
 Once you compile your Spring Boot project, a dashboard for each available process plus a global one will be generated under the
-path `target/resources/dashboards/`. You can then inject those grafana dashboards during the deployment of the grafana instance.
+path `target/resources/dashboards/`. You can then inject those Grafana dashboards during the deployment of the Grafana instance.
 
 The use case is summarized in the following schema:
 
@@ -53,12 +53,17 @@ You can use these default dashboards, or you can personalize them and use your c
 
 ### Compile and Run in Local Dev Mode
 
-It is possible to use `docker-compose` to demonstrate how to inject the generated dashboards in the volume of the grafana container:
+It is possible to use `docker-compose` to demonstrate how to inject the generated dashboards in the volume of the Grafana container:
 
 1. Run `mvn clean package` to build the project and generate dashboards.
 2. Run `docker-compose up` to start the applications.
 
-The volumes of the grafana container are properly set in the `docker-compose.yml` file, so that the dashboards are properly loaded at startup.
+The volumes of the Grafana container are properly set in the `docker-compose.yml` file, so that the dashboards are automatically loaded at startup.
+
+To access the dashboards simply open http://localhost:3000/ on your browser once the containers are started.
+
+The first time it may take a few seconds for the Grafana container to start and load everything, so if you can't see the web UI immediately, try
+waiting 30 seconds.
 
 ## Example Usage
 
