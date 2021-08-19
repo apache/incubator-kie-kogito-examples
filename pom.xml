@@ -340,6 +340,8 @@
         <module>process-kafka-multi-quarkus</module>
         <module>process-kafka-multi-springboot</module>
         <module>process-kafka-quickstart-springboot</module>
+        <module>process-monitoring-quarkus</module>
+        <module>process-monitoring-springboot</module>
         <module>process-scripts-quarkus</module>
         <module>process-scripts-springboot</module>
         <module>process-service-calls-quarkus</module>
