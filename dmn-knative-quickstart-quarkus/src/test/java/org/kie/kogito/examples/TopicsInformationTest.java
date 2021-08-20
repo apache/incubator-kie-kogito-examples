@@ -15,12 +15,12 @@
  */
 package org.kie.kogito.examples;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.event.ChannelType;
 import org.kie.kogito.event.CloudEventMeta;
@@ -38,11 +38,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class TopicsInformationTest {
 
     @Test
+    @Disabled("https://issues.redhat.com/browse/KOGITO-5738")
     void verifyTopicsInformation() {
         Topic expectedIncomingTopic = new Topic("kogito_incoming_stream", ChannelType.INCOMING);
         expectedIncomingTopic.setEventsMeta(Collections.singletonList(new CloudEventMeta("DecisionRequest", "", EventKind.CONSUMED)));
 
-        Set<CloudEventMeta> expectedOutgoingEventMeta = new HashSet<>();
+        List<CloudEventMeta> expectedOutgoingEventMeta = new ArrayList<>();
         expectedOutgoingEventMeta.add(new CloudEventMeta("DecisionResponse", "Traffic+Violation", EventKind.PRODUCED));
         expectedOutgoingEventMeta.add(new CloudEventMeta("DecisionResponse", "Traffic+Violation/FineService", EventKind.PRODUCED));
         expectedOutgoingEventMeta.add(new CloudEventMeta("DecisionResponseFull", "Traffic+Violation", EventKind.PRODUCED));

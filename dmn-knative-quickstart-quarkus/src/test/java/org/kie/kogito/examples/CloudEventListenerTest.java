@@ -21,6 +21,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -68,6 +69,7 @@ public class CloudEventListenerTest {
     }
 
     @Test
+    @Disabled("https://issues.redhat.com/browse/KOGITO-5738")
     void checkDecision() throws JsonProcessingException {
         final Map<String, Object> decisionInput = Map.of(
                 "Driver", Map.of("Age", 35, "Points", 3),
