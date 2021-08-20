@@ -1,0 +1,13 @@
+# A scrape configuration containing exactly one endpoint to scrape:
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: 'kogito-app'
+
+    scrape_interval: 10s
+
+    metrics_path: /metrics
+
+    static_configs:
+      - targets: ['hello:8080'] 
+        
+        #['host.docker.internal:8180']
