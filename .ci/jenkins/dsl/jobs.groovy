@@ -1,5 +1,5 @@
 import org.kie.jenkins.jobdsl.templates.KogitoJobTemplate
-import org.kie.jenkins.jobdsl.KogitoConstants
+import org.kie.jenkins.jobdsl.FolderUtils
 import org.kie.jenkins.jobdsl.Utils
 import org.kie.jenkins.jobdsl.KogitoJobType
 
@@ -32,13 +32,9 @@ Map getMultijobPRConfig() {
     ]
 }
 
-def bddRuntimesPrFolder = "${KogitoConstants.KOGITO_DSL_PULLREQUEST_FOLDER}/${KogitoConstants.KOGITO_DSL_RUNTIMES_BDD_FOLDER}"
-def nightlyBranchFolder = "${KogitoConstants.KOGITO_DSL_NIGHTLY_FOLDER}/${JOB_BRANCH_FOLDER}"
-def releaseBranchFolder = "${KogitoConstants.KOGITO_DSL_RELEASE_FOLDER}/${JOB_BRANCH_FOLDER}"
-
 if (Utils.isMainBranch(this)) {
     // For BDD runtimes PR job
-    setupDeployJob(bddRuntimesPrFolder, KogitoJobType.PR)
+    setupDeployJob(FolderUtils.getPullRequestRuntimesBDDFolder(this), KogitoJobType.PR)
 }
 
 // PR checks
@@ -47,18 +43,18 @@ setupMultijobPrNativeChecks()
 setupMultijobPrLTSChecks()
 
 // Nightly jobs
-setupNativeJob(nightlyBranchFolder)
-setupDeployJob(nightlyBranchFolder, KogitoJobType.NIGHTLY)
-setupPromoteJob(nightlyBranchFolder, KogitoJobType.NIGHTLY)
+setupNativeJob()
+setupDeployJob(FolderUtils.getNightlyFolder(this), KogitoJobType.NIGHTLY)
+setupPromoteJob(FolderUtils.getNightlyFolder(this), KogitoJobType.NIGHTLY)
 
 // No release directly on main branch
 if (!Utils.isMainBranch(this)) {
-    setupDeployJob(releaseBranchFolder, KogitoJobType.RELEASE)
-    setupPromoteJob(releaseBranchFolder, KogitoJobType.RELEASE)
+    setupDeployJob(FolderUtils.getReleaseFolder(this), KogitoJobType.RELEASE)
+    setupPromoteJob(FolderUtils.getReleaseFolder(this), KogitoJobType.RELEASE)
 }
 
 if (Utils.isLTSBranch(this)) {
-    setupNativeLTSJob(nightlyBranchFolder)
+    setupNativeLTSJob()
 }
 
 /////////////////////////////////////////////////////////////////
@@ -77,8 +73,8 @@ void setupMultijobPrLTSChecks() {
     KogitoJobTemplate.createMultijobLTSPRJobs(this, getMultijobPRConfig()) { return getDefaultJobParams() }
 }
 
-void setupNativeJob(String jobFolder) {
-    def jobParams = getJobParams('kogito-examples-native', jobFolder, "${JENKINSFILE_PATH}/Jenkinsfile.native", 'Kogito Examples Native Testing')
+void setupNativeJob() {
+    def jobParams = getJobParams('kogito-examples-native', FolderUtils.getNightlyFolder(this), "${JENKINSFILE_PATH}/Jenkinsfile.native", 'Kogito Examples Native Testing')
     jobParams.triggers = [ cron : 'H 6 * * *' ]
     KogitoJobTemplate.createPipelineJob(this, jobParams).with {
         parameters {
@@ -92,8 +88,8 @@ void setupNativeJob(String jobFolder) {
     }
 }
 
-void setupNativeLTSJob(String jobFolder) {
-    def jobParams = getJobParams('kogito-examples-native-lts', jobFolder, "${JENKINSFILE_PATH}/Jenkinsfile.native", 'Kogito Examples Native LTS Testing')
+void setupNativeLTSJob() {
+    def jobParams = getJobParams('kogito-examples-native-lts', FolderUtils.getNightlyFolder(this), "${JENKINSFILE_PATH}/Jenkinsfile.native", 'Kogito Examples Native LTS Testing')
     jobParams.triggers = [ cron : 'H 8 * * *' ]
     KogitoJobTemplate.createPipelineJob(this, jobParams).with {
         parameters {
