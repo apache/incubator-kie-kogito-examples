@@ -11,13 +11,18 @@
 
   <artifactId>serverless-workflow-order-processing</artifactId>
   <name>Kogito Example :: Serverless Workflow Order Processing</name>
-
+  <properties>
+    <quarkus-plugin.version>2.1.0.Final</quarkus-plugin.version>
+    <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
+    <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
+    <quarkus.platform.version>2.1.0.Final</quarkus.platform.version>
+  </properties>
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>org.kie.kogito</groupId>
-        <artifactId>kogito-quarkus-bom</artifactId>
-        <version>${project.version}</version>
+        <groupId>${quarkus.platform.group-id}</groupId>
+        <artifactId>${quarkus.platform.artifact-id}</artifactId>
+        <version>${quarkus.platform.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -62,6 +67,7 @@
       <plugin>
         <groupId>io.quarkus</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
+        <version>${quarkus-plugin.version}</version>
         <executions>
           <execution>
             <goals>
@@ -80,6 +86,7 @@
           <plugin>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-maven-plugin</artifactId>
+            <version>${quarkus-plugin.version}</version>
             <executions>
               <execution>
                 <goals>
