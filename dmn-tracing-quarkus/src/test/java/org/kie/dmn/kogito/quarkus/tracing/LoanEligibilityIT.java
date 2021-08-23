@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.cloudevents.CloudEventUtils;
-import org.kie.kogito.test.kafka.KafkaTestClient;
+import org.kie.kogito.test.quarkus.kafka.KafkaTestClient;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 import org.kie.kogito.tracing.decision.event.model.ModelEvent;
 import org.kie.kogito.tracing.decision.event.trace.TraceEvent;

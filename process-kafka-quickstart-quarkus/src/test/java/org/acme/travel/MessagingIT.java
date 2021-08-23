@@ -28,7 +28,7 @@ import javax.inject.Inject;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.junit.After;
 import org.junit.jupiter.api.Test;
-import org.kie.kogito.test.kafka.KafkaTestClient;
+import org.kie.kogito.test.quarkus.kafka.KafkaTestClient;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
