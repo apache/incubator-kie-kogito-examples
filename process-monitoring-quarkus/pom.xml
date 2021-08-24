@@ -9,13 +9,24 @@
   </parent>
   <artifactId>process-monitoring-quarkus</artifactId>
   <name>Kogito Example :: Process Monitoring :: Quarkus</name>
-
+  <properties>
+    <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
+    <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
+    <quarkus.platform.version>${version.io.quarkus}</quarkus.platform.version>
+  </properties>
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>org.kie.kogito</groupId>
-        <artifactId>kogito-quarkus-bom</artifactId>
-        <version>${project.version}</version>
+        <groupId>${quarkus.platform.group-id}</groupId>
+        <artifactId>quarkus-kogito-bom</artifactId>
+        <version>${quarkus.platform.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>${quarkus.platform.group-id}</groupId>
+        <artifactId>${quarkus.platform.artifact-id}</artifactId>
+        <version>${quarkus.platform.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -53,6 +64,7 @@
       <plugin>
         <groupId>io.quarkus</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
+        <version>${quarkus.platform.version}</version>
         <executions>
           <execution>
             <goals>

@@ -10,12 +10,24 @@
   <artifactId>process-decisions-quarkus</artifactId>
   <name>Kogito Example :: Process :: Decisions :: Quarkus</name>
   <description>Process with DMN and DRL integration - Quarkus</description>
+  <properties>
+    <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
+    <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
+    <quarkus.platform.version>${version.io.quarkus}</quarkus.platform.version>
+  </properties>
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>org.kie.kogito</groupId>
-        <artifactId>kogito-quarkus-bom</artifactId>
-        <version>${kogito.version}</version>
+        <groupId>${quarkus.platform.group-id}</groupId>
+        <artifactId>quarkus-kogito-bom</artifactId>
+        <version>${quarkus.platform.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>${quarkus.platform.group-id}</groupId>
+        <artifactId>${quarkus.platform.artifact-id}</artifactId>
+        <version>${quarkus.platform.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
