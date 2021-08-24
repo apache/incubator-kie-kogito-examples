@@ -58,8 +58,8 @@ It utilizes PostgreSQL server as the backend store.
 ## Infrastructure requirements
 
 This quickstart requires a PostgreSQL server to be available with a database, a user and credentials already created
-, these configurations should then be set in the connection URI parameter in [applications.properties](src/main/resources/application.properties) file with the key
- `kogito.persistence.postgresql.connection.uri`, i.e `postgresql.connection.uri=postgresql://kogito-user:kogito-pass@localhost:5432/kogito` here are the [full settings for URI](https://www.postgresql.org/docs/9.6/static/libpq-connect.html#LIBPQ-CONNSTRING)    
+, these configurations should then be set in the data source URL parameter in [applications.properties](src/main/resources/application.properties) file with the key
+ `quarkus.datasource.reactive.url`, i.e `quarkus.datasource.reactive.url=postgresql://localhost:5432/kogito` here are the [full settings for URI](https://quarkus.io/guides/reactive-sql-clients#reactive-datasource)
  
 You must set the property `kogito.persistence.type=postgresql` to enable PostgreSQL persistence. There is also a
 configuration to allow the application to run DDL scripts during the initialization, which you can enable with the
@@ -96,7 +96,7 @@ When using native image compilation, you will also need:
 ### Compile and Run in Local Dev Mode
 
 ```sh
-mvn clean compile quarkus:dev
+mvn clean compile quarkus:dev -Ppersistence
 ```
 
 NOTE: With dev mode of Quarkus you can take advantage of hot reload for business assets like processes, rules, decision tables and java code. No need to redeploy or restart your running application.
@@ -124,14 +124,14 @@ java -Dkogito.persistence.optimistic.lock=true -jar target/quarkus-app/quarkus-r
 ### Package and Run in JVM mode
 
 ```sh
-mvn clean package
+mvn clean package -Ppersistence
 java -jar target/quarkus-app/quarkus-run.jar  
 ```
 
 or on windows
 
 ```sh
-mvn clean package
+mvn clean package -Ppersistence
 java -jar target\quarkus-app\quarkus-run.jar
 ```
 
@@ -139,7 +139,7 @@ java -jar target\quarkus-app\quarkus-run.jar
 Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
 
 ```sh
-mvn clean package -Pnative
+mvn clean package -Ppersistence,native
 ```
 
 To run the generated native executable, generated in `target/`, execute

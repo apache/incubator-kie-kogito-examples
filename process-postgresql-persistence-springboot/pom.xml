@@ -17,7 +17,7 @@
     <dependencies>
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-springboot-bom</artifactId>
+      <artifactId>kogito-spring-boot-bom</artifactId>
       <version>${project.version}</version>
       <type>pom</type>
       <scope>import</scope>
@@ -28,17 +28,13 @@
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
     </dependency>
 
     <!-- kogito -->
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-springboot-starter</artifactId>
+      <artifactId>kogito-processes-spring-boot-starter</artifactId>
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
@@ -58,7 +54,7 @@
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-test-utils</artifactId>
+      <artifactId>kogito-spring-boot-test-utils</artifactId>
       <version>${project.version}</version>
       <scope>test</scope>
     </dependency>
@@ -173,7 +169,7 @@
       <dependencies>
         <dependency>
           <groupId>org.kie.kogito</groupId>
-          <artifactId>kogito-addons-springboot-events-kafka</artifactId>
+          <artifactId>kogito-addons-springboot-events-process-kafka</artifactId>
         </dependency>
       </dependencies>
       <build>

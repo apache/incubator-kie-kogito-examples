@@ -29,7 +29,7 @@ import javax.inject.Inject;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import org.kie.kogito.kafka.KafkaClient;
+import org.kie.kogito.test.kafka.KafkaTestClient;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -61,7 +61,7 @@ public class MultiMessagingIT {
     @Inject
     private ObjectMapper objectMapper;
 
-    public KafkaClient kafkaClient;
+    public KafkaTestClient kafkaClient;
 
     @ConfigProperty(name = KafkaQuarkusTestResource.KOGITO_KAFKA_PROPERTY)
     private String kafkaBootstrapServers;
@@ -69,7 +69,7 @@ public class MultiMessagingIT {
     @Test
     public void testProcess() throws InterruptedException {
         objectMapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
-        kafkaClient = new KafkaClient(kafkaBootstrapServers);
+        kafkaClient = new KafkaTestClient(kafkaBootstrapServers);
 
         //number of generated events to test
         final int count = 3;
@@ -121,6 +121,6 @@ public class MultiMessagingIT {
 
     @AfterEach
     public void stop() {
-        Optional.ofNullable(kafkaClient).ifPresent(KafkaClient::shutdown);
+        Optional.ofNullable(kafkaClient).ifPresent(KafkaTestClient::shutdown);
     }
 }

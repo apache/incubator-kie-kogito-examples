@@ -9,12 +9,18 @@
   </parent>
   <artifactId>notification-service</artifactId>
   <name>Kogito Example :: Serverless Workflow Github Showcase :: Notification Service</name>
+  <properties>
+    <quarkus-plugin.version>2.1.0.Final</quarkus-plugin.version>
+    <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
+    <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
+    <quarkus.platform.version>2.1.0.Final</quarkus.platform.version>
+  </properties>
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>io.quarkus</groupId>
-        <artifactId>quarkus-bom</artifactId>
-        <version>${version.io.quarkus}</version>
+        <groupId>${quarkus.platform.group-id}</groupId>
+        <artifactId>${quarkus.platform.artifact-id}</artifactId>
+        <version>${quarkus.platform.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -28,7 +34,6 @@
     <dependency>
       <groupId>io.cloudevents</groupId>
       <artifactId>cloudevents-http-restful-ws</artifactId>
-      <version>${version.cloudevents}</version>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -91,6 +96,7 @@
       <plugin>
         <groupId>io.quarkus</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
+        <version>${quarkus-plugin.version}</version>
         <executions>
           <execution>
             <goals>
@@ -114,6 +120,7 @@
           <plugin>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-maven-plugin</artifactId>
+            <version>${quarkus-plugin.version}</version>
             <executions>
               <execution>
                 <goals>

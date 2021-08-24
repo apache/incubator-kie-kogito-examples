@@ -45,13 +45,6 @@ pipeline {
                 }
             }
         }
-        stage('Examples Build&Test') {
-            steps {
-                script {
-                    runUnitTests(kogitoExamplesRepo)
-                }
-            }
-        }
         stage('Examples Integration Tests') {
             steps {
                 script {
@@ -92,7 +85,7 @@ pipeline {
 }
 
 void sendNotification() {
-    emailext body: "**Native check job** #${BUILD_NUMBER} was: ${currentBuild.currentResult}\nPlease look here: ${BUILD_URL}",
+    emailext body: "**${NOTIFICATION_JOB_NAME}** #${BUILD_NUMBER} was: ${currentBuild.currentResult}\nPlease look here: ${BUILD_URL}",
              subject: "[${params.BUILD_BRANCH_NAME}] Kogito Examples",
              to: env.KOGITO_CI_EMAIL_TO
 }
@@ -137,24 +130,6 @@ void runQuickBuild(String project) {
             .run('clean install')
 }
 
-void runUnitTests(String project, Closure alterMvnCmd = null) {
-    def mvnCmd = getNativeMavenCommand(project)
-    if (project == 'optaplanner') {
-        mvnCmd.withProperty('enforcer.skip')
-            .withProperty('formatter.skip')
-            .withProperty('impsort.skip')
-            .withProperty('revapi.skip')
-    } else {
-        mvnCmd.withProperty('quickTests')
-    }
-
-    if (alterMvnCmd) {
-        alterMvnCmd(mvnCmd)
-    }
-
-    runMavenTests(mvnCmd, 'clean install')
-}
-
 void runIntegrationTests(String project, List profiles=[]) {
     String profileSuffix = profiles ? "-${profiles.join('-')}" : ''
     String itFolder = "${project}-it${profileSuffix}"
@@ -181,12 +156,18 @@ MavenCommand getMavenCommand(String directory) {
                 .inDirectory(directory)
 }
 
-MavenCommand getNativeMavenCommand(String directory) {
-    return getMavenCommand(directory)
+MavenCommand getNativeMavenCommand(String directory, String builderImage = getNativeBuilderImage()) {
+    def mvnCmd = getMavenCommand(directory)
                 .withProfiles(['native'])
                 .withProperty('quarkus.native.container-build', true)
                 .withProperty('quarkus.native.container-runtime', 'docker')
                 .withProperty('quarkus.profile', 'native') // Added due to https://github.com/quarkusio/quarkus/issues/13341
+    
+    if (builderImage) {
+        mvnCmd.withProperty('quarkus.native.builder-image', builderImage)
+    }
+
+    return mvnCmd
 }
 
 void cleanContainers() {
@@ -195,4 +176,8 @@ void cleanContainers() {
 
 void saveReports(boolean allowEmpty=false) {
     junit testResults: '**/target/surefire-reports/**/*.xml, **/target/failsafe-reports/**/*.xml', allowEmptyResults: allowEmpty
+}
+
+String getNativeBuilderImage() {
+    return params.NATIVE_BUILDER_IMAGE
 }

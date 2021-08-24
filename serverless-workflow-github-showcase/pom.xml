@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+         xmlns="http://maven.apache.org/POM/4.0.0">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
@@ -18,24 +18,9 @@
   <properties>
     <jandex-plugin.version>1.0.7</jandex-plugin.version>
     <surefire-plugin.version>2.22.1</surefire-plugin.version>
-    <version.cloudevents>2.0.0-milestone3</version.cloudevents>
     <version.io.jjwt>0.11.2</version.io.jjwt>
     <version.kohsuke.github>1.116</version.kohsuke.github>
     <version.org.camel>1.0.1</version.org.camel>
     <version.com.github.tomakehurst.wiremock>2.27.2</version.com.github.tomakehurst.wiremock>
   </properties>
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>io.cloudevents</groupId>
-        <artifactId>cloudevents-api</artifactId>
-        <version>${version.cloudevents}</version>
-      </dependency>
-      <dependency>
-        <groupId>io.cloudevents</groupId>
-        <artifactId>cloudevents-core</artifactId>
-        <version>${version.cloudevents}</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
 </project>

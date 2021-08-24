@@ -45,7 +45,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <!-- kogito -->
     <kogito.version>${project.version}</kogito.version>
-    <version.org.optaplanner>8.10.0-SNAPSHOT</version.org.optaplanner>
+    <version.org.optaplanner>8.11.0-SNAPSHOT</version.org.optaplanner>
     <!-- override default to fast-jar packaging for forward-compatibility -->
     <quarkus.package.type>fast-jar</quarkus.package.type>
   </properties>
@@ -122,8 +122,9 @@
       <modules>
         <module>decisiontable-quarkus-example</module>
         <module>decisiontable-springboot-example</module>
-        <module>dmn-event-driven-quarkus</module>
+        <!-- <module>dmn-event-driven-quarkus</module> -->
         <module>dmn-event-driven-springboot</module>
+        <module>dmn-knative-quickstart-quarkus</module>
         <module>dmn-listener-quarkus</module>
         <module>dmn-listener-springboot</module>
         <module>dmn-pmml-quarkus-example</module>
@@ -142,6 +143,10 @@
         <module>pmml-springboot-example</module>
         <module>process-business-rules-quarkus</module>
         <module>process-business-rules-springboot</module>
+        <module>process-decisions-quarkus</module>
+        <module>process-decisions-rest-quarkus</module>
+        <module>process-decisions-springboot</module>
+        <module>process-decisions-rest-springboot</module>
         <module>process-infinispan-persistence-quarkus</module>
         <module>process-infinispan-persistence-springboot</module>
         <module>process-kafka-persistence-quarkus</module>
@@ -150,6 +155,8 @@
         <module>process-kafka-multi-springboot</module>
         <module>process-kafka-quickstart-springboot</module>
         <module>process-knative-quickstart-quarkus</module>
+        <module>process-monitoring-quarkus</module>
+        <module>process-monitoring-springboot</module>
         <module>process-mongodb-persistence-quarkus</module>
         <module>process-mongodb-persistence-springboot</module>
         <module>process-optaplanner-quarkus</module>
@@ -262,6 +269,7 @@
       <modules>
         <module>decisiontable-quarkus-example</module>
         <module>dmn-event-driven-quarkus</module>
+        <module>dmn-knative-quickstart-quarkus</module>
         <module>dmn-listener-quarkus</module>
         <module>dmn-pmml-quarkus-example</module>
         <module>dmn-quarkus-example</module>
@@ -276,6 +284,7 @@
         <module>process-kafka-persistence-quarkus</module>
         <module>process-kafka-quickstart-quarkus</module>
         <module>process-knative-quickstart-quarkus</module>
+        <module>process-monitoring-quarkus</module>
         <module>process-mongodb-persistence-quarkus</module>
         <module>process-optaplanner-quarkus</module>
         <module>process-postgresql-persistence-quarkus</module>
@@ -325,6 +334,24 @@
         <module>rules-quarkus-helloworld</module>
         <module>ruleunit-quarkus-example</module>
         <module>ruleunit-springboot-example</module>
+        <module>process-decisions-quarkus</module>
+        <module>process-decisions-springboot</module>
+        <module>process-decisions-rest-quarkus</module>
+        <module>process-decisions-rest-springboot</module>
+        <module>process-kafka-quickstart-quarkus</module>
+        <module>process-kafka-multi-quarkus</module>
+        <module>process-kafka-multi-springboot</module>
+        <module>process-kafka-quickstart-springboot</module>
+        <module>process-monitoring-quarkus</module>
+        <module>process-monitoring-springboot</module>
+        <module>process-scripts-quarkus</module>
+        <module>process-scripts-springboot</module>
+        <module>process-service-calls-quarkus</module>
+        <module>process-service-calls-springboot</module>
+        <module>process-rest-workitem-multi-quarkus</module>
+        <module>process-rest-workitem-quarkus</module>
+        <module>process-rest-service-call-quarkus</module>
+        <module>process-rest-service-call-springboot</module>
       </modules>
     </profile>
 
@@ -349,6 +376,7 @@
         <module>process-infinispan-persistence-springboot</module>
         <module>process-kafka-quickstart-springboot</module>
         <module>process-kafka-multi-springboot</module>
+        <module>process-monitoring-springboot</module>
         <module>process-mongodb-persistence-springboot</module>
         <module>process-optaplanner-springboot</module>
         <module>process-postgresql-persistence-springboot</module>

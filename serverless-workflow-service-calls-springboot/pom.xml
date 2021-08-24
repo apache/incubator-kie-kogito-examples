@@ -20,7 +20,7 @@
     <dependencies>
       <dependency>
         <groupId>org.kie.kogito</groupId>
-        <artifactId>kogito-springboot-bom</artifactId>
+        <artifactId>kogito-spring-boot-bom</artifactId>
         <version>${project.version}</version>
         <type>pom</type>
         <scope>import</scope>
@@ -47,7 +47,7 @@
     <!-- kogito -->
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-springboot-starter</artifactId>
+      <artifactId>kogito-spring-boot-starter</artifactId>
     </dependency>
 
     <dependency>
