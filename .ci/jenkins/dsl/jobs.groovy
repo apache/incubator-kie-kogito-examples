@@ -3,6 +3,8 @@ import org.kie.jenkins.jobdsl.KogitoConstants
 import org.kie.jenkins.jobdsl.Utils
 import org.kie.jenkins.jobdsl.KogitoJobType
 
+JENKINSFILE_PATH = '.ci/jenkins'
+
 def getDefaultJobParams() {
     return KogitoJobTemplate.getDefaultJobParams(this, 'kogito-examples')
 }
@@ -35,13 +37,6 @@ def nightlyBranchFolder = "${KogitoConstants.KOGITO_DSL_NIGHTLY_FOLDER}/${JOB_BR
 def releaseBranchFolder = "${KogitoConstants.KOGITO_DSL_RELEASE_FOLDER}/${JOB_BRANCH_FOLDER}"
 
 if (Utils.isMainBranch(this)) {
-    // Old PR checks.
-    // To be removed once supported release branches (<= 1.7.x) are no more there.
-    setupPrJob()
-    setupQuarkusLTSPrJob()
-    setupNativePrJob()
-    // End of old PR checks
-
     // For BDD runtimes PR job
     setupDeployJob(bddRuntimesPrFolder, KogitoJobType.PR)
 }
@@ -70,27 +65,6 @@ if (Utils.isLTSBranch(this)) {
 // Methods
 /////////////////////////////////////////////////////////////////
 
-void setupPrJob() {
-    def jobParams = getDefaultJobParams()
-    jobParams.pr.run_only_for_branches = ['1.5.x']
-    jobParams.env.put('TIMEOUT_VALUE', 120)
-    KogitoJobTemplate.createPRJob(this, jobParams)
-}
-
-void setupQuarkusLTSPrJob() {
-    def jobParams = getDefaultJobParams()
-    jobParams.pr.run_only_for_branches = ['1.5.x']
-    jobParams.env.put('TIMEOUT_VALUE', 120)
-    KogitoJobTemplate.createQuarkusLTSPRJob(this, jobParams)
-}
-
-void setupNativePrJob() {
-    def jobParams = getDefaultJobParams()
-    jobParams.pr.run_only_for_branches = ['1.5.x']
-    jobParams.env.put('TIMEOUT_VALUE', 600)
-    KogitoJobTemplate.createNativePRJob(this, jobParams)
-}
-
 void setupMultijobPrDefaultChecks() {
     KogitoJobTemplate.createMultijobPRJobs(this, getMultijobPRConfig()) { return getDefaultJobParams() }
 }
@@ -104,7 +78,7 @@ void setupMultijobPrLTSChecks() {
 }
 
 void setupNativeJob(String jobFolder) {
-    def jobParams = getJobParams('kogito-examples-native', jobFolder, 'Jenkinsfile.native', 'Kogito Examples Native Testing')
+    def jobParams = getJobParams('kogito-examples-native', jobFolder, "${JENKINSFILE_PATH}/Jenkinsfile.native", 'Kogito Examples Native Testing')
     jobParams.triggers = [ cron : 'H 6 * * *' ]
     KogitoJobTemplate.createPipelineJob(this, jobParams).with {
         parameters {
@@ -119,7 +93,7 @@ void setupNativeJob(String jobFolder) {
 }
 
 void setupNativeLTSJob(String jobFolder) {
-    def jobParams = getJobParams('kogito-examples-native-lts', jobFolder, 'Jenkinsfile.native', 'Kogito Examples Native LTS Testing')
+    def jobParams = getJobParams('kogito-examples-native-lts', jobFolder, "${JENKINSFILE_PATH}/Jenkinsfile.native", 'Kogito Examples Native LTS Testing')
     jobParams.triggers = [ cron : 'H 8 * * *' ]
     KogitoJobTemplate.createPipelineJob(this, jobParams).with {
         parameters {
@@ -142,7 +116,7 @@ void setupNativeLTSJob(String jobFolder) {
 * also we set a specific repository for the pr checks
 */
 void setupDeployJob(String jobFolder, KogitoJobType jobType) {
-    def jobParams = getJobParams('kogito-examples-deploy', jobFolder, 'Jenkinsfile.deploy', 'Kogito Examples Deploy')
+    def jobParams = getJobParams('kogito-examples-deploy', jobFolder, "${JENKINSFILE_PATH}/Jenkinsfile.deploy", 'Kogito Examples Deploy')
     if (jobType == KogitoJobType.PR) {
         jobParams.git.branch = '${BUILD_BRANCH_NAME}'
         jobParams.git.author = '${GIT_AUTHOR}'
@@ -203,7 +177,7 @@ void setupDeployJob(String jobFolder, KogitoJobType jobType) {
 }
 
 void setupPromoteJob(String jobFolder, KogitoJobType jobType) {
-    KogitoJobTemplate.createPipelineJob(this, getJobParams('kogito-examples-promote', jobFolder, 'Jenkinsfile.promote', 'Kogito Examples Promote')).with {
+    KogitoJobTemplate.createPipelineJob(this, getJobParams('kogito-examples-promote', jobFolder, "${JENKINSFILE_PATH}/Jenkinsfile.promote", 'Kogito Examples Promote')).with {
         parameters {
             stringParam('DISPLAY_NAME', '', 'Setup a specific build display name')
 
