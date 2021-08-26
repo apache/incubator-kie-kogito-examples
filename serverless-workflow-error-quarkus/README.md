@@ -7,7 +7,7 @@ The service is described using JSON format as defined in the
 [CNCF Serverless Workflow specification](https://github.com/serverlessworkflow/specification).
 
 The workflow check if the number is odd or even and print a message indicating that. 
-The main feature of this demo is that if the number is odd, an exception is thrown and it is the exception error handling the one that sets the odd message. 
+The main feature of this demo is that if the number is odd, an exception is thrown, and it is the exception error handling the one that sets the odd message. 
 
 Hence, this workflow expects as JSON input containing a natural number. This number is passed using a service operation to ``EvenService`` java class. If the number is even, the workflow move to the next defined state, which injects "even" ``numberType``. But if the number is odd, the class throws an ``IllegalArgumentException``. This exception is handled and redirected to odd inject node by using [inline workflow error handling](https://github.com/serverlessworkflow/specification/blob/main/specification.md#Workflow-Error-Handling).  This basically consist on adding as ``onErrors`` field, where the expected exception is specified in ``code`` and the target state (a node injecting "odd" ``numberType``) in ``transition``. Both execution paths finish on the same node, which prints the calculated ``eventType``.
 
