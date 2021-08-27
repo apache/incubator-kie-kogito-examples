@@ -26,7 +26,8 @@ import java.util.stream.IntStream;
 import javax.inject.Inject;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
-import org.junit.After;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.test.quarkus.kafka.KafkaTestClient;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
@@ -63,10 +64,21 @@ public class MessagingIT {
     @ConfigProperty(name = KafkaQuarkusTestResource.KOGITO_KAFKA_PROPERTY)
     private String kafkaBootstrapServers;
 
+    @BeforeEach
+    public void setup() {
+        kafkaClient = new KafkaTestClient(kafkaBootstrapServers);
+    }
+
+    @AfterEach
+    public void close() {
+        if (kafkaClient != null) {
+            kafkaClient.shutdown();
+        }
+    }
+
     @Test
     public void testProcess() throws InterruptedException {
         objectMapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
-        kafkaClient = new KafkaTestClient(kafkaBootstrapServers);
 
         //number of generated events to test
         final int count = 3;
@@ -113,7 +125,7 @@ public class MessagingIT {
         }
     }
 
-    @After
+    @AfterEach
     public void stop() {
         Optional.ofNullable(kafkaClient).ifPresent(KafkaTestClient::shutdown);
     }

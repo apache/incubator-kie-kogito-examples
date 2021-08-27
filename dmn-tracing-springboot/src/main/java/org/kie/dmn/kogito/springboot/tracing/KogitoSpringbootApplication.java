@@ -18,7 +18,7 @@ package org.kie.dmn.kogito.springboot.tracing;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication(scanBasePackages = { "org.kie.dmn.kogito.**", "org.kie.kogito.app.**", "org.kie.kogito.tracing.**", "http**", "org.kie.kogito.monitoring.*" })
+@SpringBootApplication(scanBasePackages = { "org.kie.dmn.kogito.**", "org.kie.kogito.**", "org.kie.kogito.tracing.**", "http**", "org.kie.kogito.monitoring.*" })
 public class KogitoSpringbootApplication {
 
     public static void main(String[] args) {

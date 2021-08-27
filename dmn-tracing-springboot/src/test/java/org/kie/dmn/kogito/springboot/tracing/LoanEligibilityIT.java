@@ -26,7 +26,7 @@ import org.kie.kogito.test.springboot.kafka.KafkaTestClient;
 import org.kie.kogito.testcontainers.springboot.KafkaSpringBootTestResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.ContextConfiguration;
@@ -52,8 +52,8 @@ public class LoanEligibilityIT {
     @LocalServerPort
     private int port;
 
-    @Value("${spring.kafka.bootstrap-servers}")
-    private String kafkaBootstrapServers;
+    @Autowired
+    private KafkaTestClient kafkaClient;
 
     @BeforeEach
     public void setUp() {
@@ -62,65 +62,55 @@ public class LoanEligibilityIT {
 
     @Test
     public void testEvaluateLoanEligibility() throws InterruptedException {
-        final KafkaTestClient kafkaClient = new KafkaTestClient(kafkaBootstrapServers);
         final CountDownLatch countDownLatch = new CountDownLatch(1);
 
-        try {
-            kafkaClient.consume(TRACING_TOPIC_NAME, s -> {
-                LOGGER.info("Received from kafka: {}", s);
-                Optional.ofNullable(CloudEventUtils.decode(s))
-                        .ifPresentOrElse(
-                                cloudEvent -> countDownLatch.countDown(),
-                                () -> LOGGER.error("Error parsing {}", s));
-            });
+        kafkaClient.consume(TRACING_TOPIC_NAME, s -> {
+            LOGGER.info("Received from kafka: {}", s);
+            Optional.ofNullable(CloudEventUtils.decode(s))
+                    .ifPresentOrElse(
+                            cloudEvent -> countDownLatch.countDown(),
+                            () -> LOGGER.error("Error parsing {}", s));
+        });
 
-            given()
-                    .body("{" +
-                            "    \"Client\": {" +
-                            "        \"age\": 43," +
-                            "        \"salary\": 1950," +
-                            "        \"existing payments\": 100" +
-                            "    }," +
-                            "    \"Loan\": {" +
-                            "        \"duration\": 15," +
-                            "        \"installment\": 180" +
-                            "    }," +
-                            "    \"SupremeDirector\" : \"Yes\"," +
-                            "    \"Bribe\": 1000" +
-                            "}")
-                    .contentType(ContentType.JSON)
-                    .when()
-                    .post("/LoanEligibility")
-                    .then()
-                    .statusCode(200)
-                    .header(KOGITO_EXECUTION_ID_HEADER, matchesThePatternOfAUUID())
-                    .body("'Decide'", is(true));
+        given()
+                .body("{" +
+                        "    \"Client\": {" +
+                        "        \"age\": 43," +
+                        "        \"salary\": 1950," +
+                        "        \"existing payments\": 100" +
+                        "    }," +
+                        "    \"Loan\": {" +
+                        "        \"duration\": 15," +
+                        "        \"installment\": 180" +
+                        "    }," +
+                        "    \"SupremeDirector\" : \"Yes\"," +
+                        "    \"Bribe\": 1000" +
+                        "}")
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/LoanEligibility")
+                .then()
+                .statusCode(200)
+                .header(KOGITO_EXECUTION_ID_HEADER, matchesThePatternOfAUUID())
+                .body("'Decide'", is(true));
 
-            countDownLatch.await(5, TimeUnit.SECONDS);
-            assertEquals(0, countDownLatch.getCount());
-        } finally {
-            kafkaClient.shutdown();
-        }
+        countDownLatch.await(5, TimeUnit.SECONDS);
+        assertEquals(0, countDownLatch.getCount());
     }
 
     @Test
     public void testEvaluateDMNModel() throws InterruptedException {
-        final KafkaTestClient kafkaClient = new KafkaTestClient(kafkaBootstrapServers);
         final CountDownLatch countDownLatch = new CountDownLatch(1);
 
-        try {
-            kafkaClient.consume(TRACING_MODELS_TOPIC_NAME, s -> {
-                LOGGER.info("Received from kafka: {}", s);
-                Optional.ofNullable(CloudEventUtils.decode(s))
-                        .ifPresentOrElse(
-                                cloudEvent -> countDownLatch.countDown(),
-                                () -> LOGGER.error("Error parsing {}", s));
-            });
+        kafkaClient.consume(TRACING_MODELS_TOPIC_NAME, s -> {
+            LOGGER.info("Received from kafka: {}", s);
+            Optional.ofNullable(CloudEventUtils.decode(s))
+                    .ifPresentOrElse(
+                            cloudEvent -> countDownLatch.countDown(),
+                            () -> LOGGER.error("Error parsing {}", s));
+        });
 
-            countDownLatch.await(5, TimeUnit.SECONDS);
-            assertEquals(0, countDownLatch.getCount());
-        } finally {
-            kafkaClient.shutdown();
-        }
+        countDownLatch.await(5, TimeUnit.SECONDS);
+        assertEquals(0, countDownLatch.getCount());
     }
 }
