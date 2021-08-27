@@ -7,7 +7,7 @@
 ## Description
 
 A set of BPMN processes used to manually run throughput tests on Springboot  in order to check performance.
-All BPMN files share the same structure. They consist on one script, which invokes ``Thread.sleep`` to stop process execution as much time as indicated on ``delay`` argument and they all publish a message 
+All BPMN files share the same structure. They consist of one script, which invokes ``Thread.sleep`` to stop process execution as much time as indicated on ``delay`` argument, and they all publish a message 
 to channel  _done_  when ended. 
 The difference between them is the way they are started: 
 * test.bpmn2 is started through a regular REST invocation
