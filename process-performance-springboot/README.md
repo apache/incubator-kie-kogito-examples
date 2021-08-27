@@ -15,7 +15,7 @@ The difference between them is the way they are started:
 * kafkaTestOtherChannel.bpmn2 is started through a message on channel  _test2_
  
 This project is configured to run on Kafka (you can change broker and topic on application.properties). Therefore, you need to have
-Kafka cluster installed and available over the network. Refer to [Kafka Apache site](https://kafka.apache.org/quickstart) to more information about how to install. 
+Kafka cluster installed and available over the network. Refer to [Kafka Apache site](https://kafka.apache.org/quickstart) for more information about how to install. 
 
 ## Build and run
 
