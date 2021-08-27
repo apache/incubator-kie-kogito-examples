@@ -48,12 +48,8 @@
     <!-- uncomment these two to enable persistence for kogito -->
     <!--
     <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-infinispan-client</artifactId>
-    </dependency>
-    <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-addons-persistence-infinispan</artifactId>
+      <artifactId>kogito-addons-quarkus-persistence-infinispan</artifactId>
     </dependency>
     -->
     <dependency>
