@@ -1,5 +1,11 @@
 # Decision Table + Quarkus example
 
+| | |
+|-|-|
+|`NOTE`|**Looking for modern decision tables?**<br />Kogito, like Drools, offers support of the [DMN open standard](https://drools.org/learn/dmn.html) for visual and semantic execution of declarative logic. The business rules in this example may be also expressed using DMN decision tables (or other visual paradigm of DMN), instead of Drools XLS decision tables.<br/>For more information about DMN support in Kogito, you may refer to the companion Quarkus guide specific to [Kogito DMN support on Quarkus](https://quarkus.io/guides/kogito-dmn), or the [Kogito DMN documentation](https://docs.kogito.kie.org/latest/html_single/#_using_dmn_models_in_kogito_services).|
+
+---
+
 ## Description
 
 A rule service to validate `LoanApplication` fact. Rules are written as a decision table.
