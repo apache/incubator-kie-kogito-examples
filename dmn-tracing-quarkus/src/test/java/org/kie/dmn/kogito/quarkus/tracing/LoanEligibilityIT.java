@@ -19,6 +19,8 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.cloudevents.CloudEventUtils;
 import org.kie.kogito.test.quarkus.kafka.KafkaTestClient;
@@ -51,71 +53,75 @@ public class LoanEligibilityIT {
     @ConfigProperty(name = KafkaQuarkusTestResource.KOGITO_KAFKA_PROPERTY)
     private String kafkaBootstrapServers;
 
-    @Test
-    public void testEvaluateLoanEligibility() throws InterruptedException {
-        final KafkaTestClient kafkaClient = new KafkaTestClient(kafkaBootstrapServers);
-        final CountDownLatch countDownLatch = new CountDownLatch(1);
+    private KafkaTestClient kafkaClient;
 
-        try {
-            kafkaClient.consume(TRACING_TOPIC_NAME, s -> {
-                LOGGER.info("Received from kafka: {}", s);
+    @BeforeEach
+    public void setup() {
+        kafkaClient = new KafkaTestClient(kafkaBootstrapServers);
+    }
 
-                if (checkDeserialization(s, TraceEvent.class) && isTraceEventComplete(s)) {
-                    countDownLatch.countDown();
-                } else {
-                    fail("Decision trace event is not valid");
-                }
-            });
-
-            given()
-                    .body("{" +
-                            "    \"Client\": {" +
-                            "        \"age\": 43," +
-                            "        \"salary\": 1950," +
-                            "        \"existing payments\": 100" +
-                            "    }," +
-                            "    \"Loan\": {" +
-                            "        \"duration\": 15," +
-                            "        \"installment\": 180" +
-                            "    }," +
-                            "    \"SupremeDirector\" : \"Yes\"," +
-                            "    \"Bribe\": 1000" +
-                            "}")
-                    .contentType(ContentType.JSON)
-                    .when()
-                    .post("/LoanEligibility")
-                    .then()
-                    .statusCode(200)
-                    .header(KOGITO_EXECUTION_ID_HEADER, matchesThePatternOfAUUID())
-                    .body("'Decide'", is(true));
-
-            countDownLatch.await(5, TimeUnit.SECONDS);
-            assertEquals(0, countDownLatch.getCount());
-        } finally {
+    @AfterEach
+    public void close() {
+        if (kafkaClient != null) {
             kafkaClient.shutdown();
         }
     }
 
     @Test
-    public void testEvaluateDMNModel() throws InterruptedException {
-        final KafkaTestClient kafkaClient = new KafkaTestClient(kafkaBootstrapServers);
+    public void testEvaluateLoanEligibility() throws InterruptedException {
         final CountDownLatch countDownLatch = new CountDownLatch(1);
 
-        try {
-            kafkaClient.consume(TRACING_MODELS_TOPIC_NAME, s -> {
-                LOGGER.info("Received from kafka: {}", s);
-                if (checkDeserialization(s, ModelEvent.class) && isModelEventComplete(s)) {
-                    countDownLatch.countDown();
-                } else {
-                    fail("Model event is not valid");
-                }
-            });
+        kafkaClient.consume(TRACING_TOPIC_NAME, s -> {
+            LOGGER.info("Received from kafka: {}", s);
 
-            countDownLatch.await(5, TimeUnit.SECONDS);
-            assertEquals(0, countDownLatch.getCount());
-        } finally {
-            kafkaClient.shutdown();
-        }
+            if (checkDeserialization(s, TraceEvent.class) && isTraceEventComplete(s)) {
+                countDownLatch.countDown();
+            } else {
+                fail("Decision trace event is not valid");
+            }
+        });
+
+        given()
+                .body("{" +
+                        "    \"Client\": {" +
+                        "        \"age\": 43," +
+                        "        \"salary\": 1950," +
+                        "        \"existing payments\": 100" +
+                        "    }," +
+                        "    \"Loan\": {" +
+                        "        \"duration\": 15," +
+                        "        \"installment\": 180" +
+                        "    }," +
+                        "    \"SupremeDirector\" : \"Yes\"," +
+                        "    \"Bribe\": 1000" +
+                        "}")
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/LoanEligibility")
+                .then()
+                .statusCode(200)
+                .header(KOGITO_EXECUTION_ID_HEADER, matchesThePatternOfAUUID())
+                .body("'Decide'", is(true));
+
+        countDownLatch.await(5, TimeUnit.SECONDS);
+        assertEquals(0, countDownLatch.getCount());
+    }
+
+    @Test
+    public void testEvaluateDMNModel() throws InterruptedException {
+        final CountDownLatch countDownLatch = new CountDownLatch(1);
+
+        kafkaClient.consume(TRACING_MODELS_TOPIC_NAME, s -> {
+            LOGGER.info("Received from kafka: {}", s);
+            if (checkDeserialization(s, ModelEvent.class) && isModelEventComplete(s)) {
+                countDownLatch.countDown();
+            } else {
+                fail("Model event is not valid");
+            }
+        });
+
+        countDownLatch.await(5, TimeUnit.SECONDS);
+        assertEquals(0, countDownLatch.getCount());
     }
 
     private <T> boolean checkDeserialization(String s, Class<T> clazz) {

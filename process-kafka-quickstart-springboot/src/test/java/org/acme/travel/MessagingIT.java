@@ -23,7 +23,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
-import org.junit.After;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.test.springboot.kafka.KafkaTestClient;
 import org.kie.kogito.testcontainers.springboot.KafkaSpringBootTestResource;
@@ -109,7 +109,7 @@ public class MessagingIT {
         }
     }
 
-    @After
+    @AfterEach
     public void stop() {
         Optional.ofNullable(kafkaClient).ifPresent(KafkaTestClient::shutdown);
     }

@@ -17,8 +17,8 @@ package org.acme.travel;
 
 import java.net.URI;
 import java.time.OffsetDateTime;
-import java.util.Arrays;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -28,6 +28,7 @@ import javax.inject.Inject;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.test.quarkus.kafka.KafkaTestClient;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
@@ -66,16 +67,20 @@ public class MultiMessagingIT {
     @ConfigProperty(name = KafkaQuarkusTestResource.KOGITO_KAFKA_PROPERTY)
     private String kafkaBootstrapServers;
 
+    @BeforeEach
+    public void setup() {
+        kafkaClient = new KafkaTestClient(kafkaBootstrapServers);
+    }
+
     @Test
     public void testProcess() throws InterruptedException {
         objectMapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
-        kafkaClient = new KafkaTestClient(kafkaBootstrapServers);
 
         //number of generated events to test
         final int count = 3;
         final CountDownLatch countDownLatch = new CountDownLatch(count);
 
-        kafkaClient.consume(Arrays.asList(TOPIC_PROCESSED_CONSUMER, TOPIC_CANCEL_CONSUMER), s -> {
+        kafkaClient.consume(Set.of(TOPIC_PROCESSED_CONSUMER, TOPIC_CANCEL_CONSUMER), s -> {
             LOGGER.info("Received from kafka: {}", s);
             try {
                 JsonNode event = objectMapper.readValue(s, JsonNode.class);
