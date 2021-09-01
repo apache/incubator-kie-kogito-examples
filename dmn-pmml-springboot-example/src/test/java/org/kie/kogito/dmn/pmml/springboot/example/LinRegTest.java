@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.dmn.pmml.kogito.springboot.example;
+package org.kie.kogito.dmn.pmml.springboot.example;
 
 import java.util.Collections;
 import java.util.Map;
@@ -26,10 +26,10 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import io.restassured.RestAssured;
 
-import static org.kie.dmn.pmml.kogito.springboot.example.CommonTestUtils.testDescriptive;
-import static org.kie.dmn.pmml.kogito.springboot.example.CommonTestUtils.testDescriptiveWrongData;
-import static org.kie.dmn.pmml.kogito.springboot.example.CommonTestUtils.testResult;
-import static org.kie.dmn.pmml.kogito.springboot.example.CommonTestUtils.testResultWrongData;
+import static org.kie.kogito.dmn.pmml.springboot.example.CommonTestUtils.testDescriptive;
+import static org.kie.kogito.dmn.pmml.springboot.example.CommonTestUtils.testDescriptiveWrongData;
+import static org.kie.kogito.dmn.pmml.springboot.example.CommonTestUtils.testResult;
+import static org.kie.kogito.dmn.pmml.springboot.example.CommonTestUtils.testResultWrongData;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
