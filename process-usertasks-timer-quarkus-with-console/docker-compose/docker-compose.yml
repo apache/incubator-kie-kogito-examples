@@ -81,13 +81,14 @@ services:
       - ./persistence/:/home/kogito/data/protobufs/
     environment:
       QUARKUS_INFINISPAN_CLIENT_SERVER_LIST: infinispan:11222
+      QUARKUS_INFINISPAN_CLIENT_USE_AUTH: "false"
       KAFKA_BOOTSTRAP_SERVERS: kafka:29092
       KOGITO_DATA_INDEX_PROPS: -Dkogito.protobuf.folder=/home/kogito/data/protobufs/
 
   jobs-service:
     container_name: jobs-service
     network_mode: "host"
-    image: quay.io/kiegroup/kogito-jobs-service:${KOGITO_VERSION}
+    image: quay.io/kiegroup/kogito-jobs-service-infinispan:${KOGITO_VERSION}
     depends_on:
       kafka:
         condition: service_started
@@ -95,7 +96,8 @@ services:
         condition: service_healthy
       data-index:
         condition: service_started
-    environment: 
+    environment:
+      QUARKUS_INFINISPAN_CLIENT_USE_AUTH: "false"
       ENABLE_EVENTS: "true"
       KOGITO_JOBS_PROPS: -Dquarkus-profile=events-support -D%events-support.quarkus.http.port=8580 -D%events-support.kafka.bootstrap.servers=localhost:9092
                          -D%events-support.mp.messaging.outgoing.kogito-job-service-job-status-events.bootstrap.servers=localhost:9092
