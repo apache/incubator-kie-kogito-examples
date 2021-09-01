@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Red Hat, Inc. and/or its affiliates.
+ * Copyright 2021 Red Hat, Inc. and/or its affiliates.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.dmn.pmml.kogito.quarkus.example;
+package org.kie.kogito.dmn.pmml.quarkus.example;
 
 import java.util.Collections;
 import java.util.Map;
@@ -23,30 +23,29 @@ import org.junit.jupiter.api.Test;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.RestAssured;
 
-import static org.kie.dmn.pmml.kogito.quarkus.example.CommonTestUtils.testDescriptive;
-import static org.kie.dmn.pmml.kogito.quarkus.example.CommonTestUtils.testResult;
+import static org.kie.kogito.dmn.pmml.quarkus.example.CommonTestUtils.testDescriptive;
+import static org.kie.kogito.dmn.pmml.quarkus.example.CommonTestUtils.testResult;
 
 @QuarkusTest
-public class LinRegTest {
+public class MiningModelTest {
 
-    private static final String BASE_PATH = "/LinReg";
-    private static final String TARGET = "fld4";
+    private static final String BASE_PATH = "/MiningModelSum";
+    private static final String TARGET = "result";
 
     static {
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
     }
 
     @Test
-    void testEvaluateLinRegResult() {
-        String inputData = "{\"fld1\":3.0, \"fld2\":2.0, \"fld3\":\"y\"}";
-        testResult(inputData, BASE_PATH, TARGET, 52.5f);
+    void testEvaluateMiningModelResult() {
+        String inputData = "{\"input1\":200.0, \"input2\":-1.0, \"input3\":2.0}";
+        testResult(inputData, BASE_PATH, TARGET, -299.0f);
     }
 
     @Test
-    void testEvaluateLinRegDescriptive() {
-        String inputData = "{\"fld1\":3.0, \"fld2\":2.0, \"fld3\":\"y\"}";
-        final Map<String, Object> expectedResultMap = Collections.singletonMap(TARGET, 52.5f);
+    void testEvaluateMiningModelResultDescriptive() {
+        String inputData = "{\"input1\":200.0, \"input2\":-1.0, \"input3\":2.0}";
+        final Map<String, Object> expectedResultMap = Collections.singletonMap(TARGET, -299.0f);
         testDescriptive(inputData, BASE_PATH, TARGET, expectedResultMap);
     }
-
 }

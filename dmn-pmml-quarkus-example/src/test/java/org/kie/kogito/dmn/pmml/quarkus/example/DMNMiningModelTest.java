@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Red Hat, Inc. and/or its affiliates.
+ * Copyright 2021 Red Hat, Inc. and/or its affiliates.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,37 +13,42 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.dmn.pmml.kogito.quarkus.example;
+package org.kie.kogito.dmn.pmml.quarkus.example;
 
 import org.junit.jupiter.api.Test;
 
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import io.restassured.path.json.config.JsonPathConfig;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.is;
+import static io.restassured.config.JsonConfig.jsonConfig;
+import static org.hamcrest.Matchers.*;
 
 @QuarkusTest
-public class DMNTreeTest {
+public class DMNMiningModelTest {
 
     static {
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
     }
 
     @Test
-    public void testEvaluateTreeDMN() {
-        String inputData = "{\"temperature\":30.0, \"humidity\":10.0}";
+    public void testEvaluateMiningModelDMN() {
+        String inputData = "{\"input1\":200.0, \"input2\":-1.0, \"input3\":2.0}";
         given()
+                .config(RestAssured.config().jsonConfig(jsonConfig().numberReturnType(JsonPathConfig.NumberReturnType.DOUBLE)))
                 .contentType(ContentType.JSON)
                 .body(inputData)
                 .when()
-                .post("/TestTreeDMN")
+                .post("/TestMiningModelDMN")
                 .then()
                 .statusCode(200)
-                .body("TestTreeBKM", is("function TestTreeBKM( humidity, temperature )"))
-                .body("temperature", is(Float.valueOf("30")))
-                .body("humidity", is(Float.valueOf("10")))
-                .body("Decision", is("sunglasses"));
+                .body("SumMiningModelBKM", is("function SumMiningModelBKM( input1, input2, input3 )"))
+                .body("input1", is(comparesEqualTo(200))) // was input
+                .body("input2", is(comparesEqualTo(-1))) // was input
+                .body("input3", is(comparesEqualTo(2))) // was input
+                .body("Decision", is(comparesEqualTo(-299))) // real decision output
+        ;
     }
 }
