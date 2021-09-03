@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.dmn.kogito.quarkus.tracing;
+package org.kie.kogito.dmn.quarkus.tracing;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -38,7 +38,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
-import static org.kie.dmn.kogito.quarkus.tracing.matcher.StringMatchesUUIDPattern.matchesThePatternOfAUUID;
+import static org.kie.kogito.dmn.quarkus.tracing.matcher.StringMatchesUUIDPattern.matchesThePatternOfAUUID;
 
 @QuarkusTest
 @QuarkusTestResource(KafkaQuarkusTestResource.class)

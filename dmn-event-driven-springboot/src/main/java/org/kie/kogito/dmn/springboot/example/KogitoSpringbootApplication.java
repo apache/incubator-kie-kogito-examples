@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.dmn.kogito.springboot.example;
+package org.kie.kogito.dmn.springboot.example;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication(scanBasePackages = { "org.kie.dmn.kogito.**", "org.kie.kogito.app.**", "org.kie.kogito.**", "http**" })
+@SpringBootApplication(scanBasePackages = { "org.kie.kogito.app.**", "org.kie.kogito.**", "http**" })
 public class KogitoSpringbootApplication {
 
     public static void main(String[] args) {

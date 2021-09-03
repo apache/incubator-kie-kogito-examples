@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.dmn.kogito.quarkus.tracing.matcher;
+package org.kie.kogito.dmn.springboot.tracing.matcher;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -35,5 +35,4 @@ public class StringMatchesUUIDPattern extends TypeSafeMatcher<String> {
     public static Matcher<String> matchesThePatternOfAUUID() {
         return new StringMatchesUUIDPattern();
     }
-
 }

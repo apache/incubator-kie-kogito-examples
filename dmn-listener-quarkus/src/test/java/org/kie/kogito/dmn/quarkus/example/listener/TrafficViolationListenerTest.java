@@ -23,9 +23,9 @@ import javax.inject.Inject;
 
 import org.junit.jupiter.api.Test;
 import org.kie.dmn.api.core.event.DMNRuntimeEventListener;
-import org.kie.dmn.kogito.quarkus.example.mock.MockDMNRuntimeEventListener;
 import org.kie.kogito.decision.DecisionConfig;
 import org.kie.kogito.decision.DecisionEventListenerConfig;
+import org.kie.kogito.dmn.quarkus.example.mock.MockDMNRuntimeEventListener;
 
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;

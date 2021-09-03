@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.dmn.kogito.springboot.tracing;
+package org.kie.kogito.dmn.springboot.tracing;
 
 import java.util.Optional;
 import java.util.concurrent.CountDownLatch;
@@ -37,7 +37,7 @@ import io.restassured.http.ContentType;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.kie.dmn.kogito.springboot.tracing.matcher.StringMatchesUUIDPattern.matchesThePatternOfAUUID;
+import static org.kie.kogito.dmn.springboot.tracing.matcher.StringMatchesUUIDPattern.matchesThePatternOfAUUID;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
 @ContextConfiguration(initializers = KafkaSpringBootTestResource.class)
