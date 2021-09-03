@@ -13,16 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.tests;
+package org.kie.kogito.flexible.example.model;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-@SpringBootApplication(scanBasePackages = { "org.kie.kogito.**" })
-public class KogitoSpringbootApplication {
-
-    public static void main(String[] args) {
-        SpringApplication.run(KogitoSpringbootApplication.class, args);
-    }
-
+public enum State {
+    NEW,
+    WAITING_FOR_CUSTOMER,
+    WAITING_FOR_OWNER,
+    RESOLVED,
+    CLOSED
 }
