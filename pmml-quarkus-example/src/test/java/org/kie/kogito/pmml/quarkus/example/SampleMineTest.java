@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.pmml.kogito.quarkus.example;
+package org.kie.kogito.pmml.quarkus.example;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,29 +21,33 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.RestAssured;
 
-import static org.kie.pmml.kogito.quarkus.example.CommonTestUtils.testDescriptive;
-import static org.kie.pmml.kogito.quarkus.example.CommonTestUtils.testResult;
+import static org.kie.kogito.pmml.quarkus.example.CommonTestUtils.testDescriptive;
+import static org.kie.kogito.pmml.quarkus.example.CommonTestUtils.testResult;
 
 @QuarkusTest
-class SimpleScorecardTest {
+class SampleMineTest {
 
-    private static final String BASE_PATH = "/SimpleScorecard";
-    private static final String TARGET = "score";
+    private static final String BASE_PATH = "/SampleMine";
+    private static final String TARGET = "decision";
 
-    @Test
-    void testEvaluateSimpleScorecardResult() {
-        String inputData = "{\"input1\":5.0, \"input2\":-10.0}";
-        testResult(inputData, BASE_PATH, TARGET, -15.0f);
+    static {
+        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
     }
 
     @Test
-    void testEvaluateSimpleScorecardDescriptive() {
-        String inputData = "{\"input1\":5.0, \"input2\":-10.0}";
+    void testEvaluateSampleMineResult() {
+        String inputData = "{\"temperature\":30.0, \"humidity\":10.0}";
+        testResult(inputData, BASE_PATH, TARGET, "sunglasses");
+    }
+
+    @Test
+    void testEvaluateSampleMineDescriptive() {
+        String inputData = "{\"temperature\":30.0, \"humidity\":10.0}";
         final Map<String, Object> expectedResultMap = new HashMap<>();
-        expectedResultMap.put(TARGET, -15.0f);
-        expectedResultMap.put("Reason Code 1", "Input1ReasonCode");
-        expectedResultMap.put("Reason Code 2", "Input2ReasonCode");
+        expectedResultMap.put(TARGET, "sunglasses");
+        expectedResultMap.put("weatherdecision", "sunglasses");
         testDescriptive(inputData, BASE_PATH, TARGET, expectedResultMap);
     }
 

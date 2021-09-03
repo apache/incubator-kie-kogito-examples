@@ -13,14 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.pmml.kogito.springboot.example;
+package org.kie.kogito.pmml.quarkus.example;
 
 import java.util.Map;
 
 import org.hamcrest.core.IsNull;
 
 import io.restassured.http.ContentType;
-import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
@@ -35,26 +34,24 @@ public class CommonTestUtils {
             final String path,
             final String targetField,
             final Object expectedResult) {
-        final Response response = given()
+        given()
                 .contentType(ContentType.JSON)
                 .body(inputData)
                 .when()
-                .post(path);
-        System.out.println(response.body().prettyPrint());
-        response.then()
+                .post(path)
+                .then()
                 .statusCode(200)
                 .body(targetField, is(expectedResult));
     }
 
     public static void testResultWrongData(final String inputData,
             final String path) {
-        final Response response = given()
+        given()
                 .contentType(ContentType.JSON)
                 .body(inputData)
                 .when()
-                .post(path);
-        System.out.println(response.body().prettyPrint());
-        response.then()
+                .post(path)
+                .then()
                 .statusCode(500)
                 .body("exception", isA(String.class));
     }
@@ -64,13 +61,11 @@ public class CommonTestUtils {
             final String targetField,
             final Map<String, Object> expectedResultMap) {
         String path = basePath + "/descriptive";
-        final Response response = given()
+        Object resultVariables = given()
                 .contentType(ContentType.JSON)
                 .body(inputData)
                 .when()
-                .post(path);
-        System.out.println(response.body().prettyPrint());
-        Object resultVariables = response
+                .post(path)
                 .then()
                 .statusCode(200)
                 .body("correlationId", is(new IsNull()))
@@ -94,13 +89,12 @@ public class CommonTestUtils {
     public static void testDescriptiveWrongData(final String inputData,
             final String basePath) {
         String path = basePath + "/descriptive";
-        final Response response = given()
+        given()
                 .contentType(ContentType.JSON)
                 .body(inputData)
                 .when()
-                .post(path);
-        System.out.println(response.body().prettyPrint());
-        response.then()
+                .post(path)
+                .then()
                 .statusCode(500)
                 .body("exception", isA(String.class));
     }

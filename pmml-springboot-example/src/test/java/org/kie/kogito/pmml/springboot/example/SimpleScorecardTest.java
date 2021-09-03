@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.pmml.kogito.springboot.example;
+package org.kie.kogito.pmml.springboot.example;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,15 +26,15 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import io.restassured.RestAssured;
 
-import static org.kie.pmml.kogito.springboot.example.CommonTestUtils.testDescriptive;
-import static org.kie.pmml.kogito.springboot.example.CommonTestUtils.testResult;
+import static org.kie.kogito.pmml.springboot.example.CommonTestUtils.testDescriptive;
+import static org.kie.kogito.pmml.springboot.example.CommonTestUtils.testResult;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-class SampleMineTest {
+class SimpleScorecardTest {
 
-    private static final String BASE_PATH = "/SampleMine";
-    private static final String TARGET = "decision";
+    private static final String BASE_PATH = "/SimpleScorecard";
+    private static final String TARGET = "score";
 
     @LocalServerPort
     private int port;
@@ -45,17 +45,18 @@ class SampleMineTest {
     }
 
     @Test
-    void testEvaluateSampleMineResult() {
-        String inputData = "{\"temperature\":30.0, \"humidity\":10.0}";
-        testResult(inputData, BASE_PATH, TARGET, "sunglasses");
+    void testEvaluateSimpleScorecardResult() {
+        String inputData = "{\"input1\":5.0, \"input2\":-10.0}";
+        testResult(inputData, BASE_PATH, TARGET, -15.0f);
     }
 
     @Test
-    void testEvaluateSampleMineDescriptive() {
-        String inputData = "{\"temperature\":30.0, \"humidity\":10.0}";
+    void testEvaluateSimpleScorecardDescriptive() {
+        String inputData = "{\"input1\":5.0, \"input2\":-10.0}";
         final Map<String, Object> expectedResultMap = new HashMap<>();
-        expectedResultMap.put(TARGET, "sunglasses");
-        expectedResultMap.put("weatherdecision", "sunglasses");
+        expectedResultMap.put(TARGET, -15.0f);
+        expectedResultMap.put("Reason Code 1", "Input1ReasonCode");
+        expectedResultMap.put("Reason Code 2", "Input2ReasonCode");
         testDescriptive(inputData, BASE_PATH, TARGET, expectedResultMap);
     }
 

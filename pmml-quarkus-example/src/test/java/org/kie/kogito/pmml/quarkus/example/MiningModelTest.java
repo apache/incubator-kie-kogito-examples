@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.pmml.kogito.quarkus.example;
+package org.kie.kogito.pmml.quarkus.example;
 
 import java.util.Collections;
 import java.util.Map;
@@ -22,8 +22,8 @@ import org.junit.jupiter.api.Test;
 
 import io.quarkus.test.junit.QuarkusTest;
 
-import static org.kie.pmml.kogito.quarkus.example.CommonTestUtils.testDescriptive;
-import static org.kie.pmml.kogito.quarkus.example.CommonTestUtils.testResult;
+import static org.kie.kogito.pmml.quarkus.example.CommonTestUtils.testDescriptive;
+import static org.kie.kogito.pmml.quarkus.example.CommonTestUtils.testResult;
 
 @QuarkusTest
 class MiningModelTest {

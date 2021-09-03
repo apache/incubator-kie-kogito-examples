@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.pmml.kogito.springboot.example;
+package org.kie.kogito.pmml.springboot.example;
 
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -26,15 +26,15 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import io.restassured.RestAssured;
 
-import static org.kie.pmml.kogito.springboot.example.CommonTestUtils.testDescriptive;
-import static org.kie.pmml.kogito.springboot.example.CommonTestUtils.testResult;
+import static org.kie.kogito.pmml.springboot.example.CommonTestUtils.testDescriptive;
+import static org.kie.kogito.pmml.springboot.example.CommonTestUtils.testResult;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-class LinRegTest {
+class SampleMineTest {
 
-    private static final String BASE_PATH = "/LinReg";
-    private static final String TARGET = "fld4";
+    private static final String BASE_PATH = "/SampleMine";
+    private static final String TARGET = "decision";
 
     @LocalServerPort
     private int port;
@@ -45,15 +45,17 @@ class LinRegTest {
     }
 
     @Test
-    void testEvaluateLinRegResult() {
-        String inputData = "{\"fld1\":3.0, \"fld2\":2.0, \"fld3\":\"y\"}";
-        testResult(inputData, BASE_PATH, TARGET, 52.5f);
+    void testEvaluateSampleMineResult() {
+        String inputData = "{\"temperature\":30.0, \"humidity\":10.0}";
+        testResult(inputData, BASE_PATH, TARGET, "sunglasses");
     }
 
     @Test
-    void testEvaluateLinRegDescriptive() {
-        String inputData = "{\"fld1\":3.0, \"fld2\":2.0, \"fld3\":\"y\"}";
-        final Map<String, Object> expectedResultMap = Collections.singletonMap(TARGET, 52.5f);
+    void testEvaluateSampleMineDescriptive() {
+        String inputData = "{\"temperature\":30.0, \"humidity\":10.0}";
+        final Map<String, Object> expectedResultMap = new HashMap<>();
+        expectedResultMap.put(TARGET, "sunglasses");
+        expectedResultMap.put("weatherdecision", "sunglasses");
         testDescriptive(inputData, BASE_PATH, TARGET, expectedResultMap);
     }
 
