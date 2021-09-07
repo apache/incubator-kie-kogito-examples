@@ -13,16 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.tests;
+package org.kie.kogito.pmml.quarkus.example;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import io.quarkus.test.junit.NativeImageTest;
 
-@SpringBootApplication(scanBasePackages = { "org.kie.kogito.**" })
-public class KogitoSpringbootApplication {
+@NativeImageTest
+public class NativeSimpleScorecardTestIT extends SimpleScorecardTest {
 
-    public static void main(String[] args) {
-        SpringApplication.run(KogitoSpringbootApplication.class, args);
-    }
-
+    // Execute the same tests but in native mode.
 }
