@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>kogito-examples</artifactId>
-    <version>1.11.0.Final</version>
+    <version>1.11.1-SNAPSHOT</version>
   </parent>
   <artifactId>dmn-drools-springboot-metrics</artifactId>
   <name>Kogito Example :: DMN Metrics SpringBoot</name>
