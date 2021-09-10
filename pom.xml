@@ -203,6 +203,7 @@
         <module>serverless-workflow-github-showcase</module>
         <module>serverless-workflow-order-processing</module>
         <module>serverless-workflow-funqy</module>
+	<module>task-assigning</module>
       </modules>
     </profile>
 
@@ -396,6 +397,7 @@
         <module>ruleunit-springboot-example</module>
         <module>serverless-workflow-greeting-springboot</module>
         <module>serverless-workflow-service-calls-springboot</module>
+        <module>task-assigning</module>
       </modules>
     </profile>
   </profiles>

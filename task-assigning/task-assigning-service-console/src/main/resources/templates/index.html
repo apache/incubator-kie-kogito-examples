@@ -1,0 +1,52 @@
+<html lang="en">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Task Assigning Service by OptaPlanner</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/webjars/font-awesome/css/all.css"/>
+    <link rel="stylesheet" href="/style.css"/>
+</head>
+
+<script>
+    window.TASK_ASSIGNING_SERVICE_SOLUTION_URL = '{config:property('kogito.task-assigning.service.solution.url')}';
+</script>
+
+<body>
+<div class="container-fluid">
+    <noscript>Enabling JavaScript is required to run this app.</noscript>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="https://www.optaplanner.org">
+            <img src="optaPlannerLogo200px.png" alt="OptaPlanner logo">
+        </a>
+    </nav>
+    <div class="sticky-top d-flex justify-content-center align-items-center" aria-live="polite" aria-atomic="true">
+        <div id="notificationPanel" style="position: absolute; top: .5rem;"></div>
+    </div>
+    <h3>Task Assigning Service by OptaPlanner</h3>
+
+    <div style="margin-bottom: .5rem">
+        <button id="refreshButton" type="button" class="btn btn-success">
+            <span class="fas fa-sync"></span> Refresh
+        </button>
+        <button id="startPeriodicRefreshButton" type="button" class="btn btn-success">
+            <span class="fas fa-play"></span> Periodic Refresh
+        </button>
+        <button id="stopPeriodicRefreshButton" type="button" class="btn btn-danger">
+            <span class="fas fa-stop"></span> Stop refreshing
+        </button>
+    </div>
+
+    <div class="tab-content" id="myTabContent">
+        <table class="table table-borderless table-striped" id="solutionTable">
+            <!-- Filled in by app.js -->
+        </table>
+    </div>
+</div>
+
+<script src="/webjars/jquery/jquery.min.js"></script>
+<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+<script src="/webjars/js-joda/dist/js-joda.min.js"></script>
+<script src="/app.js"></script>
+</body>
+</html>
