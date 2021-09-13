@@ -34,7 +34,7 @@
     <!-- kogito -->
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-spring-boot-starter</artifactId>
+      <artifactId>kogito-serverless-workflow-spring-boot-starter</artifactId>
     </dependency>
     <dependency>
       <groupId>com.jayway.jsonpath</groupId>
