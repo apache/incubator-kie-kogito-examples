@@ -49,6 +49,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 @SpringBootTest(classes = KogitoKafkaMultiSpringbootApplication.class)
 @ContextConfiguration(initializers = KafkaSpringBootTestResource.class)
+@Disabled("Flaky test. Follow-up issue: https://issues.redhat.com/browse/KOGITO-5886")
 public class MultiMessagingIT {
 
     public static final String TOPIC_PRODUCER = "travellers";
