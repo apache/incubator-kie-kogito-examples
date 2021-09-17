@@ -94,92 +94,92 @@ pipeline {
                 }
             }
         }
-        stage('Build kogito-examples') {
-            steps {
-                script {
-                    getMavenCommand().skipTests(params.SKIP_TESTS).run('clean install')
-                }
-            }
-            post {
-                always {
-                    saveReports(params.SKIP_TESTS)
-                }
-            }
-        }
-        stage('Check kogito-examples with persistence') {
-            steps {
-                script {
-                    sh "cp -r ${getRepoName()} ${getRepoName()}-persistence"
-                    getMavenCommand("${getRepoName()}-persistence")
-                        .skipTests(params.SKIP_TESTS)
-                        .withProfiles(['persistence'])
-                        .run('clean install')
-                }
-            }
-            post {
-                always {
-                    saveReports(params.SKIP_TESTS)
-                }
-            }
-        }
-        stage('Check kogito-examples with events') {
-            steps {
-                script {
-                    sh "cp -r ${getRepoName()} ${getRepoName()}-events"
-                    getMavenCommand("${getRepoName()}-events")
-                        .skipTests(params.SKIP_TESTS)
-                        .withProfiles(['events'])
-                        .run('clean install')
-                }
-            }
-            post {
-                always {
-                    saveReports(params.SKIP_TESTS)
-                }
-            }
-        }
-        stage('Deploy to repository') {
-            when {
-                expression { return !shouldStageArtifacts() && !isSpecificArtifactsUpload() && shouldDeployToRepository() }
-            }
-            steps {
-                script {
-                    runMavenDeploy()
-                }
-            }
-        }
-        stage('Deploy locally') {
-            when {
-                expression { return shouldStageArtifacts() || isSpecificArtifactsUpload() }
-            }
-            steps {
-                script {
-                    runMavenDeploy(true)
-                }
-            }
-        }
-        stage('Upload artifacts to given repository') {
-            when {
-                expression { return isSpecificArtifactsUpload() }
-            }
-            steps {
-                script {
-                    // Deploy to specific repository with credentials
-                    maven.uploadLocalArtifacts(env.MAVEN_REPO_CREDS_ID, getLocalDeploymentFolder(), getMavenRepoZipUrl())
-                }
-            }
-        }
-        stage('Stage artifacts') {
-            when {
-                expression { return shouldStageArtifacts() }
-            }
-            steps {
-                script {
-                    // Stage release artifacts
-                    runMavenStage()
-                }
-            }
-        }
+        // stage('Build kogito-examples') {
+        //     steps {
+        //         script {
+        //             getMavenCommand().skipTests(params.SKIP_TESTS).run('clean install')
+        //         }
+        //     }
+        //     post {
+        //         always {
+        //             saveReports(params.SKIP_TESTS)
+        //         }
+        //     }
+        // }
+        // stage('Check kogito-examples with persistence') {
+        //     steps {
+        //         script {
+        //             sh "cp -r ${getRepoName()} ${getRepoName()}-persistence"
+        //             getMavenCommand("${getRepoName()}-persistence")
+        //                 .skipTests(params.SKIP_TESTS)
+        //                 .withProfiles(['persistence'])
+        //                 .run('clean install')
+        //         }
+        //     }
+        //     post {
+        //         always {
+        //             saveReports(params.SKIP_TESTS)
+        //         }
+        //     }
+        // }
+        // stage('Check kogito-examples with events') {
+        //     steps {
+        //         script {
+        //             sh "cp -r ${getRepoName()} ${getRepoName()}-events"
+        //             getMavenCommand("${getRepoName()}-events")
+        //                 .skipTests(params.SKIP_TESTS)
+        //                 .withProfiles(['events'])
+        //                 .run('clean install')
+        //         }
+        //     }
+        //     post {
+        //         always {
+        //             saveReports(params.SKIP_TESTS)
+        //         }
+        //     }
+        // }
+        // stage('Deploy to repository') {
+        //     when {
+        //         expression { return !shouldStageArtifacts() && !isSpecificArtifactsUpload() && shouldDeployToRepository() }
+        //     }
+        //     steps {
+        //         script {
+        //             runMavenDeploy()
+        //         }
+        //     }
+        // }
+        // stage('Deploy locally') {
+        //     when {
+        //         expression { return shouldStageArtifacts() || isSpecificArtifactsUpload() }
+        //     }
+        //     steps {
+        //         script {
+        //             runMavenDeploy(true)
+        //         }
+        //     }
+        // }
+        // stage('Upload artifacts to given repository') {
+        //     when {
+        //         expression { return isSpecificArtifactsUpload() }
+        //     }
+        //     steps {
+        //         script {
+        //             // Deploy to specific repository with credentials
+        //             maven.uploadLocalArtifacts(env.MAVEN_REPO_CREDS_ID, getLocalDeploymentFolder(), getMavenRepoZipUrl())
+        //         }
+        //     }
+        // }
+        // stage('Stage artifacts') {
+        //     when {
+        //         expression { return shouldStageArtifacts() }
+        //     }
+        //     steps {
+        //         script {
+        //             // Stage release artifacts
+        //             runMavenStage()
+        //         }
+        //     }
+        // }
         stage('Create PR') {
             when {
                 expression { return isRelease() || isCreatePr() }
