@@ -13,13 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.kie.kogito.examples.quarkus;
 
-package org.kie.kogito.examples;
+import java.util.Random;
 
-import io.quarkus.test.junit.NativeImageTest;
+import javax.enterprise.context.ApplicationScoped;
 
-@NativeImageTest
-public class NativeDashboardGenerationIT extends DashboardGenerationTest {
+import org.kie.kogito.examples.quarkus.demo.Order;
 
-    // Execute the same tests but in native mode.
+@ApplicationScoped
+public class CalculationService {
+
+    private Random random = new Random();
+
+    public Order calculateTotal(Order order) {
+        order.setTotal(random.nextDouble());
+
+        return order;
+    }
 }
