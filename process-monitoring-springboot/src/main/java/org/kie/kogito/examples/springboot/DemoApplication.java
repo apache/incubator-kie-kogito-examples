@@ -13,22 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.examples;
+package org.kie.kogito.examples.springboot;
 
-import java.util.Random;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import javax.enterprise.context.ApplicationScoped;
+@SpringBootApplication(scanBasePackages = { "org.kie.kogito.**" })
+public class DemoApplication {
 
-import org.kie.kogito.examples.demo.Order;
-
-@ApplicationScoped
-public class CalculationService {
-
-    private Random random = new Random();
-
-    public Order calculateTotal(Order order) {
-        order.setTotal(random.nextDouble());
-
-        return order;
+    public static void main(String[] args) {
+        SpringApplication.run(DemoApplication.class, args);
     }
 }
