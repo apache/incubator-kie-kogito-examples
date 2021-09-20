@@ -52,11 +52,7 @@
     <!-- Persistence -->
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-addons-persistence-infinispan</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-infinispan-client</artifactId>
+      <artifactId>kogito-addons-quarkus-persistence-infinispan</artifactId>
     </dependency>
 
     <dependency>
