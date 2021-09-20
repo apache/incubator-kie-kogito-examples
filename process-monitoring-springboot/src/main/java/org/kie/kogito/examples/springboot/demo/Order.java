@@ -13,45 +13,45 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.examples.demo;
+package org.kie.kogito.examples.springboot.demo;
 
 public class Order implements java.io.Serializable {
 
     static final long serialVersionUID = 1L;
 
-    private String orderNumber;
-    private Boolean shipped;
-    private Double total;
+    private java.lang.String orderNumber;
+    private java.lang.Boolean shipped;
+    private java.lang.Double total;
 
     public Order() {
     }
 
-    public String getOrderNumber() {
+    public java.lang.String getOrderNumber() {
         return this.orderNumber;
     }
 
-    public void setOrderNumber(String orderNumber) {
+    public void setOrderNumber(java.lang.String orderNumber) {
         this.orderNumber = orderNumber;
     }
 
-    public Boolean isShipped() {
+    public java.lang.Boolean isShipped() {
         return this.shipped;
     }
 
-    public void setShipped(Boolean shipped) {
+    public void setShipped(java.lang.Boolean shipped) {
         this.shipped = shipped;
     }
 
-    public Double getTotal() {
+    public java.lang.Double getTotal() {
         return this.total;
     }
 
-    public void setTotal(Double total) {
+    public void setTotal(java.lang.Double total) {
         this.total = total;
     }
 
-    public Order(String orderNumber, Boolean shipped,
-            Double total) {
+    public Order(java.lang.String orderNumber, java.lang.Boolean shipped,
+            java.lang.Double total) {
         this.orderNumber = orderNumber;
         this.shipped = shipped;
         this.total = total;
@@ -60,4 +60,5 @@ public class Order implements java.io.Serializable {
     public String toString() {
         return "Order[" + this.orderNumber + "]";
     }
+
 }

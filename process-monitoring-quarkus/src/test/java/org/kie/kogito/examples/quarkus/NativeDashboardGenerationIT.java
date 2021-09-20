@@ -13,15 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.examples;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+package org.kie.kogito.examples.quarkus;
 
-@SpringBootApplication(scanBasePackages = { "org.kie.kogito.**" })
-public class DemoApplication {
+import io.quarkus.test.junit.NativeImageTest;
 
-    public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class, args);
-    }
+@NativeImageTest
+public class NativeDashboardGenerationIT extends DashboardGenerationTest {
+
+    // Execute the same tests but in native mode.
 }
