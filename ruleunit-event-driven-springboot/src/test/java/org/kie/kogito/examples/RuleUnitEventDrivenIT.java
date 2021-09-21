@@ -105,8 +105,38 @@ class RuleUnitEventDrivenIT {
     }
 
     @Test
-    void test() {
+    void testQueryFindAllApplicationAmounts() {
+        doTest("events/query/find_all_application_amounts");
+    }
+
+    @Test
+    void testQueryFindApproved() {
         doTest("events/query/find_approved");
+    }
+
+    @Test
+    void testQueryFindNotApprovedIdAndAmount() {
+        doTest("events/query/find_not_approved_id_and_amount");
+    }
+
+    @Test
+    void testErrorBadRequestNullData() {
+        doTest("events/error/bad_request/null_data");
+    }
+
+    @Test
+    void testErrorBadRequestNullModel() {
+        doTest("events/error/bad_request/null_model");
+    }
+
+    @Test
+    void testErrorQueryNotFoundWrongQuery() {
+        doTest("events/error/query_not_found/wrong_query");
+    }
+
+    @Test
+    void testErrorQueryNotFoundWrongRuleUnitId() {
+        doTest("events/error/query_not_found/wrong_rule_unit_id");
     }
 
     private void assertCloudEventJsonEquals(String expectedJson, String actualJson) throws Exception {

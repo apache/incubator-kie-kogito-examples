@@ -16,7 +16,8 @@
 package org.kie.kogito.queries;
 unit LoanUnit;
 
-import org.kie.kogito.queries.LoanApplication
+import org.kie.kogito.queries.LoanApplication;
+import org.kie.kogito.queries.AllAmounts;
 
 rule SmallDepositApprove when
     $l: /loanApplications[ applicant.age >= 20, deposit < 1000, amount <= 2000 ]
@@ -57,3 +58,13 @@ query FindNotApprovedIdAndAmount
     /loanApplications[ !approved, $id: id, $amount : amount ]
 end
 
+rule AllAmounts
+when
+    accumulate ( $a : /loanApplications ; $sum : sum($a.amount))
+then
+    allAmounts.add(new AllAmounts($sum));
+end
+
+query FindAllApplicationAmounts
+    $a : /allAmounts
+end
