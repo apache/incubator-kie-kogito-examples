@@ -86,6 +86,7 @@ services:
       - ./target/protobuf:/home/kogito/data/protobufs/
     environment:
       QUARKUS_INFINISPAN_CLIENT_SERVER_LIST: infinispan:11222
+      QUARKUS_INFINISPAN_CLIENT_USE_AUTH: "false"
       KAFKA_BOOTSTRAP_SERVERS: kafka:29092
       KOGITO_DATA_INDEX_PROPS: -Dkogito.protobuf.folder=/home/kogito/data/protobufs/
 
