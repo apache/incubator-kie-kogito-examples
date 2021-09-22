@@ -130,25 +130,32 @@ public class PmmlEventDrivenIT {
 
     @Test
     void testModelRegressionDefault() {
-//        for (String evaluationType : List.of("evaluate_all", "evaluate_decision_service")) {
-//            for (String resultType : List.of("context_only", "full_result")) {
-//                for (String filterStatus : List.of("all", "filtered")) {
-//                    String basePath = String.join("/", "events", evaluationType, resultType, filterStatus);
-//                    doTest(basePath);
-//                }
-//            }
-//        }
-//
-//        for (String errorSubPath : List.of("bad_request/null_data", "bad_request/null_model", "model_not_found")) {
-//            String basePath = "events/error/" + errorSubPath;
-//            doTest(basePath);
-//        }
         doTest("events/model/regression/default");
     }
 
     @Test
     void testModelRegressionFullResult() {
         doTest("events/model/regression/full_result");
+    }
+
+    @Test
+    void testModelScorecardDefault() {
+        doTest("events/model/scorecard/default");
+    }
+
+    @Test
+    void testModelScorecardFullResult() {
+        doTest("events/model/scorecard/full_result");
+    }
+
+    @Test
+    void testModelTreeDefault() {
+        doTest("events/model/tree/default");
+    }
+
+    @Test
+    void testModelTreeFullResult() {
+        doTest("events/model/tree/full_result");
     }
 
     private void assertCloudEventJsonEquals(String expectedJson, String actualJson) throws Exception {
