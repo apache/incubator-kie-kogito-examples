@@ -1,0 +1,16 @@
+{
+  "specversion": "1.0",
+  "id": "d54ace84-6788-46b6-a359-b308f8b21778",
+  "source": "PredicatesMining",
+  "type": "PredictionResponseFull",
+  "subject": "TheSubject",
+  "kogitopmmlmodelname": "PredicatesMining",
+  "data": {
+    "segmentIndex": 0,
+    "resultCode": "OK",
+    "resultObjectName": "categoricalResult",
+    "resultVariables": {
+      "categoricalResult": 1.381666666666666
+    }
+  }
+}
