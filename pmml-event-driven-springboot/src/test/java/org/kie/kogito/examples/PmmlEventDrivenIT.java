@@ -25,16 +25,17 @@ import java.util.Optional;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;
 
-import org.eclipse.microprofile.config.inject.ConfigProperty;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.kie.kogito.test.quarkus.kafka.KafkaTestClient;
-import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
+import org.kie.kogito.pmml.springboot.example.KogitoSpringbootApplication;
+import org.kie.kogito.test.springboot.kafka.KafkaTestClient;
+import org.kie.kogito.testcontainers.springboot.KafkaSpringBootTestResource;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -42,16 +43,13 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import io.quarkus.test.common.QuarkusTestResource;
-import io.quarkus.test.junit.QuarkusTest;
-
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@QuarkusTest
-@QuarkusTestResource(KafkaQuarkusTestResource.class)
-public class PmmlEventDrivenIT {
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
+@ContextConfiguration(initializers = KafkaSpringBootTestResource.class)
+class PmmlEventDrivenIT {
 
     public static final String REQUESTS_TOPIC_NAME = "pmml-event-driven-requests";
     public static final String RESPONSES_TOPIC_NAME = "pmml-event-driven-responses";
@@ -62,9 +60,7 @@ public class PmmlEventDrivenIT {
             .setSerializationInclusion(JsonInclude.Include.NON_NULL);
     private static final String DEFAULT_EVENT_ID = "d54ace84-6788-46b6-a359-b308f8b21778";
 
-    @ConfigProperty(name = KafkaQuarkusTestResource.KOGITO_KAFKA_PROPERTY)
-    private String kafkaBootstrapServers;
-
+    @Autowired
     private KafkaTestClient kafkaClient;
 
     /**
@@ -105,18 +101,6 @@ public class PmmlEventDrivenIT {
             } else {
                 pruneNullNodes(child);
             }
-        }
-    }
-
-    @BeforeEach
-    public void setup() {
-        kafkaClient = new KafkaTestClient(kafkaBootstrapServers);
-    }
-
-    @AfterEach
-    public void close() {
-        if (kafkaClient != null) {
-            kafkaClient.shutdown();
         }
     }
 
