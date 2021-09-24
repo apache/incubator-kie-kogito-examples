@@ -36,6 +36,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest(classes = ServerlessServiceCallsExampleApplication.class)
 @ExtendWith(SpringExtension.class)
+@ExtendWith(RestCountriesMockServer.class)
 public class CountriesWorkflowIntegrationTest {
 
     @Autowired
