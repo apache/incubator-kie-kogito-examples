@@ -124,6 +124,7 @@
         <module>decisiontable-springboot-example</module>
         <!-- <module>dmn-event-driven-quarkus</module> -->
         <module>dmn-event-driven-springboot</module>
+        <module>dmn-incubation-api-quarkus</module>
         <module>dmn-knative-quickstart-quarkus</module>
         <module>dmn-listener-quarkus</module>
         <module>dmn-listener-springboot</module>
@@ -139,6 +140,7 @@
         <module>flexible-process-springboot</module>
         <module>kogito-travel-agency</module>
         <module>onboarding-example</module>
+        <module>pmml-incubation-api-quarkus</module>
         <module>pmml-quarkus-example</module>
         <module>pmml-springboot-example</module>
         <module>process-business-rules-quarkus</module>
@@ -147,6 +149,7 @@
         <module>process-decisions-rest-quarkus</module>
         <module>process-decisions-springboot</module>
         <module>process-decisions-rest-springboot</module>
+        <module>process-incubation-api-quarkus</module>
         <module>process-infinispan-persistence-quarkus</module>
         <module>process-infinispan-persistence-springboot</module>
         <module>process-kafka-persistence-quarkus</module>
@@ -188,6 +191,7 @@
         <module>process-usertasks-with-security-oidc-springboot-with-console</module>
         <module>process-usertasks-with-security-quarkus</module>
         <module>process-usertasks-with-security-springboot</module>
+        <module>rules-incubation-api-quarkus</module>
         <module>rules-quarkus-helloworld</module>
         <module>ruleunit-quarkus-example</module>
         <module>ruleunit-springboot-example</module>

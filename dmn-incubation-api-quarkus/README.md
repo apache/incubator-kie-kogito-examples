@@ -1,0 +1,92 @@
+# DMN Incubation API
+
+## Description
+
+This quickstart project starts a REST endpoint embedding a simple DMN that computes Traffic Violation:
+
+- it expects the violation as the payload of the REST
+- it returns the result as a payload of the REST response
+- this quickstart uses the public API to define a custom REST endpoint instead of codegen
+
+## Build and run
+
+### Prerequisites
+
+You will need:
+  - Java 11+ installed
+  - Environment variable JAVA_HOME set accordingly
+  - Maven installed
+
+### Compile and Run in Local Dev Mode
+
+```sh
+mvn clean compile quarkus:dev
+```
+
+NOTE: With dev mode of Quarkus you can take advantage of hot reload for business assets like processes, rules, decision tables and java code. No need to redeploy or restart your running application.
+
+### Package and Run in JVM mode
+
+```sh
+mvn clean package
+java -jar target/quarkus-app/quarkus-run.jar
+```
+
+### OpenAPI (Swagger) documentation
+[Specification at swagger.io](https://swagger.io/docs/specification/about/)
+
+You can take a look at the [OpenAPI definition](http://localhost:8080/openapi?format=json) - automatically generated and included in this service - to determine all available operations exposed by this service. For easy readability you can visualize the OpenAPI definition file using a UI tool like for example available [Swagger UI](https://editor.swagger.io).
+
+In addition, various clients to interact with this service can be easily generated using this OpenAPI definition.
+
+When running in either Quarkus Development or Native mode, we also leverage the [Quarkus OpenAPI extension](https://quarkus.io/guides/openapi-swaggerui#use-swagger-ui-for-development) that exposes [Swagger UI](http://localhost:8080/swagger-ui/) that you can use to look at available REST endpoints and send test requests.
+
+### Submit a request
+
+To make use of this application it is as simple as sending a request to `http://localhost:8080/custom`  with the following content
+
+```json
+{
+    "Driver": {
+        "Points" : 2
+    },
+    "Violation": {
+        "Type" : "speed",
+        "Actual Speed" : 120,
+        "Speed Limit" : 100
+    }
+}
+```
+
+Complete curl command can be found below:
+
+```sh
+curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"Driver":{"Points":2},"Violation":{"Type":"speed","Actual Speed":120,"Speed Limit":100}}' http://localhost:8080/hello
+```
+
+Response should be similar to:
+
+```json
+{
+   "Driver" : {
+      "Age" : null,
+      "City" : null,
+      "Name" : null,
+      "Points" : 2,
+      "State" : null
+   },
+   "Fine" : {
+      "Amount" : 500,
+      "Points" : 3
+   },
+   "Should the driver be suspended?" : "No",
+   "Violation" : {
+      "Actual Speed" : 120,
+      "Code" : null,
+      "Date" : null,
+      "Speed Limit" : 100,
+      "Type" : "speed"
+   }
+}
+```
+
