@@ -14,7 +14,6 @@
     <description>Process with Transactional Outbox - MongoDB and Spring Boot</description>
 
     <properties>
-        <vertx.version>4.1.2</vertx.version>
         <docker.showLogs>true</docker.showLogs>
         <docker.removeVolumes>true</docker.removeVolumes>
         <DEBEZIUM_VERSION>1.7</DEBEZIUM_VERSION>
@@ -26,13 +25,6 @@
                 <groupId>org.kie.kogito</groupId>
                 <artifactId>kogito-spring-boot-bom</artifactId>
                 <version>${project.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>io.vertx</groupId>
-                <artifactId>vertx-stack-depchain</artifactId>
-                <version>${vertx.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -79,8 +71,13 @@
 
         <!-- test related -->
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.kie.kogito</groupId>
+            <artifactId>kogito-spring-boot-test-utils</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -91,16 +88,6 @@
         <dependency>
             <groupId>org.awaitility</groupId>
             <artifactId>awaitility</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-kafka-client</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.kafka</groupId>
-            <artifactId>kafka-clients</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>

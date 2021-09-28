@@ -16,44 +16,55 @@
 package org.kie.kogito.examples.demo;
 
 import java.time.Duration;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.awaitility.Awaitility;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import org.kie.kogito.test.springboot.kafka.KafkaTestClient;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.jayway.jsonpath.JsonPath;
-
-import io.vertx.core.Vertx;
-import io.vertx.core.impl.ConcurrentHashSet;
-import io.vertx.kafka.client.consumer.KafkaConsumer;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasSize;
 
+@SpringBootTest
 public class OutboxIT {
+
+    private static final Duration INITIAL_TIMEOUT = Duration.ofSeconds(250);
+    private static final Duration TIMEOUT = Duration.ofSeconds(25);
+    private static final Duration INTERVAL = Duration.ofSeconds(5);
+
+    private static final String PROCESS_EVENTS_TOPIC = "kogito-processinstances-events";
+    private static final String USERTASK_EVENTS_TOPIC = "kogito-usertaskinstances-events";
+
+    @Value("${kogito.port}")
+    private int kogitoPort;
+
+    @Value("${debezium.port}")
+    private int debeziumPort;
+
+    @Autowired
+    private KafkaTestClient kafkaClient;
+
+    @AfterEach
+    void close() {
+        if (kafkaClient != null) {
+            kafkaClient.shutdown();
+        }
+    }
 
     @Test
     public void testSendProcessEvents() {
-        Duration initialTimeout = Duration.ofSeconds(250);
-        Duration timeout = Duration.ofSeconds(25);
-        Duration interval = Duration.ofSeconds(5);
-
-        String processEventsTopic = "kogito-processinstances-events";
-        String usertaskEventsTopic = "kogito-usertaskinstances-events";
-
-        int kogitoPort = Integer.parseInt(System.getProperty("kogito.port"));
-        int debeziumPort = Integer.parseInt(System.getProperty("debezium.port"));
-        int kafkaPort = Integer.parseInt(System.getProperty("kafka.port"));
-
         // Check Debezium (Kafka, MongoDB) readiness
         Awaitility.given().ignoreExceptions()
-                .await().atMost(initialTimeout)
-                .with().pollInterval(interval)
+                .await().atMost(INITIAL_TIMEOUT)
+                .with().pollInterval(INTERVAL)
                 .until(() -> {
                     given()
                             .port(kogitoPort)
@@ -66,8 +77,8 @@ public class OutboxIT {
 
         // Check Kogito App readiness
         Awaitility.given().ignoreExceptions()
-                .await().atMost(initialTimeout)
-                .with().pollInterval(interval)
+                .await().atMost(INITIAL_TIMEOUT)
+                .with().pollInterval(INTERVAL)
                 .until(() -> {
                     given()
                             .port(debeziumPort)
@@ -84,8 +95,8 @@ public class OutboxIT {
 
         // Check Debezium no Kafka topic created
         Awaitility.given().ignoreExceptions()
-                .await().atMost(timeout)
-                .with().pollInterval(interval)
+                .await().atMost(TIMEOUT)
+                .with().pollInterval(INTERVAL)
                 .until(() -> {
                     given()
                             .port(debeziumPort)
@@ -101,8 +112,8 @@ public class OutboxIT {
 
         // Call Kogito App to publish events
         Awaitility.given().ignoreExceptions()
-                .await().atMost(timeout)
-                .with().pollInterval(interval)
+                .await().atMost(TIMEOUT)
+                .with().pollInterval(INTERVAL)
                 .until(() -> {
                     given()
                             .port(kogitoPort)
@@ -121,8 +132,8 @@ public class OutboxIT {
 
         // Check Debezium Kafka topic created
         Awaitility.given().ignoreExceptions()
-                .await().atMost(timeout)
-                .with().pollInterval(interval)
+                .await().atMost(TIMEOUT)
+                .with().pollInterval(INTERVAL)
                 .until(() -> {
                     given()
                             .port(debeziumPort)
@@ -133,65 +144,39 @@ public class OutboxIT {
                             .statusCode(200)
                             .assertThat()
                             .body("kogito-connector.topics", hasSize(2))
-                            .body("kogito-connector.topics", hasItem(processEventsTopic))
-                            .body("kogito-connector.topics", hasItem(usertaskEventsTopic));
+                            .body("kogito-connector.topics", hasItem(PROCESS_EVENTS_TOPIC))
+                            .body("kogito-connector.topics", hasItem(USERTASK_EVENTS_TOPIC));
                     return true;
                 });
 
         // Check Kafka messages
-        Vertx vertx = Vertx.vertx();
-        Map<String, String> config = new HashMap<>();
-        config.put("bootstrap.servers", "localhost:" + kafkaPort);
-        config.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-        config.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-        config.put("group.id", "outbox_test");
-        config.put("auto.offset.reset", "earliest");
-        config.put("enable.auto.commit", "false");
-
-        // Check Kafka topics created
-        KafkaConsumer<String, String> topicsConsumer = KafkaConsumer.create(vertx, config);
-        Set<String> topics = new ConcurrentHashSet<>();
-        topics.add(processEventsTopic);
-        topics.add(usertaskEventsTopic);
-        topicsConsumer.listTopics()
-                .onSuccess(partitionsTopicMap -> partitionsTopicMap.forEach((topic, partitions) -> topics.remove(topic)));
-        Awaitility.given().ignoreExceptions()
-                .await().atMost(timeout)
-                .with().pollInterval(interval)
-                .until(topics::isEmpty);
 
         // Check process events pushed
-        KafkaConsumer<String, String> processEventConsumer = KafkaConsumer.create(vertx, config);
         AtomicInteger processEventCounter = new AtomicInteger(0);
-        processEventConsumer.handler(record -> {
-            String message = record.value();
+        kafkaClient.consume(PROCESS_EVENTS_TOPIC, message -> {
             String orderNumber = JsonPath.read(message, "$.data.variables.order.orderNumber");
             boolean shipped = JsonPath.read(message, "$.data.variables.order.shipped");
             if ("23570".equals(orderNumber) && !shipped) {
                 processEventCounter.incrementAndGet();
             }
         });
-        processEventConsumer.subscribe(processEventsTopic);
         Awaitility.given().ignoreExceptions()
-                .await().atMost(timeout)
-                .with().pollInterval(interval)
+                .await().atMost(TIMEOUT)
+                .with().pollInterval(INTERVAL)
                 .until(() -> processEventCounter.intValue() == 2);
 
         // Check usertask events pushed
-        KafkaConsumer<String, String> usertaskEventConsumer = KafkaConsumer.create(vertx, config);
         AtomicInteger usertaskEventCounter = new AtomicInteger(0);
-        usertaskEventConsumer.handler(record -> {
-            String message = record.value();
+        kafkaClient.consume(USERTASK_EVENTS_TOPIC, message -> {
             String orderNumber = JsonPath.read(message, "$.data.inputs.input1.orderNumber");
             boolean shipped = JsonPath.read(message, "$.data.inputs.input1.shipped");
             if ("23570".equals(orderNumber) && !shipped) {
                 usertaskEventCounter.incrementAndGet();
             }
         });
-        usertaskEventConsumer.subscribe(usertaskEventsTopic);
         Awaitility.given().ignoreExceptions()
-                .await().atMost(timeout)
-                .with().pollInterval(interval)
+                .await().atMost(TIMEOUT)
+                .with().pollInterval(INTERVAL)
                 .until(() -> usertaskEventCounter.intValue() == 1);
     }
 }
