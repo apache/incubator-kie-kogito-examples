@@ -1,0 +1,21 @@
+{
+  "specversion": "1.0",
+  "id": "d54ace84-6788-46b6-a359-b308f8b21778",
+  "source": "find-approved",
+  "type": "RulesResponse",
+  "subject": "TheSubject",
+  "kogitoruleunitid": "org.kie.kogito.queries.LoanUnit",
+  "kogitoruleunitquery": "FindApproved",
+  "data": [
+    {
+      "id": "ABC10001",
+      "applicant": {
+        "name": "John",
+        "age": 45
+      },
+      "amount": 2000,
+      "deposit": 100,
+      "approved": true
+    }
+  ]
+}
