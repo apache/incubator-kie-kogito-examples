@@ -10,10 +10,10 @@
   <artifactId>dmn-incubation-api-quarkus</artifactId>
   <name>Kogito Example :: DMN Incubation API With Quarkus</name>
   <properties>
-    <quarkus-plugin.version>${version.io.quarkus}</quarkus-plugin.version>
-    <quarkus.platform.artifact-id>kogito-quarkus-bom</quarkus.platform.artifact-id>
-    <quarkus.platform.group-id>org.kie.kogito</quarkus.platform.group-id>
-    <quarkus.platform.version>${project.version}</quarkus.platform.version>
+    <quarkus-plugin.version>2.1.0.Final</quarkus-plugin.version>
+    <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
+    <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
+    <quarkus.platform.version>2.1.0.Final</quarkus.platform.version>
   </properties>
   <dependencyManagement>
     <dependencies>
