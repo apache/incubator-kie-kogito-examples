@@ -1,0 +1,19 @@
+{
+  "specversion": "1.0",
+  "id": "d54ace84-6788-46b6-a359-b308f8b21778",
+  "source": "find-not-approved-id-and-amount",
+  "type": "RulesResponse",
+  "subject": "TheSubject",
+  "kogitoruleunitid": "org.kie.kogito.queries.LoanUnit",
+  "kogitoruleunitquery": "FindNotApprovedIdAndAmount",
+  "data": [
+    {
+      "$amount": 5000,
+      "$id": "ABC10002"
+    },
+    {
+      "$amount": 1000,
+      "$id": "ABC10015"
+    }
+  ]
+}
