@@ -42,7 +42,7 @@ When running in either Quarkus Development or Native mode, we also leverage the 
 
 ### Submit a request
 
-To make use of this application it is as simple as sending a request to `http://localhost:8080/hello`  with the following content
+To make use of this application it is as simple as sending a request to `http://localhost:8080/custom-rest-process`  with the following content
 
 ```json
 {
@@ -54,7 +54,7 @@ To make use of this application it is as simple as sending a request to `http://
 Complete curl command can be found below:
 
 ```sh
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"name" : "john"}' http://localhost:8080/hello
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"name" : "john"}' http://localhost:8080/custom-rest-process
 ```
 
 Response should be similar to:

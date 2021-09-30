@@ -27,15 +27,15 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 
 @QuarkusTest
-public class GreetingResourceTest {
+public class CustomRestRulesTest {
 
     @Test
-    public void testHelloEndpoint() {
+    public void testRules() {
         given()
                 .contentType(ContentType.JSON)
                 .when()
                 .body(Map.of("strings", List.of("hello")))
-                .post("/hello")
+                .post("/custom-rest-rules")
                 .peek()
                 .then()
                 .statusCode(200)

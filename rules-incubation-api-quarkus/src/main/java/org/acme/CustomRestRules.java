@@ -16,6 +16,7 @@
 package org.acme;
 
 import java.util.Map;
+import java.util.stream.Stream;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -24,30 +25,34 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.kie.kogito.examples.Hello;
 import org.kie.kogito.incubation.application.AppRoot;
 import org.kie.kogito.incubation.common.DataContext;
 import org.kie.kogito.incubation.common.MapDataContext;
-import org.kie.kogito.incubation.decisions.DecisionIds;
-import org.kie.kogito.incubation.decisions.services.DecisionService;
+import org.kie.kogito.incubation.rules.RuleUnitIds;
+import org.kie.kogito.incubation.rules.services.RuleUnitService;
 
-@Path("/hello")
-public class GreetingResource {
+@Path("/custom-rest-rules")
+public class CustomRestRules {
 
     @Inject
     AppRoot appRoot;
     @Inject
-    DecisionService svc;
+    RuleUnitService svc;
 
     @POST
-    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public DataContext hello(Map<String, Object> payload) {
-        // path: /decisions/https%3A%2F%2Fgithub.com%2Fkiegroup%2Fdrools%2Fkie-dmn%2F_A4BCA8B8-CF08-433F-93B2-A2598F19ECFF/Traffic%20Violation
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Stream<String> helloUnit(Map<String, Object> payload) {
+        // path: /rule-units/org.kie.kogito.examples.Hello/queries/hello
 
-        var id = appRoot
-                .get(DecisionIds.class)
-                .get("https://github.com/kiegroup/drools/kie-dmn/_A4BCA8B8-CF08-433F-93B2-A2598F19ECFF",
-                        "Traffic Violation");
-        return svc.evaluate(id, MapDataContext.from(payload));
+        var queryId = appRoot.get(RuleUnitIds.class)
+                .get(Hello.class)
+                .queries()
+                .get("hello");
+        DataContext ctx = MapDataContext.from(payload);
+        return svc.evaluate(queryId, ctx) // Stream<DataContext>
+                .map(dc -> (String) dc.as(MapDataContext.class).get("$s"));
     }
+
 }

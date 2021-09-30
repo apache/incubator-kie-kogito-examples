@@ -16,7 +16,6 @@
 package org.acme;
 
 import java.util.Map;
-import java.util.stream.Stream;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -25,34 +24,27 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import org.kie.kogito.examples.Hello;
 import org.kie.kogito.incubation.application.AppRoot;
 import org.kie.kogito.incubation.common.DataContext;
 import org.kie.kogito.incubation.common.MapDataContext;
-import org.kie.kogito.incubation.rules.RuleUnitIds;
-import org.kie.kogito.incubation.rules.services.RuleUnitService;
+import org.kie.kogito.incubation.processes.ProcessIds;
+import org.kie.kogito.incubation.processes.services.StraightThroughProcessService;
 
-@Path("/hello")
-public class GreetingResource {
+@Path("/custom-rest-process")
+public class CustomRestProcess {
 
     @Inject
     AppRoot appRoot;
     @Inject
-    RuleUnitService svc;
+    StraightThroughProcessService svc;
 
     @POST
-    @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Stream<String> hello(Map<String, Object> payload) {
-        // path: /rule-units/org.kie.kogito.examples.Hello/queries/hello
+    @Produces(MediaType.APPLICATION_JSON)
+    public DataContext customProcessScripts(Map<String, Object> payload) {
+        // path: /processes/scripts
 
-        var queryId = appRoot.get(RuleUnitIds.class)
-                .get(Hello.class)
-                .queries()
-                .get("hello");
-        DataContext ctx = MapDataContext.from(payload);
-        return svc.evaluate(queryId, ctx) // Stream<DataContext>
-                .map(dc -> (String) dc.as(MapDataContext.class).get("$s"));
+        var id = appRoot.get(ProcessIds.class).get("scripts");
+        return svc.evaluate(id, MapDataContext.from(payload));
     }
-
 }

@@ -58,7 +58,7 @@ Complete curl command can be found below:
 ```sh
 curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '
 {"fld1":3.0, "fld2":2.0, "fld3":"y"}
-' http://localhost:8080/custom
+' http://localhost:8080/custom-rest-prediction
 ```
 
 Response should be similar to:

@@ -26,10 +26,10 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 
 @QuarkusTest
-public class GreetingResourceTest {
+public class CustomRestPredictionTest {
 
     @Test
-    public void testHelloEndpoint() {
+    public void testRestPrediction() {
         given()
                 .contentType(ContentType.JSON)
                 .when()
@@ -37,7 +37,7 @@ public class GreetingResourceTest {
                         "fld1", 3.0,
                         "fld2", 2.0,
                         "fld3", "y"))
-                .post("/custom")
+                .post("/custom-rest-prediction")
                 .peek()
                 .then()
                 .statusCode(200)

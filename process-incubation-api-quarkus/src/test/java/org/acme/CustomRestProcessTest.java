@@ -15,6 +15,8 @@
  */
 package org.acme;
 
+import java.util.Map;
+
 import org.junit.jupiter.api.Test;
 
 import io.quarkus.test.junit.QuarkusTest;
@@ -24,30 +26,19 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 
 @QuarkusTest
-public class GreetingResourceTest {
-
-    String body = "{" +
-            "    \"Driver\": {" +
-            "        \"Points\" : 2" +
-            "    }," +
-            "    \"Violation\": {" +
-            "        \"Type\" : \"speed\"," +
-            "        \"Actual Speed\" : 120," +
-            "        \"Speed Limit\" : 100" +
-            "    }" +
-            "}";
+public class CustomRestProcessTest {
 
     @Test
-    public void testHelloEndpoint() {
+    public void testRestProcess() {
         given()
                 .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .body(body)
-                .post("/hello")
+                .when()
+                .body(Map.of("name", "Paul"))
+                .post("/custom-rest-process")
+                .peek()
                 .then()
                 .statusCode(200)
-                .body("'Should the driver be suspended?'", is("No"));
-
+                .body("message", is("Hello Paul"));
     }
 
 }

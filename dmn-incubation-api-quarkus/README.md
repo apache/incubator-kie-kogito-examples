@@ -43,7 +43,7 @@ When running in either Quarkus Development or Native mode, we also leverage the 
 
 ### Submit a request
 
-To make use of this application it is as simple as sending a request to `http://localhost:8080/custom`  with the following content
+To make use of this application it is as simple as sending a request to `http://localhost:8080/custom-rest-decision`  with the following content
 
 ```json
 {
@@ -61,7 +61,7 @@ To make use of this application it is as simple as sending a request to `http://
 Complete curl command can be found below:
 
 ```sh
-curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"Driver":{"Points":2},"Violation":{"Type":"speed","Actual Speed":120,"Speed Limit":100}}' http://localhost:8080/hello
+curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"Driver":{"Points":2},"Violation":{"Type":"speed","Actual Speed":120,"Speed Limit":100}}' http://localhost:8080/custom-rest-decision
 ```
 
 Response should be similar to:

@@ -43,7 +43,7 @@ When running in either Quarkus Development or Native mode, we also leverage the 
 
 ### Submit a request
 
-To make use of this application it is as simple as sending a request to `http://localhost:8080/custom`  with the following content
+To make use of this application it is as simple as sending a request to `http://localhost:8080/custom-rest-rules`  with the following content
 
 ```json
 {
@@ -56,7 +56,7 @@ To make use of this application it is as simple as sending a request to `http://
 Complete curl command can be found below:
 
 ```sh
-curl -H "Content-Type: application/json" -X POST -d '{"strings":["hello"]}' http://localhost:8080/hello
+curl -H "Content-Type: application/json" -X POST -d '{"strings":["hello"]}' http://localhost:8080/custom-rest-rules
 ```
 
 Response should be similar to:
