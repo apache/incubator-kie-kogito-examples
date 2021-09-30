@@ -1,7 +1,8 @@
 import org.kie.jenkins.jobdsl.templates.KogitoJobTemplate
 import org.kie.jenkins.jobdsl.FolderUtils
-import org.kie.jenkins.jobdsl.Utils
 import org.kie.jenkins.jobdsl.KogitoJobType
+import org.kie.jenkins.jobdsl.KogitoJobUtils
+import org.kie.jenkins.jobdsl.Utils
 
 JENKINSFILE_PATH = '.ci/jenkins'
 
@@ -56,6 +57,10 @@ if (!Utils.isMainBranch(this)) {
 if (Utils.isLTSBranch(this)) {
     setupNativeLTSJob()
 }
+
+KogitoJobUtils.createQuarkusUpdateToolsJob(this, 'kogito-examples', 'Kogito Examples', [
+  properties: [ 'quarkus-plugin.version', 'quarkus.platform.version' ],
+])
 
 /////////////////////////////////////////////////////////////////
 // Methods
