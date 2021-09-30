@@ -1,4 +1,4 @@
-# Event-Driven DMN Quarkus Example
+# Event-Driven PMML Quarkus Example
 
 ## Description
 

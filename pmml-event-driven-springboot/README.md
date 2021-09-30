@@ -1,4 +1,4 @@
-# Event-Driven DMN Spring Boot Example
+# Event-Driven PMML Spring Boot Example
 
 ## Description
 
