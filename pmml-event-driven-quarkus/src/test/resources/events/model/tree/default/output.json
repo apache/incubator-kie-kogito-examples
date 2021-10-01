@@ -1,0 +1,11 @@
+{
+  "specversion": "1.0",
+  "id": "d54ace84-6788-46b6-a359-b308f8b21778",
+  "source": "SampleMine",
+  "type": "PredictionResponse",
+  "subject": "TheSubject",
+  "kogitopmmlmodelname": "SampleMine",
+  "data": {
+    "decision": "sunglasses"
+  }
+}

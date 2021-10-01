@@ -141,6 +141,8 @@
         <module>kogito-travel-agency</module>
         <module>onboarding-example</module>
         <module>pmml-incubation-api-quarkus</module>
+        <module>pmml-event-driven-quarkus</module>
+        <module>pmml-event-driven-springboot</module>
         <module>pmml-quarkus-example</module>
         <module>pmml-springboot-example</module>
         <module>process-business-rules-quarkus</module>
@@ -162,6 +164,8 @@
         <module>process-monitoring-springboot</module>
         <module>process-mongodb-persistence-quarkus</module>
         <module>process-mongodb-persistence-springboot</module>
+        <module>process-outbox-mongodb-quarkus</module>
+        <module>process-outbox-mongodb-springboot</module>
         <module>process-optaplanner-quarkus</module>
         <module>process-optaplanner-springboot</module>
         <module>process-postgresql-persistence-quarkus</module>
@@ -193,6 +197,8 @@
         <module>process-usertasks-with-security-springboot</module>
         <module>rules-incubation-api-quarkus</module>
         <module>rules-quarkus-helloworld</module>
+        <module>ruleunit-event-driven-quarkus</module>
+        <module>ruleunit-event-driven-springboot</module>
         <module>ruleunit-quarkus-example</module>
         <module>ruleunit-springboot-example</module>
         <module>rules-legacy-quarkus-example</module>
@@ -282,6 +288,7 @@
         <module>flexible-process-quarkus</module>
         <module>kogito-travel-agency</module>
         <module>onboarding-example</module>
+        <module>pmml-event-driven-quarkus</module>
         <module>pmml-quarkus-example</module>
         <module>process-business-rules-quarkus</module>
         <module>process-infinispan-persistence-quarkus</module>
@@ -290,6 +297,7 @@
         <module>process-knative-quickstart-quarkus</module>
         <module>process-monitoring-quarkus</module>
         <module>process-mongodb-persistence-quarkus</module>
+        <module>process-outbox-mongodb-quarkus</module>
         <module>process-optaplanner-quarkus</module>
         <module>process-postgresql-persistence-quarkus</module>
         <module>process-quarkus-example</module>
@@ -307,6 +315,7 @@
         <module>process-usertasks-with-security-oidc-quarkus-with-console</module>
         <module>process-usertasks-with-security-quarkus</module>
         <module>rules-quarkus-helloworld</module>
+        <module>ruleunit-event-driven-quarkus</module>
         <module>ruleunit-quarkus-example</module>
         <module>serverless-workflow-greeting-quarkus</module>
         <module>serverless-workflow-service-calls-quarkus</module>
@@ -333,11 +342,15 @@
         <module>dmn-drools-quarkus-metrics</module>
         <module>dmn-drools-springboot-metrics</module>
         <module>dmn-springboot-example</module>
+        <module>pmml-event-driven-quarkus</module>
+        <module>pmml-event-driven-springboot</module>
         <module>pmml-quarkus-example</module>
         <module>pmml-springboot-example</module>
         <module>rules-legacy-quarkus-example</module>
         <module>rules-legacy-springboot-example</module>
         <module>rules-quarkus-helloworld</module>
+        <module>ruleunit-event-driven-quarkus</module>
+        <module>ruleunit-event-driven-springboot</module>
         <module>ruleunit-quarkus-example</module>
         <module>ruleunit-springboot-example</module>
         <module>process-decisions-quarkus</module>
@@ -377,6 +390,7 @@
         <module>dmn-springboot-example</module>
         <module>dmn-tracing-springboot</module>
         <module>flexible-process-springboot</module>
+        <module>pmml-event-driven-springboot</module>
         <module>pmml-springboot-example</module>
         <module>process-business-rules-springboot</module>
         <module>process-infinispan-persistence-springboot</module>
@@ -384,6 +398,7 @@
         <module>process-kafka-multi-springboot</module>
         <module>process-monitoring-springboot</module>
         <module>process-mongodb-persistence-springboot</module>
+        <module>process-outbox-mongodb-springboot</module>
         <module>process-optaplanner-springboot</module>
         <module>process-postgresql-persistence-springboot</module>
         <module>process-rest-service-call-springboot</module>
