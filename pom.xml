@@ -139,6 +139,8 @@
         <module>flexible-process-springboot</module>
         <module>kogito-travel-agency</module>
         <module>onboarding-example</module>
+        <module>pmml-event-driven-quarkus</module>
+        <module>pmml-event-driven-springboot</module>
         <module>pmml-quarkus-example</module>
         <module>pmml-springboot-example</module>
         <module>process-business-rules-quarkus</module>
@@ -282,6 +284,7 @@
         <module>flexible-process-quarkus</module>
         <module>kogito-travel-agency</module>
         <module>onboarding-example</module>
+        <module>pmml-event-driven-quarkus</module>
         <module>pmml-quarkus-example</module>
         <module>process-business-rules-quarkus</module>
         <module>process-infinispan-persistence-quarkus</module>
@@ -335,6 +338,8 @@
         <module>dmn-drools-quarkus-metrics</module>
         <module>dmn-drools-springboot-metrics</module>
         <module>dmn-springboot-example</module>
+        <module>pmml-event-driven-quarkus</module>
+        <module>pmml-event-driven-springboot</module>
         <module>pmml-quarkus-example</module>
         <module>pmml-springboot-example</module>
         <module>rules-legacy-quarkus-example</module>
@@ -381,6 +386,7 @@
         <module>dmn-springboot-example</module>
         <module>dmn-tracing-springboot</module>
         <module>flexible-process-springboot</module>
+        <module>pmml-event-driven-springboot</module>
         <module>pmml-springboot-example</module>
         <module>process-business-rules-springboot</module>
         <module>process-infinispan-persistence-springboot</module>
