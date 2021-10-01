@@ -2,10 +2,14 @@
 
 ## Description
 
-This quickstart project starts a REST endpoint embedding a simple process that expects a name:
+This quickstart project demonstrate how to use the Kogito Public API (*Incubation*). It disables the predefined generated REST endpoint and instead uses the Public API to define a custom HTTP resource.
+
+The custom REST endpoint evaluates a process that expects a name:
 
 - when the name is supplied via REST request, it prints a "hello" message to screen and return that same message as a REST response.
 - the quickstart uses the public API to define a custom REST endpoint instead of codegen.
+
+*Incubation* means that this API is experimental, but it is part of a regular release for early access and to gather community feedback.
 
 ## Build and run
 

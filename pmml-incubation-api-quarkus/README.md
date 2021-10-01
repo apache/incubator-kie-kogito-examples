@@ -2,11 +2,15 @@
 
 ## Description
 
-This quickstart project starts a REST endpoint embedding a simple PMML that computes a linear regression:
+This quickstart project demonstrate how to use the Kogito Public API (*Incubation*). It disables the predefined generated REST endpoint and instead uses the Public API to define a custom HTTP resource.
+
+The custom REST endpoint evaluates a PMML that computes a linear regression:
 
 - it expects the parameters as the payload of the REST
 - it returns the result as a payload of the REST response
 - this quickstart uses the public API to define a custom REST endpoint instead of codegen
+
+*Incubation* means that this API is experimental, but it is part of a regular release for early access and to gather community feedback.
 
 ## Build and run
 
