@@ -24,10 +24,15 @@ def getJobParams(String jobName, String jobFolder, String jenkinsfileName, Strin
 Map getMultijobPRConfig() {
     return [
         parallel: true,
+        buildchain: true,
         jobs : [
             [
-                id: 'Examples',
+                id: 'kogito-examples',
                 primary: true,
+                env : [
+                    // Sonarcloud analysis is disabled for examples
+                    DISABLE_SONARCLOUD: true,
+                ]
             ]
         ]
     ]
