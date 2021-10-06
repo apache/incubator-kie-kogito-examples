@@ -1,0 +1,83 @@
+version: '2'
+services:
+  zookeeper:
+    image: debezium/zookeeper:${DEBEZIUM_VERSION}
+    ports:
+      - ${ZOOKEEPER_PORT}:2181
+  kafka:
+    image: debezium/kafka:${DEBEZIUM_VERSION}
+    ports:
+      - ${KAFKA_PORT}:9092
+    links:
+      - zookeeper
+    depends_on:
+      - zookeeper
+    environment:
+      - ZOOKEEPER_CONNECT=zookeeper:2181
+  kafdrop:
+    image: obsidiandynamics/kafdrop
+    ports:
+      - ${KAFDROP_PORT}:9000
+    links:
+      - kafka
+    depends_on:
+      - kafka
+    environment:
+      KAFKA_BROKERCONNECT: "kafka:9092"
+      JVM_OPTS: "-Xms32M -Xmx64M"
+      SERVER_SERVLET_CONTEXTPATH: "/"
+  mongodb:
+    build: ./mongodb
+    image: kogito/outbox/mongodb
+    hostname: mongodb
+    ports:
+      - ${MONGODB_PORT}:27017
+    environment:
+      - MONGODB_USER=debezium
+      - MONGODB_PASSWORD=dbz
+  connect:
+    image: debezium/connect:${DEBEZIUM_VERSION}
+    ports:
+      - ${DEBEZIUM_PORT}:8083
+    links:
+      - kafka
+      - mongodb
+    depends_on:
+      - kafka
+      - mongodb
+    environment:
+      - BOOTSTRAP_SERVERS=kafka:9092
+      - GROUP_ID=1
+      - CONFIG_STORAGE_TOPIC=kogito_connect_configs
+      - OFFSET_STORAGE_TOPIC=kogito_connect_offsets
+      - STATUS_STORAGE_TOPIC=kogito_connect_statuses
+  sidecar:
+    build: ./sidecar
+    image: kogito/outbox/sidecar
+    links:
+      - connect
+      - mongodb
+    depends_on:
+      - connect
+      - mongodb
+    environment:
+      - MONGODB_HOST=mongodb:27017
+      - MONGODB_RS=rs0
+      - MONGODB_USER=debezium
+      - MONGODB_PASSWORD=dbz
+      - KAFKA_HOST=kafka:9092
+      - CONNECT_HOST=connect:8083
+  kogito:
+    build: ./kogito
+    image: kogito/outbox/springboot
+    ports:
+      - ${KOGITO_PORT}:8080
+    links:
+      - mongodb
+    depends_on:
+      - mongodb
+    environment:
+      - MONGODB_HOST=mongodb:27017
+      - MONGODB_USERNAME=debezium
+      - MONGODB_PASSWORD=dbz
+      - MONGODB_AUTH_SOURCE=admin

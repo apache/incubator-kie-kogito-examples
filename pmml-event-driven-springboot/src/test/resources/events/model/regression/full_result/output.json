@@ -1,0 +1,17 @@
+{
+  "specversion": "1.0",
+  "id": "d54ace84-6788-46b6-a359-b308f8b21778",
+  "source": "LinReg",
+  "type": "PredictionResponseFull",
+  "subject": "TheSubject",
+  "kogitopmmlmodelname": "LinReg",
+  "data": {
+    "segmentIndex": 0,
+    "resultCode": "OK",
+    "resultObjectName": "fld4",
+    "resultVariables": {
+      "result": 52.5,
+      "fld4": 52.5
+    }
+  }
+}
