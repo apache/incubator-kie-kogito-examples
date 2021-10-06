@@ -49,7 +49,7 @@ public class ErrorHandlingScript {
         ProcessWorkItemHandlerException exception = (ProcessWorkItemHandlerException) kcontext.getVariable("Error");
         String strategy = (String) kcontext.getVariable("strategy");
         LOG.debug("strategy: {}", strategy);
-        
+
         // apply strategy
         if (exception != null && strategy != null && strategy.matches("(RETRY|COMPLETE|ABORT|RETHROW)")) {
             ProcessWorkItemHandlerException exception2 = new ProcessWorkItemHandlerException(exception.getProcessId(),
