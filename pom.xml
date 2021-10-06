@@ -215,6 +215,7 @@
         <module>serverless-workflow-github-showcase</module>
         <module>serverless-workflow-order-processing</module>
         <module>serverless-workflow-funqy</module>
+        <module>serverless-workflow-temperature-conversion</module>
       </modules>
     </profile>
 
