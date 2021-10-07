@@ -15,17 +15,19 @@
  */
 package org.acme;
 
+import org.kie.kogito.incubation.application.AppRoot;
+import org.kie.kogito.incubation.common.DataContext;
+import org.kie.kogito.incubation.common.MapDataContext;
+import org.kie.kogito.incubation.predictions.PredictionIds;
+import org.kie.kogito.incubation.predictions.services.PredictionService;
+
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
-import org.kie.kogito.incubation.application.*;
-import org.kie.kogito.incubation.common.*;
-import org.kie.kogito.incubation.predictions.PredictionIds;
-import org.kie.kogito.incubation.predictions.services.PredictionService;
+import java.util.Map;
 
 @Path("/custom-rest-prediction")
 public class CustomRestPrediction {
@@ -38,12 +40,13 @@ public class CustomRestPrediction {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public DataContext linearRegression(MapDataContext ctx) {
+    public DataContext linearRegression(Map<String, Object> payload) {
         // path: /predictions/LinReg        
         var id = appRoot
                 .get(PredictionIds.class)
                 .get("LinReg");
 
+        MapDataContext ctx = MapDataContext.of(payload);
         return svc.evaluate(id, ctx);
     }
 
