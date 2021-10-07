@@ -15,11 +15,7 @@
  */
 package org.acme;
 
-import org.kie.kogito.incubation.application.AppRoot;
-import org.kie.kogito.incubation.common.DataContext;
-import org.kie.kogito.incubation.common.MapDataContext;
-import org.kie.kogito.incubation.predictions.PredictionIds;
-import org.kie.kogito.incubation.predictions.services.PredictionService;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -27,7 +23,12 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import java.util.Map;
+
+import org.kie.kogito.incubation.application.AppRoot;
+import org.kie.kogito.incubation.common.DataContext;
+import org.kie.kogito.incubation.common.MapDataContext;
+import org.kie.kogito.incubation.predictions.PredictionIds;
+import org.kie.kogito.incubation.predictions.services.PredictionService;
 
 @Path("/custom-rest-prediction")
 public class CustomRestPrediction {
