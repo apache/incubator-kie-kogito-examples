@@ -343,7 +343,7 @@ kcontext.setVariable("processId", kcontext.getProcessInstance().getStringId());<
           <drools:metaValue>Passenger Boarding Request</drools:metaValue>
         </drools:metaData>
         <drools:metaData name="customAsync">
-          <drools:metaValue>true</drools:metaValue>
+          <drools:metaValue>false</drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
       <bpmn2:property id="isPassengerApproved" itemSubjectRef="_isPassengerApprovedItem" name="isPassengerApproved"/>
