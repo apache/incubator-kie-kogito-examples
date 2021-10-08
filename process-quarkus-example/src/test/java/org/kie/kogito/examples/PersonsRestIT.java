@@ -49,7 +49,12 @@ public class PersonsRestIT {
     @BeforeEach
     public void cleanUp() {
         // need it when running with persistence
-        personProcess.instances().values().forEach(pi -> pi.abort());
+        try {
+            personProcess.instances().values().forEach(pi -> pi.abort());
+        } catch (IllegalArgumentException ex) {
+            // process might not longer be there is not persisted
+        }
+
     }
 
     @Test
