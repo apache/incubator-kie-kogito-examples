@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Red Hat, Inc. and/or its affiliates.
+ * Copyright 2021 Red Hat, Inc. and/or its affiliates.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,39 +23,37 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.kie.kogito.addons.k8s.Endpoint;
 import org.kie.kogito.addons.k8s.EndpointQueryKey;
 import org.kie.kogito.addons.k8s.LocalEndpointDiscovery;
-import org.kie.kogito.addons.springboot.k8s.workitems.SpringDiscoveredEndpointCaller;
+import org.kie.kogito.addons.quarkus.k8s.workitems.QuarkusDiscoveredEndpointCaller;
 import org.kie.kogito.examples.onboarding.DecisionTaskWorkItemHandler;
 import org.kie.kogito.internal.process.runtime.KogitoWorkItemHandler;
 import org.kie.kogito.process.impl.DefaultWorkItemHandlerConfig;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
-@Component
-public class WorkItemHandlerConfig extends DefaultWorkItemHandlerConfig {
+public abstract class BaseWorkItemHandlerConfig extends DefaultWorkItemHandlerConfig {
 
-    @Autowired
-    private SpringDiscoveredEndpointCaller endpointCaller;
+    @Inject
+    QuarkusDiscoveredEndpointCaller endpointCaller;
 
-    @Value("${org.acme.kogito.onboarding.local}")
+    @ConfigProperty(name = "org.acme.kogito.onboarding.local", defaultValue = "false")
     Boolean isLocalRunning;
 
     private final Map<String, KogitoWorkItemHandler> workItemHandlers = new HashMap<>();
-    private final List<String> supportedHandlers = Arrays.asList("AssignDepartmentAndManager",
-            "CalculatePaymentDate",
-            "CalculateVacationDays",
-            "CalculateTaxRate",
-            "ValidateEmployee",
-            "AssignIdAndEmail",
-            "DecisionTask");
+    protected final List<String> supportedHandlers = Arrays.asList("AssignDepartmentAndManager",
+                                                                   "CalculatePaymentDate",
+                                                                   "CalculateVacationDays",
+                                                                   "CalculateTaxRate",
+                                                                   "ValidateEmployee",
+                                                                   "AssignIdAndEmail",
+                                                                   "DecisionTask");
 
     @Override
     public KogitoWorkItemHandler forName(String name) {
-        workItemHandlers.putIfAbsent("DecisionTask", new DecisionTaskWorkItemHandler(this.endpointCaller));
+        workItemHandlers.putIfAbsent("DecisionTask", new DecisionTaskWorkItemHandler(endpointCaller));
         if (supportedHandlers.contains(name)) {
             // use decision task handler (single instance) for all supported handlers that are based on decision calls
             return workItemHandlers.get("DecisionTask");

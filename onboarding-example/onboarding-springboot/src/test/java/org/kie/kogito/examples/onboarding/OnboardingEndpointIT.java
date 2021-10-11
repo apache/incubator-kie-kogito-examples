@@ -23,9 +23,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.kie.kogito.addons.springboot.k8s.workitems.SpringDiscoveredEndpointCaller;
 import org.kie.kogito.examples.KogitoOnboardingApplication;
 import org.kie.kogito.examples.test.RecordedOutputWorkItemHandler;
 import org.kie.kogito.internal.process.runtime.KogitoWorkItem;
@@ -38,11 +41,9 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
-
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.core.Is.is;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoOnboardingApplication.class)
@@ -52,12 +53,20 @@ public class OnboardingEndpointIT {
     @Autowired
     private ProcessConfig processConfig;
 
+    @Autowired
+    private SpringDiscoveredEndpointCaller endpointCaller;
+
     @LocalServerPort
     private int port;
 
     @BeforeEach
     public void setUp() {
         RestAssured.port = port;
+    }
+
+    @Test
+    public void testDiscoveryCallerIsInjected() {
+        assertNotNull(endpointCaller);
     }
 
     @Test
