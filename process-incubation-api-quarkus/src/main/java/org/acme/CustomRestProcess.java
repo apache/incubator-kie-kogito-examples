@@ -45,6 +45,7 @@ public class CustomRestProcess {
         // path: /processes/scripts
 
         var id = appRoot.get(ProcessIds.class).get("scripts");
-        return svc.evaluate(id, MapDataContext.from(payload));
+        MapDataContext ctx = MapDataContext.of(payload);
+        return svc.evaluate(id, ctx);
     }
 }

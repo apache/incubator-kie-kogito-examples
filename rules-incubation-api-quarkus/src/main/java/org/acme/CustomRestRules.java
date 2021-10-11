@@ -50,7 +50,7 @@ public class CustomRestRules {
                 .get(Hello.class)
                 .queries()
                 .get("hello");
-        DataContext ctx = MapDataContext.from(payload);
+        DataContext ctx = MapDataContext.of(payload);
         return svc.evaluate(queryId, ctx) // Stream<DataContext>
                 .map(dc -> dc.as(MapDataContext.class).get("$s", String.class));
     }
