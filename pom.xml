@@ -153,6 +153,7 @@
         <module>process-decisions-rest-quarkus</module>
         <module>process-decisions-springboot</module>
         <module>process-decisions-rest-springboot</module>
+        <module>process-error-handling</module>
         <module>process-incubation-api-quarkus</module>
         <module>process-infinispan-persistence-quarkus</module>
         <module>process-infinispan-persistence-springboot</module>
@@ -215,6 +216,7 @@
         <module>serverless-workflow-github-showcase</module>
         <module>serverless-workflow-order-processing</module>
         <module>serverless-workflow-funqy</module>
+        <module>serverless-workflow-temperature-conversion</module>
       </modules>
     </profile>
 

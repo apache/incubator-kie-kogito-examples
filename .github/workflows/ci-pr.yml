@@ -7,7 +7,7 @@ jobs:
     concurrency:
       group: pull_request-${{ github.head_ref }}
       cancel-in-progress: true
-    timeout-minutes: 120
+    timeout-minutes: 180
     strategy:
       matrix:
         os: [ubuntu-latest]
@@ -46,7 +46,7 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
       - name: Build Chain ${{ matrix.java-version }}
         id: build-chain
-        uses: kiegroup/github-action-build-chain@v2.6.2
+        uses: kiegroup/github-action-build-chain@v2.6.11
         with:
           definition-file: https://raw.githubusercontent.com/${GROUP}/kogito-pipelines/${BRANCH}/.ci/pull-request-config.yaml
       - name: Publish Test Report
