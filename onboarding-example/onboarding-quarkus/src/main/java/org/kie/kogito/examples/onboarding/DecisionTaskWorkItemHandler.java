@@ -47,5 +47,4 @@ public class DecisionTaskWorkItemHandler implements KogitoWorkItemHandler {
     public String getName() {
         return "DecisionTask";
     }
-
 }

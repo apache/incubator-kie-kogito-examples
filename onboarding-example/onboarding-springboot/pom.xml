@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
@@ -98,6 +98,81 @@
           <artifactId>infinispan-spring-boot-starter-remote</artifactId>
         </dependency>
       </dependencies>
+    </profile>
+    <profile>
+      <id>kubernetes</id>
+      <activation>
+        <property>
+          <name>kubernetes</name>
+        </property>
+      </activation>
+      <properties>
+        <jkube.mode>kubernetes</jkube.mode>
+        <jkube.generator.java-exec.webPort>8080</jkube.generator.java-exec.webPort>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.eclipse.jkube</groupId>
+            <artifactId>kubernetes-maven-plugin</artifactId>
+            <configuration>
+              <resources>
+                <imagePullPolicy>IfNotPresent</imagePullPolicy>
+                <labels>
+                  <all>
+                    <onboarding>process</onboarding>
+                  </all>
+                </labels>
+                <serviceAccounts>
+                  <serviceAccount>
+                    <name>${project.artifactId}</name>
+                    <deploymentRef>${project.artifactId}</deploymentRef>
+                  </serviceAccount>
+                </serviceAccounts>
+              </resources>
+              <generator>
+                <includes>
+                  <include>spring-boot</include>
+                </includes>
+                <config>
+                  <spring-boot>
+                    <color>always</color>
+                  </spring-boot>
+                </config>
+              </generator>
+              <enricher>
+                <config>
+                  <jkube-service>
+                    <type>NodePort</type>
+                  </jkube-service>
+                </config>
+              </enricher>
+              <images>
+                <image>
+                  <name>kogito/%a</name>
+                  <build>
+                    <from>registry.access.redhat.com/ubi8/openjdk-11:latest</from>
+                    <assembly>
+                      <targetDir>/deployments</targetDir>
+                    </assembly>
+                    <ports>
+                      <port>8080/tcp</port>
+                    </ports>
+                  </build>
+                </image>
+              </images>
+            </configuration>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>resource</goal>
+                  <goal>build</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
     </profile>
   </profiles>
 </project>

@@ -8,7 +8,8 @@ This is a sample Payroll service that is exposing a set of REST endpoints to:
 * calculate a tax rate for the given employee
 * calculate the number of vacation days for the given employee
 
-The service is defined as a decision service, using three sets of DMN decisions for each of the functions described above.
+The service is defined as a decision service, using three sets of DMN decisions for each of the functions described
+above.
 
 ## Installing and Running
 
@@ -19,26 +20,34 @@ mvn clean package quarkus:dev
 ```
 
 ### Compile and Run using Local Native Image
+
 Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
 
 ```
 mvn clean package -Pnative
 ```
-  
+
 To run the generated native executable, generated in `target/`, execute:
 
 ```
 ./target/payroll-runner -Dquarkus.http.port=8082 -Dquarkus.http.host=localhost
 ```
-  
+
 ## OpenAPI (Swagger) documentation
+
 [Specification at swagger.io](https://swagger.io/docs/specification/about/)
 
-You can take a look at the [OpenAPI definition](http://localhost:8082/openapi?format=json) - automatically generated and included in this service - to determine all available operations exposed by this service. For easy readability you can visualize the OpenAPI definition file using a UI tool like for example available [Swagger UI](https://editor.swagger.io).
+You can take a look at the [OpenAPI definition](http://localhost:8082/openapi?format=json) - automatically generated and
+included in this service - to determine all available operations exposed by this service. For easy readability you can
+visualize the OpenAPI definition file using a UI tool like for example available [Swagger UI](https://editor.swagger.io)
+.
 
 In addition, various clients to interact with this service can be easily generated using this OpenAPI definition.
 
-When running in Quarkus development mode, we also leverage the [Quarkus OpenAPI extension](https://quarkus.io/guides/openapi-swaggerui#use-swagger-ui-for-development) that exposes [Swagger UI](http://localhost:8082/swagger-ui/) that you can use to look at available REST endpoints and send test requests.
+When running in Quarkus development mode, we also leverage
+the [Quarkus OpenAPI extension](https://quarkus.io/guides/openapi-swaggerui#use-swagger-ui-for-development) that
+exposes [Swagger UI](http://localhost:8082/swagger-ui/) that you can use to look at available REST endpoints and send
+test requests.
 
 ## Example Usage
 
@@ -74,43 +83,37 @@ curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -
 
 As response the employee details including the number of vacation days are returned.
 
-## Deployment to OpenShift
+## Deployment to Kubernetes, OpenShift or Minikube
 
-NOTE: Make sure that kogito S2I image builders are available to your OpenShift environment
+This project is configured to run with Quarkus Kubernetes extensions. You can simply run:
 
-### Build from local workspace
+```shell
+# make sure that the docker env from minikube is enabled locally
+$ eval $(minikube -p minikube docker-env)
 
-* Go to payroll project root directory
-* Create new binary build and start it by uploading content of the current directory
-
-```sh
-oc new-build myproject/kogito-builder --env RUNTIME_TYPE=quarkus --binary=true --name=payroll-service-builder
-oc start-build payroll-service-builder --from-dir . --env RUNTIME_TYPE=quarkus --incremental=true
+# build the service, the image and deploy it on Minikube:
+$ mvn clean install -Dquarkus.kubernetes.deploy=true
 ```
 
-Once the build is completed create new build for runtime image
+> NOTE: If you're targeting a Kubernetes or OpenShift cluster, use the resources created on `target/kubernetes` directory.
 
-```sh
-oc new-build --name payroll-service --source-image=payroll-service-builder --source-image-path=/home/kogito/bin:. --env RUNTIME_TYPE=quarkus --env NATIVE=true --image-stream=kogito-runtime-native
+The default configuration is set to deploy on **Minikube**. You can change this configuration by uncommenting the
+properties on `src/main/resources/application.properties` file. Please see the
+official [Quarkus Guide](https://quarkus.io/guides/deploying-to-kubernetes) for more information.
+
+## Deploying to Knative
+
+To be able to deploy to Knative you can follow
+the [same guide mentioned above](https://quarkus.io/guides/deploying-to-kubernetes#knative). The needed information is
+already added to the `application.properties` file.
+
+## Testing on Minikube
+
+Once you have deployed the three services, you can run the following command to expose the `onboarding-service` via Node
+Port (the default option is already configured for you):
+
+```shell
+minikube service --url payroll-service
 ```
 
-Next create application for the runtime image
-
-```sh
-oc new-app payroll-service:latest -l taxes/rate=process,vacations/days=process,payments/date=process
-```
-
-and lastly create the route for it
-
-```sh
-oc expose svc/payroll-service
-```
-
-## Knative
-
-To be able to deploy to knative there is a template script that can be used to directly deploy 
-image from docker hub, just execute following command
-
-```sh
-oc apply -f knative/knative-payroll-service.yaml
-```
+You should see the URL in the terminal. Use it to make the calls to the `payroll-service`

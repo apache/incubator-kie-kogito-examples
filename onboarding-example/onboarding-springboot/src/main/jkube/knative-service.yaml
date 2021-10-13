@@ -1,0 +1,15 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: onboarding-springboot
+spec:
+  template:
+    spec:
+      containers:
+        - image: kogito/onboarding-springboot:latest
+          imagePullPolicy: IfNotPresent
+          serviceAccountName: onboarding-springboot
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP

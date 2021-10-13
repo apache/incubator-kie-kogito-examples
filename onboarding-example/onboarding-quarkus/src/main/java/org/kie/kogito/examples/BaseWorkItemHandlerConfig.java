@@ -44,12 +44,12 @@ public abstract class BaseWorkItemHandlerConfig extends DefaultWorkItemHandlerCo
 
     private final Map<String, KogitoWorkItemHandler> workItemHandlers = new HashMap<>();
     protected final List<String> supportedHandlers = Arrays.asList("AssignDepartmentAndManager",
-                                                                   "CalculatePaymentDate",
-                                                                   "CalculateVacationDays",
-                                                                   "CalculateTaxRate",
-                                                                   "ValidateEmployee",
-                                                                   "AssignIdAndEmail",
-                                                                   "DecisionTask");
+            "CalculatePaymentDate",
+            "CalculateVacationDays",
+            "CalculateTaxRate",
+            "ValidateEmployee",
+            "AssignIdAndEmail",
+            "DecisionTask");
 
     @Override
     public KogitoWorkItemHandler forName(String name) {

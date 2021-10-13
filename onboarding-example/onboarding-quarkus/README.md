@@ -114,20 +114,31 @@ official [Quarkus Guide](https://quarkus.io/guides/deploying-to-kubernetes) for 
 
 To be able to deploy to Knative you can follow
 the [same guide mentioned above](https://quarkus.io/guides/deploying-to-kubernetes#knative). The needed information is
-already added to the `application.propertis file`.
+already added to the `application.properties` file.
 
 In addition, following permissions should be added to the default service account so the service discovery can properly
 happen
 
 ```sh
-oc policy add-role-to-group view system:serviceaccounts:default -n istio-system
-oc policy add-role-to-group knative-serving-core system:serviceaccounts:default -n default
+oc policy add-role-to-group view system:serviceaccounts:onboarding-service -n istio-system
+oc policy add-role-to-group knative-serving-core system:serviceaccounts:onboarding-service -n default
 ```
 
 If using [Knative Serving Operator](https://github.com/knative/serving-operator) on OpenShift 4.x, the permissions that
 need to be set are
 
 ```sh
-oc adm policy add-role-to-user knative-serving-core system:serviceaccount:myproject:default -n default
-oc adm policy add-role-to-user view system:serviceaccount:myproject:default -n istio-system
+oc adm policy add-role-to-user knative-serving-core system:serviceaccount:myproject:onboarding-service -n default
+oc adm policy add-role-to-user view system:serviceaccount:myproject:onboarding-service -n istio-system
 ```
+
+## Testing on Minikube
+
+Once you have deployed the three services, you can run the following command to expose the `onboarding-service` via Node
+Port (the default option is already configured for you):
+
+```shell
+minikube service --url onboarding-service
+```
+
+You should see the URL in the terminal. Use it to make the calls to the `onboarding-service`

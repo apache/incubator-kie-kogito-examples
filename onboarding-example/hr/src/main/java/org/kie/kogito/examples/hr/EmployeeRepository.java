@@ -50,5 +50,4 @@ public class EmployeeRepository {
             registered.add(emp.getPersonalId());
         }
     }
-
 }
