@@ -15,27 +15,15 @@
  */
 package org.acme.deals;
 
-import org.acme.travels.KogitoApplication;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.kie.kogito.testcontainers.springboot.PostgreSqlSpringBootTestResource;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.test.context.ContextConfiguration;
+import org.kie.kogito.testcontainers.quarkus.PostgreSqlQuarkusTestResource;
 
-import io.restassured.RestAssured;
+import io.quarkus.test.common.QuarkusTestResource;
+import io.quarkus.test.junit.QuarkusTest;
 
-@SpringBootTest(classes = KogitoApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ContextConfiguration(initializers = PostgreSqlSpringBootTestResource.class)
+@QuarkusTest
+@QuarkusTestResource(PostgreSqlQuarkusTestResource.class)
 public class PostgresDealsRestIT {
-
-    @LocalServerPort
-    int randomServerPort;
-
-    @BeforeEach
-    public void setup() {
-        RestAssured.port = randomServerPort;
-    }
 
     @Test
     public void testDealsRest() {
