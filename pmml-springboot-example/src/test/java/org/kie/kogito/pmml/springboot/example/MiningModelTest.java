@@ -27,9 +27,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import io.restassured.RestAssured;
 
 import static org.kie.kogito.pmml.springboot.example.CommonTestUtils.testDescriptive;
-import static org.kie.kogito.pmml.springboot.example.CommonTestUtils.testDescriptiveWrongData;
 import static org.kie.kogito.pmml.springboot.example.CommonTestUtils.testResult;
-import static org.kie.kogito.pmml.springboot.example.CommonTestUtils.testResultWrongData;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
@@ -59,18 +57,6 @@ class MiningModelTest {
     }
 
     @Test
-    void testEvaluatePredicatesMiningResultWrongData() {
-        String inputData = "{\"residenceState\":\"AP\", " +
-                "\"validLicense\":true, " +
-                "\"occupation\":\"ASTRONAUT\", " +
-                "\"categoricalY\":\"classA\", " +
-                "\"categoricalX\":\"red\", " +
-                "\"variable\":6.6, " +
-                "\"age\":\"b\"}";
-        testResultWrongData(inputData, BASE_PATH);
-    }
-
-    @Test
     void testEvaluatePredicatesMiningDescriptive() {
         String inputData = "{\"residenceState\":\"AP\", " +
                 "\"validLicense\":true, " +
@@ -83,15 +69,4 @@ class MiningModelTest {
         testDescriptive(inputData, BASE_PATH, TARGET, expectedResultMap);
     }
 
-    @Test
-    void testEvaluatePredicatesMiningDescriptiveWrongData() {
-        String inputData = "{\"residenceState\":\"AP\", " +
-                "\"validLicense\":true, " +
-                "\"occupation\":\"ASTRONAUT\", " +
-                "\"categoricalY\":\"classA\", " +
-                "\"categoricalX\":\"red\", " +
-                "\"variable\":6.6, " +
-                "\"age\":\"b\"}";
-        testDescriptiveWrongData(inputData, BASE_PATH);
-    }
 }

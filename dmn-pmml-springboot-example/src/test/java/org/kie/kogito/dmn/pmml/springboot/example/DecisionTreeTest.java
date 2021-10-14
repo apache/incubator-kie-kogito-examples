@@ -27,9 +27,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import io.restassured.RestAssured;
 
 import static org.kie.kogito.dmn.pmml.springboot.example.CommonTestUtils.testDescriptive;
-import static org.kie.kogito.dmn.pmml.springboot.example.CommonTestUtils.testDescriptiveWrongData;
 import static org.kie.kogito.dmn.pmml.springboot.example.CommonTestUtils.testResult;
-import static org.kie.kogito.dmn.pmml.springboot.example.CommonTestUtils.testResultWrongData;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
@@ -53,12 +51,6 @@ public class DecisionTreeTest {
     }
 
     @Test
-    void testEvaluateDecisionTreeResultWrongData() {
-        String inputData = "{\"temperature\":\"b\", \"humidity\":10.0}";
-        testResultWrongData(inputData, BASE_PATH);
-    }
-
-    @Test
     void testEvaluateDecisionTreeDescriptive() {
         String inputData = "{\"temperature\":30.0, \"humidity\":10.0}";
         final Map<String, Object> expectedResultMap = new HashMap<>();
@@ -67,9 +59,4 @@ public class DecisionTreeTest {
         testDescriptive(inputData, BASE_PATH, TARGET, expectedResultMap);
     }
 
-    @Test
-    void testEvaluateDecisionTreeDecriptiveWrongData() {
-        String inputData = "{\"temperature\":\"b\", \"humidity\":10.0}";
-        testDescriptiveWrongData(inputData, BASE_PATH);
-    }
 }
