@@ -15,40 +15,21 @@
  */
 package org.kie.kogito.alerts;
 
-import org.kie.kogito.rules.DataProcessor;
+import org.kie.kogito.rules.DataSource;
 import org.kie.kogito.rules.DataStream;
 import org.kie.kogito.rules.RuleUnitData;
 
 public class AlertingService implements RuleUnitData {
 
-    private DataStream<Event> eventData;
-    private DataStream<Alert> alertData;
+    private DataStream<Event> eventData = DataSource.createStream();
+    private DataStream<Alert> alertData = DataSource.createStream();
 
-    private AlertingServiceEmitter emitter;
-    private AlertingServiceReceiver receiver;
-
-    public AlertingService() {
-    }
-
-    public AlertingService(DataStream<Event> eventData, DataStream<Alert> alertData) {
-        this.eventData = eventData;
-        this.alertData = alertData;
-    }
-
-    public AlertingService(AlertingServiceEmitter emitter, AlertingServiceReceiver receiver) {
-        this.emitter = emitter;
-        this.receiver = receiver;
+    public DataStream<Event> getEventData() {
+        return eventData;
     }
 
     public void setEventData(DataStream<Event> eventData) {
         this.eventData = eventData;
-        if (receiver != null) {
-            receiver.setEventData(eventData);
-        }
-    }
-
-    public DataStream<Event> getEventData() {
-        return eventData;
     }
 
     public DataStream<Alert> getAlertData() {
@@ -56,27 +37,7 @@ public class AlertingService implements RuleUnitData {
     }
 
     public void setAlertData(DataStream<Alert> alertData) {
-        if (emitter != null) {
-            this.alertData = new DataStream<Alert>() {
-
-                @Override
-                public void subscribe(DataProcessor<Alert> subscriber) {
-                    alertData.subscribe(subscriber);
-                }
-
-                @Override
-                public void append(Alert value) {
-                    emitter.send(value); // for outgoing channel
-                    alertData.append(value); // for in-memory ksession. We may comment out this if we use this service only for reactive incoming/outgoing (no query endpoint)
-                }
-            };
-        } else {
-            this.alertData = alertData;
-        }
+        this.alertData = alertData;
     }
 
-    @Override()
-    public String toString() {
-        return "AlertingService" + "( " + "eventData=" + eventData + ", " + "alertData=" + alertData + " )";
-    }
 }

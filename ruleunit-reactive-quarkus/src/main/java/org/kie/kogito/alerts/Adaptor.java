@@ -19,31 +19,39 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
+import org.eclipse.microprofile.reactive.messaging.Channel;
+import org.eclipse.microprofile.reactive.messaging.Emitter;
+import org.eclipse.microprofile.reactive.messaging.Incoming;
+import org.kie.kogito.rules.DataObserver;
 import org.kie.kogito.rules.RuleUnit;
 import org.kie.kogito.rules.RuleUnitInstance;
 
 import io.quarkus.runtime.Startup;
 
-@ApplicationScoped
 @Startup
-public class AlertingServiceReactiveExecutor {
+@ApplicationScoped
+public class Adaptor {
 
     @Inject
     RuleUnit<AlertingService> ruleUnit;
 
-    @Inject
-    AlertingServiceEmitter emitter;
+    AlertingService alertingService;
+    RuleUnitInstance<AlertingService> ruleUnitInstance;
 
     @Inject
-    AlertingServiceReceiver receiver;
+    @Channel("alerts")
+    Emitter<Alert> emitter;
 
     @PostConstruct
-    void onPostConstruct() {
-        System.out.println("AlertingServiceReactiveExecutor : onPostConstruct");
+    void init() {
+        this.alertingService = new AlertingService();
+        this.ruleUnitInstance = ruleUnit.createInstance(alertingService);
+        alertingService.getAlertData().subscribe(DataObserver.of(emitter::send));
+    }
 
-        // This is only one stateful RuleUnit in this service with the special reactive DataStream
-        AlertingService unitData = new AlertingService(emitter, receiver);
-        RuleUnitInstance<org.kie.kogito.alerts.AlertingService> ruleUnitInstance = ruleUnit.createInstance(unitData);
-        receiver.setRuleUnitInstance(ruleUnitInstance);
+    @Incoming("events")
+    public void receive(Event event) throws InterruptedException {
+        alertingService.getEventData().append(event);
+        ruleUnitInstance.fire();
     }
 }

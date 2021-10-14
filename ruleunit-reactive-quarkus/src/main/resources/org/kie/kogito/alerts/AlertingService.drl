@@ -9,7 +9,3 @@ then
    Alert alert = new Alert( "warning", $e.toString() );
    alertData.append( alert );
 end
-
-query Warnings
-   alerts: /alertData [ severity == "warning" ]
-end
