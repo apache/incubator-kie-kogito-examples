@@ -50,6 +50,8 @@
     <quarkus.package.type>fast-jar</quarkus.package.type>
     <!-- dependencies version -->
     <version.org.skyscreamer>1.5.0</version.org.skyscreamer>
+    <!-- JKube -->
+    <version.org.eclipse.jkube>1.4.0</version.org.eclipse.jkube>
   </properties>
 
   <!-- distributionManagement section -->
@@ -689,6 +691,17 @@
               </configuration>
             </execution>
           </executions>
+        </plugin>
+        <!-- Image build / Kubernetes deployment -->
+        <plugin>
+          <groupId>org.eclipse.jkube</groupId>
+          <artifactId>kubernetes-maven-plugin</artifactId>
+          <version>${version.org.eclipse.jkube}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.eclipse.jkube</groupId>
+          <artifactId>openshift-maven-plugin</artifactId>
+          <version>${version.org.eclipse.jkube}</version>
         </plugin>
       </plugins>
     </pluginManagement>

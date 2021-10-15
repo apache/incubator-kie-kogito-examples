@@ -115,5 +115,26 @@
         </dependency>
       </dependencies>
     </profile>
+    <profile>
+      <id>minikube</id>
+      <properties>
+        <quarkus.kubernetes.deploy>true</quarkus.kubernetes.deploy>
+        <quarkus.profile>minikube</quarkus.profile>
+      </properties>
+    </profile>
+    <profile>
+      <id>kubernetes</id>
+      <properties>
+        <quarkus.kubernetes.deploy>true</quarkus.kubernetes.deploy>
+        <quarkus.profile>kubernetes</quarkus.profile>
+      </properties>
+    </profile>
+    <profile>
+      <id>knative</id>
+      <properties>
+        <quarkus.kubernetes.deploy>true</quarkus.kubernetes.deploy>
+        <quarkus.profile>knative</quarkus.profile>
+      </properties>
+    </profile>
   </profiles>
 </project>
