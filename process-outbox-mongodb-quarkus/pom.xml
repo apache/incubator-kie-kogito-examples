@@ -122,6 +122,11 @@
                         <kogito.port>${KOGITO_PORT}</kogito.port>
                         <debezium.port>${DEBEZIUM_PORT}</debezium.port>
                         <kafka.port>${KAFKA_PORT}</kafka.port>
+                        <!-- Connection properties must be provided also here otherwise internal Quarkus cannot boot -->
+                        <quarkus.mongodb.connection-string>mongodb://localhost:${MONGODB_PORT}</quarkus.mongodb.connection-string>
+                        <quarkus.mongodb.credentials.username>debezium</quarkus.mongodb.credentials.username>
+                        <quarkus.mongodb.credentials.password>dbz</quarkus.mongodb.credentials.password>
+                        <quarkus.mongodb.credentials.auth-source>admin</quarkus.mongodb.credentials.auth-source>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>

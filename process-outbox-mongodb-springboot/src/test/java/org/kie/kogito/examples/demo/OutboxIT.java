@@ -25,6 +25,7 @@ import org.kie.kogito.test.springboot.kafka.KafkaTestClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
 
 import com.jayway.jsonpath.JsonPath;
 
@@ -34,6 +35,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasSize;
 
 @SpringBootTest
+@TestPropertySource(locations = "classpath:application-test.properties")
 public class OutboxIT {
 
     private static final Duration INITIAL_TIMEOUT = Duration.ofSeconds(250);
