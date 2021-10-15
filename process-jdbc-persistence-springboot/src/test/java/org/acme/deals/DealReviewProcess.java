@@ -23,47 +23,47 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 
 public class DealReviewProcess {
     static void run() {
-           // test adding new deal
+        // test adding new deal
         String addDealPayload =
-           "{\"name\" : \"my fancy deal\", \"traveller\" : { \"firstName\" : \"John\", \"lastName\" : \"Doe\", \"email\" : \"jon.doe@example.com\", \"nationality\" : \"American\",\"address\" : { \"street\" : \"main street\", \"city\" : \"Boston\", \"zipCode\" : \"10005\", \"country\" : \"US\" }}}";
+                "{\"name\" : \"my fancy deal\", \"traveller\" : { \"firstName\" : \"John\", \"lastName\" : \"Doe\", \"email\" : \"jon.doe@example.com\", \"nationality\" : \"American\",\"address\" : { \"street\" : \"main street\", \"city\" : \"Boston\", \"zipCode\" : \"10005\", \"country\" : \"US\" }}}";
         String dealId = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(
-           addDealPayload)
-           .when().post(
-                   "/deals")
-           .then().log().ifValidationFails().statusCode(201).body("id", notNullValue()).extract().path("id");
+                addDealPayload)
+                .when().post(
+                        "/deals")
+                .then().log().ifValidationFails().statusCode(201).body("id", notNullValue()).extract().path("id");
         // test getting the created deal
         given().accept(ContentType.JSON)
-           .when().get("/deals")
-           .then().log().ifValidationFails().statusCode(200).body("$.size()", is(1), "[0].id", is(dealId));
+                .when().get("/deals")
+                .then().log().ifValidationFails().statusCode(200).body("$.size()", is(1), "[0].id", is(dealId));
 
         // test getting order by id
         given().accept(ContentType.JSON)
-           .when().get("/deals/" + dealId)
-           .then().log().ifValidationFails().statusCode(200).body("id", is(dealId));
+                .when().get("/deals/" + dealId)
+                .then().log().ifValidationFails().statusCode(200).body("id", is(dealId));
 
         // get deals for review
         String dealReviewId = given().accept(ContentType.JSON)
-           .when().get("/dealreviews")
-           .then().log().ifValidationFails().statusCode(200).body("$.size()", is(1)).body("[0].id", notNullValue()).extract().path("[0].id");
+                .when().get("/dealreviews")
+                .then().log().ifValidationFails().statusCode(200).body("$.size()", is(1)).body("[0].id", notNullValue()).extract().path("[0].id");
 
         // get task for john
         String taskId = given().accept(ContentType.JSON)
-           .when().get("/dealreviews/{uuid}/tasks?user=john", dealReviewId)
-           .then().log().ifValidationFails().statusCode(200).body("$.size", is(1)).extract().path("[0].id");
+                .when().get("/dealreviews/{uuid}/tasks?user=john", dealReviewId)
+                .then().log().ifValidationFails().statusCode(200).body("$.size", is(1)).extract().path("[0].id");
 
         // complete review task
         given().contentType(ContentType.JSON).accept(ContentType.JSON).body("{\"review\" : \"very good work\"}")
-           .when().post("/dealreviews/{uuid}/review/{tuuid}?user=john", dealReviewId, taskId)
-           .then().log().ifValidationFails().statusCode(200);
+                .when().post("/dealreviews/{uuid}/review/{tuuid}?user=john", dealReviewId, taskId)
+                .then().log().ifValidationFails().statusCode(200);
 
         //verify no deals to review
         given().accept(ContentType.JSON)
-           .when().get("/dealreviews")
-           .then().log().ifValidationFails().statusCode(200).body("$.size()", is(0));
+                .when().get("/dealreviews")
+                .then().log().ifValidationFails().statusCode(200).body("$.size()", is(0));
 
         //verify no deals
         given().accept(ContentType.JSON)
-           .when().get("/deals")
-           .then().log().ifValidationFails().statusCode(200).body("$.size()", is(0));
+                .when().get("/deals")
+                .then().log().ifValidationFails().statusCode(200).body("$.size()", is(0));
     }
 }

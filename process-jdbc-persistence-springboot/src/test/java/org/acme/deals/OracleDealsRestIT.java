@@ -21,11 +21,12 @@ import org.junit.jupiter.api.Test;
 import org.kie.kogito.testcontainers.springboot.OracleSqlSpringBootTestResource;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 
 import io.restassured.RestAssured;
 
-
+@ActiveProfiles("jdbc-oracle")
 @SpringBootTest(classes = KogitoApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ContextConfiguration(initializers = OracleSqlSpringBootTestResource.class)
 public class OracleDealsRestIT {

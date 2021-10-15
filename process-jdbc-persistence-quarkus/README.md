@@ -1,4 +1,4 @@
-# Process with persistence powered by PostgreSQL
+# Process with persistence powered by JDBC
 
 ## Description
 
@@ -15,9 +15,7 @@ This example shows:
 * each process instance is going to be evaluated and asks for review
 * at any point in time, the service can be shutdown, and when brought back, it will keep the state of the instances
 
-Note: The use of this example shows that the data sent to PostgreSQL is saved. You can shut down the application and restart it, and as long as PostgreSQL is running after you restart you should still see the data.
-
-It utilizes PostgreSQL server as the backend store.
+Note: The use of this example shows that the data sent to the database is saved. You can shut down the application and restart it, and as long as the database is running after you restart you should still see the data.
 
 * Process (submitDeal.bpmn)
 <p align="center"><img width=75% height=50% src="docs/images/process.png"></p>
@@ -57,26 +55,30 @@ It utilizes PostgreSQL server as the backend store.
 
 ## Infrastructure requirements
 
-This quickstart requires a PostgreSQL server to be available with a database, a user and credentials already created
-, these configurations should then be set in the data source URL parameter in [applications.properties](src/main/resources/application.properties) file with the key
- `quarkus.datasource.reactive.url`, i.e `quarkus.datasource.reactive.url=postgresql://localhost:5432/kogito` here are the [full settings for URI](https://quarkus.io/guides/reactive-sql-clients#reactive-datasource)
+This quickstart requires a PostgreSQL/Oracle server to be available with a database. Example configuration can be found in [postgresql.properties](src/main/resources/postgresql.properties) and [oracle.properties](src/main/resources/oracle.properties).
 
-You must set the property `kogito.persistence.type=postgresql` to enable PostgreSQL persistence. There is also a
-configuration to allow the application to run DDL scripts during the initialization, which you can enable with the
-property `kogito.persistence.auto.ddl=true`.
+You must set the property `kogito.persistence.type=jdbc` to enable JDBC persistence. There is also a configuration to allow the application to run DDL scripts during the initialization, which you can enable with the property `kogito.persistence.auto.ddl=true`.
 For more details you can check [applications.properties](src/main/resources/application.properties).
 
-Optionally and for convenience, a docker-compose [configuration file](docker-compose/docker-compose.yml) is
- provided in the path [docker-compose/](docker-compose/), where you can just run the command from there:
-  ```sh
-  docker-compose up
-  ```
-  In this way a container for PostgreSQL running on port 5432, along with PgAdmin, running on port
-   8055 to allow the database management.
+Optionally and for convenience, a docker-compose setup is provided.
 
-  The default admin user for PostgreSQL is `postgres` with password `pass`, for PgAdmin the default user created is
-   `user@user.org` with password `pass`, the database connection could be set in PgAdmin using the hostname
-   `postgres-container` for the PostgreSQL server, details defined in [configuration file](docker-compose/docker-compose.yml),  an initializer script is executed to create the `kogito` database and `kogito-user`.
+### Postgres
+Postgres [configuration file](docker-compose/postgres-compose.yaml) is provided in the path, where you can just run the command from there:
+  ```sh
+  docker-compose -f postgres-compose.yaml up
+  ```
+  In this way a container for PostgreSQL running on port 5432.
+
+  The default admin user for PostgreSQL is `postgres` with password `pass`.
+
+### Oracle
+Oracle [configuration file](docker-compose/oracle-compose.yaml) is provided, where you can just run the command from there:
+  ```sh
+  docker-compose -f oracle-compose.yaml up
+  ```
+  In this way a container for Oracle running on port 1521.
+
+  The default admin user for Oracle is `system` with password `oracle`.
 
 ## Build and run
 
@@ -95,8 +97,9 @@ When using native image compilation, you will also need:
 
 ### Compile and Run in Local Dev Mode
 
+Start the application in dev mode with either postgres or oracle profiles. Eg:
 ```sh
-mvn clean compile quarkus:dev -Ppersistence
+mvn clean compile quarkus:dev -Pjdbc-postgres
 ```
 
 NOTE: With dev mode of Quarkus you can take advantage of hot reload for business assets like processes, rules, decision tables and java code. No need to redeploy or restart your running application.
@@ -112,26 +115,26 @@ kogito.persistence.optimistic.lock=true
 Additionally, you can use below commands to set this property at runtime and build and run the application
 
 ```
-mvn clean compile quarkus:dev -Dkogito.persistence.optimistic.lock=true -Ppersistence
+mvn clean compile quarkus:dev -Dkogito.persistence.optimistic.lock=true -Pjdbc-postgres
 ```
 or
 
 ```
-mvn clean package -Ppersistence
+mvn clean package -Pjdbc-postgres
 java -Dkogito.persistence.optimistic.lock=true -jar target/quarkus-app/quarkus-run.jar
 ```
 
 ### Package and Run in JVM mode
 
 ```sh
-mvn clean package -Ppersistence
+mvn clean package -Pjdbc-postgres
 java -jar target/quarkus-app/quarkus-run.jar
 ```
 
 or on windows
 
 ```sh
-mvn clean package -Ppersistence
+mvn clean package -Pjdbc-postgres
 java -jar target\quarkus-app\quarkus-run.jar
 ```
 
@@ -139,7 +142,7 @@ java -jar target\quarkus-app\quarkus-run.jar
 Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
 
 ```sh
-mvn clean package -Ppersistence,native
+mvn clean package -Pjdbc-postgres,native
 ```
 
 To run the generated native executable, generated in `target/`, execute
@@ -182,7 +185,7 @@ To make use of this application it is as simple as putting a sending request to 
 Complete curl command can be found below:
 
 ```
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"name" : "my fancy deal", "traveller" : { "firstName" : "John", "lastName" : "Doe", "email" : "jon.doe@example.com", "nationality" : "American","address" : { "street" : "main street", "city" : "Boston", "zipCode" : "10005", "country" : "US" }}}' http://localhost:8080/deals
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"name" : "my fancy deal", "traveller" : { "firstName" : "John", "lastName" : "Doe", "email" : "jon.doe@example.com", "nationality" : "American","address" : { "street" : "main street", "city" : "Boston", "zipCode" : "10005", "country" : "US" }}}' 'http://localhost:8080/deals'
 ```
 
 this will then trigger the review user task that you can work with.
@@ -192,13 +195,13 @@ this will then trigger the review user task that you can work with.
 First you can display all active reviews of deals
 
 ```
-curl -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/dealreviews
+curl -H 'Content-Type:application/json' -H 'Accept:application/json' 'http://localhost:8080/dealreviews'
 ```
 
 based on the response you can select one of the reviews to see more details
 
 ```
-curl -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/dealreviews/{uuid}/tasks?user=john
+curl -H 'Content-Type:application/json' -H 'Accept:application/json' 'http://localhost:8080/dealreviews/{uuid}/tasks?user=john'
 ```
 
 where uuid is the id of the deal review you want to work with.
@@ -206,7 +209,7 @@ where uuid is the id of the deal review you want to work with.
 Next you can get the details assigned to review user task by
 
 ```
-curl -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/dealreviews/{uuid}/review/{tuuid}?user=john
+curl -H 'Content-Type:application/json' -H 'Accept:application/json' 'http://localhost:8080/dealreviews/{uuid}/review/{tuuid}?user=john'
 ```
 
 where uuid is the id of the deal review and tuuid is the id of the user task you want to get
@@ -217,7 +220,7 @@ where uuid is the id of the deal review and tuuid is the id of the user task you
 Last but not least, you can complete the review user task by:
 
 ```
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"review" : "very good work"}' http://localhost:8080/dealreviews/{uuid}/review/{tuuid}?user=john
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"review" : "very good work"}' 'http://localhost:8080/dealreviews/{uuid}/review/{tuuid}?user=john'
 ```
 
 Where `{uuid}` is the id of the deal review and `{tuuid}` is the id of the user task you want to get.

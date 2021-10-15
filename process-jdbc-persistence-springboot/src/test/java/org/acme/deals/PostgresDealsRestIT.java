@@ -21,10 +21,12 @@ import org.junit.jupiter.api.Test;
 import org.kie.kogito.testcontainers.springboot.PostgreSqlSpringBootTestResource;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 
 import io.restassured.RestAssured;
 
+@ActiveProfiles("jdbc-postgres")
 @SpringBootTest(classes = KogitoApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ContextConfiguration(initializers = PostgreSqlSpringBootTestResource.class)
 public class PostgresDealsRestIT {

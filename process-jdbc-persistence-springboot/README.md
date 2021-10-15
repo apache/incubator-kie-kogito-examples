@@ -1,4 +1,4 @@
-# Process with persistence powered by PostgreSQL
+# Process with persistence powered by JDBC
 
 ## Description
 
@@ -15,9 +15,7 @@ This example shows:
 * each process instance is going to be evaluated and asks for review
 * at any point in time, the service can be shutdown, and when brought back, it will keep the state of the instances
 
-Note: The use of this example shows that the data sent to PostgreSQL is saved. You can shut down the application and restart it, and as long as PostgreSQL is running after you restart you should still see the data.
-
-It utilizes PostgreSQL server as the backend store.
+Note: The use of this example shows that the data sent to a database is saved. You can shut down the application and restart it, and as long as database is running after you restart you should still see the data.
 
 * Process (submitDeal.bpmn)
 <p align="center"><img width=75% height=50% src="docs/images/process.png"></p>
@@ -49,7 +47,7 @@ It utilizes PostgreSQL server as the backend store.
 * Review deal user task	(top)
 <p align="center"><img src="docs/images/reviewDealUserTask.png"></p>
 
-* Review deal user task	(botom)
+* Review deal user task	(bottom)
 <p align="center"><img src="docs/images/reviewDealUserTask2.png"></p>
 
 * Review deal user task	(Assignments)
@@ -65,7 +63,7 @@ For more details you can check [applications.properties](src/main/resources/appl
 Optionally and for convenience, a docker-compose setup is provided.
 
 ### Postgres
-Postgres [configuration file](docker-compose/postgres-compose.yml) is provided in the path [postgres-compose/](postgres-compose/), where you can just run the command from there:
+Postgres [configuration file](docker-compose/postgres-compose.yaml) is provided in the path, where you can just run the command from there:
   ```sh
   docker-compose -f postgres-compose.yaml up
   ```
@@ -74,7 +72,7 @@ Postgres [configuration file](docker-compose/postgres-compose.yml) is provided i
   The default admin user for PostgreSQL is `postgres` with password `pass`.
 
 ### Oracle
-Oracle [configuration file](docker-compose/oracle-compose.yml) is provided in the path [oracle-compose/](oracle-compose/), where you can just run the command from there:
+Oracle [configuration file](docker-compose/oracle-compose.yaml) is provided, where you can just run the command from there:
   ```sh
   docker-compose -f oracle-compose.yaml up
   ```
@@ -151,7 +149,7 @@ To make use of this application it is as simple as putting a sending request to 
 Complete curl command can be found below:
 
 ```
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"name" : "my fancy deal", "traveller" : { "firstName" : "John", "lastName" : "Doe", "email" : "jon.doe@example.com", "nationality" : "American","address" : { "street" : "main street", "city" : "Boston", "zipCode" : "10005", "country" : "US" }}}' http://localhost:8080/deals
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"name" : "my fancy deal", "traveller" : { "firstName" : "John", "lastName" : "Doe", "email" : "jon.doe@example.com", "nationality" : "American","address" : { "street" : "main street", "city" : "Boston", "zipCode" : "10005", "country" : "US" }}}' 'http://localhost:8080/deals'
 ```
 
 this will then trigger the review user task that you can work with.
@@ -161,13 +159,13 @@ this will then trigger the review user task that you can work with.
 First you can display all active reviews of deals
 
 ```
-curl -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/dealreviews
+curl -H 'Content-Type:application/json' -H 'Accept:application/json' 'http://localhost:8080/dealreviews'
 ```
 
 based on the response you can select one of the reviews to see more details
 
 ```
-curl -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/dealreviews/{uuid}/tasks?user=john
+curl -H 'Content-Type:application/json' -H 'Accept:application/json' 'http://localhost:8080/dealreviews/{uuid}/tasks?user=john'
 ```
 
 where uuid is the id of the deal review you want to work with.
@@ -175,7 +173,7 @@ where uuid is the id of the deal review you want to work with.
 Next you can get the details assigned to review user task by
 
 ```
-curl -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/dealreviews/{uuid}/review/{tuuid}?user=john
+curl -H 'Content-Type:application/json' -H 'Accept:application/json' 'http://localhost:8080/dealreviews/{uuid}/review/{tuuid}?user=john'
 ```
 
 where uuid is the id of the deal review and tuuid is the id of the user task you want to get
@@ -186,7 +184,7 @@ where uuid is the id of the deal review and tuuid is the id of the user task you
 Last but not least you can complete review user task by
 
 ```
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"review" : "very good work"}' http://localhost:8080/dealreviews/uuid/review/{tuuid}?user=john
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"review" : "very good work"}' 'http://localhost:8080/dealreviews/uuid/review/{tuuid}?user=john'
 ```
 
 where uuid is the id of the deal review and tuuid is the id of the user task you want to get
