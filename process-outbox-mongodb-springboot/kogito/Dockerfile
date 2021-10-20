@@ -1,4 +1,4 @@
-FROM openjdk:11-jre-slim
+FROM fabric8/java-alpine-openjdk11-jre
 
 VOLUME /tmp
 

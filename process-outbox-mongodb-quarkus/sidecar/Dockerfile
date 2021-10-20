@@ -1,4 +1,4 @@
-FROM mongo:4.4
+FROM mongo:4.4.10
 
 RUN apt-get update && apt-get install -y curl
 
