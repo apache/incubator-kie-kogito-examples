@@ -48,6 +48,6 @@ public class CustomRestDecision {
                 .get(DecisionIds.class)
                 .get("https://github.com/kiegroup/drools/kie-dmn/_A4BCA8B8-CF08-433F-93B2-A2598F19ECFF",
                         "Traffic Violation");
-        return svc.evaluate(id, MapDataContext.of(payload));
+        return svc.evaluate(id, MapDataContext.of(payload)).data();
     }
 }

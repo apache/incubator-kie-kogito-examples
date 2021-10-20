@@ -48,7 +48,7 @@ public class CustomRestPrediction {
                 .get("LinReg");
 
         MapDataContext ctx = MapDataContext.of(payload);
-        return svc.evaluate(id, ctx);
+        return svc.evaluate(id, ctx).data();
     }
 
 }
