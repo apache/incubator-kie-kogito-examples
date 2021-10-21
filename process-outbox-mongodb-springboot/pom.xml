@@ -160,6 +160,13 @@
                         <debezium.port>${DEBEZIUM_PORT}</debezium.port>
                         <kafka.port>${KAFKA_PORT}</kafka.port>
                     </systemPropertyVariables>
+                    <environmentVariables>
+                        <!-- Connection properties must be provided also here otherwise internal Spring Boot cannot boot -->
+                        <MONGODB_HOST>localhost:${MONGODB_PORT}</MONGODB_HOST>
+                        <MONGODB_USERNAME>debezium</MONGODB_USERNAME>
+                        <MONGODB_PASSWORD>dbz</MONGODB_PASSWORD>
+                        <MONGODB_AUTH_SOURCE>admin</MONGODB_AUTH_SOURCE>
+                    </environmentVariables>
                 </configuration>
             </plugin>
             <plugin>
