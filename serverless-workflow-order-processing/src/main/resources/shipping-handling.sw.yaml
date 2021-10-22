@@ -1,5 +1,6 @@
 id: shippinghandling
 name: Shipping Handling
+expressionLang: jsonpath
 start: ShippingHandling
 version: "1.0"
 events:

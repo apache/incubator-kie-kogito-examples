@@ -2,6 +2,7 @@ id: yamlgreet
 version: '1.0'
 name: Greeting workflow
 description: YAML based greeting workflow
+expressionLang: jsonpath
 start: ChooseOnLanguage
 functions:
   - name: greetFunction

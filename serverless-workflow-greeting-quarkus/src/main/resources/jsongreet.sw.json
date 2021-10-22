@@ -2,6 +2,7 @@
   "id": "jsongreet",
   "version": "1.0",
   "name": "Greeting workflow",
+  "expressionLang": "jsonpath",
   "description": "JSON based greeting workflow",
   "start": "ChooseOnLanguage",
   "functions": [

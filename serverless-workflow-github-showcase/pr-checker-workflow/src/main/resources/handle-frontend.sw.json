@@ -1,6 +1,7 @@
 {
   "id": "handle_frontend",
   "name": "HandleFrontend",
+  "expressionLang": "jsonpath",
   "version": "1.0",
   "start": "CheckFrontend",
   "functions": [

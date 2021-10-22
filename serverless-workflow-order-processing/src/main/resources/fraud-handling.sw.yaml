@@ -1,5 +1,6 @@
 id: fraudhandling
 name: Fraud Handling
+expressionLang: jsonpath
 start: FraudHandling
 version: "1.0"
 events:

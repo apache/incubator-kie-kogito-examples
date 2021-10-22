@@ -1,6 +1,7 @@
 {
   "id": "onboarding",
   "name": "Patient Onboarding Workflow",
+  "expressionLang": "jsonpath",
   "start": "LetsOnboard",
   "states": [
     {

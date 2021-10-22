@@ -1,6 +1,7 @@
 {
     "id": "RestExample",
     "name": "Rest fun with numbers",
+    "expressionLang": "jsonpath",
     "version": "1.0v",
     "start": "Calculations",
     "functions": [
