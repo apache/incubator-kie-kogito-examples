@@ -213,6 +213,7 @@
         <module>serverless-workflow-service-calls-quarkus</module>
         <module>serverless-workflow-service-calls-springboot</module>
         <module>serverless-workflow-events-quarkus</module>
+        <module>serverless-workflow-error-quarkus</module>
         <module>serverless-workflow-functions-quarkus</module>
         <module>serverless-workflow-functions-events-quarkus</module>
         <module>serverless-workflow-github-showcase</module>
