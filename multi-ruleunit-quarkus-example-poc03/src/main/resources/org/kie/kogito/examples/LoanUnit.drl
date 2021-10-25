@@ -1,0 +1,69 @@
+/**
+ * Copyright 2020 Red Hat, Inc. and/or its affiliates.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.kie.kogito.examples;
+unit LoanUnit;
+
+import org.kie.kogito.examples.LoanApplication;
+
+// ----------------------
+// loan approval
+// ----------------------
+
+rule SmallDepositApprove when
+    $l: /loanApplications[ deposit < 1000, amount <= 2000, applicant.occupationCategory == "A" ]
+then
+    modify($l) { setApproved(true) };
+end
+
+rule SmallDepositReject when
+    $l: /loanApplications[ deposit < 1000, amount > 2000, applicant.occupationCategory == "A" ]
+then
+    modify($l) { setApproved(false) };
+end
+
+rule LargeDepositApprove when
+    $l: /loanApplications[ deposit >= 1000, amount <= 10000, applicant.occupationCategory == "A" ]
+then
+    modify($l) { setApproved(true) };
+end
+
+rule LargeDepositReject when
+    $l: /loanApplications[ deposit >= 1000, amount > 10000, applicant.occupationCategory == "A" ]
+then
+    modify($l) { setApproved(false) };
+end
+
+// more...
+
+// ----------------------
+// special cases
+// ----------------------
+rule LargeDepositWithoutCurrentOccupation
+no-loop
+when
+    $l: /loanApplications[ deposit >= 1000, applicant.occupationCode == null ]
+then
+    System.out.println("*** LargeDepositWithoutCurrentOccupation");
+    Applicant $a = $l.getApplicant();
+    $a.setOccupationCode($a.getPreviousOccupationCode()); // evaluate based on previous occupation
+    modify($l) { setApplicant($a) }; // this triggers common rule "occupationCategory*"
+end
+
+query FindApproved
+    $l: /loanApplications[ approved ]
+end
+
+
