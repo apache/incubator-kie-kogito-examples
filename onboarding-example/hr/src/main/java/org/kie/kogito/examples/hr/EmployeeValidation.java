@@ -20,6 +20,7 @@ import org.kie.kogito.rules.RuleUnitData;
 import org.kie.kogito.rules.SingletonStore;
 
 public class EmployeeValidation implements RuleUnitData {
+
     private final SingletonStore<Employee> employee = DataSource.createSingleton();
     private final SingletonStore<EmployeeValidationModel> validation = DataSource.createSingleton();
 

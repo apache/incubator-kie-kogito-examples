@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
@@ -21,7 +21,31 @@
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-cloud-workitems</artifactId>
+      <artifactId>kogito-addons-quarkus-kubernetes</artifactId>
+    </dependency>
+
+    <!-- Kubernetes deployment extensions -->
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-kubernetes</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-container-image-jib</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-minikube</artifactId>
+      <optional>true</optional>
+    </dependency>
+
+    <!-- To run our tests on a mocked environment -->
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-test-kubernetes-client</artifactId>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -90,6 +114,27 @@
           <version>${project.version}</version>
         </dependency>
       </dependencies>
+    </profile>
+    <profile>
+      <id>minikube</id>
+      <properties>
+        <quarkus.kubernetes.deploy>true</quarkus.kubernetes.deploy>
+        <quarkus.profile>minikube</quarkus.profile>
+      </properties>
+    </profile>
+    <profile>
+      <id>kubernetes</id>
+      <properties>
+        <quarkus.kubernetes.deploy>true</quarkus.kubernetes.deploy>
+        <quarkus.profile>kubernetes</quarkus.profile>
+      </properties>
+    </profile>
+    <profile>
+      <id>knative</id>
+      <properties>
+        <quarkus.kubernetes.deploy>true</quarkus.kubernetes.deploy>
+        <quarkus.profile>knative</quarkus.profile>
+      </properties>
     </profile>
   </profiles>
 </project>

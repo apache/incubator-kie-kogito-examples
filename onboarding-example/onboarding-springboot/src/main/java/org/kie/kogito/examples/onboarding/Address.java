@@ -69,5 +69,4 @@ public class Address implements java.io.Serializable {
         this.zipCode = zipCode;
         this.country = country;
     }
-
 }

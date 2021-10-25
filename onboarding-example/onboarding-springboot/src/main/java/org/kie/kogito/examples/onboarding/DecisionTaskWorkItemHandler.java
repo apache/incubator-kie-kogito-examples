@@ -17,28 +17,23 @@ package org.kie.kogito.examples.onboarding;
 
 import java.util.Map;
 
-import org.kie.kogito.cloud.workitems.DiscoveredServiceWorkItemHandler;
-import org.kie.kogito.cloud.workitems.HttpMethods;
-import org.kie.kogito.cloud.workitems.ServiceInfo;
+import org.kie.kogito.addons.springboot.k8s.workitems.SpringDiscoveredEndpointCaller;
 import org.kie.kogito.internal.process.runtime.KogitoWorkItem;
+import org.kie.kogito.internal.process.runtime.KogitoWorkItemHandler;
 import org.kie.kogito.internal.process.runtime.KogitoWorkItemManager;
+import org.springframework.http.HttpMethod;
 
-public class DecisionTaskWorkItemHandler extends DiscoveredServiceWorkItemHandler {
+public class DecisionTaskWorkItemHandler implements KogitoWorkItemHandler {
 
-    public DecisionTaskWorkItemHandler() {
-        if ("true".equalsIgnoreCase(System.getProperty("local"))) {
-            this.addServices("id", new ServiceInfo("http://localhost:8081/id", null));
-            this.addServices("department", new ServiceInfo("http://localhost:8081/department/first", null));
-            this.addServices("employeeValidation", new ServiceInfo("http://localhost:8081/employee-validation/first", null));
-            this.addServices("vacations/days", new ServiceInfo("http://localhost:8082/vacations/days", null));
-            this.addServices("taxes/rate", new ServiceInfo("http://localhost:8082/taxes/rate", null));
-            this.addServices("payments/date", new ServiceInfo("http://localhost:8082/payments/date", null));
-        }
+    private SpringDiscoveredEndpointCaller endpointCaller;
+
+    public DecisionTaskWorkItemHandler(SpringDiscoveredEndpointCaller endpointCaller) {
+        this.endpointCaller = endpointCaller;
     }
 
     @Override
     public void executeWorkItem(KogitoWorkItem workItem, KogitoWorkItemManager manager) {
-        Map<String, Object> results = discoverAndCall(workItem, System.getenv("NAMESPACE"), "Decision", HttpMethods.POST);
+        Map<String, Object> results = this.endpointCaller.discoverAndCall(workItem, System.getenv("NAMESPACE"), "Decision", HttpMethod.POST.toString());
 
         manager.completeWorkItem(workItem.getStringId(), results);
     }
@@ -52,5 +47,4 @@ public class DecisionTaskWorkItemHandler extends DiscoveredServiceWorkItemHandle
     public String getName() {
         return "DecisionTask";
     }
-
 }
