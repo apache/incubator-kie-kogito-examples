@@ -1,5 +1,6 @@
 name: Order Workflow
 id: orderworkflow
+expressionLang: jsonpath
 version: "1.0"
 description: Workflow for processing Orders and produce Logistics Events
 start: ReceiveOrder

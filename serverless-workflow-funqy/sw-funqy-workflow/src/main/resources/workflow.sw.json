@@ -2,6 +2,7 @@
   "id": "countryworkflow",
   "version": "1.0",
   "name": "Country Workflow",
+  "expressionLang": "jsonpath",
   "description": "Workflow for countries",
   "start": "GetCountryInfo",
   "states": [
