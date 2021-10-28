@@ -157,6 +157,7 @@
         <module>process-decisions-rest-springboot</module>
         <module>process-error-handling</module>
         <module>process-incubation-api-quarkus</module>
+        <module>process-incubation-api-messaging-quarkus</module>
         <module>process-infinispan-persistence-quarkus</module>
         <module>process-infinispan-persistence-springboot</module>
         <module>process-kafka-persistence-quarkus</module>
