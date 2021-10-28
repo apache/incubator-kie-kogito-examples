@@ -2,14 +2,16 @@
 
 ## Description
 
-This quickstart project demonstrate how to use the Kogito Public API (*Incubation*). It disables the predefined generated REST endpoint and instead uses the Public API to define a custom HTTP resource.
+This quickstart project demonstrate how to use the Kogito Public API (*Incubation*) with Messaging and Kafka. It disables the predefined generated REST endpoint and instead uses the Public API to interact with the process.
 
-The custom REST endpoint evaluates a process that expects a name:
+A message consumer receives a message and evaluates a process using the process id and publish a response.
 
-- when the name is supplied via REST request, it prints a "hello" message to screen and return that same message as a REST response.
-- the quickstart uses the public API to define a custom REST endpoint instead of codegen.
+- when a new message is received in the topic ´hello´, it starts a process that prints a "hello" message to console and publishes a response in another topic `hello-response`.
+- the quickstart uses the public API to define a message consumer/publisher instead of any kogito messaging addon.
 
 *Incubation* means that this API is experimental, but it is part of a regular release for early access and to gather community feedback.
+
+All configuration details like the Kafka broker URL and topic names can be found in  [applications.properties](src/main/resources/application.properties) file.
 
 ## Build and run
 
@@ -35,18 +37,9 @@ mvn clean package
 java -jar target/quarkus-app/quarkus-run.jar
 ```
 
-### OpenAPI (Swagger) documentation
-[Specification at swagger.io](https://swagger.io/docs/specification/about/)
-
-You can take a look at the [OpenAPI definition](http://localhost:8080/openapi?format=json) - automatically generated and included in this service - to determine all available operations exposed by this service. For easy readability you can visualize the OpenAPI definition file using a UI tool like for example available [Swagger UI](https://editor.swagger.io).
-
-In addition, various clients to interact with this service can be easily generated using this OpenAPI definition.
-
-When running in either Quarkus Development or Native mode, we also leverage the [Quarkus OpenAPI extension](https://quarkus.io/guides/openapi-swaggerui#use-swagger-ui-for-development) that exposes [Swagger UI](http://localhost:8080/swagger-ui/) that you can use to look at available REST endpoints and send test requests.
-
 ### Submit a request
 
-To make use of this application it is as simple as sending a request to `http://localhost:8080/custom-rest-process`  with the following content
+To make use of this application it is as simple as sending a message to the configured topic ´hello´ with the following content
 
 ```json
 {
@@ -58,13 +51,7 @@ To make use of this application it is as simple as sending a request to `http://
 
 ```
 
-Complete curl command can be found below:
-
-```sh
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{  "user" : { "firstName": "Marty", "lastName" : "McFly"}}' http://localhost:8080/custom-rest-process
-```
-
-Response should be similar to:
+Response is sent in the topic ´hello-response´, and it should be similar to:
 
 ```json
 {
@@ -81,4 +68,3 @@ And also in Quarkus log you should see a log entry:
 ```
 Hello, Marty McFly!
 ```
-
