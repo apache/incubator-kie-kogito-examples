@@ -1,7 +1,7 @@
-<bpmn2:definitions xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_KOdCUAzREDmO9ZdGxaSt8g" exporter="jBPM Process Modeler" exporterVersion="2.0" targetNamespace="http://www.omg.org/bpmn20">
+<bpmn2:definitions xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" xmlns:xsi="xsi" id="_7X-yoBrlEDqiHs1PP4Bahg" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd http://www.omg.org/spec/DD/20100524/DC DC.xsd http://www.omg.org/spec/DD/20100524/DI DI.xsd " exporter="jBPM Process Modeler" exporterVersion="2.0" targetNamespace="http://www.omg.org/bpmn20">
   <bpmn2:itemDefinition id="_exceptionItem" structureRef="org.kie.api.runtime.process.WorkItem"/>
   <bpmn2:error id="exception" errorCode="exception"/>
-  <bpmn2:process id="compensarion" drools:packageName="com.myspace" drools:version="1.0" drools:adHoc="false" name="compensation" isExecutable="true" processType="Public">
+  <bpmn2:process id="error_events" drools:packageName="com.myspace" drools:version="1.0" drools:adHoc="false" name="error-events" isExecutable="true" processType="Public">
     <bpmn2:property id="exception" itemSubjectRef="_exceptionItem" name="exception"/>
     <bpmn2:sequenceFlow id="_953DDA64-3B4E-4D46-988F-7A0F97974724" sourceRef="_B3788C79-69B9-4512-92F6-84B26F06DB35" targetRef="_B7D536BD-24B5-4927-9EF8-8D13536DED0C">
       <bpmn2:extensionElements>
@@ -100,7 +100,7 @@
     <bpmn2:association id="_0B4CF977-07EB-404F-BB13-E71B139753C0" associationDirection="One" sourceRef="_5355F792-4A77-4453-9139-A382B18F8FA8" targetRef="_E1836EFD-D1B0-4F42-B713-4204020C4566"/>
   </bpmn2:process>
   <bpmndi:BPMNDiagram>
-    <bpmndi:BPMNPlane bpmnElement="compensarion">
+    <bpmndi:BPMNPlane bpmnElement="error_events">
       <bpmndi:BPMNShape id="shape__4AA37BAE-6D6C-4944-8C7F-BC786DA17A31" bpmnElement="_4AA37BAE-6D6C-4944-8C7F-BC786DA17A31" isExpanded="true">
         <dc:Bounds height="253" width="653" x="477" y="537"/>
       </bpmndi:BPMNShape>
@@ -232,7 +232,7 @@
         </bpsim:Scenario>
       </bpsim:BPSimData>
     </bpmn2:extensionElements>
-    <bpmn2:source>_KOdCUAzREDmO9ZdGxaSt8g</bpmn2:source>
-    <bpmn2:target>_KOdCUAzREDmO9ZdGxaSt8g</bpmn2:target>
+    <bpmn2:source>_7X-yoBrlEDqiHs1PP4Bahg</bpmn2:source>
+    <bpmn2:target>_7X-yoBrlEDqiHs1PP4Bahg</bpmn2:target>
   </bpmn2:relationship>
 </bpmn2:definitions>
