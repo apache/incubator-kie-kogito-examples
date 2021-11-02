@@ -1,8 +1,8 @@
-# Kogito Serverless Workflow - Greeting Example
+# Kogito Serverless Workflow - Error Example
 
 ## Description
 
-This example contains a simple greeting workflow service that illustrate error handling. 
+This example contains a simple workflow service that illustrate error handling. 
 The service is described using JSON format as defined in the 
 [CNCF Serverless Workflow specification](https://github.com/serverlessworkflow/specification).
 
@@ -61,7 +61,7 @@ To run the generated native executable, generated in `target/`, execute
 
 ### Submit a request
 
-The service based on the JSON workflow definition can be access by sending a request to http://localhost:8080/jsongreet'
+The service based on the JSON workflow definition can be access by sending a request to http://localhost:8080/error'
 with following content 
 
 ```json
