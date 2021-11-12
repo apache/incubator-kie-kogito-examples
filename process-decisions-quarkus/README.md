@@ -2,14 +2,16 @@
 
 ## Description
 
-This is an example project that shows the usage of decisions within processes. Decisions can be expressed in different domains or assets, such as DMN and DRL. 
+This is a straight-through process (STP) example intended to orchestrate business decisions using BPMN. Decisions can be expressed in different domains or assets, such as DMN and DRL. 
 The focus here is to show how to integrate decisions in an embedded way using Business Rule Task where they must be deployed together with the process, in the same application. All assets(bpmn, dmn, drl) must be under the [resources](src/main/resources/).
 
 This example covers the following items:
 
+* Straight-through process (no state persistence)
 * DMN to define a decision service
 * DRL to define rules decision service
 * How to integrate the process with decisions using Business Rule Task
+* Kogito Runtime Tools Quarkus extension to leverage the Management Console during dev time
 
 ### The Traffic Process example:
 
@@ -181,9 +183,9 @@ Given data:
 {
     "driverId": "12345",
     "violation":{
-        "Type":"speed",
-        "Speed Limit": 100,
-        "Actual Speed":140
+        "type":"speed",
+        "speedLimit": 100,
+        "actualSpeed":140
     }
 }
 ```
@@ -236,9 +238,9 @@ Given data:
 {
     "driverId": "1234",
     "violation":{
-        "Type":"speed",
-        "Speed Limit": 100,
-        "Actual Speed":110
+        "type":"speed",
+        "speedLimit": 100,
+        "actualSpeed":110
     }
 }
 ```
@@ -278,7 +280,38 @@ After the Curl command, you should see a similar console log
 ```
 In this case the driver license is expired when the DRL is evaluated because the  DriverService generated an expired date for the driver's license thus DMN is not evaluated, so the `validLicense` is `false`, `suspended` and `fine` are `null`. 
 
+## Using the Management Console and Kogito Runtime Tools
+This projects includes a Maven profile that allows you to start the service with the new [Kogito Runtime Tools Quarkus extension](https://blog.kie.org/2021/09/developing-business-processes-more-efficiently-with-runtime-tools-quarkus-extension-part-1.html) allowing you as a developer access the [Kogito Management Console](https://blog.kie.org/2021/09/manage-processes-and-tasks-using-kogito-consoles.html) and visualize your Process Instances.
 
+Although the Business Process used in this example project is a STP and do not have state persistence, we are leveraging the Kogito Data Index service to store the Process Instance runtime events (process definition, variables, process nodes, meta-data etc) so we can visualize the final state of each instance using the Kogito Management Console. In order to do that we need to start the Data Index service and its backend components (Kafka and Infinispan). For this we provide a docker-compose file inside [docker-compose](./docker-compose) directory.
+
+### Prerequisites
+
+You will need:
+  - Kogito Data Index Service and its required components: Kafka and Infinispan
+  - Docker and Docker Compose
+
+### Kogito Management Console
+This project leverages a new Quarkus extension provided by Kogito that brings the Management Console as part of the Quarkus Dev Services UI.
+After starting your Kogito app in dev mode (`mvn quarkus:dev`) access the Quarkus [Dev UI](http://localhost:8080/q/dev/) at http://localhost:8080/q/dev
+
+On the **Kogito Runtime Tools** Card click on **Process Instances**
+
+![Quarkus Dev UI](docs/images/DevUI.png)
+
+If you have already started any process instance by calling the Kogito Rest API endpoint you will be able to see them by filtering them by `Completed`.
+
+![Process Instances Filter](docs/images/DevUI-processInstances_completed.png)
+
+Your completed process instances should appear in a list like this
+
+![Processes List](docs/images/DevUI_processInstance_list.png)
+
+Click in any process to see its details
+
+![Processes List](docs/images/DevUI_processInstance_detail.png)
+
+> The Management Console get these information from the Kogito Data Index service which is responsible for consuming Process events from Kafka index them and store into Infinispan.
 ## Deploying with Kogito Operator
 
 In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).

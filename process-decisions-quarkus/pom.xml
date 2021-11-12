@@ -9,7 +9,7 @@
   </parent>
   <artifactId>process-decisions-quarkus</artifactId>
   <name>Kogito Example :: Process :: Decisions :: Quarkus</name>
-  <description>Process with DMN and DRL integration - Quarkus</description>
+  <description>Straight-through Process with DMN and DRL integration - Quarkus</description>
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -67,4 +67,51 @@
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>runtime-tools</id>
+      <properties>
+        <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
+        <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
+        <quarkus.platform.version>2.4.0.Final</quarkus.platform.version>
+      </properties>       
+      <dependencyManagement>
+        <dependencies>
+          <dependency>
+            <groupId>org.kie.kogito</groupId>
+            <artifactId>kogito-quarkus-bom</artifactId>
+            <version>${kogito.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+          </dependency>
+          <dependency>
+            <groupId>${quarkus.platform.group-id}</groupId>
+            <artifactId>${quarkus.platform.artifact-id}</artifactId>
+            <version>${quarkus.platform.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+          </dependency>      
+        </dependencies>
+      </dependencyManagement>
+      <dependencies>
+        <dependency>
+          <groupId>org.kie.kogito</groupId>
+          <artifactId>kogito-addons-quarkus-process-svg</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>org.kie.kogito</groupId>
+          <artifactId>kogito-addons-quarkus-events-process</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>io.quarkus</groupId>
+          <artifactId>quarkus-smallrye-reactive-messaging-kafka</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>org.kie.kogito</groupId>
+          <artifactId>runtime-tools-quarkus-extension</artifactId>
+          <version>${kogito.version}</version>
+        </dependency>        
+      </dependencies>
+    </profile>
+  </profiles>  
 </project>

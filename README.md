@@ -110,6 +110,7 @@ shows timers (intermediate and boundary) that allows to introduce delays in proc
 - Onboarding example combining 1 process and two decision services: see [README.md](onboarding-example/README.md)
 - Rules on Quarkus: see [README.md](rules-quarkus-example/README.md)
 - Rules on Quarkus with Unit: see [README.md](ruleunit-quarkus-example/README.md)
+- Straight-through Process (STP) orchestrating decisions and rules with Kogito Runtime Tools Quarkus extension: see [README.md](straight-through-process-decisions-quarkus-devservices/README.md) 
 - Process on Quarkus: see [README.md](process-quarkus-example/README.md)
 - Process on Spring Boot: see [README.md](process-springboot-example/README.md)
 
