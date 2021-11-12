@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
@@ -11,10 +11,10 @@
   <name>Kogito Example :: Onboarding Example :: Payroll with DMN</name>
   <description>Payroll related decisions for onboarding</description>
   <properties>
-    <quarkus-plugin.version>2.1.0.Final</quarkus-plugin.version>
+    <quarkus-plugin.version>2.4.0.Final</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-    <quarkus.platform.version>2.1.0.Final</quarkus.platform.version>
+    <quarkus.platform.version>2.4.0.Final</quarkus.platform.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -48,6 +48,24 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-openapi</artifactId>
     </dependency>
+
+    <!-- Kubernetes deployment extensions -->
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-kubernetes</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-container-image-jib</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-minikube</artifactId>
+      <optional>true</optional>
+    </dependency>
+
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-junit5</artifactId>
@@ -83,4 +101,27 @@
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>minikube</id>
+      <properties>
+        <quarkus.kubernetes.deploy>true</quarkus.kubernetes.deploy>
+        <quarkus.profile>minikube</quarkus.profile>
+      </properties>
+    </profile>
+    <profile>
+      <id>kubernetes</id>
+      <properties>
+        <quarkus.kubernetes.deploy>true</quarkus.kubernetes.deploy>
+        <quarkus.profile>kubernetes</quarkus.profile>
+      </properties>
+    </profile>
+    <profile>
+      <id>knative</id>
+      <properties>
+        <quarkus.kubernetes.deploy>true</quarkus.kubernetes.deploy>
+        <quarkus.profile>knative</quarkus.profile>
+      </properties>
+    </profile>
+  </profiles>
 </project>

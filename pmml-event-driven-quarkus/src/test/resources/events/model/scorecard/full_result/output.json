@@ -1,0 +1,19 @@
+{
+  "specversion": "1.0",
+  "id": "d54ace84-6788-46b6-a359-b308f8b21778",
+  "source": "SimpleScorecard",
+  "type": "PredictionResponseFull",
+  "subject": "TheSubject",
+  "kogitopmmlmodelname": "SimpleScorecard",
+  "data": {
+    "segmentIndex": 0,
+    "resultCode": "OK",
+    "resultObjectName": "score",
+    "resultVariables": {
+      "score": -15.0,
+      "Score": -15.0,
+      "Reason Code 1": "Input1ReasonCode",
+      "Reason Code 2": "Input2ReasonCode"
+    }
+  }
+}

@@ -45,9 +45,13 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <!-- kogito -->
     <kogito.version>${project.version}</kogito.version>
-    <version.org.optaplanner>8.12.0-SNAPSHOT</version.org.optaplanner>
+    <version.org.optaplanner>8.14.0-SNAPSHOT</version.org.optaplanner>
     <!-- override default to fast-jar packaging for forward-compatibility -->
     <quarkus.package.type>fast-jar</quarkus.package.type>
+    <!-- dependencies version -->
+    <version.org.skyscreamer>1.5.0</version.org.skyscreamer>
+    <!-- JKube -->
+    <version.org.eclipse.jkube>1.4.0</version.org.eclipse.jkube>
   </properties>
 
   <!-- distributionManagement section -->
@@ -124,6 +128,7 @@
         <module>decisiontable-springboot-example</module>
         <!-- <module>dmn-event-driven-quarkus</module> -->
         <module>dmn-event-driven-springboot</module>
+        <module>dmn-incubation-api-quarkus</module>
         <module>dmn-knative-quickstart-quarkus</module>
         <module>dmn-listener-quarkus</module>
         <module>dmn-listener-springboot</module>
@@ -139,6 +144,9 @@
         <module>flexible-process-springboot</module>
         <module>kogito-travel-agency</module>
         <module>onboarding-example</module>
+        <module>pmml-incubation-api-quarkus</module>
+        <module>pmml-event-driven-quarkus</module>
+        <module>pmml-event-driven-springboot</module>
         <module>pmml-quarkus-example</module>
         <module>pmml-springboot-example</module>
         <module>process-business-rules-quarkus</module>
@@ -147,6 +155,8 @@
         <module>process-decisions-rest-quarkus</module>
         <module>process-decisions-springboot</module>
         <module>process-decisions-rest-springboot</module>
+        <module>process-error-handling</module>
+        <module>process-incubation-api-quarkus</module>
         <module>process-infinispan-persistence-quarkus</module>
         <module>process-infinispan-persistence-springboot</module>
         <module>process-kafka-persistence-quarkus</module>
@@ -159,8 +169,12 @@
         <module>process-monitoring-springboot</module>
         <module>process-mongodb-persistence-quarkus</module>
         <module>process-mongodb-persistence-springboot</module>
+        <module>process-outbox-mongodb-quarkus</module>
+        <module>process-outbox-mongodb-springboot</module>
         <module>process-optaplanner-quarkus</module>
         <module>process-optaplanner-springboot</module>
+        <module>process-performance-quarkus</module>
+        <module>process-performance-springboot</module>
         <module>process-postgresql-persistence-quarkus</module>
         <module>process-postgresql-persistence-springboot</module>
         <module>process-quarkus-example</module>
@@ -188,7 +202,10 @@
         <module>process-usertasks-with-security-oidc-springboot-with-console</module>
         <module>process-usertasks-with-security-quarkus</module>
         <module>process-usertasks-with-security-springboot</module>
+        <module>rules-incubation-api-quarkus</module>
         <module>rules-quarkus-helloworld</module>
+        <module>ruleunit-event-driven-quarkus</module>
+        <module>ruleunit-event-driven-springboot</module>
         <module>ruleunit-quarkus-example</module>
         <module>ruleunit-springboot-example</module>
         <module>rules-legacy-quarkus-example</module>
@@ -198,11 +215,15 @@
         <module>serverless-workflow-service-calls-quarkus</module>
         <module>serverless-workflow-service-calls-springboot</module>
         <module>serverless-workflow-events-quarkus</module>
+        <module>serverless-workflow-expression-quarkus</module>
+        <module>serverless-workflow-error-quarkus</module>
+        <module>serverless-workflow-callback-quarkus</module>
         <module>serverless-workflow-functions-quarkus</module>
         <module>serverless-workflow-functions-events-quarkus</module>
         <module>serverless-workflow-github-showcase</module>
         <module>serverless-workflow-order-processing</module>
         <module>serverless-workflow-funqy</module>
+        <module>serverless-workflow-temperature-conversion</module>
       </modules>
     </profile>
 
@@ -278,6 +299,7 @@
         <module>flexible-process-quarkus</module>
         <module>kogito-travel-agency</module>
         <module>onboarding-example</module>
+        <module>pmml-event-driven-quarkus</module>
         <module>pmml-quarkus-example</module>
         <module>process-business-rules-quarkus</module>
         <module>process-infinispan-persistence-quarkus</module>
@@ -286,6 +308,7 @@
         <module>process-knative-quickstart-quarkus</module>
         <module>process-monitoring-quarkus</module>
         <module>process-mongodb-persistence-quarkus</module>
+        <module>process-outbox-mongodb-quarkus</module>
         <module>process-optaplanner-quarkus</module>
         <module>process-postgresql-persistence-quarkus</module>
         <module>process-quarkus-example</module>
@@ -303,6 +326,7 @@
         <module>process-usertasks-with-security-oidc-quarkus-with-console</module>
         <module>process-usertasks-with-security-quarkus</module>
         <module>rules-quarkus-helloworld</module>
+        <module>ruleunit-event-driven-quarkus</module>
         <module>ruleunit-quarkus-example</module>
         <module>serverless-workflow-greeting-quarkus</module>
         <module>serverless-workflow-service-calls-quarkus</module>
@@ -329,11 +353,15 @@
         <module>dmn-drools-quarkus-metrics</module>
         <module>dmn-drools-springboot-metrics</module>
         <module>dmn-springboot-example</module>
+        <module>pmml-event-driven-quarkus</module>
+        <module>pmml-event-driven-springboot</module>
         <module>pmml-quarkus-example</module>
         <module>pmml-springboot-example</module>
         <module>rules-legacy-quarkus-example</module>
         <module>rules-legacy-springboot-example</module>
         <module>rules-quarkus-helloworld</module>
+        <module>ruleunit-event-driven-quarkus</module>
+        <module>ruleunit-event-driven-springboot</module>
         <module>ruleunit-quarkus-example</module>
         <module>ruleunit-springboot-example</module>
         <module>process-decisions-quarkus</module>
@@ -373,6 +401,7 @@
         <module>dmn-springboot-example</module>
         <module>dmn-tracing-springboot</module>
         <module>flexible-process-springboot</module>
+        <module>pmml-event-driven-springboot</module>
         <module>pmml-springboot-example</module>
         <module>process-business-rules-springboot</module>
         <module>process-infinispan-persistence-springboot</module>
@@ -380,6 +409,7 @@
         <module>process-kafka-multi-springboot</module>
         <module>process-monitoring-springboot</module>
         <module>process-mongodb-persistence-springboot</module>
+        <module>process-outbox-mongodb-springboot</module>
         <module>process-optaplanner-springboot</module>
         <module>process-postgresql-persistence-springboot</module>
         <module>process-rest-service-call-springboot</module>
@@ -398,6 +428,36 @@
         <module>serverless-workflow-service-calls-springboot</module>
       </modules>
     </profile>
+    <profile>
+      <id>optaplanner-downstream</id>
+      <activation>
+        <property>
+          <name>optaplanner</name>
+        </property>
+      </activation>
+      <modules>
+        <module>process-optaplanner-quarkus</module>
+        <module>process-optaplanner-springboot</module>
+      </modules>
+    </profile>
+    <profile>
+      <id>optaplanner-downstream-native</id>
+      <activation>
+        <property>
+          <name>optaplanner-native</name>
+        </property>
+      </activation>
+      <properties>
+        <failsafe.include>**/Native*IT.java</failsafe.include>
+        <failsafe.exclude></failsafe.exclude>
+        <quarkus.package.type>native</quarkus.package.type>
+        <!-- Native building needs a fixed port for tests -->
+        <tests.quarkus.http.port>8080</tests.quarkus.http.port>
+      </properties>
+      <modules>
+        <module>process-optaplanner-quarkus</module>
+      </modules>
+    </profile>
   </profiles>
 
   <dependencyManagement>
@@ -406,6 +466,12 @@
         <groupId>org.infinispan</groupId>
         <artifactId>infinispan-spring-boot-starter-remote</artifactId>
         <version>${version.org.infinispan}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.skyscreamer</groupId>
+        <artifactId>jsonassert</artifactId>
+        <version>${version.org.skyscreamer}</version>
+        <scope>test</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -628,6 +694,17 @@
               </configuration>
             </execution>
           </executions>
+        </plugin>
+        <!-- Image build / Kubernetes deployment -->
+        <plugin>
+          <groupId>org.eclipse.jkube</groupId>
+          <artifactId>kubernetes-maven-plugin</artifactId>
+          <version>${version.org.eclipse.jkube}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.eclipse.jkube</groupId>
+          <artifactId>openshift-maven-plugin</artifactId>
+          <version>${version.org.eclipse.jkube}</version>
         </plugin>
       </plugins>
     </pluginManagement>

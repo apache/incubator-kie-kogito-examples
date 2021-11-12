@@ -12,10 +12,10 @@
   <artifactId>dmn-event-driven-quarkus</artifactId>
   <name>Kogito Example :: DMN Event-Driven :: Quarkus</name>
   <properties>
-    <quarkus-plugin.version>2.1.0.Final</quarkus-plugin.version>
+    <quarkus-plugin.version>2.3.0.Final</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-    <quarkus.platform.version>2.1.0.Final</quarkus.platform.version>
+    <quarkus.platform.version>2.3.0.Final</quarkus.platform.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -37,6 +37,19 @@
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-addons-quarkus-events-decisions</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-resteasy</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-arc</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-resteasy-jackson</artifactId>
     </dependency>
 
     <dependency>
@@ -67,7 +80,6 @@
     <dependency>
       <groupId>org.skyscreamer</groupId>
       <artifactId>jsonassert</artifactId>
-      <version>1.5.0</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

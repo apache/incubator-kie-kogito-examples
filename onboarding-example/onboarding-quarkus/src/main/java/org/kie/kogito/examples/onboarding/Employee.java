@@ -82,5 +82,4 @@ public class Employee implements java.io.Serializable {
         this.birthDate = birthDate;
         this.address = address;
     }
-
 }

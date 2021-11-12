@@ -22,13 +22,27 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
+
+import org.kie.kogito.addons.k8s.Endpoint;
+import org.kie.kogito.addons.k8s.EndpointQueryKey;
+import org.kie.kogito.addons.k8s.LocalEndpointDiscovery;
+import org.kie.kogito.addons.springboot.k8s.workitems.SpringDiscoveredEndpointCaller;
 import org.kie.kogito.examples.onboarding.DecisionTaskWorkItemHandler;
 import org.kie.kogito.internal.process.runtime.KogitoWorkItemHandler;
 import org.kie.kogito.process.impl.DefaultWorkItemHandlerConfig;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 public class WorkItemHandlerConfig extends DefaultWorkItemHandlerConfig {
+
+    @Autowired
+    private SpringDiscoveredEndpointCaller endpointCaller;
+
+    @Value("${org.acme.kogito.onboarding.local}")
+    Boolean isLocalRunning;
 
     private final Map<String, KogitoWorkItemHandler> workItemHandlers = new HashMap<>();
     private final List<String> supportedHandlers = Arrays.asList("AssignDepartmentAndManager",
@@ -41,13 +55,11 @@ public class WorkItemHandlerConfig extends DefaultWorkItemHandlerConfig {
 
     @Override
     public KogitoWorkItemHandler forName(String name) {
-
-        workItemHandlers.putIfAbsent("DecisionTask", new DecisionTaskWorkItemHandler());
+        workItemHandlers.putIfAbsent("DecisionTask", new DecisionTaskWorkItemHandler(this.endpointCaller));
         if (supportedHandlers.contains(name)) {
             // use decision task handler (single instance) for all supported handlers that are based on decision calls
             return workItemHandlers.get("DecisionTask");
         }
-
         return super.forName(name);
     }
 
@@ -56,5 +68,20 @@ public class WorkItemHandlerConfig extends DefaultWorkItemHandlerConfig {
         List<String> names = new ArrayList<>(supportedHandlers);
         names.addAll(super.names());
         return names;
+    }
+
+    @PostConstruct
+    public void loadLocalServicesIfNotOnKube() {
+        if (isLocalRunning) {
+            final LocalEndpointDiscovery endpointDiscovery = new LocalEndpointDiscovery();
+            final String namespace = System.getenv("NAMESPACE");
+            endpointDiscovery.addCache(new EndpointQueryKey(namespace, "id"), new Endpoint("http://localhost:8081/id"));
+            endpointDiscovery.addCache(new EndpointQueryKey(namespace, "department"), new Endpoint("http://localhost:8081/department/first"));
+            endpointDiscovery.addCache(new EndpointQueryKey(namespace, "employeeValidation"), new Endpoint("http://localhost:8081/employee-validation/first"));
+            endpointDiscovery.addCache(new EndpointQueryKey(namespace, "vacations/days"), new Endpoint("http://localhost:8082/vacations/days"));
+            endpointDiscovery.addCache(new EndpointQueryKey(namespace, "taxes/rate"), new Endpoint("http://localhost:8082/taxes/rate"));
+            endpointDiscovery.addCache(new EndpointQueryKey(namespace, "payments/date"), new Endpoint("http://localhost:8082/payments/date"));
+            this.endpointCaller.setEndpointDiscovery(endpointDiscovery);
+        }
     }
 }

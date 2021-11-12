@@ -64,5 +64,4 @@ public class Payroll implements java.io.Serializable {
         this.taxRate = taxRate;
         this.paymentDate = paymentDate;
     }
-
 }

@@ -10,10 +10,12 @@
   <artifactId>notification-service</artifactId>
   <name>Kogito Example :: Serverless Workflow Github Showcase :: Notification Service</name>
   <properties>
-    <quarkus-plugin.version>2.1.0.Final</quarkus-plugin.version>
+    <quarkus-plugin.version>2.4.0.Final</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-    <quarkus.platform.version>2.1.0.Final</quarkus.platform.version>
+    <quarkus.platform.version>2.4.0.Final</quarkus.platform.version>
+
+    <quarkus.native.enable-https-url-handler>true</quarkus.native.enable-https-url-handler>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -34,6 +36,10 @@
     <dependency>
       <groupId>io.cloudevents</groupId>
       <artifactId>cloudevents-http-restful-ws</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-resteasy</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -107,33 +113,4 @@
       </plugin>
     </plugins>
   </build>
-  <profiles>
-    <profile>
-      <id>native</id>
-      <activation>
-        <property>
-          <name>native</name>
-        </property>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-maven-plugin</artifactId>
-            <version>${quarkus-plugin.version}</version>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>native-image</goal>
-                </goals>
-                <configuration>
-                  <enableHttpUrlHandler>true</enableHttpUrlHandler>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
 </project>

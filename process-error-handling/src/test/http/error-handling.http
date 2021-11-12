@@ -1,0 +1,50 @@
+@HOST=localhost:8080
+
+###
+# @name hello_error
+POST http://{{HOST}}/hello_error
+Accept: application/json
+Content-Type: application/json
+
+{
+    "name" : "RETRY"
+}
+
+# @piid={{hello_error.response.body.id}}
+
+###
+# @name hello_error_get
+GET http://{{HOST}}/hello_error
+Accept: application/json
+Content-Type: application/json
+
+@hello_piid={{hello_error_get.response.body.0.id}}
+
+
+###
+# @name error_handling_get
+GET http://{{HOST}}/error_handling
+Accept: application/json
+Content-Type: application/json
+
+@piid={{error_handling_get.response.body.0.id}}
+
+###
+# @name error_handling_tasks
+GET http://{{HOST}}/error_handling/{{piid}}/tasks
+Accept: application/json
+Content-Type: application/json
+
+@taskid={{error_handling_tasks.response.body.0.id}}
+@task_name={{error_handling_tasks.response.body.0.name}}
+
+###
+# @name task_complete
+POST http://{{HOST}}/error_handling/{{piid}}/{{task_name}}/{{taskid}}?phase=complete
+Accept: application/json
+Content-Type: application/json
+
+{
+    "input" : "Jimmy",
+    "strategy" : "RETRY"
+}

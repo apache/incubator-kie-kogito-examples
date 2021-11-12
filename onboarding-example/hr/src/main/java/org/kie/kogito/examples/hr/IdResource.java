@@ -23,6 +23,7 @@ import javax.ws.rs.core.MediaType;
 
 @Path("/id")
 public class IdResource {
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)

@@ -11,10 +11,10 @@
   <name>Kogito Example :: Process Infinispan Persistence Quarkus</name>
   <description>Process with Infinispan persistence - Quarkus</description>
   <properties>
-    <quarkus-plugin.version>2.1.0.Final</quarkus-plugin.version>
+    <quarkus-plugin.version>2.4.0.Final</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-    <quarkus.platform.version>2.1.0.Final</quarkus.platform.version>
+    <quarkus.platform.version>2.4.0.Final</quarkus.platform.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -32,6 +32,11 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-resteasy</artifactId>
     </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-resteasy-jackson</artifactId>
+    </dependency>
+
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-quarkus</artifactId>

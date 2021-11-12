@@ -29,12 +29,14 @@ import org.kie.kogito.process.ProcessInstance;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @QuarkusTest
+@QuarkusTestResource(RestCountriesMockServer.class)
 public class CountryServiceWorkflowTest {
 
     @Named("jsonservicecall")

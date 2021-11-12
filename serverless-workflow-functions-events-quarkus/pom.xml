@@ -11,10 +11,10 @@
   <name>Kogito Example :: Serverless Workflow Functions And Events :: Quarkus</name>
   <description>Kogito Serverless Workflow Functions And Events Example - Quarkus</description>
   <properties>
-    <quarkus-plugin.version>2.1.0.Final</quarkus-plugin.version>
+    <quarkus-plugin.version>2.4.0.Final</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-    <quarkus.platform.version>2.1.0.Final</quarkus.platform.version>
+    <quarkus.platform.version>2.4.0.Final</quarkus.platform.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -43,6 +43,14 @@
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-drools</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-resteasy</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-resteasy-jackson</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -89,25 +97,4 @@
       </plugin>
     </plugins>
   </build>
-  <profiles>
-    <profile>
-      <id>native</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-maven-plugin</artifactId>
-            <version>${quarkus-plugin.version}</version>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>native-image</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
 </project>

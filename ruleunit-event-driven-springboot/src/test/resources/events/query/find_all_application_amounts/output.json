@@ -1,0 +1,14 @@
+{
+  "specversion": "1.0",
+  "id": "d54ace84-6788-46b6-a359-b308f8b21778",
+  "source": "find-all-application-amounts",
+  "type": "RulesResponse",
+  "subject": "TheSubject",
+  "kogitoruleunitid": "org.kie.kogito.queries.LoanUnit",
+  "kogitoruleunitquery": "FindAllApplicationAmounts",
+  "data": [
+    {
+      "amounts": 8000
+    }
+  ]
+}

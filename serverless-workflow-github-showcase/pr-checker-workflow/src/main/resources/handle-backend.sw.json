@@ -1,6 +1,7 @@
 {
   "id": "handle_backend",
   "name": "HandleBackend",
+  "expressionLang": "jsonpath",
   "version": "1.0",
   "start": "CheckBackend",
   "functions": [
