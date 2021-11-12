@@ -292,8 +292,14 @@ You will need:
   - Docker and Docker Compose
 
 ### Kogito Management Console
-This project leverages a new Quarkus extension provided by Kogito that brings the Management Console as part of the Quarkus Dev Services UI.
-After starting your Kogito app in dev mode (`mvn quarkus:dev`) access the Quarkus [Dev UI](http://localhost:8080/q/dev/) at http://localhost:8080/q/dev
+In order to visualize the Process Instance Diagram and its Completed Status you need to start the service using the `runtime-tools` maven profile:
+
+```
+mvn clean compile quarkus:dev -Pruntime-tools
+```
+
+This profile leverages a new Quarkus extension provided by Kogito that brings the Management Console as part of the Quarkus Dev Services UI.
+After starting your Kogito app using this profile (`-Pruntime-tools`) access the Quarkus [Dev UI](http://localhost:8080/q/dev/) at http://localhost:8080/q/dev
 
 On the **Kogito Runtime Tools** Card click on **Process Instances**
 
