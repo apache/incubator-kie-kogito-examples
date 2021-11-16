@@ -135,8 +135,9 @@ Example response:
 ## Integration example with Trusty Service
 
 When the tracing addon is enabled, the tracing events are emitted and pushed to a Kafka broker. The [Trusty Service](https://github.com/kiegroup/kogito-apps/tree/main/trusty) can consume such events and store them on a storage. The Trusty Service exposes then some api to consume the information that has been collected. 
-A `docker-compose` example is provided in the current folder. In particular, when `docker-compose up` is run, a Kafka broker, an Infinispan container and the nightly build of the trusty service are deployed. 
-Once the services are up and running, after a decision has been evaluated, you can access the trusty service swagger at `localhost:8081/swagger-ui/` and try to query what are the evaluations of the last day at `localhost:8081/v1/executions` for example.
+A `docker-compose` example is provided in the current folder. In particular, when `docker-compose up` is run, a Kafka broker, an Infinispan container and the latest build of the trusty service configured to use Infinispan are deployed. 
+Once the services are up and running, after a decision has been evaluated, you can access the trusty service API to list the evaluations at `localhost:8081/executions` for example.
+
 ## Deploying with Kogito Operator
 
 In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).
