@@ -16,9 +16,9 @@ fi
 echo "Kogito Image version: ${KOGITO_VERSION}"
 echo "KOGITO_VERSION=${KOGITO_VERSION}" > ".env"
 
-# if [ "$(uname)" == "Darwin" ]; then
-#    echo "DOCKER_GATEWAY_HOST=${host.docker.internal}" >> ".env"
-if [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+if [ "$(uname)" == "Darwin" ]; then
+   echo "DOCKER_GATEWAY_HOST=host.docker.internal" >> ".env"
+elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
    echo "DOCKER_GATEWAY_HOST=172.17.0.1" >> ".env"
 fi
 
@@ -35,6 +35,5 @@ else
     echo "$KOGITO_EXAMPLE_SVG_FOLDER does not exist. Have you compiled the project?"
     exit 1
 fi
-
 
 docker-compose -p kogito-services up -d
