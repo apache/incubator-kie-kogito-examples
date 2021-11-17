@@ -209,7 +209,7 @@ This will:
 * Compile the back-end.
 * Package the front-end and back-end into a single Java runner.
 
-After the build has completed, you can start the Manaagement Console with the following command: `java -jar target/management-console-*-runner.jar`
+After the build has completed, you can start the Management Console with the following command: `java -jar target/management-console-*-runner.jar`
 
 By default, the **Management Console** will try to connect to the **Data Index Service** at: http://localhost:8180
 

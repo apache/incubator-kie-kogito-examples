@@ -90,15 +90,35 @@ services:
       KAFKA_BOOTSTRAP_SERVERS: kafka:29092
       KOGITO_DATA_INDEX_PROPS: -Dkogito.protobuf.folder=/home/kogito/data/protobufs/
 
+  keycloak:
+    container_name: keycloak
+    image: jboss/keycloak
+    ports:
+      - "8480:8080"
+    volumes:
+      - ./keycloak/kogito-realm.json:/tmp/kogito-realm.json
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/auth/realms/kogito" ]
+      interval: 1s
+      timeout: 1s
+      retries: 50
+    environment:
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
+      KEYCLOAK_IMPORT: /tmp/kogito-realm.json
+
   management-console:
     container_name: management-console
     image: quay.io/kiegroup/kogito-management-console:${KOGITO_VERSION}
-    ports:
-      - 8280:8080
+    network_mode: "host"
     depends_on:
-      - data-index
+      data-index:
+        condition: service_started
     volumes:
       - ./svg/:/home/kogito/data/svg/
     environment:
-      KOGITO_DATAINDEX_HTTP_URL: http://${DOCKER_GATEWAY_HOST}:8180
-      KOGITO_MANAGEMENT_CONSOLE_PROPS:  -Dkogito.svg.folder.path=/home/kogito/data/svg
+      KOGITO_DATAINDEX_HTTP_URL: http://localhost:8180/graphql
+      KOGITO_MANAGEMENT_CONSOLE_PROPS: -Dquarkus-profile=changeport -D%changeport.quarkus.http.port=8280  -Dchangeport.kogito.service.url=http://localhost:8280
+              -Dkogito.consoles.keycloak.config.url=http://localhost:8480/auth
+              -Dkogito.consoles.keycloak.config.health-check-url=http://localhost:8480/auth/realms/kogito/.well-known/openid-configuration
+              -Dkogito.svg.folder.path=/home/kogito/data/svg

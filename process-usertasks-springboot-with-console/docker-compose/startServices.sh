@@ -16,12 +16,6 @@ fi
 echo "Kogito Image version: ${KOGITO_VERSION}"
 echo "KOGITO_VERSION=${KOGITO_VERSION}" > ".env"
 
-if [ "$(uname)" == "Darwin" ]; then
-   echo "DOCKER_GATEWAY_HOST=${host.docker.internal}" >> ".env"
-elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-   echo "DOCKER_GATEWAY_HOST=172.17.0.1" >> ".env"
-fi
-
 PERSISTENCE_FOLDER=./persistence
 KOGITO_EXAMPLE_PERSISTENCE=../target/classes/META-INF/resources/persistence/protobuf
 

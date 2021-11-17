@@ -7,6 +7,7 @@ To allow a quick setup of all services required to run this demo, we provide a d
 - Grafana
 - Kogito Data Index
 - Kogito Management Console
+- Keycloak
 
 This setup ensures that all services are connected using the default configuration as well as provisioning the Travel Agency dashboard to Grafana.  
 
@@ -38,6 +39,7 @@ In order to use it, please ensure you have Docker Compose installed on your mach
   - Grafana: 3000
   - Data Index: 8180
   - Management Console: 8280
+  - Keycloak: 8480
   
 To access the Grafana dashboard, simply navigate to http://localhost:3000 and login using the default username 'admin' and password 'admin'.
 Prometheus will also be available on http://localhost:9090, no authentication is required. 
@@ -55,3 +57,12 @@ Prometheus will also be available on http://localhost:9090, no authentication is
   For more details please check the Docker Compose documentation.
   
     docker-compose --help
+
+
+NOTE: Keycloak comes with a predefined set of users that can be used to access the Kogito Management Console:
+
+| Login         | Password   | 
+| ------------- | ---------- | 
+|    admin      |   admin    | 
+|    jdoe       |   jdoe     |
+
