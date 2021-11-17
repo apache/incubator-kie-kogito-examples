@@ -1,4 +1,4 @@
-FROM mongo:4.4
+FROM mongo:4.4.10
 
 COPY init.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/init.sh

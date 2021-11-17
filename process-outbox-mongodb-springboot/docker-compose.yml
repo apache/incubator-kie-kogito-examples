@@ -14,18 +14,18 @@ services:
       - zookeeper
     environment:
       - ZOOKEEPER_CONNECT=zookeeper:2181
-  kafdrop:
-    image: obsidiandynamics/kafdrop
-    ports:
-      - ${KAFDROP_PORT}:9000
-    links:
-      - kafka
-    depends_on:
-      - kafka
-    environment:
-      KAFKA_BROKERCONNECT: "kafka:9092"
-      JVM_OPTS: "-Xms32M -Xmx64M"
-      SERVER_SERVLET_CONTEXTPATH: "/"
+#  kafdrop:
+#    image: obsidiandynamics/kafdrop
+#    ports:
+#      - ${KAFDROP_PORT}:9000
+#    links:
+#      - kafka
+#    depends_on:
+#      - kafka
+#    environment:
+#      KAFKA_BROKERCONNECT: "kafka:9092"
+#      JVM_OPTS: "-Xms32M -Xmx64M"
+#      SERVER_SERVLET_CONTEXTPATH: "/"
   mongodb:
     build: ./mongodb
     image: kogito/outbox/mongodb

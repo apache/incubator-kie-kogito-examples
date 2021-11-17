@@ -1,5 +1,5 @@
-FROM adoptopenjdk/openjdk11:latest
-RUN mkdir -p /myapp
-ADD target/* /myapp/
-ENV port=8080
-CMD java -jar /myapp/dmn-drools-springboot-metrics.jar
+FROM fabric8/java-alpine-openjdk11-jre
+
+COPY target/dmn-drools-springboot-metrics.jar /deployments/
+
+ENTRYPOINT [ "/deployments/run-java.sh" ]
