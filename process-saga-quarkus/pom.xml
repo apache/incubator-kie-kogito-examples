@@ -10,14 +10,13 @@
   <artifactId>process-saga-quarkus</artifactId>
 
   <name>Kogito Example :: Process Saga with Quarkus</name>
-  <description>How to implement Saga with a BPMN Process using compensations</description>
+  <description>How to implement Saga with a BPMN Process using Compensations</description>
 
   <properties>
     <quarkus-plugin.version>2.4.0.Final</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
     <quarkus.platform.version>2.4.0.Final</quarkus.platform.version>
-
   </properties>
 
   <dependencyManagement>
@@ -34,17 +33,19 @@
 
   <dependencies>
     <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-resteasy-jackson</artifactId>
-    </dependency>
-    <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-quarkus</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-resteasy-jackson</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-openapi</artifactId>
     </dependency>
+
+    <!-- Test -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-junit5</artifactId>
@@ -102,5 +103,4 @@
       </build>
     </profile>
   </profiles>
-
 </project>

@@ -31,7 +31,12 @@ public class FlightService {
 
     public Response bookFlight(String tripId, String failService) {
         LOGGER.info("Book Flight for trip {}", tripId);
-        return mockService.execute(failService, this.getClass());
+        return mockService.execute(failService, FlightService.class, false);
+    }
+
+    public Response bookFlight(String tripId, String failService, String throwException) {
+        LOGGER.info("Book Flight for trip {}", tripId);
+        return mockService.execute(failService, FlightService.class, Boolean.parseBoolean(throwException));
     }
 
     public Response cancelFlight(String id) {

@@ -31,7 +31,12 @@ public class HotelService {
 
     public Response bookHotel(String tripId, String failService) {
         LOGGER.info("Book Hotel for trip {}", tripId);
-        return mockService.execute(failService, this.getClass());
+        return mockService.execute(failService, HotelService.class, false);
+    }
+
+    public Response bookHotel(String tripId, String failService, String throwException) {
+        LOGGER.info("Book Hotel for trip {}", tripId);
+        return mockService.execute(failService, HotelService.class, Boolean.parseBoolean(throwException));
     }
 
     public Response cancelHotel(String id) {

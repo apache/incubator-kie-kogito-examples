@@ -31,7 +31,12 @@ public class PaymentService {
 
     public Response createPayment(String tripId, String failService) {
         LOGGER.info("Create Payment for trip {}", tripId);
-        return mockService.execute(failService, this.getClass());
+        return mockService.execute(failService, PaymentService.class, false);
+    }
+
+    public Response createPayment(String tripId, String failService, String throwException) {
+        LOGGER.info("Create Payment for trip {}", tripId);
+        return mockService.execute(failService, PaymentService.class, Boolean.parseBoolean(throwException));
     }
 
     public Response cancelPayment(String id) {
