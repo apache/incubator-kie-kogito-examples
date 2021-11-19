@@ -30,12 +30,12 @@ public class PaymentService {
     MockService mockService;
 
     public Response processPayment(String orderId, String failService) {
-        LOGGER.info("Create Payment for order {}", orderId);
+        LOGGER.info("Process Payment for order {}", orderId);
         return mockService.execute(failService, PaymentService.class, false);
     }
 
     public Response processPayment(String orderId, String failService, String throwException) {
-        LOGGER.info("Create Payment for order {}", orderId);
+        LOGGER.info("Process Payment for order {}", orderId);
         return mockService.execute(failService, PaymentService.class, Boolean.parseBoolean(throwException));
     }
 

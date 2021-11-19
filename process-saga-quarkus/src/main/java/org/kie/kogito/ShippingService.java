@@ -29,12 +29,12 @@ public class ShippingService {
     @Inject
     MockService mockService;
 
-    public Response reserveStock(String orderId, String failService) {
+    public Response scheduleShipping(String orderId, String failService) {
         LOGGER.info("Schedule Shipping for order {}", orderId);
         return mockService.execute(failService, ShippingService.class, false);
     }
 
-    public Response reserveStock(String orderId, String failService, String throwException) {
+    public Response scheduleShipping(String orderId, String failService, String throwException) {
         LOGGER.info("Schedule Shipping for order {}", orderId);
         return mockService.execute(failService, ShippingService.class, Boolean.parseBoolean(throwException));
     }

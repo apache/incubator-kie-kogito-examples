@@ -30,12 +30,12 @@ public class StockService {
     MockService mockService;
 
     public Response reserveStock(String orderId, String failService) {
-        LOGGER.info("Book Stock for order {}", orderId);
+        LOGGER.info("Reserve Stock for order {}", orderId);
         return mockService.execute(failService, StockService.class, false);
     }
 
     public Response reserveStock(String orderId, String failService, String throwException) {
-        LOGGER.info("Book Stock for order {}", orderId);
+        LOGGER.info("Reserve Stock for order {}", orderId);
         return mockService.execute(failService, StockService.class, Boolean.parseBoolean(throwException));
     }
 
