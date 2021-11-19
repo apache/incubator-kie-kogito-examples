@@ -22,25 +22,25 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @ApplicationScoped
-public class HotelService {
+public class StockService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(HotelService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(StockService.class);
 
     @Inject
     MockService mockService;
 
-    public Response bookHotel(String tripId, String failService) {
-        LOGGER.info("Book Hotel for trip {}", tripId);
-        return mockService.execute(failService, HotelService.class, false);
+    public Response reserveStock(String orderId, String failService) {
+        LOGGER.info("Book Stock for order {}", orderId);
+        return mockService.execute(failService, StockService.class, false);
     }
 
-    public Response bookHotel(String tripId, String failService, String throwException) {
-        LOGGER.info("Book Hotel for trip {}", tripId);
-        return mockService.execute(failService, HotelService.class, Boolean.parseBoolean(throwException));
+    public Response reserveStock(String orderId, String failService, String throwException) {
+        LOGGER.info("Book Stock for order {}", orderId);
+        return mockService.execute(failService, StockService.class, Boolean.parseBoolean(throwException));
     }
 
-    public Response cancelHotel(String id) {
-        LOGGER.info("Cancel Hotel for booking {}", id);
+    public Response cancelStock(String id) {
+        LOGGER.info("Cancel Stock for  order {}", id);
         return new Response(Response.Type.SUCCESS, id);
     }
 }

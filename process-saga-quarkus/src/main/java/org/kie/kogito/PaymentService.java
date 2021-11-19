@@ -29,13 +29,13 @@ public class PaymentService {
     @Inject
     MockService mockService;
 
-    public Response createPayment(String tripId, String failService) {
-        LOGGER.info("Create Payment for trip {}", tripId);
+    public Response processPayment(String orderId, String failService) {
+        LOGGER.info("Create Payment for order {}", orderId);
         return mockService.execute(failService, PaymentService.class, false);
     }
 
-    public Response createPayment(String tripId, String failService, String throwException) {
-        LOGGER.info("Create Payment for trip {}", tripId);
+    public Response processPayment(String orderId, String failService, String throwException) {
+        LOGGER.info("Create Payment for order {}", orderId);
         return mockService.execute(failService, PaymentService.class, Boolean.parseBoolean(throwException));
     }
 

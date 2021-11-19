@@ -21,17 +21,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @ApplicationScoped
-public class TripService {
+public class OrderService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(TripService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(OrderService.class);
 
-    public Response success(String tripId) {
-        LOGGER.info("Trip Success for trip {}", tripId);
-        return Response.success(tripId);
+    public Response success(String orderId) {
+        LOGGER.info("Order Success for order {}", orderId);
+        return Response.success(orderId);
     }
 
-    public Response failure(String tripId) {
-        LOGGER.info("Trip Failed for trip {}", tripId);
-        return Response.error(tripId);
+    public Response failure(String orderId) {
+        LOGGER.info("Order Failed for order {}", orderId);
+        return Response.error(orderId);
     }
 }

@@ -1,4 +1,4 @@
-<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_x4880CrSEDqdKuEm9EsShg" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd http://www.omg.org/spec/DD/20100524/DC DC.xsd http://www.omg.org/spec/DD/20100524/DI DI.xsd " exporter="jBPM Process Modeler" exporterVersion="2.0" targetNamespace="http://www.omg.org/bpmn20">
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_g6bMoCt2EDqdKuEm9EsShg" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd http://www.omg.org/spec/DD/20100524/DC DC.xsd http://www.omg.org/spec/DD/20100524/DI DI.xsd " exporter="jBPM Process Modeler" exporterVersion="2.0" targetNamespace="http://www.omg.org/bpmn20">
   <bpmn2:itemDefinition id="_tripIdItem" structureRef="String"/>
   <bpmn2:itemDefinition id="_hotelResponseItem" structureRef="org.kie.kogito.Response"/>
   <bpmn2:itemDefinition id="_flightResponseItem" structureRef="org.kie.kogito.Response"/>
@@ -28,7 +28,7 @@
     <bpmn2:operation id="_509E842A-8338-48F6-8268-161C000C840B_ServiceOperation" name="bookFlight" implementationRef="bookFlight"/>
   </bpmn2:interface>
   <bpmn2:interface id="_49632170-78A4-4962-B98C-E2962724056C_ServiceInterface" name="org.kie.kogito.PaymentService" implementationRef="org.kie.kogito.PaymentService">
-    <bpmn2:operation id="_49632170-78A4-4962-B98C-E2962724056C_ServiceOperation" name="createPayment" implementationRef="createPayment"/>
+    <bpmn2:operation id="_49632170-78A4-4962-B98C-E2962724056C_ServiceOperation" name="processPayment" implementationRef="processPayment"/>
   </bpmn2:interface>
   <bpmn2:interface id="_8D9E5145-C71D-41F0-8FC4-5560D7545043_ServiceInterface" name="org.kie.kogito.HotelService" implementationRef="org.kie.kogito.HotelService">
     <bpmn2:operation id="_8D9E5145-C71D-41F0-8FC4-5560D7545043_ServiceOperation" name="cancelHotel" implementationRef="cancelHotel"/>
@@ -53,7 +53,7 @@
     <bpmn2:property id="failService" itemSubjectRef="_failServiceItem" name="failService">
       <bpmn2:extensionElements>
         <drools:metaData name="customTags">
-          <drools:metaValue><![CDATA[internal]]></drools:metaValue>
+          <drools:metaValue><![CDATA[input]]></drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
     </bpmn2:property>
@@ -72,7 +72,12 @@
         </drools:metaData>
       </bpmn2:extensionElements>
     </bpmn2:sequenceFlow>
-    <bpmn2:sequenceFlow id="_A362E8DF-2D3C-4371-BB9A-611A8336BB5B" sourceRef="_913F5364-D2FF-4195-ACB5-C79165AA16F6" targetRef="_74021F76-EA26-455D-91FD-FB54C823E38D">
+    <bpmn2:sequenceFlow id="_A362E8DF-2D3C-4371-BB9A-611A8336BB5B" name="Fail" sourceRef="_913F5364-D2FF-4195-ACB5-C79165AA16F6" targetRef="_74021F76-EA26-455D-91FD-FB54C823E38D">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[Fail]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java"><![CDATA[return !paymentResponse.isSuccess();]]></bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="_A8273137-5BBA-4BF6-9266-AB394803BF8F" sourceRef="_913F5364-D2FF-4195-ACB5-C79165AA16F6" targetRef="_8EE09D40-0D96-4EC0-86E4-A3FB11B78EB0">
@@ -83,10 +88,20 @@
       </bpmn2:extensionElements>
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java"><![CDATA[return paymentResponse.isSuccess();]]></bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:sequenceFlow id="_B80CEB01-A51B-42EC-A8C8-4CD67D8736AD" sourceRef="_5DC3475F-D54D-4C40-87FD-6F2054BC3F73" targetRef="_74021F76-EA26-455D-91FD-FB54C823E38D">
+    <bpmn2:sequenceFlow id="_B80CEB01-A51B-42EC-A8C8-4CD67D8736AD" name="Fail" sourceRef="_5DC3475F-D54D-4C40-87FD-6F2054BC3F73" targetRef="_74021F76-EA26-455D-91FD-FB54C823E38D">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[Fail]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java"><![CDATA[return !hotelResponse.isSuccess();]]></bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:sequenceFlow id="_2FAB8CB2-7CD0-4D20-BF40-4808AFA8297B" sourceRef="_CBEBBAE1-E162-47B9-BB83-1822A7E33965" targetRef="_74021F76-EA26-455D-91FD-FB54C823E38D">
+    <bpmn2:sequenceFlow id="_2FAB8CB2-7CD0-4D20-BF40-4808AFA8297B" name="Fail" sourceRef="_CBEBBAE1-E162-47B9-BB83-1822A7E33965" targetRef="_74021F76-EA26-455D-91FD-FB54C823E38D">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[Fail]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java"><![CDATA[return !flightResponse.isSuccess();]]></bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="_83820D13-5545-488E-B86C-485C9FC4AEC5" sourceRef="_8EE09D40-0D96-4EC0-86E4-A3FB11B78EB0" targetRef="_F14F8673-F77F-4A8E-8378-B9DDEF63274C">
@@ -289,10 +304,10 @@ Success]]></drools:metaValue>
     <bpmn2:endEvent id="_F14F8673-F77F-4A8E-8378-B9DDEF63274C">
       <bpmn2:incoming>_83820D13-5545-488E-B86C-485C9FC4AEC5</bpmn2:incoming>
     </bpmn2:endEvent>
-    <bpmn2:serviceTask id="_49632170-78A4-4962-B98C-E2962724056C" drools:serviceimplementation="Java" drools:serviceinterface="org.kie.kogito.PaymentService" drools:serviceoperation="createPayment" name="create payment" implementation="Java" operationRef="_49632170-78A4-4962-B98C-E2962724056C_ServiceOperation">
+    <bpmn2:serviceTask id="_49632170-78A4-4962-B98C-E2962724056C" drools:serviceimplementation="Java" drools:serviceinterface="org.kie.kogito.PaymentService" drools:serviceoperation="processPayment" name="process payment" implementation="Java" operationRef="_49632170-78A4-4962-B98C-E2962724056C_ServiceOperation">
       <bpmn2:extensionElements>
         <drools:metaData name="elementname">
-          <drools:metaValue><![CDATA[create payment]]></drools:metaValue>
+          <drools:metaValue><![CDATA[process payment]]></drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
       <bpmn2:incoming>_6B77DF02-AB0F-49C6-973B-9526E7BB0B8E</bpmn2:incoming>
@@ -704,7 +719,7 @@ Success]]></drools:metaValue>
         </bpsim:Scenario>
       </bpsim:BPSimData>
     </bpmn2:extensionElements>
-    <bpmn2:source>_x4880CrSEDqdKuEm9EsShg</bpmn2:source>
-    <bpmn2:target>_x4880CrSEDqdKuEm9EsShg</bpmn2:target>
+    <bpmn2:source>_g6bMoCt2EDqdKuEm9EsShg</bpmn2:source>
+    <bpmn2:target>_g6bMoCt2EDqdKuEm9EsShg</bpmn2:target>
   </bpmn2:relationship>
 </bpmn2:definitions>
