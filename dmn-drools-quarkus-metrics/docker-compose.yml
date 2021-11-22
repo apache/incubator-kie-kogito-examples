@@ -18,6 +18,7 @@ services:
       - hello
   grafana:
     image: grafana/grafana:6.6.1
+    user: "$UID:$GID"
     depends_on:
       - prometheus
     ports:
