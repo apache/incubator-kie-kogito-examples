@@ -215,6 +215,7 @@
         <module>serverless-workflow-greeting-springboot</module>
         <module>serverless-workflow-service-calls-quarkus</module>
         <module>serverless-workflow-service-calls-springboot</module>
+        <module>serverless-workflow-compensation-quarkus</module>
         <module>serverless-workflow-events-quarkus</module>
         <module>serverless-workflow-expression-quarkus</module>
         <module>serverless-workflow-error-quarkus</module>
