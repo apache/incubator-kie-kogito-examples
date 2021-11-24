@@ -143,7 +143,7 @@
           </execution>
           <execution>
             <id>copy-docker-compose-for-tests</id>
-            <phase>prepare-package</phase>
+            <phase>pre-integration-test</phase>
             <goals>
               <goal>copy-resources</goal>
             </goals>
@@ -162,6 +162,7 @@
           </execution>
         </executions>
       </plugin>
+      <!-- Keep this after maven-resources-plugin, since both copy-docker-compose-for-tests and this one are bind to pre-integration-test phase, and this one has to be executed after !-->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
