@@ -15,48 +15,88 @@
  */
 package org.kie.kogito.examples;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.Duration;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.Set;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
 
-import org.awaitility.Awaitility;
-import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.test.quarkus.kafka.KafkaTestClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.testcontainers.containers.DockerComposeContainer;
+import org.testcontainers.containers.output.OutputFrame;
+import org.testcontainers.containers.output.Slf4jLogConsumer;
+import org.testcontainers.containers.wait.strategy.Wait;
 
 import com.jayway.jsonpath.JsonPath;
 
-import io.quarkus.test.junit.QuarkusTest;
-
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.hasSize;
+import static org.awaitility.Awaitility.await;
+import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@QuarkusTest
 public class OutboxIT {
 
-    private static final Duration INITIAL_TIMEOUT = Duration.ofSeconds(250);
-    private static final Duration TIMEOUT = Duration.ofSeconds(25);
-    private static final Duration INTERVAL = Duration.ofSeconds(5);
+    private static final Logger LOGGER = LoggerFactory.getLogger(OutboxIT.class);
+    private static final Duration INITIAL_TIMEOUT = Duration.ofMinutes(5);
+    private static final Duration TIMEOUT = Duration.ofMinutes(1);
+    private static final Duration INTERVAL = Duration.ofSeconds(1);
 
     private static final String PROCESS_EVENTS_TOPIC = "kogito-processinstances-events";
     private static final String USERTASK_EVENTS_TOPIC = "kogito-usertaskinstances-events";
+    private static final int KOGITO_PORT = 8080;
+    private static final int KAFKA_PORT = 9092;
+    private static final int DEBEZIUM_PORT = 8083;
+    private static DockerComposeContainer COMPOSE;
 
-    @ConfigProperty(name = "kogito.port")
     private int kogitoPort;
-
-    @ConfigProperty(name = "debezium.port")
     private int debeziumPort;
-
-    @ConfigProperty(name = "kafka.port")
     private int kafkaPort;
 
     private KafkaTestClient kafkaClient;
 
+    @BeforeAll
+    static void before() {
+        Path path = Paths.get("../../docker-compose.yml");
+        if (!path.toFile().exists()) {
+            path = Paths.get("docker-compose.yml");
+        }
+        COMPOSE = new DockerComposeContainer(path.toFile());
+        COMPOSE.withExposedService("kogito", KOGITO_PORT);
+        COMPOSE.withExposedService("kafka", KAFKA_PORT);
+        COMPOSE.withExposedService("connect", DEBEZIUM_PORT);
+        COMPOSE.withLogConsumer("kafka", logger());
+        COMPOSE.withLogConsumer("connect", logger());
+        COMPOSE.withLogConsumer("sidecar", logger());
+        COMPOSE.withLogConsumer("kogito", logger());
+        COMPOSE.waitingFor("kogito", Wait.forListeningPort());
+        COMPOSE.start();
+    }
+
+    @AfterAll
+    static void after() {
+        if (COMPOSE != null) {
+            COMPOSE.stop();
+        }
+    }
+
+    private static Consumer<OutputFrame> logger() {
+        return new Slf4jLogConsumer(LOGGER);
+    }
+
     @BeforeEach
     void setup() {
+        kogitoPort = COMPOSE.getServicePort("kogito", KOGITO_PORT);
+        debeziumPort = COMPOSE.getServicePort("connect", DEBEZIUM_PORT);
+        kafkaPort = COMPOSE.getServicePort("kafka", KAFKA_PORT);
         kafkaClient = new KafkaTestClient("localhost:" + kafkaPort);
     }
 
@@ -68,123 +108,92 @@ public class OutboxIT {
     }
 
     @Test
-    public void testSendProcessEvents() {
+    public void testSendProcessEvents() throws InterruptedException {
         // Check Debezium (Kafka, MongoDB) readiness
-        Awaitility.given().ignoreExceptions()
-                .await().atMost(INITIAL_TIMEOUT)
+        await().ignoreExceptions()
+                .atMost(INITIAL_TIMEOUT)
                 .with().pollInterval(INTERVAL)
-                .until(() -> {
-                    given()
-                            .port(kogitoPort)
-                            .when()
-                            .get("/orders")
-                            .then()
-                            .statusCode(200);
-                    return true;
-                });
+                .untilAsserted(() -> given()
+                        .port(kogitoPort)
+                        .when()
+                        .get("/orders")
+                        .then()
+                        .statusCode(200));
 
         // Check Kogito App readiness
-        Awaitility.given().ignoreExceptions()
-                .await().atMost(INITIAL_TIMEOUT)
+        await().ignoreExceptions()
+                .atMost(INITIAL_TIMEOUT)
                 .with().pollInterval(INTERVAL)
-                .until(() -> {
-                    given()
-                            .port(debeziumPort)
-                            .pathParam("connector", "kogito-connector")
-                            .pathParam("task", 0)
-                            .when()
-                            .get("/connectors/{connector}/tasks/{task}/status")
-                            .then()
-                            .statusCode(200)
-                            .assertThat()
-                            .body("state", equalTo("RUNNING"));
-                    return true;
-                });
+                .untilAsserted(() -> given()
+                        .port(debeziumPort)
+                        .pathParam("connector", "kogito-connector")
+                        .pathParam("task", 0)
+                        .when()
+                        .get("/connectors/{connector}/tasks/{task}/status")
+                        .then()
+                        .statusCode(200)
+                        .body("state", equalTo("RUNNING")));
 
         // Check Debezium no Kafka topic created
-        Awaitility.given().ignoreExceptions()
-                .await().atMost(TIMEOUT)
+        await().atMost(TIMEOUT)
                 .with().pollInterval(INTERVAL)
-                .until(() -> {
-                    given()
-                            .port(debeziumPort)
-                            .pathParam("connector", "kogito-connector")
-                            .when()
-                            .get("/connectors/{connector}/topics")
-                            .then()
-                            .statusCode(200)
-                            .assertThat()
-                            .body("kogito-connector.topics", hasSize(0));
-                    return true;
-                });
-
-        // Call Kogito App to publish events
-        Awaitility.given().ignoreExceptions()
-                .await().atMost(TIMEOUT)
-                .with().pollInterval(INTERVAL)
-                .until(() -> {
-                    given()
-                            .port(kogitoPort)
-                            .header("Content-Type", "application/json")
-                            .body("{\"approver\" : \"john\", \"order\" : {\"orderNumber\" : \"23570\", \"shipped\" : false}}")
-                            .when()
-                            .post("/orders")
-                            .then()
-                            .statusCode(201)
-                            .assertThat()
-                            .body("approver", equalTo("john"))
-                            .body("order.orderNumber", equalTo("23570"))
-                            .body("order.shipped", equalTo(false));
-                    return true;
-                });
-
-        // Check Debezium Kafka topic created
-        Awaitility.given().ignoreExceptions()
-                .await().atMost(TIMEOUT)
-                .with().pollInterval(INTERVAL)
-                .until(() -> {
-                    given()
-                            .port(debeziumPort)
-                            .pathParam("connector", "kogito-connector")
-                            .when()
-                            .get("/connectors/{connector}/topics")
-                            .then()
-                            .statusCode(200)
-                            .assertThat()
-                            .body("kogito-connector.topics", hasSize(2))
-                            .body("kogito-connector.topics", hasItem(PROCESS_EVENTS_TOPIC))
-                            .body("kogito-connector.topics", hasItem(USERTASK_EVENTS_TOPIC));
-                    return true;
-                });
+                .untilAsserted(() -> given()
+                        .port(debeziumPort)
+                        .pathParam("connector", "kogito-connector")
+                        .when()
+                        .get("/connectors/{connector}/topics")
+                        .then()
+                        .statusCode(200)
+                        .body("kogito-connector.topics", hasSize(0)));
 
         // Check Kafka messages
+        CountDownLatch processEventCounter = new CountDownLatch(2);
+        CountDownLatch userTaskEventCounter = new CountDownLatch(1);
+        kafkaClient.consume(Set.of(PROCESS_EVENTS_TOPIC, USERTASK_EVENTS_TOPIC), message -> {
+            String type = JsonPath.read(message, "$.type");
+            if ("ProcessInstanceEvent".equals(type)) {
+                String orderNumber = JsonPath.read(message, "$.data.variables.order.orderNumber");
+                boolean shipped = JsonPath.read(message, "$.data.variables.order.shipped");
+                if ("23570".equals(orderNumber) && !shipped) {
+                    processEventCounter.countDown();
+                }
+            } else if ("UserTaskInstanceEvent".equals(type)) {
+                String orderNumber = JsonPath.read(message, "$.data.inputs.input1.orderNumber");
+                boolean shipped = JsonPath.read(message, "$.data.inputs.input1.shipped");
+                if ("23570".equals(orderNumber) && !shipped) {
+                    userTaskEventCounter.countDown();
+                }
+            }
+        });
+
+        // Call Kogito App to publish events
+        given()
+                .port(kogitoPort)
+                .header("Content-Type", "application/json")
+                .body("{\"approver\" : \"john\", \"order\" : {\"orderNumber\" : \"23570\", \"shipped\" : false}}")
+                .when()
+                .post("/orders")
+                .then()
+                .statusCode(201)
+                .body("approver", equalTo("john"))
+                .body("order.orderNumber", equalTo("23570"))
+                .body("order.shipped", equalTo(false));
+
+        // Check Debezium Kafka topic created
+        await().atMost(TIMEOUT)
+                .with().pollInterval(INTERVAL)
+                .untilAsserted(() -> given()
+                        .port(debeziumPort)
+                        .pathParam("connector", "kogito-connector")
+                        .when()
+                        .get("/connectors/{connector}/topics")
+                        .then()
+                        .statusCode(200)
+                        .body("kogito-connector.topics", hasSize(2))
+                        .body("kogito-connector.topics", hasItems(PROCESS_EVENTS_TOPIC, USERTASK_EVENTS_TOPIC)));
 
         // Check process events pushed
-        AtomicInteger processEventCounter = new AtomicInteger(0);
-        kafkaClient.consume(PROCESS_EVENTS_TOPIC, message -> {
-            String orderNumber = JsonPath.read(message, "$.data.variables.order.orderNumber");
-            boolean shipped = JsonPath.read(message, "$.data.variables.order.shipped");
-            if ("23570".equals(orderNumber) && !shipped) {
-                processEventCounter.incrementAndGet();
-            }
-        });
-        Awaitility.given().ignoreExceptions()
-                .await().atMost(TIMEOUT)
-                .with().pollInterval(INTERVAL)
-                .until(() -> processEventCounter.intValue() == 2);
-
-        // Check usertask events pushed
-        AtomicInteger usertaskEventCounter = new AtomicInteger(0);
-        kafkaClient.consume(USERTASK_EVENTS_TOPIC, message -> {
-            String orderNumber = JsonPath.read(message, "$.data.inputs.input1.orderNumber");
-            boolean shipped = JsonPath.read(message, "$.data.inputs.input1.shipped");
-            if ("23570".equals(orderNumber) && !shipped) {
-                usertaskEventCounter.incrementAndGet();
-            }
-        });
-        Awaitility.given().ignoreExceptions()
-                .await().atMost(TIMEOUT)
-                .with().pollInterval(INTERVAL)
-                .until(() -> usertaskEventCounter.intValue() == 1);
+        assertTrue(processEventCounter.await(TIMEOUT.getSeconds(), TimeUnit.SECONDS));
+        assertTrue(userTaskEventCounter.await(TIMEOUT.getSeconds(), TimeUnit.SECONDS));
     }
 }

@@ -14,8 +14,6 @@
     <description>Process with Transactional Outbox - MongoDB and Spring Boot</description>
 
     <properties>
-        <docker.showLogs>true</docker.showLogs>
-        <docker.removeVolumes>true</docker.removeVolumes>
         <DEBEZIUM_VERSION>1.7</DEBEZIUM_VERSION>
     </properties>
 
@@ -44,11 +42,6 @@
             <groupId>org.kie.kogito</groupId>
             <artifactId>kogito-processes-spring-boot-starter</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.kie.kogito</groupId>
-            <artifactId>kogito-addons-springboot-process-management</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
@@ -150,58 +143,6 @@
                         </fileset>
                     </filesets>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <configuration>
-                    <systemPropertyVariables>
-                        <kogito.port>${KOGITO_PORT}</kogito.port>
-                        <debezium.port>${DEBEZIUM_PORT}</debezium.port>
-                        <kafka.port>${KAFKA_PORT}</kafka.port>
-                    </systemPropertyVariables>
-                    <environmentVariables>
-                        <!-- Connection properties must be provided also here otherwise internal Spring Boot cannot boot -->
-                        <MONGODB_HOST>localhost:${MONGODB_PORT}</MONGODB_HOST>
-                        <MONGODB_USERNAME>debezium</MONGODB_USERNAME>
-                        <MONGODB_PASSWORD>dbz</MONGODB_PASSWORD>
-                        <MONGODB_AUTH_SOURCE>admin</MONGODB_AUTH_SOURCE>
-                    </environmentVariables>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>io.fabric8</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <configuration>
-                    <skip>${skipTests}</skip>
-                    <images>
-                        <image>
-                            <external>
-                                <type>compose</type>
-                                <basedir>.</basedir>
-                                <composeFile>docker-compose.yml</composeFile>
-                            </external>
-                        </image>
-                    </images>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>start</id>
-                        <phase>pre-integration-test</phase>
-                        <goals>
-                            <goal>build</goal>
-                            <goal>start</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>stop</id>
-                        <phase>post-integration-test</phase>
-                        <goals>
-                            <goal>stop</goal>
-                            <goal>remove</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
