@@ -118,12 +118,13 @@
           </filesets>
         </configuration>
       </plugin>
+      <!-- Keep this after quarkus-maven-plugin, since both are bind to package phase, and this one has to be executed after !-->
       <plugin>
         <artifactId>maven-resources-plugin</artifactId>
         <executions>
           <execution>
             <id>copy-resources</id>
-            <phase>prepare-package</phase>
+            <phase>package</phase>
             <goals>
               <goal>copy-resources</goal>
             </goals>
