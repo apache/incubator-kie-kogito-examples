@@ -25,7 +25,7 @@ Import the following dependency in your `pom.xml`:
 
 ### Architecture
 
-Once you compile your Springboot project, a dashboard for each available endpoint will be generated under the path `target/resources/dashboards/`. You can then inject those grafana dashboards during the deployment of the grafana instance.
+Once you compile your Springboot project, a dashboard for each available endpoint will be generated under the path `target/classes/META-INF/resources/monitoring/dashboards/`. You can then inject those grafana dashboards during the deployment of the grafana instance.
 
 The use case is summarized in the following schema:
  
