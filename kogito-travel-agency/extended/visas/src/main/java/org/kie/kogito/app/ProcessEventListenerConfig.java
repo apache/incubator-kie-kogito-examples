@@ -22,7 +22,8 @@ import javax.inject.Inject;
 
 import org.kie.kogito.KogitoGAV;
 import org.kie.kogito.conf.ConfigBean;
-import org.kie.kogito.monitoring.core.common.MonitoringRegistry;
+import org.kie.kogito.monitoring.MonitoringRegistryManager;
+import org.kie.kogito.monitoring.prometheus.api.PrometheusMeterRegistryManager;
 import org.kie.kogito.process.impl.DefaultProcessEventListenerConfig;
 
 @ApplicationScoped
@@ -33,13 +34,20 @@ public class ProcessEventListenerConfig extends DefaultProcessEventListenerConfi
     @Inject
     ConfigBean configBean;
 
+    @Inject
+    MonitoringRegistryManager monitoringRegistryManager;
+
+    @Inject
+    PrometheusMeterRegistryManager prometheusMeterRegistryManager;
+
     public ProcessEventListenerConfig() {
         super();
     }
 
     @PostConstruct
     public void setup() {
-        this.listener = new VisaApplicationPrometheusProcessEventListener("acme-travels", configBean.getGav().orElse(KogitoGAV.EMPTY_GAV), MonitoringRegistry.getDefaultMeterRegistry());
+        this.listener = new VisaApplicationPrometheusProcessEventListener("acme-travels",
+                                                                          configBean.getGav().orElse(KogitoGAV.EMPTY_GAV), monitoringRegistryManager, prometheusMeterRegistryManager);
         register(this.listener);
     }
 
