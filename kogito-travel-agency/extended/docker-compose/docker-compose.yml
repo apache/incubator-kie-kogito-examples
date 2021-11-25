@@ -3,11 +3,11 @@ version: '2.1'
 services:
 
   infinispan:
-    image: infinispan/server:12.1.7.Final
+    image: infinispan/server:13.0.2.Final
     container_name: infinispan
     ports:
-        - 11222:11222
-    command: "/opt/infinispan/bin/server.sh -c infinispan-demo.xml"
+        - "11222:11222"
+    command: "-c infinispan-demo.xml"
     volumes:
       - ./infinispan/infinispan.xml:/opt/infinispan/server/conf/infinispan-demo.xml:z
     healthcheck:
