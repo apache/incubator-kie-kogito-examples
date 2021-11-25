@@ -48,13 +48,14 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <!-- kogito -->
     <kogito.version>${project.version}</kogito.version>
-    <version.org.optaplanner>8.14.0-SNAPSHOT</version.org.optaplanner>
+    <version.org.optaplanner>8.15.0-SNAPSHOT</version.org.optaplanner>
     <!-- override default to fast-jar packaging for forward-compatibility -->
     <quarkus.package.type>fast-jar</quarkus.package.type>
     <!-- dependencies version -->
     <version.org.skyscreamer>1.5.0</version.org.skyscreamer>
     <!-- JKube -->
     <version.org.eclipse.jkube>1.4.0</version.org.eclipse.jkube>
+    <version.docker.plugin>0.37.0</version.docker.plugin>
   </properties>
 
   <!-- distributionManagement section -->
@@ -217,6 +218,7 @@
         <module>serverless-workflow-greeting-springboot</module>
         <module>serverless-workflow-service-calls-quarkus</module>
         <module>serverless-workflow-service-calls-springboot</module>
+        <module>serverless-workflow-compensation-quarkus</module>
         <module>serverless-workflow-events-quarkus</module>
         <module>serverless-workflow-expression-quarkus</module>
         <module>serverless-workflow-error-quarkus</module>
@@ -708,6 +710,11 @@
           <groupId>org.eclipse.jkube</groupId>
           <artifactId>openshift-maven-plugin</artifactId>
           <version>${version.org.eclipse.jkube}</version>
+        </plugin>
+        <plugin>
+          <groupId>io.fabric8</groupId>
+          <artifactId>docker-maven-plugin</artifactId>
+          <version>${version.docker.plugin}</version>
         </plugin>
       </plugins>
     </pluginManagement>

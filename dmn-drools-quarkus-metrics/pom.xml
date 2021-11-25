@@ -10,10 +10,10 @@
   <artifactId>dmn-drools-quarkus-metrics</artifactId>
   <name>Kogito Example :: DMN Metrics Quarkus</name>
   <properties>
-    <quarkus-plugin.version>2.4.0.Final</quarkus-plugin.version>
+    <quarkus-plugin.version>2.4.2.Final</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-    <quarkus.platform.version>2.4.0.Final</quarkus.platform.version>
+    <quarkus.platform.version>2.4.2.Final</quarkus.platform.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -105,11 +105,26 @@
         </executions>
       </plugin>
       <plugin>
+        <artifactId>maven-clean-plugin</artifactId>
+        <configuration>
+          <filesets>
+            <fileset>
+              <directory>docker-compose/grafana/provisioning/dashboards</directory>
+              <excludes>
+                <exclude>dashboard.yml</exclude>
+              </excludes>
+              <followSymlinks>false</followSymlinks>
+            </fileset>
+          </filesets>
+        </configuration>
+      </plugin>
+      <!-- Keep this after quarkus-maven-plugin, since both are bind to package phase, and this one has to be executed after !-->
+      <plugin>
         <artifactId>maven-resources-plugin</artifactId>
         <executions>
           <execution>
             <id>copy-resources</id>
-            <phase>prepare-package</phase>
+            <phase>package</phase>
             <goals>
               <goal>copy-resources</goal>
             </goals>
@@ -128,7 +143,7 @@
           </execution>
           <execution>
             <id>copy-docker-compose-for-tests</id>
-            <phase>prepare-package</phase>
+            <phase>pre-integration-test</phase>
             <goals>
               <goal>copy-resources</goal>
             </goals>
@@ -147,6 +162,7 @@
           </execution>
         </executions>
       </plugin>
+      <!-- Keep this after maven-resources-plugin, since both copy-docker-compose-for-tests and this one are bind to pre-integration-test phase, and this one has to be executed after !-->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>

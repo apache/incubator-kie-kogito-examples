@@ -120,7 +120,7 @@
           <drools:metaValue><![CDATA[Process Traveler]]></drools:metaValue>
         </drools:metaData>
         <drools:metaData name="customAsync">
-          <drools:metaValue><![CDATA[true]]></drools:metaValue>
+          <drools:metaValue><![CDATA[false]]></drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
       <bpmn2:incoming>_D15CD483-D31D-42F8-A93A-AAAF44292D84</bpmn2:incoming>
