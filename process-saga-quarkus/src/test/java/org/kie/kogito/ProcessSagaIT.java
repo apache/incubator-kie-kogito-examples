@@ -49,13 +49,13 @@ public class ProcessSagaIT {
     public void testOrderFailure() {
         String payload = "{\n" +
                 "    \"orderId\": \"" + ORDER_ID + "\",\n" +
-                "    \"failService\" : \"PaymentService\"\n" +
+                "    \"failService\" : \"ShippingService\"\n" +
                 "}";
         ExtractableResponse<Response> response = createOrder(payload);
         response.path("id");
         assertThat(response.<String> path("stockResponse.type")).isEqualTo("SUCCESS");
-        assertThat(response.<String> path("shippingResponse.type")).isEqualTo("SUCCESS");
-        assertThat(response.<String> path("paymentResponse.type")).isEqualTo("ERROR");
+        assertThat(response.<String> path("paymentResponse.type")).isEqualTo("SUCCESS");
+        assertThat(response.<String> path("shippingResponse.type")).isEqualTo("ERROR");
         assertThat(response.<String> path("orderResponse.type")).isEqualTo("ERROR");
         assertThat(response.<String> path("orderResponse.resourceId")).isEqualTo(ORDER_ID);
     }
