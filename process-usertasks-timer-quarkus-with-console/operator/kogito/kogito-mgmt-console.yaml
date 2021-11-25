@@ -1,0 +1,13 @@
+apiVersion: app.kiegroup.org/v1beta1
+kind: KogitoSupportingService
+metadata:
+  name: kogito-mgmt-console
+spec:
+  serviceType: MgmtConsole
+  env:
+    - name: KOGITO_MANAGEMENT_CONSOLE_PROPS
+      value: >-
+        -Dkogito.consoles.keycloak.config.url=http://kogito-keycloak/auth
+        -Dkogito.consoles.keycloak.config.health-check-url=http://kogito-keycloak/auth/realms/kogito/.well-known/openid-configuration
+        -Dkogito.svg.folder.path=/home/kogito/data/svg
+        -Dkogito.consoles.keycloak.config.client-id=kogito-mgmt-console

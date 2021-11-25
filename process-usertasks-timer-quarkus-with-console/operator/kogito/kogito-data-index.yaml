@@ -1,0 +1,11 @@
+apiVersion: app.kiegroup.org/v1beta1
+kind: KogitoSupportingService
+metadata:  
+  name: kogito-data-index
+spec:
+  infra:
+    - kogito-kafka-infra
+    - kogito-infinispan-infra
+    - kogito-process-usertask-timer-infra
+  replicas: 1
+  serviceType: DataIndex

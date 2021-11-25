@@ -1,0 +1,9 @@
+apiVersion: app.kiegroup.org/v1beta1
+kind: KogitoInfra
+metadata:  
+  name: kogito-process-usertask-timer-infra
+spec:
+  configMapVolumeReferences:
+    - name: process-usertasks-timer-protobuf-files
+      mountPath: /home/kogito/data/protobufs/process-usertasks-timer
+      fileMode: 0644

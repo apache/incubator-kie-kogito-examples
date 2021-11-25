@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kogito-keycloak  
+  labels:
+    app: kogito-keycloak
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kogito-keycloak
+  template:
+    metadata:
+      labels:
+        app: kogito-keycloak
+    spec:
+      containers:
+      - name: kogito-keycloak
+        image: quay.io/keycloak/keycloak:15.0.2
+        env:
+        - name: KEYCLOAK_USER
+          value: "admin"
+        - name: KEYCLOAK_PASSWORD
+          value: "admin"
+        - name: PROXY_ADDRESS_FORWARDING
+          value: "true"
+        - name: KEYCLOAK_IMPORT
+          value: /tmp/kogito-realm.json                          
+        ports:
+        - name: http
+          containerPort: 8080
+        - name: https
+          containerPort: 8443
+        readinessProbe:
+          httpGet:
+            path: /auth/realms/master
+            port: 8080    
+        volumeMounts:
+          - mountPath: /tmp
+            name: keycloak-realm-config                
+      volumes:
+        - name: keycloak-realm-config
+          configMap: 
+            name: keycloak-realm-config      
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kogito-keycloak
+  labels:
+    app: kogito-keycloak
+spec:
+  selector:
+    app: kogito-keycloak 
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8080   
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: kogito-keycloak
+  labels:
+    app: kogito-keycloak  
+spec:
+  to:
+    kind: Service
+    name: kogito-keycloak
+  port:
+    targetPort: http

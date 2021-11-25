@@ -1,0 +1,85 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: process-usertasks-timer
+  labels:
+    app: process-usertasks-timer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: process-usertasks-timer
+  template:
+    metadata:
+      labels:
+        app: process-usertasks-timer
+    spec:
+      volumes:
+        - name: kogito-infinispan-truststore
+          secret:
+            secretName: kogito-infinispan-truststore
+            defaultMode: 416
+      containers:
+        - name: process-usertasks-timer
+          readinessProbe:
+            httpGet:
+              path: /q/health/ready
+              port: 8080              
+          livenessProbe:
+            httpGet:
+              path: /q/health/live
+              port: 8080              
+          startupProbe:
+            httpGet:
+              path: /q/health/live
+              port: 8080              
+          ports:
+            - name: http
+              containerPort: 8080
+          env:
+            - name: KOGITO_JOBS_SERVICE_URL
+              value: http://kogito-jobs-service
+            - name: KOGITO_SERVICE_URL
+              value: http://process-usertasks-timer
+          envFrom:
+            - configMapRef:
+                name: kogito-kafka-quarkus-config
+            - configMapRef:
+                name: kogito-infinispan-quarkus-config
+            - secretRef:
+                name: kogito-infinispan-truststore-quarkus-secret
+            - secretRef:
+                name: kogito-infinispan-quarkus-credential
+          volumeMounts:
+            - name: kogito-infinispan-truststore
+              mountPath: /home/kogito/certs/infinispan/truststore.p12
+              subPath: truststore.p12
+          image: 'quay.io/vajain/process-usertasks-timer-quarkus-with-console:30.0'
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: process-usertasks-timer
+  labels:
+    app: process-usertasks-timer
+spec:
+  selector:
+    app: process-usertasks-timer
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 8080
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: process-usertasks-timer
+  labels:
+    app: process-usertasks-timer
+spec:
+  to:
+    kind: Service
+    name: process-usertasks-timer
+  port:
+    targetPort: http

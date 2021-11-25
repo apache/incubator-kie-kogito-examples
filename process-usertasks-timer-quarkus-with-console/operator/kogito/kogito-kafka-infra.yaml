@@ -1,0 +1,9 @@
+apiVersion: app.kiegroup.org/v1beta1
+kind: KogitoInfra
+metadata:  
+  name: kogito-kafka-infra
+spec:
+  resource:
+    apiVersion: kafka.strimzi.io/v1beta2
+    kind: Kafka
+    name: kogito-kafka

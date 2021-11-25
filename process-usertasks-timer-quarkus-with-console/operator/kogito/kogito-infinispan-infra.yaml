@@ -1,0 +1,9 @@
+apiVersion: app.kiegroup.org/v1beta1
+kind: KogitoInfra
+metadata:  
+  name: kogito-infinispan-infra  
+spec:
+  resource:
+    apiVersion: infinispan.org/v1
+    kind: Infinispan
+    name: kogito-infinispan

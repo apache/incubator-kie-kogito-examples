@@ -1,0 +1,13 @@
+apiVersion: app.kiegroup.org/v1beta1
+kind: KogitoSupportingService
+metadata:
+  name: kogito-task-console
+spec:
+  serviceType: TaskConsole
+  env:
+    - name: KOGITO_TASK_CONSOLE_PROPS
+      value: >-
+        -Dkogito.consoles.keycloak.config.url=http://kogito-keycloak-process-usertasks-timer.rhba-cluster-0ad6762cc85bcef5745bb684498c2436-0000.us-south.containers.appdomain.cloud/auth
+        -Dkogito.consoles.keycloak.config.health-check-url=http://kogito-keycloak-process-usertasks-timer.rhba-cluster-0ad6762cc85bcef5745bb684498c2436-0000.us-south.containers.appdomain.cloud/auth/realms/kogito/.well-known/openid-configuration
+        -Dkogito.svg.folder.path=/home/kogito/data/svg
+        -Dkogito.consoles.keycloak.config.client-id=kogito-task-console
