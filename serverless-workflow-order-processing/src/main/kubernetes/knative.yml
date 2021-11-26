@@ -87,3 +87,14 @@ spec:
       apiVersion: serving.knative.dev/v1
       kind: Service
       name: fraud-evaluation
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: serverless-workflow-order-processing
+spec:
+  template:
+    spec:
+      containers:
+        - name: serverless-workflow-order-processing
+          imagePullPolicy: IfNotPresent
