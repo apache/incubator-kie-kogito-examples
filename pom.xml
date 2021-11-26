@@ -220,6 +220,7 @@
         <module>serverless-workflow-expression-quarkus</module>
         <module>serverless-workflow-error-quarkus</module>
         <module>serverless-workflow-callback-quarkus</module>
+        <module>serverless-workflow-foreach-quarkus</module>
         <module>serverless-workflow-functions-quarkus</module>
         <module>serverless-workflow-functions-events-quarkus</module>
         <module>serverless-workflow-github-showcase</module>
