@@ -7,7 +7,7 @@
   <parent>
     <groupId>org.kie.kogito</groupId>
     <artifactId>kogito-build-parent</artifactId>
-    <version>1.14.0.Final</version>
+    <version>1.14.1-SNAPSHOT</version>
   </parent>
 
   <groupId>org.kie.kogito.examples</groupId>
@@ -45,7 +45,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <!-- kogito -->
     <kogito.version>${project.version}</kogito.version>
-    <version.org.optaplanner>8.14.0.Final</version.org.optaplanner>
+    <version.org.optaplanner>8.14.1-SNAPSHOT</version.org.optaplanner>
     <!-- override default to fast-jar packaging for forward-compatibility -->
     <quarkus.package.type>fast-jar</quarkus.package.type>
     <!-- dependencies version -->
