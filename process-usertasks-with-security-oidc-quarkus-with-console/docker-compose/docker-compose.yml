@@ -3,15 +3,13 @@ version: '2.1'
 services:
 
   infinispan:
-    image: infinispan/server:12.1.7.Final
+    image: infinispan/server:13.0.2.Final
     container_name: infinispan
     ports:
-      - 11222:11222
-    command: "/opt/infinispan/bin/server.sh -c infinispan-demo.xml"
+      - "11222:11222"
+    command: "-c infinispan-demo.xml"
     volumes:
       - ./infinispan/infinispan.xml:/opt/infinispan/server/conf/infinispan-demo.xml:z
-      - ./infinispan/users.properties:/opt/infinispan/server/conf/users.properties
-      - ./infinispan/groups.properties:/opt/infinispan/server/conf/groups.properties
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:11222/rest/v2/cache-managers/default/health/status" ]
       interval: 1s
@@ -83,10 +81,7 @@ services:
       - ./persistence/:/home/kogito/data/protobufs/
     environment:
       QUARKUS_INFINISPAN_CLIENT_SERVER_LIST: infinispan:11222
-      QUARKUS_INFINISPAN_CLIENT_USE_AUTH: "true"
-      QUARKUS_INFINISPAN_CLIENT_AUTH_USERNAME: admin
-      QUARKUS_INFINISPAN_CLIENT_AUTH_PASSWORD: admin
-      QUARKUS_INFINISPAN_CLIENT_SASL_MECHANISM: PLAIN
+      QUARKUS_INFINISPAN_CLIENT_USE_AUTH: "false"
       KAFKA_BOOTSTRAP_SERVERS: kafka:29092
       KOGITO_DATA_INDEX_PROPS: -Dkogito.protobuf.folder=/home/kogito/data/protobufs/
 
