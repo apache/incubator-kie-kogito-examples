@@ -17,9 +17,6 @@ package org.kie.kogito.app;
 
 import java.util.Arrays;
 
-import io.micrometer.core.instrument.Counter;
-import io.micrometer.core.instrument.Tag;
-import io.micrometer.core.instrument.composite.CompositeMeterRegistry;
 import org.acme.travels.VisaApplication;
 import org.jbpm.workflow.instance.impl.WorkflowProcessInstanceImpl;
 import org.kie.api.event.process.ProcessCompletedEvent;
@@ -27,6 +24,10 @@ import org.kie.kogito.KogitoGAV;
 import org.kie.kogito.monitoring.MonitoringRegistryManager;
 import org.kie.kogito.monitoring.core.common.process.MetricsProcessEventListener;
 import org.kie.kogito.monitoring.prometheus.api.PrometheusMeterRegistryManager;
+
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.Tag;
+import io.micrometer.core.instrument.composite.CompositeMeterRegistry;
 
 public class VisaApplicationPrometheusProcessEventListener extends MetricsProcessEventListener {
 
@@ -53,7 +54,8 @@ public class VisaApplicationPrometheusProcessEventListener extends MetricsProces
     private MonitoringRegistryManager monitoringRegistryManager;
     private PrometheusMeterRegistryManager prometheusMeterRegistryManager;
 
-    public VisaApplicationPrometheusProcessEventListener(String identifier, KogitoGAV kogitoGAV, MonitoringRegistryManager monitoringRegistryManager, PrometheusMeterRegistryManager prometheusMeterRegistryManager) {
+    public VisaApplicationPrometheusProcessEventListener(String identifier, KogitoGAV kogitoGAV, MonitoringRegistryManager monitoringRegistryManager,
+            PrometheusMeterRegistryManager prometheusMeterRegistryManager) {
         super(identifier, kogitoGAV, monitoringRegistryManager.getDefaultMeterRegistry());
         this.identifier = identifier;
         this.monitoringRegistryManager = monitoringRegistryManager;
@@ -65,12 +67,12 @@ public class VisaApplicationPrometheusProcessEventListener extends MetricsProces
                 .getPrometheusMeterRegistry()
                 .find(NUMBER_OF_VISA_APPROVED_COUNTER_NAME)
                 .counters()
-                .forEach(x -> ((CompositeMeterRegistry)monitoringRegistryManager.getDefaultMeterRegistry()).remove(x));
+                .forEach(x -> ((CompositeMeterRegistry) monitoringRegistryManager.getDefaultMeterRegistry()).remove(x));
         prometheusMeterRegistryManager
                 .getPrometheusMeterRegistry()
                 .find(NUMBER_OF_VISA_REJECTED_COUNTER_NAME)
                 .counters()
-                .forEach(x -> ((CompositeMeterRegistry)monitoringRegistryManager.getDefaultMeterRegistry()).remove(x));
+                .forEach(x -> ((CompositeMeterRegistry) monitoringRegistryManager.getDefaultMeterRegistry()).remove(x));
     }
 
     @Override
@@ -82,11 +84,13 @@ public class VisaApplicationPrometheusProcessEventListener extends MetricsProces
             VisaApplication application = (VisaApplication) processInstance.getVariable("visaApplication");
 
             if (application.isApproved()) {
-                getNumberOfVisaApplicationsApprovedCounter(identifier, safeValue(application.getCountry()), String.valueOf(application.getDuration()), safeValue(application.getNationality(), monitoringRegistryManager))
-                        .increment();
+                getNumberOfVisaApplicationsApprovedCounter(identifier, safeValue(application.getCountry()), String.valueOf(application.getDuration()),
+                        safeValue(application.getNationality()), monitoringRegistryManager)
+                                .increment();
             } else {
-                getNumberOfVisaApplicationsRejected(identifier, safeValue(application.getCountry()), String.valueOf(application.getDuration()), safeValue(application.getNationality(), monitoringRegistryManager))
-                        .increment();
+                getNumberOfVisaApplicationsRejected(identifier, safeValue(application.getCountry()), String.valueOf(application.getDuration()),
+                        safeValue(application.getNationality()), monitoringRegistryManager)
+                                .increment();
             }
         }
     }

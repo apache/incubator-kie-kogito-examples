@@ -47,7 +47,7 @@ public class ProcessEventListenerConfig extends DefaultProcessEventListenerConfi
     @PostConstruct
     public void setup() {
         this.listener = new VisaApplicationPrometheusProcessEventListener("acme-travels",
-                                                                          configBean.getGav().orElse(KogitoGAV.EMPTY_GAV), monitoringRegistryManager, prometheusMeterRegistryManager);
+                configBean.getGav().orElse(KogitoGAV.EMPTY_GAV), monitoringRegistryManager, prometheusMeterRegistryManager);
         register(this.listener);
     }
 
