@@ -14,12 +14,10 @@
     <description>Process with Transactional Outbox - MongoDB and Quarkus</description>
 
     <properties>
-        <quarkus-plugin.version>2.4.0.Final</quarkus-plugin.version>
+        <quarkus-plugin.version>2.5.0.Final</quarkus-plugin.version>
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
         <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-        <quarkus.platform.version>2.4.0.Final</quarkus.platform.version>
-        <docker.showLogs>true</docker.showLogs>
-        <docker.removeVolumes>true</docker.removeVolumes>
+        <quarkus.platform.version>2.5.0.Final</quarkus.platform.version>
         <DEBEZIUM_VERSION>1.7</DEBEZIUM_VERSION>
     </properties>
 
@@ -38,11 +36,7 @@
     <dependencies>
         <dependency>
             <groupId>org.kie.kogito</groupId>
-            <artifactId>kogito-quarkus</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.kie.kogito</groupId>
-            <artifactId>kogito-addons-quarkus-process-management</artifactId>
+            <artifactId>kogito-quarkus-processes</artifactId>
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
@@ -51,18 +45,6 @@
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-resteasy-jackson</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-arc</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-smallrye-openapi</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-smallrye-health</artifactId>
         </dependency>
 
         <dependency>
@@ -75,8 +57,8 @@
         </dependency>
 
         <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-junit5</artifactId>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -118,50 +100,10 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <configuration>
-                    <systemPropertyVariables>
-                        <kogito.port>${KOGITO_PORT}</kogito.port>
-                        <debezium.port>${DEBEZIUM_PORT}</debezium.port>
-                        <kafka.port>${KAFKA_PORT}</kafka.port>
-                        <!-- Connection properties must be provided also here otherwise internal Quarkus cannot boot -->
-                        <quarkus.mongodb.connection-string>mongodb://localhost:${MONGODB_PORT}</quarkus.mongodb.connection-string>
-                        <quarkus.mongodb.credentials.username>debezium</quarkus.mongodb.credentials.username>
-                        <quarkus.mongodb.credentials.password>dbz</quarkus.mongodb.credentials.password>
-                        <quarkus.mongodb.credentials.auth-source>admin</quarkus.mongodb.credentials.auth-source>
-                    </systemPropertyVariables>
+                    <classpathDependencyExcludes>
+                        <classpathDependencyExclude>org.jboss.slf4j:slf4j-jboss-logmanager</classpathDependencyExclude>
+                    </classpathDependencyExcludes>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>io.fabric8</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <configuration>
-                    <images>
-                        <image>
-                            <external>
-                                <type>compose</type>
-                                <basedir>.</basedir>
-                                <composeFile>docker-compose.yml</composeFile>
-                            </external>
-                        </image>
-                    </images>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>start</id>
-                        <phase>pre-integration-test</phase>
-                        <goals>
-                            <goal>build</goal>
-                            <goal>start</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>stop</id>
-                        <phase>post-integration-test</phase>
-                        <goals>
-                            <goal>stop</goal>
-                            <goal>remove</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>

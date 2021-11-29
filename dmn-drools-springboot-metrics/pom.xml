@@ -96,11 +96,26 @@
         </executions>
       </plugin>
       <plugin>
+        <artifactId>maven-clean-plugin</artifactId>
+        <configuration>
+          <filesets>
+            <fileset>
+              <directory>docker-compose/grafana/provisioning/dashboards</directory>
+              <excludes>
+                <exclude>dashboard.yml</exclude>
+              </excludes>
+              <followSymlinks>false</followSymlinks>
+            </fileset>
+          </filesets>
+        </configuration>
+      </plugin>
+      <!-- Keep this after kogito-maven-plugin, since both are bind to package phase, and this one has to be executed after !-->
+      <plugin>
         <artifactId>maven-resources-plugin</artifactId>
         <executions>
           <execution>
             <id>copy-resources</id>
-            <phase>prepare-package</phase>
+            <phase>package</phase>
             <goals>
               <goal>copy-resources</goal>
             </goals>
@@ -119,7 +134,7 @@
           </execution>
           <execution>
             <id>copy-docker-compose-for-tests</id>
-            <phase>prepare-package</phase>
+            <phase>pre-integration-test</phase>
             <goals>
               <goal>copy-resources</goal>
             </goals>
@@ -138,6 +153,7 @@
           </execution>
         </executions>
       </plugin>
+      <!-- Keep this after maven-resources-plugin, since both copy-docker-compose-for-tests and this one are bind to pre-integration-test phase, and this one has to be executed after !-->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
