@@ -5,6 +5,7 @@ To allow a quick setup of all services required to run this demo, we provide a d
 - Kafka
 - Prometheus
 - Grafana
+- Keycloak
 - Kogito Data Index
 - Kogito Management Console
 
@@ -36,6 +37,7 @@ In order to use it, please ensure you have Docker Compose installed on your mach
   - Kafka: 9092
   - Prometheus: 9090
   - Grafana: 3000
+  - Keycloak: 8480
   - Data Index: 8180
   - Management Console: 8280
   
