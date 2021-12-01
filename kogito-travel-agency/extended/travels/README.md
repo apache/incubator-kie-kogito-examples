@@ -105,8 +105,6 @@ There will be services implemented to carry on the hotel and flight booking. Imp
 * org.acme.travels.service.HotelBookingService
 * org.acme.travels.service.FlightBookingService
 
-
-
 # Try out the complete service
 
 ## Installing and Running
@@ -123,30 +121,54 @@ When using native image compilation, you will also need:
   - Environment variable GRAALVM_HOME set accordingly
   - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too, please refer to GraalVM installation documentation for more details.
 
-### Infrastructure requirements
+### Starting the Kogito and Infrastructure Services
 
-#### Infinispan
+This quickstart provides a docker compose template that starts all the required services. This setup ensures that all services are connected with a default configuration.
 
-This application requires an Infinispan server to be available and by default expects it to be on default port and localhost.
+You should start all the services before you execute any of the **Hiring** example, to do that please execute:
 
-You can install Infinispan server by downloading version 12.x from the [official website](https://infinispan.org/download/).
+For Linux and MacOS:
 
-In the section [Persistence in Kogito services](https://docs.jboss.org/kogito/release/latest/html_single/#con-persistence_kogito-developing-process-services) the required 
-Infinispan configuration is explained in more detail.
+1. Open a Terminal
+2. Go to the process-usertasks-quarkus-with-console folder at kogito-examples
 
-Alternatively, you can use the Docker Compose template, instructions on how to use it are available in the [README](../docker-compose/README.md) file.
+```bash
+cd <path_to_process-usertasks-quarkus-with-console>/docker-compose
+```
 
-#### Apache Kafka
+3. Run the ```startServices.sh``` script
 
-This application requires a [Apache Kafka](https://kafka.apache.org/) installed and following topics created
+```bash
+sh ./startServices.sh
+```
 
-* `visaapplications` - used to send visa application that are consumed and processed by Kogito Visas service
-* `visasresponses` - used to send visa applications that were approved or rejected
-* `kogito-processinstances-events` - used to emit events by kogito that can be consumed by data index service and other services
-* `kogito-usertaskinstances-events` -used to emit events by kogito that can be consumed by data index service
-* `kogito-variables-events` - used to emit events by kogito that can be consumed by data index service
+Once all services bootstrap, the following ports will be assigned on your local machine:
 
-Alternatively, you can use the Docker Compose template, instructions on how to use it are available in the [README](../docker-compose/README.md) file.
+- Infinispan: 11222
+- Kafka: 9092
+- Data Index: 8180
+- Keycloak server: 8480
+- Management Console: 8280
+
+> **_NOTE:_**  This step requires the project to be compiled, please consider running a ```mvn clean install``` command on the project root before running the ```startServices.sh``` script for the first time or any time you modify the project.
+
+Once started you can simply stop all services by executing the ```docker-compose stop```.
+
+All created containers can be removed by executing the ```docker-compose rm```.
+
+### Using Keycloak as Authentication Server
+
+In this Quickstart we'll be using [Keycloak](https://www.keycloak.org/) as *Authentication Server*. It will be started as a part of the project *Infrastructure Services*, you can check the configuration on the project [docker-compose.yml](docker-compose/docker-compose.yml) in [docker-compose](docker-compose) folder.
+
+It will install the *Kogito Realm* that comes with a predefined set of users:
+| Login         | Password   | Roles               |
+| ------------- | ---------- | ------------------- |
+|    admin      |   admin    | *admin*, *managers* |
+|    alice      |   alice    | *user*              |
+|    jdoe       |   jdoe     | *managers*          |
+
+Once Keycloak is started, you should be able to access your *Keycloak Server* at [localhost:8480/auth](http://localhost:8480/auth) with *admin* user.
+
 
 ### Compile and Run in Local Dev Mode
 
@@ -156,7 +178,6 @@ mvn clean package quarkus:dev
 
 NOTE: With dev mode of Quarkus you can take advantage of hot reload for business assets like processes, rules and decision
 tables and java code. No need to redeploy or restart your running application.During this workshop we will create a software system for a startup travel agency called Kogito Travel Agency. The first iteration of the system will consist of a set of services that are able to deal with travel requests and the booking of hotels and flights.
-
 
 ### Compile and Run using Local Native Image
 Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
@@ -170,50 +191,6 @@ To run the generated native executable, generated in `target/`, execute
 ```
 ./target/travels-{version}-runner
 ```
-
-### Start Kogito Data Index Service
-
-We provide a `startDataIndex.sh` and `startDataIndex.ps1` script in the `scripts` directory of this tutorial. This script will
-
-* Check that the **Kogito Travel Agency** and **Kogito Visas** projects have been compiled and that the required protobuf files are available.
-* Copy the protobuf files to a local directory.
-* Download the **Kogito Data Index Service Runner** if required.
-* Start the **Kogito Data Index Service Runner** with the copied protobuf files.
-
-
-If you wish to install, configure and start the **Data Index Service** manually, the _runnner_ can be downloaded from [Kogito Data Index Service](https://search.maven.org/artifact/org.kie.kogito/data-index)
-
-This service works with .proto (protobuf) files that define the data model. fter downloading the runner, create a new folder to store the .proto files that will be used by the service,  e.g. `persistence`. Copy the protobuf files from the **Kogito Travel Agency** and **Kogito Visas** application to the `persistence` folder. These files can be found in the `target/classes/META-INF/resources/persistence/protobuf` folders of these projects.
-
-To start the **Kogito Data Index Service**, execute the Java runner JAR of the service, providing it the location of the protobuf files:
-
-```
-java -jar  -Dkogito.protobuf.folder={full path to proto files folder} data-index-service-0.4.0-runner.jar
-```
-
-e.g.
-
-```
-java -jar  -Dkogito.protobuf.folder=`pwd`/persistence data-index-service-0.4.0-runner.jar
-```
-
-
-### Start Kogito Management Console
-
-The Kogito Management Console consists of a frontend and backend component. These 2 components can be combined into a single executable runner using the project's Maven build.
-
-To package the frontend and backend together, use the following Maven build command: `mvn clean package -Dui.deps -Dui`
-This will:
-* Install the required front-end dependencies.
-* Build the front-end,
-* Compile the back-end.
-* Package the front-end and back-end into a single Java runner.
-
-After the build has completed, you can start the Manaagement Console with the following command: `java -jar target/management-console-*-runner.jar`
-
-By default, the **Management Console** will try to connect to the **Data Index Service** at: http://localhost:8180
-
-The UI of the **Management Console** can be accessed at: http://localhost:8280
 
 
 ### Start the Kogito Jobs Service
