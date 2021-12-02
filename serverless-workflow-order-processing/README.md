@@ -232,9 +232,10 @@ Data,
   {"id":"f0643c68-609c-48aa-a820-5df423fa4fe0","country":"Brazil","total":500,"description":"iPhone 12","shipping":"international"}
 ```
 
-## Deploying with Kogito Operator
+## Deploying in Minikube
 
-In the [`kubernetes`](kubernetes) directory you'll find the custom resources needed to deploy this example on OpenShift or Kubernetes with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).
+We have prepared a `knative` Maven profile to build the service image locally and all the Knative resources you need
+to get started.
 
 Just make sure your cluster has [Knative Eventing available](https://knative.dev/docs/eventing/getting-started/):
 
@@ -242,13 +243,11 @@ Just make sure your cluster has [Knative Eventing available](https://knative.dev
 2. [Install Knative with Operators](https://knative.dev/development/install/knative-with-operators/)
     1. Install Knative Serving
     2. Install Knative Eventing
-3. [Create and configure](https://knative.dev/docs/eventing/getting-started/#setting-up-knative-eventing-resources) a namespace with Knative Eventing (you will need a Broker)
-4. [Install the Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift)
-5. Create the [Knative eventing sinks](kubernetes/knative-sinks.yaml) (simply run `kubectl apply -f` using this file)
-6. On Kubernetes, build this example locally with the [Dockerfile](Dockerfile), then [push it](kogito-sw-openshift.yaml) to a third party registry.
-   For OpenShift, you can let the [cluster build it for you](kubernetes/kogito-sw-openshift.yaml)
-7. Expose the service, if on minikube [follow this tutorial](https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/). There's an `Ingress` already pre created in [kubernetes/ingress.yaml](kubernetes/ingress.yaml). [`NodePort` also works](https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/#deploy-a-hello-world-app).
-   On OpenShift, the operator will automatically expose the service for you.
+3. Install the `KogitoSource` [via command line](https://github.com/knative-sandbox/eventing-kogito#installation).
+4. Run `eval $(minikube docker-env)` to build the image directly into the Minikube registry. 
+5. Run `mvn clean install -Pknative -Dnamespace=<your namespace>` to build the image and the Knative resources for your application to run.
+6. Apply the objects created for you with `kubectl apply -f target/kubernetes/knative.yml`.
+7. Create the `KogitoSource` to hook up your service into the Knative broker: `kubectl apply -f kubernetes/kogitosource.yaml`. 
 8. Run `curl` from the terminal like you did in the previously steps. 
    To see what's going on, just query for one of the Knative service sinks created on step #5. 
    You should see something like:
