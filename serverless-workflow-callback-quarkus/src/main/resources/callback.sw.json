@@ -4,7 +4,7 @@
   "expressionLang": "jsonpath",
   "name": "Workflow Callback example",
   "description": "An example of how to use callback state",
-  "start": "start",
+  "start": "waitForEvent",
   "events": [
     {
       "name": "moveEvent",
@@ -26,30 +26,9 @@
       "metadata": {
         "type": "sysout"
       }
-    },
-    {
-      "name": "injectPI",
-      "metadata": {
-        "type": "script"
-      }
     }
   ],
   "states": [
-    {
-      "name": "start",
-      "type": "operation",
-      "actions": [
-        {
-          "functionRef": {
-            "refName": "injectPI",
-            "arguments": {
-              "script": "kcontext.setVariable (\"workflowdata\", new com.fasterxml.jackson.databind.ObjectMapper().createObjectNode().put(\"eventId\",kcontext.getProcessInstance().getStringId()));"
-            }
-          }
-        }
-      ],
-      "transition": "waitForEvent"
-    },
     {
       "name": "waitForEvent",
       "type": "callback",
