@@ -3,11 +3,11 @@ version: '2.1'
 services:
 
   infinispan:
-    image: infinispan/server:12.1.7.Final
+    image: infinispan/server:13.0.2.Final
     container_name: infinispan
     ports:
-        - 11222:11222
-    command: "/opt/infinispan/bin/server.sh -c infinispan-demo.xml"
+        - "11222:11222"
+    command: "-c infinispan-demo.xml"
     volumes:
       - ./infinispan/infinispan.xml:/opt/infinispan/server/conf/infinispan-demo.xml:z
     healthcheck:
@@ -72,6 +72,23 @@ services:
     environment:
       - PROMETHEUS_URL=http://prometheus:9090
 
+  keycloak:
+    container_name: keycloak
+    image: jboss/keycloak
+    ports:
+      - "8480:8080"
+    volumes:
+      - ./keycloak/kogito-realm.json:/tmp/kogito-realm.json
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/auth/realms/kogito" ]
+      interval: 1s
+      timeout: 1s
+      retries: 50
+    environment:
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
+      KEYCLOAK_IMPORT: /tmp/kogito-realm.json
+
   data-index:
     container_name: data-index
     image: quay.io/kiegroup/kogito-data-index-infinispan:${KOGITO_VERSION}
@@ -96,9 +113,12 @@ services:
     ports:
       - 8280:8080
     depends_on:
-      - data-index
+      data-index:
+        condition: service_started
+      keycloak:
+        condition: service_healthy
     volumes:
       - ./svg/:/home/kogito/data/svg/
     environment:
-      KOGITO_DATAINDEX_HTTP_URL: http://${DOCKER_GATEWAY_HOST}:8180
-      KOGITO_MANAGEMENT_CONSOLE_PROPS:  -Dkogito.svg.folder.path=/home/kogito/data/svg
+      KOGITO_DATAINDEX_HTTP_URL: http://${DOCKER_GATEWAY_HOST}:8180/graphql
+      KOGITO_MANAGEMENT_CONSOLE_PROPS: -Dkogito.consoles.keycloak.config.url=http://${DOCKER_GATEWAY_HOST}:8480/auth -Dkogito.consoles.keycloak.config.health-check-url=http://${DOCKER_GATEWAY_HOST}:8480/auth/realms/kogito/.well-known/openid-configuration -Dkogito.svg.folder.path=/home/kogito/data/svg
