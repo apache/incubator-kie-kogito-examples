@@ -181,6 +181,6 @@ Example response:
 
 **Debezium Connector**: https://debezium.io/blog/2019/02/19/reliable-microservices-data-exchange-with-the-outbox-pattern/
 
-**debezium-examples:** https://github.com/debezium/debezium-examples/blob/master/tutorial/README.md#using-mongodb
+**debezium-examples:** https://github.com/debezium/debezium-examples/blob/main/tutorial/README.md#using-mongodb
 
-**debezium-images:** https://github.com/debezium/docker-images/tree/master/examples/mongodb/
+**debezium-images:** https://github.com/debezium/docker-images/tree/main/examples/mongodb/
