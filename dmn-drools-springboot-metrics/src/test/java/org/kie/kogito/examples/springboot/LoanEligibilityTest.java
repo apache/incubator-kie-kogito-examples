@@ -81,7 +81,7 @@ public class LoanEligibilityTest {
 
         given()
                 .when()
-                .get("/metrics")
+                .get("/actuator/prometheus")
                 .then()
                 .statusCode(200)
                 .body(containsString(

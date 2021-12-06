@@ -4,7 +4,7 @@ scrape_configs:
 
     scrape_interval: 10s
 
-    metrics_path: /metrics
+    metrics_path: /q/metrics
 
     static_configs:
       - targets: ['kogito-app:8080']

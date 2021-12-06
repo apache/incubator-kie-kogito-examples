@@ -75,7 +75,7 @@ public class ProcessMetricsTest {
 
         given()
                 .when()
-                .get("/metrics")
+                .get("/q/metrics")
                 .then()
                 .statusCode(200)
                 .body(containsString(
