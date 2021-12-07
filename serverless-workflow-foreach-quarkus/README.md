@@ -74,11 +74,6 @@ once completed, it should return:
 ```json
 { 
   "workflowdata": {
-        "input": [
-            1,
-            2,
-            3
-        ],
         "output": [
             2,
             3,
