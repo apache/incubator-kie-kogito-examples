@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2020 Red Hat, Inc. and/or its affiliates.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,24 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.quarkus.traffic
+package org.kie.kogito.springboot.rest.traffic;
 
-unit LicenseValidationService
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-rule "Is driver license valid"
-when            
-    $driver: /driver[licenseExpiration.after(currentTime)]
-then
-    $driver.setValidLicense(true);
-end
+@SpringBootApplication(scanBasePackages = { "org.kie.kogito.**", "http**", "com.example.**" })
+public class KogitoApplication {
 
-rule "Is driver license expired"
-when            
-    $driver: /driver[licenseExpiration.before(currentTime)]
-then
-    $driver.setValidLicense(false);
-end
-
-query "validation"
-  $driver : /driver
-end
+    public static void main(String[] args) {
+        SpringApplication.run(KogitoApplication.class, args);
+    }
+}
