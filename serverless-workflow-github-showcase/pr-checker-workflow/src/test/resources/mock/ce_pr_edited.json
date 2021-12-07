@@ -201,12 +201,12 @@
           "forks":0,
           "open_issues":2,
           "watchers":0,
-          "default_branch":"master"
+          "default_branch":"main"
         }
       },
       "base":{
-        "label":"your-username:master",
-        "ref":"master",
+        "label":"your-username:main",
+        "ref":"main",
         "sha":"5921558af53606e943823839220a887b66fc2baa",
         "user":{
           "login":"your-username",
@@ -315,7 +315,7 @@
           "forks":0,
           "open_issues":2,
           "watchers":0,
-          "default_branch":"master"
+          "default_branch":"main"
         }
       },
       "_links":{
@@ -451,7 +451,7 @@
       "forks":0,
       "open_issues":2,
       "watchers":0,
-      "default_branch":"master"
+      "default_branch":"main"
     },
     "sender":{
       "login":"your-username",
