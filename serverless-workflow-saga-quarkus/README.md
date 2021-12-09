@@ -6,11 +6,11 @@ Service to demonstrate how to implement Saga pattern based on Serverless Workflo
  on an Order Fulfillment process which consists in a sequence of steps, that could represent calls to external
   services, microservices, serverless functions, etc.
   
- All steps `stock`, `payment` and `shipping` should be executed to confirm an Order, if any of the
+ All steps, defined as states in the workflow, `stock`, `payment` and `shipping` should be executed to confirm an Order, if any of the
  steps fail, then a compensation for each completed step should be executed to undo the operation or to keep the
- process on a consistent state. For instance, reserve stock step, should cancel the stock reservation. The
- compensations for the steps are represented in the worflow using the `compensatedBy` property that indicates the state responsible to compensation.
-
+ process on a consistent state. For instance, the reserve stock, should cancel the stock reservation. The
+ compensations for the steps are defined in the workflow using the `compensatedBy` property which indicates the state responsible to perform a compensation action.
+ 
 The compensations can be triggered by a transition setting the property `compensate` to `true`, this transition can be declared in 
 a state that represents and error in the workflow, in the order workflow example it is the `ServiceError` state. In general the error in a state can be declared 
 with the property `onErrors` which may include a transition to a state that represents this error.
@@ -26,8 +26,8 @@ The functions to execute the steps and compensations in this example are impleme
   
   The output of each step, is represented by a `Response` that contains a type, indicating <b>success</b> or <b>error
   </b> and the id of the resource that was invoked in the service, but this could be any kind of response depending on
-   the requirement of each service, in case of error handling we can simply throw Java Exceptions from the service class, 
-   in this case it triggers the error handling with the defined transitions in the workflow.
+   the requirement of each service, in case of error handling we can simply throw Java Exceptions from the service classes, 
+   in this case, the error handling is triggered with the defined transitions in the workflow, in this example the transition is taget to the `ServiceError`state.
 
 ## Order Saga workflow
 
