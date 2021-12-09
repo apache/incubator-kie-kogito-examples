@@ -1,0 +1,252 @@
+{
+  "id": "order_saga_workflow",
+  "version": "1.0",
+  "expressionLang": "jsonpath",
+  "name": "Order Fulfilment Workflow Saga example",
+  "description": "An example of how to implement Saga with the Order Fulfilment example",
+  "start": "reserveStock",
+  "functions": [
+    {
+      "name": "reserveStock",
+      "metadata": {
+        "interface": "org.kie.kogito.StockService",
+        "operation": "reserveStock",
+        "type": "service"
+      }
+    },
+    {
+      "name": "cancelStock",
+      "metadata": {
+        "interface": "org.kie.kogito.StockService",
+        "operation": "cancelStock",
+        "type": "service"
+      }
+    },
+    {
+      "name": "processPayment",
+      "metadata": {
+        "interface": "org.kie.kogito.PaymentService",
+        "operation": "processPayment",
+        "type": "service"
+      }
+    },
+    {
+      "name": "cancelPayment",
+      "metadata": {
+        "interface": "org.kie.kogito.PaymentService",
+        "operation": "cancelPayment",
+        "type": "service"
+      }
+    },
+    {
+      "name": "scheduleShipping",
+      "metadata": {
+        "interface": "org.kie.kogito.ShippingService",
+        "operation": "scheduleShipping",
+        "type": "service"
+      }
+    },
+    {
+      "name": "cancelShipping",
+      "metadata": {
+        "interface": "org.kie.kogito.ShippingService",
+        "operation": "cancelShipping",
+        "type": "service"
+      }
+    },
+    {
+      "name": "orderSuccess",
+      "metadata": {
+        "interface": "org.kie.kogito.OrderService",
+        "operation": "success",
+        "type": "service"
+      }
+    },
+    {
+      "name": "orderFailure",
+      "metadata": {
+        "interface": "org.kie.kogito.OrderService",
+        "operation": "failure",
+        "type": "service"
+      }
+    },
+    {
+      "name": "log",
+      "metadata": {
+        "type": "sysout"
+      }
+    }
+  ],
+  "states": [
+    {
+      "name": "reserveStock",
+      "type": "operation",
+      "actions": [
+        {
+          "name": "reserveStockAction",
+          "functionRef": {
+            "refName": "reserveStock",
+            "arguments": {
+              "orderId": "$.orderId",
+              "failService": "$.failService"
+            }
+          }
+        }
+      ],
+      "transition": "processPayment",
+      "compensatedBy": "CancelStock",
+      "onErrors": [
+        {
+          "error": "reserve stock failed",
+          "code": "org.kie.kogito.ServiceException",
+          "transition": "ServiceError"
+        }
+      ]
+    },
+    {
+      "name": "processPayment",
+      "type": "operation",
+      "actions": [
+        {
+          "name": "processPaymentAction",
+          "functionRef": {
+            "refName": "processPayment",
+            "arguments": {
+              "orderId": "$.orderId",
+              "failService": "$.failService"
+            }
+          }
+        }
+      ],
+      "transition": "scheduleShipping",
+      "compensatedBy": "CancelPayment",
+      "onErrors": [
+        {
+          "error": "process payment failed",
+          "code": "org.kie.kogito.ServiceException",
+          "transition": "ServiceError"
+        }
+      ]
+    },
+    {
+      "name": "scheduleShipping",
+      "type": "operation",
+      "actions": [
+        {
+          "name": "scheduleShippingAction",
+          "functionRef": {
+            "refName": "scheduleShipping",
+            "arguments": {
+              "orderId": "$.orderId",
+              "failService": "$.failService"
+            }
+          }
+        }
+      ],
+      "transition": "Finish",
+      "compensatedBy": "CancelShipping",
+      "onErrors": [
+        {
+          "error": "shipping failed",
+          "code": "org.kie.kogito.ServiceException",
+          "transition": "ServiceError"
+        }
+      ]
+    },
+    {
+      "name": "ServiceError",
+      "type": "inject",
+      "data": {
+        "orderResponse": "Error creating order"
+      },
+      "transition": {
+        "nextState": "FinishWithError",
+        "compensate": true
+      }
+    },
+    {
+      "name": "CancelStock",
+      "usedForCompensation": true,
+      "type": "operation",
+      "actions": [
+        {
+          "name": "cancelStockAction",
+          "functionRef": {
+            "refName": "cancelStock",
+            "arguments": {
+              "orderId": "$.orderId"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "CancelPayment",
+      "usedForCompensation": true,
+      "type": "operation",
+      "actions": [
+        {
+          "name": "cancelPaymentAction",
+          "functionRef": {
+            "refName": "cancelPayment",
+            "arguments": {
+              "orderId": "$.orderId"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "CancelShipping",
+      "usedForCompensation": true,
+      "type": "operation",
+      "actions": [
+        {
+          "name": "cancelShippingAction",
+          "functionRef": {
+            "refName": "cancelShipping",
+            "arguments": {
+              "orderId": "$.orderId"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "FinishWithError",
+      "type": "operation",
+      "actions": [
+        {
+          "name": "orderFailureAction",
+          "functionRef": {
+            "refName": "orderFailure",
+            "arguments": {
+              "orderId": "$.orderId"
+            }
+          }
+        }
+      ],
+      "end": {
+        "terminate": "true"
+      }
+    },
+    {
+      "name": "Finish",
+      "type": "operation",
+      "actions": [
+        {
+          "name": "orderSuccessAction",
+          "functionRef": {
+            "refName": "orderSuccess",
+            "arguments": {
+              "orderId": "$.orderId"
+            }
+          }
+        }
+      ],
+      "end": {
+        "terminate": "true"
+      }
+    }
+  ]
+}
