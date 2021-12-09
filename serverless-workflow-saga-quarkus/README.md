@@ -1,8 +1,8 @@
-# Saga Process example with Quarkus
+# Saga Serverless Workflow example with Quarkus
 
 ## Description
 
-Service to demonstrate how to implement Saga pattern based on Serverless Workflow with Kogito. The proposed example is based
+This is an example to demonstrate how to implement Saga pattern based on Serverless Workflow with Kogito. The proposed example is based
  on an Order Fulfillment process which consists in a sequence of steps, that could represent calls to external
   services, microservices, serverless functions, etc.
   
