@@ -13,26 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.acme.travel;
+package org.acme.travel.tests.multimessaging.quarkus;
 
 import java.net.URI;
 import java.time.OffsetDateTime;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
+import javax.inject.Inject;
+
+import org.acme.travel.Traveller;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.kie.kogito.test.springboot.kafka.KafkaTestClient;
-import org.kie.kogito.testcontainers.springboot.KafkaSpringBootTestResource;
-import org.kie.kogito.tests.KogitoKafkaQuickstartSpringbootApplication;
+import org.kie.kogito.test.quarkus.kafka.KafkaTestClient;
+import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -40,25 +42,36 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.cloudevents.core.builder.CloudEventBuilder;
+import io.quarkus.test.common.QuarkusTestResource;
+import io.quarkus.test.junit.QuarkusTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-@SpringBootTest(classes = KogitoKafkaQuickstartSpringbootApplication.class)
-@ContextConfiguration(initializers = KafkaSpringBootTestResource.class)
-public class MessagingIT {
+@QuarkusTest
+@QuarkusTestResource(KafkaQuarkusTestResource.class)
+public class MultiMessagingIT {
 
     public static final String TOPIC_PRODUCER = "travellers";
-    public static final String TOPIC_CONSUMER = "processedtravellers";
-    private static Logger LOGGER = LoggerFactory.getLogger(MessagingIT.class);
+    public static final String TOPIC_PROCESSED_CONSUMER = "processedtravellers";
+    public static final String TOPIC_CANCEL_CONSUMER = "cancelledtravellers";
 
-    @Autowired
+    private static Logger LOGGER = LoggerFactory.getLogger(MultiMessagingIT.class);
+
+    @Inject
     private ObjectMapper objectMapper;
 
-    @Autowired
-    private KafkaTestClient kafkaClient;
+    public KafkaTestClient kafkaClient;
+
+    @ConfigProperty(name = KafkaQuarkusTestResource.KOGITO_KAFKA_PROPERTY)
+    private String kafkaBootstrapServers;
+
+    @BeforeEach
+    public void setup() {
+        kafkaClient = new KafkaTestClient(kafkaBootstrapServers);
+    }
 
     @Test
     public void testProcess() throws InterruptedException {
@@ -68,16 +81,15 @@ public class MessagingIT {
         final int count = 3;
         final CountDownLatch countDownLatch = new CountDownLatch(count);
 
-        kafkaClient.consume(TOPIC_CONSUMER, s -> {
+        kafkaClient.consume(Set.of(TOPIC_PROCESSED_CONSUMER, TOPIC_CANCEL_CONSUMER), s -> {
             LOGGER.info("Received from kafka: {}", s);
             try {
                 JsonNode event = objectMapper.readValue(s, JsonNode.class);
                 Traveller traveller = objectMapper.readValue(event.get("data").toString(), Traveller.class);
-                assertTrue(traveller.isProcessed());
+                assertEquals(!traveller.getNationality().equals("American"), traveller.isProcessed());
                 assertTrue(traveller.getFirstName().matches("Name[0-9]+"));
                 assertTrue(traveller.getLastName().matches("LastName[0-9]+"));
                 assertTrue(traveller.getEmail().matches("email[0-9]+"));
-                assertTrue(traveller.getNationality().matches("Nationality[0-9]+"));
                 countDownLatch.countDown();
             } catch (JsonProcessingException e) {
                 LOGGER.error("Error parsing {}", s, e);
@@ -86,11 +98,15 @@ public class MessagingIT {
         });
 
         IntStream.range(0, count)
-                .mapToObj(i -> new Traveller("Name" + i, "LastName" + i, "email" + i, "Nationality" + i))
+                .mapToObj(i -> new Traveller("Name" + i, "LastName" + i, "email" + i, getNationality(i)))
                 .forEach(traveller -> kafkaClient.produce(generateCloudEvent(traveller), TOPIC_PRODUCER));
 
         countDownLatch.await(10, TimeUnit.SECONDS);
         assertEquals(0, countDownLatch.getCount());
+    }
+
+    private String getNationality(int i) {
+        return i % 2 == 0 ? "American" : "Spanish";
     }
 
     private String generateCloudEvent(Traveller traveller) {
