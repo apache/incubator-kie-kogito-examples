@@ -38,14 +38,14 @@ public class TrafficProcessIT {
     }
 
     @Test
-    public void testTrafficViolationRestServiceDecision() {
+    public void testTrafficViolationRestServiceDecisionOnSprinboot() {
         testTrafficProcess("traffic_service", "12345", 120d, "No", true);
         testTrafficProcess("traffic_service", "12345", 140d, "Yes", true);
         testTrafficProcess("traffic_service", "1234", 140d, null, false);
     }
 
     @Test
-    public void testTrafficViolationRestWIHDecision() {
+    public void testTrafficViolationRestWIHDecisionOnSprinboot() {
         testTrafficProcess("traffic_wih", "12345", 120d, "No", true);
         testTrafficProcess("traffic_wih", "12345", 140d, "Yes", true);
         testTrafficProcess("traffic_wih", "1234", 140d, null, false);

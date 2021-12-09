@@ -126,7 +126,7 @@
       <modules>
         <module>decisiontable-quarkus-example</module>
         <module>decisiontable-springboot-example</module>
-        <!-- <module>dmn-event-driven-quarkus</module> -->
+        <module>dmn-event-driven-quarkus</module>
         <module>dmn-event-driven-springboot</module>
         <module>dmn-incubation-api-quarkus</module>
         <module>dmn-knative-quickstart-quarkus</module>
@@ -219,6 +219,7 @@
         <module>serverless-workflow-expression-quarkus</module>
         <module>serverless-workflow-error-quarkus</module>
         <module>serverless-workflow-callback-quarkus</module>
+        <module>serverless-workflow-foreach-quarkus</module>
         <module>serverless-workflow-functions-quarkus</module>
         <module>serverless-workflow-functions-events-quarkus</module>
         <module>serverless-workflow-github-showcase</module>
