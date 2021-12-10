@@ -2,14 +2,13 @@
   "id": "expression",
   "version": "1.0",
   "name": "Workflow Expression example",
-  "description": "An example of how to use a JQ expression assigment",
+  "description": "An example of how to use a JQ expression assignment",
   "start": "squareState",
   "functions": [
     {
       "name": "square",
       "type": "expression",
-      "operation": ".square = .number*.number"
-      
+      "operation": "{multiply: .number*.number, sum:.number+.number}"
     },
     {
       "name": "printMessage",
@@ -27,6 +26,10 @@
           "name": "squareAction",
           "functionRef": {
             "refName": "square"
+          },
+          "actionDataFilter": {
+             "results" : ".multiply", 
+             "toStateData" : ".number"
           }
         }
       ],
@@ -35,6 +38,9 @@
     {
       "name": "finish",
       "type": "operation",
+      "stateDataFilter": {
+        "input": "{square: .number}"
+      },
       "actions": [
         {
           "name": "printAction",

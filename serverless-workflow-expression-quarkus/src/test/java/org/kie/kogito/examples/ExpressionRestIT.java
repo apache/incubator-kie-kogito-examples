@@ -22,6 +22,7 @@ import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 
 @QuarkusTest
 class ExpressionRestIT {
@@ -35,7 +36,7 @@ class ExpressionRestIT {
                 .post("/expression")
                 .then()
                 .statusCode(201)
-                .body("workflowdata.square", is(4));
-
+                .body("workflowdata.square", is(4))
+                .body("workflowdata.number", nullValue());
     }
 }

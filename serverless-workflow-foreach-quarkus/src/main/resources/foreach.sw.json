@@ -30,6 +30,7 @@
       },
       "actions": [
         {
+          "name":"increase",
           "functionRef": {
             "refName": "increase"
           }
