@@ -8,7 +8,7 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>kogito-examples</artifactId>
-    <version>1.14.1.Final</version>
+    <version>1.14.2-SNAPSHOT</version>
   </parent>
   <artifactId>dmn-listener-springboot</artifactId>
   <name>Kogito Example :: DMN with listeners - Spring Boot</name>
