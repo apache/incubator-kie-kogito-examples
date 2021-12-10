@@ -4,12 +4,16 @@
 
 This is an example to demonstrate how to implement Saga pattern based on Serverless Workflow with Kogito. The proposed example is based
  on an Order Fulfillment process which consists in a sequence of steps, that could represent calls to external
-  services, microservices, serverless functions, etc.
+  services, microservices, serverless functions, etc. More details can be found in [kie blog][https://blog.kie.org/2021/11/saga-pattern-with-processes-and-kogito-part-1.html].
+  
+  <img src="docs/images/order-fulfilment.png"/>
   
  All steps, defined as states in the workflow, `stock`, `payment` and `shipping` should be executed to confirm an Order, if any of the
  steps fail, then a compensation for each completed step should be executed to undo the operation or to keep the
  process on a consistent state. For instance, the reserve stock, should cancel the stock reservation. The
  compensations for the steps are defined in the workflow using the `compensatedBy` property which indicates the state responsible to perform a compensation action.
+ 
+  <img src="docs/images/order-saga-overview.png"/>
  
 The compensations can be triggered by a transition setting the property `compensate` to `true`, this transition can be declared in 
 a state that represents and error in the workflow, in the order workflow example it is the `ServiceError` state. In general the error in a state can be declared 
@@ -170,3 +174,5 @@ In the console executing the application you can check the log it with the execu
 ## Deploying with Kogito Operator
 
 In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).
+
+[https://blog.kie.org/2021/11/saga-pattern-with-processes-and-kogito-part-1.html]: https://blog.kie.org/2021/11/saga-pattern-with-processes-and-kogito-part-1.html
