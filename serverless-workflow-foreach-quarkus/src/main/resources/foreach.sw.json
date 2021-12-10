@@ -25,6 +25,9 @@
       "iterationParam" : "item",
       "inputCollection": ".input",
       "outputCollection": ".output",
+      "stateDataFilter": {
+        "output": "{output: .output}"
+      },
       "actions": [
         {
           "functionRef": {
