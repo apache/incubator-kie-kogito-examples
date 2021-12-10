@@ -21,10 +21,12 @@ import java.util.Collections;
 import java.util.UUID;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.kie.kogito.internal.process.runtime.KogitoProcessContext;
 import org.kie.kogito.process.Processes;
 import org.kie.kogito.test.quarkus.kafka.KafkaTestClient;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
@@ -55,8 +57,13 @@ public class PublishService {
         objectMapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
     }
 
-    public void publishMove(JsonNode workflowData) {
-        kafkaClient.produce(generateCloudEvent(workflowData.get("eventId").asText()), "move");
+    @PreDestroy
+    void close() {
+        kafkaClient.shutdown();
+    }
+
+    public void publishMove(JsonNode workflowData, KogitoProcessContext context) {
+        kafkaClient.produce(generateCloudEvent(context.getProcessInstance().getStringId()), "move");
     }
 
     private String generateCloudEvent(String id) {

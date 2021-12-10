@@ -97,7 +97,7 @@ public class TravelIT {
         whenNewTravel(TRAVELLER_FROM_POLAND, TRIP_TO_POLAND);
         given()
                 .when()
-                .get("/metrics")
+                .get("/q/metrics")
                 .then()
                 .statusCode(200)
                 .body(containsString(

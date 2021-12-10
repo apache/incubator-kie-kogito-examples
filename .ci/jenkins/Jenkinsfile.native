@@ -94,9 +94,7 @@ pipeline {
 }
 
 void sendNotification() {
-    emailext body: "**${NOTIFICATION_JOB_NAME}** #${BUILD_NUMBER} was: ${currentBuild.currentResult}\nPlease look here: ${BUILD_URL}",
-             subject: "[${params.BUILD_BRANCH_NAME}] Kogito Examples",
-             to: env.KOGITO_CI_EMAIL_TO
+    mailer.sendMarkdownTestSummaryNotification("${NOTIFICATION_JOB_NAME}", "[${params.BUILD_BRANCH_NAME}] Kogito Examples", [env.KOGITO_CI_EMAIL_TO])
 }
 
 void checkoutKogitoRepo(String repo, String dirName=repo) {
@@ -159,11 +157,12 @@ void runIntegrationTests(String project, List profiles=[]) {
 
 void runMavenTests(MavenCommand mvnCmd, String mvnRunCmd) {
     try {
-        mvnCmd.run(mvnRunCmd)
+        mvnCmd.withProperty('maven.test.failure.ignore', true).run(mvnRunCmd)
     } catch (err) {
         unstable("${mvnRunCmd} did not finish correctly")
     } finally {
         saveReports()
+        util.archiveConsoleLog
         cleanContainers()
     }
 }
@@ -193,8 +192,8 @@ void cleanContainers() {
     cloud.cleanContainersAndImages('docker')
 }
 
-void saveReports(boolean allowEmpty=false) {
-    junit testResults: '**/target/surefire-reports/**/*.xml, **/target/failsafe-reports/**/*.xml', allowEmptyResults: allowEmpty
+void saveReports() {
+    junit testResults: '**/target/surefire-reports/**/*.xml, **/target/failsafe-reports/**/*.xml', allowEmptyResults: true
 }
 
 String getNativeBuilderImage() {

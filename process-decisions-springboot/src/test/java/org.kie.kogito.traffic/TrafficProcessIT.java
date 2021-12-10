@@ -48,7 +48,7 @@ public class TrafficProcessIT {
     }
 
     @Test
-    public void testTrafficViolationEmbeddedDecision() {
+    public void testTrafficViolationEmbeddedDecisionOnSprinboot() {
         testTrafficProcess("traffic", "12345", 120d, "No", true);
         testTrafficProcess("traffic", "12345", 140d, "Yes", true);
         testTrafficProcess("traffic", "1234", 140d, null, false);
