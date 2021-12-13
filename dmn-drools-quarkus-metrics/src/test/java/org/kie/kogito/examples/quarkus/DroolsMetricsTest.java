@@ -53,21 +53,21 @@ public class DroolsMetricsTest {
                 .get("/q/metrics")
                 .then()
                 .statusCode(200)
-                .body(containsString("org_kie_kogito_examples_mylistener_total{event=\"afteractivationfiredeventimpl" +
+                .body(containsString("org_kie_kogito_examples_customruleeventlistener_total{event=\"afteractivationfiredeventimpl" +
                         "\",} 1.0"));
         given()
                 .when()
                 .get("/q/metrics")
                 .then()
                 .statusCode(200)
-                .body(containsString("org_kie_kogito_examples_mylistener_total{event=\"beforeactivationfiredeventimpl" +
+                .body(containsString("org_kie_kogito_examples_customruleeventlistener_total{event=\"beforeactivationfiredeventimpl" +
                         "\",} 1.0"));
         given()
                 .when()
                 .get("/q/metrics")
                 .then()
                 .statusCode(200)
-                .body(containsString("org_kie_kogito_examples_mylistener_total{event=\"activationcreatedeventimpl" +
+                .body(containsString("org_kie_kogito_examples_customruleeventlistener_total{event=\"activationcreatedeventimpl" +
                         "\",} 1.0"));
     }
 }

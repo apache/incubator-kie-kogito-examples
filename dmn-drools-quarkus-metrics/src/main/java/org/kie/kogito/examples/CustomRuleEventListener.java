@@ -29,13 +29,13 @@ import org.kie.api.event.rule.RuleFlowGroupDeactivatedEvent;
 
 import io.micrometer.prometheus.PrometheusMeterRegistry;
 
-public class MyListener extends DefaultAgendaEventListener {
+public class CustomRuleEventListener extends DefaultAgendaEventListener {
 
-    private static final Logger logger = Logger.getLogger(MyListener.class);
+    private static final Logger logger = Logger.getLogger(CustomRuleEventListener.class);
 
     private final PrometheusMeterRegistry prometheusMeterRegistry;
 
-    public MyListener(PrometheusMeterRegistry prometheusMeterRegistry) {
+    public CustomRuleEventListener(PrometheusMeterRegistry prometheusMeterRegistry) {
         this.prometheusMeterRegistry = prometheusMeterRegistry;
     }
 
@@ -100,8 +100,8 @@ public class MyListener extends DefaultAgendaEventListener {
     }
 
     private void registerEvent(KieRuntimeEvent event) {
-        logger.info(event.getClass().getSimpleName());
-        prometheusMeterRegistry.counter("org.kie.kogito.examples.mylistener", "event",
+        logger.debug(event.getClass().getSimpleName());
+        prometheusMeterRegistry.counter("org.kie.kogito.examples.customruleeventlistener", "event",
                 event.getClass().getSimpleName().toLowerCase()).increment();
     }
 }
