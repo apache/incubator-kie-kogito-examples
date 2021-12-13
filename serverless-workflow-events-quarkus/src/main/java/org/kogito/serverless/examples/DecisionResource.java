@@ -39,6 +39,7 @@ public class DecisionResource {
     @Produces(MediaType.SERVER_SENT_EVENTS)
     @SseElementType("application/json")
     public Publisher<JsonNode> streamDecisions() {
+        System.out.println("\n\n\n>>>>stream decisions");
         return decisions;
     }
 }

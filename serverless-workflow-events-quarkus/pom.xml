@@ -90,4 +90,12 @@
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>native</id>
+      <properties>
+        <failsafe.include>**/*IT.java</failsafe.include>
+      </properties>
+    </profile>
+  </profiles>
 </project>

@@ -28,20 +28,20 @@ When using native image compilation, you will also need:
 
 ### Compile and Run in Local Dev Mode
 
-```text
-mvn clean package quarkus:dev    
+```sh
+mvn clean package quarkus:dev
 ```
 
 ### Compile and Run in JVM mode
 
-```text
+```sh
 mvn clean package 
 java -jar target/quarkus-app/quarkus-run.jar
 ```
 
 or on windows
 
-```text
+```sh
 mvn clean package
 java -jar target\quarkus-app\quarkus-run.jar
 ```
@@ -49,19 +49,19 @@ java -jar target\quarkus-app\quarkus-run.jar
 ### Compile and Run using Local Native Image
 Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
 
-```text
+```sh
 mvn clean package -Pnative
 ```
   
 To run the generated native executable, generated in `target/`, execute
 
-```text
+```sh
 ./target/serverless-workflow-error-quarkus-{version}-runner
 ```
 
 ### Submit a request
 
-The service based on the JSON workflow definition can be access by sending a request to http://localhost:8080/error'
+The service based on the JSON workflow definition can be access by sending a request to http://localhost:8080/error
 with following content 
 
 ```json
@@ -74,7 +74,7 @@ with following content
 
 Complete curl command can be found below:
 
-```text
+```sh
 curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : {"number": 2}}' http://localhost:8080/error
 ```
 
@@ -97,7 +97,7 @@ If you would like to check odd number
 
 Complete curl command can be found below:
 
-```text
+```sh
 curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : {"number": 1}}' http://localhost:8080/error
 ```
 

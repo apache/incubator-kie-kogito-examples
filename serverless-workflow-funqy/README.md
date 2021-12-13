@@ -30,7 +30,7 @@ When using native image compilation, you will also need:
 
 First you need to start the `sw-funqy-services` module:
 
-```text
+```sh
 cd sw-funqy-services
 mvn clean install quarkus:dev
 ```
@@ -39,7 +39,7 @@ this service will start on port 8080
 
 Then we need to start our workflow service, namely `sw-funqy-workflow`
 
-```text
+```sh
 cd sw-funqy-workflow
 mvn clean install quarkus:dev
 ```

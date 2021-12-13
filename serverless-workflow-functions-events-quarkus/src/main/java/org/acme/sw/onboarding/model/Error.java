@@ -15,6 +15,9 @@
  */
 package org.acme.sw.onboarding.model;
 
+import io.quarkus.runtime.annotations.RegisterForReflection;
+
+@RegisterForReflection
 public class Error {
 
     private String message;

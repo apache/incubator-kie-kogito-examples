@@ -13,37 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.examples;
+
+package org.kogito.serverless.examples;
 
 import org.junit.jupiter.api.Test;
 
+import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.containsString;
 
 @QuarkusIntegrationTest
-class GreetRestIT {
+@QuarkusTestResource(RestServiceMockServer.class)
+public class WorkflowIT {
 
     @Test
-    void testGreetRest() {
+    public void testWorkflow() {
         given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
-                .body("{\"workflowdata\" : {\"name\" : \"John\", \"language\":\"English\"}}").when()
-                .post("/jsongreet")
+                .body("{\"workflowdata\" : {\"name\" : \"Brazil\"}}").when()
+                .when().post("/countryworkflow")
                 .then()
-                .statusCode(201)
-                .body("workflowdata.greeting", containsString("Hello"));
+                .statusCode(201);
 
-        given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .body("{\"workflowdata\" : {\"name\" : \"Javierito\", \"language\":\"Spanish\"}}").when()
-                .post("/jsongreet")
-                .then()
-                .statusCode(201)
-                .body("workflowdata.greeting", containsString("Saludos"));
     }
+
 }

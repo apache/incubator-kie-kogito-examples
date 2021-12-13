@@ -1,7 +1,6 @@
 {
   "id": "onboarding",
   "name": "Patient Onboarding Workflow",
-  "expressionLang": "jsonpath",
   "start": "LetsOnboard",
   "states": [
     {
@@ -17,7 +16,12 @@
               "functionRef": "StoreNewPatient"
             },
             {
-              "functionRef": "AssignDoctorToPatient"
+              "functionRef": {
+                "refName": "AssignDoctorToPatient",
+                "arguments": {
+                  "patients": "[ . ]"
+                }
+              }
             },
             {
               "functionRef": "SchedulePatientAppointment"
@@ -46,7 +50,7 @@
     },
     {
       "name": "AssignDoctorToPatient",
-      "operation": "/onboarding/assignment",
+      "operation": "/assign-doctor/first",
       "metadata": {
         "method": "POST",
         "type": "rest"

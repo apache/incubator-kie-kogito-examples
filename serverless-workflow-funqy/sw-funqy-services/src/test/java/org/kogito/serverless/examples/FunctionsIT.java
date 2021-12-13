@@ -20,12 +20,12 @@ import org.junit.jupiter.api.Test;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import io.quarkus.test.junit.QuarkusTest;
+import io.quarkus.test.junit.QuarkusIntegrationTest;
 
 import static io.restassured.RestAssured.given;
 
-@QuarkusTest
-public class FunctionsTest {
+@QuarkusIntegrationTest
+public class FunctionsIT {
 
     @Test
     public void testCountriesFunction() throws Exception {
