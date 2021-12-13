@@ -13,15 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.examples;
+package org.kie.kogito.app;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.drools.core.config.DefaultRuleEventListenerConfig;
+import org.kie.kogito.examples.MyListener;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 
-@SpringBootApplication(scanBasePackages = { "org.kie.kogito.**", "http**" })
-public class KogitoSpringbootApplication {
+import io.micrometer.prometheus.PrometheusMeterRegistry;
 
-    public static void main(String[] args) {
-        SpringApplication.run(KogitoSpringbootApplication.class, args);
+@Configuration
+public class RuleEventListenerConfig extends DefaultRuleEventListenerConfig {
+
+    @Autowired
+    public RuleEventListenerConfig(PrometheusMeterRegistry prometheusMeterRegistry) {
+        super(new MyListener(prometheusMeterRegistry));
     }
 }

@@ -64,5 +64,27 @@ public class DroolsMetricsTest {
                 .body(containsString(
                         String.format("drl_match_fired_nanosecond_count{app_id=\"default-rule-monitoring-listener\",artifactId=\"%s\",rule=\"helloWorld\",version=\"%s\",} 1.0", PROJECT_ARTIFACT_ID,
                                 PROJECT_VERSION)));
+
+        given()
+                .when()
+                .get("/actuator/prometheus")
+                .then()
+                .statusCode(200)
+                .body(containsString("org_kie_kogito_examples_mylistener_total{event=\"afteractivationfiredeventimpl" +
+                        "\",} 1.0"));
+        given()
+                .when()
+                .get("/actuator/prometheus")
+                .then()
+                .statusCode(200)
+                .body(containsString("org_kie_kogito_examples_mylistener_total{event=\"beforeactivationfiredeventimpl" +
+                        "\",} 1.0"));
+        given()
+                .when()
+                .get("/actuator/prometheus")
+                .then()
+                .statusCode(200)
+                .body(containsString("org_kie_kogito_examples_mylistener_total{event=\"activationcreatedeventimpl" +
+                        "\",} 1.0"));
     }
 }

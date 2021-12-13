@@ -21,58 +21,58 @@ import org.acme.travels.VisaApplication;
 import org.jbpm.workflow.instance.impl.WorkflowProcessInstanceImpl;
 import org.kie.api.event.process.ProcessCompletedEvent;
 import org.kie.kogito.KogitoGAV;
-import org.kie.kogito.monitoring.MonitoringRegistryManager;
 import org.kie.kogito.monitoring.core.common.process.MetricsProcessEventListener;
-import org.kie.kogito.monitoring.prometheus.api.PrometheusMeterRegistryManager;
 
 import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.Metrics;
 import io.micrometer.core.instrument.Tag;
 import io.micrometer.core.instrument.composite.CompositeMeterRegistry;
+import io.micrometer.prometheus.PrometheusMeterRegistry;
 
 public class VisaApplicationPrometheusProcessEventListener extends MetricsProcessEventListener {
 
     private static final String NUMBER_OF_VISA_APPROVED_COUNTER_NAME = "acme_travels_visas_approved_total";
     private static final String NUMBER_OF_VISA_REJECTED_COUNTER_NAME = "acme_travels_visas_rejected_total";
 
-    private static Counter getNumberOfVisaApplicationsApprovedCounter(String appId, String country, String duration, String nationality, MonitoringRegistryManager monitoringRegistryManager) {
+    private static Counter getNumberOfVisaApplicationsApprovedCounter(String appId, String country, String duration,
+            String nationality,
+            CompositeMeterRegistry compositeMeterRegistry) {
         return Counter
                 .builder(NUMBER_OF_VISA_APPROVED_COUNTER_NAME)
                 .description("Approved visa applications")
                 .tags(Arrays.asList(Tag.of("app_id", appId), Tag.of("country", country), Tag.of("duration", duration), Tag.of("nationality", nationality)))
-                .register(monitoringRegistryManager.getDefaultMeterRegistry());
+                .register(compositeMeterRegistry);
     }
 
-    private static Counter getNumberOfVisaApplicationsRejected(String appId, String country, String duration, String nationality, MonitoringRegistryManager monitoringRegistryManager) {
+    private static Counter getNumberOfVisaApplicationsRejected(String appId, String country, String duration,
+            String nationality,
+            CompositeMeterRegistry compositeMeterRegistry) {
         return Counter
                 .builder(NUMBER_OF_VISA_REJECTED_COUNTER_NAME)
                 .description("Rejected visa applications")
                 .tags(Arrays.asList(Tag.of("app_id", appId), Tag.of("country", country), Tag.of("duration", duration), Tag.of("nationality", nationality)))
-                .register(monitoringRegistryManager.getDefaultMeterRegistry());
+                .register(compositeMeterRegistry);
     }
 
     private String identifier;
-    private MonitoringRegistryManager monitoringRegistryManager;
-    private PrometheusMeterRegistryManager prometheusMeterRegistryManager;
+    private final PrometheusMeterRegistry prometheusMeterRegistry;
 
-    public VisaApplicationPrometheusProcessEventListener(String identifier, KogitoGAV kogitoGAV, MonitoringRegistryManager monitoringRegistryManager,
-            PrometheusMeterRegistryManager prometheusMeterRegistryManager) {
-        super(identifier, kogitoGAV, monitoringRegistryManager.getDefaultMeterRegistry());
+    public VisaApplicationPrometheusProcessEventListener(String identifier, KogitoGAV kogitoGAV,
+            PrometheusMeterRegistry prometheusMeterRegistry) {
+        super(identifier, kogitoGAV, Metrics.globalRegistry);
         this.identifier = identifier;
-        this.monitoringRegistryManager = monitoringRegistryManager;
-        this.prometheusMeterRegistryManager = prometheusMeterRegistryManager;
+        this.prometheusMeterRegistry = prometheusMeterRegistry;
     }
 
     public void cleanup() {
-        prometheusMeterRegistryManager
-                .getPrometheusMeterRegistry()
+        prometheusMeterRegistry
                 .find(NUMBER_OF_VISA_APPROVED_COUNTER_NAME)
                 .counters()
-                .forEach(x -> ((CompositeMeterRegistry) monitoringRegistryManager.getDefaultMeterRegistry()).remove(x));
-        prometheusMeterRegistryManager
-                .getPrometheusMeterRegistry()
+                .forEach(Metrics.globalRegistry::remove);
+        prometheusMeterRegistry
                 .find(NUMBER_OF_VISA_REJECTED_COUNTER_NAME)
                 .counters()
-                .forEach(x -> ((CompositeMeterRegistry) monitoringRegistryManager.getDefaultMeterRegistry()).remove(x));
+                .forEach(Metrics.globalRegistry::remove);
     }
 
     @Override
@@ -84,12 +84,13 @@ public class VisaApplicationPrometheusProcessEventListener extends MetricsProces
             VisaApplication application = (VisaApplication) processInstance.getVariable("visaApplication");
 
             if (application.isApproved()) {
-                getNumberOfVisaApplicationsApprovedCounter(identifier, safeValue(application.getCountry()), String.valueOf(application.getDuration()),
-                        safeValue(application.getNationality()), monitoringRegistryManager)
+                getNumberOfVisaApplicationsApprovedCounter(identifier, safeValue(application.getCountry()),
+                        String.valueOf(application.getDuration()),
+                        safeValue(application.getNationality()), Metrics.globalRegistry)
                                 .increment();
             } else {
                 getNumberOfVisaApplicationsRejected(identifier, safeValue(application.getCountry()), String.valueOf(application.getDuration()),
-                        safeValue(application.getNationality()), monitoringRegistryManager)
+                        safeValue(application.getNationality()), Metrics.globalRegistry)
                                 .increment();
             }
         }
