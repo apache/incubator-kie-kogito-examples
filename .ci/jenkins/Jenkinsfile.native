@@ -162,7 +162,7 @@ void runMavenTests(MavenCommand mvnCmd, String mvnRunCmd) {
         unstable("${mvnRunCmd} did not finish correctly")
     } finally {
         saveReports()
-        util.archiveConsoleLog
+        util.archiveConsoleLog()
         cleanContainers()
     }
 }
