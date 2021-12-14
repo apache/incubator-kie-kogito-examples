@@ -49,6 +49,18 @@ Kogito currently exports two types of dashboards depending on the model used on 
 
 You can use these default dashboards, or you can personalize them and use your custom dashboards.
 
+#### Custom dashboards
+User may add custom dashboards defined as `json` files. Format specification and details are provided in the [Official documentation](https://grafana.com/docs/grafana/latest/dashboards/json-model/) page.
+There are some conventions to be followed to successfully add such dashboards inside a `Kogito` project:
+
+1. dashboard files must be stored inside `/src/main/resources/META-INF/dashboards` directory
+2. dashboard file names must start with `domain-dashoboard` (for domain specific dashboards) or `operational-dashboard` (for operational ones)
+3. dashboard file names must end with `.json`
+4. dashboard file names should not conflict with auto-generated ones
+5. the `title` attribute of custom dashboards should not conflict with auto-generated ones.
+
+Custom dashboards will be available in the grafana panel, together with auto-generated ones.
+
 ### Compile and Run in Local Dev Mode
 
 It is possible to use `docker-compose` to demonstrate how to inject the generated dashboards in the volume of the grafana container:
