@@ -15,9 +15,6 @@
  */
 package org.kie.kogito.examples.springboot;
 
-import java.util.List;
-
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -143,12 +140,4 @@ public class LoanEligibilityTest {
                         "=\"afterevaluatedecisioneventimpl\",}"));
     }
 
-    @Test
-    @SuppressWarnings("unchecked")
-    public void testDashboardsListIsAvailable() {
-        List<String> dashboards = given().contentType(ContentType.JSON).accept(ContentType.JSON).when()
-                .get("/monitoring/dashboards/list.json").as(List.class);
-
-        Assertions.assertEquals(4, dashboards.size());
-    }
 }
