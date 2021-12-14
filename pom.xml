@@ -245,6 +245,7 @@
         <module>process-springboot-example</module>
         <module>process-postgresql-persistence-quarkus</module>
         <module>process-postgresql-persistence-springboot</module>
+        <module>serverless-workflow-callback-quarkus</module>
       </modules>
     </profile>
 
@@ -530,12 +531,13 @@
               <tests.category>${tests.category}</tests.category>
               <enable.resource.infinispan>${enable.resource.infinispan}</enable.resource.infinispan>
               <enable.resource.kafka>${enable.resource.kafka}</enable.resource.kafka>
+              <enable.resource.postgresql>${enable.resource.postgresql}</enable.resource.postgresql>
+              <enable.resource.mongodb>${enable.resource.mongodb}</enable.resource.mongodb>
               <container.image.keycloak>${container.image.keycloak}</container.image.keycloak>
               <container.image.infinispan>${container.image.infinispan}</container.image.infinispan>
               <container.image.kafka>${container.image.kafka}</container.image.kafka>
               <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
               <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-              <enable.resource.mongodb>${enable.resource.mongodb}</enable.resource.mongodb>
               <quarkus.http.test-port>${tests.quarkus.http.port}</quarkus.http.test-port>
             </systemPropertyVariables>
             <classesDirectory>${project.build.outputDirectory}</classesDirectory>
