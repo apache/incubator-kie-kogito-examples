@@ -25,7 +25,7 @@ import org.junit.jupiter.api.Test;
 import org.kie.kogito.cloudevents.CloudEventUtils;
 import org.kie.kogito.test.quarkus.kafka.KafkaTestClient;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
-import org.kie.kogito.tracing.decision.event.model.DecisionModelEvent;
+import org.kie.kogito.tracing.event.model.models.DecisionModelEvent;
 import org.kie.kogito.tracing.event.trace.TraceEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
