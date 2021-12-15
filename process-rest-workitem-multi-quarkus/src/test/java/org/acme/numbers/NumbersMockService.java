@@ -18,15 +18,16 @@ package org.acme.numbers;
 import java.util.Collections;
 import java.util.Map;
 
+import com.fasterxml.jackson.databind.node.IntNode;
 import com.github.tomakehurst.wiremock.WireMockServer;
 
 import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
 
-import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.get;
+import static com.github.tomakehurst.wiremock.client.WireMock.ok;
 import static com.github.tomakehurst.wiremock.client.WireMock.post;
-import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
+import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options;
 
 public class NumbersMockService implements QuarkusTestResourceLifecycleManager {
 
@@ -34,19 +35,13 @@ public class NumbersMockService implements QuarkusTestResourceLifecycleManager {
 
     @Override
     public Map<String, String> start() {
-        wireMockServer = new WireMockServer(8080);
+        wireMockServer = new WireMockServer(options().dynamicPort());
         wireMockServer.start();
-        stubFor(get(urlEqualTo("/numbers/random"))
-                .willReturn(aResponse()
-                        .withHeader("Content-Type", "application/json")
-                        .withBody("1")));
-
-        stubFor(post(urlEqualTo("/numbers/1/multiplyByAndSum"))
-                .willReturn(aResponse()
-                        .withHeader("Content-Type", "application/json")
-                        .withBody("34")));
-
-        return Collections.emptyMap();
+        wireMockServer.stubFor(get(urlEqualTo("/numbers/random")).willReturn(ok().withHeader("Content-Type", "application/json").withJsonBody(new IntNode(1))));
+        wireMockServer.stubFor(post(urlEqualTo("/numbers/1/multiplyByAndSum")).willReturn(ok()
+                .withHeader("Content-Type", "application/json")
+                .withJsonBody(new IntNode(34))));
+        return Collections.singletonMap("wiremock.port", Integer.toString(wireMockServer.port()));
     }
 
     @Override
