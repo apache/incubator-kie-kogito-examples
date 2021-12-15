@@ -50,6 +50,7 @@ pipeline {
                     if (isRelease() || isCreatePr()) {
                         // Verify version is set
                         assert getProjectVersion()
+                        assert getDroolsVersion()
                         assert getOptaPlannerVersion()
 
                         if (isRelease()) {
@@ -68,6 +69,7 @@ pipeline {
                         setDeployPropertyIfNeeded('git.author', getGitAuthor())
                         setDeployPropertyIfNeeded('project.version', getProjectVersion())
                         setDeployPropertyIfNeeded('release', isRelease())
+                        setDeployPropertyIfNeeded('drools.version', getDroolsVersion())
                         setDeployPropertyIfNeeded('optaplanner.version', getOptaPlannerVersion())
                     }
                 }
@@ -89,6 +91,8 @@ pipeline {
             steps {
                 script {
                     maven.mvnVersionsUpdateParentAndChildModules(getMavenCommand(), getProjectVersion(), !isRelease())
+                    // Update Drools version
+                    maven.mvnSetVersionProperty(getMavenCommand(), 'version.org.drools', getDroolsVersion())
                     // Update Optaplanner version
                     maven.mvnSetVersionProperty(getMavenCommand(), 'version.org.optaplanner', getOptaPlannerVersion())
                 }
@@ -342,6 +346,10 @@ String getBuildBranch() {
 
 String getProjectVersion() {
     return params.PROJECT_VERSION
+}
+
+String getDroolsVersion() {
+    return params.DROOLS_VERSION
 }
 
 String getOptaPlannerVersion() {

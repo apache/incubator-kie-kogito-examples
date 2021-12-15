@@ -27,7 +27,7 @@
       <dependency>
         <groupId>org.drools</groupId>
         <artifactId>drools-bom</artifactId>
-        <version>${project.version}</version>
+        <version>${version.org.drools}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
