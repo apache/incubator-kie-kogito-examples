@@ -15,8 +15,10 @@
  */
 package org.acme.numbers;
 
-import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -29,19 +31,25 @@ import static io.restassured.RestAssured.given;
 
 @QuarkusTest
 @QuarkusTestResource(NumbersMockService.class)
-class RestExampleTest {
+class RestExampleTestIT {
 
     @BeforeAll
     static void init() {
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
     }
 
+    @ConfigProperty(name = "wiremock.port")
+    int port;
+
     @Test
     void testRestExample() {
+        Map<String, Object> body = new HashMap<>();
+        body.put("numbers", new int[] { 1, 2, 3, 4, 5, 6, 7 });
+        body.put("port", port);
         given()
                 .contentType(ContentType.JSON)
                 .when()
-                .body(Collections.singletonMap("inputNumbers", Collections.singletonMap("numbers", new int[] { 1, 2, 3, 4, 5, 6, 7 })))
+                .body(body)
                 .post("/RestExample")
                 .then()
                 .statusCode(201);
