@@ -168,7 +168,7 @@ void runMavenTests(MavenCommand mvnCmd, String mvnRunCmd) {
 }
 
 MavenCommand getMavenCommand(String directory) {
-    return new MavenCommand(this, ['-fae'])
+    return new MavenCommand(this, ['-fae', '-ntp'])
                 .withSettingsXmlId('kogito_release_settings')
                 .withProperty('java.net.preferIPv4Stack', true)
                 .inDirectory(directory)
