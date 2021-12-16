@@ -35,9 +35,11 @@
             "actionMode": "sequential",
             "actions": [
                 {
+                    "name": "randomize",
                     "functionRef": "randomNumber"
                 },
                 {
+                    "name": "multiplier",
                     "functionRef": {
                         "refName": "multiplyAllByRandomAndSum",
                         "arguments": {

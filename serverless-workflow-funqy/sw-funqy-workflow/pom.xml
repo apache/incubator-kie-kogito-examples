@@ -73,9 +73,9 @@
 
         <!-- Serverless Workflow -->
         <dependency>
-            <groupId>org.kie.kogito</groupId>
-            <artifactId>kogito-openapi-workitem</artifactId>
-        </dependency>
+          <groupId>org.kie.kogito</groupId>
+          <artifactId>kogito-quarkus-serverless-workflow</artifactId>
+         </dependency>
 
     </dependencies>
     <build>
