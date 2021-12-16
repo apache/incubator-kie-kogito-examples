@@ -16,23 +16,42 @@
 package org.kie.kogito.examples;
 
 import org.junit.jupiter.api.Test;
+import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
+import org.kie.kogito.testcontainers.quarkus.PostgreSqlQuarkusTestResource;
 
-import io.quarkus.test.junit.QuarkusTest;
+import io.quarkus.test.common.QuarkusTestResource;
+import io.quarkus.test.junit.QuarkusIntegrationTest;
 import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.await;
 
-@QuarkusTest
+@QuarkusIntegrationTest
+@QuarkusTestResource(KafkaQuarkusTestResource.class)
+@QuarkusTestResource(PostgreSqlQuarkusTestResource.Conditional.class)
 class CallbackRestIT {
 
     @Test
     void testCallbackRest() {
-        given()
+        String id = given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
                 .post("/callback")
                 .then()
-                .statusCode(201);
+                .statusCode(201)
+                .extract()
+                .path("id");
 
+        await()
+                .atLeast(1, SECONDS)
+                .atMost(60, SECONDS)
+                .with().pollInterval(1, SECONDS)
+                .untilAsserted(() -> given()
+                        .contentType(ContentType.JSON)
+                        .accept(ContentType.JSON)
+                        .get("/callback/{id}", id)
+                        .then()
+                        .statusCode(404));
     }
 }
