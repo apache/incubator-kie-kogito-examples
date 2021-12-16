@@ -95,6 +95,7 @@
         <module>serverless-workflow-saga-quarkus</module>
         <module>serverless-workflow-service-calls-quarkus</module>
         <module>serverless-workflow-temperature-conversion</module>
+        <module>serverless-workflow-qas-service-showcase</module>
       </modules>
     </profile>
 
@@ -113,6 +114,7 @@
         <module>process-postgresql-persistence-quarkus</module>
         <module>process-quarkus-example</module>
         <module>serverless-workflow-callback-quarkus</module>
+        <module>serverless-workflow-qas-service-showcase</module>
       </modules>
     </profile>
 

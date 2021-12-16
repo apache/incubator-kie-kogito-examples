@@ -1,0 +1,195 @@
+{
+  "id": "qaservice",
+  "version": "1.0",
+  "name": "Query Answer Service",
+  "expressionLang": "jsonpath",
+  "description": "A simple SW example that coordinates the formulation of a query and it's resolution by using an external service",
+  "start": "Initialization",
+  "events": [
+    {
+      "name": "queryResultEvent",
+      "source": "",
+      "type": "query_response_events"
+    }
+  ],
+  "functions": [
+    {
+      "name": "executeScript",
+      "metadata": {
+        "type": "script"
+      }
+    },
+    {
+      "name": "sendQuery",
+      "operation": "/query-service/sendQuery",
+      "metadata": {
+        "method": "POST",
+        "type": "rest"
+      }
+    },
+    {
+      "name": "registerQuery",
+      "metadata": {
+        "interface": "org.acme.QueryAnswerServiceHelper",
+        "operation": "registerQuery",
+        "type": "service"
+      }
+    },
+    {
+      "name": "registerAnswer",
+      "metadata": {
+        "interface": "org.acme.QueryAnswerServiceHelper",
+        "operation": "registerAnswer",
+        "type": "service"
+      }
+    },
+    {
+      "name": "registerError",
+      "metadata": {
+        "interface": "org.acme.QueryAnswerServiceHelper",
+        "operation": "registerError",
+        "type": "service"
+      }
+    }
+  ],
+  "states": [
+    {
+      "name": "Initialization",
+      "type": "operation",
+      "actions": [
+        {
+          "name": "printWorkflowDataAction",
+          "functionRef": {
+            "refName": "executeScript",
+            "arguments": {
+              "script": "org.acme.QueryAnswerServiceScripts.printWorkflowData(\"Workflowdata received as process parameter\", kcontext);"
+            }
+          }
+        },
+        {
+          "name": "initializeDataAction",
+          "functionRef": {
+            "refName": "executeScript",
+            "arguments": {
+              "script": "org.acme.QueryAnswerServiceScripts.initializationScript(kcontext);"
+            }
+          }
+        },
+        {
+          "name": "registerQueryAction",
+          "functionRef": {
+            "refName": "registerQuery"
+          }
+        }
+      ],
+      "transition": "Print Initialized Data"
+    },
+    {
+      "name": "Print Initialized Data",
+      "type": "operation",
+      "actions": [
+        {
+          "name": "printWorkflowDataAction",
+          "functionRef": {
+            "refName": "executeScript",
+            "arguments": {
+              "script": "org.acme.QueryAnswerServiceScripts.printWorkflowData(\"Workflowdata after Initialization\", kcontext);"
+            }
+          }
+        }
+      ],
+      "transition": "Send Query and Wait For Answer"
+    },
+    {
+      "name": "Send Query and Wait For Answer",
+      "type": "callback",
+      "action": {
+        "name": "sendQueryAction",
+        "functionRef": {
+          "refName": "sendQuery",
+          "arguments": {
+            "processInstanceId": "$.processInstanceId",
+            "query": "$.query"
+          }
+        }
+      },
+      "eventRef": "queryResultEvent",
+      "transition": "Register Answer",
+      "onErrors": [
+        {
+          "error": "execution error",
+          "code": "java.util.concurrent.CompletionException",
+          "transition": "Process query service error"
+        }
+      ]
+    },
+    {
+      "name": "Register Answer",
+      "type": "operation",
+      "actions": [
+        {
+          "name": "printWorkflowDataAction",
+          "functionRef": {
+            "refName": "executeScript",
+            "arguments": {
+              "script": "org.acme.QueryAnswerServiceScripts.printWorkflowData(\"Workflowdata before executing registerAnswerAction\", kcontext);"
+            }
+          }
+        },
+        {
+          "name": "registerAnswerAction",
+          "functionRef": {
+            "refName": "registerAnswer"
+          }
+        }
+      ],
+      "transition": "Finalize process"
+    },
+    {
+      "name": "Process query service error",
+      "type": "inject",
+      "data": {
+        "error": "The query service invocation failed, please try at another time"
+      },
+      "transition": "Register error"
+    },
+    {
+      "name": "Register error",
+      "type": "operation",
+      "actions": [
+        {
+          "name": "printWorkflowDataAction",
+          "functionRef": {
+            "refName": "executeScript",
+            "arguments": {
+              "script": "org.acme.QueryAnswerServiceScripts.printWorkflowData(\"Workflowdata before executing registerErrorAction\", kcontext);"
+            }
+          }
+        },
+        {
+          "name": "registerErrorAction",
+          "functionRef": {
+            "refName": "registerError"
+          }
+        }
+      ],
+      "transition": "Finalize process"
+    },
+    {
+      "name": "Finalize process",
+      "type": "operation",
+      "actions": [
+        {
+          "name": "printWorkflowDataAction",
+          "functionRef": {
+            "refName": "executeScript",
+            "arguments": {
+              "script": "org.acme.QueryAnswerServiceScripts.printWorkflowData(\"Workflowdata at process finalization\", kcontext);"
+            }
+          }
+        }
+      ],
+      "end": "true"
+    }
+  ]
+}
