@@ -239,16 +239,13 @@ to get started.
 
 Just make sure your cluster has [Knative Eventing available](https://knative.dev/docs/eventing/getting-started/):
 
-1. [Install Istio](https://knative.dev/development/install/installing-istio/)
-2. [Install Knative with Operators](https://knative.dev/development/install/knative-with-operators/)
-    1. Install Knative Serving
-    2. Install Knative Eventing
-3. Install the `KogitoSource` [via command line](https://github.com/knative-sandbox/eventing-kogito#installation).
-4. Run `eval $(minikube docker-env)` to build the image directly into the Minikube registry. 
-5. Run `mvn clean install -Pknative -Dnamespace=<your namespace>` to build the image and the Knative resources for your application to run.
-6. Apply the objects created for you with `kubectl apply -f target/kubernetes/knative.yml`.
-7. Create the `KogitoSource` to hook up your service into the Knative broker: `kubectl apply -f kubernetes/kogitosource.yaml`. 
-8. Run `curl` from the terminal like you did in the previously steps. 
+1. [Install Knative](https://knative.dev/docs/getting-started/)
+2. Install the `KogitoSource` [via command line](https://github.com/knative-sandbox/eventing-kogito#installation).
+3. Run `eval $(minikube docker-env)` to build the image directly into the Minikube registry. 
+4. Run `mvn clean install -Pknative -Dnamespace=<your namespace>` to build the image and the Knative resources for your application to run.
+5. Apply the objects created for you with `kubectl apply -f target/kubernetes/knative.yml`.
+6. Create the `KogitoSource` to hook up your service into the Knative broker: `kubectl apply -f kubernetes/kogitosource.yaml`. 
+7. Run `curl` from the terminal like you did in the previously steps. 
    To see what's going on, just query for one of the Knative service sinks created on step #5. 
    You should see something like:
 
@@ -272,3 +269,30 @@ Extensions,
 Data,
   {"id":"f0643c68-609c-48aa-a820-5df423fa4fe0","country":"Brazil","total":500,"description":"iPhone 7","shipping":"international"}
 ```
+
+### Accessing the Service on Minikube
+
+Ideally, you installed Knative on Minikube via [their quickstart](https://knative.dev/docs/getting-started/). 
+Doing so, you will have installed nip.io DNS and will be able to access the services via their exposed Knative Routes.
+
+Alternatively, if you installed via Knative Operators and Istio, you will need to follow this procedure in order to access the service:
+
+1. Run `minikube tunnel`
+2. Define the Ingress Gateway `INGRESSGATEWAY=istio-ingressgateway`
+3. Get the Gateway IP with:
+   ```shell
+   export GATEWAY_IP=`kubectl get svc $INGRESSGATEWAY --namespace istio-system \
+    --output jsonpath="{.status.loadBalancer.ingress[*]['ip']}"`
+   ```
+4. Run the `curl` command using the Gateway URL. For example:
+
+   ```shell
+   curl -X POST \
+      -H "content-type: application/json"  \
+      -H "ce-specversion: 1.0"  \
+      -H "ce-source: /from/localhost"  \
+      -H "ce-type: orderEvent"  \
+      -H "ce-id: f0643c68-609c-48aa-a820-5df423fa4fe0"  \
+      -d ' {"id":"f0643c68-609c-48aa-a820-5df423fa4fe0","country":"Brazil","total":15000,"description":"iPhone 7"}' \
+   http://${GATEWAY_IP} --header "Host:serverless-workflow-order-processing.kogito.example.com"
+   ```
