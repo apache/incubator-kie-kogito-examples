@@ -1,9 +1,3 @@
-# a default broker
-apiVersion: eventing.knative.dev/v1
-kind: Broker
-metadata:
-  name: default
----
 # simple knative application to display the routed messages
 apiVersion: serving.knative.dev/v1
 kind: Service
