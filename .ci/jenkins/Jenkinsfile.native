@@ -159,10 +159,10 @@ void runMavenTests(MavenCommand mvnCmd, String mvnRunCmd) {
     try {
         mvnCmd.withProperty('maven.test.failure.ignore', true).run(mvnRunCmd)
     } catch (err) {
-        unstable("${mvnRunCmd} did not finish correctly")
+        util.archiveConsoleLog()
+        throw err
     } finally {
         saveReports()
-        util.archiveConsoleLog()
         cleanContainers()
     }
 }
