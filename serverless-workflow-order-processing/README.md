@@ -72,7 +72,7 @@ mvn clean package
 java -jar target/quarkus-app/quarkus-run.jar
 ```
 
-or on windows
+or on Windows
 
 ```sh
 mvn clean package
@@ -82,13 +82,13 @@ java -jar target\quarkus-app\quarkus-run.jar
 ### Package and Run using Local Native Image
 Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
 
-```
+```sh
 mvn clean package -Pnative
 ```
 
 To run the generated native executable, generated in `target/`, execute
 
-```
+```sh
 ./target/serverless-workflow-order-processing-runner
 ```
 

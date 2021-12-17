@@ -45,13 +45,10 @@ import org.slf4j.LoggerFactory;
 public class AppointmentResource {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AppointmentResource.class);
-    private final List<Appointment> appointments;
+    private final List<Appointment> appointments = new ArrayList<>();
+
     @Inject
     ScheduleService scheduleService;
-
-    public AppointmentResource() {
-        this.appointments = new ArrayList<>();
-    }
 
     @POST
     public Response schedulePatientAppointment(@NotNull final Patient patient) {

@@ -34,7 +34,7 @@ public class OperationsMockService implements QuarkusTestResourceLifecycleManage
     @Override
     public Map<String, String> start() {
         multiplicationService =
-                this.startServer(8080,
+                this.startServer(8282,
                         "{\"multiplication\": { \"leftElement\": \"68.0\", \"rightElement\": \"0.5556\", \"product\": \"37.808\" }}");
         subtractionService =
                 this.startServer(8181,

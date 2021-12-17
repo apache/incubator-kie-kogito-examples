@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Red Hat, Inc. and/or its affiliates.
+ * Copyright 2021 Red Hat, Inc. and/or its affiliates.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,29 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.acme.sw.onboarding.resources;
+package org.kie.kogito.examples.sw.temp.subtraction;
 
 import org.junit.jupiter.api.Test;
 
-import io.quarkus.test.junit.QuarkusTest;
+import io.quarkus.test.junit.QuarkusIntegrationTest;
 import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 
-@QuarkusTest
-class PatientResourceTest {
+@QuarkusIntegrationTest
+class OperationResourceIT {
 
     @Test
-    void verifyStoreNewPatient() {
-        given()
-                .body("{ \"name\": \"Mick\", \"dateOfBirth\": \"1983-08-15\", \"symptoms\":[\"seizures\"]}")
+    void testRestExample() {
+        final OperationResource.Result result = given()
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/onboarding/patient")
+                .body(new SubtractionOperation(2, 2))
+                .post("/")
                 .then()
-                .statusCode(200)
-                .body("id", not(empty()));
+                .statusCode(200).extract().as(OperationResource.Result.class);
+        assertThat(result.subtraction.getDifference(), is(0f));
     }
 }

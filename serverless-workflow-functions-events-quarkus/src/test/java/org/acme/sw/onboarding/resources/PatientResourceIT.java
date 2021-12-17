@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Red Hat, Inc. and/or its affiliates.
+ * Copyright 2020 Red Hat, Inc. and/or its affiliates.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,29 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.examples.sw.temp.multiplication;
+package org.acme.sw.onboarding.resources;
 
 import org.junit.jupiter.api.Test;
 
-import io.quarkus.test.junit.QuarkusTest;
+import io.quarkus.test.junit.QuarkusIntegrationTest;
 import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.not;
 
-@QuarkusTest
-class OperationResourceTest {
+@QuarkusIntegrationTest
+class PatientResourceIT {
 
     @Test
-    void testRestExample() {
-        final OperationResource.Result result = given()
+    void verifyStoreNewPatient() {
+        given()
+                .body("{ \"name\": \"Mick\", \"dateOfBirth\": \"1983-08-15\", \"symptoms\":[\"seizures\"]}")
                 .contentType(ContentType.JSON)
                 .when()
-                .body(new MultiplicationOperation(2, 2))
-                .post("/")
+                .post("/onboarding/patient")
                 .then()
-                .statusCode(200).extract().as(OperationResource.Result.class);
-        assertThat(result.multiplication.getProduct(), is(4f));
+                .statusCode(200)
+                .body("id", not(empty()));
     }
 }

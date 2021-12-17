@@ -39,20 +39,20 @@ https://kafka.apache.org/quickstart
 
 ### Compile and Run in Local Dev Mode
 
-```text
-mvn clean compile quarkus:dev    
+```sh
+mvn clean compile quarkus:dev
 ```
 
 ### Package and Run in JVM mode
 
-```text
+```sh
 mvn clean package 
 java -jar target/quarkus-app/quarkus-run.jar
 ```
 
-or on windows
+or on Windows
 
-```text
+```sh
 mvn clean package
 java -jar target\quarkus-app\quarkus-run.jar
 ```
@@ -60,13 +60,13 @@ java -jar target\quarkus-app\quarkus-run.jar
 ### Package and Run using Local Native Image
 Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
 
-```text
+```sh
 mvn clean package -Pnative
 ```
   
 To run the generated native executable, generated in `target/`, execute
 
-```text
+```sh
 ./target/serverless-workflow-events-quarkus-runner
 ```
 
@@ -75,7 +75,7 @@ To run the generated native executable, generated in `target/`, execute
 After starting the example application you can access the front-end page at:
 
 ```text
-http://localhost:8080/applicants.html
+http://localhost:8080/
 ```
 
 You should see the following page:
@@ -87,8 +87,8 @@ You should see the following page:
 Fill in the "Submit New Applicant" form and submit it. This will send a cloud event
 to Kafka which starts a new workflow instance. The workflow includes a rule function call
 which evaluates the salary entered. Before the workflow execution ends
-it sends a cloud event to kafka. The UI subscribes to these events using SSE and 
-updates the "Application Decision" table withe the results, for example:
+it sends a cloud event to Kafka. The UI subscribes to these events using SSE and 
+updates the "Application Decision" table with the results, for example:
 
 <p align="center">
 <img src="img/sw-example2.png" alt="Example2"/>

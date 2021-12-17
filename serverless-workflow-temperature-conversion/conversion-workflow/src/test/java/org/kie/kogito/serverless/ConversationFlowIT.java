@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Red Hat, Inc. and/or its affiliates.
+ * Copyright 2021 Red Hat, Inc. and/or its affiliates.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,26 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.acme.numbers.serverless.workflow.functions;
+package org.kie.kogito.serverless;
 
 import java.util.Collections;
 
-import org.acme.numbers.NumbersMockService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import io.quarkus.test.common.QuarkusTestResource;
-import io.quarkus.test.junit.QuarkusTest;
+import io.quarkus.test.junit.QuarkusIntegrationTest;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.Matchers.emptyOrNullString;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
 
-@QuarkusTest
-@QuarkusTestResource(NumbersMockService.class)
-class RestExampleTest {
+@QuarkusIntegrationTest
+@QuarkusTestResource(OperationsMockService.class)
+class ConversationFlowIT {
 
     @BeforeAll
     static void init() {
@@ -40,7 +39,7 @@ class RestExampleTest {
     }
 
     @Test
-    void testRestExample() {
+    void sanityVerification() {
         given()
                 .contentType(ContentType.JSON)
                 .when()
@@ -48,11 +47,12 @@ class RestExampleTest {
                         Collections
                                 .singletonMap(
                                         "workflowdata",
-                                        Collections.singletonMap("inputNumbers", new int[] { 1, 2, 3, 4, 5, 6, 7 })))
-                .post("/RestExample")
+                                        Collections.singletonMap("fahrenheit", "100")))
+                .post("/fahrenheit_to_celsius")
                 .then()
                 .statusCode(201)
-                .body("id", not(emptyOrNullString()))
-                .body("workflowdata", not(emptyOrNullString()));
+                .body("id", notNullValue())
+                .body("workflowdata.fahrenheit", is("100"))
+                .body("workflowdata.multiplication.product", is("37.808")); //values from mock server
     }
 }

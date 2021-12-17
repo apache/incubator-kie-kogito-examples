@@ -13,7 +13,7 @@ which to greet them in
 The workflow starts with a SWICH state, which is like a gateway. The switch state 
 decides which language to greet the person in based on the workflow input "language" parameter.
 Depending on the language the workflow then injects the language-based greeting via RELAY states.
-Relay states are just "pass" states which do no execute any functions and only have the ability
+Relay states are just "pass" states which do not execute any functions and only have the ability
 to inject data into the workflow.
 The inject states then transition to the OPERATION state which call a "sysout" function passing it 
 input parameter containing the greeting and the name of the person to greet: "$.greeting $.name".
@@ -35,20 +35,20 @@ When using native image compilation, you will also need:
 
 ### Compile and Run in Local Dev Mode
 
-```text
-mvn clean package quarkus:dev    
+```sh
+mvn clean package quarkus:dev
 ```
 
 ### Compile and Run in JVM mode
 
-```text
+```sh
 mvn clean package 
 java -jar target/quarkus-app/quarkus-run.jar
 ```
 
 or on windows
 
-```text
+```sh
 mvn clean package
 java -jar target\quarkus-app\quarkus-run.jar
 ```
@@ -56,13 +56,13 @@ java -jar target\quarkus-app\quarkus-run.jar
 ### Compile and Run using Local Native Image
 Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
 
-```text
+```sh
 mvn clean package -Pnative
 ```
   
 To run the generated native executable, generated in `target/`, execute
 
-```text
+```sh
 ./target/sw-quarkus-greeting-{version}-runner
 ```
 
@@ -82,13 +82,13 @@ with following content
 
 Complete curl command can be found below:
 
-```text
+```sh
 curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : {"name": "John", "language": "English"}}' http://localhost:8080/jsongreet
 ```
 
 Log after curl executed:
 
-```text
+```json
 {"id":"541a5363-1667-4f6d-a8b4-1299eba81eac","workflowdata":{"name":"John","language":"English","greeting":"Hello from JSON Workflow, "}}
 ```
 
@@ -111,7 +111,7 @@ If you would like to greet the person in Spanish, we need to pass the following 
 
 Complete curl command can be found below:
 
-```text
+```sh
 curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : {"name": "John", "language": "Spanish"}}' http://localhost:8080/jsongreet
 ```
 
@@ -121,7 +121,7 @@ In Quarkus you should now see the log message printed:
 Saludos desde JSON Workflow, John
 ```
 
-Similarly the service based on the YAML workflow definition can be access by sending a request to http://localhost:8080/yamlgreet'
+Similarly, the service based on the YAML workflow definition can be access by sending a request to http://localhost:8080/yamlgreet'
 using the same content:
 
 ```json
@@ -135,7 +135,7 @@ using the same content:
 
 Complete curl command can be found below:
 
-```text
+```sh
 curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : {"name": "John", "language": "English"}}' http://localhost:8080/yamlgreet
 ```
  
