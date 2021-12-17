@@ -30,19 +30,15 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 @Path("/numbers")
 @Produces(MediaType.APPLICATION_JSON)
 @ApplicationScoped
 public class NumbersResource {
 
-    private ObjectMapper objectMapper;
     private Random rand;
 
     @PostConstruct
     void init() {
-        objectMapper = new ObjectMapper();
         rand = new Random();
     }
 
