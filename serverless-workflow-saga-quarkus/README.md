@@ -6,10 +6,7 @@ This is an example of how to implement the Saga pattern based on Serverless Work
   
   <img src="docs/images/order-fulfilment.png"/>
   
- All steps, defined as states in the workflow, `stock`, `payment` and `shipping` should be executed to confirm an Order, if any of the
- steps fail, then a compensation for each completed step should be executed to undo the operation or to keep the
- process on a consistent state. For instance, the reserve stock, should cancel the stock reservation. The
- compensations for the steps are defined in the workflow using the `compensatedBy` property which indicates the state responsible to perform a compensation action.
+ All steps, defined as states in the workflow, `stock`, `payment`, and `shipping` should be executed to confirm an Order. If any of the steps fail, then a compensation for each completed step should be performed to undo the operation or keep the process consistent. For instance, the reserve stock should cancel the stock reservation. The compensations for the steps are defined in the workflow using the `compensatedBy` property, which indicates the state responsible for performing a compensation action.
  
   <img src="docs/images/order-saga-overview.png"/>
  
