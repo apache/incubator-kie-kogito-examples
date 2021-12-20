@@ -14,9 +14,7 @@ The compensations can be triggered by a transition setting the property `compens
   
 The functions to execute the steps and compensations in this example are implemented using Java classes under the project's `src`, for instance, [StockService][/src/main/java/org/kie/kogito/StockService.java]. For this example, they are just mocking responses, but they could be executing calls to external services or any business logic in an actual use case. Other options can declare these operations, like OpenAPI, REST, or events. 
  
- The start point of Saga workflow is to submit a request to create a new Order with a given `orderId`, this could be
-  any other payload that represents an `Order`, but for the sake of simplicity, in this example it will be
-   based on the `id` that could be used as a correlation key to client starting the Saga workflow.
+The start point of the Saga workflow is to submit a request to create a new Order with a given `orderId`. This could be any other payload that represents an `Order`. For the sake of simplicity, in this example, it will be based on the `id` that could be used as a correlation key to the client starting the Saga workflow.
   
   The output of each step, is represented by a `Response` that contains a type, indicating <b>success</b> or <b>error
   </b> and the id of the resource that was invoked in the service, but this could be any kind of response depending on
