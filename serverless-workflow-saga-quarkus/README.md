@@ -2,9 +2,7 @@
 
 ## Description
 
-This is an example to demonstrate how to implement Saga pattern based on Serverless Workflow with Kogito. The proposed example is based
- on an Order Fulfillment process which consists in a sequence of steps, that could represent calls to external
-  services, microservices, serverless functions, etc. More details can be found in [kie blog][https://blog.kie.org/2021/11/saga-pattern-with-processes-and-kogito-part-1.html].
+This is an example of how to implement the Saga pattern based on Serverless Workflow with Kogito. The proposed example is based on an Order Fulfillment process which consists of a sequence of steps that could represent calls to external services, microservices, serverless functions, etc. More details can be found in [kie blog][https://blog.kie.org/2021/11/saga-pattern-with-processes-and-kogito-part-1.html].
   
   <img src="docs/images/order-fulfilment.png"/>
   
