@@ -116,8 +116,7 @@ In the console executing the application, you can check the log with the execute
 
 #### Simulating errors to activate the compensation flows
 
-To make testing the process easier it was introduced an optional attribute `failService` that indicates which service
- should respond with an error. The attribute is basically the simple class name of the service.
+An optional attribute, `failService` was introduced to make testing the process easier, which indicates which service should respond with an error. The attribute is the simple class name of the service.
 
 Example:
 
