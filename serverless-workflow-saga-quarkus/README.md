@@ -12,9 +12,7 @@ This is an example of how to implement the Saga pattern based on Serverless Work
  
 The compensations can be triggered by a transition setting the property `compensate` to `true`, this transition can be declared in a state that represents an error in the workflow. In the order workflow example, it is the `ServiceError` state. In general, the error in a state can be declared with the property `onErrors`, which may include a transition to a state that represents this error.
   
-The functions to execute the steps and compensations in this example are implemented as using Java classes under
- the `src` of the project, for instance [StockService][/src/main/java/org/kie/kogito/StockService.java], for this example they are just mocking responses, but in a real use case they could be executing calls to external services, or any business logic. Other options are possible to declare these operations, 
-   like OpenAPI, REST, or events. 
+The functions to execute the steps and compensations in this example are implemented using Java classes under the project's `src`, for instance, [StockService][/src/main/java/org/kie/kogito/StockService.java]. For this example, they are just mocking responses, but they could be executing calls to external services or any business logic in an actual use case. Other options can declare these operations, like OpenAPI, REST, or events. 
  
  The start point of Saga workflow is to submit a request to create a new Order with a given `orderId`, this could be
   any other payload that represents an `Order`, but for the sake of simplicity, in this example it will be
