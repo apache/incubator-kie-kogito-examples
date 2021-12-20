@@ -105,7 +105,7 @@ Response example:
 }
 ```
 
-In the console executing the application you can check the log it with the executed steps.
+In the console executing the application, you can check the log with the executed steps.
 
 ```text
 2021-12-09 16:00:20,948 INFO  [org.kie.kog.StockService] (executor-thread-0) Reserve Stock for order 03e6cf79-3301-434b-b5e1-d6899b5639aa
