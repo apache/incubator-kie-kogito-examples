@@ -12,10 +12,10 @@
   <description>Kogito with Knative Eventing - Quarkus</description>
   <properties>
     <version.com.github.tomakehurst.wiremock>2.27.1</version.com.github.tomakehurst.wiremock>
-    <quarkus-plugin.version>2.5.1.Final</quarkus-plugin.version>
+    <quarkus-plugin.version>2.6.0.Final</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-    <quarkus.platform.version>2.5.1.Final</quarkus.platform.version>
+    <quarkus.platform.version>2.6.0.Final</quarkus.platform.version>
   </properties>
   <dependencyManagement>
     <dependencies>
