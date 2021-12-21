@@ -31,16 +31,16 @@ public class ShippingService {
 
     public Response scheduleShipping(String orderId, String failService) {
         LOGGER.info("Schedule Shipping for order {}", orderId);
-        return mockService.execute(failService, ShippingService.class, true);
+        return mockService.execute(failService, ShippingService.class, true, orderId);
     }
 
     public Response scheduleShipping(String orderId, String failService, String throwException) {
         LOGGER.info("Schedule Shipping for order {}", orderId);
-        return mockService.execute(failService, ShippingService.class, Boolean.parseBoolean(throwException));
+        return mockService.execute(failService, ShippingService.class, Boolean.parseBoolean(throwException), orderId);
     }
 
     public Response cancelShipping(String id) {
-        LOGGER.info("Cancel Shipping for  order {}", id);
+        LOGGER.info("Cancel Shipping {}", id);
         return new Response(Response.Type.SUCCESS, id);
     }
 }

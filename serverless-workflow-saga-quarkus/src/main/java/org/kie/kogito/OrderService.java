@@ -26,12 +26,12 @@ public class OrderService {
     private static final Logger LOGGER = LoggerFactory.getLogger(OrderService.class);
 
     public Response success(String orderId) {
-        LOGGER.info("Order Success for order {}", orderId);
+        LOGGER.info("Order Success {}", orderId);
         return Response.success(orderId);
     }
 
     public Response failure(String orderId) {
-        LOGGER.info("Order Failed for order {}", orderId);
+        LOGGER.info("Order Failed {}", orderId);
         return Response.error(orderId);
     }
 }

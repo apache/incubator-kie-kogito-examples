@@ -31,16 +31,16 @@ public class PaymentService {
 
     public Response processPayment(String orderId, String failService) {
         LOGGER.info("Process Payment for order {}", orderId);
-        return mockService.execute(failService, PaymentService.class, true);
+        return mockService.execute(failService, PaymentService.class, true, orderId);
     }
 
     public Response processPayment(String orderId, String failService, String throwException) {
         LOGGER.info("Process Payment for order {}", orderId);
-        return mockService.execute(failService, PaymentService.class, Boolean.parseBoolean(throwException));
+        return mockService.execute(failService, PaymentService.class, Boolean.parseBoolean(throwException), orderId);
     }
 
     public Response cancelPayment(String id) {
-        LOGGER.info("Cancel Payment for payment {}", id);
+        LOGGER.info("Cancel Payment {}", id);
         return new Response(Response.Type.SUCCESS, id);
     }
 }

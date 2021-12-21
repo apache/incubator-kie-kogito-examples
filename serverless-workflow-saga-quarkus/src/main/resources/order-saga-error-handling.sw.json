@@ -1,7 +1,6 @@
 {
   "id": "order_saga_error_workflow",
   "version": "1.0",
-  "expressionLang": "jsonpath",
   "name": "Order Fulfilment Workflow Saga example",
   "description": "An example of how to implement Saga for the Order Fulfilment example using Error Handling and Compensation",
   "start": "reserveStock",
@@ -87,9 +86,13 @@
           "functionRef": {
             "refName": "reserveStock",
             "arguments": {
-              "orderId": "$.orderId",
-              "failService": "$.failService"
+              "orderId": ".orderId",
+              "failService": ".failService"
             }
+          },
+          "actionDataFilter": {
+            "results": ".",
+            "toStateData": ".stockResponse"
           }
         }
       ],
@@ -112,9 +115,13 @@
           "functionRef": {
             "refName": "processPayment",
             "arguments": {
-              "orderId": "$.orderId",
-              "failService": "$.failService"
+              "orderId": ".orderId",
+              "failService": ".failService"
             }
+          },
+          "actionDataFilter": {
+            "results": ".",
+            "toStateData": ".paymentResponse"
           }
         }
       ],
@@ -137,9 +144,13 @@
           "functionRef": {
             "refName": "scheduleShipping",
             "arguments": {
-              "orderId": "$.orderId",
-              "failService": "$.failService"
+              "orderId": ".orderId",
+              "failService": ".failService"
             }
+          },
+          "actionDataFilter": {
+            "results": ".",
+            "toStateData": ".shippingResponse"
           }
         }
       ],
@@ -156,9 +167,7 @@
     {
       "name": "ServiceError",
       "type": "inject",
-      "data": {
-        "orderResponse": "FAILED"
-      },
+      "data": {},
       "transition": {
         "nextState": "FailedOrder",
         "compensate": true
@@ -174,8 +183,12 @@
           "functionRef": {
             "refName": "cancelStock",
             "arguments": {
-              "orderId": "$.orderId"
+              "stockId": ".stockResponse.resourceId"
             }
+          },
+          "actionDataFilter": {
+            "results": ".",
+            "toStateData": ".cancelStockResponse"
           }
         }
       ]
@@ -190,8 +203,12 @@
           "functionRef": {
             "refName": "cancelPayment",
             "arguments": {
-              "orderId": "$.orderId"
+              "paymentId": ".paymentResponse.resourceId"
             }
+          },
+          "actionDataFilter": {
+            "results": ".",
+            "toStateData": ".cancelPaymentResponse"
           }
         }
       ]
@@ -206,8 +223,12 @@
           "functionRef": {
             "refName": "cancelShipping",
             "arguments": {
-              "orderId": "$.orderId"
+              "shippingId": ".shippingResponse.resourceId"
             }
+          },
+          "actionDataFilter": {
+            "results": ".",
+            "toStateData": ".cancelShippingResponse"
           }
         }
       ]
@@ -221,8 +242,12 @@
           "functionRef": {
             "refName": "orderFailure",
             "arguments": {
-              "orderId": "$.orderId"
+              "orderId": ".orderId"
             }
+          },
+          "actionDataFilter": {
+            "results": ".",
+            "toStateData": ".orderResponse"
           }
         }
       ],
@@ -239,19 +264,15 @@
           "functionRef": {
             "refName": "orderSuccess",
             "arguments": {
-              "orderId": "$.orderId"
+              "orderId": ".orderId"
             }
+          },
+          "actionDataFilter": {
+            "results": ".",
+            "toStateData": ".orderResponse"
           }
         }
       ],
-      "transition": "EndSuccess"
-    },
-    {
-      "name": "EndSuccess",
-      "type": "inject",
-      "data": {
-        "orderResponse": "SUCCESS"
-      },
       "end": {
         "terminate": "true"
       }

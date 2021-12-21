@@ -29,16 +29,16 @@ public class MockService {
 
     private static Logger LOGGER = LoggerFactory.getLogger(MockService.class);
 
-    public Response execute(String failClass, Class clazz, boolean throwException) {
+    public Response execute(String failClass, Class clazz, boolean throwException, String resourceId) {
         boolean fail = Optional.ofNullable(clazz)
                 .map(Class::getSimpleName)
                 .map(n -> Objects.equals(failClass, n))
                 .orElse(false);
         if (fail) {
-            LOGGER.info("Error in {} ", failClass);
+            LOGGER.error("Error in {} for {}", failClass, resourceId);
         }
         if (fail && throwException) {
-            throw new ServiceException("Error executing " + failClass);
+            throw new ServiceException("Error executing " + failClass + " for " + resourceId);
         }
         return new Response(fail ? Response.Type.ERROR : Response.Type.SUCCESS,
                 UUID.randomUUID().toString());

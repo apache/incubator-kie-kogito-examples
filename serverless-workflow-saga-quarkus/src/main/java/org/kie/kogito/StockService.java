@@ -31,16 +31,16 @@ public class StockService {
 
     public Response reserveStock(String orderId, String failService) {
         LOGGER.info("Reserve Stock for order {}", orderId);
-        return mockService.execute(failService, StockService.class, true);
+        return mockService.execute(failService, StockService.class, true, orderId);
     }
 
     public Response reserveStock(String orderId, String failService, String throwException) {
         LOGGER.info("Reserve Stock for order {}", orderId);
-        return mockService.execute(failService, StockService.class, Boolean.parseBoolean(throwException));
+        return mockService.execute(failService, StockService.class, Boolean.parseBoolean(throwException), orderId);
     }
 
     public Response cancelStock(String id) {
-        LOGGER.info("Cancel Stock for order {}", id);
+        LOGGER.info("Cancel Stock {}", id);
         return new Response(Response.Type.SUCCESS, id);
     }
 }
