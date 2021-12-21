@@ -2,69 +2,66 @@
 
 ## Description
 
-A quickstart project that deals with traveller processing carried by rules. It illustrates
-how easy it is to make the Kogito processes and rules to work with Knative Eventing. 
-This project is based on the example [Process with Kafka](https://github.com/kiegroup/kogito-examples/tree/main/process-kafka-quickstart-quarkus). 
+A quickstart project that deals with traveller processing carried by rules. It illustrates how easy it is to make the Kogito processes and rules to work with Knative Eventing. This project is based on
+the example [Process with Kafka](https://github.com/kiegroup/kogito-examples/tree/main/process-kafka-quickstart-quarkus).
 
 This example shows
 
 * consuming events from a Knative Eventing broker and for each event start new process instance
 * each process instance is expecting a traveller information in JSON format
 * traveller is then processed by rules and based on the outcome of the processing (processed or not) traveller is
-	* if successfully processed traveller information is logged and then updated information is send to Knative broker
-	* if not processed traveller info is logged and then process instance finishes emitting the event `skiptraveller` to Knative broker
-
+    * if successfully processed traveller information is logged and then updated information is send to Knative broker
+    * if not processed traveller info is logged and then process instance finishes emitting the event `skiptraveller` to Knative broker
 
 ![](docs/images/process.png)
 
 * Diagram Properties (top)
-![](docs/images/diagramProperties.png)
+  ![](docs/images/diagramProperties.png)
 
 * Diagram Properties (bottom)
-![](docs/images/diagramProperties2.png)
+  ![](docs/images/diagramProperties2.png)
 
 * Diagram Properties (process variables)
-![](docs/images/diagramProperties3.png)
+  ![](docs/images/diagramProperties3.png)
 
 * Start Message
-![](docs/images/startMessage.png)
+  ![](docs/images/startMessage.png)
 
 * Start Message (Assignments)
-![](docs/images/startMessageAssignments.png)
+  ![](docs/images/startMessageAssignments.png)
 
 * Process Traveler Business Rule (top)
-![](docs/images/processTravelerBusinessRule.png)
+  ![](docs/images/processTravelerBusinessRule.png)
 
 * Process Traveler Business Rule (bottom)
-![](docs/images/processTravelerBusinessRule2.png)
+  ![](docs/images/processTravelerBusinessRule2.png)
 
 * Process Traveler Business Rule (Assignments)
-![](docs/images/processTravelerBusinessRuleAssignments.png)
+  ![](docs/images/processTravelerBusinessRuleAssignments.png)
 
 * Process Traveler Gateway
-![](docs/images/processedTravelerGateway.png)
+  ![](docs/images/processedTravelerGateway.png)
 
 * Process Traveler Gateway Yes Connector
-![](docs/images/processedTravelerYesConnector.png)
+  ![](docs/images/processedTravelerYesConnector.png)
 
 * Process Traveler Gateway No Connector
-![](docs/images/processedTravelerNoConnector.png)
+  ![](docs/images/processedTravelerNoConnector.png)
 
 * Log Traveler Script Task
-![](docs/images/logTravelerScriptTask.png)
+  ![](docs/images/logTravelerScriptTask.png)
 
 * Skip Traveler Script Task
-![](docs/images/skipTravelerScriptTask.png)
+  ![](docs/images/skipTravelerScriptTask.png)
 
 * Processed Traveler End Message
-![](docs/images/processedTravelerEndMessage.png)
+  ![](docs/images/processedTravelerEndMessage.png)
 
 * Processed Traveler End Message (Assignments)
-![](docs/images/processedTravelerEndMessageAssignments.png)
+  ![](docs/images/processedTravelerEndMessageAssignments.png)
 
 * Skip Traveler End
-![](docs/images/skipTraveler.png)
-
+  ![](docs/images/skipTraveler.png)
 
 ## Infrastructure requirements
 
@@ -73,23 +70,25 @@ This quickstart requires Knative Eventing to be available in your cluster:
 * Install [minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
 * Install [Knative Eventing](https://knative.dev/docs/install/) in your minikube cluster
 
-For local testing only you can use [Podman](https://podman.io/getting-started/installation.html) or Docker to simulate an application
-receiving your events.
+For local testing only you can use [Podman](https://podman.io/getting-started/installation.html) or Docker to simulate an application receiving your events.
 
 ## Build and run
 
 ### Prerequisites
 
 You will need:
-  - Java 11+ installed
-  - Environment variable JAVA_HOME set accordingly
-  - Maven 3.6.2+ installed
+
+- Java 11+ installed
+- Environment variable JAVA_HOME set accordingly
+- Maven 3.6.2+ installed
 
 When using native image compilation, you will also need:
-  - GraalVM 19.3+ installed
-  - Environment variable GRAALVM_HOME set accordingly
-  - GraalVM native image needs as well native-image extension: https://www.graalvm.org/reference-manual/native-image/
-  - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too, please refer to GraalVM installation documentation for more details.
+
+- GraalVM 19.3+ installed
+- Environment variable GRAALVM_HOME set accordingly
+- GraalVM native image needs as well native-image extension: https://www.graalvm.org/reference-manual/native-image/
+- Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too, please refer to GraalVM installation documentation for more
+  details.
 
 ### Compile and Run in Local Dev Mode
 
@@ -98,12 +97,11 @@ K_SINK=http://localhost:8181 mvn clean compile quarkus:dev
 ```
 
 [`K_SINK` is the environment variable injected by the Knative Eventing platform](https://knative.dev/docs/eventing/samples/sinkbinding/#create-our-sinkbinding)
-once we deploy the application on a Kubernetes cluster.
-Instead of _hardcoding_ the endpoint where we are going to send our produced messages, we rely on Knative to inject this information in runtime.
+once we deploy the application on a Kubernetes cluster. Instead of _hardcoding_ the endpoint where we are going to send our produced messages, we rely on Knative to inject this information in runtime.
 
 The environment variable will be assigned to the SmallRye HTTP connector in runtime: `mp.messaging.outgoing.processedtravellers.url=${K_SINK}`.
 
-For local tests we will mock the endpoint where the produced messages supposed to be delivered. 
+For local tests we will mock the endpoint where the produced messages supposed to be delivered.
 
 NOTE: With dev mode of Quarkus you can take advantage of hot reload for business assets like processes, rules, decision tables and java code. No need to redeploy or restart your running application.
 
@@ -122,12 +120,13 @@ java -jar target\quarkus-app\quarkus-run.jar
 ```
 
 ### Package and Run using Local Native Image
+
 Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
 
 ```
 mvn clean package -Pnative
 ```
-  
+
 To run the generated native executable, generated in `target/`, execute
 
 ```
@@ -135,18 +134,18 @@ To run the generated native executable, generated in `target/`, execute
 ```
 
 ### OpenAPI (Swagger) documentation
+
 [Specification at swagger.io](https://swagger.io/docs/specification/about/)
 
-You can take a look at the [OpenAPI definition](http://localhost:8080/openapi?format=json) - automatically
-generated and included in this service - to determine all available operations exposed by this service. 
+You can take a look at the [OpenAPI definition](http://localhost:8080/openapi?format=json) - automatically generated and included in this service - to determine all available operations exposed by
+this service.
 
-For easy readability you can visualize the OpenAPI definition file using a UI tool like for 
-example available [Swagger UI](https://editor.swagger.io).
+For easy readability you can visualize the OpenAPI definition file using a UI tool like for example available [Swagger UI](https://editor.swagger.io).
 
 In addition, various clients to interact with this service can be easily generated using this OpenAPI definition.
 
-When running in either Quarkus Development or Native mode, we also leverage the 
-[Quarkus OpenAPI extension](https://quarkus.io/guides/openapi-swaggerui#use-swagger-ui-for-development) that exposes [Swagger UI](http://localhost:8080/swagger-ui/) 
+When running in either Quarkus Development or Native mode, we also leverage the
+[Quarkus OpenAPI extension](https://quarkus.io/guides/openapi-swaggerui#use-swagger-ui-for-development) that exposes [Swagger UI](http://localhost:8080/swagger-ui/)
 that you can use to look at available REST endpoints and send test requests.
 
 ### Use the application locally
@@ -236,22 +235,20 @@ This system can't deal with American
 Skipping traveller Traveller [firstName=Jane, lastName=Doe, email=jane.doe@example.com, nationality=American, processed=false]
 ```
 
-## Deploying with Kogito Operator
+## Deploying in Minikube
 
-In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift or Kubernetes with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).
+We have prepared a `knative` Maven profile to build the service image locally and all the Knative resources you need
+to get started.
 
 Just make sure your cluster has [Knative Eventing available](https://knative.dev/docs/eventing/getting-started/):
 
-1. [Install Istio](https://knative.dev/development/install/installing-istio/)
-2. [Install Knative with Operators](https://knative.dev/development/install/knative-with-operators/)
-    1. Install Knative Serving
-    2. Install Knative Eventing
-3. [Create and configure](https://knative.dev/docs/eventing/getting-started/#setting-up-knative-eventing-resources) a namespace with Knative Eventing (you will need a Broker)
-4. [Install the Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift)
-5. On Kubernetes, build this example locally with the Dockerfile on [operator/kubernetes/Dockerfile](operator/kubernetes/Dockerfile) path, then [push it](operator/kubernetes/process-knative-quickstart-quarkus.yaml) to a third party registry. 
-For OpenShift, you can let the [cluster build it for you](operator/openshift/process-knative-quickstart-quarkus.yaml)
-6. Expose the service, if on minikube [follow this tutorial](https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/). There's an `Ingress` already pre created in [operator/kubernetes/ingress.yaml](operator/kubernetes/ingress.yaml). [`NodePort` also works](https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/#deploy-a-hello-world-app).
-7. Run `curl` from the terminal like you did in the previously steps. To see what's going on, just query for the Knative service `event-display`. You should see something like: 
+1. [Install Knative](https://knative.dev/docs/getting-started/)
+2. Install the `KogitoSource` [via command line](https://github.com/knative-sandbox/eventing-kogito#installation).
+3. Run `eval $(minikube docker-env)` to build the image directly into the Minikube registry.
+4. Run `mvn clean install -Pknative -Dnamespace=<your namespace>` to build the image and the Knative resources for your application to run.
+5. Apply the objects created for you with `kubectl apply -f target/kubernetes/*.yml`. It will deploy the objects from `knative.yml` and `kogito.yml` generated files.
+6. Run `curl` from the terminal like you did in the previously steps. To see what's going on, just query for the Knative service `event-display`. You should see something like:
+
 ```
 ☁️  cloudevents.Event
 Validation: valid
@@ -274,3 +271,30 @@ Data,
 The diagram below illustrates the Knative objects architecture for this demo:
 
 ![](docs/images/knative-diagram.png)
+
+### Accessing the Service on Minikube
+
+Ideally, you installed Knative on Minikube via [their quickstart](https://knative.dev/docs/getting-started/). Doing so, you will have installed nip.io DNS and will be able to access the services via
+their exposed Knative Routes.
+
+Alternatively, if you installed via Knative Operators and Istio, you will need to follow this procedure in order to access the service:
+
+1. Run `minikube tunnel`
+2. Define the Ingress Gateway `INGRESSGATEWAY=istio-ingressgateway`
+3. Get the Gateway IP with:
+   ```shell
+   export GATEWAY_IP=`kubectl get svc $INGRESSGATEWAY --namespace istio-system \
+    --output jsonpath="{.status.loadBalancer.ingress[*]['ip']}"`
+   ```
+4. Run the `curl` command using the Gateway URL. For example:
+
+   ```shell
+    $ curl -X POST \
+    -H "content-type: application/json"  \
+    -H "ce-specversion: 1.0"  \
+    -H "ce-source: /from/localhost"  \
+    -H "ce-type: travellers"  \
+    -H "ce-id: 12346"  \
+    -d '{"firstName": "Jane", "lastName": "Doe", "email": "jane.doe@example.com", "nationality": "American"}' \
+    http://${GATEWAY_IP} --header "Host:process-knative-quickstart-quarkus.kogito.example.com"
+   ```
