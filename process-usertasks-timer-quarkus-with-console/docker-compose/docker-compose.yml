@@ -119,7 +119,7 @@ services:
      - ./svg/:/home/kogito/data/svg/
    environment:
       KOGITO_DATAINDEX_HTTP_URL: http://${DOCKER_GATEWAY_HOST}:8180/graphql
-      KOGITO_MANAGEMENT_CONSOLE_PROPS: -Dkogito.consoles.keycloak.config.url=http://${DOCKER_GATEWAY_HOST}:8480/auth -Dkogito.consoles.keycloak.config.health-check-url=http://${DOCKER_GATEWAY_HOST}:8480/auth/realms/kogito/.well-known/openid-configuration -Dkogito.svg.folder.path=/home/kogito/data/svg
+      KOGITO_MANAGEMENT_CONSOLE_PROPS: -Dkogito.consoles.keycloak.config.url=http://localhost:8480/auth -Dkogito.consoles.keycloak.config.health-check-url=http://localhost:8480/auth/realms/kogito/.well-known/openid-configuration -Dkogito.svg.folder.path=/home/kogito/data/svg
 
   task-console:
     container_name: task-console
@@ -133,4 +133,4 @@ services:
         condition: service_healthy
     environment:
       KOGITO_DATAINDEX_HTTP_URL: http://${DOCKER_GATEWAY_HOST}:8180/graphql
-      KOGITO_TASK_CONSOLE_PROPS: -Dkogito.consoles.keycloak.config.url=http://${DOCKER_GATEWAY_HOST}:8480/auth -Dkogito.consoles.keycloak.config.health-check-url=http://${DOCKER_GATEWAY_HOST}:8480/auth/realms/kogito/.well-known/openid-configuration
+      KOGITO_TASK_CONSOLE_PROPS: -Dkogito.consoles.keycloak.config.url=http://localhost:8480/auth -Dkogito.consoles.keycloak.config.health-check-url=http://localhost:8480/auth/realms/kogito/.well-known/openid-configuration

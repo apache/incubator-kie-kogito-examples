@@ -90,16 +90,8 @@ to do that you must start the consoles using the *keycloak* quarkus profile as a
 
 ### Compile and Run in Local Dev Mode
 
-In Linux: 
-
 ```sh
 mvn clean compile spring-boot:run 
-```
-
-For others OS: 
-
-```sh 
-mvn clean compile spring-boot:run -Dspring-boot.run.arguments=--keycloak.auth-server-url=http://${host.docker.internal}:8480/auth
 ```
 
 ### Package and Run using uberjar
@@ -110,16 +102,10 @@ mvn clean package
 
 To run the generated native executable, generated in `target/`, execute
 
-In Linux:
-
 ```sh
 java -jar target/process-usertasks-with-security-oidc-springboot-with-console.jar
 ```
 
-For others OS: 
-```sh 
-java -jar target/process-usertasks-with-security-oidc-springboot-with-console.jar  -Dspring-boot.run.arguments=--keycloak.auth-server-url=http://${host.docker.internal}:8480/auth
-```
 We can navigate to [http://localhost:8080](http://localhost:8080) to verify the Kogito runtime is running
 
 ### OpenAPI (Swagger) documentation
@@ -134,21 +120,9 @@ We can access to deployed [http://localhost:8080/swagger-ui](http://localhost:80
 The application is using bearer token authorization and the first thing to do is obtain an access token from the Keycloak
 Server in order to access the application resources. Obtain an access token for user john.
 
-In Linux
 ```sh
 export access_token=$(\
-    curl -X POST http://172.17.0.1:8480/auth/realms/kogito/protocol/openid-connect/token \
-    --user kogito-app:secret \
-    -H 'content-type: application/x-www-form-urlencoded' \
-    -d 'username=jdoe&password=jdoe&grant_type=password' | jq --raw-output '.access_token' \
- )
-```
-
-Other OS:
-
-```sh
-export access_token=$(\
-    curl -X POST http://${host.docker.internal}:8480/auth/realms/kogito/protocol/openid-connect/token \
+    curl -X POST http://localhost:8480/auth/realms/kogito/protocol/openid-connect/token \
     --user kogito-app:secret \
     -H 'content-type: application/x-www-form-urlencoded' \
     -d 'username=jdoe&password=jdoe&grant_type=password' | jq --raw-output '.access_token' \
