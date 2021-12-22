@@ -40,6 +40,10 @@
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-addons-quarkus-knative-eventing</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-rest-workitem</artifactId>
     </dependency>
     <dependency>
@@ -110,6 +114,29 @@
       <properties>
         <failsafe.include>**/*IT.java</failsafe.include>
       </properties>
+    </profile>
+    <profile>
+      <id>knative</id>
+      <properties>
+        <!-- Shortcuts -->
+        <namespace>default</namespace>
+        <deploy>false</deploy>
+        <!-- Quarkus Knative integration to build and deploy -->
+        <quarkus.kubernetes.namespace>${namespace}</quarkus.kubernetes.namespace>
+        <quarkus.kubernetes.deploy>${deploy}</quarkus.kubernetes.deploy>
+        <quarkus.container-image.build>true</quarkus.container-image.build>
+        <quarkus.profile>knative</quarkus.profile>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>io.quarkus</groupId>
+          <artifactId>quarkus-kubernetes</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>io.quarkus</groupId>
+          <artifactId>quarkus-container-image-jib</artifactId>
+        </dependency>
+      </dependencies>
     </profile>
   </profiles>
 </project>

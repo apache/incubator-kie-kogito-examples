@@ -6,7 +6,7 @@ version: "1.0"
 events:
    - kind: produced
      name: FraudEvaluation
-     type: orders.fraudEvaluation
+     type: fraudEvaluation
      source: fraudEvaluation
 states:
   - name: FraudHandling

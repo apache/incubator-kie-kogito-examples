@@ -157,11 +157,17 @@ To run the generated native executable, generated in `target/`, execute
 ./target/serverless-workflow-functions-quarkus-runner.jar
 ```
 
-## Deploying with Kogito Operator
+## Deploying in Minikube
 
-In the [`operator`](operator) directory you can find the custom resources needed to deploy this example on OpenShift or Kubernetes with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).
+We have prepared a `knative` Maven profile to build the service image locally and all the Knative resources you need
+to get started.
 
-Don't forget to replace the `<namespace>` placeholder in yaml files
+1. [Install Knative](https://knative.dev/docs/getting-started/)
+2. Install the `KogitoSource` [via command line](https://github.com/knative-sandbox/eventing-kogito#installation).
+3. Run `eval $(minikube docker-env)` to build the image directly into the Minikube registry.
+4. Run `mvn clean install -Pknative -Dnamespace=<your namespace>` to build the image and the Knative resources for your application to run.
+5. Apply the objects created for you with `kubectl apply -f target/kubernetes/*.yml`. It will deploy the objects from `knative.yml` and `kogito.yml` generated files.
+6. Run `curl` from the terminal like you did in the previously steps.
 
 ## Credits
 
