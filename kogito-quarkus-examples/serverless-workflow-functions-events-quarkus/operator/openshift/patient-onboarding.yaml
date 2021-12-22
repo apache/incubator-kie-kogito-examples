@@ -1,0 +1,39 @@
+#Knative MUST be pre-installed in namespace
+apiVersion: eventing.knative.dev/v1
+kind: Broker
+metadata:
+  name: default
+---
+apiVersion: app.kiegroup.org/v1beta1
+kind: KogitoInfra
+metadata:
+  name: kogito-knative-infra
+spec:
+  resource:
+    apiVersion: eventing.knative.dev/v1
+    kind: Broker
+    name: default
+---
+apiVersion: app.kiegroup.org/v1beta1
+kind: KogitoBuild
+metadata:
+  name: patient-onboarding
+spec:
+  type: RemoteSource
+  #env:
+  # env can be used to set variables during build
+  #- name: MY_CUSTOM_ENV
+  #  value: "my value"
+  gitSource:
+    contextDir: serverless-workflow-functions-events-quarkus
+    uri: 'https://github.com/kiegroup/kogito-examples'
+  # set your maven nexus repository to speed up the build time
+  #mavenMirrorURL:
+---
+apiVersion: app.kiegroup.org/v1beta1
+kind: KogitoRuntime
+metadata:
+  name: patient-onboarding
+spec:
+  infra:
+    - kogito-knative-infra

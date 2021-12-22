@@ -1,0 +1,22 @@
+apiVersion: app.kiegroup.org/v1beta1
+kind: KogitoInfra
+metadata:
+  name: kogito-knative-infra
+spec:
+  # bind Knative Broker with our own service
+  resource:
+    apiVersion: eventing.knative.dev/v1
+    kind: Broker
+    name: default
+---
+apiVersion: app.kiegroup.org/v1beta1
+kind: KogitoRuntime
+metadata:
+  name: process-knative-quickstart-quarkus
+spec:
+  replicas: 1
+  # see the Dockerfile in this directory to know how to build this app locally
+  image: quay.io/<yournamespace>/process-knative-quickstart-quarkus:latest
+  # we bind our application with Knative env
+  infra:
+  - kogito-knative-infra
