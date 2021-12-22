@@ -40,7 +40,11 @@
             }
         },
         "eventRef" : "moveEvent",
-      "transition": "finish"
+        "eventDataFilter" : {
+           "data" : "$.move",
+           "toStateData" : "$.move"
+        },
+      	"transition": "finish"
     },
     {
       "name": "finish",
@@ -51,7 +55,7 @@
           "functionRef": {
             "refName": "printMessage",
             "arguments": {
-              "message": "$.move"
+              "message": "$[*]"
             }
           }
         }
