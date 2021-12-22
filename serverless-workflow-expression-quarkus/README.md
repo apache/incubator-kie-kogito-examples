@@ -62,16 +62,25 @@ with following content
 
 ```json
 {
-  "workflowdata": {
-   "number" : 2
-  }
+    "workflowdata": {
+        "numbers": [
+            {
+                "x": 2,
+                "y": 1
+            },
+            {
+                "x": 4,
+                "y": 3
+            }
+        ]
+    }
 }
 ```
 
 Complete curl command can be found below:
 
 ```sh
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : {"number": 2}}' http://localhost:8080/expression
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata":{"numbers":[{"x":2, "y": 1},{"x":4, "y": 3}]}}' http://localhost:8080/expression
 ```
 
 

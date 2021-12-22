@@ -6,9 +6,9 @@
   "start": "squareState",
   "functions": [
     {
-      "name": "square",
+      "name": "max",
       "type": "expression",
-      "operation": "{multiply: .number*.number, sum:.number+.number}"
+      "operation": "{max: .numbers | max_by(.x), min: .numbers | min_by(.y)}"
     },
     {
       "name": "printMessage",
@@ -23,12 +23,12 @@
       "type": "operation",
       "actions": [
         {
-          "name": "squareAction",
+          "name": "maxAction",
           "functionRef": {
-            "refName": "square"
+            "refName": "max"
           },
           "actionDataFilter": {
-             "results" : ".multiply", 
+             "results" : ".max.x", 
              "toStateData" : ".number"
           }
         }
@@ -39,7 +39,7 @@
       "name": "finish",
       "type": "operation",
       "stateDataFilter": {
-        "input": "{square: .number}"
+        "input": "{result: .number}"
       },
       "actions": [
         {
@@ -47,7 +47,7 @@
           "functionRef": {
             "refName": "printMessage",
             "arguments": {
-              "message": ".square"
+              "message": ".result"
             }
           }
         }
