@@ -131,12 +131,10 @@
         <dependency>
           <groupId>io.quarkus</groupId>
           <artifactId>quarkus-kubernetes</artifactId>
-          <optional>true</optional>
         </dependency>
         <dependency>
           <groupId>io.quarkus</groupId>
           <artifactId>quarkus-container-image-jib</artifactId>
-          <optional>true</optional>
         </dependency>
       </dependencies>
     </profile>
