@@ -17,7 +17,7 @@ package org.kie.kogito;
 
 import org.junit.jupiter.api.Test;
 
-import io.quarkus.test.junit.QuarkusTest;
+import io.quarkus.test.junit.QuarkusIntegrationTest;
 import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
 
@@ -25,7 +25,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
-@QuarkusTest
+@QuarkusIntegrationTest
 public class OrderSagaWorkflowIT {
 
     public static final String ORDER_ID = "03e6cf79-3301-434b-b5e1-d6899b5639aa";
@@ -40,7 +40,7 @@ public class OrderSagaWorkflowIT {
                 "  }\n" +
                 "}", ORDER_ID, "blah");
         ValidatableResponse response = createOrder(payload);
-        response.body("workflowdata.orderResponse", equalTo("SUCCESS"));
+        response.body("workflowdata.orderResponse.type", equalTo("SUCCESS"));
         response.body("workflowdata.orderId", equalTo(ORDER_ID));
     }
 
@@ -53,7 +53,7 @@ public class OrderSagaWorkflowIT {
                 "  }\n" +
                 "}", ORDER_ID, "ShippingService");
         ValidatableResponse response = createOrder(payload);
-        response.body("workflowdata.orderResponse", equalTo("FAILED"));
+        response.body("workflowdata.orderResponse.type", equalTo("ERROR"));
         response.body("workflowdata.orderId", equalTo(ORDER_ID));
     }
 
