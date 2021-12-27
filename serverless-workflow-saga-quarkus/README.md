@@ -17,9 +17,9 @@ The functions to execute the steps and compensations in this example are impleme
 The start point of the Saga workflow is to submit a request to create a new Order with a given `orderId`. This could be any other payload that represents an `Order`. For the sake of simplicity, in this example, it will be based on the `id` that could be used as a correlation key to the client starting the Saga workflow.
   
   The output of each step, is represented by a `Response` that contains a type, indicating <b>success</b> or <b>error
-  </b> and the id of the resource that was invoked in the service, but this could be any kind of response depending on
-   the requirement of each service, in case of error handling we can simply throw Java Exceptions from the service classes, 
-   in this case, the error handling is triggered with the defined transitions in the workflow, in this example the transition is taget to the `ServiceError`state.
+  </b> and the id of the resource that was invoked in the service, for instance, for `PaymentService` the `resourceId` represents the payment, but this could be any kind of response depending on the requirement of each service, in case of error handling we can simply throw Java Exceptions from the service classes, in this case, the error handling is triggered with the defined transitions in the workflow, in this example the transition is target to the `ServiceError`state. 
+  
+  During the workflow execution the response information of each state executing a service call are filtered and mapped in the workflow data, in this way this information can be used when calling the compensations, for instance, when cancelling a payment for a given order, the payment ID can be used, since it was received from the process payment call and is kept in the workflow data. After a workflow execution is completed all responses from each step can be checked in the `workflowdata` attribute.
 
 ## Order Saga workflow
 
@@ -37,9 +37,10 @@ You will need:
   - Maven 3.6.2+ installed
 
 When using native image compilation, you will also need:
-  - [GraalVM 19.1.1](https://github.com/oracle/graal/releases/tag/vm-19.1.1) installed
+  - [GraalVM 21.3.0+](https://github.com/oracle/graal/releases/tag/vm-21.3.0)
   - Environment variable GRAALVM_HOME set accordingly
   - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too.  You also need 'native-image' installed in GraalVM (using 'gu install native-image'). Please refer to [GraalVM installation documentation](https://www.graalvm.org/docs/reference-manual/aot-compilation/#prerequisites) for more details.
+  - More details can be found in the [Quarkus Guide](https://quarkus.io/guides/building-native-image)
 
 ### Compile and Run in Local Dev Mode
 
