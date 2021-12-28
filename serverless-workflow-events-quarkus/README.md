@@ -37,6 +37,15 @@ This quickstart requires Apache Kafka to be available and by default expects it 
 
 https://kafka.apache.org/quickstart
 
+Optionally and for convenience, a docker-compose [configuration file](docker-compose/docker-compose.yml) is
+provided in the path [docker-compose/](docker-compose/), where you can just run the command from there:
+
+```sh
+docker-compose up
+```  
+
+In this way a container for Kafka will be started on port 9092.
+
 ### Compile and Run in Local Dev Mode
 
 ```sh
