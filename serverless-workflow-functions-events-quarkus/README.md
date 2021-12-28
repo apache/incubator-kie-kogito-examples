@@ -29,7 +29,7 @@ The workflow starts with a CloudEvent informing a new patient entry:
 Or you can use cURL and set the CloudEvents parameters in the request headers:
 
 ```shell script
-$ curl -X POST \
+curl -X POST \
       -H "content-type: application/json"  \
       -H "ce-specversion: 1.0"  \
       -H "ce-source: /hospital/entry"  \
