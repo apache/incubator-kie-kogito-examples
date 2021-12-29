@@ -112,7 +112,7 @@ that you can use to look at available REST endpoints and send test requests.
 First thing, fire up the sink application using podman/docker:
 
 ```shell script
-$ podman run --rm -it -p 8181:8080 gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+podman run --rm -it -p 8181:8080 gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
 ```
 
 This is the same image used by Knative Eventing demos. It's running on port 8181 to not clash with the example application.
@@ -120,7 +120,7 @@ This is the same image used by Knative Eventing demos. It's running on port 8181
 Then run the application with:
 
 ```shell script
-$ K_SINK=http://localhost:8181 mvn clean quarkus:dev
+K_SINK=http://localhost:8181 mvn clean quarkus:dev
 
 __  ____  __  _____   ___  __ ____  ______ 
  --/ __ \/ / / / _ | / _ \/ //_/ / / / __/ 
@@ -143,7 +143,7 @@ __  ____  __  _____   ___  __ ____  ______
 Now send a message to the application on 8080 port using the [cloud event format](https://github.com/cloudevents/spec) with `curl`:
 
 ```shell script
-$ curl -X POST \
+curl -X POST \
       -H "content-type: application/json"  \
       -H "ce-specversion: 1.0"  \
       -H "ce-source: /from/localhost"  \
@@ -200,7 +200,7 @@ Additionally, there are some extension attributes that starts with `kogito` to p
 To take the other path of the workflow send this message to your application:
 
 ```shell script
-$ curl -X POST \
+curl -X POST \
       -H "content-type: application/json"  \
       -H "ce-specversion: 1.0"  \
       -H "ce-source: /from/localhost"  \
@@ -243,7 +243,7 @@ Just make sure your cluster has [Knative Eventing available](https://knative.dev
 2. Install the `KogitoSource` [via command line](https://github.com/knative-sandbox/eventing-kogito#installation).
 3. Run `eval $(minikube docker-env)` to build the image directly into the Minikube registry. 
 4. Run `mvn clean install -Pknative -Dnamespace=<your namespace>` to build the image and the Knative resources for your application to run.
-5. Apply the objects created for you with `kubectl apply -f target/kubernetes/*.yml`. It will deploy the objects from `knative.yml` and `kogito.yml` generated files.
+5. Apply the objects created for you with `kubectl apply -f target/kubernetes`. It will deploy the objects from `knative.yml` and `kogito.yml` generated files.
 6. Run `curl` from the terminal like you did in the previously steps. 
    To see what's going on, just query for one of the Knative service sinks created on step #5. 
    You should see something like:
