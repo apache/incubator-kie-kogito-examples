@@ -10,7 +10,7 @@ The workflow expects as JSON input containing the name of the person to greet, a
 which to greet them in
 (see details in the [Submit a request](#Submit-a-request) section).
 
-The workflow starts with a SWICH state, which is like a gateway. The switch state 
+The workflow starts with a SWITCH state, which is like a gateway. The switch state 
 decides which language to greet the person in based on the workflow input "language" parameter.
 Depending on the language the workflow then injects the language-based greeting via RELAY states.
 Relay states are just "pass" states which do not execute any functions and only have the ability
