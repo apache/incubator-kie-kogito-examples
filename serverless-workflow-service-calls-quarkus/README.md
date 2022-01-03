@@ -76,7 +76,7 @@ You should see the following page:
 <img src="img/sw-example1.png" alt="Example1"/>
 </p>
 
-Enter in a name of a country in the "Name" text input box (e.g "Germany", "Greece", "USA", etc) and press the 
+Enter a name of a country in the "Name" text input box (e.g "Germany", "Greece", "USA", etc) and press the 
 "Classify" button. 
 
 This will call the serverless workflow passing it the name of the country you entered. The workflow 
