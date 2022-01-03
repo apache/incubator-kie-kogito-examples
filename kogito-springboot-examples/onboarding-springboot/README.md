@@ -1,6 +1,20 @@
-# Onboarding Sample Service
+# Sample On Boarding Services
 
 ## Description
+
+This example illustrates how you can build a complete onboarding solution by combining multiple services (based on
+business processes and decisions).
+
+It consists of three independent services:
+
+* onboarding - main service where you can start onboarding new employees (defined as a set of 3 business processes)
+* hr - a decision service responsible for HR-related activities (using DRL rules)
+* payroll - a decision service responsible for payroll-related activities (using DMN)
+
+Note that both the hr and payroll services are implemented in the corresponding [quarkus based example](../../kogito-quarkus-examples/onboarding-example/).
+
+Users will typically only interact with the main onboarding service, but this one relies on the other two to manage some
+of the work.
 
 This is the main onboarding service that exposes a single REST endpoint to onboard new employees.
 
@@ -9,6 +23,22 @@ employees. This includes one main process that serves as the overall entry point
 interaction with HR and payroll.
 
 ## Installing and Running
+
+### Prerequisites
+
+You will need:
+
+- Java 11+ installed
+- Environment variable JAVA_HOME set accordingly
+- Maven 3.6.2+ installed
+
+### Installation
+
+Please follow the instruction for each of the individual services. It is recommended to install them in given order.
+
+* [hr](../../kogito-quarkus-examples/onboarding-example/hr/README.md)
+* [payroll](../../kogito-quarkus-examples/onboarding-example/payroll/README.md)
+* [onboarding spring boot](README.md)
 
 ### Compile and Run in Local Dev Mode
 

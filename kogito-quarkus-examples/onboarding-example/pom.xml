@@ -50,10 +50,6 @@
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
-      <!-- This is to disable springboot module in native maven profile -->
-      <modules>
-        <module>onboarding-springboot</module>
-      </modules>
     </profile>
     <profile>
       <id>native</id>

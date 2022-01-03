@@ -28,6 +28,7 @@
         <module>dmn-springboot-example</module>
         <module>dmn-tracing-springboot</module>
         <module>flexible-process-springboot</module>
+        <module>onboarding-springboot</module>
         <module>pmml-event-driven-springboot</module>
         <module>pmml-springboot-example</module>
         <module>process-business-rules-springboot</module>
