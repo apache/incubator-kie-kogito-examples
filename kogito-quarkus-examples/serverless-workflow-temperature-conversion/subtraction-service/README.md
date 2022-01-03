@@ -47,13 +47,13 @@ If you want to learn more about building native executables, please consult http
 Simply run the application with:
 
 ```shell
-$ mvn clean quarkus:dev -Dquarkus.http.port=8181
+mvn clean quarkus:dev -Dquarkus.http.port=8181
 ```
 
 In a new terminal, execute a `curl` command to the root path:
 
 ```shell
-$ curl -X POST \
+curl -X POST \
   -H 'Content-Type:application/json'\
   -H 'Accept:application/json' \
   -d '{"leftElement" : "5", "rightElement": "2" }' \
