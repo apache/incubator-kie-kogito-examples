@@ -3,7 +3,7 @@
   "info" : {
     "title" : "REST Countries",
     "description" : "REST Countries",
-    "termsOfService" : "https://restcountries.eu/",
+    "termsOfService" : "https://restcountries.com/",
     "license" : {
       "name" : "Mozilla Public License MPL 2.0",
       "url" : "https://www.mozilla.org/en-US/MPL/2.0/"
@@ -11,7 +11,7 @@
     "version" : "2.0.5"
   },
   "servers" : [ {
-    "url" : "https://restcountries.eu/rest/"
+    "url" : "https://restcountries.com/"
   } ],
   "paths" : {
     "/v1" : {
