@@ -243,7 +243,7 @@ Just make sure your cluster has [Knative Eventing available](https://knative.dev
 2. Install the `KogitoSource` [via command line](https://github.com/knative-sandbox/eventing-kogito#installation).
 3. Run `eval $(minikube docker-env)` to build the image directly into the Minikube registry. 
 4. Run `mvn clean install -Pknative -Dnamespace=<your namespace>` to build the image and the Knative resources for your application to run.
-5. Apply the objects created for you with `kubectl apply -f target/kubernetes`. It will deploy the objects from `knative.yml` and `kogito.yml` generated files.
+5. Apply the objects created for you with `kubectl apply -f target/kubernetes/knative.yml,target/kubernetes/kogito.yml`. It will deploy the objects from `knative.yml` and `kogito.yml` generated files.
 6. Run `curl` from the terminal like you did in the previously steps. 
    To see what's going on, just query for one of the Knative service sinks created on step #5. 
    You should see something like:
