@@ -370,6 +370,7 @@
         <module>process-decisions-springboot</module>
         <module>process-decisions-rest-quarkus</module>
         <module>process-decisions-rest-springboot</module>
+        <module>process-error-handling</module>
         <module>process-kafka-quickstart-quarkus</module>
         <module>process-kafka-multi-quarkus</module>
         <module>process-kafka-multi-springboot</module>
