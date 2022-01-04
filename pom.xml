@@ -299,6 +299,7 @@
         <module>dmn-drools-quarkus-metrics</module>
         <module>dmn-tracing-quarkus</module>
         <module>flexible-process-quarkus</module>
+        <module>flexible-process-springboot</module>
         <module>kogito-travel-agency</module>
         <module>onboarding-example</module>
         <module>pmml-event-driven-quarkus</module>
@@ -385,8 +386,6 @@
         <module>process-rest-workitem-quarkus</module>
         <module>process-rest-service-call-quarkus</module>
         <module>process-rest-service-call-springboot</module>
-        <module>flexible-process-quarkus</module>
-        <module>flexible-process-springboot</module>
         <module>process-business-rules-quarkus</module>
         <module>process-business-rules-springboot</module>
         <module>process-postgresql-persistence-quarkus</module>
