@@ -112,7 +112,7 @@ that you can use to look at available REST endpoints and send test requests.
 First thing, fire up the sink application using podman/docker:
 
 ```shell script
-podman run --rm -it -p 8181:8080 gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+$ podman run --rm -it -p 8181:8080 gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
 ```
 
 This is the same image used by Knative Eventing demos. It's running on port 8181 to not clash with the example application.
@@ -120,7 +120,7 @@ This is the same image used by Knative Eventing demos. It's running on port 8181
 Then run the application with:
 
 ```shell script
-K_SINK=http://localhost:8181 mvn clean quarkus:dev
+$ K_SINK=http://localhost:8181 mvn clean quarkus:dev
 
 __  ____  __  _____   ___  __ ____  ______ 
  --/ __ \/ / / / _ | / _ \/ //_/ / / / __/ 
@@ -143,7 +143,7 @@ __  ____  __  _____   ___  __ ____  ______
 Now send a message to the application on 8080 port using the [cloud event format](https://github.com/cloudevents/spec) with `curl`:
 
 ```shell script
-curl -X POST \
+$ curl -X POST \
       -H "content-type: application/json"  \
       -H "ce-specversion: 1.0"  \
       -H "ce-source: /from/localhost"  \
@@ -200,7 +200,7 @@ Additionally, there are some extension attributes that starts with `kogito` to p
 To take the other path of the workflow send this message to your application:
 
 ```shell script
-curl -X POST \
+$ curl -X POST \
       -H "content-type: application/json"  \
       -H "ce-specversion: 1.0"  \
       -H "ce-source: /from/localhost"  \
