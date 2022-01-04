@@ -46,7 +46,7 @@ Please follow the instruction for each of the individual services. It is recomme
 
 * [hr](hr/README.md)
 * [payroll](payroll/README.md)
-* [onboarding quarkus](onboarding-quarkus/README.md) or [onboarding spring boot](onboarding-springboot/README.md)
+* [onboarding quarkus](onboarding-quarkus/README.md)
 
 ## Example Usage
 
