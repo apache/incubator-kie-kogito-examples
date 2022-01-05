@@ -293,12 +293,12 @@
       </activation>
       <modules>
         <module>decisiontable-quarkus-example</module>
+        <module>dmn-drools-quarkus-metrics</module>
         <module>dmn-event-driven-quarkus</module>
         <module>dmn-knative-quickstart-quarkus</module>
         <module>dmn-listener-quarkus</module>
         <module>dmn-pmml-quarkus-example</module>
         <module>dmn-quarkus-example</module>
-        <module>dmn-drools-quarkus-metrics</module>
         <module>dmn-tracing-quarkus</module>
         <module>flexible-process-quarkus</module>
         <module>flexible-process-springboot</module>
@@ -311,24 +311,24 @@
         <module>process-kafka-persistence-quarkus</module>
         <module>process-kafka-quickstart-quarkus</module>
         <module>process-knative-quickstart-quarkus</module>
-        <module>process-monitoring-quarkus</module>
         <module>process-mongodb-persistence-quarkus</module>
-        <module>process-outbox-mongodb-quarkus</module>
+        <module>process-monitoring-quarkus</module>
         <module>process-optaplanner-quarkus</module>
+        <module>process-outbox-mongodb-quarkus</module>
         <module>process-postgresql-persistence-quarkus</module>
         <module>process-quarkus-example</module>
-        <module>process-scripts-quarkus</module>
-        <module>process-service-calls-quarkus</module>
+        <module>process-rest-service-call-quarkus</module>
         <module>process-rest-workitem-multi-quarkus</module>
         <module>process-rest-workitem-quarkus</module>
-        <module>process-rest-service-call-quarkus</module>
+        <module>process-scripts-quarkus</module>
+        <module>process-service-calls-quarkus</module>
         <module>process-timer-quarkus</module>
         <module>process-usertasks-custom-lifecycle-quarkus</module>
-        <module>process-usertasks-quarkus</module>
         <module>process-usertasks-quarkus-with-console</module>
+        <module>process-usertasks-quarkus</module>
         <module>process-usertasks-timer-quarkus-with-console</module>
-        <module>process-usertasks-with-security-oidc-quarkus</module>
         <module>process-usertasks-with-security-oidc-quarkus-with-console</module>
+        <module>process-usertasks-with-security-oidc-quarkus</module>
         <module>process-usertasks-with-security-quarkus</module>
         <module>rules-quarkus-helloworld</module>
         <module>ruleunit-event-driven-quarkus</module>
@@ -336,13 +336,13 @@
         <module>serverless-workflow-callback-quarkus</module>
         <module>serverless-workflow-compensation-quarkus</module>
         <module>serverless-workflow-error-quarkus</module>
+        <module>serverless-workflow-events-quarkus</module>
         <module>serverless-workflow-expression-quarkus</module>
         <module>serverless-workflow-functions-events-quarkus</module>
         <module>serverless-workflow-functions-quarkus</module>
         <module>serverless-workflow-funqy</module>
         <module>serverless-workflow-greeting-quarkus</module>
         <module>serverless-workflow-service-calls-quarkus</module>
-        <module>serverless-workflow-events-quarkus</module>
         <module>serverless-workflow-temperature-conversion</module>
       </modules>
     </profile>
