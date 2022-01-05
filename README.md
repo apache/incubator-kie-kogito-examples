@@ -73,8 +73,8 @@ service invocation use cases to be covered.
 
 shows REST service invocation and parsing data back to an object instance used as process variable.
 
-* [on Quarkus](process-service-rest-call-quarkus)
-* [on Spring Boot](process-service-rest-call-springboot)
+* [on Quarkus](process-rest-service-call-quarkus)
+* [on Spring Boot](process-rest-service-call-springboot)
 
 ## Process with user tasks
 
@@ -104,6 +104,32 @@ shows timers (intermediate and boundary) that allows to introduce delays in proc
 
 * [on Quarkus](process-timer-quarkus)
 * [on Spring Boot](process-timer-springboot)
+
+## Serverless Workflow Getting Started
+
+A Serverless Workflow greeting service with both JSON and YAML workflow definitions
+
+* [on Quarkus](serverless-workflow-greeting-quarkus)
+* [on Spring Boot](serverless-workflow-greeting-springboot)
+
+## Serverless Workflow with events
+
+A Serverless Workflow service for processing job applicant approvals and that showcases event-driven services.
+
+* [on Quarkus](serverless-workflow-events-quarkus)
+
+## Serverless Workflow with service calls
+
+A Serverless Workflow service for returning country information
+
+* [on Quarkus](serverless-workflow-service-calls-quarkus)
+* [on Spring Boot](serverless-workflow-service-calls-springboot)
+
+## Serverless Workflow GitHub showcase
+
+A Serverless Workflow service that works as a Github bot application, which reacts upon a new PR being opened in a given GitHub project.
+
+* [on Quarkus](serverless-workflow-github-showcase)
 
 ## Other Misc Examples
 

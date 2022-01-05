@@ -11,10 +11,10 @@
     <name>Kogito Example :: Serverless Workflow :: Funqy :: Workflow</name>
     <description>Kogito Serverless Workflow Funqy Workflow - Quarkus</description>
     <properties>
-      <quarkus-plugin.version>2.5.1.Final</quarkus-plugin.version>
+      <quarkus-plugin.version>2.6.0.Final</quarkus-plugin.version>
       <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
       <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-      <quarkus.platform.version>2.5.1.Final</quarkus.platform.version>
+      <quarkus.platform.version>2.6.0.Final</quarkus.platform.version>
     </properties>
     <dependencyManagement>
       <dependencies>
@@ -30,7 +30,7 @@
     <dependencies>
         <dependency>
             <groupId>org.kie.kogito</groupId>
-            <artifactId>kogito-quarkus</artifactId>
+            <artifactId>kogito-quarkus-serverless-workflow</artifactId>
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
@@ -42,7 +42,7 @@
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-jackson</artifactId>
+            <artifactId>quarkus-resteasy-jackson</artifactId>
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
@@ -58,6 +58,11 @@
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-smallrye-health</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.quarkus</groupId>
             <artifactId>quarkus-junit5</artifactId>
             <scope>test</scope>
         </dependency>
@@ -67,16 +72,10 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-smallrye-health</artifactId>
+            <groupId>com.github.tomakehurst</groupId>
+            <artifactId>wiremock-jre8</artifactId>
+            <scope>test</scope>
         </dependency>
-
-        <!-- Serverless Workflow -->
-        <dependency>
-            <groupId>org.kie.kogito</groupId>
-            <artifactId>kogito-openapi-workitem</artifactId>
-        </dependency>
-
     </dependencies>
     <build>
         <finalName>${project.artifactId}</finalName>
@@ -95,4 +94,12 @@
             </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>native</id>
+            <properties>
+                <failsafe.include>**/*IT.java</failsafe.include>
+            </properties>
+        </profile>
+    </profiles>
 </project>

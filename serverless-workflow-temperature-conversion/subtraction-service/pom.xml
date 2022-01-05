@@ -10,10 +10,10 @@
   <artifactId>subtraction-service</artifactId>
   <name>Kogito Example :: Serverless Workflow Temperature Conversion :: Subtraction Service</name>
   <properties>
-    <quarkus-plugin.version>2.5.1.Final</quarkus-plugin.version>
+    <quarkus-plugin.version>2.6.0.Final</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-    <quarkus.platform.version>2.5.1.Final</quarkus.platform.version>
+    <quarkus.platform.version>2.6.0.Final</quarkus.platform.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -92,35 +92,8 @@
   <profiles>
     <profile>
       <id>native</id>
-      <activation>
-        <property>
-          <name>native</name>
-        </property>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <artifactId>maven-failsafe-plugin</artifactId>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>integration-test</goal>
-                  <goal>verify</goal>
-                </goals>
-                <configuration>
-                  <systemPropertyVariables>
-                    <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
-                    <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-                    <maven.home>${maven.home}</maven.home>
-                  </systemPropertyVariables>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
       <properties>
-        <quarkus.package.type>native</quarkus.package.type>
+        <failsafe.include>**/*IT.java</failsafe.include>
       </properties>
     </profile>
   </profiles>

@@ -16,7 +16,6 @@
 package org.kie.kogito.examples.sw.orders.processing;
 
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 import javax.ws.rs.core.MediaType;
 
@@ -31,13 +30,11 @@ import com.github.tomakehurst.wiremock.WireMockServer;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.RestAssured;
 
-import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
-import static com.github.tomakehurst.wiremock.client.WireMock.containing;
-import static com.github.tomakehurst.wiremock.client.WireMock.post;
-import static com.github.tomakehurst.wiremock.client.WireMock.postRequestedFor;
-import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
+import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options;
 import static io.restassured.RestAssured.given;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.await;
 
 @QuarkusTest
 public class VerifyWorkflowExecutionIT {
@@ -80,10 +77,15 @@ public class VerifyWorkflowExecutionIT {
                 .header("ce-source", "/from/test")
                 .header("ce-type", "orderEvent")
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(objectMapper.writeValueAsString(order)).post("/").then().statusCode(200);
-        // WireShark does not support assert until timeout
-        TimeUnit.SECONDS.sleep(1);
-        sink.verify(2, postRequestedFor(urlEqualTo("/")).withRequestBody(containing(order.getId())));
+                .body(objectMapper.writeValueAsString(order))
+                .post("/")
+                .then()
+                .statusCode(200);
+
+        await()
+                .atMost(60, SECONDS)
+                .with().pollInterval(1, SECONDS)
+                .untilAsserted(() -> sink.verify(2, postRequestedFor(urlEqualTo("/")).withRequestBody(containing(order.getId()))));
     }
 
     @Test
@@ -101,10 +103,15 @@ public class VerifyWorkflowExecutionIT {
                 .header("ce-source", "/from/test")
                 .header("ce-type", "orderEvent")
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(objectMapper.writeValueAsString(order)).post("/").then().statusCode(200);
-        // WireShark does not support assert until timeout
-        TimeUnit.SECONDS.sleep(1);
-        sink.verify(1, postRequestedFor(urlEqualTo("/")).withRequestBody(containing(order.getId())));
+                .body(objectMapper.writeValueAsString(order))
+                .post("/")
+                .then()
+                .statusCode(200);
+
+        await()
+                .atMost(60, SECONDS)
+                .with().pollInterval(1, SECONDS)
+                .untilAsserted(() -> sink.verify(1, postRequestedFor(urlEqualTo("/")).withRequestBody(containing(order.getId()))));
     }
 
     @Test
@@ -122,9 +129,14 @@ public class VerifyWorkflowExecutionIT {
                 .header("ce-source", "/from/test")
                 .header("ce-type", "orderEvent")
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(objectMapper.writeValueAsString(order)).post("/").then().statusCode(200);
-        // WireShark does not support assert until timeout
-        TimeUnit.SECONDS.sleep(1);
-        sink.verify(1, postRequestedFor(urlEqualTo("/")).withRequestBody(containing(order.getId())));
+                .body(objectMapper.writeValueAsString(order))
+                .post("/")
+                .then()
+                .statusCode(200);
+
+        await()
+                .atMost(60, SECONDS)
+                .with().pollInterval(1, SECONDS)
+                .untilAsserted(() -> sink.verify(1, postRequestedFor(urlEqualTo("/")).withRequestBody(containing(order.getId()))));
     }
 }

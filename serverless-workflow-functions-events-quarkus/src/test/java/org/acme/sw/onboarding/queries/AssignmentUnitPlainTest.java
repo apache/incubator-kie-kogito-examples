@@ -24,6 +24,7 @@ import org.kie.kogito.rules.DataObserver;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AssignmentUnitPlainTest {
+
     @Test
     public void create() {
         AssignmentUnit assignmentUnit = new AssignmentUnit();

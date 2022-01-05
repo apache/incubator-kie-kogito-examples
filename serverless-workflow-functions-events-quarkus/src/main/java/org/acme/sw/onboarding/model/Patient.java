@@ -105,6 +105,7 @@ public class Patient {
                 ", id='" + id + '\'' +
                 ", symptoms=" + symptoms +
                 ", dateOfBirth=" + dateOfBirth +
+                ", assignedDoctor=" + assignedDoctor +
                 '}';
     }
 }

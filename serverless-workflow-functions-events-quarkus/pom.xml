@@ -11,10 +11,12 @@
   <name>Kogito Example :: Serverless Workflow Functions And Events :: Quarkus</name>
   <description>Kogito Serverless Workflow Functions And Events Example - Quarkus</description>
   <properties>
-    <quarkus-plugin.version>2.5.1.Final</quarkus-plugin.version>
+    <quarkus-plugin.version>2.6.0.Final</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-    <quarkus.platform.version>2.5.1.Final</quarkus.platform.version>
+    <quarkus.platform.version>2.6.0.Final</quarkus.platform.version>
+    <!-- fixed port for tests, see https://issues.redhat.com/browse/KOGITO-6406 -->
+    <tests.quarkus.http.port>8080</tests.quarkus.http.port>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -35,6 +37,10 @@
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-quarkus-serverless-workflow</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-addons-quarkus-knative-eventing</artifactId>
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
@@ -62,6 +68,10 @@
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-health</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
       <artifactId>quarkus-junit5</artifactId>
       <scope>test</scope>
     </dependency>
@@ -76,8 +86,9 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-smallrye-health</artifactId>
+      <groupId>org.awaitility</groupId>
+      <artifactId>awaitility</artifactId>
+      <scope>test</scope>
     </dependency>
   </dependencies>
   <build>
@@ -97,4 +108,35 @@
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>native</id>
+      <properties>
+        <failsafe.include>**/*IT.java</failsafe.include>
+      </properties>
+    </profile>
+    <profile>
+      <id>knative</id>
+      <properties>
+        <!-- Shortcuts -->
+        <namespace>default</namespace>
+        <deploy>false</deploy>
+        <!-- Quarkus Knative integration to build and deploy -->
+        <quarkus.kubernetes.namespace>${namespace}</quarkus.kubernetes.namespace>
+        <quarkus.kubernetes.deploy>${deploy}</quarkus.kubernetes.deploy>
+        <quarkus.container-image.build>true</quarkus.container-image.build>
+        <quarkus.profile>knative</quarkus.profile>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>io.quarkus</groupId>
+          <artifactId>quarkus-kubernetes</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>io.quarkus</groupId>
+          <artifactId>quarkus-container-image-jib</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
+  </profiles>
 </project>

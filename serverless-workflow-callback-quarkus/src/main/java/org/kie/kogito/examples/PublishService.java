@@ -17,7 +17,8 @@ package org.kie.kogito.examples;
 
 import java.net.URI;
 import java.time.OffsetDateTime;
-import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.PostConstruct;
@@ -68,6 +69,9 @@ public class PublishService {
 
     private String generateCloudEvent(String id) {
 
+        Map<String, Object> eventBody = new HashMap<>();
+        eventBody.put("move", "This has been injected by the event");
+        eventBody.put("dummyVariable", "This will be discarded by the process");
         try {
             return objectMapper.writeValueAsString(CloudEventBuilder.v1()
                     .withId(UUID.randomUUID().toString())
@@ -75,7 +79,7 @@ public class PublishService {
                     .withType("move")
                     .withTime(OffsetDateTime.now())
                     .withExtension("kogitoprocrefid", id)
-                    .withData(objectMapper.writeValueAsBytes(Collections.singletonMap("move", "This has been injected by the event")))
+                    .withData(objectMapper.writeValueAsBytes(eventBody))
                     .build());
         } catch (JsonProcessingException e) {
             throw new IllegalArgumentException(e);

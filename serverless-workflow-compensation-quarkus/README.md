@@ -8,8 +8,6 @@ The service is described using JSON format as defined in the
 This is simple workflow that expects a boolean `shouldCompensate` to indicate if compensation segment (which is composed by two `inject states`) should be executed or not.
 The process result is a boolean field `compensated` which value should match `shouldCompensate`. 
 
-
-
 ## Installing and Running
 
 ### Prerequisites
@@ -26,20 +24,20 @@ When using native image compilation, you will also need:
 
 ### Compile and Run in Local Dev Mode
 
-```text
-mvn clean package quarkus:dev    
+```sh
+mvn clean package quarkus:dev
 ```
 
 ### Compile and Run in JVM mode
 
-```text
+```sh
 mvn clean package 
 java -jar target/quarkus-app/quarkus-run.jar
 ```
 
 or on windows
 
-```text
+```sh
 mvn clean package
 java -jar target\quarkus-app\quarkus-run.jar
 ```
@@ -47,13 +45,13 @@ java -jar target\quarkus-app\quarkus-run.jar
 ### Compile and Run using Local Native Image
 Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
 
-```text
+```sh
 mvn clean package -Pnative
 ```
   
 To run the generated native executable, generated in `target/`, execute
 
-```text
+```sh
 ./target/serverless-workflow-compensation-quarkus-{version}-runner
 ```
 
@@ -72,10 +70,9 @@ with following content
 
 Complete curl command can be found below:
 
-```text
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : {"shouldCompensate": true}}' http://localhost:8080/error
+```sh
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : {"shouldCompensate": true}}' http://localhost:8080/compensation
 ```
-
 
 Should return something like this ("id" will change)
 

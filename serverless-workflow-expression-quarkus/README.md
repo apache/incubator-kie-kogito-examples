@@ -24,20 +24,20 @@ When using native image compilation, you will also need:
 
 ### Compile and Run in Local Dev Mode
 
-```text
-mvn clean package quarkus:dev    
+```sh
+mvn clean package quarkus:dev
 ```
 
 ### Compile and Run in JVM mode
 
-```text
+```sh
 mvn clean package 
 java -jar target/quarkus-app/quarkus-run.jar
 ```
 
-or on windows
+or on Windows
 
-```text
+```sh
 mvn clean package
 java -jar target\quarkus-app\quarkus-run.jar
 ```
@@ -45,13 +45,13 @@ java -jar target\quarkus-app\quarkus-run.jar
 ### Compile and Run using Local Native Image
 Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
 
-```text
+```sh
 mvn clean package -Pnative
 ```
   
 To run the generated native executable, generated in `target/`, execute
 
-```text
+```sh
 ./target/serverless-workflow-expression-quarkus-{version}-runner
 ```
 
@@ -62,16 +62,25 @@ with following content
 
 ```json
 {
-  "workflowdata": {
-   "number" : 2
-  }
+    "workflowdata": {
+        "numbers": [
+            {
+                "x": 2,
+                "y": 1
+            },
+            {
+                "x": 4,
+                "y": 3
+            }
+        ]
+    }
 }
 ```
 
 Complete curl command can be found below:
 
-```text
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : {"number": 2}}' http://localhost:8080/expression
+```sh
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata":{"numbers":[{"x":2, "y": 1},{"x":4, "y": 3}]}}' http://localhost:8080/expression
 ```
 
 

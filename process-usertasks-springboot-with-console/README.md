@@ -114,7 +114,7 @@ mvn clean package
 To run the generated native executable, generated in `target/`, execute
 
 ```sh
-java -jar target/process-usertasks-springboot.jar
+java -jar target/process-usertasks-springboot-with-console.jar
 ```
 
 ### OpenAPI (Swagger) documentation

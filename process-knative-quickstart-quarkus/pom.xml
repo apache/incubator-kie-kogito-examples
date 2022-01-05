@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
@@ -12,10 +12,10 @@
   <description>Kogito with Knative Eventing - Quarkus</description>
   <properties>
     <version.com.github.tomakehurst.wiremock>2.27.1</version.com.github.tomakehurst.wiremock>
-    <quarkus-plugin.version>2.5.1.Final</quarkus-plugin.version>
+    <quarkus-plugin.version>2.6.0.Final</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-    <quarkus.platform.version>2.5.1.Final</quarkus.platform.version>
+    <quarkus.platform.version>2.6.0.Final</quarkus.platform.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -106,4 +106,29 @@
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>knative</id>
+      <properties>
+        <!-- Shortcuts -->
+        <namespace>default</namespace>
+        <deploy>false</deploy>
+        <!-- Quarkus Knative integration to build and deploy -->
+        <quarkus.kubernetes.namespace>${namespace}</quarkus.kubernetes.namespace>
+        <quarkus.kubernetes.deploy>${deploy}</quarkus.kubernetes.deploy>
+        <quarkus.container-image.build>true</quarkus.container-image.build>
+        <quarkus.profile>knative</quarkus.profile>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>io.quarkus</groupId>
+          <artifactId>quarkus-kubernetes</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>io.quarkus</groupId>
+          <artifactId>quarkus-container-image-jib</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
+  </profiles>
 </project>

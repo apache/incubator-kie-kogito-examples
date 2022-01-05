@@ -10,6 +10,8 @@ The service is described using JSON format as defined in the
 
 ## Infrastructure requirements
 
+### Kafka
+
 This quickstart requires an Apache Kafka to be available and by default expects it to be on default port and localhost.
 
 * Install and Startup Kafka Server / Zookeeper
@@ -18,6 +20,30 @@ https://kafka.apache.org/quickstart
 
 To publish and consume the event, topic "move" is used. 
 
+Optionally and for convenience, a docker-compose [configuration file](docker-compose/docker-compose.yml) is
+provided in the path [docker-compose/](docker-compose/), where you can just run the command from there:
+
+```sh
+docker-compose up
+```  
+
+In this way a container for Kafka will be started on port 9092.
+
+### PostgreSQL
+
+Alternatively, you can run this example using persistence with a PostgreSQL server.
+
+Configuration for setting up the connection can be found in [applications.properties](src/main/resources/application.properties) file, which
+follows the Quarkus JDBC settings, for more information please check [JDBC Configuration Reference](https://quarkus.io/guides/datasource#jdbc-configuration).
+
+Optionally and for convenience, a docker-compose [configuration file](docker-compose/docker-compose.yml) is
+provided in the path [docker-compose/](docker-compose/), where you can just run the command from there:
+
+```sh
+docker-compose up
+```  
+
+In this way a container for PostgreSQL will be started on port 5432.
 
 ## Installing and Running
 
@@ -35,46 +61,54 @@ When using native image compilation, you will also need:
 
 ### Compile and Run in Local Dev Mode
 
-```text
-mvn clean package quarkus:dev    
+```sh
+mvn clean package quarkus:dev
 ```
 
 ### Compile and Run in JVM mode
 
-```text
+```sh
 mvn clean package 
 java -jar target/quarkus-app/quarkus-run.jar
 ```
 
-or on windows
+or on Windows
 
-```text
+```sh
 mvn clean package
 java -jar target\quarkus-app\quarkus-run.jar
+```
+
+### Compile and Run in JVM mode using PostgreSQL persistence
+
+To enable persistence, please append `-Ppersistence` to your Maven command.
+That will ensure the correct dependencies are in place, and automatically set the required properties to connect
+with the PostgreSQL instance from the provided docker compose.
+
+```sh
+mvn clean package -Peristence 
 ```
 
 ### Compile and Run using Local Native Image
 Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
 
-```text
+```sh
 mvn clean package -Pnative
 ```
   
 To run the generated native executable, generated in `target/`, execute
 
-```text
+```sh
 ./target/serverless-workflow-callback-quarkus-{version}-runner
 ```
 
 ### Submit a request
 
-The service based on the JSON workflow definition can be access by sending a request to http://localhost:8080/callback'
-
-```
+The service based on the JSON workflow definition can be access by sending a request to http://localhost:8080/callback
 
 Complete curl command can be found below:
 
-```text
+```sh
 curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/callback
 ```
 

@@ -2,14 +2,13 @@
   "id": "expression",
   "version": "1.0",
   "name": "Workflow Expression example",
-  "description": "An example of how to use a JQ expression assigment",
+  "description": "An example of how to use a JQ expression assignment",
   "start": "squareState",
   "functions": [
     {
-      "name": "square",
+      "name": "max",
       "type": "expression",
-      "operation": ".square = .number*.number"
-      
+      "operation": "{max: .numbers | max_by(.x), min: .numbers | min_by(.y)}"
     },
     {
       "name": "printMessage",
@@ -24,9 +23,13 @@
       "type": "operation",
       "actions": [
         {
-          "name": "squareAction",
+          "name": "maxAction",
           "functionRef": {
-            "refName": "square"
+            "refName": "max"
+          },
+          "actionDataFilter": {
+             "results" : ".max.x", 
+             "toStateData" : ".number"
           }
         }
       ],
@@ -35,13 +38,16 @@
     {
       "name": "finish",
       "type": "operation",
+      "stateDataFilter": {
+        "input": "{result: .number}"
+      },
       "actions": [
         {
           "name": "printAction",
           "functionRef": {
             "refName": "printMessage",
             "arguments": {
-              "message": ".square"
+              "message": ".result"
             }
           }
         }
