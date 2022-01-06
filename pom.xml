@@ -173,6 +173,7 @@
         <module>process-outbox-mongodb-springboot</module>
         <module>process-optaplanner-quarkus</module>
         <module>process-optaplanner-springboot</module>
+        <module>process-performance-client</module>
         <module>process-performance-quarkus</module>
         <module>process-performance-springboot</module>
         <module>process-postgresql-persistence-quarkus</module>
