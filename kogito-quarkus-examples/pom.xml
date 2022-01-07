@@ -63,6 +63,7 @@
         <module>process-rest-workitem-multi-quarkus</module>
         <module>process-rest-workitem-quarkus</module>
         <module>process-scripts-quarkus</module>
+        <module>process-saga-quarkus</module>
         <module>process-service-calls-quarkus</module>
         <module>process-timer-quarkus</module>
         <module>process-usertasks-custom-lifecycle-quarkus</module>
