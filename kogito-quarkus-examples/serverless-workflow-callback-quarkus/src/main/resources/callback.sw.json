@@ -1,0 +1,68 @@
+{
+  "id": "callback",
+  "version": "1.0",
+  "expressionLang": "jsonpath",
+  "name": "Workflow Callback example",
+  "description": "An example of how to use callback state",
+  "start": "waitForEvent",
+  "events": [
+    {
+      "name": "moveEvent",
+      "source": "",
+      "type": "move"
+    }
+  ],
+  "functions": [
+    {
+      "name": "publishMove",
+      "metadata": {
+        "interface": "org.kie.kogito.examples.PublishService",
+        "operation": "publishMove",
+        "type": "service"
+      }
+    },
+    {
+      "name": "printMessage",
+      "metadata": {
+        "type": "sysout"
+      }
+    }
+  ],
+  "states": [
+    {
+      "name": "waitForEvent",
+      "type": "callback",
+      "action": 
+        {
+          "name": "publishAction",
+          "functionRef": {
+            "refName": "publishMove"
+            }
+        },
+        "eventRef" : "moveEvent",
+        "eventDataFilter" : {
+           "data" : "$.move",
+           "toStateData" : "$.move"
+        },
+      	"transition": "finish"
+    },
+    {
+      "name": "finish",
+      "type": "operation",
+      "actions": [
+        {
+          "name": "printAction",
+          "functionRef": {
+            "refName": "printMessage",
+            "arguments": {
+              "message": "$[*]"
+            }
+          }
+        }
+      ],
+      "end": {
+        "terminate": "true"
+      }
+    }
+  ]
+}

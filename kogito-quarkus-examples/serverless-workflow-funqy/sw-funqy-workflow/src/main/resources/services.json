@@ -1,0 +1,99 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Funqy Services",
+    "description": "Funqy Services",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8082/"
+    }
+  ],
+  "paths": {
+    "/classify": {
+      "post": {
+        "operationId": "classify",
+        "requestBody": {
+          "description": "country name",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/population": {
+      "post": {
+        "operationId": "population",
+        "requestBody": {
+          "description": "country name",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/country": {
+      "post": {
+        "operationId": "country",
+        "requestBody": {
+          "description": "country name",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
