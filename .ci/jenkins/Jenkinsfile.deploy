@@ -201,16 +201,11 @@ pipeline {
             }
             steps {
                 commitAndCreatePR()
-            }
-            post {
-                success {
-                    script {
-                        setDeployPropertyIfNeeded("${getRepoName()}.pr.source.uri", "https://github.com/${getBotAuthor()}/${getRepoName()}")
-                        setDeployPropertyIfNeeded("${getRepoName()}.pr.source.ref", getBotBranch())
-                        setDeployPropertyIfNeeded("${getRepoName()}.pr.target.uri", "https://github.com/${getGitAuthor()}/${getRepoName()}")
-                        setDeployPropertyIfNeeded("${getRepoName()}.pr.target.ref", getBuildBranch())
-                    }
-                }
+                
+                setDeployPropertyIfNeeded("${getRepoName()}.pr.source.uri", "https://github.com/${getBotAuthor()}/${getRepoName()}")
+                setDeployPropertyIfNeeded("${getRepoName()}.pr.source.ref", getBotBranch())
+                setDeployPropertyIfNeeded("${getRepoName()}.pr.target.uri", "https://github.com/${getGitAuthor()}/${getRepoName()}")
+                setDeployPropertyIfNeeded("${getRepoName()}.pr.target.ref", getBuildBranch())
             }
         }
         stage('Update nightly branch') {
