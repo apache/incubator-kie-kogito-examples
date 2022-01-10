@@ -18,7 +18,10 @@ package org.kie.kogito.serverless;
 import java.util.Collections;
 import java.util.Map;
 
+import org.kie.kogito.event.cloudevents.CloudEventExtensionConstants;
+
 import com.github.tomakehurst.wiremock.WireMockServer;
+import com.github.tomakehurst.wiremock.client.WireMock;
 
 import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
 
@@ -56,6 +59,7 @@ public class OperationsMockService implements QuarkusTestResourceLifecycleManage
         final WireMockServer server = new WireMockServer(port);
         server.start();
         server.stubFor(post(urlEqualTo("/"))
+                .withHeader(CloudEventExtensionConstants.PROCESS_ID, WireMock.matching(".*"))
                 .willReturn(aResponse()
                         .withHeader("Content-Type", "application/json")
                         .withBody(response)));
