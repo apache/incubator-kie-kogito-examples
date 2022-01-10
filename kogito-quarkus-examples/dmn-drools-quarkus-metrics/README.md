@@ -99,4 +99,4 @@ curl -X POST 'http://localhost:8080/LoanEligibility' -H 'Content-Type: applicati
 
 the service will return the decision results.  
 
-If you are using the `docker-compose` script we provided, go to `localhost:3000` and have a look at your dashboards. 
+If you are using the `docker-compose` script we provided, go to `localhost:3000` and have a look at your dashboards.
