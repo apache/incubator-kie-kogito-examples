@@ -13,6 +13,7 @@ You will need:
   - Java 11+ installed
   - Environment variable JAVA_HOME set accordingly
   - Maven 3.6.2+ installed
+  - A Docker environment
 
 ### Compile and Run in Local Dev Mode
 
