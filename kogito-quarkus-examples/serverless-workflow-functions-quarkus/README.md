@@ -104,7 +104,7 @@ Log after curl executed:
             7,
             8,
             7
-        ],
+        ]
     }
 }
 ```

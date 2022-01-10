@@ -33,8 +33,8 @@ To deploy this example in your Kubernetes/OpenShift cluster, you will need:
 
 1. A [Quay.io](https://quay.io/repository/) account
 2. A Kubernetes/OpenShift namespace to deploy the example: `kubectl create ns kogito-github` or `oc new-project kogito-github
-3. [**Istio**](https://istio.io/docs/setup/install/istioctl/) installed because it's [required by Knative platform](https://knative.dev/docs/install/any-kubernetes-cluster/). 
-You can follow the [Knative documentation](https://knative.dev/development/install/installing-istio) for a very basic and simple installation.
+3. [**Istio**](https://istio.io/docs/setup/install/istioctl/) installed because it's [required by Knative platform](https://knative.dev/docs/install/). 
+You can follow the [Knative documentation](https://knative.dev/docs/install/serving/installing-istio/) for a very basic and simple installation.
 4. **Knative** Serving and Eventing components installed. 
 We recommend [installing the Knative Operator](https://knative.dev/docs/install/knative-with-operators/) and install the rest of the components
 through it as described in their documentation.
