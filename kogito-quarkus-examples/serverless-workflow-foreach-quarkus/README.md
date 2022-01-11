@@ -4,7 +4,7 @@
 
 This example contains a simple workflow service that illustrate foreach state usage. 
 `ForEach` is a state that invokes an action over any item of an input collection.
-This example consist of just one `foreach` state. A list of `int` is passed and every item increase its value one unit. Another actions prints the updated value. 
+This example consist of just one `foreach` state. A list of `int` is passed and every item increase its value one unit. Another action prints the updated value. 
 The service is described using JSON format as defined in the 
 [CNCF Serverless Workflow specification](https://github.com/serverlessworkflow/specification).
 
@@ -58,14 +58,12 @@ To run the generated native executable, generated in `target/`, execute
 
 ### Submit a request
 
-The service based on the JSON workflow definition can be access by sending a request to http://localhost:8080/foreach'
-
-```
+The service based on the JSON workflow definition can be access by sending a request to http://localhost:8080/foreach
 
 Complete curl command can be found below:
 
 ```text
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : {"input": [1,2,3]}' http://localhost:8080/foreach
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : {"input": [1,2,3]}}' http://localhost:8080/foreach
 ```
 
 

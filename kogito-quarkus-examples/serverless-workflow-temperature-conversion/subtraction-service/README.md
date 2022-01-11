@@ -7,21 +7,21 @@ subtraction operations.
 
 You can run your application in dev mode that enables live coding using:
 ```shell script
-./mvn compile quarkus:dev
+mvn compile quarkus:dev
 ```
 
 ## Packaging and running the application
 
 The application can be packaged using:
 ```shell script
-./mvn package
+mvn package
 ```
 It produces the `quarkus-app/quarkus-run.jar` file in the `/target` directory.
 Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib` directory.
 
 If you want to build an _über-jar_, execute the following command:
 ```shell script
-./mvn package -Dquarkus.package.type=uber-jar
+mvn package -Dquarkus.package.type=uber-jar
 ```
 
 The application is now runnable using `java -jar target/subtraction-service-{version}-runner.jar`.
@@ -30,12 +30,12 @@ The application is now runnable using `java -jar target/subtraction-service-{ver
 
 You can create a native executable using: 
 ```shell script
-./mvn package -Pnative
+mvn package -Pnative
 ```
 
 Or, if you don't have GraalVM installed, you can run the native executable build in a container using: 
 ```shell script
-./mvn package -Pnative -Dquarkus.native.container-build=true
+mvn package -Pnative -Dquarkus.native.container-build=true
 ```
 
 You can then execute your native executable with: `./target/subtraction-service-{version}-runner`

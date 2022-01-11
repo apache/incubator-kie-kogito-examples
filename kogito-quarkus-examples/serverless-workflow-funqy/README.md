@@ -6,7 +6,7 @@ This example showcases the use of [Serverless Workflow specification](https://gi
 markup to call Funqy services via OpenAPi.
 
 This example is composed of two modules, namely `sw-funqy-services` and `sw-funqy-workflow`.
-`sw-funqy-services` contains the 3 Funqy functions and runs on port 8080.
+`sw-funqy-services` contains the 3 Funqy functions and runs on port 8082.
 `sw-funqy-workflow` contains just the workflow, the OpenApi definition and a simple UI and runs on port 8081.
 
 This showcases that just with a workflow definition and an OpenApi definition you can 

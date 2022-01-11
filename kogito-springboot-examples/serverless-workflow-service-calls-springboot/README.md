@@ -55,7 +55,7 @@ In addition, various clients to interact with this service can be easily generat
 After starting the example application you can access the AngularJS page at:
 
 ```text
-http://localhost:8080/example/countries.html
+http://localhost:8080
 ```
 
 You should see the following page:
@@ -64,7 +64,7 @@ You should see the following page:
 <img src="img/sw-example1.png" alt="Example1"/>
 </p>
 
-Enter in a name of a country in the "Name" text input box (e.g "Germany", "Greece", "USA", etc) and press the 
+Enter a name of a country in the "Name" text input box (e.g "Germany", "Greece", "USA", etc) and press the 
 "Classify" button. 
 
 This will call the serverless workflow passing it the name of the country you entered. The workflow 
