@@ -39,15 +39,12 @@
     <failsafe.exclude>**/Native*IT.java</failsafe.exclude>
     <alphanetworkCompilerEnabled>false</alphanetworkCompilerEnabled>
     <tests.category></tests.category>
-    <!-- Port 0 means dynamic port -->
-    <tests.quarkus.http.port>0</tests.quarkus.http.port>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <!-- kogito -->
     <kogito.version>${project.version}</kogito.version>
-    <version.org.optaplanner>8.15.0-SNAPSHOT</version.org.optaplanner>
-    <!-- override default to fast-jar packaging for forward-compatibility -->
-    <quarkus.package.type>fast-jar</quarkus.package.type>
+    <version.org.drools>8.16.0-SNAPSHOT</version.org.drools>
+    <version.org.optaplanner>8.16.0-SNAPSHOT</version.org.optaplanner>
     <!-- dependencies version -->
     <version.org.skyscreamer>1.5.0</version.org.skyscreamer>
     <!-- JKube -->
@@ -117,358 +114,13 @@
     </developer>
   </developers>
 
-  <profiles>
-    <profile>
-      <id>default</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
-      <modules>
-        <module>decisiontable-quarkus-example</module>
-        <module>decisiontable-springboot-example</module>
-        <module>dmn-event-driven-quarkus</module>
-        <module>dmn-event-driven-springboot</module>
-        <module>dmn-incubation-api-quarkus</module>
-        <module>dmn-knative-quickstart-quarkus</module>
-        <module>dmn-listener-quarkus</module>
-        <module>dmn-listener-springboot</module>
-        <module>dmn-pmml-quarkus-example</module>
-        <module>dmn-pmml-springboot-example</module>
-        <module>dmn-quarkus-example</module>
-        <module>dmn-drools-quarkus-metrics</module>
-        <module>dmn-drools-springboot-metrics</module>
-        <module>dmn-springboot-example</module>
-        <module>dmn-tracing-quarkus</module>
-        <module>dmn-tracing-springboot</module>
-        <module>flexible-process-quarkus</module>
-        <module>flexible-process-springboot</module>
-        <module>kogito-travel-agency</module>
-        <module>onboarding-example</module>
-        <module>pmml-incubation-api-quarkus</module>
-        <module>pmml-event-driven-quarkus</module>
-        <module>pmml-event-driven-springboot</module>
-        <module>pmml-quarkus-example</module>
-        <module>pmml-springboot-example</module>
-        <module>process-business-rules-quarkus</module>
-        <module>process-business-rules-springboot</module>
-        <module>process-decisions-quarkus</module>
-        <module>process-decisions-rest-quarkus</module>
-        <module>process-decisions-springboot</module>
-        <module>process-decisions-rest-springboot</module>
-        <module>process-error-handling</module>
-        <module>process-incubation-api-quarkus</module>
-        <module>process-infinispan-persistence-quarkus</module>
-        <module>process-infinispan-persistence-springboot</module>
-        <module>process-kafka-persistence-quarkus</module>
-        <module>process-kafka-quickstart-quarkus</module>
-        <module>process-kafka-multi-quarkus</module>
-        <module>process-kafka-multi-springboot</module>
-        <module>process-kafka-quickstart-springboot</module>
-        <module>process-knative-quickstart-quarkus</module>
-        <module>process-monitoring-quarkus</module>
-        <module>process-monitoring-springboot</module>
-        <module>process-mongodb-persistence-quarkus</module>
-        <module>process-mongodb-persistence-springboot</module>
-        <module>process-outbox-mongodb-quarkus</module>
-        <module>process-outbox-mongodb-springboot</module>
-        <module>process-optaplanner-quarkus</module>
-        <module>process-optaplanner-springboot</module>
-        <module>process-performance-quarkus</module>
-        <module>process-performance-springboot</module>
-        <module>process-postgresql-persistence-quarkus</module>
-        <module>process-postgresql-persistence-springboot</module>
-        <module>process-quarkus-example</module>
-        <module>process-springboot-example</module>
-        <module>process-scripts-quarkus</module>
-        <module>process-scripts-springboot</module>
-        <module>process-service-calls-quarkus</module>
-        <module>process-service-calls-springboot</module>
-        <module>process-rest-workitem-multi-quarkus</module>
-        <module>process-rest-workitem-quarkus</module>
-        <module>process-rest-service-call-quarkus</module>
-        <module>process-rest-service-call-springboot</module>
-        <module>process-timer-quarkus</module>
-        <module>process-timer-springboot</module>
-        <module>process-usertasks-custom-lifecycle-quarkus</module>
-        <module>process-usertasks-custom-lifecycle-springboot</module>
-        <module>process-usertasks-quarkus</module>
-        <module>process-usertasks-quarkus-with-console</module>
-        <module>process-usertasks-springboot</module>
-        <module>process-usertasks-timer-quarkus-with-console</module>
-        <module>process-usertasks-springboot-with-console</module>
-        <module>process-usertasks-with-security-oidc-quarkus</module>
-        <module>process-usertasks-with-security-oidc-quarkus-with-console</module>
-        <module>process-usertasks-with-security-oidc-springboot</module>
-        <module>process-usertasks-with-security-oidc-springboot-with-console</module>
-        <module>process-usertasks-with-security-quarkus</module>
-        <module>process-usertasks-with-security-springboot</module>
-        <module>rules-incubation-api-quarkus</module>
-        <module>rules-quarkus-helloworld</module>
-        <module>ruleunit-event-driven-quarkus</module>
-        <module>ruleunit-event-driven-springboot</module>
-        <module>ruleunit-quarkus-example</module>
-        <module>ruleunit-springboot-example</module>
-        <module>rules-legacy-quarkus-example</module>
-        <module>rules-legacy-springboot-example</module>
-        <module>serverless-workflow-greeting-quarkus</module>
-        <module>serverless-workflow-greeting-springboot</module>
-        <module>serverless-workflow-service-calls-quarkus</module>
-        <module>serverless-workflow-service-calls-springboot</module>
-        <module>serverless-workflow-compensation-quarkus</module>
-        <module>serverless-workflow-events-quarkus</module>
-        <module>serverless-workflow-expression-quarkus</module>
-        <module>serverless-workflow-error-quarkus</module>
-        <module>serverless-workflow-callback-quarkus</module>
-        <module>serverless-workflow-foreach-quarkus</module>
-        <module>serverless-workflow-functions-quarkus</module>
-        <module>serverless-workflow-functions-events-quarkus</module>
-        <module>serverless-workflow-github-showcase</module>
-        <module>serverless-workflow-order-processing</module>
-        <module>serverless-workflow-funqy</module>
-        <module>serverless-workflow-temperature-conversion</module>
-      </modules>
-    </profile>
-
-    <profile>
-      <id>persistence</id>
-      <activation>
-        <property>
-          <name>persistence</name>
-        </property>
-      </activation>
-      <properties>
-        <tests.category>persistence</tests.category>
-      </properties>
-      <modules>
-        <module>onboarding-example</module>
-        <module>process-quarkus-example</module>
-        <module>process-springboot-example</module>
-        <module>process-postgresql-persistence-quarkus</module>
-        <module>process-postgresql-persistence-springboot</module>
-      </modules>
-    </profile>
-
-    <profile>
-      <id>jdbc-persistence</id>
-      <activation>
-        <property>
-          <name>jdbc-persistence</name>
-        </property>
-      </activation>
-
-      <modules>
-        <module>process-postgresql-persistence-quarkus</module>
-        <module>process-postgresql-persistence-springboot</module>
-      </modules>
-    </profile>
-
-    <profile>
-      <id>events</id>
-      <activation>
-        <property>
-          <name>events</name>
-        </property>
-      </activation>
-      <modules>
-        <module>process-quarkus-example</module>
-        <module>process-springboot-example</module>
-      </modules>
-    </profile>
-
-    <profile>
-      <id>native</id>
-      <properties>
-        <failsafe.include>**/Native*IT.java</failsafe.include>
-        <failsafe.exclude></failsafe.exclude>
-        <quarkus.package.type>native</quarkus.package.type>
-        <!-- Native building needs a fixed port for tests -->
-        <tests.quarkus.http.port>8080</tests.quarkus.http.port>
-      </properties>
-      <activation>
-        <property>
-          <name>native</name>
-        </property>
-      </activation>
-      <modules>
-        <module>decisiontable-quarkus-example</module>
-        <module>dmn-event-driven-quarkus</module>
-        <module>dmn-knative-quickstart-quarkus</module>
-        <module>dmn-listener-quarkus</module>
-        <module>dmn-pmml-quarkus-example</module>
-        <module>dmn-quarkus-example</module>
-        <module>dmn-drools-quarkus-metrics</module>
-        <module>dmn-tracing-quarkus</module>
-        <module>flexible-process-quarkus</module>
-        <module>kogito-travel-agency</module>
-        <module>onboarding-example</module>
-        <module>pmml-event-driven-quarkus</module>
-        <module>pmml-quarkus-example</module>
-        <module>process-business-rules-quarkus</module>
-        <module>process-infinispan-persistence-quarkus</module>
-        <module>process-kafka-persistence-quarkus</module>
-        <module>process-kafka-quickstart-quarkus</module>
-        <module>process-knative-quickstart-quarkus</module>
-        <module>process-monitoring-quarkus</module>
-        <module>process-mongodb-persistence-quarkus</module>
-        <module>process-outbox-mongodb-quarkus</module>
-        <module>process-optaplanner-quarkus</module>
-        <module>process-postgresql-persistence-quarkus</module>
-        <module>process-quarkus-example</module>
-        <module>process-scripts-quarkus</module>
-        <module>process-service-calls-quarkus</module>
-        <module>process-rest-workitem-multi-quarkus</module>
-        <module>process-rest-workitem-quarkus</module>
-        <module>process-rest-service-call-quarkus</module>
-        <module>process-timer-quarkus</module>
-        <module>process-usertasks-custom-lifecycle-quarkus</module>
-        <module>process-usertasks-quarkus</module>
-        <module>process-usertasks-quarkus-with-console</module>
-        <module>process-usertasks-timer-quarkus-with-console</module>
-        <module>process-usertasks-with-security-oidc-quarkus</module>
-        <module>process-usertasks-with-security-oidc-quarkus-with-console</module>
-        <module>process-usertasks-with-security-quarkus</module>
-        <module>rules-quarkus-helloworld</module>
-        <module>ruleunit-event-driven-quarkus</module>
-        <module>ruleunit-quarkus-example</module>
-        <module>serverless-workflow-greeting-quarkus</module>
-        <module>serverless-workflow-service-calls-quarkus</module>
-        <module>serverless-workflow-events-quarkus</module>
-        <module>serverless-workflow-temperature-conversion</module>
-      </modules>
-    </profile>
-
-    <profile>
-      <id>productized</id>
-      <activation>
-        <property>
-          <name>productized</name>
-        </property>
-      </activation>
-      <modules>
-        <module>dmn-event-driven-quarkus</module>
-        <module>dmn-event-driven-springboot</module>
-        <module>dmn-listener-quarkus</module>
-        <module>dmn-listener-springboot</module>
-        <module>dmn-pmml-quarkus-example</module>
-        <module>dmn-pmml-springboot-example</module>
-        <module>dmn-quarkus-example</module>
-        <module>dmn-drools-quarkus-metrics</module>
-        <module>dmn-drools-springboot-metrics</module>
-        <module>dmn-springboot-example</module>
-        <module>pmml-event-driven-quarkus</module>
-        <module>pmml-event-driven-springboot</module>
-        <module>pmml-quarkus-example</module>
-        <module>pmml-springboot-example</module>
-        <module>rules-legacy-quarkus-example</module>
-        <module>rules-legacy-springboot-example</module>
-        <module>rules-quarkus-helloworld</module>
-        <module>ruleunit-event-driven-quarkus</module>
-        <module>ruleunit-event-driven-springboot</module>
-        <module>ruleunit-quarkus-example</module>
-        <module>ruleunit-springboot-example</module>
-        <module>process-decisions-quarkus</module>
-        <module>process-decisions-springboot</module>
-        <module>process-decisions-rest-quarkus</module>
-        <module>process-decisions-rest-springboot</module>
-        <module>process-kafka-quickstart-quarkus</module>
-        <module>process-kafka-multi-quarkus</module>
-        <module>process-kafka-multi-springboot</module>
-        <module>process-kafka-quickstart-springboot</module>
-        <module>process-monitoring-quarkus</module>
-        <module>process-monitoring-springboot</module>
-        <module>process-scripts-quarkus</module>
-        <module>process-scripts-springboot</module>
-        <module>process-service-calls-quarkus</module>
-        <module>process-service-calls-springboot</module>
-        <module>process-rest-workitem-multi-quarkus</module>
-        <module>process-rest-workitem-quarkus</module>
-        <module>process-rest-service-call-quarkus</module>
-        <module>process-rest-service-call-springboot</module>
-      </modules>
-    </profile>
-
-    <profile>
-      <id>springboot</id>
-      <activation>
-        <property>
-          <name>springboot</name>
-        </property>
-      </activation>
-      <modules>
-        <module>decisiontable-springboot-example</module>
-        <module>dmn-drools-springboot-metrics</module>
-        <module>dmn-event-driven-springboot</module>
-        <module>dmn-listener-springboot</module>
-        <module>dmn-pmml-springboot-example</module>
-        <module>dmn-springboot-example</module>
-        <module>dmn-tracing-springboot</module>
-        <module>flexible-process-springboot</module>
-        <module>pmml-event-driven-springboot</module>
-        <module>pmml-springboot-example</module>
-        <module>process-business-rules-springboot</module>
-        <module>process-infinispan-persistence-springboot</module>
-        <module>process-kafka-quickstart-springboot</module>
-        <module>process-kafka-multi-springboot</module>
-        <module>process-monitoring-springboot</module>
-        <module>process-mongodb-persistence-springboot</module>
-        <module>process-outbox-mongodb-springboot</module>
-        <module>process-optaplanner-springboot</module>
-        <module>process-postgresql-persistence-springboot</module>
-        <module>process-rest-service-call-springboot</module>
-        <module>process-scripts-springboot</module>
-        <module>process-service-calls-springboot</module>
-        <module>process-springboot-example</module>
-        <module>process-timer-springboot</module>
-        <module>process-usertasks-custom-lifecycle-springboot</module>
-        <module>process-usertasks-springboot</module>
-        <module>process-usertasks-springboot-with-console</module>
-        <module>process-usertasks-with-security-oidc-springboot</module>
-        <module>process-usertasks-with-security-oidc-springboot-with-console</module>
-        <module>process-usertasks-with-security-springboot</module>
-        <module>ruleunit-springboot-example</module>
-        <module>serverless-workflow-greeting-springboot</module>
-        <module>serverless-workflow-service-calls-springboot</module>
-      </modules>
-    </profile>
-    <profile>
-      <id>optaplanner-downstream</id>
-      <activation>
-        <property>
-          <name>optaplanner</name>
-        </property>
-      </activation>
-      <modules>
-        <module>process-optaplanner-quarkus</module>
-        <module>process-optaplanner-springboot</module>
-      </modules>
-    </profile>
-    <profile>
-      <id>optaplanner-downstream-native</id>
-      <activation>
-        <property>
-          <name>optaplanner-native</name>
-        </property>
-      </activation>
-      <properties>
-        <failsafe.include>**/Native*IT.java</failsafe.include>
-        <failsafe.exclude></failsafe.exclude>
-        <quarkus.package.type>native</quarkus.package.type>
-        <!-- Native building needs a fixed port for tests -->
-        <tests.quarkus.http.port>8080</tests.quarkus.http.port>
-      </properties>
-      <modules>
-        <module>process-optaplanner-quarkus</module>
-      </modules>
-    </profile>
-  </profiles>
+  <modules>
+    <module>kogito-quarkus-examples</module>
+    <module>kogito-springboot-examples</module>
+  </modules>
 
   <dependencyManagement>
     <dependencies>
-      <dependency>
-        <groupId>org.infinispan</groupId>
-        <artifactId>infinispan-spring-boot-starter-remote</artifactId>
-        <version>${version.org.infinispan}</version>
-      </dependency>
       <dependency>
         <groupId>org.skyscreamer</groupId>
         <artifactId>jsonassert</artifactId>
@@ -481,16 +133,6 @@
   <build>
     <pluginManagement>
       <plugins>
-        <plugin>
-          <groupId>io.quarkus</groupId>
-          <artifactId>quarkus-maven-plugin</artifactId>
-          <version>${version.io.quarkus}</version>
-        </plugin>
-        <plugin>
-          <groupId>org.springframework.boot</groupId>
-          <artifactId>spring-boot-maven-plugin</artifactId>
-          <version>${version.org.springframework.boot}</version>
-        </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-resources-plugin</artifactId>
@@ -530,13 +172,12 @@
               <tests.category>${tests.category}</tests.category>
               <enable.resource.infinispan>${enable.resource.infinispan}</enable.resource.infinispan>
               <enable.resource.kafka>${enable.resource.kafka}</enable.resource.kafka>
+              <enable.resource.postgresql>${enable.resource.postgresql}</enable.resource.postgresql>
+              <enable.resource.mongodb>${enable.resource.mongodb}</enable.resource.mongodb>
               <container.image.keycloak>${container.image.keycloak}</container.image.keycloak>
               <container.image.infinispan>${container.image.infinispan}</container.image.infinispan>
               <container.image.kafka>${container.image.kafka}</container.image.kafka>
               <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
-              <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-              <enable.resource.mongodb>${enable.resource.mongodb}</enable.resource.mongodb>
-              <quarkus.http.test-port>${tests.quarkus.http.port}</quarkus.http.test-port>
             </systemPropertyVariables>
             <classesDirectory>${project.build.outputDirectory}</classesDirectory>
             <workingDirectory>${project.build.directory}/test-run</workingDirectory>
@@ -597,7 +238,6 @@
             <runOrder>hourly</runOrder>
             <systemPropertyVariables>
               <tests.category>${tests.category}</tests.category>
-              <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
             </systemPropertyVariables>
           </configuration>
         </plugin>

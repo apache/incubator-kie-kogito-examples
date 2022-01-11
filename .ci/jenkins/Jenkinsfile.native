@@ -159,16 +159,16 @@ void runMavenTests(MavenCommand mvnCmd, String mvnRunCmd) {
     try {
         mvnCmd.withProperty('maven.test.failure.ignore', true).run(mvnRunCmd)
     } catch (err) {
-        unstable("${mvnRunCmd} did not finish correctly")
+        util.archiveConsoleLog()
+        throw err
     } finally {
         saveReports()
-        util.archiveConsoleLog()
         cleanContainers()
     }
 }
 
 MavenCommand getMavenCommand(String directory) {
-    return new MavenCommand(this, ['-fae'])
+    return new MavenCommand(this, ['-fae', '-ntp'])
                 .withSettingsXmlId('kogito_release_settings')
                 .withProperty('java.net.preferIPv4Stack', true)
                 .inDirectory(directory)

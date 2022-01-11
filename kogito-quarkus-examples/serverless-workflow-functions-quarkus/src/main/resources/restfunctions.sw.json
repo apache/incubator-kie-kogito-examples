@@ -1,0 +1,80 @@
+{
+    "id": "RestExample",
+    "name": "Rest fun with numbers",
+    "expressionLang": "jsonpath",
+    "version": "1.0v",
+    "start": "Calculations",
+    "functions": [
+        {
+            "name": "randomNumber",
+            "operation": "/numbers/random",
+            "metadata": {
+                "method": "GET",
+                "type": "rest"
+            }
+        },
+        {
+            "name": "multiplyAllByRandomAndSum",
+            "operation": "/numbers/{multiplier}/multiplyByAndSum",
+            "metadata": {
+                "method": "POST",
+                "type": "rest"
+            }
+        },
+        {
+            "name": "debug",
+            "metadata": {
+                "type": "sysout"
+            }
+        }
+    ],
+    "states": [
+        {
+            "name": "Calculations",
+            "type": "operation",
+            "actionMode": "sequential",
+            "actions": [
+                {
+                    "name": "randomize",
+                    "functionRef": "randomNumber"
+                },
+                {
+                    "name": "multiplier",
+                    "functionRef": {
+                        "refName": "multiplyAllByRandomAndSum",
+                        "arguments": {
+                            "numbers": "$.inputNumbers",
+                            "multiplier": "$.randomNumber"
+                        }
+                    }
+                }
+            ],
+            "transition": "SetMessage"
+        },
+        {
+            "name": "SetMessage",
+            "type": "inject",
+            "data": {
+                "message": "The sum is: "
+            },
+            "transition": "PrintResult"
+        },
+        {
+            "name": "PrintResult",
+            "type": "operation",
+            "actionMode": "sequential",
+            "actions": [
+                {
+                    "name": "printAction",
+                    "functionRef": {
+                        "refName": "debug",
+                        "arguments": {
+                            "message": "$.message $.sum"
+                        }
+                    }
+                }
+            ],
+            "end": true
+        }
+    ]
+}
