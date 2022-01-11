@@ -25,8 +25,8 @@ import org.junit.jupiter.api.Test;
 import org.kie.kogito.event.cloudevents.utils.CloudEventUtils;
 import org.kie.kogito.test.quarkus.kafka.KafkaTestClient;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
-import org.kie.kogito.tracing.decision.event.model.ModelEvent;
-import org.kie.kogito.tracing.decision.event.trace.TraceEvent;
+import org.kie.kogito.tracing.event.model.models.DecisionModelEvent;
+import org.kie.kogito.tracing.event.trace.TraceEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -113,7 +113,7 @@ public class LoanEligibilityIT {
 
         kafkaClient.consume(TRACING_MODELS_TOPIC_NAME, s -> {
             LOGGER.info("Received from kafka: {}", s);
-            if (checkDeserialization(s, ModelEvent.class) && isModelEventComplete(s)) {
+            if (checkDeserialization(s, DecisionModelEvent.class) && isModelEventComplete(s)) {
                 countDownLatch.countDown();
             } else {
                 fail("Model event is not valid");
