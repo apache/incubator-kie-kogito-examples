@@ -53,5 +53,3 @@ kogito-travel-agency/extended/scripts/persistence/
 
 #Grafana generated dashboards
 **/docker-compose/grafana/provisioning/dashboards/*.json
-/kogito-springboot-examples/dmn-drools-springboot-metrics/src/main/resources/META-INF/dashboards/
-/kogito-quarkus-examples/dmn-drools-quarkus-metrics/src/main/resources/META-INF/dashboards/
