@@ -101,6 +101,10 @@
               </excludes>
               <followSymlinks>false</followSymlinks>
             </fileset>
+            <fileset>
+              <directory>src/main/resources/META-INF/dashboards</directory>
+              <followSymlinks>false</followSymlinks>
+            </fileset>
           </filesets>
         </configuration>
       </plugin>
@@ -108,6 +112,22 @@
       <plugin>
         <artifactId>maven-resources-plugin</artifactId>
         <executions>
+          <execution>
+            <id>copy-filtered-resources</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.basedir}/src/main/resources/META-INF/dashboards</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>${project.basedir}/src/main/filtered-resources/META-INF/dashboards</directory>
+                  <filtering>true</filtering>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
           <execution>
             <id>copy-resources</id>
             <phase>package</phase>
