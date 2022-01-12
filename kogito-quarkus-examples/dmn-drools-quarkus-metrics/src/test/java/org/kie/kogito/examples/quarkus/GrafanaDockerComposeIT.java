@@ -112,8 +112,8 @@ public class GrafanaDockerComposeIT {
                 .body("title", hasItem(String.format("%s_%s - LoanEligibility - Domain Dashboard", PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
                 .body("title", not(hasItem(String.format("%s_%s - Traffic Violation - Operational Dashboard", PROJECT_ARTIFACT_ID, PROJECT_VERSION))))
                 .body("title", not(hasItem(String.format("%s_%s - Traffic Violation - Domain Dashboard", PROJECT_ARTIFACT_ID, PROJECT_VERSION))))
-                .body("title", hasItem("- Custom - Operational Dashboard"))
-                .body("title", hasItem("- Custom - Domain Dashboard"));
+                .body("title", hasItem(String.format("%s_%s - Custom - Operational Dashboard", PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
+                .body("title", hasItem(String.format("%s_%s - Custom - Domain Dashboard", PROJECT_ARTIFACT_ID, PROJECT_VERSION)));
     }
 
     @Test
