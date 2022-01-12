@@ -115,6 +115,10 @@
               </excludes>
               <followSymlinks>false</followSymlinks>
             </fileset>
+            <fileset>
+              <directory>src/main/resources/META-INF/dashboards</directory>
+              <followSymlinks>false</followSymlinks>
+            </fileset>
           </filesets>
         </configuration>
       </plugin>
