@@ -1,62 +1,67 @@
 {
   "id": "callback",
   "version": "1.0",
-  "expressionLang": "jsonpath",
   "name": "Workflow Callback example",
   "description": "An example of how to use callback state",
-  "start": "waitForEvent",
+  "start": "createModel",
   "events": [
     {
-      "name": "moveEvent",
+      "name": "resumeEvent",
       "source": "",
-      "type": "move"
+      "type": "resume"
+    },
+    {
+      "name": "waitEvent",
+      "source": "",
+      "type": "wait"
     }
+    
   ],
   "functions": [
     {
-      "name": "publishMove",
+      "name": "printInstanceId",
       "metadata": {
-        "interface": "org.kie.kogito.examples.PublishService",
-        "operation": "publishMove",
+        "interface": "org.kie.kogito.examples.PrintService",
+        "operation": "printKogitoProcessId",
         "type": "service"
-      }
-    },
-    {
-      "name": "printMessage",
-      "metadata": {
-        "type": "sysout"
       }
     }
   ],
   "states": [
+     {
+      "name": "createModel",
+      "type": "inject",
+      "data": {
+        "move": "This is the initial data in the model"
+      },
+      "transition": "waitForEvent"
+    },
     {
       "name": "waitForEvent",
       "type": "callback",
       "action": 
         {
           "name": "publishAction",
-          "functionRef": {
-            "refName": "publishMove"
-            }
+          "eventRef": {
+            "triggerEventRef": "resumeEvent",
+            "data": "{move: .move}"
+          }
         },
-        "eventRef" : "moveEvent",
+        "eventRef" : "waitEvent",
         "eventDataFilter" : {
-           "data" : "$.move",
-           "toStateData" : "$.move"
+           "data" : ".result",
+           "toStateData" : ".move"
         },
-      	"transition": "finish"
+        "transition": "finish"
     },
     {
       "name": "finish",
       "type": "operation",
       "actions": [
         {
-          "name": "printAction",
+          "name": "printInstanceId",
           "functionRef": {
-            "refName": "printMessage",
-            "arguments": {
-              "message": "$[*]"
-            }
+            "refName": "printInstanceId"
           }
         }
       ],

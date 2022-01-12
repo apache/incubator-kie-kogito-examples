@@ -3,8 +3,8 @@
 ## Description
 
 This example contains a simple workflow service that illustrate callback state usage. 
-A callback is a state that invokes an action and wait for an event, so this example needs an event broker.
-This example consist of just one callback state. Its action calls a service that publish the event type that is expected by its eventRef. 
+A callback is a state that invokes an action and wait for an event (event that will be eventually fired by the external service notified by the action), so this example needs an event broker.
+This example consist of a callback state that waits for an event arriving on wait channel. Its action publish an event on resume channel. The event published on resume channnel is modified and republished into the wait channel by `PrintService`, which simulates an external service. 
 The service is described using JSON format as defined in the 
 [CNCF Serverless Workflow specification](https://github.com/serverlessworkflow/specification).
 
@@ -25,7 +25,7 @@ provided in the path [docker-compose/](docker-compose/), where you can just run 
 
 ```sh
 docker-compose up
-```  
+```
 
 In this way a container for Kafka will be started on port 9092.
 
@@ -41,7 +41,7 @@ provided in the path [docker-compose/](docker-compose/), where you can just run 
 
 ```sh
 docker-compose up
-```  
+```
 
 In this way a container for PostgreSQL will be started on port 5432.
 
@@ -116,6 +116,6 @@ curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' htt
 After a while (note that to you need give time for event to be consumed)  you should see the log message printed in quarkus:
 
 ```text
-This has been injected by the event
+ Workflow data {"move":"This is the initial data in the model and has been modified by the event publisher"}
 ```
 
