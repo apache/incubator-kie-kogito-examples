@@ -45,7 +45,7 @@ class CallbackRestIT {
 
         await()
                 .atLeast(1, SECONDS)
-                .atMost(60, SECONDS)
+                .atMost(30, SECONDS)
                 .with().pollInterval(1, SECONDS)
                 .untilAsserted(() -> given()
                         .contentType(ContentType.JSON)
