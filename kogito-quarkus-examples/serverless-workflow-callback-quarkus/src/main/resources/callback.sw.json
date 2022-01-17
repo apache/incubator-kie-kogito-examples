@@ -52,6 +52,13 @@
            "data" : ".result",
            "toStateData" : ".move"
         },
+        "onErrors": [
+        {
+          "error": "execution error",
+          "code": "java.util.concurrent.CompletionException",
+          "end": true
+        }
+        ],
         "transition": "finish"
     },
     {
