@@ -2,7 +2,7 @@ version: '2.1'
 
 services:
   postgres:
-    image: postgres:9.6
+    image: postgres:13.4-alpine3.14
     ports:
       - "5432:5432"
     volumes:
@@ -105,7 +105,7 @@ services:
     container_name: jobs-service
     image: quay.io/kiegroup/kogito-jobs-service-postgresql:latest
     ports:
-      - "8580:8080"
+      - "8580:8580"
     depends_on:
       - kafka
       - postgres
@@ -114,9 +114,10 @@ services:
       QUARKUS_DATASOURCE_USERNAME: kogito-user
       QUARKUS_DATASOURCE_PASSWORD: kogito-pass
       ENABLE_EVENTS: "true"
-      KOGITO_JOBS_PROPS: -Dquarkus-profile=events-support -D%events-support.kafka.bootstrap.servers=kafka:9092
-                         -D%events-support.mp.messaging.outgoing.kogito-job-service-job-status-events.bootstrap.servers=kafka:9092
+      KOGITO_JOBS_PROPS: -Dquarkus-profile=events-support -D%events-support.kafka.bootstrap.servers=kafka:29092
+                         -D%events-support.mp.messaging.outgoing.kogito-job-service-job-status-events.bootstrap.servers=kafka:29092
                          -Dquarkus.flyway.migrate-at-start=true -Dquarkus.datasource.reactive.url=postgresql://postgres:5432/kogito
+                         -D%events-support.quarkus.http.port=8580 -Dkogito.service.url=http://localhost:8580
 
   management-console:
     container_name: management-console
