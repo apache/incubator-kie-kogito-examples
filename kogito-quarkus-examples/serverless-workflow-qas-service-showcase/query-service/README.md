@@ -58,8 +58,6 @@ To run the generated native executable, generated in `target/`, execute
 ./target/query-service-{version}-runner
 ```
 
-> **NOTE:** When the native image is generated, the persistence will be automatically enabled, and thus the PostgreSQL database will be required.
-
 ### Submit a request
 
 Use the following curl command to list all the pending queries in the query service:

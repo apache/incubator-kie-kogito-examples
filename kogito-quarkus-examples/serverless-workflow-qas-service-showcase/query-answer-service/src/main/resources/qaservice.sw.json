@@ -21,11 +21,7 @@
     },
     {
       "name": "sendQuery",
-      "operation": "/query-service/sendQuery",
-      "metadata": {
-        "method": "POST",
-        "type": "rest"
-      }
+      "operation": "specs/query-service.yaml#sendQuery"
     },
     {
       "name": "registerQuery",
@@ -108,8 +104,7 @@
         "functionRef": {
           "refName": "sendQuery",
           "arguments": {
-            "processInstanceId": "$.processInstanceId",
-            "query": "$.query"
+            "queryRequest": "{ \\\"processInstanceId\\\": \\\"$.processInstanceId\\\", \\\"query\\\": \\\"$.query\\\" }"
           }
         }
       },
@@ -118,7 +113,7 @@
       "onErrors": [
         {
           "error": "execution error",
-          "code": "java.util.concurrent.CompletionException",
+          "code": "javax.ws.rs.ProcessingException",
           "transition": "Process query service error"
         }
       ]

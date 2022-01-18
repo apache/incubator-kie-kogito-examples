@@ -51,12 +51,6 @@
       <artifactId>kogito-quarkus-serverless-workflow</artifactId>
     </dependency>
 
-    <!-- RestWorkItemHandler to support Rest calls from the SW workflows -->
-    <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-rest-workitem</artifactId>
-    </dependency>
-
     <!-- Messaging settings -->
     <dependency>
       <groupId>org.kie.kogito</groupId>

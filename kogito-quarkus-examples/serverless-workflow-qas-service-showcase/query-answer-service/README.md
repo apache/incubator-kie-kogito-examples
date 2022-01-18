@@ -102,8 +102,6 @@ To run the generated native executable, generated in `target/`, execute
 ./target/query-answer-service-{version}-runner
 ```
 
-> **NOTE:** When the native image is generated the persistence will be automatically enabled, and thus the PostgreSQL database will be required.
-
 ### Submit a request
 
 The service based on the JSON workflow definition can be accessed by sending requests to the http://localhost:8080/qaservice url.
