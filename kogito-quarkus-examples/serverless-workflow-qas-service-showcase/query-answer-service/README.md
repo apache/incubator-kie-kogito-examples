@@ -2,7 +2,7 @@
 
 ## Description
 
-This project contains a simple [serverless workflow](src/main/resources/qaservice.sw.json) and some auxiliary resources that implements the **Query and Answer Service** 
+This project contains a simple [serverless workflow](src/main/resources/qaservice.sw.json) and some auxiliary resources that implement the **Query and Answer Service** 
 described in the [serverless-workflow-qas-service-showcase/README.md](../README.md). Please read it before to continue.
 
 The service is described using JSON format as defined in the
@@ -12,13 +12,13 @@ The service is described using JSON format as defined in the
 
 ### Kafka
 
-This quickstart requires an Apache Kafka to be available and by default expects it to be on default port and localhost.
+This quickstart requires an Apache Kafka to be available and, by default, expects it to be on the default port and localhost.
 
 * Install and Startup Kafka Server / Zookeeper
 
 https://kafka.apache.org/quickstart
 
-To publish and consume the events, topic "query_response_events" is used.
+The topic "query_response_events" is used to publish and consume the events.
 
 Optionally and for convenience, a docker-compose [configuration file](../docker-compose/docker-compose.yml) is
 provided in the path [../docker-compose](../docker-compose), where you can just run the command from there:
@@ -27,7 +27,7 @@ provided in the path [../docker-compose](../docker-compose), where you can just 
 docker-compose up
 ```  
 
-In this way a container for Kafka will be started on port 9092.
+In this way, a container for Kafka will be started on port 9092.
 
 ### PostgreSQL
 
@@ -43,7 +43,7 @@ provided in the path [../docker-compose](../docker-compose), where you can just 
 docker-compose up
 ```  
 
-In this way a container for PostgreSQL will be started on port 5432.
+In this way, a container for PostgreSQL will be started on port 5432.
 
 ## Installing and Running
 

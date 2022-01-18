@@ -1,26 +1,26 @@
-# # Kogito Serverless Workflow - Query Answer Service Showcase
+# Kogito Serverless Workflow - Query Answer Service Showcase
 
 The goal of this example is to implement a simple *Query and Answer* service.
 
-The resolution of a formulated query is managed by a [serverless workflow instance](query-answer-service/src/main/resources/qaservice.sw.json), which in turn will interact with an external service to get the answers. Considering that the answers are produced by an external service, they can arrive at any later point in time, and thus, the serverless workflow must coordinate all these interactions in order to properly populate the knowledge database with the queries and the corresponding answers.
+The resolution of a formulated query is managed by a [serverless workflow instance](query-answer-service/src/main/resources/qaservice.sw.json), which will interact with an external service to get the answers. Considering that an external service produces the answers, they can arrive at any later point in time. Thus, the serverless workflow must coordinate all these interactions to correctly populate the knowledge database with the queries and the corresponding answers.
 
-The lifespan of the [serverless workflow instance](query-answer-service/src/main/resources/qaservice.sw.json) makes sense only during the query resolution time, however the queries and answers will remain stored in the knowledge database for later consumption, querying, etc.
+The lifespan of the [serverless workflow instance](query-answer-service/src/main/resources/qaservice.sw.json) makes sense only during the query resolution time. However, the queries and answers will remain stored in the knowledge database for later consumption, querying, etc.
 
-In the following diagram you can see the problem structuring and the different interactions that occurs in order to resolve a query.
+The following diagram shows the problem structure and the different interactions that occur to resolve a query.
 
 ![](docs/QueryAnswerServiceDiagram.png)
 
 # Example UI
 
-To run the example, a simple UI is provided, and can be used to emulate both the query formulation and resolution.
+To run the example, a simple UI is provided and can be used to emulate both the query formulation and resolution.
 Note that two different applications are being emulated.
 
-**Please read following files and follow the required steps in order to start all the required components.**
+**Please read the following files and follow the required steps to start all the required components.**
 
 1) [query-answer-service/README.md](query-answer-service/README.md)
 2) [query-service/README.md](query-service/README.md) 
 
-When all the components and services are started, follow these steps to formulate and resolve queries by using the UI if desired.
+When all the components and services are started, follow these steps to formulate and resolve queries using the UI.
 
 > **NOTE:** All the query formulation and resolution cycle can also be invoked by using the services respective endpoints.
 
@@ -34,7 +34,7 @@ When all the components and services are started, follow these steps to formulat
 
 ![](docs/CreateQuery.png)
 
-3) After creating the query you will see all the queries in the knowledge database.
+3) After creating the query, you will see all the queries in the knowledge database.
 
 ![](docs/PendingQuery.png)
 

@@ -7,13 +7,13 @@ and where the queries are resolved. Please read it before to continue.
 
 ## Infrastructure requirements
 
-The same infrastructure requirements as the described in [Query Answer Service](../query-answer-service/README.md#infrastructure-requirements) apply for this service.
+The same infrastructure requirements as described in [Query Answer Service](../query-answer-service/README.md#infrastructure-requirements) apply for this service.
 
 ## Installing and Running
 
 ### Prerequisites
 
-The same prerequisites as the described in [Query Answer Service](../query-answer-service/README.md#prerequisites) apply for this service.
+The same prerequisites as described in [Query Answer Service](../query-answer-service/README.md#prerequisites) apply for this service.
 
 ### Compile and Run in Local Dev Mode
 
@@ -38,7 +38,7 @@ java -jar target\quarkus-app\quarkus-run.jar
 ### Compile and Run in JVM mode using PostgreSQL persistence
 
 To enable persistence, please append `-Ppersistence` to your Maven command.
-That will ensure the correct dependencies are in place, and automatically set the required properties to connect
+That will ensure the correct dependencies are in place and automatically set the required properties to connect
 with the PostgreSQL instance from the provided docker compose.
 
 ```sh
@@ -58,7 +58,7 @@ To run the generated native executable, generated in `target/`, execute
 ./target/query-service-{version}-runner
 ```
 
-> **NOTE:** When the native image is generated the persistence will be automatically enabled, and thus the PostgreSQL database will be required.
+> **NOTE:** When the native image is generated, the persistence will be automatically enabled, and thus the PostgreSQL database will be required.
 
 ### Submit a request
 
