@@ -36,9 +36,11 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import org.springframework.boot.test.autoconfigure.actuate.metrics.AutoConfigureMetrics;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = DemoApplication.class)
+@AutoConfigureMetrics
 public class ProcessMetricsTest {
 
     private static final String PROJECT_VERSION = ProjectMetadataProvider.getProjectVersion();

@@ -29,8 +29,10 @@ import io.restassured.http.ContentType;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
+import org.springframework.boot.test.autoconfigure.actuate.metrics.AutoConfigureMetrics;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
+@AutoConfigureMetrics
 public class LoanEligibilityTest {
 
     private static final String PROJECT_VERSION = ProjectMetadataProvider.getProjectVersion();
