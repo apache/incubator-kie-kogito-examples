@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>serverless-workflow-github-showcase</artifactId>
-    <version>1.16.0.Final</version>
+    <version>1.16.1-SNAPSHOT</version>
   </parent>
   <artifactId>github-service</artifactId>
   <name>Kogito Example :: Serverless Workflow Github Showcase :: GitHub Service</name>
