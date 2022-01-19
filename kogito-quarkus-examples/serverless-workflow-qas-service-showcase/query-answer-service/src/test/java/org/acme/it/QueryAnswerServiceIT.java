@@ -147,6 +147,9 @@ class QueryAnswerServiceIT {
         kafkaClient.shutdown();
     }
 
+    /**
+     * https://issues.redhat.com/browse/KOGITO-6582
+     */
     public static class ConditionalPostgreSqlQuarkusTestResource extends PostgreSqlQuarkusTestResource {
 
         public ConditionalPostgreSqlQuarkusTestResource() {
