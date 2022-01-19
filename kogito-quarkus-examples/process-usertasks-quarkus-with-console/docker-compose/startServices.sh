@@ -1,6 +1,19 @@
 #!/bin/sh
 
-echo "Script requires your Kogito Quickstart to be compiled"
+BD="postgresql"
+
+if [ -n "$1" ]; then
+  if [[ "$1" == "postgresql" || "$1" == "mongodb" || "$1" == "infinispan" || "$1" == "p" ]];
+  then
+    BD="$1"
+  else
+   echo "Usage: By default postgresql environments is started if no argument is provided"
+   echo "     start POSTGRESQL docker-compose running: ./startServices.sh postgresql or just ./startServices.sh "
+   echo "     start INFINISPAN docker-compose running: ./startServices.sh infinispan "
+   exit 1
+  fi
+fi
+echo "Script requires your Kogito Quickstart to be compiled with the right profile: ../mvn clean install -DskipTests -P$BD"
 
 PROJECT_VERSION=$(cd ../ && mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
 
@@ -51,4 +64,4 @@ else
     exit 1
 fi
 
-docker-compose up
+docker-compose -f docker-compose-$BD.yml up
