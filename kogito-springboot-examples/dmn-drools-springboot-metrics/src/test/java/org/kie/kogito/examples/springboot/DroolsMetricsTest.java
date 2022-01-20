@@ -26,9 +26,11 @@ import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
+import org.springframework.boot.test.autoconfigure.actuate.metrics.AutoConfigureMetrics;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+@AutoConfigureMetrics
 public class DroolsMetricsTest {
 
     private static final String PROJECT_VERSION = ProjectMetadataProvider.getProjectVersion();
