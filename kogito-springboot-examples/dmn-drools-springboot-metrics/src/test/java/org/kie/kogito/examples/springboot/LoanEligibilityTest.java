@@ -17,6 +17,7 @@ package org.kie.kogito.examples.springboot;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.autoconfigure.actuate.metrics.AutoConfigureMetrics;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 
@@ -26,7 +27,6 @@ import io.restassured.http.ContentType;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
-import org.springframework.boot.test.autoconfigure.actuate.metrics.AutoConfigureMetrics;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
 @AutoConfigureMetrics
