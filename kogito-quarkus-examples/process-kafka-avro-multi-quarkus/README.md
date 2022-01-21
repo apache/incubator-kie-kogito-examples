@@ -5,7 +5,7 @@
 A modification of quickstart project that deals with traveller processing carried by rules. The original example illustrates how easy it is to make the Kogito processes and rules work with Apache Kafka sending messages to different topics. This one demonstrates the usage of two features: 
 
 * Default event marshaling override uses [Apache Avro](https://avro.apache.org/docs/current/index.html) rather than JSON. See `AvroEventMarshaller` and `AvroEventUnmashaller`
-* Disable Cloud event to directly publish the traveller object. By setting `kogito.messaging.as-cloudevents` to false
+* Disable Cloud event to publish the traveller object directly. By setting `kogito.messaging.as-cloudevents` to false
 
 Quick reminder of what the original example was doing:
 * consuming events from a Kafka topic and for each event start new process instance
