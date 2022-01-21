@@ -145,6 +145,6 @@ When running in either Quarkus Development or Native mode, we also leverage the 
 
 ### Use the application
 
-To make use of this application, you need to publish to `travellers` topic a kafka record containing an instance of `org.acme.travel.traveller` serialized using [Apache Avro](https://avro.apache.org/docs/current/gettingstartedjava.html) format. The best option is to do that programmatically. Take a look to provided unit test class (named `MultiMessagingIt`)for an idea of how to achieve that. 
+To make use of this application, you need to publish to `travellers` topic a kafka record containing an instance of `org.acme.travel.traveller` serialized using [Apache Avro](https://avro.apache.org/docs/current/gettingstartedjava.html) format. The best option is to do that programmatically. Take a look at the provided unit test class (named `MultiMessagingIt`) to understand how to achieve that. 
 
 
