@@ -15,6 +15,14 @@
       }
     },
     {
+      "name": "isSqr",
+      "metadata": {
+        "interface": "org.kie.kogito.examples.EvenService",
+        "operation": "isSquare",
+        "type": "service"
+      }
+    },
+    {
       "name": "printMessage",
       "metadata": {
         "type": "sysout"
@@ -34,13 +42,22 @@
               "number": "$.number"
             }
           }
+        },
+        {
+          "name": "checkSqrAction",
+          "functionRef": {
+            "refName": "isSqr",
+            "arguments": {
+              "number": "$.number"
+            }
+          }
         }
       ],
       "transition": "even",
       "onErrors": [
         {
-          "error": "odd number",
-          "code": "java.lang.IllegalArgumentException",
+          "error": "odd or sqrt number",
+          "code": "java.lang.RuntimeException",
           "transition": "odd"
         }
       ]
