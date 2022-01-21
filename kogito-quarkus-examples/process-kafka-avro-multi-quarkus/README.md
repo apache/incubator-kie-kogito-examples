@@ -13,7 +13,7 @@ Quick reminder of what the original example was doing:
     * if successfully processed, traveller information is logged and then updated information is send to another Kafka topic
     * if not processed traveller, info is logged and then process instance finishes  sending reply to a different Kafka topic
 
-The functionality is still the same, but the format of the event, rather than being a cloudevent json format, is a representation of traveller object using Avro format. To help us dealing with the serialization details,
+The functionality is still the same, but the format of the event, rather than being a cloudevent JSON format, it is a representation of the traveller object using Avro format. To help us deal with the serialization details,
 [jackson-kafka-avro-serializer](https://github.com/productboardlabs/jackson-kafka-avro-serializer) dependency is added to `pom.xml`
 
 ```
