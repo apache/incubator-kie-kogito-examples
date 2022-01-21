@@ -7,11 +7,11 @@ A modification of quickstart project that deals with traveller processing carrie
 * Default event marshaling override uses [Apache Avro](https://avro.apache.org/docs/current/index.html) rather than JSON. See `AvroEventMarshaller` and `AvroEventUnmashaller`
 * Disable Cloud event to publish the traveller object directly. By setting `kogito.messaging.as-cloudevents` to false
 
-Quick reminder of what the original example was doing:
-* consuming events from a Kafka topic and for each event start new process instance
+A quick reminder of what the original example was doing:
+* consuming events from a Kafka topic and for each event start a new process instance
 * traveller is then processed by rules and based on the outcome of traveller processing:
-    * if successfully processed, traveller information is logged and then updated information is send to another Kafka topic
-    * if not processed traveller, info is logged and then process instance finishes  sending reply to a different Kafka topic
+    * if successfully processed, traveller information is logged, and then updated information is sent to another Kafka topic
+    * if not processed traveller, info is logged and then process instance finishes sending a reply to a different Kafka topic
 
 The functionality is still the same, but the format of the event, rather than being a cloudevent JSON format, it is a representation of the traveller object using Avro format. To help us deal with the serialization details,
 [jackson-kafka-avro-serializer](https://github.com/productboardlabs/jackson-kafka-avro-serializer) dependency is added to `pom.xml`
