@@ -126,25 +126,8 @@
         <module>dmn-listener-springboot</module>
         <module>dmn-pmml-springboot-example</module>
         <module>dmn-springboot-example</module>
-        <module>flexible-process-springboot</module>
         <module>pmml-event-driven-springboot</module>
         <module>pmml-springboot-example</module>
-        <module>process-business-rules-springboot</module>
-        <module>process-decisions-rest-springboot</module>
-        <module>process-decisions-springboot</module>
-        <module>process-kafka-multi-springboot</module>
-        <module>process-kafka-quickstart-springboot</module>
-        <module>process-monitoring-springboot</module>
-        <module>process-postgresql-persistence-springboot</module>
-        <module>process-rest-service-call-springboot</module>
-        <module>process-scripts-springboot</module>
-        <module>process-service-calls-springboot</module>
-        <module>process-timer-springboot</module>
-        <module>process-usertasks-custom-lifecycle-springboot</module>
-        <module>process-usertasks-springboot-with-console</module>
-        <module>process-usertasks-springboot</module>
-        <module>process-usertasks-with-security-oidc-springboot-with-console</module>
-        <module>process-usertasks-with-security-oidc-springboot</module>
         <module>rules-legacy-springboot-example</module>
         <module>ruleunit-event-driven-springboot</module>
         <module>ruleunit-springboot-example</module>
