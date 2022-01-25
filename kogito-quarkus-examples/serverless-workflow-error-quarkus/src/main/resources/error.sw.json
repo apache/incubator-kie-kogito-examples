@@ -5,6 +5,12 @@
   "name": "Workflow Error example",
   "description": "An example of how to handle an exception thrown by a service",
   "start": "checkEven",
+  "errors": [
+    {
+      "name": "odd number",
+      "code": "java.lang.RuntimeException"
+     }
+  ],
   "functions": [
     {
       "name": "isEven",
@@ -56,8 +62,7 @@
       "transition": "even",
       "onErrors": [
         {
-          "error": "odd or sqrt number",
-          "code": "java.lang.RuntimeException",
+          "errorRef": "odd number",
           "transition": "odd"
         }
       ]

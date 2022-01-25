@@ -4,6 +4,12 @@
   "name": "Query Answer Service",
   "expressionLang": "jsonpath",
   "description": "A simple SW example that coordinates the formulation of a query and it's resolution by using an external service",
+  "errors" : [
+    {
+      "name": "execution error",
+      "code": "javax.ws.rs.ProcessingException"
+    }
+  ],
   "start": "Initialization",
   "events": [
     {
@@ -112,8 +118,7 @@
       "transition": "Register Answer",
       "onErrors": [
         {
-          "error": "execution error",
-          "code": "javax.ws.rs.ProcessingException",
+          "errorRef": "execution error",
           "transition": "Process query service error"
         }
       ]

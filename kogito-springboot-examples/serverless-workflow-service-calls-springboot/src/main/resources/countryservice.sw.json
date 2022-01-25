@@ -60,7 +60,7 @@
           }
         }
       ],
-      "default": {
+      "defaultCondition": {
         "transition": "ClassifyAsSmallOrMedium"
       }
     },
