@@ -26,6 +26,7 @@ import org.junit.jupiter.api.TestInstance;
 import org.kie.kogito.testcontainers.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.test.autoconfigure.actuate.metrics.AutoConfigureMetrics;
 import org.testcontainers.containers.DockerComposeContainer;
 import org.testcontainers.containers.output.Slf4jLogConsumer;
 import org.testcontainers.containers.wait.strategy.Wait;
@@ -40,6 +41,7 @@ import static org.hamcrest.core.IsNot.not;
 
 @Testcontainers
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@AutoConfigureMetrics
 public class GrafanaDockerComposeIT {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GrafanaDockerComposeIT.class);
