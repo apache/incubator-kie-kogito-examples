@@ -58,7 +58,7 @@
           "transition": "ClassifyAsLarge"
         }
       ],
-      "default": {
+      "defaultCondition": {
         "transition": "ClassifyAsSmallOrMedium"
       }
     },

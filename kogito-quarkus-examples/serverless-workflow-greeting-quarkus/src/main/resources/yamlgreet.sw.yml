@@ -16,7 +16,7 @@ states:
         transition: GreetInEnglish
       - condition: "{{ $.[?(@.language  == 'Spanish')] }}"
         transition: GreetInSpanish
-    default:
+    defaultCondition:
       transition: GreetInEnglish
   - name: GreetInEnglish
     type: inject

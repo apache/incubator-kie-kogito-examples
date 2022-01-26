@@ -20,8 +20,10 @@ states:
     type: parallel
     branches:
       - name: HandleFraudEvaluation
-        workflowId: fraudhandling
+        actions:
+           - subFlowRef: fraudhandling
       - name: HandleShippingType
-        workflowId: shippinghandling
-    completionType: and
+        actions:
+           - subFlowRef: shippinghandling
+    completionType: allOf
     end: true
