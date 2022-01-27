@@ -8,9 +8,8 @@
   "functions": [
     {
       "name": "greetFunction",
-      "metadata": {
-        "type": "sysout"
-      }
+      "type": "custom",
+      "operation": "sysout"
     }
   ],
   "states": [

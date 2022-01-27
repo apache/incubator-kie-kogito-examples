@@ -22,11 +22,8 @@
   "functions": [
     {
       "name": "printInstanceId",
-      "metadata": {
-        "interface": "org.kie.kogito.examples.PrintService",
-        "operation": "printKogitoProcessId",
-        "type": "service"
-      }
+      "type": "custom",
+      "operation": "service:java:org.kie.kogito.examples.PrintService::printKogitoProcessId"
     }
   ],
   "states": [
