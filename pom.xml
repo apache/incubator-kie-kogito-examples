@@ -15,7 +15,7 @@
   <packaging>pom</packaging>
 
   <name>Kogito Example</name>
-  <description>Kogito Example test</description>
+  <description>Kogito Example</description>
 
   <url>http://kogito.kie.org</url>
   <inceptionYear>2019</inceptionYear>
