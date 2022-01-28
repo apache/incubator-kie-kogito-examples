@@ -27,7 +27,7 @@
           "transition": "GreetInSpanish"
         }
       ],
-      "default": {
+      "defaultCondition": {
         "transition": "GreetInEnglish"
       }
     },

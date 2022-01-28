@@ -1,0 +1,26 @@
+---
+openapi: 3.0.3
+info:
+  title: query-service API
+  version: 2.0.0-SNAPSHOT
+paths:
+  /query-service/sendQuery:
+    post:
+      operationId: sendQuery
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueryRequest'
+      responses:
+        "200":
+          description: OK
+components:
+  schemas:
+    QueryRequest:
+      type: object
+      properties:
+        processInstanceId:
+          type: string
+        query:
+          type: string

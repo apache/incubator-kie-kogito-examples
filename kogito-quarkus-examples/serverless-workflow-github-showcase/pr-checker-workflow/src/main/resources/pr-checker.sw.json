@@ -52,11 +52,11 @@
       "branches": [
         {
           "name": "HandleBackendSubFlow",
-          "workflowId": "handle_backend"
+          "actions" : [{"subFlowRef":"handle_backend" }] 
         },
         {
           "name": "HandleFrontendSubFlow",
-          "workflowId": "handle_frontend"
+          "actions" : [{"subFlowRef":"handle_frontend" }]
         }
       ],
       "end": {

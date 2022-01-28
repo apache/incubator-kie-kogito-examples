@@ -3,6 +3,8 @@
   "version": "1.0",
   "name": "Workflow Callback example",
   "description": "An example of how to use callback state",
+  "errors": [{"name": "execution error",
+          "code": "java.util.concurrent.CompletionException"}],
   "start": "createModel",
   "events": [
     {
@@ -20,11 +22,8 @@
   "functions": [
     {
       "name": "printInstanceId",
-      "metadata": {
-        "interface": "org.kie.kogito.examples.PrintService",
-        "operation": "printKogitoProcessId",
-        "type": "service"
-      }
+      "type": "custom",
+      "operation": "service:java:org.kie.kogito.examples.PrintService::printKogitoProcessId"
     }
   ],
   "states": [
@@ -54,8 +53,7 @@
         },
         "onErrors": [
         {
-          "error": "execution error",
-          "code": "java.util.concurrent.CompletionException",
+          "errorRef": "execution error",
           "end": true
         }
         ],

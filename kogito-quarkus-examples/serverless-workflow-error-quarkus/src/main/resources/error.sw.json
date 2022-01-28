@@ -5,20 +5,27 @@
   "name": "Workflow Error example",
   "description": "An example of how to handle an exception thrown by a service",
   "start": "checkEven",
+  "errors": [
+    {
+      "name": "odd number",
+      "code": "java.lang.RuntimeException"
+     }
+  ],
   "functions": [
     {
       "name": "isEven",
-      "metadata": {
-        "interface": "org.kie.kogito.examples.EvenService",
-        "operation": "isEven",
-        "type": "service"
-      }
+      "type": "custom",
+      "operation": "service:java:org.kie.kogito.examples.EvenService::isEven"
+    },
+    {
+      "name": "isSqr",
+      "type": "custom",
+      "operation": "service:java:org.kie.kogito.examples.EvenService::isSquare"
     },
     {
       "name": "printMessage",
-      "metadata": {
-        "type": "sysout"
-      }
+      "type": "custom",
+       "operation": "sysout"
     }
   ],
   "states": [
@@ -34,13 +41,21 @@
               "number": "$.number"
             }
           }
+        },
+        {
+          "name": "checkSqrAction",
+          "functionRef": {
+            "refName": "isSqr",
+            "arguments": {
+              "number": "$.number"
+            }
+          }
         }
       ],
       "transition": "even",
       "onErrors": [
         {
-          "error": "odd number",
-          "code": "java.lang.IllegalArgumentException",
+          "errorRef": "odd number",
           "transition": "odd"
         }
       ]
