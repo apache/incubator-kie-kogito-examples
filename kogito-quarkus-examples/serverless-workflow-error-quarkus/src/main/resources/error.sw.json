@@ -14,25 +14,18 @@
   "functions": [
     {
       "name": "isEven",
-      "metadata": {
-        "interface": "org.kie.kogito.examples.EvenService",
-        "operation": "isEven",
-        "type": "service"
-      }
+      "type": "custom",
+      "operation": "service:java:org.kie.kogito.examples.EvenService::isEven"
     },
     {
       "name": "isSqr",
-      "metadata": {
-        "interface": "org.kie.kogito.examples.EvenService",
-        "operation": "isSquare",
-        "type": "service"
-      }
+      "type": "custom",
+      "operation": "service:java:org.kie.kogito.examples.EvenService::isSquare"
     },
     {
       "name": "printMessage",
-      "metadata": {
-        "type": "sysout"
-      }
+      "type": "custom",
+       "operation": "sysout"
     }
   ],
   "states": [

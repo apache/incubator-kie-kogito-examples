@@ -6,8 +6,8 @@ expressionLang: jsonpath
 start: ChooseOnLanguage
 functions:
   - name: greetFunction
-    metadata:
-      type: sysout
+    type: custom
+    operation: sysout
 states:
   - name: ChooseOnLanguage
     type: switch
