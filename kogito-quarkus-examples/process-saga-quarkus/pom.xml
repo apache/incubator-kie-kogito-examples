@@ -13,7 +13,6 @@
   <description>How to implement Saga with a BPMN Process using Compensations</description>
 
   <properties>
-    <version.io.quarkus>2.6.0.Final</version.io.quarkus>
     <quarkus-plugin.version>2.7.0.Final</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
