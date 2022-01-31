@@ -45,7 +45,7 @@ In your local machine you will need:
 
 1. To clone this repository and go to `serverless-workflow-github-showcase` directory (`git clone https://github.com/kiegroup/kogito-examples.git && cd serverless-workflow-github-showcase`)
 2. [Java 11 SDK](https://openjdk.java.net/install/)
-3. [Maven 3.6.3+](https://maven.apache.org/install.html)
+3. [Maven 3.8.1+](https://maven.apache.org/install.html)
 4. [Podman](https://podman.io/getting-started/installation.html) or Docker to build the images
 5. `kubectl` or `oc` client
 
