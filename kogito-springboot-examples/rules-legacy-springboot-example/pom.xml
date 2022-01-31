@@ -7,7 +7,7 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>kogito-springboot-examples</artifactId>
-    <version>1.16.1-SNAPSHOT</version>
+    <version>1.16.1.Final</version>
   </parent>
   <artifactId>rules-legacy-springboot-example</artifactId>
   <name>Kogito Example :: Rules Legacy API - Spring Boot</name>

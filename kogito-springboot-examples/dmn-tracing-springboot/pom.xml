@@ -8,7 +8,7 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>kogito-springboot-examples</artifactId>
-    <version>1.16.1-SNAPSHOT</version>
+    <version>1.16.1.Final</version>
   </parent>
   <artifactId>dmn-tracing-springboot</artifactId>
   <name>Kogito Example :: DMN Tracing - Spring Boot</name>
