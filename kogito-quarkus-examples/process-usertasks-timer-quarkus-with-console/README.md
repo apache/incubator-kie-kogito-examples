@@ -27,7 +27,7 @@ The required *Kogito and Infrastructure Services* for this example are:
 
 * Java 11+ installed
 * Environment variable JAVA_HOME set accordingly
-* Maven 3.6.2+ installed
+* Maven 3.8.1+ installed
 * Docker and Docker Compose to run the required example infrastructure.
 
 And when using native image compilation, you will also need: 

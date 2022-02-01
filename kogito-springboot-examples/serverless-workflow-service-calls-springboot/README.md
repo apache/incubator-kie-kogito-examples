@@ -22,7 +22,7 @@ service to store the data before it finishes execution.
 You will need:
   - Java 11+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.6.2+ installed
+  - Maven 3.8.1+ installed
 
 ### Compile and Run in Local Dev Mode
 
