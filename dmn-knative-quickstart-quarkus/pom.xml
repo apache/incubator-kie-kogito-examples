@@ -54,11 +54,7 @@
 
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-addons-quarkus-cloudevents</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-reactive-messaging-http</artifactId>
+      <artifactId>kogito-addons-quarkus-knative-eventing</artifactId>
     </dependency>
 
     <dependency>
