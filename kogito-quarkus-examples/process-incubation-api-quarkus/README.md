@@ -18,7 +18,7 @@ The custom REST endpoint evaluates a process that expects a name:
 You will need:
   - Java 11+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven installed
+  - Maven 3.8.1+ installed
 
 ### Compile and Run in Local Dev Mode
 
