@@ -12,6 +12,7 @@
 
   <artifactId>kogito-springboot-examples</artifactId>
   <packaging>pom</packaging>
+  <name>Kogito Example :: Spring Boot</name>
 
   <dependencyManagement>
     <dependencies>
