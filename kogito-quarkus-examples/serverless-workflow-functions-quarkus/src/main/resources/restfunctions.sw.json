@@ -7,25 +7,18 @@
     "functions": [
         {
             "name": "randomNumber",
-            "operation": "/numbers/random",
-            "metadata": {
-                "method": "GET",
-                "type": "rest"
-            }
+            "type": "custom",
+            "operation": "rest:get:/numbers/random"
         },
         {
             "name": "multiplyAllByRandomAndSum",
-            "operation": "/numbers/{multiplier}/multiplyByAndSum",
-            "metadata": {
-                "method": "POST",
-                "type": "rest"
-            }
+            "type": "custom",
+            "operation": "rest:post:/numbers/{multiplier}/multiplyByAndSum"
         },
         {
             "name": "debug",
-            "metadata": {
-                "type": "sysout"
-            }
+            "type": "custom",
+            "operation": "sysout"
         }
     ],
     "states": [

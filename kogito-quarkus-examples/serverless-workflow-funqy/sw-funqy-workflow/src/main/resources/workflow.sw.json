@@ -41,14 +41,17 @@
   "functions": [
     {
       "name": "countryFunction",
+      "type": "rest",
       "operation": "services.json#country"
     },
     {
       "name": "populationFunction",
+      "type": "rest",
       "operation": "services.json#population"
     },
     {
       "name": "classificationFunction",
+      "type": "rest",
       "operation": "services.json#classify"
     }
   ]

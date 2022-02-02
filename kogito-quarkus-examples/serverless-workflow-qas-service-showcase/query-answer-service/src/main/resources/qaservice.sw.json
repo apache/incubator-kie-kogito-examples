@@ -4,6 +4,12 @@
   "name": "Query Answer Service",
   "expressionLang": "jsonpath",
   "description": "A simple SW example that coordinates the formulation of a query and it's resolution by using an external service",
+  "errors" : [
+    {
+      "name": "execution error",
+      "code": "javax.ws.rs.ProcessingException"
+    }
+  ],
   "start": "Initialization",
   "events": [
     {
@@ -15,37 +21,28 @@
   "functions": [
     {
       "name": "executeScript",
-      "metadata": {
-        "type": "script"
-      }
+      "type": "custom",
+      "operation": "script"
     },
     {
       "name": "sendQuery",
+      "type": "rest",
       "operation": "specs/query-service.yaml#sendQuery"
     },
     {
       "name": "registerQuery",
-      "metadata": {
-        "interface": "org.acme.QueryAnswerServiceHelper",
-        "operation": "registerQuery",
-        "type": "service"
-      }
+      "type": "custom",
+      "operation": "service:java:org.acme.QueryAnswerServiceHelper::registerQuery"
     },
     {
       "name": "registerAnswer",
-      "metadata": {
-        "interface": "org.acme.QueryAnswerServiceHelper",
-        "operation": "registerAnswer",
-        "type": "service"
-      }
+      "type": "custom",
+      "operation": "service:java:org.acme.QueryAnswerServiceHelper::registerAnswer"
     },
     {
       "name": "registerError",
-      "metadata": {
-        "interface": "org.acme.QueryAnswerServiceHelper",
-        "operation": "registerError",
-        "type": "service"
-      }
+      "type": "custom",
+      "operation": "service:java:org.acme.QueryAnswerServiceHelper::registerError"
     }
   ],
   "states": [
@@ -112,8 +109,7 @@
       "transition": "Register Answer",
       "onErrors": [
         {
-          "error": "execution error",
-          "code": "javax.ws.rs.ProcessingException",
+          "errorRef": "execution error",
           "transition": "Process query service error"
         }
       ]

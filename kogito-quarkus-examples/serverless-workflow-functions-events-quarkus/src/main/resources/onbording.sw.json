@@ -42,27 +42,18 @@
   "functions": [
     {
       "name": "StoreNewPatient",
-      "operation": "/onboarding/patient",
-      "metadata": {
-        "method": "POST",
-        "type": "rest"
-      }
+      "type": "custom",
+      "operation": "rest:post:/onboarding/patient"
     },
     {
       "name": "AssignDoctorToPatient",
-      "operation": "/assign-doctor/first",
-      "metadata": {
-        "method": "POST",
-        "type": "rest"
-      }
+      "type": "custom",
+      "operation": "rest:post:/assign-doctor/first"
     },
     {
       "name": "SchedulePatientAppointment",
-      "operation": "/onboarding/schedule/appointment",
-      "metadata": {
-        "method": "POST",
-        "type": "rest"
-      }
+      "type": "custom",
+      "operation": "rest:post:/onboarding/schedule/appointment"
     }
   ]
 }

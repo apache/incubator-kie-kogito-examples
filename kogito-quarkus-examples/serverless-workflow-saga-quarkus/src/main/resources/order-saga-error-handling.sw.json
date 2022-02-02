@@ -3,6 +3,21 @@
   "version": "1.0",
   "name": "Order Fulfilment Workflow Saga example",
   "description": "An example of how to implement Saga for the Order Fulfilment example using Error Handling and Compensation",
+  "errors" : [
+    {
+      "name" : "reserve stock failed",
+      "code": "org.kie.kogito.ServiceException"
+    },
+    {
+      "name": "process payment failed",
+      "code": "org.kie.kogito.ServiceException"
+    },
+    {
+      "name": "shipping failed",
+      "code": "org.kie.kogito.ServiceException"
+    }
+    
+  ],
   "start": "reserveStock",
   "functions": [
     {
@@ -100,8 +115,7 @@
       "compensatedBy": "CancelStock",
       "onErrors": [
         {
-          "error": "reserve stock failed",
-          "code": "org.kie.kogito.ServiceException",
+          "errorRef": "reserve stock failed",
           "transition": "ServiceError"
         }
       ]
@@ -129,8 +143,7 @@
       "compensatedBy": "CancelPayment",
       "onErrors": [
         {
-          "error": "process payment failed",
-          "code": "org.kie.kogito.ServiceException",
+          "errorRef": "process payment failed",
           "transition": "ServiceError"
         }
       ]
@@ -158,8 +171,7 @@
       "compensatedBy": "CancelShipping",
       "onErrors": [
         {
-          "error": "shipping failed",
-          "code": "org.kie.kogito.ServiceException",
+          "errorRef": "shipping failed",
           "transition": "ServiceError"
         }
       ]

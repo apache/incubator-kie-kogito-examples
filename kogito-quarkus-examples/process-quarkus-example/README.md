@@ -15,7 +15,7 @@ Based on these two processes (defined using BPMN 2.0 format), the custom data ob
 You will need:
   - Java 11+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.6.2+ installed
+  - Maven 3.8.1+ installed
 
 When using native image compilation, you will also need:
   - [GraalVM 19.1.1](https://github.com/oracle/graal/releases/tag/vm-19.1.1) installed
