@@ -4,7 +4,7 @@
 ## Description
 
 **Kogito Travel Agency** and **Kogito Visas** communicate completely via events. First **Kogito Travel Agency** sends visa applications 
-for those travellers thar require visas to visit given country, next based on visa application evaluation, **Kogito Visas**  sends back 
+for those travellers that require visas to visit given country, next based on visa application evaluation *(by user alice)*, **Kogito Visas**  sends back 
 the response with the visa processing outcome - approved or rejected.
 
 
