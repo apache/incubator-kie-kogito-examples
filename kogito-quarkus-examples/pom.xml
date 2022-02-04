@@ -12,6 +12,7 @@
 
   <artifactId>kogito-quarkus-examples</artifactId>
   <packaging>pom</packaging>
+  <name>Kogito Example :: Quarkus</name>
 
   <properties>
     <!-- Port 0 means dynamic port -->
