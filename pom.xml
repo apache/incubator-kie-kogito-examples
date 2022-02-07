@@ -6,7 +6,7 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.kie.kogito</groupId>
-    <artifactId>kogito-build-parent</artifactId>
+    <artifactId>kogito-build-no-bom-parent</artifactId>
     <version>1.11.2-SNAPSHOT</version>
   </parent>
 
@@ -48,6 +48,10 @@
     <version.org.optaplanner>8.11.2-SNAPSHOT</version.org.optaplanner>
     <!-- override default to fast-jar packaging for forward-compatibility -->
     <quarkus.package.type>fast-jar</quarkus.package.type>
+    <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
+    <quarkus.platform.version>2.2.3.Final</quarkus.platform.version>
+    <quarkus-plugin.version>2.2.3.Final</quarkus-plugin.version>
+
   </properties>
 
   <!-- distributionManagement section -->
@@ -396,9 +400,9 @@
     <pluginManagement>
       <plugins>
         <plugin>
-          <groupId>io.quarkus</groupId>
+          <groupId>${quarkus.platform.group-id}</groupId>
           <artifactId>quarkus-maven-plugin</artifactId>
-          <version>${version.io.quarkus}</version>
+          <version>${quarkus-plugin.version}</version>
         </plugin>
         <plugin>
           <groupId>org.springframework.boot</groupId>
@@ -639,5 +643,4 @@
       </plugin>
     </plugins>
   </build>
-
 </project>
