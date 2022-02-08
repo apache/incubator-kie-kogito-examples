@@ -65,6 +65,7 @@
 </div>
 <script>
     const graphql = '{config:property('kogito.dataindex.http.url') or 'http://localhost:8180'}/graphql';
+    const userFilter = "?user=alice";
 
     $(function () {
         $.ajaxSetup({
@@ -183,7 +184,7 @@
         };
         var visaApplicationRequest = JSON.stringify(\{application: vapplication\});
 
-        $.post("/visaApplications/" + $("#visa_p_id").val() + "/ApplicationApproval/" + $("#visa_t_id").val(), visaApplicationRequest, function () {
+        $.post("/visaApplications/" + $("#visa_p_id").val() + "/ApplicationApproval/" + $("#visa_t_id").val() + userFilter, visaApplicationRequest, function () {
 
         }, "json");
     }
@@ -196,7 +197,7 @@
             var id = button.data('id');
             var modal = $(this);
 
-            $.getJSON("/visaApplications/" + id + "/tasks", function (data) {
+            $.getJSON("/visaApplications/" + id + "/tasks"+userFilter, function (data) {
                 $.each(data, function (key, val) {
                     if ("ApplicationApproval" == val.name) {
                         modal.find('.modal-title').text("Visa application for " + button.data("lastname") + ", " + button.data("firstname"));

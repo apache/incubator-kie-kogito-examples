@@ -72,6 +72,7 @@
 </div>
 <script>
     const graphql = '{config:property('kogito.dataindex.http.url') or 'http://localhost:8180'}/graphql';
+    const userFilter = "?user=jdoe";
 
     $(function () {
         $.ajaxSetup({
@@ -164,7 +165,7 @@
         };
         var visaApplicationRequest = JSON.stringify(\{visaApplication: application\});
 
-        $.post("/travels/" + $("#visa_p_id").val() + "/VisaApplication/" + $("#visa_t_id").val(), visaApplicationRequest, function () {
+        $.post("/travels/" + $("#visa_p_id").val() + "/VisaApplication/" + $("#visa_t_id").val() + userFilter, visaApplicationRequest, function () {
 
         }, "json");
     }
@@ -350,7 +351,7 @@
             modal.find('.modal-title').text("Tasks for " + button.data("lastname") + ", " + button.data("firstname"));
 
             $("#taskscontent").children().remove();
-            $.getJSON("/travels/" + id + "/tasks", function (data) {
+            $.getJSON("/travels/" + id + "/tasks"+userFilter, function (data) {
                 $.each(data, function (key, val) {
                     if ("VisaApplication" == val.name) {
                         $("<tr><td>" + val.name + "</td>" +
@@ -368,7 +369,7 @@
                     } else {
                         $("<tr><td>" + val.name + "</td>" +
                                 "<td>" +
-                                "<button class='btn btn-primary btn-sm' onclick=\"completeTask('" + id + "', '" + val.name + "', '" + val.id + "')\" data-dismiss=\"modal\" " +
+                                "<button class='btn btn-primary btn-sm' onclick=\"completeTask('" + id + "', '" + val.name + "', '" + val.id + userFilter + "')\" data-dismiss=\"modal\" " +
                                 "   <span>Complete</span>" +
                                 "</button>" +
                                 "</td>" +
@@ -386,7 +387,7 @@
                 var modal = $(this);
                 modal.find('.modal-title').text("Visa application");
 
-                $.getJSON("/travels/" + id + "/VisaApplication/" + taskid, function (data) {
+                $.getJSON("/travels/" + id + "/VisaApplication/" + taskid + userFilter, function (data) {
 
                     $("#visa_firstName").val(data.parameters.traveller.firstName);
                     $("#visa_lastName").val(data.parameters.traveller.lastName);
