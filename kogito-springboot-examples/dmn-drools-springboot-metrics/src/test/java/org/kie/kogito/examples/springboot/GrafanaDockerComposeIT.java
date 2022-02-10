@@ -137,6 +137,6 @@ public class GrafanaDockerComposeIT {
                 .when()
                 .get("/actuator/prometheus")
                 .then()
-                .header("Content-Type", "text/plain; version=0.0.4;charset=utf-8");
+                .header("Content-Type", "text/plain;version=0.0.4;charset=utf-8");
     }
 }
