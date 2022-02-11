@@ -76,11 +76,6 @@
     </dependency>
     <dependency>
       <groupId>io.cloudevents</groupId>
-      <artifactId>cloudevents-api</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.cloudevents</groupId>
       <artifactId>cloudevents-json-jackson</artifactId>
       <scope>test</scope>
     </dependency>
