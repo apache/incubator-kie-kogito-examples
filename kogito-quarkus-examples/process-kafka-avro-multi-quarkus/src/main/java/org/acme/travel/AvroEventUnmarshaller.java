@@ -29,7 +29,7 @@ public class AvroEventUnmarshaller implements EventUnmarshaller<Object> {
     AvroUtils avroUtils;
 
     @Override
-    public <T> T unmarshall(Object input, Class<T> outputClass) throws IOException {
-        return avroUtils.readObject((byte[]) input, outputClass);
+    public <T> T unmarshall(Object input, Class<T> outputClass, Class<?>... parametrizedClasses) throws IOException {
+        return avroUtils.readObject((byte[]) input, outputClass, parametrizedClasses);
     }
 }

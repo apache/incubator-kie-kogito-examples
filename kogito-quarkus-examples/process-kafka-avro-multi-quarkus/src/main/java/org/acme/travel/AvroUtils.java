@@ -17,12 +17,14 @@ package org.acme.travel;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Objects;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 import org.apache.avro.reflect.ReflectData;
 
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.dataformat.avro.AvroMapper;
 import com.fasterxml.jackson.dataformat.avro.AvroSchema;
 
@@ -43,8 +45,10 @@ public class AvroUtils {
         }
     }
 
-    public <T> T readObject(byte[] payload, Class<T> outputClass) throws IOException {
-        return (T) avroMapper.readerFor(outputClass)
+    public <T> T readObject(byte[] payload, Class<T> outputClass, Class<?>... parametrizedClasses) throws IOException {
+        final JavaType type = Objects.isNull(parametrizedClasses) ? avroMapper.getTypeFactory().constructType(outputClass)
+                : avroMapper.getTypeFactory().constructParametricType(outputClass, parametrizedClasses);
+        return avroMapper.readerFor(type)
                 .with(getSchema(outputClass))
                 .readValue(payload);
     }
