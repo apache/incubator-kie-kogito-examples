@@ -92,7 +92,7 @@ public class QueryServiceResource {
         try {
             return objectMapper.writeValueAsString(CloudEventBuilder.v1()
                     .withId(UUID.randomUUID().toString())
-                    .withSource(URI.create(""))
+                    .withSource(URI.create("query-service"))
                     .withType("query_response_events")
                     .withTime(OffsetDateTime.now())
                     .withExtension("kogitoprocrefid", processInstanceId)
