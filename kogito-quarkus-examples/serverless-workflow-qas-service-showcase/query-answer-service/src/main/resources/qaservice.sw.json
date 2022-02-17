@@ -2,7 +2,6 @@
   "id": "qaservice",
   "version": "1.0",
   "name": "Query Answer Service",
-  "expressionLang": "jsonpath",
   "description": "A simple SW example that coordinates the formulation of a query and it's resolution by using an external service",
   "errors" : [
     {
@@ -20,9 +19,9 @@
   ],
   "functions": [
     {
-      "name": "executeScript",
+      "name": "printMessage",
       "type": "custom",
-      "operation": "script"
+      "operation": "sysout"
     },
     {
       "name": "sendQuery",
@@ -53,18 +52,9 @@
         {
           "name": "printWorkflowDataAction",
           "functionRef": {
-            "refName": "executeScript",
+            "refName": "printMessage",
             "arguments": {
-              "script": "org.acme.QueryAnswerServiceScripts.printWorkflowData(\"Workflowdata received as process parameter\", kcontext);"
-            }
-          }
-        },
-        {
-          "name": "initializeDataAction",
-          "functionRef": {
-            "refName": "executeScript",
-            "arguments": {
-              "script": "org.acme.QueryAnswerServiceScripts.initializationScript(kcontext);"
+              "message": "\\\"Workflowdata received as process parameter\\\"+(.|tostring)"
             }
           }
         },
@@ -84,9 +74,9 @@
         {
           "name": "printWorkflowDataAction",
           "functionRef": {
-            "refName": "executeScript",
+            "refName": "printMessage",
             "arguments": {
-              "script": "org.acme.QueryAnswerServiceScripts.printWorkflowData(\"Workflowdata after Initialization\", kcontext);"
+              "message": "\\\"Workflowdata after Initialization\\\"+(.|tostring)"
             }
           }
         }
@@ -101,7 +91,7 @@
         "functionRef": {
           "refName": "sendQuery",
           "arguments": {
-            "queryRequest": {"processInstanceId": "$.processInstanceId", "query": "$.query" }
+            "queryRequest": {"processInstanceId": "$CONTEXT.workflowInstanceId", "query": ".query" }
           }
         }
       },
@@ -121,9 +111,9 @@
         {
           "name": "printWorkflowDataAction",
           "functionRef": {
-            "refName": "executeScript",
+            "refName": "printMessage",
             "arguments": {
-              "script": "org.acme.QueryAnswerServiceScripts.printWorkflowData(\"Workflowdata before executing registerAnswerAction\", kcontext);"
+               "message": "\\\"Workflowdata before executing registerAnswer\\\"+(.|tostring)"
             }
           }
         },
@@ -151,9 +141,9 @@
         {
           "name": "printWorkflowDataAction",
           "functionRef": {
-            "refName": "executeScript",
+            "refName": "printMessage",
             "arguments": {
-              "script": "org.acme.QueryAnswerServiceScripts.printWorkflowData(\"Workflowdata before executing registerErrorAction\", kcontext);"
+               "message": "\\\"Workflowdata before executing registerErrorAction\\\"+(.|tostring)"
             }
           }
         },
@@ -173,9 +163,9 @@
         {
           "name": "printWorkflowDataAction",
           "functionRef": {
-            "refName": "executeScript",
+            "refName": "printMessage",
             "arguments": {
-              "script": "org.acme.QueryAnswerServiceScripts.printWorkflowData(\"Workflowdata at process finalization\", kcontext);"
+               "message": "\\\"Workflowdata when finishing workflow\\\"+(.|tostring)"
             }
           }
         }
