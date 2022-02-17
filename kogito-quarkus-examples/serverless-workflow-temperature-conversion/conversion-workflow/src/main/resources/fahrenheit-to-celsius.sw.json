@@ -34,7 +34,7 @@
           "functionRef": {
             "refName": "subtraction",
             "arguments": {
-              "subtractionOperation": "{ \\\"leftElement\\\": \\\"$.fahrenheit\\\", \\\"rightElement\\\": \\\"$.subtractValue\\\" }"
+              "subtractionOperation": { "leftElement": "$.fahrenheit", "rightElement": "$.subtractValue" }
             }
           }
         },
@@ -43,7 +43,7 @@
           "functionRef": {
             "refName": "multiplication",
             "arguments": {
-              "multiplicationOperation": "{ \\\"leftElement\\\": \\\"$.subtraction.difference\\\", \\\"rightElement\\\": \\\"$.multiplyValue\\\" }"
+              "multiplicationOperation": { "leftElement": "$.subtraction.difference", "rightElement": "$.multiplyValue" }
             }
           }
         }

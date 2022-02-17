@@ -37,6 +37,9 @@
                         "refName": "multiplyAllByRandomAndSum",
                         "arguments": {
                             "numbers": "$.inputNumbers",
+                            "additionalData" : {
+                              "numbers": "$.inputNumbers"
+                            },
                             "multiplier": "$.randomNumber"
                         }
                     }
