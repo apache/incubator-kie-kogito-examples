@@ -275,6 +275,38 @@
         <module>process-optaplanner-quarkus</module>
       </modules>
     </profile>
+           
+    <profile>
+      <id>kogito-apps-downstream</id>
+      <activation>
+        <property>
+          <name>kogito-apps</name>
+        </property>
+      </activation>
+      <modules>
+        <module>trusty-tracing-quarkus-devservices</module>
+      </modules>
+    </profile>
+
+    <profile>
+      <id>kogito-apps-downstream-native</id>
+      <activation>
+        <property>
+          <name>kogito-apps-native</name>
+        </property>
+      </activation>
+      <properties>
+        <failsafe.include>**/Native*IT.java</failsafe.include>
+        <failsafe.exclude></failsafe.exclude>
+        <quarkus.package.type>native</quarkus.package.type>
+        <!-- Native building needs a fixed port for tests -->
+        <tests.quarkus.http.port>8080</tests.quarkus.http.port>
+      </properties>
+      <!-- To update once there are kogito-apps needed modules in native -->
+      <!-- modules>
+        <module>process-optaplanner-quarkus</module>
+      </modules -->
+    </profile>
   </profiles>
 
   <build>
