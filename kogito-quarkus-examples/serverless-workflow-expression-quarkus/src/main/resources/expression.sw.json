@@ -2,6 +2,16 @@
   "id": "expression",
   "version": "1.0",
   "name": "Workflow Expression example",
+  "constants" : {
+    "Dog" : {
+      "castellano" : "perro",
+      "leones": "perru",
+      "gallego" : "can",
+      "aragones" : "cocho",
+      "catalan" : "gos",
+      "vasco": "txakurra"
+    }
+  },
   "description": "An example of how to use a JQ expression assignment",
   "start": "squareState",
   "functions": [

@@ -16,9 +16,9 @@ states:
   - name: ShippingHandling
     type: switch
     dataConditions:
-      - condition: "{{ $.[?(@.country == 'US')] }}"
+      - condition: "${ $.[?(@.country == 'US')] }"
         transition: DomesticShipping
-      - condition: "{{ $.[?(@.country != 'US')] }}"
+      - condition: "${ $.[?(@.country != 'US')] }"
         transition: InternationalShipping
   - name: DomesticShipping
     type: inject
