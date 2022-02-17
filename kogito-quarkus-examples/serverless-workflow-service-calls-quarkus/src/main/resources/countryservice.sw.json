@@ -50,11 +50,11 @@
       "type": "switch",
       "dataConditions": [
         {
-          "condition": "{{ $.response[0].[?(@.population < 20000000)] }}",
+          "condition": "${ $.response[0].[?(@.population < 20000000)] }",
           "transition": "ClassifyAsSmallOrMedium"
         },
         {
-          "condition": "{{ $.response[0].[?(@.population >= 20000000)] }}",
+          "condition": "${ $.response[0].[?(@.population >= 20000000)] }",
           "transition": "ClassifyAsLarge"
         }
       ],

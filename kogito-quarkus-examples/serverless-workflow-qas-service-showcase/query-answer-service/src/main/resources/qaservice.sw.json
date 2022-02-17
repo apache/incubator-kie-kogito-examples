@@ -101,7 +101,7 @@
         "functionRef": {
           "refName": "sendQuery",
           "arguments": {
-            "queryRequest": "{ \\\"processInstanceId\\\": \\\"$.processInstanceId\\\", \\\"query\\\": \\\"$.query\\\" }"
+            "queryRequest": {"processInstanceId": "$.processInstanceId", "query": "$.query" }
           }
         }
       },
