@@ -4,10 +4,10 @@ metadata:
   name: response-events-sb-query-service
 spec:
   sink:
-  ref:
-    apiVersion: eventing.knative.dev/v1
-    kind: Broker
-    name: default
+    ref:
+      apiVersion: eventing.knative.dev/v1
+      kind: Broker
+      name: default
   subject:
     apiVersion: serving.knative.dev/v1
     kind: Service
