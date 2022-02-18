@@ -181,6 +181,12 @@
         <quarkus.profile>persistence</quarkus.profile>
         <enable.resource.postgresql>true</enable.resource.postgresql>
       </properties>
+      <dependencies>
+        <dependency>
+          <groupId>io.quarkus</groupId>
+          <artifactId>quarkus-smallrye-reactive-messaging-kafka</artifactId>
+        </dependency>
+      </dependencies>
     </profile>
     <profile>
       <id>kafka</id>
