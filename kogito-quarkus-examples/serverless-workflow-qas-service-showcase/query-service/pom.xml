@@ -18,6 +18,7 @@
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
     <kogito.bom.version>${project.version}</kogito.bom.version>
+    <version.io.quarkiverse.reactivemessaging.http>1.0.1</version.io.quarkiverse.reactivemessaging.http>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -55,16 +56,17 @@
       <artifactId>quarkus-smallrye-openapi</artifactId>
     </dependency>
     <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-smallrye-reactive-messaging-kafka</artifactId>
-    </dependency>
-    <dependency>
       <groupId>io.cloudevents</groupId>
       <artifactId>cloudevents-core</artifactId>
     </dependency>
     <dependency>
       <groupId>io.cloudevents</groupId>
       <artifactId>cloudevents-json-jackson</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkiverse.reactivemessaging.http</groupId>
+      <artifactId>quarkus-reactive-messaging-http</artifactId>
+      <version>${version.io.quarkiverse.reactivemessaging.http}</version>
     </dependency>
 
     <dependency>
@@ -179,6 +181,52 @@
         <quarkus.profile>persistence</quarkus.profile>
         <enable.resource.postgresql>true</enable.resource.postgresql>
       </properties>
+      <dependencies>
+        <dependency>
+          <groupId>io.quarkus</groupId>
+          <artifactId>quarkus-smallrye-reactive-messaging-kafka</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
+    <profile>
+      <id>kafka</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <quarkus.profile>kafka</quarkus.profile>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>io.quarkus</groupId>
+          <artifactId>quarkus-smallrye-reactive-messaging-kafka</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
+    <profile>
+      <id>knative</id>
+      <properties>
+        <!-- Shortcuts -->
+        <namespace>default</namespace>
+        <deploy>false</deploy>
+        <!-- Quarkus Knative integration to build and deploy -->
+        <quarkus.kubernetes.namespace>${namespace}</quarkus.kubernetes.namespace>
+        <quarkus.kubernetes.deploy>${deploy}</quarkus.kubernetes.deploy>
+        <quarkus.container-image.build>true</quarkus.container-image.build>
+        <quarkus.profile>knative</quarkus.profile>
+        <enable.resource.postgresql>true</enable.resource.postgresql>
+        <skipTests>true</skipTests>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>io.quarkus</groupId>
+          <artifactId>quarkus-kubernetes</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>io.quarkus</groupId>
+          <artifactId>quarkus-container-image-jib</artifactId>
+        </dependency>
+      </dependencies>
     </profile>
   </profiles>
 </project>
