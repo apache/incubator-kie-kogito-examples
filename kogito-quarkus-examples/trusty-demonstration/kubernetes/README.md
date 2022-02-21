@@ -168,7 +168,7 @@ kubectl expose deployment dmn-tracing-quarkus -n ${PROJECT_NAME}  --type=NodePor
 minikube service dmn-tracing-quarkus-np -n ${PROJECT_NAME}
 ```
 
-A new tab in your browser should be opened automatically. Navigate under the path `/swagger-ui` and execute a post request on the endpoint `LoanEligibility` with the following payload: 
+A new tab in your browser should be opened automatically. Navigate under the path `/q/swagger-ui` and execute a post request on the endpoint `LoanEligibility` with the following payload: 
 ```json
 {"Bribe": 1000,"Client": {"age": 43,"existing payments": 100,"salary": 1950},"Loan": {"duration": 15,"installment": 180}, "SupremeDirector": "Yes"}
 ```
