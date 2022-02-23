@@ -12,7 +12,7 @@ pipeline {
     }
 
     tools {
-        maven 'kie-maven-3.6.3'
+        maven 'kie-maven-3.8.1'
         jdk 'kie-jdk11'
     }
 
@@ -97,12 +97,15 @@ pipeline {
         stage('Build kogito-examples') {
             steps {
                 script {
-                    getMavenCommand().skipTests(params.SKIP_TESTS).run('clean install')
+                    getMavenCommand().withProperty('maven.test.failure.ignore', true).skipTests(params.SKIP_TESTS).run('clean install')
                 }
             }
             post {
                 always {
-                    saveReports(params.SKIP_TESTS)
+                    script {
+                        saveReports()
+                        util.archiveConsoleLog()
+                    }
                 }
             }
         }
@@ -113,12 +116,16 @@ pipeline {
                     getMavenCommand("${getRepoName()}-persistence")
                         .skipTests(params.SKIP_TESTS)
                         .withProfiles(['persistence'])
+                        .withProperty('maven.test.failure.ignore', true)
                         .run('clean install')
                 }
             }
             post {
                 always {
-                    saveReports(params.SKIP_TESTS)
+                    script {
+                        saveReports()
+                        util.archiveConsoleLog()
+                    }
                 }
             }
         }
@@ -129,12 +136,16 @@ pipeline {
                     getMavenCommand("${getRepoName()}-events")
                         .skipTests(params.SKIP_TESTS)
                         .withProfiles(['events'])
+                        .withProperty('maven.test.failure.ignore', true)
                         .run('clean install')
                 }
             }
             post {
                 always {
-                    saveReports(params.SKIP_TESTS)
+                    script {
+                        saveReports()
+                        util.archiveConsoleLog()
+                    }
                 }
             }
         }
@@ -186,16 +197,11 @@ pipeline {
             }
             steps {
                 commitAndCreatePR()
-            }
-            post {
-                success {
-                    script {
-                        setDeployPropertyIfNeeded("${getRepoName()}.pr.source.uri", "https://github.com/${getBotAuthor()}/${getRepoName()}")
-                        setDeployPropertyIfNeeded("${getRepoName()}.pr.source.ref", getBotBranch())
-                        setDeployPropertyIfNeeded("${getRepoName()}.pr.target.uri", "https://github.com/${getGitAuthor()}/${getRepoName()}")
-                        setDeployPropertyIfNeeded("${getRepoName()}.pr.target.ref", getBuildBranch())
-                    }
-                }
+                
+                setDeployPropertyIfNeeded("${getRepoName()}.pr.source.uri", "https://github.com/${getBotAuthor()}/${getRepoName()}")
+                setDeployPropertyIfNeeded("${getRepoName()}.pr.source.ref", getBotBranch())
+                setDeployPropertyIfNeeded("${getRepoName()}.pr.target.uri", "https://github.com/${getGitAuthor()}/${getRepoName()}")
+                setDeployPropertyIfNeeded("${getRepoName()}.pr.target.ref", getBuildBranch())
             }
         }
         stage('Update nightly branch') {
@@ -234,16 +240,14 @@ pipeline {
 
 void sendNotification() {
     if (params.SEND_NOTIFICATION) {
-        emailext body: "**Deploy job** #${BUILD_NUMBER} was: ${currentBuild.currentResult}\nPlease look here: ${BUILD_URL}",
-             subject: "[${getBuildBranch()}] Kogito Examples",
-             to: env.KOGITO_CI_EMAIL_TO
+        mailer.sendMarkdownTestSummaryNotification('Deploy', "[${getBuildBranch()}] Kogito Examples", [env.KOGITO_CI_EMAIL_TO])
     } else {
         echo 'No notification sent per configuration'
     }
 }
 
-void saveReports(boolean allowEmpty=false) {
-    junit testResults: '**/target/surefire-reports/**/*.xml, **/target/failsafe-reports/**/*.xml', allowEmptyResults: allowEmpty
+void saveReports() {
+    junit testResults: '**/target/surefire-reports/**/*.xml, **/target/failsafe-reports/**/*.xml', allowEmptyResults: true
 }
 
 void checkoutRepo() {
@@ -363,7 +367,7 @@ void setDeployPropertyIfNeeded(String key, def value) {
 
 MavenCommand getMavenCommand(String directory = '') {
     directory = directory ?: getRepoName()
-    MavenCommand mvnCmd = new MavenCommand(this, ['-fae'])
+    MavenCommand mvnCmd = new MavenCommand(this, ['-fae', '-ntp'])
                                 .withSettingsXmlId(env.MAVEN_SETTINGS_CONFIG_FILE_ID)
                                 .inDirectory(directory)
                                 .withProperty('full')
