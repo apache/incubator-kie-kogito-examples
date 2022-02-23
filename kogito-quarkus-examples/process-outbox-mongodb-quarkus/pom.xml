@@ -14,7 +14,7 @@
     <description>Process with Transactional Outbox - MongoDB and Quarkus</description>
 
     <properties>
-        <DEBEZIUM_VERSION>1.7</DEBEZIUM_VERSION>        
+        <DEBEZIUM_VERSION>1.7</DEBEZIUM_VERSION>
         <quarkus-plugin.version>2.7.1.Final</quarkus-plugin.version>
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
         <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>

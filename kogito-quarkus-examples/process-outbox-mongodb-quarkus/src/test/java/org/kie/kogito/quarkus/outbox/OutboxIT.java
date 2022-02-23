@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Red Hat, Inc. and/or its affiliates.
+ * Copyright 2022 Red Hat, Inc. and/or its affiliates.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.examples;
+package org.kie.kogito.quarkus.outbox;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -46,7 +46,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class OutboxIT {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(OutboxIT.class);
-    private static final Duration INITIAL_TIMEOUT = Duration.ofMinutes(5);
     private static final Duration TIMEOUT = Duration.ofMinutes(1);
     private static final Duration INTERVAL = Duration.ofSeconds(1);
 
@@ -70,6 +69,7 @@ public class OutboxIT {
             path = Paths.get("docker-compose.yml");
         }
         COMPOSE = new DockerComposeContainer(path.toFile());
+        COMPOSE.withPull(false);
         COMPOSE.withExposedService("kogito", KOGITO_PORT);
         COMPOSE.withExposedService("kafka", KAFKA_PORT);
         COMPOSE.withExposedService("connect", DEBEZIUM_PORT);
@@ -77,6 +77,8 @@ public class OutboxIT {
         COMPOSE.withLogConsumer("connect", logger());
         COMPOSE.withLogConsumer("sidecar", logger());
         COMPOSE.withLogConsumer("kogito", logger());
+        COMPOSE.waitingFor("kafka", Wait.forListeningPort());
+        COMPOSE.waitingFor("sidecar", Wait.forListeningPort());
         COMPOSE.waitingFor("kogito", Wait.forListeningPort());
         COMPOSE.start();
     }
@@ -111,7 +113,7 @@ public class OutboxIT {
     public void testSendProcessEvents() throws InterruptedException {
         // Check Debezium (Kafka, MongoDB) readiness
         await().ignoreExceptions()
-                .atMost(INITIAL_TIMEOUT)
+                .atMost(TIMEOUT)
                 .with().pollInterval(INTERVAL)
                 .untilAsserted(() -> given()
                         .port(kogitoPort)
@@ -122,7 +124,7 @@ public class OutboxIT {
 
         // Check Kogito App readiness
         await().ignoreExceptions()
-                .atMost(INITIAL_TIMEOUT)
+                .atMost(TIMEOUT)
                 .with().pollInterval(INTERVAL)
                 .untilAsserted(() -> given()
                         .port(debeziumPort)
