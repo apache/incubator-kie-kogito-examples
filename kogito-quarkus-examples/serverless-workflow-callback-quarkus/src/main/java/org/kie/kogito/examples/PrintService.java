@@ -21,16 +21,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionStage;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
-import org.eclipse.microprofile.reactive.messaging.Channel;
-import org.eclipse.microprofile.reactive.messaging.Emitter;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
 import org.eclipse.microprofile.reactive.messaging.Message;
+import org.eclipse.microprofile.reactive.messaging.Outgoing;
 import org.kie.kogito.event.cloudevents.CloudEventExtensionConstants;
 import org.kie.kogito.event.cloudevents.utils.CloudEventUtils;
 import org.kie.kogito.internal.process.runtime.KogitoProcessContext;
@@ -53,20 +50,16 @@ public class PrintService {
     @Inject
     ObjectMapper objectMapper;
 
-    @Inject
-    @Channel("out-wait")
-    Emitter<String> emitter;
-
     public void printKogitoProcessId(JsonNode workflowData, KogitoProcessContext context) {
         logger.info("Workflow data {}, KogitoProcessInstanceId {} ", workflowData, context.getProcessInstance().getStringId());
     }
 
     @Incoming("in-resume")
-    public CompletionStage<?> onEvent(Message<String> message) {
+    @Outgoing("out-wait")
+    public String onEvent(Message<String> message) {
         Optional<CloudEvent> ce = CloudEventUtils.decode(message.getPayload());
         JsonCloudEventData cloudEventData = (JsonCloudEventData) ce.get().getData();
-        emitter.send(generateCloudEvent(ce.get().getExtension(CloudEventExtensionConstants.PROCESS_INSTANCE_ID).toString(), cloudEventData.getNode().get("move").asText()));
-        return CompletableFuture.completedStage(null);
+        return generateCloudEvent(ce.get().getExtension(CloudEventExtensionConstants.PROCESS_INSTANCE_ID).toString(), cloudEventData.getNode().get("move").asText());
     }
 
     private String generateCloudEvent(String id, String input) {
