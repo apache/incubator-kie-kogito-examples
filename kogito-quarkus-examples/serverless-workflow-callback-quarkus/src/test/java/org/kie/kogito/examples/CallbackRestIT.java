@@ -21,6 +21,7 @@ import org.kie.kogito.testcontainers.quarkus.PostgreSqlQuarkusTestResource;
 
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusIntegrationTest;
+import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
@@ -31,6 +32,10 @@ import static org.awaitility.Awaitility.await;
 @QuarkusTestResource(KafkaQuarkusTestResource.class)
 @QuarkusTestResource(PostgreSqlQuarkusTestResource.Conditional.class)
 class CallbackRestIT {
+
+    static {
+        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+    }
 
     @Test
     void testCallbackRest() {

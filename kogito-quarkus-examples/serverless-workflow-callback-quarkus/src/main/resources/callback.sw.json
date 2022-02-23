@@ -3,8 +3,12 @@
   "version": "1.0",
   "name": "Workflow Callback example",
   "description": "An example of how to use callback state",
-  "errors": [{"name": "execution error",
-          "code": "java.util.concurrent.CompletionException"}],
+  "errors": [
+    {
+      "name": "execution error",
+      "code": "java.util.concurrent.CompletionException"
+    }
+  ],
   "start": "createModel",
   "events": [
     {
@@ -17,7 +21,6 @@
       "source": "",
       "type": "wait"
     }
-    
   ],
   "functions": [
     {
@@ -27,7 +30,7 @@
     }
   ],
   "states": [
-     {
+    {
       "name": "createModel",
       "type": "inject",
       "data": {
@@ -38,26 +41,25 @@
     {
       "name": "waitForEvent",
       "type": "callback",
-      "action": 
-        {
-          "name": "publishAction",
-          "eventRef": {
-            "triggerEventRef": "resumeEvent",
-            "data": "{move: .move}"
-          }
-        },
-        "eventRef" : "waitEvent",
-        "eventDataFilter" : {
-           "data" : ".result",
-           "toStateData" : ".move"
-        },
-        "onErrors": [
+      "action": {
+        "name": "publishAction",
+        "eventRef": {
+          "triggerEventRef": "resumeEvent",
+          "data": "{move: .move}"
+        }
+      },
+      "eventRef": "waitEvent",
+      "eventDataFilter": {
+        "data": ".result",
+        "toStateData": ".move"
+      },
+      "onErrors": [
         {
           "errorRef": "execution error",
           "end": true
         }
-        ],
-        "transition": "finish"
+      ],
+      "transition": "finish"
     },
     {
       "name": "finish",
