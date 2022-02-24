@@ -1,4 +1,4 @@
-apiVersion: kafka.strimzi.io/v1beta1
+apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaTopic
 metadata:
   name: trusty-explainability-request
@@ -8,7 +8,7 @@ spec:
   partitions: 1
   replicas: 1
 ---
-apiVersion: kafka.strimzi.io/v1beta1
+apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaTopic
 metadata:
   name: trusty-explainability-result
@@ -18,7 +18,7 @@ spec:
   partitions: 1
   replicas: 1
 ---
-apiVersion: kafka.strimzi.io/v1beta1
+apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaTopic
 metadata:
   name: kogito-tracing-decision
@@ -28,17 +28,7 @@ spec:
   partitions: 1
   replicas: 1
 ---
-apiVersion: kafka.strimzi.io/v1beta1
-kind: KafkaTopic
-metadata:
-  name: trusty-explainability-request
-  labels:
-    strimzi.io/cluster: "my-cluster"
-spec:
-  partitions: 1
-  replicas: 1
----
-apiVersion: kafka.strimzi.io/v1beta1
+apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaTopic
 metadata:
   name: kogito-tracing-model

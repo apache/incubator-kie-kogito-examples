@@ -5,7 +5,7 @@ metadata:
   name: kogito-kafka-infra
 spec:
   resource:
-    apiVersion: kafka.strimzi.io/v1beta1
+    apiVersion: kafka.strimzi.io/v1beta2
     kind: Kafka
 ---
 #Infinispan operator should be pre-installed in namespace

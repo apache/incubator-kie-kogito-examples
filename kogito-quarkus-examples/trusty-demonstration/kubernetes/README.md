@@ -90,7 +90,7 @@ Install `strimzi` operator with
 
 ```bash
 TARGET_DIR="."
-STRIMZI_VERSION=0.17.0
+STRIMZI_VERSION=0.28.0
 
 wget "https://github.com/strimzi/strimzi-kafka-operator/releases/download/${STRIMZI_VERSION}/strimzi-${STRIMZI_VERSION}.tar.gz" -P "$TARGET_DIR/"
 tar zxf "${TARGET_DIR}/strimzi-${STRIMZI_VERSION}.tar.gz" -C "$TARGET_DIR"
@@ -168,7 +168,7 @@ kubectl expose deployment dmn-tracing-quarkus -n ${PROJECT_NAME}  --type=NodePor
 minikube service dmn-tracing-quarkus-np -n ${PROJECT_NAME}
 ```
 
-A new tab in your browser should be opened automatically. Navigate under the path `/swagger-ui` and execute a post request on the endpoint `LoanEligibility` with the following payload: 
+A new tab in your browser should be opened automatically. Navigate under the path `/q/swagger-ui` and execute a post request on the endpoint `LoanEligibility` with the following payload: 
 ```json
 {"Bribe": 1000,"Client": {"age": 43,"existing payments": 100,"salary": 1950},"Loan": {"duration": 15,"installment": 180}, "SupremeDirector": "Yes"}
 ```
