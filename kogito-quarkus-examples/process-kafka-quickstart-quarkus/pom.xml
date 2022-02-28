@@ -83,13 +83,6 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-health</artifactId>
     </dependency>
-
-    <dependency>
-      <groupId>org.apache.kafka</groupId>
-      <artifactId>kafka-clients</artifactId>
-      <version>3.1.0</version>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
   <build>
     <finalName>${project.artifactId}</finalName>
