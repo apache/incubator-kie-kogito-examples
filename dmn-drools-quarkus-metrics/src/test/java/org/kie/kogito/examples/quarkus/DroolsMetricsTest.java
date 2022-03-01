@@ -45,7 +45,7 @@ public class DroolsMetricsTest {
                 .then()
                 .statusCode(200)
                 .body(containsString(
-                        String.format("drl_match_fired_nanosecond_count{app_id=\"default-rule-monitoring-listener\",artifactId=\"%s\",rule=\"helloWorld\",version=\"%s\",} 1.0", PROJECT_ARTIFACT_ID,
+                        String.format("drl_match_fired_nanosecond_count{app_id=\"default-rule-monitoring-listener\",artifactId=\"%s\",rule=\"helloWorld\",version=\"%s\",} 0.0", PROJECT_ARTIFACT_ID,
                                 PROJECT_VERSION)));
     }
 }
