@@ -25,6 +25,8 @@ import java.util.UUID;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
+import org.eclipse.microprofile.reactive.messaging.Acknowledgment;
+import org.eclipse.microprofile.reactive.messaging.Acknowledgment.Strategy;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
 import org.eclipse.microprofile.reactive.messaging.Message;
 import org.eclipse.microprofile.reactive.messaging.Outgoing;
@@ -56,6 +58,7 @@ public class PrintService {
 
     @Incoming("in-resume")
     @Outgoing("out-wait")
+    @Acknowledgment(Strategy.POST_PROCESSING)
     public String onEvent(Message<String> message) {
         Optional<CloudEvent> ce = CloudEventUtils.decode(message.getPayload());
         JsonCloudEventData cloudEventData = (JsonCloudEventData) ce.get().getData();
