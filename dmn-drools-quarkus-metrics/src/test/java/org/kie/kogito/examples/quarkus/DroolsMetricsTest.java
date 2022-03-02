@@ -45,8 +45,6 @@ public class DroolsMetricsTest {
                 .then()
                 .statusCode(200);
 
-        Thread.sleep(2000);
-
         given()
                 .when()
                 .get("/metrics")

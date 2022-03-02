@@ -79,8 +79,6 @@ public class ProcessMetricsTest {
         ProcessInstance<?> processInstance = orderProcess.createInstance(m);
         processInstance.start();
 
-        Thread.sleep(2000);
-
         given()
                 .when()
                 .get("/metrics")

@@ -73,8 +73,6 @@ public class LoanEligibilityTest {
                 .statusCode(200)
                 .body("'Decide'", is(false));
 
-        Thread.sleep(2000);
-
         given()
                 .when()
                 .get("/metrics")
