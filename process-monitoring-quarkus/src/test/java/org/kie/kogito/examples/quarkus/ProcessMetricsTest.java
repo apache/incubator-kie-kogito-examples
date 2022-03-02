@@ -61,7 +61,13 @@ public class ProcessMetricsTest {
     }
 
     @Test
-    public void testProcessMetricsQuarkus() {
+    public void testProcessMetricsQuarkus() throws Exception {
+        given()
+                .when()
+                .get("/metrics")
+                .then()
+                .statusCode(200);
+
         assertNotNull(orderProcess);
 
         Model m = orderProcess.createModel();
@@ -73,6 +79,8 @@ public class ProcessMetricsTest {
         ProcessInstance<?> processInstance = orderProcess.createInstance(m);
         processInstance.start();
 
+        Thread.sleep(2000);
+
         given()
                 .when()
                 .get("/metrics")
@@ -82,7 +90,7 @@ public class ProcessMetricsTest {
                         String.format("kogito_process_instance_running_total{app_id=\"default-process-monitoring-listener\",artifactId=\"%s\",process_id=\"demo.orders\",version=\"%s\",} 1.0",
                                 PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
                 .body(containsString(
-                        String.format("kogito_process_instance_started_total{app_id=\"default-process-monitoring-listener\",artifactId=\"%s\",process_id=\"demo.orderItems\",version=\"%s\",} 0.0",
+                        String.format("kogito_process_instance_started_total{app_id=\"default-process-monitoring-listener\",artifactId=\"%s\",process_id=\"demo.orderItems\",version=\"%s\",} 1.0",
                                 PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
                 .body(containsString(
                         String.format("kogito_process_instance_running_total{app_id=\"default-process-monitoring-listener\",artifactId=\"%s\",process_id=\"demo.orders\",version=\"%s\",} 1.0",
