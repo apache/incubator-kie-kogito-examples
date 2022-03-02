@@ -34,7 +34,13 @@ public class LoanEligibilityTest {
     private static final String PROJECT_ARTIFACT_ID = ProjectMetadataProvider.getProjectArtifactId();
 
     @Test
-    public void testEvaluateLoanEligibility() {
+    public void testEvaluateLoanEligibility() throws Exception {
+        given()
+                .when()
+                .get("/metrics")
+                .then()
+                .statusCode(200);
+
         // Approved Loan
         given()
                 .body("{" +

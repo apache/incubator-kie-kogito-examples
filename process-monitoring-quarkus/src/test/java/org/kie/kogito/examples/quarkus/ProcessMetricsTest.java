@@ -61,7 +61,13 @@ public class ProcessMetricsTest {
     }
 
     @Test
-    public void testProcessMetricsQuarkus() {
+    public void testProcessMetricsQuarkus() throws Exception {
+        given()
+                .when()
+                .get("/metrics")
+                .then()
+                .statusCode(200);
+
         assertNotNull(orderProcess);
 
         Model m = orderProcess.createModel();

@@ -10,11 +10,11 @@
   <artifactId>notification-service</artifactId>
   <name>Kogito Example :: Serverless Workflow Github Showcase :: Notification Service</name>
   <properties>
-    <quarkus-plugin.version>2.4.0.Final</quarkus-plugin.version>
+    <quarkus-plugin.version>2.7.2.Final</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
     <quarkus.native.enable-https-url-handler>true</quarkus.native.enable-https-url-handler>
-    <quarkus.platform.version>2.4.0.Final</quarkus.platform.version>
+    <quarkus.platform.version>2.7.2.Final</quarkus.platform.version>
   </properties>
   <dependencyManagement>
     <dependencies>

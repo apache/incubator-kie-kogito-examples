@@ -30,7 +30,13 @@ public class DroolsMetricsTest {
     private static final String PROJECT_ARTIFACT_ID = ProjectMetadataProvider.getProjectArtifactId();
 
     @Test
-    public void testDrlMetrics() {
+    public void testDrlMetrics() throws Exception {
+        given()
+                .when()
+                .get("/metrics")
+                .then()
+                .statusCode(200);
+
         given()
                 .body("{\"strings\": [\"hello\"]}")
                 .contentType(ContentType.JSON)
