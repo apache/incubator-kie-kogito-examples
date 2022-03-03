@@ -9,7 +9,7 @@
       "code": "java.util.concurrent.CompletionException"
     }
   ],
-  "start": "createModel",
+  "start": "waitForEvent",
   "events": [
     {
       "name": "resumeEvent",
@@ -19,7 +19,8 @@
     {
       "name": "waitEvent",
       "source": "",
-      "type": "wait"
+      "type": "wait",
+      "metadata" : { "dataOnly" : "false"}
     }
   ],
   "functions": [
@@ -31,26 +32,18 @@
   ],
   "states": [
     {
-      "name": "createModel",
-      "type": "inject",
-      "data": {
-        "move": "This is the initial data in the model"
-      },
-      "transition": "waitForEvent"
-    },
-    {
       "name": "waitForEvent",
       "type": "callback",
       "action": {
         "name": "publishAction",
         "eventRef": {
           "triggerEventRef": "resumeEvent",
-          "data": "{move: .move}"
+          "data": "{move: \"This is the initial data in the model\", processInstanceId: \"$WORKFLOW.instanceId\"}"
         }
       },
       "eventRef": "waitEvent",
       "eventDataFilter": {
-        "data": ".result",
+        "data": ".data.result",
         "toStateData": ".move"
       },
       "onErrors": [
