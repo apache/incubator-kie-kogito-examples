@@ -9,7 +9,7 @@
       "code": "java.util.concurrent.CompletionException"
     }
   ],
-  "start": "createModel",
+  "start": "waitForEvent",
   "events": [
     {
       "name": "resumeEvent",
@@ -31,21 +31,13 @@
   ],
   "states": [
     {
-      "name": "createModel",
-      "type": "inject",
-      "data": {
-        "move": "This is the initial data in the model"
-      },
-      "transition": "waitForEvent"
-    },
-    {
       "name": "waitForEvent",
       "type": "callback",
       "action": {
         "name": "publishAction",
         "eventRef": {
           "triggerEventRef": "resumeEvent",
-          "data": "{move: .move}"
+          "data": "{move: \"This is the initial data in the model\"}"
         }
       },
       "eventRef": "waitEvent",
