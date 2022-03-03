@@ -6,7 +6,7 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.kie.kogito</groupId>
-    <artifactId>kogito-build-parent</artifactId>
+    <artifactId>kogito-build-no-bom-parent</artifactId>
     <version>1.13.1-SNAPSHOT</version>
   </parent>
 
@@ -50,6 +50,10 @@
     <quarkus.package.type>fast-jar</quarkus.package.type>
     <!-- dependencies version -->
     <version.org.skyscreamer>1.5.0</version.org.skyscreamer>
+    <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
+    <quarkus.platform.version>2.7.2.Final</quarkus.platform.version>
+    <quarkus-plugin.version>2.7.2.Final</quarkus-plugin.version>
+
   </properties>
 
   <!-- distributionManagement section -->
@@ -457,9 +461,9 @@
     <pluginManagement>
       <plugins>
         <plugin>
-          <groupId>io.quarkus</groupId>
+          <groupId>${quarkus.platform.group-id}</groupId>
           <artifactId>quarkus-maven-plugin</artifactId>
-          <version>${version.io.quarkus}</version>
+          <version>${quarkus-plugin.version}</version>
         </plugin>
         <plugin>
           <groupId>org.springframework.boot</groupId>
@@ -700,5 +704,4 @@
       </plugin>
     </plugins>
   </build>
-
 </project>
