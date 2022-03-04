@@ -70,7 +70,7 @@
       </plugin>
       <plugin>
         <groupId>org.kie.kogito</groupId>
-        <artifactId>kogito-maven-plugin</artifactId>
+        <artifactId>kogito-processes-maven-plugin</artifactId>
         <extensions>true</extensions>
       </plugin>
     </plugins>
