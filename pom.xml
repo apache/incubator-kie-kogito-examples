@@ -51,8 +51,8 @@
     <!-- dependencies version -->
     <version.org.skyscreamer>1.5.0</version.org.skyscreamer>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-    <quarkus.platform.version>2.7.2.Final</quarkus.platform.version>
-    <quarkus-plugin.version>2.7.2.Final</quarkus-plugin.version>
+    <quarkus.platform.version>2.7.3.Final</quarkus.platform.version>
+    <quarkus-plugin.version>2.7.3.Final</quarkus-plugin.version>
 
   </properties>
 
