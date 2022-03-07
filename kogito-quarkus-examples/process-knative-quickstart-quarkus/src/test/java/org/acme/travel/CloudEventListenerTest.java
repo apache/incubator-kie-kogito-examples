@@ -15,20 +15,18 @@
  */
 package org.acme.travel;
 
-import javax.ws.rs.core.MediaType;
-
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.tomakehurst.wiremock.WireMockServer;
+import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.RestAssured;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.tomakehurst.wiremock.WireMockServer;
-
-import io.quarkus.test.junit.QuarkusTest;
-import io.restassured.RestAssured;
+import javax.ws.rs.core.MediaType;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.containing;
@@ -37,6 +35,8 @@ import static com.github.tomakehurst.wiremock.client.WireMock.postRequestedFor;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options;
 import static io.restassured.RestAssured.given;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.await;
 
 @QuarkusTest
 public class CloudEventListenerTest {
@@ -81,7 +81,7 @@ public class CloudEventListenerTest {
     }
 
     @Test
-    void checkStartNewProcessInstanceWithCE() throws JsonProcessingException, InterruptedException {
+    void checkStartNewProcessInstanceWithCE() throws JsonProcessingException {
         final ObjectMapper objectMapper = new ObjectMapper();
         final Traveller traveller = new Traveller();
         traveller.setFirstName("Jane");
@@ -97,14 +97,15 @@ public class CloudEventListenerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(objectMapper.writeValueAsString(traveller)).post("/").then().statusCode(200);
 
-        // have we received the message? We force the sleep since the WireMock framework doesn't support waiting/timeout verification
-        LOGGER.info("Waiting 2 seconds to receive the produced message");
-        Thread.sleep(2000);
-        sink.verify(1, postRequestedFor(urlEqualTo("/")).withRequestBody(containing("jane.doe@example.com")));
+        LOGGER.info("Waiting at most 2 seconds to receive the produced message");
+        await().atMost(2, SECONDS).untilAsserted(() -> sink.verify(1, postRequestedFor(urlEqualTo("/"))
+                .withHeader("Content-Type", containing("application/cloudevents+json"))
+                .withRequestBody(containing("jane.doe@example.com"))
+                .withRequestBody(containing("\"source\":\"/process/Travelers\""))));
     }
 
     @Test
-    void checkStartNewProcessInstanceWithSourceField() throws JsonProcessingException, InterruptedException {
+    void checkStartNewProcessInstanceWithSourceField() throws JsonProcessingException {
         final ObjectMapper objectMapper = new ObjectMapper();
         final Traveller traveller = new Traveller();
         traveller.setFirstName("Jane");
@@ -120,9 +121,10 @@ public class CloudEventListenerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(objectMapper.writeValueAsString(traveller)).post("/").then().statusCode(200);
 
-        // have we received the message? We force the sleep since the WireMock framework doesn't support waiting/timeout verification
-        LOGGER.info("Waiting 2 seconds to receive the produced message");
-        Thread.sleep(2000);
-        sink.verify(1, postRequestedFor(urlEqualTo("/")).withRequestBody(containing("jane.doe2@example.com")));
+        LOGGER.info("Waiting at most 2 seconds to receive the produced message");
+        await().atMost(2, SECONDS).untilAsserted(() -> sink.verify(1, postRequestedFor(urlEqualTo("/"))
+                .withHeader("Content-Type", containing("application/cloudevents+json"))
+                .withRequestBody(containing("jane.doe2@example.com"))
+                .withRequestBody(containing("\"source\":\"/process/Travelers\""))));
     }
 }
