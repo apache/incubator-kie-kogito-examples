@@ -9,7 +9,7 @@ kogitoExamplesRepo = 'kogito-examples'
 
 pipeline {
     agent {
-        label 'kie-rhel7 && kie-mem16g'
+        label 'kie-rhel7 && kie-mem24g'
     }
     tools {
         maven 'kie-maven-3.8.1'
