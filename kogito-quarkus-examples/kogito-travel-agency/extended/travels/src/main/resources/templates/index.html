@@ -106,7 +106,7 @@
               var received_msg = evt.data;
               let jsonObject = JSON.parse(received_msg);
                if(jsonObject.type === 'connection_ack'){
-                   ws.send('{"id" : "2", "type" : "start", "payload" : { "query" : "subscription { TravelsUpdated { id, traveller { lastName, firstName, email, nationality } trip { city, country, begin, end, visaRequired } hotel { name, bookingNumber, phone, address { street } } flight { flightNumber, departure, arrival } visaApplication { approved } metadata { processInstances { businessKey, state } } } }"}}');
+                   ws.send('{"id" : "2", "type" : "start", "payload" : { "query" : "subscription { TravelsUpdated { id, traveller { lastName, firstName, email, nationality } trip { city, country, begin, end, visaRequired } hotel { name, bookingNumber, phone, address { street } } flight { flightNumber, departure, arrival } visaResolution { approved } metadata { processInstances { businessKey, state } } } }"}}');
                } else if(jsonObject.type === 'data') {
                    var val = jsonObject.payload.data.TravelsUpdated;
 
@@ -185,7 +185,7 @@
                 "trip { city, country, begin, end, visaRequired } " +
                 "hotel { name, bookingNumber, phone, address { street } } " +
                 "flight { flightNumber, departure, arrival } " +
-                "visaApplication { approved } " +
+                "visaResolution { approved } " +
                 "metadata { processInstances { state, businessKey } } " +
                 "}}\"" +
                 "}";
@@ -213,7 +213,7 @@
               "<td>" + val.trip.country + ", " + val.trip.city + "</td>" +
               "<td>" + val.trip.begin.substring(0, 10) + " - " + val.trip.end.substring(0, 10) + "</td>" +
               "<td>" + (val.trip.visaRequired ? 'Yes' : 'No') + "</td>" +
-              "<td>" + (val.visaApplication != null ? (val.visaApplication.approved ? 'Yes' : 'No') : 'N/A')+ "</td>" +
+              "<td>" + (val.visaResolution != null ? (val.visaResolution.approved ? 'Yes' : 'No') : 'N/A')+ "</td>" +
               "<td>" + (val.hotel != null ? val.hotel.name : '') + "</td>" +
               "<td>" + (val.flight != null ? val.flight.flightNumber : '') + "</td>" +
               "<td>" +

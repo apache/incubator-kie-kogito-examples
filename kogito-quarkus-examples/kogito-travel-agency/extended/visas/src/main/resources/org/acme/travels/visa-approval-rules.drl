@@ -16,14 +16,14 @@
 package org.acme.travels
 
 import org.acme.travels.VisaApplication;
-
+import org.acme.travels.VisaResolution;
 
 rule "Visit Australia with e-visa up to 90 days" ruleflow-group "visa-approvals"
 
 when
     $application: VisaApplication(duration <= 90, country == "Australia")
 then
-    $application.setApproved(true);     
+    VisaResolution $resolution = new VisaResolution(true, "Visit Australia with e-visa up to 90 days violated"); 
 end
 
 rule "Visit US with e-visa up to 15 days" ruleflow-group "visa-approvals"
@@ -31,5 +31,12 @@ rule "Visit US with e-visa up to 15 days" ruleflow-group "visa-approvals"
 when
     $application: VisaApplication(duration <= 15, country == "US")
 then
-    $application.setApproved(true);     
+    VisaResolution $resolution = new VisaResolution(true, "Visit US with e-visa up to 15 days violated");
+end
+
+rule "Default rejection" ruleflow-group "visa-approvals"
+
+when
+then
+    VisaResolution $resolution = new VisaResolution(false, "Automatic approval not fulfilled"); 
 end
