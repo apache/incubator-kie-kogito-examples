@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_zKFowIDuEDqPj9OzBmYTog" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd http://www.omg.org/spec/DD/20100524/DC DC.xsd http://www.omg.org/spec/DD/20100524/DI DI.xsd " exporter="jBPM Process Modeler" exporterVersion="2.0" targetNamespace="http://www.omg.org/bpmn20">
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_hQ5McIFYEDq0xrbjKlKRWw" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd http://www.omg.org/spec/DD/20100524/DC DC.xsd http://www.omg.org/spec/DD/20100524/DI DI.xsd " exporter="jBPM Process Modeler" exporterVersion="2.0" targetNamespace="http://www.omg.org/bpmn20">
   <bpmn2:itemDefinition id="_travellerItem" structureRef="org.acme.travels.Traveller"/>
   <bpmn2:itemDefinition id="_tripItem" structureRef="org.acme.travels.Trip"/>
   <bpmn2:itemDefinition id="_hotelItem" structureRef="org.acme.travels.Hotel"/>
@@ -40,7 +40,6 @@
   <bpmn2:itemDefinition id="__24FBB8D6-EF2D-4DCC-846D-D8C5E21849D2_NotStartedNotifyInputXItem" structureRef="Object"/>
   <bpmn2:itemDefinition id="__24FBB8D6-EF2D-4DCC-846D-D8C5E21849D2_NotCompletedNotifyInputXItem" structureRef="Object"/>
   <bpmn2:itemDefinition id="__24FBB8D6-EF2D-4DCC-846D-D8C5E21849D2_visaApplicationInputXItem" structureRef="org.acme.travels.VisaApplication"/>
-  <bpmn2:itemDefinition id="__24FBB8D6-EF2D-4DCC-846D-D8C5E21849D2_visaApplicationOutputXItem" structureRef="org.acme.travels.VisaApplication"/>
   <bpmn2:itemDefinition id="__54ABE1ED-61BE-45F9-812C-795A5D4ED35E_namespaceInputXItem" structureRef="java.lang.String"/>
   <bpmn2:itemDefinition id="__54ABE1ED-61BE-45F9-812C-795A5D4ED35E_modelInputXItem" structureRef="java.lang.String"/>
   <bpmn2:itemDefinition id="__54ABE1ED-61BE-45F9-812C-795A5D4ED35E_decisionInputXItem" structureRef="java.lang.String"/>
@@ -54,9 +53,9 @@
   <bpmn2:itemDefinition id="__BDA56801-1155-4AF2-94D4-7DAADED2E3C0_Message_5_InputInputXItem" structureRef="org.acme.travels.VisaApplication"/>
   <bpmn2:itemDefinition id="visaapplicationsType" structureRef="org.acme.travels.VisaApplication"/>
   <bpmn2:error id="VisaRejected" errorCode="VisaRejected"/>
-  <bpmn2:message id="_zKM9gIDuEDqPj9OzBmYTog" itemRef="visasapprovedType" name="visasapproved"/>
-  <bpmn2:message id="_zKNkkIDuEDqPj9OzBmYTog" itemRef="visasrejectedType" name="visasrejected"/>
-  <bpmn2:message id="_zKNkkYDuEDqPj9OzBmYTog" itemRef="visaapplicationsType" name="visaapplications"/>
+  <bpmn2:message id="_hRAhMIFYEDq0xrbjKlKRWw" itemRef="visasapprovedType" name="visasapproved"/>
+  <bpmn2:message id="_hRBIQIFYEDq0xrbjKlKRWw" itemRef="visasrejectedType" name="visasrejected"/>
+  <bpmn2:message id="_hRBIQYFYEDq0xrbjKlKRWw" itemRef="visaapplicationsType" name="visaapplications"/>
   <bpmn2:process id="travels" drools:packageName="org.acme.travels" drools:version="1.0" drools:adHoc="false" name="travels" isExecutable="true" processType="Public">
     <bpmn2:property id="traveller" itemSubjectRef="_travellerItem" name="traveller"/>
     <bpmn2:property id="trip" itemSubjectRef="_tripItem" name="trip"/>
@@ -96,15 +95,18 @@
     <bpmn2:sequenceFlow id="_D5DA3A83-4BF0-48BE-B5AF-D38BFE2214DC" sourceRef="_175DC79D-C2F1-4B28-BE2D-B583DFABF70D" targetRef="_F543B3F0-AB44-4A5B-BF17-8D9DEB505815"/>
     <bpmn2:sequenceFlow id="_B2AD73E3-936A-4276-B823-F100A5491F33" sourceRef="_B9F2DFAB-ADFE-4E00-8D6B-25AD0F8985C2" targetRef="_2E27A318-8F46-4999-8B1B-A936475135F5"/>
     <bpmn2:sequenceFlow id="_6A0D7529-2827-49FD-9AF3-BC99E4D20A22" sourceRef="_2140F05A-364F-40B3-BB7B-B12927065DF8" targetRef="_4543C45C-1490-4E2B-8B90-1B60A790E5FA"/>
-    <bpmn2:sequenceFlow id="_826E7BA0-2694-4EE5-94CE-02A688866D92" sourceRef="_A8C9F331-8433-411D-91DB-B2060D4F8D14" targetRef="_7F75E8BD-3032-47EC-814F-66B197CA99C5">
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java"><![CDATA[return visaResolution.isApproved();]]></bpmn2:conditionExpression>
-    </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="_5B33AFBC-00A7-4960-B0BB-915E498FEAD5" sourceRef="_A8C9F331-8433-411D-91DB-B2060D4F8D14" targetRef="_E611283E-30B0-46B9-8305-768A002C7518">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java"><![CDATA[return !visaResolution.isApproved();]]></bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="_826E7BA0-2694-4EE5-94CE-02A688866D92" sourceRef="_A8C9F331-8433-411D-91DB-B2060D4F8D14" targetRef="_7F75E8BD-3032-47EC-814F-66B197CA99C5">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java"><![CDATA[return visaResolution.isApproved();]]></bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="_236C7093-24CC-461C-AC26-A0159DF8E449" sourceRef="_BDA56801-1155-4AF2-94D4-7DAADED2E3C0" targetRef="_A8C9F331-8433-411D-91DB-B2060D4F8D14"/>
     <bpmn2:sequenceFlow id="_6807E8C1-F6A8-4EAA-A723-AE547B99C506" sourceRef="_B34ADDEE-DEA5-47C5-A913-F8B85ED5641F" targetRef="_175DC79D-C2F1-4B28-BE2D-B583DFABF70D"/>
     <bpmn2:sequenceFlow id="_AFCA5CB8-347B-467E-91C7-408F73DBACC3" sourceRef="_7F75E8BD-3032-47EC-814F-66B197CA99C5" targetRef="_B34ADDEE-DEA5-47C5-A913-F8B85ED5641F"/>
+    <bpmn2:sequenceFlow id="_1099B9A2-BD99-438E-99EA-771282DA9483" sourceRef="_5EA95D17-59A6-4567-92DF-74D36CE7F35A" targetRef="_D22A04B8-7D92-4071-B073-5671B9EF1DFE">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java"><![CDATA[return trip.isVisaRequired();]]></bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="_6F3EEE4F-6232-480D-8CA8-916ECCD3F5E8" name="no need for visa" sourceRef="_5EA95D17-59A6-4567-92DF-74D36CE7F35A" targetRef="_B34ADDEE-DEA5-47C5-A913-F8B85ED5641F">
       <bpmn2:extensionElements>
         <drools:metaData name="elementname">
@@ -112,9 +114,6 @@
         </drools:metaData>
       </bpmn2:extensionElements>
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java"><![CDATA[return !trip.isVisaRequired();]]></bpmn2:conditionExpression>
-    </bpmn2:sequenceFlow>
-    <bpmn2:sequenceFlow id="_1099B9A2-BD99-438E-99EA-771282DA9483" sourceRef="_5EA95D17-59A6-4567-92DF-74D36CE7F35A" targetRef="_D22A04B8-7D92-4071-B073-5671B9EF1DFE">
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java"><![CDATA[return trip.isVisaRequired();]]></bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="_7B3955CE-F78F-4AFA-9897-A69C43DA6D37" sourceRef="_54ABE1ED-61BE-45F9-812C-795A5D4ED35E" targetRef="_5EA95D17-59A6-4567-92DF-74D36CE7F35A"/>
     <bpmn2:sequenceFlow id="_1D1BEBA0-97A4-4D67-A13D-A727104DA511" sourceRef="_1B11BEC9-402A-4E73-959A-296BD334CAB0" targetRef="_54ABE1ED-61BE-45F9-812C-795A5D4ED35E"/>
@@ -128,21 +127,22 @@
       </bpmn2:extensionElements>
       <bpmn2:incoming>_1099B9A2-BD99-438E-99EA-771282DA9483</bpmn2:incoming>
       <bpmn2:outgoing>_F84CA626-A7EC-48A0-90DD-4806EB4B2CC9</bpmn2:outgoing>
-      <bpmn2:script>System.out.println("SCRIPT TASK EXECUTED!!!!!!!");
-
-visaApplication = new org.acme.travels.VisaApplication();
+      <bpmn2:script>visaApplication = new org.acme.travels.VisaApplication();
 
 visaApplication.setFirstName(traveller.getFirstName());
 visaApplication.setLastName(traveller.getLastName());
 visaApplication.setCity(trip.getCity());
 visaApplication.setCountry(trip.getCountry());
+visaApplication.setPassportNumber(traveller.getPassportNumber());
+visaApplication.setNationality(traveller.getNationality());
 
 
 long difference = Math.abs(trip.getEnd().getTime() - trip.getBegin().getTime());
 long differenceDates = difference / (24 * 60 * 60 * 1000);
 
 visaApplication.setDuration((int)differenceDates);
-</bpmn2:script>
+
+kcontext.setVariable("visaApplication", visaApplication);</bpmn2:script>
     </bpmn2:scriptTask>
     <bpmn2:intermediateThrowEvent id="_BDA56801-1155-4AF2-94D4-7DAADED2E3C0" name="Send visa application">
       <bpmn2:extensionElements>
@@ -160,7 +160,7 @@ visaApplication.setDuration((int)differenceDates);
       <bpmn2:inputSet>
         <bpmn2:dataInputRefs>_BDA56801-1155-4AF2-94D4-7DAADED2E3C0_Message_5_InputInputX</bpmn2:dataInputRefs>
       </bpmn2:inputSet>
-      <bpmn2:messageEventDefinition drools:msgref="visaapplications" messageRef="_zKNkkYDuEDqPj9OzBmYTog"/>
+      <bpmn2:messageEventDefinition drools:msgref="visaapplications" messageRef="_hRBIQYFYEDq0xrbjKlKRWw"/>
     </bpmn2:intermediateThrowEvent>
     <bpmn2:parallelGateway id="_175DC79D-C2F1-4B28-BE2D-B583DFABF70D" name="Book" gatewayDirection="Diverging">
       <bpmn2:extensionElements>
@@ -188,7 +188,7 @@ visaApplication.setDuration((int)differenceDates);
       <bpmn2:outputSet>
         <bpmn2:dataOutputRefs>_E611283E-30B0-46B9-8305-768A002C7518_Message_3_OutputOutputX</bpmn2:dataOutputRefs>
       </bpmn2:outputSet>
-      <bpmn2:messageEventDefinition drools:msgref="visasrejected" messageRef="_zKNkkIDuEDqPj9OzBmYTog"/>
+      <bpmn2:messageEventDefinition drools:msgref="visasrejected" messageRef="_hRBIQIFYEDq0xrbjKlKRWw"/>
     </bpmn2:intermediateCatchEvent>
     <bpmn2:intermediateCatchEvent id="_7F75E8BD-3032-47EC-814F-66B197CA99C5" name="visasapproved">
       <bpmn2:extensionElements>
@@ -206,7 +206,7 @@ visaApplication.setDuration((int)differenceDates);
       <bpmn2:outputSet>
         <bpmn2:dataOutputRefs>_7F75E8BD-3032-47EC-814F-66B197CA99C5_Message_4_OutputOutputX</bpmn2:dataOutputRefs>
       </bpmn2:outputSet>
-      <bpmn2:messageEventDefinition drools:msgref="visasapproved" messageRef="_zKM9gIDuEDqPj9OzBmYTog"/>
+      <bpmn2:messageEventDefinition drools:msgref="visasapproved" messageRef="_hRAhMIFYEDq0xrbjKlKRWw"/>
     </bpmn2:intermediateCatchEvent>
     <bpmn2:businessRuleTask id="_54ABE1ED-61BE-45F9-812C-795A5D4ED35E" drools:ruleFlowGroup="visas" name="Visa check" implementation="http://www.jboss.org/drools/rule">
       <bpmn2:extensionElements>
@@ -254,16 +254,12 @@ visaApplication.setDuration((int)differenceDates);
         <bpmn2:dataInput id="_24FBB8D6-EF2D-4DCC-846D-D8C5E21849D2_visaApplicationInputX" drools:dtype="org.acme.travels.VisaApplication" itemSubjectRef="__24FBB8D6-EF2D-4DCC-846D-D8C5E21849D2_visaApplicationInputXItem" name="visaApplication"/>
         <bpmn2:dataInput id="_24FBB8D6-EF2D-4DCC-846D-D8C5E21849D2_SkippableInputX" drools:dtype="Object" itemSubjectRef="__24FBB8D6-EF2D-4DCC-846D-D8C5E21849D2_SkippableInputXItem" name="Skippable"/>
         <bpmn2:dataInput id="_24FBB8D6-EF2D-4DCC-846D-D8C5E21849D2_PriorityInputX" drools:dtype="Object" itemSubjectRef="__24FBB8D6-EF2D-4DCC-846D-D8C5E21849D2_PriorityInputXItem" name="Priority"/>
-        <bpmn2:dataOutput id="_24FBB8D6-EF2D-4DCC-846D-D8C5E21849D2_visaApplicationOutputX" drools:dtype="org.acme.travels.VisaApplication" itemSubjectRef="__24FBB8D6-EF2D-4DCC-846D-D8C5E21849D2_visaApplicationOutputXItem" name="visaApplication"/>
         <bpmn2:inputSet>
           <bpmn2:dataInputRefs>_24FBB8D6-EF2D-4DCC-846D-D8C5E21849D2_TaskNameInputX</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>_24FBB8D6-EF2D-4DCC-846D-D8C5E21849D2_visaApplicationInputX</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>_24FBB8D6-EF2D-4DCC-846D-D8C5E21849D2_SkippableInputX</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>_24FBB8D6-EF2D-4DCC-846D-D8C5E21849D2_PriorityInputX</bpmn2:dataInputRefs>
         </bpmn2:inputSet>
-        <bpmn2:outputSet>
-          <bpmn2:dataOutputRefs>_24FBB8D6-EF2D-4DCC-846D-D8C5E21849D2_visaApplicationOutputX</bpmn2:dataOutputRefs>
-        </bpmn2:outputSet>
       </bpmn2:ioSpecification>
       <bpmn2:dataInputAssociation>
         <bpmn2:targetRef>_24FBB8D6-EF2D-4DCC-846D-D8C5E21849D2_TaskNameInputX</bpmn2:targetRef>
@@ -290,12 +286,8 @@ visaApplication.setDuration((int)differenceDates);
           <bpmn2:to xsi:type="bpmn2:tFormalExpression"><![CDATA[_24FBB8D6-EF2D-4DCC-846D-D8C5E21849D2_PriorityInputX]]></bpmn2:to>
         </bpmn2:assignment>
       </bpmn2:dataInputAssociation>
-      <bpmn2:dataOutputAssociation>
-        <bpmn2:sourceRef>_24FBB8D6-EF2D-4DCC-846D-D8C5E21849D2_visaApplicationOutputX</bpmn2:sourceRef>
-        <bpmn2:targetRef>visaApplication</bpmn2:targetRef>
-      </bpmn2:dataOutputAssociation>
-      <bpmn2:potentialOwner id="_zKZx0IDuEDqPj9OzBmYTog">
-        <bpmn2:resourceAssignmentExpression id="_zKaY4IDuEDqPj9OzBmYTog">
+      <bpmn2:potentialOwner id="_hRLgUIFYEDq0xrbjKlKRWw">
+        <bpmn2:resourceAssignmentExpression id="_hRLgUYFYEDq0xrbjKlKRWw">
           <bpmn2:formalExpression>jdoe</bpmn2:formalExpression>
         </bpmn2:resourceAssignmentExpression>
       </bpmn2:potentialOwner>
@@ -356,8 +348,8 @@ visaApplication.setDuration((int)differenceDates);
           <bpmn2:to xsi:type="bpmn2:tFormalExpression"><![CDATA[_2140F05A-364F-40B3-BB7B-B12927065DF8_PriorityInputX]]></bpmn2:to>
         </bpmn2:assignment>
       </bpmn2:dataInputAssociation>
-      <bpmn2:potentialOwner id="_zKbnAIDuEDqPj9OzBmYTog">
-        <bpmn2:resourceAssignmentExpression id="_zKbnAYDuEDqPj9OzBmYTog">
+      <bpmn2:potentialOwner id="_hRMucIFYEDq0xrbjKlKRWw">
+        <bpmn2:resourceAssignmentExpression id="_hRMucYFYEDq0xrbjKlKRWw">
           <bpmn2:formalExpression>jdoe</bpmn2:formalExpression>
         </bpmn2:resourceAssignmentExpression>
       </bpmn2:potentialOwner>
@@ -433,8 +425,8 @@ visaApplication.setDuration((int)differenceDates);
         </drools:metaData>
       </bpmn2:extensionElements>
       <bpmn2:incoming>_236C7093-24CC-461C-AC26-A0159DF8E449</bpmn2:incoming>
-      <bpmn2:outgoing>_5B33AFBC-00A7-4960-B0BB-915E498FEAD5</bpmn2:outgoing>
       <bpmn2:outgoing>_826E7BA0-2694-4EE5-94CE-02A688866D92</bpmn2:outgoing>
+      <bpmn2:outgoing>_5B33AFBC-00A7-4960-B0BB-915E498FEAD5</bpmn2:outgoing>
     </bpmn2:eventBasedGateway>
     <bpmn2:exclusiveGateway id="_B34ADDEE-DEA5-47C5-A913-F8B85ED5641F" gatewayDirection="Converging">
       <bpmn2:incoming>_6F3EEE4F-6232-480D-8CA8-916ECCD3F5E8</bpmn2:incoming>
@@ -448,8 +440,8 @@ visaApplication.setDuration((int)differenceDates);
         </drools:metaData>
       </bpmn2:extensionElements>
       <bpmn2:incoming>_7B3955CE-F78F-4AFA-9897-A69C43DA6D37</bpmn2:incoming>
-      <bpmn2:outgoing>_1099B9A2-BD99-438E-99EA-771282DA9483</bpmn2:outgoing>
       <bpmn2:outgoing>_6F3EEE4F-6232-480D-8CA8-916ECCD3F5E8</bpmn2:outgoing>
+      <bpmn2:outgoing>_1099B9A2-BD99-438E-99EA-771282DA9483</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
     <bpmn2:startEvent id="_1B11BEC9-402A-4E73-959A-296BD334CAB0" name="StartProcess">
       <bpmn2:extensionElements>
@@ -569,15 +561,15 @@ visaApplication.setDuration((int)differenceDates);
         <di:waypoint x="248.66666666666669" y="180.26222962250804"/>
         <di:waypoint x="323.6666666666667" y="170.33333333333334"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="edge_shape__5EA95D17-59A6-4567-92DF-74D36CE7F35A_to_shape__D22A04B8-7D92-4071-B073-5671B9EF1DFE" bpmnElement="_1099B9A2-BD99-438E-99EA-771282DA9483">
-        <di:waypoint x="331.6666666666667" y="178.33333333333334"/>
-        <di:waypoint x="331.6666666666667" y="48.33333333333334"/>
-        <di:waypoint x="405.99999999999994" y="47"/>
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="edge_shape__5EA95D17-59A6-4567-92DF-74D36CE7F35A_to_shape__B34ADDEE-DEA5-47C5-A913-F8B85ED5641F" bpmnElement="_6F3EEE4F-6232-480D-8CA8-916ECCD3F5E8">
         <di:waypoint x="323.6666666666667" y="170.33333333333334"/>
         <di:waypoint x="331.6666499711511" y="296.33333333333337"/>
         <di:waypoint x="1030.6666666666667" y="290.33333333333337"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="edge_shape__5EA95D17-59A6-4567-92DF-74D36CE7F35A_to_shape__D22A04B8-7D92-4071-B073-5671B9EF1DFE" bpmnElement="_1099B9A2-BD99-438E-99EA-771282DA9483">
+        <di:waypoint x="331.6666666666667" y="178.33333333333334"/>
+        <di:waypoint x="331.6666666666667" y="48.33333333333334"/>
+        <di:waypoint x="405.99999999999994" y="47"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="edge_shape__7F75E8BD-3032-47EC-814F-66B197CA99C5_to_shape__B34ADDEE-DEA5-47C5-A913-F8B85ED5641F" bpmnElement="_AFCA5CB8-347B-467E-91C7-408F73DBACC3">
         <di:waypoint x="1025.6666666666667" y="167.33333333333334"/>
@@ -591,13 +583,13 @@ visaApplication.setDuration((int)differenceDates);
         <di:waypoint x="860.6666666666667" y="35.33333333333334"/>
         <di:waypoint x="1029.6666666666667" y="40.33333333333334"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="edge_shape__A8C9F331-8433-411D-91DB-B2060D4F8D14_to_shape__E611283E-30B0-46B9-8305-768A002C7518" bpmnElement="_5B33AFBC-00A7-4960-B0BB-915E498FEAD5">
-        <di:waypoint x="1029.6666666666667" y="40.33333333333334"/>
-        <di:waypoint x="1173.6666666666667" y="36.33333333333334"/>
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="edge_shape__A8C9F331-8433-411D-91DB-B2060D4F8D14_to_shape__7F75E8BD-3032-47EC-814F-66B197CA99C5" bpmnElement="_826E7BA0-2694-4EE5-94CE-02A688866D92">
         <di:waypoint x="1029.6666666666667" y="40.33333333333334"/>
         <di:waypoint x="1025.6666666666667" y="167.33333333333334"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="edge_shape__A8C9F331-8433-411D-91DB-B2060D4F8D14_to_shape__E611283E-30B0-46B9-8305-768A002C7518" bpmnElement="_5B33AFBC-00A7-4960-B0BB-915E498FEAD5">
+        <di:waypoint x="1029.6666666666667" y="40.33333333333334"/>
+        <di:waypoint x="1173.6666666666667" y="36.33333333333334"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="edge_shape__2140F05A-364F-40B3-BB7B-B12927065DF8_to_shape__4543C45C-1490-4E2B-8B90-1B60A790E5FA" bpmnElement="_6A0D7529-2827-49FD-9AF3-BC99E4D20A22">
         <di:waypoint x="1656.6666666666667" y="298.33333333333337"/>
@@ -790,7 +782,7 @@ visaApplication.setDuration((int)differenceDates);
         </bpsim:Scenario>
       </bpsim:BPSimData>
     </bpmn2:extensionElements>
-    <bpmn2:source>_zKFowIDuEDqPj9OzBmYTog</bpmn2:source>
-    <bpmn2:target>_zKFowIDuEDqPj9OzBmYTog</bpmn2:target>
+    <bpmn2:source>_hQ5McIFYEDq0xrbjKlKRWw</bpmn2:source>
+    <bpmn2:target>_hQ5McIFYEDq0xrbjKlKRWw</bpmn2:target>
   </bpmn2:relationship>
 </bpmn2:definitions>
