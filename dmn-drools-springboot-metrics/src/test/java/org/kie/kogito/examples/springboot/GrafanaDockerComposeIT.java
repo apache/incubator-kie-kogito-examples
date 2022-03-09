@@ -130,7 +130,7 @@ public class GrafanaDockerComposeIT {
         given()
                 .baseUri(KOGITO_APPLICATION_URL)
                 .when()
-                .get("/metrics")
+                .get("/actuator/prometheus")
                 .then()
                 .header("Content-Type", "text/plain;charset=UTF-8");
     }
