@@ -24,6 +24,7 @@ import org.kie.kogito.process.Process;
 import org.kie.kogito.process.ProcessInstanceReadMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.test.autoconfigure.actuate.metrics.AutoConfigureMetrics;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -39,6 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = DemoApplication.class)
+@AutoConfigureMetrics
 public class ProcessMetricsTest {
 
     private static final String PROJECT_VERSION = ProjectMetadataProvider.getProjectVersion();
@@ -87,7 +89,7 @@ public class ProcessMetricsTest {
 
         given()
                 .when()
-                .get("/metrics")
+                .get("/actuator/prometheus")
                 .then()
                 .statusCode(200)
                 .body(containsString(

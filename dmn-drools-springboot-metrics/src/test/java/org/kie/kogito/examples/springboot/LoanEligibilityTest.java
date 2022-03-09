@@ -20,6 +20,7 @@ import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.autoconfigure.actuate.metrics.AutoConfigureMetrics;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 
@@ -31,6 +32,7 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
+@AutoConfigureMetrics
 public class LoanEligibilityTest {
 
     private static final String PROJECT_VERSION = ProjectMetadataProvider.getProjectVersion();
@@ -84,7 +86,7 @@ public class LoanEligibilityTest {
 
         given()
                 .when()
-                .get("/metrics")
+                .get("/actuator/prometheus")
                 .then()
                 .statusCode(200)
                 .body(containsString(
