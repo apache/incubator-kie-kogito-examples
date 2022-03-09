@@ -585,6 +585,11 @@
           <artifactId>kogito-maven-plugin</artifactId>
           <version>${project.version}</version>
         </plugin>
+        <plugin>
+          <groupId>org.kie.kogito</groupId>
+          <artifactId>kogito-processes-maven-plugin</artifactId>
+          <version>${project.version}</version>
+        </plugin>
         <!-- Packaging -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
