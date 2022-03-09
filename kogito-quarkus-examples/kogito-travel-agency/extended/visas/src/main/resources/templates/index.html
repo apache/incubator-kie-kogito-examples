@@ -91,7 +91,7 @@
               var received_msg = evt.data;
               let jsonObject = JSON.parse(received_msg);
                if(jsonObject.type === 'connection_ack'){
-                   ws.send('{"id" : "2", "type" : "start", "payload" : { "query" : "subscription { VisaApplicationsUpdated { id, visaApplication { lastName, firstName, country, city, nationality, duration, passportNumber, approved } metadata { processInstances { state  } } } }"}}');
+                   ws.send('{"id" : "2", "type" : "start", "payload" : { "query" : "subscription { VisaApplicationsUpdated { id, visaApplication { lastName, firstName, country, city, nationality, duration, passportNumber }, visaResolution { approved },  metadata { processInstances { state  } } } }"}}');
                } else if(jsonObject.type === 'data') {
                    var val = jsonObject.payload.data.VisaApplicationsUpdated;
 
@@ -116,7 +116,8 @@
         var query = "{ \"query\": \"" +
                 "{ VisaApplications { " +
                 "id " +
-                "visaApplication { lastName, firstName, country, city, nationality, duration, passportNumber, approved } " +
+                "visaApplication { lastName, firstName, country, city, nationality, duration, passportNumber } " +
+                "visaResolution { approved } " +
                 "metadata { processInstances { state  } } " +
                 "}}\"" +
                 "}";
@@ -144,7 +145,7 @@
               "<td>" + val.visaApplication.duration + " days</td>" +
               "<td>" + val.visaApplication.passportNumber + "</td>" +
               "<td>" + val.visaApplication.nationality + "</td>" +
-              "<td>" + (val.visaApplication.approved ? 'Yes' : 'No') + "</td>" +
+              "<td>" + (val.visaResolution.approved ? 'Yes' : 'No') + "</td>" +
               "<td>";
       if (active) {
           html +=

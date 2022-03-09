@@ -96,7 +96,6 @@ public class Traveller {
         this.address = address;
     }
 
-
     public String getPassportNumber() {
         return passportNumber;
     }
@@ -108,7 +107,7 @@ public class Traveller {
     @Override
     public String toString() {
         return "Traveller [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", nationality="
-                + nationality + ", address=" + address + ", passportNumber="+ passportNumber + "]";
+                + nationality + ", address=" + address + ", passportNumber=" + passportNumber + "]";
     }
 
 }
