@@ -24,8 +24,6 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
-import javax.inject.Inject;
-
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -41,15 +39,16 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.cloudevents.core.builder.CloudEventBuilder;
+import io.cloudevents.jackson.JsonFormat;
 import io.quarkus.test.common.QuarkusTestResource;
-import io.quarkus.test.junit.QuarkusTest;
+import io.quarkus.test.junit.QuarkusIntegrationTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-@QuarkusTest
+@QuarkusIntegrationTest
 @QuarkusTestResource(KafkaQuarkusTestResource.class)
 public class MultiMessagingIT {
 
@@ -59,7 +58,6 @@ public class MultiMessagingIT {
 
     private static Logger LOGGER = LoggerFactory.getLogger(MultiMessagingIT.class);
 
-    @Inject
     private ObjectMapper objectMapper;
 
     public KafkaTestClient kafkaClient;
@@ -69,6 +67,8 @@ public class MultiMessagingIT {
 
     @BeforeEach
     public void setup() {
+        objectMapper = new ObjectMapper();
+        objectMapper.registerModule(JsonFormat.getCloudEventJacksonModule());
         kafkaClient = new KafkaTestClient(kafkaBootstrapServers);
     }
 
