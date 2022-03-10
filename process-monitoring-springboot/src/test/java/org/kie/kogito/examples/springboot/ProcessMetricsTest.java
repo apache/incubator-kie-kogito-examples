@@ -89,7 +89,7 @@ public class ProcessMetricsTest {
 
         given()
                 .when()
-                .get("/actuator/prometheus")
+                .get("/metrics")
                 .then()
                 .statusCode(200)
                 .body(containsString(
