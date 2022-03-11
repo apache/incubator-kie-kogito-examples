@@ -19,17 +19,21 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Stream;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.kie.kogito.test.quarkus.kafka.KafkaTestClient;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -121,21 +125,29 @@ public class DmnEventDrivenIT {
         }
     }
 
-    @Test
-    public void test() {
+    private static Stream<Arguments> test() {
+        List<Arguments> arguments = new ArrayList<>();
         for (String evaluationType : List.of("evaluate_all", "evaluate_decision_service")) {
             for (String resultType : List.of("context_only", "full_result")) {
                 for (String filterStatus : List.of("all", "filtered")) {
                     String basePath = String.join("/", "events", evaluationType, resultType, filterStatus);
-                    doTest(basePath);
+                    arguments.add(Arguments.of(basePath));
                 }
             }
         }
 
         for (String errorSubPath : List.of("bad_request/null_data", "bad_request/null_model", "model_not_found")) {
             String basePath = "events/error/" + errorSubPath;
-            doTest(basePath);
+            arguments.add(Arguments.of(basePath));
         }
+
+        return arguments.stream();
+    }
+
+    @ParameterizedTest
+    @MethodSource
+    public void test(String basePath) {
+        doTest(basePath);
     }
 
     private void assertCloudEventJsonEquals(String expectedJson, String actualJson) throws Exception {

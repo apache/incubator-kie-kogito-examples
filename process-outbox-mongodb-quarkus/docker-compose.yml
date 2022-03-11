@@ -1,44 +1,49 @@
 version: '2'
 services:
-  zookeeper:
-    image: debezium/zookeeper:${DEBEZIUM_VERSION}
-    ports:
-      - ${ZOOKEEPER_PORT}:2181
   kafka:
-    image: debezium/kafka:${DEBEZIUM_VERSION}
+    image: vectorized/redpanda:v21.11.8
     ports:
-      - ${KAFKA_PORT}:9092
-    links:
-      - zookeeper
-    depends_on:
-      - zookeeper
-    environment:
-      - ZOOKEEPER_CONNECT=zookeeper:2181
+      - "9092:9092"
+      - "29092:29092"
+    command:
+      - redpanda
+      - start
+      - --smp
+      - '1'
+      - --reserve-memory
+      - 0M
+      - --overprovisioned
+      - --node-id
+      - '0'
+      - --kafka-addr
+      - PLAINTEXT://0.0.0.0:29092,OUTSIDE://0.0.0.0:9092
+      - --advertise-kafka-addr
+      - PLAINTEXT://kafka:29092,OUTSIDE://localhost:9092
   kafdrop:
     image: obsidiandynamics/kafdrop
     ports:
-      - ${KAFDROP_PORT}:9000
+      - "9000:9000"
     links:
       - kafka
     depends_on:
       - kafka
     environment:
-      KAFKA_BROKERCONNECT: "kafka:9092"
+      KAFKA_BROKERCONNECT: "kafka:29092"
       JVM_OPTS: "-Xms32M -Xmx64M"
       SERVER_SERVLET_CONTEXTPATH: "/"
   mongodb:
     build: ./mongodb
-    image: kogito/outbox/mongodb
+    image: kogito/outbox/quarkus/mongodb
     hostname: mongodb
     ports:
-      - ${MONGODB_PORT}:27017
+      - "27017:27017"
     environment:
       - MONGODB_USER=debezium
       - MONGODB_PASSWORD=dbz
   connect:
     image: debezium/connect:${DEBEZIUM_VERSION}
     ports:
-      - ${DEBEZIUM_PORT}:8083
+      - "8083:8083"
     links:
       - kafka
       - mongodb
@@ -46,14 +51,14 @@ services:
       - kafka
       - mongodb
     environment:
-      - BOOTSTRAP_SERVERS=kafka:9092
+      - BOOTSTRAP_SERVERS=kafka:29092
       - GROUP_ID=1
       - CONFIG_STORAGE_TOPIC=kogito_connect_configs
       - OFFSET_STORAGE_TOPIC=kogito_connect_offsets
       - STATUS_STORAGE_TOPIC=kogito_connect_statuses
   sidecar:
     build: ./sidecar
-    image: kogito/outbox/sidecar
+    image: kogito/outbox/quarkus/sidecar
     links:
       - connect
       - mongodb
@@ -65,19 +70,20 @@ services:
       - MONGODB_RS=rs0
       - MONGODB_USER=debezium
       - MONGODB_PASSWORD=dbz
-      - KAFKA_HOST=kafka:9092
+      - KAFKA_HOST=kafka:29092
       - CONNECT_HOST=connect:8083
   kogito:
     build:
       context: ./kogito
       dockerfile: ${KOGITO_DOCKERFILE}
-    image: kogito/outbox/quarkus
+    image: kogito/outbox/quarkus/runtime
     ports:
-      - ${KOGITO_PORT}:8080
+      - "8080:8080"
     links:
       - mongodb
     depends_on:
       - mongodb
+      - sidecar
     environment:
       - QUARKUS_MONGODB_CONNECTION_STRING=mongodb://mongodb:27017
       - QUARKUS_MONGODB_CREDENTIALS_USERNAME=debezium
