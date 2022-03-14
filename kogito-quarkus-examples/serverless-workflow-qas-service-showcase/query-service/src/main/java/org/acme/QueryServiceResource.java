@@ -33,6 +33,7 @@ import javax.ws.rs.core.Response;
 
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Emitter;
+import org.eclipse.microprofile.reactive.messaging.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,6 +42,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.cloudevents.core.builder.CloudEventBuilder;
 import io.cloudevents.jackson.JsonCloudEventData;
+import io.quarkus.reactivemessaging.http.runtime.OutgoingHttpMetadata;
 
 @Path("query-service")
 @ApplicationScoped
@@ -83,7 +85,7 @@ public class QueryServiceResource {
     public Response resolveQuery(ResolveRequest request) {
         String event = generateCloudEvent(request.getProcessInstanceId(), request.getQueryResponse());
         LOGGER.debug("Resolving query for processInstanceId:{}, event to send is: {}", request.getProcessInstanceId(), event);
-        eventsEmitter.send(event);
+        eventsEmitter.send(Message.of(event).addMetadata(new OutgoingHttpMetadata.Builder().addHeader("content-type", "application/cloudevents+json").build()));
         repository.delete(request.getProcessInstanceId());
         return Response.ok("{}").build();
     }
@@ -92,7 +94,7 @@ public class QueryServiceResource {
         try {
             return objectMapper.writeValueAsString(CloudEventBuilder.v1()
                     .withId(UUID.randomUUID().toString())
-                    .withSource(URI.create(""))
+                    .withSource(URI.create("query-service"))
                     .withType("query_response_events")
                     .withTime(OffsetDateTime.now())
                     .withExtension("kogitoprocrefid", processInstanceId)

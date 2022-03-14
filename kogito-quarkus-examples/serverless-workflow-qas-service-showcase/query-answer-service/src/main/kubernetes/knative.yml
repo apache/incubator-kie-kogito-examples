@@ -1,0 +1,48 @@
+# deployment for postgres database
+apiVersion: v1
+data:
+  postgrespass: cGFzcwo=
+kind: Secret
+metadata:
+  name: qas-postgres
+type: Opaque
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "qas-postgres"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "qas-postgres"
+  template:
+    metadata:
+      labels:
+        app: "qas-postgres"
+    spec:
+      containers:
+        - env:
+            - name: "POSTGRES_PASSWORD"
+              valueFrom:
+                secretKeyRef:
+                  key: postgrespass
+                  name: qas-postgres
+          image: "postgres:13.4-alpine3.14"
+          imagePullPolicy: "Always"
+          name: "qas-postgres"
+          ports:
+            - containerPort: 5432
+              name: "tcp"
+              protocol: "TCP"
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: qas-postgres
+spec:
+  selector:
+    app: qas-postgres
+  ports:
+    - port: 5432
+  type: ClusterIP

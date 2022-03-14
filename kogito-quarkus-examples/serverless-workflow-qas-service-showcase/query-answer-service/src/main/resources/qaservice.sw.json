@@ -2,9 +2,8 @@
   "id": "qaservice",
   "version": "1.0",
   "name": "Query Answer Service",
-  "expressionLang": "jsonpath",
   "description": "A simple SW example that coordinates the formulation of a query and it's resolution by using an external service",
-  "errors" : [
+  "errors": [
     {
       "name": "execution error",
       "code": "javax.ws.rs.ProcessingException"
@@ -19,11 +18,6 @@
     }
   ],
   "functions": [
-    {
-      "name": "executeScript",
-      "type": "custom",
-      "operation": "script"
-    },
     {
       "name": "sendQuery",
       "type": "rest",
@@ -51,43 +45,9 @@
       "type": "operation",
       "actions": [
         {
-          "name": "printWorkflowDataAction",
-          "functionRef": {
-            "refName": "executeScript",
-            "arguments": {
-              "script": "org.acme.QueryAnswerServiceScripts.printWorkflowData(\"Workflowdata received as process parameter\", kcontext);"
-            }
-          }
-        },
-        {
-          "name": "initializeDataAction",
-          "functionRef": {
-            "refName": "executeScript",
-            "arguments": {
-              "script": "org.acme.QueryAnswerServiceScripts.initializationScript(kcontext);"
-            }
-          }
-        },
-        {
           "name": "registerQueryAction",
           "functionRef": {
             "refName": "registerQuery"
-          }
-        }
-      ],
-      "transition": "Print Initialized Data"
-    },
-    {
-      "name": "Print Initialized Data",
-      "type": "operation",
-      "actions": [
-        {
-          "name": "printWorkflowDataAction",
-          "functionRef": {
-            "refName": "executeScript",
-            "arguments": {
-              "script": "org.acme.QueryAnswerServiceScripts.printWorkflowData(\"Workflowdata after Initialization\", kcontext);"
-            }
           }
         }
       ],
@@ -101,7 +61,7 @@
         "functionRef": {
           "refName": "sendQuery",
           "arguments": {
-            "queryRequest": "{ \\\"processInstanceId\\\": \\\"$.processInstanceId\\\", \\\"query\\\": \\\"$.query\\\" }"
+            "queryRequest": "${{processInstanceId: \"$WORKFLOW.instanceId\", query: .query}}"
           }
         }
       },
@@ -119,22 +79,13 @@
       "type": "operation",
       "actions": [
         {
-          "name": "printWorkflowDataAction",
-          "functionRef": {
-            "refName": "executeScript",
-            "arguments": {
-              "script": "org.acme.QueryAnswerServiceScripts.printWorkflowData(\"Workflowdata before executing registerAnswerAction\", kcontext);"
-            }
-          }
-        },
-        {
           "name": "registerAnswerAction",
           "functionRef": {
             "refName": "registerAnswer"
           }
         }
       ],
-      "transition": "Finalize process"
+      "end": true
     },
     {
       "name": "Process query service error",
@@ -149,38 +100,13 @@
       "type": "operation",
       "actions": [
         {
-          "name": "printWorkflowDataAction",
-          "functionRef": {
-            "refName": "executeScript",
-            "arguments": {
-              "script": "org.acme.QueryAnswerServiceScripts.printWorkflowData(\"Workflowdata before executing registerErrorAction\", kcontext);"
-            }
-          }
-        },
-        {
           "name": "registerErrorAction",
           "functionRef": {
             "refName": "registerError"
           }
         }
       ],
-      "transition": "Finalize process"
-    },
-    {
-      "name": "Finalize process",
-      "type": "operation",
-      "actions": [
-        {
-          "name": "printWorkflowDataAction",
-          "functionRef": {
-            "refName": "executeScript",
-            "arguments": {
-              "script": "org.acme.QueryAnswerServiceScripts.printWorkflowData(\"Workflowdata at process finalization\", kcontext);"
-            }
-          }
-        }
-      ],
-      "end": "true"
+      "end": true
     }
   ]
 }

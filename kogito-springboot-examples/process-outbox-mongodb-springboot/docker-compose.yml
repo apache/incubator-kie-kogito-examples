@@ -1,36 +1,24 @@
 version: '2'
 services:
-  zookeeper:
-    image: strimzi/kafka:0.20.1-kafka-2.6.0
-    command: [
-        "sh", "-c",
-        "bin/zookeeper-server-start.sh config/zookeeper.properties"
-    ]
-    ports:
-      - "2181:2181"
-    environment:
-      LOG_DIR: "/tmp/logs"
-
   kafka:
-    image: strimzi/kafka:0.20.1-kafka-2.6.0
-    command: [
-        "sh", "-c",
-        "bin/kafka-server-start.sh config/server.properties --override inter.broker.listener.name=$${KAFKA_INTER_BROKER_LISTENER_NAME} --override listener.security.protocol.map=$${KAFKA_LISTENER_SECURITY_PROTOCOL_MAP} --override listeners=$${KAFKA_LISTENERS} --override advertised.listeners=$${KAFKA_ADVERTISED_LISTENERS} --override zookeeper.connect=$${KAFKA_ZOOKEEPER_CONNECT}"
-    ]
-    depends_on:
-      - zookeeper
+    image: vectorized/redpanda:v21.11.8
     ports:
       - "9092:9092"
-    environment:
-      KAFKA_BROKER_ID: 0
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_LISTENERS: INTERNAL://kafka:29092,EXTERNAL://kafka:9092
-      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:29092,EXTERNAL://localhost:9092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT
-      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
-      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      LOG_DIR: "/tmp/logs"
+      - "29092:29092"
+    command:
+      - redpanda
+      - start
+      - --smp
+      - '1'
+      - --reserve-memory
+      - 0M
+      - --overprovisioned
+      - --node-id
+      - '0'
+      - --kafka-addr
+      - PLAINTEXT://0.0.0.0:29092,OUTSIDE://0.0.0.0:9092
+      - --advertise-kafka-addr
+      - PLAINTEXT://kafka:29092,OUTSIDE://localhost:9092
   kafdrop:
     image: obsidiandynamics/kafdrop
     ports:
@@ -45,7 +33,7 @@ services:
       SERVER_SERVLET_CONTEXTPATH: "/"
   mongodb:
     build: ./mongodb
-    image: kogito/outbox/mongodb
+    image: kogito/outbox/springboot/mongodb
     hostname: mongodb
     ports:
       - "27017:27017"
@@ -70,7 +58,7 @@ services:
       - STATUS_STORAGE_TOPIC=kogito_connect_statuses
   sidecar:
     build: ./sidecar
-    image: kogito/outbox/sidecar
+    image: kogito/outbox/springboot/sidecar
     links:
       - connect
       - mongodb
@@ -86,7 +74,7 @@ services:
       - CONNECT_HOST=connect:8083
   kogito:
     build: ./kogito
-    image: kogito/outbox/springboot
+    image: kogito/outbox/springboot/runtime
     ports:
       - "8080:8080"
     links:

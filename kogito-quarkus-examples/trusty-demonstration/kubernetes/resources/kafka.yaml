@@ -1,4 +1,4 @@
-apiVersion: kafka.strimzi.io/v1beta1
+apiVersion: kafka.strimzi.io/v1beta2
 kind: Kafka
 metadata:
   name: my-cluster
@@ -6,11 +6,18 @@ spec:
   kafka:
     replicas: 1
     listeners:
-      plain: {}
-      tls: {}
-      external:
+      - name: plain
+        port: 9092
+        type: internal
+        tls: false
+      - name: tls
+        port: 9093
+        type: internal
+        tls: true
+      - name: external
         type: nodeport
         tls: false
+        port: 9094
     storage:
       type: jbod
       volumes:

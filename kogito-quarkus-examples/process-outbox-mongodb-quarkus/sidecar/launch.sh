@@ -1,13 +1,13 @@
 set -euxo pipefail
 
-until mongo "$MONGODB_HOST" --eval "print(\"waited for connection\")"; do
+until mongo -u "$MONGODB_USER" -p "$MONGODB_PASSWORD" --host "$MONGODB_RS"/"$MONGODB_HOST" admin --eval "print(\"waited for connection\")"; do
   echo "Wait for MongoDB"
-  sleep 3
+  sleep 1
 done
 
-until $(curl --output /dev/null --silent --head --fail "$CONNECT_HOST"); do
+until [ "$(curl --output /dev/null --silent --head -w ''%{http_code}'' "$CONNECT_HOST")" == "200" ]; do
   echo "Wait for Debezium"
-  sleep 3
+  sleep 1
 done
 
 echo "Start MongoDB connector"
@@ -21,7 +21,7 @@ curl -i -X POST -H "Accept:application/json" -H "Content-Type:application/json" 
       "consumer.max.poll.records" : "100",
       "database.history.consumer.max.poll.records" : "100",
       "connect.backoff.max.delay.ms" : "5000",
-      "mongodb.server.selection.timeout.ms" : "5000",
+      "mongodb.socket.timeout.ms" : "5000",
       "mongodb.poll.interval.ms" : "5000",
       "mongodb.hosts" : "$MONGODB_RS/$MONGODB_HOST",
       "mongodb.name" : "dbserver1",

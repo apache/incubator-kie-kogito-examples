@@ -37,6 +37,7 @@ import org.slf4j.LoggerFactory;
 
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
+import io.smallrye.reactive.messaging.kafka.Record;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -54,9 +55,10 @@ public class MultiMessagingIT {
     Emitter<byte[]> emitter;
 
     @Incoming("processedtravellers-in")
-    public CompletionStage<?> onProcessedEvent(Message<byte[]> message) throws IOException {
+    public CompletionStage<?> onProcessedEvent(Record<String, byte[]> message) throws IOException {
         logger.info("Event received for processed travellers");
-        Traveller event = utils.readObject(message.getPayload(), Traveller.class);
+        assertEquals("Real Betis Balompie", message.key());
+        Traveller event = utils.readObject(message.value(), Traveller.class);
         logger.info("Event deserialized sucessfully {}", event);
         assertTraveller(event);
         countDownLatch.countDown();
@@ -82,9 +84,17 @@ public class MultiMessagingIT {
     public void testProcess() throws InterruptedException {
         IntStream.range(0, count)
                 .mapToObj(i -> new Traveller("Name" + i, "LastName" + i, "email" + i, getNationality(i)))
-                .forEach(traveller -> emitter.send(utils.writeObject(traveller)));
+                .forEach(traveller -> emitter.send(utils.writeObject(traveller)).whenComplete(this::logEventOrFailure));
         countDownLatch.await(10, TimeUnit.SECONDS);
         assertEquals(0, countDownLatch.getCount());
+    }
+
+    private void logEventOrFailure(Void v, Throwable e) {
+        if (e != null) {
+            logger.error("Error when publishing event", e);
+        } else {
+            logger.info("Event published succesfully");
+        }
     }
 
     private void assertTraveller(Traveller traveller) {

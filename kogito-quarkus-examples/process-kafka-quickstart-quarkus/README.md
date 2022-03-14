@@ -158,7 +158,7 @@ Content (cloud event format)
   "id": "21627e26-31eb-43e7-8343-92a696fd96b1",
   "source": "",
   "type": "travellers",
-  "time": "2019-10-01T12:02:23.812262+02:00[Europe/Warsaw]",
+  "time": "2022-02-24T13:25:16+0000",
   "data": {
 	"firstName" : "Jan",
 	"lastName" : "Kowalski",
@@ -170,7 +170,7 @@ Content (cloud event format)
 One liner
 
 ```json
-{"specversion": "0.3","id": "21627e26-31eb-43e7-8343-92a696fd96b1","source": "","type": "travellers", "time": "2019-10-01T12:02:23.812262+02:00[Europe/Warsaw]","data": { "firstName" : "Jan", "lastName" : "Kowalski", "email" : "jan.kowalski@example.com", "nationality" : "Polish"}}
+{"specversion": "0.3","id": "21627e26-31eb-43e7-8343-92a696fd96b1","source": "","type": "travellers", "time": "2022-02-24T13:25:16+0000","data": { "firstName" : "Jan", "lastName" : "Kowalski", "email" : "jan.kowalski@example.com", "nationality" : "Polish"}}
 ```
 
 
@@ -218,7 +218,7 @@ With the following content (Cloud Event Format)
   "id": "31627e26-31eb-43e7-8343-92a696fd96b1",
   "source": "",
   "type": "travellers",
-  "time": "2019-10-01T12:02:23.812262+02:00[Europe/Warsaw]",
+  "time": "2022-02-24T13:25:16+0000",
   "data": {
 	"firstName" : "John",
 	"lastName" : "Doe",
@@ -231,7 +231,7 @@ With the following content (Cloud Event Format)
 One Liner
 
 ```json
-{"specversion": "0.3","id": "31627e26-31eb-43e7-8343-92a696fd96b1","source": "","type": "travellers", "time": "2019-10-01T12:02:23.812262+02:00[Europe/Warsaw]","data": { "firstName" : "John", "lastName" : "Doe", "email" : "john.doe@example.com", "nationality" : "American"}}
+{"specversion": "0.3","id": "31627e26-31eb-43e7-8343-92a696fd96b1","source": "","type": "travellers", "time": "2022-02-24T13:25:16+0000","data": { "firstName" : "John", "lastName" : "Doe", "email" : "john.doe@example.com", "nationality" : "American"}}
 ```
 
 this will not result in message being send to `processedtravelers` topic.

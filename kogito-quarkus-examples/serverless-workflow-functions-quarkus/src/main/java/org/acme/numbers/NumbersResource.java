@@ -30,6 +30,9 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Path("/numbers")
@@ -39,6 +42,7 @@ public class NumbersResource {
 
     private ObjectMapper objectMapper;
     private Random rand;
+    private static final Logger logger = LoggerFactory.getLogger(NumbersResource.class);
 
     @PostConstruct
     void init() {
@@ -55,6 +59,10 @@ public class NumbersResource {
     @POST
     @Path("{number}/multiplyByAndSum")
     public Response multiplyByAndSum(@PathParam("number") int multiplier, Numbers numbers) {
+        Object extra = numbers.getAdditionalData();
+        if (extra != null) {
+            logger.info("Additional data {}", extra);
+        }
         return fromNumber("sum", numbers.getNumbers().stream().map(n -> n.intValue() * multiplier).collect(Collectors.summingInt(Integer::intValue)));
     }
 

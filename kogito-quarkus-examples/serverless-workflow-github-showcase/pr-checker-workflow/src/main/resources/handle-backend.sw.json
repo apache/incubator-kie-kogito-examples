@@ -30,7 +30,7 @@
       "type": "switch",
       "dataConditions": [
         {
-          "condition": "{{ $.files[?(@ =~ /^.*backend.*$/i )] }}",
+          "condition": "${ $.files[?(@ =~ /^.*backend.*$/i )] }",
           "transition": {
             "produceEvents": [
               {
@@ -41,7 +41,7 @@
           }
         },
         {
-          "condition": "{{ $.files[?(@ =~ /^(?!.*backend).*$/i )] }}",
+          "condition": "${ $.files[?(@ =~ /^(?!.*backend).*$/i )] }",
           "end": true
         }
       ]

@@ -31,12 +31,13 @@ import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options
 
 public class NumbersMockService implements QuarkusTestResourceLifecycleManager {
 
-    private WireMockServer wireMockServer;
+    private static final WireMockServer wireMockServer = new WireMockServer(options().dynamicPort());
 
     @Override
     public Map<String, String> start() {
-        wireMockServer = new WireMockServer(options().dynamicPort());
-        wireMockServer.start();
+        if (!wireMockServer.isRunning()) {
+            wireMockServer.start();
+        }
         wireMockServer.stubFor(get(urlEqualTo("/numbers/random")).willReturn(ok().withHeader("Content-Type", "application/json").withJsonBody(new IntNode(1))));
         wireMockServer.stubFor(post(urlEqualTo("/numbers/1/multiplyByAndSum")).willReturn(ok()
                 .withHeader("Content-Type", "application/json")
@@ -51,4 +52,7 @@ public class NumbersMockService implements QuarkusTestResourceLifecycleManager {
         }
     }
 
+    public static int serverPort() {
+        return wireMockServer.port();
+    }
 }

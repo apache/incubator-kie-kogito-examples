@@ -35,7 +35,7 @@ Like the other Kogito AddOns, the only required step to enable it is to include 
 </dependency>
 ```
 
-The version is implicitly derived from the `kogito-quarkus-bom` included in the `dependencyManagement` section.
+The version is implicitly derived from the BOM imported in the `dependencyManagement` section.
 
 ### Configuration
 
