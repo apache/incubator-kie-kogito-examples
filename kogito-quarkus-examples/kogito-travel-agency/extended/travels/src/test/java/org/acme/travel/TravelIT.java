@@ -15,6 +15,7 @@
  */
 package org.acme.travel;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -33,6 +34,8 @@ import org.acme.travels.VisaResolution;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.Model;
+import org.kie.kogito.auth.IdentityProviders;
+import org.kie.kogito.auth.SecurityPolicy;
 import org.kie.kogito.process.Process;
 import org.kie.kogito.process.ProcessInstance;
 import org.kie.kogito.process.ProcessInstanceReadMode;
@@ -59,9 +62,10 @@ public class TravelIT {
 
     private static final String STEP_CONFIRM_TRAVEL = "ConfirmTravel";
     private static final String STEP_VISA_APPLICATION = "VisaApplication";
-    private static final String STEP_VISA_RESOLUTION = "VisaResolution";
     private static final String PROJECT_VERSION = ProjectMetadataProvider.getProjectVersion();
     private static final String PROJECT_ARTIFACT_ID = ProjectMetadataProvider.getProjectArtifactId();
+
+    private static final SecurityPolicy SECURITY_POLICY_JDOE = SecurityPolicy.of(IdentityProviders.of("jdoe", Collections.emptyList()));
 
     @Inject
     @Named("travels")
@@ -120,20 +124,22 @@ public class TravelIT {
     }
 
     private void whenConfirmTravel() {
-        WorkItem workItem = thenNextStepIs(STEP_CONFIRM_TRAVEL);
-        processInstance.completeWorkItem(workItem.getId(), null);
+        WorkItem workItem = thenNextStepIs(STEP_CONFIRM_TRAVEL, SECURITY_POLICY_JDOE);
+        Map<String, Object> results = new HashMap<>();
+        results.put("approve", true);
+        processInstance.completeWorkItem(workItem.getId(), results, SECURITY_POLICY_JDOE);
     }
 
     private void whenAddVisaApplication() {
         Map<String, Object> results = new HashMap<>();
         results.put("visaApplication", new VisaApplication("Jan", "Kowalski", "New York", "US", 10, "XXX098765"));
         results.put("visaResolution", new VisaResolution(true, "Test reason"));
-        WorkItem workItem = thenNextStepIs(STEP_VISA_RESOLUTION);
-        processInstance.completeWorkItem(workItem.getId(), results);
+        WorkItem workItem = thenNextStepIs(STEP_VISA_APPLICATION, SECURITY_POLICY_JDOE);
+        processInstance.completeWorkItem(workItem.getId(), results, SECURITY_POLICY_JDOE);
     }
 
-    private WorkItem thenNextStepIs(String expected) {
-        List<WorkItem> workItems = processInstance.workItems();
+    private WorkItem thenNextStepIs(String expected, SecurityPolicy policy) {
+        List<WorkItem> workItems = processInstance.workItems(policy);
         assertEquals(1, workItems.size());
         WorkItem next = workItems.get(0);
         assertEquals(expected, next.getName());
