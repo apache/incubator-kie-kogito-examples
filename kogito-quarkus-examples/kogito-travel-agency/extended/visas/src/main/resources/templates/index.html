@@ -180,10 +180,13 @@
             lastName: $("#lastName").val(),
             duration: Number($("#duration").val()),
             passportNumber: $("#passportNumber").val(),
-            nationality: $("#nationality").val(),
-            approved: Boolean(decision)
+            nationality: $("#nationality").val()
         };
-        var visaApplicationRequest = JSON.stringify(\{application: vapplication\});
+        var vResolution = {
+            approved: Boolean(decision),
+            reason: "Manual approval"
+        };
+        var visaApplicationRequest = JSON.stringify(\{application: vapplication, resolution: vResolution\});
 
         $.post("/visaApplications/" + $("#visa_p_id").val() + "/ApplicationApproval/" + $("#visa_t_id").val() + userFilter, visaApplicationRequest, function () {
 

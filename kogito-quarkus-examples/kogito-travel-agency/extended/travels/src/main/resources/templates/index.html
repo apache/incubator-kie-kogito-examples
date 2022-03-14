@@ -407,7 +407,13 @@
                     $("#visa_p_id").val(id);
                     $("#visa_t_id").val(taskid);
 
-                    $("#visa_duration").val('');
+                    const tripStart = new Date(data.parameters.trip.begin);
+                    const tripEnd = new Date(data.parameters.trip.end);
+                    const diffTime = Math.abs(tripEnd - tripStart);
+
+                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+                    $("#visa_duration").val(diffDays);
                 });
 
             })
@@ -718,11 +724,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="visa_passportNumber">Passport number</label> <input type="text"
-                                                                                                class="form-control" id="visa_passportNumber" name="visa_passportNumber">
+                                                                                                class="form-control" id="visa_passportNumber" name="visa_passportNumber" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="visa_duration">Duration</label> <input type="text"
-                                                                                   class="form-control" id="visa_duration" name="visa_duration">
+                                                                                   class="form-control" id="visa_duration" name="visa_duration" readonly>
                             </div>
                         </div>
                     </div>

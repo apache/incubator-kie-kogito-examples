@@ -47,12 +47,13 @@ public class Traveller {
 
     }
 
-    public Traveller(String firstName, String lastName, String email, String nationality, Address address) {
+    public Traveller(String firstName, String lastName, String email, String nationality, String passportNumber, Address address) {
         super();
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.nationality = nationality;
+        this.passportNumber = passportNumber;
         this.address = address;
     }
 

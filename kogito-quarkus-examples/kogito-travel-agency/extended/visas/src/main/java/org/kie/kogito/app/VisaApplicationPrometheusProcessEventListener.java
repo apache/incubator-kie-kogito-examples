@@ -18,6 +18,7 @@ package org.kie.kogito.app;
 import java.util.Arrays;
 
 import org.acme.travels.VisaApplication;
+import org.acme.travels.VisaResolution;
 import org.jbpm.workflow.instance.impl.WorkflowProcessInstanceImpl;
 import org.kie.api.event.process.ProcessCompletedEvent;
 import org.kie.kogito.KogitoGAV;
@@ -82,8 +83,9 @@ public class VisaApplicationPrometheusProcessEventListener extends MetricsProces
 
         if (processInstance.getProcessId().equals("visaApplications")) {
             VisaApplication application = (VisaApplication) processInstance.getVariable("visaApplication");
+            VisaResolution resolution = (VisaResolution) processInstance.getVariable("visaResolution");
 
-            if (application.isApproved()) {
+            if (resolution.isApproved()) {
                 getNumberOfVisaApplicationsApprovedCounter(identifier, safeValue(application.getCountry()),
                         String.valueOf(application.getDuration()),
                         safeValue(application.getNationality()), Metrics.globalRegistry)

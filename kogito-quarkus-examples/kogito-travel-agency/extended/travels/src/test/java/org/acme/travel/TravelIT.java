@@ -29,6 +29,7 @@ import org.acme.travels.Hotel;
 import org.acme.travels.Traveller;
 import org.acme.travels.Trip;
 import org.acme.travels.VisaApplication;
+import org.acme.travels.VisaResolution;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.Model;
@@ -52,12 +53,13 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @QuarkusTestResource(value = KafkaQuarkusTestResource.class)
 public class TravelIT {
 
-    private static final Traveller TRAVELLER_FROM_POLAND = new Traveller("Jan", "Kowalski", "jan.kowalski@example.com", "Polish", new Address("polna", "Krakow", "32000", "Poland"));
+    private static final Traveller TRAVELLER_FROM_POLAND = new Traveller("Jan", "Kowalski", "jan.kowalski@example.com", "Polish", "N7397478", new Address("polna", "Krakow", "32000", "Poland"));
     private static final Trip TRIP_TO_POLAND = new Trip("Another City", "Poland", new Date(), new Date());
     private static final Trip TRIP_TO_US = new Trip("New York", "US", new Date(), new Date());
 
     private static final String STEP_CONFIRM_TRAVEL = "ConfirmTravel";
     private static final String STEP_VISA_APPLICATION = "VisaApplication";
+    private static final String STEP_VISA_RESOLUTION = "VisaResolution";
     private static final String PROJECT_VERSION = ProjectMetadataProvider.getProjectVersion();
     private static final String PROJECT_ARTIFACT_ID = ProjectMetadataProvider.getProjectArtifactId();
 
@@ -125,7 +127,8 @@ public class TravelIT {
     private void whenAddVisaApplication() {
         Map<String, Object> results = new HashMap<>();
         results.put("visaApplication", new VisaApplication("Jan", "Kowalski", "New York", "US", 10, "XXX098765"));
-        WorkItem workItem = thenNextStepIs(STEP_VISA_APPLICATION);
+        results.put("visaResolution", new VisaResolution(true, "Test reason"));
+        WorkItem workItem = thenNextStepIs(STEP_VISA_RESOLUTION);
         processInstance.completeWorkItem(workItem.getId(), results);
     }
 
@@ -147,7 +150,7 @@ public class TravelIT {
 
     private void thenHotelAndFlightAreChosen() {
         Model result = (Model) processInstance.variables();
-        assertEquals(5, result.toMap().size());
+        assertEquals(6, result.toMap().size());
         Hotel hotel = (Hotel) result.toMap().get("hotel");
         assertNotNull(hotel);
         assertEquals("Perfect hotel", hotel.getName());

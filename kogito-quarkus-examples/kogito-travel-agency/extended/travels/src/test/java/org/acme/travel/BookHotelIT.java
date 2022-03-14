@@ -50,7 +50,7 @@ public class BookHotelIT {
 
         Model m = bookHotelProcess.createModel();
         Map<String, Object> parameters = new HashMap<>();
-        parameters.put("traveller", new Traveller("John", "Doe", "john.doe@example.com", "American", new Address("main street", "Boston", "10005", "US")));
+        parameters.put("traveller", new Traveller("John", "Doe", "john.doe@example.com", "American", "N7397478", new Address("main street", "Boston", "10005", "US")));
         parameters.put("trip", new Trip("New York", "US", new Date(), new Date()));
 
         m.fromMap(parameters);

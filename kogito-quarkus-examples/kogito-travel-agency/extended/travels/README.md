@@ -66,6 +66,10 @@ Location that is associated with either traveller or hotel
 
 Details requires to apply for visa to travel to particular country
 
+**Visa Resolution**
+
+Final decision regarding visa application status
+
 <p align="center"><img width=75% height=75% src="docs/images/datamodel.png"></p>
 
 
@@ -245,6 +249,7 @@ curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST h
 		"lastName" : "Doe",
 		"email" : "john.doe@example.com",
 		"nationality" : "American",
+		"passportNumber" : "N4379478",
 		"address" : {
 			"street" : "main street",
 			"city" : "Boston",
@@ -275,6 +280,7 @@ curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST h
 		"lastName" : "Kowalski",
 		"email" : "jan.kowalski@example.com",
 		"nationality" : "Polish",
+		"passportNumber" : "N4379478",
 		"address" : {
 			"street" : "polna",
 			"city" : "Krakow",
