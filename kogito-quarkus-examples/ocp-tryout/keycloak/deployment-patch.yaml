@@ -1,0 +1,48 @@
+spec:
+  template:
+    spec:
+      volumes:
+        - name: app-map
+          configMap:
+            name: keycloak-config
+      containers:
+        - name: keycloak
+          volumeMounts:
+            - name: app-map
+              mountPath: /tmp
+          env:
+            - name: KEYCLOAK_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: kogito-configs
+                  key: keycloak.admin.user
+            - name: KEYCLOAK_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: kogito-configs
+                  key: keycloak.admin.password
+            - name: KEYCLOAK_IMPORT
+              valueFrom:
+                configMapKeyRef:
+                  name: kogito-configs
+                  key: keycloak.realm.json
+            - name: DB_VENDOR
+              valueFrom:
+                configMapKeyRef:
+                  name: kogito-configs
+                  key: keycloak.db.vendor
+#            - name: DB_ADDR
+#              valueFrom:
+#                configMapKeyRef:
+#                  name: kogito-configs
+#                  key: postgres.service.hostname
+#            - name: DB_USER
+#              valueFrom:
+#                configMapKeyRef:
+#                  name: kogito-configs
+#                  key: keycloak.db.user
+#            - name: DB_PASSWORD
+#              valueFrom:
+#                configMapKeyRef:
+#                  name: kogito-configs
+#                  key: keycloak.db.password
