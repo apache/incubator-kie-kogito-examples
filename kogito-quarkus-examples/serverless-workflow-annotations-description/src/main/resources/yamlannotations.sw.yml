@@ -1,7 +1,7 @@
 id: yamlannotations
 version: '1.0'
 name: Annotations workflow
-description: YAML based annotations workflow
+description: This is an amazing workflow
 expressionLang: jsonpath
 annotations:
   - Cogito

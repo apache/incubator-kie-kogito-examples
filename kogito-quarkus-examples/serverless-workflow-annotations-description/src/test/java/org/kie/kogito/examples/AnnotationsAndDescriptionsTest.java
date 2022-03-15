@@ -21,7 +21,8 @@ import java.nio.file.Paths;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
@@ -38,11 +39,17 @@ import io.quarkus.test.junit.QuarkusTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @QuarkusTest
-class AnnotationsTest {
+class AnnotationsAndDescriptionsTest {
+
+    public static Stream<Arguments> testAnnotationsSource() {
+        return Stream.of(
+                Arguments.of("JsonannotationsResource.java", "jsonannotations"),
+                Arguments.of("YamlannotationsResource.java", "yamlannotations"));
+    }
 
     @ParameterizedTest
-    @ValueSource(strings = { "JsonannotationsResource.java", "YamlannotationsResource.java" })
-    void testAnnotations(String fileName) throws IOException {
+    @MethodSource("testAnnotationsSource")
+    void testAnnotations(String fileName, String worfklowId) throws IOException {
         Path generatedFile = Paths.get("target", "generated-sources", "kogito", "org", "kie",
                 "kogito", "serverless", fileName);
 
@@ -53,14 +60,28 @@ class AnnotationsTest {
         Stream<AnnotationExpr> tagAnnotations = classOrInterfaceDeclaration.getAnnotations().stream()
                 .filter(a -> a.getNameAsString().equals("Tag"));
 
-        assertThat(tagAnnotations).containsExactly(
+        assertThat(tagAnnotations).containsExactlyInAnyOrder(
                 createTagAnnotation("Cogito"),
                 createTagAnnotation("ergo"),
-                createTagAnnotation("sum"));
+                createTagAnnotation("sum"),
+                createTagAnnotation(worfklowId, "This is an amazing workflow"));
+    }
+
+    private static AnnotationExpr createTagAnnotation(String name, String description) {
+        NodeList<MemberValuePair> attributes = new NodeList<>();
+
+        if (name != null) {
+            attributes.add(new MemberValuePair("name", new StringLiteralExpr(name)));
+        }
+
+        if (description != null) {
+            attributes.add(new MemberValuePair("description", new StringLiteralExpr(description)));
+        }
+
+        return new NormalAnnotationExpr(new Name("Tag"), attributes);
     }
 
     private static AnnotationExpr createTagAnnotation(String name) {
-        NodeList<MemberValuePair> attributes = new NodeList<>(new MemberValuePair("name", new StringLiteralExpr(name)));
-        return new NormalAnnotationExpr(new Name("Tag"), attributes);
+        return createTagAnnotation(name, null);
     }
 }

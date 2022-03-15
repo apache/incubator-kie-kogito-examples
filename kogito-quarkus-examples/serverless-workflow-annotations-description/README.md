@@ -1,12 +1,12 @@
-# Kogito Serverless Workflow - Greeting Example
+# Kogito Serverless Workflow - Annotations and Description Example
 
 ## Description
 
-This example contains two simple workflow services containing the `annotation` attribute. 
+This example contains two simple workflow services containing the `annotation` and `description` attributes. 
 The services are described using both JSON and YAML formats as defined in the 
 [CNCF Serverless Workflow specification](https://github.com/cncf/wg-serverless/tree/main/workflow/spec).
 
-These workflow definitions will generate an Open API document like the following (note the tags "Cogito", "ergo", and "sum"):
+These workflow definitions will generate an Open API document like the following (note the tags "Cogito", "ergo", "sum", "jsonannotations", and "yamlannotations"):
 
 ````yaml
 ---
@@ -14,9 +14,13 @@ openapi: 3.0.3
 info:
   title: serverless-workflow-annotations API
 tags:
-- name: Cogito
-- name: ergo
-- name: sum
+  - name: Cogito
+  - name: ergo
+  - name: jsonannotations
+    description: This is an amazing workflow
+  - name: sum
+  - name: yamlannotations
+    description: This is an amazing workflow
 paths:
   /:
     post:

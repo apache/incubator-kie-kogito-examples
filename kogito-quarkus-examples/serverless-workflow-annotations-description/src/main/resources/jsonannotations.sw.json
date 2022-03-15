@@ -1,9 +1,10 @@
 {
-  "id": "jsondescription",
+  "id": "jsonannotations",
   "version": "1.0",
-  "name": "Description workflow",
+  "name": "Annotations workflow",
   "expressionLang": "jsonpath",
   "description": "This is an amazing workflow",
+  "annotations": [ "Cogito", "ergo", "sum" ],
   "start": "ChooseOnLanguage",
   "functions": [
     {
