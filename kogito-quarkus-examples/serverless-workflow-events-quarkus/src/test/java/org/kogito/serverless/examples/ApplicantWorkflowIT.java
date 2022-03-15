@@ -51,7 +51,6 @@ public class ApplicantWorkflowIT {
     @Test
     public void testApplicantProcess() throws Exception {
         Integer assignedPort = ConfigProvider.getConfig().getValue("quarkus.http.test-port", Integer.class);
-        System.out.println("assignedPort = " + assignedPort);
         ObjectMapper mapper = new ObjectMapper();
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target(String.format(DECISION_SSE_ENDPOINT, assignedPort));
@@ -59,15 +58,8 @@ public class ApplicantWorkflowIT {
         List<String> received = new CopyOnWriteArrayList<>();
 
         try (SseEventSource source = SseEventSource.target(target).reconnectingEvery(0, TimeUnit.MILLISECONDS).build()) {
-            source.register(inboundSseEvent -> {
-                System.out.println("\n\n\n>>> inboundSseEvent = " + inboundSseEvent);
-                received.add(String.valueOf(inboundSseEvent.readData()));
-            }, t -> {
-                System.out.println(">>>>onerror");
-                t.printStackTrace();
-            });
+            source.register(inboundSseEvent -> received.add(String.valueOf(inboundSseEvent.readData())));
             source.open();
-            System.out.println("source.isOpen() = " + source.isOpen());
 
             // Call the exposed domain endpoint
             given()
@@ -79,10 +71,7 @@ public class ApplicantWorkflowIT {
                     .log().all()
                     .statusCode(204);
 
-            await().atMost(1, MINUTES).until(() -> {
-                System.out.println("received = " + received.size());
-                return received.size() == 1;
-            });
+            await().atMost(1, MINUTES).until(() -> received.size() == 1);
 
             JsonNode approvedDecision = mapper.readTree(received.get(0));
             assertEquals("Approved", approvedDecision.get("data").get("decision").asText());
