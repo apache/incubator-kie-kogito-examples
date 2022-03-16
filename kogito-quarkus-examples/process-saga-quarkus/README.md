@@ -69,7 +69,7 @@ java -jar target/process-saga-quarkus-runner.jar
 Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
 
 ```
-mvn clean package -Pnative
+mvn clean package -Dnative
 ```
 
 To run the generated native executable, generated in `target/`, execute
@@ -111,7 +111,11 @@ Given data:
 Curl command (using the JSON object above):
 
 ```sh
-curl -H "Content-Type: application/json" -X POST http://localhost:8080/orders -d '{"orderId" : "03e6cf79-3301-434b-b5e1-d6899b5639aa"}'
+curl -X 'POST' \
+  'http://localhost:8080/order' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{ "orderId" : "03e6cf79-3301-434b-b5e1-d6899b5639aa"}'
 ```
 The response for the request is returned with attributes representing the response of each step, either
  success or failure. The `orderResponse` attribute indicates if the order can be confirmed in case of success or
@@ -168,7 +172,14 @@ Example:
 Curl command (using the JSON object above):
 
 ```sh
-curl -H "Content-Type: application/json" -X POST http://localhost:8080/orders -d '{"orderId" : "03e6cf79-3301-434b-b5e1-d6899b5639aa", "failService" : "PaymentService"}' 
+curl -X 'POST' \
+  'http://localhost:8080/order' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "orderId" : "03e6cf79-3301-434b-b5e1-d6899b5639aa",
+    "failService" : "PaymentService"
+}' 
 ```
 
 Response example:
