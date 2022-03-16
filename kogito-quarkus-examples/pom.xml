@@ -89,6 +89,7 @@
         <module>rules-quarkus-helloworld</module>
         <module>ruleunit-event-driven-quarkus</module>
         <module>ruleunit-quarkus-example</module>
+        <module>serverless-workflow-annotations-description</module>
         <module>serverless-workflow-callback-quarkus</module>
         <module>serverless-workflow-compensation-quarkus</module>
         <module>serverless-workflow-consuming-events-over-http-quarkus</module>
