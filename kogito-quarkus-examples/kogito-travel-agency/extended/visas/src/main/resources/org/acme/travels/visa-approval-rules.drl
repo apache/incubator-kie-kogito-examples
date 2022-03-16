@@ -21,7 +21,8 @@ import org.acme.travels.VisaResolution;
 rule "Visit Australia with e-visa up to 90 days" ruleflow-group "visa-approvals"
 
 when
-    $application: VisaApplication(duration <= 90, country == "Australia") && $resolution : VisaResolution()
+    $application: VisaApplication(duration <= 90, country == "Australia")
+    $resolution : VisaResolution()
 then
     $resolution.setApproved(true);
     $resolution.setReason("Automatic visa approval");
