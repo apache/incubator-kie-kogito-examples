@@ -8,7 +8,7 @@
   "functions": [
     {
       "name": "countryInfoFunction",
-      "operation": "restcountries.json#getByName1"
+      "operation": "restcountries.json#getByName_1"
     },
     {
       "name": "classifySmallMediumFunction",
