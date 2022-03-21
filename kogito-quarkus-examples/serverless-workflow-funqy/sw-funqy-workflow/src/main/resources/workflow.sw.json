@@ -13,25 +13,19 @@
         {
           "functionRef": {
             "refName": "countryFunction",
-            "arguments": {
-              "body": "$.name"
-            }
+            "arguments":  "$.name"
           }
         },
         {
           "functionRef": {
             "refName": "populationFunction",
-            "arguments": {
-              "body": "$.name"
-            }
+            "arguments": "$.name"
           }
         },
         {
           "functionRef": {
             "refName": "classificationFunction",
-            "arguments": {
-              "body": "$.name"
-            }
+            "arguments":  "$.name"
           }
         }
       ],
