@@ -3,7 +3,7 @@
 The goal of this procedure is to simplify the deployment of a Kogito application on the Openshift platform.
 This deployment includes both the required infrastructure and the Kogito application.
 
-The deployment is targeting examples based on the BPM model which require additional resources like protobuf and svg files.
+The deployment is targeting examples based on the BPM model which may require additional resources like protobuf and svg files.
 
 Make sure you meet the [prerequisites](#prerequisites) and then start [here](#installation).
 

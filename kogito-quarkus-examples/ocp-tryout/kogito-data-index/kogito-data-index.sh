@@ -9,6 +9,10 @@ if [ "${action}" == "uninstall" ]; then
 
 elif [ "${action}" == "install" ]; then
   echo "*** installing data-index ${type}"
+  # at least empty protobuf folder needs to exist
+  if [ ! -d ../testapp/protobuf ]; then
+    mkdir ../testapp/protobuf
+  fi
   # cannot add a label directly to a config map create command => workaround:
   # create a configmap yaml locally -> update label on that locally => pipe into server "create cm from yaml" command
   oc create configmap data-index-config --from-file=../testapp/protobuf -o yaml --dry-run=client | \

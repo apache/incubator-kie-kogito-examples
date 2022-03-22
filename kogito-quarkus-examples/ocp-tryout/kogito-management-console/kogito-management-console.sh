@@ -8,6 +8,10 @@ if [ "${action}" == "uninstall" ]; then
 
 elif [ "${action}" == "install" ]; then
   echo "*** installing management console"
+  # at least empty svg folder needs to exist
+  if [ ! -d ../testapp/svg ]; then
+    mkdir ../testapp/svg
+  fi
   # cannot add a label directly to a config map create command => workaround:
   # create a configmap yaml locally -> update label on that locally => pipe into server "create cm from yaml" command
   oc create configmap kogito-management-config --from-file=../testapp/svg -o yaml --dry-run=client | \
