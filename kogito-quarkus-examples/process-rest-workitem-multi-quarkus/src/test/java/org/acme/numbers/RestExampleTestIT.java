@@ -45,7 +45,7 @@ class RestExampleTestIT {
     void testRestExample() {
         Map<String, Object> body = new HashMap<>();
         body.put("numbers", new int[] { 1, 2, 3, 4, 5, 6, 7 });
-        body.put("port", port);
+        body.put("port", getPort());
         given()
                 .contentType(ContentType.JSON)
                 .when()
@@ -53,5 +53,9 @@ class RestExampleTestIT {
                 .post("/RestExample")
                 .then()
                 .statusCode(201);
+    }
+
+    private int getPort() {
+        return port == 0 ? NumbersMockService.serverPort() : port;
     }
 }

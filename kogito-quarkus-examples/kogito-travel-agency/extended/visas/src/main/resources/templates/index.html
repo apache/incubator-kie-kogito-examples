@@ -65,6 +65,7 @@
 </div>
 <script>
     const graphql = '{config:property('kogito.dataindex.http.url') or 'http://localhost:8180'}/graphql';
+    const userFilter = "?user=alice";
 
     $(function () {
         $.ajaxSetup({
@@ -90,7 +91,7 @@
               var received_msg = evt.data;
               let jsonObject = JSON.parse(received_msg);
                if(jsonObject.type === 'connection_ack'){
-                   ws.send('{"id" : "2", "type" : "start", "payload" : { "query" : "subscription { VisaApplicationsUpdated { id, visaApplication { lastName, firstName, country, city, nationality, duration, passportNumber, approved } metadata { processInstances { state  } } } }"}}');
+                   ws.send('{"id" : "2", "type" : "start", "payload" : { "query" : "subscription { VisaApplicationsUpdated { id, visaApplication { lastName, firstName, country, city, nationality, duration, passportNumber }, visaResolution { approved },  metadata { processInstances { state  } } } }"}}');
                } else if(jsonObject.type === 'data') {
                    var val = jsonObject.payload.data.VisaApplicationsUpdated;
 
@@ -115,7 +116,8 @@
         var query = "{ \"query\": \"" +
                 "{ VisaApplications { " +
                 "id " +
-                "visaApplication { lastName, firstName, country, city, nationality, duration, passportNumber, approved } " +
+                "visaApplication { lastName, firstName, country, city, nationality, duration, passportNumber } " +
+                "visaResolution { approved } " +
                 "metadata { processInstances { state  } } " +
                 "}}\"" +
                 "}";
@@ -143,7 +145,7 @@
               "<td>" + val.visaApplication.duration + " days</td>" +
               "<td>" + val.visaApplication.passportNumber + "</td>" +
               "<td>" + val.visaApplication.nationality + "</td>" +
-              "<td>" + (val.visaApplication.approved ? 'Yes' : 'No') + "</td>" +
+              "<td>" + (val.visaResolution.approved ? 'Yes' : 'No') + "</td>" +
               "<td>";
       if (active) {
           html +=
@@ -178,12 +180,15 @@
             lastName: $("#lastName").val(),
             duration: Number($("#duration").val()),
             passportNumber: $("#passportNumber").val(),
-            nationality: $("#nationality").val(),
-            approved: Boolean(decision)
+            nationality: $("#nationality").val()
         };
-        var visaApplicationRequest = JSON.stringify(\{application: vapplication\});
+        var vResolution = {
+            approved: Boolean(decision),
+            reason: "Manual approval"
+        };
+        var visaApplicationRequest = JSON.stringify(\{application: vapplication, resolution: vResolution\});
 
-        $.post("/visaApplications/" + $("#visa_p_id").val() + "/ApplicationApproval/" + $("#visa_t_id").val(), visaApplicationRequest, function () {
+        $.post("/visaApplications/" + $("#visa_p_id").val() + "/ApplicationApproval/" + $("#visa_t_id").val() + userFilter, visaApplicationRequest, function () {
 
         }, "json");
     }
@@ -196,7 +201,7 @@
             var id = button.data('id');
             var modal = $(this);
 
-            $.getJSON("/visaApplications/" + id + "/tasks", function (data) {
+            $.getJSON("/visaApplications/" + id + "/tasks"+userFilter, function (data) {
                 $.each(data, function (key, val) {
                     if ("ApplicationApproval" == val.name) {
                         modal.find('.modal-title').text("Visa application for " + button.data("lastname") + ", " + button.data("firstname"));

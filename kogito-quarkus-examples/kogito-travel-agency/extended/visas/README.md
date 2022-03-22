@@ -5,13 +5,13 @@
 This is another service of the Kogito Travel Agency application. It's responsible for processing visa applications
 that are sent during travel requests. 
 
-In it's current state it simply accepts incoming visa applications from Kafka topic and process them
+In its current state it simply accepts incoming visa applications from Kafka topic and process them
 
 * automatically if the rules match the visa application details
 * manually otherwise
 
 Response is logged into the visa application and the processing ends. Further evolutions of the service
-will add additional hanlding to the approved or rejected visa applications.
+will add additional handling to the approved or rejected visa applications _(by user alice)_.
 
 ## Activities to perform
 

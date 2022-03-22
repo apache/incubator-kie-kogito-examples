@@ -84,9 +84,17 @@ public class MultiMessagingIT {
     public void testProcess() throws InterruptedException {
         IntStream.range(0, count)
                 .mapToObj(i -> new Traveller("Name" + i, "LastName" + i, "email" + i, getNationality(i)))
-                .forEach(traveller -> emitter.send(utils.writeObject(traveller)));
+                .forEach(traveller -> emitter.send(utils.writeObject(traveller)).whenComplete(this::logEventOrFailure));
         countDownLatch.await(10, TimeUnit.SECONDS);
         assertEquals(0, countDownLatch.getCount());
+    }
+
+    private void logEventOrFailure(Void v, Throwable e) {
+        if (e != null) {
+            logger.error("Error when publishing event", e);
+        } else {
+            logger.info("Event published succesfully");
+        }
     }
 
     private void assertTraveller(Traveller traveller) {

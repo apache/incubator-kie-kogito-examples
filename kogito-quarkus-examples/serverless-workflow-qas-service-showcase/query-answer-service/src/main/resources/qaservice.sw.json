@@ -61,7 +61,8 @@
         "functionRef": {
           "refName": "sendQuery",
           "arguments": {
-            "queryRequest": "${{processInstanceId: \"$WORKFLOW.instanceId\", query: .query}}"
+            "processInstanceId": "\"$WORKFLOW.instanceId\"",
+            "query": ".query"
           }
         }
       },

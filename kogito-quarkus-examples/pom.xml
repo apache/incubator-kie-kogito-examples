@@ -20,10 +20,10 @@
     <!-- override default to fast-jar packaging for forward-compatibility -->
     <quarkus.package.type>fast-jar</quarkus.package.type>
     <!-- quarkus platform related properties -->
-    <quarkus-plugin.version>2.7.1.Final</quarkus-plugin.version>
+    <quarkus-plugin.version>2.7.3.Final</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-    <quarkus.platform.version>2.7.1.Final</quarkus.platform.version>
+    <quarkus.platform.version>2.7.3.Final</quarkus.platform.version>
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
     <kogito.bom.version>${project.version}</kogito.bom.version>
@@ -89,6 +89,7 @@
         <module>rules-quarkus-helloworld</module>
         <module>ruleunit-event-driven-quarkus</module>
         <module>ruleunit-quarkus-example</module>
+        <module>serverless-workflow-annotations-description</module>
         <module>serverless-workflow-callback-quarkus</module>
         <module>serverless-workflow-compensation-quarkus</module>
         <module>serverless-workflow-consuming-events-over-http-quarkus</module>
