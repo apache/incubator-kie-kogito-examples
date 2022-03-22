@@ -3,6 +3,8 @@ kind: ConfigMap
 metadata:
   name: kogito-configs
 data:
+    general.namespace: "${project_name}"
+    general.appsclusterhost: "${apps_cluster_host}"
     keycloak.admin.user: 'admin'
     keycloak.admin.password: 'admin'
     keycloak.realm.json: '/tmp/kogito-realm.json'

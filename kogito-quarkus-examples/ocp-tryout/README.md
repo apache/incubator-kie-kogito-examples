@@ -26,30 +26,6 @@ Installation from pre-build images
 - [Jobs service](https://docs.jboss.org/kogito/release/latest/html_single/#con-jobs-service_kogito-configuring)
 - [Task console](https://docs.jboss.org/kogito/release/latest/html_single/#con-task-console_kogito-developing-process-services)
 
-## Constraints
-- Developer Sandbox does not allow to install additional operators - (https://www.youtube.com/watch?v=oDqw8aBGDD8 from 18.02.2021 - time: 9:09)
-  => cannot use Kogito Operator install
-- Developer Sandbox sets [resource quotas](https://github.com/codeready-toolchain/host-operator/blob/master/deploy/templates/nstemplatetiers/base/cluster.yaml) per user name
-
-### Memory and cpu requests and limits
-if marked `-` then namespace defaults are applied
-
-|deployment|request cpu|request mem|limit cpu|limit mem|
-|---|---|---|---|---|
-|**namespace default per deployment/statefulSet**|10m|64Mi|1|750Mi|
-|keycloak|-|-|-|-|
-|kogito-data-index-infinispan|-|-|-|500Mi|
-|kogito-management-console|-|-|-|500Mi|
-|kogito-task-console|-|-|-|500Mi|
-|kogito-jobs-service|-|-|-|500Mi|
-|kogito-travel-agency-travels-jvm|-|-|-|500Mi|
-|kogito-travel-agency-visas-jvm|-|-|-|500Mi|
-|infinispan|500m|512Mi|500m|512Mi|
-|kafka|-|-|-|-|
-|kafka-zookeeper|250m|256Mi|-|-|
-|**sum**|-|-|-|6512Mi|
-|**sandbox max. aggregate values per user name (both namespaces)**|1750m|7Gi|20000m|7Gi|
-
 ## Architecture 
 ![](./architecture.png)
 
@@ -58,7 +34,7 @@ if marked `-` then namespace defaults are applied
 - update `./installer.properties`  
   **mandatory** properties are:
   - `KOGITO_VERSION`: the version of Kogito your application is based upon - **default**: latest
-  - `OCP_PROJECT`: the project/namespace for the deployment
+  - `OCP_PROJECT`: the project/namespace for the deployment which must exist
 - update folders
   - **Note**: you can use the example files from `./testapp/example`
      which allow you to run the Kogito Travel Agency extended example. Just copy the folders to under `./testapp`
@@ -73,17 +49,16 @@ if marked `-` then namespace defaults are applied
       image:
         repository: quay.io/kiegroup/examples-travels
         tag: 1.16.0.final
-      service:
-        port: 8080
+      applicationPort: 8080
       ```
     - `./testapp/protobuf`: For each Kogito application to be installed add its protobuf files. Protobuf files for the Kogito examples can be found under folder `target/classes/META-INF/resources/persistence/protobuf`. 
     - `./testapp/svg`: For each Kogito application to be installed add its svg files. svg files for the Kogito examples can be found under `target/classes/META-INF/processSVG`.
 - run `./installer.sh`
-- installation logs are written to `./ocp-tryout/installLogs.txt`
+- installation logs are written to the console and `./ocp-tryout/installLogs.txt`
 
 ## Removal of installation
 - login to OCP cluster: `oc login ...`
-- use the same `./installer.properties` you installed with to remove the installation completely
+- use the same `./installer.properties` you installed with to remove the installation completely or cherry-pick the parts to uninstall
 - run `./uninstaller.sh`
 
 [comment]: <> (### Installation of Kogito application)
@@ -129,27 +104,27 @@ All configuration required to make those connections as well as initializations 
 ### Kogito Job Service Configurations
 - `kogito.jobsservice.props` - command line properties for the job service
 
-## Validation
-### Validating Data index
-Browse to Data index route and copy below query into GraphiQL query area 
-```
-{ProcessInstances {id}}
-```
-### Validating Infinispan
-Browse to Infinispan route, use user developer to login; take the password from the infinispan opaque secret
+## Constraints
+- Developer Sandbox does not allow to install additional operators - (https://www.youtube.com/watch?v=oDqw8aBGDD8 from 18.02.2021 - time: 9:09)
+  => cannot use Kogito Operator install
+- Developer Sandbox sets [resource quotas](https://github.com/codeready-toolchain/host-operator/blob/master/deploy/templates/nstemplatetiers/base/cluster.yaml) per user name
 
-### Validating Kafka topics
-You can optionally run the following commands to deploy a new `kafka-client` Pod to verify the events sent to the
-Kafka topics:
+### Memory and cpu requests and limits
+if marked `-` then namespace defaults are applied
 
-```shell
-kubectl run kafka-client --restart='Never' --image docker.io/bitnami/kafka:2.8.1-debian-10-r57 --namespace dmartino-test --command -- sleep infinity
-kubectl exec --tty -i kafka-client --namespace dmartino-test -- bash
-kafka-topics.sh --bootstrap-server kafka.dmartino-test.svc.cluster.local:9092 --list
-```
-The following are sample commands that you can use on the `kafka-client` shell to monitor some of the relevant topics:
-```shell
-kafka-console-consumer.sh  --bootstrap-server kafka.dmartino-test.svc.cluster.local:9092 --topic kogito-processinstances-events --from-beginning
-kafka-console-consumer.sh  --bootstrap-server kafka.dmartino-test.svc.cluster.local:9092 --topic visaapplications --from-beginning
-kafka-console-consumer.sh  --bootstrap-server kafka.dmartino-test.svc.cluster.local:9092 --topic visasresponses --from-beginning
-```
+|deployment|request cpu|request mem|limit cpu|limit mem|
+|---|---|---|---|---|
+|**namespace default per deployment/statefulSet**|10m|64Mi|1|750Mi|
+|keycloak|-|-|-|-|
+|kogito-data-index-infinispan|-|-|-|500Mi|
+|kogito-management-console|-|-|-|500Mi|
+|kogito-task-console|-|-|-|500Mi|
+|kogito-jobs-service|-|-|-|500Mi|
+|kogito-travel-agency-travels-jvm|-|-|-|500Mi|
+|kogito-travel-agency-visas-jvm|-|-|-|500Mi|
+|infinispan|500m|512Mi|500m|512Mi|
+|kafka|-|-|-|-|
+|kafka-zookeeper|250m|256Mi|-|-|
+|**sum**|-|-|-|6512Mi|
+|**sandbox max. aggregate values per user name (both namespaces)**|1750m|7Gi|20000m|7Gi|
+

@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: a.valid.imagepath
+  repository: kogito/kogito-app-placeholder
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
@@ -39,6 +39,7 @@ securityContext: {}
 service:
   type: ClusterIP
   port: 80
+  portName: http
 
 ingress:
   enabled: false
@@ -81,15 +82,10 @@ tolerations: []
 
 affinity: {}
 
-# if the applicationName is left empty, the installer creates default names starting with "kogitoapp"
-applicationName: ""
-applicationPort: 8080
-namespace: the.used.namespace
-clusterName: a.valid.clustername
 route:
   enabled: true
   annotations: {}
 
-
+applicationPort: 8080
 
 

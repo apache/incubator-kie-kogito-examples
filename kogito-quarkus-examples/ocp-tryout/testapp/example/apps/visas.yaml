@@ -2,6 +2,4 @@ image:
   repository: quay.io/kiegroup/examples-visas
   tag: "1.16.0.final"
 
-applicationPort: 8090
-namespace: uegozi-dev
-clusterName: apps.ocp-dev01.lab.eng.tlv2.redhat.com
+applicationPort: 8080

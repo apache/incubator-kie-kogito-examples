@@ -5,8 +5,8 @@ source common-functions.sh
 
 action=uninstall
 
-components=(INFINISPAN KAFKA KEYCLOAK \
-           SHARED_CONFIG KOGITO_DATA_INDEX KOGITO_MANAGEMENT_CONSOLE KOGITO_TASK_CONSOLE KOGITO_JOBS_SERVICE \
+components=(SHARED_CONFIG INFINISPAN KAFKA KEYCLOAK \
+           KOGITO_DATA_INDEX KOGITO_MANAGEMENT_CONSOLE KOGITO_TASK_CONSOLE KOGITO_JOBS_SERVICE \
            TEST_APP)
 # override the installer properties configuration if needed
 function overrideEnvVariables(){
@@ -31,7 +31,20 @@ function componentAction(){
 
 function uninstall(){
 
+  if [ -z $OCP_PROJECT ]; then
+    echo "OCP_PROJECT property is not defined"
+    exit 1
+  else
+    oc get "project/$OCP_PROJECT" > /dev/null 2>&1
+    if [ "$?" != "0" ]; then
+      echo "OCP_PROJECT $OCP_PROJECT does not exist"
+      exit 1
+    fi
+  fi
+
   overrideEnvVariables
+
+  echo "************* UNINSTALL START *****************"
 
   componentAction "${TEST_APP}" "testapp"
 
@@ -51,7 +64,9 @@ function uninstall(){
 
   componentAction "${SHARED_CONFIG}" "kogito-shared"
 }
-uninstall > uninstallLogs.txt 2>&1
+rm -f uninstallLogs.log
+touch uninstallLogs.log
+uninstall |& tee uninstallLogs.log
 
 exit 0
 

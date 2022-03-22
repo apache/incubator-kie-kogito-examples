@@ -9,8 +9,8 @@ source common-functions.sh
 
 action=install
 
-components=(INFINISPAN KAFKA KEYCLOAK \
-           SHARED_CONFIG KOGITO_DATA_INDEX KOGITO_MANAGEMENT_CONSOLE KOGITO_TASK_CONSOLE KOGITO_JOBS_SERVICE \
+components=(SHARED_CONFIG INFINISPAN KAFKA KEYCLOAK \
+           KOGITO_DATA_INDEX KOGITO_MANAGEMENT_CONSOLE KOGITO_TASK_CONSOLE KOGITO_JOBS_SERVICE \
            TEST_APP)
 # override the installer properties configuration if needed
 function overrideEnvVariables(){
@@ -63,16 +63,22 @@ function install(){
   if [ -z $OCP_PROJECT ]; then
     echo "OCP_PROJECT property is not defined"
     exit 1
+  else
+    oc get "project/$OCP_PROJECT" > /dev/null 2>&1
+    if [ "$?" != "0" ]; then
+      echo "OCP_PROJECT $OCP_PROJECT does not exist"
+      exit 1
+    fi
   fi
 
   overrideEnvVariables
 
   echo "************* INSTALLATION START *****************"
   echo "**************************************************"
-  echo -e "*** Kogito version:\t\t\t\t$KOGITO_VERSION"
+  echo -e "*** Kogito version:\t\t\t$KOGITO_VERSION"
   echo -e "*** OCP project name:\t\t\t$OCP_PROJECT"
-  echo -e "*** Install all?\t\t\t\t$INSTALL_ALL"
-  echo -e "*** Is Dry run?\t\t\t\t\t$DRY_RUN"
+  echo -e "*** Install all?\t\t\t$INSTALL_ALL"
+  echo -e "*** Is Dry run?\t\t\t\t$DRY_RUN"
   echo -e "*** Installing components:\t\t$(componentsToInstall components)";
   echo "**************************************************"
 
@@ -93,6 +99,8 @@ function install(){
 
   echo "************* INSTALLATION END *******************"
 }
-install > installLogs.txt 2>&1
+rm -f installLogs.log
+touch installLogs.log
+install |& tee installLogs.log
 
 exit 0

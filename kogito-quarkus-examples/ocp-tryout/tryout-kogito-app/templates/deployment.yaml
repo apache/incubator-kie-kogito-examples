@@ -34,8 +34,18 @@ spec:
           image: "{{ required "A valid .Values.image.repository entry required!" .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
+            - name: GENERAL_NS
+              valueFrom:
+                configMapKeyRef:
+                  name: kogito-configs
+                  key: general.namespace
+            - name: GENERAL_CLUSTERHOST
+              valueFrom:
+                configMapKeyRef:
+                  name: kogito-configs
+                  key: general.appsclusterhost
             - name: KOGITO_SERVICE_URL
-              value: "http://{{ include "tryout-kogito-app.fullname" . }}-{{ required "A valid .Values.namespace entry required!" .Values.namespace }}.{{ required "A valid .Values.clusterName entry required!" .Values.clusterName }}"
+              value: "http://{{ include "tryout-kogito-app.fullname" . }}-$(GENERAL_NS).$(GENERAL_CLUSTERHOST)"
             - name: KAFKA_BOOTSTRAP_SERVERS
               valueFrom:
                 configMapKeyRef:

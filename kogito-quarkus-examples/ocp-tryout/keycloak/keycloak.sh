@@ -2,10 +2,10 @@
 
 action=$1
 
-# NOTE: if need to update kogito_realm.json, replace content of kogito-realm-orig.json here
+# NOTE: if need to update kogito_realm.json, edit content of kogito-realm-orig.json here
 function updateClientRedirectUrls(){
-  mngConsole=\"http://kogito-management-console-$(getProjectName).$(getClusterAppsHostname)\"
-  taskConsole=\"http://kogito-task-console-$(getProjectName).$(getClusterAppsHostname)\"
+  mngConsole=\"http://kogito-management-console-$(getProjectName).$(getClusterAppsHostname)/*\"
+  taskConsole=\"http://kogito-task-console-$(getProjectName).$(getClusterAppsHostname)/*\"
   additionalRedirectUris=["${mngConsole}","${taskConsole}"]
   (jq '(.clients[] | select(.clientId=="kogito-console-quarkus") | .redirectUris) |= . + '${additionalRedirectUris} kogito-realm-orig.json) > kogito-realm.json
 }
@@ -20,7 +20,7 @@ elif [ "${action}" == "install" ]; then
   oc create configmap keycloak-config --from-file=./kogito-realm.json -o yaml --dry-run=client | \
     oc label -f- --dry-run=client -o yaml --local=true app=keycloak | \
     oc apply -f- -n $(getProjectName) $(dryRun)
-  oc new-app jboss/keycloak:15.0.2 -n $(getProjectName) $(dryRun "NewApp")
+  oc new-app quay.io/keycloak/keycloak:15.0.2 -n $(getProjectName) $(dryRun "NewApp")
   waitForPod keycloak
   oc patch deployment keycloak --patch "$(cat deployment-patch.yaml)" -n $(getProjectName) $(dryRun)
   waitForPod keycloak

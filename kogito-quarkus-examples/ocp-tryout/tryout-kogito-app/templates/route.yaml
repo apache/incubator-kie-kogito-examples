@@ -1,6 +1,5 @@
 {{- if .Values.route.enabled }}
   {{- $fullName := include "tryout-kogito-app.fullname" . -}}
-  {{- $svcPort := .Values.service.port -}}
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
@@ -14,10 +13,10 @@ metadata:
 spec:
   host:
   port:
-    targetPort: {{ $svcPort }}
+    targetPort: {{ .Values.service.portName }}
   to:
     kind: Service
     name: {{ $fullName }}
-    weight: 100
-  wildcardPolicy: None
+    #weight: 100
+  #wildcardPolicy: None
 {{- end }}

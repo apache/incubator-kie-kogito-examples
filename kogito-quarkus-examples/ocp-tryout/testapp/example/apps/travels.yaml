@@ -3,5 +3,3 @@ image:
   tag: "1.16.0.final"
 
 applicationPort: 8080
-namespace: uegozi-dev
-clusterName: apps.ocp-dev01.lab.eng.tlv2.redhat.com
