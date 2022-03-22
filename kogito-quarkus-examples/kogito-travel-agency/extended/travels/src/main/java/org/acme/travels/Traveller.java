@@ -40,16 +40,20 @@ public class Traveller {
     @NotNull(message = "Address can not be null.")
     private Address address;
 
+    @NotBlank(message = "Passport Number can not be blank.")
+    private String passportNumber;
+
     public Traveller() {
 
     }
 
-    public Traveller(String firstName, String lastName, String email, String nationality, Address address) {
+    public Traveller(String firstName, String lastName, String email, String nationality, String passportNumber, Address address) {
         super();
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.nationality = nationality;
+        this.passportNumber = passportNumber;
         this.address = address;
     }
 
@@ -93,10 +97,18 @@ public class Traveller {
         this.address = address;
     }
 
+    public String getPassportNumber() {
+        return passportNumber;
+    }
+
+    public void setPassportNumber(String passportNumber) {
+        this.passportNumber = passportNumber;
+    }
+
     @Override
     public String toString() {
         return "Traveller [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", nationality="
-                + nationality + ", address=" + address + "]";
+                + nationality + ", address=" + address + ", passportNumber=" + passportNumber + "]";
     }
 
 }

@@ -44,7 +44,7 @@ public class VisaRulesIT {
 
         assertNotNull(ruleRuntime);
 
-        Traveller traveller = new Traveller("John", "Doe", "john.doe@example.com", "American", new Address("main street", "Boston", "10005", "US"));
+        Traveller traveller = new Traveller("John", "Doe", "john.doe@example.com", "American", "N7397478", new Address("main street", "Boston", "10005", "US"));
         Trip trip = new Trip("New York", "US", new Date(), new Date());
 
         KieSession ksession = ruleRuntime.newKieSession();
@@ -63,7 +63,7 @@ public class VisaRulesIT {
 
         assertNotNull(ruleRuntime);
 
-        Traveller traveller = new Traveller("Jan", "Kowalski", "jan.kowalski@example.com", "Polish", new Address("polna", "Krakow", "32000", "Poland"));
+        Traveller traveller = new Traveller("Jan", "Kowalski", "jan.kowalski@example.com", "Polish", "N7397478", new Address("polna", "Krakow", "32000", "Poland"));
         Trip trip = new Trip("New York", "US", new Date(), new Date());
 
         KieSession ksession = ruleRuntime.newKieSession();

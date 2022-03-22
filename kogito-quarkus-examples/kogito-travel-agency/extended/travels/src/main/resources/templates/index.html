@@ -72,6 +72,7 @@
 </div>
 <script>
     const graphql = '{config:property('kogito.dataindex.http.url') or 'http://localhost:8180'}/graphql';
+    const userFilter = "?user=jdoe";
 
     $(function () {
         $.ajaxSetup({
@@ -105,7 +106,7 @@
               var received_msg = evt.data;
               let jsonObject = JSON.parse(received_msg);
                if(jsonObject.type === 'connection_ack'){
-                   ws.send('{"id" : "2", "type" : "start", "payload" : { "query" : "subscription { TravelsUpdated { id, traveller { lastName, firstName, email, nationality } trip { city, country, begin, end, visaRequired } hotel { name, bookingNumber, phone, address { street } } flight { flightNumber, departure, arrival } visaApplication { approved } metadata { processInstances { businessKey, state } } } }"}}');
+                   ws.send('{"id" : "2", "type" : "start", "payload" : { "query" : "subscription { TravelsUpdated { id, traveller { lastName, firstName, email, nationality, passportNumber } trip { city, country, begin, end, visaRequired } hotel { name, bookingNumber, phone, address { street } } flight { flightNumber, departure, arrival } visaResolution { approved } metadata { processInstances { businessKey, state } } } }"}}');
                } else if(jsonObject.type === 'data') {
                    var val = jsonObject.payload.data.TravelsUpdated;
 
@@ -164,7 +165,7 @@
         };
         var visaApplicationRequest = JSON.stringify(\{visaApplication: application\});
 
-        $.post("/travels/" + $("#visa_p_id").val() + "/VisaApplication/" + $("#visa_t_id").val(), visaApplicationRequest, function () {
+        $.post("/travels/" + $("#visa_p_id").val() + "/VisaApplication/" + $("#visa_t_id").val() + userFilter, visaApplicationRequest, function () {
 
         }, "json");
     }
@@ -180,11 +181,11 @@
         var query = "{ \"query\": \"" +
                 "{ Travels { " +
                 "id " +
-                "traveller { lastName, firstName, email, nationality } " +
+                "traveller { lastName, firstName, email, nationality, passportNumber } " +
                 "trip { city, country, begin, end, visaRequired } " +
                 "hotel { name, bookingNumber, phone, address { street } } " +
                 "flight { flightNumber, departure, arrival } " +
-                "visaApplication { approved } " +
+                "visaResolution { approved } " +
                 "metadata { processInstances { state, businessKey } } " +
                 "}}\"" +
                 "}";
@@ -212,7 +213,7 @@
               "<td>" + val.trip.country + ", " + val.trip.city + "</td>" +
               "<td>" + val.trip.begin.substring(0, 10) + " - " + val.trip.end.substring(0, 10) + "</td>" +
               "<td>" + (val.trip.visaRequired ? 'Yes' : 'No') + "</td>" +
-              "<td>" + (val.visaApplication != null ? (val.visaApplication.approved ? 'Yes' : 'No') : 'N/A')+ "</td>" +
+              "<td>" + (val.visaResolution != null ? (val.visaResolution.approved ? 'Yes' : 'No') : 'N/A')+ "</td>" +
               "<td>" + (val.hotel != null ? val.hotel.name : '') + "</td>" +
               "<td>" + (val.flight != null ? val.flight.flightNumber : '') + "</td>" +
               "<td>" +
@@ -223,6 +224,7 @@
               "data-lastname='" + val.traveller.lastName + "' " +
               "data-email='" + val.traveller.email + "' " +
               "data-nationality='" + val.traveller.nationality + "' " +
+              "data-passportNumber='" + val.traveller.passportNumber + "' " +
               "data-country='" + val.trip.country + "' " +
               "data-city='" + val.trip.city + "' " +
               "data-begin='" + val.trip.begin.substring(0, 10) + "' " +
@@ -276,6 +278,7 @@
             modal.find('#lastName').val("");
             modal.find('#email').val("");
             modal.find('#nationality').val("");
+            modal.find('#passportNumber').val("");
 
             modal.find('#street').val("");
             modal.find('#city').val("");
@@ -300,7 +303,8 @@
                     lastName: $("#lastName").val(),
                     email: $("#email").val(),
                     nationality: $("#nationality").val(),
-                    address: address
+                    address: address,
+                    passportNumber: $("#passportNumber").val(),
                 };
                 var trip = {
                     country: $("#destinationCountry").val(),
@@ -326,6 +330,7 @@
             modal.find('#lastName').val(button.data("lastname"));
             modal.find('#email').val(button.data("email"));
             modal.find('#nationality').val(button.data("nationality"));
+            modal.find('#passportNumber').val(button.data("passportnumber"));
 
             modal.find('#destinationCountry').val(button.data("country"));
             modal.find('#destinationCity').val(button.data("city"));
@@ -350,7 +355,7 @@
             modal.find('.modal-title').text("Tasks for " + button.data("lastname") + ", " + button.data("firstname"));
 
             $("#taskscontent").children().remove();
-            $.getJSON("/travels/" + id + "/tasks", function (data) {
+            $.getJSON("/travels/" + id + "/tasks"+userFilter, function (data) {
                 $.each(data, function (key, val) {
                     if ("VisaApplication" == val.name) {
                         $("<tr><td>" + val.name + "</td>" +
@@ -368,7 +373,7 @@
                     } else {
                         $("<tr><td>" + val.name + "</td>" +
                                 "<td>" +
-                                "<button class='btn btn-primary btn-sm' onclick=\"completeTask('" + id + "', '" + val.name + "', '" + val.id + "')\" data-dismiss=\"modal\" " +
+                                "<button class='btn btn-primary btn-sm' onclick=\"completeTask('" + id + "', '" + val.name + "', '" + val.id + userFilter + "')\" data-dismiss=\"modal\" " +
                                 "   <span>Complete</span>" +
                                 "</button>" +
                                 "</td>" +
@@ -386,12 +391,13 @@
                 var modal = $(this);
                 modal.find('.modal-title').text("Visa application");
 
-                $.getJSON("/travels/" + id + "/VisaApplication/" + taskid, function (data) {
+                $.getJSON("/travels/" + id + "/VisaApplication/" + taskid + userFilter, function (data) {
 
                     $("#visa_firstName").val(data.parameters.traveller.firstName);
                     $("#visa_lastName").val(data.parameters.traveller.lastName);
                     $("#visa_email").val(data.parameters.traveller.email);
                     $("#visa_nationality").val(data.parameters.traveller.nationality);
+                    $("#visa_passportNumber").val(data.parameters.traveller.passportNumber);
 
                     $("#visa_destinationCity").val(data.parameters.trip.city);
                     $("#visa_destinationCountry").val(data.parameters.trip.country);
@@ -401,8 +407,13 @@
                     $("#visa_p_id").val(id);
                     $("#visa_t_id").val(taskid);
 
-                    $("#visa_passportNumber").val('');
-                    $("#visa_duration").val('');
+                    const tripStart = new Date(data.parameters.trip.begin);
+                    const tripEnd = new Date(data.parameters.trip.end);
+                    const diffTime = Math.abs(tripEnd - tripStart);
+
+                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+                    $("#visa_duration").val(diffDays);
                 });
 
             })
@@ -443,6 +454,10 @@
 
                         </div>
                         <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group">
+                                <label for="passportNumber">Passport Number</label> <input type="text"
+                                                                          class="form-control" id="passportNumber" name="passportNumber" required>
+                            </div>
                             <div class="form-group">
                                 <label for="street">Street</label> <input type="email"
                                                                           class="form-control" id="street" name="street" required>
@@ -528,6 +543,10 @@
                                                                         class="form-control" id="email" name="email" readonly>
                             </div>
                             <div class="form-group">
+                                <label for="passportNumber">Passport Number</label> <input type="text"
+                                                                        class="form-control" id="passportNumber" name="passportNumber" readonly>
+                            </div>
+                            <div class="form-group">
                                 <label for="nationality">Nationality</label> <input
                                     type="text" class="form-control" id="nationality"
                                     name="form-control" readonly>
@@ -556,7 +575,8 @@
                                     name="tripEnd" readonly>
                             </div>
                         </div>
-
+                    </div>
+                    <div class="row">
                         <div class="col-md-6 col-sm-6 col-xs-6">
                             <div class="form-group">
                                 <h3>Hotel</h3>
@@ -704,11 +724,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="visa_passportNumber">Passport number</label> <input type="text"
-                                                                                                class="form-control" id="visa_passportNumber" name="visa_passportNumber">
+                                                                                                class="form-control" id="visa_passportNumber" name="visa_passportNumber" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="visa_duration">Duration</label> <input type="text"
-                                                                                   class="form-control" id="visa_duration" name="visa_duration">
+                                                                                   class="form-control" id="visa_duration" name="visa_duration" readonly>
                             </div>
                         </div>
                     </div>
