@@ -3,6 +3,8 @@
 The goal of this procedure is to simplify the deployment of a Kogito application on the Openshift platform.
 This deployment includes both the required infrastructure and the Kogito application.
 
+The deployment is targeting examples based on the BPM model which require additional resources like protobuf and svg files.
+
 Make sure you meet the [prerequisites](#prerequisites) and then start [here](#installation).
 
 ## Prerequisites
@@ -39,11 +41,11 @@ Installation from pre-build images
   - **Note**: you can use the example files from `./testapp/example`
      which allow you to run the Kogito Travel Agency extended example. Just copy the folders to under `./testapp`
      The KOGITO_VERSION in `installer.properties` should be 1.16.0.
-  - **When not using example files, do:**
-    - `./testapp/apps`: For each Kogito application to be installed define a `<values>.yaml` file. 
+  - **When not using the example files, do:**
+    - `./testapp/apps`: For each Kogito application to be installed define a `<values>.yaml` file under the `apps` folder. 
     The file name will be used as the chart release name. Only use lowercase alphanumeric characters.
     
-    The minimum configuration is:  
+    The minimum configuration for each `<values>.yaml` is:  
       ```
       # example
       image:
@@ -51,10 +53,11 @@ Installation from pre-build images
         tag: 1.16.0.final
       applicationPort: 8080
       ```
-    - `./testapp/protobuf`: For each Kogito application to be installed add its protobuf files. Protobuf files for the Kogito examples can be found under folder `target/classes/META-INF/resources/persistence/protobuf`. 
-    - `./testapp/svg`: For each Kogito application to be installed add its svg files. svg files for the Kogito examples can be found under `target/classes/META-INF/processSVG`.
+    - `./testapp/protobuf`: For each Kogito application to be installed add its protobuf files under the `protobuf` folder. Protobuf files for the Kogito examples can be found under folder `target/classes/META-INF/resources/persistence/protobuf`. 
+    - `./testapp/svg`: For each Kogito application to be installed add its svg files under the `svg` folder. svg files for the Kogito examples can be found under `target/classes/META-INF/processSVG`.
 - run `./installer.sh`
-- installation logs are written to the console and `./ocp-tryout/installLogs.txt`
+
+Installation logs are written to the console and `./ocp-tryout/installLogs.txt`
 
 ## Removal of installation
 - login to OCP cluster: `oc login ...`
