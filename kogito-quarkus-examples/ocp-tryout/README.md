@@ -64,22 +64,6 @@ Installation logs are written to the console and `./ocp-tryout/installLogs.txt`
 - use the same `./installer.properties` you installed with to remove the installation completely or cherry-pick the parts to uninstall
 - run `./uninstaller.sh`
 
-[comment]: <> (### Installation of Kogito application)
-
-[comment]: <> (The application is installed together with the complete infrastructure )
-
-[comment]: <> (when running the `./installer.sh`. )
-
-[comment]: <> (To install the application separately, run `./testapp/testapp.sh install`)
-
-[comment]: <> (### Removal of Kogito application)
-
-[comment]: <> (The application is uninstalled together with the complete infrastructure)
-
-[comment]: <> (when running the `./uninstaller.sh`. )
-
-[comment]: <> (To uninstall the application separately, run `./testapp/testapp.sh uninstall`)
-
 ## Component Interconnection/Initialization
 
 Not just the Kogito application but also Kogito services need to interface with other Kogito services or infrastructures.
