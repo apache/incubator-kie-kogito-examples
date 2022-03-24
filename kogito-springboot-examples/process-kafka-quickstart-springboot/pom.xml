@@ -72,7 +72,6 @@
     <dependency>
       <groupId>io.cloudevents</groupId>
       <artifactId>cloudevents-json-jackson</artifactId>
-      <scope>test</scope>
     </dependency>
   </dependencies>
 
