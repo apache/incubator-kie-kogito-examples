@@ -23,7 +23,7 @@ import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.ByteArraySerializer;
-import org.kie.kogito.services.event.ProcessDataEvent;
+import org.kie.kogito.event.process.ProcessDataEvent;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -50,21 +50,19 @@ public class KafkaDispatcher implements RequestDispatcher {
 
     @Override
     public void dispatch(long delay, Consumer<Throwable> consumer) {
-
         try {
-            kafkaProducer.send(new ProducerRecord<>("test", objectMapper.writeValueAsBytes(
-                    new ObjectCloudEvent(trigger, delay))), (r, e) -> {
-                        if (e != null) {
-                            consumer.accept(e);
-                        }
-                    });
+            kafkaProducer.send(new ProducerRecord<>("test", objectMapper.writeValueAsBytes(new ObjectCloudEvent(trigger, delay))), (r, e) -> {
+                if (e != null) {
+                    consumer.accept(e);
+                }
+            });
         } catch (JsonProcessingException e) {
             consumer.accept(e);
         }
     }
 
     @Override
-    public void close() throws Exception {
+    public void close() {
         kafkaProducer.close();
     }
 
