@@ -9,7 +9,7 @@ spec:
   #- name: MY_CUSTOM_ENV
   #  value: "my value"
   gitSource:
-    contextDir: serverless-workflow-temperature-conversion
+    contextDir: kogito-quarkus-examples/serverless-workflow-temperature-conversion
     uri: "https://github.com/kiegroup/kogito-examples"
   # set your maven nexus repository to speed up the build time
   #mavenMirrorURL:

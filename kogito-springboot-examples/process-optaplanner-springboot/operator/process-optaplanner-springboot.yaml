@@ -6,7 +6,7 @@ spec:
   type: RemoteSource
   runtime: springboot
   gitSource:
-    contextDir: process-optaplanner-springboot
+    contextDir: kogito-quarkus-examples/process-optaplanner-springboot
     uri: 'https://github.com/kiegroup/kogito-examples'
   # set your maven nexus repository to speed up the build time
   #mavenMirrorURL:

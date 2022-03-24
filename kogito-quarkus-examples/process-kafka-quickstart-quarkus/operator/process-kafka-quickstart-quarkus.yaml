@@ -19,7 +19,7 @@ spec:
   #- name: MY_CUSTOM_ENV
   #  value: "my value"
   gitSource:
-    contextDir: process-kafka-quickstart-quarkus
+    contextDir: kogito-quarkus-examples/process-kafka-quickstart-quarkus
     uri: 'https://github.com/kiegroup/kogito-examples'
   # set your maven nexus repository to speed up the build time
   #mavenMirrorURL:
