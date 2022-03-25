@@ -15,7 +15,7 @@ metadata:
 spec:
   type: RemoteSource
   gitSource:
-    contextDir: process-infinispan-persistence-quarkus
+    contextDir: kogito-quarkus-examples/process-infinispan-persistence-quarkus
     uri: 'https://github.com/kiegroup/kogito-examples'
   # set your maven nexus repository to speed up the build time
   #mavenMirrorURL:

@@ -5,7 +5,7 @@ metadata:
 spec:
   type: RemoteSource
   gitSource:
-    contextDir: process-quarkus-example
+    contextDir: kogito-quarkus-examples/process-quarkus-example
     uri: 'https://github.com/kiegroup/kogito-examples'
   # set your maven nexus repository to speed up the build time
   #mavenMirrorURL:
