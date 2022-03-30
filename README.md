@@ -127,7 +127,6 @@ shows timers (intermediate and boundary) that allows to introduce delays in proc
 A Serverless Workflow greeting service with both JSON and YAML workflow definitions
 
 * [on Quarkus](kogito-quarkus-examples/serverless-workflow-greeting-quarkus)
-* [on Spring Boot](kogito-springboot-examples/serverless-workflow-greeting-springboot)
 
 ## Serverless Workflow with events
 
@@ -140,7 +139,6 @@ A Serverless Workflow service for processing job applicant approvals and that sh
 A Serverless Workflow service for returning country information
 
 * [on Quarkus](kogito-quarkus-examples/serverless-workflow-service-calls-quarkus)
-* [on Spring Boot](kogito-springboot-examples/serverless-workflow-service-calls-springboot)
 
 ## Serverless Workflow GitHub showcase
 

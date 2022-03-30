@@ -172,8 +172,6 @@
         <module>process-usertasks-with-security-oidc-springboot</module>
         <module>process-usertasks-with-security-springboot</module>
         <module>ruleunit-springboot-example</module>
-        <module>serverless-workflow-greeting-springboot</module>
-        <module>serverless-workflow-service-calls-springboot</module>
       </modules>
     </profile>
 
