@@ -23,11 +23,15 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 @Component
 public class LogEventPublisher implements EventPublisher {
 
-    ObjectMapper json = new ObjectMapper();
+    ObjectMapper json = JsonMapper.builder()
+            .addModule(new JavaTimeModule())
+            .build();
 
     @Override
     public void publish(DataEvent<?> event) {
