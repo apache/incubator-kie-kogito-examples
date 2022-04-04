@@ -15,7 +15,6 @@
  */
 package org.kie.kogito.springboot;
 
-import org.keycloak.adapters.springboot.KeycloakSpringBootConfigResolver;
 import org.keycloak.adapters.springsecurity.KeycloakConfiguration;
 import org.keycloak.adapters.springsecurity.KeycloakSecurityComponents;
 import org.keycloak.adapters.springsecurity.authentication.KeycloakAuthenticationProvider;
@@ -35,7 +34,7 @@ import org.springframework.security.web.authentication.session.SessionAuthentica
 class DefaultWebSecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
 
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+    public void configureGlobal(AuthenticationManagerBuilder auth) {
         SimpleAuthorityMapper grantedAuthorityMapper = new SimpleAuthorityMapper();
         grantedAuthorityMapper.setPrefix("ROLE_");
 
@@ -43,11 +42,6 @@ class DefaultWebSecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
         keycloakAuthenticationProvider.setGrantedAuthoritiesMapper(grantedAuthorityMapper);
 
         auth.authenticationProvider(keycloakAuthenticationProvider);
-    }
-
-    @Bean
-    public KeycloakSpringBootConfigResolver KeycloakConfigResolver() {
-        return new KeycloakSpringBootConfigResolver();
     }
 
     @Bean
