@@ -66,14 +66,14 @@
       <artifactId>kogito-addons-springboot-process-management</artifactId>
     </dependency>
 
-    <!-- uncomment these two to enable persistence for kogito -->
+    <!-- uncomment these two to enable persistence for Kogito -->
     <!--     <dependency>
       <groupId>org.infinispan</groupId>
       <artifactId>infinispan-spring-boot-starter-remote</artifactId>
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-addons-persistence-infinispan</artifactId>
+      <artifactId>kogito-addons-springboot-persistence-infinispan</artifactId>
     </dependency> -->
 
   </dependencies>

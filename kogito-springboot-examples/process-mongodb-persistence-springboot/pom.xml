@@ -57,7 +57,7 @@
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-addons-persistence-mongodb</artifactId>
+      <artifactId>kogito-addons-springboot-persistence-mongodb</artifactId>
     </dependency>
 
     <dependency>
