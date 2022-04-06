@@ -41,7 +41,7 @@ services:
       - MONGODB_USER=debezium
       - MONGODB_PASSWORD=dbz
   connect:
-    image: debezium/connect:${DEBEZIUM_VERSION}
+    image: quay.io/debezium/connect:${DEBEZIUM_VERSION}
     ports:
       - "8083:8083"
     links:
