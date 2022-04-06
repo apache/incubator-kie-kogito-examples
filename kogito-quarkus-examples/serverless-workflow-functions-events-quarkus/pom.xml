@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>kogito-quarkus-examples</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
+    <version>1.20.0-SNAPSHOT</version>
   </parent>
   <artifactId>serverless-workflow-functions-events-quarkus</artifactId>
   <name>Kogito Example :: Serverless Workflow Functions And Events :: Quarkus</name>
