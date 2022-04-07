@@ -23,8 +23,8 @@ import org.acme.travels.Address;
 import org.acme.travels.Traveller;
 import org.acme.travels.Trip;
 import org.drools.core.common.InternalAgenda;
-import org.kie.api.runtime.KieRuntimeBuilder;
 import org.junit.jupiter.api.Test;
+import org.kie.api.runtime.KieRuntimeBuilder;
 import org.kie.api.runtime.KieSession;
 
 import io.quarkus.test.junit.QuarkusTest;
