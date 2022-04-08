@@ -7,7 +7,7 @@
   <parent>
     <groupId>org.kie.kogito</groupId>
     <artifactId>kogito-build-no-bom-parent</artifactId>
-    <version>1.20.0-SNAPSHOT</version>
+    <version>1.20.0.Final</version>
   </parent>
 
   <groupId>org.kie.kogito.examples</groupId>
@@ -43,8 +43,8 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <!-- kogito -->
     <kogito.version>${project.version}</kogito.version>
-    <version.org.drools>8.20.0-SNAPSHOT</version.org.drools>
-    <version.org.optaplanner>8.20.0-SNAPSHOT</version.org.optaplanner>
+    <version.org.drools>8.20.0.Beta</version.org.drools>
+    <version.org.optaplanner>8.20.0.Final</version.org.optaplanner>
     <!-- dependencies version -->
     <version.org.skyscreamer>1.5.0</version.org.skyscreamer>
     <!-- JKube -->
