@@ -25,8 +25,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.kie.api.runtime.KieRuntimeBuilder;
 import org.kie.api.runtime.KieSession;
-import org.kie.kogito.legacy.rules.KieRuntimeBuilder;
 
 @Path("/find-approved")
 public class FindApprovedLoansEndpoint {
