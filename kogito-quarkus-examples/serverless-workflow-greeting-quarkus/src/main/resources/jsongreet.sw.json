@@ -2,7 +2,6 @@
   "id": "jsongreet",
   "version": "1.0",
   "name": "Greeting workflow",
-  "expressionLang": "jsonpath",
   "description": "JSON based greeting workflow",
   "start": "ChooseOnLanguage",
   "functions": [
@@ -18,11 +17,11 @@
       "type": "switch",
       "dataConditions": [
         {
-          "condition": "${ $.[?(@.language  == 'English')] }",
+          "condition": "${ .language == \"English\" }",
           "transition": "GreetInEnglish"
         },
         {
-          "condition": "${ $.[?(@.language  == 'Spanish')] }",
+          "condition": "${ .language == \"Spanish\" }",
           "transition": "GreetInSpanish"
         }
       ],
@@ -55,7 +54,7 @@
           "functionRef": {
             "refName": "greetFunction",
             "arguments": {
-              "message": "$.greeting $.name"
+              "message": ".greeting+.name"
             }
           }
         }
