@@ -12,9 +12,9 @@ states:
   - name: ChooseOnLanguage
     type: switch
     dataConditions:
-      - condition: "{{ $.[?(@.language  == 'English')] }}"
+      - condition: "${$.[?(@.language  == 'English')]}"
         transition: GreetInEnglish
-      - condition: "{{ $.[?(@.language  == 'Spanish')] }}"
+      - condition: "${$.[?(@.language  == 'Spanish')]}"
         transition: GreetInSpanish
     defaultCondition:
       transition: GreetInEnglish
