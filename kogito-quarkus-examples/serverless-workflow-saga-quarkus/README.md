@@ -12,7 +12,7 @@ This is an example of how to implement the Saga pattern based on Serverless Work
  
 The compensations can be triggered by a transition setting the property `compensate` to `true`, this transition can be declared in a state that represents an error in the workflow. In the order workflow example, it is the `ServiceError` state. In general, the error in a state can be declared with the property `onErrors`, which may include a transition to a state that represents this error.
   
-The functions to execute the steps and compensations in this example are implemented using Java classes under the project's `src`, for instance, [StockService][/src/main/java/org/kie/kogito/StockService.java]. For this example, they are just mocking responses, but they could be executing calls to external services or any business logic in an actual use case. Other options can declare these operations, like OpenAPI, REST, or events. 
+The functions to execute the steps and compensations in this example are implemented using Java classes under the project's `src`, for instance, [StockService](/src/main/java/org/kie/kogito/StockService.java). For this example, they are just mocking responses, but they could be executing calls to external services or any business logic in an actual use case. Other options can declare these operations, like OpenAPI, REST, or events. 
  
 The start point of the Saga workflow is to submit a request to create a new Order with a given `orderId`. This could be any other payload that represents an `Order`. For the sake of simplicity, in this example, it will be based on the `id` that could be used as a correlation key to the client starting the Saga workflow.
   
@@ -200,4 +200,4 @@ In the console executing the application, you can check the log with the execute
 
 In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).
 
-[https://blog.kie.org/2021/11/saga-pattern-with-processes-and-kogito-part-1.html]: https://blog.kie.org/2021/11/saga-pattern-with-processes-and-kogito-part-1.html
+See also: [SAGA PATTERN WITH PROCESSES AND KOGITO – PART 1](https://blog.kie.org/2021/11/saga-pattern-with-processes-and-kogito-part-1.html)
