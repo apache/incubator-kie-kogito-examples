@@ -25,7 +25,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.acme.QueryRecord;
-import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.eclipse.microprofile.config.ConfigProvider;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -60,15 +60,13 @@ class QueryAnswerServiceIT {
     private static final String QUERY_ANSWER_SERVICE_URL = "/qaservice";
     private static final String QUERY_ANSWER_SERVICE_GET_BY_ID_URL = QUERY_ANSWER_SERVICE_URL + "/{id}";
 
-    @ConfigProperty(name = KafkaQuarkusTestResource.KOGITO_KAFKA_PROPERTY)
-    String kafkaBootstrapServers;
-
     private ObjectMapper objectMapper;
 
     private KafkaTestClient kafkaClient;
 
     @BeforeEach
     void setup() {
+        String kafkaBootstrapServers = ConfigProvider.getConfig().getValue(KafkaQuarkusTestResource.KOGITO_KAFKA_PROPERTY, String.class);
         kafkaClient = new KafkaTestClient(kafkaBootstrapServers);
         objectMapper = new ObjectMapper()
                 .registerModule(new JavaTimeModule())
