@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>serverless-workflow-github-showcase</artifactId>
-    <version>1.20.0.Final</version>
+    <version>1.20.1-SNAPSHOT</version>
   </parent>
   <artifactId>pr-checker-workflow</artifactId>
   <name>Kogito Example :: Serverless Workflow Github Showcase :: PR Checker Workflow</name>
