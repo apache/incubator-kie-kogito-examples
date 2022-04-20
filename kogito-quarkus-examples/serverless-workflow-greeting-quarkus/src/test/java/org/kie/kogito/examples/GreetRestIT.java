@@ -27,7 +27,7 @@ import static org.hamcrest.CoreMatchers.containsString;
 class GreetRestIT {
 
     @Test
-    void testGreetRest() {
+    void testEnglish() {
         given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
@@ -36,7 +36,10 @@ class GreetRestIT {
                 .then()
                 .statusCode(201)
                 .body("workflowdata.greeting", containsString("Hello"));
+    }
 
+    @Test
+    void testSpanish() {
         given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
@@ -45,5 +48,29 @@ class GreetRestIT {
                 .then()
                 .statusCode(201)
                 .body("workflowdata.greeting", containsString("Saludos"));
+    }
+
+    @Test
+    void testDefaultLanguage() {
+        given()
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .body("{\"workflowdata\" : {\"name\" : \"John\"}}").when()
+                .post("/jsongreet")
+                .then()
+                .statusCode(201)
+                .body("workflowdata.greeting", containsString("Hello"));
+    }
+
+    @Test
+    void testUnsupportedLanguage() {
+        given()
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .body("{\"workflowdata\" : {\"name\" : \"Jan\", \"language\":\"Czech\"}}").when()
+                .post("/jsongreet")
+                .then()
+                .statusCode(201)
+                .body("workflowdata.greeting", containsString("Hello"));
     }
 }
