@@ -40,7 +40,9 @@ import com.jayway.jsonpath.JsonPath;
 
 import static io.restassured.RestAssured.given;
 import static org.awaitility.Awaitility.await;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class OutboxIT {
@@ -51,6 +53,7 @@ public class OutboxIT {
 
     private static final String PROCESS_EVENTS_TOPIC = "kogito-processinstances-events";
     private static final String USERTASK_EVENTS_TOPIC = "kogito-usertaskinstances-events";
+    private static final String VARIABLE_EVENTS_TOPIC = "kogito-variables-events";
     private static final int KOGITO_PORT = 8080;
     private static final int KAFKA_PORT = 9092;
     private static final int DEBEZIUM_PORT = 8083;
@@ -191,8 +194,8 @@ public class OutboxIT {
                         .get("/connectors/{connector}/topics")
                         .then()
                         .statusCode(200)
-                        .body("kogito-connector.topics", hasSize(2))
-                        .body("kogito-connector.topics", hasItems(PROCESS_EVENTS_TOPIC, USERTASK_EVENTS_TOPIC)));
+                        .body("kogito-connector.topics", hasSize(3))
+                        .body("kogito-connector.topics", hasItems(PROCESS_EVENTS_TOPIC, USERTASK_EVENTS_TOPIC, VARIABLE_EVENTS_TOPIC)));
 
         // Check process events pushed
         assertTrue(processEventCounter.await(TIMEOUT.getSeconds(), TimeUnit.SECONDS));
