@@ -23,8 +23,6 @@ Import the following dependency in your `pom.xml`:
 </dependency>
 ```
 
-Remember to enable dumping of generated files adding ```kogito.quarkus.codegen.dumpFiles=true``` to application.properties
-
 ### Architecture
 
 Once you compile your Quarkus project, a dashboard for each available endpoint will be generated under the path `target/classes/META-INF/resources/monitoring/dashboards/`. You can then inject those grafana dashboards during the deployment of the grafana instance.
