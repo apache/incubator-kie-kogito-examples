@@ -328,28 +328,28 @@ Cancels travel request with given id
 curl -X DELETE http://localhost:8080/travels/{uuid}
 ```
 
-### GET /travels/{id}/tasks
+### GET /travels/{id}/tasks?user=jdoe
 
 Returns currently assigned user tasks for give travel request:
 
 ```sh
-curl -X GET http://localhost:8080/travels/{uuid}/tasks
+curl -X GET http://localhost:8080/travels/{uuid}/tasks?user=jdoe
 ```
 
-### GET /travels/{id}/VisaApplication/{taskId}
+### GET /travels/{id}/VisaApplication/{taskId}?user=jdoe
 
 Returns visa application task information:
 
 ```sh
-curl -X GET http://localhost:8080/travels/{uuid}/VisaApplication/{task-uuid}
+curl -X GET http://localhost:8080/travels/{uuid}/VisaApplication/{task-uuid}?user=jdoe
 ```
 
-### POST /travels/{id}/VisaApplication/{taskId}
+### POST /travels/{id}/VisaApplication/{taskId}?user=jdoe
 
 Completes visa application task
 
 ```sh
-curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST http://localhost:8080/travels/{uuid}/VisaApplication/{task-uuid} -d @- << EOF
+curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST http://localhost:8080/travels/{uuid}/VisaApplication/{task-uuid}?user=jdoe -d @- << EOF
 {
 	"visaApplication" : {
 		"firstName" : "Jan",
@@ -364,20 +364,20 @@ curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST h
 EOF
 ```
 
-### GET /travels/{id}/ConfirmTravel/{taskId}
+### GET /travels/{id}/ConfirmTravel/{taskId}?user=jdoe
 
 Returns travel (hotel, flight) task information required for confirmation:
 
 ```sh
-curl -X GET http://localhost:8080/travels/{uuid}/ConfirmTravel/{task-uuid}
+curl -X GET http://localhost:8080/travels/{uuid}/ConfirmTravel/{task-uuid}?user=jdoe
 ```
 
-### POST /travels/{id}/ConfirmTravel/{taskId}
+### POST /travels/{id}/ConfirmTravel/{taskId}?user=jdoe
 
 Completes confirms travel task - meaning confirms (and completes) the travel request
 
 ```sh
-curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST http://localhost:8080/travels/{uuid}/ConfirmTravel/{task-uuid} -d '{}'
+curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST http://localhost:8080/travels/{uuid}/ConfirmTravel/{task-uuid}?user=jdoe -d '{}'
 ```
 
 ### Querying the technical cache
