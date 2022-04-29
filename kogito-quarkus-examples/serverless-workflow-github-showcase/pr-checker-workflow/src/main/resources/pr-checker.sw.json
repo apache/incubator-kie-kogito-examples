@@ -7,11 +7,8 @@
   "functions": [
     {
       "name": "FetchPRFiles",
-      "metadata": {
-        "interface": "org.kogito.examples.sw.github.workflow.GitHubService",
-        "operation": "fetchPRFiles",
-        "type": "service"
-      }
+      "type": "custom",
+      "operation": "service:java:org.kogito.examples.sw.github.workflow.GitHubService::fetchPRFiles"
     }
   ],
   "events": [
