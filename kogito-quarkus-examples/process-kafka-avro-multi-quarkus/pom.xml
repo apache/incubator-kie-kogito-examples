@@ -82,11 +82,9 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-health</artifactId>
     </dependency>
-
     <dependency>
-        <groupId>io.github.productboardlabs</groupId>
-        <artifactId>jackson-kafka-avro-serializer</artifactId>
-        <version>0.7.0</version>
+      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <artifactId>jackson-dataformat-avro</artifactId>
     </dependency>
   </dependencies>
   <build>
