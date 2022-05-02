@@ -291,8 +291,8 @@ curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST h
 	"trip" : {
 		"city" : "New York",
 		"country" : "US",
-		"begin" : "2019-12-10T00:00:00.000+02:00",
-		"end" : "2019-12-15T00:00:00.000+02:00"
+		"begin" : "2019-12-05T00:00:00.000+02:00",
+		"end" : "2019-12-30T00:00:00.000+02:00"
 	}
 }
 EOF
@@ -328,7 +328,7 @@ Cancels travel request with given id
 curl -X DELETE http://localhost:8080/travels/{uuid}
 ```
 
-### GET /travels/{id}/tasks?user=jdoe
+### GET /travels/{id}/tasks
 
 Returns currently assigned user tasks for give travel request:
 
@@ -336,7 +336,7 @@ Returns currently assigned user tasks for give travel request:
 curl -X GET http://localhost:8080/travels/{uuid}/tasks?user=jdoe
 ```
 
-### GET /travels/{id}/VisaApplication/{taskId}?user=jdoe
+### GET /travels/{id}/VisaApplication/{taskId}
 
 Returns visa application task information:
 
@@ -344,27 +344,15 @@ Returns visa application task information:
 curl -X GET http://localhost:8080/travels/{uuid}/VisaApplication/{task-uuid}?user=jdoe
 ```
 
-### POST /travels/{id}/VisaApplication/{taskId}?user=jdoe
+### POST /travels/{id}/VisaApplication/{taskId}
 
 Completes visa application task
 
 ```sh
-curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST http://localhost:8080/travels/{uuid}/VisaApplication/{task-uuid}?user=jdoe -d @- << EOF
-{
-	"visaApplication" : {
-		"firstName" : "Jan",
-		"lastName" : "Kowalski",
-		"nationality" : "Polish",
-		"city" : "New York",
-		"country" : "US",
-		"passportNumber" : "ABC09876",
-		"duration" : 25
-	}
-}
-EOF
+curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST http://localhost:8080/travels/{uuid}/VisaApplication/{task-uuid}?user=jdoe -d '{}'
 ```
 
-### GET /travels/{id}/ConfirmTravel/{taskId}?user=jdoe
+### GET /travels/{id}/ConfirmTravel/{taskId}
 
 Returns travel (hotel, flight) task information required for confirmation:
 
@@ -372,7 +360,7 @@ Returns travel (hotel, flight) task information required for confirmation:
 curl -X GET http://localhost:8080/travels/{uuid}/ConfirmTravel/{task-uuid}?user=jdoe
 ```
 
-### POST /travels/{id}/ConfirmTravel/{taskId}?user=jdoe
+### POST /travels/{id}/ConfirmTravel/{taskId}
 
 Completes confirms travel task - meaning confirms (and completes) the travel request
 
