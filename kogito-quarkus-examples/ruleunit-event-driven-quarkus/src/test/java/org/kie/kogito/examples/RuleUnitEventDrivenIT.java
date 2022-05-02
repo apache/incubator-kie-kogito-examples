@@ -28,7 +28,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.kie.kogito.test.quarkus.QuarkusIntegrationTestProperty;
+import org.kie.kogito.test.quarkus.QuarkusTestProperty;
 import org.kie.kogito.test.quarkus.kafka.KafkaTestClient;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -62,7 +62,7 @@ class RuleUnitEventDrivenIT {
             .setSerializationInclusion(JsonInclude.Include.NON_NULL);
     private static final String DEFAULT_EVENT_ID = "d54ace84-6788-46b6-a359-b308f8b21778";
 
-    @QuarkusIntegrationTestProperty(name = KafkaQuarkusTestResource.KOGITO_KAFKA_PROPERTY)
+    @QuarkusTestProperty(name = KafkaQuarkusTestResource.KOGITO_KAFKA_PROPERTY)
     private String kafkaBootstrapServers;
 
     private KafkaTestClient kafkaClient;

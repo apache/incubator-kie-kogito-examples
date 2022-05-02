@@ -28,12 +28,12 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Stream;
 
-import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.kie.kogito.test.quarkus.QuarkusTestProperty;
 import org.kie.kogito.test.quarkus.kafka.KafkaTestClient;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -67,7 +67,7 @@ public class DmnEventDrivenIT {
             .setSerializationInclusion(JsonInclude.Include.NON_NULL);
     private static final String DEFAULT_EVENT_ID = "d54ace84-6788-46b6-a359-b308f8b21778";
 
-    @ConfigProperty(name = KafkaQuarkusTestResource.KOGITO_KAFKA_PROPERTY)
+    @QuarkusTestProperty(name = KafkaQuarkusTestResource.KOGITO_KAFKA_PROPERTY)
     private String kafkaBootstrapServers;
 
     private KafkaTestClient kafkaClient;

@@ -28,7 +28,7 @@ import org.acme.travel.Traveller;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.kie.kogito.test.quarkus.QuarkusIntegrationTestProperty;
+import org.kie.kogito.test.quarkus.QuarkusTestProperty;
 import org.kie.kogito.test.quarkus.kafka.KafkaTestClient;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 import org.slf4j.Logger;
@@ -63,7 +63,7 @@ public class MultiMessagingIT {
 
     public KafkaTestClient kafkaClient;
 
-    @QuarkusIntegrationTestProperty(name = KafkaQuarkusTestResource.KOGITO_KAFKA_PROPERTY)
+    @QuarkusTestProperty(name = KafkaQuarkusTestResource.KOGITO_KAFKA_PROPERTY)
     private String kafkaBootstrapServers;
 
     @BeforeEach
