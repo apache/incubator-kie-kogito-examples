@@ -31,7 +31,7 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 
 @QuarkusTest
 @QuarkusTestResource(KeycloakQuarkusTestResource.class)
-@QuarkusTestResource(value = KafkaQuarkusTestResource.class)
+@QuarkusTestResource(KafkaQuarkusTestResource.class)
 public class ApprovalsRestIT {
 
     @QuarkusTestProperty(name = "quarkus.oidc.auth-server-url")
