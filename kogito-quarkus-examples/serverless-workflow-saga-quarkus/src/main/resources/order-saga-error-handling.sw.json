@@ -22,73 +22,48 @@
   "functions": [
     {
       "name": "reserveStock",
-      "metadata": {
-        "interface": "org.kie.kogito.StockService",
-        "operation": "reserveStock",
-        "type": "service"
-      }
+      "type": "custom",
+      "operation": "service:org.kie.kogito.StockService::reserveStock"
     },
     {
       "name": "cancelStock",
-      "metadata": {
-        "interface": "org.kie.kogito.StockService",
-        "operation": "cancelStock",
-        "type": "service"
-      }
+       "type": "custom",
+      "operation": "service:org.kie.kogito.StockService::cancelStock"
     },
     {
       "name": "processPayment",
-      "metadata": {
-        "interface": "org.kie.kogito.PaymentService",
-        "operation": "processPayment",
-        "type": "service"
-      }
+      "type": "custom",
+      "operation": "service:org.kie.kogito.PaymentService::processPayment"
     },
     {
       "name": "cancelPayment",
-      "metadata": {
-        "interface": "org.kie.kogito.PaymentService",
-        "operation": "cancelPayment",
-        "type": "service"
-      }
+      "type": "custom",
+      "operation": "service:org.kie.kogito.PaymentService::cancelPayment"
     },
     {
       "name": "scheduleShipping",
-      "metadata": {
-        "interface": "org.kie.kogito.ShippingService",
-        "operation": "scheduleShipping",
-        "type": "service"
-      }
+      "type": "custom",
+      "operation": "service:org.kie.kogito.ShippingService::scheduleShipping"
     },
     {
       "name": "cancelShipping",
-      "metadata": {
-        "interface": "org.kie.kogito.ShippingService",
-        "operation": "cancelShipping",
-        "type": "service"
-      }
+      "type": "custom",
+      "operation": "service:org.kie.kogito.ShippingService::cancelShipping"
     },
     {
       "name": "orderSuccess",
-      "metadata": {
-        "interface": "org.kie.kogito.OrderService",
-        "operation": "success",
-        "type": "service"
-      }
+      "type": "custom",
+      "operation": "service:org.kie.kogito.OrderService::success"
     },
     {
       "name": "orderFailure",
-      "metadata": {
-        "interface": "org.kie.kogito.OrderService",
-        "operation": "failure",
-        "type": "service"
-      }
+      "type": "custom",
+      "operation": "service:org.kie.kogito.OrderService::failure"
     },
     {
       "name": "log",
-      "metadata": {
-        "type": "sysout"
-      }
+      "type": "custom",
+      "operation": "sysout"
     }
   ],
   "states": [
