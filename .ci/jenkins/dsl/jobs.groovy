@@ -1,25 +1,19 @@
-import org.kie.jenkins.jobdsl.templates.KogitoJobTemplate
-import org.kie.jenkins.jobdsl.FolderUtils
-import org.kie.jenkins.jobdsl.KogitoJobType
+/*
+* This file is describing all the Jenkins jobs in the DSL format (see https://plugins.jenkins.io/job-dsl/)
+* needed by the Kogito pipelines.
+*
+* The main part of Jenkins job generation is defined into the https://github.com/kiegroup/kogito-pipelines repository.
+*
+* This file is making use of shared libraries defined in
+* https://github.com/kiegroup/kogito-pipelines/tree/main/dsl/seed/src/main/groovy/org/kie/jenkins/jobdsl.
+*/
+
+import org.kie.jenkins.jobdsl.model.Folder
+import org.kie.jenkins.jobdsl.KogitoJobTemplate
 import org.kie.jenkins.jobdsl.KogitoJobUtils
 import org.kie.jenkins.jobdsl.Utils
 
-JENKINSFILE_PATH = '.ci/jenkins'
-
-def getDefaultJobParams() {
-    return KogitoJobTemplate.getDefaultJobParams(this, 'kogito-examples')
-}
-
-def getJobParams(String jobName, String jobFolder, String jenkinsfileName, String jobDescription = '') {
-    def jobParams = getDefaultJobParams()
-    jobParams.job.name = jobName
-    jobParams.job.folder = jobFolder
-    jobParams.jenkinsfile = jenkinsfileName
-    if (jobDescription) {
-        jobParams.job.description = jobDescription
-    }
-    return jobParams
-}
+jenkins_path = '.ci/jenkins'
 
 Map getMultijobPRConfig() {
     return [
@@ -38,32 +32,20 @@ Map getMultijobPRConfig() {
     ]
 }
 
-if (Utils.isMainBranch(this)) {
-    // For BDD runtimes PR job
-    setupDeployJob(FolderUtils.getPullRequestRuntimesBDDFolder(this), KogitoJobType.PR)
-}
-
 // PR checks
-setupMultijobPrDefaultChecks()
-setupMultijobPrNativeChecks()
-setupMultijobPrLTSChecks()
+KogitoJobUtils.createAllEnvsPerRepoPRJobs(this) { jobFolder -> getMultijobPRConfig() }
+setupDeployJob(Folder.PULLREQUEST_RUNTIMES_BDD)
 
 // Nightly jobs
+setupDeployJob(Folder.NIGHTLY)
 setupNativeJob()
-setupDeployJob(FolderUtils.getNightlyFolder(this), KogitoJobType.NIGHTLY)
-setupPromoteJob(FolderUtils.getNightlyFolder(this), KogitoJobType.NIGHTLY)
+setupMandrelJob()
 
-// No release directly on main branch
-if (!Utils.isMainBranch(this)) {
-    setupDeployJob(FolderUtils.getReleaseFolder(this), KogitoJobType.RELEASE)
-    setupPromoteJob(FolderUtils.getReleaseFolder(this), KogitoJobType.RELEASE)
-}
+// Release jobs
+setupDeployJob(Folder.RELEASE)
+setupPromoteJob(Folder.RELEASE)
 
-if (Utils.isLTSBranch(this)) {
-    setupNativeLTSJob()
-}
-
-KogitoJobUtils.createQuarkusUpdateToolsJob(this, 'kogito-examples', 'Kogito Examples', [
+KogitoJobUtils.createQuarkusUpdateToolsJob(this, 'kogito-examples', [
   properties: [ 'quarkus-plugin.version', 'quarkus.platform.version' ],
 ])
 
@@ -71,22 +53,10 @@ KogitoJobUtils.createQuarkusUpdateToolsJob(this, 'kogito-examples', 'Kogito Exam
 // Methods
 /////////////////////////////////////////////////////////////////
 
-void setupMultijobPrDefaultChecks() {
-    KogitoJobTemplate.createMultijobPRJobs(this, getMultijobPRConfig()) { return getDefaultJobParams() }
-}
-
-void setupMultijobPrNativeChecks() {
-    KogitoJobTemplate.createMultijobNativePRJobs(this, getMultijobPRConfig()) { return getDefaultJobParams() }
-}
-
-void setupMultijobPrLTSChecks() {
-    KogitoJobTemplate.createMultijobLTSPRJobs(this, getMultijobPRConfig()) { return getDefaultJobParams() }
-}
-
 void setupNativeJob() {
-    def jobParams = getJobParams('kogito-examples-native', FolderUtils.getNightlyFolder(this), "${JENKINSFILE_PATH}/Jenkinsfile.native", 'Kogito Examples Native Testing')
+    def jobParams = KogitoJobUtils.getBasicJobParams(this, 'kogito-examples', Folder.NIGHTLY_NATIVE, "${jenkins_path}/Jenkinsfile.native", 'Kogito Examples Native Testing')
     jobParams.triggers = [ cron : 'H 6 * * *' ]
-    KogitoJobTemplate.createPipelineJob(this, jobParams).with {
+    KogitoJobTemplate.createPipelineJob(this, jobParams)?.with {
         parameters {
             stringParam('BUILD_BRANCH_NAME', "${GIT_BRANCH}", 'Set the Git branch to checkout')
             stringParam('GIT_AUTHOR', "${GIT_AUTHOR_NAME}", 'Set the Git author to checkout')
@@ -98,15 +68,15 @@ void setupNativeJob() {
     }
 }
 
-void setupNativeLTSJob() {
-    def jobParams = getJobParams('kogito-examples-native-lts', FolderUtils.getNightlyFolder(this), "${JENKINSFILE_PATH}/Jenkinsfile.native", 'Kogito Examples Native LTS Testing')
+void setupMandrelJob() {
+    def jobParams = KogitoJobUtils.getBasicJobParams(this, 'kogito-examples', Folder.NIGHTLY_MANDREL, "${jenkins_path}/Jenkinsfile.native", 'Kogito Examples Mandrel Testing')
     jobParams.triggers = [ cron : 'H 8 * * *' ]
-    KogitoJobTemplate.createPipelineJob(this, jobParams).with {
+    KogitoJobTemplate.createPipelineJob(this, jobParams)?.with {
         parameters {
             stringParam('BUILD_BRANCH_NAME', "${GIT_BRANCH}", 'Set the Git branch to checkout')
             stringParam('GIT_AUTHOR', "${GIT_AUTHOR_NAME}", 'Set the Git author to checkout')
 
-            stringParam('NATIVE_BUILDER_IMAGE', Utils.getLTSNativeBuilderImage(this), 'Which native builder image to use ?')
+            stringParam('NATIVE_BUILDER_IMAGE', Utils.getMandrelEnvironmentBuilderImage(this), 'Which native builder image to use ?')
         }
         environmentVariables {
             env('JENKINS_EMAIL_CREDS_ID', "${JENKINS_EMAIL_CREDS_ID}")
@@ -121,19 +91,19 @@ void setupNativeLTSJob() {
 * as we want in that case more dynamic git retrieval
 * also we set a specific repository for the pr checks
 */
-void setupDeployJob(String jobFolder, KogitoJobType jobType) {
-    def jobParams = getJobParams('kogito-examples-deploy', jobFolder, "${JENKINSFILE_PATH}/Jenkinsfile.deploy", 'Kogito Examples Deploy')
-    if (jobType == KogitoJobType.PR) {
+void setupDeployJob(Folder jobFolder) {
+    def jobParams = KogitoJobUtils.getBasicJobParams(this, 'kogito-examples-deploy', jobFolder, "${jenkins_path}/Jenkinsfile.deploy", 'Kogito Examples Deploy')
+    if (jobFolder.isPullRequest()) {
         jobParams.git.branch = '${BUILD_BRANCH_NAME}'
         jobParams.git.author = '${GIT_AUTHOR}'
         jobParams.git.project_url = Utils.createProjectUrl("${GIT_AUTHOR_NAME}", jobParams.git.repository)
     }
-    KogitoJobTemplate.createPipelineJob(this, jobParams).with {
+    KogitoJobTemplate.createPipelineJob(this, jobParams)?.with {
         parameters {
             stringParam('DISPLAY_NAME', '', 'Setup a specific build display name')
 
             stringParam('BUILD_BRANCH_NAME', "${GIT_BRANCH}", 'Set the Git branch to checkout')
-            if (jobType == KogitoJobType.PR) {
+            if (jobFolder.isPullRequest()) {
                 // author can be changed as param only for PR behavior, due to source branch/target, else it is considered as an env
                 stringParam('GIT_AUTHOR', "${GIT_AUTHOR_NAME}", 'Set the Git author to checkout')
             }
@@ -154,11 +124,10 @@ void setupDeployJob(String jobFolder, KogitoJobType jobType) {
             env('REPO_NAME', 'kogito-examples')
             env('PROPERTIES_FILE_NAME', 'deployment.properties')
 
-            env('RELEASE', jobType == KogitoJobType.RELEASE)
             env('JENKINS_EMAIL_CREDS_ID', "${JENKINS_EMAIL_CREDS_ID}")
             env('MAVEN_SETTINGS_CONFIG_FILE_ID', "${MAVEN_SETTINGS_FILE_ID}")
 
-            if (jobType == KogitoJobType.PR) {
+            if (jobFolder.isPullRequest()) {
                 env('MAVEN_DEPENDENCIES_REPOSITORY', "${MAVEN_PR_CHECKS_REPOSITORY_URL}")
                 env('MAVEN_DEPLOY_REPOSITORY', "${MAVEN_PR_CHECKS_REPOSITORY_URL}")
                 env('MAVEN_REPO_CREDS_ID', "${MAVEN_PR_CHECKS_REPOSITORY_CREDS_ID}")
@@ -172,7 +141,7 @@ void setupDeployJob(String jobFolder, KogitoJobType jobType) {
 
                 env('MAVEN_DEPENDENCIES_REPOSITORY', "${MAVEN_ARTIFACTS_REPOSITORY}")
                 env('MAVEN_DEPLOY_REPOSITORY', "${MAVEN_ARTIFACTS_REPOSITORY}")
-                if (jobType == KogitoJobType.RELEASE) {
+                if (jobFolder.isRelease()) {
                     env('NEXUS_RELEASE_URL', "${MAVEN_NEXUS_RELEASE_URL}")
                     env('NEXUS_RELEASE_REPOSITORY_ID', "${MAVEN_NEXUS_RELEASE_REPOSITORY}")
                     env('NEXUS_STAGING_PROFILE_ID', "${MAVEN_NEXUS_STAGING_PROFILE_ID}")
@@ -183,8 +152,8 @@ void setupDeployJob(String jobFolder, KogitoJobType jobType) {
     }
 }
 
-void setupPromoteJob(String jobFolder, KogitoJobType jobType) {
-    KogitoJobTemplate.createPipelineJob(this, getJobParams('kogito-examples-promote', jobFolder, "${JENKINSFILE_PATH}/Jenkinsfile.promote", 'Kogito Examples Promote')).with {
+void setupPromoteJob(Folder jobFolder) {
+    KogitoJobTemplate.createPipelineJob(this, KogitoJobUtils.getBasicJobParams(this, 'kogito-examples-promote', jobFolder, "${jenkins_path}/Jenkinsfile.promote", 'Kogito Examples Promote'))?.with {
         parameters {
             stringParam('DISPLAY_NAME', '', 'Setup a specific build display name')
 
@@ -207,7 +176,6 @@ void setupPromoteJob(String jobFolder, KogitoJobType jobType) {
             env('REPO_NAME', 'kogito-examples')
             env('PROPERTIES_FILE_NAME', 'deployment.properties')
 
-            env('RELEASE', jobType == KogitoJobType.RELEASE)
             env('JENKINS_EMAIL_CREDS_ID', "${JENKINS_EMAIL_CREDS_ID}")
 
             env('GIT_AUTHOR', "${GIT_AUTHOR_NAME}")
