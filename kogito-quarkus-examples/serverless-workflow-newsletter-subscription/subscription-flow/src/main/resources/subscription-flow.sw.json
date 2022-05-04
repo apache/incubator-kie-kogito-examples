@@ -1,0 +1,120 @@
+{
+  "id": "subscription_flow",
+  "dataInputSchema": "subscription-schema.json",
+  "specVersion": "0.8",
+  "version": "1.0",
+  "start": "VerifyEmail",
+  "events": [
+    {
+      "kind": "produced",
+      "type": "new.subscription",
+      "name": "NewSubscriptionEvent"
+    },
+    {
+      "kind": "consumed",
+      "type": "confirm.subscription",
+      "name": "ConfirmSubscriptionEvent"
+    }
+  ],
+  "functions": [
+    {
+      "name": "subscribeToNewsletter",
+      "operation": "specs/subscription-service.yaml#subscribe"
+    },
+    {
+      "name": "confirmSubscription",
+      "operation": "specs/subscription-service.yaml#confirm"
+    },
+    {
+      "name": "verifyEmail",
+      "operation": "specs/subscription-service.yaml#verify"
+    }
+  ],
+  "states": [
+    {
+      "name": "VerifyEmail",
+      "type": "operation",
+      "actions": [
+        {
+          "functionRef": {
+            "refName": "verifyEmail",
+            "arguments": {
+              "email": "${ .email }"
+            }
+          }
+        }
+      ],
+      "transition": {
+        "nextState": "ExitIfEmailExists"
+      }
+    },
+    {
+      "name": "ExitIfEmailExists",
+      "type": "switch",
+      "dataConditions": [
+        {
+          "condition": "${ .emailExists == true }",
+          "transition": {
+            "nextState": "NoSubscription"
+          }
+        },
+        {
+          "condition": "${ .emailExists == false }",
+          "transition": {
+            "nextState": "SubscribeAndWaitForConfirmation"
+          }
+        }
+      ]
+    },
+    {
+      "name": "SubscribeAndWaitForConfirmation",
+      "type": "callback",
+      "action": {
+        "functionRef": {
+          "refName": "subscribeToNewsletter",
+          "arguments": {
+            "email": "${ .email }",
+            "id": "$WORKFLOW.instanceId",
+            "name": "${ .name }"
+          }
+        }
+      },
+      "eventRef": "ConfirmSubscriptionEvent",
+      "transition": {
+        "nextState": "ConfirmSubscription"
+      }
+    },
+    {
+      "name": "ConfirmSubscription",
+      "type": "operation",
+      "actions": [
+        {
+          "functionRef": {
+            "refName": "confirmSubscription",
+            "arguments": {
+              "email": "${ .email }",
+              "id": "$WORKFLOW.instanceId",
+              "name": "${ .name }"
+            }
+          }
+        }
+      ],
+      "end": {
+        "produceEvents": [
+          {
+            "eventRef": "NewSubscriptionEvent"
+          }
+        ],
+        "terminate": true
+      }
+    },
+    {
+      "name": "NoSubscription",
+      "type": "inject",
+      "data": {
+        "subscribed": true
+      },
+      "end": true
+    }
+  ]
+}
