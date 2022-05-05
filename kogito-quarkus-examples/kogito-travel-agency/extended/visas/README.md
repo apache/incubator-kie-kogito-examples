@@ -167,27 +167,27 @@ Once the service is up and running, you can use the following examples to intera
 
 ### GET /visaApplications
 
-Returns list of travel requests currently active:
+Returns list of visa application requests currently active:
 
 ```sh
 curl -X GET http://localhost:8090/visaApplications
 ```
 
-As response an array of travels is returned.
+As response an array of visa applications is returned.
 
 ### GET /visaApplications/{id}
 
-Returns travel request with given id (if active):
+Returns the visa application request with given id (if active):
 
 ```sh
 curl -X GET http://localhost:8090/visaApplications/{uuid}
 ```
 
-As response a single travel request is returned if found, otherwise 404 Not Found is returned.
+As response a single visa application request is returned if found, otherwise 404 Not Found is returned.
 
 ### DELETE /visaApplications/{id}
 
-Cancels travel request with given id
+Cancels visa application request with given id
 
 ```sh
 curl -X DELETE http://localhost:8090/visaApplications/{uuid}
@@ -195,10 +195,10 @@ curl -X DELETE http://localhost:8090/visaApplications/{uuid}
 
 ### GET /visaApplications/{id}/tasks
 
-Returns currently assigned user tasks for give travel request:
+Returns currently assigned user tasks for given visa application request:
 
 ```sh
-curl -X GET http://localhost:8090/visaApplications/{uuid}/tasks
+curl -X GET http://localhost:8090/visaApplications/{uuid}/tasks?user=alice
 ```
 
 ### GET /visaApplications/{id}/ApplicationApproval/{taskId}
@@ -206,7 +206,7 @@ curl -X GET http://localhost:8090/visaApplications/{uuid}/tasks
 Returns visa application task information:
 
 ```sh
-curl -X GET http://localhost:8090/visaApplications/{uuid}/ApplicationApproval/{task-uuid}
+curl -X GET http://localhost:8090/visaApplications/{uuid}/ApplicationApproval/{task-uuid}?user=alice
 ```
 
 ### POST /visaApplications/{id}/ApplicationApproval/{taskId}
@@ -214,17 +214,11 @@ curl -X GET http://localhost:8090/visaApplications/{uuid}/ApplicationApproval/{t
 Completes visa application task
 
 ```sh
-curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST http://localhost:8090/visaApplications/435aa429-5ddb-4480-9219-ad9c51bbf885/ApplicationApproval/98796868-d94e-4363-8e8f-6a1d31cbbff6 -d @- << EOF
+curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST http://localhost:8090/visaApplications/{uuid}/ApplicationApproval/{task-uuid}?user=alice -d @- << EOF
 {
-	"application" : {
-		"firstName" : "Jan",
-		"lastName" : "Kowalski",
-		"nationality" : "Polish",
-		"city" : "New York",
-		"country" : "US",
-		"passportNumber" : "ABC09876",
-		"duration" : 25,
-		"approved" : true
+	"resolution":{
+		"approved":true,
+		"reason":"Manual approval"
 	}
 }
 EOF
