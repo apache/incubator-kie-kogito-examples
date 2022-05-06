@@ -23,7 +23,7 @@ import io.quarkus.test.junit.NativeImageTest;
 
 @NativeImageTest
 @QuarkusTestResource(KeycloakQuarkusTestResource.class)
-@QuarkusTestResource(value = KafkaQuarkusTestResource.class)
+@QuarkusTestResource(KafkaQuarkusTestResource.class)
 public class NativeApprovalsRestIT extends ApprovalsRestIT {
     // run the same tests only against native image
 }
