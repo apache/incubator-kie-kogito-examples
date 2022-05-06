@@ -26,6 +26,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.matching.EqualToPattern;
+import com.github.tomakehurst.wiremock.matching.UrlPathPattern;
 
 import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
 
@@ -55,6 +56,7 @@ public class SubscriptionServiceMock implements QuarkusTestResourceLifecycleMana
         try {
             stubFor(post("/subscription")
                     .willReturn(aResponse()
+                            .withStatus(200)
                             .withHeader(CONTENT_TYPE, APPLICATION_JSON)
                             .withBody(mapper.writeValueAsString(newSubscription()))));
 
@@ -62,20 +64,21 @@ public class SubscriptionServiceMock implements QuarkusTestResourceLifecycleMana
             confirmedSub.setVerified(true);
             stubFor(put("/subscription/confirm")
                     .willReturn(aResponse()
+                            .withStatus(200)
                             .withHeader(CONTENT_TYPE, APPLICATION_JSON)
                             .withBody(mapper.writeValueAsString(confirmedSub))));
-
-            stubFor(get("/subscription/verify").withQueryParam("email", new EqualToPattern(EMAIL))
+            stubFor(get(new UrlPathPattern(new EqualToPattern("/subscription/verify"), true)).withQueryParam("email", new EqualToPattern(EMAIL))
                     .willReturn(aResponse()
+                            .withStatus(200)
                             .withHeader(CONTENT_TYPE, APPLICATION_JSON)
-                            .withBody(mapper.writeValueAsString(new SubscriptionResource.EmailVerificationReply(EMAIL, true)))));
+                            .withBody(mapper.writeValueAsString(new SubscriptionResource.EmailVerificationReply(EMAIL, false)))));
 
         } catch (JsonProcessingException e) {
             throw new RuntimeException("Impossible to convert Subscription to JSON", e);
         }
 
         Map<String, String> properties = new HashMap<>();
-        properties.put("quarkus.rest-client.\"org.openapi.quarkus.api.SubscriptionResourceApi\".url", wireMockServer.baseUrl());
+        properties.put("quarkus.rest-client.\"org.kie.kogito.openapi.subscriptionservice.api.SubscriptionResourceApi\".url", wireMockServer.baseUrl());
         return properties;
     }
 

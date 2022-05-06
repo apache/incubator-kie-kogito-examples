@@ -32,6 +32,7 @@ public final class SubscriptionConstants {
         final Subscription subscription = new Subscription(EMAIL);
         subscription.setId(ID);
         subscription.setName(NAME);
+        subscription.setVerified(false);
         return subscription;
     }
 
