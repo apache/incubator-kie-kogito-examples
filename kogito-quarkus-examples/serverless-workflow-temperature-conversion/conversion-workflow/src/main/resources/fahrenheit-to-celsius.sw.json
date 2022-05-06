@@ -19,8 +19,8 @@
       "name": "SetConstants",
       "type": "inject",
       "data": {
-        "subtractValue": "32.0",
-        "multiplyValue": "0.5556"
+        "subtractValue": 32.0,
+        "multiplyValue": 0.5556
       },
       "transition": "Computation"
     },
@@ -43,7 +43,7 @@
           "name": "multiply",
           "functionRef": {
             "refName": "multiplication",
-            "arguments":  { "leftElement": "$.subtraction.difference", "rightElement": "$.multiplyValue" }
+            "arguments":  { "leftElement": "$.difference", "rightElement": "$.multiplyValue" }
           }
         }
       ],

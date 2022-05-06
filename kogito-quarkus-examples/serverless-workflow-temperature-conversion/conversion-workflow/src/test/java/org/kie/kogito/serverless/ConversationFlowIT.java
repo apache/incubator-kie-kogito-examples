@@ -53,6 +53,6 @@ class ConversationFlowIT {
                 .statusCode(201)
                 .body("id", notNullValue())
                 .body("workflowdata.fahrenheit", is("100"))
-                .body("workflowdata.multiplication.product", is("37.808")); //values from mock server
+                .body("workflowdata.product", is(37.808f)); //values from mock server
     }
 }

@@ -6,24 +6,35 @@ info:
 paths:
   /:
     post:
-      operationId: doOperation
-      requestBody:
+     operationId: doOperation
+     parameters:
+        - in: header
+          name: notUsed
+          schema: 
+            type: string
+          required: false
+     requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/MultiplicationOperation'
-      responses:
+     responses:
         "200":
           description: OK
+          content: 
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  product:
+                    format: float
+                    type: number
 components:
   schemas:
     MultiplicationOperation:
       type: object
       properties:
         leftElement:
-          format: float
-          type: number
-        product:
           format: float
           type: number
         rightElement:

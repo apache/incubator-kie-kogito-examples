@@ -36,6 +36,6 @@ class OperationResourceIT {
                 .post("/")
                 .then()
                 .statusCode(200).extract().as(OperationResource.Result.class);
-        assertThat(result.multiplication.getProduct(), is(4f));
+        assertThat(result.getProduct(), is(4f));
     }
 }

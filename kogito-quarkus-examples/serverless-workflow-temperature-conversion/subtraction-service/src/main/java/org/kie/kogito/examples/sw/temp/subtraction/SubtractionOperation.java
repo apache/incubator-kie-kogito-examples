@@ -27,7 +27,6 @@ public class SubtractionOperation {
 
     private float leftElement;
     private float rightElement;
-    private float difference;
 
     public SubtractionOperation() {
     }
@@ -53,20 +52,11 @@ public class SubtractionOperation {
         this.rightElement = rightElement;
     }
 
-    public float getDifference() {
-        return difference;
-    }
-
-    public void setDifference(float difference) {
-        this.difference = difference;
-    }
-
     @Override
     public String toString() {
         return "Operation{" +
                 "leftElement=" + leftElement +
                 ", rightElement=" + rightElement +
-                ", difference=" + difference +
                 '}';
     }
 
@@ -79,12 +69,11 @@ public class SubtractionOperation {
             return false;
         }
         SubtractionOperation subtractionOperation = (SubtractionOperation) o;
-        return Float.compare(subtractionOperation.leftElement, leftElement) == 0 && Float.compare(subtractionOperation.rightElement, rightElement) == 0
-                && Float.compare(subtractionOperation.difference, difference) == 0;
+        return Float.compare(subtractionOperation.leftElement, leftElement) == 0 && Float.compare(subtractionOperation.rightElement, rightElement) == 0;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(leftElement, rightElement, difference);
+        return Objects.hash(leftElement, rightElement);
     }
 }
