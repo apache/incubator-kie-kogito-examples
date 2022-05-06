@@ -27,7 +27,6 @@ public class MultiplicationOperation {
 
     private float leftElement;
     private float rightElement;
-    private float product;
 
     public MultiplicationOperation() {
     }
@@ -53,20 +52,11 @@ public class MultiplicationOperation {
         this.rightElement = rightElement;
     }
 
-    public float getProduct() {
-        return product;
-    }
-
-    public void setProduct(float product) {
-        this.product = product;
-    }
-
     @Override
     public String toString() {
         return "Operation{" +
                 "leftElement=" + leftElement +
                 ", rightElement=" + rightElement +
-                ", product=" + product +
                 '}';
     }
 
@@ -79,11 +69,11 @@ public class MultiplicationOperation {
             return false;
         }
         MultiplicationOperation operation = (MultiplicationOperation) o;
-        return Float.compare(operation.leftElement, leftElement) == 0 && Float.compare(operation.rightElement, rightElement) == 0 && Float.compare(operation.product, product) == 0;
+        return Float.compare(operation.leftElement, leftElement) == 0 && Float.compare(operation.rightElement, rightElement) == 0;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(leftElement, rightElement, product);
+        return Objects.hash(leftElement, rightElement);
     }
 }

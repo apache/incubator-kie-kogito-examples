@@ -100,15 +100,8 @@ You should have a reply similar to this one:
     "fahrenheit": 100,
     "subtractValue": "32.0",
     "multiplyValue": "0.5556",
-    "subtraction": {
-      "leftElement": 100,
-      "rightElement": 32,
-      "difference": 68
-    },
-    "multiplication": {
-      "leftElement": 68,
-      "rightElement": 0.5556,
-      "product": 37.7808
+    "difference": 68.0,
+    "product": 37.7808
     }
   }
 }

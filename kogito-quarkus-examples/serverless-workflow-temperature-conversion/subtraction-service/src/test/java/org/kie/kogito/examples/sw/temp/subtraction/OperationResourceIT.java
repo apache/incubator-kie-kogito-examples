@@ -36,6 +36,6 @@ class OperationResourceIT {
                 .post("/")
                 .then()
                 .statusCode(200).extract().as(OperationResource.Result.class);
-        assertThat(result.subtraction.getDifference(), is(0f));
+        assertThat(result.getDifference(), is(0f));
     }
 }

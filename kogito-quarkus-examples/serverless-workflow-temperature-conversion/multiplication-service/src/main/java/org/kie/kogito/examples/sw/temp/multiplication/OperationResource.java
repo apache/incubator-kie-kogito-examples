@@ -23,6 +23,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponseSchema;
+
 import io.quarkus.runtime.annotations.RegisterForReflection;
 
 @Path("/")
@@ -31,29 +33,26 @@ import io.quarkus.runtime.annotations.RegisterForReflection;
 public class OperationResource {
 
     @POST
+    @APIResponseSchema(value = OperationResource.Result.class, responseDescription = "MultiplicationResult", responseCode = "200")
     public Response doOperation(@NotNull MultiplicationOperation operation) {
-        operation.setProduct(operation.getLeftElement() * operation.getRightElement());
-        return Response.ok(new Result(operation)).build();
+        return Response.ok(new Result(operation.getLeftElement() * operation.getRightElement())).build();
     }
 
     @RegisterForReflection
     public static final class Result {
 
-        MultiplicationOperation multiplication;
+        float product;
 
         public Result() {
         }
 
-        public Result(final MultiplicationOperation multiplication) {
-            this.multiplication = multiplication;
+        public Result(float product) {
+            this.product = product;
         }
 
-        public MultiplicationOperation getMultiplication() {
-            return multiplication;
+        public float getProduct() {
+            return product;
         }
 
-        public void setMultiplication(MultiplicationOperation multiplication) {
-            this.multiplication = multiplication;
-        }
     }
 }
