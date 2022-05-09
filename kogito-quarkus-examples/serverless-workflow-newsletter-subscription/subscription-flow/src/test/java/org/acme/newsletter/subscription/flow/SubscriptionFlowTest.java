@@ -115,7 +115,7 @@ public class SubscriptionFlowTest {
                 .header("ce-id", confirmationEvent.getId())
                 .header("ce-source", confirmationEvent.getSource().toString())
                 .header("ce-type", confirmationEvent.getType())
-                .header("kogitoprocrefid", workflowId)
+                .header("ce-kogitoprocrefid", confirmationEvent.getExtension("kogitoprocrefid"))
                 .body(mapper.writeValueAsString(subscription))
                 .post("/")// the root path means we are listening for CEs for Knative Eventing integration
                 .then()
