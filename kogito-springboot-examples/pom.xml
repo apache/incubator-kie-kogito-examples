@@ -49,7 +49,6 @@
         <module>process-kafka-quickstart-springboot</module>
         <module>process-mongodb-persistence-springboot</module>
         <module>process-monitoring-springboot</module>
-        <module>process-optaplanner-springboot</module>
         <module>process-outbox-mongodb-springboot</module>
         <module>process-performance-springboot</module>
         <module>process-postgresql-persistence-springboot</module>
@@ -157,7 +156,6 @@
         <module>process-kafka-quickstart-springboot</module>
         <module>process-mongodb-persistence-springboot</module>
         <module>process-monitoring-springboot</module>
-        <module>process-optaplanner-springboot</module>
         <module>process-outbox-mongodb-springboot</module>
         <module>process-postgresql-persistence-springboot</module>
         <module>process-rest-service-call-springboot</module>
@@ -172,18 +170,6 @@
         <module>process-usertasks-with-security-oidc-springboot</module>
         <module>process-usertasks-with-security-springboot</module>
         <module>ruleunit-springboot-example</module>
-      </modules>
-    </profile>
-
-    <profile>
-      <id>optaplanner-downstream</id>
-      <activation>
-        <property>
-          <name>optaplanner</name>
-        </property>
-      </activation>
-      <modules>
-        <module>process-optaplanner-springboot</module>
       </modules>
     </profile>
   </profiles>
