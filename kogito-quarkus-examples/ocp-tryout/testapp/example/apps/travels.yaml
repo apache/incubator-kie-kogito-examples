@@ -1,0 +1,5 @@
+image:
+  repository: quay.io/kiegroup/examples-travels
+  tag: "1.16.0.final"
+
+applicationPort: 8080

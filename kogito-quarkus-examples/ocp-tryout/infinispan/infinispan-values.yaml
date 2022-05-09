@@ -1,0 +1,22 @@
+images:
+  server: quay.io/infinispan/server:13.0.3.Final
+deploy:
+  infinispan:
+    server:
+      endpoints:
+        - securityRealm: default
+          socketBinding: default
+        - connectors:
+            hotrod:
+              hotrodConnector:
+                authentication:
+                  sasl:
+                    mechanisms: DIGEST-MD5
+                    qop: auth
+                    serverName: infinispan
+            rest:
+              restConnector:
+                authentication:
+                  mechanisms: BASIC
+          securityRealm: metrics
+          socketBinding: metrics

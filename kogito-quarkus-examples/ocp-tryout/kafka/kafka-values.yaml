@@ -1,0 +1,14 @@
+persistence:
+  size: 1Gi
+  dataLogDir:
+    size: 1Gi
+podSecurityContext:
+  enabled: false
+
+zookeeper:
+  persistence:
+    size: 1Gi
+    dataLogDir:
+      size: 1Gi
+  securityContext:
+    enabled: false

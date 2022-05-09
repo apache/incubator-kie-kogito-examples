@@ -1,0 +1,30 @@
+spec:
+  template:
+    spec:
+      volumes:
+        - name: app-pvc
+          configMap:
+            name: kogito-management-config
+      containers:
+        - name: kogito-management-console
+          volumeMounts:
+            - name: app-pvc
+              mountPath: /home/kogito/data/svg
+          env:
+            - name: KOGITO_DATAINDEX_HTTP_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: kogito-configs
+                  key: kogito.dataindex.httpurl.with.graphql
+            - name: KOGITO_MANAGEMENT_CONSOLE_PROPS
+              valueFrom:
+                configMapKeyRef:
+                  name: kogito-configs
+                  key: kogito.managementconsole.props
+          resources:
+            limits:
+              cpu: '1'
+              memory: 500Mi
+            requests:
+              cpu: 10m
+              memory: 64Mi

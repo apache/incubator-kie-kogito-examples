@@ -1,0 +1,23 @@
+spec:
+  template:
+    spec:
+      containers:
+        - name: kogito-task-console
+          env:
+            - name: KOGITO_DATAINDEX_HTTP_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: kogito-configs
+                  key: kogito.dataindex.httpurl.with.graphql
+            - name: KOGITO_TASK_CONSOLE_PROPS
+              valueFrom:
+                configMapKeyRef:
+                  name: kogito-configs
+                  key: kogito.taskconsole.props
+          resources:
+            limits:
+              cpu: '1'
+              memory: 500Mi
+            requests:
+              cpu: 10m
+              memory: 64Mi
