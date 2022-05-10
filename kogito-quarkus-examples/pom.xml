@@ -64,7 +64,6 @@
         <module>process-knative-quickstart-quarkus</module>
         <module>process-mongodb-persistence-quarkus</module>
         <module>process-monitoring-quarkus</module>
-        <module>process-optaplanner-quarkus</module>
         <module>process-outbox-mongodb-quarkus</module>
         <module>process-performance-client</module>
         <module>process-performance-quarkus</module>
@@ -191,7 +190,6 @@
         <module>process-knative-quickstart-quarkus</module>
         <module>process-mongodb-persistence-quarkus</module>
         <module>process-monitoring-quarkus</module>
-        <module>process-optaplanner-quarkus</module>
         <module>process-outbox-mongodb-quarkus</module>
         <module>process-postgresql-persistence-quarkus</module>
         <module>process-quarkus-example</module>
@@ -246,38 +244,6 @@
         <module>ruleunit-quarkus-example</module>
       </modules>
     </profile>
-
-    <profile>
-      <id>optaplanner-downstream</id>
-      <activation>
-        <property>
-          <name>optaplanner</name>
-        </property>
-      </activation>
-      <modules>
-        <module>process-optaplanner-quarkus</module>
-      </modules>
-    </profile>
-
-    <profile>
-      <id>optaplanner-downstream-native</id>
-      <activation>
-        <property>
-          <name>optaplanner-native</name>
-        </property>
-      </activation>
-      <properties>
-        <failsafe.include>**/Native*IT.java</failsafe.include>
-        <failsafe.exclude></failsafe.exclude>
-        <quarkus.package.type>native</quarkus.package.type>
-        <quarkus.native.native-image-xmx>8g</quarkus.native.native-image-xmx>
-        <!-- Native building needs a fixed port for tests -->
-        <tests.quarkus.http.port>8080</tests.quarkus.http.port>
-      </properties>
-      <modules>
-        <module>process-optaplanner-quarkus</module>
-      </modules>
-    </profile>
            
     <profile>
       <id>kogito-apps-downstream</id>
@@ -306,10 +272,6 @@
         <!-- Native building needs a fixed port for tests -->
         <tests.quarkus.http.port>8080</tests.quarkus.http.port>
       </properties>
-      <!-- To update once there are kogito-apps needed modules in native -->
-      <!-- modules>
-        <module>process-optaplanner-quarkus</module>
-      </modules -->
     </profile>
   </profiles>
 
