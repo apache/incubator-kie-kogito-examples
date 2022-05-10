@@ -1,100 +1,100 @@
 {
   "id": "callback",
   "version": "1.0",
-  "name": "Workflow Callback example",
-  "description": "An example of how to use callback state",
-  "errors": [
-    {
-      "name": "execution error",
-      "code": "java.util.concurrent.CompletionException"
-    }
-  ],
-  "start": "StartEventState",
+  "name": "Workflow Correlation example",
+  "description": "An example of how to use correlation on events",  
+  "start": "New User Account Request",
   "events": [
     {
-      "name": "startEvent",
+      "name": "newAccountEvent",
       "source": "",
-      "type": "startEventType",
+      "type": "newAccountEventType",
       "correlation": [
         {
-          "contextAttributeName": "orderid"
-        },
-        {
-          "contextAttributeName": "customerid",
-          "contextAttributeValue" : "123456"
+          "contextAttributeName": "userid"
         }
       ]      
     },
     {
-      "name": "resumeEvent",
-      "source": "",
-      "type": "resume"      
+      "name": "validateAccountEmailEvent",
+      "source": "workflow",
+      "type": "validateAccountEmail"      
     },
     {
-      "name": "waitEvent",
-      "source": "",
-      "type": "wait",
+      "name": "validatedAccountEmailEvent",
+      "source": "workflow",
+      "type": "validatedAccountEmail",
       "correlation": [
         {
-          "contextAttributeName": "orderid"
-        },
+          "contextAttributeName": "userid"
+        }
+      ]      
+    },
+    {
+      "name": "activateAccountEvent",
+      "source": "workflow",
+      "type": "activateAccount"      
+    },
+    {
+      "name": "activatedAccountEvent",
+      "source": "workflow",
+      "type": "activatedAccount",
+      "correlation": [
         {
-          "contextAttributeName": "customerid",
-          "contextAttributeValue" : "123456"
+          "contextAttributeName": "userid"
         }
       ]      
     }
   ],
   "functions": [
     {
-      "name": "printInstanceId",
+      "name": "complete",
       "type": "custom",
-      "operation": "service:java:org.kie.kogito.examples.PrintService::printKogitoProcessId"
+      "operation": "service:java:org.kie.kogito.examples.PrintService::complete"
     }
   ],
   "states": [
      {
-     "name":"StartEventState",
+     "name":"New User Account Request",
      "type":"event",
      "onEvents": [{
-         "eventRefs": ["startEvent"]                 
-     }]     ,
-     "stateDataFilter": {
-        "output": "${ .payload.greeting }"
-     },
-     "transition": "waitForEvent"
+         "eventRefs": ["newAccountEvent"]                 
+     }],     
+     "transition": "Validade User Email"
   },
     {
-      "name": "waitForEvent",
+      "name": "Validade User Email",
       "type": "callback",
       "action": {
-        "name": "publishAction",
+        "name": "publish validate event",
         "eventRef": {
-          "triggerEventRef": "resumeEvent",
-          "data": "{move: \"This is the initial data in the model\"}"
+          "triggerEventRef": "validateAccountEmailEvent"
         }
       },
-      "eventRef": "waitEvent",
-      "eventDataFilter": {
-        "data": ".result",
-        "toStateData": ".move"
-      },
-      "onErrors": [
-        {
-          "errorRef": "execution error",
-          "end": true
-        }
-      ],
-      "transition": "finish"
+      "eventRef": "validatedAccountEmailEvent",      
+      "transition": "Activate User Account"
     },
+{
+      "name": "Activate User Account",
+      "type": "callback",
+      "action": {
+        "name": "publish Activate Account event",
+        "eventRef": {
+          "triggerEventRef": "activateAccountEvent"          
+        }
+      },
+      "eventRef": "activatedAccountEvent",      
+      "transition": "Account Creation Completed"
+    },
+
     {
-      "name": "finish",
+      "name": "Account Creation Completed",
       "type": "operation",
       "actions": [
         {
-          "name": "printInstanceId",
+          "name": "accountCreationCompleted",
           "functionRef": {
-            "refName": "printInstanceId"
+            "refName": "complete"
           }
         }
       ],

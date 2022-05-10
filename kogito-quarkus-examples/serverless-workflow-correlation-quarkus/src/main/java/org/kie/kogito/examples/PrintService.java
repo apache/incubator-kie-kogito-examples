@@ -17,8 +17,6 @@ package org.kie.kogito.examples;
 
 import java.net.URI;
 import java.time.OffsetDateTime;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -30,11 +28,9 @@ import org.eclipse.microprofile.reactive.messaging.Acknowledgment.Strategy;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
 import org.eclipse.microprofile.reactive.messaging.Message;
 import org.eclipse.microprofile.reactive.messaging.Outgoing;
-import org.kie.kogito.event.cloudevents.CloudEventExtensionConstants;
 import org.kie.kogito.event.cloudevents.utils.CloudEventUtils;
 import org.kie.kogito.internal.process.runtime.KogitoProcessContext;
 import org.kie.kogito.internal.process.runtime.KogitoProcessInstance;
-import org.kie.kogito.process.ProcessInstance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -54,38 +50,42 @@ public class PrintService {
     @Inject
     ObjectMapper objectMapper;
 
-    public void printKogitoProcessId(JsonNode workflowData, KogitoProcessContext context) {
+    public void complete(JsonNode workflowData, KogitoProcessContext context) {
         logger.info("Workflow data {}, KogitoProcessInstanceId {} ", workflowData, context.getProcessInstance().getStringId());
-        logger.info("Workflow completed for orderId {}, KogitoProcessInstanceId {} ", ((KogitoProcessInstance)context.getProcessInstance()).unwrap().correlation() , context.getProcessInstance().getStringId());
+        logger.info("Workflow completed for orderId {}, KogitoProcessInstanceId {} ", ((KogitoProcessInstance) context.getProcessInstance()).unwrap().correlation(),
+                context.getProcessInstance().getStringId());
     }
 
-    @Incoming("in-resume")
-    @Outgoing("out-wait")
+    @Incoming("validate")
+    @Outgoing("validated")
     @Acknowledgment(Strategy.POST_PROCESSING)
-    public String onEvent(Message<String> message) {
+    public String onEventValidate(Message<String> message) {
         Optional<CloudEvent> ce = CloudEventUtils.decode(message.getPayload());
         JsonCloudEventData cloudEventData = (JsonCloudEventData) ce.get().getData();
-        return generateCloudEvent(ce.get().getExtension("orderid").toString(), cloudEventData.getNode().get("move").asText());
+        return generateCloudEvent(ce.get().getExtension("userid").toString(), "validatedAccountEmail");
     }
 
-    private String generateCloudEvent(String id, String input) {
-        Map<String, Object> eventBody = new HashMap<>();
-        eventBody.put("result", input + " and has been modified by the event publisher");
-        eventBody.put("dummyEventVariable", "This will be discarded by the process");
+    @Incoming("activate")
+    @Outgoing("activated")
+    @Acknowledgment(Strategy.POST_PROCESSING)
+    public String onEventActivate(Message<String> message) {
+        Optional<CloudEvent> ce = CloudEventUtils.decode(message.getPayload());
+        JsonCloudEventData cloudEventData = (JsonCloudEventData) ce.get().getData();
+        return generateCloudEvent(ce.get().getExtension("userid").toString(), "activatedAccount");
+    }
+
+    private String generateCloudEvent(String id, String type) {
         try {
             return objectMapper.writeValueAsString(CloudEventBuilder.v1()
                     .withId(UUID.randomUUID().toString())
                     .withSource(URI.create(""))
-                    .withType("wait")
+                    .withType(type)
                     .withTime(OffsetDateTime.now())
-                    //.withExtension(CloudEventExtensionConstants.PROCESS_REFERENCE_ID, id)
-                    .withExtension("orderid", id)
-                    .withData(objectMapper.writeValueAsBytes(eventBody))
+                    .withExtension("userid", id)
+                    .withData(objectMapper.writeValueAsBytes(new Account("tiago@tiago.com", id)))
                     .build());
         } catch (JsonProcessingException e) {
             throw new IllegalArgumentException(e);
         }
-
     }
-
 }

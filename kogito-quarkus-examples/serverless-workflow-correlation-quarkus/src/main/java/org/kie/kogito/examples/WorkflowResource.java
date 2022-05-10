@@ -17,25 +17,22 @@ package org.kie.kogito.examples;
 
 import java.net.URI;
 import java.time.OffsetDateTime;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-
 import javax.ws.rs.PathParam;
+
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Emitter;
-import org.eclipse.microprofile.reactive.messaging.Outgoing;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.cloudevents.core.builder.CloudEventBuilder;
 
-@Path("/start1")
+@Path("/start")
 public class WorkflowResource {
 
     @Inject
@@ -45,26 +42,23 @@ public class WorkflowResource {
     Emitter<String> emitter;
 
     @GET
-    @Path("/{orderId}")
-    public String onEvent(@PathParam("orderId") String orderId) {
-        String start = generateCloudEvent(orderId, "startEventType");
+    @Path("/{userId}")
+    public String onEvent(@PathParam("userId") String userId) {
+        String start = generateCloudEvent(userId, "newAccountEventType");
         emitter.send(start);
 
         return start;
     }
 
-    private String generateCloudEvent(String id, String input) {
-        Map<String, Object> eventBody = new HashMap<>();
-        eventBody.put("result", input + " and has been modified by the event publisher");
-        eventBody.put("dummyEventVariable", "This will be discarded by the process");
+    private String generateCloudEvent(String id, String type) {
         try {
             return objectMapper.writeValueAsString(CloudEventBuilder.v03()
                     .withId(UUID.randomUUID().toString())
                     .withSource(URI.create(""))
-                    .withType(input)
+                    .withType(type)
                     .withTime(OffsetDateTime.now())
-                    .withExtension("orderid", id)
-                    .withData(objectMapper.writeValueAsBytes(eventBody))
+                    .withExtension("userid", id)
+                    .withData(objectMapper.writeValueAsBytes(new Account("test@test.com", id)))
                     .build());
         } catch (JsonProcessingException e) {
             throw new IllegalArgumentException(e);
