@@ -51,7 +51,6 @@ pipeline {
                         // Verify version is set
                         assert getProjectVersion()
                         assert getDroolsVersion()
-                        assert getOptaPlannerVersion()
 
                         if (isRelease()) {
                             // Verify if on right release branch
@@ -70,7 +69,6 @@ pipeline {
                         setDeployPropertyIfNeeded('project.version', getProjectVersion())
                         setDeployPropertyIfNeeded('release', isRelease())
                         setDeployPropertyIfNeeded('drools.version', getDroolsVersion())
-                        setDeployPropertyIfNeeded('optaplanner.version', getOptaPlannerVersion())
                     }
                 }
             }
@@ -93,8 +91,6 @@ pipeline {
                     maven.mvnVersionsUpdateParentAndChildModules(getMavenCommand(), getProjectVersion(), !isRelease())
                     // Update Drools version
                     maven.mvnSetVersionProperty(getMavenCommand(), 'version.org.drools', getDroolsVersion())
-                    // Update Optaplanner version
-                    maven.mvnSetVersionProperty(getMavenCommand(), 'version.org.optaplanner', getOptaPlannerVersion())
                 }
             }
         }
@@ -345,10 +341,6 @@ String getProjectVersion() {
 
 String getDroolsVersion() {
     return params.DROOLS_VERSION
-}
-
-String getOptaPlannerVersion() {
-    return params.OPTAPLANNER_VERSION
 }
 
 String getBotBranch() {
