@@ -16,8 +16,10 @@
 
 package org.acme.newsletter.subscription.service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
@@ -29,6 +31,7 @@ import org.slf4j.LoggerFactory;
 import io.quarkus.arc.properties.IfBuildProperty;
 import io.quarkus.runtime.Startup;
 import io.vertx.mutiny.sqlclient.Row;
+import io.vertx.mutiny.sqlclient.RowIterator;
 import io.vertx.mutiny.sqlclient.RowSet;
 import io.vertx.mutiny.sqlclient.Tuple;
 
@@ -88,6 +91,15 @@ public class PostgreSqlSubscriptionRepository implements SubscriptionRepository 
     }
 
     @Override
+    public List<Subscription> fetchAllByVerified(boolean verified) {
+        return client.preparedQuery("SELECT " + SUBSCRIPTION_COLUMNS + " FROM " + SUBSCRIPTION_TABLE + " WHERE verified = $1")
+                .execute(Tuple.of(verified))
+                .onItem().transform(RowSet::iterator)
+                .map(PostgreSqlSubscriptionRepository::from)
+                .await().indefinitely();
+    }
+
+    @Override
     public void saveOrUpdate(Subscription subscription) {
         client.preparedQuery("INSERT INTO " + SUBSCRIPTION_TABLE + " (" + SUBSCRIPTION_COLUMNS + ") " +
                 " VALUES ($1, $2, $3, $4) " +
@@ -108,5 +120,11 @@ public class PostgreSqlSubscriptionRepository implements SubscriptionRepository 
         subscription.setVerified(row.getBoolean("verified"));
         subscription.setName(row.getString("nm"));
         return subscription;
+    }
+
+    private static List<Subscription> from(RowIterator<Row> rows) {
+        return StreamSupport.stream(((Iterable<Row>) () -> rows).spliterator(), false)
+                .map(PostgreSqlSubscriptionRepository::from)
+                .collect(toList());
     }
 }

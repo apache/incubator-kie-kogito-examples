@@ -16,9 +16,11 @@
 
 package org.acme.newsletter.subscription.service;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
@@ -62,4 +64,10 @@ public class InMemorySubscriptionRepository implements SubscriptionRepository {
     public void saveOrUpdate(Subscription subscription) {
         this.subscriptionMap.put(subscription.getEmail(), subscription);
     }
+
+    @Override
+    public List<Subscription> fetchAllByVerified(boolean verified) {
+        return subscriptionMap.values().stream().filter(s -> s.isVerified() == verified).collect(Collectors.toUnmodifiableList());
+    }
+
 }

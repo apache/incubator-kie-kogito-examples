@@ -16,6 +16,7 @@
 
 package org.acme.newsletter.subscription.service;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface SubscriptionService {
@@ -39,5 +40,7 @@ public interface SubscriptionService {
      * Fetch the subscription by email
      */
     Optional<Subscription> fetch(String email);
+
+    List<Subscription> list(boolean verified);
 
 }

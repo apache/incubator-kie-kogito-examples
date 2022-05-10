@@ -19,12 +19,14 @@ package org.acme.newsletter.subscription.flow;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.acme.newsletter.subscription.service.Subscription;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.kie.kogito.testcontainers.quarkus.PostgreSqlQuarkusTestResource;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -34,7 +36,7 @@ import com.github.tomakehurst.wiremock.WireMockServer;
 import io.cloudevents.CloudEvent;
 import io.cloudevents.core.v1.CloudEventBuilder;
 import io.quarkus.test.common.QuarkusTestResource;
-import io.quarkus.test.junit.QuarkusTest;
+import io.quarkus.test.junit.QuarkusIntegrationTest;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 
@@ -51,9 +53,10 @@ import static org.acme.newsletter.subscription.flow.SubscriptionConstants.newSub
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
 
-@QuarkusTest
+@QuarkusIntegrationTest
 @QuarkusTestResource(SubscriptionServiceMock.class)
-public class SubscriptionFlowTest {
+@QuarkusTestResource(SubscriptionFlowIT.ConditionalPostgreSqlQuarkusTestResource.class)
+public class SubscriptionFlowIT {
 
     // Mocking our Knative broker, the new.subscriber event should be broadcast to it
     private static WireMockServer sink;
@@ -80,7 +83,7 @@ public class SubscriptionFlowTest {
     }
 
     @Test
-    void verifySubscription() throws JsonProcessingException {
+    void verifySubscription() throws JsonProcessingException, InterruptedException {
         final ObjectMapper mapper = new ObjectMapper();
         final TypeReference<HashMap<String, Object>> typeRef = new TypeReference<>() {
         };
@@ -126,6 +129,25 @@ public class SubscriptionFlowTest {
                 .atMost(10, SECONDS)
                 .with().pollInterval(1, SECONDS)
                 .untilAsserted(() -> sink.verify(1, postRequestedFor(urlEqualTo("/")).withRequestBody(containing(EMAIL))));
+    }
+
+    /**
+     * https://issues.redhat.com/browse/KOGITO-6582
+     */
+    public static class ConditionalPostgreSqlQuarkusTestResource extends PostgreSqlQuarkusTestResource {
+
+        public ConditionalPostgreSqlQuarkusTestResource() {
+            enableConditional();
+        }
+
+        private boolean isEnabled() {
+            return Optional.ofNullable(System.getProperty("enable.resource.postgresql")).map(property -> property.equalsIgnoreCase(Boolean.TRUE.toString())).orElse(false);
+        }
+
+        @Override
+        protected Map<String, String> getProperties() {
+            return isEnabled() ? super.getProperties() : new HashMap<>();
+        }
     }
 
 }

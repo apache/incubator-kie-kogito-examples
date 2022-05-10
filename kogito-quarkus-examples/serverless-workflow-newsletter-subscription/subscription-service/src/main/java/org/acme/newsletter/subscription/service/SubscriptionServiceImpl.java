@@ -15,6 +15,7 @@
  */
 package org.acme.newsletter.subscription.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -53,6 +54,11 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     @Override
     public Optional<Subscription> fetch(String email) {
         return subscriptionRepository.fetchByEmail(email);
+    }
+
+    @Override
+    public List<Subscription> list(boolean verified) {
+        return subscriptionRepository.fetchAllByVerified(verified);
     }
 
 }

@@ -31,6 +31,9 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponseSchema;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -94,6 +97,26 @@ public class SubscriptionResource {
             return Response.ok(subscription.get()).build();
         }
         return Response.status(Response.Status.NOT_FOUND).build();
+    }
+
+    @GET
+    @Path("pending")
+    @Produces(MediaType.APPLICATION_JSON)
+    @APIResponse(responseCode = "200", description = "success", content = {
+            @Content(schema = @Schema(allOf = Subscription.class))
+    })
+    public Response fetchAllNotVerified() {
+        return Response.ok(this.service.list(false)).build();
+    }
+
+    @GET
+    @Path("verified")
+    @Produces(MediaType.APPLICATION_JSON)
+    @APIResponse(responseCode = "200", description = "success", content = {
+            @Content(schema = @Schema(allOf = Subscription.class))
+    })
+    public Response fetchAllVerified() {
+        return Response.ok(this.service.list(true)).build();
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
