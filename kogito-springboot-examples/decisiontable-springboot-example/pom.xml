@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>kogito-springboot-examples</artifactId>
-    <version>1.21.0-SNAPSHOT</version>
+    <version>1.21.0.Final</version>
   </parent>
   <artifactId>decisiontable-springboot-example</artifactId>
   <name>Kogito Example :: Decision Table - Spring Boot</name>
