@@ -180,7 +180,7 @@
       <id>knative</id>
       <properties>
         <!-- Shortcuts -->
-        <namespace>default</namespace>
+        <namespace>newsletter-showcase</namespace>
         <deploy>false</deploy>
         <!-- Quarkus Knative integration to build and deploy -->
         <quarkus.kubernetes.namespace>${namespace}</quarkus.kubernetes.namespace>

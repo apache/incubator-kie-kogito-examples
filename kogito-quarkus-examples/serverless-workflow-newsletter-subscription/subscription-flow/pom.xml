@@ -64,7 +64,15 @@
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-addons-quarkus-knative-eventing</artifactId>
     </dependency>
-
+    <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>runtime-tools-quarkus-extension</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-addons-quarkus-process-svg</artifactId>
+    </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-reactive-pg-client</artifactId>
@@ -199,7 +207,7 @@
       <id>knative</id>
       <properties>
         <!-- Shortcuts -->
-        <namespace>default</namespace>
+        <namespace>newsletter-showcase</namespace>
         <deploy>false</deploy>
         <!-- Quarkus Knative integration to build and deploy -->
         <quarkus.kubernetes.namespace>${namespace}</quarkus.kubernetes.namespace>
