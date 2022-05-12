@@ -2,16 +2,16 @@
 
 In this example, you will see a Newsletter Subscription use case described with the [Serverless Workflow specification](https://serverlessworkflow.io/).
 
-<!-- add image -->
-
 The figure below illustrates the overall architecture of this use case.
+
+![Architecture](docs/architecture.png)
 
 1. Once a new subscription request comes, the flow will evaluate if it's not already subscribed.
 2. Case not, it will attempt to subscribe the new user and wait for the confirmation.
 3. Once a new event containing the confirmation arrives, the flow will resume and subscribe the new user.
 4. By the end, a new event containing the details of the subscription is broadcasted in the environment, so other actors can react upon it.
 
-<!-- add image -->
+![Workflow](docs/newsletter-subscription-flow.png)
 
 This example demonstrates a few features powered by the Kogito implementation of the Serverless Workflow specification:
 
@@ -23,13 +23,44 @@ In a Knative environment, the services involved in this use case can be scaled t
 
 ## Using Quarkus Dev Services
 
-You can use the Workflow Instance management dev service when in Quarkus Dev Mode (`quarkus dev` from the [subscription-flow](subscription-flow) module root) to visualie the details of a given workflow instance:
+You can use the Workflow Instance management dev service when in Quarkus Dev Mode (`quarkus dev` from the [subscription-flow](subscription-flow) module root) to visualize the details of a given workflow instance:
 
-<!-- add image -->
+![Quarkus Dev UI](docs/dev-console.png)
 
 ## The User Interface
 
-<!-- add image -->
+The [Newsletter Subscription Flow](subscription-flow) application has a user interface to interact with the workflow without having to rely on the command line to push events or making HTTP requests: 
+
+![User Interface](docs/ui-example.png)
+
+## Running Locally
+
+The example has two modules: [the workflow application](subscription-flow) that will orchestrate the use case and the [subscription service application](subscription-service) that has a REST API to interact with the newsletter subscription domain.
+
+You can run it locally using Maven and Java:
+
+1. Compile the whole application with:
+```
+mvn clean install -DskipTests
+```
+2. In a new terminal, run the Subscription Service via:
+```
+java -jar -Dquarkus.http.port=8282 subscription-service/target/quarkus-app/quarkus-run.jar
+```
+3. Again, in a new terminal, run the Subscription Workflow with:
+```
+java -jar subscription-flow/target/quarkus-app/quarkus-run.jar
+```
+4. Lastly, start the CloudEvent sink log to receive the `new subscription` event:
+```
+docker run --rm -it -p 8181:8080 gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+```
+
+You should have the ports `8080`, `8181` and `8282` free to have all the services up.
+
+Go to http://localhost:8080 and play around with the interface. You will see in the CloudEvents sink the new subscription event produced by the workflow after confirming a given subscription.
+
+> The Subscription API also has an interface that can be accessed in http://localhost:8181/ to see the confirmed subscriptions.
 
 ## Running on Knative
 
