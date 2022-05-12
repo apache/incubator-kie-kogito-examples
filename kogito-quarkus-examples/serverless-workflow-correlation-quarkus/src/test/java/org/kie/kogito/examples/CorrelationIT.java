@@ -15,6 +15,7 @@
  */
 package org.kie.kogito.examples;
 
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 import org.kie.kogito.testcontainers.quarkus.PostgreSqlQuarkusTestResource;
@@ -42,21 +43,21 @@ class CorrelationIT {
         String id = given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
-                .post("/start")
+                .post("/start/12345")
                 .then()
-                .statusCode(201)
                 .extract()
                 .path("id");
 
         await()
                 .atLeast(1, SECONDS)
-                .atMost(30, SECONDS)
+                .atMost(120, SECONDS)
                 .with().pollInterval(1, SECONDS)
                 .untilAsserted(() -> given()
                         .contentType(ContentType.JSON)
                         .accept(ContentType.JSON)
-                        .get("/callback/{id}", id)
+                        .get("/correlation")
                         .then()
-                        .statusCode(404));
+                        .statusCode(200)
+                        .body("$", Matchers.hasSize(0)));
     }
 }

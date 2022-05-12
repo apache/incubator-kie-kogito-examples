@@ -20,7 +20,7 @@ import java.time.OffsetDateTime;
 import java.util.UUID;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
@@ -41,7 +41,7 @@ public class WorkflowResource {
     @Channel("start")
     Emitter<String> emitter;
 
-    @GET
+    @POST
     @Path("/{userId}")
     public String onEvent(@PathParam("userId") String userId) {
         String start = generateCloudEvent(userId, "newAccountEventType");
