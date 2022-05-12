@@ -60,7 +60,7 @@ public class EventsService {
         Optional<CloudEvent> ce = CloudEventUtils.decode(message.getPayload());
         JsonCloudEventData cloudEventData = (JsonCloudEventData) ce.get().getData();
         logger.info("Validate Account received. Workflow data {}", cloudEventData);
-        return generateCloudEvent(ce.get().getExtension("userid").toString(), "validatedAccountEmail", cloudEventData);
+        return generateCloudEvent(ce.get().getExtension("userid").toString(), "validatedAccountEmail", null);
     }
 
     @Incoming("activate")
@@ -70,7 +70,7 @@ public class EventsService {
         Optional<CloudEvent> ce = CloudEventUtils.decode(message.getPayload());
         JsonCloudEventData cloudEventData = (JsonCloudEventData) ce.get().getData();
         logger.info("Activate Account received. Workflow data {}", cloudEventData);
-        return generateCloudEvent(ce.get().getExtension("userid").toString(), "activatedAccount", cloudEventData);
+        return generateCloudEvent(ce.get().getExtension("userid").toString(), "activatedAccount", null);
     }
 
     private String generateCloudEvent(String id, String type, Object data) {

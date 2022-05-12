@@ -1,12 +1,42 @@
-# Kogito Serverless Workflow - Callback Example
+# Kogito Serverless Workflow - Correlation with Callback Example
 
 ## Description
 
-This example contains a simple workflow service that illustrate callback state usage. 
-A callback is a state that invokes an action and wait for an event (event that will be eventually fired by the external service notified by the action), so this example needs an event broker.
-This example consist of a callback state that waits for an event arriving on wait channel. Its action publish an event on resume channel. The event published on resume channnel is modified and republished into the wait channel by `PrintService`, which simulates an external service. 
-The service is described using JSON format as defined in the 
-[CNCF Serverless Workflow specification](https://github.com/serverlessworkflow/specification).
+This example contains a workflow service to demonstrate correlation feature using callback states and events. 
+Each callback state withing the workflow publishes an event and wait for a response event, 
+there is an incoming event, it is matched with the proper workflow instance by using the correlation attribute, in this case it is the `userid`. So for every incoming event the userid is used to properly find and trigger the proper workflow instance. The correlation is defined in the [workflow definition file](src/main/resources/correlation.sw.json) that is described using JSON format as defined in the [CNCF Serverless Workflow specification](https://github.com/serverlessworkflow/specification).
+
+```json
+"correlation": [
+    {
+    "contextAttributeName": "userid"
+    }
+]
+```
+Events should be in CloudEvent format and the correlation attribute should be defined as an extension attribute, in this case `userid`.
+
+The workflow example is started by events as well, so a start event should be published with the same correlation attribute `userid, that will be used to match correlations for the started workflow instance. 
+ 
+In the example the event broker used to publish/receive the events is Kafka, and the used topics are the same described as the event types in the workflow definition.
+
+
+```json
+{
+  "name": "newAccountEvent",
+  "source": "",
+  "type": "newAccountEventType",
+  "correlation": [
+    {
+      "contextAttributeName": "userid"
+    }
+  ]
+}
+```
+For simplicity, the events are published and consumed in the same application running the workflow, but in a real use case they should come from different services interacting with the workflow, see [EventsService](src/main/java/org/kie/kogito/examples/EventsService.java).
+
+To start the workflow as mentioned, it is required an event to be published which is going to be consumed by the workflow service starting a new instance. A helper REST endpoint was recreated to simplify this step, so once a POST request is received it publishes the start event to the broker see [WorkflowResource](src/main/java/org/kie/kogito/examples/WorkflowResource.java).
+
+All eventing configuration and the broker parameters are in done in the [application.properties](src/main/resources/application.properties). 
 
 ## Infrastructure requirements
 
@@ -99,23 +129,28 @@ mvn clean package -Pnative
 To run the generated native executable, generated in `target/`, execute
 
 ```sh
-./target/serverless-workflow-callback-quarkus-{version}-runner
+./target/serverless-workflow-correlation-quarkus-{version}-runner
 ```
 
-### Submit a request
+### Start a workflow
 
-The service based on the JSON workflow definition can be access by sending a request to http://localhost:8080/callback
+The service based on the JSON workflow definition can be access by sending a request to http://localhost:8080/start/{userid}
 
 Complete curl command can be found below:
 
 ```sh
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/callback
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/start/12345
 ```
 
-
-After a while (note that to you need give time for event to be consumed)  you should see the log message printed in quarkus:
+After a while (note that to you need give time for event to be consumed)  you should see the log message printed in the console, and the workflow is completed.
 
 ```text
- Workflow data {"move":"This is the initial data in the model and has been modified by the event publisher"}
+2022-05-12 11:02:15,891 INFO  [org.kie.kog.ser.eve.imp.ProcessEventDispatcher] (kogito-event-executor-0) Starting new process instance with signal 'newAccountEventType'
+2022-05-12 11:02:18,909 INFO  [io.sma.rea.mes.kafka] (vert.x-eventloop-thread-9) SRMSG18256: Initialize record store for topic-partition 'validateAccountEmail-0' at position 16.
+2022-05-12 11:02:18,919 INFO  [org.kie.kog.exa.EventsService] (pool-1-thread-1) Validate Account received. Workflow data JsonCloudEventData{node={"email":"test@test.com","userId":"12345"}}
+2022-05-12 11:02:19,931 INFO  [io.sma.rea.mes.kafka] (vert.x-eventloop-thread-5) SRMSG18256: Initialize record store for topic-partition 'validatedAccountEmail-0' at position 16.
+2022-05-12 11:02:20,962 INFO  [io.sma.rea.mes.kafka] (vert.x-eventloop-thread-8) SRMSG18256: Initialize record store for topic-partition 'activateAccount-0' at position 16.
+2022-05-12 11:02:20,971 INFO  [org.kie.kog.exa.EventsService] (pool-1-thread-1) Activate Account received. Workflow data JsonCloudEventData{node={"email":"test@test.com","userId":"12345"}}
+2022-05-12 11:02:21,994 INFO  [io.sma.rea.mes.kafka] (vert.x-eventloop-thread-6) SRMSG18256: Initialize record store for topic-partition 'activatedAccount-0' at position 7.
+2022-05-12 11:02:22,006 INFO  [org.kie.kog.exa.EventsService] (kogito-event-executor-0) Complete Account Creation received. Workflow data {"email":"test@test.com","userId":"12345"}, KogitoProcessInstanceId 0cef0eef-06c8-4433-baea-505fa8d45f68 
 ```
-
