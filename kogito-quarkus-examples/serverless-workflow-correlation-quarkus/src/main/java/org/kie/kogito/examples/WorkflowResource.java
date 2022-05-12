@@ -46,7 +46,6 @@ public class WorkflowResource {
     public String onEvent(@PathParam("userId") String userId) {
         String start = generateCloudEvent(userId, "newAccountEventType");
         emitter.send(start);
-
         return start;
     }
 

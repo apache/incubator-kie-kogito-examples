@@ -31,7 +31,7 @@ import static org.awaitility.Awaitility.await;
 @QuarkusIntegrationTest
 @QuarkusTestResource(KafkaQuarkusTestResource.class)
 @QuarkusTestResource(PostgreSqlQuarkusTestResource.Conditional.class)
-class CallbackRestIT {
+class CorrelationIT {
 
     static {
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
@@ -42,7 +42,7 @@ class CallbackRestIT {
         String id = given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
-                .post("/callback")
+                .post("/start")
                 .then()
                 .statusCode(201)
                 .extract()

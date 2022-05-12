@@ -30,7 +30,6 @@ import org.eclipse.microprofile.reactive.messaging.Message;
 import org.eclipse.microprofile.reactive.messaging.Outgoing;
 import org.kie.kogito.event.cloudevents.utils.CloudEventUtils;
 import org.kie.kogito.internal.process.runtime.KogitoProcessContext;
-import org.kie.kogito.internal.process.runtime.KogitoProcessInstance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,17 +42,15 @@ import io.cloudevents.core.builder.CloudEventBuilder;
 import io.cloudevents.jackson.JsonCloudEventData;
 
 @ApplicationScoped
-public class PrintService {
+public class EventsService {
 
-    private static final Logger logger = LoggerFactory.getLogger(PrintService.class);
+    private static final Logger logger = LoggerFactory.getLogger(EventsService.class);
 
     @Inject
     ObjectMapper objectMapper;
 
     public void complete(JsonNode workflowData, KogitoProcessContext context) {
-        logger.info("Workflow data {}, KogitoProcessInstanceId {} ", workflowData, context.getProcessInstance().getStringId());
-        logger.info("Workflow completed for orderId {}, KogitoProcessInstanceId {} ", ((KogitoProcessInstance) context.getProcessInstance()).unwrap().correlation(),
-                context.getProcessInstance().getStringId());
+        logger.info("Complete Account Creation received. Workflow data {}, KogitoProcessInstanceId {} ", workflowData, context.getProcessInstance().getStringId());
     }
 
     @Incoming("validate")
@@ -62,7 +59,8 @@ public class PrintService {
     public String onEventValidate(Message<String> message) {
         Optional<CloudEvent> ce = CloudEventUtils.decode(message.getPayload());
         JsonCloudEventData cloudEventData = (JsonCloudEventData) ce.get().getData();
-        return generateCloudEvent(ce.get().getExtension("userid").toString(), "validatedAccountEmail");
+        logger.info("Validate Account received. Workflow data {}", cloudEventData);
+        return generateCloudEvent(ce.get().getExtension("userid").toString(), "validatedAccountEmail", cloudEventData);
     }
 
     @Incoming("activate")
@@ -71,10 +69,11 @@ public class PrintService {
     public String onEventActivate(Message<String> message) {
         Optional<CloudEvent> ce = CloudEventUtils.decode(message.getPayload());
         JsonCloudEventData cloudEventData = (JsonCloudEventData) ce.get().getData();
-        return generateCloudEvent(ce.get().getExtension("userid").toString(), "activatedAccount");
+        logger.info("Activate Account received. Workflow data {}", cloudEventData);
+        return generateCloudEvent(ce.get().getExtension("userid").toString(), "activatedAccount", cloudEventData);
     }
 
-    private String generateCloudEvent(String id, String type) {
+    private String generateCloudEvent(String id, String type, Object data) {
         try {
             return objectMapper.writeValueAsString(CloudEventBuilder.v1()
                     .withId(UUID.randomUUID().toString())
@@ -82,7 +81,7 @@ public class PrintService {
                     .withType(type)
                     .withTime(OffsetDateTime.now())
                     .withExtension("userid", id)
-                    .withData(objectMapper.writeValueAsBytes(new Account("tiago@tiago.com", id)))
+                    .withData(objectMapper.writeValueAsBytes(data))
                     .build());
         } catch (JsonProcessingException e) {
             throw new IllegalArgumentException(e);
