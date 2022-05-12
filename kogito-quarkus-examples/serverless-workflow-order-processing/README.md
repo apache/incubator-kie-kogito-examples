@@ -239,13 +239,32 @@ to get started.
 
 Just make sure your cluster has [Knative Eventing available](https://knative.dev/docs/eventing/getting-started/):
 
-1. [Install Knative](https://knative.dev/docs/getting-started/)
-2. Install the `KogitoSource` [via command line](https://github.com/knative-sandbox/eventing-kogito#installation).
-3. Run `eval $(minikube docker-env)` to build the image directly into the Minikube registry. 
-4. Run `mvn clean install -Pknative -Dnamespace=<your namespace>` to build the image and the Knative resources for your application to run.
-5. Apply the objects created for you with `kubectl apply -f target/kubernetes/knative.yml,target/kubernetes/kogito.yml`. It will deploy the objects from `knative.yml` and `kogito.yml` generated files.
-6. Run `curl` from the terminal like you did in the previously steps. 
-   To see what's going on, just query for one of the Knative service sinks created on step #5. 
+1. Install [Minikube](https://minikube.sigs.k8s.io/docs/start/)
+2. Enable Minikube internal image registry by running `minikube addons enable registry`
+3. Install Knative using the [quickstart](https://knative.dev/docs/getting-started/) since a DNS will be configured for you. In case you need to restart Minikube, make sure you start it using the `knative` profile by running `minikube start -p knative`.
+5. Run `eval $(minikube -p minikube docker-env --profile knative)` to configure your terminal to use the local Minikube instance.
+6. Install the [Knative Kogito Source](https://github.com/knative-sandbox/eventing-kogito#installation).
+7. Run `mvn clean install -Pknative -Dnamespace=knative` to build and push the image to Minikube registry and generate the Knative resources for your application to run.
+8. Apply the objects created for you with `kubectl apply -f target/kubernetes/knative.yml,target/kubernetes/kogito.yml`. It will deploy the objects from `knative.yml` and `kogito.yml` generated files.
+9. Run `curl` from the terminal like you did in the previously steps. 
+   ```shell script
+   $ curl -X POST \
+   -H "content-type: application/json"  \
+   -H "ce-specversion: 1.0"  \
+   -H "ce-source: /from/localhost"  \
+   -H "ce-type: orderEvent"  \
+   -H "ce-id: f0643c68-609c-48aa-a820-5df423fa4fe0"  \
+   -d ' {"id":"f0643c68-609c-48aa-a820-5df423fa4fe0","country":"Brazil","total":500,"description":"iPhone 7"}' \
+   $(kn service describe serverless-workflow-order-processing -o url)
+   ```
+kubectl logs -l serving.knative.dev/service=event-display -c user-container
+kubectl logs -l serving.knative.dev/service=shipping-domestic -c user-container
+kubectl logs -l serving.knative.dev/service=shipping-international -c user-container
+
+kubectl logs -l app.kubernetes.io/name=serverless-workflow-order-processing
+kubectl logs -l serving.knative.dev/service=serverless-workflow-order-processing -c user-container
+
+   To see what's going on, just query for one of the Knative service sinks created on the previous step.
    You should see something like:
 
 ```

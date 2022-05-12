@@ -113,6 +113,7 @@
         <quarkus.kubernetes.deploy>${deploy}</quarkus.kubernetes.deploy>
         <quarkus.container-image.build>true</quarkus.container-image.build>
         <quarkus.profile>knative</quarkus.profile>
+        <skipTests>true</skipTests>
       </properties>
       <dependencies>
         <dependency>

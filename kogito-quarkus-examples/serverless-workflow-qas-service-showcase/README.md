@@ -66,11 +66,12 @@ In this example we use a regular, in-memory, broker. Feel free to adapt the exam
 
 ### Preparing your environment
 
-1. Install [minikube](https://minikube.sigs.k8s.io/docs/start/)
-2. Install Knative using the [quickstarts](https://knative.dev/docs/getting-started/) since a DNS will be configured for you.
-3. Install the [Knative Kogito Source](https://github.com/knative-sandbox/eventing-kogito#installation).
-4. Run `eval $(minikube -p minikube docker-env --profile knative)` to build the images in your internal Minikube registry.
-5. Run `mvn clean install -Pknative`. All resources needed to run the example will be generated for you.
+1. Install [Minikube](https://minikube.sigs.k8s.io/docs/start/)
+2. Enable Minikube internal image registry by running `minikube addons enable registry`
+3. Install Knative using the [quickstart](https://knative.dev/docs/getting-started/) since a DNS will be configured for you. In case you need to restart Minikube, make sure you start it using the `knative` profile by running `minikube start -p knative`.
+4. Install the [Knative Kogito Source](https://github.com/knative-sandbox/eventing-kogito#installation).
+5. Run `eval $(minikube -p minikube docker-env --profile knative)` to configure your terminal to use the local Minikube instance.
+6. Run `mvn clean install -Pknative` to build and push the image to Minikube registry and generate the Knative resources for your application to run.
 
 Deploy the services with the following command:
 
