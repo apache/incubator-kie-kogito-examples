@@ -1,0 +1,49 @@
+{
+  "id": "jsongreet",
+  "version": "1.0",
+  "name": "Greeting workflow",
+  "description": "JSON based greeting workflow",
+  "start": "GreetPerson",
+  "functions": [
+    {
+      "name": "sayHello",
+      "type: "rpc",
+      "operation": "file://../serverless-workflow-greeting-server-rpc-quarkus/src/main/resources/greeeting.proto#Greeter#sayHello"
+    }
+    {
+      "name": "printMessage",
+      "type": "custom",
+      "operation": "sysout"
+    }
+  ],
+  "states": [
+    {
+      "name": "GreetPerson",
+      "type": "operation",
+      "actions": [
+        {
+          "name": "sayHello",
+          "functionRef" : {
+            "refName": "sayHello",
+            "arguments": {
+              "name": ".name",
+              "language": ".language"
+            }
+          }
+        },
+        {
+          "name": "printMessage",
+          "functionRef": {
+            "refName": "printMessage",
+            "arguments": {
+              "message": ".message"
+            }
+          }
+        }
+      ],
+      "end": {
+        "terminate": "true"
+      }
+    }
+  ]
+}
