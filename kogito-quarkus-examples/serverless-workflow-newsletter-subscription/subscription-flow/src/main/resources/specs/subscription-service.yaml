@@ -1,0 +1,93 @@
+---
+openapi: 3.0.3
+info:
+  title: serverless-workflow-newsletter-subscription-service API
+  version: 2.0.0-SNAPSHOT
+paths:
+  /subscription:
+    get:
+      tags:
+      - Subscription Resource
+      operationId: fetch
+      parameters:
+      - name: email
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+    post:
+      tags:
+      - Subscription Resource
+      operationId: subscribe
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Subscription'
+      responses:
+        "200":
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+  /subscription/confirm:
+    put:
+      tags:
+      - Subscription Resource
+      operationId: confirm
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Subscription'
+      responses:
+        "200":
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+  /subscription/verify:
+    get:
+      tags:
+      - Subscription Resource
+      operationId: verify
+      parameters:
+      - name: email
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailVerificationReply'
+components:
+  schemas:
+    EmailVerificationReply:
+      type: object
+      properties:
+        email:
+          type: string
+        emailExists:
+          type: boolean
+    Subscription:
+      type: object
+      properties:
+        email:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        verified:
+          type: boolean

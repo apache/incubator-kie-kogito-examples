@@ -106,6 +106,7 @@
         <module>serverless-workflow-service-calls-quarkus</module>
         <module>serverless-workflow-temperature-conversion</module>
         <module>serverless-workflow-qas-service-showcase</module>
+        <module>serverless-workflow-newsletter-subscription</module>
         <module>trusty-tracing-quarkus-devservices</module>
       </modules>
     </profile>
@@ -126,6 +127,7 @@
         <module>process-quarkus-example</module>
         <module>serverless-workflow-callback-quarkus</module>
         <module>serverless-workflow-qas-service-showcase</module>
+        <module>serverless-workflow-newsletter-subscription</module>
       </modules>
     </profile>
 
