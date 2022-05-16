@@ -77,10 +77,6 @@
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-addons-quarkus-process-svg</artifactId>
     </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-reactive-pg-client</artifactId>
-    </dependency>
 
     <!-- UI dependencies -->
     <dependency>
@@ -203,7 +199,15 @@
       <dependencies>
         <dependency>
           <groupId>org.kie.kogito</groupId>
-          <artifactId>kogito-addons-quarkus-persistence-postgresql</artifactId>
+          <artifactId>kogito-addons-quarkus-persistence-jdbc</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>io.quarkus</groupId>
+          <artifactId>quarkus-jdbc-postgresql</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>io.quarkus</groupId>
+          <artifactId>quarkus-agroal</artifactId>
         </dependency>
       </dependencies>
     </profile>
