@@ -18,9 +18,9 @@ package org.acme.numbers;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.kie.kogito.test.quarkus.QuarkusTestProperty;
 
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
@@ -38,7 +38,7 @@ class RestExampleTestIT {
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
     }
 
-    @ConfigProperty(name = "wiremock.port")
+    @QuarkusTestProperty(name = "wiremock.port")
     int port;
 
     @Test
