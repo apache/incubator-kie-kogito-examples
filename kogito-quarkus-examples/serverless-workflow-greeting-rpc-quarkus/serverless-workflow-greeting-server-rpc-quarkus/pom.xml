@@ -7,7 +7,7 @@
 		<version>2.0.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>serverless-workflow-greeting-server-rpc-quarkus</artifactId>
-	<name>Kogito Example :: Serverless Workflow Greeting :: gRPC:: Quarkus</name>
+	<name>Kogito Example :: Serverless Workflow Greeting :: gRPC Client:: Quarkus</name>
 	<description>Kogito Serverless Workflow Example that defines a simple gRPC service - Quarkus</description>
 	<properties></properties>
 	<dependencies>
@@ -34,18 +34,45 @@
 			<version>6.0.53</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+		  <groupId>org.kie.kogito</groupId>
+		  <artifactId>kogito-serverless-workflow-runtime</artifactId>
+		  <version>2.0.0-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 	<build>
+		<resources>
+			<resource>
+				<directory>${basedir}/src/main/resources</directory>
+			</resource>
+			<resource>
+				<directory>${project.build.directory}/generated-resources</directory>
+			</resource>
+		</resources>
 		<finalName>${project.artifactId}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.xolstice.maven.plugins</groupId>
 				<artifactId>protobuf-maven-plugin</artifactId>
 				<configuration>
-				 	<protocArtifact>com.google.protobuf:protoc:3.19.2:exe:${os.detected.classifier}</protocArtifact>
+					<protocArtifact>com.google.protobuf:protoc:3.19.2:exe:${os.detected.classifier}</protocArtifact>
 					<pluginId>grpc-java</pluginId>
 					<pluginArtifact>io.grpc:protoc-gen-grpc-java:1.45.1:exe:${os.detected.classifier}</pluginArtifact>
+					<writeDescriptorSet>true</writeDescriptorSet>
+					<descriptorSetFileName>output.protobin</descriptorSetFileName>
+					<attachProtoSources>false</attachProtoSources>
+					<protoSourceRoot>${project.basedir}/src/main/proto</protoSourceRoot>
+					<outputDirectory>${project.build.directory}/generated-sources/protobuf/java</outputDirectory>
 				</configuration>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>compile</goal>
+							<goal>compile-custom</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

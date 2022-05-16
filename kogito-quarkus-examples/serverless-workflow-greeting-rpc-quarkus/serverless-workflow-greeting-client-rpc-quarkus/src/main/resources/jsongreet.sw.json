@@ -7,9 +7,9 @@
   "functions": [
     {
       "name": "sayHello",
-      "type: "rpc",
-      "operation": "file://../serverless-workflow-greeting-server-rpc-quarkus/src/main/resources/greeeting.proto#Greeter#sayHello"
-    }
+      "type": "rpc",
+      "operation": "file://../serverless-workflow-greeting-server-rpc-quarkus/src/main/proto/greeting.proto#Greeter#SayHello"
+    },
     {
       "name": "printMessage",
       "type": "custom",

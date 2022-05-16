@@ -1,0 +1,10 @@
+{
+    "Dog" : {
+      "castellano" : "perro",
+      "leones": "perru",
+      "gallego" : "can",
+      "aragones" : "cocho",
+      "catalan" : "gos",
+      "vasco": "txakurra"
+    }
+  }
