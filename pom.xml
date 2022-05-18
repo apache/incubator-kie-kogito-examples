@@ -45,7 +45,6 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <!-- kogito -->
     <kogito.version>${project.version}</kogito.version>
-    <version.org.optaplanner>8.13.1-SNAPSHOT</version.org.optaplanner>
     <!-- override default to fast-jar packaging for forward-compatibility -->
     <quarkus.package.type>fast-jar</quarkus.package.type>
     <!-- dependencies version -->
@@ -175,8 +174,6 @@
         <module>process-mongodb-persistence-springboot</module>
         <module>process-outbox-mongodb-quarkus</module>
         <module>process-outbox-mongodb-springboot</module>
-        <module>process-optaplanner-quarkus</module>
-        <module>process-optaplanner-springboot</module>
         <module>process-performance-quarkus</module>
         <module>process-performance-springboot</module>
         <module>process-postgresql-persistence-quarkus</module>
@@ -309,7 +306,6 @@
         <module>process-monitoring-quarkus</module>
         <module>process-mongodb-persistence-quarkus</module>
         <module>process-outbox-mongodb-quarkus</module>
-        <module>process-optaplanner-quarkus</module>
         <module>process-postgresql-persistence-quarkus</module>
         <module>process-quarkus-example</module>
         <module>process-scripts-quarkus</module>
@@ -392,7 +388,6 @@
         <module>process-monitoring-springboot</module>
         <module>process-mongodb-persistence-springboot</module>
         <module>process-outbox-mongodb-springboot</module>
-        <module>process-optaplanner-springboot</module>
         <module>process-postgresql-persistence-springboot</module>
         <module>process-rest-service-call-springboot</module>
         <module>process-scripts-springboot</module>
@@ -408,36 +403,6 @@
         <module>ruleunit-springboot-example</module>
         <module>serverless-workflow-greeting-springboot</module>
         <module>serverless-workflow-service-calls-springboot</module>
-      </modules>
-    </profile>
-    <profile>
-      <id>optaplanner-downstream</id>
-      <activation>
-        <property>
-          <name>optaplanner</name>
-        </property>
-      </activation>
-      <modules>
-        <module>process-optaplanner-quarkus</module>
-        <module>process-optaplanner-springboot</module>
-      </modules>
-    </profile>
-    <profile>
-      <id>optaplanner-downstream-native</id>
-      <activation>
-        <property>
-          <name>optaplanner-native</name>
-        </property>
-      </activation>
-      <properties>
-        <failsafe.include>**/Native*IT.java</failsafe.include>
-        <failsafe.exclude></failsafe.exclude>
-        <quarkus.package.type>native</quarkus.package.type>
-        <!-- Native building needs a fixed port for tests -->
-        <tests.quarkus.http.port>8080</tests.quarkus.http.port>
-      </properties>
-      <modules>
-        <module>process-optaplanner-quarkus</module>
       </modules>
     </profile>
   </profiles>
