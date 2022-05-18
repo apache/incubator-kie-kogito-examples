@@ -144,7 +144,6 @@ void setupDeployJob(String jobFolder, KogitoJobType jobType) {
             booleanParam('UPDATE_NIGHTLY_BRANCH', false, 'Set to true if at the end of the run, the nightly branch should be updated. This CANNOT be used with `CREATE_PR` parameter also enabled (this latter one has priority). It is also disabled for release job.')
 
             stringParam('PROJECT_VERSION', '', 'Optional if not RELEASE. If RELEASE, cannot be empty.')
-            stringParam('OPTAPLANNER_VERSION', '', 'Optional if not RELEASE. If RELEASE, cannot be empty.')
 
             booleanParam('SEND_NOTIFICATION', false, 'In case you want the pipeline to send a notification on CI channel for this run.')
         }
@@ -194,7 +193,6 @@ void setupPromoteJob(String jobFolder, KogitoJobType jobType) {
 
             // Release information which can override `deployment.properties`
             stringParam('PROJECT_VERSION', '', 'Override `deployment.properties`. Optional if not RELEASE. If RELEASE, cannot be empty.')
-            stringParam('OPTAPLANNER_VERSION', '', 'Override `deployment.properties`. Optional if not RELEASE. If RELEASE, cannot be empty.')
             stringParam('GIT_TAG', '', 'Git tag to set, if different from PROJECT_VERSION')
             booleanParam('UPDATE_STABLE_BRANCH', false, 'Set to true if you want to update the `stable` branch to new created Git tag.')
 
