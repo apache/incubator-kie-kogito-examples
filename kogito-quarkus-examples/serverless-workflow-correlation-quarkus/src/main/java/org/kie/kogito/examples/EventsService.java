@@ -17,8 +17,10 @@ package org.kie.kogito.examples;
 
 import java.net.URI;
 import java.time.OffsetDateTime;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -49,6 +51,8 @@ public class EventsService {
     @Inject
     ObjectMapper objectMapper;
 
+    private Map<String, String> accounts = new ConcurrentHashMap<>();
+
     public void complete(JsonNode workflowData, KogitoProcessContext context) {
         logger.info("Complete Account Creation received. Workflow data {}, KogitoProcessInstanceId {} ", workflowData, context.getProcessInstance().getStringId());
     }
@@ -60,7 +64,12 @@ public class EventsService {
         Optional<CloudEvent> ce = CloudEventUtils.decode(message.getPayload());
         JsonCloudEventData cloudEventData = (JsonCloudEventData) ce.get().getData();
         logger.info("Validate Account received. Workflow data {}", cloudEventData);
-        return generateCloudEvent(ce.get().getExtension("userid").toString(), "validatedAccountEmail", null);
+        String userId = ce.get().getExtension("userid").toString();
+
+        //just for testing
+        accounts.put(userId, ce.get().getExtension("kogitoprocinstanceid").toString());
+
+        return generateCloudEvent(userId, "validatedAccountEmail", null);
     }
 
     @Incoming("activate")
@@ -86,5 +95,9 @@ public class EventsService {
         } catch (JsonProcessingException e) {
             throw new IllegalArgumentException(e);
         }
+    }
+
+    public final String getAccount(String userId) {
+        return accounts.get(userId);
     }
 }

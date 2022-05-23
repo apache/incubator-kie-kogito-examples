@@ -15,22 +15,28 @@
  */
 package org.kie.kogito.examples;
 
-import org.hamcrest.Matchers;
+import java.util.concurrent.atomic.AtomicReference;
+
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 import org.kie.kogito.testcontainers.quarkus.PostgreSqlQuarkusTestResource;
 
 import io.quarkus.test.common.QuarkusTestResource;
+import io.quarkus.test.common.ResourceArg;
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
+import static java.util.concurrent.TimeUnit.MINUTES;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource.KOGITO_KAFKA_TOPICS;
 
 @QuarkusIntegrationTest
-@QuarkusTestResource(KafkaQuarkusTestResource.class)
+@QuarkusTestResource(value = KafkaQuarkusTestResource.class,
+        initArgs = { @ResourceArg(name = KOGITO_KAFKA_TOPICS, value = "validatedAccountEmail,validateAccountEmail,activateAccount,activatedAccount,newAccountEventType ") })
 @QuarkusTestResource(PostgreSqlQuarkusTestResource.Conditional.class)
 class CorrelationIT {
 
@@ -38,26 +44,44 @@ class CorrelationIT {
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
     }
 
+    private String userId = "12345";
+
     @Test
     void testCallbackRest() {
-        String id = given()
+        given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
-                .post("/start/12345")
+                .pathParam("userId", userId)
+                .post("/account/{userId}")
                 .then()
-                .extract()
-                .path("id");
+                .statusCode(201);
 
+        //check instance created
+        AtomicReference<String> processInstanceId = new AtomicReference<>();
         await()
-                .atLeast(1, SECONDS)
-                .atMost(120, SECONDS)
+                .pollDelay(15, SECONDS)
+                .atMost(2, MINUTES)
+                .with().pollInterval(1, SECONDS)
+                .untilAsserted(() -> processInstanceId.set(given()
+                        .accept(ContentType.JSON)
+                        .pathParam("userId", userId)
+                        .get("/account/{userId}")
+                        .then()
+                        .statusCode(200)
+                        .body("processInstanceId", notNullValue())
+                        .extract()
+                        .body().path("processInstanceId")));
+
+        //check instance completed
+        await()
+                .atMost(2, MINUTES)
                 .with().pollInterval(1, SECONDS)
                 .untilAsserted(() -> given()
                         .contentType(ContentType.JSON)
                         .accept(ContentType.JSON)
-                        .get("/correlation")
+                        .pathParam("processInstanceId", processInstanceId.get())
+                        .get("/correlation/{processInstanceId}")
                         .then()
-                        .statusCode(200)
-                        .body("$", Matchers.hasSize(0)));
+                        .statusCode(404));
     }
 }

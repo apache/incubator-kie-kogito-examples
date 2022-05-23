@@ -60,10 +60,10 @@
      "onEvents": [{
          "eventRefs": ["newAccountEvent"]                 
      }],     
-     "transition": "Validade User Email"
+     "transition": "Validate User Email"
   },
     {
-      "name": "Validade User Email",
+      "name": "Validate User Email",
       "type": "callback",
       "action": {
         "name": "publish validate event",

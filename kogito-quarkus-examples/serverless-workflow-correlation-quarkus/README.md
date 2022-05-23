@@ -134,12 +134,12 @@ To run the generated native executable, generated in `target/`, execute
 
 ### Start a workflow
 
-The service based on the JSON workflow definition can be access by sending a request to http://localhost:8080/start/{userid}
+The service based on the JSON workflow definition can be access by sending a request to http://localhost:8080/account/{userid}
 
 Complete curl command can be found below:
 
 ```sh
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/start/12345
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/account/12345
 ```
 
 After a while (note that to you need give time for event to be consumed)  you should see the log message printed in the console, and the workflow is completed.
