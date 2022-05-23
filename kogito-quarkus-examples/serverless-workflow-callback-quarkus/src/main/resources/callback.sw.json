@@ -19,8 +19,7 @@
     {
       "name": "waitEvent",
       "source": "",
-      "type": "wait",
-      "dataOnly": false
+      "type": "wait"
     }
   ],
   "functions": [
@@ -43,7 +42,7 @@
       },
       "eventRef": "waitEvent",
       "eventDataFilter": {
-        "data": ".data.result",
+        "data": ".result",
         "toStateData": ".move"
       },
       "onErrors": [
