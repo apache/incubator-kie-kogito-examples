@@ -35,7 +35,7 @@ class GreetRestIT {
                 .post("/jsongreet")
                 .then()
                 .statusCode(201)
-                .body("workflowdata.greeting", containsString("Hello"));
+                .body("workflowdata.message", containsString("Hello"));
     }
 
     @Test
@@ -47,7 +47,7 @@ class GreetRestIT {
                 .post("/jsongreet")
                 .then()
                 .statusCode(201)
-                .body("workflowdata.greeting", containsString("Saludos"));
+                .body("workflowdata.message", containsString("Saludos"));
     }
 
     @Test
@@ -59,7 +59,7 @@ class GreetRestIT {
                 .post("/jsongreet")
                 .then()
                 .statusCode(201)
-                .body("workflowdata.greeting", containsString("Hello"));
+                .body("workflowdata.message", containsString("Hello"));
     }
 
     @Test
@@ -71,6 +71,6 @@ class GreetRestIT {
                 .post("/jsongreet")
                 .then()
                 .statusCode(201)
-                .body("workflowdata.greeting", containsString("Hello"));
+                .body("workflowdata.message", containsString("Hello"));
     }
 }

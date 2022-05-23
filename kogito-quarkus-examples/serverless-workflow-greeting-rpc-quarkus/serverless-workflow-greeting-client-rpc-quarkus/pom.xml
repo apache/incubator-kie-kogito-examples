@@ -65,44 +65,8 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<resources>
-			<resource>
-				<directory>${basedir}/src/main/resources</directory>
-			</resource>
-			<resource>
-				<directory>${project.build.directory}/generated-resources</directory>
-			</resource>
-		</resources>
 		<finalName>${project.artifactId}</finalName>
 		<plugins>
-
-			<plugin>
-				<groupId>org.xolstice.maven.plugins</groupId>
-				<artifactId>protobuf-maven-plugin</artifactId>
-				<configuration>
-					<additionalProtoPathElements>
-						<additionalProtoPathElement>${project.basedir}/../serverless-workflow-greeting-server-rpc-quarkus/src/main/proto/greeting.proto</additionalProtoPathElement>
-					</additionalProtoPathElements>
-					<protocArtifact>com.google.protobuf:protoc:3.19.2:exe:${os.detected.classifier}</protocArtifact>
-					<pluginId>grpc-java</pluginId>
-					<pluginArtifact>io.grpc:protoc-gen-grpc-java:1.45.1:exe:${os.detected.classifier}</pluginArtifact>
-					<writeDescriptorSet>true</writeDescriptorSet>
-					<descriptorSetFileName>output.protobin</descriptorSetFileName>
-					<attachProtoSources>false</attachProtoSources>
-					<protoSourceRoot>${project.basedir}/src/main/proto</protoSourceRoot>
-					>
-					<outputDirectory>${project.build.directory}/generated-sources/protobuf/java</outputDirectory>
-				</configuration>
-				<executions>
-					<execution>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>compile</goal>
-							<goal>compile-custom</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
 			<plugin>
 				<groupId>${quarkus.platform.group-id}</groupId>
 				<artifactId>quarkus-maven-plugin</artifactId>
@@ -110,12 +74,14 @@
 				<executions>
 					<execution>
 						<goals>
-							<goal>build</goal>
+						    <goal>build</goal>
+						    <goal>generate-code</goal>
+              				<goal>generate-code-tests</goal>
 						</goals>
 					</execution>
 				</executions>
 			</plugin>
-		</plugins>
+    </plugins>
 	</build>
 	<profiles>
 		<profile>
