@@ -78,7 +78,7 @@ public class SubscriptionServiceMock implements QuarkusTestResourceLifecycleMana
         }
 
         Map<String, String> properties = new HashMap<>();
-        properties.put("quarkus.rest-client.\"org.kie.kogito.openapi.subscriptionservice.api.SubscriptionResourceApi\".url", wireMockServer.baseUrl());
+        properties.put("quarkus.rest-client.subscription_service_yaml.url", wireMockServer.baseUrl());
         return properties;
     }
 
