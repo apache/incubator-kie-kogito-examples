@@ -15,16 +15,39 @@
  */
 package org.kie.kogito.examples;
 
-import org.junit.jupiter.api.Test;
+import java.io.IOException;
 
-import io.quarkus.test.junit.QuarkusIntegrationTest;
+import org.eclipse.microprofile.config.ConfigProvider;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.kie.kogito.examples.sw.greeting.GreeterService;
+
+import io.grpc.Server;
+import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.containsString;
 
-@QuarkusIntegrationTest
+@QuarkusTest
 class GreetRestIT {
+
+    private static Server server;
+
+    @BeforeAll
+    static void setup() throws IOException {
+        int port = ConfigProvider.getConfig().getValue("quarkus.grpc.clients.Greeter.port", Integer.class);
+        server = GreeterService.buildServer(port);
+        server.start();
+    }
+
+    @AfterAll
+    static void tearDown() throws InterruptedException {
+        server.shutdownNow();
+        server.awaitTermination();
+        server = null;
+    }
 
     @Test
     void testEnglish() {

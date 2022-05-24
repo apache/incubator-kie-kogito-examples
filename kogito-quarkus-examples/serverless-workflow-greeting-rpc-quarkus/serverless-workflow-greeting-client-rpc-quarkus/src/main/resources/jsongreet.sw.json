@@ -8,7 +8,7 @@
     {
       "name": "sayHello",
       "type": "rpc",
-      "operation": "file:///home/ftirados/git/kogito-examples/kogito-quarkus-examples/serverless-workflow-greeting-rpc-quarkus/serverless-workflow-greeting-server-rpc-quarkus/src/main/proto/greeting.proto#Greeter#SayHello"
+      "operation": "greeting.proto#Greeter#SayHello"
     },
     {
       "name": "printMessage",

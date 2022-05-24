@@ -27,10 +27,13 @@ import io.grpc.stub.StreamObserver;
 public class GreeterService extends GreeterGrpc.GreeterImplBase {
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        int port = Integer.getInteger("grpc.port", 50051);
-        Server server = ServerBuilder.forPort(port).addService(new GreeterService()).build();
+        Server server = buildServer(Integer.getInteger("grpc.port", 50051));
         server.start();
         server.awaitTermination();
+    }
+
+    public static Server buildServer(int port) {
+        return ServerBuilder.forPort(port).addService(new GreeterService()).build();
     }
 
     @Override
