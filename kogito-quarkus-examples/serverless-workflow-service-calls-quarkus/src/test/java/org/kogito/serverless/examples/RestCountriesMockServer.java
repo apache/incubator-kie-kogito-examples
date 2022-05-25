@@ -49,7 +49,7 @@ public class RestCountriesMockServer implements QuarkusTestResourceLifecycleMana
                             .withJsonBody(greecePayload)));
 
             final Map<String, String> properties = new HashMap<>();
-            properties.put("org.kogito.openapi.client.restcountries.base_path", wireMockServer.baseUrl() + "/rest");
+            properties.put("quarkus.rest-client.restcountries_json.url", wireMockServer.baseUrl() + "/rest");
 
             return properties;
         } catch (IOException e) {
