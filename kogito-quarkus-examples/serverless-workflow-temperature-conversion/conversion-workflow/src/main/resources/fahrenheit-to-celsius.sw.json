@@ -1,7 +1,6 @@
 {
   "id": "fahrenheit_to_celsius",
   "name": "Fahrenheit to Celsius Conversion Flow",
-  "expressionLang": "jsonpath",
   "version": "v1.0",
   "start": "SetConstants",
   "functions": [
@@ -34,8 +33,8 @@
           "functionRef": {
             "refName": "subtraction",
             "arguments": {
-              "leftElement": "$.fahrenheit", 
-              "rightElement": "$.subtractValue" 
+              "leftElement": ".fahrenheit", 
+              "rightElement": ".subtractValue" 
             }
           }
         },
@@ -43,7 +42,7 @@
           "name": "multiply",
           "functionRef": {
             "refName": "multiplication",
-            "arguments":  { "leftElement": "$.difference", "rightElement": "$.multiplyValue" }
+            "arguments":  "{ leftElement: .difference, rightElement: .multiplyValue }"
           }
         }
       ],
