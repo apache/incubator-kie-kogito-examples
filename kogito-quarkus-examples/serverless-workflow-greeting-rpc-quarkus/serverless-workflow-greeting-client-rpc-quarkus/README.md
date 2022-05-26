@@ -63,7 +63,7 @@ To run the generated native executable, generated in `target/`, execute
 
 ### Submit a request
 
-The service based on the JSON workflow definition can be access by sending a request to http://localhost:8080/jsongreet'
+The service based on the JSON workflow definition can be accessed by sending a request to http://localhost:8080/jsongreet
 with following content 
 
 ```json
