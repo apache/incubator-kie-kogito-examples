@@ -14,9 +14,16 @@
     "url" : "https://restcountries.com/"
   } ],
   "paths" : {
-    "/v1" : {
+    "/v2" : {
       "get" : {
         "operationId" : "getCountries",
+        "parameters" : [ {
+          "name" : "fields",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
         "responses" : {
           "default" : {
             "description" : "default response",
@@ -46,295 +53,9 @@
         }
       }
     },
-    "/v1/all" : {
-      "get" : {
-        "operationId" : "getAllCountries",
-        "responses" : {
-          "default" : {
-            "description" : "default response",
-            "content" : {
-              "application/json;charset=utf-8" : {
-                "schema" : {
-                  "type" : "object"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/alpha/{alphacode}" : {
-      "get" : {
-        "operationId" : "getByAlpha",
-        "parameters" : [ {
-          "name" : "alphacode",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "default" : {
-            "description" : "default response",
-            "content" : {
-              "application/json;charset=utf-8" : {
-                "schema" : {
-                  "type" : "object"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/alpha" : {
-      "get" : {
-        "operationId" : "getByAlphaList",
-        "parameters" : [ {
-          "name" : "codes",
-          "in" : "query",
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "default" : {
-            "description" : "default response",
-            "content" : {
-              "application/json;charset=utf-8" : {
-                "schema" : {
-                  "type" : "object"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/callingcode/{callingcode}" : {
-      "get" : {
-        "operationId" : "getByCallingCode",
-        "parameters" : [ {
-          "name" : "callingcode",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "default" : {
-            "description" : "default response",
-            "content" : {
-              "application/json;charset=utf-8" : {
-                "schema" : {
-                  "type" : "object"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/capital/{capital}" : {
-      "get" : {
-        "operationId" : "getByCapital",
-        "parameters" : [ {
-          "name" : "capital",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "default" : {
-            "description" : "default response",
-            "content" : {
-              "application/json;charset=utf-8" : {
-                "schema" : {
-                  "type" : "object"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/currency/{currency}" : {
-      "get" : {
-        "operationId" : "getByCurrency",
-        "parameters" : [ {
-          "name" : "currency",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "default" : {
-            "description" : "default response",
-            "content" : {
-              "application/json;charset=utf-8" : {
-                "schema" : {
-                  "type" : "object"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/lang/{lang}" : {
-      "get" : {
-        "operationId" : "getByLanguage",
-        "parameters" : [ {
-          "name" : "lang",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "default" : {
-            "description" : "default response",
-            "content" : {
-              "application/json;charset=utf-8" : {
-                "schema" : {
-                  "type" : "object"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/name/{name}" : {
-      "get" : {
-        "operationId" : "getByName",
-        "parameters" : [ {
-          "name" : "name",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "fullText",
-          "in" : "query",
-          "schema" : {
-            "type" : "boolean"
-          }
-        } ],
-        "responses" : {
-          "default" : {
-            "description" : "default response",
-            "content" : {
-              "application/json;charset=utf-8" : {
-                "schema" : {
-                  "type" : "object"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/region/{region}" : {
-      "get" : {
-        "operationId" : "getByRegion",
-        "parameters" : [ {
-          "name" : "region",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "default" : {
-            "description" : "default response",
-            "content" : {
-              "application/json;charset=utf-8" : {
-                "schema" : {
-                  "type" : "object"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/subregion/{subregion}" : {
-      "get" : {
-        "operationId" : "getBySubregion",
-        "parameters" : [ {
-          "name" : "subregion",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "default" : {
-            "description" : "default response",
-            "content" : {
-              "application/json;charset=utf-8" : {
-                "schema" : {
-                  "type" : "object"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v2" : {
-      "get" : {
-        "operationId" : "getCountries_1",
-        "parameters" : [ {
-          "name" : "fields",
-          "in" : "query",
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "default" : {
-            "description" : "default response",
-            "content" : {
-              "application/json;charset=utf-8" : {
-                "schema" : {
-                  "type" : "object"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post" : {
-        "operationId" : "doPOST_1",
-        "responses" : {
-          "default" : {
-            "description" : "default response",
-            "content" : {
-              "application/json;charset=utf-8" : {
-                "schema" : {
-                  "type" : "object"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/v2/all" : {
       "get" : {
-        "operationId" : "getAllCountries_1",
+        "operationId" : "getAllCountries",
         "parameters" : [ {
           "name" : "fields",
           "in" : "query",
@@ -358,7 +79,7 @@
     },
     "/v2/alpha/{alphacode}" : {
       "get" : {
-        "operationId" : "getByAlpha_1",
+        "operationId" : "getByAlpha",
         "parameters" : [ {
           "name" : "alphacode",
           "in" : "path",
@@ -389,7 +110,7 @@
     },
     "/v2/alpha" : {
       "get" : {
-        "operationId" : "getByAlphaList_1",
+        "operationId" : "getByAlphaList",
         "parameters" : [ {
           "name" : "codes",
           "in" : "query",
@@ -419,7 +140,7 @@
     },
     "/v2/callingcode/{callingcode}" : {
       "get" : {
-        "operationId" : "getByCallingCode_1",
+        "operationId" : "getByCallingCode",
         "parameters" : [ {
           "name" : "callingcode",
           "in" : "path",
@@ -450,7 +171,7 @@
     },
     "/v2/capital/{capital}" : {
       "get" : {
-        "operationId" : "getByCapital_1",
+        "operationId" : "getByCapital",
         "parameters" : [ {
           "name" : "capital",
           "in" : "path",
@@ -481,7 +202,7 @@
     },
     "/v2/currency/{currency}" : {
       "get" : {
-        "operationId" : "getByCurrency_1",
+        "operationId" : "getByCurrency",
         "parameters" : [ {
           "name" : "currency",
           "in" : "path",
@@ -543,7 +264,7 @@
     },
     "/v2/lang/{lang}" : {
       "get" : {
-        "operationId" : "getByLanguage_1",
+        "operationId" : "getByLanguage",
         "parameters" : [ {
           "name" : "lang",
           "in" : "path",
@@ -574,7 +295,7 @@
     },
     "/v2/name/{name}" : {
       "get" : {
-        "operationId" : "getByName_1",
+        "operationId" : "getByName",
         "parameters" : [ {
           "name" : "name",
           "in" : "path",
@@ -611,7 +332,7 @@
     },
     "/v2/region/{region}" : {
       "get" : {
-        "operationId" : "getByRegion_1",
+        "operationId" : "getByRegion",
         "parameters" : [ {
           "name" : "region",
           "in" : "path",
