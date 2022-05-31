@@ -7,7 +7,7 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>kogito-examples</artifactId>
-    <version>1.13.1-SNAPSHOT</version>
+    <version>1.13.2-SNAPSHOT</version>
   </parent>
   <artifactId>pmml-event-driven-springboot</artifactId>
   <name>Kogito Example :: PMML Event-Driven - Spring Boot</name>
