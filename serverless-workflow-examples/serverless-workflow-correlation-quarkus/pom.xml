@@ -98,12 +98,6 @@
   </build>
   <profiles>
     <profile>
-      <id>native</id>
-      <properties>
-        <failsafe.include>**/*IT.java</failsafe.include>
-      </properties>
-    </profile>
-    <profile>
       <id>persistence</id>
       <activation>
         <property>
