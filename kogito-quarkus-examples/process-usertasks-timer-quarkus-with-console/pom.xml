@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>kogito-quarkus-examples</artifactId>
-    <version>1.22.1-SNAPSHOT</version>
+    <version>1.22.1.Final</version>
   </parent>
 
   <artifactId>process-usertasks-timer-quarkus-with-console</artifactId>
