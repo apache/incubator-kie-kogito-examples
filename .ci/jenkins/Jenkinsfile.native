@@ -2,7 +2,6 @@
 
 import org.kie.jenkins.MavenCommand
 
-droolsRepo = 'drools'
 kogitoRuntimesRepo = 'kogito-runtimes'
 kogitoExamplesRepo = 'kogito-examples'
 
@@ -25,16 +24,8 @@ pipeline {
         stage('Initialize') {
             steps {
                 script {
-                    checkoutDroolsRepo()
                     checkoutKogitoRepo(kogitoRuntimesRepo)
                     checkoutKogitoRepo(kogitoExamplesRepo)
-                }
-            }
-        }
-        stage('Build Drools') {
-            steps {
-                script {
-                    runQuickBuild(droolsRepo)
                 }
             }
         }
@@ -94,32 +85,8 @@ void checkoutKogitoRepo(String repo, String dirName=repo) {
     }
 }
 
-void checkoutDroolsRepo() {
-    dir(droolsRepo) {
-        checkout(githubscm.resolveRepository(droolsRepo, params.GIT_AUTHOR, getDroolsTargetBranch(), false))
-    }
-}
-
 String getKogitoTargetBranch() {
-    return getTargetBranch(0)
-}
-
-String getDroolsTargetBranch() {
-    return getTargetBranch(7)
-}
-
-String getTargetBranch(Integer addToMajor) {
-    String targetBranch = params.BUILD_BRANCH_NAME
-    String [] versionSplit = targetBranch.split("\\.")
-    if (versionSplit.length == 3
-        && versionSplit[0].isNumber()
-        && versionSplit[1].isNumber()
-        && versionSplit[2] == 'x') {
-        targetBranch = "${Integer.parseInt(versionSplit[0]) + addToMajor}.${versionSplit[1]}.x"
-    } else {
-        echo "Cannot parse targetBranch as release branch so going further with current value: ${targetBranch}"
-        }
-    return targetBranch
+    return params.BUILD_BRANCH_NAME
 }
 
 void runQuickBuild(String project) {
