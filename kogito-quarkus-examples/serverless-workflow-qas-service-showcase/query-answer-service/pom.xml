@@ -9,7 +9,7 @@
   </parent>
 
   <artifactId>query-answer-service</artifactId>
-  <name>Kogito Example :: Serverless Workflow Query and Answer Service</name>
+  <name>Kogito Example :: Serverless Workflow Query and Answer :: Workflow Service</name>
   <properties>
     <quarkus-plugin.version>2.10.0.Final</quarkus-plugin.version>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>

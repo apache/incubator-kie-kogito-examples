@@ -9,10 +9,6 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <properties>
-    <org.kie.kogito.runtime-tools-quarkus-extension.version>1.21.0.Final</org.kie.kogito.runtime-tools-quarkus-extension.version>
-  </properties>
-
   <name>Kogito Example :: Serverless Workflow Newsletter Subscription :: Subscription Flow</name>
   <description>Kogito Serverless Workflow service that orchestrates the Newsletter Subscription use case</description>
   <artifactId>serverless-workflow-newsletter-subscription-flow</artifactId>
@@ -70,8 +66,7 @@
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>runtime-tools-quarkus-extension</artifactId>
-      <version>${org.kie.kogito.runtime-tools-quarkus-extension.version}</version>
+      <artifactId>swf-quarkus-extension</artifactId>
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>

@@ -235,17 +235,25 @@
         </property>
       </activation>
       <modules>
-        <module>dmn-drools-quarkus-metrics</module>
-        <module>dmn-event-driven-quarkus</module>
-        <module>dmn-listener-quarkus</module>
-        <module>dmn-pmml-quarkus-example</module>
-        <module>dmn-quarkus-example</module>
-        <module>pmml-event-driven-quarkus</module>
-        <module>pmml-quarkus-example</module>
-        <module>rules-legacy-quarkus-example</module>
-        <module>rules-quarkus-helloworld</module>
-        <module>ruleunit-event-driven-quarkus</module>
-        <module>ruleunit-quarkus-example</module>
+        <module>serverless-workflow-annotations-description</module>
+        <module>serverless-workflow-callback-quarkus</module>
+        <module>serverless-workflow-compensation-quarkus</module>
+        <module>serverless-workflow-consuming-events-over-http-quarkus</module>
+        <module>serverless-workflow-correlation-quarkus</module>
+        <module>serverless-workflow-error-quarkus</module>
+        <module>serverless-workflow-events-quarkus</module>
+        <module>serverless-workflow-expression-quarkus</module>
+        <module>serverless-workflow-foreach-quarkus</module>
+        <module>serverless-workflow-functions-quarkus</module>
+        <module>serverless-workflow-funqy</module>
+        <module>serverless-workflow-greeting-quarkus</module>
+        <module>serverless-workflow-greeting-rpc-quarkus</module>
+        <module>serverless-workflow-order-processing</module>
+        <module>serverless-workflow-saga-quarkus</module>
+        <module>serverless-workflow-service-calls-quarkus</module>
+        <module>serverless-workflow-temperature-conversion</module>
+        <module>serverless-workflow-qas-service-showcase</module>
+        <module>serverless-workflow-newsletter-subscription</module>
       </modules>
     </profile>
            

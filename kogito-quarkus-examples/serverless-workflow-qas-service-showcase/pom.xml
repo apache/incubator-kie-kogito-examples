@@ -9,7 +9,7 @@
   </parent>
   <artifactId>serverless-workflow-qas-service-showcase</artifactId>
   <packaging>pom</packaging>
-  <name>Kogito Example :: Serverless Workflow Query and Answer Service Showcase</name>
+  <name>Kogito Example :: Serverless Workflow Query and Answer Showcase</name>
   <modules>
     <module>query-answer-service</module>
     <module>query-service</module>

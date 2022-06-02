@@ -9,7 +9,7 @@
   <groupId>org.kie.kogito</groupId>
   <artifactId>serverless-workflow-saga-quarkus</artifactId>
 
-  <name>Kogito Example :: Order Saga Workflow with Quarkus</name>
+  <name>Kogito Example :: Serverless Workflow Order Saga :: Quarkus</name>
   <description>How to implement Saga with a Serverless Workflow</description>
 
   <properties>
