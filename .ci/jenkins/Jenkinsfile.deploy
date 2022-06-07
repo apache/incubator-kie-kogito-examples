@@ -110,6 +110,9 @@ pipeline {
             }
         }
         stage('Check kogito-examples with persistence') {
+            when {
+                expression { return !isPersistenceDisabled() }
+            }
             steps {
                 script {
                     sh "cp -r ${getRepoName()} ${getRepoName()}-persistence"
@@ -130,6 +133,9 @@ pipeline {
             }
         }
         stage('Check kogito-examples with events') {
+            when {
+                expression { return !isEventsDisabled() }
+            }
             steps {
                 script {
                     sh "cp -r ${getRepoName()} ${getRepoName()}-events"
@@ -407,4 +413,12 @@ String getLocalDeploymentFolder() {
 
 String getMavenRepoZipUrl() {
     return "${env.MAVEN_DEPLOY_REPOSITORY.replaceAll('/content/', '/service/local/').replaceFirst('/*$', '')}/content-compressed"
+}
+
+boolean isPersistenceDisabled() {
+    return env.DISABLE_PERSISTENCE ? env.DISABLE_PERSISTENCE.toBoolean() : false
+}
+
+boolean isEventsDisabled() {
+    return env.DISABLE_EVENTS ? env.DISABLE_EVENTS.toBoolean() : false
 }

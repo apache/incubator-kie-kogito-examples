@@ -54,6 +54,9 @@ pipeline {
             }
         }
         stage('Examples Integration Tests with persistence') {
+            when {
+                expression { return !isPersistenceDisabled() }
+            }
             steps {
                 script {
                     runIntegrationTests(kogitoExamplesRepo, ['persistence'])
@@ -61,6 +64,9 @@ pipeline {
             }
         }
         stage('Examples Integration Tests with events') {
+            when {
+                expression { return !isEventsDisabled() }
+            }
             steps {
                 script {
                     runIntegrationTests(kogitoExamplesRepo, ['events'])
@@ -180,4 +186,12 @@ void saveReports() {
 
 String getNativeBuilderImage() {
     return env.NATIVE_BUILDER_IMAGE
+}
+
+boolean isPersistenceDisabled() {
+    return env.DISABLE_PERSISTENCE ? env.DISABLE_PERSISTENCE.toBoolean() : false
+}
+
+boolean isEventsDisabled() {
+    return env.DISABLE_EVENTS ? env.DISABLE_EVENTS.toBoolean() : false
 }
