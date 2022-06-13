@@ -121,25 +121,25 @@ shows timers (intermediate and boundary) that allows to introduce delays in proc
 
 A Serverless Workflow greeting service with both JSON and YAML workflow definitions
 
-* [on Quarkus](kogito-quarkus-examples/serverless-workflow-greeting-quarkus)
+* [on Quarkus](serverless-workflow-examples/serverless-workflow-greeting-quarkus)
 
 ## Serverless Workflow with events
 
 A Serverless Workflow service for processing job applicant approvals and that showcases event-driven services.
 
-* [on Quarkus](kogito-quarkus-examples/serverless-workflow-events-quarkus)
+* [on Quarkus](serverless-workflow-examples/serverless-workflow-events-quarkus)
 
 ## Serverless Workflow with service calls
 
 A Serverless Workflow service for returning country information
 
-* [on Quarkus](kogito-quarkus-examples/serverless-workflow-service-calls-quarkus)
+* [on Quarkus](serverless-workflow-examples/serverless-workflow-service-calls-quarkus)
 
 ## Serverless Workflow GitHub showcase
 
 A Serverless Workflow service that works as a Github bot application, which reacts upon a new PR being opened in a given GitHub project.
 
-* [on Quarkus](kogito-quarkus-examples/serverless-workflow-github-showcase)
+* [on Quarkus](serverless-workflow-examples/serverless-workflow-github-showcase)
 
 ## Other Misc Examples
 
