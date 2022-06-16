@@ -60,7 +60,7 @@ You should have the ports `8080`, `8181` and `8282` free to have all the service
 
 Go to http://localhost:8080 and play around with the interface. You will see in the CloudEvents sink the new subscription event produced by the workflow after confirming a given subscription.
 
-> The Subscription API also has an interface that can be accessed in http://localhost:8181/ to see the confirmed subscriptions.
+> The Subscription API also has an interface that can be accessed in http://localhost:8282/ to see the confirmed subscriptions.
 
 ## Running on Knative
 
