@@ -115,10 +115,29 @@
     </developer>
   </developers>
 
-  <modules>
-    <module>kogito-quarkus-examples</module>
-    <module>kogito-springboot-examples</module>
-  </modules>
+  <profiles>
+    <profile>
+      <id>default</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <modules>
+        <module>kogito-quarkus-examples</module>
+        <module>kogito-springboot-examples</module>
+      </modules>
+    </profile>
+    <profile>
+      <id>productized</id>
+      <activation>
+        <property>
+          <name>productized</name>
+        </property>
+      </activation>
+      <modules>
+        <module>kogito-quarkus-examples</module>
+      </modules>
+    </profile>
+  </profiles>
 
   <dependencyManagement>
     <dependencies>
@@ -319,7 +338,9 @@
                     <Bundle-Version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.${osgi.snapshot.qualifier}</Bundle-Version>
                     <Bundle-Name>${project.name}</Bundle-Name>
                     <Bundle-Vendor>${project.organization.name}</Bundle-Vendor>
-                    <Eclipse-SourceBundle>${java.module.name};version="${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.${osgi.snapshot.qualifier}";roots:="."</Eclipse-SourceBundle>
+                    <Eclipse-SourceBundle>
+                      ${java.module.name};version="${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.${osgi.snapshot.qualifier}";roots:="."
+                    </Eclipse-SourceBundle>
                   </manifestEntries>
                 </archive>
               </configuration>
@@ -337,7 +358,9 @@
                     <Bundle-Version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.${osgi.snapshot.qualifier}</Bundle-Version>
                     <Bundle-Name>${project.name}</Bundle-Name>
                     <Bundle-Vendor>${project.organization.name}</Bundle-Vendor>
-                    <Eclipse-SourceBundle>${java.module.name}.tests;version="${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.${osgi.snapshot.qualifier}";roots:="."</Eclipse-SourceBundle>
+                    <Eclipse-SourceBundle>
+                      ${java.module.name}.tests;version="${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.${osgi.snapshot.qualifier}";roots:="."
+                    </Eclipse-SourceBundle>
                   </manifestEntries>
                 </archive>
               </configuration>
