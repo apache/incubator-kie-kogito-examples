@@ -124,6 +124,7 @@
       <modules>
         <module>kogito-quarkus-examples</module>
         <module>kogito-springboot-examples</module>
+        <module>serverless-workflow-examples</module>
       </modules>
     </profile>
     <profile>
@@ -134,7 +135,7 @@
         </property>
       </activation>
       <modules>
-        <module>kogito-quarkus-examples</module>
+        <module>serverless-workflow-examples</module>
       </modules>
     </profile>
   </profiles>
