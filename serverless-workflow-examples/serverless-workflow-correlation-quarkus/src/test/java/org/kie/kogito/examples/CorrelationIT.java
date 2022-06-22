@@ -31,14 +31,17 @@ import static io.restassured.RestAssured.given;
 import static java.util.concurrent.TimeUnit.MINUTES;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
-import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource.KOGITO_KAFKA_TOPICS;
 
 @QuarkusIntegrationTest
 @QuarkusTestResource(value = KafkaQuarkusTestResource.class,
         initArgs = { @ResourceArg(name = KOGITO_KAFKA_TOPICS, value = "validatedAccountEmail,validateAccountEmail,activateAccount,activatedAccount,newAccountEventType ") })
-@QuarkusTestResource(PostgreSqlQuarkusTestResource.Conditional.class)
+@QuarkusTestResource(PostgreSqlQuarkusTestResource.class)
 class CorrelationIT {
+
+    public static final String HEALTH_URL = "/q/health/ready";
+    public static final int TIMEOUT = 2;
 
     static {
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
@@ -48,6 +51,19 @@ class CorrelationIT {
 
     @Test
     void testCallbackRest() {
+        //health check - wait to be ready
+        await()
+                .atMost(TIMEOUT, MINUTES)
+                .with().pollInterval(1, SECONDS)
+                .with()
+                .untilAsserted(() -> given()
+                        .contentType(ContentType.JSON)
+                        .accept(ContentType.JSON)
+                        .get(HEALTH_URL)
+                        .then()
+                        .statusCode(200));
+
+        //start workflow
         given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
@@ -59,9 +75,9 @@ class CorrelationIT {
         //check instance created
         AtomicReference<String> processInstanceId = new AtomicReference<>();
         await()
-                .pollDelay(15, SECONDS)
-                .atMost(2, MINUTES)
+                .atMost(TIMEOUT, MINUTES)
                 .with().pollInterval(1, SECONDS)
+                .with()
                 .untilAsserted(() -> processInstanceId.set(given()
                         .accept(ContentType.JSON)
                         .pathParam("userId", userId)
@@ -74,7 +90,7 @@ class CorrelationIT {
 
         //check instance completed
         await()
-                .atMost(2, MINUTES)
+                .atMost(TIMEOUT, MINUTES)
                 .with().pollInterval(1, SECONDS)
                 .untilAsserted(() -> given()
                         .contentType(ContentType.JSON)

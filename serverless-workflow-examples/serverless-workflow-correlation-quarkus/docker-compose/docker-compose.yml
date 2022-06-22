@@ -36,9 +36,31 @@ services:
       LOG_DIR: "/tmp/logs"
 
   postgres:
-    image: postgres:13.4-alpine3.14
+    image: postgres:14.1-alpine
     container_name: postgres
     environment:
-      POSTGRES_PASSWORD: pass
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
     ports:
       - 5432:5432
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d/
+    networks:
+      - postgres-compose-network
+
+  pgadmin-compose:
+    image: dpage/pgadmin4:6.10
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user@user.org
+      PGADMIN_DEFAULT_PASSWORD: pass
+    ports:
+      - 8055:80
+    depends_on:
+      - postgres
+    networks:
+      - postgres-compose-network
+    container_name: pgadmin-container
+
+networks:
+  postgres-compose-network:
+    driver: bridge
