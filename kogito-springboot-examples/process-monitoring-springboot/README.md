@@ -32,9 +32,9 @@ path `target/resources/dashboards/`. You can then inject those Grafana dashboard
 
 The use case is summarized in the following schema:
 
-![RuntimeMetrics](https://user-images.githubusercontent.com/18282531/76740726-a0cbdd80-676e-11ea-8cc3-63ed5cbb3ac8.png)
+![RuntimeMetrics](./docs/schema.png)
 
-To summarize, the kogito app will expose by default an endpoint `/metrics` with the prometheus variables, and a prometheus instance will simply fetch
+To summarize, the kogito app will expose by default an endpoint `/actuator/prometheus` with the prometheus variables, and a prometheus instance will simply fetch
 the data from there.
 
 ### Dashboards
