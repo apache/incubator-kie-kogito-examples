@@ -22,7 +22,15 @@ In a new terminal, go to the `serverless-workflow-oauth2-orchestration-quarkus/s
 $ cd serverless-workflow-oauth2-orchestration-quarkus/scripts
 
 $ ./startKeycloak.sh
-```  
+```
+
+Alternatively, you can use docker-compose following this procedure:
+
+```sh
+$ cd serverless-workflow-oauth2-orchestration-quarkus/docker-compose
+
+$ docker-compose up
+```
 
 In this way, a container for Keycloak will be started on port 8281.
 You can navigate to this URL [Keycloak console](http://localhost:8281/auth) to check that the server is running. 

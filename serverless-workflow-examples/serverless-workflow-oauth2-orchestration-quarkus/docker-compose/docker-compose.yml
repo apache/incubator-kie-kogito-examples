@@ -1,0 +1,19 @@
+version: '2.1'
+
+services:
+  keycloak:
+    container_name: keycloak
+    image: quay.io/keycloak/keycloak:legacy
+    ports:
+      - "8281:8080"
+    volumes:
+      - ./keycloak/kogito-realm.json:/tmp/kogito-realm.json
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/auth/realms/kogito" ]
+      interval: 1s
+      timeout: 1s
+      retries: 50
+    environment:
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
+      KEYCLOAK_IMPORT: /tmp/kogito-realm.json
