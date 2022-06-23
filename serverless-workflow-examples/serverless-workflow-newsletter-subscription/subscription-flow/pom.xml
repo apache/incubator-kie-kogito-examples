@@ -66,7 +66,7 @@
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>swf-quarkus-extension</artifactId>
+      <artifactId>kogito-quarkus-serverless-workflow-devui</artifactId>
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
