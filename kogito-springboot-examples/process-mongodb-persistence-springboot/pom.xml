@@ -49,12 +49,6 @@
       <artifactId>kogito-api</artifactId>
     </dependency>
 
-    <!-- required for version override, see: https://issues.redhat.com/browse/KOGITO-5031 -->
-    <dependency>
-      <groupId>org.mongodb</groupId>
-      <artifactId>mongodb-driver-sync</artifactId>
-      <version>${version.org.mongo.springboot}</version>
-    </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-addons-springboot-persistence-mongodb</artifactId>
