@@ -25,6 +25,7 @@ import org.acme.newsletter.subscription.service.SubscriptionResource;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tomakehurst.wiremock.WireMockServer;
+import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 import com.github.tomakehurst.wiremock.matching.EqualToPattern;
 import com.github.tomakehurst.wiremock.matching.UrlPathPattern;
 
@@ -47,7 +48,7 @@ public class SubscriptionServiceMock implements QuarkusTestResourceLifecycleMana
 
     @Override
     public Map<String, String> start() {
-        wireMockServer = new WireMockServer(8283);
+        wireMockServer = new WireMockServer(WireMockConfiguration.wireMockConfig().dynamicPort());
         wireMockServer.start();
         configureFor(wireMockServer.port());
 
