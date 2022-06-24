@@ -34,7 +34,7 @@ public class GitHubServiceMockServer implements QuarkusTestResourceLifecycleMana
 
     @Override
     public Map<String, String> start() {
-        wireMockServer = new WireMockServer(WireMockConfiguration.options().port(8282));
+        wireMockServer = new WireMockServer(WireMockConfiguration.wireMockConfig().dynamicPort());
         wireMockServer.start();
 
         wireMockServer.stubFor(post(urlEqualTo("/repo/your-username/your-repository/pr/2/labels"))

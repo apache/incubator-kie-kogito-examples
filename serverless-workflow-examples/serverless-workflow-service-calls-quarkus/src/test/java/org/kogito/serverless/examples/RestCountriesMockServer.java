@@ -36,7 +36,7 @@ public class RestCountriesMockServer implements QuarkusTestResourceLifecycleMana
 
     @Override
     public Map<String, String> start() {
-        wireMockServer = new WireMockServer(WireMockConfiguration.options().port(8282));
+        wireMockServer = new WireMockServer(WireMockConfiguration.wireMockConfig().dynamicPort());
         wireMockServer.start();
 
         final ObjectMapper objectMapper = new ObjectMapper();
