@@ -24,7 +24,6 @@ import org.kie.kogito.testcontainers.quarkus.PostgreSqlQuarkusTestResource;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.common.ResourceArg;
 import io.quarkus.test.junit.QuarkusIntegrationTest;
-import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
@@ -40,22 +39,18 @@ import static org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource.KOG
 @QuarkusTestResource(PostgreSqlQuarkusTestResource.class)
 class CorrelationIT {
 
-    public static final String HEALTH_URL = "/q/health/ready";
+    public static final String HEALTH_URL = "/q/health";
     public static final int TIMEOUT = 2;
-
-    static {
-        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
-    }
 
     private String userId = "12345";
 
     @Test
-    void testCallbackRest() {
+    void testCorrelation() {
         //health check - wait to be ready
         await()
                 .atMost(TIMEOUT, MINUTES)
-                .with().pollInterval(1, SECONDS)
-                .with()
+                .pollInterval(1, SECONDS)
+                .pollInSameThread()
                 .untilAsserted(() -> given()
                         .contentType(ContentType.JSON)
                         .accept(ContentType.JSON)
@@ -74,10 +69,9 @@ class CorrelationIT {
 
         //check instance created
         AtomicReference<String> processInstanceId = new AtomicReference<>();
-        await()
-                .atMost(TIMEOUT, MINUTES)
-                .with().pollInterval(1, SECONDS)
-                .with()
+        await().atMost(TIMEOUT, MINUTES)
+                .pollInterval(1, SECONDS)
+                .pollInSameThread()
                 .untilAsserted(() -> processInstanceId.set(given()
                         .accept(ContentType.JSON)
                         .pathParam("userId", userId)
@@ -91,7 +85,8 @@ class CorrelationIT {
         //check instance completed
         await()
                 .atMost(TIMEOUT, MINUTES)
-                .with().pollInterval(1, SECONDS)
+                .pollInterval(1, SECONDS)
+                .pollInSameThread()
                 .untilAsserted(() -> given()
                         .contentType(ContentType.JSON)
                         .accept(ContentType.JSON)
