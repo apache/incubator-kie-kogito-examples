@@ -32,7 +32,7 @@ public class KafkaDispatcher implements RequestDispatcher {
 
     private class ObjectCloudEvent extends ProcessDataEvent<Object> {
         public ObjectCloudEvent(String trigger, Object data) {
-            super(trigger, "java_client", data, null, null, null, null, null, null, null);
+            super(trigger, "java_client", data, null, null, null, null, null, null, null, null);
         }
     }
 
