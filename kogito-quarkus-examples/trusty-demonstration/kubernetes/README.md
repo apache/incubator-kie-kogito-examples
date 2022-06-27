@@ -19,7 +19,7 @@ Note: also previous versions of `docker`, `minikube` and `kubernetes`  might wor
 
 In this example, we will use the `dmn-tracing-quarkus` application that you can find in the root of this repository. This kogito application is using the `tracing-addon` so to export the tracing information that will be used by the trusty and explainability services for further analysis.
 
-Navigate under the folder `kogito-examples/dmn-tracing-quarkus` and run 
+Navigate under the folder `kogito-examples/kogito-quarkus-examples/dmn-tracing-quarkus` and run 
 ```bash
 mvn clean package -DskipTests
 ```
