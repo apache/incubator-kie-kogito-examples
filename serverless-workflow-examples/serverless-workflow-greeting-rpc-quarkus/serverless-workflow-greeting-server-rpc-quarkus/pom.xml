@@ -9,21 +9,31 @@
   <artifactId>serverless-workflow-greeting-server-rpc-quarkus</artifactId>
   <name>Kogito Example :: Serverless Workflow Greeting :: gRPC Server:: Quarkus</name>
   <description>Kogito Serverless Workflow Example that defines a simple gRPC service - Quarkus</description>
-  <properties></properties>
+  <properties>
+    <version.compiler.plugin>3.8.1</version.compiler.plugin>
+    <maven.compiler.release>11</maven.compiler.release>
+    <protec.version>3.19.2</protec.version>
+    <grpc.version>1.45.1</grpc.version>
+    <version.kr.motd.maven.os>1.6.0</version.kr.motd.maven.os>
+    <version.org.xolstice.maven.protobuf>0.6.1</version.org.xolstice.maven.protobuf>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>io.grpc</groupId>
       <artifactId>grpc-netty-shaded</artifactId>
-      <version>1.45.1</version>
+      <version>${grpc.version}</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>io.grpc</groupId>
       <artifactId>grpc-protobuf</artifactId>
+      <version>${grpc.version}</version>
     </dependency>
     <dependency>
       <groupId>io.grpc</groupId>
       <artifactId>grpc-stub</artifactId>
+      <version>${grpc.version}</version>
     </dependency>
     <dependency>
       <!-- necessary for Java 9+ -->
@@ -39,6 +49,13 @@
     </dependency>
   </dependencies>
   <build>
+    <extensions>
+      <extension>
+        <groupId>kr.motd.maven</groupId>
+        <artifactId>os-maven-plugin</artifactId>
+        <version>${version.kr.motd.maven.os}</version>
+      </extension>
+    </extensions>
     <resources>
       <resource>
         <directory>${basedir}/src/main/resources</directory>
@@ -50,17 +67,26 @@
     <finalName>${project.artifactId}</finalName>
     <plugins>
       <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${version.compiler.plugin}</version>
+        <configuration>
+          <release>${maven.compiler.release}</release>
+        </configuration>
+      </plugin>
+      <plugin>
         <groupId>org.xolstice.maven.plugins</groupId>
         <artifactId>protobuf-maven-plugin</artifactId>
+        <version>${version.org.xolstice.maven.protobuf}</version>
         <configuration>
-          <protocArtifact>com.google.protobuf:protoc:3.19.2:exe:${os.detected.classifier}</protocArtifact>
+          <protocArtifact>com.google.protobuf:protoc:${protec.version}:exe:${os.detected.classifier}</protocArtifact>
           <pluginId>grpc-java</pluginId>
-          <pluginArtifact>io.grpc:protoc-gen-grpc-java:1.45.1:exe:${os.detected.classifier}</pluginArtifact>
+          <pluginArtifact>io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:${os.detected.classifier}</pluginArtifact>
           <writeDescriptorSet>true</writeDescriptorSet>
           <descriptorSetFileName>output.protobin</descriptorSetFileName>
           <attachProtoSources>false</attachProtoSources>
           <protoSourceRoot>${project.basedir}/src/main/proto</protoSourceRoot>
           <outputDirectory>${project.build.directory}/generated-sources/protobuf/java</outputDirectory>
+          <clearOutputDirectory>false</clearOutputDirectory>
         </configuration>
         <executions>
           <execution>
@@ -75,6 +101,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>2.15</version>
         <configuration>
           <skip>true</skip>
         </configuration>

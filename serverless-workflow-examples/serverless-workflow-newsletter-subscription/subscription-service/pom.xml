@@ -13,6 +13,12 @@
   <description>Regular Quarkus REST Service to serve the Subscription Service API</description>
   <artifactId>serverless-workflow-newsletter-subscription-service</artifactId>
   <packaging>jar</packaging>
+  <properties>
+    <assertj.core.version>3.22.0</assertj.core.version>
+    <version.io.cloudevents.cloudevents-core>2.3.0</version.io.cloudevents.cloudevents-core>
+    <version.io.cloudevents.cloudevents.json.jackson>2.3.0</version.io.cloudevents.cloudevents.json.jackson>
+    <version.io.quarkiverse.reactivemessaging.http>1.0.1</version.io.quarkiverse.reactivemessaging.http>
+  </properties>
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -51,10 +57,12 @@
     <dependency>
       <groupId>io.cloudevents</groupId>
       <artifactId>cloudevents-core</artifactId>
+      <version>${version.io.cloudevents.cloudevents-core}</version>
     </dependency>
     <dependency>
       <groupId>io.cloudevents</groupId>
       <artifactId>cloudevents-json-jackson</artifactId>
+      <version>${version.io.cloudevents.cloudevents.json.jackson}</version>
     </dependency>
     <dependency>
       <groupId>io.quarkiverse.reactivemessaging.http</groupId>
@@ -75,6 +83,7 @@
     <dependency>
       <groupId>org.webjars</groupId>
       <artifactId>bootstrap</artifactId>
+      <version>${version.org.webjars.bootstrap}</version>
     </dependency>
 
     <!-- Testing dependencies -->
@@ -91,6 +100,7 @@
     <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
+      <version>${assertj.core.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -101,6 +111,13 @@
   </dependencies>
   <build>
     <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${version.compiler.plugin}</version>
+        <configuration>
+          <release>${maven.compiler.release}</release>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>${quarkus.platform.group-id}</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>

@@ -15,6 +15,8 @@
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
     <quarkus.platform.version>2.11.0.Final</quarkus.platform.version>
+    <version.compiler.plugin>3.8.1</version.compiler.plugin>
+    <maven.compiler.release>11</maven.compiler.release>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -82,6 +84,13 @@
   </dependencies>
   <build>
     <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${version.compiler.plugin}</version>
+        <configuration>
+          <release>${maven.compiler.release}</release>
+        </configuration>
+      </plugin>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>${surefire-plugin.version}</version>

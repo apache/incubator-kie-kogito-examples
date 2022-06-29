@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>org.kie.kogito.examples</groupId>
-    <artifactId>serverless-workflow-examples</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
-  </parent>
+
   <groupId>org.kie.kogito</groupId>
+  <version>2.0.0-SNAPSHOT</version>
   <artifactId>serverless-workflow-saga-quarkus</artifactId>
 
   <name>Kogito Example :: Serverless Workflow Order Saga :: Quarkus</name>
@@ -20,7 +17,29 @@
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
     <kogito.bom.version>${project.version}</kogito.bom.version>
+    <version.compiler.plugin>3.8.1</version.compiler.plugin>
+    <maven.compiler.release>11</maven.compiler.release>
+    <assertj-core.version>3.8.0</assertj-core.version>
   </properties>
+
+  <repositories>
+    <!-- Bootstrap repository to locate the parent pom when the parent pom
+      has not been build locally. -->
+    <repository>
+      <id>jboss-public-repository-group</id>
+      <name>JBoss Public Repository Group</name>
+      <url>https://repository.jboss.org/nexus/content/groups/public/</url>
+      <layout>default</layout>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>daily</updatePolicy>
+      </snapshots>
+    </repository>
+  </repositories>
 
   <dependencyManagement>
     <dependencies>
@@ -65,12 +84,20 @@
     <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
+      <version>${assertj-core.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
 
   <build>
     <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${version.compiler.plugin}</version>
+        <configuration>
+          <release>${maven.compiler.release}</release>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>${quarkus.platform.group-id}</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
