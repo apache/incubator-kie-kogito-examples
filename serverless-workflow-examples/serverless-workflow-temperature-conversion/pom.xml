@@ -14,5 +14,8 @@
     <module>subtraction-service</module>
     <module>multiplication-service</module>
     <module>conversion-workflow</module>
+    <module>conversion-workflow-full</module>
+    <module>conversion-workflow-function</module>
+    <module>conversion-workflow-spec</module>
   </modules>
 </project>

@@ -34,3 +34,8 @@ Please see each service README file to understand how to use and run them locall
 1. [Temperature Conversion Service](conversion-workflow)
 2. [Multiplication Service](multiplication-service)
 3. [Subtraction Service](subtraction-service)
+
+You can also find alternative OpenAPI endpoint configuration approaches for the Temperature Conversion workflow:
+* [Temperature Conversion Service using Full Uri](conversion-workflow-full)
+* [Temperature Conversion Service using Spec Title](conversion-workflow-spec)
+* [Temperature Conversion Service using Function Name](conversion-workflow-function)
