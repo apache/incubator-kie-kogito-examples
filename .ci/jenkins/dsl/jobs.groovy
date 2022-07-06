@@ -55,6 +55,7 @@ KogitoJobUtils.createQuarkusUpdateToolsJob(this, 'kogito-examples', [
 
 void setupNativeJob() {
     def jobParams = KogitoJobUtils.getBasicJobParams(this, 'kogito-examples', Folder.NIGHTLY_NATIVE, "${jenkins_path}/Jenkinsfile.native", 'Kogito Examples Native Testing')
+    KogitoJobUtils.setupJobParamsDefaultMavenConfiguration(this, jobParams)
     jobParams.triggers = [ cron : 'H 6 * * *' ]
     jobParams.env.putAll([
         JENKINS_EMAIL_CREDS_ID: "${JENKINS_EMAIL_CREDS_ID}",
@@ -70,6 +71,7 @@ void setupNativeJob() {
 
 void setupMandrelJob() {
     def jobParams = KogitoJobUtils.getBasicJobParams(this, 'kogito-examples', Folder.NIGHTLY_MANDREL, "${jenkins_path}/Jenkinsfile.native", 'Kogito Examples Mandrel Testing')
+    KogitoJobUtils.setupJobParamsDefaultMavenConfiguration(this, jobParams)
     jobParams.triggers = [ cron : 'H 8 * * *' ]
     jobParams.env.putAll([
         JENKINS_EMAIL_CREDS_ID: "${JENKINS_EMAIL_CREDS_ID}",
@@ -91,6 +93,7 @@ void setupMandrelJob() {
 */
 void setupDeployJob(Folder jobFolder) {
     def jobParams = KogitoJobUtils.getBasicJobParams(this, 'kogito-examples-deploy', jobFolder, "${jenkins_path}/Jenkinsfile.deploy", 'Kogito Examples Deploy')
+    KogitoJobUtils.setupJobParamsDefaultMavenConfiguration(this, jobParams)
     if (jobFolder.isPullRequest()) {
         jobParams.git.branch = '${BUILD_BRANCH_NAME}'
         jobParams.git.author = '${GIT_AUTHOR}'
@@ -155,6 +158,7 @@ void setupDeployJob(Folder jobFolder) {
 
 void setupPromoteJob(Folder jobFolder) {
     def jobParams = KogitoJobUtils.getBasicJobParams(this, 'kogito-examples-promote', jobFolder, "${jenkins_path}/Jenkinsfile.promote", 'Kogito Examples Promote')
+    KogitoJobUtils.setupJobParamsDefaultMavenConfiguration(this, jobParams)
     jobParams.env.putAll([
         REPO_NAME: 'kogito-examples',
         PROPERTIES_FILE_NAME: 'deployment.properties',
