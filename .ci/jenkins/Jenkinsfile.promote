@@ -12,15 +12,15 @@ pipeline {
     }
 
     tools {
-        maven 'kie-maven-3.8.1'
-        jdk 'kie-jdk11'
+        maven env.BUILD_MAVEN_TOOL
+        jdk env.BUILD_JDK_TOOL
     }
 
     options {
         timestamps()
         timeout(time: 180, unit: 'MINUTES')
     }
-    
+
     // parameters {
     // For parameters, check into ./dsl/jobs.groovy file
     // }
@@ -29,7 +29,7 @@ pipeline {
         // Static env is defined into ./dsl/jobs.groovy file
 
         KOGITO_CI_EMAIL_TO = credentials("${JENKINS_EMAIL_CREDS_ID}")
-        
+
         BOT_BRANCH_HASH = "${util.generateHash(10)}"
         GITHUB_CLI_VERSION = '0.11.1'
     }
@@ -39,7 +39,7 @@ pipeline {
             steps {
                 script {
                     cleanWs()
-                    
+
                     if (params.DISPLAY_NAME) {
                         currentBuild.displayName = params.DISPLAY_NAME
                     }
@@ -62,14 +62,14 @@ pipeline {
             when {
                 expression { return isRelease() }
             }
-            steps{
+            steps {
                 script {
                     dir(getRepoName()) {
                         checkoutRepo()
                         mergeAndPush(getDeployPrLink())
                         tagLatest()
 
-                        if(params.UPDATE_STABLE_BRANCH) {
+                        if (params.UPDATE_STABLE_BRANCH) {
                             githubscm.createBranch('stable')
                             forcePushProtectedBranch('stable', 'main')
                         }
@@ -77,7 +77,7 @@ pipeline {
                 }
             }
         }
-        stage('Set examples next snapshot version'){
+        stage('Set examples next snapshot version') {
             when {
                 expression { return isRelease() }
             }
@@ -87,7 +87,7 @@ pipeline {
                         prepareForPR()
 
                         maven.mvnVersionsUpdateParentAndChildModules(getMavenCommand(), getSnapshotVersion(), true)
-                        maven.mvnSetVersionProperty(getMavenCommand(),'version.org.drools', util.getNextVersion(getDroolsVersion(), 'micro'))
+                        maven.mvnSetVersionProperty(getMavenCommand(), 'version.org.drools', util.getNextVersion(getDroolsVersion(), 'micro'))
 
                         commitAndCreatePR()
                     }
@@ -95,7 +95,7 @@ pipeline {
                         sh "git checkout ${getBuildBranch()}"
                         mergeAndPush(getPipelinePrLink())
 
-                        if(shouldDeployToRepository()){
+                        if (shouldDeployToRepository()) {
                             runMavenDeploy()
                         } else {
                             echo 'Testing environment and no specific deploy repository given => no deployment'
@@ -129,32 +129,32 @@ void sendNotification() {
 // Deployment properties
 //////////////////////////////////////////////////////////////////////////////
 
-void readDeployProperties(){
+void readDeployProperties() {
     String deployUrl = params.DEPLOY_BUILD_URL
-    if (deployUrl != ''){
-        if(!deployUrl.endsWith('/')){
+    if (deployUrl != '') {
+        if (!deployUrl.endsWith('/')) {
             deployUrl += '/'
         }
         sh "wget ${deployUrl}artifact/${PROPERTIES_FILE_NAME} -O ${PROPERTIES_FILE_NAME}"
         deployProperties = readProperties file: PROPERTIES_FILE_NAME
         // echo all properties
-        echo deployProperties.collect{ entry -> "${entry.key}=${entry.value}" }.join('\n')
+        echo deployProperties.collect { entry -> "${entry.key}=${entry.value}" }.join('\n')
     }
 }
 
-boolean hasDeployProperty(String key){
+boolean hasDeployProperty(String key) {
     return deployProperties[key] != null
 }
 
-String getDeployProperty(String key){
-    if(hasDeployProperty(key)){
+String getDeployProperty(String key) {
+    if (hasDeployProperty(key)) {
         return deployProperties[key]
     }
     return ''
 }
 
-String getParamOrDeployProperty(String paramKey, String deployPropertyKey){
-    if (params[paramKey] != ''){
+String getParamOrDeployProperty(String paramKey, String deployPropertyKey) {
+    if (params[paramKey] != '') {
         return params[paramKey]
     }
     return getDeployProperty(deployPropertyKey)
@@ -200,27 +200,27 @@ String getGitAuthor() {
     return env.GIT_AUTHOR
 }
 
-String getGitAuthorCredsID(){
+String getGitAuthorCredsID() {
     return env.AUTHOR_CREDS_ID
 }
 
-String getBotAuthorCredsID(){
+String getBotAuthorCredsID() {
     return env.BOT_CREDENTIALS_ID
 }
 
-String getDeployPrLink(){
+String getDeployPrLink() {
     return getDeployProperty("${getRepoName()}.pr.link")
 }
 
-String getPipelinePrLink(){
+String getPipelinePrLink() {
     return pipelineProperties["${getRepoName()}.pr.link"]
 }
 
-void setPipelinePrLink(String value){
+void setPipelinePrLink(String value) {
     pipelineProperties["${getRepoName()}.pr.link"] = value
 }
 
-String getSnapshotBranch(){
+String getSnapshotBranch() {
     return "${getSnapshotVersion().toLowerCase()}-${env.BOT_BRANCH_HASH}"
 }
 
@@ -322,9 +322,9 @@ MavenCommand getMavenCommand() {
     return mvnCmd
 }
 
-void runMavenDeploy(){
+void runMavenDeploy() {
     mvnCmd = getMavenCommand()
-    if(env.MAVEN_DEPLOY_REPOSITORY){
+    if (env.MAVEN_DEPLOY_REPOSITORY) {
         mvnCmd.withDeployRepository(env.MAVEN_DEPLOY_REPOSITORY)
     }
     mvnCmd.skipTests(true).run('clean deploy')
