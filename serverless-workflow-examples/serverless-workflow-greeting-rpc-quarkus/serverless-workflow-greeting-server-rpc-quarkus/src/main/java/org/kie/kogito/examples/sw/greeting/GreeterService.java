@@ -18,6 +18,7 @@ package org.kie.kogito.examples.sw.greeting;
 import java.io.IOException;
 
 import org.kie.kogito.examples.sw.greeting.Greeting.HelloReply;
+import org.kie.kogito.examples.sw.greeting.Greeting.HelloReply.State;
 import org.kie.kogito.examples.sw.greeting.Greeting.HelloRequest;
 
 import io.grpc.Server;
@@ -48,7 +49,7 @@ public class GreeterService extends GreeterGrpc.GreeterImplBase {
             default:
                 message = "Hello from gRPC service " + request.getName();
         }
-        responseObserver.onNext(HelloReply.newBuilder().setMessage(message).build());
+        responseObserver.onNext(HelloReply.newBuilder().setMessage(message).setState(State.SUCCESS).build());
         responseObserver.onCompleted();
     }
 }

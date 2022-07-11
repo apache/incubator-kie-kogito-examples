@@ -29,6 +29,7 @@ import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.is;
 
 @QuarkusTest
 class GreetRestIT {
@@ -58,7 +59,8 @@ class GreetRestIT {
                 .post("/jsongreet")
                 .then()
                 .statusCode(201)
-                .body("workflowdata.message", containsString("Hello"));
+                .body("workflowdata.message", containsString("Hello"))
+                .body("workflowdata.state", is("SUCCESS"));
     }
 
     @Test
