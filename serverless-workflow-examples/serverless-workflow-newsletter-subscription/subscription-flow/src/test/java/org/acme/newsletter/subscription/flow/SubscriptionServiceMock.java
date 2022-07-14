@@ -16,7 +16,7 @@
 
 package org.acme.newsletter.subscription.flow;
 
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.Map;
 
 import org.acme.newsletter.subscription.service.Subscription;
@@ -32,11 +32,9 @@ import com.github.tomakehurst.wiremock.matching.UrlPathPattern;
 import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
-import static com.github.tomakehurst.wiremock.client.WireMock.configureFor;
 import static com.github.tomakehurst.wiremock.client.WireMock.get;
 import static com.github.tomakehurst.wiremock.client.WireMock.post;
 import static com.github.tomakehurst.wiremock.client.WireMock.put;
-import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
 import static javax.ws.rs.core.HttpHeaders.CONTENT_TYPE;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import static org.acme.newsletter.subscription.flow.SubscriptionConstants.EMAIL;
@@ -50,12 +48,11 @@ public class SubscriptionServiceMock implements QuarkusTestResourceLifecycleMana
     public Map<String, String> start() {
         wireMockServer = new WireMockServer(WireMockConfiguration.wireMockConfig().dynamicPort());
         wireMockServer.start();
-        configureFor(wireMockServer.port());
 
         ObjectMapper mapper = new ObjectMapper();
 
         try {
-            stubFor(post("/subscription")
+            wireMockServer.stubFor(post("/subscription")
                     .willReturn(aResponse()
                             .withStatus(200)
                             .withHeader(CONTENT_TYPE, APPLICATION_JSON)
@@ -63,12 +60,12 @@ public class SubscriptionServiceMock implements QuarkusTestResourceLifecycleMana
 
             final Subscription confirmedSub = newSubscription();
             confirmedSub.setVerified(true);
-            stubFor(put("/subscription/confirm")
+            wireMockServer.stubFor(put("/subscription/confirm")
                     .willReturn(aResponse()
                             .withStatus(200)
                             .withHeader(CONTENT_TYPE, APPLICATION_JSON)
                             .withBody(mapper.writeValueAsString(confirmedSub))));
-            stubFor(get(new UrlPathPattern(new EqualToPattern("/subscription/verify"), true)).withQueryParam("email", new EqualToPattern(EMAIL))
+            wireMockServer.stubFor(get(new UrlPathPattern(new EqualToPattern("/subscription/verify"), true)).withQueryParam("email", new EqualToPattern(EMAIL))
                     .willReturn(aResponse()
                             .withStatus(200)
                             .withHeader(CONTENT_TYPE, APPLICATION_JSON)
@@ -78,9 +75,7 @@ public class SubscriptionServiceMock implements QuarkusTestResourceLifecycleMana
             throw new RuntimeException("Impossible to convert Subscription to JSON", e);
         }
 
-        Map<String, String> properties = new HashMap<>();
-        properties.put("quarkus.rest-client.subscription_service_yaml.url", wireMockServer.baseUrl());
-        return properties;
+        return Collections.singletonMap("quarkus.rest-client.subscription_service_yaml.url", wireMockServer.baseUrl());
     }
 
     @Override
