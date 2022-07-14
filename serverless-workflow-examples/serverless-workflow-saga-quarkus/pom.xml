@@ -19,7 +19,8 @@
     <kogito.bom.version>${project.version}</kogito.bom.version>
     <version.compiler.plugin>3.8.1</version.compiler.plugin>
     <maven.compiler.release>11</maven.compiler.release>
-    <assertj-core.version>3.8.0</assertj-core.version>
+    <version.org.assertj>3.22.0</version.org.assertj>
+    <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
   </properties>
 
   <dependencyManagement>
@@ -65,7 +66,7 @@
     <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
-      <version>${assertj-core.version}</version>
+      <version>${version.org.assertj}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -90,6 +91,16 @@
             </goals>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${version.surefire.plugin}</version>
+        <configuration>
+          <systemPropertyVariables>
+            <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+            <maven.home>${maven.home}</maven.home>
+          </systemPropertyVariables>
+        </configuration>
       </plugin>
     </plugins>
   </build>

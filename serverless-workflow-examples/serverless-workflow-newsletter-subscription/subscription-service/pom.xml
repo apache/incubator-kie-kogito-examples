@@ -14,9 +14,8 @@
   <artifactId>serverless-workflow-newsletter-subscription-service</artifactId>
   <packaging>jar</packaging>
   <properties>
-    <assertj.core.version>3.22.0</assertj.core.version>
-    <version.io.cloudevents.cloudevents-core>2.3.0</version.io.cloudevents.cloudevents-core>
-    <version.io.cloudevents.cloudevents.json.jackson>2.3.0</version.io.cloudevents.cloudevents.json.jackson>
+    <version.org.assertj>3.22.0</version.org.assertj>
+    <version.io.cloudevents>2.3.0</version.io.cloudevents>
     <version.io.quarkiverse.reactivemessaging.http>1.0.1</version.io.quarkiverse.reactivemessaging.http>
   </properties>
   <dependencyManagement>
@@ -57,12 +56,12 @@
     <dependency>
       <groupId>io.cloudevents</groupId>
       <artifactId>cloudevents-core</artifactId>
-      <version>${version.io.cloudevents.cloudevents-core}</version>
+      <version>${version.io.cloudevents}</version>
     </dependency>
     <dependency>
       <groupId>io.cloudevents</groupId>
       <artifactId>cloudevents-json-jackson</artifactId>
-      <version>${version.io.cloudevents.cloudevents.json.jackson}</version>
+      <version>${version.io.cloudevents}</version>
     </dependency>
     <dependency>
       <groupId>io.quarkiverse.reactivemessaging.http</groupId>
@@ -83,7 +82,7 @@
     <dependency>
       <groupId>org.webjars</groupId>
       <artifactId>bootstrap</artifactId>
-      <version>${version.org.webjars.bootstrap}</version>
+      <version>${version.org.webjars}</version>
     </dependency>
 
     <!-- Testing dependencies -->
@@ -100,7 +99,7 @@
     <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
-      <version>${assertj.core.version}</version>
+      <version>${version.org.assertj}</version>
       <scope>test</scope>
     </dependency>
     <dependency>

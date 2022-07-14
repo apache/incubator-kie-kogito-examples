@@ -19,8 +19,7 @@
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
     <kogito.bom.version>${project.version}</kogito.bom.version>
     <version.io.quarkiverse.reactivemessaging.http>1.0.1</version.io.quarkiverse.reactivemessaging.http>
-    <version.io.cloudevents.cloudevents-core>2.3.0</version.io.cloudevents.cloudevents-core>
-    <version.io.cloudevents.cloudevents.json.jackson>2.3.0</version.io.cloudevents.cloudevents.json.jackson>
+    <version.io.cloudevents>2.3.0</version.io.cloudevents>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -60,12 +59,12 @@
     <dependency>
       <groupId>io.cloudevents</groupId>
       <artifactId>cloudevents-core</artifactId>
-      <version>${version.io.cloudevents.cloudevents-core}</version>
+      <version>${version.io.cloudevents}</version>
     </dependency>
     <dependency>
       <groupId>io.cloudevents</groupId>
       <artifactId>cloudevents-json-jackson</artifactId>
-      <version>${version.io.cloudevents.cloudevents.json.jackson}</version>
+      <version>${version.io.cloudevents}</version>
     </dependency>
     <dependency>
       <groupId>io.quarkiverse.reactivemessaging.http</groupId>
@@ -86,7 +85,7 @@
     <dependency>
       <groupId>org.webjars</groupId>
       <artifactId>bootstrap</artifactId>
-      <version>${version.org.webjars.bootstrap}</version>
+      <version>${version.org.webjars}</version>
     </dependency>
 
     <!-- Testing dependencies -->
@@ -103,7 +102,7 @@
     <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
-      <version>${assertj.core.version}</version>
+      <version>${version.org.assertj}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -176,6 +175,16 @@
                 </configuration>
               </execution>
             </executions>
+          </plugin>
+          <plugin>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>${version.surefire.plugin}</version>
+            <configuration>
+              <systemPropertyVariables>
+                <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+                <maven.home>${maven.home}</maven.home>
+              </systemPropertyVariables>
+            </configuration>
           </plugin>
         </plugins>
       </build>

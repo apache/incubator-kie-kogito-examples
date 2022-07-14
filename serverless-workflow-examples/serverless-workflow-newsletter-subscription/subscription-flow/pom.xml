@@ -15,7 +15,7 @@
   <packaging>jar</packaging>
 
   <properties>
-    <asserj-core-version>3.22.0</asserj-core-version>
+    <version.org.assertj>3.22.0</version.org.assertj>
     <version.com.github.tomakehurst.wiremock>2.33.0</version.com.github.tomakehurst.wiremock>
   </properties>
   <dependencyManagement>
@@ -82,7 +82,7 @@
     <dependency>
       <groupId>org.webjars</groupId>
       <artifactId>bootstrap</artifactId>
-      <version>${version.org.webjars.bootstrap}</version>
+      <version>${version.org.webjars}</version>
     </dependency>
 
     <!-- Testing dependencies -->
@@ -99,7 +99,7 @@
     <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
-      <version>${asserj-core-version}</version>
+      <version>${version.org.assertj}</version>
       <scope>test</scope>
     </dependency>
     <dependency>

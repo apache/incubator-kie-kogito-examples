@@ -18,7 +18,7 @@
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
     <kogito.bom.version>${project.version}</kogito.bom.version>
-    <version.com.github.tomakehurst.wiremock>2.33.0</version.com.github.tomakehurst.wiremock>
+    <version.com.github.tomakehurst.wiremock>2.33.1</version.com.github.tomakehurst.wiremock>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -72,7 +72,7 @@
     <dependency>
       <groupId>org.webjars</groupId>
       <artifactId>bootstrap</artifactId>
-      <version>${version.org.webjars.bootstrap}</version>
+      <version>${version.org.webjars}</version>
     </dependency>
 
     <!-- Testing dependencies -->
@@ -89,7 +89,7 @@
     <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
-      <version>${assertj.core.version}</version>
+      <version>${version.org.assertj}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -150,6 +150,16 @@
       </activation>
       <build>
         <plugins>
+          <plugin>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>${version.surefire.plugin}</version>
+            <configuration>
+              <systemPropertyVariables>
+                <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+                <maven.home>${maven.home}</maven.home>
+              </systemPropertyVariables>
+            </configuration>
+          </plugin>
           <plugin>
             <artifactId>maven-failsafe-plugin</artifactId>
             <version>${version.failsafe.plugin}</version>

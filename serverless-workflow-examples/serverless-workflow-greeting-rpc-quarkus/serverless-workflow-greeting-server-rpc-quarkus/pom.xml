@@ -12,8 +12,9 @@
   <properties>
     <version.compiler.plugin>3.8.1</version.compiler.plugin>
     <maven.compiler.release>11</maven.compiler.release>
-    <protec.version>3.19.2</protec.version>
-    <grpc.version>1.45.1</grpc.version>
+    <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
+    <version.com.google.protobuf>3.19.2</version.com.google.protobuf>
+    <version.io.grpc>1.45.1</version.io.grpc>
     <version.kr.motd.maven.os>1.6.0</version.kr.motd.maven.os>
     <version.org.xolstice.maven.protobuf>0.6.1</version.org.xolstice.maven.protobuf>
   </properties>
@@ -22,18 +23,18 @@
     <dependency>
       <groupId>io.grpc</groupId>
       <artifactId>grpc-netty-shaded</artifactId>
-      <version>${grpc.version}</version>
+      <version>${version.io.grpc}</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>io.grpc</groupId>
       <artifactId>grpc-protobuf</artifactId>
-      <version>${grpc.version}</version>
+      <version>${version.io.grpc}</version>
     </dependency>
     <dependency>
       <groupId>io.grpc</groupId>
       <artifactId>grpc-stub</artifactId>
-      <version>${grpc.version}</version>
+      <version>${version.io.grpc}</version>
     </dependency>
     <dependency>
       <!-- necessary for Java 9+ -->
@@ -78,9 +79,9 @@
         <artifactId>protobuf-maven-plugin</artifactId>
         <version>${version.org.xolstice.maven.protobuf}</version>
         <configuration>
-          <protocArtifact>com.google.protobuf:protoc:${protec.version}:exe:${os.detected.classifier}</protocArtifact>
+          <protocArtifact>com.google.protobuf:protoc:${version.com.google.protobuf}:exe:${os.detected.classifier}</protocArtifact>
           <pluginId>grpc-java</pluginId>
-          <pluginArtifact>io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:${os.detected.classifier}</pluginArtifact>
+          <pluginArtifact>io.grpc:protoc-gen-grpc-java:${version.io.grpc}:exe:${os.detected.classifier}</pluginArtifact>
           <writeDescriptorSet>true</writeDescriptorSet>
           <descriptorSetFileName>output.protobin</descriptorSetFileName>
           <attachProtoSources>false</attachProtoSources>
@@ -106,7 +107,16 @@
           <skip>true</skip>
         </configuration>
       </plugin>
-
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${version.surefire.plugin}</version>
+        <configuration>
+          <systemPropertyVariables>
+            <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+            <maven.home>${maven.home}</maven.home>
+          </systemPropertyVariables>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
   <profiles></profiles>
