@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.kie.kogito.examples</groupId>
@@ -22,7 +22,7 @@
     <maven.compiler.release>11</maven.compiler.release>
   </properties>
 
- <dependencyManagement>
+  <dependencyManagement>
     <dependencies>
       <dependency>
         <groupId>${quarkus.platform.group-id}</groupId>
@@ -66,7 +66,7 @@
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-addons-quarkus-source-files</artifactId>
     </dependency>
-      <dependency>
+    <dependency>
       <groupId>io.rest-assured</groupId>
       <artifactId>rest-assured</artifactId>
       <scope>test</scope>
@@ -115,17 +115,34 @@
     </plugins>
   </build>
   <profiles>
-  <profile>
-    <id>native</id>
-    <activation>
-      <property>
-        <name>native</name>
-      </property>
-    </activation>
-    <properties>
-      <quarkus.package.type>native</quarkus.package.type>
-    </properties>
-  </profile>
+    <profile>
+      <id>native</id>
+      <activation>
+        <property>
+          <name>native</name>
+        </property>
+      </activation>
+      <properties>
+        <quarkus.package.type>native</quarkus.package.type>
+      </properties>
+    </profile>
+    <profile>
+      <id>container</id>
+      <activation>
+        <property>
+          <name>container</name>
+        </property>
+      </activation>
+      <properties>
+        <quarkus.profile>container</quarkus.profile>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>io.quarkus</groupId>
+          <artifactId>quarkus-container-image-jib</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
     <profile>
       <id>persistence</id>
       <activation>

@@ -7,15 +7,15 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./sql:/docker-entrypoint-initdb.d/
+      - ./sql:/docker-entrypoint-initdb.d:Z
     healthcheck:
       test: [ "CMD", "pg_isready", "-q", "-d", "kogito", "-U", "kogito-user" ]
       timeout: 45s
       interval: 10s
       retries: 50
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
 
   pgadmin-compose:
     image: dpage/pgadmin4:5.0
@@ -83,7 +83,7 @@ services:
 
   sw-callback-service:
     container_name: sw-callback-service
-    image: org.kie.kogito/serverless-workflow-callback-quarkus:1.0-SNAPSHOT
+    image: quay.io/${USER}/serverless-workflow-callback-quarkus:1.0-SNAPSHOT
     ports:
       - "8080:8080"
     depends_on:

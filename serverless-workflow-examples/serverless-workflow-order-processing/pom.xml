@@ -143,6 +143,7 @@
         <namespace>default</namespace>
         <deploy>false</deploy>
         <!-- Quarkus Knative integration to build and deploy -->
+        <quarkus.container-image.group>kogito</quarkus.container-image.group>
         <quarkus.kubernetes.namespace>${namespace}</quarkus.kubernetes.namespace>
         <quarkus.kubernetes.deploy>${deploy}</quarkus.kubernetes.deploy>
         <quarkus.container-image.build>true</quarkus.container-image.build>
@@ -153,6 +154,23 @@
           <groupId>io.quarkus</groupId>
           <artifactId>quarkus-kubernetes</artifactId>
         </dependency>
+        <dependency>
+          <groupId>io.quarkus</groupId>
+          <artifactId>quarkus-container-image-jib</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
+    <profile>
+      <id>container</id>
+      <activation>
+        <property>
+          <name>container</name>
+        </property>
+      </activation>
+      <properties>
+        <quarkus.profile>container</quarkus.profile>
+      </properties>
+      <dependencies>
         <dependency>
           <groupId>io.quarkus</groupId>
           <artifactId>quarkus-container-image-jib</artifactId>
