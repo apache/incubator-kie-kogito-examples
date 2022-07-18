@@ -8,6 +8,10 @@ option java_package="org.kie.kogito.examples.sw.greeting";
 service Greeter {
   // Sends a greeting
   rpc SayHello (HelloRequest) returns (HelloReply) {}
+  rpc SayHelloAllLanguages (HelloRequest) returns (stream HelloReply) {}
+  rpc SayHelloMultipleLanguagesAtOnce (stream HelloRequest) returns (HelloReply) {}
+  rpc SayHelloMultipleLanguages (stream HelloRequest) returns (stream HelloReply) {}
+  rpc SayHelloMultipleLanguagesError (stream HelloRequest) returns (stream HelloReply) {}
 }
 
 // The request message containing the user's name.
