@@ -1,0 +1,49 @@
+---
+openapi: 3.0.3
+info:
+  title: Acme Financial Service API
+  version: 1.0.1
+paths:
+  /financial-service/exchange-rate:
+    get:
+      tags:
+        - Acme Financial Resource
+      operationId: exchangeRate
+      parameters:
+        - name: currencyFrom
+          in: query
+          schema:
+            type: string
+        - name: currencyTo
+          in: query
+          schema:
+            type: string
+        - name: exchangeDate
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExchangeRateResult'
+      security:
+        - acme-financial-oauth: [ ]
+components:
+  schemas:
+    ExchangeRateResult:
+      type: object
+      properties:
+        rate:
+          format: double
+          type: number
+  securitySchemes:
+    acme-financial-oauth:
+      type: oauth2
+      flows:
+        clientCredentials:
+          authorizationUrl: http://localhost:8281/auth/realms/kogito/protocol/openid-connect/auth
+          tokenUrl: http://localhost:8281/auth/realms/kogito/protocol/openid-connect/token
+          scopes: { }
