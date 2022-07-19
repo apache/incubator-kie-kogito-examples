@@ -31,6 +31,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import io.quarkus.runtime.annotations.RegisterForReflection;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
@@ -42,6 +43,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @ApplicationScoped
 @Path("/subscription")
+@RegisterForReflection
 public class SubscriptionResource {
 
     @Inject
