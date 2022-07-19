@@ -171,6 +171,7 @@
                 </goals>
                 <configuration>
                   <systemPropertyVariables>
+                    <quarkus.package.type>native</quarkus.package.type>
                     <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
                     <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
                     <maven.home>${maven.home}</maven.home>
@@ -181,9 +182,6 @@
           </plugin>
         </plugins>
       </build>
-      <properties>
-        <quarkus.package.type>native</quarkus.package.type>
-      </properties>
     </profile>
     <profile>
       <id>persistence</id>
@@ -192,10 +190,6 @@
           <name>persistence</name>
         </property>
       </activation>
-      <properties>
-        <quarkus.profile>persistence</quarkus.profile>
-        <enable.resource.postgresql>true</enable.resource.postgresql>
-      </properties>
       <dependencies>
         <dependency>
           <groupId>org.kie.kogito</groupId>
@@ -214,21 +208,45 @@
           <artifactId>quarkus-smallrye-reactive-messaging-kafka</artifactId>
         </dependency>
       </dependencies>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <version>${version.failsafe.plugin}</version>
+            <configuration>
+              <systemPropertyVariables>
+                <quarkus.profile>persistence</quarkus.profile>
+                <enable.resource.postgresql>true</enable.resource.postgresql>
+              </systemPropertyVariables>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
     </profile>
     <profile>
       <id>kafka</id>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
-      <properties>
-        <quarkus.profile>kafka</quarkus.profile>
-      </properties>
       <dependencies>
         <dependency>
           <groupId>io.quarkus</groupId>
           <artifactId>quarkus-smallrye-reactive-messaging-kafka</artifactId>
         </dependency>
       </dependencies>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <version>${version.failsafe.plugin}</version>
+            <configuration>
+              <systemPropertyVariables>
+                <quarkus.profile>kafka</quarkus.profile>
+              </systemPropertyVariables>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
     </profile>
     <profile>
       <id>knative</id>

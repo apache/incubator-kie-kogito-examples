@@ -17,6 +17,7 @@
     <version.compiler.plugin>3.8.1</version.compiler.plugin>
     <maven.compiler.release>11</maven.compiler.release>
     <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
+    <version.failsafe.plugin>${version.surefire.plugin}</version.failsafe.plugin>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -86,9 +87,6 @@
         </executions>
       </plugin>
       <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-      </plugin>
-      <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>${version.surefire.plugin}</version>
         <configuration>
@@ -103,9 +101,29 @@
   <profiles>
     <profile>
       <id>native</id>
-      <properties>
-        <failsafe.include>**/*IT.java</failsafe.include>
-      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <version>${version.failsafe.plugin}</version>
+            <configuration>
+              <systemPropertyVariables>
+                <failsafe.include>**/*IT.java</failsafe.include>
+                <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+                <maven.home>${maven.home}</maven.home>
+              </systemPropertyVariables>
+            </configuration>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>integration-test</goal>
+                  <goal>verify</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
     </profile>
   </profiles>
 </project>
