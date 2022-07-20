@@ -57,6 +57,7 @@
         <module>serverless-workflow-temperature-conversion</module>
         <module>serverless-workflow-qas-service-showcase</module>
         <module>serverless-workflow-newsletter-subscription</module>
+        <module>serverless-workflow-oauth2-orchestration-quarkus</module>
       </modules>
     </profile>
 
