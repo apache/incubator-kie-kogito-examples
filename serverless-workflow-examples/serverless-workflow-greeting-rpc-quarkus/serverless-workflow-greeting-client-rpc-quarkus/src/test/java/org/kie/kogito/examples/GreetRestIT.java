@@ -24,13 +24,13 @@ import org.junit.jupiter.api.Test;
 import org.kie.kogito.examples.sw.greeting.GreeterService;
 
 import io.grpc.Server;
-import io.quarkus.test.junit.QuarkusTest;
+import io.quarkus.test.junit.QuarkusIntegrationTest;
 import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.containsString;
 
-@QuarkusTest
+@QuarkusIntegrationTest
 class GreetRestIT {
 
     private static Server server;

@@ -18,20 +18,14 @@ package org.acme.it;
 
 import java.net.URI;
 import java.time.OffsetDateTime;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 import java.util.UUID;
 
 import org.acme.QueryRecord;
-import org.eclipse.microprofile.config.ConfigProvider;
+import org.apache.kafka.clients.producer.ProducerRecord;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.kie.kogito.test.quarkus.kafka.KafkaTestClient;
-import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
-import org.kie.kogito.testcontainers.quarkus.PostgreSqlQuarkusTestResource;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -41,18 +35,20 @@ import io.cloudevents.jackson.JsonCloudEventData;
 import io.cloudevents.jackson.JsonFormat;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusIntegrationTest;
+import io.quarkus.test.kafka.InjectKafkaCompanion;
+import io.quarkus.test.kafka.KafkaCompanionResource;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
+import io.smallrye.reactive.messaging.kafka.companion.KafkaCompanion;
 
 import static io.restassured.RestAssured.given;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
+import static org.awaitility.Awaitility.await;
 
-@QuarkusTestResource(WireMockQueryServiceResource.class)
-@QuarkusTestResource(KafkaQuarkusTestResource.class)
-@QuarkusTestResource(QueryAnswerServiceIT.ConditionalPostgreSqlQuarkusTestResource.class)
 @QuarkusIntegrationTest
+@QuarkusTestResource(WireMockQueryServiceResource.class)
+@QuarkusTestResource(KafkaCompanionResource.class)
 class QueryAnswerServiceIT {
 
     private static final String QUERY = "THE FORMULATED QUERY";
@@ -62,12 +58,11 @@ class QueryAnswerServiceIT {
 
     private ObjectMapper objectMapper;
 
-    private KafkaTestClient kafkaClient;
+    @InjectKafkaCompanion
+    KafkaCompanion kafkaCompanion;
 
     @BeforeEach
     void setup() {
-        String kafkaBootstrapServers = ConfigProvider.getConfig().getValue(KafkaQuarkusTestResource.KOGITO_KAFKA_PROPERTY, String.class);
-        kafkaClient = new KafkaTestClient(kafkaBootstrapServers);
         objectMapper = new ObjectMapper()
                 .registerModule(new JavaTimeModule())
                 .registerModule(JsonFormat.getCloudEventJacksonModule())
@@ -108,7 +103,7 @@ class QueryAnswerServiceIT {
                 .withData(JsonCloudEventData.wrap(objectMapper.createObjectNode().put("answer", ANSWER)))
                 .build());
 
-        kafkaClient.produce(response, "query_response_events");
+        kafkaCompanion.produceStrings().usingGenerator(i -> new ProducerRecord<>("query_response_events", response));
 
         // give some time for the event to be processed and the process to finish.
         await()
@@ -142,25 +137,7 @@ class QueryAnswerServiceIT {
 
     @AfterEach
     void cleanUp() {
-        kafkaClient.shutdown();
+        kafkaCompanion.close();
     }
 
-    /**
-     * https://issues.redhat.com/browse/KOGITO-6582
-     */
-    public static class ConditionalPostgreSqlQuarkusTestResource extends PostgreSqlQuarkusTestResource {
-
-        public ConditionalPostgreSqlQuarkusTestResource() {
-            enableConditional();
-        }
-
-        private boolean isEnabled() {
-            return Optional.ofNullable(System.getProperty("enable.resource.postgresql")).map(property -> property.equalsIgnoreCase(Boolean.TRUE.toString())).orElse(false);
-        }
-
-        @Override
-        protected Map<String, String> getProperties() {
-            return isEnabled() ? super.getProperties() : new HashMap<>();
-        }
-    }
 }

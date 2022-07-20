@@ -31,7 +31,6 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import io.quarkus.runtime.annotations.RegisterForReflection;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
@@ -40,6 +39,8 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponseSchema;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.quarkus.runtime.annotations.RegisterForReflection;
 
 @ApplicationScoped
 @Path("/subscription")
@@ -122,6 +123,7 @@ public class SubscriptionResource {
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
+    @RegisterForReflection
     public static class EmailVerificationReply implements Serializable {
         private final String email;
         private boolean emailExists;

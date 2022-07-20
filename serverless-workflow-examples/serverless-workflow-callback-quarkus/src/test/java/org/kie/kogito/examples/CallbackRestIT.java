@@ -16,10 +16,7 @@
 package org.kie.kogito.examples;
 
 import org.junit.jupiter.api.Test;
-import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
-import org.kie.kogito.testcontainers.quarkus.PostgreSqlQuarkusTestResource;
 
-import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -29,8 +26,6 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
 
 @QuarkusIntegrationTest
-@QuarkusTestResource(KafkaQuarkusTestResource.class)
-@QuarkusTestResource(PostgreSqlQuarkusTestResource.Conditional.class)
 class CallbackRestIT {
 
     static {
