@@ -154,6 +154,11 @@
         <version>${version.org.skyscreamer}</version>
         <scope>test</scope>
       </dependency>
+      <dependency>
+        <groupId>org.kie.kogito</groupId>
+        <artifactId>kogito-test-utils</artifactId>
+        <version>${project.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
