@@ -9,6 +9,7 @@
   </parent>
 
   <artifactId>currency-exchange-workflow</artifactId>
+  <name>Kogito Example :: Serverless Workflow Oauth2 Orchestration Example :: Currency Exchange</name>
 
   <properties>
     <quarkus-plugin.version>2.11.0.Final</quarkus-plugin.version>

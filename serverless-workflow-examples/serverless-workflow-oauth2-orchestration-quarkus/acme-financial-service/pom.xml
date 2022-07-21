@@ -8,6 +8,7 @@
     <version>2.0.0-SNAPSHOT</version>
   </parent>
   <artifactId>acme-financial-service</artifactId>
+  <name>Kogito Example :: Serverless Workflow Oauth2 Orchestration Example :: ACME Financial Service</name>
   <properties>
     <quarkus-plugin.version>2.11.0.Final</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
