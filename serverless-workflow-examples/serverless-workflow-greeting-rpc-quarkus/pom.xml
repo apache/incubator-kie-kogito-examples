@@ -14,4 +14,7 @@
     <module>serverless-workflow-greeting-client-rpc-quarkus</module>
     <module>serverless-workflow-greeting-server-rpc-quarkus</module>
   </modules>
+  <properties>
+    <maven.deploy.skip>true</maven.deploy.skip>
+  </properties>
 </project>
