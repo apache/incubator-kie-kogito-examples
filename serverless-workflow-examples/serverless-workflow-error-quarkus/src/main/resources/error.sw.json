@@ -8,7 +8,7 @@
   "errors": [
     {
       "name": "odd number",
-      "code": "java.lang.RuntimeException"
+      "code": "Odd situation"
      },
      {
       "name": "bad request",
