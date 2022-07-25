@@ -47,7 +47,7 @@ public class PublishRestService {
         logger.info("Publish type " + type + " number " + number);
         // check if the input number is even
         if (!"even".equals(type)) {
-            return Response.status(Status.BAD_REQUEST).entity(objectMapper.createObjectNode().put("error", "No perfect square for odd numbers")).build();
+            return Response.status(Status.BAD_REQUEST).entity(objectMapper.createObjectNode().put("error", "Perfect square assessment not supported for odd numbers by this service")).build();
         }
         return Response.ok().entity(objectMapper.createObjectNode().put("perfect", isPerfectSquare(number))).build();
     }
