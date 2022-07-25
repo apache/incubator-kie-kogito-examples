@@ -13,12 +13,16 @@
   <name>Kogito Example :: Process Service Rest Call Spring Boot</name>
   <description>Kogito service invocation with REST - Spring Boot</description>
 
+  <properties>
+    <version.org.kie.kogito>2.0.0-SNAPSHOT</version.org.kie.kogito>
+  </properties>
+
   <dependencyManagement>
     <dependencies>
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-spring-boot-bom</artifactId>
-      <version>${project.version}</version>
+      <version>${version.org.kie.kogito}</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
@@ -61,7 +65,7 @@
       <plugin>
         <groupId>org.kie.kogito</groupId>
         <artifactId>kogito-maven-plugin</artifactId>
-        <version>${kogito.version}</version>
+        <version>${version.org.kie.kogito}</version>
         <extensions>true</extensions>
       </plugin>
     </plugins>

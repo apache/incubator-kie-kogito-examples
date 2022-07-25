@@ -25,10 +25,10 @@ By default `org.kie.kogito:kogito-bom` is used, but, when needed, this can be ov
 The properties defined in each of the modules and can be overridden as follows:
 * Kogito BOM
   ```
-  mvn -Dkogito.bom.group-id=io.quarkus.platform -Dkogito.bom.artifact-id=quarkus-kogito-bom -Dkogito.bom.version=2.2.3.Final
+  mvn -Dkogito.bom.group-id=io.quarkus.platform -Dkogito.bom.artifact-id=quarkus-kogito-bom -Dversion.org.kie.kogito=2.2.3.Final
   ```
 > Note: It's important to keep BOM versions aligned when overriding. In case of Quarkus Platform this means using a single
-> version value for all two (`quarkus.platform.version`, `kogito.bom.version`) properties.
+> version value for all two (`quarkus.platform.version`, `version.org.kie.kogito`) properties.
 
 ## Contribution
 

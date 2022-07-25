@@ -94,7 +94,7 @@ pipeline {
             steps {
                 script {
                     maven.mvnVersionsUpdateParentAndChildModules(getMavenCommand(), getProjectVersion(), !isRelease())
-                    // Update Drools version
+                    maven.mvnSetVersionProperty(getMavenCommand(), 'version.org.kie.kogito', getProjectVersion())
                     maven.mvnSetVersionProperty(getMavenCommand(), 'version.org.drools', getDroolsVersion())
                 }
             }

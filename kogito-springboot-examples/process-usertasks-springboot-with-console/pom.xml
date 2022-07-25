@@ -12,15 +12,18 @@
   <artifactId>process-usertasks-springboot-with-console</artifactId>
   <name>Kogito Example :: Process with Usertasks Spring Boot :: Console</name>
   <description>Kogito usertasks orchestration - Spring Boot - With Console</description>
+  
   <properties>
     <enable.resource.infinispan>true</enable.resource.infinispan>
+    <version.org.kie.kogito>2.0.0-SNAPSHOT</version.org.kie.kogito>
   </properties>
+
   <dependencyManagement>
     <dependencies>
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-spring-boot-bom</artifactId>
-      <version>${project.version}</version>
+      <version>${version.org.kie.kogito}</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
@@ -53,7 +56,7 @@
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-spring-boot-test-utils</artifactId>
-      <version>${project.version}</version>
+      <version>${version.org.kie.kogito}</version>
       <scope>test</scope>
     </dependency>
 
@@ -101,7 +104,7 @@
       <plugin>
         <groupId>org.kie.kogito</groupId>
         <artifactId>kogito-maven-plugin</artifactId>
-        <version>${kogito.version}</version>
+        <version>${version.org.kie.kogito}</version>
         <extensions>true</extensions>
       </plugin>
     </plugins>

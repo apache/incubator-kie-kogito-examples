@@ -13,12 +13,16 @@
   <name>Kogito Example :: Process PostgreSQL Persistence Spring Boot</name>
   <description>Kogito with PostgreSQL persistence - Spring Boot</description>
 
+  <properties>
+    <version.org.kie.kogito>2.0.0-SNAPSHOT</version.org.kie.kogito>
+  </properties>
+
   <dependencyManagement>
     <dependencies>
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-spring-boot-bom</artifactId>
-      <version>${project.version}</version>
+      <version>${version.org.kie.kogito}</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
@@ -55,7 +59,7 @@
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-spring-boot-test-utils</artifactId>
-      <version>${project.version}</version>
+      <version>${version.org.kie.kogito}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -78,7 +82,7 @@
       <plugin>
         <groupId>org.kie.kogito</groupId>
         <artifactId>kogito-maven-plugin</artifactId>
-        <version>${kogito.version}</version>
+        <version>${version.org.kie.kogito}</version>
         <extensions>true</extensions>
       </plugin>
     </plugins>

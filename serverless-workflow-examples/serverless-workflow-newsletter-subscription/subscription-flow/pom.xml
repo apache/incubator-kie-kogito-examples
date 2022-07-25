@@ -30,7 +30,7 @@
       <dependency>
         <groupId>${kogito.bom.group-id}</groupId>
         <artifactId>${kogito.bom.artifact-id}</artifactId>
-        <version>${kogito.bom.version}</version>
+        <version>${version.org.kie.kogito}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -112,7 +112,7 @@
       <groupId>org.kie.kogito.examples</groupId>
       <artifactId>serverless-workflow-newsletter-subscription-service</artifactId>
       <scope>test</scope>
-      <version>${project.version}</version>
+      <version>${version.org.kie.kogito}</version>
     </dependency>
     <dependency>
       <groupId>org.awaitility</groupId>

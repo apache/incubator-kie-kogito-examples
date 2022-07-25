@@ -10,6 +10,7 @@
   <artifactId>onboarding-quarkus</artifactId>
   <name>Kogito Example :: Onboarding Example :: Onboarding with Business Process Quarkus</name>
   <description>Onboarding function and service orchestration</description>
+  
   <dependencies>
     <dependency>
       <groupId>org.kie.kogito</groupId>
@@ -111,7 +112,7 @@
         <dependency>
           <groupId>org.kie.kogito</groupId>
           <artifactId>kogito-addons-quarkus-persistence-infinispan</artifactId>
-          <version>${project.version}</version>
+          <version>${version.org.kie.kogito}</version>
         </dependency>
       </dependencies>
     </profile>
