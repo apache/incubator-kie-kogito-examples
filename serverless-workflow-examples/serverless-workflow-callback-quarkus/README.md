@@ -31,7 +31,7 @@ In this way a container for Kafka will be started on port 9092.
 
 ### PostgreSQL
 
-Alternatively, you can run this example using persistence with a PostgreSQL server.
+This example also requires persistence with a PostgreSQL server.
 
 Configuration for setting up the connection can be found in [applications.properties](src/main/resources/application.properties) file, which
 follows the Quarkus JDBC settings, for more information please check [JDBC Configuration Reference](https://quarkus.io/guides/datasource#jdbc-configuration).
@@ -77,16 +77,6 @@ or on Windows
 ```sh
 mvn clean package
 java -jar target\quarkus-app\quarkus-run.jar
-```
-
-### Compile and Run in JVM mode using PostgreSQL persistence
-
-To enable persistence, please append `-Ppersistence` to your Maven command.
-That will ensure the correct dependencies are in place, and automatically set the required properties to connect
-with the PostgreSQL instance from the provided docker compose.
-
-```sh
-mvn clean package -Peristence 
 ```
 
 ### Compile and Run using Local Native Image
