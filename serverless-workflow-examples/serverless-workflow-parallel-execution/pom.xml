@@ -3,12 +3,14 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>org.kie.kogito.examples</groupId>
-        <artifactId>serverless-workflow-examples</artifactId>
-        <version>2.0.0-SNAPSHOT</version>
-    </parent>
+
+    <groupId>org.kie.kogito.examples</groupId>
     <artifactId>serverless-workflow-parallel-execution</artifactId>
+    <version>2.0.0-SNAPSHOT</version>
+
+    <name>Kogito Example :: Serverless Workflow Parallel Execution :: Quarkus</name>
+    <description>Kogito Serverless Workflow Example - Quarkus</description>
+
     <properties>
         <quarkus-plugin.version>2.11.0.Final</quarkus-plugin.version>
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
@@ -17,7 +19,11 @@
         <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
         <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
         <kogito.bom.version>${project.version}</kogito.bom.version>
+        <maven.compiler.release>11</maven.compiler.release>
+        <version.compiler.plugin>3.8.1</version.compiler.plugin>
+        <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
     </properties>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -69,7 +75,15 @@
         </dependency>
     </dependencies>
     <build>
+        <finalName>${project.artifactId}</finalName>
         <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${version.compiler.plugin}</version>
+                <configuration>
+                    <release>${maven.compiler.release}</release>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>${quarkus.platform.group-id}</groupId>
                 <artifactId>quarkus-maven-plugin</artifactId>
@@ -78,6 +92,24 @@
                     <execution>
                         <goals>
                             <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${version.failsafe.plugin}</version>
+                <configuration>
+                    <systemPropertyVariables>
+                        <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+                        <maven.home>${maven.home}</maven.home>
+                    </systemPropertyVariables>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -92,32 +124,6 @@
                     <name>native</name>
                 </property>
             </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-failsafe-plugin</artifactId>
-                        <version>${surefire-plugin.version}</version>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>integration-test</goal>
-                                    <goal>verify</goal>
-                                </goals>
-                                <configuration>
-                                    <systemPropertyVariables>
-                                        <native.image.path>
-                                            ${project.build.directory}/${project.build.finalName}-runner
-                                        </native.image.path>
-                                        <java.util.logging.manager>org.jboss.logmanager.LogManager
-                                        </java.util.logging.manager>
-                                        <maven.home>${maven.home}</maven.home>
-                                    </systemPropertyVariables>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
             <properties>
                 <quarkus.package.type>native</quarkus.package.type>
             </properties>
