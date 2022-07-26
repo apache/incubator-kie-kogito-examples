@@ -94,12 +94,6 @@ pipeline {
                     dir(getRepoName()) {
                         sh "git checkout ${getBuildBranch()}"
                         mergeAndPush(getPipelinePrLink())
-
-                        if (shouldDeployToRepository()) {
-                            runMavenDeploy()
-                        } else {
-                            echo 'Testing environment and no specific deploy repository given => no deployment'
-                        }
                     }
                 }
             }

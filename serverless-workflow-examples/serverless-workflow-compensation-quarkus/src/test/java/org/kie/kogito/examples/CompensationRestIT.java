@@ -17,13 +17,13 @@ package org.kie.kogito.examples;
 
 import org.junit.jupiter.api.Test;
 
-import io.quarkus.test.junit.QuarkusTest;
+import io.quarkus.test.junit.QuarkusIntegrationTest;
 import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 
-@QuarkusTest
+@QuarkusIntegrationTest
 public class CompensationRestIT {
 
     @Test

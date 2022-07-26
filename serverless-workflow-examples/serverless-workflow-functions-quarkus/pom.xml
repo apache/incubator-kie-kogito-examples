@@ -2,12 +2,11 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>org.kie.kogito.examples</groupId>
-    <artifactId>serverless-workflow-examples</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
-  </parent>
+
+  <groupId>org.kie.kogito.examples</groupId>
   <artifactId>serverless-workflow-functions-quarkus</artifactId>
+  <version>2.0.0-SNAPSHOT</version>
+
   <name>Kogito Example :: Serverless Workflow Functions :: Quarkus</name>
   <description>Kogito Serverless Workflow Example - Quarkus</description>
   <properties>
@@ -20,7 +19,12 @@
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
     <kogito.bom.version>${project.version}</kogito.bom.version>
+    <version.compiler.plugin>3.8.1</version.compiler.plugin>
+    <maven.compiler.release>11</maven.compiler.release>
+    <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
+    <version.com.github.tomakehurst.wiremock>2.33.1</version.com.github.tomakehurst.wiremock>
   </properties>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -77,12 +81,20 @@
     <dependency>
       <groupId>com.github.tomakehurst</groupId>
       <artifactId>wiremock-jre8</artifactId>
+      <version>${version.com.github.tomakehurst.wiremock}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
   <build>
     <finalName>${project.artifactId}</finalName>
     <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${version.compiler.plugin}</version>
+        <configuration>
+          <release>${maven.compiler.release}</release>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>${quarkus.platform.group-id}</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
@@ -95,14 +107,24 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <version>${version.failsafe.plugin}</version>
+        <configuration>
+          <systemPropertyVariables>
+            <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+            <maven.home>${maven.home}</maven.home>
+          </systemPropertyVariables>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>integration-test</goal>
+              <goal>verify</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
-  <profiles>
-    <profile>
-      <id>native</id>
-      <properties>
-        <failsafe.include>**/*IT.java</failsafe.include>
-      </properties>
-    </profile>
-  </profiles>
 </project>
