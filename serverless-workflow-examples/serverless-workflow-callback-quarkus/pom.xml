@@ -64,6 +64,18 @@
       <artifactId>quarkus-resteasy-jackson</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-addons-quarkus-persistence-jdbc</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-jdbc-postgresql</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-agroal</artifactId>
+    </dependency>
+    <dependency>
       <groupId>io.rest-assured</groupId>
       <artifactId>rest-assured</artifactId>
       <scope>test</scope>
@@ -71,11 +83,6 @@
     <dependency>
       <groupId>org.awaitility</groupId>
       <artifactId>awaitility</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-quarkus-test-utils</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -99,34 +106,14 @@
   <profiles>
     <profile>
       <id>native</id>
-      <properties>
-        <failsafe.include>**/*IT.java</failsafe.include>
-      </properties>
-    </profile>
-    <profile>
-      <id>persistence</id>
       <activation>
         <property>
-          <name>persistence</name>
+          <name>native</name>
         </property>
       </activation>
       <properties>
-        <enable.resource.postgresql>true</enable.resource.postgresql>
+        <quarkus.package.type>native</quarkus.package.type>
       </properties>
-      <dependencies>
-        <dependency>
-          <groupId>org.kie.kogito</groupId>
-          <artifactId>kogito-addons-quarkus-persistence-jdbc</artifactId>
-        </dependency>
-        <dependency>
-          <groupId>io.quarkus</groupId>
-          <artifactId>quarkus-jdbc-postgresql</artifactId>
-        </dependency>
-        <dependency>
-          <groupId>io.quarkus</groupId>
-          <artifactId>quarkus-agroal</artifactId>
-        </dependency>
-      </dependencies>
     </profile>
   </profiles>
 </project>
