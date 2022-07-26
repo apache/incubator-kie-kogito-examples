@@ -45,11 +45,11 @@ if (Utils.isMainBranch(this)) {
 
 // PR checks
 setupMultijobPrDefaultChecks()
-// setupMultijobPrNativeChecks()
+setupMultijobPrNativeChecks()
 setupMultijobPrLTSChecks()
 
 // Nightly jobs
-// setupNativeJob()
+setupNativeJob()
 setupDeployJob(FolderUtils.getNightlyFolder(this), KogitoJobType.NIGHTLY)
 setupPromoteJob(FolderUtils.getNightlyFolder(this), KogitoJobType.NIGHTLY)
 
@@ -59,9 +59,9 @@ if (!Utils.isMainBranch(this)) {
     setupPromoteJob(FolderUtils.getReleaseFolder(this), KogitoJobType.RELEASE)
 }
 
-// if (Utils.isLTSBranch(this)) {
-//     setupNativeLTSJob()
-// }
+if (Utils.isLTSBranch(this)) {
+    setupNativeLTSJob()
+}
 
 KogitoJobUtils.createQuarkusUpdateToolsJob(this, 'kogito-examples', 'Kogito Examples', [
   properties: [ 'quarkus-plugin.version', 'quarkus.platform.version' ],
