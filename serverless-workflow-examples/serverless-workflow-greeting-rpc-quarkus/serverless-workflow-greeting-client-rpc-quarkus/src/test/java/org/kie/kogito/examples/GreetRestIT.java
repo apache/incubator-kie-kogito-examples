@@ -24,11 +24,17 @@ import org.junit.jupiter.api.Test;
 import org.kie.kogito.examples.sw.greeting.GreeterService;
 
 import io.grpc.Server;
+import io.restassured.RestAssured;
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.Matchers.aMapWithSize;
+import static org.hamcrest.Matchers.hasEntry;
+import static org.hamcrest.Matchers.hasSize;
 
 @QuarkusIntegrationTest
 class GreetRestIT {
@@ -40,6 +46,7 @@ class GreetRestIT {
         int port = ConfigProvider.getConfig().getValue("quarkus.grpc.clients.Greeter.port", Integer.class);
         server = GreeterService.buildServer(port);
         server.start();
+        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
     }
 
     @AfterAll
@@ -96,4 +103,75 @@ class GreetRestIT {
                 .statusCode(201)
                 .body("workflowdata.message", containsString("Hello"));
     }
+
+    @Test
+    void testServerStreamAllLanguages() {
+        given()
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .body("{\"workflowdata\" : {\"name\" : \"John\"}}").when()
+                .post("/jsongreetserverstream")
+                .then()
+                .statusCode(201)
+                .body("workflowdata.response", hasSize(2))
+                .body("workflowdata.response[0]", allOf(aMapWithSize(1), hasEntry("message", "Hello from gRPC service John")))
+                .body("workflowdata.response[1]", allOf(aMapWithSize(1), hasEntry("message", "Saludos desde gRPC service John")));
+    }
+
+    @Test
+    void testClientStreamGetMultipleLanguagesAtOnce() {
+        given()
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .body("{\"workflowdata\" : { \"helloRequests\" : [" +
+                        "{\"name\" : \"Javierito\", \"language\":\"Spanish\"}," +
+                        "{\"name\" : \"John\", \"language\":\"English\"}," +
+                        "{\"name\" : \"Jan\", \"language\":\"Czech\"}" +
+                        "]}}")
+                .when()
+                .post("/jsongreetclientstream")
+                .then()
+                .statusCode(201)
+                .body("workflowdata.message", equalTo("Saludos desde gRPC service Javierito\n" +
+                        "Hello from gRPC service John\n" +
+                        "Hello from gRPC service Jan"));
+    }
+
+    @Test
+    void testBiDiStreamGetMultipleLanguages() {
+        given()
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .body("{\"workflowdata\" : { \"helloRequests\" : [" +
+                        "{\"name\" : \"Javierito\", \"language\":\"Spanish\"}," +
+                        "{\"name\" : \"John\", \"language\":\"English\"}," +
+                        "{\"name\" : \"Jan\", \"language\":\"Czech\"}" +
+                        "]}}")
+                .when()
+                .post("/jsongreetbidistream")
+                .then()
+                .statusCode(201)
+                .body("workflowdata.response", hasSize(3))
+                .body("workflowdata.response[0]", allOf(aMapWithSize(1), hasEntry("message", "Saludos desde gRPC service Javierito")))
+                .body("workflowdata.response[1]", allOf(aMapWithSize(1), hasEntry("message", "Hello from gRPC service John")))
+                .body("workflowdata.response[2]", allOf(aMapWithSize(1), hasEntry("message", "Hello from gRPC service Jan")));
+    }
+
+    @Test
+    void testBiDiStreamGetMultipleLanguagesError() {
+        given()
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .body("{\"workflowdata\" : { \"helloRequests\" : [" +
+                        "{\"name\" : \"Javierito\", \"language\":\"Spanish\"}," +
+                        "{\"name\" : \"John\", \"language\":\"English\"}," +
+                        "{\"name\" : \"Jan\", \"language\":\"Czech\"}" +
+                        "]}}")
+                .when()
+                .post("/jsongreetbidistreamerror")
+                .then()
+                .statusCode(500)
+                .body("message", allOf(containsString("io.grpc.StatusRuntimeException"), containsString("OUT_OF_RANGE")));
+    }
+
 }

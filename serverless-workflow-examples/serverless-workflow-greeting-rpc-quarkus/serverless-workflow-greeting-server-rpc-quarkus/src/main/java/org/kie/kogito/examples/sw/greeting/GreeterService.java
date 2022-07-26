@@ -16,15 +16,20 @@
 package org.kie.kogito.examples.sw.greeting;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.kie.kogito.examples.sw.greeting.Greeting.HelloReply;
 import org.kie.kogito.examples.sw.greeting.Greeting.HelloRequest;
 
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
+import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
 
 public class GreeterService extends GreeterGrpc.GreeterImplBase {
+
+    public static final String[] SUPPORTED_LANGUAGES = { "English", "Spanish" };
 
     public static void main(String[] args) throws IOException, InterruptedException {
         Server server = buildServer(Integer.getInteger("grpc.port", 50051));
@@ -39,6 +44,91 @@ public class GreeterService extends GreeterGrpc.GreeterImplBase {
     @Override
     public void sayHello(HelloRequest request,
             StreamObserver<HelloReply> responseObserver) {
+        responseObserver.onNext(HelloReply.newBuilder().setMessage(getMessage(request)).build());
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void sayHelloAllLanguages(HelloRequest request, StreamObserver<HelloReply> responseObserver) {
+        for (String language : SUPPORTED_LANGUAGES) {
+            HelloRequest languageRequest = HelloRequest.newBuilder(request).setLanguage(language).build();
+            responseObserver.onNext(HelloReply.newBuilder().setMessage(getMessage(languageRequest)).build());
+        }
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public StreamObserver<HelloRequest> sayHelloMultipleLanguagesAtOnce(StreamObserver<HelloReply> responseObserver) {
+        return new StreamObserver<>() {
+
+            private final List<String> messages = new ArrayList<>();
+
+            @Override
+            public void onNext(HelloRequest helloRequest) {
+                messages.add(getMessage(helloRequest));
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+                // ignore
+            }
+
+            @Override
+            public void onCompleted() {
+                responseObserver.onNext(HelloReply.newBuilder().setMessage(String.join("\n", messages)).build());
+                responseObserver.onCompleted();
+            }
+        };
+    }
+
+    @Override
+    public StreamObserver<HelloRequest> sayHelloMultipleLanguages(StreamObserver<HelloReply> responseObserver) {
+        return new StreamObserver<>() {
+            @Override
+            public void onNext(HelloRequest helloRequest) {
+                responseObserver.onNext(HelloReply.newBuilder().setMessage(getMessage(helloRequest)).build());
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+                // ignore
+            }
+
+            @Override
+            public void onCompleted() {
+                responseObserver.onCompleted();
+            }
+        };
+    }
+
+    @Override
+    public StreamObserver<HelloRequest> sayHelloMultipleLanguagesError(StreamObserver<HelloReply> responseObserver) {
+        return new StreamObserver<>() {
+            int counter = 0;
+
+            @Override
+            public void onNext(HelloRequest helloRequest) {
+                responseObserver.onNext(HelloReply.newBuilder().setMessage(getMessage(helloRequest)).build());
+                if (++counter == 2) {
+                    RuntimeException ex = Status.OUT_OF_RANGE.asRuntimeException();
+                    responseObserver.onError(ex);
+                    throw ex;
+                }
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+                // ignore
+            }
+
+            @Override
+            public void onCompleted() {
+                responseObserver.onCompleted();
+            }
+        };
+    }
+
+    private static String getMessage(HelloRequest request) {
         String message;
         switch (request.getLanguage().toLowerCase()) {
             case "spanish":
@@ -48,7 +138,6 @@ public class GreeterService extends GreeterGrpc.GreeterImplBase {
             default:
                 message = "Hello from gRPC service " + request.getName();
         }
-        responseObserver.onNext(HelloReply.newBuilder().setMessage(message).build());
-        responseObserver.onCompleted();
+        return message;
     }
 }
