@@ -1,0 +1,37 @@
+---
+openapi: 3.0.3
+info:
+  title: stock-portfolio-service API
+  version: 2.0.0-SNAPSHOT
+paths:
+  /profit/{symbol}:
+    get:
+      tags:
+        - Profit Resource
+      operationId: getStockProfit
+      parameters:
+        - name: symbol
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: currentPrice
+          in: query
+          schema:
+            type: number
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StockProfit'
+components:
+  schemas:
+    StockProfit:
+      type: object
+      properties:
+        symbol:
+          type: string
+        profit:
+          type: string

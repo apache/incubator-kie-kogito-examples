@@ -41,6 +41,7 @@
         <module>serverless-workflow-parallel-execution</module>
         <module>serverless-workflow-saga-quarkus</module>
         <module>serverless-workflow-service-calls-quarkus</module>
+        <module>serverless-workflow-stock-profit</module>
         <module>serverless-workflow-temperature-conversion</module>
         <module>serverless-workflow-qas-service-showcase</module>
         <module>serverless-workflow-newsletter-subscription</module>
@@ -111,6 +112,7 @@
         <module>serverless-workflow-parallel-execution</module>
         <module>serverless-workflow-saga-quarkus</module>
         <module>serverless-workflow-service-calls-quarkus</module>
+        <module>serverless-workflow-stock-profit</module>
         <module>serverless-workflow-temperature-conversion</module>
         <module>serverless-workflow-qas-service-showcase</module>
         <module>serverless-workflow-newsletter-subscription</module>
