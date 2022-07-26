@@ -7,7 +7,7 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>kogito-quarkus-examples</artifactId>
-    <version>1.25.0.Final</version>
+    <version>1.25.1-SNAPSHOT</version>
   </parent>
   <artifactId>dmn-event-driven-quarkus</artifactId>
   <name>Kogito Example :: DMN Event-Driven :: Quarkus</name>
