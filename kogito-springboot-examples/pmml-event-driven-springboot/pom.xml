@@ -14,6 +14,7 @@
 
   <properties>
     <version.org.kie.kogito>2.0.0-SNAPSHOT</version.org.kie.kogito>
+    <kogito.bom.version>${version.org.kie.kogito}</kogito.bom.version>
   </properties>
 
   <dependencyManagement>
@@ -21,7 +22,7 @@
       <dependency>
         <groupId>org.kie.kogito</groupId>
         <artifactId>kogito-spring-boot-bom</artifactId>
-        <version>${version.org.kie.kogito}</version>
+        <version>${kogito.bom.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -41,6 +42,7 @@
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-spring-boot-test-utils</artifactId>
+      <version>${version.org.kie.kogito}</version>
       <scope>test</scope>
     </dependency>
     <dependency>

@@ -88,7 +88,7 @@ example. To enable it, just uncomment this dependency in the `pom.xml` file, [se
 <dependency>
   <groupId>org.kie.kogito</groupId>
   <artifactId>kogito-addons-quarkus-jobs-management</artifactId>
-  <version>${version.org.kie.kogito}</version>
+  <version>${kogito.bom.version}</version>
 </dependency>
 ```
 

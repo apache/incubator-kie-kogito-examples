@@ -17,6 +17,7 @@
     <quarkus.platform.version>2.11.2.Final</quarkus.platform.version>
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
+    <kogito.bom.version>${version.org.kie.kogito}</kogito.bom.version>
     <version.org.kie.kogito>2.0.0-SNAPSHOT</version.org.kie.kogito>
   </properties>
   <dependencyManagement>
@@ -31,7 +32,7 @@
       <dependency>
         <groupId>${kogito.bom.group-id}</groupId>
         <artifactId>${kogito.bom.artifact-id}</artifactId>
-        <version>${version.org.kie.kogito}</version>
+        <version>${kogito.bom.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>

@@ -93,6 +93,7 @@ pipeline {
 
                         maven.mvnVersionsUpdateParentAndChildModules(getMavenCommand(), getSnapshotVersion(), true)
                         maven.mvnSetVersionProperty(getMavenCommand(), 'version.org.kie.kogito', getSnapshotVersion())
+                        maven.mvnSetVersionProperty(getMavenCommand(), 'kogito.bom.version', getSnapshotVersion())
                         maven.mvnSetVersionProperty(getMavenCommand(), 'version.org.drools', util.getNextVersion(getDroolsVersion(), 'micro'))
 
                         commitAndCreatePR()

@@ -21,11 +21,6 @@
         <artifactId>infinispan-spring-boot-starter-remote</artifactId>
         <version>${version.org.infinispan}</version>
       </dependency>
-      <dependency>
-        <groupId>org.kie.kogito</groupId>
-        <artifactId>kogito-spring-boot-test-utils</artifactId>
-        <version>${project.version}</version>
-      </dependency>
     </dependencies>
   </dependencyManagement>
 

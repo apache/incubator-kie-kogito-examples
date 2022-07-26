@@ -69,6 +69,7 @@
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-quarkus-test-utils</artifactId>
+        <version>${version.org.kie.kogito}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -112,7 +113,7 @@
         <dependency>
           <groupId>org.kie.kogito</groupId>
           <artifactId>kogito-addons-quarkus-persistence-infinispan</artifactId>
-          <version>${version.org.kie.kogito}</version>
+          <version>${kogito.bom.version}</version>
         </dependency>
       </dependencies>
     </profile>

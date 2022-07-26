@@ -95,6 +95,7 @@ pipeline {
                 script {
                     maven.mvnVersionsUpdateParentAndChildModules(getMavenCommand(), getProjectVersion(), !isRelease())
                     maven.mvnSetVersionProperty(getMavenCommand(), 'version.org.kie.kogito', getProjectVersion())
+                    maven.mvnSetVersionProperty(getMavenCommand(), 'kogito.bom.version', getProjectVersion())
                     maven.mvnSetVersionProperty(getMavenCommand(), 'version.org.drools', getDroolsVersion())
                 }
             }
