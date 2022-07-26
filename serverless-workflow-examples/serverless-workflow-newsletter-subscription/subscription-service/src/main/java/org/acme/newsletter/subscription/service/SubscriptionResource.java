@@ -40,8 +40,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.quarkus.runtime.annotations.RegisterForReflection;
+
 @ApplicationScoped
 @Path("/subscription")
+@RegisterForReflection
 public class SubscriptionResource {
 
     @Inject
@@ -120,6 +123,7 @@ public class SubscriptionResource {
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
+    @RegisterForReflection
     public static class EmailVerificationReply implements Serializable {
         private final String email;
         private boolean emailExists;

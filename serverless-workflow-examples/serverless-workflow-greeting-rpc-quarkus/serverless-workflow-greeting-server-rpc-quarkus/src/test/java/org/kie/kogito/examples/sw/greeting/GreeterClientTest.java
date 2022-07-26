@@ -30,7 +30,7 @@ import io.grpc.Server;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class GreeterClient {
+public class GreeterClientTest {
 
     private static final int port = Integer.getInteger("grpc.port", 50053);
 

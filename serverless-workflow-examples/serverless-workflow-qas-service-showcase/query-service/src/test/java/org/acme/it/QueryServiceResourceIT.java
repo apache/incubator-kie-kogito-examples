@@ -20,9 +20,7 @@ import java.util.List;
 
 import org.acme.QueryRequest;
 import org.junit.jupiter.api.Test;
-import org.kie.kogito.testcontainers.quarkus.PostgreSqlQuarkusTestResource;
 
-import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
@@ -30,7 +28,6 @@ import io.restassured.path.json.JsonPath;
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@QuarkusTestResource(PostgreSqlQuarkusTestResource.Conditional.class)
 @QuarkusIntegrationTest
 class QueryServiceResourceIT {
 

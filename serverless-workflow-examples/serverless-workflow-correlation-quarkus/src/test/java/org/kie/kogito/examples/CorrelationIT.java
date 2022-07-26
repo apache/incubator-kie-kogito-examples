@@ -18,11 +18,7 @@ package org.kie.kogito.examples;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.junit.jupiter.api.Test;
-import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
-import org.kie.kogito.testcontainers.quarkus.PostgreSqlQuarkusTestResource;
 
-import io.quarkus.test.common.QuarkusTestResource;
-import io.quarkus.test.common.ResourceArg;
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 import io.restassured.http.ContentType;
 
@@ -31,12 +27,8 @@ import static java.util.concurrent.TimeUnit.MINUTES;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
 import static org.hamcrest.Matchers.notNullValue;
-import static org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource.KOGITO_KAFKA_TOPICS;
 
 @QuarkusIntegrationTest
-@QuarkusTestResource(value = KafkaQuarkusTestResource.class,
-        initArgs = { @ResourceArg(name = KOGITO_KAFKA_TOPICS, value = "validatedAccountEmail,validateAccountEmail,activateAccount,activatedAccount,newAccountEventType ") })
-@QuarkusTestResource(PostgreSqlQuarkusTestResource.class)
 class CorrelationIT {
 
     public static final String HEALTH_URL = "/q/health";
