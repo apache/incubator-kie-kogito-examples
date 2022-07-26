@@ -7,7 +7,7 @@
 
   <groupId>org.kie.kogito.examples</groupId>
   <name>Kogito Example :: Serverless Workflow Newsletter Subscription Showcase</name>
-  <version>2.0.0-SNAPSHOT</version>
+  <version>1.0-SNAPSHOT</version>
   <description>Kogito Serverless Workflow example showcasing the Newsletter Subscription use case</description>
   <artifactId>serverless-workflow-newsletter-subscription</artifactId>
   <packaging>pom</packaging>
