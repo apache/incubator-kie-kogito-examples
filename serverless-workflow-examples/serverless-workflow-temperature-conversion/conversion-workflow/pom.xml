@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>serverless-workflow-temperature-conversion</artifactId>
-    <version>1.24.1-SNAPSHOT</version>
+    <version>1.24.1.Final</version>
   </parent>
   <artifactId>conversion-workflow</artifactId>
   <name>Kogito Example :: Serverless Workflow Temperature Conversion :: Conversion Service</name>

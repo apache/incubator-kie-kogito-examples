@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>serverless-workflow-greeting-rpc-quarkus</artifactId>
-    <version>1.24.1-SNAPSHOT</version>
+    <version>1.24.1.Final</version>
   </parent>
   <artifactId>serverless-workflow-greeting-client-rpc-quarkus</artifactId>
   <name>Kogito Example :: Serverless Workflow Greeting :: gRPC Client:: Quarkus</name>
