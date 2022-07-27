@@ -6,7 +6,7 @@
   "start": "GreetPerson",
   "functions": [
     {
-      "name": "sayHello",
+      "name": "SayHelloMultipleLanguagesAtOnce",
       "type": "rpc",
       "operation": "greeting.proto#Greeter#SayHelloMultipleLanguagesAtOnce"
     }
@@ -17,9 +17,9 @@
       "type": "operation",
       "actions": [
         {
-          "name": "sayHello",
+          "name": "SayHelloMultipleLanguagesAtOnce",
           "functionRef" : {
-            "refName": "sayHello",
+            "refName": "SayHelloMultipleLanguagesAtOnce",
             "arguments": ".helloRequests"
           }
         }
