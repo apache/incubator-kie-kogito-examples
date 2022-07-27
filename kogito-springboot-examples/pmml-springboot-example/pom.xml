@@ -13,7 +13,7 @@
   <name>Kogito Example :: PMML - Spring Boot</name>
 
   <properties>
-    <drools.version>8.24.0-SNAPSHOT</drools.version>
+    <drools.version>8.26.0-SNAPSHOT</drools.version>
   </properties>
 
   <dependencyManagement>

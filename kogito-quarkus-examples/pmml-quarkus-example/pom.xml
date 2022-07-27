@@ -17,7 +17,7 @@
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
     <kogito.bom.version>${project.version}</kogito.bom.version>
-    <drools.version>8.24.0-SNAPSHOT</drools.version>
+    <drools.version>8.26.0-SNAPSHOT</drools.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -66,6 +66,16 @@
       <dependency>
         <groupId>org.kie</groupId>
         <artifactId>kie-pmml-models-drools-scorecard-evaluator</artifactId>
+        <version>${drools.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.kie</groupId>
+        <artifactId>kie-drl-compilation-common</artifactId>
+        <version>${drools.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.kie</groupId>
+        <artifactId>kie-drl-map-input-runtime</artifactId>
         <version>${drools.version}</version>
       </dependency>
     </dependencies>
@@ -153,7 +163,15 @@
       <groupId>org.kie</groupId>
       <artifactId>kie-pmml-models-drools-scorecard-evaluator</artifactId>
     </dependency>
-
+    <!-- EFESTO -->
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-drl-compilation-common</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-drl-map-input-runtime</artifactId>
+    </dependency>
 
 
     <dependency>
