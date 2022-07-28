@@ -37,6 +37,7 @@
         <module>serverless-workflow-greeting-quarkus</module>
         <module>serverless-workflow-greeting-rpc-quarkus</module>
         <module>serverless-workflow-order-processing</module>
+        <module>serverless-workflow-parallel-execution</module>
         <module>serverless-workflow-saga-quarkus</module>
         <module>serverless-workflow-service-calls-quarkus</module>
         <module>serverless-workflow-temperature-conversion</module>
@@ -105,6 +106,7 @@
         <module>serverless-workflow-greeting-quarkus</module>
         <module>serverless-workflow-greeting-rpc-quarkus</module>
         <module>serverless-workflow-order-processing</module>
+        <module>serverless-workflow-parallel-execution</module>
         <module>serverless-workflow-saga-quarkus</module>
         <module>serverless-workflow-service-calls-quarkus</module>
         <module>serverless-workflow-temperature-conversion</module>
