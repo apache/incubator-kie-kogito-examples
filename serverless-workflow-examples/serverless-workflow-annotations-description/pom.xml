@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.kie.kogito.examples</groupId>
         <artifactId>serverless-workflow-examples</artifactId>
-        <version>1.24.1-SNAPSHOT</version>
+        <version>1.24.1.Final</version>
     </parent>
     <artifactId>serverless-workflow-annotations-description</artifactId>
     <name>Kogito Example :: Serverless Workflow Annotations and Description:: Quarkus</name>
