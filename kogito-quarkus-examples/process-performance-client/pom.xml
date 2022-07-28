@@ -7,7 +7,7 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>kogito-quarkus-examples</artifactId>
-    <version>1.24.1.Final</version>
+    <version>1.24.2-SNAPSHOT</version>
   </parent>
   <artifactId>process-performance-client</artifactId>
   <name>Kogito Example :: Client Performance test</name>
