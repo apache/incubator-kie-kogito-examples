@@ -34,6 +34,8 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+    <version.org.kie.kogito>2.0.0-SNAPSHOT</version.org.kie.kogito>
+
     <surefire.forkCount>1</surefire.forkCount>
     <failsafe.include>**/*IT.java</failsafe.include>
     <failsafe.exclude>**/Native*IT.java</failsafe.exclude>
@@ -154,7 +156,7 @@
       <dependency>
         <groupId>org.kie.kogito</groupId>
         <artifactId>kogito-test-utils</artifactId>
-        <version>${project.version}</version>
+      <version>${version.org.kie.kogito}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

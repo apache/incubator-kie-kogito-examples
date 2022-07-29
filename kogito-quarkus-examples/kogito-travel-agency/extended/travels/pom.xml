@@ -119,7 +119,7 @@
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-quarkus-test-utils</artifactId>
-        <version>${version.org.kie.kogito}</version>
+      <version>${version.org.kie.kogito}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
