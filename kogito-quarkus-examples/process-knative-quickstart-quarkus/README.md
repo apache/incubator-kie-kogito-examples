@@ -130,7 +130,7 @@ mvn clean package -Pnative
 To run the generated native executable, generated in `target/`, execute
 
 ```
-./target/process-kafka-quickstart-quarkus-runner
+./target/process-knative-quickstart-quarkus-runner
 ```
 
 ### OpenAPI (Swagger) documentation
