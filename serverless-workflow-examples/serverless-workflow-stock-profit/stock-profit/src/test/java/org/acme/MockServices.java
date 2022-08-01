@@ -34,8 +34,8 @@ public class MockServices implements QuarkusTestResourceLifecycleManager {
     public Map<String, String> start() {
         configureWiremockServer();
         return Map.of(
-                "quarkus.rest-client.\"stock_svc_yaml\".url", wireMockServer.baseUrl(),
-                "quarkus.rest-client.\"stock_portfolio_svc_yaml\".url", wireMockServer.baseUrl()
+                "quarkus.rest-client.stock_svc_yaml.url", wireMockServer.baseUrl(),
+                "quarkus.rest-client.stock_portfolio_svc_yaml.url", wireMockServer.baseUrl()
         );
     }
 
