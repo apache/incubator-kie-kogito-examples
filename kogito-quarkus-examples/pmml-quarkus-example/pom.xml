@@ -68,6 +68,7 @@
         <artifactId>kie-pmml-models-drools-scorecard-evaluator</artifactId>
         <version>${drools.version}</version>
       </dependency>
+      <!-- Efesto -->
       <dependency>
         <groupId>org.kie</groupId>
         <artifactId>kie-drl-compilation-common</artifactId>
