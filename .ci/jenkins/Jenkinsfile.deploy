@@ -6,6 +6,8 @@ import org.kie.jenkins.MavenStagingHelper
 
 deployProperties = [:]
 
+examplesHelper = null
+
 pipeline {
     agent {
         label 'kie-rhel7 && kie-mem16g && !master'
@@ -42,6 +44,9 @@ pipeline {
             steps {
                 script {
                     cleanWs()
+
+                    checkout scm
+                    examplesHelper = load '.ci/jenkins/helper_scripts/examples.groovy'
 
                     if (params.DISPLAY_NAME) {
                         currentBuild.displayName = params.DISPLAY_NAME
@@ -391,6 +396,8 @@ void runMavenDeploy(boolean localDeployment = false) {
     } else if (env.MAVEN_DEPLOY_REPOSITORY) {
         mvnCmd.withDeployRepository(env.MAVEN_DEPLOY_REPOSITORY)
     }
+
+    mvnCmd.withOptions(examplesHelper.getDeployableArtifactIds().collect { "-pl :${it} "})
 
     mvnCmd.skipTests(true).run('clean deploy')
 }
