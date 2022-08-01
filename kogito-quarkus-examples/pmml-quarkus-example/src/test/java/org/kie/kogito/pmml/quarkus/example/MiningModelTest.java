@@ -21,6 +21,7 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.RestAssured;
 
 import static org.kie.kogito.pmml.quarkus.example.CommonTestUtils.testDescriptive;
 import static org.kie.kogito.pmml.quarkus.example.CommonTestUtils.testResult;
@@ -28,8 +29,12 @@ import static org.kie.kogito.pmml.quarkus.example.CommonTestUtils.testResult;
 @QuarkusTest
 class MiningModelTest {
 
-    private static final String BASE_PATH = "/PredicatesMining";
+    private static final String BASE_PATH = "/Testminingmodel/PredicatesMining";
     private static final String TARGET = "categoricalResult";
+
+    static {
+        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+    }
 
     @Test
     void testEvaluatePredicatesMiningResult() {

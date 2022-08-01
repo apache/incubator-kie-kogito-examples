@@ -21,6 +21,7 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.RestAssured;
 
 import static org.kie.kogito.pmml.quarkus.example.CommonTestUtils.testDescriptive;
 import static org.kie.kogito.pmml.quarkus.example.CommonTestUtils.testResult;
@@ -28,8 +29,12 @@ import static org.kie.kogito.pmml.quarkus.example.CommonTestUtils.testResult;
 @QuarkusTest
 class SimpleScorecardTest {
 
-    private static final String BASE_PATH = "/SimpleScorecard";
+    private static final String BASE_PATH = "/Testscorecard/SimpleScorecard";
     private static final String TARGET = "score";
+
+    static {
+        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+    }
 
     @Test
     void testEvaluateSimpleScorecardResult() {

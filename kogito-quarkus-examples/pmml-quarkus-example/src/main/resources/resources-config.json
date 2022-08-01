@@ -1,0 +1,10 @@
+{
+  "resources": [
+    {
+      "pattern": ".*\\.pmml_json$"
+    },
+    {
+      "pattern": ".*\\.drl_json$"
+    }
+  ]
+}
