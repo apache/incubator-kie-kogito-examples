@@ -104,15 +104,17 @@ public class GreeterService extends GreeterGrpc.GreeterImplBase {
     @Override
     public StreamObserver<HelloRequest> sayHelloMultipleLanguagesError(StreamObserver<HelloReply> responseObserver) {
         return new StreamObserver<>() {
-            int counter = 0;
-
+            int counter;
+            
             @Override
             public void onNext(HelloRequest helloRequest) {
-                responseObserver.onNext(HelloReply.newBuilder().setMessage(getMessage(helloRequest)).build());
-                if (++counter == 2) {
+                counter++;
+                if (counter == 2) {
+                    responseObserver.onNext(HelloReply.newBuilder().setMessage(getMessage(helloRequest)).build());
                     RuntimeException ex = Status.OUT_OF_RANGE.asRuntimeException();
                     responseObserver.onError(ex);
-                    throw ex;
+                } else if (counter < 2){
+                    responseObserver.onNext(HelloReply.newBuilder().setMessage(getMessage(helloRequest)).build());
                 }
             }
 
@@ -123,7 +125,9 @@ public class GreeterService extends GreeterGrpc.GreeterImplBase {
 
             @Override
             public void onCompleted() {
-                responseObserver.onCompleted();
+                if (counter < 2) {
+                    responseObserver.onCompleted();
+                }
             }
         };
     }
