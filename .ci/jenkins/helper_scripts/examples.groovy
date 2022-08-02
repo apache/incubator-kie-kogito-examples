@@ -30,10 +30,9 @@ List getDeployableArtifactIds() {
     }
 
     // echo "${writeJSON(json: rootFolder, returnText:true)}"
-
-    def pomProjectPaths = getPackagingPomProjectPaths(rootFolder)
-    return pomProjectPaths.collect {
-        return getArtifactId(readFile(file: it))
+    
+    return getPackagingPomProjectPaths(rootFolder).collect {
+        return getArtifactId(it, readFile(file: it))
     }.findAll { it }
 }
 
@@ -50,11 +49,12 @@ List getPackagingPomProjectPaths(def folder) {
 }
 
 @NonCPS
-String getArtifactId(String pomFileContent) {
+String getArtifactId(String pomFileName, String pomFileContent) {
     def pomXml = new XmlSlurper().parseText(pomFileContent)
-    if (pomXml.children().find{ it.name() == 'parent' || it == './pom.xml' }){
+    if (pomFileName == './pom.xml' || pomXml.children().find{ it.name() == 'parent' }){
         return "${pomXml.artifactId.text()}"
     }
+    println "file ignored"
     return ''
 }
 
