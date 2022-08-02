@@ -6,6 +6,8 @@ import org.kie.jenkins.MavenStagingHelper
 
 deployProperties = [:]
 
+examplesHelper = null
+
 pipeline {
     agent {
         label 'kie-rhel7 && kie-mem16g && !master'
@@ -42,6 +44,9 @@ pipeline {
             steps {
                 script {
                     cleanWs()
+
+                    checkout scm
+                    examplesHelper = load '.ci/jenkins/helper_scripts/examples.groovy'
 
                     if (params.DISPLAY_NAME) {
                         currentBuild.displayName = params.DISPLAY_NAME
@@ -152,6 +157,48 @@ pipeline {
                         saveReports()
                         util.archiveConsoleLog()
                     }
+                }
+            }
+        }
+        stage('Deploy to repository') {
+            when {
+                expression { return !shouldStageArtifacts() && !isSpecificArtifactsUpload() && shouldDeployToRepository() }
+            }
+            steps {
+                script {
+                    runMavenDeploy()
+                }
+            }
+        }
+        stage('Deploy locally') {
+            when {
+                expression { return shouldStageArtifacts() || isSpecificArtifactsUpload() }
+            }
+            steps {
+                script {
+                    runMavenDeploy(true)
+                }
+            }
+        }
+        stage('Upload artifacts to given repository') {
+            when {
+                expression { return isSpecificArtifactsUpload() }
+            }
+            steps {
+                script {
+                    // Deploy to specific repository with credentials
+                    maven.uploadLocalArtifacts(env.MAVEN_REPO_CREDS_ID, getLocalDeploymentFolder(), getMavenRepoZipUrl())
+                }
+            }
+        }
+        stage('Stage artifacts') {
+            when {
+                expression { return shouldStageArtifacts() }
+            }
+            steps {
+                script {
+                    // Stage release artifacts
+                    runMavenStage()
                 }
             }
         }
@@ -348,6 +395,10 @@ void runMavenDeploy(boolean localDeployment = false) {
         mvnCmd.withLocalDeployFolder(getLocalDeploymentFolder())
     } else if (env.MAVEN_DEPLOY_REPOSITORY) {
         mvnCmd.withDeployRepository(env.MAVEN_DEPLOY_REPOSITORY)
+    }
+
+    dir(getRepoName()) {
+        mvnCmd.withOptions(examplesHelper.getDeployableArtifactIds().collect { "-pl :${it} "})
     }
 
     mvnCmd.skipTests(true).run('clean deploy')
