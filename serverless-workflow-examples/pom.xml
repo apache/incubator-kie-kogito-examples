@@ -36,6 +36,7 @@
         <module>serverless-workflow-github-showcase</module>
         <module>serverless-workflow-greeting-quarkus</module>
         <module>serverless-workflow-greeting-rpc-quarkus</module>
+        <module>serverless-workflow-hello-world</module>
         <module>serverless-workflow-order-processing</module>
         <module>serverless-workflow-parallel-execution</module>
         <module>serverless-workflow-saga-quarkus</module>
@@ -105,6 +106,7 @@
         <module>serverless-workflow-funqy</module>
         <module>serverless-workflow-greeting-quarkus</module>
         <module>serverless-workflow-greeting-rpc-quarkus</module>
+        <module>serverless-workflow-hello-world</module>
         <module>serverless-workflow-order-processing</module>
         <module>serverless-workflow-parallel-execution</module>
         <module>serverless-workflow-saga-quarkus</module>
