@@ -24,6 +24,7 @@ import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.ByteArraySerializer;
 import org.kie.kogito.event.process.ProcessDataEvent;
+import org.kie.kogito.jackson.utils.ObjectMapperFactory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -42,7 +43,7 @@ public class KafkaDispatcher implements RequestDispatcher {
 
     public KafkaDispatcher(String trigger) {
         this.trigger = trigger;
-        this.objectMapper = new ObjectMapper();
+        this.objectMapper = ObjectMapperFactory.get();
         Map<String, Object> properties = Collections.singletonMap(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,
                 "localhost:9092");
         kafkaProducer = new KafkaProducer<>(properties, new ByteArraySerializer(), new ByteArraySerializer());
