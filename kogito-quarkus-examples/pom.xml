@@ -203,36 +203,6 @@
     </profile>
 
     <profile>
-      <id>productized</id>
-      <activation>
-        <property>
-          <name>productized</name>
-        </property>
-      </activation>
-      <modules>
-        <module>serverless-workflow-annotations-description</module>
-        <module>serverless-workflow-callback-quarkus</module>
-        <module>serverless-workflow-compensation-quarkus</module>
-        <module>serverless-workflow-consuming-events-over-http-quarkus</module>
-        <module>serverless-workflow-correlation-quarkus</module>
-        <module>serverless-workflow-error-quarkus</module>
-        <module>serverless-workflow-events-quarkus</module>
-        <module>serverless-workflow-expression-quarkus</module>
-        <module>serverless-workflow-foreach-quarkus</module>
-        <module>serverless-workflow-functions-quarkus</module>
-        <module>serverless-workflow-funqy</module>
-        <module>serverless-workflow-greeting-quarkus</module>
-        <module>serverless-workflow-greeting-rpc-quarkus</module>
-        <module>serverless-workflow-order-processing</module>
-        <module>serverless-workflow-saga-quarkus</module>
-        <module>serverless-workflow-service-calls-quarkus</module>
-        <module>serverless-workflow-temperature-conversion</module>
-        <module>serverless-workflow-qas-service-showcase</module>
-        <module>serverless-workflow-newsletter-subscription</module>
-      </modules>
-    </profile>
-           
-    <profile>
       <id>kogito-apps-downstream</id>
       <activation>
         <property>
