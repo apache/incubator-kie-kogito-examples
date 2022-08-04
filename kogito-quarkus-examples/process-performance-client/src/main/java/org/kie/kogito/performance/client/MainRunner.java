@@ -26,7 +26,7 @@ public class MainRunner {
 
     public static void main(String[] args) {
         try (RequestDispatcher dispatcher = RequestDispatcherFactory.getDispatcher(RequestType.KAFKA, "test")) {
-            new RequestDispatcherRunner(dispatcher, 1, 1000).call();
+            new RequestDispatcherRunner(dispatcher, 100, 10).call();
         } catch (Exception ex) {
             logger.error("Execution error ", ex);
             System.exit(-1);
