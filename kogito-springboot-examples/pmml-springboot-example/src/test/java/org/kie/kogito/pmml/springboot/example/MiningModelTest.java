@@ -33,7 +33,7 @@ import static org.kie.kogito.pmml.springboot.example.CommonTestUtils.testResult;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 class MiningModelTest {
 
-    private static final String BASE_PATH = "/PredicatesMining";
+    private static final String BASE_PATH = "/Testminingmodel/PredicatesMining";
     private static final String TARGET = "categoricalResult";
 
     @LocalServerPort

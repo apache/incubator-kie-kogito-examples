@@ -36,8 +36,8 @@ Given inputs:
 
 ```json
 {
-  "fld1":3.0, 
-  "fld2":2.0, 
+  "fld1":3.0,
+  "fld2":2.0,
   "fld3":"y"
 }
 ```
@@ -45,12 +45,12 @@ Given inputs:
 Curl command (using the JSON object above):
 
 ```sh
-curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"fld1":3.0, "fld2":2.0, "fld3":"y"}' http://localhost:8080/LinReg
+curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"fld1":3.0, "fld2":2.0, "fld3":"y"}' http://localhost:8080/Testregression/LinReg
 ```
 or on Windows:
 
 ```sh
-curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" -d "{"fld1":3.0, "fld2":2.0, "fld3":"y"}" http://localhost:8080/LinReg
+curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" -d "{"fld1":3.0, "fld2":2.0, "fld3":"y"}" http://localhost:8080/Testregression/LinReg
 ```
 
 Example response:
@@ -75,12 +75,12 @@ Given inputs:
 Curl command (using the JSON object above):
 
 ```sh
-curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"temperature":30.0, "humidity":10.0}' http://localhost:8080/SampleMine
+curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"temperature":30.0, "humidity":10.0}' http://localhost:8080/Testtree/SampleMine
 ```
 or on Windows:
 
 ```sh
-curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" -d "{"temperature":30.0, "humidity":10.0}" http://localhost:8080/SampleMine
+curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" -d "{"temperature":30.0, "humidity":10.0}" http://localhost:8080/Testtree/SampleMine
 ```
 
 Example response:
@@ -105,12 +105,12 @@ Given inputs:
 Curl command (using the JSON object above):
 
 ```sh
-curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"input1":5.0, "input2":-10.0}' http://localhost:8080/SimpleScorecard
+curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"input1":5.0, "input2":-10.0}' http://localhost:8080/Testscorecard/SimpleScorecard
 ```
 or on Windows:
 
 ```sh
-curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" -d "{"input1":5.0, "input2":-10.0}" http://localhost:8080/SimpleScorecard
+curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" -d "{"input1":5.0, "input2":-10.0}" http://localhost:8080/Testscorecard/SimpleScorecard
 ```
 
 Example response:
@@ -139,12 +139,12 @@ Given inputs:
 Curl command (using the JSON object above):
 
 ```sh
-curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"residenceState":"AP", "validLicense":true, "occupation":"ASTRONAUT", "categoricalY":"classA", "categoricalX":"red", "variable":6.6, "age":25.0}' http://localhost:8080/PredicatesMining
+curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"residenceState":"AP", "validLicense":true, "occupation":"ASTRONAUT", "categoricalY":"classA", "categoricalX":"red", "variable":6.6, "age":25.0}' http://localhost:8080/Testminingmodel/PredicatesMining
 ```
 or on Windows:
 
 ```sh
-curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" -d "{"residenceState":"AP", "validLicense":true, "occupation":"ASTRONAUT", "categoricalY":"classA", "categoricalX":"red", "variable":6.6, "age":25.0}" http://localhost:8080/PredicatesMining
+curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" -d "{"residenceState":"AP", "validLicense":true, "occupation":"ASTRONAUT", "categoricalY":"classA", "categoricalX":"red", "variable":6.6, "age":25.0}" http://localhost:8080/Testminingmodel/PredicatesMining
 ```
 
 Example response:
