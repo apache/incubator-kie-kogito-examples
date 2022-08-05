@@ -99,8 +99,9 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-test-kafka-companion</artifactId>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-quarkus-test-utils</artifactId>
+      <version>${kogito.bom.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>

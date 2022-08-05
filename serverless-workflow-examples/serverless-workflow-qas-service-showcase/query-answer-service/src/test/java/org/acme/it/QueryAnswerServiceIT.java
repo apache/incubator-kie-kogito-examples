@@ -22,10 +22,12 @@ import java.util.List;
 import java.util.UUID;
 
 import org.acme.QueryRecord;
-import org.apache.kafka.clients.producer.ProducerRecord;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.kie.kogito.test.quarkus.QuarkusTestProperty;
+import org.kie.kogito.test.quarkus.kafka.KafkaTestClient;
+import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -35,11 +37,8 @@ import io.cloudevents.jackson.JsonCloudEventData;
 import io.cloudevents.jackson.JsonFormat;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusIntegrationTest;
-import io.quarkus.test.kafka.InjectKafkaCompanion;
-import io.quarkus.test.kafka.KafkaCompanionResource;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
-import io.smallrye.reactive.messaging.kafka.companion.KafkaCompanion;
 
 import static io.restassured.RestAssured.given;
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -48,7 +47,7 @@ import static org.awaitility.Awaitility.await;
 
 @QuarkusIntegrationTest
 @QuarkusTestResource(WireMockQueryServiceResource.class)
-@QuarkusTestResource(KafkaCompanionResource.class)
+@QuarkusTestResource(KafkaQuarkusTestResource.class)
 class QueryAnswerServiceIT {
 
     private static final String QUERY = "THE FORMULATED QUERY";
@@ -56,13 +55,15 @@ class QueryAnswerServiceIT {
     private static final String QUERY_ANSWER_SERVICE_URL = "/qaservice";
     private static final String QUERY_ANSWER_SERVICE_GET_BY_ID_URL = QUERY_ANSWER_SERVICE_URL + "/{id}";
 
+    @QuarkusTestProperty(name = KafkaQuarkusTestResource.KOGITO_KAFKA_PROPERTY)
+    private String kafkaBootstrapServers;
     private ObjectMapper objectMapper;
 
-    @InjectKafkaCompanion
-    KafkaCompanion kafkaCompanion;
+    private KafkaTestClient kafkaClient;
 
     @BeforeEach
     void setup() {
+        kafkaClient = new KafkaTestClient(kafkaBootstrapServers);
         objectMapper = new ObjectMapper()
                 .registerModule(new JavaTimeModule())
                 .registerModule(JsonFormat.getCloudEventJacksonModule())
@@ -103,7 +104,7 @@ class QueryAnswerServiceIT {
                 .withData(JsonCloudEventData.wrap(objectMapper.createObjectNode().put("answer", ANSWER)))
                 .build());
 
-        kafkaCompanion.produceStrings().usingGenerator(i -> new ProducerRecord<>("query_response_events", response), 1);
+        kafkaClient.produce(response, "query_response_events");
 
         // give some time for the event to be processed and the process to finish.
         await()
@@ -137,7 +138,7 @@ class QueryAnswerServiceIT {
 
     @AfterEach
     void cleanUp() {
-        kafkaCompanion.close();
+        kafkaClient.shutdown();
     }
 
 }
