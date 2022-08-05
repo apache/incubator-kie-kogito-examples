@@ -103,7 +103,7 @@ class QueryAnswerServiceIT {
                 .withData(JsonCloudEventData.wrap(objectMapper.createObjectNode().put("answer", ANSWER)))
                 .build());
 
-        kafkaCompanion.produceStrings().usingGenerator(i -> new ProducerRecord<>("query_response_events", response));
+        kafkaCompanion.produceStrings().usingGenerator(i -> new ProducerRecord<>("query_response_events", response), 1);
 
         // give some time for the event to be processed and the process to finish.
         await()
