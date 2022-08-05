@@ -29,7 +29,7 @@ import static org.kie.kogito.dmn.pmml.quarkus.example.CommonTestUtils.testResult
 @QuarkusTest
 class DecisionTreeTest {
 
-    private static final String BASE_PATH = "/DecisionTree";
+    private static final String BASE_PATH = "/Testtree/DecisionTree";
     private static final String TARGET = "decision";
 
     static {

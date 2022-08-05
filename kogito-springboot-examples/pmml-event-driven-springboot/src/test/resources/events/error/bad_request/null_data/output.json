@@ -4,6 +4,7 @@
   "source": "PredicatesMining",
   "type": "PredictionResponseError",
   "subject": "TheSubject",
+  "kogitopmmlfilename": "test_miningmodel.pmml",
   "kogitopmmlmodelname": "PredicatesMining",
   "data": "BAD_REQUEST"
 }

@@ -190,7 +190,6 @@
       <artifactId>kie-drl-map-input-runtime</artifactId>
     </dependency>
 
-
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-junit5</artifactId>

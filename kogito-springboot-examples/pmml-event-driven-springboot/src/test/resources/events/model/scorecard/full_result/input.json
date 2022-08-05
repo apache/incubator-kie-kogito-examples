@@ -4,6 +4,7 @@
   "source": "SomeEventSource",
   "type": "PredictionRequest",
   "subject": "TheSubject",
+  "kogitopmmlfilename": "test_scorecard.pmml",
   "kogitopmmlmodelname": "SimpleScorecard",
   "kogitopmmlfullresult": true,
   "data": {

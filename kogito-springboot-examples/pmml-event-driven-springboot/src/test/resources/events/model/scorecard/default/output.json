@@ -4,6 +4,7 @@
   "source": "SimpleScorecard",
   "type": "PredictionResponse",
   "subject": "TheSubject",
+  "kogitopmmlfilename": "test_scorecard.pmml",
   "kogitopmmlmodelname": "SimpleScorecard",
   "data": {
     "score": -15.0

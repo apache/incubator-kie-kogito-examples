@@ -33,7 +33,7 @@ import static org.kie.kogito.dmn.pmml.springboot.example.CommonTestUtils.testRes
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class DecisionTreeTest {
 
-    private static final String BASE_PATH = "/DecisionTree";
+    private static final String BASE_PATH = "/Testtree/DecisionTree";
     private static final String TARGET = "decision";
 
     @LocalServerPort

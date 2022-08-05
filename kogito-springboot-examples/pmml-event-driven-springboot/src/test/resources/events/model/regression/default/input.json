@@ -4,6 +4,7 @@
   "source": "SomeEventSource",
   "type": "PredictionRequest",
   "subject": "TheSubject",
+  "kogitopmmlfilename": "test_regression.pmml",
   "kogitopmmlmodelname": "LinReg",
   "data": {
     "fld1":3.0,

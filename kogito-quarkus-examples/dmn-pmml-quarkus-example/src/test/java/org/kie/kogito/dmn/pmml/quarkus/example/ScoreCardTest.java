@@ -29,7 +29,7 @@ import static org.kie.kogito.dmn.pmml.quarkus.example.CommonTestUtils.testResult
 @QuarkusTest
 public class ScoreCardTest {
 
-    private static final String BASE_PATH = "/SampleScore";
+    private static final String BASE_PATH = "/Testscorecard/SampleScore";
     private static final String TARGET = "overallScore";
 
     static {
