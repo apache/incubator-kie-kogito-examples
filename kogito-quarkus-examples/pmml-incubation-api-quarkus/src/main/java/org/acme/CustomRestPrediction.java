@@ -42,10 +42,10 @@ public class CustomRestPrediction {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public DataContext linearRegression(Map<String, Object> payload) {
-        // path: /predictions/LinReg        
+        // path: /predictions/Testregression/LinReg
         var id = appRoot
                 .get(PredictionIds.class)
-                .get("LinReg");
+                .get("test_regression.pmml", "LinReg");
 
         MapDataContext ctx = MapDataContext.of(payload);
         return svc.evaluate(id, ctx).data();

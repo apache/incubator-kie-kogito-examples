@@ -92,6 +92,25 @@
     <finalName>${project.artifactId}</finalName>
     <plugins>
       <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>properties-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>set-system-properties</goal>
+            </goals>
+            <configuration>
+              <properties>
+                <property>
+                  <name>indexfile.directory</name>
+                  <value>${build.directory}/classes</value>
+                </property>
+              </properties>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
         <groupId>${quarkus.platform.group-id}</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
         <version>${quarkus-plugin.version}</version>
@@ -102,6 +121,15 @@
             </goals>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <configuration>
+          <systemPropertyVariables>
+            <indexfile.directory>${build.directory}/test-run</indexfile.directory>
+          </systemPropertyVariables>
+        </configuration>
       </plugin>
     </plugins>
   </build>
