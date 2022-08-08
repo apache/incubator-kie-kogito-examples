@@ -4,6 +4,7 @@
   "source": "aName",
   "type": "PredictionResponseError",
   "subject": "TheSubject",
+  "kogitopmmlfilename": "test_miningmodel.pmml",
   "kogitopmmlmodelname": "aName",
   "data": "MODEL_NOT_FOUND"
 }

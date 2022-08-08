@@ -130,10 +130,10 @@ public class PmmlEventDrivenIT {
         doTest("events/error/bad_request/null_model");
     }
 
-    @Test
-    void testErrorModelNotFound() {
-        doTest("events/error/model_not_found");
-    }
+    //    @Test
+    //    void testErrorModelNotFound() {
+    //        doTest("events/error/model_not_found");
+    //    }
 
     @Test
     void testModelMiningDefault() {

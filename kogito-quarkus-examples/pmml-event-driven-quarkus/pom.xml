@@ -17,6 +17,7 @@
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
     <kogito.bom.version>${project.version}</kogito.bom.version>
+    <drools.version>8.26.0-SNAPSHOT</drools.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -34,6 +35,50 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+      <!-- Drools models -->
+      <!-- Tree -->
+      <dependency>
+        <groupId>org.kie</groupId>
+        <artifactId>kie-pmml-models-drools-tree-model</artifactId>
+        <version>${drools.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.kie</groupId>
+        <artifactId>kie-pmml-models-drools-tree-compiler</artifactId>
+        <version>${drools.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.kie</groupId>
+        <artifactId>kie-pmml-models-drools-tree-evaluator</artifactId>
+        <version>${drools.version}</version>
+      </dependency>
+      <!-- Scorecard -->
+      <dependency>
+        <groupId>org.kie</groupId>
+        <artifactId>kie-pmml-models-drools-scorecard-model</artifactId>
+        <version>${drools.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.kie</groupId>
+        <artifactId>kie-pmml-models-drools-scorecard-compiler</artifactId>
+        <version>${drools.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.kie</groupId>
+        <artifactId>kie-pmml-models-drools-scorecard-evaluator</artifactId>
+        <version>${drools.version}</version>
+      </dependency>
+      <!-- Efesto -->
+      <dependency>
+        <groupId>org.kie</groupId>
+        <artifactId>kie-drl-compilation-common</artifactId>
+        <version>${drools.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.kie</groupId>
+        <artifactId>kie-drl-map-input-runtime</artifactId>
+        <version>${drools.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <dependencies>
@@ -46,6 +91,17 @@
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-addons-quarkus-events-predictions</artifactId>
     </dependency>
+
+    <!-- EFESTO -->
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-drl-compilation-common</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-drl-map-input-runtime</artifactId>
+    </dependency>
+
 
     <dependency>
       <groupId>io.quarkus</groupId>
