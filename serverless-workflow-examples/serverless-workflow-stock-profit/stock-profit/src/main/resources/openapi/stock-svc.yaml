@@ -1,0 +1,33 @@
+---
+openapi: 3.0.3
+info:
+  title: stock-service API
+  version: 2.0.0-SNAPSHOT
+paths:
+  /stock-price/{symbol}:
+    get:
+      tags:
+        - Stock Price Resource
+      operationId: getStockPrice
+      parameters:
+        - name: symbol
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stock'
+components:
+  schemas:
+    Stock:
+      type: object
+      properties:
+        symbol:
+          type: string
+        currentPrice:
+          type: number
