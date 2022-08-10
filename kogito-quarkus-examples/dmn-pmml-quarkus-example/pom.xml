@@ -47,16 +47,6 @@
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-quarkus-predictions</artifactId>
     </dependency>
-    <!--    <dependency>-->
-    <!--      <groupId>org.kie.kogito</groupId>-->
-    <!--      <artifactId>kogito-quarkus-rules-deployment</artifactId>-->
-    <!--      <exclusions>-->
-    <!--        <exclusion>-->
-    <!--          <groupId>org.kie</groupId>-->
-    <!--          <artifactId>efesto-runtime-manager-api</artifactId>-->
-    <!--        </exclusion>-->
-    <!--      </exclusions>-->
-    <!--    </dependency>-->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-resteasy</artifactId>
@@ -78,15 +68,6 @@
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-pmml</artifactId>
     </dependency>
-    <!--    &lt;!&ndash; EFESTO &ndash;&gt;-->
-    <!--    <dependency>-->
-    <!--      <groupId>org.kie</groupId>-->
-    <!--      <artifactId>kie-drl-compilation-common</artifactId>-->
-    <!--    </dependency>-->
-    <!--    <dependency>-->
-    <!--      <groupId>org.kie</groupId>-->
-    <!--      <artifactId>kie-drl-map-input-runtime</artifactId>-->
-    <!--    </dependency>-->
 
     <dependency>
       <groupId>io.quarkus</groupId>
