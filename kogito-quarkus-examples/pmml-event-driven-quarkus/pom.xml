@@ -55,17 +55,6 @@
       <artifactId>kogito-addons-quarkus-events-predictions</artifactId>
     </dependency>
 
-    <!-- EFESTO -->
-    <dependency>
-      <groupId>org.kie</groupId>
-      <artifactId>kie-drl-compilation-common</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.kie</groupId>
-      <artifactId>kie-drl-map-input-runtime</artifactId>
-    </dependency>
-
-
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-resteasy</artifactId>

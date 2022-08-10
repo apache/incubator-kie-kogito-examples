@@ -36,7 +36,6 @@
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-predictions-spring-boot-starter</artifactId>
     </dependency>
-
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
@@ -46,70 +45,6 @@
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-pmml</artifactId>
-      <exclusions>
-        <!-- Tree -->
-        <exclusion>
-          <groupId>org.kie</groupId>
-          <artifactId>kie-pmml-models-tree-model</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.kie</groupId>
-          <artifactId>kie-pmml-models-tree-compiler</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.kie</groupId>
-          <artifactId>kie-pmml-models-tree-evaluator</artifactId>
-        </exclusion>
-        <!-- Scorecard -->
-        <exclusion>
-          <groupId>org.kie</groupId>
-          <artifactId>kie-pmml-models-scorecard-model</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.kie</groupId>
-          <artifactId>kie-pmml-models-scorecard-compiler</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.kie</groupId>
-          <artifactId>kie-pmml-models-scorecard-evaluator</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <!-- Drools models -->
-    <!-- Tree -->
-    <dependency>
-      <groupId>org.kie</groupId>
-      <artifactId>kie-pmml-models-drools-tree-model</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.kie</groupId>
-      <artifactId>kie-pmml-models-drools-tree-compiler</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.kie</groupId>
-      <artifactId>kie-pmml-models-drools-tree-evaluator</artifactId>
-    </dependency>
-    <!-- Scorecard -->
-    <dependency>
-      <groupId>org.kie</groupId>
-      <artifactId>kie-pmml-models-drools-scorecard-model</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.kie</groupId>
-      <artifactId>kie-pmml-models-drools-scorecard-compiler</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.kie</groupId>
-      <artifactId>kie-pmml-models-drools-scorecard-evaluator</artifactId>
-    </dependency>
-    <!-- EFESTO -->
-    <dependency>
-      <groupId>org.kie</groupId>
-      <artifactId>kie-drl-compilation-common</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.kie</groupId>
-      <artifactId>kie-drl-map-input-runtime</artifactId>
     </dependency>
 
     <dependency>
@@ -127,25 +62,6 @@
   <build>
     <finalName>${project.artifactId}</finalName>
     <plugins>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>properties-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <goals>
-              <goal>set-system-properties</goal>
-            </goals>
-            <configuration>
-              <properties>
-                <property>
-                  <name>indexfile.directory</name>
-                  <value>${build.outputDirectory}/</value>
-                </property>
-              </properties>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
       <plugin>
         <groupId>org.kie.kogito</groupId>
         <artifactId>kogito-maven-plugin</artifactId>
