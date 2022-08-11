@@ -4,6 +4,7 @@
   "source": "LinReg",
   "type": "PredictionResponseFull",
   "subject": "TheSubject",
+  "kogitopmmlfilename": "test_regression.pmml",
   "kogitopmmlmodelname": "LinReg",
   "data": {
     "segmentIndex": 0,

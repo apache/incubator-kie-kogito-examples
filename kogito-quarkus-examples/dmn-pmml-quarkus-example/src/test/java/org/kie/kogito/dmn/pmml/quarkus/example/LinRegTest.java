@@ -29,7 +29,7 @@ import static org.kie.kogito.dmn.pmml.quarkus.example.CommonTestUtils.testResult
 @QuarkusTest
 public class LinRegTest {
 
-    private static final String BASE_PATH = "/LinReg";
+    private static final String BASE_PATH = "/Testregression/LinReg";
     private static final String TARGET = "fld4";
 
     static {

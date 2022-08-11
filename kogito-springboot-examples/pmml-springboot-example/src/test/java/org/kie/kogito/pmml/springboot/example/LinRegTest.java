@@ -33,7 +33,7 @@ import static org.kie.kogito.pmml.springboot.example.CommonTestUtils.testResult;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 class LinRegTest {
 
-    private static final String BASE_PATH = "/LinReg";
+    private static final String BASE_PATH = "/Testregression/LinReg";
     private static final String TARGET = "fld4";
 
     @LocalServerPort

@@ -35,7 +35,7 @@ import static org.kie.kogito.dmn.pmml.springboot.example.CommonTestUtils.testRes
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class ScoreCardTest {
 
-    private static final String BASE_PATH = "/SampleScore";
+    private static final String BASE_PATH = "/Testscorecard/SampleScore";
     private static final String TARGET = "overallScore";
 
     @LocalServerPort

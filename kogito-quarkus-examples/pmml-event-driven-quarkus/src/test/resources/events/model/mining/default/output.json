@@ -4,6 +4,7 @@
   "source": "PredicatesMining",
   "type": "PredictionResponse",
   "subject": "TheSubject",
+  "kogitopmmlfilename": "test_miningmodel.pmml",
   "kogitopmmlmodelname": "PredicatesMining",
   "data": {
     "categoricalResult": 1.381666666666666

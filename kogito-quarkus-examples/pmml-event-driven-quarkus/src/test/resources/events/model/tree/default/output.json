@@ -4,6 +4,7 @@
   "source": "SampleMine",
   "type": "PredictionResponse",
   "subject": "TheSubject",
+  "kogitopmmlfilename": "test_tree.pmml",
   "kogitopmmlmodelname": "SampleMine",
   "data": {
     "decision": "sunglasses"

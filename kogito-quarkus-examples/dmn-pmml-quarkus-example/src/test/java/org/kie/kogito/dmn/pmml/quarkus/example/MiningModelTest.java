@@ -29,7 +29,7 @@ import static org.kie.kogito.dmn.pmml.quarkus.example.CommonTestUtils.testResult
 @QuarkusTest
 public class MiningModelTest {
 
-    private static final String BASE_PATH = "/MiningModelSum";
+    private static final String BASE_PATH = "/Testminingmodelsummed/MiningModelSum";
     private static final String TARGET = "result";
 
     static {

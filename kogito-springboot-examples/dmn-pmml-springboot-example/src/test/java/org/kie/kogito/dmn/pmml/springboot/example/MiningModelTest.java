@@ -35,7 +35,7 @@ import static org.kie.kogito.dmn.pmml.springboot.example.CommonTestUtils.testRes
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class MiningModelTest {
 
-    private static final String BASE_PATH = "/MiningModelSum";
+    private static final String BASE_PATH = "/Testminingmodelsummed/MiningModelSum";
     private static final String TARGET = "result";
 
     @LocalServerPort

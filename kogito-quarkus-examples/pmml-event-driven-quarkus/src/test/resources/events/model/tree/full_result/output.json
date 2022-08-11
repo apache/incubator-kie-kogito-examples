@@ -4,6 +4,7 @@
   "source": "SampleMine",
   "type": "PredictionResponseFull",
   "subject": "TheSubject",
+  "kogitopmmlfilename": "test_tree.pmml",
   "kogitopmmlmodelname": "SampleMine",
   "data": {
     "segmentIndex": 0,

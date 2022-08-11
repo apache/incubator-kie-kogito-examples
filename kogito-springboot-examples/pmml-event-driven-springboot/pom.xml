@@ -29,7 +29,6 @@
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-predictions-spring-boot-starter</artifactId>
     </dependency>
-
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-addons-springboot-events-predictions</artifactId>
@@ -60,6 +59,7 @@
   <build>
     <finalName>${project.artifactId}</finalName>
     <plugins>
+
       <plugin>
         <groupId>org.kie.kogito</groupId>
         <artifactId>kogito-maven-plugin</artifactId>
