@@ -81,17 +81,6 @@ This needs to be given when starting process instance as delay attribute of type
 
 ## Build and run
 
-By default the [Jobs Service integration](#use-kogito-job-service-as-external-timer-service) is not enabled for this 
-example. To enable it, just uncomment this dependency in the `pom.xml` file, [see](#configure-pomxml):
-
-```xml
-<dependency>
-  <groupId>org.kie.kogito</groupId>
-  <artifactId>kogito-addons-quarkus-jobs-management</artifactId>
-  <version>${kogito.bom.version}</version>
-</dependency>
-```
-
 ### Prerequisites
 
 You will need:
@@ -104,6 +93,75 @@ When using native image compilation, you will also need:
   - Environment variable GRAALVM_HOME set accordingly
   - GraalVM native image needs as well native-image extension: https://www.graalvm.org/reference-manual/native-image/
   - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too, please refer to GraalVM installation documentation for more details.
+
+### Start Kogito Job Service
+
+You need to download the job service and start it locally
+
+You can download it from [Select Latest Version]
+https://repo.maven.apache.org/maven2/org/kie/kogito/jobs-service/
+
+```sh
+java -Dquarkus.http.port=8085 -jar jobs-service-common/target/jobs-service-common-{version}-runner.jar
+```
+
+* After Starting Kogito Web Service you should see a similar Log as follows
+
+<p align="center"><img src="docs/images/kogitoWebServiceLog.png"></p>
+
+In case you'd like to run the job service with enabled persistence then start
+Infinispan server before and then run the job service with following command
+
+Download Infinispan Server from
+https://infinispan.org/download/
+
+Start Infinispan Server
+[Infinispan Directory]/bin/sh server.sh
+
+```sh
+java -Dquarkus.http.port=8085 -jar jobs-service-infinispan/target/jobs-service-infinispan-{version}-runner.jar
+```
+
+* After Starting Infinispan you should see a similar Log as follows
+
+<p align="center"><img src="docs/images/infinispanRunning.png"></p>
+
+If you'd like to use PostgresSQL or MongoDB as persistence, start the PostgreSQL or MongoDB server, then start job service with following command
+
+For PostgreSQL:
+```sh
+java -Dquarkus.http.port=8085 -Dquarkus.datasource.username={username} -Dquarkus.datasource.password={password} -Dquarkus.datasource.reactive.url=postgresql://{host}:{port}/{db} -Dquarkus.datasource.jdbc.url=jdbc:postgresql://{host}:{port}/{db}  -jar jobs-service-postgresql/target/jobs-service-postgresql-{version}-runner.jar
+```
+
+For MongoDB:
+```sh
+java -Dquarkus.http.port=8085 -Dquarkus.mongodb.connection-string=mongodb://{username}:{password}@{host}:{port} -Dquarkus.mongodb.database={db} -jar jobs-service-mongodb/target/jobs-service-mongodb-{version}-runner.jar
+```
+
+In all cases replace `{version}` with actual Kogito version to be used (Job Service is available from 0.6.0)
+
+After that you can redo the timer queries described above.
+
+### Kogito Jobs Service configuration into the application
+
+To be able to use Kogito Job Service as timer service , an additional dependency is needed into the `pom.xml` file:
+
+```xml
+<dependency>
+  <groupId>org.kie.kogito</groupId>
+  <artifactId>kogito-addons-quarkus-jobs-management</artifactId>
+</dependency>
+```
+
+Then, to allow to use Job Service as timer service there is a need to specify some properties in the `src/main/application.properties` file:
+
+```properties
+kogito.jobs-service.url=http://localhost:8085
+kogito.service.url=http://localhost:8080
+```
+
+First one is used to direct the Kogito runtime to let it know where is the Kogito Job Service - it needs to match the location of the Kogito Job Service when starting it - see below.  
+Second one is used by Kogito Job Service to callback when the timer expires and needs to be pointing to the service host and port
 
 ### Compile and Run in Local Dev Mode
 
@@ -258,86 +316,6 @@ Before timer... waiting for  R2/PT1S
 After Timer
 After Timer
 ```
-
-## Use Kogito Job Service as external timer service
-
-There is additional configuration needed in 
-
-* application.properties
-* pom.xml
-
-### Configure application.properties
-
-To allow to use Job Service as timer service there is a need to specify additional properties
-
-```properties
-kogito.jobs-service.url=http://localhost:8085
-kogito.service.url=http://localhost:8080
-```
-
-
-First one is used to direct the Kogito runtime to let it know where is the Kogito Job Service - it needs
-to match the location of the Kogito Job Service when starting it - see below.
-Second one is used by Kogito Job Service to callback when the timer expires and needs to be pointing to the service host and port
-
-### Configure pom.xml
-
-To be able to use Kogito Job Service as timer service additional dependency needs to be added
-
-```xml
-<dependency>
-  <groupId>org.kie.kogito</groupId>
-  <artifactId>kogito-addons-quarkus-jobs-management</artifactId>
-</dependency>
-```
-
-### Start Kogito Job Service
-
-You need to download the job service and start it locally
-
-You can download it from [Select Latest Version]
-https://repo.maven.apache.org/maven2/org/kie/kogito/jobs-service/
-
-```sh
-java -Dquarkus.http.port=8085 -jar jobs-service-common/target/jobs-service-common-{version}-runner.jar
-```
-
-* After Starting Kogito Web Service you should see a similar Log as follows
-
-<p align="center"><img src="docs/images/kogitoWebServiceLog.png"></p>
-
-In case you'd like to run the job service with enabled persistence then start
-Infinispan server before and then run the job service with following command
-
-Download Infinispan Server from
-https://infinispan.org/download/
-
-Start Infinispan Server
-[Infinispan Directory]/bin/sh server.sh
-
-```sh
-java -Dquarkus.http.port=8085 -jar jobs-service-infinispan/target/jobs-service-infinispan-{version}-runner.jar
-```
-
-* After Starting Infinispan you should see a similar Log as follows
-
-<p align="center"><img src="docs/images/infinispanRunning.png"></p>
-
-If you'd like to use PostgresSQL or MongoDB as persistence, start the PostgreSQL or MongoDB server, then start job service with following command
-
-For PostgreSQL:
-```sh
-java -Dquarkus.http.port=8085 -Dquarkus.datasource.username={username} -Dquarkus.datasource.password={password} -Dquarkus.datasource.reactive.url=postgresql://{host}:{port}/{db} -Dquarkus.datasource.jdbc.url=jdbc:postgresql://{host}:{port}/{db}  -jar jobs-service-postgresql/target/jobs-service-postgresql-{version}-runner.jar
-```
-
-For MongoDB:
-```sh
-java -Dquarkus.http.port=8085 -Dquarkus.mongodb.connection-string=mongodb://{username}:{password}@{host}:{port} -Dquarkus.mongodb.database={db} -jar jobs-service-mongodb/target/jobs-service-mongodb-{version}-runner.jar
-```
-
-In all cases replace `{version}` with actual Kogito version to be used (Job Service is available from 0.6.0)
-
-After that you can redo the timer queries described above.
 
 ## Deploy on OpenShift
 
