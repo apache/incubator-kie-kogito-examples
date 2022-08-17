@@ -1,0 +1,130 @@
+{
+  "id": "callback_state_timeouts",
+  "version": "1.0",
+  "name": "Callback State Timeouts Example",
+  "description": "Simple process to show the callback state timeout working",
+  "start": "PrintStartMessage",
+  "events": [
+    {
+      "name": "callbackEvent",
+      "source": "",
+      "type": "callback_state_event_type"
+    }
+  ],
+  "errors": [
+    {
+      "name": "callbackError",
+      "code": "java.lang.Exception"
+    }
+  ],
+  "functions": [
+    {
+      "name": "callbackFunction",
+      "metadata": {
+        "interface": "org.kie.kogito.examples.HelperService",
+        "operation": "echoAsJson",
+        "type": "service"
+      }
+    },
+    {
+      "name": "systemOut",
+      "type": "custom",
+      "operation": "sysout"
+    }
+  ],
+  "states": [
+    {
+      "name": "PrintStartMessage",
+      "type": "operation",
+      "actions": [
+        {
+          "name": "printSystemOut",
+          "functionRef": {
+            "refName": "systemOut",
+            "arguments": {
+              "message": "${\"callback-state-timeouts: \" + $WORKFLOW.instanceId + \" has started.\"}"
+            }
+          }
+        }
+      ],
+      "transition": "CallbackState"
+    },
+    {
+      "name": "CallbackState",
+      "type": "callback",
+      "action": {
+        "name": "callbackAction",
+        "functionRef": {
+          "refName": "callbackFunction",
+          "arguments": {
+            "input": "${\"callbackFunction was executed in the remote service for the callback-state-timeouts: \" + $WORKFLOW.instanceId}"
+          }
+        }
+      },
+      "eventRef": "callbackEvent",
+      "transition": "CheckEventArrival",
+      "onErrors": [
+        {
+          "errorRef": "callbackError",
+          "transition": "FinalizeWithError"
+        }
+      ],
+      "timeouts": {
+        "eventTimeout": "PT30S"
+      }
+    },
+    {
+      "name": "CheckEventArrival",
+      "type": "switch",
+      "dataConditions": [
+        {
+          "condition": "${ .eventData != null }",
+          "transition": "EventArrived"
+        }
+      ],
+      "defaultCondition": {
+        "transition": "EventNotArrived"
+      }
+    },
+    {
+      "name": "EventArrived",
+      "type": "inject",
+      "data": {
+        "exitMessage": "The callback event has arrived."
+      },
+      "transition": "PrintExitMessage"
+    },
+    {
+      "name": "EventNotArrived",
+      "type": "inject",
+      "data": {
+        "exitMessage": "The callback event has not arrived, and the timeout has overdue."
+      },
+      "transition": "PrintExitMessage"
+    },
+    {
+      "name": "FinalizeWithError",
+      "type": "inject",
+      "data": {
+        "exitMessage": "An error was produced in the state: CallbackState."
+      },
+      "transition": "PrintExitMessage"
+    },
+    {
+      "name": "PrintExitMessage",
+      "type": "operation",
+      "actions": [
+        {
+          "name": "printSystemOut",
+          "functionRef": {
+            "refName": "systemOut",
+            "arguments": {
+              "message": "${\"callback-state-timeouts: \" + $WORKFLOW.instanceId + \" has finalized. \" + .exitMessage + \" eventData: \" + .eventData}"
+            }
+          }
+        }
+      ],
+      "end": true
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: jobs-service-postgresql-create-job-trigger
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: CreateProcessInstanceJobRequest
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: jobs-service-postgresql
+    uri: /jobs/events
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: jobs-service-postgresql-cancel-job-trigger
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: CancelJobRequest
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: jobs-service-postgresql
+    uri: /jobs/events
+---
+apiVersion: sources.knative.dev/v1
+kind: SinkBinding
+metadata:
+  name: jobs-service-postgresql-sb
+spec:
+  sink:
+    ref:
+      apiVersion: eventing.knative.dev/v1
+      kind: Broker
+      name: default
+      namespace: ""
+  subject:
+    apiVersion: serving.knative.dev/v1
+    kind: Service
+    name: jobs-service-postgresql
