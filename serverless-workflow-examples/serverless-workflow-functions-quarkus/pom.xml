@@ -5,7 +5,7 @@
 
   <groupId>org.kie.kogito.examples</groupId>
   <artifactId>serverless-workflow-functions-quarkus</artifactId>
-  <version>2.0.0-SNAPSHOT</version>
+  <version>1.0-SNAPSHOT</version>
 
   <name>Kogito Example :: Serverless Workflow Functions :: Quarkus</name>
   <description>Kogito Serverless Workflow Example - Quarkus</description>
@@ -18,7 +18,7 @@
     <quarkus.platform.version>2.11.2.Final</quarkus.platform.version>
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-    <kogito.bom.version>${project.version}</kogito.bom.version>
+    <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
     <version.compiler.plugin>3.8.1</version.compiler.plugin>
     <maven.compiler.release>11</maven.compiler.release>
     <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>

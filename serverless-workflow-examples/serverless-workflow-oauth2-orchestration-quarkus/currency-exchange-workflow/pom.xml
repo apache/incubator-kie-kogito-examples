@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>serverless-workflow-oauth2-orchestration-quarkus</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
   </parent>
 
   <artifactId>currency-exchange-workflow</artifactId>
@@ -18,7 +18,7 @@
     <quarkus.platform.version>2.11.2.Final</quarkus.platform.version>
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-    <kogito.bom.version>${project.version}</kogito.bom.version>
+    <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
     <version.compiler.plugin>3.8.1</version.compiler.plugin>
     <maven.compiler.release>11</maven.compiler.release>
     <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
@@ -77,7 +77,7 @@
       <plugin>
         <groupId>${quarkus.platform.group-id}</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
-        <version>${quarkus.platform.version}</version>
+        <version>${quarkus-plugin.version}</version>
         <extensions>true</extensions>
         <executions>
           <execution>
