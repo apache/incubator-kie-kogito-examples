@@ -23,6 +23,7 @@
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
     <kogito.bom.version>${project.version}</kogito.bom.version>
+    <version.io.cloudevents>2.3.0</version.io.cloudevents>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -62,6 +63,11 @@
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-health</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.cloudevents</groupId>
+      <artifactId>cloudevents-core</artifactId>
+      <version>${version.io.cloudevents}</version>
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>

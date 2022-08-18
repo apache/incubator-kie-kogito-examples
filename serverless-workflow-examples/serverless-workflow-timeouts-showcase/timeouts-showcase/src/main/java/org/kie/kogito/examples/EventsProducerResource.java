@@ -130,6 +130,7 @@ public class EventsProducerResource {
                     .withType(eventType)
                     .withTime(OffsetDateTime.now())
                     .withExtension("kogitoprocrefid", processInstanceId)
+                    .withDataContentType(MediaType.APPLICATION_JSON)
                     .withData(JsonCloudEventData.wrap(objectMapper.createObjectNode().put("eventData", event.getEventData())))
                     .build());
         } catch (JsonProcessingException e) {

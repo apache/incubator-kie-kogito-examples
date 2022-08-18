@@ -4,7 +4,7 @@
 2. Install Knative using the [quickstarts](https://knative.dev/docs/getting-started/) since a DNS will be configured for you.
 
 > **NOTE:** Every time you restart your minikube installation, you must activate the knative profile, and be sure that you have enabled the minikube tunnel for this profile after minikube has started.
-> You can do this by executing this commands:
+> You can do this by executing these commands:
 > ```shell
 > minikube start -p knative
 > minikube tunnel -p knative
@@ -12,7 +12,7 @@
 
 ### Building the project
 
-Open a terminal window, go to the serverless-workflow-timeouts-showcase directory, and execute these commands to be sure the generated images are stored in the Minikube internal registry. 
+Once the minikube environment is running, open a terminal window, go to the serverless-workflow-timeouts-showcase directory, and execute these commands to be sure the generated images are stored in the minikube internal registry. 
 
 ```shell
 eval $(minikube -p knative docker-env)
@@ -27,7 +27,7 @@ To deploy the postgresql database used by the timeouts showcase you must execute
 ```shell
 kubectl apply -f kubernetes/timeouts-showcase-database.yml
 
-# After executing the command you will see an output like this:
+# After executing the command, you will see an output like this:
 
 secret/timeouts-showcase-database created
 deployment.apps/timeouts-showcase-database created
@@ -41,7 +41,7 @@ To deploy the Jobs Service you must execute this command:
 ```shell
 kubectl apply -f kubernetes/jobs-service-postgresql.yml
 
-# After executing the command you will see an output like this:
+# After executing the command, you will see an output like this:
 
 service/jobs-service-postgresql created
 deployment.apps/jobs-service-postgresql created
@@ -52,12 +52,12 @@ sinkbinding.sources.knative.dev/jobs-service-postgresql-sb created
 
 ### Jobs Service logs (optional step)
 
-To see the jobs service logs you can execute this procedure:
+To see the Jobs Service logs you can execute this procedure:
 
 ```shell
 kubectl get pod | grep jobs-service-postgresql
 
-# After executing the command you will see an output like this:
+# After executing the command, you will see an output like this:
 
 jobs-service-postgresql-56d9668b4b-k4v87            1/1     Running   0             72s
 
