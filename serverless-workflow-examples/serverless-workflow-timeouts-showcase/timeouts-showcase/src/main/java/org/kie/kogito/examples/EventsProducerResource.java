@@ -60,7 +60,7 @@ public class EventsProducerResource {
     /**
      * Event type expected by the callback_state_timeouts sw to receive the callback results from the callback function.
      */
-    private static final String CALLBACK_STATE_EVENT_TYPE = "callback_state_event_type";
+    private static final String CALLBACK_EVENT_TYPE = "callback_event_type";
 
     /**
      * Outgoing channel for the response events sent to the processes.
@@ -85,7 +85,7 @@ public class EventsProducerResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response produceCallbackStateTimeoutsEvent(@PathParam("processInstanceId") String processInstanceId, Event event) {
-        String cloudEvent = generateCloudEvent(processInstanceId, CALLBACK_STATE_EVENT_TYPE, event);
+        String cloudEvent = generateCloudEvent(processInstanceId, CALLBACK_EVENT_TYPE, event);
         emitEvent(cloudEvent);
         return Response.ok("{}").build();
     }

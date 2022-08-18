@@ -39,14 +39,15 @@ service/timeouts-showcase-database created
 To deploy the Jobs Service you must execute this command:
 
 ```shell
-kubectl apply -f kubernetes/jobs-service-postgresql-knative.yml
+kubectl apply -f kubernetes/jobs-service-postgresql.yml
 
 # After executing the command you will see an output like this:
 
-service.serving.knative.dev/jobs-service-postgresql created
+service/jobs-service-postgresql created
+deployment.apps/jobs-service-postgresql created
 trigger.eventing.knative.dev/jobs-service-postgresql-create-job-trigger created
 trigger.eventing.knative.dev/jobs-service-postgresql-cancel-job-trigger created
-sinkbinding.sources.knative.dev/jobs-service-postgresql-sb configured
+sinkbinding.sources.knative.dev/jobs-service-postgresql-sb created
 ```
 
 ### Jobs Service logs (optional step)
@@ -58,32 +59,29 @@ kubectl get pod | grep jobs-service-postgresql
 
 # After executing the command you will see an output like this:
 
-jobs-service-postgresql-00001-deployment-76f7f6bb76-6z552   2/2     Running   0          19m
+jobs-service-postgresql-56d9668b4b-k4v87            1/1     Running   0             72s
 
 # Note that it might take some time for the service to start, and the pod name can be different in your installation.
 
 # To see the jobs service logs you can execute this command:
 
-kubectl logs jobs-service-postgresql-00001-deployment-76f7f6bb76-6z552
+kubectl logs jobs-service-postgresql-56d9668b4b-k4v87
 
 __  ____  __  _____   ___  __ ____  ______ 
  --/ __ \/ / / / _ | / _ \/ //_/ / / / __/ 
  -/ /_/ / /_/ / __ |/ , _/ ,< / /_/ /\ \   
 --\___\_\____/_/ |_/_/|_/_/|_|\____/___/   
-2022-08-16 07:49:20,357 jobs-service-postgresql-00001-deployment-76f7f6bb76-6z552 INFO  [org.kie.kogito.jobs.service.json.JacksonConfiguration:-1] (main) Jackson customization initialized.
-2022-08-16 07:49:20,826 jobs-service-postgresql-00001-deployment-76f7f6bb76-6z552 INFO  [org.flywaydb.core.internal.license.VersionPrinter:-1] (main) Flyway Community Edition 8.5.13 by Redgate
-2022-08-16 07:49:20,826 jobs-service-postgresql-00001-deployment-76f7f6bb76-6z552 INFO  [org.flywaydb.core.internal.license.VersionPrinter:-1] (main) See what's new here: https://flywaydb.org/documentation/learnmore/releaseNotes#8.5.13
-2022-08-16 07:49:20,826 jobs-service-postgresql-00001-deployment-76f7f6bb76-6z552 INFO  [org.flywaydb.core.internal.license.VersionPrinter:-1] (main) 
-2022-08-16 07:49:20,928 jobs-service-postgresql-00001-deployment-76f7f6bb76-6z552 INFO  [org.flywaydb.core.internal.database.base.BaseDatabaseType:-1] (main) Database: jdbc:postgresql://timeouts-showcase-database:5432/postgres (PostgreSQL 13.4)
-2022-08-16 07:49:20,952 jobs-service-postgresql-00001-deployment-76f7f6bb76-6z552 INFO  [org.flywaydb.core.internal.schemahistory.JdbcTableSchemaHistory:-1] (main) Creating Schema History table "public"."flyway_schema_history" ...
-2022-08-16 07:49:21,044 jobs-service-postgresql-00001-deployment-76f7f6bb76-6z552 INFO  [org.flywaydb.core.internal.command.DbMigrate:-1] (main) Current version of schema "public": << Empty Schema >>
-2022-08-16 07:49:21,053 jobs-service-postgresql-00001-deployment-76f7f6bb76-6z552 INFO  [org.flywaydb.core.internal.command.DbMigrate:-1] (main) Migrating schema "public" to version "2.0.0 - Create Table"
-2022-08-16 07:49:21,095 jobs-service-postgresql-00001-deployment-76f7f6bb76-6z552 INFO  [org.flywaydb.core.internal.command.DbMigrate:-1] (main) Migrating schema "public" to version "2.0.1 - job details increase job id size"
-2022-08-16 07:49:21,111 jobs-service-postgresql-00001-deployment-76f7f6bb76-6z552 INFO  [org.flywaydb.core.internal.command.DbMigrate:-1] (main) Successfully applied 2 migrations to schema "public", now at version v2.0.1 (execution time 00:00.093s)
-2022-08-16 07:49:21,438 jobs-service-postgresql-00001-deployment-76f7f6bb76-6z552 INFO  [io.quarkus:-1] (main) jobs-service-postgresql 2.0.0-SNAPSHOT on JVM (powered by Quarkus 2.11.2.Final) started in 1.863s. Listening on: http://0.0.0.0:8080
-2022-08-16 07:49:21,438 jobs-service-postgresql-00001-deployment-76f7f6bb76-6z552 INFO  [io.quarkus:-1] (main) Profile prod activated. 
-2022-08-16 07:49:21,438 jobs-service-postgresql-00001-deployment-76f7f6bb76-6z552 INFO  [io.quarkus:-1] (main) Installed features: [agroal, cdi, flyway, jdbc-postgresql, kafka-client, narayana-jta, oidc, reactive-pg-client, reactive-routes, resteasy, resteasy-jackson, security, smallrye-context-propagation, smallrye-fault-tolerance, smallrye-health, smallrye-openapi, smallrye-reactive-messaging, smallrye-reactive-messaging-http, smallrye-reactive-messaging-kafka, swagger-ui, vertx]
-2022-08-16 07:49:21,588 jobs-service-postgresql-00001-deployment-76f7f6bb76-6z552 INFO  [org.kie.kogito.jobs.service.scheduler.JobSchedulerManager:-1] (executor-thread-0) Loading scheduled jobs completed !
+2022-08-18 10:34:47,902 jobs-service-postgresql-56d9668b4b-k4v87 INFO  [org.kie.kogito.jobs.service.json.JacksonConfiguration:-1] (main) Jackson customization initialized.
+2022-08-18 10:34:48,544 jobs-service-postgresql-56d9668b4b-k4v87 INFO  [org.flywaydb.core.internal.license.VersionPrinter:-1] (main) Flyway Community Edition 8.5.13 by Redgate
+2022-08-18 10:34:48,545 jobs-service-postgresql-56d9668b4b-k4v87 INFO  [org.flywaydb.core.internal.license.VersionPrinter:-1] (main) See what's new here: https://flywaydb.org/documentation/learnmore/releaseNotes#8.5.13
+2022-08-18 10:34:48,545 jobs-service-postgresql-56d9668b4b-k4v87 INFO  [org.flywaydb.core.internal.license.VersionPrinter:-1] (main) 
+2022-08-18 10:34:48,678 jobs-service-postgresql-56d9668b4b-k4v87 INFO  [org.flywaydb.core.internal.database.base.BaseDatabaseType:-1] (main) Database: jdbc:postgresql://timeouts-showcase-database:5432/postgres (PostgreSQL 13.4)
+2022-08-18 10:34:48,727 jobs-service-postgresql-56d9668b4b-k4v87 INFO  [org.flywaydb.core.internal.command.DbMigrate:-1] (main) Current version of schema "public": 2.0.1
+2022-08-18 10:34:48,728 jobs-service-postgresql-56d9668b4b-k4v87 INFO  [org.flywaydb.core.internal.command.DbMigrate:-1] (main) Schema "public" is up to date. No migration necessary.
+2022-08-18 10:34:49,065 jobs-service-postgresql-56d9668b4b-k4v87 INFO  [io.quarkus:-1] (main) jobs-service-postgresql 2.0.0-SNAPSHOT on JVM (powered by Quarkus 2.11.2.Final) started in 2.040s. Listening on: http://0.0.0.0:8080
+2022-08-18 10:34:49,065 jobs-service-postgresql-56d9668b4b-k4v87 INFO  [io.quarkus:-1] (main) Profile prod activated. 
+2022-08-18 10:34:49,065 jobs-service-postgresql-56d9668b4b-k4v87 INFO  [io.quarkus:-1] (main) Installed features: [agroal, cdi, flyway, jdbc-postgresql, kafka-client, narayana-jta, oidc, reactive-pg-client, reactive-routes, resteasy, resteasy-jackson, security, smallrye-context-propagation, smallrye-fault-tolerance, smallrye-health, smallrye-openapi, smallrye-reactive-messaging, smallrye-reactive-messaging-http, smallrye-reactive-messaging-kafka, swagger-ui, vertx]
+2022-08-18 10:34:49,241 jobs-service-postgresql-56d9668b4b-k4v87 INFO  [org.kie.kogito.jobs.service.scheduler.JobSchedulerManager:-1] (executor-thread-0) Loading scheduled jobs completed !
 ```
 
 ### Timeouts showcase service deployment
@@ -100,8 +98,8 @@ kubectl apply -f timeouts-showcase/target/kubernetes/kogito.yml
 service.serving.knative.dev/timeouts-showcase created
 
 trigger.eventing.knative.dev/visa-denied-event-type-trigger-timeouts-showcase created
-trigger.eventing.knative.dev/callback-state-event-type-trigger-timeouts-showcase created
 trigger.eventing.knative.dev/visa-approved-event-type-trigger-timeouts-showcase created
+trigger.eventing.knative.dev/callback-event-type-trigger-timeouts-showcase created
 sinkbinding.sources.knative.dev/sb-timeouts-showcase created
 
 ```
@@ -151,7 +149,7 @@ curl -X 'GET' \
 
 # The command will produce an output like this, which indicates that the process is waiting for an event to arrive.
 
-{"id":"2e8e1930-9bae-4d60-b364-6fbd61128f51","workflowdata":{}}
+[{"id":"2e8e1930-9bae-4d60-b364-6fbd61128f51","workflowdata":{}}]
 ```
 
 Execute this command 30+ seconds after the SW instance was created, and you'll get the following results.

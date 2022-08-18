@@ -8,7 +8,7 @@
     {
       "name": "callbackEvent",
       "source": "",
-      "type": "callback_state_event_type"
+      "type": "callback_event_type"
     }
   ],
   "errors": [
@@ -22,7 +22,7 @@
       "name": "callbackFunction",
       "metadata": {
         "interface": "org.kie.kogito.examples.HelperService",
-        "operation": "echoAsJson",
+        "operation": "remoteSystemOut",
         "type": "service"
       }
     },
@@ -57,7 +57,7 @@
         "functionRef": {
           "refName": "callbackFunction",
           "arguments": {
-            "input": "${\"callbackFunction was executed in the remote service for the callback-state-timeouts: \" + $WORKFLOW.instanceId}"
+            "input": "${\"callback-state-timeouts: \" + $WORKFLOW.instanceId + \" has executed the callbackFunction.\"}"
           }
         }
       },

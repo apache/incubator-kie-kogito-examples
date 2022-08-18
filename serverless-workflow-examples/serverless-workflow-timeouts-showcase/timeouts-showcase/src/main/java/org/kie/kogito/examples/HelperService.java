@@ -26,10 +26,8 @@ import org.slf4j.LoggerFactory;
 @ApplicationScoped
 public class HelperService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(HelperService.class);
-
-    public String echoAsJson(String input) {
-        LOGGER.info("Executing echoAsJson(\"{}\")", input);
-        return "{\"answer\" : \"" + input + "\"}";
+    public String remoteSystemOut(String message) {
+        System.out.println("Executing remoteSystemOut: " + message);
+        return "{}";
     }
 }
