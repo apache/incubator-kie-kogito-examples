@@ -152,18 +152,10 @@ curl -X 'GET' \
 [{"id":"2e8e1930-9bae-4d60-b364-6fbd61128f51","workflowdata":{}}]
 ```
 
-Execute this command 30+ seconds after the SW instance was created, and you'll get the following results.
+If you execute the previous command 30+ seconds after the SW instance was created, and you'll get an empty array as 
+result, which means that the SW has timed-out.
 ```shell
-curl -X 'GET' \
-  'http://timeouts-showcase.default.10.105.86.217.sslip.io/switch_state_timeouts' \
-  -H 'accept: */*' \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "workflowdata": {}
-}'
-
-# The command above will produce an output object where the process id is not present, which means that the SW has timed-out.
-
+# empty array as result.
 []
 ```
 
