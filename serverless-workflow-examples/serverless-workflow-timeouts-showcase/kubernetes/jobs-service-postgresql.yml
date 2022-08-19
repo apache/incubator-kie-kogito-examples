@@ -1,4 +1,23 @@
 ---
+apiVersion: sources.knative.dev/v1
+kind: SinkBinding
+metadata:
+  name: jobs-service-postgresql-sb
+spec:
+  sink:
+    ref:
+      apiVersion: eventing.knative.dev/v1
+      kind: Broker
+      name: default
+      namespace: default
+  subject:
+    apiVersion: apps/v1
+    kind: Deployment
+    selector:
+      matchLabels:
+        app.kubernetes.io/name: jobs-service-postgresql
+        app.kubernetes.io/version: 2.0.0-SNAPSHOT
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -113,19 +132,3 @@ spec:
       kind: Service
       name: jobs-service-postgresql
     uri: /jobs/events
----
-apiVersion: sources.knative.dev/v1
-kind: SinkBinding
-metadata:
-  name: jobs-service-postgresql-sb
-spec:
-  sink:
-    ref:
-      apiVersion: eventing.knative.dev/v1
-      kind: Broker
-      name: default
-      namespace: ""
-  subject:
-    apiVersion: v1
-    kind: Service
-    name: jobs-service-postgresql
