@@ -13,7 +13,7 @@
   <description>Kogito with DMN Knative Eventing - Quarkus</description>
 
   <properties>
-    <version.com.github.tomakehurst.wiremock>2.27.1</version.com.github.tomakehurst.wiremock>
+    <version.com.github.tomakehurst.wiremock>2.33.2</version.com.github.tomakehurst.wiremock>
     <quarkus-plugin.version>2.11.2.Final</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>

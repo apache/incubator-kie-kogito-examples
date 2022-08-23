@@ -89,7 +89,11 @@ public class VerifyWorkflowExecutionIT {
         await()
                 .atMost(60, SECONDS)
                 .with().pollInterval(1, SECONDS)
-                .untilAsserted(() -> sink.verify(2, postRequestedFor(urlEqualTo("/")).withRequestBody(containing(order.getId()))));
+                .untilAsserted(() -> {
+                    sink.verify(2, postRequestedFor(urlEqualTo("/")).withRequestBody(containing(order.getId())));
+                    sink.verify(1, postRequestedFor(urlEqualTo("/")).withRequestBody(containing("\"type\":\"fraudEvaluation\"").and(containing("\"id\":\"" + order.getId() + "\""))));
+                    sink.verify(1, postRequestedFor(urlEqualTo("/")).withRequestBody(containing("\"type\":\"domesticShipping\"").and(containing("\"id\":\"" + order.getId() + "\""))));
+                });
     }
 
     @Test
@@ -115,7 +119,11 @@ public class VerifyWorkflowExecutionIT {
         await()
                 .atMost(60, SECONDS)
                 .with().pollInterval(1, SECONDS)
-                .untilAsserted(() -> sink.verify(1, postRequestedFor(urlEqualTo("/")).withRequestBody(containing(order.getId()))));
+                .untilAsserted(() -> {
+                    sink.verify(1, postRequestedFor(urlEqualTo("/")).withRequestBody(containing(order.getId())));
+                    sink.verify(1, postRequestedFor(urlEqualTo("/")).withRequestBody(containing("\"type\":\"domesticShipping\"").and(containing("\"id\":\"" + order.getId() + "\""))));
+                });
+
     }
 
     @Test
@@ -141,6 +149,9 @@ public class VerifyWorkflowExecutionIT {
         await()
                 .atMost(60, SECONDS)
                 .with().pollInterval(1, SECONDS)
-                .untilAsserted(() -> sink.verify(1, postRequestedFor(urlEqualTo("/")).withRequestBody(containing(order.getId()))));
+                .untilAsserted(() -> {
+                    sink.verify(1, postRequestedFor(urlEqualTo("/")).withRequestBody(containing(order.getId())));
+                    sink.verify(1, postRequestedFor(urlEqualTo("/")).withRequestBody(containing("\"type\":\"internationalShipping\"").and(containing("\"id\":\"" + order.getId() + "\""))));
+                });
     }
 }
