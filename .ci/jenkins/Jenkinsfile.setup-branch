@@ -95,6 +95,9 @@ pipeline {
             }
         }
         stage('Update images\' version') {
+            when {
+                expression { !isMainBranch() }
+            }
             steps {
                 script {
                     String[] versionSplit = getKogitoVersion().split("\\.")
@@ -157,7 +160,7 @@ pipeline {
 
 void sendNotification() {
     if (params.SEND_NOTIFICATION) {
-        mailer.sendMarkdownTestSummaryNotification('Init', "[${getBuildBranch()}] Kogito Examples", [env.KOGITO_CI_EMAIL_TO])
+        mailer.sendMarkdownTestSummaryNotification('Setup branch', "[${getBuildBranch()}] Kogito Examples", [env.KOGITO_CI_EMAIL_TO])
     } else {
         echo 'No notification sent per configuration'
     }
@@ -223,4 +226,8 @@ void runMavenDeploy(String directory) {
     }
 
     mvnCmd.skipTests(true).run('clean deploy')
+}
+
+boolean isMainBranch() {
+    return env.IS_MAIN_BRANCH ? env.IS_MAIN_BRANCH.toBoolean() : false
 }
