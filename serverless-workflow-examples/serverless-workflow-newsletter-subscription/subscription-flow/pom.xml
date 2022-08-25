@@ -16,7 +16,7 @@
 
   <properties>
     <version.org.assertj>3.22.0</version.org.assertj>
-    <version.com.github.tomakehurst.wiremock>2.33.0</version.com.github.tomakehurst.wiremock>
+    <version.com.github.tomakehurst.wiremock>2.33.2</version.com.github.tomakehurst.wiremock>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -82,7 +82,12 @@
     <dependency>
       <groupId>org.webjars</groupId>
       <artifactId>bootstrap</artifactId>
-      <version>${version.org.webjars}</version>
+      <version>${version.org.webjars.bootstrap}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.webjars</groupId>
+      <artifactId>jquery</artifactId>
+      <version>${version.org.webjars.jquery}</version>
     </dependency>
 
     <!-- Testing dependencies -->

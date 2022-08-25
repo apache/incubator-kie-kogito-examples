@@ -8,7 +8,7 @@
     <artifactId>serverless-workflow-testing-with-rest-assured</artifactId>
     <version>2.0.0-SNAPSHOT</version>
 
-    <name>Kogito Example :: Serverless Workflow Greeting :: Quarkus</name>
+    <name>Kogito Example :: Serverless Workflow Testing with REST Assured :: Quarkus</name>
     <description>Kogito Serverless Workflow Example - Quarkus</description>
     <properties>
         <quarkus-plugin.version>2.12.0.Final</quarkus-plugin.version>
@@ -17,7 +17,7 @@
         <quarkus.platform.version>2.12.0.Final</quarkus.platform.version>
         <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
         <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-        <kogito.bom.version>${project.version}</kogito.bom.version>
+        <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
         <maven.compiler.release>11</maven.compiler.release>
         <version.compiler.plugin>3.8.1</version.compiler.plugin>
         <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>

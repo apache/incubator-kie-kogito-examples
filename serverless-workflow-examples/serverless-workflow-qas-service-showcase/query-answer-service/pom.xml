@@ -18,7 +18,7 @@
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
-    <version.com.github.tomakehurst.wiremock>2.33.1</version.com.github.tomakehurst.wiremock>
+    <version.com.github.tomakehurst.wiremock>2.33.2</version.com.github.tomakehurst.wiremock>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -72,7 +72,12 @@
     <dependency>
       <groupId>org.webjars</groupId>
       <artifactId>bootstrap</artifactId>
-      <version>${version.org.webjars}</version>
+      <version>${version.org.webjars.bootstrap}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.webjars</groupId>
+      <artifactId>jquery</artifactId>
+      <version>${version.org.webjars.jquery}</version>
     </dependency>
 
     <!-- Testing dependencies -->
