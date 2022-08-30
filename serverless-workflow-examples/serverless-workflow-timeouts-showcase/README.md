@@ -139,13 +139,7 @@ curl -X 'POST' \
 
 If you execute the following command during the first 30 seconds after the SW instance was created, you'll get the following results:
 ```shell
-curl -X 'GET' \
-  'http://timeouts-showcase.default.10.105.86.217.sslip.io/switch_state_timeouts' \
-  -H 'accept: */*' \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "workflowdata": {}
-}'
+curl -X 'GET' 'http://timeouts-showcase.default.10.105.86.217.sslip.io/switch_state_timeouts'
 
 # The command will produce an output like this, which indicates that the process is waiting for an event to arrive.
 
@@ -158,6 +152,20 @@ result, which means that the SW has timed-out.
 # empty array as result.
 []
 ```
+
+You can execute the following command to create a new `callback_state_timeouts` workflow instance:
+
+```shell
+curl -X 'POST' \
+  'http://timeouts-showcase.default.10.105.86.217.sslip.io/callback_state_timeouts' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "workflowdata": {}
+}'
+```
+
+Similar to `switch_state_timeouts` you can wait for 30+ seconds to check the SW was timed-out.
 
 You can also verify the timeouts functioning following this procedure:
 ```shell
@@ -195,3 +203,7 @@ __  ____  __  _____   ___  __ ____  ______
 switch-state-timeouts: 2e8e1930-9bae-4d60-b364-6fbd61128f51 has started.
 switch-state-timeouts: 2e8e1930-9bae-4d60-b364-6fbd61128f51 has finalized. No decision was made. The switch state did not receive any event, and the timeout has overdue.
 ```
+
+### Helper shell scripts
+
+To make things easier to clear the running environment on minikube it was created a set of scripts under [scripts](/scripts).
