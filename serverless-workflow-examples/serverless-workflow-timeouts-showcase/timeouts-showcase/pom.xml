@@ -172,6 +172,7 @@
         <quarkus.kubernetes.namespace>${namespace}</quarkus.kubernetes.namespace>
         <quarkus.kubernetes.deploy>${deploy}</quarkus.kubernetes.deploy>
         <quarkus.container-image.build>true</quarkus.container-image.build>
+        <quarkus.container-image.push>true</quarkus.container-image.push>
         <quarkus.profile>knative</quarkus.profile>
       </properties>
       <dependencies>
