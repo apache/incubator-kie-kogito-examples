@@ -78,7 +78,7 @@
       "name": "EventNotArrived",
       "type": "inject",
       "data": {
-        "exitMessage": "The callback event has not arrived, and the timeout has overdue. Tiago Change !!"
+        "exitMessage": "The callback event has not arrived, and the timeout has overdue."
       },
       "transition": "PrintExitMessage"
     },
