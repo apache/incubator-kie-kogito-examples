@@ -19,6 +19,8 @@
     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
     <maven.compiler.release>11</maven.compiler.release>
     <version.compiler.plugin>3.8.1</version.compiler.plugin>
+    <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
+    <version.failsafe.plugin>${version.surefire.plugin}</version.failsafe.plugin>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -76,11 +78,6 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>io.rest-assured</groupId>
-      <artifactId>rest-assured</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
       <groupId>org.awaitility</groupId>
       <artifactId>awaitility</artifactId>
       <scope>test</scope>
@@ -109,6 +106,23 @@
         <configuration>
           <release>${maven.compiler.release}</release>
         </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <version>${version.failsafe.plugin}</version>
+        <configuration>
+          <systemPropertyVariables>
+            <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+          </systemPropertyVariables>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>integration-test</goal>
+              <goal>verify</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>

@@ -17,7 +17,7 @@ package org.kie.kogito.examples;
 
 import java.util.concurrent.TimeUnit;
 
-import io.quarkus.test.junit.QuarkusTest;
+import io.quarkus.test.junit.QuarkusIntegrationTest;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeAll;
@@ -27,8 +27,8 @@ import static io.restassured.RestAssured.given;
 import static org.awaitility.Awaitility.await;
 import static org.hamcrest.Matchers.equalTo;
 
-@QuarkusTest
-class TimeoutTest {
+@QuarkusIntegrationTest
+class TimeoutIT {
 
     @BeforeAll
     static void init() {
