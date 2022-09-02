@@ -14,7 +14,7 @@
   <description>Runtime counterpart for custom rpc type</description>
 
   <dependencies>
-   <dependency>
+    <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-quarkus-serverless-workflow</artifactId>
     </dependency>
@@ -25,9 +25,8 @@
     </dependency>
   </dependencies>
   <build>
-   
     <plugins>
-        <plugin>
+      <plugin>
         <groupId>io.quarkus</groupId>
         <artifactId>quarkus-extension-maven-plugin</artifactId>
         <version>${quarkus-plugin.version}</version>
@@ -46,15 +45,15 @@
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>${version.compiler.plugin}</version>
-        <configuration>
-          <annotationProcessorPaths>
-            <path>
-              <groupId>io.quarkus</groupId>
-              <artifactId>quarkus-extension-processor</artifactId>
-              <version>${version.io.quarkus}</version>
-            </path>
-          </annotationProcessorPaths>
-        </configuration>
+          <configuration>
+            <annotationProcessorPaths>
+              <path>
+                <groupId>io.quarkus</groupId>
+                <artifactId>quarkus-extension-processor</artifactId>
+                <version>${version.io.quarkus}</version>
+              </path>
+            </annotationProcessorPaths>
+          </configuration>
       </plugin>
     </plugins>
   </build>

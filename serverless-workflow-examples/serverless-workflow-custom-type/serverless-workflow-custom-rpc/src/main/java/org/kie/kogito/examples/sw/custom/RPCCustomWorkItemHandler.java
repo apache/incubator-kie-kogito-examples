@@ -15,10 +15,10 @@ import org.kie.kogito.serverless.workflow.WorkflowWorkItemHandler;
 @ApplicationScoped
 public class RPCCustomWorkItemHandler extends WorkflowWorkItemHandler {
 
-    public final static String NAME = "RPCCustomWorkItemHandler";
-    public final static String HOST = "host";
-    public final static String PORT = "port";
-    public final static String OPERATION = "operation";
+    public static final String NAME = "RPCCustomWorkItemHandler";
+    public static final String HOST = "host";
+    public static final String PORT = "port";
+    public static final String OPERATION = "operation";
     
     @Override
     protected Object internalExecute(KogitoWorkItem workItem, Map<String, Object> parameters)  {
@@ -30,7 +30,7 @@ public class RPCCustomWorkItemHandler extends WorkflowWorkItemHandler {
                 throw new IllegalArgumentException ("Operation is a mandatory parameter");
             }
             return CalculatorClient.invokeOperation((String)metadata.getOrDefault(HOST,"localhost"), (int) metadata.getOrDefault(PORT, 8082), 
-                    OperationId.valueOf(OperationId.class, operationId.toUpperCase()), (Integer)iter.next(), (Integer)iter.next());
+                    OperationId.valueOf(operationId.toUpperCase()), (Integer)iter.next(), (Integer)iter.next());
         } catch (IOException io ) {
             throw new UncheckedIOException(io);
         }

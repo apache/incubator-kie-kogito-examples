@@ -81,7 +81,7 @@ public class CalculatorServer implements Runnable, Closeable {
                 }
             }
             catch (IOException io) {
-                logger.error("Error writting to client",io);
+                logger.error("Error writing to client",io);
             }
         }
     }
