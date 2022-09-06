@@ -142,6 +142,7 @@
     <profile>
       <id>knative</id>
       <properties>
+        <skipTests>true</skipTests>
         <!-- Shortcuts -->
         <namespace>default</namespace>
         <deploy>false</deploy>

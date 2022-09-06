@@ -89,9 +89,9 @@ __  ____  __  _____   ___  __ ____  ______
 To deploy the example workflows you must execute these commands:
 
 ```shell
-kubectl apply -f timeouts-showcase/target/kubernetes/knative.yml
+kubectl apply -f target/kubernetes/knative.yml
 
-kubectl apply -f timeouts-showcase/target/kubernetes/kogito.yml
+kubectl apply -f target/kubernetes/kogito.yml
 
 # After executing the commands you will see an output like this:
 
