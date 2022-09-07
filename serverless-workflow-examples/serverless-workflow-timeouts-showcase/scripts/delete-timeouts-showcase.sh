@@ -1,6 +1,6 @@
 #!/bin/sh
 
-kubectl delete service timeouts-showcase
+kn service delete timeouts-showcase
 
 kubectl delete sinkbinding sb-timeouts-showcase
 
