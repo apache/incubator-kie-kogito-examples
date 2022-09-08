@@ -140,7 +140,7 @@ function startProcess(endpoint, onSuccess) {
             onSuccess.call();
         },
     }).fail(function () {
-        showError("An error was produced when creating a new serverless workflow instance: " + endpoint + ", please check that que application is running.");
+        showError("An error was produced when creating a new serverless workflow instance: " + endpoint + ", please check that server is running.");
     });
 }
 
@@ -155,7 +155,7 @@ function produceEvent(endpoint, processInstanceId, eventData, onSuccess) {
             onSuccess.call();
         },
     }).fail(function () {
-        showError("An error while sending an event to server endpoint: " + endpoint + "/" + processInstanceId);
+        showError("An error was produced while sending an event to server endpoint: " + endpoint + "/" + processInstanceId + ", please check that server is running");
     });
 }
 
@@ -192,11 +192,11 @@ $(document).ready(function () {
     refreshTables();
 
     //Initialize button listeners
-    $('#refreshButton1').click(function () {
+    $('#refreshSwitchStateTimeoutsButton').click(function () {
         refreshSwitchStateTimeoutsTable();
     });
 
-    $('#refreshButton2').click(function () {
+    $('#refreshCallbackStateTimeoutsButton').click(function () {
         refreshCallbackStateTimeoutsTable();
     });
 

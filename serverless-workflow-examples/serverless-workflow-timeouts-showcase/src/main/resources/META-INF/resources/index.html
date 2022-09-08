@@ -19,7 +19,7 @@
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
     <meta content="width=device-width, initial-scale=1" name="viewport">
-    <title>Timeouts showcase console</title>
+    <title>Timeouts showcase</title>
     <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css"/>
 </head>
 <body>
@@ -28,32 +28,41 @@
         <div id="notificationPanel" style="position: absolute; top: .5rem;"></div>
     </div>
     <h3>Timeouts showcase</h3>
-    <hr>
-    <p>
-    <p>
-    <p>
-    <h4>switch-state-timeouts serverless workflow instances:</h4>
-    <div style="margin-bottom: .5rem">
-        <button id="refreshButton1" type="button" class="btn btn-secondary">Refresh</button>
-        <button id="startSwitchStateTimeoutsButton" type="button" class="btn btn-primary">Start new switch-state-timeouts</button>
-    </div>
 
-    <table class="table table-bordered table-striped table-sm" id="switchStateTimeoutsTable">
-        <!-- Filled in by app.js -->
-    </table>
-    <hr>
-    <p>
-    <p>
-    <p>
-    <h4>callback-state-timeouts serverless workflow instances:</h4>
-    <div style="margin-bottom: .5rem">
-        <button id="refreshButton2" type="button" class="btn btn-secondary">Refresh</button>
-        <button id="startCallbackStateTimeoutsButton" type="button" class="btn btn-primary">Start new callback-state-timeouts</button>
-    </div>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="switch-state-timeouts-tab" data-bs-toggle="tab" data-bs-target="#switch-state-timeouts-container" type="button" role="tab" aria-controls="switch-state-timeouts-container" aria-selected="true">switch-state-timeouts</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="callback-state-timeouts-tab" data-bs-toggle="tab" data-bs-target="#callback-state-timeouts-container" type="button" role="tab" aria-controls="callback-state-timeouts-container" aria-selected="false">callback-state-timeouts</button>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="switch-state-timeouts-container" role="tabpanel" aria-labelledby="switch-state-timeouts-tab">
+            <div style="padding-top: 20px;">
+                <div style="margin-bottom: .5rem">
+                    <button id="refreshSwitchStateTimeoutsButton" type="button" class="btn btn-secondary btn-sm">Refresh</button>
+                    <button id="startSwitchStateTimeoutsButton" type="button" class="btn btn-primary btn-sm">Start new switch-state-timeouts</button>
+                </div>
 
-    <table class="table table-bordered table-striped table-sm" id="callbackStateTimeoutsTable">
-        <!-- Filled in by app.js -->
-    </table>
+                <table class="table table-bordered table-striped table-sm" id="switchStateTimeoutsTable">
+                    <!-- Filled in by app.js -->
+                </table>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="callback-state-timeouts-container" role="tabpanel" aria-labelledby="callback-state-timeouts-tab">
+            <div style="padding-top: 20px;">
+                <div style="margin-bottom: .5rem">
+                    <button id="refreshCallbackStateTimeoutsButton" type="button" class="btn btn-secondary btn-sm">Refresh</button>
+                    <button id="startCallbackStateTimeoutsButton" type="button" class="btn btn-primary btn-sm">Start new callback-state-timeouts</button>
+                </div>
+
+                <table class="table table-bordered table-striped table-sm" id="callbackStateTimeoutsTable">
+                    <!-- Filled in by app.js -->
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
