@@ -1,0 +1,48 @@
+# Deployment for the timeouts-showcase postgresql database
+apiVersion: v1
+data:
+  postgrespass: cGFzcwo=
+kind: Secret
+metadata:
+  name: timeouts-showcase-database
+type: Opaque
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: timeouts-showcase-database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: timeouts-showcase-database
+  template:
+    metadata:
+      labels:
+        app: timeouts-showcase-database
+    spec:
+      containers:
+        - env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: postgrespass
+                  name: timeouts-showcase-database
+          image: postgres:13.4-alpine3.14
+          imagePullPolicy: Always
+          name: timeouts-showcase-database
+          ports:
+            - containerPort: 5432
+              name: tcp
+              protocol: TCP
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: timeouts-showcase-database
+spec:
+  selector:
+    app: timeouts-showcase-database
+  ports:
+    - port: 5432
+  type: ClusterIP
