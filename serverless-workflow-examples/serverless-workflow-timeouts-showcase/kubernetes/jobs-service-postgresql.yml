@@ -1,0 +1,134 @@
+---
+apiVersion: sources.knative.dev/v1
+kind: SinkBinding
+metadata:
+  name: jobs-service-postgresql-sb
+spec:
+  sink:
+    ref:
+      apiVersion: eventing.knative.dev/v1
+      kind: Broker
+      name: default
+      namespace: default
+  subject:
+    apiVersion: apps/v1
+    kind: Deployment
+    selector:
+      matchLabels:
+        app.kubernetes.io/name: jobs-service-postgresql
+        app.kubernetes.io/version: 2.0.0-SNAPSHOT
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/name: jobs-service-postgresql
+    app.kubernetes.io/version: 2.0.0-SNAPSHOT
+  name: jobs-service-postgresql
+  namespace: default
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+  selector:
+    app.kubernetes.io/name: jobs-service-postgresql
+    app.kubernetes.io/version: 2.0.0-SNAPSHOT
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: jobs-service-postgresql
+    app.kubernetes.io/version: 2.0.0-SNAPSHOT
+  name: jobs-service-postgresql
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: jobs-service-postgresql
+      app.kubernetes.io/version: 2.0.0-SNAPSHOT
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: jobs-service-postgresql
+        app.kubernetes.io/version: 2.0.0-SNAPSHOT
+      namespace: default
+    spec:
+      containers:
+        - name: jobs-service-postgresql
+          image: quay.io/kiegroup/kogito-jobs-service-postgresql:1.27
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+          env:
+            - name: KUBERNETES_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: KOGITO_JOBS_SERVICE_KNATIVE_EVENTS
+              value: "false"
+            - name: QUARKUS_DATASOURCE_USERNAME
+              value: postgres
+            - name: QUARKUS_DATASOURCE_PASSWORD
+              value: pass
+            - name: QUARKUS_DATASOURCE_JDBC_URL
+              value: jdbc:postgresql://timeouts-showcase-database:5432/postgres
+            - name: QUARKUS_DATASOURCE_REACTIVE_URL
+              value: postgresql://timeouts-showcase-database:5432/postgres
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /q/health/live
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 0
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 10
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /q/health/ready
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 0
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 10
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: jobs-service-postgresql-create-job-trigger
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: CreateProcessInstanceJobRequest
+  subscriber:
+    ref:
+      apiVersion: v1
+      kind: Service
+      name: jobs-service-postgresql
+    uri: /jobs/events
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: jobs-service-postgresql-cancel-job-trigger
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: CancelJobRequest
+  subscriber:
+    ref:
+      apiVersion: v1
+      kind: Service
+      name: jobs-service-postgresql
+    uri: /jobs/events
