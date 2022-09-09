@@ -79,7 +79,7 @@ public class CloudEventListenerTest {
                 .header("ce-source", "/from/test")
                 .header("ce-type", "travellers")
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(objectMapper.writeValueAsString(traveller)).post("/").then().statusCode(200);
+                .body(objectMapper.writeValueAsString(traveller)).post("/").then().statusCode(202);
     }
 
     @Test
@@ -97,7 +97,7 @@ public class CloudEventListenerTest {
                 .header("ce-source", "/from/test")
                 .header("ce-type", "travellers")
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(objectMapper.writeValueAsString(traveller)).post("/").then().statusCode(200);
+                .body(objectMapper.writeValueAsString(traveller)).post("/").then().statusCode(202);
 
         LOGGER.info("Waiting at most 2 seconds to receive the produced message");
         await().atMost(2, SECONDS).untilAsserted(() -> sink.verify(1, postRequestedFor(urlEqualTo("/"))
@@ -121,7 +121,7 @@ public class CloudEventListenerTest {
                 .header("ce-source", "travellers")
                 .header("ce-type", "whatevertype")
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(objectMapper.writeValueAsString(traveller)).post("/").then().statusCode(200);
+                .body(objectMapper.writeValueAsString(traveller)).post("/").then().statusCode(202);
 
         LOGGER.info("Waiting at most 2 seconds to receive the produced message");
         await().atMost(2, SECONDS).untilAsserted(() -> sink.verify(1, postRequestedFor(urlEqualTo("/"))
