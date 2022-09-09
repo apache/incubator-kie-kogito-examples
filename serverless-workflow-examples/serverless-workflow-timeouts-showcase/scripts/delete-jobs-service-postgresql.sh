@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# commands sequence to remove the jobs-service-postgresql:
+
 kubectl delete deployment jobs-service-postgresql
 
 kubectl delete service jobs-service-postgresql
