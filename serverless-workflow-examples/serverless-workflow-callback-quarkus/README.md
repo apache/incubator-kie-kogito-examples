@@ -53,11 +53,13 @@ You will need:
   - Java 11+ installed
   - Environment variable JAVA_HOME set accordingly
   - Maven 3.8.1+ installed
+  - Docker and Docker Compose to run the required example infrastructure.
 
 When using native image compilation, you will also need: 
-  - [GraalVm](https://www.graalvm.org/downloads/) 19.3.1+ installed
-  - Environment variable GRAALVM_HOME set accordingly
-  - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too.  You also need 'native-image' installed in GraalVM (using 'gu install native-image'). Please refer to [GraalVM installation documentation](https://www.graalvm.org/docs/reference-manual/aot-compilation/#prerequisites) for more details.
+    - GraalVM 20.3+ installed
+    - Environment variable GRAALVM_HOME set accordingly
+    - GraalVM native image needs as well native-image extension: https://www.graalvm.org/reference-manual/native-image/
+    - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too, please refer to GraalVM installation documentation for more details.
 
 ### Compile and Run in Local Dev Mode
 
@@ -65,19 +67,35 @@ When using native image compilation, you will also need:
 mvn clean package quarkus:dev
 ```
 
-### Compile and Run in JVM mode
+### Start infrastructure services
 
-```sh
-mvn clean package 
-java -jar target/quarkus-app/quarkus-run.jar
+You should start all the services before you execute any of the **Callback** example, to do that please execute:
+
+For Linux and MacOS:
+
+1. Open a Terminal
+2. Go to docker-compose folder
+3. Run the ```startServices.sh``` script
+
+```bash
+sh ./startServices.sh
 ```
 
-or on Windows
 
-```sh
-mvn clean package
-java -jar target\quarkus-app\quarkus-run.jar
-```
+Once all services bootstrap, the following ports will be assigned on your local machine:
+
+- PostgreSQL: 5432
+- Kafka: 9092
+- Data Index: 8180
+- PgAdmin: 8055
+- sw-callback-service :8080
+
+> **_NOTE:_**  This step requires the project to be compiled, please consider running a ```mvn clean install``` command on the project root before running the ```startServices.sh``` script for the first time or any time you modify the project.
+
+Once started you can simply stop all services by executing the ```docker-compose -f docker-compose.yml stop```.
+
+All created containers can be removed by executing the ```docker-compose -f docker-compose.yml rm```.
+
 
 ### Compile and Run using Local Native Image
 Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
