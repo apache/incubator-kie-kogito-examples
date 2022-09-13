@@ -71,6 +71,10 @@ mvn clean package quarkus:dev
 
 You should start all the services before you execute any of the **Callback** example, to do that please execute:
 
+```sh
+mvn clean package -Dquarkus.container-image.build=true
+```
+
 For Linux and MacOS:
 
 1. Open a Terminal
@@ -90,7 +94,7 @@ Once all services bootstrap, the following ports will be assigned on your local 
 - PgAdmin: 8055
 - sw-callback-service :8080
 
-> **_NOTE:_**  This step requires the project to be compiled, please consider running a ```mvn clean install``` command on the project root before running the ```startServices.sh``` script for the first time or any time you modify the project.
+> **_NOTE:_**  This step requires the project to be compiled, please consider running a ```mvn clean install -Dquarkus.container-image.build=true``` command on the project root before running the ```startServices.sh``` script for the first time or any time you modify the project.
 
 Once started you can simply stop all services by executing the ```docker-compose -f docker-compose.yml stop```.
 
