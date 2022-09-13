@@ -27,7 +27,7 @@ import java.security.SecureRandom;
 @Path("/stock-price")
 public class RealStockPriceResource {
 
-    public static final SecureRandom SECURE_RANDOM = new SecureRandom();
+    public final SecureRandom SECURE_RANDOM = new SecureRandom();
 
     @GET
     @Path("/{symbol}")
