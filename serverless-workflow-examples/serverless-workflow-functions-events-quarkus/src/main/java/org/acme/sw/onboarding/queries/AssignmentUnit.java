@@ -22,9 +22,9 @@ import org.acme.sw.onboarding.model.Patient;
 import org.acme.sw.onboarding.model.SymptomSpecialty;
 import org.acme.sw.onboarding.services.DoctorService;
 import org.acme.sw.onboarding.services.SymptomSpecialtyService;
-import org.kie.kogito.rules.DataSource;
-import org.kie.kogito.rules.DataStore;
-import org.kie.kogito.rules.RuleUnitData;
+import org.drools.ruleunits.api.DataSource;
+import org.drools.ruleunits.api.DataStore;
+import org.drools.ruleunits.api.RuleUnitData;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
