@@ -61,6 +61,8 @@ When using native image compilation, you will also need:
     - GraalVM native image needs as well native-image extension: https://www.graalvm.org/reference-manual/native-image/
     - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too, please refer to GraalVM installation documentation for more details.
 
+NOTE: Quarkus provides a way of creating a native Linux executable without GraalVM installed, leveraging a container runtime such as Docker or podman. More details in  https://quarkus.io/guides/building-native-image#container-runtime 
+
 ### Compile and Run in Local Dev Mode
 
 ```sh
@@ -82,7 +84,7 @@ For Linux and MacOS:
 3. Run the ```startServices.sh``` script
 
 ```bash
-sh ./startServices.sh
+cd docker-compose && sh ./startServices.sh
 ```
 
 
