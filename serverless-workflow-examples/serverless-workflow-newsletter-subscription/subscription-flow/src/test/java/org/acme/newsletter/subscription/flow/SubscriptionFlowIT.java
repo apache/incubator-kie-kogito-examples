@@ -100,7 +100,7 @@ public class SubscriptionFlowIT {
                 .body(mapper.writeValueAsString(subscription))
                 .post("/")// the root path means we are listening for CEs for Knative Eventing integration
                 .then()
-                .statusCode(200);
+                .statusCode(202);
 
         // the workflow should emit a new event indicating that the subscription was successful!
         await()

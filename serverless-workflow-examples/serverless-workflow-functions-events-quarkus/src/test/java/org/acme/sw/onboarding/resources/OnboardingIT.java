@@ -28,7 +28,8 @@ import io.restassured.http.ContentType;
 import static io.restassured.RestAssured.given;
 import static java.lang.String.format;
 import static org.awaitility.Awaitility.await;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
 
 @QuarkusIntegrationTest
 class OnboardingIT {
@@ -53,7 +54,7 @@ class OnboardingIT {
                 .when()
                 .post("/")
                 .then()
-                .statusCode(200);
+                .statusCode(202);
 
         await().atMost(Duration.ofMinutes(1)).untilAsserted(() -> given()
                 .contentType(MediaType.APPLICATION_JSON)

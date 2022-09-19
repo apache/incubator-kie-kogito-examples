@@ -84,7 +84,7 @@ public class VerifyWorkflowExecutionIT {
                 .body(objectMapper.writeValueAsString(order))
                 .post("/")
                 .then()
-                .statusCode(200);
+                .statusCode(202);
 
         await()
                 .atMost(60, SECONDS)
@@ -114,7 +114,7 @@ public class VerifyWorkflowExecutionIT {
                 .body(objectMapper.writeValueAsString(order))
                 .post("/")
                 .then()
-                .statusCode(200);
+                .statusCode(202);
 
         await()
                 .atMost(60, SECONDS)
@@ -144,7 +144,7 @@ public class VerifyWorkflowExecutionIT {
                 .body(objectMapper.writeValueAsString(order))
                 .post("/")
                 .then()
-                .statusCode(200);
+                .statusCode(202);
 
         await()
                 .atMost(60, SECONDS)

@@ -81,7 +81,7 @@ public class CloudEventListenerTest {
                 .header("ce-kogitodmnmodelname", KOGITO_MODEL_NAME)
                 .header("ce-kogitodmnmodelnamespace", KOGITO_MODEL_NAMESPACE)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(new ObjectMapper().writeValueAsString(decisionInput)).post("/").then().statusCode(200);
+                .body(new ObjectMapper().writeValueAsString(decisionInput)).post("/").then().statusCode(202);
 
         await()
                 .atLeast(2, SECONDS)

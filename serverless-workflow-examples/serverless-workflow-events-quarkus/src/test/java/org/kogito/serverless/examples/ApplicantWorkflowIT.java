@@ -15,7 +15,10 @@
  */
 package org.kogito.serverless.examples;
 
+import java.net.URI;
+import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.TimeUnit;
 
@@ -27,10 +30,16 @@ import javax.ws.rs.sse.SseEventSource;
 
 import org.eclipse.microprofile.config.ConfigProvider;
 import org.junit.jupiter.api.Test;
+import org.kie.kogito.test.quarkus.QuarkusTestProperty;
+import org.kie.kogito.test.quarkus.kafka.KafkaTestClient;
+import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import io.cloudevents.core.builder.CloudEventBuilder;
+import io.cloudevents.jackson.JsonFormat;
+import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 
 import static io.restassured.RestAssured.given;
@@ -39,14 +48,18 @@ import static org.awaitility.Awaitility.await;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @QuarkusIntegrationTest
+@QuarkusTestResource(KafkaQuarkusTestResource.class)
 public class ApplicantWorkflowIT {
 
     private static final String DECISION_SSE_ENDPOINT = "http://localhost:%s/decisions/stream";
+    
+    @QuarkusTestProperty(name = KafkaQuarkusTestResource.KOGITO_KAFKA_PROPERTY)
+    private String kafkaBootstrapServers;
 
     @Test
     public void testApplicantProcess() throws Exception {
         Integer assignedPort = ConfigProvider.getConfig().getValue("quarkus.http.test-port", Integer.class);
-        ObjectMapper mapper = new ObjectMapper();
+        ObjectMapper mapper = new ObjectMapper().registerModule(JsonFormat.getCloudEventJacksonModule());
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target(String.format(DECISION_SSE_ENDPOINT, assignedPort));
 
@@ -71,17 +84,14 @@ public class ApplicantWorkflowIT {
             JsonNode approvedDecision = mapper.readTree(received.get(0));
             assertEquals("Approved", approvedDecision.get("data").get("decision").asText());
 
-            // Produce an HTTP CE Event in the root path
-            given()
-                    .header("ce-specversion", "1.0")
-                    .header("ce-id", "000")
-                    .header("ce-source", "/from/test")
-                    .header("ce-type", "applicants")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .body("{\"name\":\"Zanini\",\"position\":\"Android Engineer\",\"office\":\"Tokio\",\"salary\": 1000}")
-                    .post("/")
-                    .then()
-                    .statusCode(200);
+            new KafkaTestClient(kafkaBootstrapServers).produce(mapper.writeValueAsString(CloudEventBuilder.v1()
+                    .withId(UUID.randomUUID().toString())
+                    .withSource(URI.create("/from/test"))
+                    //Start message event name in handle-travellers.bpmn
+                    .withType("applicants")
+                    .withTime(OffsetDateTime.now())
+                    .withData("{\"name\":\"Zanini\",\"position\":\"Android Engineer\",\"office\":\"Tokio\",\"salary\": 1000}".getBytes())
+                    .build()), "applicants");
             await().atMost(1, MINUTES).until(() -> received.size() == 2);
             JsonNode deniedDecision = mapper.readTree(received.get(1));
             assertEquals("Denied", deniedDecision.get("data").get("decision").asText());

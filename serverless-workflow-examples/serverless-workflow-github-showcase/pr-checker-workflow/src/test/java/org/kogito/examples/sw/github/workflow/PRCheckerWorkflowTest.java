@@ -46,6 +46,6 @@ class PRCheckerWorkflowTest {
 
         given()
                 .contentType(JsonFormat.CONTENT_TYPE)
-                .body(pullRequestEvent).post("/").then().statusCode(200);
+                .body(pullRequestEvent).post("/").then().statusCode(202);
     }
 }
