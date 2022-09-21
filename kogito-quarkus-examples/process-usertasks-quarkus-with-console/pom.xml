@@ -98,6 +98,24 @@
       <version>${version.org.kie.kogito}</version>
       <scope>test</scope>
     </dependency>
+    <!--for gateway api of dev ui test -->
+    <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>runtime-tools-quarkus-extension</artifactId>
+      <version>${version.org.kie.kogito}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-addons-quarkus-events-process</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-addons-quarkus-process-management</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-addons-quarkus-process-svg</artifactId>
+    </dependency>
   </dependencies>
 
   <build>
