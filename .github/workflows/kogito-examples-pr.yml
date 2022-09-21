@@ -1,4 +1,4 @@
-name: Kogito Examples Build
+name: Kogito Examples
 
 on:
   pull_request:
@@ -26,7 +26,7 @@ jobs:
         examples-subfolder: [ serverless-workflow-examples ]
       fail-fast: false
     runs-on: ${{ matrix.os }}
-    name: Maven Build
+    name: ${{ matrix.examples-subfolder }} Build
     steps:
       - name: Clean Disk Space
         uses: kiegroup/kogito-pipelines/.ci/actions/ubuntu-disk-space@main
