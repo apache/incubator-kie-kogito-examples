@@ -23,10 +23,10 @@ jobs:
         os: [ubuntu-latest]
         java-version: [11]
         maven-version: ['3.8.6']
-        examples-subfolder: [ serverless-workflow-examples ]
+        examples-subfolder: [ serverless-workflow-examples, kogito-quarkus-examples ]
       fail-fast: false
     runs-on: ${{ matrix.os }}
-    name: ${{ matrix.examples-subfolder }} Build
+    name: ${{ matrix.examples-subfolder }}
     steps:
       - name: Clean Disk Space
         uses: kiegroup/kogito-pipelines/.ci/actions/ubuntu-disk-space@main
@@ -43,7 +43,7 @@ jobs:
       - name: Build Chain
         uses: kiegroup/kogito-pipelines/.ci/actions/build-chain@main
         env:
-          KOGITO_EXAMPLES_SUBFOLDER_POM: ${{ matrix.examples-subfolder }}/pom.xml
+          KOGITO_EXAMPLES_SUBFOLDER_POM: ${{ matrix.examples-subfolder }}/
         with:
           annotations-prefix: ${{ runner.os }}-${{ matrix.java-version }}/${{ matrix.maven-version }}
           github-token: "${{ secrets.GITHUB_TOKEN }}"
