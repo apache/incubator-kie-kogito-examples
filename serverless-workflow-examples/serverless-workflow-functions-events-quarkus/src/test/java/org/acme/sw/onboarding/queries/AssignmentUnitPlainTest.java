@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 import org.acme.sw.onboarding.model.Doctor;
 import org.junit.jupiter.api.Test;
-import org.kie.kogito.rules.DataObserver;
+import org.drools.ruleunits.api.DataObserver;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
