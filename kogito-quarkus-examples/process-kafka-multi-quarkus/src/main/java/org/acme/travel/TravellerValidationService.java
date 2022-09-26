@@ -15,7 +15,7 @@
  */
 package org.acme.travel;
 
-import org.kie.kogito.rules.*;
+import org.drools.ruleunits.api.*;
 
 public class TravellerValidationService implements RuleUnitData {
     private final SingletonStore<Traveller> traveller = DataSource.createSingleton();

@@ -17,9 +17,9 @@ package org.kie.kogito.traffic;
 
 import java.util.Date;
 
-import org.kie.kogito.rules.DataSource;
-import org.kie.kogito.rules.RuleUnitData;
-import org.kie.kogito.rules.SingletonStore;
+import org.drools.ruleunits.api.DataSource;
+import org.drools.ruleunits.api.RuleUnitData;
+import org.drools.ruleunits.api.SingletonStore;
 
 public class LicenseValidationService implements RuleUnitData {
     private SingletonStore<Driver> driver;
