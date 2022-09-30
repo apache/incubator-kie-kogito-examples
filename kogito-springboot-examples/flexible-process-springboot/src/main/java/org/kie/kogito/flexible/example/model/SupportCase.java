@@ -105,6 +105,10 @@ public class SupportCase {
         return this;
     }
 
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
     public Questionnaire getQuestionnaire() {
         return questionnaire;
     }
