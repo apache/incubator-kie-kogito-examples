@@ -30,9 +30,7 @@ public class CorsConfig {
 
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        // TODO: KOGITO-5455 / KOGITO-5511 can be reverted back once we upgrade to SB 2.4.x
-        config.addAllowedOrigin("*");
-        //config.setAllowedOriginPatterns(Arrays.asList("http://*:8080", "http://*:8280", "http://*:8380"));
+        config.setAllowedOriginPatterns(Arrays.asList("http://*:8080", "http://*:8280", "http://*:8380"));
         config.addAllowedHeader("*");
         config.addAllowedMethod("OPTIONS");
         config.addAllowedMethod("GET");
