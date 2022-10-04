@@ -37,6 +37,11 @@ public interface SubscriptionService {
     Subscription subscribe(Subscription subscription);
 
     /**
+     * Deletes a subscription by id.
+     */
+    void delete(String id);
+
+    /**
      * Fetch the subscription by email
      */
     Optional<Subscription> fetch(String email);

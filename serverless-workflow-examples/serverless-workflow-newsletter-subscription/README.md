@@ -9,7 +9,8 @@ The figure below illustrates the overall architecture of this use case.
 1. Once a new subscription request comes, the flow will evaluate if it's not already subscribed.
 2. Case not, it will attempt to subscribe the new user and wait for the confirmation.
 3. Once a new event containing the confirmation arrives, the flow will resume and subscribe the new user.
-4. By the end, a new event containing the details of the subscription is broadcasted in the environment, so other actors can react upon it.
+4. Subscriptions that are not confirmed during a configured period of time, are considered timed-out and are automatically removed from the system.
+5. By the end, a new event containing the details of the subscription is broadcasted in the environment, so other actors can react upon it.
 
 ![Workflow](docs/newsletter-subscription-flow.png)
 
@@ -78,9 +79,12 @@ In this example we use a regular, in-memory, broker. Feel free to adapt the exam
 Deploy the services with the following command:
 
 ```shell
-# the namespace name is very important. If you decide to change the namespace, please be update the query-answer-service Knative properties.
+# the namespace name is very important. If you decide to change the namespace, please be update the subscription-flow Knative properties.
 $ kubectl create ns newsletter-showcase
-# install the subscription-flow and the Postgres database
+# install the supporting services to run the example in knative, the PostgreSQL database, the Jobs Service and the event-display application.
+$ kubectl apply -f kubernetes/supporting-services.yml -n newsletter-showcase
+
+# install the subscription-flow
 $ kubectl apply -f subscription-flow/target/kubernetes/knative.yml -n newsletter-showcase
 $ kubectl apply -f subscription-flow/target/kubernetes/kogito.yml -n newsletter-showcase
 # install the subscription-service 

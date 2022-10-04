@@ -16,6 +16,7 @@
 
 package org.acme.newsletter.subscription.service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -102,15 +103,22 @@ public class PostgreSqlSubscriptionRepository implements SubscriptionRepository 
     @Override
     public void saveOrUpdate(Subscription subscription) {
         client.preparedQuery("INSERT INTO " + SUBSCRIPTION_TABLE + " (" + SUBSCRIPTION_COLUMNS + ") " +
-                " VALUES ($1, $2, $3, $4) " +
-                "ON CONFLICT (processinstanceid) DO " +
-                "UPDATE SET email = $2, nm = $3, verified = $4 " +
-                "RETURNING " + SUBSCRIPTION_COLUMNS)
+                                     " VALUES ($1, $2, $3, $4) " +
+                                     "ON CONFLICT (processinstanceid) DO " +
+                                     "UPDATE SET email = $2, nm = $3, verified = $4 " +
+                                     "RETURNING " + SUBSCRIPTION_COLUMNS)
                 .execute(Tuple.tuple(Stream.of(
                         subscription.getId(),
                         subscription.getEmail(),
                         subscription.getName(),
                         subscription.isVerified()).collect(toList())))
+                .await().indefinitely().value();
+    }
+
+    @Override
+    public void delete(String id) {
+        client.preparedQuery("DELETE FROM " + SUBSCRIPTION_TABLE + " WHERE processinstanceid = $1 ")
+                .execute(Tuple.tuple(Collections.singletonList(id)))
                 .await().indefinitely().value();
     }
 
