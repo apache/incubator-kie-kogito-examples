@@ -72,7 +72,6 @@ pipeline {
                     mavenCompareQuarkusDependencies(kogitoRuntimesRepo, 'kogito-quarkus-bom')
                     mavenCompareQuarkusDependencies(kogitoRuntimesRepo, 'kogito-build-no-bom-parent')
                     mavenSetProperty(kogitoRuntimesRepo, 'version.io.quarkus', '999-SNAPSHOT')
-                    mavenSetProperty(kogitoRuntimesRepo, 'version.io.quarkus.quarkus-test', '999-SNAPSHOT')
                     mavenSetProperty(kogitoExamplesRepo, 'quarkus.platform.version', '999-SNAPSHOT')
                     mavenSetProperty(kogitoExamplesRepo, 'quarkus-plugin.version', '999-SNAPSHOT')
                 }
@@ -216,7 +215,7 @@ pipeline {
 
 void sendNotification() {
     String additionalInfo = ''
-    if(useIntegrationBranch()) {
+    if (useIntegrationBranch()) {
         additionalInfo += """
 If any changes need to be done, please perform them on branch **${getIntegrationBranch()}**
 """
@@ -253,7 +252,7 @@ void mergeOnIntegrationBranch(String repoName, String baseBranch, boolean pushCh
     dir(repoName) {
         getOrCreateGitBranch(getIntegrationBranch())
         sh "git merge origin/${baseBranch} --no-ff"
-        if(pushChanges){
+        if (pushChanges) {
             githubscm.pushObject('origin', getIntegrationBranch(),  params.GIT_AUTHOR_CREDS_ID)
         }
     }
@@ -267,7 +266,7 @@ MavenCommand getBasicMavenCommand(String directory) {
 
 MavenCommand getEcosystemMavenCommand(String directory) {
     def mvnCmd = getBasicMavenCommand(directory)
-    
+
     if (env.BUILD_MVN_OPTS) {
         mvnCmd.withOptions([ env.BUILD_MVN_OPTS ])
     }
@@ -351,7 +350,6 @@ void getOrCreateGitBranch(String branch) {
         echo "Branch ${branch} already exist ... will not create it. Checking out !"
         sh "git checkout ${branch}"
     } else {
-
         echo "Branch ${branch} does not exist ... gonna create it"
         githubscm.createBranch(branch)
     }
@@ -360,7 +358,7 @@ void getOrCreateGitBranch(String branch) {
 String getReproducer() {
     String kogitoBranch = useIntegrationBranch() ? getIntegrationBranch() : getKogitoBranch()
     String droolsBranch = useIntegrationBranch() ? getIntegrationBranch() : getDroolsBranch()
-    String repoducer = """
+    String reproducer = """
 git clone --branch ${droolsBranch} --depth 1 https://github.com/kiegroup/drools.git
 git clone --branch ${kogitoBranch} --depth 1 https://github.com/kiegroup/kogito-runtimes.git
 git clone --branch ${kogitoBranch} --depth 1 https://github.com/kiegroup/kogito-apps.git
@@ -374,16 +372,15 @@ mvn -f drools/pom.xml -pl :drools-build-parent versions:compare-dependencies -Dr
 mvn -f drools/pom.xml -e versions:set-property -Dproperty=version.io.quarkus -DnewVersion=999-SNAPSHOT -DallowSnapshots=true -DgenerateBackupPoms=false
 mvn -f kogito-runtimes/pom.xml -pl :kogito-dependencies-bom -pl :kogito-build-parent -pl :kogito-quarkus-bom -pl :kogito-build-no-bom-parent versions:compare-dependencies -DremotePom=io.quarkus:quarkus-bom:999-SNAPSHOT -DupdatePropertyVersions=true -DupdateDependencies=true -DgenerateBackupPoms=false
 mvn -f kogito-runtimes/pom.xml -e versions:set-property -Dproperty=version.io.quarkus -DnewVersion=999-SNAPSHOT -DallowSnapshots=true -DgenerateBackupPoms=false
-mvn -f kogito-runtimes/pom.xml -e versions:set-property -Dproperty=version.io.quarkus.quarkus-test -DnewVersion=999-SNAPSHOT -DallowSnapshots=true -DgenerateBackupPoms=false
 mvn -f kogito-examples/pom.xml -e versions:set-property -Dproperty=quarkus.platform.version -DnewVersion=999-SNAPSHOT -DallowSnapshots=true -DgenerateBackupPoms=false
 mvn -f kogito-examples/pom.xml -e versions:set-property -Dproperty=quarkus-plugin.version -DnewVersion=999-SNAPSHOT -DallowSnapshots=true -DgenerateBackupPoms=false
 """
     }
-    reproducer += """
+    reproducer += '''
 mvn -f drools/pom.xml clean install -Dquickly
 mvn -f kogito-runtimes/pom.xml clean install -Dquickly
 mvn -f kogito-apps/pom.xml clean install -Dquickly
 mvn -f kogito-examples/pom.xml clean install -Dquickly
-"""
+'''
     return reproducer
 }
