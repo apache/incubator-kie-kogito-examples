@@ -114,3 +114,17 @@ $ minikube tunnel --profile knative
 Open the URLs in your browser and try playing with your services scaling to 0.
 
 Note that even when the pod is scaled back after a short period of time, your data remains there. That's the power of a stateful Kogito Serverless Workflow!
+
+### Cleaning-up your environment
+
+The recommended procedure to remove the showcase from your local minikube is to delete the `newsletter-showcase` namespace by executing the following command. 
+
+```shell
+# delete the newsletter-showcase 
+$ kubectl delete namespace newsletter-showcase
+
+# the deletion procedure might take some time to complete, don't cancel it. 
+# in meantime an output like this is printed in the terminal window. 
+namespace "newsletter-showcase" deleted
+```
+
