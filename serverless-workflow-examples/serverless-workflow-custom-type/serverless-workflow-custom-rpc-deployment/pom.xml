@@ -19,7 +19,7 @@
       <artifactId>serverless-workflow-custom-rpc</artifactId>
       <version>${project.version}</version>
     </dependency>
-    
+
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-quarkus-serverless-workflow-deployment</artifactId>
@@ -36,7 +36,7 @@
             <path>
               <groupId>io.quarkus</groupId>
               <artifactId>quarkus-extension-processor</artifactId>
-                <version>${version.io.quarkus}</version>
+              <version>${quarkus.platform.version}</version>
             </path>
           </annotationProcessorPaths>
         </configuration>

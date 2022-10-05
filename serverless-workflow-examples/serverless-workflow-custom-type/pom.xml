@@ -22,7 +22,6 @@
      <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
      <maven.compiler.release>11</maven.compiler.release>
      <version.org.slf4j>1.7.30</version.org.slf4j>
-     <version.io.quarkus>2.12.0.Final</version.io.quarkus>
    </properties>
   
   <dependencyManagement>
