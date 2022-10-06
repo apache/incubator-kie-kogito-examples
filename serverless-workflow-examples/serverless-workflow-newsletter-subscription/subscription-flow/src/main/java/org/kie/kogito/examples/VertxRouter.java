@@ -14,25 +14,19 @@
  * limitations under the License.
  */
 
-package org.acme.newsletter.subscription.service;
+package org.kie.kogito.examples;
 
-import java.util.List;
-import java.util.Optional;
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.event.Observes;
 
-public interface SubscriptionRepository {
+import io.vertx.core.http.HttpMethod;
+import io.vertx.ext.web.Router;
 
-    Optional<Subscription> fetchByEmail(String email);
+@ApplicationScoped
+public class VertxRouter {
 
-    Optional<Subscription> fetchByIdAndEmail(String id, String email);
-
-    List<Subscription> fetchAllByVerified(boolean verified);
-
-    void saveOrUpdate(Subscription subscription);
-
-    void delete(String id);
-
-    default boolean isValidId(String id) {
-        return id != null && !id.isBlank();
+    public void setupRouter(@Observes Router router) {
+        // send get requests on the root path o the index.html too.
+        router.route(HttpMethod.GET, "/").order(Integer.MIN_VALUE).handler(ctx -> ctx.reroute("/index.html"));
     }
-
 }

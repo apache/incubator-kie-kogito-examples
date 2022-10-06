@@ -26,6 +26,10 @@
       "operation": "specs/subscription-service.yaml#confirm"
     },
     {
+      "name": "deleteSubscription",
+      "operation": "specs/subscription-service.yaml#delete"
+    },
+    {
       "name": "verifyEmail",
       "operation": "specs/subscription-service.yaml#verify"
     }
@@ -81,7 +85,23 @@
       },
       "eventRef": "ConfirmSubscriptionEvent",
       "transition": {
-        "nextState": "ConfirmSubscription"
+        "nextState": "CheckConfirmation"
+      },
+      "timeouts": {
+        "eventTimeout": "PT3M"
+      }
+    },
+    {
+      "name" : "CheckConfirmation",
+      "type" : "switch",
+      "dataConditions": [
+        {
+          "condition": "${ .confirmed == true }",
+          "transition": "ConfirmSubscription"
+        }
+      ],
+      "defaultCondition": {
+        "transition": "DeleteSubscription"
       }
     },
     {
@@ -107,6 +127,21 @@
         ],
         "terminate": true
       }
+    },
+    {
+      "name": "DeleteSubscription",
+      "type": "operation",
+      "actions": [
+        {
+          "functionRef": {
+            "refName": "deleteSubscription",
+            "arguments": {
+              "id": "$WORKFLOW.instanceId"
+            }
+          }
+        }
+      ],
+      "end": true
     },
     {
       "name": "NoSubscription",

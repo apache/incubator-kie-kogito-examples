@@ -74,6 +74,12 @@
       <artifactId>kogito-addons-quarkus-process-svg</artifactId>
     </dependency>
 
+    <!-- Management plugin -->
+    <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-addons-quarkus-process-management</artifactId>
+    </dependency>
+
     <!-- UI dependencies -->
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -182,31 +188,6 @@
       </properties>
     </profile>
     <profile>
-      <id>persistence</id>
-      <activation>
-        <property>
-          <name>persistence</name>
-        </property>
-      </activation>
-      <properties>
-        <quarkus.profile>persistence</quarkus.profile>
-      </properties>
-      <dependencies>
-        <dependency>
-          <groupId>org.kie.kogito</groupId>
-          <artifactId>kogito-addons-quarkus-persistence-jdbc</artifactId>
-        </dependency>
-        <dependency>
-          <groupId>io.quarkus</groupId>
-          <artifactId>quarkus-jdbc-postgresql</artifactId>
-        </dependency>
-        <dependency>
-          <groupId>io.quarkus</groupId>
-          <artifactId>quarkus-agroal</artifactId>
-        </dependency>
-      </dependencies>
-    </profile>
-    <profile>
       <id>knative</id>
       <properties>
         <!-- Shortcuts -->
@@ -240,6 +221,10 @@
         <dependency>
           <groupId>io.quarkus</groupId>
           <artifactId>quarkus-agroal</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>org.kie.kogito</groupId>
+          <artifactId>kogito-addons-quarkus-jobs-knative-eventing</artifactId>
         </dependency>
       </dependencies>
     </profile>

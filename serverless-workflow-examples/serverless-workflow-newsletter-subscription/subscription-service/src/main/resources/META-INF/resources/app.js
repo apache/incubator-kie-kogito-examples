@@ -1,14 +1,19 @@
 function refreshSubscriptionTable() {
+    showSpinnerDialog("Loading subscriptions");
     $.getJSON("/subscription/pending", (subscriptions) => {
+        closeSpinnerDialog();
         printPendingSubsTable(subscriptions);
     }).fail(function () {
-        showError("An error was produced during the Subscriptions refresh, please check that que subscription-service application is running.");
+        closeSpinnerDialog();
+        showError("An error was produced during the Pending subscriptions refresh, please check that que subscription-service application is running.");
     });
 
     $.getJSON("/subscription/verified", (subscriptions) => {
+        closeSpinnerDialog();
         printVerifiedSubsTable(subscriptions);
     }).fail(function () {
-        showError("An error was produced during the Subscriptions refresh, please check that que subscription-service application is running.");
+        closeSpinnerDialog();
+        showError("An error was produced during the Verified subscriptions refresh, please check that que subscription-service application is running.");
     });
 }
 
@@ -46,19 +51,27 @@ function printSubscriptionRow(subsTableBody, subscription) {
 }
 
 function showError(message) {
-    const notification = $(`<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="min-width: 30rem"/>`)
+    const notification = $(`<div class="toast" role="alert" aria-live="assertive" aria-atomic="true"  data-bs-delay="3000"/>`)
             .append($(`<div class="toast-header bg-danger">
-                 <strong class="mr-auto text-dark">Error</strong>
-                 <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                   <span aria-hidden="true">&times;</span>
-                 </button>
+                 <strong class="me-auto text-dark">Error</strong>
+                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                </div>`))
             .append($(`<div class="toast-body"/>`)
                     .append($(`<p/>`).text(message))
             );
     $("#notificationPanel").append(notification);
-    notification.toast({delay: 30000});
     notification.toast("show");
+}
+
+function showSpinnerDialog(message) {
+    const modal = $('#spinnerDialog');
+    modal.find('#spinnerDialogMessage').text(message);
+    modal.show();
+}
+
+function closeSpinnerDialog() {
+    const modal = $('#spinnerDialog');
+    modal.hide();
 }
 
 $(document).ready(function () {

@@ -21,20 +21,18 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import org.acme.newsletter.subscription.service.Subscription;
-import org.junit.jupiter.api.Test;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.github.tomakehurst.wiremock.WireMockServer;
-
 import io.cloudevents.CloudEvent;
 import io.cloudevents.core.v1.CloudEventBuilder;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import org.junit.jupiter.api.Test;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.containing;
 import static com.github.tomakehurst.wiremock.client.WireMock.postRequestedFor;
@@ -42,7 +40,7 @@ import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 import static io.restassured.RestAssured.given;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.acme.newsletter.subscription.flow.SubscriptionConstants.EMAIL;
-import static org.acme.newsletter.subscription.flow.SubscriptionConstants.newSubscription;
+import static org.acme.newsletter.subscription.flow.SubscriptionConstants.NAME;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.awaitility.Awaitility.await;
 
@@ -69,7 +67,7 @@ public class SubscriptionFlowIT {
         final String bodyAfterSubs = given()
                 .accept(ContentType.JSON)
                 .contentType(ContentType.JSON)
-                .body("{\"workflowdata\": {\"email\": \"" + EMAIL + "\"}}")
+                .body("{\"workflowdata\": {\"email\": \"" + EMAIL + "\", \"name\": \"" + NAME + "\"}}")
                 .post("/subscription_flow")
                 .then()
                 .statusCode(201).extract().body().asPrettyString();
@@ -79,8 +77,9 @@ public class SubscriptionFlowIT {
         // we need the workflow instance id to confirm our subscription
         final Map<String, Object> map = mapper.readValue(bodyAfterSubs, typeRef);
         final String workflowId = map.get("id").toString();
-        final Subscription subscription = newSubscription();
-        subscription.setId(workflowId);
+        final ObjectNode data = mapper.createObjectNode();
+        data.put("id", workflowId);
+        data.put("confirmed", true);
 
         // now we send the CE with our confirmation to end the subscription flow
         final CloudEvent confirmationEvent = new CloudEventBuilder()
@@ -97,8 +96,8 @@ public class SubscriptionFlowIT {
                 .header("ce-source", confirmationEvent.getSource().toString())
                 .header("ce-type", confirmationEvent.getType())
                 .header("ce-kogitoprocrefid", confirmationEvent.getExtension("kogitoprocrefid"))
-                .body(mapper.writeValueAsString(subscription))
-                .post("/")// the root path means we are listening for CEs for Knative Eventing integration
+                .body(data.toString())
+                .post("/")// path where we are listening for CEs for Knative Eventing integration
                 .then()
                 .statusCode(202);
 
@@ -106,7 +105,10 @@ public class SubscriptionFlowIT {
         await()
                 .atMost(10, SECONDS)
                 .with().pollInterval(1, SECONDS)
-                .untilAsserted(() -> sink.verify(1, postRequestedFor(urlEqualTo("/")).withRequestBody(containing(EMAIL))));
+                .untilAsserted(() -> sink.verify(1,
+                                                 postRequestedFor(urlEqualTo("/"))
+                                                         .withRequestBody(containing("new.subscription"))
+                                                         .withRequestBody(containing(EMAIL))
+                                                         .withRequestBody(containing(NAME))));
     }
-
 }

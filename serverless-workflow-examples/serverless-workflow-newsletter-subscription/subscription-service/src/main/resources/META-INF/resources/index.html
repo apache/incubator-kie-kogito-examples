@@ -46,6 +46,19 @@
     <table class="table table-borderless table-striped" id="verifiedSubscriptions">
         <!-- Filled in by app.js -->
     </table>
+
+    <div id="spinnerDialog" class="modal" tabIndex="-1" data-bs-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="d-flex align-items-center">
+                        <div class="spinner-border" role="status"></div>
+                        <span id="spinnerDialogMessage" style="padding-left: 15px">Loading ...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script src="/webjars/jquery/jquery.min.js"></script>
