@@ -9,8 +9,8 @@
   <packaging>pom</packaging>
   <name>Kogito Example :: Serverless Workflow grpc example</name>
   <modules>
-    <module>serverless-workflow-greeting-client-rpc-quarkus</module>
     <module>serverless-workflow-greeting-server-rpc-quarkus</module>
+    <module>serverless-workflow-greeting-client-rpc-quarkus</module>
   </modules>
 
 </project>
