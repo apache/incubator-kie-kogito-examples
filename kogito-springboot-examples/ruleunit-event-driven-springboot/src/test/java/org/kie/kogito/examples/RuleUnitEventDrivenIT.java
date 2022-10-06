@@ -15,6 +15,10 @@
  */
 package org.kie.kogito.examples;
 
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.await;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -42,10 +46,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import static java.util.concurrent.TimeUnit.SECONDS;
-import static org.awaitility.Awaitility.await;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
 @ContextConfiguration(initializers = KafkaSpringBootTestResource.class)
@@ -119,26 +119,6 @@ class RuleUnitEventDrivenIT {
         doTest("events/query/find_not_approved_id_and_amount");
     }
 
-    @Test
-    void testErrorBadRequestNullData() {
-        doTest("events/error/bad_request/null_data");
-    }
-
-    @Test
-    void testErrorBadRequestNullModel() {
-        doTest("events/error/bad_request/null_model");
-    }
-
-    @Test
-    void testErrorQueryNotFoundWrongQuery() {
-        doTest("events/error/query_not_found/wrong_query");
-    }
-
-    @Test
-    void testErrorQueryNotFoundWrongRuleUnitId() {
-        doTest("events/error/query_not_found/wrong_rule_unit_id");
-    }
-
     private void assertCloudEventJsonEquals(String expectedJson, String actualJson) throws Exception {
         String normalizedExpectedJson = prepareCloudEventJsonForJSONAssert(expectedJson);
         String normalizedActualJson = prepareCloudEventJsonForJSONAssert(actualJson);
@@ -177,7 +157,7 @@ class RuleUnitEventDrivenIT {
                 .untilAsserted(() -> {
                     kafkaClient.produce(inputJson, REQUESTS_TOPIC_NAME);
 
-                    assertTrue(countDownLatch.await(10, SECONDS));
+                    assertTrue(countDownLatch.await(5, SECONDS));
                     assertCloudEventJsonEquals(outputJson, outputEventRef.get());
                 });
     }
