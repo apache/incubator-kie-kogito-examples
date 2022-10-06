@@ -21,6 +21,7 @@ import java.time.OffsetDateTime;
 import java.util.UUID;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -30,6 +31,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import io.vertx.core.http.HttpMethod;
+import io.vertx.ext.web.Router;
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Emitter;
 import org.eclipse.microprofile.reactive.messaging.Message;
@@ -61,7 +64,14 @@ public class EventsProducerResource {
      * Event type expected by the callback_state_timeouts sw to receive the callback results from the callback function.
      */
     private static final String CALLBACK_EVENT_TYPE = "callback_event_type";
-
+    /**
+     * Event type expected by the event_state_timeouts sw to execute the associated actions.
+     */
+    private static final String EVENT1_EVENT_TYPE = "event1_event_type";
+    /**
+     * Event type expected by the event_state_timeouts sw to execute the associated actions.
+     */
+    private static final String EVENT2_EVENT_TYPE = "event2_event_type";
     /**
      * Outgoing channel for the response events sent to the processes.
      */
@@ -76,7 +86,6 @@ public class EventsProducerResource {
 
     /**
      * Produce a callback event for an instance of the callback-state-timeouts serverless workflow.
-     * 
      * @param processInstanceId Process instance id of the process that will receive the event.
      * @param event event to send.
      */
@@ -85,14 +94,11 @@ public class EventsProducerResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response produceCallbackStateTimeoutsEvent(@PathParam("processInstanceId") String processInstanceId, Event event) {
-        String cloudEvent = generateCloudEvent(processInstanceId, CALLBACK_EVENT_TYPE, event);
-        emitEvent(cloudEvent);
-        return Response.ok("{}").build();
+        return produceEvent(processInstanceId, CALLBACK_EVENT_TYPE, event);
     }
 
     /**
      * Produce a visa approval event for an instance of the switch-state-timeouts serverless workflow.
-     *
      * @param processInstanceId Process instance id of the process that will receive the event.
      * @param event event to send.
      */
@@ -101,14 +107,11 @@ public class EventsProducerResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response produceSwitchStateTimeoutsVistaApprovedEvent(@PathParam("processInstanceId") String processInstanceId, Event event) {
-        String cloudEvent = generateCloudEvent(processInstanceId, VISA_APPROVED_EVENT_TYPE, event);
-        emitEvent(cloudEvent);
-        return Response.ok("{}").build();
+        return produceEvent(processInstanceId, VISA_APPROVED_EVENT_TYPE, event);
     }
 
     /**
      * Produce a visa denial event for an instance of the switch-state-timeouts serverless workflow.
-     *
      * @param processInstanceId Process instance id of the process that will receive the event.
      * @param event event to send.
      */
@@ -117,7 +120,37 @@ public class EventsProducerResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response produceSwitchStateTimeoutsVistaDeniedEvent(@PathParam("processInstanceId") String processInstanceId, Event event) {
-        String cloudEvent = generateCloudEvent(processInstanceId, VISA_DENIED_EVENT_TYPE, event);
+        return produceEvent(processInstanceId, VISA_DENIED_EVENT_TYPE, event);
+    }
+
+    /**
+     * Produce the event1 for an instance of the event-state-timeouts serverless workflow.
+     * @param processInstanceId Process instance id of the process that will receive the event.
+     * @param event event to send.
+     */
+    @Path("produce-event-state-timeouts-event1/{processInstanceId}")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response produceEventStateTimeoutsEvent1(@PathParam("processInstanceId") String processInstanceId, Event event) {
+        return produceEvent(processInstanceId, EVENT1_EVENT_TYPE, event);
+    }
+
+    /**
+     * Produce the event2 for an instance of the event-state-timeouts serverless workflow.
+     * @param processInstanceId Process instance id of the process that will receive the event.
+     * @param event event to send.
+     */
+    @Path("produce-event-state-timeouts-event2/{processInstanceId}")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response produceEventStateTimeoutsEvent2(@PathParam("processInstanceId") String processInstanceId, Event event) {
+        return produceEvent(processInstanceId, EVENT2_EVENT_TYPE, event);
+    }
+
+    private Response produceEvent(String processInstanceId, String eventType, Event event) {
+        String cloudEvent = generateCloudEvent(processInstanceId, eventType, event);
         emitEvent(cloudEvent);
         return Response.ok("{}").build();
     }
@@ -125,14 +158,14 @@ public class EventsProducerResource {
     private String generateCloudEvent(String processInstanceId, String eventType, Event event) {
         try {
             return objectMapper.writeValueAsString(CloudEventBuilder.v1()
-                    .withId(UUID.randomUUID().toString())
-                    .withSource(URI.create("events-producer"))
-                    .withType(eventType)
-                    .withTime(OffsetDateTime.now())
-                    .withExtension("kogitoprocrefid", processInstanceId)
-                    .withDataContentType(MediaType.APPLICATION_JSON)
-                    .withData(JsonCloudEventData.wrap(objectMapper.createObjectNode().put("eventData", event.getEventData())))
-                    .build());
+                                                           .withId(UUID.randomUUID().toString())
+                                                           .withSource(URI.create("events-producer"))
+                                                           .withType(eventType)
+                                                           .withTime(OffsetDateTime.now())
+                                                           .withExtension("kogitoprocrefid", processInstanceId)
+                                                           .withDataContentType(MediaType.APPLICATION_JSON)
+                                                           .withData(JsonCloudEventData.wrap(objectMapper.createObjectNode().put("eventData", event.getEventData())))
+                                                           .build());
         } catch (JsonProcessingException e) {
             throw new IllegalArgumentException(e);
         }
@@ -143,6 +176,7 @@ public class EventsProducerResource {
     }
 
     public static class Event {
+
         private String eventData;
 
         public Event() {

@@ -231,6 +231,11 @@ In this tab, you can create and complete instances of the callback-sate-timeouts
 
 ![](docs/CallbackStateTimeoutsTab.png)
 
+#### Event-state-timeouts tab
+In this tab, you can create and complete instances of the event-sate-timeouts process.
+
+![](docs/EventStateTimeoutsTab.png)
+
 > **NOTE:** Remember that example workflows are configured with timeouts, which means that, if you create a workflow instance
 > and execute no action, when the timeout is met, if you refresh the data, the given instance won't be shown anymore. This last is perfectly fine, since the workflow might have finished because of the timeout overdue.
 > 
