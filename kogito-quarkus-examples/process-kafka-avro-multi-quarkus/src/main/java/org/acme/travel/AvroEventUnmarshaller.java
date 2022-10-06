@@ -23,13 +23,13 @@ import javax.inject.Inject;
 import org.kie.kogito.event.EventUnmarshaller;
 
 @ApplicationScoped
-public class AvroEventUnmarshaller implements EventUnmarshaller<Object> {
+public class AvroEventUnmarshaller implements EventUnmarshaller<byte[]> {
 
     @Inject
     AvroUtils avroUtils;
 
     @Override
-    public <T> T unmarshall(Object input, Class<T> outputClass, Class<?>... parametrizedClasses) throws IOException {
-        return avroUtils.readObject((byte[]) input, outputClass, parametrizedClasses);
+    public <T> T unmarshall(byte[] input, Class<T> outputClass, Class<?>... parametrizedClasses) throws IOException {
+        return avroUtils.readObject(input, outputClass, parametrizedClasses);
     }
 }
