@@ -117,7 +117,7 @@ function confirmSubscription(subscriptionId, subscriptionEmail) {
     const ceInput = JSON.stringify(cloudEventJson);
     showSpinnerDialog("Confirming subscription: " + subscriptionId + ", " + subscriptionEmail);
     $.ajax({
-        url: "/kogito-incoming-stream",
+        url: "/",
         type: "POST",
         dataType: "text",
         contentType: "application/cloudevents+json; charset=UTF-8",

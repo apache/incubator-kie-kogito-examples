@@ -97,7 +97,7 @@ public class SubscriptionFlowIT {
                 .header("ce-type", confirmationEvent.getType())
                 .header("ce-kogitoprocrefid", confirmationEvent.getExtension("kogitoprocrefid"))
                 .body(data.toString())
-                .post("/kogito-incoming-stream")// path where we are listening for CEs for Knative Eventing integration
+                .post("/")// path where we are listening for CEs for Knative Eventing integration
                 .then()
                 .statusCode(202);
 
