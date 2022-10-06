@@ -55,11 +55,6 @@
     </dependency>
     <dependency>
       <groupId>org.apache.camel.quarkus</groupId>
-      <artifactId>camel-quarkus-core</artifactId>
-      <version>${version.org.camel}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.camel.quarkus</groupId>
       <artifactId>camel-quarkus-slack</artifactId>
       <version>${version.org.camel}</version>
     </dependency>
