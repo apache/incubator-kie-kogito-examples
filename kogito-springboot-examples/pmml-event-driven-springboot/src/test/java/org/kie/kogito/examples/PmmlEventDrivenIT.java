@@ -105,21 +105,6 @@ class PmmlEventDrivenIT {
     }
 
     @Test
-    void testErrorBadRequestNullData() {
-        doTest("events/error/bad_request/null_data");
-    }
-
-    @Test
-    void testErrorBadRequestNullModel() {
-        doTest("events/error/bad_request/null_model");
-    }
-
-    //    @Test
-    //    void testErrorModelNotFound() {
-    //        doTest("events/error/model_not_found");
-    //    }
-
-    @Test
     void testModelMiningDefault() {
         doTest("events/model/mining/default");
     }

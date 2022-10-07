@@ -135,12 +135,6 @@ public class DmnEventDrivenIT {
                 }
             }
         }
-
-        for (String errorSubPath : List.of("bad_request/null_data", "bad_request/null_model", "model_not_found")) {
-            String basePath = "events/error/" + errorSubPath;
-            arguments.add(Arguments.of(basePath));
-        }
-
         return arguments.stream();
     }
 
