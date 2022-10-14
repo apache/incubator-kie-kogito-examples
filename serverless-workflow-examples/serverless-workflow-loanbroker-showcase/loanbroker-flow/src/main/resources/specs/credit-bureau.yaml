@@ -1,0 +1,58 @@
+openapi: 3.0.1
+info:
+  title: Credit Bureau
+  description: Credit Bureau function for the Serverless Loan Broker Application
+  version: '0.1'
+  contact:
+    name: Ricardo Zanini
+    email: ricardozanini@gmail.com
+    url: https://kogito.kie.org/
+servers:
+  - url: http://localhost:8080
+paths:
+  /:
+    get:
+      operationId: getCustomerCreditScore
+      description: Get the Customer's Credit Score
+      parameters:
+        - name: SSN
+          in: query
+          schema:
+            type: string
+          example: 123-45-6789
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json; charset=utf8:
+              schema:
+                $ref: '#/components/schemas/CreditBureauResponse'
+              examples: { }
+      servers:
+        - url: http://localhost:8080
+      tags:
+        - CreditBureau
+    servers:
+      - url: http://localhost:8080
+components:
+  schemas:
+    CreditBureauResponse:
+      type: object
+      required:
+        - SSN
+          score
+          history
+      properties:
+        SSN:
+          type: string
+          minLength: 11
+          maxLength: 11
+          pattern: ^\d{3}-\d{2}-\d{4}$
+        score:
+          type: integer
+          minLength: 1
+        history:
+          type: integer
+          minLength: 1
+tags:
+  - name: CreditBureau

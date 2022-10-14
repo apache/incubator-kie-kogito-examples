@@ -49,6 +49,7 @@
         <module>serverless-workflow-oauth2-orchestration-quarkus</module>
         <module>serverless-workflow-timeouts-showcase</module>
         <module>serverless-workflow-custom-type</module>
+        <module>serverless-workflow-loanbroker-showcase</module>
       </modules>
     </profile>
 
@@ -121,6 +122,7 @@
         <module>serverless-workflow-testing-with-rest-assured</module>
         <module>serverless-workflow-qas-service-showcase</module>
         <module>serverless-workflow-newsletter-subscription</module>
+        <module>serverless-workflow-loanbroker-showcase</module>
       </modules>
     </profile>
   </profiles>
