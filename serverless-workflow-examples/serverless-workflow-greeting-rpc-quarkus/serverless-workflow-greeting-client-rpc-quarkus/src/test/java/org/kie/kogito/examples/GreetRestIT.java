@@ -61,7 +61,7 @@ class GreetRestIT {
         given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
-                .body("{\"workflowdata\" : {\"name\" : \"John\", \"language\":\"English\"}}").when()
+                .body("{\"name\" : \"John\", \"language\":\"English\"}").when()
                 .post("/jsongreet")
                 .then()
                 .statusCode(201)
@@ -73,7 +73,7 @@ class GreetRestIT {
         given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
-                .body("{\"workflowdata\" : {\"name\" : \"Javierito\", \"language\":\"Spanish\"}}").when()
+                .body("{\"name\" : \"Javierito\", \"language\":\"Spanish\"}").when()
                 .post("/jsongreet")
                 .then()
                 .statusCode(201)
@@ -85,7 +85,7 @@ class GreetRestIT {
         given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
-                .body("{\"workflowdata\" : {\"name\" : \"John\"}}").when()
+                .body("{\"name\" : \"John\"}").when()
                 .post("/jsongreet")
                 .then()
                 .statusCode(201)
@@ -97,7 +97,7 @@ class GreetRestIT {
         given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
-                .body("{\"workflowdata\" : {\"name\" : \"Jan\", \"language\":\"Czech\"}}").when()
+                .body("{\"name\" : \"Jan\", \"language\":\"Czech\"}").when()
                 .post("/jsongreet")
                 .then()
                 .statusCode(201)
@@ -109,7 +109,7 @@ class GreetRestIT {
         given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
-                .body("{\"workflowdata\" : {\"name\" : \"John\"}}").when()
+                .body("{\"name\" : \"John\"}").when()
                 .post("/jsongreetserverstream")
                 .then()
                 .statusCode(201)
@@ -123,11 +123,11 @@ class GreetRestIT {
         given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
-                .body("{\"workflowdata\" : { \"helloRequests\" : [" +
+                .body("{\"helloRequests\" : [" +
                         "{\"name\" : \"Javierito\", \"language\":\"Spanish\"}," +
                         "{\"name\" : \"John\", \"language\":\"English\"}," +
                         "{\"name\" : \"Jan\", \"language\":\"Czech\"}" +
-                        "]}}")
+                        "]}")
                 .when()
                 .post("/jsongreetclientstream")
                 .then()
@@ -142,11 +142,11 @@ class GreetRestIT {
         given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
-                .body("{\"workflowdata\" : { \"helloRequests\" : [" +
+                .body("{\"helloRequests\" : [" +
                         "{\"name\" : \"Javierito\", \"language\":\"Spanish\"}," +
                         "{\"name\" : \"John\", \"language\":\"English\"}," +
                         "{\"name\" : \"Jan\", \"language\":\"Czech\"}" +
-                        "]}}")
+                        "]}")
                 .when()
                 .post("/jsongreetbidistream")
                 .then()
@@ -162,11 +162,11 @@ class GreetRestIT {
         given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
-                .body("{\"workflowdata\" : { \"helloRequests\" : [" +
+                .body("{\"helloRequests\" : [" +
                         "{\"name\" : \"Javierito\", \"language\":\"Spanish\"}," +
                         "{\"name\" : \"John\", \"language\":\"English\"}," +
                         "{\"name\" : \"Jan\", \"language\":\"Czech\"}" +
-                        "]}}")
+                        "]}")
                 .when()
                 .post("/jsongreetbidistreamerror")
                 .then()

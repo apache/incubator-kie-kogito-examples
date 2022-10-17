@@ -128,9 +128,7 @@ curl -X 'POST' \
   'http://timeouts-showcase.default.10.105.86.217.sslip.io/switch_state_timeouts' \
   -H 'accept: */*' \
   -H 'Content-Type: application/json' \
-  -d '{
-  "workflowdata": {}
-}'
+  -d '{}'
 
 # The command will produce an output like this:
 
@@ -160,9 +158,7 @@ curl -X 'POST' \
   'http://timeouts-showcase.default.10.105.86.217.sslip.io/callback_state_timeouts' \
   -H 'accept: */*' \
   -H 'Content-Type: application/json' \
-  -d '{
-  "workflowdata": {}
-}'
+  -d '{}'
 ```
 
 Similar to `switch_state_timeouts` you can wait for 30+ seconds to check the SW was timed-out.

@@ -42,11 +42,7 @@ class StockProfitIT {
         given()
                 .contentType(ContentType.JSON)
                 .when()
-                .body(
-                        Collections
-                                .singletonMap(
-                                        "workflowdata",
-                                        Collections.singletonMap("symbol", "KGTO")))
+                .body(Collections.singletonMap("symbol", "KGTO"))
                 .post("/stockprofit")
                 .then()
                 .statusCode(201)

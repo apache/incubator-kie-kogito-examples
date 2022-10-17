@@ -34,11 +34,9 @@ public class OrderSagaWorkflowIT {
     @Test
     public void testOrderSuccess() {
         String payload = String.format("{\n" +
-                "  \"workflowdata\": {\n" +
-                "   \"orderId\": \"%s\",\n" +
-                "   \"failService\" : \"%s\"\n" +
-                "  }\n" +
-                "}", ORDER_ID, "blah");
+                                               " \"orderId\": \"%s\",\n" +
+                                               " \"failService\" : \"%s\"\n" +
+                                               "}", ORDER_ID, "blah");
         ValidatableResponse response = createOrder(payload);
         response.body("workflowdata.orderResponse.type", equalTo("SUCCESS"));
         response.body("workflowdata.orderId", equalTo(ORDER_ID));
@@ -47,10 +45,8 @@ public class OrderSagaWorkflowIT {
     @Test
     public void testOrderFailure() {
         String payload = String.format("{\n" +
-                "  \"workflowdata\": {\n" +
-                "   \"orderId\": \"%s\",\n" +
-                "   \"failService\" : \"%s\"\n" +
-                "  }\n" +
+                "  \"orderId\": \"%s\",\n" +
+                "  \"failService\" : \"%s\"\n" +
                 "}", ORDER_ID, "ShippingService");
         ValidatableResponse response = createOrder(payload);
         response.body("workflowdata.orderResponse.type", equalTo("ERROR"));

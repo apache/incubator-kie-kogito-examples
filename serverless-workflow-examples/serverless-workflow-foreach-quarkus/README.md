@@ -63,7 +63,7 @@ The service based on the JSON workflow definition can be access by sending a req
 Complete curl command can be found below:
 
 ```text
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : {"input": [1,2,3]}}' http://localhost:8080/foreach
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"input": [1,2,3]}' http://localhost:8080/foreach
 ```
 
 

@@ -34,7 +34,7 @@ class ForEachRestIT {
         given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
-                .body("{\"workflowdata\" : {\"input\" : [1,2,3]}}").when()
+                .body("{\"input\" : [1,2,3]}").when()
                 .post("/foreach")
                 .then()
                 .statusCode(201)

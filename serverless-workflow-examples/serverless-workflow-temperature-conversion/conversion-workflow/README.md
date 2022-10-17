@@ -9,7 +9,9 @@ The workflow is described using JSON format as defined in the
 The workflow expects a JSON input containing the temperature in Fahrenheits:
 
 ```json
-{"workflowdata" : { "fahrenheit": 100  } }
+{
+  "fahrenheit": 100
+}
 ```
 
 The workflow starts defining the constants to be used during the computation.
@@ -87,7 +89,7 @@ Complete curl command can be found below:
 curl -X POST \
     -H 'Content-Type:application/json' \
     -H 'Accept:application/json' \
-    -d '{"workflowdata" : { "fahrenheit": 100  } }' \
+    -d '{"fahrenheit": 100}' \
     http://localhost:8080/fahrenheit_to_celsius | jq .
 ```
 

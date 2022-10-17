@@ -95,11 +95,9 @@ curl -X 'POST' \
   -H 'accept: */*' \
   -H 'Content-Type: application/json' \
   -d '{
-        "workflowdata": {
-           "currencyFrom": "EUR",
-           "currencyTo": "USD",
-           "exchangeDate": "2022-06-10",
-           "amount": 2.0
-       }
+       "currencyFrom": "EUR",
+       "currencyTo": "USD",
+       "exchangeDate": "2022-06-10",
+       "amount": 2.0
     }'
 ```

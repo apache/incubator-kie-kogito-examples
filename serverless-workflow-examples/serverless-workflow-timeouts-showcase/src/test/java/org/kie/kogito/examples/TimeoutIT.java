@@ -53,7 +53,7 @@ class TimeoutIT {
         String id = given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
-                .body("{\"workflowdata\": {}}").when()
+                .body("{}").when()
                 .post(workflowPath)
                 .then()
                 .statusCode(201)

@@ -31,7 +31,7 @@ class ParallelStateTest {
         given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
-                .body("{\"workflowdata\":{}}").when()
+                .body("{}").when()
                 .post("/parallel")
                 .then()
                 .statusCode(201)

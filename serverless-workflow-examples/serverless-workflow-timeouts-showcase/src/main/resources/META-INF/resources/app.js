@@ -126,9 +126,7 @@ function startNewCallbackStateTimeouts() {
 }
 
 function startProcess(endpoint, onSuccess) {
-    const processInputJson = {
-        "workflowdata": {}
-    };
+    const processInputJson = { };
     const processInput = JSON.stringify(processInputJson);
     $.ajax({
         url: endpoint,

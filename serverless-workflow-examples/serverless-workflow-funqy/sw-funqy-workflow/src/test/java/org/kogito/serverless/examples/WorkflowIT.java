@@ -33,7 +33,7 @@ public class WorkflowIT {
         given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
-                .body("{\"workflowdata\" : {\"name\" : \"Brazil\"}}").when()
+                .body("{\"name\" : \"Brazil\"}").when()
                 .when().post("/countryworkflow")
                 .then()
                 .statusCode(201);

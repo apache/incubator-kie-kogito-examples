@@ -67,45 +67,41 @@ with following content
 
 ```json
 {
-  "workflowdata": {
-   "inputNumbers": [
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            7
-        ]
-  }
+  "inputNumbers": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    7
+  ]
 }
 ```
 
 Complete curl command can be found below:
 
 ```sh
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : {"inputNumbers": [1,2,3,4,5,6,7,8,7]}}' http://localhost:8080/RestExample
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"inputNumbers": [1,2,3,4,5,6,7,8,7]}' http://localhost:8080/RestExample
 ```
 
 Log after curl executed:
 
 ```json
 {
-    "workflowdata": {
-        "inputNumbers": [
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            7
-        ]
-    }
+  "inputNumbers": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    7
+  ]
 }
 ```
 
