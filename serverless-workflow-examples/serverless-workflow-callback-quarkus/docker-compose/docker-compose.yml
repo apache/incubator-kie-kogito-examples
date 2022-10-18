@@ -83,7 +83,7 @@ services:
 
   sw-callback-service:
     container_name: sw-callback-service
-    image: quay.io/${USER}/serverless-workflow-callback-quarkus:1.0-SNAPSHOT
+    image: dev.local/${USER}/serverless-workflow-callback-quarkus:1.0-SNAPSHOT
     ports:
       - "8080:8080"
     depends_on:
