@@ -85,6 +85,9 @@
           ]
         }
       ],
+      "timeouts": {
+        "eventTimeout": "PT30S"
+      },
       "transition": "PrintExitMessage"
     },
     {
@@ -96,7 +99,7 @@
           "functionRef": {
             "refName": "systemOut",
             "arguments": {
-              "message": "${\"event-state-timeouts: \" + $WORKFLOW.instanceId + \" has finalized. \" + .exitMessage}"
+              "message": "${\"event-state-timeouts: \" + $WORKFLOW.instanceId + \" has finalized. \" + if .exitMessage != null then .exitMessage else \"The event state did not receive any event, and the timeout has overdue\" end }"
             }
           }
         }

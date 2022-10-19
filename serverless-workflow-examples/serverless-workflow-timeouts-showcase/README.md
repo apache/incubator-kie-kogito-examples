@@ -167,6 +167,18 @@ curl -X 'POST' \
 
 Similar to `switch_state_timeouts` you can wait for 30+ seconds to check the SW was timed-out.
 
+Finally, you can execute the following command to create a new `event_state_timeous` workflow instance:
+
+```shell
+curl -X 'POST' \
+  'http://timeouts-showcase.default.10.105.86.217.sslip.io/event_state_timeouts' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "workflowdata": {}
+}'
+```
+
 You can also verify the timeouts functioning following this procedure:
 ```shell
 kubectl get pod | grep timeouts-showcase
