@@ -33,7 +33,6 @@
         <module>serverless-workflow-functions-events-quarkus</module>
         <module>serverless-workflow-functions-quarkus</module>
         <module>serverless-workflow-funqy</module>
-        <module>serverless-workflow-github-showcase</module>
         <module>serverless-workflow-greeting-quarkus</module>
         <module>serverless-workflow-greeting-rpc-quarkus</module>
         <module>serverless-workflow-hello-world</module>
