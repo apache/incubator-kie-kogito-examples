@@ -1,0 +1,33 @@
+version: '2'
+
+services:
+  greeting-grpc-server:
+    container_name: greeting-grpc-server
+    image: dev.local/${USER}/serverless-workflow-greeting-server-rpc-quarkus:1.0-SNAPSHOT
+    restart: always
+    ports:
+      - "50051:50051"
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.5
+
+  greeting-grpc-client:
+    container_name: greeting-grpc-client
+    image: dev.local/${USER}/serverless-workflow-greeting-client-rpc-quarkus:1.0-SNAPSHOT
+    environment:
+      JAVA_OPTIONS: "-Dquarkus.grpc.clients.Greeter.host=10.5.0.5"
+    ports:
+      - "8080:8080"
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.6
+    depends_on:
+      - greeting-grpc-server
+
+networks:
+  vpcbr:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
+          gateway: 10.5.0.1
