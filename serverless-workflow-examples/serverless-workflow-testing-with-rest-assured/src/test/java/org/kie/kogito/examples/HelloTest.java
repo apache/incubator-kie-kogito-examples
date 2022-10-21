@@ -38,7 +38,7 @@ class HelloTest {
         given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
-                .body("{\"workflowdata\": {\"name\": \"John Doe\"}}").when()
+                .body("{\"name\": \"John Doe\"}").when()
                 .post("/hello")
                 .then()
                 .statusCode(201)

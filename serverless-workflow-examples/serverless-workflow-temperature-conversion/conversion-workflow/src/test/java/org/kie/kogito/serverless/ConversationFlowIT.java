@@ -43,11 +43,7 @@ class ConversationFlowIT {
         given()
                 .contentType(ContentType.JSON)
                 .when()
-                .body(
-                        Collections
-                                .singletonMap(
-                                        "workflowdata",
-                                        Collections.singletonMap("fahrenheit", "100")))
+                .body(Collections.singletonMap("fahrenheit", "100"))
                 .post("/fahrenheit_to_celsius")
                 .then()
                 .statusCode(201)

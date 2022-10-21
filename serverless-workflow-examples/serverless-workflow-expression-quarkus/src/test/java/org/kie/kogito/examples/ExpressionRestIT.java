@@ -32,7 +32,7 @@ class ExpressionRestIT {
         given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
-                .body("{\"workflowdata\":{\"numbers\":[{\"x\":2, \"y\": 1},{\"x\":4, \"y\": 3}]}}").when()
+                .body("{\"numbers\":[{\"x\":2, \"y\": 1},{\"x\":4, \"y\": 3}]}").when()
                 .post("/expression")
                 .then()
                 .statusCode(201)

@@ -41,11 +41,7 @@ class RestExampleIT {
         given()
                 .contentType(ContentType.JSON)
                 .when()
-                .body(
-                        Collections
-                                .singletonMap(
-                                        "workflowdata",
-                                        Collections.singletonMap("inputNumbers", new int[] { 1, 2, 3, 4, 5, 6, 7 })))
+                .body(Collections.singletonMap("inputNumbers", new int[]{1, 2, 3, 4, 5, 6, 7}))
                 .post("/RestExample")
                 .then()
                 .statusCode(201)

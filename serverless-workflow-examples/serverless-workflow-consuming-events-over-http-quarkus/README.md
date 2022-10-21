@@ -68,16 +68,14 @@ with following content
 
 ```json
 {
-  "workflowdata": {
-   "message" : "Hello"
-  }
+  "message": "Hello"
 }
 ```
 
 Complete curl command can be found below:
 
 ```sh
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : {"message": "Hello"}}' http://localhost:8080/start
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"message": "Hello"}' http://localhost:8080/start
 ```
 
 Should return something like this ("id" will change):

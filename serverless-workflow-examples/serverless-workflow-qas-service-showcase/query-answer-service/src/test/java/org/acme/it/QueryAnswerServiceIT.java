@@ -73,7 +73,7 @@ class QueryAnswerServiceIT {
     @Test
     void queryAnswerProcessCycle() throws Exception {
         // start a new process instance by sending a query and collect the process instance id.
-        String processInput = "{\"workflowdata\": {\"query\": \"" + QUERY + "\"} }";
+        String processInput = "{\"query\": \"" + QUERY + "\"}";
         String processInstanceId = given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
