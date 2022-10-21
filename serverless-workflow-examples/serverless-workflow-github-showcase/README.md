@@ -1,3 +1,7 @@
+**DEPRECATION NOTICE**
+
+> This example has a few old concepts from architecture and integration perspective. [We are working on an updated version of this example](https://issues.redhat.com/browse/KOGITO-8169). Until there, please try our other examples in this directory.
+
 ## Serverless Workflow GitHub Showcase
 
 In this example we will deploy a GitHub "bot" application that will
