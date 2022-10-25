@@ -151,7 +151,7 @@ class PmmlEventDrivenIT {
         LOG.info("Normalized expected: " + normalizedExpectedJson);
         LOG.info("Normalized actual..: " + normalizedActualJson);
 
-        JSONAssert.assertEquals(normalizedExpectedJson, normalizedActualJson, JSONCompareMode.NON_EXTENSIBLE);
+        JSONAssert.assertEquals(normalizedExpectedJson, normalizedActualJson, JSONCompareMode.LENIENT);
     }
 
     private void doTest(String basePath) {
