@@ -10,7 +10,6 @@
   </parent>
 
   <artifactId>serverless-workflow-custom-type-example</artifactId>
- 
 
   <name>Kogito Example :: Serverless Workflow Custom RPC Client :: Quarkus</name>
   <description>The client project</description>
@@ -28,12 +27,12 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-resteasy-jackson</artifactId>
     </dependency>
-    
     <dependency>
       <groupId>org.kie.kogito.examples</groupId>
       <artifactId>serverless-workflow-custom-rpc</artifactId>
       <version>${project.version}</version>
     </dependency>
+
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-junit5</artifactId>
@@ -44,8 +43,8 @@
       <artifactId>rest-assured</artifactId>
       <scope>test</scope>
     </dependency>
-    
   </dependencies>
+
   <build>
     <finalName>${project.artifactId}</finalName>
     <plugins>
@@ -89,6 +88,23 @@
     </plugins>
   </build>
   <profiles>
+    <profile>
+      <id>container</id>
+      <activation>
+        <property>
+          <name>container</name>
+        </property>
+      </activation>
+      <properties>
+        <quarkus.profile>container</quarkus.profile>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>io.quarkus</groupId>
+          <artifactId>quarkus-container-image-jib</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
     <profile>
       <id>native</id>
       <activation>

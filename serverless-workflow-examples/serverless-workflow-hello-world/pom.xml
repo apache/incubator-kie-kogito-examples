@@ -43,11 +43,8 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
     <dependencies>
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-container-image-jib</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.kie.kogito</groupId>
             <artifactId>kogito-quarkus-serverless-workflow</artifactId>
@@ -143,6 +140,23 @@
         </plugins>
     </build>
     <profiles>
+        <profile>
+            <id>container</id>
+            <activation>
+                <property>
+                    <name>container</name>
+                </property>
+            </activation>
+            <properties>
+                <quarkus.profile>container</quarkus.profile>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>io.quarkus</groupId>
+                    <artifactId>quarkus-container-image-jib</artifactId>
+                </dependency>
+            </dependencies>
+        </profile>
         <profile>
             <id>native</id>
             <activation>
