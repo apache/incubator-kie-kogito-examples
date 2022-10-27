@@ -6,7 +6,7 @@
 
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>serverless-workflow-testing-with-rest-assured</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
 
     <name>Kogito Example :: Serverless Workflow Testing with REST Assured :: Quarkus</name>
     <description>Kogito Serverless Workflow Example - Quarkus</description>
@@ -41,6 +41,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
     <dependencies>
         <dependency>
             <groupId>org.kie.kogito</groupId>
@@ -133,6 +134,23 @@
         </plugins>
     </build>
     <profiles>
+        <profile>
+            <id>container</id>
+            <activation>
+                <property>
+                    <name>container</name>
+                </property>
+            </activation>
+            <properties>
+                <quarkus.profile>container</quarkus.profile>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>io.quarkus</groupId>
+                    <artifactId>quarkus-container-image-jib</artifactId>
+                </dependency>
+            </dependencies>
+        </profile>
         <profile>
             <id>native</id>
             <activation>
