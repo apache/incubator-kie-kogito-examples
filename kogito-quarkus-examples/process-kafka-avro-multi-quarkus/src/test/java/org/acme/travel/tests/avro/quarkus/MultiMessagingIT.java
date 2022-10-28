@@ -30,7 +30,7 @@ import org.eclipse.microprofile.reactive.messaging.Emitter;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
 import org.eclipse.microprofile.reactive.messaging.Message;
 import org.junit.jupiter.api.Test;
-import org.kie.kogito.event.avro.AvroUtils;
+import org.kie.kogito.event.avro.AvroIO;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,7 +55,7 @@ public class MultiMessagingIT {
     Emitter<byte[]> emitter;
 
     @Inject
-    AvroUtils utils;
+    AvroIO utils;
 
     @Incoming("processedtravellers-in")
     public CompletionStage<?> onProcessedEvent(Record<String, byte[]> message) throws IOException {

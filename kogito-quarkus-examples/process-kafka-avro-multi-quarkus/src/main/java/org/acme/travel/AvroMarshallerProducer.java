@@ -25,16 +25,16 @@ import org.kie.kogito.event.EventMarshaller;
 import org.kie.kogito.event.EventUnmarshaller;
 import org.kie.kogito.event.avro.AvroEventMarshaller;
 import org.kie.kogito.event.avro.AvroEventUnmarshaller;
-import org.kie.kogito.event.avro.AvroUtils;
+import org.kie.kogito.event.avro.AvroIO;
 
 @ApplicationScoped
 public class AvroMarshallerProducer {
 
-    private AvroUtils avroUtils;
+    private AvroIO avroUtils;
 
     @PostConstruct
     void init() throws IOException {
-        avroUtils = new AvroUtils();
+        avroUtils = new AvroIO();
     }
 
     @Produces
@@ -49,7 +49,7 @@ public class AvroMarshallerProducer {
 
     // publish as bean for testing
     @Produces
-    AvroUtils getAvroUtils() {
+    AvroIO getAvroUtils() {
         return avroUtils;
     }
 
