@@ -46,6 +46,18 @@
       <artifactId>kogito-addons-springboot-kubernetes</artifactId>
     </dependency>
 
+    <!-- Need to downgrade due to incompatibility between Spring Cloud and kubernetes-client 6+ defined by Quarkus -->
+    <dependency>
+      <groupId>io.fabric8</groupId>
+      <artifactId>kubernetes-client</artifactId>
+      <version>5.12.4</version>
+    </dependency>
+    <dependency>
+      <groupId>io.fabric8</groupId>
+      <artifactId>knative-client</artifactId>
+      <version>5.12.4</version>
+    </dependency>
+
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
