@@ -52,6 +52,10 @@
       <artifactId>kogito-quarkus</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-addons-marshallers-avro</artifactId>
+    </dependency>
+    <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-resteasy</artifactId>
     </dependency>
@@ -76,18 +80,9 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>io.cloudevents</groupId>
-      <artifactId>cloudevents-json-jackson</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-health</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.dataformat</groupId>
-      <artifactId>jackson-dataformat-avro</artifactId>
-    </dependency>
+    </dependency> 
   </dependencies>
   <build>
     <finalName>${project.artifactId}</finalName>

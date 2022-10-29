@@ -17,19 +17,40 @@ package org.acme.travel;
 
 import java.io.IOException;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import javax.enterprise.inject.Produces;
 
+import org.kie.kogito.event.EventMarshaller;
 import org.kie.kogito.event.EventUnmarshaller;
+import org.kie.kogito.event.avro.AvroEventMarshaller;
+import org.kie.kogito.event.avro.AvroEventUnmarshaller;
+import org.kie.kogito.event.avro.AvroIO;
 
 @ApplicationScoped
-public class AvroEventUnmarshaller implements EventUnmarshaller<byte[]> {
+public class AvroMarshallerProducer {
 
-    @Inject
-    AvroUtils avroUtils;
+    private AvroIO avroUtils;
 
-    @Override
-    public <T> T unmarshall(byte[] input, Class<T> outputClass, Class<?>... parametrizedClasses) throws IOException {
-        return avroUtils.readObject(input, outputClass, parametrizedClasses);
+    @PostConstruct
+    void init() throws IOException {
+        avroUtils = new AvroIO();
     }
+
+    @Produces
+    EventMarshaller<byte[]> getAvroMarshaller() {
+        return new AvroEventMarshaller(avroUtils);
+    }
+
+    @Produces
+    EventUnmarshaller<byte[]> getAvroUnmarshaller() {
+        return new AvroEventUnmarshaller(avroUtils);
+    }
+
+    // publish as bean for testing
+    @Produces
+    AvroIO getAvroUtils() {
+        return avroUtils;
+    }
+
 }
