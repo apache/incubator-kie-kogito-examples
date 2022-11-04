@@ -72,7 +72,7 @@
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-addons-marshallers-avro</artifactId>
+      <artifactId>kogito-addons-quarkus-marshallers-avro</artifactId>
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
