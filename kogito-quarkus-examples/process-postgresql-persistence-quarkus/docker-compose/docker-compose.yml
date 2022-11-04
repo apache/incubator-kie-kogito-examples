@@ -2,7 +2,7 @@ version: "3"
 
 services:
   postgres-compose:
-    image: postgres:9.6
+    image: postgres:10
     environment:
       POSTGRES_PASSWORD: pass
     ports:
