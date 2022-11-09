@@ -23,7 +23,10 @@ jobs:
         os: [ubuntu-latest]
         java-version: [11]
         maven-version: ['3.8.6']
-        examples-subfolder: [ serverless-workflow-examples, kogito-quarkus-examples ]
+        examples-subfolder:
+          - kogito-quarkus-examples
+          - kogito-springboot-examples
+          - serverless-workflow-examples
       fail-fast: false
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.examples-subfolder }}
