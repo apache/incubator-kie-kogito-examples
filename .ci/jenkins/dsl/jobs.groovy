@@ -21,11 +21,30 @@ Map getMultijobPRConfig() {
         buildchain: true,
         jobs : [
             [
-                id: 'kogito-examples',
+                id: 'kogito-quarkus-examples',
                 primary: true,
                 env : [
                     // Sonarcloud analysis is disabled for examples
                     DISABLE_SONARCLOUD: true,
+                    KOGITO_EXAMPLES_SUBFOLDER_POM: 'kogito-quarkus-examples/',
+                ]
+            ],
+            [
+                id: 'kogito-springboot-examples',
+                primary: true,
+                env : [
+                    // Sonarcloud analysis is disabled for examples
+                    DISABLE_SONARCLOUD: true,
+                    KOGITO_EXAMPLES_SUBFOLDER_POM: 'kogito-springboot-examples/',
+                ]
+            ],
+            [
+                id: 'serverless-workflow-examples',
+                primary: true,
+                env : [
+                    // Sonarcloud analysis is disabled for examples
+                    DISABLE_SONARCLOUD: true,
+                    KOGITO_EXAMPLES_SUBFOLDER_POM: 'serverless-workflow-examples/',
                 ]
             ]
         ]

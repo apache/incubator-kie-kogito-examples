@@ -15,7 +15,7 @@ on:
 jobs:
   build-chain:
     concurrency:
-      group: kogito_examples_pr-${{ github.head_ref }}
+      group: ${{ matrix.examples-subfolder }}-pr-${{ github.head_ref }}
       cancel-in-progress: true
     timeout-minutes: 180
     strategy:
