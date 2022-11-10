@@ -24,6 +24,7 @@
         <maven.compiler.release>11</maven.compiler.release>
         <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
         <version.com.github.tomakehurst.wiremock>2.33.2</version.com.github.tomakehurst.wiremock>
+        <version.org.wiremock.webhooks>2.35.0</version.org.wiremock.webhooks>
     </properties>
 
     <dependencyManagement>
@@ -84,6 +85,12 @@
             <groupId>com.github.tomakehurst</groupId>
             <artifactId>wiremock-jre8</artifactId>
             <version>${version.com.github.tomakehurst.wiremock}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.wiremock</groupId>
+            <artifactId>wiremock-webhooks-extension</artifactId>
+            <version>${version.org.wiremock.webhooks}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

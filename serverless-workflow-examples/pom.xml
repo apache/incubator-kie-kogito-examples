@@ -22,7 +22,7 @@
       </activation>
       <modules>
         <module>serverless-workflow-annotations-description</module>
-        <module>serverless-workflow-async-callback-events-over-http-quarkus</module>
+        <module>serverless-workflow-callback-events-over-http-quarkus</module>
         <module>serverless-workflow-callback-quarkus</module>
         <module>serverless-workflow-compensation-quarkus</module>
         <module>serverless-workflow-consuming-events-over-http-quarkus</module>

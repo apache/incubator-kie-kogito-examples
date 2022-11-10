@@ -15,66 +15,55 @@
  */
 package org.kie.kogito.examples;
 
-import java.net.URI;
-import java.time.OffsetDateTime;
-import java.util.Collections;
-import java.time.OffsetDateTime;
-import java.util.UUID;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.github.tomakehurst.wiremock.WireMockServer;
+import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
+import static com.github.tomakehurst.wiremock.client.WireMock.post;
+import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 
-import io.cloudevents.CloudEvent;
-import io.cloudevents.core.v1.CloudEventBuilder;
+import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
 import static io.restassured.RestAssured.given;
-import static java.util.concurrent.TimeUnit.SECONDS;
-import static org.awaitility.Awaitility.await;
+import static org.wiremock.webhooks.Webhooks.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.wiremock.webhooks.Webhooks;
+
+import java.util.Collections;
+import java.util.UUID;
 
 @QuarkusIntegrationTest
-@QuarkusTestResource(CallBackMockService.class)
-class CallbackRestIT {
+public class CallbackRestIT {
+
+    private WireMockServer callbackServer;
+
 
     static {
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
     }
 
+
+    @BeforeEach
+    void setUp() {
+        callbackServer = new WireMockServer(wireMockConfig().extensions(Webhooks.class).port(8181));
+        callbackServer.start();
+    }
+
     @Test
     void testCallbackRest() {
-        final ObjectMapper mapper = new ObjectMapper();
-        final ObjectNode data = mapper.createObjectNode();
-        data.put("message", "NewEvent");
+        mockWebServer();
+
         String id = given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
-                .body("{\"workflowdata\": {\"message\": \"" + "Hello" + "\"}}")
+                .body(Collections.singletonMap("message", "Old data"))
                 .post("/callback")
                 .then()
                 .statusCode(201)
                 .extract()
                 .path("id");
-
-        final CloudEvent waitEvent = new CloudEventBuilder()
-                .newBuilder()
-                .withId(UUID.randomUUID().toString())
-                .withSource(URI.create(""))
-                .withType("wait") // see the event type in the workflow file, the workflow engine will correlate it to our callback state :)
-                .withExtension("kogitoprocrefid", id) // required to correlate this event with the running workflow instance
-                .build();
-        given()
-                .contentType(ContentType.JSON)
-                .header("ce-specversion", waitEvent.getSpecVersion())
-                .header("ce-id", waitEvent.getId())
-                .header("ce-source", waitEvent.getSource().toString())
-                .header("ce-type", waitEvent.getType())
-                .header("ce-kogitoprocrefid", waitEvent.getExtension("kogitoprocrefid"))
-                .body(data.toString())
-                .post("/wait")// path for "wait" channel's endpoint
-                .then()
-                .statusCode(202);
 
         given()
                 .contentType(ContentType.JSON)
@@ -82,5 +71,29 @@ class CallbackRestIT {
                 .get("/callback/{id}", id)
                 .then()
                 .statusCode(404);
+
     }
+
+    private void mockWebServer() {
+
+        callbackServer.stubFor(post(urlEqualTo("/event"))
+                .willReturn(aResponse().withStatus(200))
+                .withPostServeAction("webhook", webhook()
+                        .withMethod("POST")
+                        .withUrl("http://localhost:" + 8081 + "/wait")
+                        .withHeader("Content-Type", "application/json")
+                        .withHeader("ce-specversion", "1.0")
+                        .withHeader("ce-id",UUID.randomUUID().toString())
+                        .withHeader("ce-source", "")
+                        .withHeader("ce-type", "wait")
+                        .withHeader("ce-kogitoprocrefid","{{jsonPath originalRequest.body '$.processInstanceId'}}")
+                        .withBody("{ \"message\": \"New event\" }")));
+
+    }
+    @AfterEach
+    void tearDown() {
+        callbackServer.shutdownServer();
+    }
+
+
 }
