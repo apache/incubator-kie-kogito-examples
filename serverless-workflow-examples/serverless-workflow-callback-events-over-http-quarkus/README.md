@@ -68,7 +68,7 @@ mvn clean package quarkus:dev -Dquarkus.http.port=8181
 
 ### Submit a request
 
-The service based on the JSON workflow definition can be access by sending a request to http://localhost:8080/callback
+The service based on the JSON workflow definition can be accessed by sending a request to http://localhost:8080/callback
 with the following content
 
 ```json
