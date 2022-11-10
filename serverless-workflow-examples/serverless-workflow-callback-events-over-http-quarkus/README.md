@@ -60,7 +60,7 @@ To run the generated native executable, generated in `target/`, execute
 ```sh
 ./target/serverless-workflow-compensation-quarkus-{version}-runner
 ```
- In another terminal, run the callback event service using below command
+ In another terminal, run the callback event service using the below command
 
 ```sh
 mvn clean package quarkus:dev -Dquarkus.http.port=8181
