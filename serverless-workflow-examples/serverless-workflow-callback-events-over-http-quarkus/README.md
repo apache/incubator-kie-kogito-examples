@@ -24,10 +24,11 @@ You will need:
   - Environment variable JAVA_HOME set accordingly
   - Maven 3.8.1+ installed
     When using native image compilation, you will also need:
-- [GraalVm](https://www.graalvm.org/downloads/) 19.3.1+ installed
-- Environment variable GRAALVM_HOME set accordingly
-- Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too.  You also need 'native-image' installed in GraalVM (using 'gu install native-image'). Please refer to [GraalVM installation documentation](https://www.graalvm.org/docs/reference-manual/aot-compilation/#prerequisites) for more details.
-
+  - [GraalVm](https://www.graalvm.org/downloads/) 19.3.1+ installed
+  - Environment variable GRAALVM_HOME set accordingly
+  - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too.  You also need 'native-image' installed in GraalVM (using 'gu install native-image'). Please refer to [GraalVM installation documentation](https://www.graalvm.org/docs/reference-manual/aot-compilation/#prerequisites) for more details.
+  
+Run the following commands from the callback-workflow directory as per the selected mode of running.
 ### Compile and Run in Local Dev Mode
 
 ```sh
