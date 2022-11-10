@@ -2,7 +2,7 @@
 
 ## Description
 
-This example contains a simple workflow service that illustrate callback state using OpenAPI callbacks functionality.
+This example contains a simple workflow service that illustrates callback state using OpenAPI callbacks functionality.
 A callback is a state that invokes an action and wait for an event (event that will be eventually fired by the external service notified by the action).
 This example consists of a callback state that waits for an event to arrive at the wait channel. Its action calls an external service that publishes the wait event over HTTP.
 After consuming the wait event, workflow prints the message received in the wait event and ends the workflow.
