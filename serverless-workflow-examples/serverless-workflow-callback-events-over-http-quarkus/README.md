@@ -9,7 +9,7 @@ After consuming the wait event, the workflow prints the message received in the 
 
 To go further on using HTTP with Reactive Messaging, take a look at [this article](https://quarkiverse.github.io/quarkiverse-docs/quarkus-reactive-messaging-http/dev/reactive-messaging-http.html).
 
-For the information related to Open API callbacks functionality, please refer [this document](https://swagger.io/docs/specification/callbacks/).
+For information related to Open API callbacks functionality, please refer [this document](https://swagger.io/docs/specification/callbacks/).
 
 The service is described using JSON format as defined in the 
 [CNCF Serverless Workflow specification](https://github.com/serverlessworkflow/specification).
