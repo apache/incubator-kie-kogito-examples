@@ -1,0 +1,42 @@
+openapi: 3.0.0
+info:
+  title: Callback Example
+  version: 1.0.0
+paths:
+  /event:
+    post:
+      description: make a call to the callback url to resume the workflow
+      tags:
+        - Generate Event Service
+      operationId: callBack
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventInput'
+      responses:
+        "200":
+          description: OK
+      callbacks:
+        # the name `onData` is a convenience locator
+        wait:
+          '{$request.body#/uri}':
+            post:
+              requestBody:
+                description: event payload
+                content:
+                  application/json:
+                    schema:
+                      type: object
+              responses: # Expected responses to the callback message
+                '200':
+                  description: server returns this code if it accepts the callback
+components:
+  schemas:
+    EventInput:
+      type: object
+      properties:
+        uri:
+          type: string
+        processInstanceId:
+          type: string
