@@ -62,7 +62,7 @@ public class CallbackResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public void wait(EventInput eventInput) throws JsonProcessingException {
-        logger.info("About to generate event for processinstance{}",eventInput);
+        logger.info("About to generate event for {}",eventInput);
         CloudEventBuilder builder = CloudEventBuilder.v1()
                 .withId(UUID.randomUUID().toString())
                 .withSource(URI.create(""))
