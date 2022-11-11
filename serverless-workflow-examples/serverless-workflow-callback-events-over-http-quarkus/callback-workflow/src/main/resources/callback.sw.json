@@ -3,12 +3,6 @@
   "version": "1.0",
   "name": "Workflow Callback example",
   "description": "An example of how to use callback state",
-  "errors": [
-    {
-      "name": "execution error",
-      "code": "java.util.concurrent.CompletionException"
-    }
-  ],
   "start": "printWaitMessage",
   "events": [
     {
