@@ -22,10 +22,12 @@ import java.util.Optional;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
@@ -89,6 +91,16 @@ public class SubscriptionResource {
         }
         // TODO: add an error
         return Response.status(Response.Status.BAD_REQUEST).entity(null).build();
+    }
+
+    @DELETE
+    @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @APIResponseSchema(value = Subscription.class, responseDescription = "success", responseCode = "200")
+    public Response delete(@PathParam("id") String id) {
+        service.delete(id);
+        return Response.status(Response.Status.OK).entity("{}").build();
     }
 
     @GET

@@ -1,6 +1,7 @@
 function refreshTables() {
     refreshSwitchStateTimeoutsTable();
     refreshCallbackStateTimeoutsTable();
+    refreshEventStateTimeoutsTable();
 }
 
 function refreshSwitchStateTimeoutsTable() {
@@ -20,6 +21,16 @@ function refreshCallbackStateTimeoutsTable() {
     })
             .fail(function () {
                 showError("An error was produced during the callback_state_timeouts table refresh, please check that server is running.");
+            });
+}
+
+function refreshEventStateTimeoutsTable() {
+    $.getJSON("/event_state_timeouts", (instances) => {
+        console.log(instances);
+        printEventStateTimeoutsTable(instances);
+    })
+            .fail(function () {
+                showError("An error was produced during the event_state_timeouts table refresh, please check that server is running.");
             });
 }
 
@@ -92,6 +103,45 @@ function printCallbackStateTimeoutsRow(tableBody, instance) {
     });
 }
 
+function printEventStateTimeoutsTable(instances) {
+    const table = $('#eventStateTimeoutsTable');
+    table.children().remove();
+    const tableBody = $('<tbody>').appendTo(table);
+    printEventStateTimeoutsTableHeader(table)
+    for (const instance of instances) {
+        printEventStateTimeoutsRow(tableBody, instance)
+    }
+}
+
+function printEventStateTimeoutsTableHeader(table) {
+    const header = $('<thead class="thead-dark">').appendTo(table);
+    const headerTr = $('<tr class="d-flex">').appendTo(header);
+    $('<th scope="col" class="col-4">#Workflow instance</th>').appendTo(headerTr);
+    $('<th scope="col" class="col-2"></th>').appendTo(headerTr);
+    $('<th scope="col" class="col-2"></th>').appendTo(headerTr);
+}
+
+function printEventStateTimeoutsRow(tableBody, instance) {
+    const tableRow = $('<tr class="d-flex">').appendTo(tableBody);
+    tableRow.append($(`<th scope="row" class="col-4">${instance.id}</th>`));
+
+    const sendEvent1Btn = $(`<button id="sendEvent1Btn_${instance.id}" type="button" class="btn btn-primary btn-sm">Send event1</button>`);
+    const sendEvent1ButtonTd = $(`<td class="col-2"></td>`);
+    sendEvent1ButtonTd.append(sendEvent1Btn);
+    tableRow.append(sendEvent1ButtonTd);
+    sendEvent1Btn.click(function () {
+        sendEvent1(instance.id);
+    });
+
+    const sendEvent2Btn = $(`<button id="sendEvent2Btn_${instance.id}" type="button" class="btn btn-primary btn-sm">Send event2</button>`);
+    const sendEvent2ButtonTd = $(`<td class="col-2"></td>`);
+    sendEvent2ButtonTd.append(sendEvent2Btn);
+    tableRow.append(sendEvent2ButtonTd);
+    sendEvent2Btn.click(function () {
+        sendEvent2(instance.id);
+    });
+}
+
 function sendVisaApprovalEvent(processInstanceId) {
     produceEvent("/events-producer/produce-switch-state-timeouts-visa-approved-event", processInstanceId, "Approved from UI", function () {
         disableSwitchStateTimeoutsButtons(processInstanceId);
@@ -113,6 +163,20 @@ function sendCallbackEvent(processInstanceId) {
     })
 }
 
+function sendEvent1(processInstanceId) {
+    produceEvent("/events-producer/produce-event-state-timeouts-event1", processInstanceId, "Event1 sent from UI", function () {
+        disableEventStateTimeoutsButtons(processInstanceId);
+        showEventsToast();
+    })
+}
+
+function sendEvent2(processInstanceId) {
+    produceEvent("/events-producer/produce-event-state-timeouts-event2", processInstanceId, "Event2 sent from UI", function () {
+        disableEventStateTimeoutsButtons(processInstanceId);
+        showEventsToast();
+    })
+}
+
 function startNewSwitchStateTimeouts() {
     startProcess("/switch_state_timeouts", function () {
         refreshSwitchStateTimeoutsTable();
@@ -125,10 +189,14 @@ function startNewCallbackStateTimeouts() {
     });
 }
 
+function startNewEventStateTimeouts() {
+    startProcess("/event_state_timeouts", function () {
+        refreshEventStateTimeoutsTable();
+    });
+}
+
 function startProcess(endpoint, onSuccess) {
-    const processInputJson = {
-        "workflowdata": {}
-    };
+    const processInputJson = { };
     const processInput = JSON.stringify(processInputJson);
     $.ajax({
         url: endpoint,
@@ -168,6 +236,11 @@ function disableCallbackStateTimeoutsButtons(processInstanceId) {
     $(`#callbackEventBtn_${processInstanceId}`).prop('disabled', true);
 }
 
+function disableEventStateTimeoutsButtons(processInstanceId) {
+    $(`#sendEvent1Btn_${processInstanceId}`).prop('disabled', true);
+    $(`#sendEvent2Btn_${processInstanceId}`).prop('disabled', true);
+}
+
 function showError(message) {
     const notification = $(`<div class="toast" role="alert" aria-live="assertive" aria-atomic="true"  data-bs-delay="3000"/>`)
             .append($(`<div class="toast-header bg-danger">
@@ -200,6 +273,10 @@ $(document).ready(function () {
         refreshCallbackStateTimeoutsTable();
     });
 
+    $('#refreshEventStateTimeoutsButton').click(function () {
+        refreshEventStateTimeoutsTable();
+    });
+
     $("#startSwitchStateTimeoutsButton").click(function () {
         startNewSwitchStateTimeouts();
     });
@@ -207,4 +284,9 @@ $(document).ready(function () {
     $("#startCallbackStateTimeoutsButton").click(function () {
         startNewCallbackStateTimeouts();
     });
+
+    $("#startEventStateTimeoutsButton").click(function () {
+        startNewEventStateTimeouts();
+    });
+
 });

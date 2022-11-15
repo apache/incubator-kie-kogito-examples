@@ -116,7 +116,7 @@ Use the following curl command to create a new serverless workflow instance:
 
 ```sh
 curl -X 'POST' 'http://localhost:8080/qaservice' -H 'accept: application/json' -H 'Content-Type: application/json' \
--d '{ "workflowdata" : { "query" : "the text for my query" } }'
+-d '{ "query" : "the text for my query" }'
 ```
 
 Use the following curl command to list the knowledge database:

@@ -36,6 +36,7 @@ import io.quarkus.arc.DefaultBean;
 @DefaultBean
 @ApplicationScoped
 public class InMemorySubscriptionRepository implements SubscriptionRepository {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(InMemorySubscriptionRepository.class);
 
     private final Map<String, Subscription> subscriptionMap = new ConcurrentHashMap<>();
@@ -43,8 +44,8 @@ public class InMemorySubscriptionRepository implements SubscriptionRepository {
     @PostConstruct
     public void init() {
         LOGGER.info("The {} repository will be used. " +
-                "You can build the application with the persistence profile to use a PostgreSQL database. " +
-                "Read the project documentation for more information.", InMemorySubscriptionRepository.class.getName());
+                            "You can build the application with the persistence profile to use a PostgreSQL database. " +
+                            "Read the project documentation for more information.", InMemorySubscriptionRepository.class.getName());
     }
 
     @Override
@@ -66,8 +67,15 @@ public class InMemorySubscriptionRepository implements SubscriptionRepository {
     }
 
     @Override
+    public void delete(String id) {
+        this.subscriptionMap.entrySet().stream()
+                .filter(entry -> entry.getValue().getId().equals(id))
+                .findFirst()
+                .ifPresent(entry -> subscriptionMap.remove(entry.getKey()));
+    }
+
+    @Override
     public List<Subscription> fetchAllByVerified(boolean verified) {
         return subscriptionMap.values().stream().filter(s -> s.isVerified() == verified).collect(Collectors.toUnmodifiableList());
     }
-
 }

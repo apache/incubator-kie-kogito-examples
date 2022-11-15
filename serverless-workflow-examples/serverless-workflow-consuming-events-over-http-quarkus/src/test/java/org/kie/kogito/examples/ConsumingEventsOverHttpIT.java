@@ -51,7 +51,7 @@ class ConsumingEventsOverHttpIT {
         String id = given()
                 .contentType(ContentType.JSON)
                 .when()
-                .body(Collections.singletonMap("workflowdata", Collections.emptyMap()))
+                .body(Collections.emptyMap())
                 .post("/start")
                 .then()
                 .statusCode(201)

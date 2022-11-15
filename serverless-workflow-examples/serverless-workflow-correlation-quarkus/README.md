@@ -75,6 +75,16 @@ docker-compose up
 
 In this way a container for PostgreSQL will be started on port 5432.
 
+Tip: If you get permission denied while creating the postgres container, consider to use SELinux context.
+Update the following line:
+```yaml
+    - ./sql:/docker-entrypoint-initdb.d
+```
+to
+```yaml
+    - ./sql:/docker-entrypoint-initdb.d:Z
+```
+
 ## Installing and Running
 
 ### Prerequisites

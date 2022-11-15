@@ -22,6 +22,7 @@
       </activation>
       <modules>
         <module>serverless-workflow-annotations-description</module>
+        <module>serverless-workflow-callback-events-over-http-quarkus</module>
         <module>serverless-workflow-callback-quarkus</module>
         <module>serverless-workflow-compensation-quarkus</module>
         <module>serverless-workflow-consuming-events-over-http-quarkus</module>
@@ -33,7 +34,6 @@
         <module>serverless-workflow-functions-events-quarkus</module>
         <module>serverless-workflow-functions-quarkus</module>
         <module>serverless-workflow-funqy</module>
-        <module>serverless-workflow-github-showcase</module>
         <module>serverless-workflow-greeting-quarkus</module>
         <module>serverless-workflow-greeting-rpc-quarkus</module>
         <module>serverless-workflow-hello-world</module>

@@ -128,9 +128,7 @@ curl -X 'POST' \
   'http://timeouts-showcase.default.10.105.86.217.sslip.io/switch_state_timeouts' \
   -H 'accept: */*' \
   -H 'Content-Type: application/json' \
-  -d '{
-  "workflowdata": {}
-}'
+  -d '{}'
 
 # The command will produce an output like this:
 
@@ -160,12 +158,22 @@ curl -X 'POST' \
   'http://timeouts-showcase.default.10.105.86.217.sslip.io/callback_state_timeouts' \
   -H 'accept: */*' \
   -H 'Content-Type: application/json' \
+  -d '{}'
+```
+
+Similar to `switch_state_timeouts` you can wait for 30+ seconds to check the SW was timed-out.
+
+Finally, you can execute the following command to create a new `event_state_timeous` workflow instance:
+
+```shell
+curl -X 'POST' \
+  'http://timeouts-showcase.default.10.105.86.217.sslip.io/event_state_timeouts' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
   -d '{
   "workflowdata": {}
 }'
 ```
-
-Similar to `switch_state_timeouts` you can wait for 30+ seconds to check the SW was timed-out.
 
 You can also verify the timeouts functioning following this procedure:
 ```shell
@@ -230,6 +238,11 @@ In this tab, you can create and complete instances of the switch-sate-timeouts p
 In this tab, you can create and complete instances of the callback-sate-timeouts process.
 
 ![](docs/CallbackStateTimeoutsTab.png)
+
+#### Event-state-timeouts tab
+In this tab, you can create and complete instances of the event-sate-timeouts process.
+
+![](docs/EventStateTimeoutsTab.png)
 
 > **NOTE:** Remember that example workflows are configured with timeouts, which means that, if you create a workflow instance
 > and execute no action, when the timeout is met, if you refresh the data, the given instance won't be shown anymore. This last is perfectly fine, since the workflow might have finished because of the timeout overdue.

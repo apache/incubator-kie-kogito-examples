@@ -37,6 +37,7 @@ class TimeoutIT {
 
     public static final String SWITCH_STATE_TIMEOUT_WORKFLOW_PATH = "switch_state_timeouts";
     public static final String CALLBACK_STATE_TIMEOUT_WORKFLOW_PATH = "callback_state_timeouts";
+    public static final String EVENT_STATE_TIMEOUT_WORKFLOW_PATH = "event_state_timeouts";
 
     @Test
     void testSwitchStateWorkflow() {
@@ -48,12 +49,17 @@ class TimeoutIT {
         testWorkflow(CALLBACK_STATE_TIMEOUT_WORKFLOW_PATH);
     }
 
+    @Test
+    void testEventStateWorkflow() {
+        testWorkflow(EVENT_STATE_TIMEOUT_WORKFLOW_PATH);
+    }
+
     private void testWorkflow(String workflowPath) {
         //create the workflow instance
         String id = given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
-                .body("{\"workflowdata\": {}}").when()
+                .body("{}").when()
                 .post(workflowPath)
                 .then()
                 .statusCode(201)

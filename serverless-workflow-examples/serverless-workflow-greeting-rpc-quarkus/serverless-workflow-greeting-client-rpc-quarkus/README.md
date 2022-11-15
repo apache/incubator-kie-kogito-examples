@@ -76,17 +76,15 @@ with the following content
 
 ```json
 {
-  "workflowdata": {
-   "name" : "John",
-   "language": "English"
-  }
+  "name": "John",
+  "language": "English"
 }
 ```
 
 Complete curl command can be found below:
 
 ```sh
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : {"name": "John", "language": "English"}}' http://localhost:8080/jsongreet
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"name": "John", "language": "English"}' http://localhost:8080/jsongreet
 ```
 
 Log after curl executed:
@@ -99,17 +97,15 @@ If you would like to greet the person in Spanish, we need to pass the following 
 
 ```json
 {
-  "workflowdata": {
-   "name" : "John",
-   "language": "Spanish"
-  }
+  "name": "John",
+  "language": "Spanish"
 }
 ```
 
 Complete curl command can be found below:
 
 ```sh
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : {"name": "John", "language": "Spanish"}}' http://localhost:8080/jsongreet
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{{"name": "John", "language": "Spanish"}' http://localhost:8080/jsongreet
 ```
 
 #### Server-side streaming gRPC
@@ -119,9 +115,7 @@ with the following content
 
 ```json
 {
-  "workflowdata": {
-   "name" : "John"
-  }
+  "name": "John"
 }
 ```
 
@@ -130,7 +124,7 @@ Language parameter is not needed as the gRPC server will send greetings in all l
 Complete curl command can be found below:
 
 ```sh
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : {"name": "John"}}' http://localhost:8080/jsongreetserverstream
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"name": "John"}' http://localhost:8080/jsongreetserverstream
 ```
 
 Log after curl executed:
@@ -148,34 +142,27 @@ with the following content
 
 ```json
 {
-  "workflowdata": {
-    "helloRequests": [
-      {
-        "name": "Javierito",
-        "language": "Spanish"
-      },
-      {
-        "name": "John",
-        "language": "English"
-      },
-      {
-        "name": "Jan",
-        "language": "Czech"
-      }
-    ]
-  }
+  "helloRequests": [
+    {
+      "name": "Javierito",
+      "language": "Spanish"
+    },
+    {
+      "name": "John",
+      "language": "English"
+    },
+    {
+      "name": "Jan",
+      "language": "Czech"
+    }
+  ]
 }
 ```
 
 Complete curl command can be found below:
 
 ```sh
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : { 
-                                                                                                    "helloRequests" : [
-                                                                                                                        {"name" : "Javierito", "language":"Spanish"},
-                                                                                                                        {"name" : "John", "language":"English"},
-                                                                                                                        {"name" : "Jan", "language":"Czech"}
-                                                                                                                      ]}}' http://localhost:8080/jsongreetclientstream
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"helloRequests" : [{"name" : "Javierito", "language":"Spanish"}, {"name" : "John", "language":"English"}, {"name" : "Jan", "language":"Czech"} ]}' http://localhost:8080/jsongreetclientstream
 ```
 
 Log after curl executed:
@@ -193,34 +180,27 @@ with the following content
 
 ```json
 {
-  "workflowdata": {
-    "helloRequests": [
-      {
-        "name": "Javierito",
-        "language": "Spanish"
-      },
-      {
-        "name": "John",
-        "language": "English"
-      },
-      {
-        "name": "Jan",
-        "language": "Czech"
-      }
-    ]
-  }
+  "helloRequests": [
+    {
+      "name": "Javierito",
+      "language": "Spanish"
+    },
+    {
+      "name": "John",
+      "language": "English"
+    },
+    {
+      "name": "Jan",
+      "language": "Czech"
+    }
+  ]
 }
 ```
 
 Complete curl command can be found below:
 
 ```sh
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : { 
-                                                                                                    "helloRequests" : [
-                                                                                                                        {"name" : "Javierito", "language":"Spanish"},
-                                                                                                                        {"name" : "John", "language":"English"},
-                                                                                                                        {"name" : "Jan", "language":"Czech"}
-                                                                                                                      ]}}' http://localhost:8080/jsongreetbidistream
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"helloRequests" : [{"name" : "Javierito", "language":"Spanish"}, {"name" : "John", "language":"English"}, {"name" : "Jan", "language":"Czech"}]}' http://localhost:8080/jsongreetbidistream
 ```
 
 Log after curl executed:

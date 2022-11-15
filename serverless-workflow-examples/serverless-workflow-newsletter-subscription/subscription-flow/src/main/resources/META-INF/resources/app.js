@@ -1,7 +1,10 @@
 function refreshSubsTable() {
+    showSpinnerDialog("Loading subscriptions");
     $.getJSON("/subscription_flow", (subs) => {
+        closeSpinnerDialog();
         printSubsTable(subs);
     }).fail(function () {
+        closeSpinnerDialog();
         showError("An error was produced during the subscriptions refresh, please check that que subscription-flow application is running.");
     });
 }
@@ -34,18 +37,15 @@ function printSubsRow(subscriptionTableBody, subscription) {
 }
 
 function showError(message) {
-    const notification = $(`<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="min-width: 30rem"/>`)
+    const notification = $(`<div class="toast" role="alert" aria-live="assertive" aria-atomic="true"  data-bs-delay="3000"/>`)
             .append($(`<div class="toast-header bg-danger">
-                 <strong class="mr-auto text-dark">Error</strong>
-                 <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                   <span aria-hidden="true">&times;</span>
-                 </button>
+                 <strong class="me-auto text-dark">Error</strong>
+                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                </div>`))
             .append($(`<div class="toast-body"/>`)
                     .append($(`<p/>`).text(message))
             );
     $("#notificationPanel").append(notification);
-    notification.toast({delay: 30000});
     notification.toast("show");
 }
 
@@ -67,6 +67,8 @@ function newSubscription() {
         }
     };
     const processInput = JSON.stringify(processInputJson);
+    form.modal('hide');
+    showSpinnerDialog("Creating subscription");
     $.ajax({
         url: "/subscription_flow",
         type: "POST",
@@ -75,11 +77,11 @@ function newSubscription() {
         data: processInput,
         success: function (result) {
             console.log(JSON.stringify(result));
-            form.modal('hide');
+            closeSpinnerDialog();
             refreshSubsTable();
         },
     }).fail(function () {
-        form.modal('hide');
+        closeSpinnerDialog()
         showError("An error was produced during the serverless workflow instance create attempt, please check that que subscription-flow application is running.");
     });
 }
@@ -109,10 +111,11 @@ function confirmSubscription(subscriptionId, subscriptionEmail) {
         datacontenttype: "application/json",
         data: {
             id: subscriptionId,
-            email: subscriptionEmail
+            confirmed: true
         }
     }
     const ceInput = JSON.stringify(cloudEventJson);
+    showSpinnerDialog("Confirming subscription: " + subscriptionId + ", " + subscriptionEmail);
     $.ajax({
         url: "/",
         type: "POST",
@@ -121,13 +124,26 @@ function confirmSubscription(subscriptionId, subscriptionEmail) {
         data: ceInput,
         success: function (result) {
             console.log(result);
+            closeSpinnerDialog();
             // TODO: ideally, we have a websocket listening for the new subscription event, then we update the table
             setTimeout(refreshSubsTable, 2000);
         },
     }).fail(function (xhr, status, error) {
+        closeSpinnerDialog();
         console.log(error);
         showError("An error '" + xhr.responseText + "' (status: " + status + ") was produced during the serverless workflow instance create attempt, please check that que subscription-flow application is running.");
     });
+}
+
+function showSpinnerDialog(message) {
+    const modal = $('#spinnerDialog');
+    modal.find('#spinnerDialogMessage').text(message);
+    modal.show();
+}
+
+function closeSpinnerDialog() {
+    const modal = $('#spinnerDialog');
+    modal.hide();
 }
 
 $(document).ready(function () {

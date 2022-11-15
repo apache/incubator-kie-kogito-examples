@@ -66,16 +66,14 @@ with following content
 
 ```json
 {
-  "workflowdata": {
-   "number" : 2
-  }
+  "number": 2
 }
 ```
 
 Complete curl command can be found below:
 
 ```sh
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : {"number": 2}}' http://localhost:8080/error
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"number": 2}' http://localhost:8080/error
 ```
 
 
@@ -89,16 +87,14 @@ If you would like to check odd number
 
 ```json
 {
-  "workflowdata": {
-   "number" : 1
-  }
+  "number": 1
 }
 ```
 
 Complete curl command can be found below:
 
 ```sh
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : {"number": 1}}' http://localhost:8080/error
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"number": 1}' http://localhost:8080/error
 ```
 
 In Quarkus you should see the log message printed:

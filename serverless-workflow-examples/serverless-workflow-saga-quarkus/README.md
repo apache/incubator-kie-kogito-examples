@@ -78,17 +78,15 @@ Given data:
 
 ```json
 {
-  "workflowdata": {
-   "orderId": "03e6cf79-3301-434b-b5e1-d6899b5639aa",
-   "failService" : "none"
-  }
+  "orderId": "03e6cf79-3301-434b-b5e1-d6899b5639aa",
+  "failService": "none"
 }
 ```
 
 Curl command (using the JSON object above):
 
 ```sh
-curl -H "Content-Type: application/json" -X POST http://localhost:8080/order_saga_error_workflow -d '{"workflowdata": {"orderId": "03e6cf79-3301-434b-b5e1-d6899b5639aa","failService" : "none"}}'
+curl -H "Content-Type: application/json" -X POST http://localhost:8080/order_saga_error_workflow -d '{"orderId": "03e6cf79-3301-434b-b5e1-d6899b5639aa","failService" : "none"}'
 ```
 The response for the request is returned with attributes representing the response of each step, either
  success or failure. The `orderResponse` attribute indicates if the order can be confirmed in case of success or
@@ -139,17 +137,15 @@ Example:
 
 ```json
 {
-  "workflowdata": {
-   "orderId": "03e6cf79-3301-434b-b5e1-d6899b5639aa",
-   "failService" : "ShippingService"
-  }
+  "orderId": "03e6cf79-3301-434b-b5e1-d6899b5639aa",
+  "failService": "ShippingService"
 }
 ```
 Curl command (using the JSON object above):
 
 ```sh
                                                                                                         }
-curl -H "Content-Type: application/json" -X POST http://localhost:8080/order_saga_error_workflow  -d '{"workflowdata": {"orderId": "03e6cf79-3301-434b-b5e1-d6899b5639aa","failService" : "ShippingService"}}' 
+curl -H "Content-Type: application/json" -X POST http://localhost:8080/order_saga_error_workflow  -d '{"orderId": "03e6cf79-3301-434b-b5e1-d6899b5639aa","failService" : "ShippingService"}' 
 ```
 
 Response example:

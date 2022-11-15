@@ -105,21 +105,6 @@ class PmmlEventDrivenIT {
     }
 
     @Test
-    void testErrorBadRequestNullData() {
-        doTest("events/error/bad_request/null_data");
-    }
-
-    @Test
-    void testErrorBadRequestNullModel() {
-        doTest("events/error/bad_request/null_model");
-    }
-
-    //    @Test
-    //    void testErrorModelNotFound() {
-    //        doTest("events/error/model_not_found");
-    //    }
-
-    @Test
     void testModelMiningDefault() {
         doTest("events/model/mining/default");
     }
@@ -166,7 +151,7 @@ class PmmlEventDrivenIT {
         LOG.info("Normalized expected: " + normalizedExpectedJson);
         LOG.info("Normalized actual..: " + normalizedActualJson);
 
-        JSONAssert.assertEquals(normalizedExpectedJson, normalizedActualJson, JSONCompareMode.NON_EXTENSIBLE);
+        JSONAssert.assertEquals(normalizedExpectedJson, normalizedActualJson, JSONCompareMode.LENIENT);
     }
 
     private void doTest(String basePath) {

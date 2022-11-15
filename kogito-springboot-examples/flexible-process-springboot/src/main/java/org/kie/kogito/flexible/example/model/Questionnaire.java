@@ -36,6 +36,10 @@ public class Questionnaire {
         return date;
     }
 
+    public void setDate(ZonedDateTime date) {
+        this.date = date;
+    }
+
     public int getEvaluation() {
         return evaluation;
     }

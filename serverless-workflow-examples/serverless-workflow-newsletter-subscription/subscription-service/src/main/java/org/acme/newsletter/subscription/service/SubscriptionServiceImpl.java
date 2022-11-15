@@ -52,6 +52,11 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     }
 
     @Override
+    public void delete(String id) {
+        subscriptionRepository.delete(id);
+    }
+
+    @Override
     public Optional<Subscription> fetch(String email) {
         return subscriptionRepository.fetchByEmail(email);
     }

@@ -15,6 +15,11 @@
  */
 package org.kogito.serverless.examples;
 
+import static io.restassured.RestAssured.given;
+import static java.util.concurrent.TimeUnit.MINUTES;
+import static org.awaitility.Awaitility.await;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.net.URI;
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -28,24 +33,23 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.sse.SseEventSource;
 
+import org.apache.kafka.common.serialization.ByteArrayDeserializer;
+import org.apache.kafka.common.serialization.ByteArraySerializer;
 import org.eclipse.microprofile.config.ConfigProvider;
 import org.junit.jupiter.api.Test;
+import org.kie.kogito.event.avro.AvroCloudEventMarshaller;
+import org.kie.kogito.event.avro.AvroIO;
+import org.kie.kogito.jackson.utils.ObjectMapperFactory;
 import org.kie.kogito.test.quarkus.QuarkusTestProperty;
-import org.kie.kogito.test.quarkus.kafka.KafkaTestClient;
+import org.kie.kogito.test.quarkus.kafka.KafkaTypedTestClient;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.cloudevents.core.builder.CloudEventBuilder;
-import io.cloudevents.jackson.JsonFormat;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusIntegrationTest;
-
-import static io.restassured.RestAssured.given;
-import static java.util.concurrent.TimeUnit.MINUTES;
-import static org.awaitility.Awaitility.await;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @QuarkusIntegrationTest
 @QuarkusTestResource(KafkaQuarkusTestResource.class)
@@ -59,7 +63,7 @@ public class ApplicantWorkflowIT {
     @Test
     public void testApplicantProcess() throws Exception {
         Integer assignedPort = ConfigProvider.getConfig().getValue("quarkus.http.test-port", Integer.class);
-        ObjectMapper mapper = new ObjectMapper().registerModule(JsonFormat.getCloudEventJacksonModule());
+        ObjectMapper mapper = ObjectMapperFactory.get();
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target(String.format(DECISION_SSE_ENDPOINT, assignedPort));
 
@@ -84,13 +88,14 @@ public class ApplicantWorkflowIT {
             JsonNode approvedDecision = mapper.readTree(received.get(0));
             assertEquals("Approved", approvedDecision.get("data").get("decision").asText());
 
-            new KafkaTestClient(kafkaBootstrapServers).produce(mapper.writeValueAsString(CloudEventBuilder.v1()
+            AvroCloudEventMarshaller marshaller = new AvroCloudEventMarshaller( new AvroIO());
+            new KafkaTypedTestClient<>(kafkaBootstrapServers, ByteArraySerializer.class, ByteArrayDeserializer.class).produce(marshaller.marshall(CloudEventBuilder.v1()
                     .withId(UUID.randomUUID().toString())
                     .withSource(URI.create("/from/test"))
                     //Start message event name in handle-travellers.bpmn
                     .withType("applicants")
                     .withTime(OffsetDateTime.now())
-                    .withData("{\"name\":\"Zanini\",\"position\":\"Android Engineer\",\"office\":\"Tokio\",\"salary\": 1000}".getBytes())
+                    .withData(marshaller.cloudEventDataFactory().apply(mapper.readTree("{\"name\":\"Zanini\",\"position\":\"Android Engineer\",\"office\":\"Tokio\",\"salary\": 1000}")))
                     .build()), "applicants");
             await().atMost(1, MINUTES).until(() -> received.size() == 2);
             JsonNode deniedDecision = mapper.readTree(received.get(1));

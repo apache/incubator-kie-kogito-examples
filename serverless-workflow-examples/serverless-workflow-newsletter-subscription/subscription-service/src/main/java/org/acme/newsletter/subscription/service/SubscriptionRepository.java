@@ -29,6 +29,8 @@ public interface SubscriptionRepository {
 
     void saveOrUpdate(Subscription subscription);
 
+    void delete(String id);
+
     default boolean isValidId(String id) {
         return id != null && !id.isBlank();
     }

@@ -24,13 +24,13 @@ import java.util.stream.IntStream;
 
 import javax.inject.Inject;
 
-import org.acme.travel.AvroUtils;
 import org.acme.travel.Traveller;
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Emitter;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
 import org.eclipse.microprofile.reactive.messaging.Message;
 import org.junit.jupiter.api.Test;
+import org.kie.kogito.event.avro.AvroIO;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,6 +53,9 @@ public class MultiMessagingIT {
     @Inject
     @Channel("travellers-out")
     Emitter<byte[]> emitter;
+
+    @Inject
+    AvroIO utils;
 
     @Incoming("processedtravellers-in")
     public CompletionStage<?> onProcessedEvent(Record<String, byte[]> message) throws IOException {
@@ -77,14 +80,17 @@ public class MultiMessagingIT {
         return CompletableFuture.completedStage(null);
     }
 
-    @Inject
-    AvroUtils utils;
-
     @Test
     public void testProcess() throws InterruptedException {
         IntStream.range(0, count)
                 .mapToObj(i -> new Traveller("Name" + i, "LastName" + i, "email" + i, getNationality(i)))
-                .forEach(traveller -> emitter.send(utils.writeObject(traveller)).whenComplete(this::logEventOrFailure));
+                .forEach(traveller -> {
+                    try {
+                        emitter.send(utils.writeObject(traveller)).whenComplete(this::logEventOrFailure);
+                    } catch (IOException e) {
+                        logger.error("Error marshalling event", e);
+                    }
+                });
         countDownLatch.await(10, TimeUnit.SECONDS);
         assertEquals(0, countDownLatch.getCount());
     }

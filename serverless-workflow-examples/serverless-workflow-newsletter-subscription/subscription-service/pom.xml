@@ -54,22 +54,6 @@
       <artifactId>quarkus-smallrye-openapi</artifactId>
     </dependency>
     <dependency>
-      <groupId>io.cloudevents</groupId>
-      <artifactId>cloudevents-core</artifactId>
-      <version>${version.io.cloudevents}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.cloudevents</groupId>
-      <artifactId>cloudevents-json-jackson</artifactId>
-      <version>${version.io.cloudevents}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.quarkiverse.reactivemessaging.http</groupId>
-      <artifactId>quarkus-reactive-messaging-http</artifactId>
-      <version>${version.io.quarkiverse.reactivemessaging.http}</version>
-    </dependency>
-
-    <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-reactive-pg-client</artifactId>
     </dependency>
@@ -165,24 +149,6 @@
       </properties>
     </profile>
     <profile>
-      <id>persistence</id>
-      <activation>
-        <property>
-          <name>persistence</name>
-        </property>
-      </activation>
-      <dependencies>
-        <dependency>
-          <groupId>io.quarkus</groupId>
-          <artifactId>quarkus-jdbc-postgresql</artifactId>
-        </dependency>
-        <dependency>
-          <groupId>io.quarkus</groupId>
-          <artifactId>quarkus-agroal</artifactId>
-        </dependency>
-      </dependencies>
-    </profile>
-    <profile>
       <id>knative</id>
       <properties>
         <!-- Shortcuts -->
@@ -201,6 +167,23 @@
           <groupId>io.quarkus</groupId>
           <artifactId>quarkus-kubernetes</artifactId>
         </dependency>
+        <dependency>
+          <groupId>io.quarkus</groupId>
+          <artifactId>quarkus-container-image-jib</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
+    <profile>
+      <id>container</id>
+      <activation>
+        <property>
+          <name>container</name>
+        </property>
+      </activation>
+      <properties>
+        <quarkus.profile>container</quarkus.profile>
+      </properties>
+      <dependencies>
         <dependency>
           <groupId>io.quarkus</groupId>
           <artifactId>quarkus-container-image-jib</artifactId>

@@ -1,8 +1,0 @@
-{
-  "specversion": "1.0",
-  "id": "d54ace84-6788-46b6-a359-b308f8b21778",
-  "source": "__UNKNOWN_SOURCE__",
-  "type": "RulesResponseError",
-  "subject": "TheSubject",
-  "data": "BAD_REQUEST"
-}

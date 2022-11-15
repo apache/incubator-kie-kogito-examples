@@ -62,16 +62,14 @@ with following content
 
 ```json
 {
-  "workflowdata": {
-   "shouldCompensate" : true
-  }
+  "shouldCompensate": true
 }
 ```
 
 Complete curl command can be found below:
 
 ```sh
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : {"shouldCompensate": true}}' http://localhost:8080/compensation
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"shouldCompensate": true}' http://localhost:8080/compensation
 ```
 
 Should return something like this ("id" will change)
@@ -91,16 +89,14 @@ If you would like to check output when there is no compensation
 
 ```json
 {
-  "workflowdata": {
-   "shouldCompensate" : false
-  }
+  "shouldCompensate": false
 }
 ```
 
 Complete curl command can be found below:
 
 ```text
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : {"shouldCompensate": false}}' http://localhost:8080/error
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"shouldCompensate": false}' http://localhost:8080/error
 ```
 
 Should return something like this ("id" will change)

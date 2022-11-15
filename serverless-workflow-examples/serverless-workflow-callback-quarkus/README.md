@@ -87,6 +87,15 @@ For Linux and MacOS:
 cd docker-compose && sh ./startServices.sh
 ```
 
+Tip: If you get permission denied while creating the postgres container, consider to use SELinux context.
+Update the following line:
+```yaml
+    - ./sql:/docker-entrypoint-initdb.d
+```
+to
+```yaml
+    - ./sql:/docker-entrypoint-initdb.d:Z
+```
 
 Once all services bootstrap, the following ports will be assigned on your local machine:
 
@@ -96,7 +105,7 @@ Once all services bootstrap, the following ports will be assigned on your local 
 - PgAdmin: 8055
 - sw-callback-service :8080
 
-> **_NOTE:_**  This step requires the project to be compiled, please consider running a ```mvn clean install -Dquarkus.container-image.build=true``` command on the project root before running the ```startServices.sh``` script for the first time or any time you modify the project.
+> **_NOTE:_**  This step requires the project to be compiled, please consider running a ```mvn clean package -Dcontainer``` command on the project root before running the ```startServices.sh``` script for the first time or any time you modify the project.
 
 Once started you can simply stop all services by executing the ```docker-compose -f docker-compose.yml stop```.
 
