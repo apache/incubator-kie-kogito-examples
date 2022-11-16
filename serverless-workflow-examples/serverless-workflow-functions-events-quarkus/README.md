@@ -39,7 +39,7 @@ $ curl -X POST \
   http://localhost:8080
 ```
 
-The [workflow](src/main/resources/onbording.sw.json) will then call a sequence of REST services:
+The [workflow](src/main/resources/onboarding.sw.json) will then call a sequence of REST services:
 
 1. `StoreNewPatient` will store the patient in the internal database for later processing
 2. `AssignDoctorToPatient` will run a set of [rules](https://docs.jboss.org/kogito/release/latest/html_single/#con-drl-rule-units_drl-rules) 
