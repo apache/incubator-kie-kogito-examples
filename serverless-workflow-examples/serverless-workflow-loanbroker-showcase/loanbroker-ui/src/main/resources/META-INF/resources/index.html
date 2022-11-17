@@ -60,7 +60,7 @@
                 <form>
                     <div class="form-group">
                         <label for="txtSSN" class="col-form-label">SNS:</label>
-                        <input class="form-control" id="txtSSN" type="text"/>
+                        <input class="form-control" id="txtSSN" type="text" placeholder="enter a social security number in the format 123-45-6789"/>
                         <label for="txtTerm" class="col-form-label">Term:</label>
                         <input class="form-control" id="txtTerm" type="text"/>
                         <label for="txtAmount" class="col-form-label">Amount:</label>
@@ -73,6 +73,29 @@
                 <button type="button" class="btn btn-primary" onclick="newLoanRequest()">Request Loan</button>
             </div>
         </div>
+    </div>
+</div>
+
+<div id="spinnerDialog" class="modal" tabIndex="-1" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="d-flex align-items-center">
+                    <div class="spinner-border" role="status"></div>
+                    <span id="spinnerDialogMessage" style="padding-left: 15px">Loading ...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div id="eventsToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto">New quotes response</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body"><span id="toastMessage"><!-- Filled in by app.js --></span></div>
     </div>
 </div>
 

@@ -32,6 +32,11 @@
       "name": "loanBrokerRequestedQuotes",
       "type": "kogito.serverless.workflow.aggregated.quotes",
       "kind": "produced"
+    },
+    {
+      "name": "loanBrokerRequestedQuotesTimeout",
+      "type": "kogito.serverless.workflow.aggregated.quotes.timeout",
+      "kind": "produced"
     }
   ],
   "states": [
@@ -66,9 +71,32 @@
       },
       "eventRef": "aggregatedQuotesResponse",
       "eventDataFilter": {
-        "useData": false
+        "data": "${ {\"aggregatedQuotesArrived\" : true} }"
       },
-      "transition": "FetchQuotes"
+      "transition": "CheckRequestQuoteArrived",
+      "timeouts": {
+        "eventTimeout": "PT10S"
+      }
+    },
+    {
+      "name": "CheckRequestQuoteArrived",
+      "type": "switch",
+      "dataConditions": [
+        {
+          "condition": "${ .aggregatedQuotesArrived }",
+          "transition": "FetchQuotes"
+        }
+      ],
+      "defaultCondition": {
+        "end": {
+          "produceEvents": [
+            {
+              "eventRef": "loanBrokerRequestedQuotesTimeout"
+            }
+          ],
+          "terminate": true
+        }
+      }
     },
     {
       "name": "FetchQuotes",

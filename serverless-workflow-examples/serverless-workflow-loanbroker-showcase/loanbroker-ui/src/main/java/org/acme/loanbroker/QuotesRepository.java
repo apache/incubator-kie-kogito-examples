@@ -25,6 +25,7 @@ public class QuotesRepository {
         final QuotesResponse quotesResponse = PojoCloudEventDataMapper.from(mapper, QuotesResponse.class).map(cloudEvent.getData()).getValue();
         final Object requestId = cloudEvent.getExtension("kogitoprocinstanceid");
         if (requestId != null) {
+            quotesResponse.setEventType(cloudEvent.getType());
             quotesResponse.setLoanRequestId(requestId.toString());
             quotes.put(requestId.toString(), quotesResponse);
             return quotesResponse;

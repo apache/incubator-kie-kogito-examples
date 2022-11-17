@@ -1,0 +1,56 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: loanbroker-example
+---
+# Database deployment for the loanbroker-example.
+apiVersion: v1
+data:
+  postgrespass: cGFzcwo=
+kind: Secret
+metadata:
+  name: loanbroker-example-database
+  namespace: loanbroker-example
+type: Opaque
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: loanbroker-example-database
+  namespace: loanbroker-example
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: loanbroker-example-database
+  template:
+    metadata:
+      labels:
+        app: loanbroker-example-database
+    spec:
+      containers:
+        - env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: postgrespass
+                  name: loanbroker-example-database
+          image: postgres:13.4-alpine3.14
+          imagePullPolicy: Always
+          name: loanbroker-example-database
+          ports:
+            - containerPort: 5432
+              name: tcp
+              protocol: TCP
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: loanbroker-example-database
+  namespace: loanbroker-example
+spec:
+  selector:
+    app: loanbroker-example-database
+  ports:
+    - port: 5432
+  type: ClusterIP

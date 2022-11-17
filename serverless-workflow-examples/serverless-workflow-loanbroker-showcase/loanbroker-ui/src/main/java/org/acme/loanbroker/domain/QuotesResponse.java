@@ -10,11 +10,20 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class QuotesResponse implements Serializable {
 
+    private String eventType;
     private String loanRequestId;
     private int amount;
     private int term;
     private Credit credit;
     private List<Quote> quotes = new ArrayList<>();
+
+    public String getEventType() {
+        return eventType;
+    }
+
+    public void setEventType(String eventType) {
+        this.eventType = eventType;
+    }
 
     public int getAmount() {
         return amount;
@@ -68,8 +77,9 @@ public class QuotesResponse implements Serializable {
         return amount == that.amount &&
                 term == that.term &&
                 Objects.equals(credit, that.credit) &&
-                quotes.equals(that.quotes) &&
-                loanRequestId.equals(that.loanRequestId);
+                Objects.equals(quotes, that.quotes) &&
+                Objects.equals(loanRequestId, that.loanRequestId) &&
+                Objects.equals(eventType, that.eventType);
     }
 
     @Override
@@ -80,7 +90,8 @@ public class QuotesResponse implements Serializable {
     @Override
     public String toString() {
         return "QuotesResponse{" +
-                "loanRequestId='" + loanRequestId + '\'' +
+                "eventType='" + eventType + '\'' +
+                ", loanRequestId='" + loanRequestId + '\'' +
                 ", amount=" + amount +
                 ", term=" + term +
                 ", credit=" + credit +
