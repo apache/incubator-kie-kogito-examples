@@ -13,7 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Saves every aggregated exchange in memory for later retrival.
+ * Saves every aggregated exchange in memory for later retrieval.
  */
 @ApplicationScoped
 public class InMemoryQuotesRepositoryProcessor implements QuotesRepositoryProcessor {
