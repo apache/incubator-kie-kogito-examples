@@ -10,6 +10,7 @@
   <artifactId>serverless-workflow-loanbroker-showcase-aggregator</artifactId>
   <properties>
     <skipITs>true</skipITs>
+    <!-- Quarkus Platform must change since this module is a Camel application  -->
     <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
   </properties>
   <dependencyManagement>
