@@ -12,7 +12,7 @@
   <description>Onboarding function and service orchestration</description>
   
   <properties>
-    <version.org.kie.kogito>2.0.0-SNAPSHOT</version.org.kie.kogito>
+    <version.org.kie.kogito>1.31.0-SNAPSHOT</version.org.kie.kogito>
     <kogito.bom.version>${version.org.kie.kogito}</kogito.bom.version>
   </properties>
 
