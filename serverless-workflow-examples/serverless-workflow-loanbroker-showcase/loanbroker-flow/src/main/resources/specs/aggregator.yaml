@@ -1,0 +1,90 @@
+---
+openapi: 3.0.3
+info:
+  title: aggregator API
+  version: 1.0.0-SNAPSHOT
+paths:
+  /:
+    post:
+      tags:
+        - Quotes Cloud Events Resource
+      operationId: consumeQuoteEvent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CloudEvent'
+      responses:
+        "200":
+          description: OK
+  /quotes/{id}:
+    get:
+      tags:
+        - Quotes Resource
+      operationId: fetchQuotesByInstance
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BankQuote'
+components:
+  schemas:
+    BankQuote:
+      type: object
+      properties:
+        rate:
+          format: double
+          type: number
+        bankId:
+          type: string
+    CloudEvent:
+      type: object
+      properties:
+        specVersion:
+          $ref: '#/components/schemas/SpecVersion'
+        id:
+          type: string
+        type:
+          type: string
+        source:
+          format: uri
+          type: string
+        dataContentType:
+          type: string
+        dataSchema:
+          format: uri
+          type: string
+        subject:
+          type: string
+        time:
+          format: date-time
+          type: string
+        attributeNames:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        extensionNames:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        data:
+          $ref: '#/components/schemas/CloudEventData'
+    CloudEventData:
+      type: object
+    SpecVersion:
+      enum:
+        - V03
+        - V1
+      type: string

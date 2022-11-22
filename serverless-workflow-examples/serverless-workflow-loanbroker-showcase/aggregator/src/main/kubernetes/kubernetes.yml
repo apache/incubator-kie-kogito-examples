@@ -1,0 +1,32 @@
+# Sink for the Aggregator Service
+apiVersion: sources.knative.dev/v1
+kind: SinkBinding
+metadata:
+  name: sb-loanbroker-aggregator
+spec:
+  sink:
+    ref:
+      apiVersion: eventing.knative.dev/v1
+      kind: Broker
+      name: default
+      namespace: ""
+  subject:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: loanbroker-aggregator
+---
+# Trigger for the Aggregator Service
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: trigger-aggregator-loanbroker-bank-offer
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: kogito.serverless.loanbroker.bank.offer
+  subscriber:
+    ref:
+      apiVersion: v1
+      kind: Service
+      name: loanbroker-aggregator
