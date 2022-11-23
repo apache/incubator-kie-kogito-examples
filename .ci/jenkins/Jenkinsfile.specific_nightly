@@ -84,6 +84,30 @@ pipeline {
                 }
             }
         }
+        
+        stage('Build quarkus platform') {
+            when {
+                expression { getQuarkusBranch() }
+            }
+            steps {
+                script {
+                    checkoutQuarkusPlatformRepo()
+                    
+                    maven.mvnSetVersionProperty(new MavenCommand(this), 'quarkus.version', '999-SNAPSHOT')
+                    
+                    getBasicMavenCommand('quarkus-platform')
+                        .withProperty('-Dquickly')
+                        .run('clean install')
+                }
+            }
+            post {
+                always {
+                    script {
+                        cleanContainers()
+                    }
+                }
+            }
+        }
 
         stage('Build Drools') {
             steps {
@@ -244,6 +268,13 @@ void checkoutQuarkusRepo() {
     dir('quarkus') {
         deleteDir()
         checkout(githubscm.resolveRepository('quarkus', 'quarkusio', getQuarkusBranch(), false))
+    }
+}
+
+void checkoutQuarkusPlatformRepo() {
+    dir('quarkus') {
+        deleteDir()
+        checkout(githubscm.resolveRepository('quarkus-platform', 'quarkusio', getQuarkusBranch(), false))
     }
 }
 
