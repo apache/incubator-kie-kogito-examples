@@ -96,7 +96,7 @@ pipeline {
                     maven.mvnSetVersionProperty(new MavenCommand(this), 'quarkus.version', '999-SNAPSHOT')
                     
                     getBasicMavenCommand('quarkus-platform')
-                        .withProperty('-Dquickly')
+                        .withProperty('skipTests')
                         .run('clean install')
                 }
             }
