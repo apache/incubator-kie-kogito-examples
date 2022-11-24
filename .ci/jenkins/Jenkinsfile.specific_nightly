@@ -63,8 +63,41 @@ pipeline {
                     getBasicMavenCommand('quarkus')
                         .withProperty('quickly')
                         .run('clean install')
-
-                    // Update downstream repositories dependencies
+                }
+            }
+            post {
+                always {
+                    script {
+                        cleanContainers()
+                    }
+                }
+            }
+        }
+        
+        stage('Build quarkus platform') {
+            when {
+                expression { getQuarkusBranch() }
+            }
+            steps {
+                script {
+                    checkoutQuarkusPlatformRepo()
+                    
+                    maven.mvnSetVersionProperty('quarkus.version', env.QUARKUS_VERSION)
+                    
+                    getBasicMavenCommand('quarkus-platform', false)
+                            .withSettingsXmlFile('.github/mvn-settings.xml')
+                            .skipTests(true)
+                            .run('clean install')
+                }
+            }
+        }
+        
+        stage('Update projects with Quarkus version') {
+            when {
+                expression { getQuarkusBranch() }
+            }
+            steps {
+                script {
                     mavenCompareQuarkusDependencies(droolsRepo, 'drools-build-parent')
                     mavenSetProperty(droolsRepo, 'version.io.quarkus', '999-SNAPSHOT')
                     mavenCompareQuarkusDependencies(kogitoRuntimesRepo, 'kogito-dependencies-bom')
@@ -74,13 +107,6 @@ pipeline {
                     mavenSetProperty(kogitoRuntimesRepo, 'version.io.quarkus', '999-SNAPSHOT')
                     mavenSetProperty(kogitoExamplesRepo, 'quarkus.platform.version', '999-SNAPSHOT')
                     mavenSetProperty(kogitoExamplesRepo, 'quarkus-plugin.version', '999-SNAPSHOT')
-                }
-            }
-            post {
-                always {
-                    script {
-                        cleanContainers()
-                    }
                 }
             }
         }
@@ -244,6 +270,13 @@ void checkoutQuarkusRepo() {
     dir('quarkus') {
         deleteDir()
         checkout(githubscm.resolveRepository('quarkus', 'quarkusio', getQuarkusBranch(), false))
+    }
+}
+
+void checkoutQuarkusPlatformRepo() {
+    dir('quarkus-platform') {
+        deleteDir()
+        checkout(githubscm.resolveRepository('quarkus-platform', 'quarkusio', getQuarkusBranch(), false))
     }
 }
 
