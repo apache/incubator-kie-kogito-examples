@@ -87,23 +87,20 @@ pipeline {
         
         stage('Build quarkus platform') {
             when {
-                expression { getQuarkusBranch() }
+                expression { quarkusBranch }
             }
             steps {
                 script {
-                    checkoutQuarkusPlatformRepo()
-                    
-                    maven.mvnSetVersionProperty(new MavenCommand(this), 'quarkus.version', '999-SNAPSHOT')
-                    
-                    getBasicMavenCommand('quarkus-platform')
-                        .withProperty('skipTests')
-                        .run('clean install')
-                }
-            }
-            post {
-                always {
-                    script {
-                        cleanContainers()
+                    dir('quarkus-platform') {
+                        deleteDir()
+                        checkoutQuarkusPlatformRepo()
+
+                        maven.mvnSetVersionProperty('quarkus.version', env.QUARKUS_VERSION)
+
+                        new MavenCommand(this, ['-fae', '-ntp'])
+                            .withSettingsXmlFile('.github/mvn-settings.xml')
+                            .skipTests(true)
+                            .run('clean install')
                     }
                 }
             }
