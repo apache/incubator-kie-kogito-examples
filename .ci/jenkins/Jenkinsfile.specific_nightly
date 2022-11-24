@@ -63,17 +63,6 @@ pipeline {
                     getBasicMavenCommand('quarkus')
                         .withProperty('quickly')
                         .run('clean install')
-
-                    // Update downstream repositories dependencies
-                    mavenCompareQuarkusDependencies(droolsRepo, 'drools-build-parent')
-                    mavenSetProperty(droolsRepo, 'version.io.quarkus', '999-SNAPSHOT')
-                    mavenCompareQuarkusDependencies(kogitoRuntimesRepo, 'kogito-dependencies-bom')
-                    mavenCompareQuarkusDependencies(kogitoRuntimesRepo, 'kogito-build-parent')
-                    mavenCompareQuarkusDependencies(kogitoRuntimesRepo, 'kogito-quarkus-bom')
-                    mavenCompareQuarkusDependencies(kogitoRuntimesRepo, 'kogito-build-no-bom-parent')
-                    mavenSetProperty(kogitoRuntimesRepo, 'version.io.quarkus', '999-SNAPSHOT')
-                    mavenSetProperty(kogitoExamplesRepo, 'quarkus.platform.version', '999-SNAPSHOT')
-                    mavenSetProperty(kogitoExamplesRepo, 'quarkus-plugin.version', '999-SNAPSHOT')
                 }
             }
             post {
@@ -99,6 +88,25 @@ pipeline {
                             .withSettingsXmlFile('.github/mvn-settings.xml')
                             .skipTests(true)
                             .run('clean install')
+                }
+            }
+        }
+        
+        stage('Update projects with Quarkus version') {
+            when {
+                expression { getQuarkusBranch() }
+            }
+            steps {
+                script {
+                    mavenCompareQuarkusDependencies(droolsRepo, 'drools-build-parent')
+                    mavenSetProperty(droolsRepo, 'version.io.quarkus', '999-SNAPSHOT')
+                    mavenCompareQuarkusDependencies(kogitoRuntimesRepo, 'kogito-dependencies-bom')
+                    mavenCompareQuarkusDependencies(kogitoRuntimesRepo, 'kogito-build-parent')
+                    mavenCompareQuarkusDependencies(kogitoRuntimesRepo, 'kogito-quarkus-bom')
+                    mavenCompareQuarkusDependencies(kogitoRuntimesRepo, 'kogito-build-no-bom-parent')
+                    mavenSetProperty(kogitoRuntimesRepo, 'version.io.quarkus', '999-SNAPSHOT')
+                    mavenSetProperty(kogitoExamplesRepo, 'quarkus.platform.version', '999-SNAPSHOT')
+                    mavenSetProperty(kogitoExamplesRepo, 'quarkus-plugin.version', '999-SNAPSHOT')
                 }
             }
         }
