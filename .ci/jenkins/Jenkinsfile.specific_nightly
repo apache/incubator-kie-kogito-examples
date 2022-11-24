@@ -87,7 +87,7 @@ pipeline {
         
         stage('Build quarkus platform') {
             when {
-                expression { quarkusBranch }
+                expression { getQuarkusBranch() }
             }
             steps {
                 script {
