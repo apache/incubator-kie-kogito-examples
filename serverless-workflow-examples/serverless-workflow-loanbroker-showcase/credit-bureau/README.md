@@ -4,7 +4,7 @@ Welcome to your new Node.js function project! The boilerplate function code can 
 
 ## Local execution
 
-After executing `npm install`, you can run this function locally by executing `npm run local`.
+After executing `npm install`, you can run this function locally by executing `npm run start`.
 
 The runtime will expose three endpoints.
 

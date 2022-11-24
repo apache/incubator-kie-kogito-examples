@@ -47,6 +47,7 @@ public class AppResourceTest {
     @Test
     public void testCloudEventNotifyNewQuote() throws DeploymentException, IOException, InterruptedException {
         final QuotesResponse sentQuotes = new QuotesResponse();
+        sentQuotes.setEventType("kogito.serverless.workflow.aggregated.quotes");
         sentQuotes.setLoanRequestId("1234");
         sentQuotes.setAmount(1000);
         sentQuotes.setTerm(10);

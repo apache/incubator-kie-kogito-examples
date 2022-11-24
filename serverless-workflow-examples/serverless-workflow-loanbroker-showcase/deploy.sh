@@ -42,7 +42,7 @@
 
 SKIP_BUILD=$1
 DEPLOY_LOG=deploy.log
-# remember to change in kubernetes.yaml
+# remember to change in kubernetes.yml
 NAMESPACE=loanbroker-example
 
 print_build_header() {
@@ -65,10 +65,17 @@ print_build_footer() {
 build_maven_image() {
     PROJ=$1
 
+    if [ "$2" != "" ]
+    then
+      PROFILE="-P$2"
+    fi
+
     cd $PROJ
     print_build_header $PROJ
-    mvn -B clean install -Dquarkus.kubernetes.namespace=$NAMESPACE -DskipTests >> ../$DEPLOY_LOG
+    echo "mvn -B clean install -Dquarkus.kubernetes.namespace=$NAMESPACE -DskipTests $PROFILE >> ../$DEPLOY_LOG"
+    mvn -B clean install -Dquarkus.kubernetes.namespace=$NAMESPACE -DskipTests $PROFILE >> ../$DEPLOY_LOG
     print_build_footer $PROJ $?
+    PROFILE=""
     cd - >> /dev/null
 }
 
@@ -112,7 +119,15 @@ add_flow_url_to_ui() {
     echo "Adding Flow URL to UI"
 
     DEFAULT_URL="http://loanbroker-flow.loanbroker-example.svc.cluster.local"
-    sed -i .bak 's,'"${DEFAULT_URL}"','"${LOAN_FLOW_URL}"',g' loanbroker-ui/target/kubernetes/kubernetes.yml
+    sed -i.bak 's,'"${DEFAULT_URL}"','"${LOAN_FLOW_URL}"',g' loanbroker-ui/target/kubernetes/kubernetes.yml
+}
+
+expose_loanbroker_ui() {
+    echo "Exposing UI, please run 'minikube tunnel -p knative' in a separate terminal"
+    kubectl expose deployment loanbroker-ui --name=loanbroker-ui-external --type=LoadBalancer --port=8080 -n ${NAMESPACE}
+    sleep 5
+    LOANBROKER_EXTERNAL_IP=$(kubectl get service loanbroker-ui-external -o=jsonpath --template="{.status.loadBalancer.ingress[0].ip}" -n loanbroker-example)
+    echo "To access the loanbroker-example UI please use this url: http://$LOANBROKER_EXTERNAL_IP:8080"
 }
 
 rm -rf $DEPLOY_LOG
@@ -127,18 +142,19 @@ then
         exit 1
     fi
     build_maven_image "loanbroker-ui"
-    build_maven_image "loanbroker-flow"
+    build_maven_image "loanbroker-flow" "persistence"
     build_maven_image "aggregator"
     build_kn_image "credit-bureau" "dev.local/loanbroker-credit-bureau"
     build_kn_image "banks" "dev.local/loanbroker-bank"
 fi
 
-apply_kube "kubernetes.yaml" "Banks, Credit Bureau and Namespace"
+apply_kube "kubernetes/loanbroker-example-database.yml" "Database and Namespace"
+apply_kube "kubernetes/jobs-service-postgresql.yml" "Kogito Jobs Service"
+apply_kube "kubernetes/kubernetes.yml" "Banks and Credit Bureau"
 apply_kube "loanbroker-flow/target/kubernetes/kogito.yml" "Flow Kogito Binding"
 apply_kube "loanbroker-flow/target/kubernetes/knative.yml" "Flow Service"
 apply_kube "aggregator/target/kubernetes/kubernetes.yml" "Aggregator Service"
 # get the flow ksvc address to set to the yaml file before applying
 add_flow_url_to_ui
 apply_kube "loanbroker-ui/target/kubernetes/kubernetes.yml" "User Interface"
-echo "Exposing UI at localhost:8080, please run 'minikube tunnel -p knative' in a separate terminal"
-kubectl expose deployment loanbroker-ui --name=loanbroker-ui-external --type=LoadBalancer --port=8080 -n ${NAMESPACE}
+expose_loanbroker_ui

@@ -1,10 +1,15 @@
 package org.acme.loanbroker.domain;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
+
 import java.util.Objects;
 
 public class Credit {
     private int score;
     private int history;
+    @JsonProperty
     private String SSN;
 
     public Credit() {
@@ -32,10 +37,12 @@ public class Credit {
         this.history = history;
     }
 
+    @JsonGetter("SSN")
     public String getSSN() {
         return SSN;
     }
 
+    @JsonSetter("SSN")
     public void setSSN(String SSN) {
         this.SSN = SSN;
     }

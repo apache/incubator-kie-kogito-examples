@@ -1,9 +1,12 @@
 let connected = false;
 
 function refreshLoans() {
+    showSpinnerDialog("Loading loans");
     $.getJSON("{workflowURL}/loanbroker", (subs) => {
+        closeSpinnerDialog();
         printLoansTable(subs);
     }).fail(function () {
+        closeSpinnerDialog();
         showError("An error was produced during the loans refresh, please check that que loanbroker-flow application is running.");
     });
 }
@@ -41,41 +44,50 @@ function printLoanRow(loanTableBody, loan) {
     }
 }
 
-function printQuoteRow(quote) {
+function printQuoteRow(quotesResponse) {
     const quoteTableBody = $('#completedQuotes > tbody');
-    if (quote.loanRequestId) {
+    if (quotesResponse.loanRequestId) {
         const queryRow = $('<tr>').appendTo(quoteTableBody);
-        queryRow.append($(`<th scope="row" style="width: 30%;">$\{quote.loanRequestId}</th>`));
-        queryRow.append($(`<td style="width: 30%;">$\{quote.credit.SSN}</td>`));
-        queryRow.append($(`<td style="width: 30%;">$\{quote.term}</td>`));
-        queryRow.append($(`<td style="width: 30%;">$\{quote.amount}</td>`));
-        queryRow.append($(`<td style="width: 30%;">$\{quote.credit.score}</td>`));
-        queryRow.append($(`<td style="width: 30%;">$\{quote.credit.history}</td>`));
-        if (quote.quotes) {
+        queryRow.append($(`<th scope="row" style="width: 30%;">$\{quotesResponse.loanRequestId}</th>`));
+        queryRow.append($(`<td style="width: 30%;">$\{quotesResponse.credit.SSN}</td>`));
+        queryRow.append($(`<td style="width: 30%;">$\{quotesResponse.term}</td>`));
+        queryRow.append($(`<td style="width: 30%;">$\{quotesResponse.amount}</td>`));
+        queryRow.append($(`<td style="width: 30%;">$\{quotesResponse.credit.score}</td>`));
+        queryRow.append($(`<td style="width: 30%;">$\{quotesResponse.credit.history}</td>`));
+
+        if (quotesResponse.eventType === "kogito.serverless.workflow.aggregated.quotes.timeout") {
+            showEventsToast("No bank offered for Workflow Id: " + quotesResponse.loanRequestId + " and SSN: " + quotesResponse.credit.SSN + " :(");
             const quotesRowBody = $('<tr>').append('<td colspan="6" id="">')
-            quotesRowBody.children(0).append('<table class="table mb-0">');
-            quotesRowBody.children(0).children(0).append('<thead><tr><th>Bank</th><th>Rate</th></tr></thead>');
-            quotesRowBody.children(0).children(0).append('<tbody id="quoteBody">');
-            for (const q of quote.quotes) {
-                const quotesRow = $('<tr>');
-                quotesRow.append($(`<td>$\{q.bankId}</td>`));
-                quotesRow.append($(`<td>$\{q.rate}</td>`));
-                quotesRowBody.find('#quoteBody').append(quotesRow);
-            }
+            quotesRowBody.children(0).append('<span>No bank offers were received in the given time frame, maybe you can try with a different amount.</span>');
             quotesRowBody.appendTo(quoteTableBody);
+        } else {
+            if (quotesResponse.quotes) {
+                showEventsToast(quotesResponse.quotes.length + " bank offers arrived for Workflow Id: " + quotesResponse.loanRequestId + " and SSN: " + quotesResponse.credit.SSN + "!");
+                const quotesRowBody = $('<tr>').append('<td colspan="6" id="">')
+                quotesRowBody.children(0).append('<table class="table mb-0">');
+                quotesRowBody.children(0).children(0).append('<thead><tr><th>Bank</th><th>Rate</th></tr></thead>');
+                quotesRowBody.children(0).children(0).append('<tbody id="quoteBody">');
+                for (const q of quotesResponse.quotes) {
+                    const quotesRow = $('<tr>');
+                    quotesRow.append($(`<td>$\{q.bankId}</td>`));
+                    quotesRow.append($(`<td>$\{q.rate}</td>`));
+                    quotesRowBody.find('#quoteBody').append(quotesRow);
+                }
+                quotesRowBody.appendTo(quoteTableBody);
+            }
         }
     }
 }
 
 function showError(message) {
     const notification = $(`<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="min-width: 30rem"/>`)
-            .append($(`<div class="toast-header bg-danger">
+        .append($(`<div class="toast-header bg-danger">
                  <strong class="me-auto text-white">Error</strong>
                  <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                </div>`))
-            .append($(`<div class="toast-body"/>`)
-                    .append($(`<p/>`).text(message))
-            );
+        .append($(`<div class="toast-body"/>`)
+            .append($(`<p/>`).text(message))
+        );
     $("#notificationPanel").append(notification);
     notification.toast({
         delay: 30000
@@ -104,6 +116,7 @@ function newLoanRequest() {
         }
     };
     const processInput = JSON.stringify(processInputJson);
+    showSpinnerDialog("Creating loan request");
     $.ajax({
         url: "{workflowURL}/loanbroker",
         type: "POST",
@@ -113,10 +126,12 @@ function newLoanRequest() {
         success: function (result) {
             console.log(JSON.stringify(result));
             form.modal('hide');
+            closeSpinnerDialog();
             refreshLoans();
         },
         error: function (xhr, status, error) {
             form.modal('hide');
+            closeSpinnerDialog();
             showError("An error was produced during the serverless workflow instance create attempt, please check that que loanbroker-flow application is running:\n" + xhr.responseText);
         }
     });
@@ -134,8 +149,28 @@ function connectNewQuoteSocket() {
     };
     socket.onmessage = function (m) {
         console.log("New quote: " + m.data);
-        printQuoteRow(JSON.parse(m.data));
+        const quotesResponse = JSON.parse(m.data);
+        printQuoteRow(quotesResponse);
     }
+}
+
+function showSpinnerDialog(message) {
+    const modal = $('#spinnerDialog');
+    modal.find('#spinnerDialogMessage').text(message);
+    modal.show();
+}
+
+function closeSpinnerDialog() {
+    const modal = $('#spinnerDialog');
+    modal.hide();
+}
+
+function showEventsToast(message) {
+    const eventsToast = document.getElementById("eventsToast");
+    const toastBody = eventsToast.getElementsByClassName("toast-body")[0];
+    const txt = toastBody.children[0].textContent = message;
+    const toast = new bootstrap.Toast(eventsToast);
+    toast.show();
 }
 
 $(document).ready(function () {

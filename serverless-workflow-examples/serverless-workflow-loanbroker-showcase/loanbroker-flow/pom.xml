@@ -157,5 +157,30 @@
         <quarkus.package.type>native</quarkus.package.type>
       </properties>
     </profile>
+    <profile>
+      <id>persistence</id>
+      <properties>
+        <skipTests>true</skipTests>
+        <quarkus.profile>persistence</quarkus.profile>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>org.kie.kogito</groupId>
+          <artifactId>kogito-addons-quarkus-persistence-jdbc</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>io.quarkus</groupId>
+          <artifactId>quarkus-jdbc-postgresql</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>io.quarkus</groupId>
+          <artifactId>quarkus-agroal</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>org.kie.kogito</groupId>
+          <artifactId>kogito-addons-quarkus-jobs-knative-eventing</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
   </profiles>
 </project>
