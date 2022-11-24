@@ -91,17 +91,14 @@ pipeline {
             }
             steps {
                 script {
-                    dir('quarkus-platform') {
-                        deleteDir()
-                        checkoutQuarkusPlatformRepo()
-
-                        maven.mvnSetVersionProperty('quarkus.version', env.QUARKUS_VERSION)
-
-                        new MavenCommand(this, ['-fae', '-ntp'])
+                    checkoutQuarkusPlatformRepo()
+                    
+                    maven.mvnSetVersionProperty('quarkus.version', env.QUARKUS_VERSION)
+                    
+                    getBasicMavenCommand('quarkus-platform', false)
                             .withSettingsXmlFile('.github/mvn-settings.xml')
                             .skipTests(true)
                             .run('clean install')
-                    }
                 }
             }
         }
