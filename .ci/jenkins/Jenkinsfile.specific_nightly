@@ -266,7 +266,7 @@ void checkoutQuarkusRepo() {
 }
 
 void checkoutQuarkusPlatformRepo() {
-    dir('quarkus') {
+    dir('quarkus-platform') {
         deleteDir()
         checkout(githubscm.resolveRepository('quarkus-platform', 'quarkusio', getQuarkusBranch(), false))
     }
