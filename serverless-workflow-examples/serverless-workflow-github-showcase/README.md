@@ -1,6 +1,7 @@
 **DEPRECATION NOTICE**
 
 > This example has a few old concepts from architecture and integration perspective. [We are working on an updated version of this example](https://issues.redhat.com/browse/KOGITO-8169). Until there, please try our other examples in this directory.
+> In case you still need to run it, latest Kogito version which worked was KOGITO 1.29.0.Final.
 
 ## Serverless Workflow GitHub Showcase
 
