@@ -111,10 +111,6 @@
           <groupId>org.kie.kogito</groupId>
           <artifactId>kogito-addons-quarkus-persistence-postgresql</artifactId>
         </dependency>
-        <dependency>
-          <groupId>io.quarkus</groupId>
-          <artifactId>quarkus-jdbc-postgresql</artifactId>
-        </dependency>
       </dependencies>
       <build>
        <plugins>
