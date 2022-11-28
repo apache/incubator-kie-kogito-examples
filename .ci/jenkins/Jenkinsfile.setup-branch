@@ -87,10 +87,22 @@ pipeline {
         stage('Update project version') {
             steps {
                 script {
-                    maven.mvnVersionsUpdateParentAndChildModules(getMavenCommand(getRepoName()), getKogitoVersion(), true)
-                    maven.mvnSetVersionProperty(getMavenCommand(getRepoName()), 'version.org.kie.kogito', getKogitoVersion())
-                    maven.mvnSetVersionProperty(getMavenCommand(getRepoName()), 'kogito.bom.version', getKogitoVersion())
-                    maven.mvnSetVersionProperty(getMavenCommand(getRepoName()), 'version.org.drools', getDroolsVersion())
+                    dir(getRepoName()) {
+                        def oldKogitoVersion = sh(script: "mvn help:evaluate -Dexpression=project.version -q -DforceStdout", returnStdout: true)
+                        echo "Got old Kogito version ${oldKogitoVersion}"
+
+                        maven.mvnVersionsUpdateParentAndChildModules(getMavenCommand(), getKogitoVersion(), true)
+                        maven.mvnSetVersionProperty(getMavenCommand(), 'version.org.kie.kogito', getKogitoVersion())
+                        maven.mvnSetVersionProperty(getMavenCommand(), 'kogito.bom.version', getKogitoVersion())
+                        maven.mvnSetVersionProperty(getMavenCommand(), 'version.org.drools', getDroolsVersion())
+
+                        if (getKogitoVersion() != oldKogitoVersion) {
+                            def status = sh(script: "grep -ir '${oldKogitoVersion}' --include='pom.xml'", returnStatus: true)
+                            if (status == 0) {
+                                error "Old Kogito version ${oldKogitoVersion} is still present into the project... Please review it..."
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -208,12 +220,14 @@ String getGitAuthorCredsID() {
     return env.AUTHOR_CREDS_ID
 }
 
-MavenCommand getMavenCommand(String directory) {
-    return new MavenCommand(this, ['-fae', '-ntp'])
+MavenCommand getMavenCommand(String directory = '') {
+    def mvnCmd = new MavenCommand(this, ['-fae', '-ntp'])
                 .withSettingsXmlId(env.MAVEN_SETTINGS_CONFIG_FILE_ID)
-                .inDirectory(directory)
+    if (directory) {
+        mvnCmd.inDirectory(directory)
+    }
+    return mvnCmd
 }
-
 void runMavenDeploy(String directory) {
     mvnCmd = getMavenCommand(directory)
 
