@@ -40,7 +40,10 @@
           "condition": "{{ $.[?(@.salary < 3000)] }}",
           "transition": "HandleDenied"
         }
-      ]
+      ],
+      "defaultCondition": {
+        "transition": "HandleDenied"
+      }
     },
     {
       "name": "HandleApproved",
@@ -53,7 +56,8 @@
           {
             "eventRef": "ApplicantDecisionEvent"
           }
-        ]
+        ],
+        "terminate": true
       }
     },
     {
@@ -67,7 +71,8 @@
           {
             "eventRef": "ApplicantDecisionEvent"
           }
-        ]
+        ],
+        "terminate": true
       }
     }
   ]
