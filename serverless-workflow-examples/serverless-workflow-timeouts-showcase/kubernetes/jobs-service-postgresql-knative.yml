@@ -6,6 +6,10 @@ metadata:
     app.kubernetes.io/name: jobs-service-postgresql
   name: jobs-service-postgresql
 spec:
+  replicas: 1
+  # remove after https://issues.redhat.com/browse/KOGITO-8311 is done
+  strategy:
+    type: Recreate
   template:
     metadata:
       annotations:
@@ -16,13 +20,14 @@ spec:
     spec:
       containers:
         - name: jobs-service-postgresql
-          image: quay.io/kiegroup/kogito-jobs-service-postgresql-nightly:latest
-          imagePullPolicy: Always
+          image: quay.io/kiegroup/kogito-jobs-service-allinone:latest
           ports:
             - containerPort: 8080
               name: http1
               protocol: TCP
           env:
+            - name: JOBS_SERVICE_PERSISTENCE
+              value: "postgresql"
             - name: KOGITO_JOBS_SERVICE_KNATIVE_EVENTS
               value: "false"
             - name: QUARKUS_DATASOURCE_USERNAME
