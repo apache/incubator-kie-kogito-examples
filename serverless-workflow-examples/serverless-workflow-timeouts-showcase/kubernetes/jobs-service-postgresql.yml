@@ -59,7 +59,7 @@ spec:
     spec:
       containers:
         - name: jobs-service-postgresql
-          image: quay.io/kiegroup/kogito-jobs-service-postgresql-nightly:1.31
+          image: quay.io/kiegroup/kogito-jobs-service-allinone:1.31
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
@@ -70,6 +70,8 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
+            - name: JOBS_SERVICE_PERSISTENCE
+              value: "postgresql"
             - name: KOGITO_JOBS_SERVICE_KNATIVE_EVENTS
               value: "false"
             - name: QUARKUS_DATASOURCE_USERNAME
