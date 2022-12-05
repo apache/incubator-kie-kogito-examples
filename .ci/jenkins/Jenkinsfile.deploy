@@ -228,20 +228,6 @@ pipeline {
                 setDeployPropertyIfNeeded("${getRepoName()}.pr.target.ref", getBuildBranch())
             }
         }
-        stage('Update nightly branch') {
-            when {
-                expression { return isUpdateNightlyBranch() && !isCreatePr() && !isRelease() }
-            }
-            steps {
-                script {
-                    String nightlyBranch = "nightly-${getBuildBranch()}"
-                    dir(getRepoName()) {
-                        githubscm.createBranch(nightlyBranch)
-                        githubscm.pushObject('origin', nightlyBranch, getGitAuthorCredsID())
-                    }
-                }
-            }
-        }
     }
     post {
         always {
@@ -340,10 +326,6 @@ boolean isRelease() {
 
 boolean isCreatePr() {
     return params.CREATE_PR
-}
-
-boolean isUpdateNightlyBranch() {
-    return params.UPDATE_NIGHTLY_BRANCH
 }
 
 String getRepoName() {
