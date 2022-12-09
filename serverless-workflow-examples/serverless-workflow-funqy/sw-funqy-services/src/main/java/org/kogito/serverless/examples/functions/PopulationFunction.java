@@ -21,8 +21,6 @@ import org.kogito.serverless.examples.input.Country;
 import org.kogito.serverless.examples.services.CountriesService;
 import org.kogito.serverless.examples.services.PopulationService;
 
-import com.fasterxml.jackson.databind.JsonNode;
-
 import io.quarkus.funqy.Funq;
 
 public class PopulationFunction {
@@ -33,8 +31,8 @@ public class PopulationFunction {
     PopulationService populationService;
 
     @Funq
-    public Country population(JsonNode countryName) {
+    public Country population(Country country) {
         return populationService.getPopulation(
-                countriesService.getCountry(countryName.asText()));
+                countriesService.getCountry(country.name));
     }
 }
