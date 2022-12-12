@@ -73,7 +73,7 @@ pipeline {
                 }
             }
         }
-        
+
         stage('Build quarkus platform') {
             when {
                 expression { getQuarkusBranch() }
@@ -81,9 +81,9 @@ pipeline {
             steps {
                 script {
                     checkoutQuarkusPlatformRepo()
-                    
+
                     maven.mvnSetVersionProperty('quarkus.version', env.QUARKUS_VERSION)
-                    
+
                     getBasicMavenCommand('quarkus-platform', false)
                             .withSettingsXmlFile('.github/mvn-settings.xml')
                             .skipTests(true)
@@ -91,7 +91,7 @@ pipeline {
                 }
             }
         }
-        
+
         stage('Update projects with Quarkus version') {
             when {
                 expression { getQuarkusBranch() }
@@ -168,48 +168,6 @@ pipeline {
                     getFullMavenCommand(kogitoExamplesRepo)
                         .withProperty('maven.test.failure.ignore', true)
                         .run('clean install')
-                }
-            }
-            post {
-                always {
-                    script {
-                        cleanContainers()
-                    }
-                }
-            }
-        }
-
-        stage('Build kogito-examples with persistence') {
-            when {
-                expression { return !isPersistenceDisabled() }
-            }
-            steps {
-                script {
-                    getFullMavenCommand(kogitoExamplesRepo)
-                        .withProfiles(['persistence'])
-                        .withProperty('maven.test.failure.ignore', true)
-                        .run('clean verify')
-                }
-            }
-            post {
-                always {
-                    script {
-                        cleanContainers()
-                    }
-                }
-            }
-        }
-
-        stage('Build kogito-examples with events') {
-            when {
-                expression { return !isEventsDisabled() }
-            }
-            steps {
-                script {
-                    getFullMavenCommand(kogitoExamplesRepo)
-                        .withProfiles(['events'])
-                        .withProperty('maven.test.failure.ignore', true)
-                        .run('clean verify')
                 }
             }
             post {
@@ -350,14 +308,6 @@ String getQuarkusBranch() {
     return env['QUARKUS_BRANCH'] ?: ''
 }
 
-boolean isPersistenceDisabled() {
-    return env.DISABLE_PERSISTENCE ? env.DISABLE_PERSISTENCE.toBoolean() : false
-}
-
-boolean isEventsDisabled() {
-    return env.DISABLE_EVENTS ? env.DISABLE_EVENTS.toBoolean() : false
-}
-
 String getKogitoBranch() {
     return params.BUILD_BRANCH_NAME
 }
@@ -425,16 +375,6 @@ ${getEcosystemMavenCommand(kogitoAppsRepo, false).withProperty('quickly').getFul
 cd ../${kogitoExamplesRepo}
 ${getFullMavenCommand(kogitoExamplesRepo, false).withProperty('maven.test.failure.ignore', true).getFullRunCommand('clean install')}
 """
-    if (!isPersistenceDisabled()) {
-        reproducer += """
-${getFullMavenCommand(kogitoExamplesRepo, false).withProfiles(['persistence']).withProperty('maven.test.failure.ignore', true).getFullRunCommand('clean install')}
-"""
-    }
-    if (!isEventsDisabled()) {
-        reproducer += """
-${getFullMavenCommand(kogitoExamplesRepo, false).withProfiles(['events']).withProperty('maven.test.failure.ignore', true).getFullRunCommand('clean install')}
-"""
-    }
     reproducer += '```'
     return reproducer
 }
