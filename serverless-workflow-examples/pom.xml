@@ -50,6 +50,7 @@
         <module>serverless-workflow-timeouts-showcase</module>
         <module>serverless-workflow-custom-type</module>
         <module>serverless-workflow-loanbroker-showcase</module>
+        <module>serverless-workflow-camel-routes</module>
       </modules>
     </profile>
 
