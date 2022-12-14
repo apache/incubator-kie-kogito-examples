@@ -115,7 +115,9 @@ pipeline {
         stage('Build kogito-examples') {
             steps {
                 script {
-                    getMavenCommand().withProperty('maven.test.failure.ignore', true).skipTests(params.SKIP_TESTS).run('clean install')
+                    dir(getRepoName()) {
+                        getMavenCommand().withProperty('maven.test.failure.ignore', true).skipTests(params.SKIP_TESTS).run('clean install')
+                    }
                 }
             }
             post {
@@ -133,7 +135,9 @@ pipeline {
             }
             steps {
                 script {
-                    runMavenDeploy()
+                    dir(getRepoName()) {
+                        runMavenDeploy()
+                    }
                 }
             }
         }
@@ -143,7 +147,9 @@ pipeline {
             }
             steps {
                 script {
-                    runMavenDeploy(true)
+                    dir(getRepoName()) {
+                        runMavenDeploy(true)
+                    }
                 }
             }
         }
@@ -153,8 +159,10 @@ pipeline {
             }
             steps {
                 script {
-                    // Deploy to specific repository with credentials
-                    maven.uploadLocalArtifacts(env.MAVEN_REPO_CREDS_ID, getLocalDeploymentFolder(), getMavenRepoZipUrl())
+                    dir(getRepoName()) {
+                        // Deploy to specific repository with credentials
+                        maven.uploadLocalArtifacts(env.MAVEN_REPO_CREDS_ID, getLocalDeploymentFolder(), getMavenRepoZipUrl())
+                    }
                 }
             }
         }
@@ -164,8 +172,10 @@ pipeline {
             }
             steps {
                 script {
-                    // Stage release artifacts
-                    runMavenStage()
+                    dir(getRepoName()) {
+                        // Stage release artifacts
+                        runMavenStage()
+                    }
                 }
             }
         }
@@ -325,13 +335,10 @@ void setDeployPropertyIfNeeded(String key, def value) {
     }
 }
 
-MavenCommand getMavenCommand(String directory = '') {
+MavenCommand getMavenCommand() {
     MavenCommand mvnCmd = new MavenCommand(this, ['-fae', '-ntp'])
                                 .withSettingsXmlId(env.MAVEN_SETTINGS_CONFIG_FILE_ID)
                                 .withProperty('full')
-    if (directory) {
-        mvnCmd.inDirectory(directory)
-    }
     if (env.MAVEN_DEPENDENCIES_REPOSITORY) {
         mvnCmd.withDependencyRepositoryInSettings('deps-repo', env.MAVEN_DEPENDENCIES_REPOSITORY)
     }
