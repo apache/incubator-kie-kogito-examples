@@ -63,7 +63,9 @@ pipeline {
                         }
                     }
 
-                    checkoutRepo()
+                    dir(getRepoName()) {
+                        checkoutRepo()
+                    }
                 }
             }
             post {
@@ -84,7 +86,11 @@ pipeline {
                 expression { return isRelease() || isCreatePr() }
             }
             steps {
-                prepareForPR()
+                script {
+                    dir(getRepoName()) {
+                        prepareForPR()
+                    }
+                }
             }
         }
         stage('Update project version') {
@@ -184,12 +190,16 @@ pipeline {
                 expression { return isRelease() || isCreatePr() }
             }
             steps {
-                commitAndCreatePR()
-                
-                setDeployPropertyIfNeeded("${getRepoName()}.pr.source.uri", "https://github.com/${getBotAuthor()}/${getRepoName()}")
-                setDeployPropertyIfNeeded("${getRepoName()}.pr.source.ref", getBotBranch())
-                setDeployPropertyIfNeeded("${getRepoName()}.pr.target.uri", "https://github.com/${getGitAuthor()}/${getRepoName()}")
-                setDeployPropertyIfNeeded("${getRepoName()}.pr.target.ref", getBuildBranch())
+                script {
+                    dir(getRepoName()) {
+                        commitAndCreatePR()
+
+                        setDeployPropertyIfNeeded("${getRepoName()}.pr.source.uri", "https://github.com/${getBotAuthor()}/${getRepoName()}")
+                        setDeployPropertyIfNeeded("${getRepoName()}.pr.source.ref", getBotBranch())
+                        setDeployPropertyIfNeeded("${getRepoName()}.pr.target.uri", "https://github.com/${getGitAuthor()}/${getRepoName()}")
+                        setDeployPropertyIfNeeded("${getRepoName()}.pr.target.ref", getBuildBranch())
+                    }
+                }
             }
         }
     }
@@ -225,17 +235,13 @@ void saveReports() {
 }
 
 void checkoutRepo() {
-    dir(getRepoName()) {
-        deleteDir()
-        checkout(githubscm.resolveRepository(getRepoName(), getGitAuthor(), getBuildBranch(), false))
-    }
+    deleteDir()
+    checkout(githubscm.resolveRepository(getRepoName(), getGitAuthor(), getBuildBranch(), false))
 }
 
 void prepareForPR() {
-    dir(getRepoName()) {
-        githubscm.forkRepo(getBotAuthorCredsID())
-        githubscm.createBranch(getBotBranch())
-    }
+    githubscm.forkRepo(getBotAuthorCredsID())
+    githubscm.createBranch(getBotBranch())
 }
 
 void addNotIgnoredPoms() {
@@ -264,12 +270,10 @@ void commitAndCreatePR() {
     }
     // Not using githubscm.commitChanges() because globbing won't work.
     // See: https://github.com/kiegroup/kogito-runtimes/pull/570#discussion_r449268738
-    dir(getRepoName()) {
-        addNotIgnoredPoms()
-        sh "git commit -m '${commitMsg}'"
-        githubscm.pushObject('origin', getBotBranch(), getBotAuthorCredsID())
-        deployProperties["${getRepoName()}.pr.link"] = githubscm.createPR(commitMsg, prBody, getBuildBranch(), getBotAuthorCredsID())
-    }
+    addNotIgnoredPoms()
+    sh "git commit -m '${commitMsg}'"
+    githubscm.pushObject('origin', getBotBranch(), getBotAuthorCredsID())
+    deployProperties["${getRepoName()}.pr.link"] = githubscm.createPR(commitMsg, prBody, getBuildBranch(), getBotAuthorCredsID())
 }
 
 boolean isSpecificArtifactsUpload() {
@@ -354,9 +358,7 @@ void runMavenDeploy(boolean localDeployment = false) {
         mvnCmd.withDeployRepository(env.MAVEN_DEPLOY_REPOSITORY)
     }
 
-    dir(getRepoName()) {
-        mvnCmd.withOptions(examplesHelper.getDeployableArtifactIds().collect { "-pl :${it} "})
-    }
+    mvnCmd.withOptions(examplesHelper.getDeployableArtifactIds().collect { "-pl :${it} "})
 
     mvnCmd.skipTests(true).run('clean deploy')
 }
