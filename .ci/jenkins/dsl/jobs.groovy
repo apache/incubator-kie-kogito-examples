@@ -60,13 +60,12 @@ setupDeployJob(JobType.PULL_REQUEST, 'kogito-bdd')
 createSetupBranchJob()
 
 // Nightly jobs
-setupDeployJob(JobType.NIGHTLY)
+KogitoJobUtils.createNightlyBuildChainBuildAndDeployJobForCurrentRepo(this, '', true)
 
+// Environment nightlies
 setupSpecificBuildChainNightlyJob('native')
-
 setupSpecificBuildChainNightlyJob('quarkus-main')
 setupSpecificBuildChainNightlyJob('quarkus-branch')
-
 setupSpecificBuildChainNightlyJob('mandrel')
 setupSpecificBuildChainNightlyJob('mandrel-lts')
 setupSpecificBuildChainNightlyJob('quarkus-lts')
@@ -200,7 +199,6 @@ void setupDeployJob(JobType jobType, String envName = '') {
             booleanParam('SKIP_TESTS', false, 'Skip tests')
 
             booleanParam('CREATE_PR', false, 'Should we create a PR with the changes ?')
-            booleanParam('UPDATE_NIGHTLY_BRANCH', false, 'Set to true if at the end of the run, the nightly branch should be updated. This CANNOT be used with `CREATE_PR` parameter also enabled (this latter one has priority). It is also disabled for release job.')
 
             stringParam('PROJECT_VERSION', '', 'Optional if not RELEASE. If RELEASE, cannot be empty.')
             stringParam('DROOLS_VERSION', '', 'Optional if not RELEASE. If RELEASE, cannot be empty.')

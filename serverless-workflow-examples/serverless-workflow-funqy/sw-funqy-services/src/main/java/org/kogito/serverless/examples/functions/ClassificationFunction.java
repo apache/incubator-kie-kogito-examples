@@ -21,8 +21,6 @@ import org.kogito.serverless.examples.input.Country;
 import org.kogito.serverless.examples.services.ClassificationService;
 import org.kogito.serverless.examples.services.CountriesService;
 
-import com.fasterxml.jackson.databind.JsonNode;
-
 import io.quarkus.funqy.Funq;
 
 public class ClassificationFunction {
@@ -33,8 +31,8 @@ public class ClassificationFunction {
     ClassificationService classificationService;
 
     @Funq
-    public Country classify(JsonNode countryName) {
+    public Country classify(Country country) {
         return classificationService.getClassification(
-                countriesService.getCountry(countryName.asText()));
+                countriesService.getCountry(country.name));
     }
 }

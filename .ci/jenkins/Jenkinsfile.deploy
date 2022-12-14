@@ -127,52 +127,6 @@ pipeline {
                 }
             }
         }
-        stage('Check kogito-examples with persistence') {
-            when {
-                expression { return !isPersistenceDisabled() }
-            }
-            steps {
-                script {
-                    sh "cp -r ${getRepoName()} ${getRepoName()}-persistence"
-                    getMavenCommand("${getRepoName()}-persistence")
-                        .skipTests(params.SKIP_TESTS)
-                        .withProfiles(['persistence'])
-                        .withProperty('maven.test.failure.ignore', true)
-                        .run('clean install')
-                }
-            }
-            post {
-                always {
-                    script {
-                        saveReports()
-                        util.archiveConsoleLog()
-                    }
-                }
-            }
-        }
-        stage('Check kogito-examples with events') {
-            when {
-                expression { return !isEventsDisabled() }
-            }
-            steps {
-                script {
-                    sh "cp -r ${getRepoName()} ${getRepoName()}-events"
-                    getMavenCommand("${getRepoName()}-events")
-                        .skipTests(params.SKIP_TESTS)
-                        .withProfiles(['events'])
-                        .withProperty('maven.test.failure.ignore', true)
-                        .run('clean install')
-                }
-            }
-            post {
-                always {
-                    script {
-                        saveReports()
-                        util.archiveConsoleLog()
-                    }
-                }
-            }
-        }
         stage('Deploy to repository') {
             when {
                 expression { return !shouldStageArtifacts() && !isSpecificArtifactsUpload() && shouldDeployToRepository() }
@@ -226,20 +180,6 @@ pipeline {
                 setDeployPropertyIfNeeded("${getRepoName()}.pr.source.ref", getBotBranch())
                 setDeployPropertyIfNeeded("${getRepoName()}.pr.target.uri", "https://github.com/${getGitAuthor()}/${getRepoName()}")
                 setDeployPropertyIfNeeded("${getRepoName()}.pr.target.ref", getBuildBranch())
-            }
-        }
-        stage('Update nightly branch') {
-            when {
-                expression { return isUpdateNightlyBranch() && !isCreatePr() && !isRelease() }
-            }
-            steps {
-                script {
-                    String nightlyBranch = "nightly-${getBuildBranch()}"
-                    dir(getRepoName()) {
-                        githubscm.createBranch(nightlyBranch)
-                        githubscm.pushObject('origin', nightlyBranch, getGitAuthorCredsID())
-                    }
-                }
             }
         }
     }
@@ -342,10 +282,6 @@ boolean isCreatePr() {
     return params.CREATE_PR
 }
 
-boolean isUpdateNightlyBranch() {
-    return params.UPDATE_NIGHTLY_BRANCH
-}
-
 String getRepoName() {
     return env.REPO_NAME
 }
@@ -437,12 +373,4 @@ String getLocalDeploymentFolder() {
 
 String getMavenRepoZipUrl() {
     return "${env.MAVEN_DEPLOY_REPOSITORY.replaceAll('/content/', '/service/local/').replaceFirst('/*$', '')}/content-compressed"
-}
-
-boolean isPersistenceDisabled() {
-    return env.DISABLE_PERSISTENCE ? env.DISABLE_PERSISTENCE.toBoolean() : false
-}
-
-boolean isEventsDisabled() {
-    return env.DISABLE_EVENTS ? env.DISABLE_EVENTS.toBoolean() : false
 }

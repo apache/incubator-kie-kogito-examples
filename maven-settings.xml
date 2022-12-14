@@ -1,0 +1,104 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+  <servers>
+    <server>
+      <id>jboss-releases-repository</id>
+      <username>kogito-release-user</username>
+      <password>U2bj~t_VPM9;#kW7</password>
+    </server>
+    <server>
+      <id>jboss-snapshots-repository</id>
+      <username>hudson-services</username>
+      <password>fiNi83Noauqw</password>
+    </server>
+  </servers>
+
+  <pluginGroups>
+    <pluginGroup>org.zanata</pluginGroup>
+  </pluginGroups>
+
+  <mirrors>
+    <mirror>
+      <id>mirror-central</id>
+      <mirrorOf>external:*,!kogito-staging-repository-group</mirrorOf>
+      <url>https://${env.LOCAL_NEXUS_IP}:8443/nexus/content/groups/kogito-runtimes-pr-artifacts-group/</url>
+    </mirror>
+  </mirrors>
+
+  <profiles>
+    <profile>
+      <id>internal-npm-registry</id>
+      <properties>
+        <npmRegistryURL>${env.NPM_REGISTRY_URL}</npmRegistryURL>
+        <yarnDownloadRoot>http://download.devel.redhat.com/rcm-guest/staging/rhba/dist/yarn/</yarnDownloadRoot>
+        <nodeDownloadRoot>http://download.devel.redhat.com/rcm-guest/staging/rhba/dist/node/</nodeDownloadRoot>
+        <npmDownloadRoot>http://download.devel.redhat.com/rcm-guest/staging/rhba/dist/npm/</npmDownloadRoot>
+      </properties>
+    </profile>
+
+    <profile>
+      <id>additional_repos</id>
+      <repositories>
+        <!-- Conventions are described in http://community.jboss.org/wiki/MavenGettingStarted-Developers -->
+        <repository>
+          <id>jboss-public-repository-group</id>
+          <name>JBoss Public Repository Group</name>
+          <url>https://repository.jboss.org/nexus/content/groups/public/</url>
+          <releases>
+            <enabled>true</enabled>
+            <updatePolicy>never</updatePolicy>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+            <updatePolicy>never</updatePolicy>
+          </snapshots>
+        </repository>
+        <repository>
+          <id>kogito-staging-repository-group</id>
+          <name>Kogito Staging Repositories</name>
+          <url>https://repository.jboss.org/nexus/content/groups/kogito-public</url>
+          <layout>default</layout>
+          <releases>
+            <enabled>true</enabled>
+            <updatePolicy>never</updatePolicy>
+          </releases>
+          <snapshots>
+            <enabled>false</enabled>
+            <updatePolicy>never</updatePolicy>
+          </snapshots>
+        </repository>
+      </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <id>jboss-public-repository-group</id>
+          <name>JBoss Public Repository Group</name>
+          <url>https://repository.jboss.org/nexus/content/groups/public/</url>
+          <releases>
+            <enabled>true</enabled>
+            <updatePolicy>never</updatePolicy>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+            <updatePolicy>never</updatePolicy>
+          </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+          <id>kogito-staging-repository-group</id>
+          <name>Kogito Staging Repositories</name>
+          <url>https://repository.jboss.org/nexus/content/groups/kogito-public</url>
+          <releases>
+            <enabled>true</enabled>
+            <updatePolicy>never</updatePolicy>
+          </releases>
+          <snapshots>
+            <enabled>false</enabled>
+            <updatePolicy>never</updatePolicy>
+          </snapshots>
+        </pluginRepository>
+      </pluginRepositories>
+    </profile>
+  </profiles>
+  <activeProfiles>
+    <activeProfile>additional_repos</activeProfile>
+    <activeProfile>internal-npm-registry</activeProfile>
+  </activeProfiles>
+</settings>
