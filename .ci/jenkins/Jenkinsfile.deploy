@@ -63,7 +63,9 @@ pipeline {
                         }
                     }
 
-                    checkoutRepo()
+                    dir(getRepoName()) {
+                        checkoutRepo()
+                    }
                 }
             }
             post {
@@ -84,7 +86,11 @@ pipeline {
                 expression { return isRelease() || isCreatePr() }
             }
             steps {
-                prepareForPR()
+                script {
+                    dir(getRepoName()) {
+                        prepareForPR()
+                    }
+                }
             }
         }
         stage('Update project version') {
@@ -115,7 +121,9 @@ pipeline {
         stage('Build kogito-examples') {
             steps {
                 script {
-                    getMavenCommand().withProperty('maven.test.failure.ignore', true).skipTests(params.SKIP_TESTS).run('clean install')
+                    dir(getRepoName()) {
+                        getMavenCommand().withProperty('maven.test.failure.ignore', true).skipTests(params.SKIP_TESTS).run('clean install')
+                    }
                 }
             }
             post {
@@ -133,12 +141,15 @@ pipeline {
             }
             steps {
                 script {
-                    sh "cp -r ${getRepoName()} ${getRepoName()}-persistence"
-                    getMavenCommand("${getRepoName()}-persistence")
-                        .skipTests(params.SKIP_TESTS)
-                        .withProfiles(['persistence'])
-                        .withProperty('maven.test.failure.ignore', true)
-                        .run('clean install')
+                    String newDir = "${getRepoName()}-persistence"
+                    sh "cp -r ${getRepoName()} ${newDir}"
+                    dir(newDir) {
+                        getMavenCommand()
+                            .skipTests(params.SKIP_TESTS)
+                            .withProfiles(['persistence'])
+                            .withProperty('maven.test.failure.ignore', true)
+                            .run('clean install')
+                    }
                 }
             }
             post {
@@ -156,12 +167,15 @@ pipeline {
             }
             steps {
                 script {
-                    sh "cp -r ${getRepoName()} ${getRepoName()}-events"
-                    getMavenCommand("${getRepoName()}-events")
-                        .skipTests(params.SKIP_TESTS)
-                        .withProfiles(['events'])
-                        .withProperty('maven.test.failure.ignore', true)
-                        .run('clean install')
+                    String newDir = "${getRepoName()}-events"
+                    sh "cp -r ${getRepoName()} ${newDir}"
+                    dir(newDir) {
+                        getMavenCommand()
+                            .skipTests(params.SKIP_TESTS)
+                            .withProfiles(['events'])
+                            .withProperty('maven.test.failure.ignore', true)
+                            .run('clean install')
+                    }
                 }
             }
             post {
@@ -179,7 +193,9 @@ pipeline {
             }
             steps {
                 script {
-                    runMavenDeploy()
+                    dir(getRepoName()) {
+                        runMavenDeploy()
+                    }
                 }
             }
         }
@@ -189,7 +205,9 @@ pipeline {
             }
             steps {
                 script {
-                    runMavenDeploy(true)
+                    dir(getRepoName()) {
+                        runMavenDeploy(true)
+                    }
                 }
             }
         }
@@ -199,8 +217,10 @@ pipeline {
             }
             steps {
                 script {
-                    // Deploy to specific repository with credentials
-                    maven.uploadLocalArtifacts(env.MAVEN_REPO_CREDS_ID, getLocalDeploymentFolder(), getMavenRepoZipUrl())
+                    dir(getRepoName()) {
+                        // Deploy to specific repository with credentials
+                        maven.uploadLocalArtifacts(env.MAVEN_REPO_CREDS_ID, getLocalDeploymentFolder(), getMavenRepoZipUrl())
+                    }
                 }
             }
         }
@@ -210,8 +230,10 @@ pipeline {
             }
             steps {
                 script {
-                    // Stage release artifacts
-                    runMavenStage()
+                    dir(getRepoName()) {
+                        // Stage release artifacts
+                        runMavenStage()
+                    }
                 }
             }
         }
@@ -220,12 +242,16 @@ pipeline {
                 expression { return isRelease() || isCreatePr() }
             }
             steps {
-                commitAndCreatePR()
-                
-                setDeployPropertyIfNeeded("${getRepoName()}.pr.source.uri", "https://github.com/${getBotAuthor()}/${getRepoName()}")
-                setDeployPropertyIfNeeded("${getRepoName()}.pr.source.ref", getBotBranch())
-                setDeployPropertyIfNeeded("${getRepoName()}.pr.target.uri", "https://github.com/${getGitAuthor()}/${getRepoName()}")
-                setDeployPropertyIfNeeded("${getRepoName()}.pr.target.ref", getBuildBranch())
+                script {
+                    dir(getRepoName()) {
+                        commitAndCreatePR()
+
+                        setDeployPropertyIfNeeded("${getRepoName()}.pr.source.uri", "https://github.com/${getBotAuthor()}/${getRepoName()}")
+                        setDeployPropertyIfNeeded("${getRepoName()}.pr.source.ref", getBotBranch())
+                        setDeployPropertyIfNeeded("${getRepoName()}.pr.target.uri", "https://github.com/${getGitAuthor()}/${getRepoName()}")
+                        setDeployPropertyIfNeeded("${getRepoName()}.pr.target.ref", getBuildBranch())
+                    }
+                }
             }
         }
     }
@@ -261,17 +287,13 @@ void saveReports() {
 }
 
 void checkoutRepo() {
-    dir(getRepoName()) {
-        deleteDir()
-        checkout(githubscm.resolveRepository(getRepoName(), getGitAuthor(), getBuildBranch(), false))
-    }
+    deleteDir()
+    checkout(githubscm.resolveRepository(getRepoName(), getGitAuthor(), getBuildBranch(), false))
 }
 
 void prepareForPR() {
-    dir(getRepoName()) {
-        githubscm.forkRepo(getBotAuthorCredsID())
-        githubscm.createBranch(getBotBranch())
-    }
+    githubscm.forkRepo(getBotAuthorCredsID())
+    githubscm.createBranch(getBotBranch())
 }
 
 void addNotIgnoredPoms() {
@@ -300,12 +322,10 @@ void commitAndCreatePR() {
     }
     // Not using githubscm.commitChanges() because globbing won't work.
     // See: https://github.com/kiegroup/kogito-runtimes/pull/570#discussion_r449268738
-    dir(getRepoName()) {
-        addNotIgnoredPoms()
-        sh "git commit -m '${commitMsg}'"
-        githubscm.pushObject('origin', getBotBranch(), getBotAuthorCredsID())
-        deployProperties["${getRepoName()}.pr.link"] = githubscm.createPR(commitMsg, prBody, getBuildBranch(), getBotAuthorCredsID())
-    }
+    addNotIgnoredPoms()
+    sh "git commit -m '${commitMsg}'"
+    githubscm.pushObject('origin', getBotBranch(), getBotAuthorCredsID())
+    deployProperties["${getRepoName()}.pr.link"] = githubscm.createPR(commitMsg, prBody, getBuildBranch(), getBotAuthorCredsID())
 }
 
 boolean isSpecificArtifactsUpload() {
@@ -371,13 +391,10 @@ void setDeployPropertyIfNeeded(String key, def value) {
     }
 }
 
-MavenCommand getMavenCommand(String directory = '') {
+MavenCommand getMavenCommand() {
     MavenCommand mvnCmd = new MavenCommand(this, ['-fae', '-ntp'])
                                 .withSettingsXmlId(env.MAVEN_SETTINGS_CONFIG_FILE_ID)
                                 .withProperty('full')
-    if (directory) {
-        mvnCmd.inDirectory(directory)
-    }
     if (env.MAVEN_DEPENDENCIES_REPOSITORY) {
         mvnCmd.withDependencyRepositoryInSettings('deps-repo', env.MAVEN_DEPENDENCIES_REPOSITORY)
     }
@@ -393,9 +410,7 @@ void runMavenDeploy(boolean localDeployment = false) {
         mvnCmd.withDeployRepository(env.MAVEN_DEPLOY_REPOSITORY)
     }
 
-    dir(getRepoName()) {
-        mvnCmd.withOptions(examplesHelper.getDeployableArtifactIds().collect { "-pl :${it} "})
-    }
+    mvnCmd.withOptions(examplesHelper.getDeployableArtifactIds().collect { "-pl :${it} "})
 
     mvnCmd.skipTests(true).run('clean deploy')
 }
