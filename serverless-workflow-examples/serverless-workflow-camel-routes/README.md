@@ -36,7 +36,7 @@ You can use any [Camel Quarkus component](https://camel.apache.org/camel-quarkus
         }
       ],
       "stateDataFilter": {
-        "output": "${ .words = .response[0] | del(.response) }"
+        "output": "${ words = .response[0]}"
       },
       "end": true
     }
