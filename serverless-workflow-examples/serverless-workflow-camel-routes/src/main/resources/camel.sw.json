@@ -27,7 +27,7 @@
         }
       ],
       "stateDataFilter": {
-        "output": "${ .words = .response[0] | del(.response) }"
+        "output": "${ words = .response[0]}"
       },
       "end": true
     }
