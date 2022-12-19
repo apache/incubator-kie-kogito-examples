@@ -46,6 +46,7 @@ jobs:
       - name: Build Chain
         uses: kiegroup/kogito-pipelines/.ci/actions/build-chain@main
         env:
+          BUILD_MVN_OPTS: "-Dproductized -Ddata-index-ephemeral.image=quay.io/kiegroup/kogito-data-index-ephemeral"
           KOGITO_EXAMPLES_SUBFOLDER_POM: ${{ matrix.examples-subfolder }}/
         with:
           annotations-prefix: ${{ runner.os }}-${{ matrix.java-version }}/${{ matrix.maven-version }}
