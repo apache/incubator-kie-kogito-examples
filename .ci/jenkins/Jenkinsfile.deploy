@@ -135,58 +135,6 @@ pipeline {
                 }
             }
         }
-        stage('Check kogito-examples with persistence') {
-            when {
-                expression { return !isPersistenceDisabled() }
-            }
-            steps {
-                script {
-                    String newDir = "${getRepoName()}-persistence"
-                    sh "cp -r ${getRepoName()} ${newDir}"
-                    dir(newDir) {
-                        getMavenCommand()
-                            .skipTests(params.SKIP_TESTS)
-                            .withProfiles(['persistence'])
-                            .withProperty('maven.test.failure.ignore', true)
-                            .run('clean install')
-                    }
-                }
-            }
-            post {
-                always {
-                    script {
-                        saveReports()
-                        util.archiveConsoleLog()
-                    }
-                }
-            }
-        }
-        stage('Check kogito-examples with events') {
-            when {
-                expression { return !isEventsDisabled() }
-            }
-            steps {
-                script {
-                    String newDir = "${getRepoName()}-events"
-                    sh "cp -r ${getRepoName()} ${newDir}"
-                    dir(newDir) {
-                        getMavenCommand()
-                            .skipTests(params.SKIP_TESTS)
-                            .withProfiles(['events'])
-                            .withProperty('maven.test.failure.ignore', true)
-                            .run('clean install')
-                    }
-                }
-            }
-            post {
-                always {
-                    script {
-                        saveReports()
-                        util.archiveConsoleLog()
-                    }
-                }
-            }
-        }
         stage('Deploy to repository') {
             when {
                 expression { return !shouldStageArtifacts() && !isSpecificArtifactsUpload() && shouldDeployToRepository() }
@@ -433,12 +381,4 @@ String getLocalDeploymentFolder() {
 
 String getMavenRepoZipUrl() {
     return "${env.MAVEN_DEPLOY_REPOSITORY.replaceAll('/content/', '/service/local/').replaceFirst('/*$', '')}/content-compressed"
-}
-
-boolean isPersistenceDisabled() {
-    return env.DISABLE_PERSISTENCE ? env.DISABLE_PERSISTENCE.toBoolean() : false
-}
-
-boolean isEventsDisabled() {
-    return env.DISABLE_EVENTS ? env.DISABLE_EVENTS.toBoolean() : false
 }
