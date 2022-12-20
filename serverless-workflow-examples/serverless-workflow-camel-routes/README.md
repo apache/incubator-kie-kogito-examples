@@ -1,6 +1,6 @@
 # Kogito Serverless Workflow Camel Integration
 
-This repository exemplifies a new add-on that can be used in [Kogito Serverless Workflow projects](https://kiegroup.github.io/kogito-docs/serverlessworkflow/latest/) to call custom [Camel Routes](https://camel.apache.org/) within the same application (JVM).
+This repository exemplifies the camel add-on that can be used in [Kogito Serverless Workflow projects](https://kiegroup.github.io/kogito-docs/serverlessworkflow/latest/) to call custom [Camel Routes](https://camel.apache.org/) within the same application (JVM).
 
 ## How this works
 
@@ -76,7 +76,7 @@ In the `src/main/resources/routes`, you can define the Camel route using XML or 
 
 ## Requirements
 
-From the Camel perspective, the only requirement is that the route either return a primitive or a standard Java Bean object that can be marshaled to JSON.
+From the Camel perspective, the only requirement is that the route either return a primitive or a standard Java Bean object that can be marshalled to JSON.
 
 To properly call the Camel endpoint, the workflow operation must defined either one or zero parameter. The parameter name doesn't matter, but you can use `body` by convention:
 
@@ -95,7 +95,8 @@ The value is usually a `jq` expression that queries the workflow state for the o
 
 ## Use Cases
 
-So when to use this approach? Kogito Serverless Workflow essentially has three options for state processing and service/event orchestration:
+So when to use this approach?  
+Kogito Serverless Workflow essentially has three options for state processing and service/event orchestration:
 
 1. **Event-driven via CloudEvents**. Ideal for an Event-Driven architecture where the services are ready to consume and produce events working in more reactive way.
 2. **Sync or Async REST services invocations via OpenAPI/Async API**. There are options also to directly call a REST service in the architecture or ecosystem. Either async and sync methods are supported depending on your requirements.
