@@ -101,48 +101,6 @@
     </profile>
 
     <profile>
-      <id>persistence</id>
-      <activation>
-        <property>
-          <name>persistence</name>
-        </property>
-      </activation>
-      <properties>
-        <tests.category>persistence</tests.category>
-      </properties>
-      <modules>
-        <module>onboarding-example</module>
-        <module>process-postgresql-persistence-quarkus</module>
-        <module>process-quarkus-example</module>
-      </modules>
-    </profile>
-
-    <profile>
-      <id>jdbc-persistence</id>
-      <activation>
-        <property>
-          <name>jdbc-persistence</name>
-        </property>
-      </activation>
-
-      <modules>
-        <module>process-postgresql-persistence-quarkus</module>
-      </modules>
-    </profile>
-
-    <profile>
-      <id>events</id>
-      <activation>
-        <property>
-          <name>events</name>
-        </property>
-      </activation>
-      <modules>
-        <module>process-quarkus-example</module>
-      </modules>
-    </profile>
-
-    <profile>
       <id>native</id>
       <properties>
         <failsafe.include>**/Native*IT.java</failsafe.include>

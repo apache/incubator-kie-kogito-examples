@@ -16,18 +16,15 @@
 package org.acme.deals;
 
 import org.junit.jupiter.api.Test;
-import org.kie.kogito.testcontainers.quarkus.PostgreSqlQuarkusTestResource;
 
-import io.quarkus.test.common.QuarkusTestResource;
-import io.quarkus.test.junit.QuarkusTest;
+import io.quarkus.test.junit.QuarkusIntegrationTest;
 import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
-@QuarkusTest
-@QuarkusTestResource(PostgreSqlQuarkusTestResource.class)
+@QuarkusIntegrationTest
 public class DealsRestIT {
 
     @Test

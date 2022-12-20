@@ -86,48 +86,6 @@
     </profile>
 
     <profile>
-      <id>persistence</id>
-      <activation>
-        <property>
-          <name>persistence</name>
-        </property>
-      </activation>
-      <properties>
-        <tests.category>persistence</tests.category>
-      </properties>
-      <modules>
-        <module>onboarding-springboot</module>
-        <module>process-postgresql-persistence-springboot</module>
-        <module>process-springboot-example</module>
-      </modules>
-    </profile>
-
-    <profile>
-      <id>jdbc-persistence</id>
-      <activation>
-        <property>
-          <name>jdbc-persistence</name>
-        </property>
-      </activation>
-
-      <modules>
-        <module>process-postgresql-persistence-springboot</module>
-      </modules>
-    </profile>
-
-    <profile>
-      <id>events</id>
-      <activation>
-        <property>
-          <name>events</name>
-        </property>
-      </activation>
-      <modules>
-        <module>process-springboot-example</module>
-      </modules>
-    </profile>
-
-    <profile>
       <id>springboot</id>
       <activation>
         <property>
