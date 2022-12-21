@@ -1,0 +1,11 @@
+- from:
+    uri: direct:numberToWords
+    steps:
+      - bean:
+          beanType: java.math.BigInteger
+          method: valueOf
+      - setHeader:
+            name: operationName
+            constant: NumberToWords
+      - toD:
+          uri: cxf://{{com.dataaccess.webservicesserver.url}}?serviceClass=com.dataaccess.webservicesserver.NumberConversionSoapType&wsdlURL=/wsdl/numberconversion.wsdl
