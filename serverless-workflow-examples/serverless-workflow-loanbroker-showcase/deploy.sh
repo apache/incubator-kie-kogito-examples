@@ -72,8 +72,8 @@ build_maven_image() {
 
     cd $PROJ
     print_build_header $PROJ
-    echo "mvn -B clean install -Dquarkus.kubernetes.namespace=$NAMESPACE -DskipTests $PROFILE >> ../$DEPLOY_LOG"
-    mvn -B clean install -Dquarkus.kubernetes.namespace=$NAMESPACE -DskipTests $PROFILE >> ../$DEPLOY_LOG
+    echo "mvn -B clean install -Dquarkus.kubernetes.namespace=$NAMESPACE -DskipTests -Dcontainer $PROFILE >> ../$DEPLOY_LOG"
+    mvn -B clean install -Dquarkus.kubernetes.namespace=$NAMESPACE -DskipTests -Dcontainer $PROFILE >> ../$DEPLOY_LOG
     print_build_footer $PROJ $?
     PROFILE=""
     cd - >> /dev/null
