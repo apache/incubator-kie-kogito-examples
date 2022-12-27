@@ -8,7 +8,7 @@
     {
       "name": "greet",
       "type": "custom",
-      "operation": "knative:custom-function-knative-service?path=/mypath&name=Kogito"
+      "operation": "knative:custom-function-knative-service?path=/function&name=Kogito"
     }
   ],
   "states": [

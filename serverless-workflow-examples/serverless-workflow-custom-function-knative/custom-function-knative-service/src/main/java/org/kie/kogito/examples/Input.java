@@ -15,15 +15,21 @@
  */
 package org.kie.kogito.examples;
 
-public class Greeting {
+public class Input {
+    private String name;
 
-    private final String greeting;
-
-    public Greeting(String greeting) {
-        this.greeting = greeting;
+    public Input() {
     }
 
-    public String getGreeting() {
-        return greeting;
+    public Input(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

@@ -15,19 +15,13 @@
  */
 package org.kie.kogito.examples;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+import io.quarkus.funqy.Funq;
 
-@Path("/mypath")
-public class MyPathResource {
+public class Function {
 
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Greeting getGreeting(Data data) {
-                return new Greeting("Greetings from Serverless Workflow, " + data.getName());
+    @Funq
+    public Output function(Input input) {
+        return new Output("Greetings from Serverless Workflow, " + input.getName());
     }
+
 }

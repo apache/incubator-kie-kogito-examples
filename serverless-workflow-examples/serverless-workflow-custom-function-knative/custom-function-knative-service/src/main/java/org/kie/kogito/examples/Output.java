@@ -15,22 +15,22 @@
  */
 package org.kie.kogito.examples;
 
-public final class Data {
+public class Output {
 
-    private String name;
+    private String greeting;
 
-    public String getName() {
-        return name;
+    public Output() {
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public Output(String greeting) {
+        this.greeting = greeting;
     }
 
-    @Override
-    public String toString() {
-        return "Data{" +
-                       "name='" + name + '\'' +
-                       '}';
+    public String getGreeting() {
+        return greeting;
+    }
+
+    public void setGreeting(String greeting) {
+        this.greeting = greeting;
     }
 }

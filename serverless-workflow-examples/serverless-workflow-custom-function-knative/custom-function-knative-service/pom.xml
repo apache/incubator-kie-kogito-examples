@@ -63,6 +63,10 @@
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-container-image-jib</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-funqy-knative-events</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <finalName>${project.artifactId}</finalName>
