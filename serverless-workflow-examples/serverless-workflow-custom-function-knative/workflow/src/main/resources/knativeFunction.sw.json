@@ -8,12 +8,23 @@
     {
       "name": "greet",
       "type": "custom",
-      "operation": "knative:custom-function-knative-service?path=/function&name=Kogito"
+      "operation": "knative:custom-function-knative-service",
+      "metadata": {
+        "path": "/function"
+      }
     }
   ],
   "states": [
     {
       "name": "start",
+      "type": "inject",
+      "data": {
+        "name": "Kogito"
+      },
+      "transition": "invokeFunction"
+    },
+    {
+      "name": "invokeFunction",
       "type": "operation",
       "actions": [
         {
