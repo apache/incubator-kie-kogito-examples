@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <project
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-    xmlns="http://maven.apache.org/POM/4.0.0">
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+        xmlns="http://maven.apache.org/POM/4.0.0">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
@@ -57,6 +57,18 @@
       <artifactId>kogito-quarkus</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-addons-quarkus-persistence-jdbc</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-jdbc-postgresql</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-agroal</artifactId>
+    </dependency>
+    <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-openapi</artifactId>
     </dependency>
@@ -72,12 +84,6 @@
     <dependency>
       <groupId>io.rest-assured</groupId>
       <artifactId>rest-assured</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-quarkus-test-utils</artifactId>
-      <version>${version.org.kie.kogito}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -100,81 +106,6 @@
   </build>
   <profiles>
     <profile>
-      <id>persistence</id>
-      <activation>
-        <property>
-          <name>persistence</name>
-        </property>
-      </activation>
-      <dependencies>
-        <dependency>
-          <groupId>org.kie.kogito</groupId>
-          <artifactId>kogito-addons-quarkus-persistence-postgresql</artifactId>
-        </dependency>
-      </dependencies>
-      <build>
-       <plugins>
-         <plugin>
-           <artifactId>maven-antrun-plugin</artifactId>
-           <executions>
-             <execution>
-                <phase>generate-sources</phase>
-               <goals>
-                 <goal>run</goal>
-               </goals>
-               <configuration>
-                 <target>
-                   <delete file="src/main/resources/application.properties"/>
-                   <copy file="src/main/resources/postgresql.properties"
-                         tofile="src/main/resources/application.properties"/>
-                 </target>
-               </configuration>
-             </execution>
-           </executions>
-         </plugin>
-       </plugins>
-     </build>
-    </profile>
-    <profile>
-     <id>jdbc-persistence</id>
-     <dependencies>
-        <dependency>
-          <groupId>org.kie.kogito</groupId>
-          <artifactId>kogito-addons-quarkus-persistence-jdbc</artifactId>
-        </dependency>
-        <dependency>
-          <groupId>io.quarkus</groupId>
-          <artifactId>quarkus-jdbc-postgresql</artifactId>
-        </dependency>
-        <dependency>
-         <groupId>io.quarkus</groupId>
-         <artifactId>quarkus-agroal</artifactId>
-        </dependency>
-     </dependencies>
-     <build>
-       <plugins>
-         <plugin>
-           <artifactId>maven-antrun-plugin</artifactId>
-           <executions>
-             <execution>
-                <phase>generate-sources</phase>
-               <goals>
-                 <goal>run</goal>
-               </goals>
-               <configuration>
-                 <target>
-                   <delete file="src/main/resources/application.properties"/>
-                   <copy file="src/main/resources/jdbc.properties"
-                         tofile="src/main/resources/application.properties"/>
-                 </target>
-               </configuration>
-             </execution>
-           </executions>
-         </plugin>
-       </plugins>
-     </build>
-   </profile>
-    <profile>
       <id>events</id>
       <activation>
         <property>
@@ -183,28 +114,28 @@
       </activation>
       <build>
         <plugins>
-         <plugin>
-           <artifactId>maven-antrun-plugin</artifactId>
-           <executions>
-             <execution>
-               <id>append-events</id>
-               <phase>generate-sources</phase>
-               <goals>
-                 <goal>run</goal>
-               </goals>
-               <configuration>
-                 <target>
-                   <concat destfile="src/main/resources/application-temp.properties">
-                     <fileset file="src/main/resources/application.properties" />
-                     <fileset file="src/main/resources/events.properties" />
-                   </concat>
-                   <delete file="src/main/resources/application.properties"/>
-                   <move file="src/main/resources/application-temp.properties" tofile="src/main/resources/application.properties"/>
-                 </target>
-               </configuration>
-             </execution>
-           </executions>
-         </plugin>
+          <plugin>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>append-events</id>
+                <phase>generate-sources</phase>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+                <configuration>
+                  <target>
+                    <concat destfile="src/main/resources/application-temp.properties">
+                      <fileset file="src/main/resources/application.properties"/>
+                      <fileset file="src/main/resources/events.properties"/>
+                    </concat>
+                    <delete file="src/main/resources/application.properties"/>
+                    <move file="src/main/resources/application-temp.properties" tofile="src/main/resources/application.properties"/>
+                  </target>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
         </plugins>
       </build>
       <dependencies>
