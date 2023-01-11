@@ -3,8 +3,8 @@
 ## Description
 
 This example contains a simple workflow service that demonstrates how to use Data Index Addon as part of the Kogito runtime. 
-A callback is a state that invokes an action and wait for an event (event that will be eventually fired by the external service notified by the action), so this example needs an event broker.
-This example consist of a callback state that waits for an event arriving on wait channel. Its action publish an event on resume channel. The event published on resume channnel is modified and republished into the wait channel by `PrintService`, which simulates an external service. 
+A callback is a state that invokes an action and waits for an event (an event that will be eventually fired by the external service notified by the action), so this example needs an event broker.
+This example consists of a callback state that waits for an event arriving on the wait channel. Its action is to publish an event on resume channel. The event published on resume channel is modified and republished into the wait channel by `PrintService`, which simulates an external service. 
 The service is described using JSON format as defined in the 
 [CNCF Serverless Workflow specification](https://github.com/serverlessworkflow/specification).
 
@@ -87,7 +87,7 @@ For Linux and MacOS:
 cd docker-compose && docker-compose up
 ```
 
-Tip: If you get permission denied while creating the postgres container, consider to use SELinux context.
+Tip: If you get permission denied while creating the postgres container, consider using SELinux context.
 Update the following line:
 ```yaml
     - ./sql:/docker-entrypoint-initdb.d
