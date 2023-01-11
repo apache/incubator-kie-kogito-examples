@@ -74,7 +74,7 @@ mvn clean package quarkus:dev
 You should start all the services before you execute any of the **Data Index** example, to do that please execute:
 
 ```sh
-mvn clean package -Dquarkus.container-image.build=true
+mvn clean package -Dcontainer
 ```
 
 For Linux and MacOS:
