@@ -4,7 +4,7 @@
 
 This example contains a simple workflow service that demonstrates how to use Data Index Addon as part of the Kogito runtime. 
 A callback is a state that invokes an action and waits for an event (an event that will be eventually fired by the external service notified by the action), so this example needs an event broker.
-This example consists of a callback state that waits for an event arriving on the wait channel. Its action is to publish an event on resume channel. The event published on resume channel is modified and republished into the wait channel by `PrintService`, which simulates an external service. 
+This example consists of a callback state that waits for an event arriving on the `wait` channel. Its action is to publish an event on the `resume` channel. The event published on the `resume` channel is modified and republished into the `wait` channel by `PrintService`, which simulates an external service. 
 The service is described using JSON format as defined in the 
 [CNCF Serverless Workflow specification](https://github.com/serverlessworkflow/specification).
 
@@ -18,7 +18,7 @@ This quickstart requires an Apache Kafka to be available and by default expects 
 
 https://kafka.apache.org/quickstart
 
-To publish and consume the event, topic "move" is used. 
+To publish and consume the event, the topic `move` is used. 
 
 Optionally and for convenience, a docker-compose [configuration file](docker-compose/docker-compose.yml) is
 provided in the path [docker-compose/](docker-compose/), where you can just run the command from there:
@@ -33,7 +33,7 @@ In this way a container for Kafka will be started on port 9092.
 
 This example also requires persistence with a PostgreSQL server.
 
-Configuration for setting up the connection can be found in [applications.properties](src/main/resources/application.properties) file, which
+The configuration for setting up the connection can be found in [applications.properties](src/main/resources/application.properties) file, which
 follows the Quarkus JDBC settings, for more information please check [JDBC Configuration Reference](https://quarkus.io/guides/datasource#jdbc-configuration).
 
 Optionally and for convenience, a docker-compose [configuration file](docker-compose/docker-compose.yml) is
@@ -56,7 +56,7 @@ You will need:
   - Docker and Docker Compose to run the required example infrastructure.
 
 When using native image compilation, you will also need: 
-    - GraalVM 20.3+ installed
+    - GraalVM 22.2+ installed
     - Environment variable GRAALVM_HOME set accordingly
     - GraalVM native image needs as well native-image extension: https://www.graalvm.org/reference-manual/native-image/
     - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too, please refer to GraalVM installation documentation for more details.
@@ -71,7 +71,7 @@ mvn clean package quarkus:dev
 
 ### Start infrastructure services
 
-You should start all the services before you execute any of the **Data Index** example, to do that please execute:
+You should start all the services before you execute any of the **Data Index** example. To do that please execute:
 
 ```sh
 mvn clean package -Dcontainer
@@ -87,7 +87,7 @@ For Linux and MacOS:
 cd docker-compose && docker-compose up
 ```
 
-Tip: If you get permission denied while creating the postgres container, consider using SELinux context.
+TIP: If you get a `permission denied` error while creating the postgresql container, consider using SELinux context.
 Update the following line:
 ```yaml
     - ./sql:/docker-entrypoint-initdb.d
@@ -102,7 +102,7 @@ Once all services bootstrap, the following ports will be assigned on your local 
 - PostgreSQL: 5432
 - Kafka: 9092
 - PgAdmin: 8055
-- serverless-workflow-service :8080
+- serverless-workflow-service: 8080
 
 > **_NOTE:_**  This step requires the project to be compiled, please consider running a ```mvn clean package -Dcontainer``` command on the project root before running the ```docker-compose up``` for the first time or any time you modify the project.
 
@@ -115,7 +115,7 @@ All created containers can be removed by executing the ```docker-compose -f dock
 Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
 
 ```sh
-mvn clean package -Pnative
+mvn clean package -Dnative
 ```
   
 To run the generated native executable, generated in `target/`, execute
