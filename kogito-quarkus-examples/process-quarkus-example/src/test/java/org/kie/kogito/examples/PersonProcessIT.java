@@ -25,12 +25,12 @@ import javax.inject.Named;
 
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.Model;
+import org.kie.kogito.auth.IdentityProviders;
 import org.kie.kogito.auth.SecurityPolicy;
 import org.kie.kogito.examples.demo.Person;
 import org.kie.kogito.process.Process;
 import org.kie.kogito.process.ProcessInstance;
 import org.kie.kogito.process.WorkItem;
-import org.kie.kogito.services.identity.StaticIdentityProvider;
 import org.kie.kogito.testcontainers.quarkus.InfinispanQuarkusTestResource;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 
@@ -50,7 +50,7 @@ public class PersonProcessIT {
     @Named("persons")
     Process<? extends Model> personProcess;
 
-    private SecurityPolicy policy = SecurityPolicy.of(new StaticIdentityProvider("admin", Collections.singletonList("managers")));
+    private SecurityPolicy policy = SecurityPolicy.of(IdentityProviders.of("admin", Collections.singletonList("managers")));
 
     @Test
     public void testAdult() {
@@ -130,7 +130,7 @@ public class PersonProcessIT {
         assertEquals(1, result.toMap().size());
         assertFalse(((Person) result.toMap().get("person")).isAdult());
 
-        SecurityPolicy johnPolicy = SecurityPolicy.of(new StaticIdentityProvider("john"));
+        SecurityPolicy johnPolicy = SecurityPolicy.of(IdentityProviders.of("john"));
 
         List<WorkItem> workItems = processInstance.workItems(johnPolicy);
         assertEquals(0, workItems.size());
