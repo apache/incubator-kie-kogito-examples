@@ -1,0 +1,28 @@
+asyncapi: 2.1.0
+info:
+  title: Resume event
+  version: 1.0.0
+  description: anything
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+  production:
+    url: localhost:9092
+    description: Development server
+    protocol: kafka
+    protocolVersion: '1.0.0'
+channels:
+  resume:
+    publish:
+      summary: Start a resume event
+      operationId: onResumeEvent
+      message:
+        name: ResumeEvent
+        contentType: application/json
+        payload:
+          type: object
+          properties:
+            move:
+              type: string
+              description: move data

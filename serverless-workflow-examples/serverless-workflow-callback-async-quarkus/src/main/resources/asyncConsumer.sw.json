@@ -1,0 +1,59 @@
+{
+    "id": "asyncEventConsumer",
+    "version": "1.0",
+    "name": "Workflow async consumer test",
+    "description": "An test that verifies an async api spec file with a consumer channel is really waiting",
+    "start": "printWaitMessage",
+    "functions": [
+        {
+            "name": "printMessage",
+            "type": "custom",
+            "operation": "sysout"
+        },
+        {
+            "name": "waitAsyncForEvent",
+            "type": "asyncapi",
+            "operation": "specs/asyncAPI.yaml#waitAsync"
+        }
+    ],
+    "states": [
+        {
+            "name": "printWaitMessage",
+            "type": "operation",
+            "actions": [
+                {
+                    "name": "printBeforeEvent",
+                    "functionRef": {
+                        "refName": "printMessage",
+                        "arguments": {
+                            "message": "."
+                        }
+                    }
+                }
+            ],
+            "transition": "waitAsyncForEvent"
+        },
+        {
+            "name": "waitAsyncForEvent",
+            "type": "operation",
+            "actions": [
+                {
+                    "name": "waitAsyncForEvent",
+                    "functionRef": "waitAsyncForEvent"
+                },
+                {
+                    "name": "printAfterEvent",
+                    "functionRef": {
+                        "refName": "printMessage",
+                        "arguments": {
+                            "message": "."
+                        }
+                    }
+                }
+            ],
+            "end": {
+                "terminate": "true"
+            }
+        }
+    ]
+}

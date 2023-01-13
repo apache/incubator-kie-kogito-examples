@@ -1,0 +1,75 @@
+{
+  "id": "callback",
+  "version": "1.0",
+  "name": "Workflow Callback example",
+  "description": "An example of how to use callback state",
+  "errors": [
+    {
+      "name": "execution error",
+      "code": "java.util.concurrent.CompletionException"
+    }
+  ],
+  "start": "waitForEvent",
+  "events": [
+    {
+      "name": "waitEvent",
+      "source": "",
+      "type": "wait"
+    }
+  ],
+  "functions": [
+    {
+      "name": "printInstanceId",
+      "type": "custom",
+      "operation": "service:java:org.kie.kogito.examples.PrintService::printKogitoProcessId"
+    },
+    {
+      "name": "resumeEventAsync",
+      "operation": "specs/resume-event.yaml#onResumeEvent",
+      "type": "asyncapi"
+    }
+  ],
+  "states": [
+    {
+      "name": "waitForEvent",
+      "type": "callback",
+      "action": 
+      {
+        "name": "publishAction",
+        "functionRef":{
+          "refName": "resumeEventAsync",
+          "arguments":{
+            "move": "This is the initial data in the model from Async"
+          }
+        }
+      },
+      "eventRef": "waitEvent",
+      "eventDataFilter": {
+        "data": ".result",
+        "toStateData": ".move"
+      },
+      "onErrors": [
+        {
+          "errorRef": "execution error",
+          "end": true
+        }
+      ],
+      "transition": "finish"
+    },
+    {
+      "name": "finish",
+      "type": "operation",
+      "actions": [
+        {
+          "name": "printInstanceId",
+          "functionRef": {
+            "refName": "printInstanceId"
+          }
+        }
+      ],
+      "end": {
+        "terminate": "true"
+      }
+    }
+  ]
+}
