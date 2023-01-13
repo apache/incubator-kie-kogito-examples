@@ -24,6 +24,7 @@ import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.kie.kogito.Model;
+import org.kie.kogito.auth.IdentityProviders;
 import org.kie.kogito.auth.SecurityPolicy;
 import org.kie.kogito.examples.DemoApplication;
 import org.kie.kogito.process.Process;
@@ -31,7 +32,6 @@ import org.kie.kogito.process.ProcessInstance;
 import org.kie.kogito.process.ProcessInstanceReadMode;
 import org.kie.kogito.process.ProcessInstances;
 import org.kie.kogito.process.WorkItem;
-import org.kie.kogito.services.identity.StaticIdentityProvider;
 import org.kie.kogito.testcontainers.springboot.InfinispanSpringBootTestResource;
 import org.kie.kogito.testcontainers.springboot.KafkaSpringBootTestResource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +58,7 @@ public class OrdersProcessIT {
     @Qualifier("demo.orderItems")
     Process<? extends Model> orderItemsProcess;
 
-    private SecurityPolicy policy = SecurityPolicy.of(new StaticIdentityProvider("john", Collections.singletonList("managers")));
+    private SecurityPolicy policy = SecurityPolicy.of(IdentityProviders.of("john", Collections.singletonList("managers")));
 
     @Test
     public void testOrderProcess() {
