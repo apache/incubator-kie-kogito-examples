@@ -1,5 +1,5 @@
 images:
-  server: quay.io/infinispan/server:13.0.3.Final
+  server: quay.io/infinispan/server:14.0.4.Final
 deploy:
   infinispan:
     server:

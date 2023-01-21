@@ -63,7 +63,7 @@ Kogito runtime supports multiple persistence types, including Infinispan.
 In order to use the Infinispan based persistence, you need to have a Infinispan server installed and available over the network.
 The default configuration, expects the server to be running on:
 ```
-quarkus.infinispan-client.server-list=localhost:11222
+quarkus.infinispan-client.hosts=localhost:11222
 ```
 If you need to change it, you can do so by updating the application.properties file located in src/main/resources.
 
