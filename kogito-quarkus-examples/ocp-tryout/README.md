@@ -15,7 +15,7 @@ Make sure you meet the [prerequisites](#prerequisites) and then start [here](#in
 
 ### Available Infrastructure
 - Persistence:
-  - infinispan/server:13.0.2.Final via helm chart
+  - infinispan/server:14.0.4.Final via helm chart
 - Messaging:
   - bitnami/kafka:2.8.1-debian-10-r31 via helm chart
 - Authorization/Authentication:
