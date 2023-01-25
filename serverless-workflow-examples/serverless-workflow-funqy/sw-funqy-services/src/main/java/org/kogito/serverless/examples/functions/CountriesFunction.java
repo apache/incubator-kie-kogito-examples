@@ -20,8 +20,6 @@ import javax.inject.Inject;
 import org.kogito.serverless.examples.input.Country;
 import org.kogito.serverless.examples.services.CountriesService;
 
-import com.fasterxml.jackson.databind.JsonNode;
-
 import io.quarkus.funqy.Funq;
 
 public class CountriesFunction {
@@ -29,7 +27,7 @@ public class CountriesFunction {
     CountriesService countriesService;
 
     @Funq
-    public Country country(JsonNode countryName) {
-        return countriesService.getCountry(countryName.asText());
+    public Country country(Country country) {
+        return countriesService.getCountry(country.name);
     }
 }

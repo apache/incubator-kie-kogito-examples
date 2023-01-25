@@ -34,6 +34,7 @@
         <module>dmn-incubation-api-quarkus</module>
         <module>dmn-knative-quickstart-quarkus</module>
         <module>dmn-listener-quarkus</module>
+        <module>dmn-listener-dtable</module>
         <module>dmn-pmml-quarkus-example</module>
         <module>dmn-quarkus-example</module>
         <module>dmn-tracing-quarkus</module>
@@ -84,46 +85,19 @@
       </modules>
     </profile>
 
+    <!--
+      https://issues.redhat.com/browse/KOGITO-8341 
+      Prod profile defined here with empty modules
+      So the check does still run on that subproject
+      but no module is checked
+    -->
     <profile>
-      <id>persistence</id>
+      <id>productized</id>
       <activation>
         <property>
-          <name>persistence</name>
+          <name>productized</name>
         </property>
       </activation>
-      <properties>
-        <tests.category>persistence</tests.category>
-      </properties>
-      <modules>
-        <module>onboarding-example</module>
-        <module>process-postgresql-persistence-quarkus</module>
-        <module>process-quarkus-example</module>
-      </modules>
-    </profile>
-
-    <profile>
-      <id>jdbc-persistence</id>
-      <activation>
-        <property>
-          <name>jdbc-persistence</name>
-        </property>
-      </activation>
-
-      <modules>
-        <module>process-postgresql-persistence-quarkus</module>
-      </modules>
-    </profile>
-
-    <profile>
-      <id>events</id>
-      <activation>
-        <property>
-          <name>events</name>
-        </property>
-      </activation>
-      <modules>
-        <module>process-quarkus-example</module>
-      </modules>
     </profile>
 
     <profile>

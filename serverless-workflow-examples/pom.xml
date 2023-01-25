@@ -27,6 +27,7 @@
         <module>serverless-workflow-compensation-quarkus</module>
         <module>serverless-workflow-consuming-events-over-http-quarkus</module>
         <module>serverless-workflow-correlation-quarkus</module>
+        <module>serverless-workflow-data-index-quarkus</module>
         <module>serverless-workflow-error-quarkus</module>
         <module>serverless-workflow-events-quarkus</module>
         <module>serverless-workflow-expression-quarkus</module>
@@ -49,6 +50,8 @@
         <module>serverless-workflow-oauth2-orchestration-quarkus</module>
         <module>serverless-workflow-timeouts-showcase</module>
         <module>serverless-workflow-custom-type</module>
+        <module>serverless-workflow-loanbroker-showcase</module>
+        <module>serverless-workflow-camel-routes</module>
       </modules>
     </profile>
 
@@ -75,6 +78,7 @@
       </activation>
       <modules>
         <module>serverless-workflow-callback-quarkus</module>
+        <module>serverless-workflow-data-index-quarkus</module>
         <module>serverless-workflow-compensation-quarkus</module>
         <module>serverless-workflow-error-quarkus</module>
         <module>serverless-workflow-events-quarkus</module>
@@ -100,6 +104,7 @@
       <modules>
         <module>serverless-workflow-annotations-description</module>
         <module>serverless-workflow-callback-quarkus</module>
+        <module>serverless-workflow-data-index-quarkus</module>
         <module>serverless-workflow-compensation-quarkus</module>
         <module>serverless-workflow-consuming-events-over-http-quarkus</module>
         <module>serverless-workflow-correlation-quarkus</module>
@@ -121,6 +126,7 @@
         <module>serverless-workflow-testing-with-rest-assured</module>
         <module>serverless-workflow-qas-service-showcase</module>
         <module>serverless-workflow-newsletter-subscription</module>
+        <module>serverless-workflow-loanbroker-showcase</module>
       </modules>
     </profile>
   </profiles>

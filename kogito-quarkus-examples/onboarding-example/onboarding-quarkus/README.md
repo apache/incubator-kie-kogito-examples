@@ -41,7 +41,7 @@ persistence, you need to have an Infinispan server installed and available over 
 expects the server to be running on:
 
 ```
-quarkus.infinispan-client.server-list=localhost:11222
+quarkus.infinispan-client.hosts=localhost:11222
 ```
 
 If you need to change it, you can do so by updating the `application.properties` file located in `src/main/resources`.

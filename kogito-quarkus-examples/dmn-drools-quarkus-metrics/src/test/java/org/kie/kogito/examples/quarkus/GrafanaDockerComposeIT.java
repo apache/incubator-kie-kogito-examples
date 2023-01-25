@@ -137,6 +137,6 @@ public class GrafanaDockerComposeIT {
                 .when()
                 .get("/q/metrics")
                 .then()
-                .header("Content-Type", "text/plain; version=0.0.4; charset=utf-8");
+                .header("Content-Type", "application/openmetrics-text; version=1.0.0; charset=utf-8");
     }
 }

@@ -17,7 +17,7 @@ Once the minikube environment is running, open a terminal window, go to the serv
 ```shell
 eval $(minikube -p knative docker-env)
 
-mvn clean install -Pknative
+mvn clean package -Pknative
 ```
 
 ### Postgresql database setup

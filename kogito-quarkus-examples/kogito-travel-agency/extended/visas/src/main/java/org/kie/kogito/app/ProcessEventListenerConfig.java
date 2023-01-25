@@ -21,7 +21,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 import org.kie.kogito.KogitoGAV;
-import org.kie.kogito.conf.ConfigBean;
+import org.kie.kogito.config.ConfigBean;
 import org.kie.kogito.process.impl.DefaultProcessEventListenerConfig;
 
 import io.micrometer.prometheus.PrometheusMeterRegistry;

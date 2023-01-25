@@ -1,0 +1,30 @@
+# Triggers for the UI, will receive the final response from the flow
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: trigger-ui-loanbroker-aggregated-quotes
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: kogito.serverless.workflow.aggregated.quotes
+  subscriber:
+    ref:
+      apiVersion: v1
+      kind: Service
+      name: loanbroker-ui
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: trigger-ui-loanbroker-aggregated-quotes-timeout
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: kogito.serverless.workflow.aggregated.quotes.timeout
+  subscriber:
+    ref:
+      apiVersion: v1
+      kind: Service
+      name: loanbroker-ui

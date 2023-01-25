@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "SSN": {
+      "type": "string",
+      "pattern": "^\\d{3}-\\d{2}-\\d{4}$"
+    },
+    "term": {
+      "type": "integer"
+    },
+    "amount": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "SSN",
+    "term",
+    "amount"
+  ]
+}
