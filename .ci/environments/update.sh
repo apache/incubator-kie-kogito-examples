@@ -5,12 +5,13 @@ script_dir_path=$(cd `dirname "${BASH_SOURCE[0]}"`; pwd -P)
 
 environment=$1
 
-if [ -z "${environment}"]; then
+if [ -z "${environment}" ]; then
     echo "No environment given as first argument"
     exit 1
 fi
 env_path="${script_dir_path}/${environment}"
-if [ ! -f "${env_path}"]; then
+echo $env_path
+if [ ! -d "${env_path}" ]; then
     echo "No configuration given for this environment ... Nothing done !"
     exit 0
 fi
