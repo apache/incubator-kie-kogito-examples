@@ -64,11 +64,8 @@ To run the generated native executable, generated in `target/`, execute
 
 ### Submit a request
 
-The service based on the JSON workflow definition can be started by publishing an HTTP event request to 'http://localhost:8080/startevent'
+The service based on the JSON workflow definition can be started by publishing an HTTP event to 'http://localhost:8080/startevent'
 with following content:
-
-The service based on the JSON workflow definition can be started by sending a request to http://localhost:8080/startevent'
-with following content
 
 ```json
 {
