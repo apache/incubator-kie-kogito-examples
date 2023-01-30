@@ -75,8 +75,8 @@ All configuration required to make those connections as well as initializations 
 - `keycloak.realm.json` - Keycloak initialization file for the Kogito realm creating clients, users, etc. used in Kogito examples
 - `keycloak.db.vendor` - Keycloak persistence
 ### Infinispan Configurations
-- `quarkus.infinispan.client.serverlist` - the infinispan url used by the Kogito application; can be internal service url
-- `quarkus.infinispan.client.authusername` - the user used by the Kogito application to access the infinispan service
+- `quarkus.infinispan.client.hosts` - the infinispan url used by the Kogito application; can be internal service url
+- `quarkus.infinispan.client.username` - the user used by the Kogito application to access the infinispan service
 ### Kafka Configurations
 - `kafka.bootstrap.servers` - the kafka url used by the Kogito application; can be internal service url
 ### Kogito Dataindex Configurations
