@@ -16,13 +16,13 @@ The service is described using JSON format as defined in the
 You will need:
   - Java 11+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.8.1+ installed
+  - Maven 3.8.6+ installed
     When using native image compilation, you will also need:
-  - [GraalVm](https://www.graalvm.org/downloads/) 19.3.1+ installed
+  - [GraalVm](https://www.graalvm.org/downloads/) 22.3.0+ installed
   - Environment variable GRAALVM_HOME set accordingly
   - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too.  You also need 'native-image' installed in GraalVM (using 'gu install native-image'). Please refer to [GraalVM installation documentation](https://www.graalvm.org/docs/reference-manual/aot-compilation/#prerequisites) for more details.
   - minikube (https://minikube.sigs.k8s.io/docs/start/)
-  - Knative [quickstarts](https://knative.dev/docs/getting-started/)
+  - Knative [quickstarts](https://knative.dev/docs/getting-started/quickstart-install/)
   - Run `eval $(minikube -p minikube docker-env --profile knative)` to build the images in your internal Minikube registry.
   
 ### Deploy the `custom-function-knative-service` project to Knative
