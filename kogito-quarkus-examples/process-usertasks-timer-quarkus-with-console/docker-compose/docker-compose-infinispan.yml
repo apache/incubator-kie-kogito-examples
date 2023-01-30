@@ -98,7 +98,7 @@ services:
       QUARKUS_PROFILE: events-support
       QUARKUS_HTTP_PORT: 8580
       QUARKUS_INFINISPAN_CLIENT_USE_AUTH: "false"
-      QUARKUS_INFINISPAN_CLIENT_SERVER_LIST: infinispan:11222
+      QUARKUS_INFINISPAN_CLIENT_HOSTS: infinispan:11222
 
   management-console:
    container_name: management-console
