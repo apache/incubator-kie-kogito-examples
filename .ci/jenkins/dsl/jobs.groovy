@@ -87,7 +87,7 @@ KogitoJobUtils.createQuarkusUpdateToolsJob(this, 'kogito-examples', [
 /////////////////////////////////////////////////////////////////
 
 void setupQuarkusIntegrationJob(String envName) {
-    KogitoJobUtils.createQuarkusNightlyBuildChainIntegrationJob(this, envName, Utils.getRepoName(this), true)
+    KogitoJobUtils.createNightlyBuildChainIntegrationJob(this, envName, Utils.getRepoName(this), true)
 }
 
 void setupSpecificBuildChainNightlyJob(String envName) {
