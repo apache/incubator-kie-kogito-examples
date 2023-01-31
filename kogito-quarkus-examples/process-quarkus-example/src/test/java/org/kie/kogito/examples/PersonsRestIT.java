@@ -50,7 +50,7 @@ public class PersonsRestIT {
     public void cleanUp() {
         // need it when running with persistence
         try {
-            personProcess.instances().values().forEach(pi -> pi.abort());
+            personProcess.instances().stream().forEach(pi -> pi.abort());
         } catch (IllegalArgumentException ex) {
             // process might not longer be there is not persisted
         }

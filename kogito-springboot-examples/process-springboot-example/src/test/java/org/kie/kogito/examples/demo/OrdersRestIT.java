@@ -64,8 +64,8 @@ public class OrdersRestIT {
         RestAssured.port = port;
 
         // need it when running with persistence
-        orderProcess.instances().values(ProcessInstanceReadMode.MUTABLE).forEach(pi -> pi.abort());
-        orderItemsProcess.instances().values(ProcessInstanceReadMode.MUTABLE).forEach(pi -> pi.abort());
+        orderProcess.instances().stream(ProcessInstanceReadMode.MUTABLE).forEach(pi -> pi.abort());
+        orderItemsProcess.instances().stream(ProcessInstanceReadMode.MUTABLE).forEach(pi -> pi.abort());
     }
 
     @Test

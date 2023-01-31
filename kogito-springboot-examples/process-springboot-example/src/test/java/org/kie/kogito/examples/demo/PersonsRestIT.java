@@ -59,7 +59,7 @@ public class PersonsRestIT {
         RestAssured.port = port;
 
         // need it when running with persistence
-        personProcess.instances().values(ProcessInstanceReadMode.MUTABLE).forEach(pi -> pi.abort());
+        personProcess.instances().stream(ProcessInstanceReadMode.MUTABLE).forEach(pi -> pi.abort());
     }
 
     @Test

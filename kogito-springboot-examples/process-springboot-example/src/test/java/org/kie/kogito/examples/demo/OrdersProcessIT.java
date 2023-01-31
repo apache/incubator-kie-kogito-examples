@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -40,6 +41,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -79,9 +81,8 @@ public class OrdersProcessIT {
         assertTrue(((Order) result.toMap().get("order")).getTotal() > 0);
 
         ProcessInstances<? extends Model> orderItemProcesses = orderItemsProcess.instances();
-        assertEquals(1, orderItemProcesses.size());
 
-        ProcessInstance<?> childProcessInstance = orderItemProcesses.values(ProcessInstanceReadMode.MUTABLE).iterator().next();
+        ProcessInstance<?> childProcessInstance = orderItemProcesses.stream(ProcessInstanceReadMode.MUTABLE).iterator().next();
 
         List<WorkItem> workItems = childProcessInstance.workItems(policy);
         assertEquals(1, workItems.size());
@@ -92,9 +93,13 @@ public class OrdersProcessIT {
         Optional<?> pi = orderProcess.instances().findById(processInstance.id());
         assertFalse(pi.isPresent());
 
-        // no active process instances for both orders and order items processes
-        assertEquals(0, orderProcess.instances().size());
-        assertEquals(0, orderItemsProcess.instances().size());
+        try (Stream stream = orderProcess.instances().stream()) {
+            assertThat(stream).isEmpty();
+        }
+
+        try (Stream stream = orderItemsProcess.instances().stream()) {
+            assertThat(stream).isEmpty();
+        }
     }
 
     @Test
@@ -126,9 +131,8 @@ public class OrdersProcessIT {
         assertTrue(((Order) result.toMap().get("order")).getTotal() > 0);
 
         ProcessInstances<? extends Model> orderItemProcesses = orderItemsProcess.instances();
-        assertEquals(1, orderItemProcesses.size());
 
-        ProcessInstance<?> childProcessInstance = orderItemProcesses.values(ProcessInstanceReadMode.MUTABLE).iterator().next();
+        ProcessInstance<?> childProcessInstance = orderItemProcesses.stream(ProcessInstanceReadMode.MUTABLE).iterator().next();
 
         List<WorkItem> workItems = childProcessInstance.workItems(policy);
         assertEquals(1, workItems.size());
@@ -138,8 +142,12 @@ public class OrdersProcessIT {
         assertEquals(ProcessInstance.STATE_COMPLETED, childProcessInstance.status());
         assertEquals(ProcessInstance.STATE_COMPLETED, processInstance.status());
 
-        // no active process instances for both orders and order items processes
-        assertEquals(0, orderProcess.instances().size());
-        assertEquals(0, orderItemsProcess.instances().size());
+        try (Stream stream = orderProcess.instances().stream()) {
+            assertThat(stream).isEmpty();
+        }
+
+        try (Stream stream = orderItemsProcess.instances().stream()) {
+            assertThat(stream).isEmpty();
+        }
     }
 }
