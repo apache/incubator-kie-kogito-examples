@@ -20,7 +20,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,7 +29,6 @@ import org.kie.kogito.auth.SecurityPolicy;
 import org.kie.kogito.examples.DemoApplication;
 import org.kie.kogito.process.Process;
 import org.kie.kogito.process.ProcessInstance;
-import org.kie.kogito.process.ProcessInstanceReadMode;
 import org.kie.kogito.process.ProcessInstances;
 import org.kie.kogito.process.WorkItem;
 import org.kie.kogito.testcontainers.springboot.InfinispanSpringBootTestResource;
@@ -41,11 +39,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.kie.kogito.test.utils.ProcessInstancesTestUtils.assertEmpty;
+import static org.kie.kogito.test.utils.ProcessInstancesTestUtils.getFirst;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = DemoApplication.class)
@@ -82,24 +81,18 @@ public class OrdersProcessIT {
 
         ProcessInstances<? extends Model> orderItemProcesses = orderItemsProcess.instances();
 
-        ProcessInstance<?> childProcessInstance = orderItemProcesses.stream(ProcessInstanceReadMode.MUTABLE).iterator().next();
+        ProcessInstance<?> childProcessInstance = getFirst(orderItemProcesses);
 
         List<WorkItem> workItems = childProcessInstance.workItems(policy);
         assertEquals(1, workItems.size());
-
         childProcessInstance.completeWorkItem(workItems.get(0).getId(), null, policy);
 
         assertEquals(ProcessInstance.STATE_COMPLETED, childProcessInstance.status());
         Optional<?> pi = orderProcess.instances().findById(processInstance.id());
         assertFalse(pi.isPresent());
 
-        try (Stream stream = orderProcess.instances().stream()) {
-            assertThat(stream).isEmpty();
-        }
-
-        try (Stream stream = orderItemsProcess.instances().stream()) {
-            assertThat(stream).isEmpty();
-        }
+        assertEmpty(orderProcess.instances());
+        assertEmpty(orderItemsProcess.instances());
     }
 
     @Test
@@ -132,7 +125,7 @@ public class OrdersProcessIT {
 
         ProcessInstances<? extends Model> orderItemProcesses = orderItemsProcess.instances();
 
-        ProcessInstance<?> childProcessInstance = orderItemProcesses.stream(ProcessInstanceReadMode.MUTABLE).iterator().next();
+        ProcessInstance<?> childProcessInstance = getFirst(orderItemProcesses);
 
         List<WorkItem> workItems = childProcessInstance.workItems(policy);
         assertEquals(1, workItems.size());
@@ -141,13 +134,7 @@ public class OrdersProcessIT {
 
         assertEquals(ProcessInstance.STATE_COMPLETED, childProcessInstance.status());
         assertEquals(ProcessInstance.STATE_COMPLETED, processInstance.status());
-
-        try (Stream stream = orderProcess.instances().stream()) {
-            assertThat(stream).isEmpty();
-        }
-
-        try (Stream stream = orderItemsProcess.instances().stream()) {
-            assertThat(stream).isEmpty();
-        }
+        assertEmpty(orderProcess.instances());
+        assertEmpty(orderItemsProcess.instances());
     }
 }

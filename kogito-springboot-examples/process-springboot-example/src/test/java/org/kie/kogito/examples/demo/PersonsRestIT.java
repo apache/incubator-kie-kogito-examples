@@ -22,7 +22,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.kie.kogito.Model;
 import org.kie.kogito.examples.DemoApplication;
 import org.kie.kogito.process.Process;
-import org.kie.kogito.process.ProcessInstanceReadMode;
 import org.kie.kogito.testcontainers.springboot.InfinispanSpringBootTestResource;
 import org.kie.kogito.testcontainers.springboot.KafkaSpringBootTestResource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +39,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.kie.kogito.test.utils.ProcessInstancesTestUtils.abort;
 
 @SuppressWarnings("rawtypes")
 @ExtendWith(SpringExtension.class)
@@ -59,7 +59,7 @@ public class PersonsRestIT {
         RestAssured.port = port;
 
         // need it when running with persistence
-        personProcess.instances().stream(ProcessInstanceReadMode.MUTABLE).forEach(pi -> pi.abort());
+        abort(personProcess.instances());
     }
 
     @Test

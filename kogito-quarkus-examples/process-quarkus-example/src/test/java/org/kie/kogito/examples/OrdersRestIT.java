@@ -22,7 +22,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.Model;
 import org.kie.kogito.process.Process;
-import org.kie.kogito.process.ProcessInstanceReadMode;
 import org.kie.kogito.testcontainers.quarkus.InfinispanQuarkusTestResource;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 
@@ -35,6 +34,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.kie.kogito.test.utils.ProcessInstancesTestUtils.abort;
 
 @QuarkusTest
 @QuarkusTestResource(value = InfinispanQuarkusTestResource.Conditional.class)
@@ -52,8 +52,8 @@ public class OrdersRestIT {
     @BeforeEach
     public void cleanUp() {
         // need it when running with persistence
-        orderProcess.instances().stream(ProcessInstanceReadMode.MUTABLE).forEach(pi -> pi.abort());
-        orderItemsProcess.instances().stream(ProcessInstanceReadMode.MUTABLE).forEach(pi -> pi.abort());
+        abort(orderProcess.instances());
+        abort(orderItemsProcess.instances());
     }
 
     @Test
