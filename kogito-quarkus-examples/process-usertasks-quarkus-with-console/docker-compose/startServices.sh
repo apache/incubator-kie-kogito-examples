@@ -16,7 +16,6 @@ fi
 echo "Script requires your Kogito Quickstart to be compiled with the right profile: ../mvn clean install -DskipTests -P$DB"
 
 PROJECT_VERSION=$(cd ../ && mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
-KEYCLOAK_VERSION=$(cd ../ && mvn help:evaluate -Dexpression=version.org.keycloak -q -DforceStdout)
 
 echo "Project version: ${PROJECT_VERSION}"
 
@@ -29,7 +28,6 @@ fi
 
 echo "Kogito Image version: ${KOGITO_VERSION}"
 echo "KOGITO_VERSION=${KOGITO_VERSION}" > ".env"
-echo "KEYCLOAK_VERSION=${KEYCLOAK_VERSION}" >> ".env"
 
 if [ "$(uname)" == "Darwin" ]; then
    echo "DOCKER_GATEWAY_HOST=kubernetes.docker.internal" >> ".env"

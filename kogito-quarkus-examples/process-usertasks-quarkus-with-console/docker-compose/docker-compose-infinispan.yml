@@ -52,7 +52,7 @@ services:
 
   keycloak:
     container_name: keycloak
-    image: quay.io/keycloak/keycloak:${KEYCLOAK_VERSION}-legacy
+    image: quay.io/keycloak/keycloak:legacy
     ports:
       - "8480:8080"
     volumes:
