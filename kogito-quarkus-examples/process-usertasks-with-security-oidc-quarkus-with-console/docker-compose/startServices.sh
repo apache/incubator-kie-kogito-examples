@@ -1,6 +1,6 @@
 #!/bin/sh
 
-echo "Script requires your Kogito Quickstart to be compiled"
+echo "Script requires your Kogito Quickstart to be compiled with mvn clean install -Pcontainer"
 
 PROJECT_VERSION=$(cd ../ && mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
 

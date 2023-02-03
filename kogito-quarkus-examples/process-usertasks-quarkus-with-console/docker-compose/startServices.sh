@@ -13,7 +13,7 @@ if [ -n "$1" ]; then
    exit 1
   fi
 fi
-echo "Script requires your Kogito Quickstart to be compiled with the right profile: ../mvn clean install -DskipTests -P$DB"
+echo "Script requires your Kogito Quickstart to be compiled with the right profile: ../mvn clean install -DskipTests -P$DB,container"
 
 PROJECT_VERSION=$(cd ../ && mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
 
