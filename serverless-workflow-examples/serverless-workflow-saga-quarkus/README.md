@@ -123,10 +123,10 @@ Response example:
 In the console executing the application, you can check the log with the executed steps.
 
 ```text
-2021-12-21 09:25:07,375 INFO  [org.kie.kog.StockService] (executor-thread-0) Reserve Stock for order 03e6cf79-3301-434b-b5e1-d6899b5639aa
-2021-12-21 09:25:07,398 INFO  [org.kie.kog.PaymentService] (executor-thread-0) Process Payment for order 03e6cf79-3301-434b-b5e1-d6899b5639aa
-2021-12-21 09:25:07,401 INFO  [org.kie.kog.ShippingService] (executor-thread-0) Schedule Shipping for order 03e6cf79-3301-434b-b5e1-d6899b5639aa
-2021-12-21 09:25:07,403 INFO  [org.kie.kog.OrderService] (executor-thread-0) Order Success 03e6cf79-3301-434b-b5e1-d6899b5639aa
+2021-12-21 09:25:07,375 INFO  [org.kie.kog.exa.StockService] (executor-thread-0) Reserve Stock for order 03e6cf79-3301-434b-b5e1-d6899b5639aa
+2021-12-21 09:25:07,398 INFO  [org.kie.kog.exa.PaymentService] (executor-thread-0) Process Payment for order 03e6cf79-3301-434b-b5e1-d6899b5639aa
+2021-12-21 09:25:07,401 INFO  [org.kie.kog.exa.ShippingService] (executor-thread-0) Schedule Shipping for order 03e6cf79-3301-434b-b5e1-d6899b5639aa
+2021-12-21 09:25:07,403 INFO  [org.kie.kog.exa.OrderService] (executor-thread-0) Order Success 03e6cf79-3301-434b-b5e1-d6899b5639aa
 ```
 
 #### Simulating errors to activate the compensation flows
@@ -183,13 +183,13 @@ Response example:
 In the console executing the application, you can check the log with the executed steps.
 
 ```text
-2021-12-21 09:20:45,960 INFO  [org.kie.kog.StockService] (executor-thread-0) Reserve Stock for order 03e6cf79-3301-434b-b5e1-d6899b5639aa
-2021-12-21 09:20:45,962 INFO  [org.kie.kog.PaymentService] (executor-thread-0) Process Payment for order 03e6cf79-3301-434b-b5e1-d6899b5639aa
-2021-12-21 09:20:45,964 INFO  [org.kie.kog.ShippingService] (executor-thread-0) Schedule Shipping for order 03e6cf79-3301-434b-b5e1-d6899b5639aa
-2021-12-21 09:20:45,964 ERROR [org.kie.kog.MockService] (executor-thread-0) Error in ShippingService for 03e6cf79-3301-434b-b5e1-d6899b5639aa
-2021-12-21 09:20:45,966 INFO  [org.kie.kog.PaymentService] (executor-thread-0) Cancel Payment a1068ef3-63cc-464e-820a-c049d1a5e3a6
-2021-12-21 09:20:45,968 INFO  [org.kie.kog.StockService] (executor-thread-0) Cancel Stock 8cc0144b-87e0-47ed-8d8f-eedbe4b69abe
-2021-12-21 09:20:45,970 INFO  [org.kie.kog.OrderService] (executor-thread-0) Order Failed 03e6cf79-3301-434b-b5e1-d6899b5639aa
+2021-12-21 09:20:45,960 INFO  [org.kie.kog.exa.StockService] (executor-thread-0) Reserve Stock for order 03e6cf79-3301-434b-b5e1-d6899b5639aa
+2021-12-21 09:20:45,962 INFO  [org.kie.kog.exa.PaymentService] (executor-thread-0) Process Payment for order 03e6cf79-3301-434b-b5e1-d6899b5639aa
+2021-12-21 09:20:45,964 INFO  [org.kie.kog.exa.ShippingService] (executor-thread-0) Schedule Shipping for order 03e6cf79-3301-434b-b5e1-d6899b5639aa
+2021-12-21 09:20:45,964 ERROR [org.kie.kog.exa.MockService] (executor-thread-0) Error in ShippingService for 03e6cf79-3301-434b-b5e1-d6899b5639aa
+2021-12-21 09:20:45,966 INFO  [org.kie.kog.exa.PaymentService] (executor-thread-0) Cancel Payment a1068ef3-63cc-464e-820a-c049d1a5e3a6
+2021-12-21 09:20:45,968 INFO  [org.kie.kog.exa.StockService] (executor-thread-0) Cancel Stock 8cc0144b-87e0-47ed-8d8f-eedbe4b69abe
+2021-12-21 09:20:45,970 INFO  [org.kie.kog.exa.OrderService] (executor-thread-0) Order Failed 03e6cf79-3301-434b-b5e1-d6899b5639aa
 ```
 
 ## Deploying with Kogito Operator
