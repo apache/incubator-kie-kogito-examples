@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito;
+package org.kie.kogito.examples;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -22,25 +22,25 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @ApplicationScoped
-public class ShippingService {
+public class StockService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ShippingService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(StockService.class);
 
     @Inject
     MockService mockService;
 
-    public Response scheduleShipping(String orderId, String failService) {
-        LOGGER.info("Schedule Shipping for order {}", orderId);
-        return mockService.execute(failService, ShippingService.class, true, orderId);
+    public Response reserveStock(String orderId, String failService) {
+        LOGGER.info("Reserve Stock for order {}", orderId);
+        return mockService.execute(failService, StockService.class, true, orderId);
     }
 
-    public Response scheduleShipping(String orderId, String failService, String throwException) {
-        LOGGER.info("Schedule Shipping for order {}", orderId);
-        return mockService.execute(failService, ShippingService.class, Boolean.parseBoolean(throwException), orderId);
+    public Response reserveStock(String orderId, String failService, String throwException) {
+        LOGGER.info("Reserve Stock for order {}", orderId);
+        return mockService.execute(failService, StockService.class, Boolean.parseBoolean(throwException), orderId);
     }
 
-    public Response cancelShipping(String id) {
-        LOGGER.info("Cancel Shipping {}", id);
+    public Response cancelStock(String id) {
+        LOGGER.info("Cancel Stock {}", id);
         return new Response(Response.Type.SUCCESS, id);
     }
 }
