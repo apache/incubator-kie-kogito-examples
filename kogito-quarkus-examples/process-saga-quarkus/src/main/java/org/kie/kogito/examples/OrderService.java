@@ -13,26 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito;
-
-import java.util.Objects;
-import java.util.Optional;
-import java.util.UUID;
+package org.kie.kogito.examples;
 
 import javax.enterprise.context.ApplicationScoped;
 
-@ApplicationScoped
-public class MockService {
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-    public Response execute(String failClass, Class clazz, boolean throwException) {
-        boolean fail = Optional.ofNullable(clazz)
-                .map(Class::getSimpleName)
-                .map(n -> Objects.equals(failClass, n))
-                .orElse(false);
-        if (fail && throwException) {
-            throw new ServiceException("Error executing " + failClass);
-        }
-        return new Response(fail ? Response.Type.ERROR : Response.Type.SUCCESS,
-                UUID.randomUUID().toString());
+@ApplicationScoped
+public class OrderService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(OrderService.class);
+
+    public Response success(String orderId) {
+        LOGGER.info("Order Success for order {}", orderId);
+        return Response.success(orderId);
+    }
+
+    public Response failure(String orderId) {
+        LOGGER.info("Order Failed for order {}", orderId);
+        return Response.error(orderId);
     }
 }
