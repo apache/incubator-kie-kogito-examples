@@ -120,16 +120,6 @@ pipeline {
                 }
             }
         }
-        stage('Deploy to repository') {
-            when {
-                expression { return shouldDeployToRepository() }
-            }
-            steps {
-                script {
-                    runMavenDeploy(getRepoName())
-                }
-            }
-        }
         stage('Update branch') {
             steps {
                 script {
@@ -146,14 +136,13 @@ pipeline {
                 }
             }
         }
-        stage('Update nightly branch') {
+        stage('Deploy to repository') {
+            when {
+                expression { return shouldDeployToRepository() }
+            }
             steps {
                 script {
-                    String nightlyBranch = "nightly-${getBuildBranch()}"
-                    dir(getRepoName()) {
-                        githubscm.createBranch(nightlyBranch)
-                        githubscm.pushObject('origin', nightlyBranch, getGitAuthorCredsID())
-                    }
+                    runMavenDeploy(getRepoName())
                 }
             }
         }
