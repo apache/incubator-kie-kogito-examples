@@ -85,7 +85,7 @@ build_kn_image() {
 
     cd $PROJ
     print_build_header $PROJ
-    kn func build -v -n $NAMESPACE --image $IMAGE_NAME >> ../$DEPLOY_LOG
+    kn func build -v --image $IMAGE_NAME >> ../$DEPLOY_LOG
     print_build_footer $PROJ $?
     cd - >> /dev/null
 }
