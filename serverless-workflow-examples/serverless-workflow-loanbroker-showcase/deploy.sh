@@ -133,7 +133,8 @@ expose_loanbroker_ui() {
 rm -rf $DEPLOY_LOG
 
 if [ "$SKIP_BUILD" != true ]
-then 
+then
+    kubectl config set-context --current --namespace=kogito-builder
     echo "Setting Docker Env to Minikube"
     eval $(minikube -p minikube docker-env --profile knative)
     if [ $? -gt 0 ]
