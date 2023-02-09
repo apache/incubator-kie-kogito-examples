@@ -134,7 +134,7 @@ rm -rf $DEPLOY_LOG
 
 if [ "$SKIP_BUILD" != true ]
 then
-    kubectl config set-context --current --namespace=kogito-builder
+    kubectl config set-context --current --namespace=$NAMESPACE
     echo "Setting Docker Env to Minikube"
     eval $(minikube -p minikube docker-env --profile knative)
     if [ $? -gt 0 ]
