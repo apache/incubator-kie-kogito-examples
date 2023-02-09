@@ -35,6 +35,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.kie.kogito.test.utils.ProcessInstancesTestUtils.abort;
 
 @SuppressWarnings("rawtypes")
 @QuarkusTest
@@ -49,11 +50,7 @@ public class PersonsRestIT {
     @BeforeEach
     public void cleanUp() {
         // need it when running with persistence
-        try {
-            personProcess.instances().values().forEach(pi -> pi.abort());
-        } catch (IllegalArgumentException ex) {
-            // process might not longer be there is not persisted
-        }
+        abort(personProcess.instances());
 
     }
 

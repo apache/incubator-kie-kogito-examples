@@ -28,13 +28,13 @@ import org.kie.kogito.Model;
 import org.kie.kogito.examples.quarkus.demo.Order;
 import org.kie.kogito.process.Process;
 import org.kie.kogito.process.ProcessInstance;
-import org.kie.kogito.process.ProcessInstanceReadMode;
 
 import io.quarkus.test.junit.QuarkusTest;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.kie.kogito.test.utils.ProcessInstancesTestUtils.abort;
 
 @QuarkusTest
 public class ProcessMetricsTest {
@@ -56,8 +56,8 @@ public class ProcessMetricsTest {
         // as other tests might have added instances
         // needed until Quarkus implements @DirtiesContext similar to springboot
         // see https://github.com/quarkusio/quarkus/pull/2866
-        orderProcess.instances().values(ProcessInstanceReadMode.MUTABLE).forEach(pi -> pi.abort());
-        orderItemsProcess.instances().values(ProcessInstanceReadMode.MUTABLE).forEach(pi -> pi.abort());
+        abort(orderProcess.instances());
+        abort(orderItemsProcess.instances());
     }
 
     @Test
