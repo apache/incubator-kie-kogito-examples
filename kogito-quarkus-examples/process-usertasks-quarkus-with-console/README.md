@@ -109,7 +109,7 @@ For Linux and MacOS:
 - Open a Terminal
 - Go to the example folder and run
 ```sh
-mvn clean install -Ppostgresql
+mvn clean install -Ppostgresql,container
 ```
 
 #### Start infrastructure services
@@ -141,8 +141,9 @@ Once all services bootstrap, the following ports will be assigned on your local 
 - Task Console: 8380
 - Keycloak: 8480
 - PgAdmin: 8055
+- example-runtime-service: 8080
 
-> **_NOTE:_**  This step requires the project to be compiled, please consider running a ```mvn clean install``` command on the project root before running the ```startServices.sh``` script for the first time or any time you modify the project.
+> **_NOTE:_**  This step requires the project to be compiled, please consider running a ```mvn clean install -Ppostgresql,container``` command on the project root before running the ```startServices.sh``` script for the first time or any time you modify the project.
 
 Once started you can simply stop all services by executing the ```docker-compose -f docker-compose-postgresql.yml stop```.
 
@@ -202,7 +203,7 @@ For Linux and MacOS:
 1. Open a Terminal
 2. Go to the example folder and run
 ```sh
-mvn clean install -Pinfinispan
+mvn clean install -Pinfinispan,container
 ```
 #### Start infrastructure services
 
@@ -226,8 +227,9 @@ Once all services bootstrap, the following ports will be assigned on your local 
 - Management Console: 8280
 - Task Console: 8380
 - Keycloak: 8480
+- example-runtime-service: 8080
 
-> **_NOTE:_**  This step requires the project to be compiled, please consider running a ```mvn clean install -Pinfinispan``` command on the project root before running the ```startServices.sh infinispan``` script for the first time or any time you modify the project.
+> **_NOTE:_**  This step requires the project to be compiled, please consider running a ```mvn clean install -Pinfinispan,container``` command on the project root before running the ```startServices.sh infinispan``` script for the first time or any time you modify the project.
 
 Once started you can simply stop all services by executing the ```docker-compose -f docker-compose-infinispan.yml stop```.
 
