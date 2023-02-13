@@ -10,6 +10,7 @@
     <version>1.34.0-SNAPSHOT</version>
   </parent>
 
+         
   <groupId>org.kie.kogito.examples</groupId>
   <artifactId>kogito-examples</artifactId>
   <packaging>pom</packaging>
