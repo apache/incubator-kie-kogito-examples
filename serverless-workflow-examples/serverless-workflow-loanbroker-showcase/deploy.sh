@@ -85,7 +85,7 @@ build_kn_image() {
 
     cd $PROJ
     print_build_header $PROJ
-    kn func build -v -n $NAMESPACE --image $IMAGE_NAME >> ../$DEPLOY_LOG
+    kn func build -v --image $IMAGE_NAME >> ../$DEPLOY_LOG
     print_build_footer $PROJ $?
     cd - >> /dev/null
 }
@@ -133,7 +133,7 @@ expose_loanbroker_ui() {
 rm -rf $DEPLOY_LOG
 
 if [ "$SKIP_BUILD" != true ]
-then 
+then
     echo "Setting Docker Env to Minikube"
     eval $(minikube -p minikube docker-env --profile knative)
     if [ $? -gt 0 ]
