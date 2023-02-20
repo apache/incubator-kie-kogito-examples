@@ -19,7 +19,7 @@ The custom REST endpoint evaluates a rule unit that returns a hello world messag
 You will need:
   - Java 11+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.8.1+ installed
+  - Maven 3.8.6+ installed
 
 ### Compile and Run in Local Dev Mode
 
