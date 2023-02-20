@@ -56,8 +56,9 @@ Once all services bootstrap, the following ports will be assigned on your local 
 - Management Console: 8280
 - Task Console: 8380
 - Keycloak server: 8480
+- process-usertasks-with-security-oidc-springboot-with-console: 8080
 
-> **_NOTE:_**  This step requires the project to be compiled, please consider running a ```mvn clean install``` command on the project root before running the ```startServices.sh``` script for the first time or any time you modify the project.
+> **_NOTE:_**  This step requires the project to be compiled, please consider running a ```mvn clean install -Pcontainer``` command on the project root before running the ```startServices.sh``` script for the first time or any time you modify the project. ```-Pcontainer``` will create a local docker image of the example and will be run by docker-compose with all required services.
 
 Once started you can simply stop all services by executing the ```docker-compose stop```.
 
@@ -87,6 +88,9 @@ to do that you must start the consoles using the *keycloak* quarkus profile as a
 > 
 > For more information about how to secure Kogito Task Console with OpenID Connect, please refer to [Kogito Documentation](https://docs.jboss.org/kogito/release/latest/html_single/#proc-task-console-security_kogito-developing-process-services)
 
+> **_NOTE:_** If you don't want to run the example inside docker compose. You can stop the service container by running below commands.
+
+    docker stop process-usertasks-with-security-oidc-springboot-with-console
 
 ### Compile and Run in Local Dev Mode
 

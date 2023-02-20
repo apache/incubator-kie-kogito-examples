@@ -38,6 +38,11 @@ In order to use it, please ensure you have Docker Compose installed on your mach
   - Data Index: 8180
   - Management Console: 8280
   - Task Console: 8380
+  - process-usertasks-with-security-oidc-springboot-with-console: 8080
+
+> **_NOTE:_** If you don't want to run the example inside docker compose. You can stop the container by running below commands.
+
+    docker stop process-usertasks-with-security-oidc-springboot-with-console
 
 ### Stopping and removing volume data
   
