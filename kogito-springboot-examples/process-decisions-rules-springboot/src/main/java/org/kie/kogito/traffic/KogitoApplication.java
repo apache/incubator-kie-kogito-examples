@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2020 Red Hat, Inc. and/or its affiliates.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,17 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.traffic.licensevalidated
+package org.kie.kogito.traffic;
 
-unit LicenseValidatedService
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-rule "Is validated license validated"
-when            
-    $validated: /validated[suspended.equalsIgnoreCase("no")]
-then
-    $validated.setValidLicense(true);
-end
+@SpringBootApplication(scanBasePackages = { "org.kie.kogito.**", "com.example.**" })
+public class KogitoApplication {
 
-query "validated"
-  $validated : /validated
-end
+    public static void main(String[] args) {
+        SpringApplication.run(KogitoApplication.class, args);
+    }
+}

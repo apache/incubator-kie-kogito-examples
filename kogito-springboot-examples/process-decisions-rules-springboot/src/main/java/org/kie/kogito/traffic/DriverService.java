@@ -19,13 +19,12 @@ package org.kie.kogito.traffic;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
-import javax.enterprise.context.ApplicationScoped;
-
 import org.kie.kogito.traffic.licensevalidation.Driver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
-@ApplicationScoped
+@Service
 public class DriverService {
 
     private static Logger LOGGER = LoggerFactory.getLogger(DriverService.class);

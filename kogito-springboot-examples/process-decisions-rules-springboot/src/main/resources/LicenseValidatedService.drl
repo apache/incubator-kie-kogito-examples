@@ -24,6 +24,6 @@ then
     $validated.setValidLicense(true);
 end
 
-query "validated"
+query "validate"
   $validated : /validated
 end
