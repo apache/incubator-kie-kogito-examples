@@ -191,7 +191,7 @@
         </dependency>
         <dependency>
           <groupId>io.quarkus</groupId>
-          <artifactId>quarkus-jdbc-postgresql</artifactId>
+          <artifactId>quarkus-embedded-postgresql</artifactId>
         </dependency>
         <dependency>
           <groupId>io.quarkus</groupId>
