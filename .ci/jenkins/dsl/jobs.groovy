@@ -27,7 +27,6 @@ Map getMultijobPRConfig(JenkinsFolder jobFolder) {
                 primary: true,
                 env : [
                     // Sonarcloud analysis is disabled for examples
-                    DISABLE_SONARCLOUD: true,
                     KOGITO_EXAMPLES_SUBFOLDER_POM: 'kogito-quarkus-examples/',
                     BUILD_MVN_OPTS_CURRENT: jobFolder.getEnvironmentName() ? '' : '-Dvalidate-formatting', // Validate formatting only for default env
                 ]
@@ -36,8 +35,6 @@ Map getMultijobPRConfig(JenkinsFolder jobFolder) {
                 id: 'kogito-springboot-examples',
                 primary: true,
                 env : [
-                    // Sonarcloud analysis is disabled for examples
-                    DISABLE_SONARCLOUD: true,
                     KOGITO_EXAMPLES_SUBFOLDER_POM: 'kogito-springboot-examples/',
                 ]
             ],
@@ -45,8 +42,6 @@ Map getMultijobPRConfig(JenkinsFolder jobFolder) {
                 id: 'serverless-workflow-examples',
                 primary: true,
                 env : [
-                    // Sonarcloud analysis is disabled for examples
-                    DISABLE_SONARCLOUD: true,
                     KOGITO_EXAMPLES_SUBFOLDER_POM: 'serverless-workflow-examples/',
                 ]
             ]
