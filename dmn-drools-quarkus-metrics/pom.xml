@@ -156,7 +156,7 @@
                   <directory>${project.basedir}</directory>
                   <includes>
                     <include>docker-compose.yml</include>
-                    <include>docker-compose/</include>
+                    <include>docker-compose/**</include>
                   </includes>
                 </resource>
               </resources>
