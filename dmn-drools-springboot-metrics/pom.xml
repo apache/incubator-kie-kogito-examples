@@ -155,25 +155,32 @@
         </executions>
       </plugin>
       <plugin>
-        <groupId>com.google.cloud.tools</groupId>
-        <artifactId>jib-maven-plugin</artifactId>
-        <configuration>
-          <from>
-            <image>fabric8/java-alpine-openjdk11-jre</image>
-          </from>
-          <to>
-            <image>${project.groupId}/${project.artifactId}</image>
-            <tags>
-              <tag>1.0</tag>
-            </tags>
-          </to>
-        </configuration>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
         <executions>
+          <!--
+            Create new docker image using Dockerfile which must be present in current working directory.
+            Tag the image using maven project version information.
+          -->
           <execution>
-            <phase>package</phase>
+            <id>docker-build</id>
+            <phase>pre-integration-test</phase>
             <goals>
-              <goal>dockerBuild</goal>
+              <goal>exec</goal>
             </goals>
+            <configuration>
+              <skip>${skipTests}</skip>
+              <executable>docker</executable>
+              <workingDirectory>${project.basedir}</workingDirectory>
+              <arguments>
+                <argument>build</argument>
+                <argument>-f</argument>
+                <argument>${project.basedir}/src/test/resources/DockerfileTest</argument>
+                <argument>-t</argument>
+                <argument>${project.groupId}/${project.artifactId}:1.0</argument>
+                <argument>.</argument>
+              </arguments>
+            </configuration>
           </execution>
         </executions>
       </plugin>
