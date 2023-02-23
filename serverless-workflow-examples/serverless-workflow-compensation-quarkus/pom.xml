@@ -151,7 +151,7 @@
         </property>
       </activation>
       <properties>
-        <enable.resource.postgresql>true</enable.resource.postgresql>
+        <quarkus.profile>persistence</quarkus.profile>
       </properties>
       <dependencies>
         <dependency>
@@ -159,8 +159,9 @@
           <artifactId>kogito-addons-quarkus-persistence-jdbc</artifactId>
         </dependency>
         <dependency>
-          <groupId>io.quarkus</groupId>
-          <artifactId>quarkus-jdbc-postgresql</artifactId>
+          <groupId>io.quarkiverse.embedded.postgresql</groupId>
+          <artifactId>quarkus-embedded-postgresql</artifactId>
+          <version>0.0.1</version>
         </dependency>
         <dependency>
           <groupId>io.quarkus</groupId>
