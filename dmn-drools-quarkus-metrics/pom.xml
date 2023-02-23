@@ -108,6 +108,20 @@
     </resources>
     <plugins>
       <plugin>
+        <artifactId>maven-clean-plugin</artifactId>
+        <version>3.2.0</version>
+        <configuration>
+          <filesets>
+            <fileset>
+              <directory>${project.basedir}/docker-compose/grafana/provisioning/dashboards</directory>
+              <includes>
+                <include>*.json</include>
+              </includes>
+            </fileset>
+          </filesets>
+        </configuration>
+      </plugin>
+      <plugin>
         <groupId>${quarkus.platform.group-id}</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
         <version>${quarkus-plugin.version}</version>
@@ -126,7 +140,7 @@
         <executions>
           <execution>
             <id>copy-resources</id>
-            <phase>prepare-package</phase>
+            <phase>pre-integration-test</phase>
             <goals>
               <goal>copy-resources</goal>
             </goals>
@@ -145,7 +159,7 @@
           </execution>
           <execution>
             <id>copy-docker-compose-for-tests</id>
-            <phase>prepare-package</phase>
+            <phase>pre-integration-test</phase>
             <goals>
               <goal>copy-resources</goal>
             </goals>
@@ -193,6 +207,21 @@
               <skip>false</skip>
               <executable>ls</executable>
               <workingDirectory>${project.build.testOutputDirectory}/docker-compose/grafana/provisioning/dashboards</workingDirectory>
+              <arguments>
+                <argument>-la</argument>
+              </arguments>
+            </configuration>
+          </execution>
+          <execution>
+            <id>docker-dashboards</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <skip>false</skip>
+              <executable>ls</executable>
+              <workingDirectory>${project.basedir}/docker-compose/grafana/provisioning/dashboards</workingDirectory>
               <arguments>
                 <argument>-la</argument>
               </arguments>
