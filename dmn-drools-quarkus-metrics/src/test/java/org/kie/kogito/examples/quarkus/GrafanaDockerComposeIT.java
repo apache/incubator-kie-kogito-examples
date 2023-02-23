@@ -32,7 +32,6 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
-import static org.awaitility.Awaitility.await;
 import static org.hamcrest.Matchers.hasItem;
 
 @Testcontainers
@@ -40,8 +39,6 @@ public class GrafanaDockerComposeIT {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GrafanaDockerComposeIT.class);
     private static final Duration STARTUP_MINUTES_TIMEOUT = Constants.CONTAINER_START_TIMEOUT;
-    private static final Duration TIMEOUT = Duration.ofMinutes(1);
-    private static final Duration INTERVAL = Duration.ofSeconds(1);
     private static final int GRAFANA_PORT = 3000;
     private static final int PROMETHEUS_PORT = 9090;
     private static final int KOGITO_APPLICATION_PORT = 8080;
@@ -87,19 +84,17 @@ public class GrafanaDockerComposeIT {
 
     @Test
     public void testGrafanaDashboards() {
-        await().atMost(TIMEOUT)
-                .with().pollInterval(INTERVAL)
-                .untilAsserted(() -> given()
-                        .baseUri(GRAFANA_URL)
-                        .contentType(ContentType.JSON)
-                        .when()
-                        .get("/api/search")
-                        .then()
-                        .statusCode(200)
-                        .body("title", hasItem(String.format("%s_%s - hello - Operational Dashboard", PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
-                        .body("title", hasItem(String.format("%s_%s - LoanEligibility - Domain Dashboard", PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
-                        .body("title", hasItem(String.format("%s_%s - Hello - Domain Dashboard", PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
-                        .body("title", hasItem(String.format("%s_%s - LoanEligibility - Operational Dashboard", PROJECT_ARTIFACT_ID, PROJECT_VERSION))));
+        given()
+                .baseUri(GRAFANA_URL)
+                .contentType(ContentType.JSON)
+                .when()
+                .get("/api/search")
+                .then()
+                .statusCode(200)
+                .body("title", hasItem(String.format("%s_%s - hello - Operational Dashboard", PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
+                .body("title", hasItem(String.format("%s_%s - LoanEligibility - Domain Dashboard", PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
+                .body("title", hasItem(String.format("%s_%s - Hello - Domain Dashboard", PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
+                .body("title", hasItem(String.format("%s_%s - LoanEligibility - Operational Dashboard", PROJECT_ARTIFACT_ID, PROJECT_VERSION)));
     }
 
     @Test
