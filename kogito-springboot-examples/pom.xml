@@ -44,6 +44,7 @@
         <module>pmml-springboot-example</module>
         <module>process-business-rules-springboot</module>
         <module>process-decisions-rest-springboot</module>
+        <module>process-decisions-rules-springboot</module>
         <module>process-decisions-springboot</module>
         <module>process-infinispan-persistence-springboot</module>
         <module>process-kafka-multi-springboot</module>

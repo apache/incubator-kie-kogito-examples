@@ -47,6 +47,7 @@
         <module>process-business-rules-quarkus</module>
         <module>process-decisions-quarkus</module>
         <module>process-decisions-rest-quarkus</module>
+        <module>process-decisions-rules-quarkus</module>
         <module>process-error-handling</module>
         <module>process-incubation-api-quarkus</module>
         <module>process-infinispan-persistence-quarkus</module>
