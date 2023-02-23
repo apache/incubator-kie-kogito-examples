@@ -61,7 +61,10 @@ public class GrafanaDockerComposeIT {
                     .withLogConsumer("hello_1", new Slf4jLogConsumer(LOGGER))
                     .withExposedService("prometheus_1", PROMETHEUS_PORT,
                             Wait.forHttp("/api/v1/targets")
-                                    .forResponsePredicate(x -> x.contains("\"health\":\"up\""))
+                                    .forResponsePredicate(x -> {
+                                        System.out.println("response x = " + x);
+                                        return x.contains("\"health\":\"up\"");
+                                    })
                                     .withStartupTimeout(STARTUP_MINUTES_TIMEOUT))
                     .withLogConsumer("prometheus_1", new Slf4jLogConsumer(LOGGER));
         } catch (URISyntaxException e) {

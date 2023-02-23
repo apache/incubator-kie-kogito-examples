@@ -120,7 +120,9 @@
         </executions>
       </plugin>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
+        <version>3.3.0</version>
         <executions>
           <execution>
             <id>copy-resources</id>
@@ -158,6 +160,42 @@
                   </includes>
                 </resource>
               </resources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>docker-compose</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <skip>false</skip>
+              <executable>ls</executable>
+              <workingDirectory>${project.build.testOutputDirectory}</workingDirectory>
+              <arguments>
+                <argument>-la</argument>
+              </arguments>
+            </configuration>
+          </execution>
+          <execution>
+            <id>docker-prom</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <skip>false</skip>
+              <executable>ls</executable>
+              <workingDirectory>${project.build.testOutputDirectory}/docker-compose/grafana/provisioning/dashboards</workingDirectory>
+              <arguments>
+                <argument>-la</argument>
+              </arguments>
             </configuration>
           </execution>
         </executions>
