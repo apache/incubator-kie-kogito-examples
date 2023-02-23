@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
@@ -108,15 +108,6 @@
         <version>${quarkus-plugin.version}</version>
         <executions>
           <execution>
-            <id>deps</id>
-            <phase>clean</phase>
-            <goals>
-              <goal>dependency-tree</goal>
-              <goal>info</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>build</id>
             <goals>
               <goal>build</goal>
             </goals>
