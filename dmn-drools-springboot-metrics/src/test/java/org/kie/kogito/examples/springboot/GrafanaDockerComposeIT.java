@@ -19,10 +19,7 @@ import java.io.File;
 import java.net.URISyntaxException;
 import java.time.Duration;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 import org.kie.kogito.testcontainers.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,14 +32,16 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
+import static org.awaitility.Awaitility.await;
 import static org.hamcrest.Matchers.hasItem;
 
 @Testcontainers
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class GrafanaDockerComposeIT {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GrafanaDockerComposeIT.class);
     private static final Duration STARTUP_MINUTES_TIMEOUT = Constants.CONTAINER_START_TIMEOUT;
+    private static final Duration TIMEOUT = Duration.ofMinutes(1);
+    private static final Duration INTERVAL = Duration.ofSeconds(1);
     private static final int GRAFANA_PORT = 3000;
     private static final int PROMETHEUS_PORT = 9090;
     private static final int KOGITO_APPLICATION_PORT = 8080;
@@ -73,16 +72,6 @@ public class GrafanaDockerComposeIT {
         }
     }
 
-    @BeforeAll
-    void setup() {
-        environment.start();
-    }
-
-    @AfterAll
-    void cleanup() {
-        environment.stop();
-    }
-
     @Test
     public void testPrometheusDataSource() {
         given()
@@ -98,17 +87,19 @@ public class GrafanaDockerComposeIT {
 
     @Test
     public void testGrafanaDashboards() {
-        given()
-                .baseUri(GRAFANA_URL)
-                .contentType(ContentType.JSON)
-                .when()
-                .get("/api/search")
-                .then()
-                .statusCode(200)
-                .body("title", hasItem(String.format("%s_%s - hello - Operational Dashboard", PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
-                .body("title", hasItem(String.format("%s_%s - LoanEligibility - Domain Dashboard", PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
-                .body("title", hasItem(String.format("%s_%s - Hello - Domain Dashboard", PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
-                .body("title", hasItem(String.format("%s_%s - LoanEligibility - Operational Dashboard", PROJECT_ARTIFACT_ID, PROJECT_VERSION)));
+        await().atMost(TIMEOUT)
+                .with().pollInterval(INTERVAL)
+                .untilAsserted(() -> given()
+                        .baseUri(GRAFANA_URL)
+                        .contentType(ContentType.JSON)
+                        .when()
+                        .get("/api/search")
+                        .then()
+                        .statusCode(200)
+                        .body("title", hasItem(String.format("%s_%s - hello - Operational Dashboard", PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
+                        .body("title", hasItem(String.format("%s_%s - LoanEligibility - Domain Dashboard", PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
+                        .body("title", hasItem(String.format("%s_%s - Hello - Domain Dashboard", PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
+                        .body("title", hasItem(String.format("%s_%s - LoanEligibility - Operational Dashboard", PROJECT_ARTIFACT_ID, PROJECT_VERSION))));
     }
 
     @Test
