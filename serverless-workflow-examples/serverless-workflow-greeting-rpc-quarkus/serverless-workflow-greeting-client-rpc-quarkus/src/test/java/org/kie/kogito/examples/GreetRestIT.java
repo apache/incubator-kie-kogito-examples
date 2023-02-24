@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.examples;
+package org.acme;
 
 import java.io.IOException;
 
@@ -21,7 +21,7 @@ import org.eclipse.microprofile.config.ConfigProvider;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.kie.kogito.examples.sw.greeting.GreeterService;
+import org.acme.sw.greeting.GreeterService;
 
 import io.grpc.Server;
 import io.restassured.RestAssured;

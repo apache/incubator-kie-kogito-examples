@@ -3,14 +3,14 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.kie.kogito.examples</groupId>
+    <groupId>org.acme</groupId>
     <artifactId>kogito-springboot-examples</artifactId>
     <version>2.0.0-SNAPSHOT</version>
   </parent>
   <artifactId>onboarding-springboot</artifactId>
   <name>Kogito Example :: Onboarding Example :: Onboarding with Business Process Spring Boot</name>
   <description>Onboarding function and service orchestration</description>
-  
+
   <properties>
     <version.org.kie.kogito>2.0.0-SNAPSHOT</version.org.kie.kogito>
     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
@@ -27,7 +27,7 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-  
+
   <dependencies>
     <dependency>
       <groupId>org.kie.kogito</groupId>
@@ -63,7 +63,7 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-  
+
   <build>
     <finalName>${project.artifactId}</finalName>
     <plugins>
@@ -86,7 +86,7 @@
       </plugin>
     </plugins>
   </build>
-  
+
   <profiles>
     <profile>
       <id>persistence</id>

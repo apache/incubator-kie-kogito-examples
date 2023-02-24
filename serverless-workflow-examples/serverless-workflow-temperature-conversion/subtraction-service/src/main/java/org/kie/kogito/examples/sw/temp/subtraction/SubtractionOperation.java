@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.examples.sw.temp.subtraction;
+package org.acme.sw.temp.subtraction;
 
 import java.util.Objects;
 

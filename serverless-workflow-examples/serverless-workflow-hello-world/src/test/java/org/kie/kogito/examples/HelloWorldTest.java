@@ -1,4 +1,4 @@
-package org.kie.kogito.examples;
+package org.acme;
 
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.RestAssured;

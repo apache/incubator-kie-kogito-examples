@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.examples.sw.custom;
+package org.acme.sw.custom;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -22,7 +22,7 @@ import java.util.Map;
 
 import javax.enterprise.context.ApplicationScoped;
 
-import org.kie.kogito.examples.sw.custom.CalculatorClient.OperationId;
+import org.acme.sw.custom.CalculatorClient.OperationId;
 import org.kie.kogito.internal.process.runtime.KogitoWorkItem;
 import org.kie.kogito.serverless.workflow.WorkflowWorkItemHandler;
 
@@ -34,7 +34,7 @@ public class RPCCustomWorkItemHandler extends WorkflowWorkItemHandler {
     public static final String HOST = "host";
     public static final String PORT = "port";
     public static final String OPERATION = "operation";
-    
+
     @Override
     protected Object internalExecute(KogitoWorkItem workItem, Map<String, Object> parameters)  {
         try {
@@ -44,13 +44,13 @@ public class RPCCustomWorkItemHandler extends WorkflowWorkItemHandler {
             if (operationId == null) {
                 throw new IllegalArgumentException ("Operation is a mandatory parameter");
             }
-            return CalculatorClient.invokeOperation((String)metadata.getOrDefault(HOST,"localhost"), (int) metadata.getOrDefault(PORT, 8082), 
+            return CalculatorClient.invokeOperation((String)metadata.getOrDefault(HOST,"localhost"), (int) metadata.getOrDefault(PORT, 8082),
                     OperationId.valueOf(operationId.toUpperCase()), (Integer)iter.next(), (Integer)iter.next());
         } catch (IOException io ) {
             throw new UncheckedIOException(io);
         }
     }
-    
+
     @Override
     public String getName() {
         return NAME;

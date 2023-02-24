@@ -11,29 +11,29 @@
 [INFO] os.detected.release.version: 36
 [INFO] os.detected.release.like.fedora: true
 [INFO] os.detected.classifier: linux-x86_64
-[INFO] 
-[INFO] -------< org.kie.kogito.examples:ruleunit-event-driven-quarkus >--------
+[INFO]
+[INFO] -------< org.acme:ruleunit-event-driven-quarkus >--------
 [INFO] Building Kogito Example :: Rule Unit Event-Driven :: Quarkus 2.0.0-SNAPSHOT
 [INFO] --------------------------------[ jar ]---------------------------------
-[INFO] 
+[INFO]
 [INFO] --- maven-clean-plugin:3.1.0:clean (default-clean) @ ruleunit-event-driven-quarkus ---
 [INFO] Deleting /home/ftirados/git/kogito-examples/kogito-quarkus-examples/ruleunit-event-driven-quarkus/target
-[INFO] 
+[INFO]
 [INFO] --- maven-enforcer-plugin:3.0.0-M2:enforce (enforce-versions) @ ruleunit-event-driven-quarkus ---
-[INFO] 
+[INFO]
 [INFO] --- maven-enforcer-plugin:3.0.0-M2:enforce (enforce-java-version) @ ruleunit-event-driven-quarkus ---
-[INFO] 
+[INFO]
 [INFO] --- maven-enforcer-plugin:3.0.0-M2:enforce (enforce-maven-version) @ ruleunit-event-driven-quarkus ---
-[INFO] 
+[INFO]
 [INFO] --- maven-checkstyle-plugin:3.1.1:check (default) @ ruleunit-event-driven-quarkus ---
 [INFO] You have 0 Checkstyle violations.
-[INFO] 
+[INFO]
 [INFO] --- buildnumber-maven-plugin:1.4:create (get-scm-revision) @ ruleunit-event-driven-quarkus ---
 [INFO] Executing: /bin/sh -c cd '/home/ftirados/git/kogito-examples/kogito-quarkus-examples/ruleunit-event-driven-quarkus' && 'git' 'rev-parse' '--verify' 'HEAD'
 [INFO] Working directory: /home/ftirados/git/kogito-examples/kogito-quarkus-examples/ruleunit-event-driven-quarkus
 [INFO] Storing buildNumber: b44e1b0f077b5f2905c3a4d4652871e82082f4a6 at timestamp: 1665063468886
 [INFO] Storing buildScmBranch: main
-[INFO] 
+[INFO]
 [INFO] --- formatter-maven-plugin:2.13.0:format (default) @ ruleunit-event-driven-quarkus ---
 [INFO] Using 'UTF-8' encoding to format source files.
 [INFO] Number of files to be formatted: 5
@@ -42,46 +42,46 @@
 [INFO] Skipped:                         4 file(s)
 [INFO] Read only skipped:               0 file(s)
 [INFO] Approximate time taken:          0s
-[INFO] 
+[INFO]
 [INFO] --- impsort-maven-plugin:1.5.0:sort (default) @ ruleunit-event-driven-quarkus ---
 [INFO] Using compiler compliance level: JAVA_11
 [INFO]  Total Files Processed: 5 in 00:00.139
 [INFO]         Already Sorted: 4
 [INFO]         Needed Sorting: 1
-[INFO] 
+[INFO]
 [INFO] --- maven-resources-plugin:2.5:resources (default-resources) @ ruleunit-event-driven-quarkus ---
 [debug] execute contextualize
 [INFO] Using 'UTF-8' encoding to copy filtered resources.
 [INFO] Copying 2 resources
-[INFO] 
+[INFO]
 [INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @ ruleunit-event-driven-quarkus ---
 [INFO] Changes detected - recompiling the module!
 [INFO] Compiling 4 source files to /home/ftirados/git/kogito-examples/kogito-quarkus-examples/ruleunit-event-driven-quarkus/target/classes
-[INFO] 
+[INFO]
 [INFO] --- maven-resources-plugin:2.5:testResources (default-testResources) @ ruleunit-event-driven-quarkus ---
 [debug] execute contextualize
 [INFO] Using 'UTF-8' encoding to copy filtered resources.
 [INFO] Copying 16 resources
-[INFO] 
+[INFO]
 [INFO] --- maven-compiler-plugin:3.8.1:testCompile (default-testCompile) @ ruleunit-event-driven-quarkus ---
 [INFO] Changes detected - recompiling the module!
 [INFO] Compiling 1 source file to /home/ftirados/git/kogito-examples/kogito-quarkus-examples/ruleunit-event-driven-quarkus/target/test-classes
 [WARNING] /home/ftirados/git/kogito-examples/kogito-quarkus-examples/ruleunit-event-driven-quarkus/src/test/java/org/kie/kogito/examples/RuleUnitEventDrivenIT.java:[61,13] configure(com.fasterxml.jackson.databind.MapperFeature,boolean) in com.fasterxml.jackson.databind.ObjectMapper has been deprecated
-[INFO] 
+[INFO]
 [INFO] --- maven-surefire-plugin:3.0.0-M5:test (default-test) @ ruleunit-event-driven-quarkus ---
-[INFO] 
+[INFO]
 [INFO] --- maven-jar-plugin:3.1.0:jar (default-jar) @ ruleunit-event-driven-quarkus ---
 [INFO] Building jar: /home/ftirados/git/kogito-examples/kogito-quarkus-examples/ruleunit-event-driven-quarkus/target/ruleunit-event-driven-quarkus.jar
-[INFO] 
+[INFO]
 [INFO] --- maven-jar-plugin:3.1.0:test-jar (test-jar) @ ruleunit-event-driven-quarkus ---
 [INFO] Building jar: /home/ftirados/git/kogito-examples/kogito-quarkus-examples/ruleunit-event-driven-quarkus/target/ruleunit-event-driven-quarkus-tests.jar
-[INFO] 
+[INFO]
 [INFO] --- maven-source-plugin:3.0.1:jar-no-fork (attach-sources) @ ruleunit-event-driven-quarkus ---
 [INFO] Building jar: /home/ftirados/git/kogito-examples/kogito-quarkus-examples/ruleunit-event-driven-quarkus/target/ruleunit-event-driven-quarkus-sources.jar
-[INFO] 
+[INFO]
 [INFO] --- maven-source-plugin:3.0.1:test-jar-no-fork (attach-test-sources) @ ruleunit-event-driven-quarkus ---
 [INFO] Building jar: /home/ftirados/git/kogito-examples/kogito-quarkus-examples/ruleunit-event-driven-quarkus/target/ruleunit-event-driven-quarkus-test-sources.jar
-[INFO] 
+[INFO]
 [INFO] --- quarkus-maven-plugin:2.13.0.Final:build (default) @ ruleunit-event-driven-quarkus ---
 [INFO] Performed addonsConfig discovery, found: AddonsConfig{usePersistence=false, useTracing=false, useMonitoring=false, usePrometheusMonitoring=false, useCloudEvents=true, useExplainability=false, useProcessSVG=false, useEventDrivenDecisions=false, useEventDrivenRules=true}
 [INFO] Generator discovery performed, found [processes, rules]
@@ -93,24 +93,24 @@
 	- @PostConstruct callback org.kie.kogito.queries.LoanUnitQueryFindNotApprovedIdAndAmountEventDrivenExecutor#onPostConstruct(),
 	- @PostConstruct callback org.kie.kogito.queries.LoanUnitQueryFindApprovedEventDrivenExecutor#onPostConstruct()
 [INFO] [io.quarkus.deployment.QuarkusAugmentor] Quarkus augmentation completed in 2671ms
-[INFO] 
+[INFO]
 [INFO] --- maven-resources-plugin:2.5:copy-resources (add-it-resources) @ ruleunit-event-driven-quarkus ---
 [debug] execute contextualize
 [INFO] Using 'UTF-8' encoding to copy filtered resources.
 [INFO] Copying 2 resources
-[INFO] 
+[INFO]
 [INFO] --- maven-failsafe-plugin:3.0.0-M5:integration-test (integration-test) @ ruleunit-event-driven-quarkus ---
-[INFO] 
+[INFO]
 [INFO] -------------------------------------------------------
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
-[INFO] Running org.kie.kogito.examples.RuleUnitEventDrivenIT
+[INFO] Running org.acme.RuleUnitEventDrivenIT
 2022-10-06 15:37:58,032 INFO  [org.tes.uti.ImageNameSubstitutor] (main) Found configured ImageNameSubstitutor: Kogito Image Name Substitutor
 2022-10-06 15:37:58,034 INFO  [org.tes.uti.ImageNameSubstitutor] (main) Image name substitution will be performed by: Chained substitutor of 'DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')' and then 'Kogito Image Name Substitutor'
 2022-10-06 15:37:58,054 INFO  [org.tes.doc.DockerClientProviderStrategy] (pool-3-thread-1) Loaded org.testcontainers.dockerclient.UnixSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
 2022-10-06 15:37:58,389 INFO  [org.tes.doc.DockerClientProviderStrategy] (pool-3-thread-1) Found Docker environment with local Unix socket (unix:///var/run/docker.sock)
 2022-10-06 15:37:58,390 INFO  [org.tes.DockerClientFactory] (pool-3-thread-1) Docker host IP address is localhost
-2022-10-06 15:37:58,401 INFO  [org.tes.DockerClientFactory] (pool-3-thread-1) Connected to docker: 
+2022-10-06 15:37:58,401 INFO  [org.tes.DockerClientFactory] (pool-3-thread-1) Connected to docker:
   Server Version: 20.10.18
   API Version: 1.41
   Operating System: Fedora Linux 36 (Workstation Edition)
@@ -137,18 +137,18 @@ Welcome to the Redpanda community!
 Slack: https://vectorized.io/slack - is the main way the community interacts with one another in real time :)
 Twitter: https://twitter.com/vectorizedio - come say hi!
 Github Discussion: https://github.com/vectorizedio/redpanda/discussions - is preferred for longer, async, thoughtful discussions
-2022-10-06 15:37:59,573 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDOUT: 
+2022-10-06 15:37:59,573 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDOUT:
 GitHub Issues: https://github.com/vectorizedio/redpanda/issues - is reserved only for actual issues. Please use the GitHub for discussions.
 Documentation: https://vectorized.io/docs/ - official docs site
 Support: https://support.vectorized.io/ - to share private information with the production support vectorized team
-2022-10-06 15:37:59,573 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDOUT: 
+2022-10-06 15:37:59,573 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDOUT:
 Product Feedback: https://vectorized.io/feedback/ - let us know how we can improve your experience
 
 
 INFO   redpanda::main - application.cc:160 - Redpanda v21.11.8 - e7867b4fd34296daa2497ebc352e68b9dbc2a6b5-dirty
 INFO   redpanda::main - application.cc:168 - kernel=5.19.12-200.fc36.x86_64, nodename=f5b812c0f0a4, machine=x86_64
 2022-10-06 15:37:59,574 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDOUT: Welcome to the Redpanda community!
-2022-10-06 15:37:59,574 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDOUT: 
+2022-10-06 15:37:59,574 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDOUT:
 2022-10-06 15:37:59,574 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDOUT: Slack: https://vectorized.io/slack - is the main way the community interacts with one another in real time :)
 2022-10-06 15:37:59,575 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDOUT: Twitter: https://twitter.com/vectorizedio - come say hi!
 2022-10-06 15:37:59,575 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDOUT: Github Discussion: https://github.com/vectorizedio/redpanda/discussions - is preferred for longer, async, thoughtful discussions
@@ -156,8 +156,8 @@ INFO   redpanda::main - application.cc:168 - kernel=5.19.12-200.fc36.x86_64, nod
 2022-10-06 15:37:59,576 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDOUT: Documentation: https://vectorized.io/docs/ - official docs site
 2022-10-06 15:37:59,576 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDOUT: Support: https://support.vectorized.io/ - to share private information with the production support vectorized team
 2022-10-06 15:37:59,576 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDOUT: Product Feedback: https://vectorized.io/feedback/ - let us know how we can improve your experience
-2022-10-06 15:37:59,577 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDOUT: 
-2022-10-06 15:37:59,577 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDOUT: 
+2022-10-06 15:37:59,577 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDOUT:
+2022-10-06 15:37:59,577 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDOUT:
 2022-10-06 15:37:59,577 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO   redpanda::main - application.cc:160 - Redpanda v21.11.8 - e7867b4fd34296daa2497ebc352e68b9dbc2a6b5-dirty
 2022-10-06 15:37:59,578 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO   redpanda::main - application.cc:168 - kernel=5.19.12-200.fc36.x86_64, nodename=f5b812c0f0a4, machine=x86_64
 INFO  2022-10-06 13:37:59,618 [shard 0] redpanda::main - application.cc:144 - System resources: { cpus: 1, available memory: 1024.000MiB, reserved memory: 0.000bytes}
@@ -174,7 +174,7 @@ redpanda:
   admin:
     - address: 0.0.0.0
       port: 9644
-2022-10-06 15:37:59,626 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: 
+2022-10-06 15:37:59,626 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR:
   advertised_kafka_api:
     - address: localhost
       name: OUTSIDE
@@ -247,7 +247,7 @@ INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - re
 INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.kafka_qdc_enable:0	- Enable kafka queue depth control.
 2022-10-06 15:37:59,629 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR:       name: OUTSIDE
 INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.cloud_storage_upload_ctrl_p_coeff:-2	- proportional coefficient for upload PID controller
-INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.cloud_storage_upload_ctrl_update_interval_ms:60000	- 
+INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.cloud_storage_upload_ctrl_update_interval_ms:60000	-
 INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.cloud_storage_max_connection_idle_time_ms:5000	- Max https connection idle time (ms)
 INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.cloud_storage_segment_upload_timeout_ms:30000	- Log segment upload timeout (ms)
 INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.cloud_storage_trust_file:{nullopt}	- Path to certificate that should be used to validate server certificate during TLS handshake
@@ -261,7 +261,7 @@ INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - re
 2022-10-06 15:37:59,630 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR:     - address: f5b812c0f0a4
 INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.kafka_qdc_window_size_ms:1500	- Window size for kafka queue depth control latency tracking.
 INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.cloud_storage_enable_remote_read:0	- Enable remote read for all topics
-INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.members_backend_retry_ms:5000	- Time between members backend reconciliation loop retries 
+INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.members_backend_retry_ms:5000	- Time between members backend reconciliation loop retries
 INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.compaction_ctrl_max_shares:1000	- maximum number of IO and CPU shares that compaction process can use
 INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.compaction_ctrl_min_shares:10	- minimum number of IO and CPU shares that compaction process can use
 2022-10-06 15:37:59,630 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR:       name: PLAINTEXT
@@ -270,7 +270,7 @@ INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - re
 INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.kafka_qdc_depth_update_ms:7000	- Update frequency for kafka queue depth control.
 INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.compaction_ctrl_p_coeff:-12.5	- proportional coefficient for compaction PID controller. This has to be negative since compaction backlog should decrease when number of compaction shares increases
 2022-10-06 15:37:59,630 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR:       port: 29092
-INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.compaction_ctrl_update_interval_ms:30000	- 
+INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.compaction_ctrl_update_interval_ms:30000	-
 INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.enable_auto_rebalance_on_node_add:0	- Enable automatic partition rebalancing when new nodes are added
 INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.node_management_operation_timeout_ms:5000	- Timeout for executing node management operations
 INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.leader_balancer_mute_timeout:300000	- Leadership rebalancing mute timeout
@@ -288,7 +288,7 @@ INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - re
 2022-10-06 15:37:59,631 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR:   developer_mode: true
 INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.raft_io_timeout_ms:10000	- Raft I/O timeout
 INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.zstd_decompress_workspace_bytes:8388608	- Size of the zstd decompression workspace
-INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.compaction_ctrl_backlog_size:{nullopt}	- target backlog size for compaction controller. if not set compaction target compaction backlog would be equal to 
+INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.compaction_ctrl_backlog_size:{nullopt}	- target backlog size for compaction controller. if not set compaction target compaction backlog would be equal to
 INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.append_chunk_size:16384	- Size of direct write operations to disk
 INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.auto_create_topics_enabled:1	- Allow topic auto creation
 2022-10-06 15:37:59,631 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR:   enable_idempotence: true
@@ -374,7 +374,7 @@ INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - re
 INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.storage_read_readahead_count:10	- How many additional reads to issue ahead of current read location
 INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.group_initial_rebalance_delay:300	- Extra delay (ms) added to rebalance phase to wait for new members
 2022-10-06 15:37:59,635 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR:   coredump_dir: /var/lib/redpanda/coredump
-INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.group_max_session_timeout_ms:300000	- The maximum allowed session timeout for registered consumers. Longer timeouts give consumers more time to process messages in between heartbeats at the cost of a longer time to detect failures. 
+INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.group_max_session_timeout_ms:300000	- The maximum allowed session timeout for registered consumers. Longer timeouts give consumers more time to process messages in between heartbeats at the cost of a longer time to detect failures.
 INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.raft_learner_recovery_rate:104857600	- Raft learner recovery rate limit in bytes per sec
 INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.cloud_storage_upload_ctrl_max_shares:1000	- maximum number of IO and CPU shares that archival upload can use
 INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.group_min_session_timeout_ms:6000	- The minimum allowed session timeout for registered consumers. Shorter timeouts result in quicker failure detection at the cost of more frequent consumer heartbeating, which can overwhelm broker resources.
@@ -382,16 +382,16 @@ INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - re
 INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.controller_backend_housekeeping_interval_ms:1000	- Interval between iterations of controller backend housekeeping loop
 INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.tm_sync_timeout_ms:10000	- Time to wait state catch up before rejecting a request
 INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.raft_max_concurrent_append_requests_per_follower:16	- Maximum number of concurrent append entries requests sent by leader to one follower
-INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.seed_server_meta_topic_partitions:	- 
+INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.seed_server_meta_topic_partitions:	-
 INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.metadata_dissemination_interval_ms:3000	- Interaval for metadata dissemination batching
 INF2022-10-06 15:37:59,635 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR:   enable_usage_stats: true
 O  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.default_num_windows:10	- Default number of quota tracking windows
 INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.enable_sasl:0	- Enable SASL authentication for Kafka connections.
 2022-10-06 15:37:59,636 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR:   overprovisioned: true
 INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.kvstore_max_segment_size:16777216	- Key-value maximum segment size (bytes)
-INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.min_version:	- 
+INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.min_version:	-
 INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.raft_heartbeat_disconnect_failures:3	- After how many failed heartbeats to forcibly close an unresponsive TCP connection.  Set to 0 to disable force disconnection.
-INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.max_version:	- 
+INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.max_version:	-
 INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.default_window_sec:1000	- Default quota tracking window size in milliseconds
 2022-10-06 15:37:59,636 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR:   tune_aio_events: false
 INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.fetch_max_bytes:57671680	- Maximum number of bytes returned in fetch request
@@ -405,7 +405,7 @@ INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - re
 INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.create_topic_timeout_ms:2000	- Timeout (ms) to wait for new topic creation
 2022-10-06 15:37:59,636 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR:   tune_clocksource: false
 INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.metadata_dissemination_retries:30	- Number of attempts of looking up a topic's meta data like shard before failing a request
-INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.use_scheduling_groups:	- 
+INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.use_scheduling_groups:	-
 INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.disable_metrics:0	- Disable registering metrics
 2022-10-06 15:37:59,637 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR:   tune_coredump: false
 INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.rpc_server_tcp_send_buf:{nullopt}	- TCP transmit buffer size in bytes.
@@ -478,7 +478,7 @@ INFO  2022-10-06 13:37:59,627 [shard 0] redpanda::main - application.cc:332 - sc
 INFO  2022-10-06 13:37:59,627 [shard 0] redpanda::main - application.cc:332 - schema_registry_client.produce_batch_size_bytes:0	- Number of bytes to batch before sending to broker
 INFO  2022-10-06 13:37:59,627 [shard 0] redpanda::main - application.cc:332 - schema_registry_client.consumer_session_timeout_ms:10000	- Timeout (in milliseconds) for consumer session
 INFO  2022-10-06 13:37:59,627 [shard 0] redpanda::main - application.cc:332 - schema_registry_client.produce_batch_record_count:0	- Number of records to batch before sending to broker
-2022-10-06 15:37:59,639 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: 
+2022-10-06 15:37:59,639 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR:
 INFO  2022-10-06 13:37:59,627 [shard 0] redpanda::main - application.cc:332 - schema_registry_client.retry_base_backoff_ms:100	- Delay (in milliseconds) for initial retry backoff
 INFO  2022-10-06 13:37:59,627 [shard 0] redpanda::main - application.cc:332 - schema_registry_client.retries:5	- Number of times to retry a request to a broker
 INFO  2022-10-06 13:37:59,627 [shard 0] redpanda::main - application.cc:332 - schema_registry_client.scram_password:	- Password to use for SCRAM authentication mechanisms
@@ -487,7 +487,7 @@ INFO  2022-10-06 13:37:59,627 [shard 0] redpanda::main - application.cc:332 - sc
 INFO  2022-10-06 13:37:59,627 [shard 0] syschecks - Writing pid file "/var/lib/redpanda/data/pid.lock"
 INFO  2022-10-06 13:37:59,637 [shard 0] storage - directories.h:33 - Checking `/var/lib/redpanda/data` for supported filesystems
 ERROR 2022-10-06 13:37:59,637 [shard 0] syschecks - Path: `/var/lib/redpanda/data' is not on XFS. This is a non-supported setup. Expect poor performance.
-2022-10-06 15:37:59,640 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: 
+2022-10-06 15:37:59,640 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR:
 2022-10-06 15:37:59,640 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:327 - Use `rpk config set <cfg> <value>` to change values below:
 2022-10-06 15:37:59,640 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.metrics_reporter_report_interval:86400000	- cluster metrics reporter report interval
 2022-10-06 15:37:59,640 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.metrics_reporter_tick_interval:60000	- Cluster metrics reporter tick interval
@@ -505,7 +505,7 @@ ERROR 2022-10-06 13:37:59,637 [shard 0] syschecks - Path: `/var/lib/redpanda/dat
 2022-10-06 15:37:59,644 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.cloud_storage_upload_ctrl_d_coeff:0	- derivative coefficient for upload PID controller.
 2022-10-06 15:37:59,644 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.kafka_qdc_enable:0	- Enable kafka queue depth control.
 2022-10-06 15:37:59,644 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.cloud_storage_upload_ctrl_p_coeff:-2	- proportional coefficient for upload PID controller
-2022-10-06 15:37:59,644 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.cloud_storage_upload_ctrl_update_interval_ms:60000	- 
+2022-10-06 15:37:59,644 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.cloud_storage_upload_ctrl_update_interval_ms:60000	-
 2022-10-06 15:37:59,645 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.cloud_storage_max_connection_idle_time_ms:5000	- Max https connection idle time (ms)
 2022-10-06 15:37:59,645 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.cloud_storage_segment_upload_timeout_ms:30000	- Log segment upload timeout (ms)
 2022-10-06 15:37:59,645 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.cloud_storage_trust_file:{nullopt}	- Path to certificate that should be used to validate server certificate during TLS handshake
@@ -517,7 +517,7 @@ ERROR 2022-10-06 13:37:59,637 [shard 0] syschecks - Path: `/var/lib/redpanda/dat
 2022-10-06 15:37:59,647 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.cloud_storage_enable_remote_write:0	- Enable remote write for all topics
 2022-10-06 15:37:59,647 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.kafka_qdc_window_size_ms:1500	- Window size for kafka queue depth control latency tracking.
 2022-10-06 15:37:59,648 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.cloud_storage_enable_remote_read:0	- Enable remote read for all topics
-2022-10-06 15:37:59,648 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.members_backend_retry_ms:5000	- Time between members backend reconciliation loop retries 
+2022-10-06 15:37:59,648 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.members_backend_retry_ms:5000	- Time between members backend reconciliation loop retries
 2022-10-06 15:37:59,648 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.compaction_ctrl_max_shares:1000	- maximum number of IO and CPU shares that compaction process can use
 2022-10-06 15:37:59,648 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.compaction_ctrl_min_shares:10	- minimum number of IO and CPU shares that compaction process can use
 2022-10-06 15:37:59,649 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.compaction_ctrl_d_coeff:0.2	- derivative coefficient for compaction PID controller.
@@ -526,7 +526,7 @@ ERROR 2022-10-06 13:37:59,637 [shard 0] syschecks - Path: `/var/lib/redpanda/dat
 2022-10-06 15:37:59,650 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:
 INFO  2022-10-06 13:37:59,650 [shard 0] redpanda::main - application.cc:654 - Partition manager started
 2022-10-06 15:37:59,650 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: 59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.compaction_ctrl_p_coeff:-12.5	- proportional coefficient for compaction PID controller. This has to be negative since compaction backlog should decrease when number of compaction shares increases
-2022-10-06 15:37:59,650 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.compaction_ctrl_update_interval_ms:30000	- 
+2022-10-06 15:37:59,650 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.compaction_ctrl_update_interval_ms:30000	-
 2022-10-06 15:37:59,651 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.enable_auto_rebalance_on_node_add:0	- Enable automatic partition rebalancing when new nodes are added
 2022-10-06 15:37:59,651 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.node_management_operation_timeout_ms:5000	- Timeout for executing node management operations
 2022-10-06 15:37:59,651 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.leader_balancer_mute_timeout:300000	- Leadership rebalancing mute timeout
@@ -541,7 +541,7 @@ INFO  2022-10-06 13:37:59,650 [shard 0] redpanda::main - application.cc:654 - Pa
 2022-10-06 15:37:59,654 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.enable_admin_api:1	- Enable the admin API
 2022-10-06 15:37:59,654 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.raft_io_timeout_ms:10000	- Raft I/O timeout
 2022-10-06 15:37:59,654 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.zstd_decompress_workspace_bytes:8388608	- Size of the zstd decompression workspace
-2022-10-06 15:37:59,654 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.compaction_ctrl_backlog_size:{nullopt}	- target backlog size for compaction controller. if not set compaction target compaction backlog would be equal to 
+2022-10-06 15:37:59,654 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.compaction_ctrl_backlog_size:{nullopt}	- target backlog size for compaction controller. if not set compaction target compaction backlog would be equal to
 2022-10-06 15:37:59,654 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.append_chunk_size:16384	- Size of direct write operations to disk
 2022-10-06 15:37:59,655 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.auto_create_topics_enabled:1	- Allow topic auto creation
 2022-10-06 15:37:59,655 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.reclaim_stable_window:10000	- Length of time above which growth is reset
@@ -615,21 +615,21 @@ INFO  2022-10-06 13:37:59,665 [shard 0] storage - segment.cc:635 - Creating new 
 2022-10-06 15:37:59,666 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.storage_read_readahead_count:10	- How many additional reads to issue ahead of current read location
 2022-10-06 15:37:59,666 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.group_initial_rebalance_delay:300	- Extra del
 2022-10-06 15:37:59,666 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: ay (ms) added to rebalance phase to wait for new members
-2022-10-06 15:37:59,666 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.group_max_session_timeout_ms:300000	- The maximum allowed session timeout for registered consumers. Longer timeouts give consumers more time to process messages in between heartbeats at the cost of a longer time to detect failures. 
+2022-10-06 15:37:59,666 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.group_max_session_timeout_ms:300000	- The maximum allowed session timeout for registered consumers. Longer timeouts give consumers more time to process messages in between heartbeats at the cost of a longer time to detect failures.
 2022-10-06 15:37:59,666 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.raft_learner_recovery_rate:104857600	- Raft learner recovery rate limit in bytes per sec
 2022-10-06 15:37:59,667 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.cloud_storage_upload_ctrl_max_shares:1000	- maximum number of IO and CPU shares that archival upload can use
 2022-10-06 15:37:59,667 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.group_min_session_timeout_ms:6000	- The minimum allowed session timeout for registered consumers. Shorter timeouts result in quicker failure detection at the cost of more frequent consumer heartbeating, which can overwhelm broker resources.
 2022-10-06 15:37:59,667 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.controller_backend_housekeeping_interval_ms:1000	- Interval between iterations of controller backend housekeeping loop
 2022-10-06 15:37:59,667 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.tm_sync_timeout_ms:10000	- Time to wait state catch up before rejecting a request
 2022-10-06 15:37:59,667 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.raft_max_concurrent_append_requests_per_follower:16	- Maximum number of concurrent append entries requests sent by leader to one follower
-2022-10-06 15:37:59,667 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.seed_server_meta_topic_partitions:	- 
+2022-10-06 15:37:59,667 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.seed_server_meta_topic_partitions:	-
 2022-10-06 15:37:59,668 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.metadata_dissemination_interval_ms:3000	- Interaval for metadata dissemination batching
 2022-10-06 15:37:59,668 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.default_num_windows:10	- Default number of quota tracking windows
 2022-10-06 15:37:59,668 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.enable_sasl:0	- Enable SASL authentication for Kafka connections.
 2022-10-06 15:37:59,668 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.kvstore_max_segment_size:16777216	- Key-value maximum segment size (bytes)
-2022-10-06 15:37:59,668 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.min_version:	- 
+2022-10-06 15:37:59,668 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.min_version:	-
 2022-10-06 15:37:59,668 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.raft_heartbeat_disconnect_failures:3	- After how many failed heartbeats to forcibly close an unresponsive TCP connection.  Set to 0 to disable force disconnection.
-2022-10-06 15:37:59,668 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.max_version:	- 
+2022-10-06 15:37:59,668 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.max_version:	-
 2022-10-06 15:37:59,669 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.default_window_sec:1000	- Default quota tracking window size in milliseconds
 2022-10-06 15:37:59,669 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.fetch_max_bytes:57671680	- Maximum number of bytes returned in fetch request
 2022-10-06 15:37:59,669 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.raft_heartbeat_timeout_ms:3000	- raft heartbeat RPC timeout
@@ -640,7 +640,7 @@ INFO  2022-10-06 13:37:59,665 [shard 0] storage - segment.cc:635 - Creating new 
 2022-10-06 15:37:59,669 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.target_quota_byte_rate:2147483648	- Target quota byte rate (bytes per second) - 2GB default
 2022-10-06 15:37:59,669 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.create_topic_timeout_ms:2000	- Timeout (ms) to wait for new topic creation
 2022-10-06 15:37:59,670 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.metadata_dissemination_retries:30	- Number of attempts of looking up a topic's meta data like shard before failing a request
-2022-10-06 15:37:59,670 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.use_scheduling_groups:	- 
+2022-10-06 15:37:59,670 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.use_scheduling_groups:	-
 2022-10-06 15:37:59,670 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.disable_metrics:0	- Disable registering metrics
 2022-10-06 15:37:59,670 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.rpc_server_tcp_send_buf:{nullopt}	- TCP transmit buffer size in bytes.
 2022-10-06 15:37:59,670 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,626 [shard 0] redpanda::main - application.cc:332 - redpanda.coproc_offset_flush_interval_ms:300000	- Interval for which all coprocessor offsets are flushed to disk
@@ -657,7 +657,7 @@ INFO  2022-10-06 13:37:59,665 [shard 0] storage - segment.cc:635 - Creating new 
 2022-10-06 15:37:59,672 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,627 [shard 0] redpanda::main - application.cc:332 - redpanda.admin_api_tls:{}	- TLS configuration for admin HTTP server
 2022-10-06 15:37:59,672 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,627 [shard 0] redpanda::main - application.cc:332 - redpanda.kafka_api_tls:{}	- TLS configuration for Kafka API endpoint
 2022-10-06 15:37:59,672 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,627 [shard 0] redpanda::main - application.cc:332 - redpanda.advertised_rpc_api:{nullopt}	- Address of RPC endpoint published to other cluster members
-2022-10-06 15:37:59,672 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  
+2022-10-06 15:37:59,672 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO
 2022-10-06 15:37:59,672 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: 2022-10-06 13:37:59,627 [shard 0] redpanda::main - application.cc:332 - redpanda.kafka_api:{{PLAINTEXT:{host: 0.0.0.0, port: 29092}}, {OUTSIDE:{host: 0.0.0.0, port: 9092}}}	- Address and port of an interface to listen for Kafka API requests
 2022-10-06 15:37:59,673 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,627 [shard 0] redpanda::main - application.cc:332 - redpanda.rpc_server_tls:{ enabled: 0 key/cert files: {nullopt} ca file: {nullopt} client_auth_required: 0 }	- TLS configuration for RPC server
 2022-10-06 15:37:59,673 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:37:59,627 [shard 0] redpanda::main - application.cc:332 - redpanda.rpc_server:{host: 0.0.0.0, port: 33145}	- IpAddress and port for RPC server
@@ -756,10 +756,10 @@ INFO  2022-10-06 13:37:59,733 [shard 0] redpanda::main - application.cc:1026 - S
 2022-10-06 15:37:59,743 INFO  [🐳 .11.8]] (pool-3-thread-1) Container vectorized/redpanda:v21.11.8 started in PT1.336889165S
 2022-10-06 15:37:59,743 INFO  [org.kie.kog.tes.KogitoKafkaContainer] (pool-3-thread-1) Kafka servers: OUTSIDE://localhost:49238
 Executing "/usr/lib/jvm/java-17-openjdk-17.0.4.1.1-1.fc36.x86_64/bin/java -Dquarkus.http.port=0 -Dquarkus.http.ssl-port=8444 -Dtest.url=http://localhost:0 -Dquarkus.log.file.path=/home/ftirados/git/kogito-examples/kogito-quarkus-examples/ruleunit-event-driven-quarkus/target/test-run/target/quarkus.log -Dquarkus.log.file.enable=true -Dkafka.bootstrap.servers=localhost:49238 -jar /home/ftirados/git/kogito-examples/kogito-quarkus-examples/ruleunit-event-driven-quarkus/target/quarkus-app/quarkus-run.jar"
-__  ____  __  _____   ___  __ ____  ______ 
- --/ __ \/ / / / _ | / _ \/ //_/ / / / __/ 
- -/ /_/ / /_/ / __ |/ , _/ ,< / /_/ /\ \   
---\___\_\____/_/ |_/_/|_/_/|_|\____/___/   
+__  ____  __  _____   ___  __ ____  ______
+ --/ __ \/ / / / _ | / _ \/ //_/ / / / __/
+ -/ /_/ / /_/ / __ |/ , _/ ,< / /_/ /\ \
+--\___\_\____/_/ |_/_/|_/_/|_|\____/___/
 2022-10-06 15:38:00,016 WARN  [io.qua.config] (main) Unrecognized configuration key "quarkus.swagger-ui.always-include" was provided; it will be ignored; verify that the dependency extension for this configuration is set or that you did not make a typo
 2022-10-06 15:38:00,480 INFO  [io.sma.rea.mes.kafka] (main) SRMSG18229: Configured topics for channel 'kogito_incoming_stream': [ruleunit-event-driven-requests]
 2022-10-06 15:38:00,486 INFO  [io.sma.rea.mes.kafka] (main) SRMSG18214: Key deserializer omitted, using String as default
@@ -800,7 +800,7 @@ INFO  2022-10-06 13:38:00,923 [shard 0] storage - segment.cc:635 - Creating new 
 2022-10-06 15:38:00,923 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:38:00,922 [shard 0] raft - [group_id:1, {kafka/ruleunit-event-driven-requests/0}] vote_stm.cc:252 - became the leader term:1
 2022-10-06 15:38:00,923 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:38:00,923 [shard 0] storage - segment.cc:635 - Creating new segment /var/lib/redpanda/data/kafka/ruleunit-event-driven-requests/0_2/0-1-v1.log
 2022-10-06 15:38:00,924 INFO  [io.quarkus] (main) ruleunit-event-driven-quarkus 2.0.0-SNAPSHOT on JVM (powered by Quarkus 2.13.0.Final) started in 1.112s. Listening on: http://0.0.0.0:41805
-2022-10-06 15:38:00,925 INFO  [io.quarkus] (main) Profile prod activated. 
+2022-10-06 15:38:00,925 INFO  [io.quarkus] (main) Profile prod activated.
 2022-10-06 15:38:00,925 INFO  [io.quarkus] (main) Installed features: [cdi, kafka-client, kogito-addon-events-rules-extension, kogito-addon-messaging-extension, kogito-rules, resteasy, resteasy-jackson, smallrye-context-propagation, smallrye-health, smallrye-reactive-messaging, smallrye-reactive-messaging-kafka, vertx]
 INFO  2022-10-06 13:38:00,930 [shard 0] cluster - topics_frontend.cc:71 - Create topics {{configuration: { topic: {ns: {kafka_internal}, topic: {group}}, partition_count: 1, replication_factor: 1, properties: { compression: {nullopt}, cleanup_policy_bitflags: {compact}, compaction_strategy: {nullopt}, retention_bytes: {}, retention_duration_ms: {}, segment_size: {nullopt}, timestamp_type: {nullopt}, recovery_enabled: {nullopt}, shadow_indexing: {nullopt} }}, custom_assignments: {}}}
 2022-10-06 15:38:00,930 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:38:00,930 [shard 0] cluster - topics_frontend.cc:71 - Create topics {{configuration: { topic: {ns: {kafka_internal}, topic: {group}}, partition_count: 1, replication_factor: 1, properties: { compression: {nullopt}, cleanup_policy_bitflags: {compact}, compaction_strategy: {nullopt}, retention_bytes: {}, retention_duration_ms: {}, segment_size: {nullopt}, timestamp_type: {nullopt}, recovery_enabled: {nullopt}, shadow_indexing: {nullopt} }}, custom_assignments: {}}}
@@ -826,7 +826,7 @@ INFO  2022-10-06 13:38:00,989 [shard 0] storage - segment.cc:635 - Creating new 
 2022-10-06 15:38:00,990 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:38:00,989 [shard 0] storage - segment.cc:635 - Creating new segment /var/lib/redpanda/data/kafka_internal/group/0_4/0-1-v1.log
 INFO  2022-10-06 13:38:01,067 [shard 0] kafka - fetch_session_cache.cc:106 - fetch session created: 1
 2022-10-06 15:38:01,067 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:38:01,067 [shard 0] kafka - fetch_session_cache.cc:106 - fetch session created: 1
-2022-10-06 15:38:01,101 INFO  [org.apa.kaf.cli.con.ConsumerConfig] (main) ConsumerConfig values: 
+2022-10-06 15:38:01,101 INFO  [org.apa.kaf.cli.con.ConsumerConfig] (main) ConsumerConfig values:
 	allow.auto.create.topics = true
 	auto.commit.interval.ms = 5000
 	auto.offset.reset = earliest
@@ -834,7 +834,7 @@ INFO  2022-10-06 13:38:01,067 [shard 0] kafka - fetch_session_cache.cc:106 - fet
 	check.crcs = true
 	client.dns.lookup = use_all_dns_ips
 	client.id = consumer-org.kie.kogito.test.quarkus.kafka.KafkaTestClientConsumer-1
-	client.rack = 
+	client.rack =
 	connections.max.idle.ms = 540000
 	default.api.timeout.ms = 60000
 	enable.auto.commit = false
@@ -967,7 +967,7 @@ INFO  2022-10-06 13:38:01,454 [shard 0] storage - segment.cc:635 - Creating new 
 2022-10-06 15:38:01,507 INFO  [org.apa.kaf.cli.con.int.SubscriptionState] (pool-4-thread-1) [Consumer clientId=consumer-org.kie.kogito.test.quarkus.kafka.KafkaTestClientConsumer-1, groupId=org.kie.kogito.test.quarkus.kafka.KafkaTestClientConsumer] Resetting offset for partition ruleunit-event-driven-responses-0 to position FetchPosition{offset=0, offsetEpoch=Optional.empty, currentLeader=LeaderAndEpoch{leader=Optional[localhost:49238 (id: 0 rack: null)], epoch=absent}}.
 INFO  2022-10-06 13:38:01,512 [shard 0] kafka - fetch_session_cache.cc:106 - fetch session created: 2
 2022-10-06 15:38:01,513 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:38:01,512 [shard 0] kafka - fetch_session_cache.cc:106 - fetch session created: 2
-2022-10-06 15:38:04,190 INFO  [org.apa.kaf.cli.pro.ProducerConfig] (awaitility-thread) ProducerConfig values: 
+2022-10-06 15:38:04,190 INFO  [org.apa.kaf.cli.pro.ProducerConfig] (awaitility-thread) ProducerConfig values:
 	acks = -1
 	batch.size = 16384
 	bootstrap.servers = [localhost:49238]
@@ -1228,7 +1228,7 @@ INFO  2022-10-06 13:38:04,285 [shard 0] storage - segment.cc:635 - Creating new 
 2022-10-06 15:38:06,755 INFO  [org.apa.kaf.com.met.Metrics] (pool-4-thread-1) Closing reporter org.apache.kafka.common.metrics.JmxReporter
 2022-10-06 15:38:06,755 INFO  [org.apa.kaf.com.met.Metrics] (pool-4-thread-1) Metrics reporters closed
 2022-10-06 15:38:06,758 INFO  [org.apa.kaf.com.uti.AppInfoParser] (pool-4-thread-1) App info kafka.consumer for consumer-org.kie.kogito.test.quarkus.kafka.KafkaTestClientConsumer-1 unregistered
-2022-10-06 15:38:06,772 INFO  [org.apa.kaf.cli.con.ConsumerConfig] (main) ConsumerConfig values: 
+2022-10-06 15:38:06,772 INFO  [org.apa.kaf.cli.con.ConsumerConfig] (main) ConsumerConfig values:
 	allow.auto.create.topics = true
 	auto.commit.interval.ms = 5000
 	auto.offset.reset = earliest
@@ -1236,7 +1236,7 @@ INFO  2022-10-06 13:38:04,285 [shard 0] storage - segment.cc:635 - Creating new 
 	check.crcs = true
 	client.dns.lookup = use_all_dns_ips
 	client.id = consumer-org.kie.kogito.test.quarkus.kafka.KafkaTestClientConsumer-2
-	client.rack = 
+	client.rack =
 	connections.max.idle.ms = 540000
 	default.api.timeout.ms = 60000
 	enable.auto.commit = false
@@ -1338,7 +1338,7 @@ INFO  2022-10-06 13:38:04,285 [shard 0] storage - segment.cc:635 - Creating new 
 2022-10-06 15:38:06,784 INFO  [org.apa.kaf.cli.con.int.ConsumerCoordinator] (pool-5-thread-1) [Consumer clientId=consumer-org.kie.kogito.test.quarkus.kafka.KafkaTestClientConsumer-2, groupId=org.kie.kogito.test.quarkus.kafka.KafkaTestClientConsumer] Setting offset for partition ruleunit-event-driven-responses-0 to the committed offset FetchPosition{offset=1, offsetEpoch=Optional.empty, currentLeader=LeaderAndEpoch{leader=Optional[localhost:49238 (id: 0 rack: null)], epoch=absent}}
 INFO  2022-10-06 13:38:06,786 [shard 0] kafka - fetch_session_cache.cc:106 - fetch session created: 3
 2022-10-06 15:38:06,787 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:38:06,786 [shard 0] kafka - fetch_session_cache.cc:106 - fetch session created: 3
-2022-10-06 15:38:09,778 INFO  [org.apa.kaf.cli.pro.ProducerConfig] (awaitility-thread) ProducerConfig values: 
+2022-10-06 15:38:09,778 INFO  [org.apa.kaf.cli.pro.ProducerConfig] (awaitility-thread) ProducerConfig values:
 	acks = -1
 	batch.size = 16384
 	bootstrap.servers = [localhost:49238]
@@ -1574,7 +1574,7 @@ INFO  2022-10-06 13:38:06,786 [shard 0] kafka - fetch_session_cache.cc:106 - fet
 2022-10-06 15:38:10,837 INFO  [org.apa.kaf.com.met.Metrics] (pool-5-thread-1) Closing reporter org.apache.kafka.common.metrics.JmxReporter
 2022-10-06 15:38:10,837 INFO  [org.apa.kaf.com.met.Metrics] (pool-5-thread-1) Metrics reporters closed
 2022-10-06 15:38:10,839 INFO  [org.apa.kaf.com.uti.AppInfoParser] (pool-5-thread-1) App info kafka.consumer for consumer-org.kie.kogito.test.quarkus.kafka.KafkaTestClientConsumer-2 unregistered
-2022-10-06 15:38:10,844 INFO  [org.apa.kaf.cli.con.ConsumerConfig] (main) ConsumerConfig values: 
+2022-10-06 15:38:10,844 INFO  [org.apa.kaf.cli.con.ConsumerConfig] (main) ConsumerConfig values:
 	allow.auto.create.topics = true
 	auto.commit.interval.ms = 5000
 	auto.offset.reset = earliest
@@ -1582,7 +1582,7 @@ INFO  2022-10-06 13:38:06,786 [shard 0] kafka - fetch_session_cache.cc:106 - fet
 	check.crcs = true
 	client.dns.lookup = use_all_dns_ips
 	client.id = consumer-org.kie.kogito.test.quarkus.kafka.KafkaTestClientConsumer-3
-	client.rack = 
+	client.rack =
 	connections.max.idle.ms = 540000
 	default.api.timeout.ms = 60000
 	enable.auto.commit = false
@@ -1684,7 +1684,7 @@ INFO  2022-10-06 13:38:06,786 [shard 0] kafka - fetch_session_cache.cc:106 - fet
 2022-10-06 15:38:10,864 INFO  [org.apa.kaf.cli.con.int.ConsumerCoordinator] (pool-6-thread-1) [Consumer clientId=consumer-org.kie.kogito.test.quarkus.kafka.KafkaTestClientConsumer-3, groupId=org.kie.kogito.test.quarkus.kafka.KafkaTestClientConsumer] Setting offset for partition ruleunit-event-driven-responses-0 to the committed offset FetchPosition{offset=2, offsetEpoch=Optional.empty, currentLeader=LeaderAndEpoch{leader=Optional[localhost:49238 (id: 0 rack: null)], epoch=absent}}
 INFO  2022-10-06 13:38:10,868 [shard 0] kafka - fetch_session_cache.cc:106 - fetch session created: 4
 2022-10-06 15:38:10,868 INFO  [org.kie.kog.tes.KogitoGenericContainer] (docker-java-stream-617210730) STDERR: INFO  2022-10-06 13:38:10,868 [shard 0] kafka - fetch_session_cache.cc:106 - fetch session created: 4
-2022-10-06 15:38:13,850 INFO  [org.apa.kaf.cli.pro.ProducerConfig] (awaitility-thread) ProducerConfig values: 
+2022-10-06 15:38:13,850 INFO  [org.apa.kaf.cli.pro.ProducerConfig] (awaitility-thread) ProducerConfig values:
 	acks = -1
 	batch.size = 16384
 	bootstrap.servers = [localhost:49238]
@@ -1920,22 +1920,22 @@ INFO  2022-10-06 13:38:10,868 [shard 0] kafka - fetch_session_cache.cc:106 - fet
 2022-10-06 15:38:14,940 INFO  [org.apa.kaf.com.met.Metrics] (pool-6-thread-1) Closing reporter org.apache.kafka.common.metrics.JmxReporter
 2022-10-06 15:38:14,940 INFO  [org.apa.kaf.com.met.Metrics] (pool-6-thread-1) Metrics reporters closed
 2022-10-06 15:38:14,944 INFO  [org.apa.kaf.com.uti.AppInfoParser] (pool-6-thread-1) App info kafka.consumer for consumer-org.kie.kogito.test.quarkus.kafka.KafkaTestClientConsumer-3 unregistered
-[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 19.636 s - in org.kie.kogito.examples.RuleUnitEventDrivenIT
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 19.636 s - in org.acme.RuleUnitEventDrivenIT
 2022-10-06 15:38:15,114 WARN  [org.apa.kaf.cli.NetworkClient] (smallrye-kafka-consumer-thread-0) [Consumer clientId=kafka-consumer-kogito_incoming_stream, groupId=ruleunit-event-driven-example] Connection to node 0 (localhost/127.0.0.1:49238) could not be established. Broker may not be available.
 2022-10-06 15:38:15,115 WARN  [org.apa.kaf.cli.NetworkClient] (kafka-producer-network-thread | kafka-producer-kogito_outgoing_stream) [Producer clientId=kafka-producer-kogito_outgoing_stream] Connection to node 0 (localhost/127.0.0.1:49238) could not be established. Broker may not be available.
-[INFO] 
+[INFO]
 [INFO] Results:
-[INFO] 
+[INFO]
 [INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0
-[INFO] 
-[INFO] 
+[INFO]
+[INFO]
 [INFO] --- maven-failsafe-plugin:3.0.0-M5:integration-test (default) @ ruleunit-event-driven-quarkus ---
 [INFO] Skipping execution of surefire because it has already been run for this configuration
-[INFO] 
+[INFO]
 [INFO] --- maven-failsafe-plugin:3.0.0-M5:verify (integration-test) @ ruleunit-event-driven-quarkus ---
-[INFO] 
+[INFO]
 [INFO] --- maven-failsafe-plugin:3.0.0-M5:verify (default) @ ruleunit-event-driven-quarkus ---
-[INFO] 
+[INFO]
 [INFO] --- maven-install-plugin:2.5.2:install (default-install) @ ruleunit-event-driven-quarkus ---
 [INFO] Installing /home/ftirados/git/kogito-examples/kogito-quarkus-examples/ruleunit-event-driven-quarkus/target/ruleunit-event-driven-quarkus.jar to /home/ftirados/.m2/repository/org/kie/kogito/examples/ruleunit-event-driven-quarkus/2.0.0-SNAPSHOT/ruleunit-event-driven-quarkus-2.0.0-SNAPSHOT.jar
 [INFO] Installing /home/ftirados/git/kogito-examples/kogito-quarkus-examples/ruleunit-event-driven-quarkus/pom.xml to /home/ftirados/.m2/repository/org/kie/kogito/examples/ruleunit-event-driven-quarkus/2.0.0-SNAPSHOT/ruleunit-event-driven-quarkus-2.0.0-SNAPSHOT.pom

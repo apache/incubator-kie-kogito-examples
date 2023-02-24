@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.kie.kogito.examples;
+package org.acme;
 
 import java.net.URI;
 import java.time.OffsetDateTime;

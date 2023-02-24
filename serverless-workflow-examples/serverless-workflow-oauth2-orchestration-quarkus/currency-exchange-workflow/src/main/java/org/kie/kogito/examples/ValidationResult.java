@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.kie.kogito.examples;
+package org.acme;
 
 /**
  * Used to return the validation results to the Currency Exchange Workflow.

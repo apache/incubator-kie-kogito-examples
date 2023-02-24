@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.examples.onboarding;
+package org.acme.onboarding;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -25,8 +25,8 @@ import java.util.function.Function;
 
 import javax.inject.Inject;
 
+import org.acme.test.RecordedOutputWorkItemHandler;
 import org.junit.jupiter.api.Test;
-import org.kie.kogito.examples.test.RecordedOutputWorkItemHandler;
 import org.kie.kogito.internal.process.runtime.KogitoWorkItem;
 import org.kie.kogito.internal.process.runtime.KogitoWorkItemHandler;
 import org.kie.kogito.process.ProcessConfig;

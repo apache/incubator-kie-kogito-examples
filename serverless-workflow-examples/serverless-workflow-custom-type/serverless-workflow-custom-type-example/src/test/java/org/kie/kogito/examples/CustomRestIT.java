@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.examples;
+package org.acme;
 
 import java.io.IOException;
 import java.util.Map;
@@ -21,7 +21,7 @@ import java.util.Map;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.kie.kogito.examples.sw.custom.CalculatorServer;
+import org.acme.sw.custom.CalculatorServer;
 import org.kie.kogito.serverless.workflow.SWFConstants;
 
 import io.quarkus.test.junit.QuarkusIntegrationTest;
@@ -33,30 +33,30 @@ import static org.hamcrest.CoreMatchers.is;
 @QuarkusIntegrationTest
 class CustomRestIT {
 
-    private static CalculatorServer server; 
-    
-    @BeforeAll 
+    private static CalculatorServer server;
+
+    @BeforeAll
     static void init() throws IOException {
         server = new CalculatorServer(8082);
     }
-    
-    
-    @AfterAll 
+
+
+    @AfterAll
     static void cleanup () throws IOException {
         server.close();
     }
-    
-    
+
+
     @Test
     void testCustomType() {
         testIt("customType");
     }
-    
+
     @Test
     void testCustomFunction() {
         testIt("customFunction");
     }
-    
+
 
     private void testIt(String path) {
         given()

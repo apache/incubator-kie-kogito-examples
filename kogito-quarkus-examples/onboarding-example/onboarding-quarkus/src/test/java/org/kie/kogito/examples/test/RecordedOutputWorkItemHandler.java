@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.examples.test;
+package org.acme.test;
 
 import java.util.HashMap;
 import java.util.Map;

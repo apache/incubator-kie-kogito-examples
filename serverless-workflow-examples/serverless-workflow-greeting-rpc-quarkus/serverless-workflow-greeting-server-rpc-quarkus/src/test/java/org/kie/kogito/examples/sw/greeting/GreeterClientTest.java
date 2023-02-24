@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.kie.kogito.examples.sw.greeting;
+package org.acme.sw.greeting;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,9 +27,9 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.kie.kogito.examples.sw.greeting.Greeting.HelloReply;
-import org.kie.kogito.examples.sw.greeting.Greeting.HelloRequest;
-import org.kie.kogito.examples.sw.greeting.Greeting.HelloRequest.Builder;
+import org.acme.sw.greeting.Greeting.HelloReply;
+import org.acme.sw.greeting.Greeting.HelloRequest;
+import org.acme.sw.greeting.Greeting.HelloRequest.Builder;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;

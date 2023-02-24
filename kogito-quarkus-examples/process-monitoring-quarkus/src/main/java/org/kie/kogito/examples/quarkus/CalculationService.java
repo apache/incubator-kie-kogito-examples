@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.examples.quarkus;
+package org.acme.quarkus;
 
 import java.util.Random;
 
 import javax.enterprise.context.ApplicationScoped;
 
-import org.kie.kogito.examples.quarkus.demo.Order;
+import org.acme.quarkus.demo.Order;
 
 @ApplicationScoped
 public class CalculationService {

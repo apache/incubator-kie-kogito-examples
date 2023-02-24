@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.examples.sw.orders.processing;
+package org.acme.sw.orders.processing;
 
 import java.util.UUID;
 

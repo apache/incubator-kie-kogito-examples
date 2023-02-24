@@ -13,35 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.examples.sw.custom;
+package org.acme.sw.custom;
 
 import java.io.IOException;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.kie.kogito.examples.sw.custom.CalculatorClient.OperationId;
+import org.acme.sw.custom.CalculatorClient.OperationId;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CalculatorClientTest {
-    
-    
-    private static CalculatorServer server; 
-    
-    @BeforeAll 
+
+
+    private static CalculatorServer server;
+
+    @BeforeAll
     static void init() throws IOException
     {
         server = new CalculatorServer(8082);
     }
-    
-    
+
+
     @AfterAll static void cleanup () throws IOException{
         server.close();
     }
-    
+
     @Test
-    void testCalculator() throws IOException { 
+    void testCalculator() throws IOException {
         assertEquals(7,CalculatorClient.invokeOperation("localhost", 8082, OperationId.ADD, 4, 3));
         assertEquals(1,CalculatorClient.invokeOperation("localhost", 8082, OperationId.SUBTRACTION, 4, 3));
         assertEquals(12,CalculatorClient.invokeOperation("localhost", 8082, OperationId.MULTIPLICATION, 4, 3));

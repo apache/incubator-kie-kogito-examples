@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.kie.kogito.examples;
+package org.acme;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;

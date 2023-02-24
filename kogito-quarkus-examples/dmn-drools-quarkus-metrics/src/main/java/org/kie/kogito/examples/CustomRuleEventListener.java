@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.examples;
+package org.acme;
 
 import org.drools.core.event.DefaultAgendaEventListener;
 import org.jboss.logging.Logger;
@@ -101,7 +101,7 @@ public class CustomRuleEventListener extends DefaultAgendaEventListener {
 
     private void registerEvent(KieRuntimeEvent event) {
         logger.debug(event.getClass().getSimpleName());
-        prometheusMeterRegistry.counter("org.kie.kogito.examples.customruleeventlistener", "event",
+        prometheusMeterRegistry.counter("org.acme.customruleeventlistener", "event",
                 event.getClass().getSimpleName().toLowerCase()).increment();
     }
 }

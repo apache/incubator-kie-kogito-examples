@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.examples;
+package org.acme;
 
 import java.util.Random;
 
 import javax.enterprise.context.ApplicationScoped;
 
-import org.kie.kogito.examples.demo.Order;
+import org.acme.demo.Order;
 
 @ApplicationScoped
 public class CalculationService {

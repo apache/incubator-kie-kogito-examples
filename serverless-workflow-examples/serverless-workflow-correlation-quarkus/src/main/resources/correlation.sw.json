@@ -2,7 +2,7 @@
   "id": "correlation",
   "version": "1.0",
   "name": "Workflow Correlation example",
-  "description": "An example of how to use correlation on events",  
+  "description": "An example of how to use correlation on events",
   "start": "New User Account Request",
   "events": [
     {
@@ -13,12 +13,12 @@
         {
           "contextAttributeName": "userid"
         }
-      ]      
+      ]
     },
     {
       "name": "validateAccountEmailEvent",
       "source": "workflow",
-      "type": "validateAccountEmail"      
+      "type": "validateAccountEmail"
     },
     {
       "name": "validatedAccountEmailEvent",
@@ -28,12 +28,12 @@
         {
           "contextAttributeName": "userid"
         }
-      ]      
+      ]
     },
     {
       "name": "activateAccountEvent",
       "source": "workflow",
-      "type": "activateAccount"      
+      "type": "activateAccount"
     },
     {
       "name": "activatedAccountEvent",
@@ -43,14 +43,14 @@
         {
           "contextAttributeName": "userid"
         }
-      ]      
+      ]
     }
   ],
   "functions": [
     {
       "name": "complete",
       "type": "custom",
-      "operation": "service:java:org.kie.kogito.examples.EventsService::complete"
+      "operation": "service:java:org.acme.EventsService::complete"
     }
   ],
   "states": [
@@ -58,8 +58,8 @@
      "name":"New User Account Request",
      "type":"event",
      "onEvents": [{
-         "eventRefs": ["newAccountEvent"]                 
-     }],     
+         "eventRefs": ["newAccountEvent"]
+     }],
      "transition": "Validate User Email"
   },
     {
@@ -71,7 +71,7 @@
           "triggerEventRef": "validateAccountEmailEvent"
         }
       },
-      "eventRef": "validatedAccountEmailEvent",      
+      "eventRef": "validatedAccountEmailEvent",
       "transition": "Activate User Account"
     },
 {
@@ -80,10 +80,10 @@
       "action": {
         "name": "publish Activate Account event",
         "eventRef": {
-          "triggerEventRef": "activateAccountEvent"          
+          "triggerEventRef": "activateAccountEvent"
         }
       },
-      "eventRef": "activatedAccountEvent",      
+      "eventRef": "activatedAccountEvent",
       "transition": "Account Creation Completed"
     },
 

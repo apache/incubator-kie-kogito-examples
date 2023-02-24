@@ -13,17 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.examples.hr;
+package org.acme.hr;
 
 public class DepartmentModel {
 
-    private org.kie.kogito.examples.hr.Employee employee;
+    private org.acme.hr.Employee employee;
 
-    public org.kie.kogito.examples.hr.Employee getEmployee() {
+    public org.acme.hr.Employee getEmployee() {
         return employee;
     }
 
-    public void setEmployee(org.kie.kogito.examples.hr.Employee employee) {
+    public void setEmployee(org.acme.hr.Employee employee) {
         this.employee = employee;
     }
 

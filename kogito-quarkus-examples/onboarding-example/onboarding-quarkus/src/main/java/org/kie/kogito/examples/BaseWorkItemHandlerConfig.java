@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.examples;
+package org.acme;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,12 +25,12 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
+import org.acme.onboarding.DecisionTaskWorkItemHandler;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.kie.kogito.addons.k8s.Endpoint;
 import org.kie.kogito.addons.k8s.EndpointQueryKey;
 import org.kie.kogito.addons.k8s.LocalEndpointDiscovery;
 import org.kie.kogito.addons.quarkus.k8s.workitems.QuarkusDiscoveredEndpointCaller;
-import org.kie.kogito.examples.onboarding.DecisionTaskWorkItemHandler;
 import org.kie.kogito.internal.process.runtime.KogitoWorkItemHandler;
 import org.kie.kogito.process.impl.DefaultWorkItemHandlerConfig;
 

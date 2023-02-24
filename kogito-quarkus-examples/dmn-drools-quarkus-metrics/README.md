@@ -64,7 +64,7 @@ Custom dashboards will be available in the grafana panel, together with auto-gen
 ### Compile and Run in Local Dev Mode
 
 It is possible to use `docker-compose` to demonstrate how to inject the generated dashboards in the volume of the grafana container:
-1. Run `mvn clean package` to build the project and generate dashboards. A docker image tagged `org.kie.kogito.examples/dmn-drools-quarkus-metrics-example:1.0` will be built (docker must be installed on your system).
+1. Run `mvn clean package` to build the project and generate dashboards. A docker image tagged `org.acme/dmn-drools-quarkus-metrics-example:1.0` will be built (docker must be installed on your system).
 2. Run `docker-compose up` to start the applications. 
 
 The volumes of the grafana container are properly set in the `docker-compose.yml` file, so that the dashboards are properly loaded at startup.

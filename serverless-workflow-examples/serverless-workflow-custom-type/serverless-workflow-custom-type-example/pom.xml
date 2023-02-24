@@ -5,7 +5,7 @@
 
   <parent>
     <artifactId>serverless-workflow-custom-type</artifactId>
-    <groupId>org.kie.kogito.examples</groupId>
+    <groupId>org.acme</groupId>
     <version>1.0-SNAPSHOT</version>
   </parent>
 
@@ -13,7 +13,7 @@
 
   <name>Kogito Example :: Serverless Workflow Custom RPC Client :: Quarkus</name>
   <description>The client project</description>
-  
+
   <dependencies>
     <dependency>
       <groupId>org.kie.kogito</groupId>
@@ -28,7 +28,7 @@
       <artifactId>quarkus-resteasy-jackson</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.kie.kogito.examples</groupId>
+      <groupId>org.acme</groupId>
       <artifactId>serverless-workflow-custom-rpc</artifactId>
       <version>${project.version}</version>
     </dependency>

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.examples.hr;
+package org.acme.hr;
 
 public class Employee implements java.io.Serializable {
 
@@ -24,7 +24,7 @@ public class Employee implements java.io.Serializable {
     private java.lang.String personalId;
     private java.util.Date birthDate;
 
-    private org.kie.kogito.examples.hr.Address address;
+    private org.acme.hr.Address address;
 
     public Employee() {
     }
@@ -61,11 +61,11 @@ public class Employee implements java.io.Serializable {
         this.birthDate = birthDate;
     }
 
-    public org.kie.kogito.examples.hr.Address getAddress() {
+    public org.acme.hr.Address getAddress() {
         return this.address;
     }
 
-    public void setAddress(org.kie.kogito.examples.hr.Address address) {
+    public void setAddress(org.acme.hr.Address address) {
         this.address = address;
     }
 
@@ -91,7 +91,7 @@ public class Employee implements java.io.Serializable {
 
     public Employee(java.lang.String firstName, java.lang.String lastName,
             java.lang.String personalId, java.util.Date birthDate,
-            org.kie.kogito.examples.hr.Address address) {
+            org.acme.hr.Address address) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.personalId = personalId;

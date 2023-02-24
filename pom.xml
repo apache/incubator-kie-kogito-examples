@@ -10,7 +10,7 @@
     <version>2.0.0-SNAPSHOT</version>
   </parent>
 
-  <groupId>org.kie.kogito.examples</groupId>
+  <groupId>org.acme</groupId>
   <artifactId>kogito-examples</artifactId>
   <packaging>pom</packaging>
 

@@ -1,4 +1,4 @@
-package org.kie.kogito.examples;
+package org.acme;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;

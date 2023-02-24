@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.kie.kogito.examples</groupId>
+  <groupId>org.acme</groupId>
   <artifactId>serverless-workflow-timeouts-showcase</artifactId>
   <version>1.0-SNAPSHOT</version>
   <name>Kogito Example :: Serverless Workflow Timeouts Showcase</name>
@@ -98,7 +98,7 @@
       <artifactId>jquery</artifactId>
       <version>${version.org.webjars.jquery}</version>
     </dependency>
-    
+
     <!-- Tests -->
     <dependency>
       <groupId>io.quarkus</groupId>

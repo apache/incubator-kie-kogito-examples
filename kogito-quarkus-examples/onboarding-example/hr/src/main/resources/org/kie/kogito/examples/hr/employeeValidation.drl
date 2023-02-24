@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.examples.hr;
+package org.acme.hr;
 unit EmployeeValidation;
 
-query employeeValidation 
+query employeeValidation
   v:/validation
 end
 
-rule "Employee exists" 
+rule "Employee exists"
 when
-    emp : /employee[ EmployeeRepository.get().isRegistered(personalId) ] 
+    emp : /employee[ EmployeeRepository.get().isRegistered(personalId) ]
 then
     EmployeeValidationModel val = new EmployeeValidationModel();
     val.setStatus( "exists" );
@@ -30,7 +30,7 @@ then
     validation.set(val);
 end
 
-rule "Employee does not exist" 
+rule "Employee does not exist"
 
 when
     emp : /employee[ EmployeeRepository.get().isNotRegistered(personalId) ]

@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.examples.sw.greeting;
+package org.acme.sw.greeting;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.kie.kogito.examples.sw.greeting.Greeting.HelloReply;
-import org.kie.kogito.examples.sw.greeting.Greeting.HelloRequest;
+import org.acme.sw.greeting.Greeting.HelloReply;
+import org.acme.sw.greeting.Greeting.HelloRequest;
 
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
@@ -105,7 +105,7 @@ public class GreeterService extends GreeterGrpc.GreeterImplBase {
     public StreamObserver<HelloRequest> sayHelloMultipleLanguagesError(StreamObserver<HelloReply> responseObserver) {
         return new StreamObserver<>() {
             int counter;
-            
+
             @Override
             public void onNext(HelloRequest helloRequest) {
                 counter++;

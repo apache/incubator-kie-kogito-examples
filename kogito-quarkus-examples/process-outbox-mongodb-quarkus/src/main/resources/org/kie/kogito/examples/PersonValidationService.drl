@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.examples
+package org.acme
 unit PersonValidationService
 
-import org.kie.kogito.examples.demo.Person;
+import org.acme.demo.Person;
 
 rule "Is adult"
 when
     $person: /persons[age > 18]
 then
-    modify($person) { 
-    	setAdult(true) 
+    modify($person) {
+    	setAdult(true)
     };
 end

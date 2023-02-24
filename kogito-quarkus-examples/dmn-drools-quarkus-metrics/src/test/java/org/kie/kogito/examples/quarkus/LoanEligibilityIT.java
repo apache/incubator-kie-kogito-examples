@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.examples.quarkus;
+package org.acme.quarkus;
 
 import org.junit.jupiter.api.Test;
 
