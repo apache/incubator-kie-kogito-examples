@@ -42,13 +42,11 @@
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-quarkus-rules</artifactId>
-      <version>${kogito.bom.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-addons-quarkus-events-rules</artifactId>
-      <version>${kogito.bom.version}</version>
     </dependency>
 
     <dependency>
