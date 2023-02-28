@@ -57,7 +57,7 @@ kubectl create namespace "$PROJECT_NAME"
 Set the Kogito release version
 
 ```bash
-KOGITO_VERSION=v1.5.0
+KOGITO_VERSION=v1.35.0
 ```
 
 Deploy the kogito operator in the cluster
