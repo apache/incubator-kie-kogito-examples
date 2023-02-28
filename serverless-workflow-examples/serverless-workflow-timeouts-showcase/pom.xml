@@ -67,10 +67,13 @@
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-quarkus-serverless-workflow</artifactId>
     </dependency>
+
+    <!-- this cause conflict with kogito-addons-quarkus-data-index regarding quarkus-rest-client/reactive
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-quarkus-serverless-workflow-devui</artifactId>
     </dependency>
+    -->
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-addons-quarkus-source-files</artifactId>
@@ -204,6 +207,19 @@
         <dependency>
           <groupId>io.quarkus</groupId>
           <artifactId>quarkus-container-image-jib</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
+    <profile>
+      <id>embedded</id>
+      <dependencies>
+        <dependency>
+          <groupId>org.kie.kogito</groupId>
+          <artifactId>kogito-addons-quarkus-data-index-inmemory</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>org.kie.kogito</groupId>
+          <artifactId>kogito-addons-quarkus-jobs-service-embedded</artifactId>
         </dependency>
       </dependencies>
     </profile>
