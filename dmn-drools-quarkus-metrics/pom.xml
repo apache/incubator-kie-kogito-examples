@@ -10,10 +10,10 @@
   <artifactId>dmn-drools-quarkus-metrics</artifactId>
   <name>Kogito Example :: DMN Metrics Quarkus</name>
   <properties>
-    <quarkus-plugin.version>2.7.4.Final</quarkus-plugin.version>
+    <quarkus-plugin.version>2.13.4.Final</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-    <quarkus.platform.version>2.7.4.Final</quarkus.platform.version>
+    <quarkus.platform.version>2.13.4.Final</quarkus.platform.version>
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
     <kogito.bom.version>${project.version}</kogito.bom.version>
@@ -67,7 +67,12 @@
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-container-image-jib</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
       <artifactId>quarkus-junit5</artifactId>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>io.rest-assured</groupId>
@@ -103,6 +108,20 @@
     </resources>
     <plugins>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-clean-plugin</artifactId>
+        <configuration>
+          <filesets>
+            <fileset>
+              <directory>${project.basedir}/docker-compose/grafana/provisioning/dashboards</directory>
+              <includes>
+                <include>*.json</include>
+              </includes>
+            </fileset>
+          </filesets>
+        </configuration>
+      </plugin>
+      <plugin>
         <groupId>${quarkus.platform.group-id}</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
         <version>${quarkus-plugin.version}</version>
@@ -119,7 +138,7 @@
         <executions>
           <execution>
             <id>copy-resources</id>
-            <phase>prepare-package</phase>
+            <phase>pre-integration-test</phase>
             <goals>
               <goal>copy-resources</goal>
             </goals>
@@ -138,7 +157,7 @@
           </execution>
           <execution>
             <id>copy-docker-compose-for-tests</id>
-            <phase>prepare-package</phase>
+            <phase>pre-integration-test</phase>
             <goals>
               <goal>copy-resources</goal>
             </goals>
@@ -153,36 +172,6 @@
                   </includes>
                 </resource>
               </resources>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <!--
-              Create new docker image using Dockerfile which must be present in current working directory.
-              Tag the image using maven project version information.
-            -->
-            <id>docker-build</id>
-            <phase>pre-integration-test</phase>
-            <goals>
-              <goal>exec</goal>
-            </goals>
-            <configuration>
-              <skip>${skipTests}</skip>
-              <executable>docker</executable>
-              <workingDirectory>${project.basedir}</workingDirectory>
-              <arguments>
-                <argument>build</argument>
-                <argument>-f</argument>
-                <argument>${project.basedir}/src/test/resources/DockerfileTest.jvm</argument>
-                <argument>-t</argument>
-                <argument>${project.groupId}/${project.artifactId}:1.0</argument>
-                <argument>.</argument>
-              </arguments>
             </configuration>
           </execution>
         </executions>
