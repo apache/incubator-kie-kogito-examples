@@ -17,20 +17,20 @@ package org.kie.kogito.examples.quarkus;
 
 import org.junit.jupiter.api.Test;
 
-import io.quarkus.test.junit.QuarkusTest;
+import io.quarkus.test.junit.QuarkusIntegrationTest;
 import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
 
-@QuarkusTest
-public class DroolsMetricsTest {
+@QuarkusIntegrationTest
+public class DroolsMetricsIT {
 
     private static final String PROJECT_VERSION = ProjectMetadataProvider.getProjectVersion();
     private static final String PROJECT_ARTIFACT_ID = ProjectMetadataProvider.getProjectArtifactId();
 
     @Test
-    public void testDrlMetrics() throws Exception {
+    public void testDrlMetrics() {
         given()
                 .when()
                 .get("/metrics")
