@@ -63,10 +63,11 @@ KogitoJobUtils.createNightlyBuildChainBuildAndDeployJobForCurrentRepo(this, '', 
 setupSpecificBuildChainNightlyJob('native')
 
 // Jobs with integration branch
-setupQuarkusIntegrationJob('quarkus-main')
-setupQuarkusIntegrationJob('quarkus-branch')
-setupQuarkusIntegrationJob('quarkus-lts')
-setupQuarkusIntegrationJob('native-lts')
+setupNightlyQuarkusIntegrationJob('quarkus-main')
+setupNightlyQuarkusIntegrationJob('quarkus-branch')
+setupNightlyQuarkusIntegrationJob('quarkus-lts')
+setupNightlyQuarkusIntegrationJob('native-lts')
+setupNightlyQuarkusIntegrationJob('quarkus-3')
 
 // Release jobs
 setupDeployJob(JobType.RELEASE)
@@ -80,7 +81,7 @@ KogitoJobUtils.createQuarkusUpdateToolsJob(this, 'kogito-examples', [
 // Methods
 /////////////////////////////////////////////////////////////////
 
-void setupQuarkusIntegrationJob(String envName) {
+void setupNightlyQuarkusIntegrationJob(String envName) {
     KogitoJobUtils.createNightlyBuildChainIntegrationJob(this, envName, Utils.getRepoName(this), true)
 }
 
