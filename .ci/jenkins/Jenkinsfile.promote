@@ -74,6 +74,11 @@ pipeline {
                         mergeAndPush(getDeployPrLink())
                         tagLatest()
 
+                        if(githubscm.isReleaseExist(getGitTag(), getGitAuthorCredsID())) {
+                            githubscm.deleteRelease(getGitTag(), getGitAuthorCredsID())
+                        }
+                        githubscm.createRelease(getGitTag(), getBuildBranch(), "Release ${getGitTag()}", getGitAuthorCredsID())
+
                         if (params.UPDATE_STABLE_BRANCH) {
                             githubscm.createBranch('stable')
                             forcePushProtectedBranch('stable', 'main')
