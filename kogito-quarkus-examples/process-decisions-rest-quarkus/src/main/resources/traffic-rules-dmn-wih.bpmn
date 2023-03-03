@@ -141,7 +141,7 @@ DMN]]></drools:metaValue>
       <bpmn2:dataInputAssociation>
         <bpmn2:targetRef>_38F4877F-50AD-4500-98E1-9B4FD3972291_UrlInputX</bpmn2:targetRef>
         <bpmn2:assignment>
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression"><![CDATA[http://localhost:8080/Traffic Violation]]></bpmn2:from>
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression"><![CDATA[http://localhost:8080/Traffic%20Violation]]></bpmn2:from>
           <bpmn2:to xsi:type="bpmn2:tFormalExpression"><![CDATA[_38F4877F-50AD-4500-98E1-9B4FD3972291_UrlInputX]]></bpmn2:to>
         </bpmn2:assignment>
       </bpmn2:dataInputAssociation>
