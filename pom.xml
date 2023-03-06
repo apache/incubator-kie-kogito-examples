@@ -50,14 +50,8 @@
     <!-- dependencies version -->
     <version.org.skyscreamer>1.5.0</version.org.skyscreamer>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-    <quarkus.platform.version>2.7.4.Final</quarkus.platform.version>
-    <quarkus-plugin.version>2.7.4.Final</quarkus-plugin.version>
-    <!-- 
-      `-Dquarkus.bootstrap.effective-model-builder` is a temporary fix due to quarkus resolver on tests
-      https://github.com/quarkusio/quarkus/issues/23205
-    -->
-    <quarkus.bootstrap.effective-model-builder>true</quarkus.bootstrap.effective-model-builder>
-
+    <quarkus.platform.version>2.13.7.Final</quarkus.platform.version>
+    <quarkus-plugin.version>2.13.7.Final</quarkus-plugin.version>
   </properties>
 
   <!-- distributionManagement section -->
@@ -650,7 +644,7 @@
       </plugins>
     </pluginManagement>
     <plugins>
-      <!-- need at least maven 3.6.2, fail fast with actionable error rather than obscure errors like [ Error injecting: private org.eclipse.aether.spi.log.Logger org.apache.maven.repository.internal.DefaultVersionRangeResolver.logger ] -->
+      <!-- need at least maven 3.8.6, fail fast with actionable error rather than obscure errors like [ Error injecting: private org.eclipse.aether.spi.log.Logger org.apache.maven.repository.internal.DefaultVersionRangeResolver.logger ] -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>
