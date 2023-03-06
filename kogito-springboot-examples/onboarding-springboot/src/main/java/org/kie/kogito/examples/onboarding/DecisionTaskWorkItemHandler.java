@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.acme.onboarding;
+package org.kie.kogito.examples.onboarding;
 
 import java.util.Map;
 

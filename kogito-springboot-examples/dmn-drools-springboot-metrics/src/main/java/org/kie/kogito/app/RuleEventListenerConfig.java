@@ -15,8 +15,8 @@
  */
 package org.kie.kogito.app;
 
-import org.acme.CustomRuleEventListener;
 import org.kie.kogito.drools.core.config.DefaultRuleEventListenerConfig;
+import org.kie.kogito.examples.CustomRuleEventListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 

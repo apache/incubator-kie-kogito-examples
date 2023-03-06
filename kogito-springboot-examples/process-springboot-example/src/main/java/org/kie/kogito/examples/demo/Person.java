@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.acme.demo;
+package org.kie.kogito.examples.demo;
 
 import java.io.Serializable;
 

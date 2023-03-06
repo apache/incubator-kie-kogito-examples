@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.acme;
+package org.kie.kogito.examples;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,11 +24,11 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
-import org.acme.onboarding.DecisionTaskWorkItemHandler;
 import org.kie.kogito.addons.k8s.Endpoint;
 import org.kie.kogito.addons.k8s.EndpointQueryKey;
 import org.kie.kogito.addons.k8s.LocalEndpointDiscovery;
 import org.kie.kogito.addons.springboot.k8s.workitems.SpringDiscoveredEndpointCaller;
+import org.kie.kogito.examples.onboarding.DecisionTaskWorkItemHandler;
 import org.kie.kogito.internal.process.runtime.KogitoWorkItemHandler;
 import org.kie.kogito.process.impl.DefaultWorkItemHandlerConfig;
 import org.springframework.beans.factory.annotation.Autowired;

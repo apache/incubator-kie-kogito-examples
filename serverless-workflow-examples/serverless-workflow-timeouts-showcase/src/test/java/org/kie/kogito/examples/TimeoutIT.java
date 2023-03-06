@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.acme;
+package org.kie.kogito.examples;
 
 import java.util.concurrent.TimeUnit;
 
@@ -54,7 +54,7 @@ class TimeoutIT {
     void testEventStateWorkflow() {
         testWorkflow(EVENT_STATE_TIMEOUT_WORKFLOW_PATH);
     }
-    
+
     @Test
     void testWorkflow() {
         testWorkflow(TIMEOUT_WORKFLOW_PATH);

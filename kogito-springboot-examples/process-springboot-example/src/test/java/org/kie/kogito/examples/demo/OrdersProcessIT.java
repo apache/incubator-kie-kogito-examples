@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.acme.demo;
+package org.kie.kogito.examples.demo;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -21,12 +21,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import org.acme.DemoApplication;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.kie.kogito.Model;
 import org.kie.kogito.auth.IdentityProviders;
 import org.kie.kogito.auth.SecurityPolicy;
+import org.kie.kogito.examples.DemoApplication;
 import org.kie.kogito.process.Process;
 import org.kie.kogito.process.ProcessInstance;
 import org.kie.kogito.process.ProcessInstances;

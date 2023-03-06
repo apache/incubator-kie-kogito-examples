@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.acme.springboot;
+package org.kie.kogito.examples.springboot;
 
 import java.util.Random;
 
-import org.acme.springboot.demo.Order;
+import org.kie.kogito.examples.springboot.demo.Order;
 import org.springframework.stereotype.Component;
 
 @Component

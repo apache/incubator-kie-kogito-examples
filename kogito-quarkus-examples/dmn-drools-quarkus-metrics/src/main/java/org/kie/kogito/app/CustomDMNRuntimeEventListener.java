@@ -87,7 +87,7 @@ public class CustomDMNRuntimeEventListener implements DMNRuntimeEventListener {
 
     private void registerEvent(DMNEvent event) {
         logger.debug(event.getClass().getSimpleName());
-        prometheusMeterRegistry.counter("org.acme.customdmnruntimeeventlistener", "event",
+        prometheusMeterRegistry.counter("org.kie.kogito.examples.customdmnruntimeeventlistener", "event",
                 event.getClass().getSimpleName().toLowerCase()).increment();
     }
 

@@ -13,17 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.acme.hr;
+package org.kie.kogito.examples.hr;
 
 public class EmployeeValidationModel {
 
-    private org.acme.hr.Employee employee;
+    private org.kie.kogito.examples.hr.Employee employee;
 
-    public org.acme.hr.Employee getEmployee() {
+    public org.kie.kogito.examples.hr.Employee getEmployee() {
         return employee;
     }
 
-    public void setEmployee(org.acme.hr.Employee employee) {
+    public void setEmployee(org.kie.kogito.examples.hr.Employee employee) {
         this.employee = employee;
     }
 

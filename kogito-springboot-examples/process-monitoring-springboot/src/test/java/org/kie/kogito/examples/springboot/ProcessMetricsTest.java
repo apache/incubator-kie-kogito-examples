@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.acme.springboot;
+package org.kie.kogito.examples.springboot;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -106,15 +106,15 @@ public class ProcessMetricsTest {
                                 PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
                 .body(containsString(
                         String.format(
-                                "kogito_work_item_duration_seconds_max{artifactId=\"%s\",name=\"org.acme.springboot.CalculationService_calculateTotal_3_Handler\",version=\"%s\",}",
+                                "kogito_work_item_duration_seconds_max{artifactId=\"%s\",name=\"org.kie.kogito.examples.springboot.CalculationService_calculateTotal_3_Handler\",version=\"%s\",}",
                                 PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
                 .body(containsString(
                         String.format(
-                                "kogito_work_item_duration_seconds_count{artifactId=\"%s\",name=\"org.acme.springboot.CalculationService_calculateTotal_3_Handler\",version=\"%s\",}",
+                                "kogito_work_item_duration_seconds_count{artifactId=\"%s\",name=\"org.kie.kogito.examples.springboot.CalculationService_calculateTotal_3_Handler\",version=\"%s\",}",
                                 PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
                 .body(containsString(
                         String.format(
-                                "kogito_work_item_duration_seconds_sum{artifactId=\"%s\",name=\"org.acme.springboot.CalculationService_calculateTotal_3_Handler\",version=\"%s\",}",
+                                "kogito_work_item_duration_seconds_sum{artifactId=\"%s\",name=\"org.kie.kogito.examples.springboot.CalculationService_calculateTotal_3_Handler\",version=\"%s\",}",
                                 PROJECT_ARTIFACT_ID, PROJECT_VERSION)));
     }
 }

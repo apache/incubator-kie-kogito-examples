@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/bpmn20" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_YwdwMFr1EemSce_o1Tqd5Q" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd http://www.omg.org/spec/DD/20100524/DC DC.xsd http://www.omg.org/spec/DD/20100524/DI DI.xsd " exporter="jBPM Process Modeler" exporterVersion="2.0" targetNamespace="http://www.omg.org/bpmn20">
-  <bpmn2:itemDefinition id="_employeeItem" structureRef="org.acme.onboarding.Employee"/>
-  <bpmn2:itemDefinition id="_payrollItem" structureRef="org.acme.onboarding.Payroll"/>
+  <bpmn2:itemDefinition id="_employeeItem" structureRef="org.kie.kogito.examples.onboarding.Employee"/>
+  <bpmn2:itemDefinition id="_payrollItem" structureRef="org.kie.kogito.examples.onboarding.Payroll"/>
   <bpmn2:itemDefinition id="_employeeIdItem" structureRef="String"/>
   <bpmn2:itemDefinition id="_emailItem" structureRef="String"/>
   <bpmn2:itemDefinition id="_statusItem" structureRef="String"/>
@@ -13,15 +13,15 @@
   <bpmn2:itemDefinition id="__16FFBBF8-8373-46D4-A278-F305AFA7F4B1_NamespaceInputXItem" structureRef="String"/>
   <bpmn2:itemDefinition id="__16FFBBF8-8373-46D4-A278-F305AFA7F4B1_emailOutputXItem" structureRef="String"/>
   <bpmn2:itemDefinition id="__16FFBBF8-8373-46D4-A278-F305AFA7F4B1_employeeIdOutputXItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="__9D7A4927-BFCB-4F17-A4D4-E3D03B3FBE49_employeeInputXItem" structureRef="org.acme.onboarding.Employee"/>
-  <bpmn2:itemDefinition id="__9D7A4927-BFCB-4F17-A4D4-E3D03B3FBE49_payrollOutputXItem" structureRef="org.acme.onboarding.Payroll"/>
+  <bpmn2:itemDefinition id="__9D7A4927-BFCB-4F17-A4D4-E3D03B3FBE49_employeeInputXItem" structureRef="org.kie.kogito.examples.onboarding.Employee"/>
+  <bpmn2:itemDefinition id="__9D7A4927-BFCB-4F17-A4D4-E3D03B3FBE49_payrollOutputXItem" structureRef="org.kie.kogito.examples.onboarding.Payroll"/>
   <bpmn2:itemDefinition id="__DD24B4AE-8804-4D6E-B90B-98689CF6EF37_DecisionInputXItem" structureRef="String"/>
   <bpmn2:itemDefinition id="__DD24B4AE-8804-4D6E-B90B-98689CF6EF37_ModelInputXItem" structureRef="String"/>
   <bpmn2:itemDefinition id="__DD24B4AE-8804-4D6E-B90B-98689CF6EF37_NamespaceInputXItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="__DD24B4AE-8804-4D6E-B90B-98689CF6EF37_employeeInputXItem" structureRef="org.acme.onboarding.Employee"/>
+  <bpmn2:itemDefinition id="__DD24B4AE-8804-4D6E-B90B-98689CF6EF37_employeeInputXItem" structureRef="org.kie.kogito.examples.onboarding.Employee"/>
   <bpmn2:itemDefinition id="__DD24B4AE-8804-4D6E-B90B-98689CF6EF37_statusOutputXItem" structureRef="String"/>
   <bpmn2:itemDefinition id="__DD24B4AE-8804-4D6E-B90B-98689CF6EF37_messageOutputXItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="__14472369-3EAD-4B2D-9C3B-F83D4630C59B_employeeInputXItem" structureRef="org.acme.onboarding.Employee"/>
+  <bpmn2:itemDefinition id="__14472369-3EAD-4B2D-9C3B-F83D4630C59B_employeeInputXItem" structureRef="org.kie.kogito.examples.onboarding.Employee"/>
   <bpmn2:itemDefinition id="__14472369-3EAD-4B2D-9C3B-F83D4630C59B_managerOutputXItem" structureRef="String"/>
   <bpmn2:itemDefinition id="__14472369-3EAD-4B2D-9C3B-F83D4630C59B_departmentOutputXItem" structureRef="String"/>
   <bpmn2:itemDefinition id="__55258880-C191-4643-AC16-A0F5C1B05956_SkippableInputXItem" structureRef="Object"/>
@@ -32,15 +32,15 @@
   <bpmn2:itemDefinition id="__55258880-C191-4643-AC16-A0F5C1B05956_TaskNameInputXItem" structureRef="Object"/>
   <bpmn2:itemDefinition id="__55258880-C191-4643-AC16-A0F5C1B05956_GroupIdInputXItem" structureRef="Object"/>
   <bpmn2:itemDefinition id="__55258880-C191-4643-AC16-A0F5C1B05956_ContentInputXItem" structureRef="Object"/>
-  <bpmn2:itemDefinition id="__55258880-C191-4643-AC16-A0F5C1B05956_employeeInputXItem" structureRef="org.acme.onboarding.Employee"/>
+  <bpmn2:itemDefinition id="__55258880-C191-4643-AC16-A0F5C1B05956_employeeInputXItem" structureRef="org.kie.kogito.examples.onboarding.Employee"/>
   <bpmn2:itemDefinition id="__55258880-C191-4643-AC16-A0F5C1B05956_depeartmentInputXItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="__55258880-C191-4643-AC16-A0F5C1B05956_payrollInputXItem" structureRef="org.acme.onboarding.Payroll"/>
+  <bpmn2:itemDefinition id="__55258880-C191-4643-AC16-A0F5C1B05956_payrollInputXItem" structureRef="org.kie.kogito.examples.onboarding.Payroll"/>
   <bpmn2:itemDefinition id="__55258880-C191-4643-AC16-A0F5C1B05956_emailInputXItem" structureRef="String"/>
   <bpmn2:itemDefinition id="__55258880-C191-4643-AC16-A0F5C1B05956_employeeIdInputXItem" structureRef="String"/>
   <bpmn2:itemDefinition id="__55258880-C191-4643-AC16-A0F5C1B05956_statusOutputXItem" structureRef="String"/>
   <bpmn2:itemDefinition id="__55258880-C191-4643-AC16-A0F5C1B05956_messageOutputXItem" structureRef="String"/>
   <bpmn2:error id="Rejected" errorCode="Rejected"/>
-  <bpmn2:process id="onboarding.onboarding" drools:packageName="org.acme.onboarding" drools:version="1.0" drools:adHoc="false" name="onboarding" isExecutable="true">
+  <bpmn2:process id="onboarding.onboarding" drools:packageName="org.kie.kogito.examples.onboarding" drools:version="1.0" drools:adHoc="false" name="onboarding" isExecutable="true">
     <bpmn2:property id="employee" itemSubjectRef="_employeeItem" name="employee"/>
     <bpmn2:property id="payroll" itemSubjectRef="_payrollItem" name="payroll"/>
     <bpmn2:property id="employeeId" itemSubjectRef="_employeeIdItem" name="employeeId"/>
@@ -125,9 +125,9 @@
       <bpmn2:outgoing>_44ABA3C5-9A26-4843-B03B-99C2C0251707</bpmn2:outgoing>
       <bpmn2:ioSpecification id="_YwdwM1r1EemSce_o1Tqd5Q">
         <bpmn2:dataInput id="_55258880-C191-4643-AC16-A0F5C1B05956_TaskNameInputX" drools:dtype="Object" itemSubjectRef="__55258880-C191-4643-AC16-A0F5C1B05956_TaskNameInputXItem" name="TaskName"/>
-        <bpmn2:dataInput id="_55258880-C191-4643-AC16-A0F5C1B05956_employeeInputX" drools:dtype="org.acme.onboarding.Employee" itemSubjectRef="__55258880-C191-4643-AC16-A0F5C1B05956_employeeInputXItem" name="employee"/>
+        <bpmn2:dataInput id="_55258880-C191-4643-AC16-A0F5C1B05956_employeeInputX" drools:dtype="org.kie.kogito.examples.onboarding.Employee" itemSubjectRef="__55258880-C191-4643-AC16-A0F5C1B05956_employeeInputXItem" name="employee"/>
         <bpmn2:dataInput id="_55258880-C191-4643-AC16-A0F5C1B05956_depeartmentInputX" drools:dtype="String" itemSubjectRef="__55258880-C191-4643-AC16-A0F5C1B05956_depeartmentInputXItem" name="depeartment"/>
-        <bpmn2:dataInput id="_55258880-C191-4643-AC16-A0F5C1B05956_payrollInputX" drools:dtype="org.acme.onboarding.Payroll" itemSubjectRef="__55258880-C191-4643-AC16-A0F5C1B05956_payrollInputXItem" name="payroll"/>
+        <bpmn2:dataInput id="_55258880-C191-4643-AC16-A0F5C1B05956_payrollInputX" drools:dtype="org.kie.kogito.examples.onboarding.Payroll" itemSubjectRef="__55258880-C191-4643-AC16-A0F5C1B05956_payrollInputXItem" name="payroll"/>
         <bpmn2:dataInput id="_55258880-C191-4643-AC16-A0F5C1B05956_emailInputX" drools:dtype="String" itemSubjectRef="__55258880-C191-4643-AC16-A0F5C1B05956_emailInputXItem" name="email"/>
         <bpmn2:dataInput id="_55258880-C191-4643-AC16-A0F5C1B05956_employeeIdInputX" drools:dtype="String" itemSubjectRef="__55258880-C191-4643-AC16-A0F5C1B05956_employeeIdInputXItem" name="employeeId"/>
         <bpmn2:dataInput id="_55258880-C191-4643-AC16-A0F5C1B05956_SkippableInputX" drools:dtype="Object" itemSubjectRef="__55258880-C191-4643-AC16-A0F5C1B05956_SkippableInputXItem" name="Skippable"/>
@@ -209,7 +209,7 @@
       <bpmn2:incoming>_D5E3808E-4D68-4B8F-939D-17C7643E58FD</bpmn2:incoming>
       <bpmn2:outgoing>_D32B4A20-53D1-46F3-95F6-276A2392931F</bpmn2:outgoing>
       <bpmn2:ioSpecification id="_YwdwR1r1EemSce_o1Tqd5Q">
-        <bpmn2:dataInput id="_14472369-3EAD-4B2D-9C3B-F83D4630C59B_employeeInputX" drools:dtype="org.acme.onboarding.Employee" itemSubjectRef="__14472369-3EAD-4B2D-9C3B-F83D4630C59B_employeeInputXItem" name="employee"/>
+        <bpmn2:dataInput id="_14472369-3EAD-4B2D-9C3B-F83D4630C59B_employeeInputX" drools:dtype="org.kie.kogito.examples.onboarding.Employee" itemSubjectRef="__14472369-3EAD-4B2D-9C3B-F83D4630C59B_employeeInputXItem" name="employee"/>
         <bpmn2:dataOutput id="_14472369-3EAD-4B2D-9C3B-F83D4630C59B_managerOutputX" drools:dtype="String" itemSubjectRef="__14472369-3EAD-4B2D-9C3B-F83D4630C59B_managerOutputXItem" name="manager"/>
         <bpmn2:dataOutput id="_14472369-3EAD-4B2D-9C3B-F83D4630C59B_departmentOutputX" drools:dtype="String" itemSubjectRef="__14472369-3EAD-4B2D-9C3B-F83D4630C59B_departmentOutputXItem" name="department"/>
         <bpmn2:inputSet id="_YwdwSFr1EemSce_o1Tqd5Q">
@@ -248,7 +248,7 @@
         <bpmn2:dataInput id="_DD24B4AE-8804-4D6E-B90B-98689CF6EF37_DecisionInputX" drools:dtype="String" itemSubjectRef="__DD24B4AE-8804-4D6E-B90B-98689CF6EF37_DecisionInputXItem" name="Decision"/>
         <bpmn2:dataInput id="_DD24B4AE-8804-4D6E-B90B-98689CF6EF37_ModelInputX" drools:dtype="String" itemSubjectRef="__DD24B4AE-8804-4D6E-B90B-98689CF6EF37_ModelInputXItem" name="Model"/>
         <bpmn2:dataInput id="_DD24B4AE-8804-4D6E-B90B-98689CF6EF37_NamespaceInputX" drools:dtype="String" itemSubjectRef="__DD24B4AE-8804-4D6E-B90B-98689CF6EF37_NamespaceInputXItem" name="Namespace"/>
-        <bpmn2:dataInput id="_DD24B4AE-8804-4D6E-B90B-98689CF6EF37_employeeInputX" drools:dtype="org.acme.onboarding.Employee" itemSubjectRef="__DD24B4AE-8804-4D6E-B90B-98689CF6EF37_employeeInputXItem" name="employee"/>
+        <bpmn2:dataInput id="_DD24B4AE-8804-4D6E-B90B-98689CF6EF37_employeeInputX" drools:dtype="org.kie.kogito.examples.onboarding.Employee" itemSubjectRef="__DD24B4AE-8804-4D6E-B90B-98689CF6EF37_employeeInputXItem" name="employee"/>
         <bpmn2:dataInput id="_DD24B4AE-8804-4D6E-B90B-98689CF6EF37_TaskNameInputX" drools:dtype="Object" name="TaskName"/>
         <bpmn2:dataOutput id="_DD24B4AE-8804-4D6E-B90B-98689CF6EF37_statusOutputX" drools:dtype="String" itemSubjectRef="__DD24B4AE-8804-4D6E-B90B-98689CF6EF37_statusOutputXItem" name="status"/>
         <bpmn2:dataOutput id="_DD24B4AE-8804-4D6E-B90B-98689CF6EF37_messageOutputX" drools:dtype="String" itemSubjectRef="__DD24B4AE-8804-4D6E-B90B-98689CF6EF37_messageOutputXItem" name="message"/>
@@ -314,8 +314,8 @@
       <bpmn2:incoming>_DF6979D3-AFD3-4BC8-A866-8B9214F7F0FB</bpmn2:incoming>
       <bpmn2:outgoing>_BB67B9E9-611B-4B17-A6F9-3CD4DCA4B249</bpmn2:outgoing>
       <bpmn2:ioSpecification id="_YweXTFr1EemSce_o1Tqd5Q">
-        <bpmn2:dataInput id="_9D7A4927-BFCB-4F17-A4D4-E3D03B3FBE49_employeeInputX" drools:dtype="org.acme.onboarding.Employee" itemSubjectRef="__9D7A4927-BFCB-4F17-A4D4-E3D03B3FBE49_employeeInputXItem" name="employee"/>
-        <bpmn2:dataOutput id="_9D7A4927-BFCB-4F17-A4D4-E3D03B3FBE49_payrollOutputX" drools:dtype="org.acme.onboarding.Payroll" itemSubjectRef="__9D7A4927-BFCB-4F17-A4D4-E3D03B3FBE49_payrollOutputXItem" name="payroll"/>
+        <bpmn2:dataInput id="_9D7A4927-BFCB-4F17-A4D4-E3D03B3FBE49_employeeInputX" drools:dtype="org.kie.kogito.examples.onboarding.Employee" itemSubjectRef="__9D7A4927-BFCB-4F17-A4D4-E3D03B3FBE49_employeeInputXItem" name="employee"/>
+        <bpmn2:dataOutput id="_9D7A4927-BFCB-4F17-A4D4-E3D03B3FBE49_payrollOutputX" drools:dtype="org.kie.kogito.examples.onboarding.Payroll" itemSubjectRef="__9D7A4927-BFCB-4F17-A4D4-E3D03B3FBE49_payrollOutputXItem" name="payroll"/>
         <bpmn2:inputSet id="_YweXTVr1EemSce_o1Tqd5Q">
           <bpmn2:dataInputRefs>_9D7A4927-BFCB-4F17-A4D4-E3D03B3FBE49_employeeInputX</bpmn2:dataInputRefs>
         </bpmn2:inputSet>
@@ -353,7 +353,7 @@
         <bpmn2:dataInput id="_16FFBBF8-8373-46D4-A278-F305AFA7F4B1_DecisionInputX" drools:dtype="String" itemSubjectRef="__16FFBBF8-8373-46D4-A278-F305AFA7F4B1_DecisionInputXItem" name="Decision"/>
         <bpmn2:dataInput id="_16FFBBF8-8373-46D4-A278-F305AFA7F4B1_ModelInputX" drools:dtype="String" itemSubjectRef="__16FFBBF8-8373-46D4-A278-F305AFA7F4B1_ModelInputXItem" name="Model"/>
         <bpmn2:dataInput id="_16FFBBF8-8373-46D4-A278-F305AFA7F4B1_NamespaceInputX" drools:dtype="String" itemSubjectRef="__16FFBBF8-8373-46D4-A278-F305AFA7F4B1_NamespaceInputXItem" name="Namespace"/>
-        <bpmn2:dataInput id="_9D7A4927-BFCB-4F17-A4D4-E3D03B3FBE40_employeeInputX" drools:dtype="org.acme.onboarding.Employee" itemSubjectRef="__9D7A4927-BFCB-4F17-A4D4-E3D03B3FBE49_employeeInputXItem" name="employee"/>
+        <bpmn2:dataInput id="_9D7A4927-BFCB-4F17-A4D4-E3D03B3FBE40_employeeInputX" drools:dtype="org.kie.kogito.examples.onboarding.Employee" itemSubjectRef="__9D7A4927-BFCB-4F17-A4D4-E3D03B3FBE49_employeeInputXItem" name="employee"/>
         <bpmn2:dataInput id="_16FFBBF8-8373-46D4-A278-F305AFA7F4B1_TaskNameInputX" drools:dtype="Object" name="TaskName"/>
         <bpmn2:dataOutput id="_16FFBBF8-8373-46D4-A278-F305AFA7F4B1_emailOutputX" drools:dtype="String" itemSubjectRef="__16FFBBF8-8373-46D4-A278-F305AFA7F4B1_emailOutputXItem" name="email"/>
         <bpmn2:dataOutput id="_16FFBBF8-8373-46D4-A278-F305AFA7F4B1_employeeIdOutputX" drools:dtype="String" itemSubjectRef="__16FFBBF8-8373-46D4-A278-F305AFA7F4B1_employeeIdOutputXItem" name="employeeId"/>

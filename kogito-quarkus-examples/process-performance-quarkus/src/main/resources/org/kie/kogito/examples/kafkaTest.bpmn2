@@ -6,7 +6,7 @@
   <bpmn2:itemDefinition id="testType" structureRef="Integer"/>
   <bpmn2:message id="_JlHFIL1vEDmpMpYahCYnog" itemRef="doneType" name="done"/>
   <bpmn2:message id="_JlHFIb1vEDmpMpYahCYnog" itemRef="testType" name="test"/>
-  <bpmn2:process id="kafkaTest" drools:packageName="org.acme" drools:version="1.0" drools:adHoc="false" name="kafkaTest" isExecutable="true" processType="Public">
+  <bpmn2:process id="kafkaTest" drools:packageName="org.kie.kogito.examples" drools:version="1.0" drools:adHoc="false" name="kafkaTest" isExecutable="true" processType="Public">
     <bpmn2:documentation><![CDATA[Deals with orders created by customer]]></bpmn2:documentation>
     <bpmn2:property id="delay" itemSubjectRef="_delayItem" name="delay"/>
     <bpmn2:sequenceFlow id="_EF166453-BF9B-4B1B-BAC4-F1C3B2B8C3A3" sourceRef="_93E94068-E19E-4690-82FC-39DD42972BC9" targetRef="_6BE0067B-C204-4F4C-9893-B9568E8E685C"/>

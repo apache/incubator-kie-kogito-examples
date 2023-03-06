@@ -25,6 +25,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.kie.kogito.examples.Hello;
 import org.kie.kogito.incubation.application.AppRoot;
 import org.kie.kogito.incubation.common.DataContext;
 import org.kie.kogito.incubation.common.MapDataContext;
@@ -43,7 +44,7 @@ public class CustomRestRules {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Stream<String> helloUnit(Map<String, Object> payload) {
-        // path: /rule-units/org.acme.Hello/queries/hello
+        // path: /rule-units/org.kie.kogito.examples.Hello/queries/hello
 
         var queryId = appRoot.get(RuleUnitIds.class)
                 .get(Hello.class)

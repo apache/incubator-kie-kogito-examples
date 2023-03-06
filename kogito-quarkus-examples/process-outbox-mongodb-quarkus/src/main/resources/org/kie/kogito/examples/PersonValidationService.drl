@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.acme
+package org.kie.kogito.examples
 unit PersonValidationService
 
-import org.acme.demo.Person;
+import org.kie.kogito.examples.demo.Person;
 
 rule "Is adult"
 when

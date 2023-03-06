@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.acme.demo;
+package org.kie.kogito.examples.demo;
 
-import org.acme.DemoApplication;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.kie.kogito.Model;
+import org.kie.kogito.examples.DemoApplication;
 import org.kie.kogito.process.Process;
 import org.kie.kogito.testcontainers.springboot.InfinispanSpringBootTestResource;
 import org.kie.kogito.testcontainers.springboot.KafkaSpringBootTestResource;

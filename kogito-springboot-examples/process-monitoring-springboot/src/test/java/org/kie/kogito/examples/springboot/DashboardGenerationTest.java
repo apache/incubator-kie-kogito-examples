@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.acme.springboot;
+package org.kie.kogito.examples.springboot;
 
 import java.util.List;
 

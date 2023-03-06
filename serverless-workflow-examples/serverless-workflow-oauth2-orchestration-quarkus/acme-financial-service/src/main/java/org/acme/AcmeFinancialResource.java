@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.acme;
+package org.kie.kogito.examples;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;

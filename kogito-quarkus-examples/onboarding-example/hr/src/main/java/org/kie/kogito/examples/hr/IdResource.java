@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.acme.hr;
+package org.kie.kogito.examples.hr;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;

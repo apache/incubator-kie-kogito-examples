@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.acme.onboarding;
+package org.kie.kogito.examples.onboarding;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -23,11 +23,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-import org.acme.KogitoOnboardingApplication;
-import org.acme.test.RecordedOutputWorkItemHandler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.kie.kogito.examples.KogitoOnboardingApplication;
+import org.kie.kogito.examples.test.RecordedOutputWorkItemHandler;
 import org.kie.kogito.internal.process.runtime.KogitoWorkItem;
 import org.kie.kogito.internal.process.runtime.KogitoWorkItemHandler;
 import org.kie.kogito.process.ProcessConfig;

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.acme;
+package org.kie.kogito.examples;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -327,7 +327,7 @@ public class PersonsRestIT {
                 .extract()
                 .path("[0].id");
 
-        // abort process instance via management interface        
+        // abort process instance via management interface
         given().contentType(ContentType.JSON).accept(ContentType.JSON).when().delete("/management/processes/persons/instances/" + firstCreatedId).then()
                 .statusCode(200).body("id", is(firstCreatedId));
 
@@ -367,7 +367,7 @@ public class PersonsRestIT {
         String nodeInstanceId = given().contentType(ContentType.JSON).accept(ContentType.JSON).when().get("/management/processes/persons/instances/" + firstCreatedId + "/nodeInstances").then()
                 .statusCode(200).body("$.size()", is(1)).extract().path("[0].nodeInstanceId");
 
-        // retrigger node instance via management interface        
+        // retrigger node instance via management interface
         given().contentType(ContentType.JSON).accept(ContentType.JSON).when().post("/management/processes/persons/instances/" + firstCreatedId + "/nodeInstances/" + nodeInstanceId).then()
                 .statusCode(200);
 
@@ -434,7 +434,7 @@ public class PersonsRestIT {
         given().contentType(ContentType.JSON).accept(ContentType.JSON).when().delete("/management/processes/persons/instances/" + firstCreatedId + "/nodeInstances/" + nodeInstanceId).then()
                 .statusCode(200);
 
-        // then trigger new node instance via management interface        
+        // then trigger new node instance via management interface
         given().contentType(ContentType.JSON).accept(ContentType.JSON).when().post("/management/processes/persons/instances/" + firstCreatedId + "/nodes/UserTask_1").then()
                 .statusCode(200);
 
