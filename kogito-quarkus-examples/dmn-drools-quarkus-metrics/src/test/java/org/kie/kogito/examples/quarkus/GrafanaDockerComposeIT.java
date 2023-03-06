@@ -19,10 +19,7 @@ import java.io.File;
 import java.net.URISyntaxException;
 import java.time.Duration;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 import org.kie.kogito.testcontainers.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +36,6 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.core.IsNot.not;
 
 @Testcontainers
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class GrafanaDockerComposeIT {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GrafanaDockerComposeIT.class);
@@ -72,16 +68,6 @@ public class GrafanaDockerComposeIT {
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    @BeforeAll
-    void setup() {
-        environment.start();
-    }
-
-    @AfterAll
-    void cleanup() {
-        environment.stop();
     }
 
     @Test
