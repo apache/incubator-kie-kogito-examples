@@ -76,9 +76,9 @@ spec:
             - name: QUARKUS_DATASOURCE_PASSWORD
               value: pass
             - name: QUARKUS_DATASOURCE_JDBC_URL
-              value: jdbc:postgresql://loanbroker-example-database:5432/postgres
+              value: jdbc:postgresql://loanbroker-example-database:5432/postgres?currentSchema=jobs-service
             - name: QUARKUS_DATASOURCE_REACTIVE_URL
-              value: postgresql://loanbroker-example-database:5432/postgres
+              value: postgresql://loanbroker-example-database:5432/postgres?search_path=jobs-service
           livenessProbe:
             failureThreshold: 3
             httpGet:
