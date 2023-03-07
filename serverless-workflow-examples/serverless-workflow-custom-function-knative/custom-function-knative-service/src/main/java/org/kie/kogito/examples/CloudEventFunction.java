@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Red Hat, Inc. and/or its affiliates.
+ * Copyright 2023 Red Hat, Inc. and/or its affiliates.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,16 @@
 package org.kie.kogito.examples;
 
 import io.quarkus.funqy.Funq;
+import io.quarkus.funqy.knative.events.CloudEvent;
+import io.quarkus.funqy.knative.events.CloudEventBuilder;
 
-public class Function {
+public class CloudEventFunction {
 
     @Funq
-    public Output function(Input input) {
-        return new Output("Greetings from Serverless Workflow, " + input.getName());
+    public CloudEvent<Void> cloudEventFunction(CloudEvent<Void> cloudEvent) {
+        return CloudEventBuilder.create()
+                .id("response-of-" + cloudEvent.id())
+                .build();
     }
 
 }
