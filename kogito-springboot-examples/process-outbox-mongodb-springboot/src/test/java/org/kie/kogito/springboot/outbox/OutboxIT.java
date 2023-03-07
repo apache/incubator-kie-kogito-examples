@@ -75,6 +75,7 @@ public class OutboxIT {
         }
         COMPOSE = new DockerComposeContainer<>(path.toFile());
         COMPOSE.withPull(false);
+        COMPOSE.withServices("kafka", "mongodb", "connect", "sidecar", "kogito");
         COMPOSE.withExposedService("kogito", KOGITO_PORT);
         COMPOSE.withExposedService("kafka", KAFKA_PORT);
         COMPOSE.withExposedService("connect", DEBEZIUM_PORT);
@@ -85,7 +86,9 @@ public class OutboxIT {
         COMPOSE.waitingFor("kafka", Wait.forListeningPort());
         COMPOSE.waitingFor("sidecar", Wait.forListeningPort());
         COMPOSE.waitingFor("kogito", Wait.forListeningPort());
-        COMPOSE.start();
+        COMPOSE.withLocalCompose(true);
+        //See https://github.com/testcontainers/testcontainers-java/issues/4565
+        COMPOSE.withOptions("--compatibility");
     }
 
     private static Consumer<OutputFrame> logger() {
