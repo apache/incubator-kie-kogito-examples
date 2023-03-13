@@ -101,13 +101,17 @@ The service based on the JSON workflow definition can be accessed by sending a r
 ```json
 {
   "cloudevent": {
-    "id": "42",
     "specversion": "1.0",
     "source": "org.acme.source",
     "type": "test" 
   }
 }
 ```
+
+[NOTE]
+====
+Kogito Serverless Workflow generates a CloudEvent ID based on `source` and the workflow instance ID. In case an ID is set, Kogito Serverless Workflow will ignore it and use a generated one.
+====
 
 Complete curl command can be found below (replace `<URL>` with the URL for the `workflow` service returned by the `kn service list` command):
 
@@ -116,11 +120,11 @@ curl -X 'POST' \
   '<URL>/plainJsonKnativeFunction' \
   -H 'accept: */*' \
   -H 'Content-Type: application/json' \
-  -d '{ "cloudevent": { "id": "42", "specversion": "1.0", "source": "org.acme.source", "type": "test" }}'
+  -d '{ "cloudevent": { "specversion": "1.0", "source": "org.acme.source", "type": "test" }}'
 ```
 
 Should return something like this ("id" will change):
 
 ```json
-{"id":"8dc00353-c1c6-45e9-845d-e9188d103f50","workflowdata":{"id":"response-of-42","specversion":"1.0","source":"cloudEventFunction","type":"annotated"}}
+{"id":"8dc00353-c1c6-45e9-845d-e9188d103f50","workflowdata":{"id":"response-of-org.acme.source_8dc00353-c1c6-45e9-845d-e9188d103f50","specversion":"1.0","source":"cloudEventFunction","type":"annotated"}}
 ```
