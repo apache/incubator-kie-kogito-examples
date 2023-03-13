@@ -73,10 +73,7 @@ services:
       - KAFKA_HOST=kafka:29092
       - CONNECT_HOST=connect:8083
   kogito:
-    build:
-      context: ./kogito
-      dockerfile: ${KOGITO_DOCKERFILE}
-    image: kogito/outbox/quarkus/runtime
+    image: org.kie.kogito.examples/process-outbox-mongodb-quarkus:1.0
     ports:
       - "8080:8080"
     links:

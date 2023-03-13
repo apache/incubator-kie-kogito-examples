@@ -64,7 +64,11 @@ public class GrafanaDockerComposeIT {
                             Wait.forHttp("/api/v1/targets")
                                     .forResponsePredicate(x -> x.contains("\"health\":\"up\""))
                                     .withStartupTimeout(STARTUP_MINUTES_TIMEOUT))
-                    .withLogConsumer("prometheus_1", new Slf4jLogConsumer(LOGGER));
+                    .withLogConsumer("prometheus_1", new Slf4jLogConsumer(LOGGER))
+                    .withPull(false)
+                    .withLocalCompose(true)
+                    //See https://github.com/testcontainers/testcontainers-java/issues/4565
+                    .withOptions("--compatibility");
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
