@@ -93,16 +93,15 @@
   <profiles>
     <profile>
       <id>embedded</id>
-      <properties>
-        <skipTests>true</skipTests>
-        <deploy>false</deploy>
-        <quarkus.profile>embedded</quarkus.profile>
-      </properties>
+      <activation>
+        <property>
+          <name>embedded</name>
+        </property>
+      </activation>
       <dependencies>
         <dependency>
           <groupId>org.kie.kogito</groupId>
           <artifactId>kogito-addons-quarkus-jobs-service-embedded</artifactId>
-          <version>${kogito.bom.version}</version>
         </dependency>
       </dependencies>
     </profile>
