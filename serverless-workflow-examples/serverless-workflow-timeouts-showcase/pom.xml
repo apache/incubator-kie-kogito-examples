@@ -219,6 +219,28 @@
           <groupId>org.kie.kogito</groupId>
           <artifactId>kogito-addons-quarkus-jobs-service-embedded</artifactId>
         </dependency>
+        <dependency>
+          <groupId>org.kie.kogito</groupId>
+          <artifactId>kogito-addons-quarkus-data-index-inmemory</artifactId>
+        </dependency>
+        <!-- runtimes persistence -->
+        <dependency>
+          <groupId>io.quarkiverse.embedded.postgresql</groupId>
+          <artifactId>quarkus-embedded-postgresql</artifactId>
+          <version>0.0.1</version>
+        </dependency>
+        <dependency>
+          <groupId>org.kie.kogito</groupId>
+          <artifactId>kogito-addons-quarkus-persistence-jdbc</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>io.quarkus</groupId>
+          <artifactId>quarkus-jdbc-postgresql</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>io.quarkus</groupId>
+          <artifactId>quarkus-agroal</artifactId>
+        </dependency>
       </dependencies>
     </profile>
     <profile>
