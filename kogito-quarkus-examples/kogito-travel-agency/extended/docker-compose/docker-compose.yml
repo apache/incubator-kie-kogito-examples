@@ -104,6 +104,7 @@ services:
     environment:
       QUARKUS_INFINISPAN_CLIENT_HOSTS: infinispan:11222
       QUARKUS_INFINISPAN_CLIENT_USE_AUTH: "false"
+      QUARKUS_HTTP_CORS_ORIGINS: "/.*/"
       KAFKA_BOOTSTRAP_SERVERS: kafka:29092
       KOGITO_DATA_INDEX_PROPS: -Dkogito.protobuf.folder=/home/kogito/data/protobufs/
 
