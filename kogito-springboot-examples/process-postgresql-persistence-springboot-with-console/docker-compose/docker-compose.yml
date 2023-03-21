@@ -139,7 +139,7 @@ services:
     container_name: kogito-app
     build: 
       context: ../
-      target: ./Dockerfile
+      dockerfile: Dockerfile
     ports:
       - "8080:8080"
     depends_on:
