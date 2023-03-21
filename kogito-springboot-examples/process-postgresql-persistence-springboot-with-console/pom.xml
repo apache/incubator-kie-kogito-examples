@@ -9,7 +9,7 @@
     <version>1.35.0.Final</version>
   </parent>
 
-  <artifactId>process-postgresql-persistence-springboot-with-console</artifactId>
+  <artifactId>process-postgresql-persistence-springboot</artifactId>
   <name>Kogito Example :: Process PostgreSQL Persistence Spring Boot</name>
   <description>Kogito with PostgreSQL persistence - Spring Boot</description>
 
