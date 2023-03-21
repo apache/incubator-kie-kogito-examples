@@ -16,6 +16,7 @@
     <quarkus.platform.version>2.16.4.Final</quarkus.platform.version>
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
+    <kogito.quarkus.bom.artifact-id>kogito-quarkus-bom</kogito.quarkus.bom.artifact-id>
     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
     <maven.compiler.release>11</maven.compiler.release>
     <version.compiler.plugin>3.8.1</version.compiler.plugin>
@@ -36,6 +37,13 @@
       <dependency>
         <groupId>${kogito.bom.group-id}</groupId>
         <artifactId>${kogito.bom.artifact-id}</artifactId>
+        <version>${kogito.bom.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>${kogito.bom.group-id}</groupId>
+        <artifactId>${kogito.quarkus.bom.artifact-id}</artifactId>
         <version>${kogito.bom.version}</version>
         <type>pom</type>
         <scope>import</scope>
@@ -218,6 +226,27 @@
         <dependency>
           <groupId>org.kie.kogito</groupId>
           <artifactId>kogito-addons-quarkus-jobs-service-embedded</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>org.kie.kogito</groupId>
+          <artifactId>kogito-addons-quarkus-data-index-inmemory</artifactId>
+        </dependency>
+        <!-- runtimes persistence -->
+        <dependency>
+          <groupId>io.quarkiverse.embedded.postgresql</groupId>
+          <artifactId>quarkus-embedded-postgresql</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>org.kie.kogito</groupId>
+          <artifactId>kogito-addons-quarkus-persistence-jdbc</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>io.quarkus</groupId>
+          <artifactId>quarkus-jdbc-postgresql</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>io.quarkus</groupId>
+          <artifactId>quarkus-agroal</artifactId>
         </dependency>
       </dependencies>
     </profile>
