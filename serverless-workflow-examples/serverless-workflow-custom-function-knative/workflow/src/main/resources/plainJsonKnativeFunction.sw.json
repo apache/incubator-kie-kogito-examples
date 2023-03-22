@@ -3,7 +3,7 @@
   "version": "1.0",
   "name": "Test Knative function",
   "description": "This workflow tests a Knative function",
-  "start": "start",
+  "start": "invokeFunction",
   "functions": [
     {
       "name": "greet",
@@ -15,14 +15,6 @@
     }
   ],
   "states": [
-    {
-      "name": "start",
-      "type": "inject",
-      "data": {
-        "name": "Kogito"
-      },
-      "transition": "invokeFunction"
-    },
     {
       "name": "invokeFunction",
       "type": "operation",
