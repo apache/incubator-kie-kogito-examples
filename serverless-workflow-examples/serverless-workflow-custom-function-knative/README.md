@@ -117,7 +117,7 @@ Complete curl command can be found below (replace `<URL>` with the URL for the `
 
 ```sh
 curl -X 'POST' \
-  '<URL>/plainJsonKnativeFunction' \
+  '<URL>/cloudEventKnativeFunction' \
   -H 'accept: */*' \
   -H 'Content-Type: application/json' \
   -d '{ "cloudevent": { "specversion": "1.0", "source": "org.acme.source", "type": "test" }}'
