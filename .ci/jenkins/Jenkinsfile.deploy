@@ -100,7 +100,7 @@ pipeline {
             steps {
                 script {
                     dir(getRepoName()) {
-                        def oldKogitoVersion = sh(script: "mvn help:evaluate -Dexpression=project.version -q -DforceStdout", returnStdout: true)
+                        def oldKogitoVersion = readMavenPom(file: 'pom.xml').version
                         echo "Got old Kogito version ${oldKogitoVersion}"
 
                         maven.mvnVersionsUpdateParentAndChildModules(getMavenCommand(), getProjectVersion(), true)
