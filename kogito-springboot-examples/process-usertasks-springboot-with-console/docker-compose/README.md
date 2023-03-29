@@ -7,6 +7,7 @@ To allow a quick setup of all services required to run this demo, we provide a d
 - Kogito Management Console
 - Kogito Task Console
 - Keycloak
+- process-usertasks-springboot-with-console
 
 In order to use it, please ensure you have Docker Compose installed on your machine, otherwise follow the instructions available
  in [here](https://docs.docker.com/compose/install/).
@@ -36,6 +37,11 @@ In order to use it, please ensure you have Docker Compose installed on your mach
   - Management Console: 8280
   - Task Console: 8380
   - Keycloak: 8480
+  - process-usertasks-springboot-with-console: 8080
+
+> **_NOTE:_** If you don't want to run the example inside docker compose. You can stop the container by running below commands.
+
+    docker stop process-usertasks-springboot-with-console
 
 ### Stopping and removing volume data
   
