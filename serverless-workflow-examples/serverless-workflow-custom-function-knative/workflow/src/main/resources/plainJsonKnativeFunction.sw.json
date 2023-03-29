@@ -8,9 +8,9 @@
     {
       "name": "greet",
       "type": "custom",
-      "operation": "knative:custom-function-knative-service",
+      "operation": "knative:services.v1.serving.knative.dev/default/custom-function-knative-service",
       "metadata": {
-        "path": "/plainJsonFunction"
+        "uri": "/plainJsonFunction"
       }
     }
   ],
