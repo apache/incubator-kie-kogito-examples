@@ -3,7 +3,6 @@
 echo "Script requires your Kogito Quickstart to be compiled"
 
 PROJECT_VERSION=$(cd ../ && mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
-KEYCLOAK_VERSION=$(cd ../ && mvn help:evaluate -Dexpression=version.org.keycloak -q -DforceStdout)
 
 echo "Project version: ${PROJECT_VERSION}"
 
@@ -16,14 +15,7 @@ fi
 
 echo "Kogito Image version: ${KOGITO_VERSION}"
 echo "KOGITO_VERSION=${KOGITO_VERSION}" > ".env"
-echo "KEYCLOAK_VERSION=${KEYCLOAK_VERSION}" >> ".env"
-
-if [ "$(uname)" == "Darwin" ]; then
-   echo "Docker-compose don't support host-mode in MAC OS, that is used by jobs-service in this example"
-   exit 1
-elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-   echo "DOCKER_GATEWAY_HOST=172.17.0.1" >> ".env"
-fi
+echo "DOCKER_GATEWAY_HOST=172.17.0.1" >> ".env"
 
 DB="postgresql"
 

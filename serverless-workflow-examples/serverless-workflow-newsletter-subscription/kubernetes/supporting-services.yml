@@ -207,13 +207,13 @@ spec:
   broker: default
   filter:
     attributes:
-      type: CreateProcessInstanceJobRequest
+      type: job.create
   subscriber:
     ref:
       apiVersion: v1
       kind: Service
       name: jobs-service-postgresql
-    uri: /jobs/events
+    uri: /v2/jobs/events
 ---
 apiVersion: eventing.knative.dev/v1
 kind: Trigger
@@ -223,10 +223,10 @@ spec:
   broker: default
   filter:
     attributes:
-      type: CancelJobRequest
+      type: job.delete
   subscriber:
     ref:
       apiVersion: v1
       kind: Service
       name: jobs-service-postgresql
-    uri: /jobs/events
+    uri: /v2/jobs/events

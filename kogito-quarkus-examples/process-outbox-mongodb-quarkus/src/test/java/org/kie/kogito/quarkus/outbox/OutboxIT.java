@@ -23,9 +23,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.test.quarkus.kafka.KafkaTestClient;
@@ -35,6 +33,8 @@ import org.testcontainers.containers.DockerComposeContainer;
 import org.testcontainers.containers.output.OutputFrame;
 import org.testcontainers.containers.output.Slf4jLogConsumer;
 import org.testcontainers.containers.wait.strategy.Wait;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
 import com.jayway.jsonpath.JsonPath;
 
@@ -45,6 +45,7 @@ import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@Testcontainers
 public class OutboxIT {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(OutboxIT.class);
@@ -57,6 +58,8 @@ public class OutboxIT {
     private static final int KOGITO_PORT = 8080;
     private static final int KAFKA_PORT = 9092;
     private static final int DEBEZIUM_PORT = 8083;
+
+    @Container
     private static DockerComposeContainer COMPOSE;
 
     private int kogitoPort;
@@ -65,14 +68,14 @@ public class OutboxIT {
 
     private KafkaTestClient kafkaClient;
 
-    @BeforeAll
-    static void before() {
+    static {
         Path path = Paths.get("../../docker-compose.yml");
         if (!path.toFile().exists()) {
             path = Paths.get("docker-compose.yml");
         }
         COMPOSE = new DockerComposeContainer(path.toFile());
         COMPOSE.withPull(false);
+        COMPOSE.withServices("kafka", "mongodb", "connect", "sidecar", "kogito");
         COMPOSE.withExposedService("kogito", KOGITO_PORT);
         COMPOSE.withExposedService("kafka", KAFKA_PORT);
         COMPOSE.withExposedService("connect", DEBEZIUM_PORT);
@@ -83,14 +86,9 @@ public class OutboxIT {
         COMPOSE.waitingFor("kafka", Wait.forListeningPort());
         COMPOSE.waitingFor("sidecar", Wait.forListeningPort());
         COMPOSE.waitingFor("kogito", Wait.forListeningPort());
-        COMPOSE.start();
-    }
-
-    @AfterAll
-    static void after() {
-        if (COMPOSE != null) {
-            COMPOSE.stop();
-        }
+        COMPOSE.withLocalCompose(true);
+        //See https://github.com/testcontainers/testcontainers-java/issues/4565
+        COMPOSE.withOptions("--compatibility");
     }
 
     private static Consumer<OutputFrame> logger() {

@@ -253,6 +253,28 @@ In this tab, you can create and complete instances of the event-sate-timeouts pr
 
 To remove the installed services from your minikube installation you can use the following script files provided in the `scripts` directory.
 
+
+=== Running PostgreSQL and supporting services embedded
+Additionally in this example, there is a maven profile `embedded` which adds dependencies to run PostgreSQL embedded with the application alongside
+with Jobs Service and Data Index.
+These services are bootstrapped as part of the workflow application in this way it is not required to run them externally.
+____
+
+*NOTE:* that this is only for development and testing proposes to make the deployment easier in a single application and should not be used in production.
+
+____
+
+[source,shell]
+----
+mvn clean install -Pembedded
+
+or
+
+mvn clean compile quarkus:dev -Pembedded
+
+----
+
+
 ### Known issues
 
 At the time of writing this guide, it was detected that if you stop, and start, your minikube installation, there are times when an initialization error like the one below is produced.

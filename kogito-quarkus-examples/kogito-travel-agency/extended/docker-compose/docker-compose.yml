@@ -74,7 +74,7 @@ services:
 
   keycloak:
     container_name: keycloak
-    image: quay.io/keycloak/keycloak:${KEYCLOAK_VERSION}-legacy
+    image: quay.io/keycloak/keycloak:legacy
     ports:
       - "8480:8080"
     volumes:
@@ -102,10 +102,12 @@ services:
     volumes:
       - ./target/protobuf:/home/kogito/data/protobufs/
     environment:
-      QUARKUS_INFINISPAN_CLIENT_SERVER_LIST: infinispan:11222
+      QUARKUS_INFINISPAN_CLIENT_HOSTS: infinispan:11222
       QUARKUS_INFINISPAN_CLIENT_USE_AUTH: "false"
+      QUARKUS_HTTP_CORS_ORIGINS: "/.*/"
       KAFKA_BOOTSTRAP_SERVERS: kafka:29092
       KOGITO_DATA_INDEX_PROPS: -Dkogito.protobuf.folder=/home/kogito/data/protobufs/
+      QUARKUS_HTTP_CORS_ORIGINS: "/.*/"
 
   management-console:
     container_name: management-console
@@ -122,6 +124,7 @@ services:
     environment:
       KOGITO_DATAINDEX_HTTP_URL: http://${DOCKER_GATEWAY_HOST:-host.docker.internal}:8180/graphql
       KOGITO_MANAGEMENT_CONSOLE_PROPS: -Dkogito.consoles.keycloak.config.url=http://localhost:8480/auth -Dkogito.consoles.keycloak.config.health-check-url=http://localhost:8480/auth/realms/kogito/.well-known/openid-configuration -Dkogito.svg.folder.path=/home/kogito/data/svg
+      QUARKUS_HTTP_CORS_ORIGINS: "/.*/"
 
   task-console:
     container_name: task-console
@@ -136,3 +139,4 @@ services:
     environment:
       KOGITO_DATAINDEX_HTTP_URL: http://${DOCKER_GATEWAY_HOST:-host.docker.internal}:8180/graphql
       KOGITO_TASK_CONSOLE_PROPS: -Dkogito.consoles.keycloak.config.url=http://localhost:8480/auth -Dkogito.consoles.keycloak.config.health-check-url=http://localhost:8480/auth/realms/kogito/.well-known/openid-configuration
+      QUARKUS_HTTP_CORS_ORIGINS: "/.*/"

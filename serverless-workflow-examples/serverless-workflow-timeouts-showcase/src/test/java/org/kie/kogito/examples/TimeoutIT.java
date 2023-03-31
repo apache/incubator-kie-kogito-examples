@@ -38,6 +38,7 @@ class TimeoutIT {
     public static final String SWITCH_STATE_TIMEOUT_WORKFLOW_PATH = "switch_state_timeouts";
     public static final String CALLBACK_STATE_TIMEOUT_WORKFLOW_PATH = "callback_state_timeouts";
     public static final String EVENT_STATE_TIMEOUT_WORKFLOW_PATH = "event_state_timeouts";
+    public static final String TIMEOUT_WORKFLOW_PATH = "workflow_timeout";
 
     @Test
     void testSwitchStateWorkflow() {
@@ -52,6 +53,11 @@ class TimeoutIT {
     @Test
     void testEventStateWorkflow() {
         testWorkflow(EVENT_STATE_TIMEOUT_WORKFLOW_PATH);
+    }
+    
+    @Test
+    void testWorkflow() {
+        testWorkflow(TIMEOUT_WORKFLOW_PATH);
     }
 
     private void testWorkflow(String workflowPath) {
@@ -77,7 +83,7 @@ class TimeoutIT {
 
         //check the workflow instance was timed-out and completed
         await()
-                .pollDelay(30, TimeUnit.SECONDS)
+                .pollDelay(15, TimeUnit.SECONDS)
                 .atMost(1, TimeUnit.MINUTES)
                 .untilAsserted(() -> {
                     given()

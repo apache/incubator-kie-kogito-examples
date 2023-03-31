@@ -1,0 +1,55 @@
+{
+  "id": "workflow_timeout",
+  "version": "1.0",
+  "name": "Workflow timeout example",
+  "description": "An example of how workflow timeout works",
+  "start": "printWaitMessage",
+  "timeouts": {
+    "workflowExecTimeout": "PT2S"
+  },
+  "events": [
+    {
+      "name": "neverArrivingEvent",
+      "source": "",
+      "type": "never"
+    }
+  ],
+  "functions": [
+    {
+      "name": "printMessage",
+      "type": "custom",
+      "operation": "sysout"
+    }
+  ],
+  "states": [
+    {
+      "name": "printWaitMessage",
+      "type": "operation",
+      "actions": [
+        {
+          "name": "printBeforeEvent",
+          "functionRef": {
+            "refName": "printMessage",
+            "arguments": {
+              "message": "Waiting for event"
+            }
+          }
+        }
+      ],
+      "transition": "waitForEvent"
+    },
+    {
+      "name": "waitForEvent",
+      "type": "event",
+       "onEvents": [
+         {
+          "eventRefs": [
+            "neverArrivingEvent"
+          ],
+          "actions": [ ]
+        }
+       ], 
+      "end": true
+    }
+  ]
+}

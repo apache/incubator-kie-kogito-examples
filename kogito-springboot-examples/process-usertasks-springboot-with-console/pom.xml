@@ -12,7 +12,7 @@
   <artifactId>process-usertasks-springboot-with-console</artifactId>
   <name>Kogito Example :: Process with Usertasks Spring Boot :: Console</name>
   <description>Kogito usertasks orchestration - Spring Boot - With Console</description>
-  
+
   <properties>
     <enable.resource.infinispan>true</enable.resource.infinispan>
     <version.org.kie.kogito>2.0.0-SNAPSHOT</version.org.kie.kogito>
@@ -110,5 +110,38 @@
       </plugin>
     </plugins>
   </build>
-
+  <profiles>
+    <profile>
+      <id>container</id>
+      <activation>
+        <property>
+          <name>container</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>com.google.cloud.tools</groupId>
+            <artifactId>jib-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <phase>install</phase>
+                <goals>
+                  <goal>dockerBuild</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+              <to>
+                <image>${project.groupId}/${project.artifactId}</image>
+                <tags>
+                  <tag>${project.version}</tag>
+                </tags>
+              </to>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

@@ -38,7 +38,6 @@ import org.kie.kogito.auth.IdentityProviders;
 import org.kie.kogito.auth.SecurityPolicy;
 import org.kie.kogito.process.Process;
 import org.kie.kogito.process.ProcessInstance;
-import org.kie.kogito.process.ProcessInstanceReadMode;
 import org.kie.kogito.process.WorkItem;
 import org.kie.kogito.testcontainers.quarkus.InfinispanQuarkusTestResource;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
@@ -50,6 +49,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.core.StringContains.containsString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.kie.kogito.test.utils.ProcessInstancesTestUtils.abort;
 
 @QuarkusTest
 @QuarkusTestResource(value = InfinispanQuarkusTestResource.class)
@@ -75,7 +75,7 @@ public class TravelIT {
 
     @BeforeEach
     public void cleanUp() {
-        travelsProcess.instances().values(ProcessInstanceReadMode.MUTABLE).forEach(pi -> pi.abort());
+        abort(travelsProcess.instances());
         processInstance = null;
     }
 

@@ -88,7 +88,7 @@ pipeline {
             steps {
                 script {
                     dir(getRepoName()) {
-                        def oldKogitoVersion = sh(script: "mvn help:evaluate -Dexpression=project.version -q -DforceStdout", returnStdout: true)
+                        def oldKogitoVersion = readMavenPom(file: 'pom.xml').version
                         echo "Got old Kogito version ${oldKogitoVersion}"
 
                         maven.mvnVersionsUpdateParentAndChildModules(getMavenCommand(), getKogitoVersion(), true)
@@ -120,16 +120,6 @@ pipeline {
                 }
             }
         }
-        stage('Deploy to repository') {
-            when {
-                expression { return shouldDeployToRepository() }
-            }
-            steps {
-                script {
-                    runMavenDeploy(getRepoName())
-                }
-            }
-        }
         stage('Update branch') {
             steps {
                 script {
@@ -146,14 +136,13 @@ pipeline {
                 }
             }
         }
-        stage('Update nightly branch') {
+        stage('Deploy to repository') {
+            when {
+                expression { return shouldDeployToRepository() }
+            }
             steps {
                 script {
-                    String nightlyBranch = "nightly-${getBuildBranch()}"
-                    dir(getRepoName()) {
-                        githubscm.createBranch(nightlyBranch)
-                        githubscm.pushObject('origin', nightlyBranch, getGitAuthorCredsID())
-                    }
+                    runMavenDeploy(getRepoName())
                 }
             }
         }

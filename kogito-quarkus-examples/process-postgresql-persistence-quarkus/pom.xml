@@ -16,10 +16,10 @@
   <name>Kogito Example :: Process PostgreSQL Persistence Quarkus</name>
   <description>Process with PostgreSQL persistence - Quarkus</description>
   <properties>
-    <quarkus-plugin.version>2.16.0.Final</quarkus-plugin.version>
+    <quarkus-plugin.version>2.16.5.Final</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-    <quarkus.platform.version>2.16.0.Final</quarkus.platform.version>
+    <quarkus.platform.version>2.16.5.Final</quarkus.platform.version>
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
@@ -112,32 +112,6 @@
           <name>events</name>
         </property>
       </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <artifactId>maven-antrun-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>append-events</id>
-                <phase>generate-sources</phase>
-                <goals>
-                  <goal>run</goal>
-                </goals>
-                <configuration>
-                  <target>
-                    <concat destfile="src/main/resources/application-temp.properties">
-                      <fileset file="src/main/resources/application.properties"/>
-                      <fileset file="src/main/resources/events.properties"/>
-                    </concat>
-                    <delete file="src/main/resources/application.properties"/>
-                    <move file="src/main/resources/application-temp.properties" tofile="src/main/resources/application.properties"/>
-                  </target>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
       <dependencies>
         <dependency>
           <groupId>org.kie.kogito</groupId>

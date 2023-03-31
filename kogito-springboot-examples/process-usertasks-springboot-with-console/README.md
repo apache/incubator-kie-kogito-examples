@@ -77,9 +77,10 @@ Once all services bootstrap, the following ports will be assigned on your local 
 - Data Index: 8180
 - Management Console: 8280
 - Task Console: 8380
-- Keycloak: 8480
+- Keycloak: 8480 
+- process-usertasks-springboot-with-console: 8080
 
-> **_NOTE:_**  This step requires the project to be compiled, please consider running a ```mvn clean install``` command on the project root before running the ```startServices.sh``` script for the first time or any time you modify the project.
+> **_NOTE:_**  This step requires the project to be compiled, please consider running a ```mvn clean install -Pcontainer``` command on the project root before running the ```startServices.sh``` script for the first time or any time you modify the project. ```-Pcontainer``` will create a local docker image of the example and will be run by docker-compose with all required services.
 
 Once started you can simply stop all services by executing the ```docker-compose stop```.
 
@@ -97,6 +98,10 @@ It will install the *Kogito Realm* that comes with a predefined set of users:
 |    jdoe       |   jdoe     | *managers*          |
 
 Once Keycloak is started, you should be able to access your *Keycloak Server* at [localhost:8480/auth](http://localhost:8480/auth) with *admin* user.
+
+> **_NOTE:_** If you don't want to run the example inside docker compose. You can stop the service container by running below commands.
+
+    docker stop process-usertasks-springboot-with-console
 
 ### Compile and Run in Local Dev Mode
 

@@ -15,10 +15,10 @@
 
   <properties>
     <DEBEZIUM_VERSION>1.7</DEBEZIUM_VERSION>
-    <quarkus-plugin.version>2.16.0.Final</quarkus-plugin.version>
+    <quarkus-plugin.version>2.16.5.Final</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-    <quarkus.platform.version>2.16.0.Final</quarkus.platform.version>
+    <quarkus.platform.version>2.16.5.Final</quarkus.platform.version>
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
@@ -66,6 +66,10 @@
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-addons-quarkus-events-mongodb</artifactId>
     </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-container-image-jib</artifactId>
+    </dependency>
 
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -99,149 +103,18 @@
     <finalName>${project.artifactId}</finalName>
     <plugins>
       <plugin>
-        <artifactId>maven-clean-plugin</artifactId>
-        <configuration>
-          <filesets>
-            <fileset>
-              <directory>${project.basedir}/kogito/target</directory>
-            </fileset>
-          </filesets>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-failsafe-plugin</artifactId>
-        <configuration>
-          <classpathDependencyExcludes>
-            <classpathDependencyExclude>org.jboss.slf4j:slf4j-jboss-logmanager</classpathDependencyExclude>
-          </classpathDependencyExcludes>
-        </configuration>
+        <groupId>${quarkus.platform.group-id}</groupId>
+        <artifactId>quarkus-maven-plugin</artifactId>
+        <version>${quarkus-plugin.version}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>build</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
 
-  <profiles>
-    <profile>
-      <id>default</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
-      <properties>
-        <KOGITO_DOCKERFILE>Dockerfile.jvm</KOGITO_DOCKERFILE>
-      </properties>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>${quarkus.platform.group-id}</groupId>
-            <artifactId>quarkus-maven-plugin</artifactId>
-            <version>${quarkus-plugin.version}</version>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>build</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <artifactId>maven-resources-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>copy-quarkus-app</id>
-                <phase>package</phase>
-                <goals>
-                  <goal>copy-resources</goal>
-                </goals>
-                <configuration>
-                  <outputDirectory>${project.basedir}/kogito/target/quarkus-app</outputDirectory>
-                  <resources>
-                    <resource>
-                      <directory>${project.basedir}/target/quarkus-app</directory>
-                    </resource>
-                  </resources>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-
-    <!-- profile for preparing the multistage native build of the kogito service in docker-compose.yml -->
-    <profile>
-      <id>native</id>
-      <properties>
-        <maven.main.skip>true</maven.main.skip>
-        <maven.test.skip>true</maven.test.skip>
-        <KOGITO_DOCKERFILE>Dockerfile.multistage</KOGITO_DOCKERFILE>
-      </properties>
-      <build>
-        <plugins>
-          <plugin>
-            <artifactId>maven-resources-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>copy-kogito-source</id>
-                <phase>package</phase>
-                <goals>
-                  <goal>copy-resources</goal>
-                </goals>
-                <configuration>
-                  <outputDirectory>${project.basedir}/kogito/target</outputDirectory>
-                  <resources>
-                    <resource>
-                      <directory>${project.basedir}/../</directory>
-                      <targetPath>base</targetPath>
-                      <includes>
-                        <include>mvnw</include>
-                        <include>pom.xml</include>
-                      </includes>
-                    </resource>
-                    <resource>
-                      <directory>${project.basedir}/../.mvn</directory>
-                      <targetPath>base/.mvn</targetPath>
-                    </resource>
-                    <resource>
-                      <directory>${project.basedir}/</directory>
-                      <includes>
-                        <include>pom.xml</include>
-                      </includes>
-                    </resource>
-                    <resource>
-                      <directory>${project.basedir}/src</directory>
-                      <targetPath>src</targetPath>
-                    </resource>
-                  </resources>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-
-    <!-- profile for building the kogito service in docker-compose.yml with kogito/Dockerfile.multistage -->
-    <profile>
-      <id>multistage</id>
-      <properties>
-        <quarkus.package.type>native</quarkus.package.type>
-      </properties>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>${quarkus.platform.group-id}</groupId>
-            <artifactId>quarkus-maven-plugin</artifactId>
-            <version>${quarkus-plugin.version}</version>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>build</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
 </project>

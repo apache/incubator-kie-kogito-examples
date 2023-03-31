@@ -73,8 +73,7 @@ services:
       - KAFKA_HOST=kafka:29092
       - CONNECT_HOST=connect:8083
   kogito:
-    build: ./kogito
-    image: kogito/outbox/springboot/runtime
+    image: org.kie.kogito.examples/process-outbox-mongodb-springboot:1.0
     ports:
       - "8080:8080"
     links:

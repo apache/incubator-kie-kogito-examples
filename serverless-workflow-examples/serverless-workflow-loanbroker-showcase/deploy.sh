@@ -72,8 +72,8 @@ build_maven_image() {
 
     cd $PROJ
     print_build_header $PROJ
-    echo "mvn -B clean install -Dquarkus.kubernetes.namespace=$NAMESPACE -DskipTests -Dcontainer $PROFILE >> ../$DEPLOY_LOG"
-    mvn -B clean install -Dquarkus.kubernetes.namespace=$NAMESPACE -DskipTests -Dcontainer $PROFILE >> ../$DEPLOY_LOG
+    echo "mvn -B clean install -Dquarkus.kubernetes.namespace=$NAMESPACE -DskipTests $PROFILE >> ../$DEPLOY_LOG"
+    mvn -B clean install -Dquarkus.kubernetes.namespace=$NAMESPACE -DskipTests $PROFILE >> ../$DEPLOY_LOG
     print_build_footer $PROJ $?
     PROFILE=""
     cd - >> /dev/null
@@ -85,7 +85,7 @@ build_kn_image() {
 
     cd $PROJ
     print_build_header $PROJ
-    kn func build -v -n $NAMESPACE --image $IMAGE_NAME >> ../$DEPLOY_LOG
+    kn func build -v --image $IMAGE_NAME >> ../$DEPLOY_LOG
     print_build_footer $PROJ $?
     cd - >> /dev/null
 }
@@ -133,7 +133,7 @@ expose_loanbroker_ui() {
 rm -rf $DEPLOY_LOG
 
 if [ "$SKIP_BUILD" != true ]
-then 
+then
     echo "Setting Docker Env to Minikube"
     eval $(minikube -p minikube docker-env --profile knative)
     if [ $? -gt 0 ]
@@ -141,9 +141,9 @@ then
         echo "Failed to set docker-env to minikube" >&2
         exit 1
     fi
-    build_maven_image "loanbroker-ui"
+    build_maven_image "loanbroker-ui" "container"
     build_maven_image "loanbroker-flow" "persistence"
-    build_maven_image "aggregator"
+    build_maven_image "aggregator" "container"
     build_kn_image "credit-bureau" "dev.local/loanbroker-credit-bureau"
     build_kn_image "banks" "dev.local/loanbroker-bank"
 fi

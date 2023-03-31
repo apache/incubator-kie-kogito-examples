@@ -76,9 +76,9 @@ spec:
             - name: QUARKUS_DATASOURCE_PASSWORD
               value: pass
             - name: QUARKUS_DATASOURCE_JDBC_URL
-              value: jdbc:postgresql://loanbroker-example-database:5432/postgres
+              value: jdbc:postgresql://loanbroker-example-database:5432/postgres?currentSchema=jobs-service
             - name: QUARKUS_DATASOURCE_REACTIVE_URL
-              value: postgresql://loanbroker-example-database:5432/postgres
+              value: postgresql://loanbroker-example-database:5432/postgres?search_path=jobs-service
           livenessProbe:
             failureThreshold: 3
             httpGet:
@@ -109,13 +109,13 @@ spec:
   broker: default
   filter:
     attributes:
-      type: CreateProcessInstanceJobRequest
+      type: job.create
   subscriber:
     ref:
       apiVersion: v1
       kind: Service
       name: jobs-service-postgresql
-    uri: /jobs/events
+    uri: /v2/jobs/events
 ---
 apiVersion: eventing.knative.dev/v1
 kind: Trigger
@@ -126,10 +126,10 @@ spec:
   broker: default
   filter:
     attributes:
-      type: CancelJobRequest
+      type: job.delete
   subscriber:
     ref:
       apiVersion: v1
       kind: Service
       name: jobs-service-postgresql
-    uri: /jobs/events
+    uri: /v2/jobs/events

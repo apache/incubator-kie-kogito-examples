@@ -96,7 +96,7 @@ If you would like to check output when there is no compensation
 Complete curl command can be found below:
 
 ```text
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"shouldCompensate": false}' http://localhost:8080/error
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"shouldCompensate": false}' http://localhost:8080/compensation
 ```
 
 Should return something like this ("id" will change)

@@ -44,6 +44,7 @@
         <module>pmml-springboot-example</module>
         <module>process-business-rules-springboot</module>
         <module>process-decisions-rest-springboot</module>
+        <module>process-decisions-rules-springboot</module>
         <module>process-decisions-springboot</module>
         <module>process-infinispan-persistence-springboot</module>
         <module>process-kafka-multi-springboot</module>
@@ -66,7 +67,7 @@
         <module>process-usertasks-with-security-springboot</module>
         <module>rules-legacy-springboot-example</module>
         <module>ruleunit-event-driven-springboot</module>
-        <module>ruleunit-springboot-example</module>        
+        <module>ruleunit-springboot-example</module>
       </modules>
     </profile>
 
@@ -134,6 +135,14 @@
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-maven-plugin</artifactId>
           <version>${version.org.springframework.boot}</version>
+        </plugin>
+        <plugin>
+          <groupId>com.google.cloud.tools</groupId>
+          <artifactId>jib-maven-plugin</artifactId>
+          <version>${version.jib.plugin}</version>
+          <configuration>
+            <allowInsecureRegistries>true</allowInsecureRegistries>
+          </configuration>
         </plugin>
       </plugins>
     </pluginManagement>

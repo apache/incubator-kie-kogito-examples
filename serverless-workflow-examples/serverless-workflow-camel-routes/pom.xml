@@ -12,10 +12,10 @@
   <description>Kogito Serverless Workflow Camel Routes Example - Quarkus</description>
 
   <properties>
-    <quarkus-plugin.version>2.16.0.Final</quarkus-plugin.version>
+    <quarkus-plugin.version>2.16.5.Final</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-    <quarkus.platform.version>2.16.0.Final</quarkus.platform.version>
+    <quarkus.platform.version>2.16.5.Final</quarkus.platform.version>
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
@@ -25,7 +25,7 @@
     <!-- Used by the WSDL plugin -->
     <version.org.apache.cxf>3.5.4</version.org.apache.cxf>
     <!-- Aligned with Quarkus. We don't use the Camel Quarkus platform BOM to avoid upgrade delays in our CI. Feel free to use the BOM in your projects, though -->
-    <version.io.quarkus.camel>2.15.0</version.io.quarkus.camel>
+    <version.io.quarkus.camel>2.16.0</version.io.quarkus.camel>
   </properties>
 
   <dependencyManagement>

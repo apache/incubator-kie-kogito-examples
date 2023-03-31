@@ -108,37 +108,21 @@
         </executions>
       </plugin>
       <plugin>
-        <artifactId>maven-resources-plugin</artifactId>
+        <groupId>com.google.cloud.tools</groupId>
+        <artifactId>jib-maven-plugin</artifactId>
+        <configuration>
+          <to>
+            <image>${project.groupId}/${project.artifactId}:1.0</image>
+          </to>
+        </configuration>
         <executions>
           <execution>
-            <id>copy-springboot-jar</id>
             <phase>package</phase>
             <goals>
-              <goal>copy-resources</goal>
+              <goal>dockerBuild</goal>
             </goals>
-            <configuration>
-              <outputDirectory>${project.basedir}/kogito/target</outputDirectory>
-              <resources>
-                <resource>
-                  <directory>${project.basedir}/target</directory>
-                  <includes>
-                    <include>*-springboot.jar</include>
-                  </includes>
-                </resource>
-              </resources>
-            </configuration>
           </execution>
         </executions>
-      </plugin>
-      <plugin>
-        <artifactId>maven-clean-plugin</artifactId>
-        <configuration>
-          <filesets>
-            <fileset>
-              <directory>${project.basedir}/kogito/target</directory>
-            </fileset>
-          </filesets>
-        </configuration>
       </plugin>
     </plugins>
   </build>

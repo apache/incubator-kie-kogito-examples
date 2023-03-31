@@ -8,6 +8,7 @@
 * https://github.com/kiegroup/kogito-pipelines/tree/main/dsl/seed/src/main/groovy/org/kie/jenkins/jobdsl.
 */
 
+import org.kie.jenkins.jobdsl.model.JenkinsFolder
 import org.kie.jenkins.jobdsl.model.JobType
 import org.kie.jenkins.jobdsl.utils.JobParamsUtils
 import org.kie.jenkins.jobdsl.KogitoJobTemplate
@@ -16,7 +17,7 @@ import org.kie.jenkins.jobdsl.Utils
 
 jenkins_path = '.ci/jenkins'
 
-Map getMultijobPRConfig() {
+Map getMultijobPRConfig(JenkinsFolder jobFolder) {
     return [
         parallel: true,
         buildchain: true,
@@ -26,16 +27,14 @@ Map getMultijobPRConfig() {
                 primary: true,
                 env : [
                     // Sonarcloud analysis is disabled for examples
-                    DISABLE_SONARCLOUD: true,
                     KOGITO_EXAMPLES_SUBFOLDER_POM: 'kogito-quarkus-examples/',
+                    BUILD_MVN_OPTS_CURRENT: jobFolder.getEnvironmentName() ? '' : '-Dvalidate-formatting', // Validate formatting only for default env
                 ]
             ],
             [
                 id: 'kogito-springboot-examples',
                 primary: true,
                 env : [
-                    // Sonarcloud analysis is disabled for examples
-                    DISABLE_SONARCLOUD: true,
                     KOGITO_EXAMPLES_SUBFOLDER_POM: 'kogito-springboot-examples/',
                 ]
             ],
@@ -43,8 +42,6 @@ Map getMultijobPRConfig() {
                 id: 'serverless-workflow-examples',
                 primary: true,
                 env : [
-                    // Sonarcloud analysis is disabled for examples
-                    DISABLE_SONARCLOUD: true,
                     KOGITO_EXAMPLES_SUBFOLDER_POM: 'serverless-workflow-examples/',
                 ]
             ]
@@ -53,7 +50,7 @@ Map getMultijobPRConfig() {
 }
 
 // PR checks
-KogitoJobUtils.createAllEnvironmentsPerRepoPRJobs(this) { jobFolder -> getMultijobPRConfig() }
+KogitoJobUtils.createAllEnvironmentsPerRepoPRJobs(this) { jobFolder -> getMultijobPRConfig(jobFolder) }
 setupDeployJob(JobType.PULL_REQUEST, 'kogito-bdd')
 
 // Init branch
@@ -64,13 +61,13 @@ KogitoJobUtils.createNightlyBuildChainBuildAndDeployJobForCurrentRepo(this, '', 
 
 // Environment nightlies
 setupSpecificBuildChainNightlyJob('native')
-setupSpecificBuildChainNightlyJob('mandrel')
 
 // Jobs with integration branch
-setupSpecificNightlyJob('quarkus-main', true)
-setupSpecificNightlyJob('quarkus-branch', true)
-setupSpecificNightlyJob('quarkus-lts', true)
-setupSpecificNightlyJob('mandrel-lts', true)
+setupNightlyQuarkusIntegrationJob('quarkus-main')
+setupNightlyQuarkusIntegrationJob('quarkus-branch')
+setupNightlyQuarkusIntegrationJob('quarkus-lts')
+setupNightlyQuarkusIntegrationJob('native-lts')
+setupNightlyQuarkusIntegrationJob('quarkus-3')
 
 // Release jobs
 setupDeployJob(JobType.RELEASE)
@@ -84,22 +81,8 @@ KogitoJobUtils.createQuarkusUpdateToolsJob(this, 'kogito-examples', [
 // Methods
 /////////////////////////////////////////////////////////////////
 
-void setupSpecificNightlyJob(String envName, boolean useIntegrationBranch = false) {
-    def jobParams = JobParamsUtils.getBasicJobParamsWithEnv(this, "kogito-examples${useIntegrationBranch ? '-integration-branch' : ''}", JobType.NIGHTLY, envName, "${jenkins_path}/Jenkinsfile.specific_nightly", "Kogito Examples Nightly ${envName}")
-    JobParamsUtils.setupJobParamsDefaultMavenConfiguration(this, jobParams)
-    jobParams.triggers = [ cron : '@midnight' ]
-    jobParams.env.putAll([
-        JENKINS_EMAIL_CREDS_ID: "${JENKINS_EMAIL_CREDS_ID}",
-        NOTIFICATION_JOB_NAME: "${envName} check",
-        USE_INTEGRATION_BRANCH : useIntegrationBranch,
-    ])
-    KogitoJobTemplate.createPipelineJob(this, jobParams)?.with {
-        parameters {
-            stringParam('BUILD_BRANCH_NAME', "${GIT_BRANCH}", 'Set the Git branch to checkout')
-            stringParam('GIT_AUTHOR', "${GIT_AUTHOR_NAME}", 'Set the Git author to checkout')
-            stringParam('GIT_AUTHOR_CREDS_ID', "${GIT_AUTHOR_CREDENTIALS_ID}", 'Set the Git author creds id')
-        }
-    }
+void setupNightlyQuarkusIntegrationJob(String envName) {
+    KogitoJobUtils.createNightlyBuildChainIntegrationJob(this, envName, Utils.getRepoName(this), true)
 }
 
 void setupSpecificBuildChainNightlyJob(String envName) {
