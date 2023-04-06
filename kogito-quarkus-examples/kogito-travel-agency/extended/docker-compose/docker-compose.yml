@@ -107,7 +107,6 @@ services:
       QUARKUS_HTTP_CORS_ORIGINS: "/.*/"
       KAFKA_BOOTSTRAP_SERVERS: kafka:29092
       KOGITO_DATA_INDEX_PROPS: -Dkogito.protobuf.folder=/home/kogito/data/protobufs/
-      QUARKUS_HTTP_CORS_ORIGINS: "/.*/"
 
   management-console:
     container_name: management-console

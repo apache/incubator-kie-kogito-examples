@@ -79,6 +79,7 @@ services:
       QUARKUS_DATASOURCE_USERNAME: kogito-user
       QUARKUS_DATASOURCE_PASSWORD: kogito-pass
       KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+      QUARKUS_HTTP_CORS_ORIGINS: "/.*/"
       KOGITO_DATA_INDEX_PROPS: -Dquarkus.hibernate-orm.database.generation=update
 
   sw-callback-service:
@@ -103,5 +104,7 @@ services:
       KAFKA_BOOTSTRAP_SERVERS: kafka:29092
       KOGITO_SERVICE_URL: http://sw-callback-service:8080
       KOGITO_DATAINDEX_HTTP_URL: http://data-index:8180
+      QUARKUS_FLYWAY_BASELINE_ON_MIGRATE: "true"
+      QUARKUS_HTTP_CORS_ORIGINS: "/.*/"
     extra_hosts:
       - "data-index:host-gateway"
