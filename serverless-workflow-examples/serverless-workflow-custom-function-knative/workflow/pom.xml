@@ -60,6 +60,14 @@
         </dependency>
         <dependency>
             <groupId>org.kie.kogito</groupId>
+            <artifactId>kogito-quarkus-serverless-workflow-devui</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.kie.kogito</groupId>
+            <artifactId>kogito-addons-quarkus-source-files</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.kie.kogito</groupId>
             <artifactId>kogito-addons-quarkus-knative-serving</artifactId>
         </dependency>
         <dependency>
