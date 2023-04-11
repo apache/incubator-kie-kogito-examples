@@ -1,0 +1,56 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: github-showcase
+---
+# Database deployment for the loanbroker-example.
+apiVersion: v1
+data:
+  postgrespass: cGFzcwo=
+kind: Secret
+metadata:
+  name: github-showcase-database
+  namespace: github-showcase
+type: Opaque
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: github-showcase-database
+  namespace: github-showcase
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: github-showcase-database
+  template:
+    metadata:
+      labels:
+        app: github-showcase-database
+    spec:
+      containers:
+        - env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: postgrespass
+                  name: github-showcase-database
+          image: postgres:13.4-alpine3.14
+          imagePullPolicy: Always
+          name: github-showcase-database
+          ports:
+            - containerPort: 5432
+              name: tcp
+              protocol: TCP
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: github-showcase-database
+  namespace: github-showcase
+spec:
+  selector:
+    app: github-showcase-database
+  ports:
+    - port: 5432
+  type: ClusterIP

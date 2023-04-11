@@ -3,7 +3,7 @@ kind: GitHubSource
 metadata:
   name: github-event-listener
 spec:
-  ownerAndRepository: repository_placeholder
+  ownerAndRepository: VaniHaripriya/TestRepository
   eventTypes:
     - pull_request
   accessToken:

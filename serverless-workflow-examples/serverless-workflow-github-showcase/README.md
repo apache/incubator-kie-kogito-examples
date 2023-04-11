@@ -1,8 +1,3 @@
-**DEPRECATION NOTICE**
-
-> This example has a few old concepts from architecture and integration perspective. [We are working on an updated version of this example](https://issues.redhat.com/browse/KOGITO-8169). Until there, please try our other examples in this directory.
-> In case you still need to run it, latest Kogito version which worked was KOGITO 1.29.0.Final.
-
 ## Serverless Workflow GitHub Showcase
 
 In this example we will deploy a GitHub "bot" application that will
@@ -29,23 +24,6 @@ notify a given channel.
 
 ### Prerequisites
 
-> **IMPORTANT!** Before proceeding, please make sure you have everything listed in this section ready.
-
-You may use CRC or Minikube if you don't have a cluster available with cluster admin rights.
-Or you can ask an administrator to install the prerequisites for you.
-
-To deploy this example in your Kubernetes/OpenShift cluster, you will need:
-
-1. A [Quay.io](https://quay.io/repository/) account
-2. A Kubernetes/OpenShift namespace to deploy the example: `kubectl create ns kogito-github` or `oc new-project kogito-github
-3. [**Istio**](https://istio.io/docs/setup/install/istioctl/) installed because it's [required by Knative platform](https://knative.dev/docs/install/). 
-You can follow the [Knative documentation](https://knative.dev/docs/install/serving/installing-istio/) for a very basic and simple installation.
-4. **Knative** Serving and Eventing components installed. 
-We recommend [installing the Knative Operator](https://knative.dev/docs/install/knative-with-operators/) and install the rest of the components
-through it as described in their documentation.
-5. **Kogito Operator** installed in the namespace `kogito-github`. [Download the latest release](https://github.com/kiegroup/kogito-operator/releases), and run: `NAMESPACE=kogito-github ./hack/install.sh`.
-Alternatively, you can also install it via [OperatorHub](https://operatorhub.io/operator/kogito-operator).
-
 In your local machine you will need:
 
 1. To clone this repository and go to `serverless-workflow-github-showcase` directory (`git clone https://github.com/kiegroup/kogito-examples.git && cd serverless-workflow-github-showcase`)
@@ -53,6 +31,40 @@ In your local machine you will need:
 3. [Maven 3.8.1+](https://maven.apache.org/install.html)
 4. [Podman](https://podman.io/getting-started/installation.html) or Docker to build the images
 5. `kubectl` or `oc` client
+
+## Deploying on Minikube
+
+You can easily deploy this example on Minikube by using the provided `deploy.sh` script. But first, make sure that you have:
+
+1. Installed Minikube
+2. Installed [Knative Quickstart](https://knative.dev/docs/getting-started/quickstart-install/) on your Minikube installation. It adds a new `knative` profile to your cluster, so bear in mind that every command on Minikube must be followed by `-p knative`.
+3. Installed JDK 11, Maven, NPM, and Docker in order to build all the parts of the example.
+
+### Minimum Requirements
+
+- Minikube with at least 4 CPU cores
+- Minikube RAM of 12GB
+
+Start the tunnel in a separate terminal:
+
+```shell
+minikube tunnel -p knative
+```
+
+Now just run `./deploy.sh`. It will build all the services, create the Kubernetes object, and push the images to your Minikube's internal registry.
+
+
+Once the services are deployed, discover the URLs managed by Knative:
+
+```shell
+$ kubectl get ksvc -n github-showcase
+NAME                   URL                                                                 LATESTCREATED                LATESTREADY                  READY   REASON
+event-display          http://event-display.github-showcase.10.101.75.92.sslip.io          event-display-00001          event-display-00001          True    
+github-service         http://github-service.github-showcase.10.101.75.92.sslip.io         github-service-00001         github-service-00001         True    
+notification-service   http://notification-service.github-showcase.10.101.75.92.sslip.io   notification-service-00001   notification-service-00001   True    
+pr-checker-flow        http://pr-checker-flow.github-showcase.10.101.75.92.sslip.io        pr-checker-flow-00001        pr-checker-flow-00001        True    
+```
+
 
 ### Deploying the examples
 
@@ -72,13 +84,5 @@ In case of any problems, please file an issue or reach out to us at the [Kogito 
 You can easily clean up the demo by deleting the namespace:
 
 ```shell script
-kubectl delete ns kogito-github
+kubectl delete ns github-showcase
 ```
-
-To clean up your `/etc/hosts` file, run the following script:
-
-```shell script
-./scripts/cleanup-hosts-file.sh
-```
-
-It will remove all the lines added by the `expose-on-minikube.sh` script while deploying the services.

@@ -1,0 +1,92 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: github-showcase
+---
+# use for debugging
+# simple knative application to display the routed messages
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: event-display
+  namespace: github-showcase
+spec:
+  template:
+    spec:
+      containers:
+        -  # This corresponds to
+          # https://github.com/knative/eventing-contrib/tree/main/cmd/event_display
+          image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display@sha256:a214514d6ba674d7393ec8448dd272472b2956207acb3f83152d3071f0ab1911
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: trigger-eventdisplay
+  namespace: github-showcase
+spec:
+  broker: default
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: event-display
+---
+apiVersion: sources.knative.dev/v1
+kind: SinkBinding
+metadata:
+  name: pr-checker-sink
+spec:
+  subject:
+    apiVersion: apps/v1
+    kind: Deployment
+    selector:
+      matchLabels:
+        app: pr-checker-flow
+  # any cloud event produced by our application will then be delivered to the Broker
+  sink:
+    ref:
+      apiVersion: eventing.knative.dev/v1
+      kind: Broker
+      name: default
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: pr-checker-listener
+spec:
+  broker: default
+  filter:
+    attributes:
+      # anything from our repo
+      source: placeholder
+      # pull requests events only :)
+      type: dev.knative.source.github.pull_request
+  # the subscriber is the deployed kogito service
+  subscriber:
+    ref:
+      apiVersion: v1
+      kind: Service
+      name: pr-checker-flow
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: notification-trigger
+spec:
+  # the default broker has been enabled in the cluster since the namespace is labeled with knative-eventing-injection=enabled
+  broker: default
+  filter:
+    attributes:
+      # this message is produced by the pr-checker-workflow
+      type: process.handle_backend.checker_workflow_backend
+  # the subscriber is the knative service we just deployed
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: notification-service
+---
+apiVersion: eventing.knative.dev/v1
+kind: Broker
+metadata:
+  name: default

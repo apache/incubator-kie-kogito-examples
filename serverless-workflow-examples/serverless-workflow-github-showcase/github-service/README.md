@@ -85,80 +85,32 @@ Then access the Swagger UI to play around with the API: http://localhost:8080/sw
 1. Open a test PR to have some data to play with
 2. Invite a friend to be a contributor to your repo, so you can make the service request for their review in the PRs :kissing:
 
-### Deploying on Kubernetes
+### Running on knative
 
 > **IMPORTANT! :warning:** we assume you have read the prerequisites section in the main
 > [README file](../README.md). Please follow those instructions before continuing.
 
-**Heads up!** This service will be deployed as a Knative Service instead of a regular Kubernetes
-Deployment.
+ Run `mvn clean install -Pknative`
 
-To make things easier there is a [script in this directory](deploy-kubernetes.sh) to generate the template
-files, build the application and the image, and then deploy it to your Kubernetes cluster. 
+ Deploy the service with the following command:
 
-**IMPORTANT!** You **must** be authenticated to the target Kubernetes cluster as a **cluster administrator** for this script
-to work.
-
-You can run the script once and all the required files will be generated in the `kubernetes` directory, 
-and the image will be published to your Quay.io account.
-
-Fill the value for the variables as shown below and run the script:
-
-```shell script
-# the script accepts positional arguments as following:
-QUAY_NAMESPACE=
-APP_ID=
-INSTALLATION_ID=
-DER_FILE=
-
-./deploy-kubernetes.sh $QUAY_NAMESPACE $APP_ID $INSTALLATION_ID $DER_FILE
-```
-
-You should see a similar output like this:
-
-<details><summary>Build logs</summary>
-```
-// build logs surpressed
----> Building and pushing image using tag quay.io/ricardozanini/github-service:latest
-STEP 1: FROM adoptopenjdk:11-jre-hotspot
-STEP 2: RUN mkdir -p /opt/app/lib
---> Using cache 26183c5ad8a51a030030a250db0c99e649fdd9668ef4766d0b66782d0dad7573
-STEP 3: COPY target/github-service-2.0.0-SNAPSHOT-runner.jar /opt/app
---> 31bc2627d32
-STEP 4: COPY target/lib/*.jar /opt/app/lib
---> 62eae5cdde7
-STEP 5: CMD ["java", "-jar", "/opt/app/github-service-2.0.0-SNAPSHOT-runner.jar"]
-STEP 6: COMMIT quay.io/ricardozanini/github-service:latest
---> 7c555a3060c
-7c555a3060c666582824552d8824f2787b59b67b506fb933b171764bde894730
-Getting image source signatures
-Copying config 7c555a3060 [--------------------------------------] 0.0b / 6.2KiB
-Writing manifest to image destination
-Writing manifest to image destination
-Storing signatures
----> Applying objects to the cluster in the namespace kogito-github.
-configmap/github-service-properties unchanged
-secret/github-app-ids unchanged
-secret/github-app-key unchanged
-service.serving.knative.dev/github-service configured
-```
-</details>
-
+ ```shell
+ # install the github-service 
+ $ kubectl apply -f github-service/target/kubernetes/knative.yml -n github-showcase
+ ```
 To verify if the service have been correctly deployed run:
 
 ```
-$ kubectl get ksvc github-service  -n kogito-github
+ $ kubectl get ksvc github-service  -n github-showcase
+NAME                  URL                                                         LATESTCREATED               LATESTREADY      READY   REASON
+github-service   http://github-service.github-showcase.10.104.64.247.sslip.io   github-service-00001     github-service-00001   True    
 
-NAME             URL                                               LATESTCREATED          LATESTREADY            READY   REASON
-github-service   http://github-service.kogito-github.example.com   github-service-7frvw   github-service-7frvw   True    
 ```
-
 The `READY` column should be true.
 
 #### Exposing the service on Minikube
 
-If you're running on another cluster than Minikube, the service's route exposed by Knative Serving probably is accessible to you.
-On Minikube there are some additional steps to be made. 
+Execute the following command to expose the knative service
 
 Run a new terminal window:
 
@@ -168,23 +120,22 @@ minikube tunnel
 
 Leave the process executing and then execute:
 
-```shell script
-./expose-on-minikube.sh
+```shell
+ # expose the github-service 
+ $ kubectl expose deployment github-service --name=github-service-external --type=LoadBalancer --port=8080 -n github-showcase
 ```
-
-This script will fetch the Minikube IP exposed by the `tunnel` command and add the route to your local `/etc/hosts` file.
 
 You can then access the service via the service URL:
 
 ```
-$  kubectl get ksvc github-service  -n kogito-github --output jsonpath="{.status.url}"
+$   kubectl get ksvc github-service  -n github-showcase --output jsonpath="{.status.url}"
 
-http://github-service.kogito-github.example.com
+http://github-service.github-showcase.10.104.64.247.sslip.io
 ```
 
 As we did when running through the `jar` file, we can access the Swagger UI and play around with the API: 
 
-http://github-service.kogito-github.example.com/swagger-ui
+http://github-service.github-showcase.10.104.64.247.sslip.io/q/swagger-ui
 
 The first query may take a little time to return since Knative will start the service's pod on demand. 
 After some time the pod will just terminate. 

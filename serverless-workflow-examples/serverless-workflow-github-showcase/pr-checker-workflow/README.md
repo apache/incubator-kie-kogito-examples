@@ -52,75 +52,15 @@ Just make sure that the Webhook link is correct._
 
 ### Install Knative GitHub Source
 
-Install the GitHub source from [eventing-contrib](https://github.com/knative/eventing-contrib/releases) releases that match your Knative Eventing
-platform. To know the Knative eventing version run:
+Install the GitHub source from [eventing-github](https://github.com/knative-sandbox/eventing-github/releases) releases that match your Knative Eventing
+platform. 
 
 ```shell script
-$ kubectl get KnativeEventing knative-eventing -n knative-eventing
-
-NAME               VERSION   READY   REASON
-knative-eventing   0.17.3    True  
-```
-
-Then run:
-
-```shell script
-$ kubectl apply -f https://github.com/knative/eventing-contrib/releases/download/v<VERSION>/github.yaml
+$ kubectl apply -f https://github.com/knative-sandbox/eventing-github/releases/download/k<VERSION>/github.yaml
 ```
 
 **Note:** replace `<VERSION>` with the correct Knative Eventing version.
 
-### Deploying on Kubernetes
-
-> **IMPORTANT! :warning:** we assume you have read the prerequisites section in the main
-> [README file](../README.md). Please follow those instructions before continuing.
-
-**Please do not proceed any further if you haven't deployed the [GitHub](../github-service) and [Notification](../notification-service) services.**
-
-To make things easier there is a [script in this directory](deploy-kubernetes.sh) to generate the template
-files, build the application and the image, and then deploy it to your Kubernetes cluster.
-
-**IMPORTANT!** You **must** be authenticated to the target Kubernetes cluster as a **cluster administrator** for this script
-to work.
-
-You can run the script once and all the required files will be generated in the `kubernetes/base` directory, 
-and the image will be published to your Quay.io account.
-
-Fill the value for the variables as shown below and run the script:
-
-```shell script
-# the script accepts positional arguments as following:
-QUAY_NAMESPACE=
-GITHUB_REPO=
-
-./deploy-kubernetes.sh $QUAY_NAMESPACE $GITHUB_REPO
-```
-
-You should see a similar output like this:
-
-<details><summary>Build logs</summary>
-```
----> Building and pushing image using tag quay.io/your_namespace/pr-checker-workflow:latest
-STEP 1: FROM quay.io/kiegroup/kogito-runtime-jvm:latest
-STEP 2: ENV RUNTIME_TYPE quarkus
-STEP 3: COPY target/*-runner.jar $KOGITO_HOME/bin
---> 58760d128d8
-STEP 4: COPY target/lib $KOGITO_HOME/bin/lib
-STEP 5: COMMIT quay.io/your_namespace/pr-checker-workflow:latest
---> 7bea1f647bc
-Writing manifest to image destination
-Writing manifest to image destination
-Storing signatures
----> Applying objects to the cluster in the namespace kogito-github.
-secret/github-webhook-secret unchanged
-service/pr-checker-workflow-default-http unchanged
-kogitoruntime.app.kiegroup.org/pr-checker-workflow configured
-broker.eventing.knative.dev/default unchanged
-trigger.eventing.knative.dev/pr-checker-listener unchanged
-githubsource.sources.knative.dev/github-event-listener unchanged
-sinkbinding.sources.knative.dev/pr-checker-sink unchanged
-```
-</details>
 
 If your cluster is already ready to receive GitHub Webhooks calls, just create
 a new PR in your repository with a file named "backend", and you should see the PR
@@ -145,22 +85,15 @@ $ minikube tunnel
 Now run:
 
 ```
-$ ./expose-on-minikube.sh
+$ kubectl expose deployment pr-checker-flow --name=pr-checker-flow-external --type=LoadBalancer --port=8080 -n github-showcase
 ```
-
-This command will create a new Istio `VirtualService` to access the Knative GitHub Source
-from the Smee CLI tool. Since this tool adds a `Host: smee.io` in the request before redirecting
-it to the cluster, Istio will reply with a 404 (Not Found) status code because it uses the
-HTTP header `Host` to route requests within the cluster. 
-
-Our just created `github-event-listener-smee` will take care of redirecting any requests 
-with `Host: smee.io` to the right service.
+This will expose pr-checker-flow service to be accessed from outside of cluster.
 
 Now on a new terminal window run:
 
 ```
 $ SMEE_WEBHOOK=<YOUR_SMEE_WEBHOOK>
-$ ROUTE=$(kubectl get routes -l receive-adapter=github -o jsonpath="{.items[*].status.url}" -n kogito-github)
+$ ROUTE=$( kubectl get route pr-checker-flow -o jsonpath='{.status.url}' -n github-showcase)
 
 $ smee -u $SMEE_WEBHOOK -t $ROUTE
 ```
@@ -170,10 +103,6 @@ Replace `<YOUR_SMEE_WEBHOOK>` with the Smee URL generated for you while creating
 The Smee CLI will capture all events coming from your repository and redirect
 to your local cluster, you should see the Knative pods starting on demand and in the end
 a message in the Slack channel. :)
-
-#### Kubernetes or OpenShift 4.x
-
-Talk to the cluster administrator to understand how your cluster and Istio Ingress can be exposed to the world.  
 
 ### Cleaning up!
 
