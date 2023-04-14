@@ -73,7 +73,7 @@ For more details you can check applications.properties.
 You will need:
   - Java 11+ installed 
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.8.1+ installed
+  - Maven 3.8.6+ installed
 
 ### Enable MongoDB configuration
 
