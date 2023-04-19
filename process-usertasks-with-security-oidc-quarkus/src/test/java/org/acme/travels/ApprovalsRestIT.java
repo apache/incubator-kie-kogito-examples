@@ -15,9 +15,9 @@
  */
 package org.acme.travels;
 
-import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.junit.jupiter.api.Test;
 import org.keycloak.representations.AccessTokenResponse;
+import org.kie.kogito.test.quarkus.QuarkusTestProperty;
 import org.kie.kogito.testcontainers.quarkus.KeycloakQuarkusTestResource;
 
 import io.quarkus.test.common.QuarkusTestResource;
@@ -32,7 +32,7 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 @QuarkusTestResource(KeycloakQuarkusTestResource.class)
 public class ApprovalsRestIT {
 
-    @ConfigProperty(name = "quarkus.oidc.auth-server-url")
+    @QuarkusTestProperty(name = "quarkus.oidc.auth-server-url")
     private String keycloakUrl;
 
     @Test
