@@ -239,7 +239,7 @@
         }
       ],
       "end": {
-        "terminate": "true"
+        "terminate": true
       }
     },
     {
@@ -261,7 +261,7 @@
         }
       ],
       "end": {
-        "terminate": "true"
+        "terminate": true
       }
     }
   ]

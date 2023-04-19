@@ -28,7 +28,7 @@
         }
       ],
       "end": {
-        "terminate": "true"
+        "terminate": true
       }
     }
   ]

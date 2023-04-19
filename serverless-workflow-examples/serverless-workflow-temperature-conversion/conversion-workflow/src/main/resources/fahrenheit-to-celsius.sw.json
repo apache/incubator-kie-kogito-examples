@@ -18,7 +18,7 @@
       "name": "SetConstants",
       "type": "inject",
       "data": {
-        "subtractValue": 32.0,
+        "subtractValue": 32,
         "multiplyValue": 0.5556
       },
       "transition": "Computation"
@@ -47,7 +47,7 @@
         }
       ],
       "end": {
-        "terminate": "true"
+        "terminate": true
       }
     }
   ]
