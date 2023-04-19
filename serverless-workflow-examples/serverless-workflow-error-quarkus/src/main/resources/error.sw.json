@@ -90,9 +90,7 @@
           }
         }
       ],
-      "end": {
-        "terminate": true
-      }
+      "end": true
     }
   ]
 }
