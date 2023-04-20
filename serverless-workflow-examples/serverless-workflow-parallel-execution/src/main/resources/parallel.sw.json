@@ -54,7 +54,9 @@
       ],
       "numCompleted": "2",
       "completionType": "atLeast",
-      "end": true
+      "end": {
+        "terminate": true
+      }
     }
   ]
 }
