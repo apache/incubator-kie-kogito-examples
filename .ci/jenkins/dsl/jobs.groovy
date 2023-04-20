@@ -10,6 +10,7 @@
 
 import org.kie.jenkins.jobdsl.model.JenkinsFolder
 import org.kie.jenkins.jobdsl.model.JobType
+import org.kie.jenkins.jobdsl.utils.EnvUtils
 import org.kie.jenkins.jobdsl.utils.JobParamsUtils
 import org.kie.jenkins.jobdsl.KogitoJobTemplate
 import org.kie.jenkins.jobdsl.KogitoJobUtils
@@ -47,6 +48,11 @@ Map getMultijobPRConfig(JenkinsFolder jobFolder) {
             ]
         ]
     ]
+
+    // TODO to remove once quarkus-3 env is stable
+    if (EnvUtils.hasEnvironmentId(this, jobFolder.getEnvironmentName(), 'quarkus3')) {
+        jobConfig.jobs.clear()
+    }
 
     return jobConfig
 }
