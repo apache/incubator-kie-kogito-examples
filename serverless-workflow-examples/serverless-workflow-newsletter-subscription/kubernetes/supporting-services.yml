@@ -100,6 +100,21 @@ spec:
       kind: Service
       name: event-display
 ---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: event-display-process-event-trigger
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: ProcessInstanceEvent
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: event-display
+---
 # jobs service with postgresql deployment
 apiVersion: sources.knative.dev/v1
 kind: SinkBinding
@@ -175,9 +190,11 @@ spec:
             - name: QUARKUS_DATASOURCE_PASSWORD
               value: pass
             - name: QUARKUS_DATASOURCE_JDBC_URL
-              value: jdbc:postgresql://newsletter-postgres:5432/postgres
+              value: jdbc:postgresql://newsletter-postgres:5432/postgres?currentSchema=job-service
             - name: QUARKUS_DATASOURCE_REACTIVE_URL
-              value: postgresql://newsletter-postgres:5432/postgres
+              value: postgresql://newsletter-postgres:5432/postgres?search_path=jobs-service
+            - name: QUARKUS_FLYWAY_MIGRATE-AT-START
+              value: "true"
           livenessProbe:
             failureThreshold: 3
             httpGet:

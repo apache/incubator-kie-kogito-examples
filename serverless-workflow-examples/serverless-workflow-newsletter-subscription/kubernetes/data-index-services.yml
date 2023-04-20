@@ -1,0 +1,97 @@
+---
+apiVersion: sources.knative.dev/v1
+kind: SinkBinding
+metadata:
+  name: data-index-service-postgresql-sb
+spec:
+  sink:
+    ref:
+      apiVersion: eventing.knative.dev/v1
+      kind: Broker
+      name: default
+  subject:
+    apiVersion: apps/v1
+    kind: Deployment
+    selector:
+      matchLabels:
+        app.kubernetes.io/name: data-index-service-postgresql
+        app.kubernetes.io/version: 2.0.0-SNAPSHOT
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/name: data-index-service-postgresql
+    app.kubernetes.io/version: 2.0.0-SNAPSHOT
+  name: data-index-service-postgresql
+spec:
+  ports:
+    - name: http
+      port: 8180
+  selector:
+    app.kubernetes.io/name: data-index-service-postgresql
+    app.kubernetes.io/version: 2.0.0-SNAPSHOT
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: data-index-service-postgresql
+    app.kubernetes.io/version: 2.0.0-SNAPSHOT
+  name: data-index-service-postgresql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: data-index-service-postgresql
+      app.kubernetes.io/version: 2.0.0-SNAPSHOT
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: data-index-service-postgresql
+        app.kubernetes.io/version: 2.0.0-SNAPSHOT
+    spec:
+      containers:
+        - name: data-index-service-postgresql
+          image: quay.io/kiegroup/kogito-data-index-postgresql-nightly:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8180
+              name: http
+              protocol: TCP
+          env:
+            - name: QUARKUS_DATASOURCE_USERNAME
+              value: postgres
+            - name: QUARKUS_DATASOURCE_PASSWORD
+              value: pass
+            - name: QUARKUS_DATASOURCE_JDBC_URL
+              value: jdbc:postgresql://newsletter-postgres:5432/postgres?currentSchema=data-index
+            - name: QUARKUS_DATASOURCE_DB-KIND
+              value: postgresql
+            - name: QUARKUS_HIBERNATE-ORM_DATABASE_GENERATION
+              value: update
+            - name: QUARKUS_KAFKA_HEALTH_ENABLE
+              value: "false"
+            - name: QUARKUS_HTTP_CORS_ORIGINS
+              value: /.*/
+            - name: KOGITO_DATA_INDEX_PROPS
+              value: -Dquarkus.hibernate-orm.database.generation=update -Dquarkus.flyway.migrate-at-start=true -Dquarkus.log.console.level=DEBUG
+            - name: KOGITO_DATA_INDEX_QUARKUS_PROFILE
+              value: "http-events-support"
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: data-index-service-postgresql-processes-trigger
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: ProcessInstanceEvent
+  subscriber:
+    ref:
+      apiVersion: v1
+      kind: Service
+      name: data-index-service-postgresql
+    uri: /processes
