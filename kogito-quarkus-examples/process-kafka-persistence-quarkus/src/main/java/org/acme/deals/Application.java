@@ -50,7 +50,8 @@ public class Application {
         try (AdminClient client = AdminClient.create(kafkaConfig)) {
             Set<String> topics = client.listTopics().names().get(1, TimeUnit.MINUTES);
 
-            List<NewTopic> newTopics = asList("kogito.process.dealreviews", "kogito.process.deals").stream().filter(t -> !topics.contains(t)).map(t -> new NewTopic(t, 1, (short) 1)).collect(toList());
+            List<NewTopic> newTopics =
+                    asList("kogito.process", "kogito.process.dealreviews", "kogito.process.deals").stream().filter(t -> !topics.contains(t)).map(t -> new NewTopic(t, 1, (short) 1)).collect(toList());
             if (newTopics.isEmpty() == false) {
                 client.createTopics(newTopics).all().get(1, TimeUnit.MINUTES);
                 LOGGER.info("Created kogito.process.dealreviews and kogito.process.deals topics in Kafka");
