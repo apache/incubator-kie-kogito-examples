@@ -19,7 +19,7 @@ import org.kie.jenkins.jobdsl.Utils
 jenkins_path = '.ci/jenkins'
 
 Map getMultijobPRConfig(JenkinsFolder jobFolder) {
-    String defaultBuildMvnOptsCurrent = jobFolder.getDefaultEnvVars().BUILD_MVN_OPTS_CURRENT ?: ''
+    String defaultBuildMvnOptsCurrent = jobFolder.getDefaultEnvVars().find { key, value -> "${key}" == "BUILD_MVN_OPTS_CURRENT" }?.value ?: ''
     def jobConfig = [
         parallel: true,
         buildchain: true,
