@@ -19,6 +19,7 @@ import org.kie.jenkins.jobdsl.Utils
 jenkins_path = '.ci/jenkins'
 
 Map getMultijobPRConfig(JenkinsFolder jobFolder) {
+    String defaultBuildMvnOptsCurrent = jobFolder.getDefaultEnvVarValue('BUILD_MVN_OPTS_CURRENT') ?: ''
     def jobConfig = [
         parallel: true,
         buildchain: true,
@@ -29,7 +30,7 @@ Map getMultijobPRConfig(JenkinsFolder jobFolder) {
                 env : [
                     // Sonarcloud analysis is disabled for examples
                     KOGITO_EXAMPLES_SUBFOLDER_POM: 'kogito-quarkus-examples/',
-                    BUILD_MVN_OPTS_CURRENT: jobFolder.getEnvironmentName() ? '' : '-Dvalidate-formatting', // Validate formatting only for default env
+                    BUILD_MVN_OPTS_CURRENT: "${defaultBuildMvnOptsCurrent} ${jobFolder.getEnvironmentName() ? '' : '-Dvalidate-formatting'}", // Validate formatting only for default env
                 ]
             ],
             [
