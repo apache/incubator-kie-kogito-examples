@@ -4,7 +4,7 @@
 
 This example contains a simple workflow service that demonstrates how to use Data Index Addon as part of the Kogito runtime. 
 A callback is a state that invokes an action and waits for an event (an event that will be eventually fired by the external service notified by the action), so this example needs an event broker.
-This example consists of a callback state that waits for an event arriving on the `wait` channel. Its action is to publish an event on the `resume` channel. The event published on the `resume` channel is modified and republished into the `wait` channel by `PrintService`, which simulates an external service. 
+This example consists of a callback state that waits for an event arriving at the `wait` channel. Its action is to publish an event on the `resume` channel. The event published on the `resume` channel is modified and republished into the `wait` channel by `PrintService`, which simulates an external service. 
 The service is described using JSON format as defined in the 
 [CNCF Serverless Workflow specification](https://github.com/serverlessworkflow/specification).
 
@@ -68,13 +68,27 @@ NOTE: Quarkus provides a way of creating a native Linux executable without Graal
 ```sh
 mvn clean package quarkus:dev
 ```
+Here we can run the dev mode in two scenarios:
+1. Starting dev mode with kogito-addons-quarkus-data-index. It means the Data Index functionality will be exposed as part of the runtime service, no specific service started for audit data:
+```sh
+mvn clean package quarkus:dev -Pdata-index-addon
+```
+NOTE: Data Index graphql UI will be available in http://localhost:8080/q/graphql-ui/
+
+2. Starting dev mode with Data index as a Quarkus Dev service
+```sh
+mvn clean package quarkus:dev -Pdata-index-devservice
+```
+
+NOTE: Data Index graphql UI will be available in http://localhost:8180/q/graphql-ui/
+
 
 ### Start infrastructure services
 
 You should start all the services before you execute any of the **Data Index** example. To do that please execute:
 
 ```sh
-mvn clean package -Dcontainer
+mvn clean package -P container,data-index-addon 
 ```
 
 For Linux and MacOS:
@@ -110,6 +124,54 @@ Once started you can simply stop all services by executing the ```docker-compose
 
 All created containers can be removed by executing the ```docker-compose -f docker-compose.yml rm```.
 
+This example provides also the configuration needed to see the dataindex deployed as a standalone service following the steps:
+- Execute
+
+```sh
+mvn clean package -Ddata-index-standalone
+```
+
+- Run docker-compose to start all the services:
+ 
+For Linux and MacOS:
+
+1. Open a Terminal
+2. Go to docker-compose folder
+3. Run ```./startServices.sh```
+
+or 
+
+```bash
+cd docker-compose && ./startServices.sh
+```
+
+Once all services bootstrap, the following ports will be assigned on your local machine:
+
+- PostgreSQL: 5432
+- Kafka: 9092
+- PgAdmin: 8055
+- DataIndex: 8180
+- serverless-workflow-service: 8080
+
+> **_NOTE:_**  This step requires the project to be compiled, please consider running a ```mvn clean package -Ddata-index-standalone``` command on the project root before running the ```./startServices.sh.``` for the first time or any time you modify the project.
+
+Once started you can simply stop all services by executing the ```docker-compose -f docker-compose-with-data-index.yml stop```.
+
+All created containers can be removed by executing the ```docker-compose -f docker-compose-with-data-index.yml rm```.
+
+### Compile and Run in JVM mode
+
+```sh
+mvn clean package 
+java -jar target/quarkus-app/quarkus-run.jar
+```
+
+or on Windows
+
+```sh
+mvn clean package
+java -jar target\quarkus-app\quarkus-run.jar
+```
 
 ### Compile and Run using Local Native Image
 Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
@@ -121,7 +183,7 @@ mvn clean package -Dnative
 To run the generated native executable, generated in `target/`, execute
 
 ```sh
-./target/serverless-workflow-callback-quarkus-{version}-runner
+./target/serverless-workflow-data-index-quarkus-runner
 ```
 
 ### Submit a request
