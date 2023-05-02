@@ -27,7 +27,7 @@ metadata:
 spec:
   ports:
     - name: http
-      port: 8180
+      port: 8080
   selector:
     app.kubernetes.io/name: data-index-service-postgresql
     app.kubernetes.io/version: 2.0.0-SNAPSHOT
@@ -57,7 +57,7 @@ spec:
           image: quay.io/kiegroup/kogito-data-index-postgresql-nightly:latest
           imagePullPolicy: Always
           ports:
-            - containerPort: 8180
+            - containerPort: 8080
               name: http
               protocol: TCP
           env:
