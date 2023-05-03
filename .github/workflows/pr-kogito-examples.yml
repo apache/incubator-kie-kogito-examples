@@ -56,6 +56,7 @@ jobs:
           KOGITO_EXAMPLES_SUBFOLDER_POM: ${{ matrix.env_KOGITO_EXAMPLES_SUBFOLDER_POM }}
         with:
           annotations-prefix: ${{ runner.os }}-${{ matrix.java-version }}/${{ matrix.maven-version }}
+          definition-file: https://raw.githubusercontent.com/${GROUP:kiegroup}/kogito-pipelines/${BRANCH:main}/.ci/pull-request-config.yaml
           github-token: "${{ secrets.GITHUB_TOKEN }}"
       - name: Surefire Report
         uses: kiegroup/kie-ci/.ci/actions/surefire-report@main
