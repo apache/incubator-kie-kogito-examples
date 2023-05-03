@@ -28,6 +28,7 @@ spec:
   ports:
     - name: http
       port: 8080
+      targetPort: 8080
   selector:
     app.kubernetes.io/name: data-index-service-postgresql
     app.kubernetes.io/version: 2.0.0-SNAPSHOT
@@ -61,12 +62,16 @@ spec:
               name: http
               protocol: TCP
           env:
+            - name: KUBERNETES_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
             - name: QUARKUS_DATASOURCE_USERNAME
               value: postgres
             - name: QUARKUS_DATASOURCE_PASSWORD
               value: pass
             - name: QUARKUS_DATASOURCE_JDBC_URL
-              value: jdbc:postgresql://newsletter-postgres:5432/postgres?currentSchema=data-index
+              value: jdbc:postgresql://newsletter-postgres:5432/postgres
             - name: QUARKUS_DATASOURCE_DB-KIND
               value: postgresql
             - name: QUARKUS_HIBERNATE-ORM_DATABASE_GENERATION
@@ -75,10 +80,22 @@ spec:
               value: "false"
             - name: QUARKUS_HTTP_CORS_ORIGINS
               value: /.*/
+            - name: QUARKUS_FLYWAY_MIGRATE-AT-START
+              value: "true"
             - name: KOGITO_DATA_INDEX_PROPS
-              value: -Dquarkus.hibernate-orm.database.generation=update -Dquarkus.flyway.migrate-at-start=true -Dquarkus.log.console.level=DEBUG
+              value: -Dquarkus.hibernate-orm.database.generation=update
             - name: KOGITO_DATA_INDEX_QUARKUS_PROFILE
               value: "http-events-support"
+            - name: QUARKUS_LOG_CONSOLE_ENABLE
+              value: "true"
+            - name: QUARKUS_LOG_CONSOLE_LEVEL
+              value: DEBUG
+            - name: QUARKUS_LOG_LEVEL
+              value: DEBUG
+            - name: QUARKUS_FLYWAY_TABLE
+              value: FLYWAY_DATA_INDEX
+
+
 ---
 apiVersion: eventing.knative.dev/v1
 kind: Trigger
