@@ -1,22 +1,22 @@
----
-apiVersion: sources.knative.dev/v1
-kind: SinkBinding
-metadata:
-  name: data-index-service-postgresql-sb
-spec:
-  sink:
-    ref:
-      apiVersion: eventing.knative.dev/v1
-      kind: Broker
-      name: default
-  subject:
-    apiVersion: apps/v1
-    kind: Deployment
-    selector:
-      matchLabels:
-        app.kubernetes.io/name: data-index-service-postgresql
-        app.kubernetes.io/version: 2.0.0-SNAPSHOT
----
+#---
+#apiVersion: sources.knative.dev/v1
+#kind: SinkBinding
+#metadata:
+#  name: data-index-service-postgresql-sb
+#spec:
+#  sink:
+#    ref:
+#      apiVersion: eventing.knative.dev/v1
+#      kind: Broker
+#      name: default
+#  subject:
+#    apiVersion: apps/v1
+#    kind: Deployment
+#    selector:
+#      matchLabels:
+#        app.kubernetes.io/name: data-index-service-postgresql
+#        app.kubernetes.io/version: 2.0.0-SNAPSHOT
+#---
 apiVersion: v1
 kind: Service
 metadata:
@@ -27,12 +27,12 @@ metadata:
 spec:
   ports:
     - name: http
-      port: 8080
+      port: 80
       targetPort: 8080
   selector:
     app.kubernetes.io/name: data-index-service-postgresql
     app.kubernetes.io/version: 2.0.0-SNAPSHOT
-  type: LoadBalancer
+  type: ClusterIP
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -55,8 +55,9 @@ spec:
     spec:
       containers:
         - name: data-index-service-postgresql
-          image: quay.io/kiegroup/kogito-data-index-postgresql-nightly:latest
-          imagePullPolicy: Always
+#          image: quay.io/kiegroup/kogito-data-index-postgresql-nightly:latest
+          image: dev.local/data-index-service-postgresql:2.0.0-SNAPSHOT
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
               name: http
@@ -71,16 +72,18 @@ spec:
             - name: QUARKUS_DATASOURCE_PASSWORD
               value: pass
             - name: QUARKUS_DATASOURCE_JDBC_URL
-              value: jdbc:postgresql://newsletter-postgres:5432/postgres
-            - name: QUARKUS_DATASOURCE_DB-KIND
+              value: jdbc:postgresql://newsletter-postgres:5432/postgres?currentSchema=data-index-service
+            - name: QUARKUS_DATASOURCE_DB_KIND
               value: postgresql
-            - name: QUARKUS_HIBERNATE-ORM_DATABASE_GENERATION
+            - name: QUARKUS_HIBERNATE_ORM_DATABASE_GENERATION
               value: update
             - name: QUARKUS_KAFKA_HEALTH_ENABLE
               value: "false"
+            - name: QUARKUS_HTTP_CORS
+              value: "true"
             - name: QUARKUS_HTTP_CORS_ORIGINS
               value: /.*/
-            - name: QUARKUS_FLYWAY_MIGRATE-AT-START
+            - name: QUARKUS_FLYWAY_MIGRATE_AT_START
               value: "true"
             - name: KOGITO_DATA_INDEX_PROPS
               value: -Dquarkus.hibernate-orm.database.generation=update
@@ -88,14 +91,19 @@ spec:
               value: "http-events-support"
             - name: QUARKUS_LOG_CONSOLE_ENABLE
               value: "true"
-            - name: QUARKUS_LOG_CONSOLE_LEVEL
-              value: DEBUG
+            - name: QUARKUS_LOG_CONSOLE_ENABLE
+              value: "true"
             - name: QUARKUS_LOG_LEVEL
               value: DEBUG
-            - name: QUARKUS_FLYWAY_TABLE
-              value: FLYWAY_DATA_INDEX
-
-
+            - name: QUARKUS_LOG_CATEGORY_ORG_KIE_KOGITO_INDEX_SERVICE_LEVEL
+              value: DEBUG
+            - name: QUARKUS_LOG_CATEGORY_ORG_KIE_KOGITO_INDEX_SERVICE_MIN_LEVEL
+              value: DEBUG
+              # remove this port configuration
+            - name: QUARKUS_HTTP_PORT
+              value: "8080"
+#            - name: QUARKUS_FLYWAY_TABLE
+#              value: FLYWAY_DATA_INDEX
 ---
 apiVersion: eventing.knative.dev/v1
 kind: Trigger
@@ -112,3 +120,19 @@ spec:
       kind: Service
       name: data-index-service-postgresql
     uri: /processes
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: data-index-service-postgresql-jobs-trigger
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: JobEvent
+  subscriber:
+    ref:
+      apiVersion: v1
+      kind: Service
+      name: data-index-service-postgresql
+    uri: /jobs

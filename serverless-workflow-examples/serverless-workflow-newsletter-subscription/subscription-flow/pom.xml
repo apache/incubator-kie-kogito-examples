@@ -63,22 +63,20 @@
     </dependency>
 
     <!-- Messaging settings -->
-    <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-addons-quarkus-messaging</artifactId>
-    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>org.kie.kogito</groupId>-->
+<!--      <artifactId>kogito-addons-quarkus-messaging</artifactId>-->
+<!--    </dependency>-->
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-addons-quarkus-knative-eventing</artifactId>
     </dependency>
-    <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-addons-quarkus-events-process</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-addons-quarkus-process-management</artifactId>
-    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>org.kie.kogito</groupId>-->
+<!--      <artifactId>kogito-addons-quarkus-events-process</artifactId>-->
+<!--    </dependency>-->
+
+    <!-- Dev ui and sources -->
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-quarkus-serverless-workflow-devui</artifactId>
@@ -216,7 +214,6 @@
         <quarkus.kubernetes.deploy>${deploy}</quarkus.kubernetes.deploy>
         <quarkus.container-image.build>true</quarkus.container-image.build>
         <quarkus.profile>knative</quarkus.profile>
-        <enable.resource.postgresql>true</enable.resource.postgresql>
         <skipTests>true</skipTests>
       </properties>
       <dependencies>

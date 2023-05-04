@@ -84,6 +84,10 @@ $ kubectl create ns newsletter-showcase
 # install the supporting services to run the example in knative, the PostgreSQL database, the Jobs Service and the event-display application.
 $ kubectl apply -f kubernetes/supporting-services.yml -n newsletter-showcase
 
+# TODO Neus add proper comment.
+$ kubectl apply -f kubernetes/data-index-services.yml -n newsletter-showcase
+
+
 # install the subscription-flow
 $ kubectl apply -f subscription-flow/target/kubernetes/knative.yml -n newsletter-showcase
 $ kubectl apply -f subscription-flow/target/kubernetes/kogito.yml -n newsletter-showcase

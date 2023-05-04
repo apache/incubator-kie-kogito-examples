@@ -57,6 +57,8 @@ spec:
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
+  labels:
+    app.kubernetes.io/name: event-display
   name: event-display
 spec:
   template:
@@ -64,51 +66,20 @@ spec:
       annotations:
         autoscaling.knative.dev/minScale: "1"
         autoscaling.knative.dev/maxScale: "1"
+      labels:
+        app.kubernetes.io/name: event-display
     spec:
       containers:
-        -  # This corresponds to
+        - # This corresponds to
           # https://github.com/knative/eventing-contrib/tree/main/cmd/event_display
           image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display@sha256:a214514d6ba674d7393ec8448dd272472b2956207acb3f83152d3071f0ab1911
 ---
 apiVersion: eventing.knative.dev/v1
 kind: Trigger
 metadata:
-  name: event-display-trigger
+  name: trigger-eventdisplay
 spec:
   broker: default
-  filter:
-    attributes:
-      type: new.subscription
-  subscriber:
-    ref:
-      apiVersion: serving.knative.dev/v1
-      kind: Service
-      name: event-display
----
-apiVersion: eventing.knative.dev/v1
-kind: Trigger
-metadata:
-  name: event-display-job-event-trigger
-spec:
-  broker: default
-  filter:
-    attributes:
-      type: JobEvent
-  subscriber:
-    ref:
-      apiVersion: serving.knative.dev/v1
-      kind: Service
-      name: event-display
----
-apiVersion: eventing.knative.dev/v1
-kind: Trigger
-metadata:
-  name: event-display-process-event-trigger
-spec:
-  broker: default
-  filter:
-    attributes:
-      type: ProcessInstanceEvent
   subscriber:
     ref:
       apiVersion: serving.knative.dev/v1
@@ -172,7 +143,7 @@ spec:
     spec:
       containers:
         - name: jobs-service-postgresql
-          image: quay.io/kiegroup/kogito-jobs-service-postgresql-nightly:latest
+          image: quay.io/kiegroup/kogito-jobs-service-allinone-nightly:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
@@ -183,6 +154,8 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
+            - name: JOBS_SERVICE_PERSISTENCE
+              value: "postgresql"
             - name: KOGITO_JOBS_SERVICE_KNATIVE_EVENTS
               value: "true"
             - name: QUARKUS_DATASOURCE_USERNAME
@@ -190,11 +163,9 @@ spec:
             - name: QUARKUS_DATASOURCE_PASSWORD
               value: pass
             - name: QUARKUS_DATASOURCE_JDBC_URL
-              value: jdbc:postgresql://newsletter-postgres:5432/postgres?currentSchema=job-service
+              value: jdbc:postgresql://newsletter-postgres:5432/postgres?currentSchema=jobs-service
             - name: QUARKUS_DATASOURCE_REACTIVE_URL
               value: postgresql://newsletter-postgres:5432/postgres?search_path=jobs-service
-            - name: QUARKUS_FLYWAY_MIGRATE-AT-START
-              value: "true"
           livenessProbe:
             failureThreshold: 3
             httpGet:
