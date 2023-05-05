@@ -12,7 +12,7 @@ By doing so, it allows demonstrating how to use the transactional outbox pattern
 
 1. Build the Kogito App
 ```shell
-mvn clean package
+mvn clean package -Dcontainer
 ```
 
 2. Deploy Kogito App, MongoDB, Debezium and Kafka

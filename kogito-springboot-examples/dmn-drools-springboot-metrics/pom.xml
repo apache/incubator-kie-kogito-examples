@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
@@ -114,7 +115,8 @@
           </filesets>
         </configuration>
       </plugin>
-      <!-- Keep this after kogito-maven-plugin, since both are bind to package phase, and this one has to be executed after !-->
+      <!-- Keep this after kogito-maven-plugin, since both are bind to package phase, and this one
+      has to be executed after !-->
       <plugin>
         <artifactId>maven-resources-plugin</artifactId>
         <executions>
@@ -144,7 +146,8 @@
               <outputDirectory>${project.basedir}/docker-compose/grafana/provisioning/dashboards</outputDirectory>
               <resources>
                 <resource>
-                  <directory>${project.build.directory}/classes/META-INF/resources/monitoring/dashboards</directory>
+                  <directory>
+                    ${project.build.directory}/classes/META-INF/resources/monitoring/dashboards</directory>
                   <filtering>false</filtering>
                   <excludes>
                     <exclude>**/list.json</exclude>
@@ -174,24 +177,42 @@
           </execution>
         </executions>
       </plugin>
-      <plugin>
-        <groupId>com.google.cloud.tools</groupId>
-        <artifactId>jib-maven-plugin</artifactId>
-        <configuration>
-          <to>
-            <image>${project.groupId}/${project.artifactId}:1.0</image>
-          </to>
-        </configuration>
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <goals>
-              <goal>dockerBuild</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <id>container</id>
+      <activation>
+        <property>
+          <name>container</name>
+        </property>
+      </activation>
+      <properties>
+        <quarkus.profile>container</quarkus.profile>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>com.google.cloud.tools</groupId>
+            <artifactId>jib-maven-plugin</artifactId>
+            <configuration>
+              <to>
+                <image>${project.groupId}/${project.artifactId}:1.0</image>
+              </to>
+            </configuration>
+            <executions>
+              <execution>
+                <phase>install</phase>
+                <goals>
+                  <goal>dockerBuild</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 
 </project>
