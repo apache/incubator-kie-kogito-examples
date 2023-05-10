@@ -1,0 +1,110 @@
+{
+  "id": "event_state_timeouts",
+  "version": "1.0",
+  "name": "Event State Timeouts Example",
+  "description": "Simple process to show the event state timeout working",
+  "start": "PrintStartMessage",
+  "events": [
+    {
+      "name": "event1",
+      "source": "",
+      "type": "event1_event_type"
+    },
+    {
+      "name": "event2",
+      "source": "",
+      "type": "event2_event_type"
+    }
+  ],
+  "functions": [
+    {
+      "name": "systemOut",
+      "type": "custom",
+      "operation": "sysout"
+    }
+  ],
+  "states": [
+    {
+      "name": "PrintStartMessage",
+      "type": "operation",
+      "actions": [
+        {
+          "name": "printSystemOut",
+          "functionRef": {
+            "refName": "systemOut",
+            "arguments": {
+              "message": "${\"event-state-timeouts: \" + $WORKFLOW.instanceId + \" has started.\"}"
+            }
+          }
+        }
+      ],
+      "transition": "WaitForEvent"
+    },
+    {
+      "name": "WaitForEvent",
+      "type": "event",
+      "onEvents": [
+        {
+          "eventRefs": [
+            "event1"
+          ],
+          "eventDataFilter": {
+            "data": "${ \"The event1 was received.\" }",
+            "toStateData": "${ .exitMessage }"
+          },
+          "actions": [
+            {
+              "name": "printAfterEvent1",
+              "functionRef": {
+                "refName": "systemOut",
+                "arguments": {
+                  "message": "${\"event-state-timeouts: \" + $WORKFLOW.instanceId + \" executing actions for event1.\"}"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "eventRefs": [
+            "event2"
+          ],
+          "eventDataFilter": {
+            "data": "${ \"The event2 was received.\" }",
+            "toStateData": "${ .exitMessage }"
+          },
+          "actions": [
+            {
+              "name": "printAfterEvent2",
+              "functionRef": {
+                "refName": "systemOut",
+                "arguments": {
+                  "message": "${\"event-state-timeouts: \" + $WORKFLOW.instanceId + \" executing actions for event2.\"}"
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "timeouts": {
+        "eventTimeout": "PT30S"
+      },
+      "transition": "PrintExitMessage"
+    },
+    {
+      "name": "PrintExitMessage",
+      "type": "operation",
+      "actions": [
+        {
+          "name": "printSystemOut",
+          "functionRef": {
+            "refName": "systemOut",
+            "arguments": {
+              "message": "${\"event-state-timeouts: \" + $WORKFLOW.instanceId + \" has finalized. \" + if .exitMessage != null then .exitMessage else \"The event state did not receive any event, and the timeout has overdue\" end }"
+            }
+          }
+        }
+      ],
+      "end": true
+    }
+  ]
+}
