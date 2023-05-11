@@ -11,10 +11,10 @@
     <name>Kogito Example :: Serverless Workflow Annotations and Description:: Quarkus</name>
     <description>Kogito Serverless Workflow Example - Quarkus</description>
     <properties>
-        <quarkus-plugin.version>2.16.5.Final</quarkus-plugin.version>
+        <quarkus-plugin.version>2.16.999-SNAPSHOT</quarkus-plugin.version>
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
         <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-        <quarkus.platform.version>2.16.5.Final</quarkus.platform.version>
+        <quarkus.platform.version>2.16.999-SNAPSHOT</quarkus.platform.version>
         <version.org.assertj>3.22.0</version.org.assertj>
         <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
         <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>

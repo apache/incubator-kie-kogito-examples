@@ -11,10 +11,10 @@
   <name>Kogito Example :: Serverless Workflow :: Funqy :: Services</name>
   <description>Kogito Serverless Workflow Funqy Services - Quarkus</description>
   <properties>
-    <quarkus-plugin.version>2.16.5.Final</quarkus-plugin.version>
+    <quarkus-plugin.version>2.16.999-SNAPSHOT</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-    <quarkus.platform.version>2.16.5.Final</quarkus.platform.version>
+    <quarkus.platform.version>2.16.999-SNAPSHOT</quarkus.platform.version>
     <version.compiler.plugin>3.8.1</version.compiler.plugin>
     <maven.compiler.release>11</maven.compiler.release>
     <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
