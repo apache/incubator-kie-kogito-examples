@@ -7,6 +7,11 @@
   "start": "printWaitMessage",
   "events": [
     {
+      "name": "startEvent",
+      "source": "",
+      "type": "start"
+    },
+    {
       "name": "moveEvent",
       "source": "",
       "type": "move"
@@ -22,16 +27,21 @@
   "states": [
     {
       "name": "printWaitMessage",
-      "type": "operation",
-      "actions": [
+      "type": "event",
+      "onEvents": [
         {
-          "name": "printBeforeEvent",
-          "functionRef": {
-            "refName": "printMessage",
-            "arguments": {
-              "message": "$[*]"
+          "eventRefs": ["startEvent"],
+          "actions": [
+            {
+              "name": "printAfterStart",
+              "functionRef": {
+                "refName": "printMessage",
+                "arguments": {
+                  "message": "$[*]"
+                }
+              }
             }
-          }
+          ]
         }
       ],
       "transition": "waitForEvent"
@@ -39,21 +49,21 @@
     {
       "name": "waitForEvent",
       "type": "event",
-       "onEvents": [
+      "onEvents": [
         {
           "eventRefs": [
             "moveEvent"
           ],
-          "actions": [ 
-          {
-            "name": "printAfterEvent",
-            "functionRef": {
-              "refName": "printMessage",
-              "arguments": {
-                 "message": "$[*]"
+          "actions": [
+            {
+              "name": "printAfterEvent",
+              "functionRef": {
+                "refName": "printMessage",
+                "arguments": {
+                  "message": "$[*]"
+                }
               }
             }
-          }
           ]
         }
        ], 
