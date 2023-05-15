@@ -56,6 +56,12 @@
       <artifactId>kogito-quarkus-serverless-workflow</artifactId>
     </dependency>
 
+    <!-- Service Discovery-->
+    <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-addons-quarkus-fabric8-kubernetes-service-catalog</artifactId>
+    </dependency>
+
     <!-- Messaging settings -->
     <dependency>
       <groupId>org.kie.kogito</groupId>
