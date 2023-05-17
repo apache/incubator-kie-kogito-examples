@@ -52,7 +52,8 @@
         <module>serverless-workflow-stock-profit</module>
         <module>serverless-workflow-temperature-conversion</module>
         <module>serverless-workflow-testing-with-rest-assured</module>
-        <module>serverless-workflow-timeouts-showcase</module>
+        <module>serverless-workflow-timeouts-showcase-embedded</module>
+        <module>serverless-workflow-timeouts-showcase-extended</module>
       </modules>
     </profile>
 
@@ -131,7 +132,8 @@
         <module>serverless-workflow-stock-profit</module>
         <module>serverless-workflow-temperature-conversion</module>
         <module>serverless-workflow-testing-with-rest-assured</module>
-        <module>serverless-workflow-timeouts-showcase</module>
+        <module>serverless-workflow-timeouts-showcase-embedded</module>
+        <module>serverless-workflow-timeouts-showcase-extended</module>
       </modules>
     </profile>
   </profiles>
