@@ -78,11 +78,6 @@ pipeline {
                             githubscm.deleteRelease(getGitTag(), getGitAuthorCredsID())
                         }
                         githubscm.createRelease(getGitTag(), getBuildBranch(), "Release ${getGitTag()}", getGitAuthorCredsID())
-
-                        if (params.UPDATE_STABLE_BRANCH) {
-                            githubscm.createBranch('stable')
-                            forcePushProtectedBranch('stable', 'main')
-                        }
                     }
                 }
             }
@@ -299,30 +294,6 @@ void installGithubCLI() {
     mv gh_${env.GITHUB_CLI_VERSION}_linux_amd64/bin/gh .
     rm -r gh_${env.GITHUB_CLI_VERSION}_linux_amd64*
     """
-}
-
-void setDefaultBranch(String defaultBranch) {
-    withCredentials([string(credentialsId: env.GITHUB_TOKEN_CREDS_ID, variable: 'GITHUB_TOKEN')]) {
-        // gh command from https://github.com/cli/cli/issues/929#issuecomment-629253585
-        def newDefaultBranch = sh(script: "../gh api -XPATCH 'repos/${getGitAuthor()}/${getRepoName()}' -f default_branch=${defaultBranch} | jq '.default_branch'", returnStdout: true).trim()
-        if (newDefaultBranch == "\"${defaultBranch}\"") {
-            echo "[INFO] ${getGitAuthor()}/${getRepoName()}'s default branch has been updated to ${newDefaultBranch}."
-        } else {
-            error 'Couldn\'t update default branch.'
-        }
-    }
-}
-
-void forcePushProtectedBranch(String defaultBranch, String tempBranch) {
-    setDefaultBranch(tempBranch)
-    withCredentials([usernamePassword(credentialsId: getGitAuthorCredsID(), usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
-        sh """
-        git config --local credential.helper \"!f() { echo username=\\$GIT_USERNAME; echo password=\\$GIT_PASSWORD; }; f\"
-        git push --delete origin ${defaultBranch}
-        git push origin ${defaultBranch}
-        """
-    }
-    setDefaultBranch(defaultBranch)
 }
 
 MavenCommand getMavenCommand() {

@@ -90,8 +90,10 @@ services:
     ports:
       - "8180:8080"
     depends_on:
-      - kafka
-      - postgres
+      kafka:
+        condition: service_started
+      postgres:
+        condition: service_healthy
     volumes:
       - ./target/protobuf:/home/kogito/data/protobufs/
     environment:
@@ -99,6 +101,7 @@ services:
       QUARKUS_DATASOURCE_USERNAME: kogito-user
       QUARKUS_DATASOURCE_PASSWORD: kogito-pass
       KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+      QUARKUS_HTTP_CORS_ORIGINS: "/.*/"
       KOGITO_DATA_INDEX_PROPS: -Dquarkus.hibernate-orm.database.generation=update
 
   jobs-service:
@@ -107,17 +110,20 @@ services:
     ports:
       - "8580:8080"
     depends_on:
-      - kafka
-      - postgres
+      kafka:
+        condition: service_started
+      postgres:
+        condition: service_healthy
     environment:
       QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgres:5432/kogito"
       QUARKUS_DATASOURCE_REACTIVE_URL: "postgresql://postgres:5432/kogito"
       QUARKUS_DATASOURCE_USERNAME: kogito-user
       QUARKUS_DATASOURCE_PASSWORD: kogito-pass
-      QUARKUS_FLYWAY_BASELINE_ON_MIGRATE: true
+      QUARKUS_FLYWAY_BASELINE_ON_MIGRATE: "true"
       KAFKA_BOOTSTRAP_SERVERS: kafka:29092
       QUARKUS_PROFILE: events-support
       QUARKUS_HTTP_PORT: 8580
+      QUARKUS_HTTP_CORS_ORIGINS: "/.*/"
 
   management-console:
     container_name: management-console
@@ -135,6 +141,7 @@ services:
       - ../target/classes/META-INF/processSVG/:/home/kogito/data/svg/
     environment:
       KOGITO_DATAINDEX_HTTP_URL: http://${DOCKER_GATEWAY_HOST:-host.docker.internal}:8180/graphql
+      QUARKUS_HTTP_CORS_ORIGINS: "/.*/"
       KOGITO_MANAGEMENT_CONSOLE_PROPS: -Dkogito.consoles.keycloak.config.url=http://localhost:8480/auth
         -Dkogito.consoles.keycloak.config.health-check-url=http://localhost:8480/auth/realms/kogito/.well-known/openid-configuration
         -Dkogito.svg.folder.path=/home/kogito/data/svg
@@ -151,5 +158,6 @@ services:
         condition: service_healthy
     environment:
       KOGITO_DATAINDEX_HTTP_URL: http://${DOCKER_GATEWAY_HOST:-host.docker.internal}:8180/graphql
+      QUARKUS_HTTP_CORS_ORIGINS: "/.*/"
       KOGITO_TASK_CONSOLE_PROPS: -Dkogito.consoles.keycloak.config.url=http://localhost:8480/auth
         -Dkogito.consoles.keycloak.config.health-check-url=http://localhost:8480/auth/realms/kogito/.well-known/openid-configuration

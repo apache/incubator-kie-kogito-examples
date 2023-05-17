@@ -11,7 +11,7 @@ kogitoAppsRepo = 'kogito-apps'
 
 pipeline {
     agent {
-        label 'kie-rhel7 && kie-mem16g && !built-in'
+        label 'kie-rhel8 && !built-in'
     }
 
     tools {
@@ -136,16 +136,6 @@ pipeline {
                 }
             }
         }
-        stage('Deploy to repository') {
-            when {
-                expression { return shouldDeployToRepository() }
-            }
-            steps {
-                script {
-                    runMavenDeploy(getRepoName())
-                }
-            }
-        }
     }
     post {
         unsuccessful {
@@ -178,10 +168,6 @@ void checkoutRepo(String repository, String branch) {
 
 String getDroolsTargetBranch() {
     return util.calculateTargetReleaseBranch(getBuildBranch(), 7)
-}
-
-boolean shouldDeployToRepository() {
-    return env.MAVEN_DEPLOY_REPOSITORY || getGitAuthor() == 'kiegroup'
 }
 
 String getRepoName() {
@@ -217,19 +203,7 @@ MavenCommand getMavenCommand(String directory = '') {
     }
     return mvnCmd
 }
-void runMavenDeploy(String directory) {
-    mvnCmd = getMavenCommand(directory)
 
-    if (env.MAVEN_DEPLOY_REPOSITORY) {
-        mvnCmd.withDeployRepository(env.MAVEN_DEPLOY_REPOSITORY)
-    }
-
-    dir(getRepoName()) {
-        mvnCmd.withOptions(examplesHelper.getDeployableArtifactIds().collect { "-pl :${it} "})
-    }
-
-    mvnCmd.skipTests(true).run('clean deploy')
-}
 
 boolean isMainBranch() {
     return env.IS_MAIN_BRANCH ? env.IS_MAIN_BRANCH.toBoolean() : false

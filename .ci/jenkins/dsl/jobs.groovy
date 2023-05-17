@@ -10,6 +10,7 @@
 
 import org.kie.jenkins.jobdsl.model.JenkinsFolder
 import org.kie.jenkins.jobdsl.model.JobType
+import org.kie.jenkins.jobdsl.utils.EnvUtils
 import org.kie.jenkins.jobdsl.utils.JobParamsUtils
 import org.kie.jenkins.jobdsl.KogitoJobTemplate
 import org.kie.jenkins.jobdsl.KogitoJobUtils
@@ -18,7 +19,8 @@ import org.kie.jenkins.jobdsl.Utils
 jenkins_path = '.ci/jenkins'
 
 Map getMultijobPRConfig(JenkinsFolder jobFolder) {
-    return [
+    String defaultBuildMvnOptsCurrent = jobFolder.getDefaultEnvVarValue('BUILD_MVN_OPTS_CURRENT') ?: ''
+    def jobConfig = [
         parallel: true,
         buildchain: true,
         jobs : [
@@ -28,7 +30,7 @@ Map getMultijobPRConfig(JenkinsFolder jobFolder) {
                 env : [
                     // Sonarcloud analysis is disabled for examples
                     KOGITO_EXAMPLES_SUBFOLDER_POM: 'kogito-quarkus-examples/',
-                    BUILD_MVN_OPTS_CURRENT: jobFolder.getEnvironmentName() ? '' : '-Dvalidate-formatting', // Validate formatting only for default env
+                    BUILD_MVN_OPTS_CURRENT: "${defaultBuildMvnOptsCurrent} ${jobFolder.getEnvironmentName() ? '' : '-Dvalidate-formatting'}", // Validate formatting only for default env
                 ]
             ],
             [
@@ -47,6 +49,13 @@ Map getMultijobPRConfig(JenkinsFolder jobFolder) {
             ]
         ]
     ]
+
+    // TODO to remove once quarkus-3 env is stable
+    if (EnvUtils.hasEnvironmentId(this, jobFolder.getEnvironmentName(), 'quarkus3')) {
+        jobConfig.jobs.clear()
+    }
+
+    return jobConfig
 }
 
 // PR checks
@@ -67,11 +76,12 @@ setupNightlyQuarkusIntegrationJob('quarkus-main')
 setupNightlyQuarkusIntegrationJob('quarkus-branch')
 setupNightlyQuarkusIntegrationJob('quarkus-lts')
 setupNightlyQuarkusIntegrationJob('native-lts')
-setupNightlyQuarkusIntegrationJob('quarkus-3')
+// setupNightlyQuarkusIntegrationJob('quarkus-3')
 
 // Release jobs
 setupDeployJob(JobType.RELEASE)
 setupPromoteJob(JobType.RELEASE)
+setupPostReleaseJob()
 
 KogitoJobUtils.createQuarkusUpdateToolsJob(this, 'kogito-examples', [
   properties: [ 'quarkus-plugin.version', 'quarkus.platform.version' ],
@@ -100,8 +110,6 @@ void createSetupBranchJob() {
         AUTHOR_CREDS_ID: "${GIT_AUTHOR_CREDENTIALS_ID}",
 
         MAVEN_SETTINGS_CONFIG_FILE_ID: "${MAVEN_SETTINGS_FILE_ID}",
-        MAVEN_DEPENDENCIES_REPOSITORY: "${MAVEN_ARTIFACTS_REPOSITORY}",
-        MAVEN_DEPLOY_REPOSITORY: "${MAVEN_ARTIFACTS_REPOSITORY}",
 
         IS_MAIN_BRANCH: "${Utils.isMainBranch(this)}"
     ])
@@ -222,9 +230,33 @@ void setupPromoteJob(JobType jobType) {
             stringParam('PROJECT_VERSION', '', 'Override `deployment.properties`. Optional if not RELEASE. If RELEASE, cannot be empty.')
             stringParam('DROOLS_VERSION', '', 'Override `deployment.properties`. Optional if not RELEASE. If RELEASE, cannot be empty.')
             stringParam('GIT_TAG', '', 'Git tag to set, if different from PROJECT_VERSION')
-            booleanParam('UPDATE_STABLE_BRANCH', false, 'Set to true if you want to update the `stable` branch to new created Git tag.')
 
             booleanParam('SEND_NOTIFICATION', false, 'In case you want the pipeline to send a notification on CI channel for this run.')
+        }
+    }
+}
+
+void setupPostReleaseJob() {
+    def jobParams = JobParamsUtils.getBasicJobParams(this, 'kogito-examples-post-release', JobType.RELEASE, "${jenkins_path}/Jenkinsfile.post-release", 'Kogito Examples Post Release')
+    JobParamsUtils.setupJobParamsDefaultMavenConfiguration(this, jobParams)
+    jobParams.env.putAll([
+        REPO_NAME: 'kogito-examples',
+        JENKINS_EMAIL_CREDS_ID: "${JENKINS_EMAIL_CREDS_ID}",
+
+        GIT_AUTHOR: "${GIT_AUTHOR_NAME}",
+        AUTHOR_CREDS_ID: "${GIT_AUTHOR_CREDENTIALS_ID}",
+        GITHUB_TOKEN_CREDS_ID: "${GIT_AUTHOR_TOKEN_CREDENTIALS_ID}",
+    ])
+    KogitoJobTemplate.createPipelineJob(this, jobParams)?.with {
+        parameters {
+            stringParam('DISPLAY_NAME', '', 'Setup a specific build display name')
+
+            stringParam('BUILD_BRANCH_NAME', "${GIT_BRANCH}", 'Set the Git branch to checkout')
+
+            stringParam('PROJECT_VERSION', '', 'Project version.')
+            stringParam('GIT_TAG', '', '(Optional) Git tag to use. Default is the project version')
+
+            booleanParam('SEND_NOTIFICATION', true, 'In case you want the pipeline to send a notification on CI channel for this run.')
         }
     }
 }

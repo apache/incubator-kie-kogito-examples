@@ -70,7 +70,7 @@ public class DealsRestIT {
         // get task for john
         String taskId = given().accept(ContentType.JSON)
                 .when().get("/dealreviews/{uuid}/tasks?user=john", dealReviewId)
-                .then().log().ifValidationFails().statusCode(200).body("$.size", is(1)).extract().path("[0].id");
+                .then().log().ifValidationFails().statusCode(200).body("$.size()", is(1)).extract().path("[0].id");
 
         // complete review task
         given().contentType(ContentType.JSON).accept(ContentType.JSON).body("{\"review\" : \"very good work\"}")

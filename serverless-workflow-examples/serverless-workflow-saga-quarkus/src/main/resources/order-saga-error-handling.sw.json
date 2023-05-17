@@ -238,9 +238,7 @@
           }
         }
       ],
-      "end": {
-        "terminate": "true"
-      }
+      "end": true
     },
     {
       "name": "CompleteOrder",
@@ -260,9 +258,7 @@
           }
         }
       ],
-      "end": {
-        "terminate": "true"
-      }
+      "end": true
     }
   ]
 }

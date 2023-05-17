@@ -10,10 +10,10 @@
   <name>Kogito Example :: Serverless Workflow Data Index :: Quarkus</name>
   <description>Kogito Serverless Workflow Data Index Example - Quarkus</description>
   <properties>
-    <quarkus-plugin.version>2.16.5.Final</quarkus-plugin.version>
+    <quarkus-plugin.version>2.16.6.Final</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-    <quarkus.platform.version>2.16.5.Final</quarkus.platform.version>
+    <quarkus.platform.version>2.16.6.Final</quarkus.platform.version>
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
@@ -55,13 +55,8 @@
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-addons-quarkus-data-index-postgresql</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-quarkus-serverless-workflow-devui</artifactId>
     </dependency>
-
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-junit5</artifactId>
@@ -120,27 +115,99 @@
           </execution>
         </executions>
       </plugin>
-      <plugin>
-        <artifactId>maven-failsafe-plugin</artifactId>
-        <version>${version.failsafe.plugin}</version>
-        <configuration>
-          <systemPropertyVariables>
-            <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-            <maven.home>${maven.home}</maven.home>
-          </systemPropertyVariables>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>integration-test</goal>
-              <goal>verify</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
     </plugins>
   </build>
   <profiles>
+    <profile>
+      <id>data-index-addon</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+        <property>
+          <name>data-index-addon</name>
+        </property>
+      </activation>
+      <properties>
+        <quarkus.profile>data-index-addon</quarkus.profile>
+        <quarkus.kogito.devservices.enabled>false</quarkus.kogito.devservices.enabled>
+        <quarkus.datasource.devservices.enabled>true</quarkus.datasource.devservices.enabled>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>org.kie.kogito</groupId>
+          <artifactId>kogito-addons-quarkus-data-index-postgresql</artifactId>
+        </dependency>
+      </dependencies>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <version>${version.failsafe.plugin}</version>
+            <configuration>
+              <systemPropertyVariables>
+                <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+                <maven.home>${maven.home}</maven.home>
+              </systemPropertyVariables>
+            </configuration>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>integration-test</goal>
+                  <goal>verify</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>data-index-devservice</id>
+      <activation>
+        <property>
+          <name>data-index-devservice</name>
+        </property>
+      </activation>
+      <properties>
+        <quarkus.kogito.devservices.enabled>true</quarkus.kogito.devservices.enabled>
+        <quarkus.datasource.devservices.enabled>true</quarkus.datasource.devservices.enabled>
+      </properties>
+    </profile>
+    <profile>
+      <id>data-index-standalone</id> <!-- Requires execute docker-compose/startServices.sh -->
+      <activation>
+        <property>
+          <name>data-index-standalone</name>
+        </property>
+      </activation>
+      <properties>
+        <quarkus.profile>http-events,container</quarkus.profile>
+        <quarkus.kogito.devservices.enabled>false</quarkus.kogito.devservices.enabled>
+        <quarkus.datasource.devservices.enabled>false</quarkus.datasource.devservices.enabled>
+        <quarkus.kafka.devservices.enabled>false</quarkus.kafka.devservices.enabled>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>io.quarkus</groupId>
+          <artifactId>quarkus-container-image-jib</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>org.kie.kogito</groupId>
+          <artifactId>kogito-addons-quarkus-events-process</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>org.kie.kogito</groupId>
+          <artifactId>kogito-addons-quarkus-process-management</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>org.kie.kogito</groupId>
+          <artifactId>kogito-addons-quarkus-process-svg</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>org.kie.kogito</groupId>
+          <artifactId>kogito-addons-quarkus-source-files</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
     <profile>
       <id>container</id>
       <activation>

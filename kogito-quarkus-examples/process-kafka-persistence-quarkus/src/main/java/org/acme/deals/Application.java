@@ -15,7 +15,6 @@
  */
 package org.acme.deals;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -32,14 +31,14 @@ import org.slf4j.LoggerFactory;
 import io.quarkus.runtime.Startup;
 import io.smallrye.common.annotation.Identifier;
 
-import static java.util.Arrays.asList;
-import static java.util.stream.Collectors.toList;
+import static java.util.Collections.singleton;
 
 @ApplicationScoped
 @Startup
 public class Application {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Application.class);
+    private static final String KOGITO_PROCESS = "kogito.process";
 
     @Inject
     @Identifier("default-kafka-broker")
@@ -50,10 +49,9 @@ public class Application {
         try (AdminClient client = AdminClient.create(kafkaConfig)) {
             Set<String> topics = client.listTopics().names().get(1, TimeUnit.MINUTES);
 
-            List<NewTopic> newTopics = asList("kogito.process.dealreviews", "kogito.process.deals").stream().filter(t -> !topics.contains(t)).map(t -> new NewTopic(t, 1, (short) 1)).collect(toList());
-            if (newTopics.isEmpty() == false) {
-                client.createTopics(newTopics).all().get(1, TimeUnit.MINUTES);
-                LOGGER.info("Created kogito.process.dealreviews and kogito.process.deals topics in Kafka");
+            if (!topics.contains(KOGITO_PROCESS)) {
+                client.createTopics(singleton(new NewTopic(KOGITO_PROCESS, 1, (short) 1))).all().get(1, TimeUnit.MINUTES);
+                LOGGER.info("Created kogito.process topic in Kafka");
             }
         }
     }
