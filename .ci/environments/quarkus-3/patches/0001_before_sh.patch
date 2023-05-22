@@ -1,5 +1,5 @@
 diff --git a/kogito-quarkus-examples/decisiontable-quarkus-example/pom.xml b/kogito-quarkus-examples/decisiontable-quarkus-example/pom.xml
-index 9f5e5544..ba00610f 100644
+index 1b058402..6695050b 100644
 --- a/kogito-quarkus-examples/decisiontable-quarkus-example/pom.xml
 +++ b/kogito-quarkus-examples/decisiontable-quarkus-example/pom.xml
 @@ -10,15 +10,15 @@
@@ -16,10 +16,10 @@ index 9f5e5544..ba00610f 100644
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
 -    <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
 -    <version.org.kie.kogito>2.0.0-SNAPSHOT</version.org.kie.kogito>
--    <version.org.drools>8.39.0-SNAPSHOT</version.org.drools>
+-    <version.org.drools>8.40.0-SNAPSHOT</version.org.drools>
 +    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
 +    <version.org.kie.kogito>3.0.0-SNAPSHOT</version.org.kie.kogito>
-+    <version.org.drools>9.39.0-SNAPSHOT</version.org.drools>
++    <version.org.drools>9.40.0-SNAPSHOT</version.org.drools>
    </properties>
    <dependencyManagement>
      <dependencies>
@@ -596,7 +596,7 @@ index 2f98e737..7e08d7b2 100644
  import org.kie.kogito.flexible.example.model.State;
  import org.kie.kogito.flexible.example.model.SupportCase;
 diff --git a/kogito-quarkus-examples/kogito-travel-agency/basic/pom.xml b/kogito-quarkus-examples/kogito-travel-agency/basic/pom.xml
-index 656da2aa..329e18a4 100644
+index 0bbec36d..fbf31eb8 100644
 --- a/kogito-quarkus-examples/kogito-travel-agency/basic/pom.xml
 +++ b/kogito-quarkus-examples/kogito-travel-agency/basic/pom.xml
 @@ -12,15 +12,15 @@
@@ -613,10 +613,10 @@ index 656da2aa..329e18a4 100644
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
 -    <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
 -    <version.org.kie.kogito>2.0.0-SNAPSHOT</version.org.kie.kogito>
--    <version.org.drools>8.39.0-SNAPSHOT</version.org.drools>
+-    <version.org.drools>8.40.0-SNAPSHOT</version.org.drools>
 +    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
 +    <version.org.kie.kogito>3.0.0-SNAPSHOT</version.org.kie.kogito>
-+    <version.org.drools>9.39.0-SNAPSHOT</version.org.drools>
++    <version.org.drools>9.40.0-SNAPSHOT</version.org.drools>
    </properties>
    <dependencyManagement>
      <dependencies>
@@ -722,7 +722,7 @@ index 9b27563e..6040d3fe 100644
    <dependencyManagement>
      <dependencies>
 diff --git a/kogito-quarkus-examples/kogito-travel-agency/extended/travels/pom.xml b/kogito-quarkus-examples/kogito-travel-agency/extended/travels/pom.xml
-index 5837a3a7..d22a2fc5 100644
+index 095beec0..76196994 100644
 --- a/kogito-quarkus-examples/kogito-travel-agency/extended/travels/pom.xml
 +++ b/kogito-quarkus-examples/kogito-travel-agency/extended/travels/pom.xml
 @@ -10,15 +10,15 @@
@@ -739,10 +739,10 @@ index 5837a3a7..d22a2fc5 100644
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
 -    <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
 -    <version.org.kie.kogito>2.0.0-SNAPSHOT</version.org.kie.kogito>
--    <version.org.drools>8.39.0-SNAPSHOT</version.org.drools>
+-    <version.org.drools>8.40.0-SNAPSHOT</version.org.drools>
 +    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
 +    <version.org.kie.kogito>3.0.0-SNAPSHOT</version.org.kie.kogito>
-+    <version.org.drools>9.39.0-SNAPSHOT</version.org.drools>
++    <version.org.drools>9.40.0-SNAPSHOT</version.org.drools>
    </properties>
    <dependencyManagement>
      <dependencies>
@@ -1686,7 +1686,7 @@ index d10c6720..1a96476f 100644
  import org.kie.kogito.event.EventMarshaller;
  import org.kie.kogito.event.EventUnmarshaller;
 diff --git a/kogito-quarkus-examples/process-kafka-avro-multi-quarkus/src/main/java/org/acme/travel/StringKeyDecorator.java b/kogito-quarkus-examples/process-kafka-avro-multi-quarkus/src/main/java/org/acme/travel/StringKeyDecorator.java
-index e6af7b86..268eea52 100644
+index b86ac3ee..8573a244 100644
 --- a/kogito-quarkus-examples/process-kafka-avro-multi-quarkus/src/main/java/org/acme/travel/StringKeyDecorator.java
 +++ b/kogito-quarkus-examples/process-kafka-avro-multi-quarkus/src/main/java/org/acme/travel/StringKeyDecorator.java
 @@ -15,7 +15,7 @@
@@ -1697,7 +1697,7 @@ index e6af7b86..268eea52 100644
 +import jakarta.enterprise.context.ApplicationScoped;
  
  import org.eclipse.microprofile.reactive.messaging.Message;
- import org.kie.kogito.addon.quarkus.messaging.common.message.MessageDecorator;
+ import org.kie.kogito.addon.quarkus.common.reactive.messaging.MessageDecorator;
 diff --git a/kogito-quarkus-examples/process-kafka-avro-multi-quarkus/src/test/java/org/acme/travel/tests/avro/quarkus/MultiMessagingIT.java b/kogito-quarkus-examples/process-kafka-avro-multi-quarkus/src/test/java/org/acme/travel/tests/avro/quarkus/MultiMessagingIT.java
 index 11bd3766..32f56442 100644
 --- a/kogito-quarkus-examples/process-kafka-avro-multi-quarkus/src/test/java/org/acme/travel/tests/avro/quarkus/MultiMessagingIT.java
@@ -5357,7 +5357,7 @@ index 5426850f..38aafc75 100644
  import org.junit.jupiter.api.AfterAll;
  import org.junit.jupiter.api.BeforeAll;
 diff --git a/serverless-workflow-examples/serverless-workflow-parallel-execution/pom.xml b/serverless-workflow-examples/serverless-workflow-parallel-execution/pom.xml
-index fd98dcea..47f2cd95 100644
+index 3a16b89f..16804f95 100644
 --- a/serverless-workflow-examples/serverless-workflow-parallel-execution/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-parallel-execution/pom.xml
 @@ -12,14 +12,14 @@
@@ -5999,10 +5999,10 @@ index 19a52d1e..57f37d0a 100644
          <maven.compiler.release>11</maven.compiler.release>
          <version.compiler.plugin>3.8.1</version.compiler.plugin>
          <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
-diff --git a/serverless-workflow-examples/serverless-workflow-timeouts-showcase/pom.xml b/serverless-workflow-examples/serverless-workflow-timeouts-showcase/pom.xml
-index 8e0cfadf..66592039 100644
---- a/serverless-workflow-examples/serverless-workflow-timeouts-showcase/pom.xml
-+++ b/serverless-workflow-examples/serverless-workflow-timeouts-showcase/pom.xml
+diff --git a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-embedded/pom.xml b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-embedded/pom.xml
+index 49351e16..905acc94 100644
+--- a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-embedded/pom.xml
++++ b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-embedded/pom.xml
 @@ -13,10 +13,10 @@
      <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
@@ -6016,10 +6016,10 @@ index 8e0cfadf..66592039 100644
      <maven.compiler.release>11</maven.compiler.release>
      <version.compiler.plugin>3.8.1</version.compiler.plugin>
      <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
-diff --git a/serverless-workflow-examples/serverless-workflow-timeouts-showcase/src/main/java/org/kie/kogito/examples/EventsProducerResource.java b/serverless-workflow-examples/serverless-workflow-timeouts-showcase/src/main/java/org/kie/kogito/examples/EventsProducerResource.java
+diff --git a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-embedded/src/main/java/org/kie/kogito/examples/EventsProducerResource.java b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-embedded/src/main/java/org/kie/kogito/examples/EventsProducerResource.java
 index fad6daea..84af4a33 100644
---- a/serverless-workflow-examples/serverless-workflow-timeouts-showcase/src/main/java/org/kie/kogito/examples/EventsProducerResource.java
-+++ b/serverless-workflow-examples/serverless-workflow-timeouts-showcase/src/main/java/org/kie/kogito/examples/EventsProducerResource.java
+--- a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-embedded/src/main/java/org/kie/kogito/examples/EventsProducerResource.java
++++ b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-embedded/src/main/java/org/kie/kogito/examples/EventsProducerResource.java
 @@ -20,16 +20,16 @@ import java.net.URI;
  import java.time.OffsetDateTime;
  import java.util.UUID;
@@ -6047,10 +6047,72 @@ index fad6daea..84af4a33 100644
  
  import io.vertx.core.http.HttpMethod;
  import io.vertx.ext.web.Router;
-diff --git a/serverless-workflow-examples/serverless-workflow-timeouts-showcase/src/main/java/org/kie/kogito/examples/VertxRouter.java b/serverless-workflow-examples/serverless-workflow-timeouts-showcase/src/main/java/org/kie/kogito/examples/VertxRouter.java
+diff --git a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-embedded/src/main/java/org/kie/kogito/examples/VertxRouter.java b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-embedded/src/main/java/org/kie/kogito/examples/VertxRouter.java
 index b1f5f102..15300957 100644
---- a/serverless-workflow-examples/serverless-workflow-timeouts-showcase/src/main/java/org/kie/kogito/examples/VertxRouter.java
-+++ b/serverless-workflow-examples/serverless-workflow-timeouts-showcase/src/main/java/org/kie/kogito/examples/VertxRouter.java
+--- a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-embedded/src/main/java/org/kie/kogito/examples/VertxRouter.java
++++ b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-embedded/src/main/java/org/kie/kogito/examples/VertxRouter.java
+@@ -1,7 +1,7 @@
+ package org.kie.kogito.examples;
+ 
+-import javax.enterprise.context.ApplicationScoped;
+-import javax.enterprise.event.Observes;
++import jakarta.enterprise.context.ApplicationScoped;
++import jakarta.enterprise.event.Observes;
+ 
+ import io.vertx.core.http.HttpMethod;
+ import io.vertx.ext.web.Router;
+diff --git a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-extended/pom.xml b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-extended/pom.xml
+index 4afe5c19..6f79b6d2 100644
+--- a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-extended/pom.xml
++++ b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-extended/pom.xml
+@@ -13,10 +13,10 @@
+     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
+     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
+-    <quarkus.platform.version>2.16.6.Final</quarkus.platform.version>
++    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
+     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
+     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
+-    <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
++    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
+     <maven.compiler.release>11</maven.compiler.release>
+     <version.compiler.plugin>3.8.1</version.compiler.plugin>
+     <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
+diff --git a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-extended/src/main/java/org/kie/kogito/examples/EventsProducerResource.java b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-extended/src/main/java/org/kie/kogito/examples/EventsProducerResource.java
+index fad6daea..84af4a33 100644
+--- a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-extended/src/main/java/org/kie/kogito/examples/EventsProducerResource.java
++++ b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-extended/src/main/java/org/kie/kogito/examples/EventsProducerResource.java
+@@ -20,16 +20,16 @@ import java.net.URI;
+ import java.time.OffsetDateTime;
+ import java.util.UUID;
+ 
+-import javax.enterprise.context.ApplicationScoped;
+-import javax.enterprise.event.Observes;
+-import javax.inject.Inject;
+-import javax.ws.rs.Consumes;
+-import javax.ws.rs.POST;
+-import javax.ws.rs.Path;
+-import javax.ws.rs.PathParam;
+-import javax.ws.rs.Produces;
+-import javax.ws.rs.core.MediaType;
+-import javax.ws.rs.core.Response;
++import jakarta.enterprise.context.ApplicationScoped;
++import jakarta.enterprise.event.Observes;
++import jakarta.inject.Inject;
++import jakarta.ws.rs.Consumes;
++import jakarta.ws.rs.POST;
++import jakarta.ws.rs.Path;
++import jakarta.ws.rs.PathParam;
++import jakarta.ws.rs.Produces;
++import jakarta.ws.rs.core.MediaType;
++import jakarta.ws.rs.core.Response;
+ 
+ import io.vertx.core.http.HttpMethod;
+ import io.vertx.ext.web.Router;
+diff --git a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-extended/src/main/java/org/kie/kogito/examples/VertxRouter.java b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-extended/src/main/java/org/kie/kogito/examples/VertxRouter.java
+index b1f5f102..15300957 100644
+--- a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-extended/src/main/java/org/kie/kogito/examples/VertxRouter.java
++++ b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-extended/src/main/java/org/kie/kogito/examples/VertxRouter.java
 @@ -1,7 +1,7 @@
  package org.kie.kogito.examples;
  

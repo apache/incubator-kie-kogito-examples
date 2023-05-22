@@ -12,7 +12,7 @@ recipeList:
   }
 - org.openrewrite.maven.ChangePropertyValue: {
     key: version.org.drools,
-    newValue: 9.39.0-SNAPSHOT
+    newValue: 9.40.0-SNAPSHOT
   }
 - org.openrewrite.maven.ChangePropertyValue: {
     key: version.org.kie.kogito,
