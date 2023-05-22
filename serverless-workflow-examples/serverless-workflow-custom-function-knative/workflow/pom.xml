@@ -71,6 +71,10 @@
             <artifactId>kogito-addons-quarkus-knative-serving</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.kie.kogito</groupId>
+            <artifactId>kogito-addons-quarkus-fabric8-kubernetes-service-catalog</artifactId>
+        </dependency>
+        <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-kubernetes</artifactId>
         </dependency>
