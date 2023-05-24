@@ -177,42 +177,23 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>com.google.cloud.tools</groupId>
+        <artifactId>jib-maven-plugin</artifactId>
+        <configuration>
+          <to>
+            <image>${project.groupId}/${project.artifactId}:1.0</image>
+          </to>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>dockerBuild</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
-
-  <profiles>
-    <profile>
-      <id>container</id>
-      <activation>
-        <property>
-          <name>container</name>
-        </property>
-      </activation>
-      <properties>
-        <quarkus.profile>container</quarkus.profile>
-      </properties>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>com.google.cloud.tools</groupId>
-            <artifactId>jib-maven-plugin</artifactId>
-            <configuration>
-              <to>
-                <image>${project.groupId}/${project.artifactId}:1.0</image>
-              </to>
-            </configuration>
-            <executions>
-              <execution>
-                <phase>install</phase>
-                <goals>
-                  <goal>dockerBuild</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
-
 </project>
