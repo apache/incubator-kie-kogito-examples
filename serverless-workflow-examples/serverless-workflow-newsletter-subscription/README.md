@@ -84,9 +84,8 @@ $ kubectl create ns newsletter-showcase
 # install the supporting services to run the example in knative, the PostgreSQL database, the Jobs Service and the event-display application.
 $ kubectl apply -f kubernetes/supporting-services.yml -n newsletter-showcase
 
-# TODO Neus add proper comment.
+# Install the data index service to be able to index the information related with the ProcessInstances and Jobs events 
 $ kubectl apply -f kubernetes/data-index-services.yml -n newsletter-showcase
-
 
 # install the subscription-flow
 $ kubectl apply -f subscription-flow/target/kubernetes/knative.yml -n newsletter-showcase
@@ -107,6 +106,25 @@ subscription-service   http://subscription-service.newsletter-showcase.127.0.0.1
 ```
 
 The `URL` column has the applications' endpoint.
+
+To access to the IP where the Data Index service exposes the GraphQL-UI execute:
+
+```shell
+$ kubectl get services -n newsletter-showcase
+
+NAME                                 TYPE           CLUSTER-IP       EXTERNAL-IP                                         PORT(S)                                              AGE
+data-index-service-postgresql        ClusterIP      10.100.228.32    <none>                                              80/TCP                                               7m22s
+default-kne-trigger-kn-channel       ExternalName   <none>           imc-dispatcher.knative-eventing.svc.cluster.local   80/TCP                                               7h50m
+event-display                        ExternalName   <none>           kourier-internal.kourier-system.svc.cluster.local   80/TCP                                               7h49m
+event-display-00001                  ClusterIP      10.100.114.14    <none>                                              80/TCP,443/TCP                                       7h50m
+event-display-00001-private          ClusterIP      10.109.69.197    <none>                                              80/TCP,443/TCP,9090/TCP,9091/TCP,8022/TCP,8012/TCP   7h50m
+jobs-service-postgresql              ClusterIP      10.102.232.229   <none>                                              80/TCP                                               7h50m
+newsletter-postgres                  ClusterIP      10.111.31.14     <none>                                              5432/TCP                                             7h50m
+subscription-flow                    ExternalName   <none>           kourier-internal.kourier-system.svc.cluster.local   80/TCP                                               7h34m
+subscription-service                 ExternalName   <none>           kourier-internal.kourier-system.svc.cluster.local   80/TCP                                               7h24m
+```
+
+The `CLUSTER-IP` column has the data-index IP, assigned in each installation. In this case putting 10.100.228.32 in a browser it will show the http://10.100.228.32/graphiql/
 
 Expose the URLs in your local environment. In a separated terminal, run:
 
