@@ -65,7 +65,7 @@ spec:
               value: /.*/
             - name: QUARKUS_FLYWAY_MIGRATE_AT_START
               value: "true"
-            - name: QUARKUS_PROFILE
+            - name: KOGITO_DATA_INDEX_QUARKUS_PROFILE
               value: "http-events-support"
             - name: QUARKUS_HTTP_PORT
               value: "8080"
