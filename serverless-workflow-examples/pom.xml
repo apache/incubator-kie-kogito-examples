@@ -54,6 +54,7 @@
         <module>serverless-workflow-testing-with-rest-assured</module>
         <module>serverless-workflow-timeouts-showcase-embedded</module>
         <module>serverless-workflow-timeouts-showcase-extended</module>
+        <module>serverless-workflow-timeouts-showcase-operator-devmode</module>
       </modules>
     </profile>
 
@@ -134,6 +135,7 @@
         <module>serverless-workflow-testing-with-rest-assured</module>
         <module>serverless-workflow-timeouts-showcase-embedded</module>
         <module>serverless-workflow-timeouts-showcase-extended</module>
+        <module>serverless-workflow-timeouts-showcase-operator-devmode</module>
       </modules>
     </profile>
   </profiles>
