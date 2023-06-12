@@ -1,0 +1,37 @@
+apiVersion: sw.kogito.kie.org/v1alpha08
+kind: KogitoServerlessWorkflow
+metadata:
+  name: foreach
+  annotations:
+    sw.kogito.kie.org/description: Serverless Workflow for each example on k8s!
+    sw.kogito.kie.org/version: 0.0.1
+    sw.kogito.kie.org/profile: dev
+    sw.kogito.kie.org/resource-openapi: openapi-configmap
+spec:
+  flow:
+    start: start
+    functions:
+      - name: printMessage
+        type: custom
+        operation: sysout
+      - name: increase
+        type: expression
+        operation: .item + 1
+    states:
+      - name: start
+        type: foreach
+        iterationParam: item
+        inputCollection: .input
+        outputCollection: .output
+        stateDataFilter:
+          output: '{output: .output}'
+        actions:
+          - name: increase
+            functionRef:
+              refName: increase
+          - name: printAction
+            functionRef:
+              refName: printMessage
+              arguments:
+                message: .item
+        end: true
