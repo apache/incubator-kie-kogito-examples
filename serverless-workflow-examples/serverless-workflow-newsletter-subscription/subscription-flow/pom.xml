@@ -59,6 +59,10 @@
     <!-- Service Discovery-->
     <dependency>
       <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-addons-quarkus-kubernetes</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-addons-quarkus-fabric8-kubernetes-service-catalog</artifactId>
     </dependency>
 
