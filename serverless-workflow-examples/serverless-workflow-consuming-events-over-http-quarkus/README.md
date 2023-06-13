@@ -209,7 +209,7 @@ instance now appears in `Complete` state.
 ### Building and Deploying Workflow using Kogito Serverless Workflow Operator
 For this install Kogito Serverless Workflow Operator in your Kubernetes cluster from [here](https://kiegroup.github.io/kogito-docs/serverlessworkflow/latest/cloud/operator/install-serverless-operator.html).
 
-In native Kubernetes approach you can model workflows using [YAML](src/main/resources/startevent-sw.yaml) definitions and directly deploy them using the Kogito Serverless Workflow Operator.
+In native Kubernetes approach you can model workflows using [YAML](operator/startevent-sw.yaml) definitions and directly deploy them using the Kogito Serverless Workflow Operator.
 While consuming events over http, update the configmap which gets created with suffix "{application name}-props" in the kubernetes cluster with the following properties:
 
 ```properties
