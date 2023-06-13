@@ -84,6 +84,6 @@ once completed, it should return:
 ### Building and Deploying Workflow using Kogito Serverless Workflow Operator
 For this install Kogito Serverless Workflow Operator in your Kubernetes cluster from [here](https://kiegroup.github.io/kogito-docs/serverlessworkflow/latest/cloud/operator/install-serverless-operator.html).
 
-In native Kubernetes approach you can model workflows using [YAML](src/main/resources/foreach_sw.yaml) definitions and directly deploy them using the Kogito Serverless Workflow Operator.
+In native Kubernetes approach you can model workflows using [YAML](operator/foreach_sw.yaml) definitions and directly deploy them using the Kogito Serverless Workflow Operator.
 
 Refer to [Serverless Workflow Guide](https://kiegroup.github.io/kogito-docs/serverlessworkflow/latest/cloud/index.html), to know how to build and deploy workflows using Kogito Serverless Workflow Operator.
