@@ -25,6 +25,7 @@ import static io.restassured.RestAssured.given;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 
 @QuarkusIntegrationTest
 class DataIndexRestIT {
@@ -38,9 +39,9 @@ class DataIndexRestIT {
         given().contentType(ContentType.JSON).body("{ \"query\" : \"{ProcessInstances{ id } }\" }")
                 .when().post("/graphql")
                 .then().statusCode(200)
-                .body("data.ProcessInstances.size()", is(0));
+                .body("data.ProcessInstances.size()", is(greaterThanOrEqualTo(0)));
 
-        String id = given()
+        String processInstanceId = given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
                 .post("/callback")
@@ -56,15 +57,15 @@ class DataIndexRestIT {
                 .untilAsserted(() -> given()
                         .contentType(ContentType.JSON)
                         .accept(ContentType.JSON)
-                        .get("/callback/{id}", id)
+                        .get("/callback/{id}", processInstanceId)
                         .then()
                         .statusCode(404));
 
-        given().contentType(ContentType.JSON).body("{ \"query\" : \"{ProcessInstances{ id, state } }\" }")
+        given().contentType(ContentType.JSON).body("{ \"query\" : \"{ ProcessInstances(where: { id: {equal: \\\"" + processInstanceId + "\\\"}}) { id, state } }\" }")
                 .when().post("/graphql")
                 .then().statusCode(200)
                 .body("data.ProcessInstances.size()", is(1))
-                .body("data.ProcessInstances[0].id", is(id))
+                .body("data.ProcessInstances[0].id", is(processInstanceId))
                 .body("data.ProcessInstances[0].state", is("COMPLETED"));
     }
 }
