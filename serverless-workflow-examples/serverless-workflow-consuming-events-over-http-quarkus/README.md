@@ -207,7 +207,7 @@ instance now appears in `Complete` state.
 ![Completed Workflow in Workflow Instances Page](docs/5_workflow-completed.png)
 
 ### Building and Deploying Workflow using Kogito Serverless Workflow Operator
-For this install Kogito Serverless Workflow Operator in your Kubernetes cluster from [here](https://kiegroup.github.io/kogito-docs/serverlessworkflow/latest/cloud/operator/install-serverless-operator.html).
+For this, you will need to install Kogito Serverless Workflow Operator in your Kubernetes cluster from [here](https://kiegroup.github.io/kogito-docs/serverlessworkflow/latest/cloud/operator/install-serverless-operator.html).
 
 In native Kubernetes approach you can model workflows using [YAML](operator/startevent-sw.yaml) definitions and directly deploy them using the Kogito Serverless Workflow Operator.
 While consuming events over http, update the configmap which gets created with suffix "{application name}-props" in the kubernetes cluster with the following properties:
@@ -217,4 +217,4 @@ mp.messaging.incoming.start.connector=quarkus-http
 mp.messaging.incoming.start.path=/startevent
 ```
 
-Refer to [Serverless Workflow Guide](https://kiegroup.github.io/kogito-docs/serverlessworkflow/latest/cloud/index.html), to know how to build and deploy workflows using Kogito Serverless Workflow Operator.
+Refer to the [Serverless Workflow Guide](https://kiegroup.github.io/kogito-docs/serverlessworkflow/latest/cloud/index.html) to know how to build and deploy workflows using Kogito Serverless Workflow Operator.
