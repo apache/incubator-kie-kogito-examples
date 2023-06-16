@@ -1,5 +1,5 @@
 diff --git a/kogito-quarkus-examples/decisiontable-quarkus-example/pom.xml b/kogito-quarkus-examples/decisiontable-quarkus-example/pom.xml
-index 7e34d3448..6695050b2 100644
+index 5d8c4970c..a14d4189d 100644
 --- a/kogito-quarkus-examples/decisiontable-quarkus-example/pom.xml
 +++ b/kogito-quarkus-examples/decisiontable-quarkus-example/pom.xml
 @@ -10,15 +10,15 @@
@@ -16,10 +16,10 @@ index 7e34d3448..6695050b2 100644
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
 -    <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
 -    <version.org.kie.kogito>2.0.0-SNAPSHOT</version.org.kie.kogito>
--    <version.org.drools>8.40.0-SNAPSHOT</version.org.drools>
+-    <version.org.drools>8.41.0-SNAPSHOT</version.org.drools>
 +    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
 +    <version.org.kie.kogito>3.0.0-SNAPSHOT</version.org.kie.kogito>
-+    <version.org.drools>9.40.0-SNAPSHOT</version.org.drools>
++    <version.org.drools>9.41.0-SNAPSHOT</version.org.drools>
    </properties>
    <dependencyManagement>
      <dependencies>
@@ -596,7 +596,7 @@ index 2f98e7371..7e08d7b26 100644
  import org.kie.kogito.flexible.example.model.State;
  import org.kie.kogito.flexible.example.model.SupportCase;
 diff --git a/kogito-quarkus-examples/kogito-travel-agency/basic/pom.xml b/kogito-quarkus-examples/kogito-travel-agency/basic/pom.xml
-index ed521fa7f..fbf31eb85 100644
+index 0ef201186..847bbab38 100644
 --- a/kogito-quarkus-examples/kogito-travel-agency/basic/pom.xml
 +++ b/kogito-quarkus-examples/kogito-travel-agency/basic/pom.xml
 @@ -12,15 +12,15 @@
@@ -613,10 +613,10 @@ index ed521fa7f..fbf31eb85 100644
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
 -    <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
 -    <version.org.kie.kogito>2.0.0-SNAPSHOT</version.org.kie.kogito>
--    <version.org.drools>8.40.0-SNAPSHOT</version.org.drools>
+-    <version.org.drools>8.41.0-SNAPSHOT</version.org.drools>
 +    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
 +    <version.org.kie.kogito>3.0.0-SNAPSHOT</version.org.kie.kogito>
-+    <version.org.drools>9.40.0-SNAPSHOT</version.org.drools>
++    <version.org.drools>9.41.0-SNAPSHOT</version.org.drools>
    </properties>
    <dependencyManagement>
      <dependencies>
@@ -722,7 +722,7 @@ index 578c1724a..6040d3fe5 100644
    <dependencyManagement>
      <dependencies>
 diff --git a/kogito-quarkus-examples/kogito-travel-agency/extended/travels/pom.xml b/kogito-quarkus-examples/kogito-travel-agency/extended/travels/pom.xml
-index 5aa4eeaa0..76196994e 100644
+index c6282459f..3b363f7be 100644
 --- a/kogito-quarkus-examples/kogito-travel-agency/extended/travels/pom.xml
 +++ b/kogito-quarkus-examples/kogito-travel-agency/extended/travels/pom.xml
 @@ -10,15 +10,15 @@
@@ -739,10 +739,10 @@ index 5aa4eeaa0..76196994e 100644
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
 -    <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
 -    <version.org.kie.kogito>2.0.0-SNAPSHOT</version.org.kie.kogito>
--    <version.org.drools>8.40.0-SNAPSHOT</version.org.drools>
+-    <version.org.drools>8.41.0-SNAPSHOT</version.org.drools>
 +    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
 +    <version.org.kie.kogito>3.0.0-SNAPSHOT</version.org.kie.kogito>
-+    <version.org.drools>9.40.0-SNAPSHOT</version.org.drools>
++    <version.org.drools>9.41.0-SNAPSHOT</version.org.drools>
    </properties>
    <dependencyManagement>
      <dependencies>
@@ -4073,7 +4073,7 @@ index 1baae4427..ceedd0272 100644
          <maven.compiler.release>11</maven.compiler.release>
          <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-custom-function-knative/workflow/pom.xml b/serverless-workflow-examples/serverless-workflow-custom-function-knative/workflow/pom.xml
-index 34bde79b5..ee87a5fe2 100644
+index dca575b64..94b538fb1 100644
 --- a/serverless-workflow-examples/serverless-workflow-custom-function-knative/workflow/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-custom-function-knative/workflow/pom.xml
 @@ -13,13 +13,13 @@
@@ -6000,7 +6000,7 @@ index 717cf1128..57f37d0a2 100644
          <version.compiler.plugin>3.8.1</version.compiler.plugin>
          <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-embedded/pom.xml b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-embedded/pom.xml
-index 72a578171..905acc94a 100644
+index f80bfaac4..904c140fb 100644
 --- a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-embedded/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-embedded/pom.xml
 @@ -13,10 +13,10 @@
@@ -6062,7 +6062,7 @@ index b1f5f1026..153009579 100644
  import io.vertx.core.http.HttpMethod;
  import io.vertx.ext.web.Router;
 diff --git a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-extended/pom.xml b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-extended/pom.xml
-index e21517a63..c2dd17918 100644
+index 0bd058c52..62ce7b468 100644
 --- a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-extended/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-extended/pom.xml
 @@ -13,10 +13,10 @@
