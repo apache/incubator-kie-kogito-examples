@@ -29,7 +29,7 @@
           "functionRef": {
             "refName": "python",
             "arguments": {
-              "script": "rng = np.random.default_rng().integers(low=0,high=10,size=3);"
+              "script": "rng = np.random.default_rng().integers(low=0,high=10,size=3)"
             }
           }
         } 

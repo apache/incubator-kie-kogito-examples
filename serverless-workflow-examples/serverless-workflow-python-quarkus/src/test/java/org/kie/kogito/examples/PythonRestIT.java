@@ -30,7 +30,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PythonRestIT {
 
     @Test
-    public void testOpenvino() {
+    public void testPython() {
         JsonNode node = given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
