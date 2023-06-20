@@ -5,7 +5,7 @@
 2. Start your minikube with the following command:
 
 ```shell
-minikube start --cpus 4 --memory 4096 --addons registry --addons metrics-server --insecure-registry "10.0.0.0/24" --insecure-registry "localhost:5000"
+minikube start --cpus 4 --memory 8g --addons registry --addons metrics-server --insecure-registry "10.0.0.0/24" --insecure-registry "localhost:5000"
 ```
 
 > **NOTE:** If the number of allocated cpus and memory configurations don't feet well for your installation you can try to change this numbers.
@@ -41,7 +41,7 @@ kubectl apply -f workflows/event_state_timeouts_devmode.yaml -n timeouts-showcas
 kubectl apply -f workflows/switch_state_timeouts_devmode.yaml -n timeouts-showcase
 ```
 
-After executing the commands you should have seen the following ouptputs:
+After executing the commands you should have seen the following outputs:
 ```shell
 kogitoserverlessworkflow.sw.kogito.kie.org/callbackstatetimeouts created
 kogitoserverlessworkflow.sw.kogito.kie.org/eventstatetimeouts created
