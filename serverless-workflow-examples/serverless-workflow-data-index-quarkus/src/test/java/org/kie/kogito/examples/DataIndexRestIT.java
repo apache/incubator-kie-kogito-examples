@@ -61,11 +61,15 @@ class DataIndexRestIT {
                         .then()
                         .statusCode(404));
 
-        given().contentType(ContentType.JSON).body("{ \"query\" : \"{ ProcessInstances(where: { id: {equal: \\\"" + processInstanceId + "\\\"}}) { id, state } }\" }")
-                .when().post("/graphql")
-                .then().statusCode(200)
-                .body("data.ProcessInstances.size()", is(1))
-                .body("data.ProcessInstances[0].id", is(processInstanceId))
-                .body("data.ProcessInstances[0].state", is("COMPLETED"));
+        await()
+                .atLeast(1, SECONDS)
+                .atMost(30, SECONDS)
+                .with().pollInterval(1, SECONDS)
+                .untilAsserted(() -> given().contentType(ContentType.JSON).body("{ \"query\" : \"{ ProcessInstances(where: { id: {equal: \\\"" + processInstanceId + "\\\"}}) { id, state } }\" }")
+                        .when().post("/graphql")
+                        .then().statusCode(200)
+                        .body("data.ProcessInstances.size()", is(1))
+                        .body("data.ProcessInstances[0].id", is(processInstanceId))
+                        .body("data.ProcessInstances[0].state", is("COMPLETED")));
     }
 }
