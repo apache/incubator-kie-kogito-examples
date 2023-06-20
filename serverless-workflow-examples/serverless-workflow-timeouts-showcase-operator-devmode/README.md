@@ -5,10 +5,11 @@
 2. Start your minikube with the following command:
 
 ```shell
-minikube start --cpus 4 --memory 8g --addons registry --addons metrics-server --insecure-registry "10.0.0.0/24" --insecure-registry "localhost:5000"
+minikube start --cpus 4 --memory 10g --addons registry --addons metrics-server --insecure-registry "10.0.0.0/24" --insecure-registry "localhost:5000"
 ```
 
 > **NOTE:** If the number of allocated cpus and memory configurations don't feet well for your installation you can try to change this numbers.
+> However lower configuration might lead your cluster to get out of memmory. Remember that every time you change this values, you will have to recreate your instance.
 
 3. Be sure that the Kogito Serverless Workflow Operator is installed in your minikube.
 
@@ -32,6 +33,22 @@ To deploy the workflows you must execute these commands:
 ```shell
 kubectl apply -f workflows/callback_state_timeouts_devmode.yaml -n timeouts-showcase
 ```
+
+
+> **NOTE:** In local environments, we recommend that you deploy the workflows one by one at the same time you verify that
+> each deployment was successful. To do that, you can execute this command after each deployment, and you might have to 
+> execute command several times until you see that the deployed workflow pod is running successfully.
+>
+> 
+> 
+> ```shell
+> kubectl get pod -n timeouts-showcase
+> 
+> NAME                                                    READY   STATUS    RESTARTS   AGE
+> callbackstatetimeouts-5b958764db-z5dw9                  1/1     Running   0          4m29s 
+> 
+>```
+
 
 ```shell
 kubectl apply -f workflows/event_state_timeouts_devmode.yaml -n timeouts-showcase
