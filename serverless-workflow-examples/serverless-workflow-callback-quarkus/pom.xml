@@ -61,11 +61,6 @@
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-addons-quarkus-process-management</artifactId>
     </dependency>
-
-    <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-addons-quarkus-process-svg</artifactId>
-    </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-quarkus-serverless-workflow-devui</artifactId>
