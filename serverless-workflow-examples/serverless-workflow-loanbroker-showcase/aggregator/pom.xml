@@ -6,7 +6,7 @@
     <version>1.0-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
-  <name>Kogito Examples :: Serverless Workflow Loan Broker Showcase :: Aggregator</name>
+  <name>Kogito Example :: Serverless Workflow Loan Broker Showcase :: Aggregator</name>
   <artifactId>serverless-workflow-loanbroker-showcase-aggregator</artifactId>
   <properties>
     <skipITs>true</skipITs>
