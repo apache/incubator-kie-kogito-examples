@@ -11,9 +11,9 @@ minikube start --cpus 4 --memory 10g --addons registry --addons metrics-server -
 > **NOTE:** If the number of allocated cpus and memory configurations don't feet well for your installation you can try to change this numbers.
 > However lower configuration might lead your cluster to get out of memmory. Remember that every time you change this values, you will have to recreate your instance.
 
-3. Be sure that the Kogito Serverless Workflow Operator is installed in your minikube.
+3. Be sure that the SonataFlow Operator is installed in your minikube.
 
-For more information about the installation procedure see [Install the Kogito Serverless Workflow Operator](https://kiegroup.github.io/kogito-docs/serverlessworkflow/latest/cloud/operator/install-serverless-operator.html).
+For more information about the installation procedure see [Install the SonataFlow Operator](https://kiegroup.github.io/kogito-docs/serverlessworkflow/latest/cloud/operator/install-serverless-operator.html).
 
 ### Deploying the workflows
 
@@ -60,9 +60,9 @@ kubectl apply -f workflows/switch_state_timeouts_devmode.yaml -n timeouts-showca
 
 After executing the commands you should have seen the following outputs:
 ```shell
-kogitoserverlessworkflow.sw.kogito.kie.org/callbackstatetimeouts created
-kogitoserverlessworkflow.sw.kogito.kie.org/eventstatetimeouts created
-kogitoserverlessworkflow.sw.kogito.kie.org/switchstatetimeouts created
+sonataflow.sonataflow.org/callbackstatetimeouts created
+sonataflow.sonataflow.org/eventstatetimeouts created
+sonataflow.sonataflow.org/switchstatetimeouts created
 ```
 
 ### Accessing the timeouts showcase workflows
@@ -190,7 +190,7 @@ switchstatetimeouts: 2e8e1930-9bae-4d60-b364-6fbd61128f51 has finalized. No deci
 ```
 
 ### Operator dev mode tooling
-When you work with the Kogito Serverless Operator dev mode, every time you deploy a workflow, a set of tools will be automatically provisioned as part of the deployment procedure.
+When you work with the SonataFlow Operator dev mode, every time you deploy a workflow, a set of tools will be automatically provisioned as part of the deployment procedure.
 These tools are designed to help you to test and work with your workflow when you are in the development phase of your project.
 
 > **NOTE:** Considering that the operator deploys each workflow independently, to access the tooling you must use the particular url for the workflow you wants to access.   
@@ -217,11 +217,11 @@ firefox $CALLBACK_STATE_TIMEOUTS_ROOT/q/dev
 firefox $EVENT_STATE_TIMEOUTS_ROOT/q/dev
  ```
 
-#### Dev UI Kogito Serverless Workflow Tools View
+#### Dev UI SonataFlow Tools View
 
 ![](docs/DevUIWorkflows.png)
 
-#### Dev UI Kogito Data Index View 
+#### Dev UI SonataFlow Data Index View 
 
 ![](docs/DevUIDataIndex.png)
 
@@ -236,9 +236,9 @@ To execute the UI you must:
 2) Execute the following commands to build and deploy the UI on the same namespace as your workflows.
 
 > **NOTE:** These build steps, as well as the java code you see in this project, are only to provide the timeouts showcase UI. 
-> Since the Kogito Serverless Workflows Operator can manage the workflow deployments by only providing the yaml with KogitoServerlessWorkflow resources.   
+> Since the SonataFlow Operator can manage the workflow deployments by only providing the yaml with SonataFlow resources.   
 > 
-> We recommend that you test the different workflows and actions one by one, at the same time that you use the Kogito Serverless Workflow Tooling to
+> We recommend that you test the different workflows and actions one by one, at the same time that you use the SonataFlow Tooling to
 > query the information about the workflows. Additionally, you can inspect the log files for the different pods.   
 >
 
