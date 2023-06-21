@@ -8,7 +8,7 @@
     <version>1.0-SNAPSHOT</version>
   </parent>
   <artifactId>serverless-workflow-greeting-client-rpc-quarkus</artifactId>
-  <name>Kogito Example :: Serverless Workflow Greeting :: gRPC Client:: Quarkus</name>
+  <name>Kogito Example :: Serverless Workflow Greeting :: gRPC Client :: Quarkus</name>
   <description>Kogito Serverless Workflow Example that test a simple gRPC service - Quarkus</description>
   <properties>
     <quarkus-plugin.version>2.16.7.Final</quarkus-plugin.version>

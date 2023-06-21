@@ -10,7 +10,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>serverless-workflow-custom-rpc-deployment</artifactId>
-  <name>Kogito Example:: Serverless Workflow Custom RPC:: deployment</name>
+  <name>Kogito Example :: Serverless Workflow Custom RPC :: Deployment</name>
   <description>Custom addon to add custom rpc support</description>
 
   <dependencies>
