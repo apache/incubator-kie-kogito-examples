@@ -117,7 +117,7 @@ use in "kogitoprocrefid" field the id returned by the previous request)
 Complete curl command can be found below:
 
 ```shell
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"specversion":"1.0","id":"e4604756-f58e-440e-9619-484b92408308","source":"","type":"move","time":"2023-01-17T15:35:29.967831-03:00","kogitoprocrefid":"4a254d46-0cbf-41f8-8e27-15b3da625561","data":{"move":"This has been injected by the event"}}' http://localhost:8080/
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"specversion":"1.0","id":"e4604756-f58e-440e-9619-484b92408308","source":"","type":"move","time":"2023-01-17T15:35:29.967831-03:00","kogitoprocrefid":"4a254d46-0cbf-41f8-8e27-15b3da625561","data":{"move":"This has been injected by the event"}}' http://localhost:8080/move
 ```
 
 The workflow will consume the event and print the message you sent to the console.
