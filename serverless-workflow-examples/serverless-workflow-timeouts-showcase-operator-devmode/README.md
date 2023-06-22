@@ -37,7 +37,8 @@ kubectl apply -f workflows/callback_state_timeouts_devmode.yaml -n timeouts-show
 
 > **NOTE:** In local environments, we recommend that you deploy the workflows one by one at the same time you verify that
 > each deployment was successful. To do that, you can execute this command after each deployment, and you might have to 
-> execute command several times until you see that the deployed workflow pod is running successfully.
+> execute command several times until you see that the deployed workflow pod is running successfully, since it might take
+> some time to download the images used by the operator.
 >
 > 
 > 
