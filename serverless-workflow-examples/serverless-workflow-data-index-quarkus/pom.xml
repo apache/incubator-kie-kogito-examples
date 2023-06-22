@@ -200,10 +200,6 @@
         </dependency>
         <dependency>
           <groupId>org.kie.kogito</groupId>
-          <artifactId>kogito-addons-quarkus-process-svg</artifactId>
-        </dependency>
-        <dependency>
-          <groupId>org.kie.kogito</groupId>
           <artifactId>kogito-addons-quarkus-source-files</artifactId>
         </dependency>
       </dependencies>
