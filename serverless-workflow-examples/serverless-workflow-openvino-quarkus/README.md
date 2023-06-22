@@ -4,7 +4,7 @@
 
 This example contains a workflow definition that emulates functionality exposed by [openvino hello world example](https://github.com/openvinotoolkit/openvino_notebooks/blob/main/notebooks/001-hello-world/001-hello-world.ipynb)
 
-The flow, given a image file name containing a dog image, returns that dog race. 
+The flow, given an image file name containing a dog image, returns that dog's race. 
 
 ## Installing and Running
 
