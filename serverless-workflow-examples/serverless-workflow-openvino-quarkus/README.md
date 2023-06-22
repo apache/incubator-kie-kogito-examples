@@ -32,7 +32,7 @@ mvn clean package
 java -jar target/quarkus-app/quarkus-run.jar
 ```
 
-or on windows
+or on Windows
 
 ```sh
 mvn clean package
