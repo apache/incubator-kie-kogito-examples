@@ -3,7 +3,7 @@
   "version": "1.0",
   "name": "Workflow Openvino example",
   "description": "The openvino hello world example running on serveless workflow",
-  "start": "runScripts",
+  "start": "Setup model",
   "functions": [
     {
       "name": "python",
@@ -13,7 +13,7 @@
   ],
   "states": [
     {
-      "name": "runScripts",
+      "name": "Setup model",
       "type": "operation",
       "actions": [
         {
@@ -36,7 +36,7 @@
         },
         {
           "functionRef": {
-            "name":"Download models",
+            "name":"Download model",
             "refName": "python",
             "arguments": {
               "script": "if not model_xml_path.exists():\n\tdownload_file(base_url + model_xml_name, model_xml_name, base_artifacts_dir)\n\tdownload_file(base_url + model_bin_name, model_bin_name, base_artifacts_dir)\nelse:\n\tprint(f'{model_name} already downloaded to {base_artifacts_dir}')"
@@ -51,7 +51,14 @@
               "script": "ie = Core()\nmodel = ie.read_model(model=model_xml_path)\ncompiled_model = ie.compile_model(model=model, device_name='CPU')\noutput_layer = compiled_model.output(0)"
             }
           }
-        },
+        } 
+        ],
+        "transition": "Compute result"
+      },
+      {
+        "name": "Compute result",
+        "type": "operation",
+        "actions": [
         {
           "functionRef": {
             "name":"Load input image",
@@ -79,13 +86,12 @@
               "script": "imagenet_classes = open('data/imagenet_2012.txt').read().splitlines()\nimagenet_classes = ['background'] + imagenet_classes\n"
             }
           }
-        } 
-        ],
-        "stateDataFilter" : {
-             "output" : "{group:$WORKFLOW.python.imagenet_classes[$WORKFLOW.python.result_index]}"
+        }],
+      "stateDataFilter" : {
+        "output" : "{group:$WORKFLOW.python.imagenet_classes[$WORKFLOW.python.result_index]}"
         }
         ,
         "end": true
-    }
+      }
   ]
 }
