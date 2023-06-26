@@ -12,8 +12,8 @@
   <description>Process with DMN and DRL integration through REST - Spring Boot</description>
 
   <properties>
-    <version.org.kie.kogito>1.40.1.Final</version.org.kie.kogito>
-    <kogito.bom.version>1.40.1.Final</kogito.bom.version>
+    <version.org.kie.kogito>1.40.2-SNAPSHOT</version.org.kie.kogito>
+    <kogito.bom.version>1.40.2-SNAPSHOT</kogito.bom.version>
   </properties>
 
   <dependencyManagement>
