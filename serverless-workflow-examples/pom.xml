@@ -55,15 +55,9 @@
         <module>serverless-workflow-timeouts-showcase-embedded</module>
         <module>serverless-workflow-timeouts-showcase-extended</module>
         <module>serverless-workflow-timeouts-showcase-operator-devprofile</module>
+        <module>serverless-workflow-openvino-quarkus</module>
+        <module>serverless-workflow-python-quarkus</module>
       </modules>
-    </profile>
-
-    <profile>
-      <id>python</id>
-        <modules>
-          <module>serverless-workflow-python-quarkus</module>
-          <module>serverless-workflow-openvino-quarkus</module>
-        </modules>
     </profile>
 
     <profile>
