@@ -59,6 +59,14 @@
     </profile>
 
     <profile>
+      <id>python</id>
+        <modules>
+          <module>serverless-workflow-python-quarkus</module>
+          <module>serverless-workflow-openvino-quarkus</module>
+        </modules>
+    </profile>
+
+    <profile>
       <id>persistence</id>
       <activation>
         <property>
