@@ -14,10 +14,20 @@ You will need:
   - Java 11+ installed
   - Environment variable JAVA_HOME set accordingly
   - Maven 3.8.6+ installed
-  - Python3 installed
-  - Jep installed. Instructions [here](https://github.com/ninia/jep#installation) 
-  - Python required libraries. Run `pip install -r requirements.txt`. Requirements.txt is on example root path. 
+  - Python 3+ installed. In Linux system is usually pre-installed. In case you have an older version or you are not using Linux, check [here](https://wiki.python.org/moin/BeginnersGuide/Download)
+  - Pip installed. In case it not there, run `python -m ensurepip --upgrade`
+  - Python required libraries. Run `pip install -r requirements.txt`. Requirements.txt is on example root path.
+  - Jep installed. Run `pip install jep`, Detailed instructions [here](https://github.com/ninia/jep#installation)
 
+> **_NOTE:_** Install Jep as the last one because it depends on the NumPy library to work correctly.
+
+When using native image compilation, you will also need:
+
+   - GraalVm 22.3.2+ installed
+   - Environment variable GRAALVM_HOME set accordingly
+   - LD_LIBRARY_PATH should include GRAALVM_HOME/lib/server
+
+Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too. You also need 'native-image' installed in GraalVM (using `gu install native-image`). Please refer to GraalVM installation documentation for more details.
 
 ### Compile and Run in Local Dev Mode
 
@@ -32,16 +42,25 @@ mvn clean package
 java -jar target/quarkus-app/quarkus-run.jar
 ```
 
-or on Windows
+### Compile and Run using Local Native Image
+
+Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
+Also LD_LIBRARY_PATH should include GRAALVM_HOME/lib/server
 
 ```sh
-mvn clean package
-java -jar target\quarkus-app\quarkus-run.jar
+mvn clean package -Pnative
 ```
+
+It will take a while, once finished, run the generated executable.
+
+```sh
+./target/serverless-workflow-openvino-quarkus-{version}-runner
+```
+
 
 ### Submit a request
 
-The service based on the JSON workflow definition can be access by sending a request to http://localhost:8080/openvino_helloworld
+Once the server is running, you can test it by sending a request to `http://localhost:8080/openvino_helloworld`
 with following content 
 
 ```json

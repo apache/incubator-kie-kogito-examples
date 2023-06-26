@@ -55,7 +55,7 @@ mvn clean package -Pnative
 To run the generated native executable, generated in `target/`, execute
 
 ```sh
-./target/sw-quarkus-greeting-{version}-runner
+./target/serverless-workflow-python-quarkus-{version}-runner
 ```
 
 
