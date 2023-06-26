@@ -15,9 +15,9 @@ You will need:
   - Environment variable JAVA_HOME set accordingly
   - Maven 3.8.6+ installed
   - Python 3+ installed. In Linux system is usually pre-installed. In case you have an older version or you are not using Linux, check [here](https://wiki.python.org/moin/BeginnersGuide/Download)
-  - Pip installed. Instruction [here](https://pip.pypa.io/en/stable/installation/#supported-methods)
+  - Pip installed. In case it not there, run `python -m ensurepip --upgrade`
   - Python required libraries. Run `pip install -r requirements.txt`. Requirements.txt is on example root path.
-  - Jep installed. Instructions [here](https://github.com/ninia/jep#installation)
+  - Jep installed. Run `pip install jep`, Detailed instructions [here](https://github.com/ninia/jep#installation)
 
 > **_NOTE:_** Install Jep as the last one because it depends on the NumPy library to work correctly.
 
@@ -50,8 +50,8 @@ Also LD_LIBRARY_PATH should include GRAALVM_HOME/lib/server
 ```sh
 mvn clean package -Pnative
 ```
-  
-To run the generated native executable, generated in `target/`, execute
+
+It will take a while, once finished, run the generated executable.
 
 ```sh
 ./target/serverless-workflow-openvino-quarkus-{version}-runner
