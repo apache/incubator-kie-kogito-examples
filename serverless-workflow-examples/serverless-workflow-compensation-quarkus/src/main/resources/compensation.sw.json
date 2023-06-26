@@ -5,51 +5,52 @@
   "description": "An example of how compensation works",
   "start": "printStatus",
   "states": [
- 	{
+    {
       "name": "printStatus",
       "type": "inject",
       "data": {
-         "compensated": false
+        "compensated": false
       },
-      "compensatedBy" : "compensating",
-       "transition": "branch"
-    }, 
+      "compensatedBy": "compensating",
+      "transition": "branch"
+    },
     {
       "name": "branch",
       "type": "switch",
       "dataConditions": [
         {
           "condition": ".shouldCompensate==true",
-          "transition": { 
-            "nextState" : "finish_compensate",
-            "compensate" : true
-           }
-        }, 
+          "transition": {
+            "nextState": "finish_compensate",
+            "compensate": true
+          }
+        },
         {
           "condition": ".shouldCompensate==false",
-          "transition": { 
-            "nextState" : "finish_not_compensate",
-            "compensate" : false
-           }
+          "transition": {
+            "nextState": "finish_not_compensate",
+            "compensate": false
+          }
         }
-       ]
+      ]
     },
     {
       "name": "compensating",
-      "usedForCompensation" : true,
+      "usedForCompensation": true,
       "type": "inject",
       "data": {
         "compensated": true
-      }, 
-      "transition" : "compensating_more"
+      },
+      "transition": "compensating_more"
     },
     {
       "name": "compensating_more",
-      "usedForCompensation" : true,
+      "usedForCompensation": true,
       "type": "inject",
       "data": {
         "compensating_more": "Real Betis Balompie"
-      }
+      },
+      "end" : true
     },
     {
       "name": "finish_compensate",
