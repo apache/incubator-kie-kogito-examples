@@ -17,7 +17,7 @@ For more information about the installation procedure see [Install the SonataFlo
 
 ### Deploying the workflows
 
-Once the minikube environment is running, open a terminal window, go to the `serverless-workflow-timeouts-showcase-operator-devmode` directory, and execute these commands:
+Once the minikube environment is running, open a terminal window, go to the `serverless-workflow-timeouts-showcase-operator-devprofile` directory, and execute these commands:
 
 ```shell
 # The namespace name is very important to ensure all the services that compose the showcase can interact.
@@ -31,7 +31,7 @@ kubectl create namespace timeouts-showcase
 To deploy the workflows you must execute these commands:
 
 ```shell
-kubectl apply -f workflows/callback_state_timeouts_devmode.yaml -n timeouts-showcase
+kubectl apply -f workflows/callback_state_timeouts_devprofile.yaml -n timeouts-showcase
 ```
 
 
@@ -52,11 +52,11 @@ kubectl apply -f workflows/callback_state_timeouts_devmode.yaml -n timeouts-show
 
 
 ```shell
-kubectl apply -f workflows/event_state_timeouts_devmode.yaml -n timeouts-showcase
+kubectl apply -f workflows/event_state_timeouts_devprofile.yaml -n timeouts-showcase
 ```
 
 ```shell
-kubectl apply -f workflows/switch_state_timeouts_devmode.yaml -n timeouts-showcase
+kubectl apply -f workflows/switch_state_timeouts_devprofile.yaml -n timeouts-showcase
 ```
 
 After executing the commands you should have seen the following outputs:
@@ -259,7 +259,7 @@ kubectl apply -f target/kubernetes/kubernetes.yml -n timeouts-showcase
 ```
 
 ```shell
-minikube service timeouts-showcase-operator-devmode-ui --url -n timeouts-showcase
+minikube service timeouts-showcase-operator-devprofile-ui --url -n timeouts-showcase
 # the command will produce an output like this
 http://192.168.49.2:31021
 ```
