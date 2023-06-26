@@ -122,7 +122,7 @@ pipeline {
             steps {
                 script {
                     dir(getRepoName()) {
-                        getMavenCommand().withProperty('maven.test.failure.ignore', true).withProfiles(['python']).skipTests(params.SKIP_TESTS).run('clean install')
+                        getMavenCommand().withProperty('maven.test.failure.ignore', true).skipTests(params.SKIP_TESTS).run('clean install')
                     }
                 }
             }
