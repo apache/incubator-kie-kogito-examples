@@ -1,0 +1,67 @@
+apiVersion: sonataflow.org/v1alpha08
+kind: SonataFlow
+metadata:
+  name: callbackstatetimeouts
+  annotations:
+    sonataflow.org/description: Callback State Timeouts Example k8s
+    sonataflow.org/version: 0.0.1
+    sonataflow.org/profile: dev
+spec:
+  flow:
+    start: PrintStartMessage
+    events:
+      - name: callbackEvent
+        source: ''
+        type: callback_event_type
+    functions:
+      - name: systemOut
+        type: custom
+        operation: sysout
+    states:
+      - name: PrintStartMessage
+        type: operation
+        actions:
+          - name: printSystemOut
+            functionRef:
+              refName: systemOut
+              arguments:
+                message: "${\"callback-state-timeouts: \" + $WORKFLOW.instanceId + \" has started.\"}"
+        transition: CallbackState
+      - name: CallbackState
+        type: callback
+        action:
+          name: callbackAction
+          functionRef:
+            refName: systemOut
+            arguments:
+              message: "${\"callback-state-timeouts: \" + $WORKFLOW.instanceId + \" has executed the callbackFunction.\"}"
+        eventRef: callbackEvent
+        transition: CheckEventArrival
+        timeouts:
+          eventTimeout: PT30S
+      - name: CheckEventArrival
+        type: switch
+        dataConditions:
+          - condition: "${ .eventData != null }"
+            transition: EventArrived
+        defaultCondition:
+          transition: EventNotArrived
+      - name: EventArrived
+        type: inject
+        data:
+          exitMessage: "The callback event has arrived."
+        transition: PrintExitMessage
+      - name: EventNotArrived
+        type: inject
+        data:
+          exitMessage: "The callback event has not arrived, and the timeout has overdue."
+        transition: PrintExitMessage
+      - name: PrintExitMessage
+        type: operation
+        actions:
+          - name: printSystemOut
+            functionRef:
+              refName: systemOut
+              arguments:
+                message: "${\"callback-state-timeouts: \" + $WORKFLOW.instanceId + \" has finalized. \" + .exitMessage + \" eventData: \" + .eventData}"
+        end: true
