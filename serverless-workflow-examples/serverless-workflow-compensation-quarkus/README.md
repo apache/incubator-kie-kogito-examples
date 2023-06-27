@@ -79,7 +79,7 @@ Should return something like this ("id" will change)
     "id": "b1e8ce8d-2fc5-4d39-b3b3-6f7dddbb1515",
     "workflowdata": {
         "shouldCompensate": true,
-        "compensated": "true"
+        "compensated": true,
         "compensating_more": "Real Betis Balompie"
     }
 }

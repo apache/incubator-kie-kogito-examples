@@ -4,6 +4,13 @@
   "name": "Workflow Error example",
   "description": "An example of how compensation works",
   "start": "printStatus",
+  "functions": [
+    {
+      "name": "PrintOutput",
+      "type": "custom",
+      "operation": "sysout"
+    }
+  ],
   "states": [
     {
       "name": "printStatus",
@@ -32,7 +39,10 @@
             "compensate": false
           }
         }
-      ]
+      ],
+      "defaultCondition": {
+        "end": true
+      }
     },
     {
       "name": "compensating",
@@ -50,18 +60,38 @@
       "data": {
         "compensating_more": "Real Betis Balompie"
       },
-      "end" : true
+      "end": true
     },
     {
       "name": "finish_compensate",
       "type": "operation",
-      "actions": [],
+      "actions": [
+        {
+          "name": "finish_compensate_sysout",
+          "functionRef": {
+            "refName": "PrintOutput",
+            "arguments": {
+              "message": "completed"
+            }
+          }
+        }
+      ],
       "end": true
     },
     {
       "name": "finish_not_compensate",
       "type": "operation",
-      "actions": [],
+      "actions": [
+        {
+          "name": "finish_not_compensate_sysout",
+          "functionRef": {
+            "refName": "PrintOutput",
+            "arguments": {
+              "message": "completed"
+            }
+          }
+        }
+      ],
       "end": true
     }
   ]
