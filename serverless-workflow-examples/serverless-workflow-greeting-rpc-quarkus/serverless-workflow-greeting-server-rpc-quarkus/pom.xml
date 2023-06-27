@@ -88,8 +88,6 @@
                     <pluginId>grpc-java</pluginId>
                     <pluginArtifact>io.grpc:protoc-gen-grpc-java:${version.io.grpc}:exe:${os.detected.classifier}
                     </pluginArtifact>
-                    <writeDescriptorSet>true</writeDescriptorSet>
-                    <descriptorSetFileName>output.protobin</descriptorSetFileName>
                     <attachProtoSources>false</attachProtoSources>
                     <protoSourceRoot>${project.basedir}/src/main/proto</protoSourceRoot>
                     <outputDirectory>${project.build.directory}/generated-sources/protobuf/java</outputDirectory>
