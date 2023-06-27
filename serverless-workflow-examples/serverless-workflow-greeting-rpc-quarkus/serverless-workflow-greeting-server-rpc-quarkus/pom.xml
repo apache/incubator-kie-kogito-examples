@@ -19,6 +19,7 @@
         <version.io.grpc>1.45.1</version.io.grpc>
         <version.kr.motd.maven.os>1.6.0</version.kr.motd.maven.os>
         <version.org.xolstice.maven.protobuf>0.6.1</version.org.xolstice.maven.protobuf>
+        <protobuf.write-descriptor-set>true</protobuf.write-descriptor-set>
         <version.jib-maven-plugin>3.3.0</version.jib-maven-plugin>
     </properties>
 
@@ -88,7 +89,7 @@
                     <pluginId>grpc-java</pluginId>
                     <pluginArtifact>io.grpc:protoc-gen-grpc-java:${version.io.grpc}:exe:${os.detected.classifier}
                     </pluginArtifact>
-                    <writeDescriptorSet>true</writeDescriptorSet>
+                    <writeDescriptorSet>${protobuf.write-descriptor-set}</writeDescriptorSet>
                     <descriptorSetFileName>output.protobin</descriptorSetFileName>
                     <attachProtoSources>false</attachProtoSources>
                     <protoSourceRoot>${project.basedir}/src/main/proto</protoSourceRoot>
@@ -121,6 +122,17 @@
     </build>
 
     <profiles>
+        <profile>
+            <id>productized</id>
+            <activation>
+                <property>
+                    <name>productized</name>
+                </property>
+            </activation>
+            <properties>
+                <protobuf.write-descriptor-set>false</protobuf.write-descriptor-set>
+            </properties>
+        </profile>
         <profile>
             <id>container</id>
             <activation>
