@@ -4727,7 +4727,7 @@ index 989a22856..707894ba9 100644
      <maven.compiler.release>11</maven.compiler.release>
      <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-greeting-rpc-quarkus/serverless-workflow-greeting-server-rpc-quarkus/pom.xml b/serverless-workflow-examples/serverless-workflow-greeting-rpc-quarkus/serverless-workflow-greeting-server-rpc-quarkus/pom.xml
-index 14b62e6d9..000363c3a 100644
+index f16848636..d655efefa 100644
 --- a/serverless-workflow-examples/serverless-workflow-greeting-rpc-quarkus/serverless-workflow-greeting-server-rpc-quarkus/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-greeting-rpc-quarkus/serverless-workflow-greeting-server-rpc-quarkus/pom.xml
 @@ -16,7 +16,7 @@
@@ -6123,3 +6123,236 @@ index b1f5f1026..153009579 100644
  
  import io.vertx.core.http.HttpMethod;
  import io.vertx.ext.web.Router;
+diff --git a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/pom.xml b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/pom.xml
+index 4b0eee011..600c3e642 100644
+--- a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/pom.xml
++++ b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/pom.xml
+@@ -13,10 +13,10 @@
+     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
+     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
+-    <quarkus.platform.version>2.16.7.Final</quarkus.platform.version>
++    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
+     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
+     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
+-    <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
++    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
+     <maven.compiler.release>11</maven.compiler.release>
+     <version.compiler.plugin>3.8.1</version.compiler.plugin>
+     <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
+diff --git a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/src/main/java/org/kie/kogito/examples/CallbackStateTimeoutsClient.java b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/src/main/java/org/kie/kogito/examples/CallbackStateTimeoutsClient.java
+index 9b5f2cf6f..5ed665c99 100644
+--- a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/src/main/java/org/kie/kogito/examples/CallbackStateTimeoutsClient.java
++++ b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/src/main/java/org/kie/kogito/examples/CallbackStateTimeoutsClient.java
+@@ -18,17 +18,17 @@ package org.kie.kogito.examples;
+ 
+ import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
+ 
+-import javax.ws.rs.Consumes;
+-import javax.ws.rs.DefaultValue;
+-import javax.ws.rs.GET;
+-import javax.ws.rs.POST;
+-import javax.ws.rs.Path;
+-import javax.ws.rs.Produces;
+-import javax.ws.rs.QueryParam;
+-import javax.ws.rs.core.Context;
+-import javax.ws.rs.core.HttpHeaders;
+-import javax.ws.rs.core.MediaType;
+-import javax.ws.rs.core.Response;
++import jakarta.ws.rs.Consumes;
++import jakarta.ws.rs.DefaultValue;
++import jakarta.ws.rs.GET;
++import jakarta.ws.rs.POST;
++import jakarta.ws.rs.Path;
++import jakarta.ws.rs.Produces;
++import jakarta.ws.rs.QueryParam;
++import jakarta.ws.rs.core.Context;
++import jakarta.ws.rs.core.HttpHeaders;
++import jakarta.ws.rs.core.MediaType;
++import jakarta.ws.rs.core.Response;
+ 
+ import static org.kie.kogito.examples.CallbackStateTimeoutsClient.CONFIG_KEY;
+ 
+diff --git a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/src/main/java/org/kie/kogito/examples/CloudEventsCustomizer.java b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/src/main/java/org/kie/kogito/examples/CloudEventsCustomizer.java
+index a67f7efc0..ea197f10c 100644
+--- a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/src/main/java/org/kie/kogito/examples/CloudEventsCustomizer.java
++++ b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/src/main/java/org/kie/kogito/examples/CloudEventsCustomizer.java
+@@ -20,7 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
+ import io.cloudevents.jackson.JsonFormat;
+ import io.quarkus.jackson.ObjectMapperCustomizer;
+ 
+-import javax.inject.Singleton;
++import jakarta.inject.Singleton;
+ 
+ /**
+  * Ensure the registration of the CloudEvent jackson module according to the Quarkus suggested procedure.
+diff --git a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/src/main/java/org/kie/kogito/examples/EventStateTimeoutsClient.java b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/src/main/java/org/kie/kogito/examples/EventStateTimeoutsClient.java
+index 9e12d47b9..16d01ec1a 100644
+--- a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/src/main/java/org/kie/kogito/examples/EventStateTimeoutsClient.java
++++ b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/src/main/java/org/kie/kogito/examples/EventStateTimeoutsClient.java
+@@ -18,17 +18,17 @@ package org.kie.kogito.examples;
+ 
+ import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
+ 
+-import javax.ws.rs.Consumes;
+-import javax.ws.rs.DefaultValue;
+-import javax.ws.rs.GET;
+-import javax.ws.rs.POST;
+-import javax.ws.rs.Path;
+-import javax.ws.rs.Produces;
+-import javax.ws.rs.QueryParam;
+-import javax.ws.rs.core.Context;
+-import javax.ws.rs.core.HttpHeaders;
+-import javax.ws.rs.core.MediaType;
+-import javax.ws.rs.core.Response;
++import jakarta.ws.rs.Consumes;
++import jakarta.ws.rs.DefaultValue;
++import jakarta.ws.rs.GET;
++import jakarta.ws.rs.POST;
++import jakarta.ws.rs.Path;
++import jakarta.ws.rs.Produces;
++import jakarta.ws.rs.QueryParam;
++import jakarta.ws.rs.core.Context;
++import jakarta.ws.rs.core.HttpHeaders;
++import jakarta.ws.rs.core.MediaType;
++import jakarta.ws.rs.core.Response;
+ 
+ import static org.kie.kogito.examples.EventStateTimeoutsClient.CONFIG_KEY;
+ 
+diff --git a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/src/main/java/org/kie/kogito/examples/EventsProducerResource.java b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/src/main/java/org/kie/kogito/examples/EventsProducerResource.java
+index dbbb85794..2c4fe5fe1 100644
+--- a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/src/main/java/org/kie/kogito/examples/EventsProducerResource.java
++++ b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/src/main/java/org/kie/kogito/examples/EventsProducerResource.java
+@@ -22,15 +22,15 @@ import io.cloudevents.core.builder.CloudEventBuilder;
+ import io.cloudevents.jackson.JsonCloudEventData;
+ import org.eclipse.microprofile.rest.client.inject.RestClient;
+ 
+-import javax.enterprise.context.ApplicationScoped;
+-import javax.inject.Inject;
+-import javax.ws.rs.Consumes;
+-import javax.ws.rs.POST;
+-import javax.ws.rs.Path;
+-import javax.ws.rs.PathParam;
+-import javax.ws.rs.Produces;
+-import javax.ws.rs.core.MediaType;
+-import javax.ws.rs.core.Response;
++import jakarta.enterprise.context.ApplicationScoped;
++import jakarta.inject.Inject;
++import jakarta.ws.rs.Consumes;
++import jakarta.ws.rs.POST;
++import jakarta.ws.rs.Path;
++import jakarta.ws.rs.PathParam;
++import jakarta.ws.rs.Produces;
++import jakarta.ws.rs.core.MediaType;
++import jakarta.ws.rs.core.Response;
+ import java.net.URI;
+ import java.time.OffsetDateTime;
+ import java.util.UUID;
+diff --git a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/src/main/java/org/kie/kogito/examples/SwitchStateTimeoutsClient.java b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/src/main/java/org/kie/kogito/examples/SwitchStateTimeoutsClient.java
+index 85a7e991a..aa15813a8 100644
+--- a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/src/main/java/org/kie/kogito/examples/SwitchStateTimeoutsClient.java
++++ b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/src/main/java/org/kie/kogito/examples/SwitchStateTimeoutsClient.java
+@@ -18,17 +18,17 @@ package org.kie.kogito.examples;
+ 
+ import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
+ 
+-import javax.ws.rs.Consumes;
+-import javax.ws.rs.DefaultValue;
+-import javax.ws.rs.GET;
+-import javax.ws.rs.POST;
+-import javax.ws.rs.Path;
+-import javax.ws.rs.Produces;
+-import javax.ws.rs.QueryParam;
+-import javax.ws.rs.core.Context;
+-import javax.ws.rs.core.HttpHeaders;
+-import javax.ws.rs.core.MediaType;
+-import javax.ws.rs.core.Response;
++import jakarta.ws.rs.Consumes;
++import jakarta.ws.rs.DefaultValue;
++import jakarta.ws.rs.GET;
++import jakarta.ws.rs.POST;
++import jakarta.ws.rs.Path;
++import jakarta.ws.rs.Produces;
++import jakarta.ws.rs.QueryParam;
++import jakarta.ws.rs.core.Context;
++import jakarta.ws.rs.core.HttpHeaders;
++import jakarta.ws.rs.core.MediaType;
++import jakarta.ws.rs.core.Response;
+ 
+ import static org.kie.kogito.examples.SwitchStateTimeoutsClient.CONFIG_KEY;
+ 
+diff --git a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/src/main/java/org/kie/kogito/examples/VertxRouter.java b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/src/main/java/org/kie/kogito/examples/VertxRouter.java
+index 668f08bb7..fa084b5e4 100644
+--- a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/src/main/java/org/kie/kogito/examples/VertxRouter.java
++++ b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/src/main/java/org/kie/kogito/examples/VertxRouter.java
+@@ -16,8 +16,8 @@
+ 
+ package org.kie.kogito.examples;
+ 
+-import javax.enterprise.context.ApplicationScoped;
+-import javax.enterprise.event.Observes;
++import jakarta.enterprise.context.ApplicationScoped;
++import jakarta.enterprise.event.Observes;
+ 
+ import io.vertx.core.http.HttpMethod;
+ import io.vertx.ext.web.Router;
+diff --git a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/src/main/java/org/kie/kogito/examples/WorkflowClient.java b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/src/main/java/org/kie/kogito/examples/WorkflowClient.java
+index 5f900abda..095a64993 100644
+--- a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/src/main/java/org/kie/kogito/examples/WorkflowClient.java
++++ b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/src/main/java/org/kie/kogito/examples/WorkflowClient.java
+@@ -18,12 +18,12 @@ package org.kie.kogito.examples;
+ 
+ import org.eclipse.microprofile.rest.client.annotation.ClientHeaderParam;
+ 
+-import javax.ws.rs.Consumes;
+-import javax.ws.rs.POST;
+-import javax.ws.rs.Path;
+-import javax.ws.rs.Produces;
+-import javax.ws.rs.core.MediaType;
+-import javax.ws.rs.core.Response;
++import jakarta.ws.rs.Consumes;
++import jakarta.ws.rs.POST;
++import jakarta.ws.rs.Path;
++import jakarta.ws.rs.Produces;
++import jakarta.ws.rs.core.MediaType;
++import jakarta.ws.rs.core.Response;
+ 
+ public interface WorkflowClient {
+ 
+diff --git a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/src/main/java/org/kie/kogito/examples/WorkflowsProxyResource.java b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/src/main/java/org/kie/kogito/examples/WorkflowsProxyResource.java
+index 0c77f2b2f..b92048bea 100644
+--- a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/src/main/java/org/kie/kogito/examples/WorkflowsProxyResource.java
++++ b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/src/main/java/org/kie/kogito/examples/WorkflowsProxyResource.java
+@@ -18,19 +18,19 @@ package org.kie.kogito.examples;
+ 
+ import org.eclipse.microprofile.rest.client.inject.RestClient;
+ 
+-import javax.enterprise.context.ApplicationScoped;
+-import javax.inject.Inject;
+-import javax.ws.rs.Consumes;
+-import javax.ws.rs.DefaultValue;
+-import javax.ws.rs.GET;
+-import javax.ws.rs.POST;
+-import javax.ws.rs.Path;
+-import javax.ws.rs.Produces;
+-import javax.ws.rs.QueryParam;
+-import javax.ws.rs.core.Context;
+-import javax.ws.rs.core.HttpHeaders;
+-import javax.ws.rs.core.MediaType;
+-import javax.ws.rs.core.Response;
++import jakarta.enterprise.context.ApplicationScoped;
++import jakarta.inject.Inject;
++import jakarta.ws.rs.Consumes;
++import jakarta.ws.rs.DefaultValue;
++import jakarta.ws.rs.GET;
++import jakarta.ws.rs.POST;
++import jakarta.ws.rs.Path;
++import jakarta.ws.rs.Produces;
++import jakarta.ws.rs.QueryParam;
++import jakarta.ws.rs.core.Context;
++import jakarta.ws.rs.core.HttpHeaders;
++import jakarta.ws.rs.core.MediaType;
++import jakarta.ws.rs.core.Response;
+ 
+ /**
+  * The objective of this class is to provide a simple proxy for the invocations from the UI to the SWs, and avoid
