@@ -161,7 +161,7 @@
         <dependency>
           <groupId>io.quarkiverse.embedded.postgresql</groupId>
           <artifactId>quarkus-embedded-postgresql</artifactId>
-          <version>0.0.1</version>
+          <version>0.0.8</version>
         </dependency>
         <dependency>
           <groupId>io.quarkus</groupId>
