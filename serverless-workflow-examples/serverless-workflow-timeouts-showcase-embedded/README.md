@@ -20,7 +20,7 @@ eval $(minikube -p knative docker-env)
 mvn clean package -Pknative
 ```
 
-### Timeouts showcase service deployment
+### Deploying the workflows
 
 To deploy the example workflows you must execute this command:
 
@@ -47,7 +47,7 @@ timeouts-showcase-embedded   http://timeouts-showcase-embedded.default.10.98.134
 
 Note that the output above might be different in your installation, and the IP numbers in the URL can be different.
 
-### Executing the `switch_state_timeouts` workflow using curl
+### Executing the workflows via REST APIs
 
 To execute the following commands you must use the http://timeouts-showcase-embedded.default.10.98.134.49.sslip.io corresponding to your installation.
 
@@ -81,7 +81,7 @@ result, which means that the SW has timed-out.
 []
 ```
 
-You can execute the following command to create a new `callback_state_timeouts` workflow instance:
+To execute the `callback_state_timeouts` workflow you must execute this command:
 
 ```shell
 curl -X 'POST' \
