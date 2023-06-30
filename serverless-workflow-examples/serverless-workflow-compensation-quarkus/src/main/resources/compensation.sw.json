@@ -6,7 +6,7 @@
   "start": "printStatus",
   "states": [
  	{
-      "name": "printStatus",
+      "name": "printStatu",
       "type": "inject",
       "data": {
          "compensated": false
