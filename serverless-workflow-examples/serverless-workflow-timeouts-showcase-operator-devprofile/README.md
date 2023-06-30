@@ -15,18 +15,20 @@ minikube start --cpus 4 --memory 10g --addons registry --addons metrics-server -
 
 For more information about the installation procedure see [Install the SonataFlow Operator](https://kiegroup.github.io/kogito-docs/serverlessworkflow/latest/cloud/operator/install-serverless-operator.html).
 
-### Deploying the workflows
-
-Once the minikube environment is running, open a terminal window, go to the `serverless-workflow-timeouts-showcase-operator-devprofile` directory, and execute these commands:
+### Creating the namespace
 
 ```shell
 # The namespace name is very important to ensure all the services that compose the showcase can interact.
-kubectl create namespace timeouts-showcase
+kubectl create ns timeouts-showcase
 ```
 
-> **NOTE:** In cases where you need to clean the deployed workflows, to start again, or simply release the 
-> resources on your minikube installation see: [Showcase cleaning](#showcase-cleaning)  
-> 
+> **NOTE:** In cases where you need to clean the deployed workflows, to start again, or simply release the
+> resources on your minikube installation see: [Showcase cleaning](#showcase-cleaning)
+>
+
+### Deploying the workflows
+
+Once the minikube environment is running, open a terminal window, go to the `serverless-workflow-timeouts-showcase-operator-devprofile` directory, and execute these commands:
 
 To deploy the workflows you must execute these commands:
 
@@ -107,7 +109,7 @@ EVENT_STATE_TIMEOUTS_URL=http://192.168.49.2:30936/eventstatetimeouts
 SWITCH_STATE_TIMEOUTS_URL=http://192.168.49.2:32428/switchstatetimeouts
 ```
 
-### Executing the workflows using curl
+### Executing the workflows via REST APIs
 
 To execute the `switch_state_timeouts` you must use the corresponding url obtained in the previous steps, or the env variable SWITCH_STATE_TIMEOUTS_URL: 
 

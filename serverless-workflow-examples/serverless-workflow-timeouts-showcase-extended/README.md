@@ -12,7 +12,7 @@
 
 ### Building the project
 
-Once the minikube environment is running, open a terminal window, go to the serverless-workflow-timeouts-showcase directory, and execute these commands to be sure the generated images are stored in the minikube internal registry. 
+Once the minikube environment is running, open a terminal window, go to the serverless-workflow-timeouts-showcase-extended directory, and execute these commands to be sure the generated images are stored in the minikube internal registry. 
 
 ```shell
 eval $(minikube -p knative docker-env)
@@ -20,16 +20,19 @@ eval $(minikube -p knative docker-env)
 mvn clean package -Pknative
 ```
 
-### Create the namespace
+### Creating the namespace
 
 ```shell
 # The namespace name is very important to ensure all the services that compose the showcase can interact.
 kubectl create ns timeouts-showcase
 ```
+> **NOTE:** In cases where you need to clean the deployed workflows, to start again, or simply release the
+> resources on your minikube installation see: [Showcase cleaning](#showcase-cleaning)
+>
 
-### Postgresql database setup
+### Deploying the database
 
-To deploy the postgresql database used by the timeouts showcase you must execute this command:
+To deploy the postgresql database used by the showcase you must execute this command:
 
 ```shell
 kubectl apply -f kubernetes/timeouts-showcase-database.yml -n timeouts-showcase
@@ -41,7 +44,7 @@ deployment.apps/timeouts-showcase-database created
 service/timeouts-showcase-database created
 ```
 
-### Jobs Service with postgresql persistence deployment
+### Deploying the Jobs Service (postgresql persistence)
 
 To deploy the Jobs Service you must execute this command:
 
@@ -57,7 +60,7 @@ trigger.eventing.knative.dev/jobs-service-postgresql-cancel-job-trigger created
 sinkbinding.sources.knative.dev/jobs-service-postgresql-sb created
 ```
 
-### Jobs Service logs (optional step)
+### Querying the Jobs Service logs (optional step)
 
 To see the Jobs Service logs you can execute this procedure:
 
@@ -91,7 +94,7 @@ __  ____  __  _____   ___  __ ____  ______
 2022-08-18 10:34:49,241 jobs-service-postgresql-56d9668b4b-k4v87 INFO  [org.kie.kogito.jobs.service.scheduler.JobSchedulerManager:-1] (executor-thread-0) Loading scheduled jobs completed !
 ```
 
-### Timeouts showcase service deployment
+### Deploying the workflows
 
 To deploy the example workflows you must execute these commands:
 
@@ -127,7 +130,7 @@ timeouts-showcase-extended   http://timeouts-showcase-extended.timeouts-showcase
 
 Note that the output above might be different in your installation, and the IP numbers in the URL can be different.
 
-### Executing the `switch_state_timeouts` workflow using curl
+### Executing the workflows via REST APIs
 
 To execute the following commands you must use the http://timeouts-showcase-extended.timeouts-showcase.10.98.134.49.sslip.io corresponding to your installation.
 
@@ -161,7 +164,7 @@ result, which means that the SW has timed-out.
 []
 ```
 
-You can execute the following command to create a new `callback_state_timeouts` workflow instance:
+To execute the `callback_state_timeouts` workflow you must execute this command:
 
 ```shell
 curl -X 'POST' \
