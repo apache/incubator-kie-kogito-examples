@@ -3951,7 +3951,7 @@ index 50e422c43..05e2b0dd8 100644
  
    <dependencyManagement>
 diff --git a/serverless-workflow-examples/serverless-workflow-compensation-quarkus/pom.xml b/serverless-workflow-examples/serverless-workflow-compensation-quarkus/pom.xml
-index e6c5bc0df..7a46df317 100644
+index 54891244e..5fb6a59e7 100644
 --- a/serverless-workflow-examples/serverless-workflow-compensation-quarkus/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-compensation-quarkus/pom.xml
 @@ -10,13 +10,13 @@
@@ -6000,7 +6000,7 @@ index 717cf1128..57f37d0a2 100644
          <version.compiler.plugin>3.8.1</version.compiler.plugin>
          <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-embedded/pom.xml b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-embedded/pom.xml
-index f80bfaac4..904c140fb 100644
+index 62dede6a8..f2fa86cac 100644
 --- a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-embedded/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-embedded/pom.xml
 @@ -13,10 +13,10 @@
