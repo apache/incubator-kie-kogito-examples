@@ -1,0 +1,54 @@
+apiVersion: sonataflow.org/v1alpha08
+kind: SonataFlow
+metadata:
+  annotations:
+    sonataflow.org/description: An example of how to use for each state
+    sonataflow.org/expressionLang: jq
+    sonataflow.org/profile: dev
+    sonataflow.org/version: ""
+  creationTimestamp: null
+  labels:
+    app: foreach
+  name: foreach
+  namespace: operatordemo
+spec:
+  flow:
+    functions:
+    - name: printMessage
+      operation: sysout
+      type: custom
+    - name: increase
+      operation: .item + 1
+      type: expression
+    start:
+      stateName: start
+    states:
+    - actions:
+      - actionDataFilter:
+          useResults: true
+        functionRef:
+          invoke: sync
+          refName: increase
+        name: increase
+      - actionDataFilter:
+          useResults: true
+        functionRef:
+          arguments:
+            message: .item
+          invoke: sync
+          refName: printMessage
+        name: printAction
+      end:
+        terminate: true
+      inputCollection: .input
+      iterationParam: item
+      mode: parallel
+      name: start
+      outputCollection: .output
+      stateDataFilter:
+        output: '{output: .output}'
+      type: foreach
+  resources: {}
+status:
+  address: {}
+  lastTimeRecoverAttempt: null
