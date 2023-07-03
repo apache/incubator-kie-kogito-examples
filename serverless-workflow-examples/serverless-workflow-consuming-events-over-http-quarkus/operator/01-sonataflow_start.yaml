@@ -1,0 +1,75 @@
+apiVersion: sonataflow.org/v1alpha08
+kind: SonataFlow
+metadata:
+  annotations:
+    sonataflow.org/description: An example of how to consume events over HTTP
+    sonataflow.org/expressionLang: jsonpath
+    sonataflow.org/profile: dev
+    sonataflow.org/version: ""
+  creationTimestamp: null
+  labels:
+    app: start
+  name: start
+  namespace: operatordemo
+spec:
+  flow:
+    events:
+    - dataOnly: true
+      kind: consumed
+      name: startEvent
+      type: start
+    - dataOnly: true
+      kind: consumed
+      name: moveEvent
+      type: move
+    functions:
+    - name: printMessage
+      operation: sysout
+      type: custom
+    start:
+      stateName: printWaitMessage
+    states:
+    - exclusive: true
+      name: printWaitMessage
+      onEvents:
+      - actionMode: sequential
+        actions:
+        - actionDataFilter:
+            useResults: true
+          functionRef:
+            arguments:
+              message: $[*]
+            invoke: sync
+            refName: printMessage
+          name: printAfterStart
+        eventDataFilter:
+          useData: true
+        eventRefs:
+        - startEvent
+      transition:
+        nextState: waitForEvent
+      type: event
+    - end:
+        terminate: true
+      exclusive: true
+      name: waitForEvent
+      onEvents:
+      - actionMode: sequential
+        actions:
+        - actionDataFilter:
+            useResults: true
+          functionRef:
+            arguments:
+              message: $[*]
+            invoke: sync
+            refName: printMessage
+          name: printAfterEvent
+        eventDataFilter:
+          useData: true
+        eventRefs:
+        - moveEvent
+      type: event
+  resources: {}
+status:
+  address: {}
+  lastTimeRecoverAttempt: null
