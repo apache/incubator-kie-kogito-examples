@@ -1,0 +1,48 @@
+apiVersion: sw.kogito.kie.org/v1alpha08
+kind: KogitoServerlessWorkflow
+metadata:
+  name: startevent
+  annotations:
+    sw.kogito.kie.org/description: Serverless Workflow for each example on k8s!
+    sw.kogito.kie.org/version: 0.0.1
+    sw.kogito.kie.org/profile: dev
+    sw.kogito.kie.org/resource-openapi: openapi-configmap
+spec:
+  flow:
+    start: printWaitMessage
+    events:
+      - name: startEvent
+        source: ""
+        type: start
+      - name: moveEvent
+        source: ""
+        type: move
+    functions:
+      - name: printMessage
+        type: custom
+        operation: sysout
+    states:
+      - name: printWaitMessage
+        type: event
+        onEvents:
+          - eventRefs:
+              - startEvent
+            actions:
+              - name: printAfterStart
+                functionRef:
+                  refName: printMessage
+                  arguments:
+                    message: "$[*]"
+        transition: waitForEvent
+      - name: waitForEvent
+        type: event
+        onEvents:
+          - eventRefs:
+              - moveEvent
+            actions:
+              - name: printAfterEvent
+                functionRef:
+                  refName: printMessage
+                  arguments:
+                    message: "$[*]"
+        end: true

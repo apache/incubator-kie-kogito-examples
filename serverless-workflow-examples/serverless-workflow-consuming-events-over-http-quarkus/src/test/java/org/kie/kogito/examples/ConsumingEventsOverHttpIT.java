@@ -81,7 +81,7 @@ class ConsumingEventsOverHttpIT {
                 .when()
                 .body(generateCloudEvent(MOVE_CHANNEL_NAME, "kogitoprocrefid", id, Collections.singletonMap(MOVE_CHANNEL_NAME,
                         "This has been injected by the event")))
-                .post("/")
+                .post("/move")
                 .then()
                 .statusCode(202);
 
