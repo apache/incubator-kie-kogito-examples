@@ -53,7 +53,7 @@ jobs:
       - name: Install Python needed packages
         uses: kiegroup/kie-ci/.ci/actions/python-packages@main
         with:
-          packages: jep
+          packages: numpy,jep
       - name: Build Chain
         uses: kiegroup/kie-ci/.ci/actions/build-chain@main
         env:
