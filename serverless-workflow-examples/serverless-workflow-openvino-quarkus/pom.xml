@@ -18,6 +18,7 @@
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
     <maven.compiler.release>11</maven.compiler.release>
+    <maven.exec.plugin>1.6.0</maven.exec.plugin>
     <version.compiler.plugin>3.8.1</version.compiler.plugin>
     <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
     <version.org.assertj>3.22.0</version.org.assertj>
@@ -120,6 +121,28 @@
               <goal>integration-test</goal>
               <goal>verify</goal>
             </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>${maven.exec.plugin}</version>
+        <executions>
+          <execution>
+            <id>pip-install</id>
+            <phase>generate-resources</phase>
+            <goals>
+                <goal>exec</goal>
+            </goals>
+            <configuration>
+                <executable>pip</executable>
+                <arguments>
+                    <argument>install</argument>
+                    <argument>-r</argument>
+                    <argument>${project.basedir}/requirements.txt</argument>
+                </arguments>
+            </configuration>
           </execution>
         </executions>
       </plugin>
