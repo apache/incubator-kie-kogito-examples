@@ -17,9 +17,8 @@ You will need:
   - Python 3+ installed. In Linux system is usually pre-installed. In case you have an older version or you are not using Linux, check [here](https://wiki.python.org/moin/BeginnersGuide/Download)
   - Pip installed. In case it not there, run `python -m ensurepip --upgrade`
   - Python required libraries, equivalent to run `pip install -r requirements.txt`, will be automatically installed when running Maven. 
-  - Jep installed. Run `pip install jep`, Detailed instructions [here](https://github.com/ninia/jep#installation)
 
-> **_NOTE:_** Install Jep as the last one because it depends on the NumPy library to work correctly.
+> **_NOTE:_** Requirements.txt install Jep as the last one because it depends on the NumPy library to work correctly.
 
 When using native image compilation, you will also need:
 

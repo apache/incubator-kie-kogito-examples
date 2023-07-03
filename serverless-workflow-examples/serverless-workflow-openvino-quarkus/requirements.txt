@@ -42,3 +42,5 @@ scipy
 # compatibility issues or vulnerabilities
 scikit-image>=0.19.2
 setuptools>=56.0.0
+
+jep>=4.1.1
