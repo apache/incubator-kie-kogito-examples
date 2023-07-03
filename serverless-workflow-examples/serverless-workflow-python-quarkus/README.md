@@ -14,7 +14,7 @@ You will need:
   - Maven 3.8.6+ installed
   - Python3 installed
   - Jep installed. Instructions [here](https://github.com/ninia/jep#installation) 
-  - Python required libraries. Run `pip install -r requirements.txt`. Requirements.txt is on example root path. 
+  - Python required libraries, equivalent to run `pip install -r requirements.txt`, will be automatically installed when running Maven. 
 
 When using native image compilation, you will also need: 
   - [GraalVm](https://www.graalvm.org/downloads/) 19.3.1+ installed
