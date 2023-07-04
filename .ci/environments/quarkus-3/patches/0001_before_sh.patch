@@ -1,5 +1,5 @@
 diff --git a/kogito-quarkus-examples/decisiontable-quarkus-example/pom.xml b/kogito-quarkus-examples/decisiontable-quarkus-example/pom.xml
-index 5d8c4970c..a14d4189d 100644
+index 85d36f498..09487c54e 100644
 --- a/kogito-quarkus-examples/decisiontable-quarkus-example/pom.xml
 +++ b/kogito-quarkus-examples/decisiontable-quarkus-example/pom.xml
 @@ -10,15 +10,15 @@
@@ -16,10 +16,10 @@ index 5d8c4970c..a14d4189d 100644
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
 -    <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
 -    <version.org.kie.kogito>2.0.0-SNAPSHOT</version.org.kie.kogito>
--    <version.org.drools>8.41.0-SNAPSHOT</version.org.drools>
+-    <version.org.drools>8.42.0-SNAPSHOT</version.org.drools>
 +    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
 +    <version.org.kie.kogito>3.0.0-SNAPSHOT</version.org.kie.kogito>
-+    <version.org.drools>9.41.0-SNAPSHOT</version.org.drools>
++    <version.org.drools>9.42.0-SNAPSHOT</version.org.drools>
    </properties>
    <dependencyManagement>
      <dependencies>
@@ -596,7 +596,7 @@ index 2f98e7371..7e08d7b26 100644
  import org.kie.kogito.flexible.example.model.State;
  import org.kie.kogito.flexible.example.model.SupportCase;
 diff --git a/kogito-quarkus-examples/kogito-travel-agency/basic/pom.xml b/kogito-quarkus-examples/kogito-travel-agency/basic/pom.xml
-index 0ef201186..847bbab38 100644
+index de5a81934..c20cad9b2 100644
 --- a/kogito-quarkus-examples/kogito-travel-agency/basic/pom.xml
 +++ b/kogito-quarkus-examples/kogito-travel-agency/basic/pom.xml
 @@ -12,15 +12,15 @@
@@ -613,10 +613,10 @@ index 0ef201186..847bbab38 100644
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
 -    <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
 -    <version.org.kie.kogito>2.0.0-SNAPSHOT</version.org.kie.kogito>
--    <version.org.drools>8.41.0-SNAPSHOT</version.org.drools>
+-    <version.org.drools>8.42.0-SNAPSHOT</version.org.drools>
 +    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
 +    <version.org.kie.kogito>3.0.0-SNAPSHOT</version.org.kie.kogito>
-+    <version.org.drools>9.41.0-SNAPSHOT</version.org.drools>
++    <version.org.drools>9.42.0-SNAPSHOT</version.org.drools>
    </properties>
    <dependencyManagement>
      <dependencies>
@@ -722,7 +722,7 @@ index 578c1724a..6040d3fe5 100644
    <dependencyManagement>
      <dependencies>
 diff --git a/kogito-quarkus-examples/kogito-travel-agency/extended/travels/pom.xml b/kogito-quarkus-examples/kogito-travel-agency/extended/travels/pom.xml
-index c6282459f..3b363f7be 100644
+index 8925b74f4..a56339331 100644
 --- a/kogito-quarkus-examples/kogito-travel-agency/extended/travels/pom.xml
 +++ b/kogito-quarkus-examples/kogito-travel-agency/extended/travels/pom.xml
 @@ -10,15 +10,15 @@
@@ -739,10 +739,10 @@ index c6282459f..3b363f7be 100644
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
 -    <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
 -    <version.org.kie.kogito>2.0.0-SNAPSHOT</version.org.kie.kogito>
--    <version.org.drools>8.41.0-SNAPSHOT</version.org.drools>
+-    <version.org.drools>8.42.0-SNAPSHOT</version.org.drools>
 +    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
 +    <version.org.kie.kogito>3.0.0-SNAPSHOT</version.org.kie.kogito>
-+    <version.org.drools>9.41.0-SNAPSHOT</version.org.drools>
++    <version.org.drools>9.42.0-SNAPSHOT</version.org.drools>
    </properties>
    <dependencyManagement>
      <dependencies>
