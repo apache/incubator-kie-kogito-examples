@@ -270,17 +270,17 @@ To access the UI open a browser with the returned url.
 > **NOTE:** Similar to the workflows urls, the url above will be different in each minikube installation.
 
 #### Switch-state-timeouts tab
-In this tab, you can create and complete instances of the switch-sate-timeouts process.
+In this tab, you can create and complete instances of the switch-sate-timeouts workflow.
 
 ![](docs/SwitchStateTimeoutsTab.png)
 
 #### Callback-state-timeouts tab
-In this tab, you can create and complete instances of the callback-sate-timeouts process.
+In this tab, you can create and complete instances of the callback-sate-timeouts workflow.
 
 ![](docs/CallbackStateTimeoutsTab.png)
 
 #### Event-state-timeouts tab
-In this tab, you can create and complete instances of the event-sate-timeouts process.
+In this tab, you can create and complete instances of the event-sate-timeouts workflow.
 
 ![](docs/EventStateTimeoutsTab.png)
 
