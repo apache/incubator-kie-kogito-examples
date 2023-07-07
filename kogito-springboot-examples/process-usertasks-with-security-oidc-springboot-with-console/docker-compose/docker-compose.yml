@@ -118,7 +118,7 @@ services:
 
   process-usertasks-with-security-oidc-springboot-with-console:
     container_name: process-usertasks-with-security-oidc-springboot-with-console
-    image: org.kie.kogito.examples/process-usertasks-with-security-oidc-springboot-with-console:${KOGITO_VERSION}
+    image: org.kie.kogito.examples/process-usertasks-with-security-oidc-springboot-with-console:1.0
     ports:
       - 8080:8080
     depends_on:
