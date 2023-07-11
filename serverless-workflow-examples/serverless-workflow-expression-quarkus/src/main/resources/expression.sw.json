@@ -15,6 +15,11 @@
   "dataInputSchema" : "schema/expression.json",
   "description": "An example of how to use a JQ expression assignment",
   "start": "squareState",
+  "extensions" : [ {
+      "extensionid": "workflow-output-schema",
+      "outputSchema": "schema/result.json"
+     }
+  ],
   "functions": [
     {
       "name": "max",

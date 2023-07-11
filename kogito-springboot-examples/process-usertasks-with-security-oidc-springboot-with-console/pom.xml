@@ -159,10 +159,7 @@
             </executions>
             <configuration>
               <to>
-                <image>${project.groupId}/${project.artifactId}</image>
-                <tags>
-                  <tag>${project.version}</tag>
-                </tags>
+                <image>${project.groupId}/${project.artifactId}:1.0</image>
               </to>
             </configuration>
           </plugin>

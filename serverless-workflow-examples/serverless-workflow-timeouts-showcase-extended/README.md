@@ -12,7 +12,7 @@
 
 ### Building the project
 
-Once the minikube environment is running, open a terminal window, go to the serverless-workflow-timeouts-showcase directory, and execute these commands to be sure the generated images are stored in the minikube internal registry. 
+Once the minikube environment is running, open a terminal window, go to the serverless-workflow-timeouts-showcase-extended directory, and execute these commands to be sure the generated images are stored in the minikube internal registry. 
 
 ```shell
 eval $(minikube -p knative docker-env)
@@ -20,16 +20,19 @@ eval $(minikube -p knative docker-env)
 mvn clean package -Pknative
 ```
 
-### Create the namespace
+### Creating the namespace
 
 ```shell
 # The namespace name is very important to ensure all the services that compose the showcase can interact.
 kubectl create ns timeouts-showcase
 ```
+> **NOTE:** In cases where you need to clean the deployed workflows, to start again, or simply release the
+> resources on your minikube installation see: [Showcase cleaning](#showcase-cleaning)
+>
 
-### Postgresql database setup
+### Deploying the database
 
-To deploy the postgresql database used by the timeouts showcase you must execute this command:
+To deploy the postgresql database used by the showcase you must execute this command:
 
 ```shell
 kubectl apply -f kubernetes/timeouts-showcase-database.yml -n timeouts-showcase
@@ -41,7 +44,7 @@ deployment.apps/timeouts-showcase-database created
 service/timeouts-showcase-database created
 ```
 
-### Jobs Service with postgresql persistence deployment
+### Deploying the Jobs Service
 
 To deploy the Jobs Service you must execute this command:
 
@@ -57,7 +60,7 @@ trigger.eventing.knative.dev/jobs-service-postgresql-cancel-job-trigger created
 sinkbinding.sources.knative.dev/jobs-service-postgresql-sb created
 ```
 
-### Jobs Service logs (optional step)
+### Querying the Jobs Service logs (optional step)
 
 To see the Jobs Service logs you can execute this procedure:
 
@@ -91,7 +94,22 @@ __  ____  __  _____   ___  __ ____  ______
 2022-08-18 10:34:49,241 jobs-service-postgresql-56d9668b4b-k4v87 INFO  [org.kie.kogito.jobs.service.scheduler.JobSchedulerManager:-1] (executor-thread-0) Loading scheduled jobs completed !
 ```
 
-### Timeouts showcase service deployment
+### Deploying the Data Index Service (optional step)
+
+To deploy the Data Index Service you must execute this command:
+
+```shell
+kubectl apply -f kubernetes/data-index-service-postgresql.yml -n timeouts-showcase
+
+# After executing the command, you will see an output like this:
+
+service/data-index-service-postgresql created
+deployment.apps/data-index-service-postgresql created
+trigger.eventing.knative.dev/data-index-service-postgresql-processes-trigger created
+trigger.eventing.knative.dev/data-index-service-postgresql-jobs-trigger created
+```
+
+### Deploying the workflows
 
 To deploy the example workflows you must execute these commands:
 
@@ -127,7 +145,7 @@ timeouts-showcase-extended   http://timeouts-showcase-extended.timeouts-showcase
 
 Note that the output above might be different in your installation, and the IP numbers in the URL can be different.
 
-### Executing the `switch_state_timeouts` workflow using curl
+### Executing the workflows via REST APIs
 
 To execute the following commands you must use the http://timeouts-showcase-extended.timeouts-showcase.10.98.134.49.sslip.io corresponding to your installation.
 
@@ -149,7 +167,7 @@ If you execute the following command during the first 30 seconds after the SW in
 ```shell
 curl -X 'GET' 'http://timeouts-showcase-extended.timeouts-showcase.10.98.134.49.sslip.io/switch_state_timeouts'
 
-# The command will produce an output like this, which indicates that the process is waiting for an event to arrive.
+# The command will produce an output like this, which indicates that the workflow is waiting for an event to arrive.
 
 [{"id":"2e8e1930-9bae-4d60-b364-6fbd61128f51","workflowdata":{}}]
 ```
@@ -161,7 +179,7 @@ result, which means that the SW has timed-out.
 []
 ```
 
-You can execute the following command to create a new `callback_state_timeouts` workflow instance:
+To execute the `callback_state_timeouts` workflow you must execute this command:
 
 ```shell
 curl -X 'POST' \
@@ -226,17 +244,17 @@ timeouts-showcase-extended   http://timeouts-showcase-extended.timeouts-showcase
 3) Open a browser window with the url above: http://timeouts-showcase-extended.timeouts-showcase.10.98.134.49.sslip.io
 
 #### Switch-state-timeouts tab
-In this tab, you can create and complete instances of the switch-sate-timeouts process.
+In this tab, you can create and complete instances of the switch-sate-timeouts workflow.
 
 ![](docs/SwitchStateTimeoutsTab.png)
 
 #### Callback-state-timeouts tab
-In this tab, you can create and complete instances of the callback-sate-timeouts process.
+In this tab, you can create and complete instances of the callback-sate-timeouts workflow.
 
 ![](docs/CallbackStateTimeoutsTab.png)
 
 #### Event-state-timeouts tab
-In this tab, you can create and complete instances of the event-sate-timeouts process.
+In this tab, you can create and complete instances of the event-sate-timeouts workflow.
 
 ![](docs/EventStateTimeoutsTab.png)
 
@@ -244,6 +262,24 @@ In this tab, you can create and complete instances of the event-sate-timeouts pr
 > and execute no action, when the timeout is met, if you refresh the data, the given instance won't be shown anymore. This last is perfectly fine, since the workflow might have finished because of the timeout overdue.
 > 
 > We recommend that you test the different workflows and actions one by one, at the same time that you query the timeouts-showcase logs to verify the traces generated by the workflows.
+
+### Querying the Data Index Service (optional)
+
+If you have deployed the Data Index Service, as shown in the [Deploying the Data Index Service (optional step)](#deploying-the-data-index-service-optional-step), the information about the executed workflows and jobs is recorded by that service, and you can query it by executing GraphQL queries.
+A user-friendly way to execute these queries is by using the Data Index Service GraphQL UI, that you can access by following these steps:
+
+1) Get the Data Index Service cluster IP address.
+
+```shell
+kubectl get service -n timeouts-showcase | grep data-index-service-postgresql
+
+# After executing the command you will see an output like this, where you can see the service IP
+data-index-service-postgresql              ClusterIP      10.110.95.69    
+```
+
+2) Open a browser window using the IP calculated in the previous step: http://10.110.95.69/graphiql/ and execute your queries.
+
+![](docs/DataIndexGraphQLUI.png)
 
 ### Showcase cleaning
 
