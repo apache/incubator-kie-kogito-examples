@@ -54,6 +54,7 @@
         <module>serverless-workflow-testing-with-rest-assured</module>
         <module>serverless-workflow-timeouts-showcase-embedded</module>
         <module>serverless-workflow-timeouts-showcase-extended</module>
+        <module>serverless-workflow-timeouts-showcase-operator-devprofile</module>
       </modules>
     </profile>
 
@@ -114,7 +115,6 @@
         <module>serverless-workflow-custom-type</module>
         <module>serverless-workflow-data-index-quarkus</module>
         <module>serverless-workflow-error-quarkus</module>
-        <module>serverless-workflow-events-quarkus</module>
         <module>serverless-workflow-expression-quarkus</module>
         <module>serverless-workflow-foreach-quarkus</module>
         <module>serverless-workflow-functions-quarkus</module>
@@ -134,6 +134,7 @@
         <module>serverless-workflow-testing-with-rest-assured</module>
         <module>serverless-workflow-timeouts-showcase-embedded</module>
         <module>serverless-workflow-timeouts-showcase-extended</module>
+        <module>serverless-workflow-timeouts-showcase-operator-devprofile</module>
       </modules>
     </profile>
   </profiles>

@@ -361,6 +361,8 @@ void runMavenDeploy(boolean localDeployment = false) {
     mvnCmd.withOptions(examplesHelper.getDeployableArtifactIds().collect { "-pl :${it} "})
 
     mvnCmd.skipTests(true).run('clean deploy')
+
+    util.runWithPythonVirtualEnv(mvnCmd.skipTests(true).getFullRunCommand('clean deploy'), 'swf')
 }
 
 void runMavenStage() {
