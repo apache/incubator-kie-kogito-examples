@@ -3,24 +3,24 @@ description: Update Quarkus version and refactor imports and resources if needed
 type: specs.openrewrite.org/v1beta/recipe
 recipeList:
 - org.openrewrite.maven.ChangePropertyValue: {
-    newValue: 3.0.0.Final,
-    key: quarkus-plugin.version
+    key: quarkus-plugin.version,
+    newValue: 3.0.0.Final
   }
 - org.openrewrite.maven.ChangePropertyValue: {
-    newValue: 3.0.0.Final,
-    key: quarkus.platform.version
+    key: quarkus.platform.version,
+    newValue: 3.0.0.Final
   }
 - org.openrewrite.maven.ChangePropertyValue: {
-    newValue: 9.42.0-SNAPSHOT,
-    key: version.org.drools
+    key: version.org.drools,
+    newValue: 9.42.0-SNAPSHOT
   }
 - org.openrewrite.maven.ChangePropertyValue: {
-    newValue: 3.0.0-SNAPSHOT,
-    key: version.org.kie.kogito
+    key: version.org.kie.kogito,
+    newValue: 3.0.0-SNAPSHOT
   }
 - org.openrewrite.maven.ChangePropertyValue: {
-    newValue: 3.0.0-SNAPSHOT,
-    key: kogito.bom.version
+    key: kogito.bom.version,
+    newValue: 3.0.0-SNAPSHOT
   }
 - org.kie.kogito.Quarkus3Migration
 - org.kie.ManagedDependencies
@@ -84,6 +84,7 @@ recipeList:
     newValue: 3.0.0-M1
   }
 ---
+description: Update all managed dependencies based on dependency updates from Quarkus.
 type: specs.openrewrite.org/v1beta/recipe
 recipeList:
 - org.openrewrite.maven.ChangeManagedDependencyGroupIdAndArtifactId: {
@@ -471,7 +472,6 @@ recipeList:
   }
 displayName: Update Managed Dependencies
 name: org.kie.ManagedDependencies
-description: Update all managed dependencies based on dependency updates from Quarkus.
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: io.quarkus.updates.core.quarkus30.UpgradeQuarkiverse
