@@ -1,11 +1,5 @@
-commit d8d7340021c57390f98c5d9f7912f0e988f29cc1
-Author: Pere Fernandez <pefernan@users.noreply.github.com>
-Date:   Mon May 15 21:21:31 2023 +0200
-
-    Remove Keycloak Spring Boot Adapter
-
 diff --git a/kogito-springboot-examples/process-usertasks-with-security-oidc-springboot-with-console/docker-compose/docker-compose.yml b/kogito-springboot-examples/process-usertasks-with-security-oidc-springboot-with-console/docker-compose/docker-compose.yml
-index 896ba7810..a4d8633e6 100755
+index a9167a60e..a4d8633e6 100755
 --- a/kogito-springboot-examples/process-usertasks-with-security-oidc-springboot-with-console/docker-compose/docker-compose.yml
 +++ b/kogito-springboot-examples/process-usertasks-with-security-oidc-springboot-with-console/docker-compose/docker-compose.yml
 @@ -115,19 +115,3 @@ services:
@@ -15,7 +9,7 @@ index 896ba7810..a4d8633e6 100755
 -
 -  process-usertasks-with-security-oidc-springboot-with-console:
 -    container_name: process-usertasks-with-security-oidc-springboot-with-console
--    image: org.kie.kogito.examples/process-usertasks-with-security-oidc-springboot-with-console:${KOGITO_VERSION}
+-    image: org.kie.kogito.examples/process-usertasks-with-security-oidc-springboot-with-console:1.0
 -    ports:
 -      - 8080:8080
 -    depends_on:
@@ -30,7 +24,7 @@ index 896ba7810..a4d8633e6 100755
 -      KEYCLOAK_AUTH_SERVER_URL: http://${DOCKER_GATEWAY_HOST:-host.docker.internal}:8480/auth
 \ No newline at end of file
 diff --git a/kogito-springboot-examples/process-usertasks-with-security-oidc-springboot-with-console/pom.xml b/kogito-springboot-examples/process-usertasks-with-security-oidc-springboot-with-console/pom.xml
-index ac425f103..a288e67c9 100644
+index 0e39fbaa0..312ec0080 100644
 --- a/kogito-springboot-examples/process-usertasks-with-security-oidc-springboot-with-console/pom.xml
 +++ b/kogito-springboot-examples/process-usertasks-with-security-oidc-springboot-with-console/pom.xml
 @@ -28,13 +28,6 @@
@@ -279,7 +273,7 @@ index 7740348dd..a1451ed66 100644
  spring.main.allow-bean-definition-overriding=true
  
 diff --git a/kogito-springboot-examples/process-usertasks-with-security-oidc-springboot/pom.xml b/kogito-springboot-examples/process-usertasks-with-security-oidc-springboot/pom.xml
-index 9a2c7809d..861df30b6 100644
+index ea037b1f8..7b71f28df 100644
 --- a/kogito-springboot-examples/process-usertasks-with-security-oidc-springboot/pom.xml
 +++ b/kogito-springboot-examples/process-usertasks-with-security-oidc-springboot/pom.xml
 @@ -27,13 +27,6 @@
@@ -414,10 +408,10 @@ index add510733..000000000
 -    }
 -}
 diff --git a/kogito-springboot-examples/process-usertasks-with-security-oidc-springboot/src/main/resources/application.properties b/kogito-springboot-examples/process-usertasks-with-security-oidc-springboot/src/main/resources/application.properties
-index 05c02cbc0..ee2be1c5d 100644
+index 05c02cbc0..245366542 100644
 --- a/kogito-springboot-examples/process-usertasks-with-security-oidc-springboot/src/main/resources/application.properties
 +++ b/kogito-springboot-examples/process-usertasks-with-security-oidc-springboot/src/main/resources/application.properties
-@@ -2,10 +2,7 @@ server.address=0.0.0.0
+@@ -2,10 +2,6 @@ server.address=0.0.0.0
  
  spring.main.allow-bean-definition-overriding=true
  
@@ -427,7 +421,6 @@ index 05c02cbc0..ee2be1c5d 100644
 -keycloak.credentials.secret=secret
 -keycloak.bearer-only=true
 +spring.security.oauth2.resourceserver.jwt.issuer-uri=http://localhost:8281/auth/realms/kogito
-+
  
  
 diff --git a/kogito-springboot-examples/process-usertasks-with-security-oidc-springboot/src/test/java/org/acme/travels/ApprovalsRestIT.java b/kogito-springboot-examples/process-usertasks-with-security-oidc-springboot/src/test/java/org/acme/travels/ApprovalsRestIT.java
@@ -510,7 +503,7 @@ index a2dac0b06..3be2ed592 100644
  spring.main.allow-bean-definition-overriding=true
 \ No newline at end of file
 diff --git a/kogito-springboot-examples/process-usertasks-with-security-springboot/pom.xml b/kogito-springboot-examples/process-usertasks-with-security-springboot/pom.xml
-index 15b43adf8..261542775 100644
+index 375818c87..17f4bb156 100644
 --- a/kogito-springboot-examples/process-usertasks-with-security-springboot/pom.xml
 +++ b/kogito-springboot-examples/process-usertasks-with-security-springboot/pom.xml
 @@ -45,6 +45,12 @@
