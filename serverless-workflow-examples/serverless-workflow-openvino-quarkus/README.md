@@ -16,7 +16,8 @@ You will need:
   - Maven 3.8.6+ installed
   - Python 3+ installed. In Linux system is usually pre-installed. In case you have an older version or you are not using Linux, check [here](https://wiki.python.org/moin/BeginnersGuide/Download)
   - Pip installed. In case it not there, run `python -m ensurepip --upgrade`
-  - Python required libraries, equivalent to run `pip install -r requirements.txt`, will be automatically installed when running Maven. 
+  - Python required libraries, equivalent to run `pip install -r requirements.txt` and `pip install jep`, will be automatically installed when running Maven. 
+  
 
 > **_NOTE:_** Requirements.txt install Jep as the last one because it depends on the NumPy library to work correctly.
 

@@ -130,7 +130,7 @@
         <version>${maven.exec.plugin}</version>
         <executions>
           <execution>
-            <id>pip-install</id>
+            <id>dependencies-install</id>
             <phase>generate-resources</phase>
             <goals>
                 <goal>exec</goal>
@@ -141,6 +141,20 @@
                     <argument>install</argument>
                     <argument>-r</argument>
                     <argument>${project.basedir}/requirements.txt</argument>
+                </arguments>
+            </configuration>
+          </execution>
+          <execution>
+            <id>jep</id>
+            <phase>generate-resources</phase>
+            <goals>
+                <goal>exec</goal>
+            </goals>
+            <configuration>
+                <executable>pip</executable>
+                <arguments>
+                    <argument>install</argument>
+                    <argument>jep</argument>
                 </arguments>
             </configuration>
           </execution>
