@@ -127,7 +127,7 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
-        <version>${maven.exec.plugin}</version>
+        <version>${version.exec.plugin}</version>
         <executions>
           <execution>
             <id>dependencies-install</id>
