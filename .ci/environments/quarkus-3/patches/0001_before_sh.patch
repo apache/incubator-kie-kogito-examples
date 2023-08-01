@@ -1,5 +1,5 @@
 diff --git a/kogito-quarkus-examples/decisiontable-quarkus-example/pom.xml b/kogito-quarkus-examples/decisiontable-quarkus-example/pom.xml
-index 589f67d73..09487c54e 100644
+index 3473dfde3..9f2eb36f6 100644
 --- a/kogito-quarkus-examples/decisiontable-quarkus-example/pom.xml
 +++ b/kogito-quarkus-examples/decisiontable-quarkus-example/pom.xml
 @@ -10,15 +10,15 @@
@@ -16,10 +16,10 @@ index 589f67d73..09487c54e 100644
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
 -    <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
 -    <version.org.kie.kogito>2.0.0-SNAPSHOT</version.org.kie.kogito>
--    <version.org.drools>8.42.0-SNAPSHOT</version.org.drools>
+-    <version.org.drools>8.43.0-SNAPSHOT</version.org.drools>
 +    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
 +    <version.org.kie.kogito>3.0.0-SNAPSHOT</version.org.kie.kogito>
-+    <version.org.drools>9.42.0-SNAPSHOT</version.org.drools>
++    <version.org.drools>9.43.0-SNAPSHOT</version.org.drools>
    </properties>
    <dependencyManagement>
      <dependencies>
@@ -596,7 +596,7 @@ index 2f98e7371..7e08d7b26 100644
  import org.kie.kogito.flexible.example.model.State;
  import org.kie.kogito.flexible.example.model.SupportCase;
 diff --git a/kogito-quarkus-examples/kogito-travel-agency/basic/pom.xml b/kogito-quarkus-examples/kogito-travel-agency/basic/pom.xml
-index 8b2c4b4a1..c20cad9b2 100644
+index 89e84f54c..1d29f4eae 100644
 --- a/kogito-quarkus-examples/kogito-travel-agency/basic/pom.xml
 +++ b/kogito-quarkus-examples/kogito-travel-agency/basic/pom.xml
 @@ -12,15 +12,15 @@
@@ -613,10 +613,10 @@ index 8b2c4b4a1..c20cad9b2 100644
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
 -    <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
 -    <version.org.kie.kogito>2.0.0-SNAPSHOT</version.org.kie.kogito>
--    <version.org.drools>8.42.0-SNAPSHOT</version.org.drools>
+-    <version.org.drools>8.43.0-SNAPSHOT</version.org.drools>
 +    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
 +    <version.org.kie.kogito>3.0.0-SNAPSHOT</version.org.kie.kogito>
-+    <version.org.drools>9.42.0-SNAPSHOT</version.org.drools>
++    <version.org.drools>9.43.0-SNAPSHOT</version.org.drools>
    </properties>
    <dependencyManagement>
      <dependencies>
@@ -722,7 +722,7 @@ index d30e3d357..6040d3fe5 100644
    <dependencyManagement>
      <dependencies>
 diff --git a/kogito-quarkus-examples/kogito-travel-agency/extended/travels/pom.xml b/kogito-quarkus-examples/kogito-travel-agency/extended/travels/pom.xml
-index 8986dc0f4..a56339331 100644
+index fc1986670..78ae5f035 100644
 --- a/kogito-quarkus-examples/kogito-travel-agency/extended/travels/pom.xml
 +++ b/kogito-quarkus-examples/kogito-travel-agency/extended/travels/pom.xml
 @@ -10,15 +10,15 @@
@@ -739,10 +739,10 @@ index 8986dc0f4..a56339331 100644
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
 -    <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
 -    <version.org.kie.kogito>2.0.0-SNAPSHOT</version.org.kie.kogito>
--    <version.org.drools>8.42.0-SNAPSHOT</version.org.drools>
+-    <version.org.drools>8.43.0-SNAPSHOT</version.org.drools>
 +    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
 +    <version.org.kie.kogito>3.0.0-SNAPSHOT</version.org.kie.kogito>
-+    <version.org.drools>9.42.0-SNAPSHOT</version.org.drools>
++    <version.org.drools>9.43.0-SNAPSHOT</version.org.drools>
    </properties>
    <dependencyManagement>
      <dependencies>
@@ -4727,14 +4727,14 @@ index 0a87065df..707894ba9 100644
      <maven.compiler.release>11</maven.compiler.release>
      <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-greeting-rpc-quarkus/serverless-workflow-greeting-server-rpc-quarkus/pom.xml b/serverless-workflow-examples/serverless-workflow-greeting-rpc-quarkus/serverless-workflow-greeting-server-rpc-quarkus/pom.xml
-index f16848636..d655efefa 100644
+index c2ca6f930..d004b2cc1 100644
 --- a/serverless-workflow-examples/serverless-workflow-greeting-rpc-quarkus/serverless-workflow-greeting-server-rpc-quarkus/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-greeting-rpc-quarkus/serverless-workflow-greeting-server-rpc-quarkus/pom.xml
 @@ -16,7 +16,7 @@
          <maven.compiler.release>11</maven.compiler.release>
          <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
-         <version.com.google.protobuf>3.19.2</version.com.google.protobuf>
--        <version.io.grpc>1.45.1</version.io.grpc>
+         <version.com.google.protobuf>3.22.0</version.com.google.protobuf>
+-        <version.io.grpc>1.51.1</version.io.grpc>
 +        <version.io.grpc>1.54.0</version.io.grpc>
          <version.kr.motd.maven.os>1.6.0</version.kr.motd.maven.os>
          <version.org.xolstice.maven.protobuf>0.6.1</version.org.xolstice.maven.protobuf>
@@ -5322,6 +5322,27 @@ index 335f6f86a..903e39aef 100644
  
  import org.slf4j.Logger;
  import org.slf4j.LoggerFactory;
+diff --git a/serverless-workflow-examples/serverless-workflow-openvino-quarkus/pom.xml b/serverless-workflow-examples/serverless-workflow-openvino-quarkus/pom.xml
+index d8912271a..e3016358b 100644
+--- a/serverless-workflow-examples/serverless-workflow-openvino-quarkus/pom.xml
++++ b/serverless-workflow-examples/serverless-workflow-openvino-quarkus/pom.xml
+@@ -10,13 +10,13 @@
+   <name>Kogito Example :: Serverless Workflow Openvino :: Quarkus</name>
+   <description>Kogito Serverless Workflow OpenVino Example - Quarkus</description>
+   <properties>
+-    <quarkus-plugin.version>2.16.7.Final</quarkus-plugin.version>
++    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
+     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
+     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
+-    <quarkus.platform.version>2.16.7.Final</quarkus.platform.version>
++    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
+     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
+     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
+-    <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
++    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
+     <maven.compiler.release>11</maven.compiler.release>
+     <version.exec.plugin>1.6.0</version.exec.plugin>
+     <version.compiler.plugin>3.8.1</version.compiler.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-order-processing/pom.xml b/serverless-workflow-examples/serverless-workflow-order-processing/pom.xml
 index a1a43cd7f..77a15e8cf 100644
 --- a/serverless-workflow-examples/serverless-workflow-order-processing/pom.xml
@@ -5379,6 +5400,27 @@ index e81d235f3..16804f95a 100644
          <maven.compiler.release>11</maven.compiler.release>
          <version.compiler.plugin>3.8.1</version.compiler.plugin>
          <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
+diff --git a/serverless-workflow-examples/serverless-workflow-python-quarkus/pom.xml b/serverless-workflow-examples/serverless-workflow-python-quarkus/pom.xml
+index ea1b940be..162da1ab5 100644
+--- a/serverless-workflow-examples/serverless-workflow-python-quarkus/pom.xml
++++ b/serverless-workflow-examples/serverless-workflow-python-quarkus/pom.xml
+@@ -10,13 +10,13 @@
+   <name>Kogito Example :: Serverless Workflow Python :: Quarkus</name>
+   <description>Kogito Serverless Workflow Python Example - Quarkus</description>
+   <properties>
+-    <quarkus-plugin.version>2.16.6.Final</quarkus-plugin.version>
++    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
+     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
+     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
+-    <quarkus.platform.version>2.16.6.Final</quarkus.platform.version>
++    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
+     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
+     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
+-    <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
++    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
+     <maven.compiler.release>11</maven.compiler.release>
+     <version.exec.plugin>1.6.0</version.exec.plugin>
+     <version.compiler.plugin>3.8.1</version.compiler.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-qas-service-showcase/query-answer-service/pom.xml b/serverless-workflow-examples/serverless-workflow-qas-service-showcase/query-answer-service/pom.xml
 index 5bfad8ffd..4152dd1c4 100644
 --- a/serverless-workflow-examples/serverless-workflow-qas-service-showcase/query-answer-service/pom.xml
