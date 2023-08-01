@@ -122,7 +122,11 @@ pipeline {
             steps {
                 script {
                     dir(getRepoName()) {
-                        getMavenCommand().withProperty('maven.test.failure.ignore', true).skipTests(params.SKIP_TESTS).run('clean install')
+                        def mvnCmd = getMavenCommand().withProperty('maven.test.failure.ignore', true)
+                        if (params.SKIP_TESTS) {
+                            mvnCmd.skipTests() // Conflict somehow with Python testing. If `skipTests={anyvalue}` is set, then exec plugin is not executed ...
+                        }
+                        util.runWithPythonVirtualEnv(mvnCmd.getFullRunCommand('clean install'), 'swf')
                     }
                 }
             }
