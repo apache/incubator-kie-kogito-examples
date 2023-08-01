@@ -8,7 +8,7 @@ index c2ca6f930..b681d6347 100644
          <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
 -        <version.com.google.protobuf>3.22.0</version.com.google.protobuf>
 -        <version.io.grpc>1.51.1</version.io.grpc>
-+        <version.com.google.protobuf>3.19.6</version.com.google.protobuf>
++        <version.com.google.protobuf>3.21.1</version.com.google.protobuf>
 +        <version.io.grpc>1.49.0</version.io.grpc>
          <version.kr.motd.maven.os>1.6.0</version.kr.motd.maven.os>
          <version.org.xolstice.maven.protobuf>0.6.1</version.org.xolstice.maven.protobuf>
