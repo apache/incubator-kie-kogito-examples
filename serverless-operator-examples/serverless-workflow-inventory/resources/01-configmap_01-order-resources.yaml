@@ -1,0 +1,62 @@
+apiVersion: v1
+data:
+  supplier.yaml: |
+    ---
+    openapi: 3.0.3
+    info:
+      title: Supplier API
+      version: 1.0.0-SNAPSHOT
+    tags:
+      - name: supplier
+        description: Supplier Sample
+    paths:
+      /supplier/{supplier-id}:
+        post:
+          tags:
+            - Supplier
+          operationId: sendOrder
+          parameters:
+            - name: supplier-id
+              in: path
+              required: true
+              schema:
+                type: string
+          requestBody:
+            content:
+              text/plain:
+                schema:
+                  type: string
+          responses:
+            "200":
+              description: OK
+              content:
+                text/plain:
+                  schema:
+                    type: string
+        delete:
+          tags:
+            - Supplier
+          operationId: cancelOrder
+          parameters:
+            - name: supplier-id
+              in: path
+              required: true
+              schema:
+                type: string
+          requestBody:
+            content:
+              text/plain:
+                schema:
+                  type: string
+          responses:
+            "200":
+              description: OK
+              content:
+                text/plain:
+                  schema:
+                    type: string
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: 01-order-resources
+  namespace: my-workflows

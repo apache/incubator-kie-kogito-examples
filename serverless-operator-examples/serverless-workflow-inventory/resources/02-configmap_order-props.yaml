@@ -1,0 +1,15 @@
+apiVersion: v1
+data:
+  application.properties: |
+    # Generate OpenAPIs with operationId
+    mp.openapi.extensions.smallrye.operationIdStrategy=METHOD
+
+    # OpenAPIs endpoint
+    quarkus.rest-client.supplier_yaml.url=https://order-swf-supplier-kubesmarts.rhba-0ad6762cc85bcef5745bb684498c2436-0000.us-south.containers.appdomain.cloud
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  labels:
+    app: order
+  name: order-props
+  namespace: my-workflows
