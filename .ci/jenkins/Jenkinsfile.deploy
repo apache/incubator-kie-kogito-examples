@@ -35,7 +35,7 @@ pipeline {
         // Keep here for visitibility
         MAVEN_OPTS = '-Xms1024m -Xmx4g'
 
-        BOT_BRANCH_HASH = "${util.generateHash(10)}"
+        PR_BRANCH_HASH = "${util.generateHash(10)}"
         MAVEN_DEPLOY_LOCAL_DIR = "${WORKSPACE}/maven_deploy_dir"
     }
 
@@ -88,7 +88,7 @@ pipeline {
             steps {
                 script {
                     dir(getRepoName()) {
-                        prepareForPR()
+                        githubscm.createBranch(getPRBranch())
                     }
                 }
             }
@@ -198,8 +198,8 @@ pipeline {
                     dir(getRepoName()) {
                         commitAndCreatePR()
 
-                        setDeployPropertyIfNeeded("${getRepoName()}.pr.source.uri", "https://github.com/${getBotAuthor()}/${getRepoName()}")
-                        setDeployPropertyIfNeeded("${getRepoName()}.pr.source.ref", getBotBranch())
+                        setDeployPropertyIfNeeded("${getRepoName()}.pr.source.uri", "https://github.com/${getGitAuthor()}/${getRepoName()}")
+                        setDeployPropertyIfNeeded("${getRepoName()}.pr.source.ref", getPRBranch())
                         setDeployPropertyIfNeeded("${getRepoName()}.pr.target.uri", "https://github.com/${getGitAuthor()}/${getRepoName()}")
                         setDeployPropertyIfNeeded("${getRepoName()}.pr.target.ref", getBuildBranch())
                     }
@@ -243,11 +243,6 @@ void checkoutRepo() {
     checkout(githubscm.resolveRepository(getRepoName(), getGitAuthor(), getBuildBranch(), false))
 }
 
-void prepareForPR() {
-    githubscm.forkRepo(getBotAuthorCredsID())
-    githubscm.createBranch(getBotBranch())
-}
-
 void addNotIgnoredPoms() {
     // based on https://stackoverflow.com/a/59888964/8811872
     sh '''
@@ -276,8 +271,8 @@ void commitAndCreatePR() {
     // See: https://github.com/kiegroup/kogito-runtimes/pull/570#discussion_r449268738
     addNotIgnoredPoms()
     sh "git commit -m '${commitMsg}'"
-    githubscm.pushObject('origin', getBotBranch(), getBotAuthorCredsID())
-    deployProperties["${getRepoName()}.pr.link"] = githubscm.createPRWithLabels(commitMsg, prBody, getBuildBranch(), ['skip-ci'] as String[], getBotAuthorCredsID())
+    githubscm.pushObject('origin', getPRBranch(), getGitAuthorCredsID())
+    deployProperties["${getRepoName()}.pr.link"] = githubscm.createPRWithLabels(commitMsg, prBody, getBuildBranch(), ['skip-ci'] as String[], getGitAuthorCredsID())
 }
 
 boolean isSpecificArtifactsUpload() {
@@ -321,20 +316,12 @@ String getDroolsVersion() {
     return params.DROOLS_VERSION
 }
 
-String getBotBranch() {
-    return "${getProjectVersion()}-${env.BOT_BRANCH_HASH}"
-}
-
-String getBotAuthor() {
-    return env.GIT_AUTHOR_BOT
+String getPRBranch() {
+    return "${getProjectVersion()}-${env.PR_BRANCH_HASH}"
 }
 
 String getGitAuthorCredsID() {
     return env.AUTHOR_CREDS_ID
-}
-
-String getBotAuthorCredsID() {
-    return env.BOT_CREDENTIALS_ID
 }
 
 void setDeployPropertyIfNeeded(String key, def value) {
