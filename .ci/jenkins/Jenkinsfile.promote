@@ -32,7 +32,7 @@ pipeline {
 
         KOGITO_CI_EMAIL_TO = credentials("${JENKINS_EMAIL_CREDS_ID}")
 
-        BOT_BRANCH_HASH = "${util.generateHash(10)}"
+        PR_BRANCH_HASH = "${util.generateHash(10)}"
         GITHUB_CLI_VERSION = '0.11.1'
     }
 
@@ -89,8 +89,9 @@ pipeline {
             }
             steps {
                 script {
-                    dir('bot') {
-                        prepareForPR()
+                    dir('pr') {
+                        checkoutRepo()
+                        githubscm.createBranch(getSnapshotBranch())
 
                         maven.mvnVersionsUpdateParentAndChildModules(getMavenCommand(), getSnapshotVersion(), true)
                         maven.mvnSetVersionProperty(getMavenCommand(), 'version.org.kie.kogito', getSnapshotVersion())
@@ -212,10 +213,6 @@ String getGitAuthorCredsID() {
     return env.AUTHOR_CREDS_ID
 }
 
-String getBotAuthorCredsID() {
-    return env.BOT_CREDENTIALS_ID
-}
-
 String getDeployPrLink() {
     return getDeployProperty("${getRepoName()}.pr.link")
 }
@@ -229,7 +226,7 @@ void setPipelinePrLink(String value) {
 }
 
 String getSnapshotBranch() {
-    return "${getSnapshotVersion().toLowerCase()}-${env.BOT_BRANCH_HASH}"
+    return "${getSnapshotVersion().toLowerCase()}-${env.PR_BRANCH_HASH}"
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -256,12 +253,6 @@ void tagLatest() {
     }
 }
 
-void prepareForPR() {
-    checkoutRepo()
-    githubscm.forkRepo(getBotAuthorCredsID())
-    githubscm.createBranch(getSnapshotBranch())
-}
-
 void addNotIgnoredPoms() {
     // based on https://stackoverflow.com/a/59888964/8811872
     sh '''
@@ -284,8 +275,8 @@ void commitAndCreatePR() {
     // See: https://github.com/kiegroup/kogito-runtimes/pull/570#discussion_r449268738
     addNotIgnoredPoms()
     sh "git commit -m '${commitMsg}'"
-    githubscm.pushObject('origin', getSnapshotBranch(), getBotAuthorCredsID())
-    setPipelinePrLink(githubscm.createPR(commitMsg, prBody, getBuildBranch(), getBotAuthorCredsID()))
+    githubscm.pushObject('origin', getSnapshotBranch(), getGitAuthorCredsID())
+    setPipelinePrLink(githubscm.createPR(commitMsg, prBody, getBuildBranch(), getGitAuthorCredsID()))
 }
 
 void installGithubCLI() {
