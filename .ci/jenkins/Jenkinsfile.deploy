@@ -86,7 +86,10 @@ pipeline {
             }
             steps {
                 dir(getRepoName()) {
-                    prepareForPR()
+                    if (githubscm.isBranchExist('origin',getPRBranch())) {
+                        githubscm.removeRemoteBranch('origin', getPRBranch())
+                    }
+                    githubscm.createBranch(getPRBranch())
                 }
             }
         }
@@ -295,7 +298,7 @@ String getDroolsVersion() {
 }
 
 String getPRBranch() {
-    return "${getProjectVersion()}-${env.PR_BRANCH_HASH}"
+    return params.KOGITO_PR_BRANCH
 }
 
 String getGitAuthorCredsID() {
