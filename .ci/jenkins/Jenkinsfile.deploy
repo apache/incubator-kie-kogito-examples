@@ -62,7 +62,6 @@ pipeline {
                             assert getBuildBranch() == util.getReleaseBranchFromVersion(getProjectVersion())
                         }
                     }
-
                     dir(getRepoName()) {
                         checkoutRepo()
                     }
@@ -86,16 +85,14 @@ pipeline {
                 expression { return isRelease() || isCreatePr() }
             }
             steps {
-                script {
-                    dir(getRepoName()) {
-                        githubscm.createBranch(getPRBranch())
-                    }
+                dir(getRepoName()) {
+                    prepareForPR()
                 }
             }
         }
         stage('Update project version') {
             when {
-                expression { return getProjectVersion() != '' }
+                expression { return getProjectVersion() }
             }
             steps {
                 script {
@@ -122,11 +119,7 @@ pipeline {
             steps {
                 script {
                     dir(getRepoName()) {
-                        def mvnCmd = getMavenCommand().withProperty('maven.test.failure.ignore', true)
-                        if (params.SKIP_TESTS) {
-                            mvnCmd.skipTests() // Conflict somehow with Python testing. If `skipTests={anyvalue}` is set, then exec plugin is not executed ...
-                        }
-                        util.runWithPythonVirtualEnv(mvnCmd.getFullRunCommand('clean install'), 'swf')
+                        getMavenCommand().withProperty('maven.test.failure.ignore', true).skipTests(params.SKIP_TESTS).run('clean install')
                     }
                 }
             }
@@ -139,22 +132,7 @@ pipeline {
                 }
             }
         }
-        stage('Deploy to repository') {
-            when {
-                expression { return !shouldStageArtifacts() && !isSpecificArtifactsUpload() && shouldDeployToRepository() }
-            }
-            steps {
-                script {
-                    dir(getRepoName()) {
-                        runMavenDeploy()
-                    }
-                }
-            }
-        }
-        stage('Deploy locally') {
-            when {
-                expression { return shouldStageArtifacts() || isSpecificArtifactsUpload() }
-            }
+        stage('Deploy kogito-examples locally') {
             steps {
                 script {
                     dir(getRepoName()) {
@@ -165,7 +143,7 @@ pipeline {
         }
         stage('Upload artifacts to given repository') {
             when {
-                expression { return isSpecificArtifactsUpload() }
+                expression { return !isRelease() && shouldDeployToRepository() }
             }
             steps {
                 script {
@@ -280,11 +258,11 @@ boolean isSpecificArtifactsUpload() {
 }
 
 boolean shouldStageArtifacts() {
-    return !isSpecificArtifactsUpload() && isRelease() && !env.MAVEN_DEPLOY_REPOSITORY
+    return isRelease()
 }
 
 boolean shouldDeployToRepository() {
-    return env.MAVEN_DEPLOY_REPOSITORY || getGitAuthor() == 'kiegroup'
+    return env.MAVEN_DEPLOY_REPOSITORY && env.MAVEN_REPO_CREDS_ID && getGitAuthor() == 'kiegroup'
 }
 
 boolean isRelease() {
