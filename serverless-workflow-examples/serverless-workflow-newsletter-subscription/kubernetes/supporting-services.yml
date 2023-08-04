@@ -156,7 +156,7 @@ spec:
                   fieldPath: metadata.namespace
             - name: JOBS_SERVICE_PERSISTENCE
               value: "postgresql"
-            - name: KOGITO_JOBS_SERVICE_KNATIVE_EVENTS
+            - name: KOGITO_JOBS_SERVICE_HTTP_JOB_STATUS_CHANGE_EVENTS
               value: "true"
             - name: QUARKUS_DATASOURCE_USERNAME
               value: postgres

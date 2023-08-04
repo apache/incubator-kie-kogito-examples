@@ -55,6 +55,10 @@ public class WorkflowsProxyResource {
      * External path for accessing the Event State Timeouts SW, never change.
      */
     private static final String EVENT_STATE_TIMEOUTS_URI = "event_state_timeouts";
+    /**
+     * External path for accessing the Workflow Timeouts SW, never change.
+     */
+    private static final String WORKFLOW_TIMEOUTS_URI = "workflow_timeouts";
 
     @Inject
     @RestClient
@@ -67,6 +71,10 @@ public class WorkflowsProxyResource {
     @Inject
     @RestClient
     EventStateTimeoutsClient eventStateTimeoutsClient;
+
+    @Inject
+    @RestClient
+    WorkflowTimeoutsClient workflowTimeoutsClient;
 
     @POST
     @Path(CALLBACK_STATE_TIMEOUTS_URI)
@@ -111,5 +119,20 @@ public class WorkflowsProxyResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getES() {
         return eventStateTimeoutsClient.get();
+    }
+
+    @POST
+    @Path(WORKFLOW_TIMEOUTS_URI)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response postWT(@Context HttpHeaders httpHeaders, @QueryParam("businessKey") @DefaultValue("") String businessKey, String input) {
+        return workflowTimeoutsClient.post(httpHeaders, businessKey, input);
+    }
+
+    @GET
+    @Path(WORKFLOW_TIMEOUTS_URI)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getWT() {
+        return workflowTimeoutsClient.get();
     }
 }

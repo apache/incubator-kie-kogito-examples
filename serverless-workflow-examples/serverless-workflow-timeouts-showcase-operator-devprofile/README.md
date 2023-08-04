@@ -61,11 +61,16 @@ kubectl apply -f workflows/event_state_timeouts_devprofile.yaml -n timeouts-show
 kubectl apply -f workflows/switch_state_timeouts_devprofile.yaml -n timeouts-showcase
 ```
 
+```shell
+kubectl apply -f workflows/workflow_timeouts_devprofile.yaml -n timeouts-showcase
+```
+
 After executing the commands you should have seen the following outputs:
 ```shell
 sonataflow.sonataflow.org/callbackstatetimeouts created
 sonataflow.sonataflow.org/eventstatetimeouts created
 sonataflow.sonataflow.org/switchstatetimeouts created
+sonataflow.sonataflow.org/workflowtimeouts created
 ```
 
 ### Accessing the timeouts showcase workflows
@@ -93,6 +98,13 @@ minikube service switchstatetimeouts -n timeouts-showcase  --url
 http://192.168.49.2:31917
 ```
 
+```shell
+minikube service workflowtimeouts -n timeouts-showcase  --url
+
+# workflow_timeouts url output example
+http://192.168.49.2:31786
+```
+
 > **NOTE:** The outputs above might be different in your installation, and the IP numbers and ports can change even when you delete and redeploy a particular workflow. 
 >
 > To facilitate the workflows executions, you can use the following script to define env variables with the corresponding urls. (remember to re-execute if you redeploy any workflow)
@@ -107,6 +119,7 @@ Setting workflows env variables to:
 CALLBACK_STATE_TIMEOUTS_URL=http://192.168.49.2:31471/callbackstatetimeouts
 EVENT_STATE_TIMEOUTS_URL=http://192.168.49.2:30936/eventstatetimeouts
 SWITCH_STATE_TIMEOUTS_URL=http://192.168.49.2:32428/switchstatetimeouts
+WORKFLOW_TIMEOUTS_URL=http://192.168.49.2:31786/workflowtimeouts
 ```
 
 ### Executing the workflows via REST APIs
@@ -155,11 +168,26 @@ curl -X 'POST' \
 
 Similar to the `switch_state_timeouts` you can wait for 30+ seconds to check the SW was timed-out.
 
-Finally, you can execute the following command to create a new `event_state_timeous` workflow instance:
+To execute the `event_state_timeouts` workflow you must execute this command:
 
 ```shell
 curl -X 'POST' \
   "$EVENT_STATE_TIMEOUTS_URL" \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "workflowdata": {}
+}'
+```
+
+Similar to the `switch_state_timeouts` you can wait for 30+ seconds to check the SW was timed-out.
+
+
+Finally, you can execute the following command to create a new `workflow_timeous` workflow instance:
+
+```shell
+curl -X 'POST' \
+  "$WORKFLOW_TIMEOUTS_URL" \
   -H 'accept: */*' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -177,7 +205,7 @@ NAME                                     READY   STATUS    RESTARTS   AGE
 callbackstatetimeouts-58c9f5d8fb-xgnmm   1/1     Running   0          17m
 eventstatetimeouts-8564767bd5-c7zqc      1/1     Running   0          18m
 switchstatetimeouts-8775d4c69-7pjvc      1/1     Running   0          17m
-
+workflowtimeouts-749657d85-jxhj8         1/1     Running   0          138m
 ```
 
 Finally, you can execute the following command to see the logs corresponding to any of these Pods. And see the log traces
@@ -210,16 +238,19 @@ If you used the script defined in [Accessing the timeouts showcase workflows](#a
 
 ```shell
 firefox $SWITCH_STATE_TIMEOUTS_ROOT/q/dev
- ```
+```
 
 ```shell
 firefox $CALLBACK_STATE_TIMEOUTS_ROOT/q/dev
- ```
+```
 
 ```shell
 firefox $EVENT_STATE_TIMEOUTS_ROOT/q/dev
- ```
+```
 
+```shell
+firefox $WORKFLOW_TIMEOUTS_ROOT/q/dev
+```
 #### Dev UI SonataFlow Tools View
 
 ![](docs/DevUIWorkflows.png)
@@ -270,19 +301,24 @@ To access the UI open a browser with the returned url.
 > **NOTE:** Similar to the workflows urls, the url above will be different in each minikube installation.
 
 #### Switch-state-timeouts tab
-In this tab, you can create and complete instances of the switch-sate-timeouts workflow.
+In this tab, you can create and complete instances of the `switch-sate-timeouts` workflow.
 
 ![](docs/SwitchStateTimeoutsTab.png)
 
 #### Callback-state-timeouts tab
-In this tab, you can create and complete instances of the callback-sate-timeouts workflow.
+In this tab, you can create and complete instances of the `callback-sate-timeouts` workflow.
 
 ![](docs/CallbackStateTimeoutsTab.png)
 
 #### Event-state-timeouts tab
-In this tab, you can create and complete instances of the event-sate-timeouts workflow.
+In this tab, you can create and complete instances of the `event-sate-timeouts` workflow.
 
 ![](docs/EventStateTimeoutsTab.png)
+
+#### Workflow-timeouts tab
+In this tab, you can create and complete instances of the `workflow-timeouts` workflow.
+
+![](docs/WorkflowTimeoutsTab.png)
 
 > **NOTE:** Remember that example workflows are configured with timeouts, which means that, if you create a workflow instance
 > and execute no action, when the timeout is met, if you refresh the data, the given instance won't be shown anymore. This last is perfectly fine, since the workflow might have finished because of the timeout overdue.

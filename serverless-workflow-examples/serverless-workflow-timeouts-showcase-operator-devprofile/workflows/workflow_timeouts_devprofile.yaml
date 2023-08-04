@@ -1,0 +1,43 @@
+apiVersion: sonataflow.org/v1alpha08
+kind: SonataFlow
+metadata:
+  name: workflowtimeouts
+  annotations:
+    sonataflow.org/description: Workflow Timeouts Example k8s
+    sonataflow.org/version: 0.0.1
+    sonataflow.org/profile: dev
+spec:
+  flow:
+    start: PrintStartMessage
+    timeouts:
+      workflowExecTimeout:
+        duration: 'PT30S'
+    events:
+      - name: wakeUpEvent
+        source: ''
+        type: wake_up_event_type
+    functions:
+      - name: systemOut
+        type: custom
+        operation: sysout
+    states:
+      - name: PrintStartMessage
+        type: operation
+        actions:
+          - name: printSystemOut
+            functionRef:
+              refName: systemOut
+              arguments:
+                message: "${\"workflow-timeouts: \" + $WORKFLOW.instanceId + \" has started.\"}"
+        transition: WaitForEvent
+      - name: WaitForEvent
+        type: event
+        onEvents:
+          - eventRefs: [ wakeUpEvent ]
+            actions:
+              - name: printAfterWakeUpEvent
+                functionRef:
+                  refName: systemOut
+                  arguments:
+                    message: "${\"workflow-timeouts: \" + $WORKFLOW.instanceId + \" executing actions for wake_up_event.\"}"
+        end: true

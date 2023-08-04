@@ -130,6 +130,7 @@ trigger.eventing.knative.dev/event2-event-type-trigger-timeouts-showcase-extende
 trigger.eventing.knative.dev/visa-approved-event-type-trigger-timeouts-showcase-extended created
 trigger.eventing.knative.dev/never-trigger-timeouts-showcase-extended created
 trigger.eventing.knative.dev/visa-denied-event-type-trigger-timeouts-showcase-extended created
+trigger.eventing.knative.dev/wake-up-event-type-trigger-timeouts-showcase-extended created
 sinkbinding.sources.knative.dev/sb-timeouts-showcase-extended created
 ```
 
@@ -191,11 +192,23 @@ curl -X 'POST' \
 
 Similar to `switch_state_timeouts` you can wait for 30+ seconds to check the SW was timed-out.
 
-Finally, you can execute the following command to create a new `event_state_timeous` workflow instance:
+To execute the `event_state_timeouts` workflow you must execute this command:
 
 ```shell
 curl -X 'POST' \
   'http://timeouts-showcase-extended.timeouts-showcase.10.98.134.49.sslip.io/event_state_timeouts' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "workflowdata": {}
+}'
+```
+
+Finally, you can execute the following command to create a new `workflow_timeouts` workflow instance:
+
+```shell
+curl -X 'POST' \
+  'http://timeouts-showcase-extended.timeouts-showcase.10.98.134.49.sslip.io/workflow_timeouts' \
   -H 'accept: */*' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -244,19 +257,24 @@ timeouts-showcase-extended   http://timeouts-showcase-extended.timeouts-showcase
 3) Open a browser window with the url above: http://timeouts-showcase-extended.timeouts-showcase.10.98.134.49.sslip.io
 
 #### Switch-state-timeouts tab
-In this tab, you can create and complete instances of the switch-sate-timeouts workflow.
+In this tab, you can create and complete instances of the `switch-sate-timeouts` workflow.
 
 ![](docs/SwitchStateTimeoutsTab.png)
 
 #### Callback-state-timeouts tab
-In this tab, you can create and complete instances of the callback-sate-timeouts workflow.
+In this tab, you can create and complete instances of the `callback-sate-timeouts` workflow.
 
 ![](docs/CallbackStateTimeoutsTab.png)
 
 #### Event-state-timeouts tab
-In this tab, you can create and complete instances of the event-sate-timeouts workflow.
+In this tab, you can create and complete instances of the `event-sate-timeouts` workflow.
 
 ![](docs/EventStateTimeoutsTab.png)
+
+#### Workflow-timeouts tab
+In this tab, you can create and complete instances of the `workflow-timeouts` workflow.
+
+![](docs/WorkflowTimeoutsTab.png)
 
 > **NOTE:** Remember that example workflows are configured with timeouts, which means that, if you create a workflow instance
 > and execute no action, when the timeout is met, if you refresh the data, the given instance won't be shown anymore. This last is perfectly fine, since the workflow might have finished because of the timeout overdue.
