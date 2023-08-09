@@ -38,7 +38,7 @@ class TimeoutIT {
     public static final String SWITCH_STATE_TIMEOUT_WORKFLOW_PATH = "switch_state_timeouts";
     public static final String CALLBACK_STATE_TIMEOUT_WORKFLOW_PATH = "callback_state_timeouts";
     public static final String EVENT_STATE_TIMEOUT_WORKFLOW_PATH = "event_state_timeouts";
-    public static final String TIMEOUT_WORKFLOW_PATH = "workflow_timeout";
+    public static final String TIMEOUT_WORKFLOW_PATH = "workflow_timeouts";
 
     @Test
     void testSwitchStateWorkflow() {

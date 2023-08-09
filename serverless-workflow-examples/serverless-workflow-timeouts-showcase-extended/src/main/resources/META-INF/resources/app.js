@@ -2,6 +2,7 @@ function refreshTables() {
     refreshSwitchStateTimeoutsTable();
     refreshCallbackStateTimeoutsTable();
     refreshEventStateTimeoutsTable();
+    refreshWorkflowTimeoutsTable();
 }
 
 function refreshSwitchStateTimeoutsTable() {
@@ -32,6 +33,16 @@ function refreshEventStateTimeoutsTable() {
             .fail(function () {
                 showError("An error was produced during the event_state_timeouts table refresh, please check that server is running.");
             });
+}
+
+function refreshWorkflowTimeoutsTable() {
+    $.getJSON("/workflow_timeouts", (instances) => {
+        console.log(instances);
+        printWorkflowTimeoutsTable(instances);
+    })
+        .fail(function () {
+            showError("An error was produced during the workflow_timeouts table refresh, please check that server is running.");
+        });
 }
 
 function printSwitchStateTimeoutsTable(instances) {
@@ -142,6 +153,36 @@ function printEventStateTimeoutsRow(tableBody, instance) {
     });
 }
 
+function printWorkflowTimeoutsTable(instances) {
+    const table = $('#workflowTimeoutsTable');
+    table.children().remove();
+    const tableBody = $('<tbody>').appendTo(table);
+    printWorkflowTimeoutsTableHeader(table)
+    for (const instance of instances) {
+        printWorkflowTimeoutsRow(tableBody, instance);
+    }
+}
+
+function printWorkflowTimeoutsTableHeader(table) {
+    const header = $('<thead class="thead-dark">').appendTo(table);
+    const headerTr = $('<tr class="d-flex">').appendTo(header);
+    $('<th scope="col" class="col-4">#Workflow instance</th>').appendTo(headerTr);
+    $('<th scope="col" class="col-2"></th>').appendTo(headerTr);
+}
+
+function printWorkflowTimeoutsRow(tableBody, instance) {
+    const tableRow = $('<tr class="d-flex">').appendTo(tableBody);
+    tableRow.append($(`<th scope="row" class="col-4">${instance.id}</th>`));
+
+    const wakeUpEventBtn = $(`<button id="wakeUpEventBtn_${instance.id}" type="button" class="btn btn-primary btn-sm">Send wake up event</button>`);
+    const wakeUpEventBtnTd = $(`<td class="col-2"></td>`);
+    wakeUpEventBtnTd.append(wakeUpEventBtn);
+    tableRow.append(wakeUpEventBtnTd);
+    wakeUpEventBtnTd.click(function () {
+        sendWakeUpEvent(instance.id);
+    });
+}
+
 function sendVisaApprovalEvent(processInstanceId) {
     produceEvent("/events-producer/produce-switch-state-timeouts-visa-approved-event", processInstanceId, "Approved from UI", function () {
         disableSwitchStateTimeoutsButtons(processInstanceId);
@@ -177,6 +218,13 @@ function sendEvent2(processInstanceId) {
     })
 }
 
+function sendWakeUpEvent(processInstanceId) {
+    produceEvent("/events-producer/produce-workflow-timeouts-event", processInstanceId, "Wake up event sent from UI", function () {
+        disableWorkflowTimeoutsButtons(processInstanceId);
+        showEventsToast();
+    })
+}
+
 function startNewSwitchStateTimeouts() {
     startProcess("/switch_state_timeouts", function () {
         refreshSwitchStateTimeoutsTable();
@@ -192,6 +240,12 @@ function startNewCallbackStateTimeouts() {
 function startNewEventStateTimeouts() {
     startProcess("/event_state_timeouts", function () {
         refreshEventStateTimeoutsTable();
+    });
+}
+
+function startNewWorkflowTimeouts() {
+    startProcess("/workflow_timeouts", function () {
+        refreshWorkflowTimeoutsTable();
     });
 }
 
@@ -241,6 +295,10 @@ function disableEventStateTimeoutsButtons(processInstanceId) {
     $(`#sendEvent2Btn_${processInstanceId}`).prop('disabled', true);
 }
 
+function disableWorkflowTimeoutsButtons(processInstanceId) {
+    $(`#wakeUpEventBtn_${processInstanceId}`).prop('disabled', true);
+}
+
 function showError(message) {
     const notification = $(`<div class="toast" role="alert" aria-live="assertive" aria-atomic="true"  data-bs-delay="3000"/>`)
             .append($(`<div class="toast-header bg-danger">
@@ -277,6 +335,10 @@ $(document).ready(function () {
         refreshEventStateTimeoutsTable();
     });
 
+    $('#refreshWorkflowTimeoutsButton').click(function () {
+        refreshWorkflowTimeoutsTable();
+    });
+
     $("#startSwitchStateTimeoutsButton").click(function () {
         startNewSwitchStateTimeouts();
     });
@@ -287,6 +349,10 @@ $(document).ready(function () {
 
     $("#startEventStateTimeoutsButton").click(function () {
         startNewEventStateTimeouts();
+    });
+
+    $("#startWorkflowTimeoutsButton").click(function () {
+        startNewWorkflowTimeouts();
     });
 
 });

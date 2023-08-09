@@ -19,7 +19,7 @@
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
     <meta content="width=device-width, initial-scale=1" name="viewport">
-    <title>Timeouts showcase</title>
+    <title>Timeouts showcase operator dev profile</title>
     <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css"/>
 </head>
 <body>
@@ -38,6 +38,9 @@
         </li>
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="event-sate-timeouts-tab" data-bs-toggle="tab" data-bs-target="#event-state-timeouts-container" type="button" role="tab" aria-controls="event-state-timeouts-container" aria-selected="false">event-state-timeouts</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="workflow-timeouts-tab" data-bs-toggle="tab" data-bs-target="#workflow-timeouts-container" type="button" role="tab" aria-controls="workflow-timeouts-container" aria-selected="false">workflow-timeouts</button>
         </li>
     </ul>
     <div class="tab-content" id="myTabContent">
@@ -73,6 +76,18 @@
                 </div>
 
                 <table class="table table-bordered table-striped table-sm" id="eventStateTimeoutsTable">
+                    <!-- Filled in by app.js -->
+                </table>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="workflow-timeouts-container" role="tabpanel" aria-labelledby="workflow-timeouts-tab">
+            <div style="padding-top: 20px;">
+                <div style="margin-bottom: .5rem">
+                    <button id="refreshWorkflowTimeoutsButton" type="button" class="btn btn-secondary btn-sm">Refresh</button>
+                    <button id="startWorkflowTimeoutsButton" type="button" class="btn btn-primary btn-sm">Start new workflow-timeouts</button>
+                </div>
+
+                <table class="table table-bordered table-striped table-sm" id="workflowTimeoutsTable">
                     <!-- Filled in by app.js -->
                 </table>
             </div>

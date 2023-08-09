@@ -65,6 +65,10 @@ public class EventsProducerResource {
      * Event type expected by the event_state_timeouts sw to execute the associated actions.
      */
     private static final String EVENT2_EVENT_TYPE = "event2_event_type";
+    /**
+     * Event type expected by the workflow_timeouts sw to execute the associated actions.
+     */
+    private static final String WAKE_UP_EVENT_TYPE = "wake_up_event_type";
 
     @Inject
     ObjectMapper objectMapper;
@@ -81,11 +85,15 @@ public class EventsProducerResource {
     @RestClient
     EventStateTimeoutsClient eventStateTimeoutsClient;
 
+    @Inject
+    @RestClient
+    WorkflowTimeoutsClient workflowTimeoutsClient;
+
     /**
      * Produce a callback event for an instance of the callback-state-timeouts serverless workflow.
      *
      * @param processInstanceId Process instance id of the process that will receive the event.
-     * @param event             event to send.
+     * @param event event to send.
      */
     @Path("produce-callback-state-timeouts-event/{processInstanceId}")
     @POST
@@ -100,7 +108,7 @@ public class EventsProducerResource {
      * Produce a visa approval event for an instance of the switch-state-timeouts serverless workflow.
      *
      * @param processInstanceId Process instance id of the process that will receive the event.
-     * @param event             event to send.
+     * @param event event to send.
      */
     @Path("produce-switch-state-timeouts-visa-approved-event/{processInstanceId}")
     @POST
@@ -115,7 +123,7 @@ public class EventsProducerResource {
      * Produce a visa denial event for an instance of the switch-state-timeouts serverless workflow.
      *
      * @param processInstanceId Process instance id of the process that will receive the event.
-     * @param event             event to send.
+     * @param event event to send.
      */
     @Path("produce-switch-state-timeouts-visa-denied-event/{processInstanceId}")
     @POST
@@ -130,7 +138,7 @@ public class EventsProducerResource {
      * Produce the event1 for an instance of the event-state-timeouts serverless workflow.
      *
      * @param processInstanceId Process instance id of the process that will receive the event.
-     * @param event             event to send.
+     * @param event event to send.
      */
     @Path("produce-event-state-timeouts-event1/{processInstanceId}")
     @POST
@@ -145,7 +153,7 @@ public class EventsProducerResource {
      * Produce the event2 for an instance of the event-state-timeouts serverless workflow.
      *
      * @param processInstanceId Process instance id of the process that will receive the event.
-     * @param event             event to send.
+     * @param event event to send.
      */
     @Path("produce-event-state-timeouts-event2/{processInstanceId}")
     @POST
@@ -154,6 +162,21 @@ public class EventsProducerResource {
     public Response produceEventStateTimeoutsEvent2(@PathParam("processInstanceId") String processInstanceId, Event event) {
         String cloudEvent = generateCloudEvent(processInstanceId, EVENT2_EVENT_TYPE, event);
         return produceResponse(eventStateTimeoutsClient.sendEvent(cloudEvent));
+    }
+
+    /**
+     * Produce the wake-event for an instance of the workflow-timeouts serverless workflow.
+     *
+     * @param processInstanceId Process instance id of the process that will receive the event.
+     * @param event event to send.
+     */
+    @Path("produce-workflow-timeouts-event/{processInstanceId}")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response produceWorkflowTimeoutsWakeUpEvent(@PathParam("processInstanceId") String processInstanceId, Event event) {
+        String cloudEvent = generateCloudEvent(processInstanceId, WAKE_UP_EVENT_TYPE, event);
+        return produceResponse(workflowTimeoutsClient.sendEvent(cloudEvent));
     }
 
     private static Response produceResponse(Response response) {
