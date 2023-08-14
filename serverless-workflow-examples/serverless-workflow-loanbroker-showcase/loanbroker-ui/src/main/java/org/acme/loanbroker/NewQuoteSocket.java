@@ -3,11 +3,11 @@ package org.acme.loanbroker;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.websocket.OnOpen;
-import javax.websocket.Session;
-import javax.websocket.server.ServerEndpoint;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.websocket.OnOpen;
+import jakarta.websocket.Session;
+import jakarta.websocket.server.ServerEndpoint;
 
 import org.acme.loanbroker.domain.QuotesResponse;
 import org.slf4j.Logger;

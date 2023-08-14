@@ -1,7 +1,7 @@
 package org.acme.serverless.loanbroker.aggregator;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 import org.acme.serverless.loanbroker.aggregator.model.AggregationResponse;
 import org.apache.camel.Exchange;

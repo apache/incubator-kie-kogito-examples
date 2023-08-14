@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>kogito-springboot-examples</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
+    <version>3.0.0-SNAPSHOT</version>
   </parent>
 
   <artifactId>process-usertasks-with-security-oidc-springboot-with-console</artifactId>
@@ -15,8 +15,8 @@
 
   <properties>
     <enable.resource.infinispan>true</enable.resource.infinispan>
-    <version.org.kie.kogito>2.0.0-SNAPSHOT</version.org.kie.kogito>
-    <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+    <version.org.kie.kogito>3.0.0-SNAPSHOT</version.org.kie.kogito>
+    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
   </properties>
 
   <dependencyManagement>
@@ -25,13 +25,6 @@
         <groupId>org.kie.kogito</groupId>
         <artifactId>kogito-spring-boot-bom</artifactId>
         <version>${kogito.bom.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.keycloak.bom</groupId>
-        <artifactId>keycloak-adapter-bom</artifactId>
-        <version>${version.org.keycloak}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -65,8 +58,8 @@
       <artifactId>spring-boot-starter-security</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.keycloak</groupId>
-      <artifactId>keycloak-spring-boot-starter</artifactId>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-oauth2-authorization-server</artifactId>
     </dependency>
 
     <dependency>
@@ -79,7 +72,7 @@
     </dependency>
     <dependency>
       <groupId>org.infinispan</groupId>
-      <artifactId>infinispan-spring-boot-starter-remote</artifactId>
+      <artifactId>infinispan-spring-boot3-starter-remote</artifactId>
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>

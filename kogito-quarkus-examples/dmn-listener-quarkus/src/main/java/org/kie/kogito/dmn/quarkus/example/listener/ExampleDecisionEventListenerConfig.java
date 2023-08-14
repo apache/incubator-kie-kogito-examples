@@ -15,7 +15,7 @@
  */
 package org.kie.kogito.dmn.quarkus.example.listener;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import org.kie.kogito.dmn.config.CachedDecisionEventListenerConfig;
 

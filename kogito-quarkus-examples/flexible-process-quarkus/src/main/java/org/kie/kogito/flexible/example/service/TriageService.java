@@ -17,7 +17,7 @@ package org.kie.kogito.flexible.example.service;
 
 import java.util.Random;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import org.kie.kogito.flexible.example.model.State;
 import org.kie.kogito.flexible.example.model.SupportCase;

@@ -7,13 +7,13 @@ import java.util.Objects;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.TimeUnit;
 
-import javax.inject.Inject;
-import javax.websocket.ClientEndpoint;
-import javax.websocket.ContainerProvider;
-import javax.websocket.DeploymentException;
-import javax.websocket.OnMessage;
-import javax.websocket.Session;
-import javax.ws.rs.core.MediaType;
+import jakarta.inject.Inject;
+import jakarta.websocket.ClientEndpoint;
+import jakarta.websocket.ContainerProvider;
+import jakarta.websocket.DeploymentException;
+import jakarta.websocket.OnMessage;
+import jakarta.websocket.Session;
+import jakarta.ws.rs.core.MediaType;
 
 import org.acme.loanbroker.domain.Credit;
 import org.acme.loanbroker.domain.Quote;

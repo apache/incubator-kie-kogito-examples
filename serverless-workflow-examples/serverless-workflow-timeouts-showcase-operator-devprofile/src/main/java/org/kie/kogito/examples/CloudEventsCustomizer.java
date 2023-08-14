@@ -20,7 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.cloudevents.jackson.JsonFormat;
 import io.quarkus.jackson.ObjectMapperCustomizer;
 
-import javax.inject.Singleton;
+import jakarta.inject.Singleton;
 
 /**
  * Ensure the registration of the CloudEvent jackson module according to the Quarkus suggested procedure.

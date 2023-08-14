@@ -15,9 +15,9 @@
  */
 package org.kie.kogito.app;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.Observes;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Observes;
+import jakarta.inject.Inject;
 
 import io.quarkus.qute.Location;
 import io.quarkus.qute.Template;

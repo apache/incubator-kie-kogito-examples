@@ -42,7 +42,7 @@
     </dependency>
     <dependency>
       <groupId>com.github.tomakehurst</groupId>
-      <artifactId>wiremock-jre8</artifactId>
+      <artifactId>wiremock</artifactId>
       <version>${version.com.github.tomakehurst.wiremock}</version>
       <scope>test</scope>
     </dependency>
