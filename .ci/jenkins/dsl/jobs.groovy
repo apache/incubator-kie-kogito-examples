@@ -18,6 +18,10 @@ import org.kie.jenkins.jobdsl.Utils
 
 jenkins_path = '.ci/jenkins'
 
+boolean isMainStream() {
+    return Utils.getStream(this) == 'main'
+}
+
 Map getMultijobPRConfig(JenkinsFolder jobFolder) {
     String defaultBuildMvnOptsCurrent = jobFolder.getDefaultEnvVarValue('BUILD_MVN_OPTS_CURRENT') ?: ''
     def jobConfig = [
@@ -30,7 +34,7 @@ Map getMultijobPRConfig(JenkinsFolder jobFolder) {
                 env : [
                     // Sonarcloud analysis is disabled for examples
                     KOGITO_EXAMPLES_SUBFOLDER_POM: 'kogito-quarkus-examples/',
-                    BUILD_MVN_OPTS_CURRENT: "${defaultBuildMvnOptsCurrent} ${jobFolder.getEnvironmentName() ? '' : '-Dvalidate-formatting'}", // Validate formatting only for default env
+                    BUILD_MVN_OPTS_CURRENT: "${defaultBuildMvnOptsCurrent} ${getExamplesBuildMvnOptions(jobFolder).join(' ')}",
                 ]
             ],
             [
@@ -49,8 +53,17 @@ Map getMultijobPRConfig(JenkinsFolder jobFolder) {
             ]
         ]
     ]
-    
+
     return jobConfig
+}
+
+List getExamplesBuildMvnOptions(JenkinsFolder jobFolder) {
+    List mvnOpts = []
+    if (isMainStream() && !jobFolder.getEnvironmentName()) {
+        // Validate formatting only for default env
+        mvnOpts += ['-Dvalidate-formatting']
+    }
+    return mvnOpts
 }
 
 // PR checks
@@ -61,30 +74,34 @@ setupDeployJob(JobType.PULL_REQUEST, 'kogito-bdd')
 createSetupBranchJob()
 
 // Nightly jobs
-KogitoJobUtils.createNightlyBuildChainBuildAndDeployJobForCurrentRepo(this, '', true)
-
-// Environment nightlies
-setupSpecificBuildChainNightlyJob('native')
-
-// Jobs with integration branch
-setupNightlyQuarkusIntegrationJob('quarkus-main')
-setupNightlyQuarkusIntegrationJob('quarkus-branch')
-setupNightlyQuarkusIntegrationJob('quarkus-lts')
-setupNightlyQuarkusIntegrationJob('native-lts')
+Closure setup4AMCronTriggerJobParamsGetter = { script ->
+    def jobParams = JobParamsUtils.DEFAULT_PARAMS_GETTER(script)
+    jobParams.triggers = [ cron: 'H 4 * * *' ]
+    return jobParams
+}
+Closure nightlyJobParamsGetter = isMainStream() ? JobParamsUtils.DEFAULT_PARAMS_GETTER : setup4AMCronTriggerJobParamsGetter
+KogitoJobUtils.createNightlyBuildChainBuildAndDeployJobForCurrentRepo(this, '', true, nightlyJobParamsGetter)
+setupSpecificBuildChainNightlyJob('native', nightlyJobParamsGetter)
+setupNightlyQuarkusIntegrationJob('quarkus-main', nightlyJobParamsGetter)
+setupNightlyQuarkusIntegrationJob('quarkus-branch', nightlyJobParamsGetter)
+setupNightlyQuarkusIntegrationJob('quarkus-lts', nightlyJobParamsGetter)
+setupNightlyQuarkusIntegrationJob('native-lts', nightlyJobParamsGetter)
 
 // Release jobs
 setupDeployJob(JobType.RELEASE)
 setupPromoteJob(JobType.RELEASE)
 setupPostReleaseJob()
 
-KogitoJobUtils.createQuarkusUpdateToolsJob(this, 'kogito-examples', [
-  properties: [ 'quarkus-plugin.version', 'quarkus.platform.version' ],
-])
+if (isMainStream()) {
+    KogitoJobUtils.createQuarkusUpdateToolsJob(this, 'kogito-examples', [
+       properties: [ 'quarkus-plugin.version', 'quarkus.platform.version' ],
+    ])
 
-// Quarkus 3
-if (EnvUtils.isEnvironmentEnabled(this, 'quarkus-3')) {
-    setupPrQuarkus3RewriteJob()
-    setupStandaloneQuarkus3RewriteJob()
+    // Quarkus 3
+    if (EnvUtils.isEnvironmentEnabled(this, 'quarkus-3')) {
+        setupPrQuarkus3RewriteJob()
+        setupStandaloneQuarkus3RewriteJob()
+    }
 }
 
 /////////////////////////////////////////////////////////////////
@@ -95,15 +112,14 @@ void setupNightlyQuarkusIntegrationJob(String envName, Closure defaultJobParamsG
     KogitoJobUtils.createNightlyBuildChainIntegrationJob(this, envName, Utils.getRepoName(this), true, defaultJobParamsGetter)
 }
 
-void setupSpecificBuildChainNightlyJob(String envName) {
-    KogitoJobUtils.createNightlyBuildChainBuildAndTestJobForCurrentRepo(this, envName, true)
+void setupSpecificBuildChainNightlyJob(String envName, Closure defaultJobParamsGetter = JobParamsUtils.DEFAULT_PARAMS_GETTER) {
+    KogitoJobUtils.createNightlyBuildChainBuildAndTestJobForCurrentRepo(this, envName, true, defaultJobParamsGetter)
 }
 
 void createSetupBranchJob() {
     def jobParams = JobParamsUtils.getBasicJobParams(this, 'kogito-examples', JobType.SETUP_BRANCH, "${jenkins_path}/Jenkinsfile.setup-branch", 'Kogito Examples Init branch')
     JobParamsUtils.setupJobParamsDefaultMavenConfiguration(this, jobParams)
     jobParams.env.putAll([
-        REPO_NAME: 'kogito-examples',
         JENKINS_EMAIL_CREDS_ID: "${JENKINS_EMAIL_CREDS_ID}",
 
         GIT_AUTHOR: "${GIT_AUTHOR_NAME}",
@@ -142,7 +158,6 @@ void setupDeployJob(JobType jobType, String envName = '') {
         jobParams.git.project_url = Utils.createProjectUrl("${GIT_AUTHOR_NAME}", jobParams.git.repository)
     }
     jobParams.env.putAll([
-        REPO_NAME: 'kogito-examples',
         PROPERTIES_FILE_NAME: 'deployment.properties',
 
         JENKINS_EMAIL_CREDS_ID: "${JENKINS_EMAIL_CREDS_ID}",
@@ -201,7 +216,6 @@ void setupPromoteJob(JobType jobType) {
     def jobParams = JobParamsUtils.getBasicJobParams(this, 'kogito-examples-promote', jobType, "${jenkins_path}/Jenkinsfile.promote", 'Kogito Examples Promote')
     JobParamsUtils.setupJobParamsDefaultMavenConfiguration(this, jobParams)
     jobParams.env.putAll([
-        REPO_NAME: 'kogito-examples',
         PROPERTIES_FILE_NAME: 'deployment.properties',
 
         JENKINS_EMAIL_CREDS_ID: "${JENKINS_EMAIL_CREDS_ID}",
@@ -238,7 +252,6 @@ void setupPostReleaseJob() {
     def jobParams = JobParamsUtils.getBasicJobParams(this, 'kogito-examples-post-release', JobType.RELEASE, "${jenkins_path}/Jenkinsfile.post-release", 'Kogito Examples Post Release')
     JobParamsUtils.setupJobParamsDefaultMavenConfiguration(this, jobParams)
     jobParams.env.putAll([
-        REPO_NAME: 'kogito-examples',
         JENKINS_EMAIL_CREDS_ID: "${JENKINS_EMAIL_CREDS_ID}",
 
         GIT_AUTHOR: "${GIT_AUTHOR_NAME}",
@@ -258,7 +271,6 @@ void setupPostReleaseJob() {
         }
     }
 }
-
 
 void setupPrQuarkus3RewriteJob() {
     def jobParams = JobParamsUtils.getBasicJobParamsWithEnv(this, 'kogito-examples.rewrite', JobType.PULL_REQUEST, 'quarkus-3', "${jenkins_path}/Jenkinsfile.quarkus-3.rewrite.pr", 'Kogito Examples Quarkus 3 rewrite patch regeneration')
