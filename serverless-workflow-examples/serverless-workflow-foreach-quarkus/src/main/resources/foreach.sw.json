@@ -1,6 +1,6 @@
 {
   "id": "foreach",
-  "version": "1.0",
+  "specVersion": "0.8",
   "name": "Workflow ForEach example",
   "description": "An example of how to use for each state",
   "start": "start",
