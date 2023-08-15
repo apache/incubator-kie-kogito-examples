@@ -85,12 +85,14 @@ pipeline {
                 expression { return isRelease() || isCreatePr() }
             }
             steps {
-                dir(getRepoName()) {
-                    if (githubscm.isBranchExist('origin',getPRBranch())) {
-                        githubscm.removeRemoteBranch('origin', getPRBranch())
+                script {
+                    dir(getRepoName()) {
+                        if (githubscm.isBranchExist('origin',getPRBranch())) {
+                            githubscm.removeRemoteBranch('origin', getPRBranch())
+                        }
+                        githubscm.createBranch(getPRBranch())
                     }
-                    githubscm.createBranch(getPRBranch())
-                }
+                }    
             }
         }
         stage('Update project version') {
