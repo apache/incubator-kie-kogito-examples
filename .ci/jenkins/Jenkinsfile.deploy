@@ -126,6 +126,7 @@ pipeline {
                     dir(getRepoName()) {
                         getMavenCommand()
                             .withOptions(env.BUILD_MVN_OPTS_CURRENT ? [ env.BUILD_MVN_OPTS_CURRENT ] : [])
+                            .withOptions(env.KOGITO_EXAMPLES_BUILD_MVN_OPTS ? [ env.KOGITO_EXAMPLES_BUILD_MVN_OPTS ] : [])
                             .withProperty('maven.test.failure.ignore', true)
                             .skipTests(params.SKIP_TESTS)
                             .run('clean install')
@@ -330,6 +331,8 @@ MavenCommand getMavenCommand() {
 
 void runMavenDeploy(boolean localDeployment = false) {
     mvnCmd = getMavenCommand()
+                .withOptions(env.BUILD_MVN_OPTS_CURRENT ? [ env.BUILD_MVN_OPTS_CURRENT ] : [])
+                .withOptions(env.KOGITO_EXAMPLES_BUILD_MVN_OPTS ? [ env.KOGITO_EXAMPLES_BUILD_MVN_OPTS ] : [])
 
     if (localDeployment) {
         mvnCmd.withLocalDeployFolder(getLocalDeploymentFolder())
