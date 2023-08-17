@@ -124,7 +124,12 @@ pipeline {
             steps {
                 script {
                     dir(getRepoName()) {
-                        getMavenCommand().withProperty('maven.test.failure.ignore', true).skipTests(params.SKIP_TESTS).run('clean install')
+                        getMavenCommand()
+                            .withOptions(env.BUILD_MVN_OPTS_CURRENT ? [ env.BUILD_MVN_OPTS_CURRENT ] : [])
+                            .withOptions(env.KOGITO_EXAMPLES_BUILD_MVN_OPTS ? [ env.KOGITO_EXAMPLES_BUILD_MVN_OPTS ] : [])
+                            .withProperty('maven.test.failure.ignore', true)
+                            .skipTests(params.SKIP_TESTS)
+                            .run('clean install')
                     }
                 }
             }
@@ -316,6 +321,7 @@ void setDeployPropertyIfNeeded(String key, def value) {
 MavenCommand getMavenCommand() {
     MavenCommand mvnCmd = new MavenCommand(this, ['-fae', '-ntp'])
                                 .withSettingsXmlId(env.MAVEN_SETTINGS_CONFIG_FILE_ID)
+                                .withOptions(env.BUILD_MVN_OPTS ? [ env.BUILD_MVN_OPTS ] : [])
                                 .withProperty('full')
     if (env.MAVEN_DEPENDENCIES_REPOSITORY) {
         mvnCmd.withDependencyRepositoryInSettings('deps-repo', env.MAVEN_DEPENDENCIES_REPOSITORY)
@@ -325,6 +331,8 @@ MavenCommand getMavenCommand() {
 
 void runMavenDeploy(boolean localDeployment = false) {
     mvnCmd = getMavenCommand()
+                .withOptions(env.BUILD_MVN_OPTS_CURRENT ? [ env.BUILD_MVN_OPTS_CURRENT ] : [])
+                .withOptions(env.KOGITO_EXAMPLES_BUILD_MVN_OPTS ? [ env.KOGITO_EXAMPLES_BUILD_MVN_OPTS ] : [])
 
     if (localDeployment) {
         mvnCmd.withLocalDeployFolder(getLocalDeploymentFolder())
