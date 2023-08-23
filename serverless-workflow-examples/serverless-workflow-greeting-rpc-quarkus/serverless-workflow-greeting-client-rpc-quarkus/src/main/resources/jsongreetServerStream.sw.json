@@ -8,7 +8,7 @@
     {
       "name": "SayHelloAllLanguages",
       "type": "rpc",
-      "operation": "greeting.proto#Greeter#SayHelloAllLanguages"
+      "operation": "classpath:greeting.proto#Greeter#SayHelloAllLanguages"
     }
   ],
   "states": [
