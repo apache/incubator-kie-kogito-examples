@@ -15,9 +15,9 @@
  */
 package org.kie.kogito;
 
-import io.quarkus.test.junit.NativeImageTest;
+import io.quarkus.test.junit.QuarkusIntegrationTest;
 
-@NativeImageTest
+@QuarkusIntegrationTest
 public class NativeRestQueryTestIT extends RestQueryTest {
 
     // Execute the same tests but in native mode.

@@ -3,9 +3,9 @@ package org.acme.serverless.loanbroker.aggregator;
 import java.net.URI;
 import java.util.UUID;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-import javax.ws.rs.core.MediaType;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
+import jakarta.ws.rs.core.MediaType;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.TypeConversionException;

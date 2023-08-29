@@ -3,8 +3,8 @@ package org.acme.serverless.loanbroker.aggregator;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.spi.DataFormat;

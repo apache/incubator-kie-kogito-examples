@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>kogito-springboot-examples</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
+    <version>3.0.0-SNAPSHOT</version>
   </parent>
 
   <artifactId>process-mongodb-persistence-springboot</artifactId>
@@ -15,8 +15,8 @@
 
   <properties>
     <enable.resource.mongodb>true</enable.resource.mongodb>
-    <version.org.kie.kogito>2.0.0-SNAPSHOT</version.org.kie.kogito>
-    <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+    <version.org.kie.kogito>3.0.0-SNAPSHOT</version.org.kie.kogito>
+    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
   </properties>
 
   <dependencyManagement>

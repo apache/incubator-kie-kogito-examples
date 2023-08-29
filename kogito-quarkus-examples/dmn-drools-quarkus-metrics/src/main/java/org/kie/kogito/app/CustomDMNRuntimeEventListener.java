@@ -15,8 +15,8 @@
  */
 package org.kie.kogito.app;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 import org.kie.dmn.api.core.event.AfterEvaluateAllEvent;
 import org.kie.dmn.api.core.event.AfterEvaluateContextEntryEvent;
