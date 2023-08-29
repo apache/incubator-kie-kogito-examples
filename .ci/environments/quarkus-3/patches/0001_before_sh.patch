@@ -1,16 +1,16 @@
 diff --git a/kogito-quarkus-examples/decisiontable-quarkus-example/pom.xml b/kogito-quarkus-examples/decisiontable-quarkus-example/pom.xml
-index 5b98dc9b5..0d15bd47c 100644
+index c584434b6..0d15bd47c 100644
 --- a/kogito-quarkus-examples/decisiontable-quarkus-example/pom.xml
 +++ b/kogito-quarkus-examples/decisiontable-quarkus-example/pom.xml
 @@ -10,15 +10,15 @@
    <artifactId>decisiontable-quarkus-example</artifactId>
    <name>Kogito Example :: Decision Table - Quarkus</name>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -40,18 +40,18 @@ index eb6ce553f..379ac3c45 100644
  
      // Execute the same tests but in native mode.
 diff --git a/kogito-quarkus-examples/dmn-drools-quarkus-metrics/pom.xml b/kogito-quarkus-examples/dmn-drools-quarkus-metrics/pom.xml
-index 4091e06fb..fe2725438 100755
+index 5edc5ee79..fe2725438 100755
 --- a/kogito-quarkus-examples/dmn-drools-quarkus-metrics/pom.xml
 +++ b/kogito-quarkus-examples/dmn-drools-quarkus-metrics/pom.xml
 @@ -10,14 +10,14 @@
    <artifactId>dmn-drools-quarkus-metrics</artifactId>
    <name>Kogito Example :: DMN Metrics Quarkus</name>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -93,18 +93,18 @@ index de6b18ed7..206a1665d 100644
  import org.kie.kogito.drools.core.config.DefaultRuleEventListenerConfig;
  import org.kie.kogito.examples.CustomRuleEventListener;
 diff --git a/kogito-quarkus-examples/dmn-event-driven-quarkus/pom.xml b/kogito-quarkus-examples/dmn-event-driven-quarkus/pom.xml
-index 756c58a37..d06bbbd1e 100644
+index f494fc03e..d06bbbd1e 100644
 --- a/kogito-quarkus-examples/dmn-event-driven-quarkus/pom.xml
 +++ b/kogito-quarkus-examples/dmn-event-driven-quarkus/pom.xml
 @@ -12,14 +12,14 @@
    <artifactId>dmn-event-driven-quarkus</artifactId>
    <name>Kogito Example :: DMN Event-Driven :: Quarkus</name>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -132,18 +132,18 @@ index 663d5b38a..d84f87993 100644
  public class NativeDmnEventDrivenIT extends DmnEventDrivenIT {
  
 diff --git a/kogito-quarkus-examples/dmn-incubation-api-quarkus/pom.xml b/kogito-quarkus-examples/dmn-incubation-api-quarkus/pom.xml
-index 1cddaf893..50ee80ba3 100644
+index c5abbd378..50ee80ba3 100644
 --- a/kogito-quarkus-examples/dmn-incubation-api-quarkus/pom.xml
 +++ b/kogito-quarkus-examples/dmn-incubation-api-quarkus/pom.xml
 @@ -10,14 +10,14 @@
    <artifactId>dmn-incubation-api-quarkus</artifactId>
    <name>Kogito Example :: DMN Incubation API With Quarkus</name>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -178,18 +178,18 @@ index 6b130eb44..a0d601529 100644
  import org.kie.kogito.incubation.application.AppRoot;
  import org.kie.kogito.incubation.common.DataContext;
 diff --git a/kogito-quarkus-examples/dmn-knative-quickstart-quarkus/pom.xml b/kogito-quarkus-examples/dmn-knative-quickstart-quarkus/pom.xml
-index 8d3394df8..9d413db17 100644
+index 52abe49c3..9d413db17 100644
 --- a/kogito-quarkus-examples/dmn-knative-quickstart-quarkus/pom.xml
 +++ b/kogito-quarkus-examples/dmn-knative-quickstart-quarkus/pom.xml
 @@ -14,14 +14,14 @@
  
    <properties>
      <version.com.github.tomakehurst.wiremock>2.33.2</version.com.github.tomakehurst.wiremock>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -214,18 +214,18 @@ index d4156050f..5f258cd40 100644
  import org.junit.jupiter.api.AfterAll;
  import org.junit.jupiter.api.BeforeAll;
 diff --git a/kogito-quarkus-examples/dmn-listener-dtable/pom.xml b/kogito-quarkus-examples/dmn-listener-dtable/pom.xml
-index e2bbe2a2c..9cfc58da5 100644
+index 8b3abdb38..9cfc58da5 100644
 --- a/kogito-quarkus-examples/dmn-listener-dtable/pom.xml
 +++ b/kogito-quarkus-examples/dmn-listener-dtable/pom.xml
 @@ -10,14 +10,14 @@
    <artifactId>dmn-listener-dtable</artifactId>
    <name>Kogito Example :: DMN Decision Table listener - Quarkus</name>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -278,18 +278,18 @@ index 58d847b1e..3b7d821f6 100644
  import org.junit.jupiter.api.Test;
  
 diff --git a/kogito-quarkus-examples/dmn-listener-quarkus/pom.xml b/kogito-quarkus-examples/dmn-listener-quarkus/pom.xml
-index f35069dec..4041c807a 100644
+index df719ac5b..4041c807a 100644
 --- a/kogito-quarkus-examples/dmn-listener-quarkus/pom.xml
 +++ b/kogito-quarkus-examples/dmn-listener-quarkus/pom.xml
 @@ -10,14 +10,14 @@
    <artifactId>dmn-listener-quarkus</artifactId>
    <name>Kogito Example :: DMN with listeners - Quarkus</name>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -369,18 +369,18 @@ index 427bad341..fe300f8c0 100644
  import org.kie.dmn.api.core.event.AfterEvaluateAllEvent;
  import org.kie.dmn.api.core.event.BeforeEvaluateAllEvent;
 diff --git a/kogito-quarkus-examples/dmn-pmml-quarkus-example/pom.xml b/kogito-quarkus-examples/dmn-pmml-quarkus-example/pom.xml
-index 9ec611695..a5dd0e6de 100644
+index 2b502a045..a5dd0e6de 100644
 --- a/kogito-quarkus-examples/dmn-pmml-quarkus-example/pom.xml
 +++ b/kogito-quarkus-examples/dmn-pmml-quarkus-example/pom.xml
 @@ -10,14 +10,14 @@
    <artifactId>dmn-pmml-quarkus-example</artifactId>
    <name>Kogito Example :: DMN :: PMML - QUARKUS</name>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -456,18 +456,18 @@ index 1718164ec..7c979f9c9 100644
  
      // Execute the same tests but in native mode.
 diff --git a/kogito-quarkus-examples/dmn-quarkus-example/pom.xml b/kogito-quarkus-examples/dmn-quarkus-example/pom.xml
-index c135f3942..93aaf6ce2 100644
+index 38ccc0370..93aaf6ce2 100644
 --- a/kogito-quarkus-examples/dmn-quarkus-example/pom.xml
 +++ b/kogito-quarkus-examples/dmn-quarkus-example/pom.xml
 @@ -10,14 +10,14 @@
    <artifactId>dmn-quarkus-example</artifactId>
    <name>Kogito Example :: DMN</name>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -495,18 +495,18 @@ index cbd459afc..6e8fc9234 100644
  
      // Execute the same tests but in native mode.
 diff --git a/kogito-quarkus-examples/dmn-tracing-quarkus/pom.xml b/kogito-quarkus-examples/dmn-tracing-quarkus/pom.xml
-index ade1c81f0..0eb1f4f7e 100644
+index 07fc0c4ce..0eb1f4f7e 100644
 --- a/kogito-quarkus-examples/dmn-tracing-quarkus/pom.xml
 +++ b/kogito-quarkus-examples/dmn-tracing-quarkus/pom.xml
 @@ -10,14 +10,14 @@
    <artifactId>dmn-tracing-quarkus</artifactId>
    <name>Kogito Example :: DMN Tracing - Quarkus</name>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -534,18 +534,18 @@ index 75cb11174..e20d0f871 100644
  public class NativeLoanEligibilityIT extends LoanEligibilityIT {
  
 diff --git a/kogito-quarkus-examples/flexible-process-quarkus/pom.xml b/kogito-quarkus-examples/flexible-process-quarkus/pom.xml
-index 37acce246..a06c67d3b 100644
+index f59b52e1f..a06c67d3b 100644
 --- a/kogito-quarkus-examples/flexible-process-quarkus/pom.xml
 +++ b/kogito-quarkus-examples/flexible-process-quarkus/pom.xml
 @@ -10,14 +10,14 @@
    <artifactId>flexible-process-quarkus</artifactId>
    <name>Kogito Example :: Flexible Process - Quarkus</name>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -596,18 +596,18 @@ index 2f98e7371..7e08d7b26 100644
  import org.kie.kogito.flexible.example.model.State;
  import org.kie.kogito.flexible.example.model.SupportCase;
 diff --git a/kogito-quarkus-examples/kogito-travel-agency/basic/pom.xml b/kogito-quarkus-examples/kogito-travel-agency/basic/pom.xml
-index 33ef8b0d3..0bd6d027c 100644
+index ef3c38177..0bd6d027c 100644
 --- a/kogito-quarkus-examples/kogito-travel-agency/basic/pom.xml
 +++ b/kogito-quarkus-examples/kogito-travel-agency/basic/pom.xml
 @@ -12,15 +12,15 @@
    <properties>
      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
      <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -705,35 +705,35 @@ index a45f594c8..cbff49950 100644
  import org.acme.travels.Address;
  import org.acme.travels.Traveller;
 diff --git a/kogito-quarkus-examples/kogito-travel-agency/extended/pom.xml b/kogito-quarkus-examples/kogito-travel-agency/extended/pom.xml
-index 0b4ecc8ee..6040d3fe5 100644
+index c95c81251..6040d3fe5 100644
 --- a/kogito-quarkus-examples/kogito-travel-agency/extended/pom.xml
 +++ b/kogito-quarkus-examples/kogito-travel-agency/extended/pom.xml
 @@ -15,10 +15,10 @@
      <module>visas</module>
    </modules>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
    </properties>
    <dependencyManagement>
      <dependencies>
 diff --git a/kogito-quarkus-examples/kogito-travel-agency/extended/travels/pom.xml b/kogito-quarkus-examples/kogito-travel-agency/extended/travels/pom.xml
-index a2a9ff89a..2c080c04b 100644
+index 7495c8277..2c080c04b 100644
 --- a/kogito-quarkus-examples/kogito-travel-agency/extended/travels/pom.xml
 +++ b/kogito-quarkus-examples/kogito-travel-agency/extended/travels/pom.xml
 @@ -10,15 +10,15 @@
    <artifactId>travels</artifactId>
    <name>Kogito Example :: Travel Agency :: Travels</name>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -890,18 +890,18 @@ index 608ca9daa..dcfe44dfa 100644
  import org.acme.travels.Address;
  import org.acme.travels.Traveller;
 diff --git a/kogito-quarkus-examples/kogito-travel-agency/extended/visas/pom.xml b/kogito-quarkus-examples/kogito-travel-agency/extended/visas/pom.xml
-index 9b78ee764..116a1b614 100644
+index 8e8342f2a..116a1b614 100644
 --- a/kogito-quarkus-examples/kogito-travel-agency/extended/visas/pom.xml
 +++ b/kogito-quarkus-examples/kogito-travel-agency/extended/visas/pom.xml
 @@ -10,14 +10,14 @@
    <artifactId>visas</artifactId>
    <name>Kogito Example :: Travel Agency :: Visas</name>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -950,18 +950,18 @@ index 20705faa7..e8b278eac 100644
  import io.quarkus.qute.Location;
  import io.quarkus.qute.Template;
 diff --git a/kogito-quarkus-examples/kogito-travel-agency/pom.xml b/kogito-quarkus-examples/kogito-travel-agency/pom.xml
-index 6c3cc91ab..8b8ccd73f 100644
+index 57f6d1b31..8b8ccd73f 100644
 --- a/kogito-quarkus-examples/kogito-travel-agency/pom.xml
 +++ b/kogito-quarkus-examples/kogito-travel-agency/pom.xml
 @@ -15,10 +15,10 @@
      <module>extended</module>
    </modules>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
    </properties>
    <dependencyManagement>
@@ -1049,35 +1049,35 @@ index 31e515055..dd582af13 100644
  import org.junit.jupiter.api.Test;
  import org.kie.kogito.examples.test.RecordedOutputWorkItemHandler;
 diff --git a/kogito-quarkus-examples/onboarding-example/payroll/pom.xml b/kogito-quarkus-examples/onboarding-example/payroll/pom.xml
-index 1c9942f04..ee41039b3 100644
+index dc3a6cfa0..ee41039b3 100644
 --- a/kogito-quarkus-examples/onboarding-example/payroll/pom.xml
 +++ b/kogito-quarkus-examples/onboarding-example/payroll/pom.xml
 @@ -11,10 +11,10 @@
    <name>Kogito Example :: Onboarding Example :: Payroll with DMN</name>
    <description>Payroll related decisions for onboarding</description>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
    </properties>
    <dependencyManagement>
      <dependencies>
 diff --git a/kogito-quarkus-examples/onboarding-example/pom.xml b/kogito-quarkus-examples/onboarding-example/pom.xml
-index 332d9ed37..01038a7d7 100644
+index 0c349c8b1..01038a7d7 100644
 --- a/kogito-quarkus-examples/onboarding-example/pom.xml
 +++ b/kogito-quarkus-examples/onboarding-example/pom.xml
 @@ -17,14 +17,14 @@
      <module>onboarding-quarkus</module>
    </modules>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -1089,18 +1089,18 @@ index 332d9ed37..01038a7d7 100644
    <dependencyManagement>
      <dependencies>
 diff --git a/kogito-quarkus-examples/pmml-event-driven-quarkus/pom.xml b/kogito-quarkus-examples/pmml-event-driven-quarkus/pom.xml
-index a953f1d47..78d159362 100644
+index 04ad43e09..78d159362 100644
 --- a/kogito-quarkus-examples/pmml-event-driven-quarkus/pom.xml
 +++ b/kogito-quarkus-examples/pmml-event-driven-quarkus/pom.xml
 @@ -10,14 +10,14 @@
    <artifactId>pmml-event-driven-quarkus</artifactId>
    <name>Kogito Example :: PMML Event-Driven - Quarkus</name>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -1112,18 +1112,18 @@ index a953f1d47..78d159362 100644
  
    <dependencyManagement>
 diff --git a/kogito-quarkus-examples/pmml-incubation-api-quarkus/pom.xml b/kogito-quarkus-examples/pmml-incubation-api-quarkus/pom.xml
-index 67daed45c..e82901bca 100644
+index 4a930255b..e82901bca 100644
 --- a/kogito-quarkus-examples/pmml-incubation-api-quarkus/pom.xml
 +++ b/kogito-quarkus-examples/pmml-incubation-api-quarkus/pom.xml
 @@ -10,14 +10,14 @@
    <artifactId>pmml-incubation-api-quarkus</artifactId>
    <name>Kogito Example :: PMML Incubation API With Quarkus</name>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -1158,18 +1158,18 @@ index ff7152a4f..8da1acfc7 100644
  import org.kie.kogito.incubation.application.AppRoot;
  import org.kie.kogito.incubation.common.DataContext;
 diff --git a/kogito-quarkus-examples/pmml-quarkus-example/pom.xml b/kogito-quarkus-examples/pmml-quarkus-example/pom.xml
-index 429f458b1..39fa0424e 100644
+index 40fb97a02..39fa0424e 100644
 --- a/kogito-quarkus-examples/pmml-quarkus-example/pom.xml
 +++ b/kogito-quarkus-examples/pmml-quarkus-example/pom.xml
 @@ -10,14 +10,14 @@
    <artifactId>pmml-quarkus-example</artifactId>
    <name>Kogito Example :: PMML - Quarkus</name>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -1245,18 +1245,18 @@ index e2ebcb606..57ca4ae5a 100644
  
      // Execute the same tests but in native mode.
 diff --git a/kogito-quarkus-examples/process-business-rules-quarkus/pom.xml b/kogito-quarkus-examples/process-business-rules-quarkus/pom.xml
-index d9babb753..64f0ff6ec 100644
+index d20e8e4f8..64f0ff6ec 100644
 --- a/kogito-quarkus-examples/process-business-rules-quarkus/pom.xml
 +++ b/kogito-quarkus-examples/process-business-rules-quarkus/pom.xml
 @@ -11,14 +11,14 @@
    <name>Kogito Example :: Process Business Rules Quarkus</name>
    <description>Kogito business rules invocation - Quarkus</description>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -1283,18 +1283,18 @@ index 9ff19f514..727a32d48 100644
  import org.junit.jupiter.api.Test;
  import org.kie.kogito.Model;
 diff --git a/kogito-quarkus-examples/process-decisions-quarkus/pom.xml b/kogito-quarkus-examples/process-decisions-quarkus/pom.xml
-index 0dc7a6ced..4053e229d 100644
+index d13f21a70..4053e229d 100644
 --- a/kogito-quarkus-examples/process-decisions-quarkus/pom.xml
 +++ b/kogito-quarkus-examples/process-decisions-quarkus/pom.xml
 @@ -11,14 +11,14 @@
    <name>Kogito Example :: Process :: Decisions :: Quarkus</name>
    <description>Process with DMN and DRL integration - Quarkus</description>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -1334,18 +1334,18 @@ index 169733039..1a49b80db 100644
  public class NativeTrafficProcessIT extends TrafficProcessIT {
  }
 diff --git a/kogito-quarkus-examples/process-decisions-rest-quarkus/pom.xml b/kogito-quarkus-examples/process-decisions-rest-quarkus/pom.xml
-index 9be948228..0a53fcee5 100644
+index 852e7997b..0a53fcee5 100644
 --- a/kogito-quarkus-examples/process-decisions-rest-quarkus/pom.xml
 +++ b/kogito-quarkus-examples/process-decisions-rest-quarkus/pom.xml
 @@ -12,14 +12,14 @@
    <description>Process with DMN and DRL integration through REST - Quarkus</description>
    <properties>
      <tests.quarkus.http.port>8080</tests.quarkus.http.port>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -1457,18 +1457,18 @@ index 169733039..1a49b80db 100644
  public class NativeTrafficProcessIT extends TrafficProcessIT {
  }
 diff --git a/kogito-quarkus-examples/process-decisions-rules-quarkus/pom.xml b/kogito-quarkus-examples/process-decisions-rules-quarkus/pom.xml
-index 105e2b304..8b4a25a4c 100644
+index d80e3fe23..8b4a25a4c 100644
 --- a/kogito-quarkus-examples/process-decisions-rules-quarkus/pom.xml
 +++ b/kogito-quarkus-examples/process-decisions-rules-quarkus/pom.xml
 @@ -11,14 +11,14 @@
    <name>Kogito Example :: Process :: Decisions :: Rules :: Quarkus</name>
    <description>Process with DRL, DMN and DRL integration - Quarkus</description>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -1508,18 +1508,18 @@ index 169733039..1a49b80db 100644
  public class NativeTrafficProcessIT extends TrafficProcessIT {
  }
 diff --git a/kogito-quarkus-examples/process-error-handling/pom.xml b/kogito-quarkus-examples/process-error-handling/pom.xml
-index b79166f17..72cdc45de 100644
+index a8ea2e0d9..72cdc45de 100644
 --- a/kogito-quarkus-examples/process-error-handling/pom.xml
 +++ b/kogito-quarkus-examples/process-error-handling/pom.xml
 @@ -10,14 +10,14 @@
    <name>Kogito Example :: Process Scripts With Quarkus</name>
    <description>Kogito scripts invocation - Quarkus</description>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -1559,18 +1559,18 @@ index 1764afdf5..1861f1fe5 100644
  import org.junit.jupiter.api.Test;
  import org.kie.kogito.Model;
 diff --git a/kogito-quarkus-examples/process-incubation-api-quarkus/pom.xml b/kogito-quarkus-examples/process-incubation-api-quarkus/pom.xml
-index e777ce947..32bcae41e 100644
+index bddd25ce0..32bcae41e 100644
 --- a/kogito-quarkus-examples/process-incubation-api-quarkus/pom.xml
 +++ b/kogito-quarkus-examples/process-incubation-api-quarkus/pom.xml
 @@ -10,14 +10,14 @@
    <artifactId>process-incubation-api-quarkus</artifactId>
    <name>Kogito Example :: Process Incubation API With Quarkus</name>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -1605,18 +1605,18 @@ index 2d6846e20..9b83e574a 100644
  import org.kie.kogito.incubation.application.AppRoot;
  import org.kie.kogito.incubation.common.DataContext;
 diff --git a/kogito-quarkus-examples/process-infinispan-persistence-quarkus/pom.xml b/kogito-quarkus-examples/process-infinispan-persistence-quarkus/pom.xml
-index 6937264b4..a2ad322c2 100644
+index fdecf09f8..a2ad322c2 100644
 --- a/kogito-quarkus-examples/process-infinispan-persistence-quarkus/pom.xml
 +++ b/kogito-quarkus-examples/process-infinispan-persistence-quarkus/pom.xml
 @@ -11,14 +11,14 @@
    <name>Kogito Example :: Process Infinispan Persistence Quarkus</name>
    <description>Process with Infinispan persistence - Quarkus</description>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -1644,18 +1644,18 @@ index 81b8e1b43..09dfeba1b 100644
  
  }
 diff --git a/kogito-quarkus-examples/process-kafka-avro-multi-quarkus/pom.xml b/kogito-quarkus-examples/process-kafka-avro-multi-quarkus/pom.xml
-index 3c84a9307..955f1baa0 100644
+index 2473da2ba..955f1baa0 100644
 --- a/kogito-quarkus-examples/process-kafka-avro-multi-quarkus/pom.xml
 +++ b/kogito-quarkus-examples/process-kafka-avro-multi-quarkus/pom.xml
 @@ -11,14 +11,14 @@
    <name>Kogito Example :: Process with Kafka and Quarkus, multiple channels, avro serialization</name>
    <description>Kogito with Kafka - Quarkus, using one channel per message name</description>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -1712,18 +1712,18 @@ index 11bd3766a..32f56442c 100644
  import org.acme.travel.Traveller;
  import org.eclipse.microprofile.reactive.messaging.Channel;
 diff --git a/kogito-quarkus-examples/process-kafka-multi-quarkus/pom.xml b/kogito-quarkus-examples/process-kafka-multi-quarkus/pom.xml
-index 393c98ca1..bc665ceb1 100644
+index 3fa03011a..bc665ceb1 100644
 --- a/kogito-quarkus-examples/process-kafka-multi-quarkus/pom.xml
 +++ b/kogito-quarkus-examples/process-kafka-multi-quarkus/pom.xml
 @@ -11,14 +11,14 @@
    <name>Kogito Example :: Process with Kafka and Quarkus, multiple channels</name>
    <description>Kogito with Kafka - Quarkus, using one channel per message name</description>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -1735,18 +1735,18 @@ index 393c98ca1..bc665ceb1 100644
    <dependencyManagement>
      <dependencies>
 diff --git a/kogito-quarkus-examples/process-kafka-persistence-quarkus/pom.xml b/kogito-quarkus-examples/process-kafka-persistence-quarkus/pom.xml
-index fceabfd1f..3192692c4 100644
+index c0d02b120..3192692c4 100644
 --- a/kogito-quarkus-examples/process-kafka-persistence-quarkus/pom.xml
 +++ b/kogito-quarkus-examples/process-kafka-persistence-quarkus/pom.xml
 @@ -29,14 +29,14 @@
    <name>Kogito Example :: Process Kafka Persistence Quarkus</name>
    <description>Process with Kafka persistence - Quarkus</description>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -1776,18 +1776,18 @@ index 533137b03..971e11bf6 100644
  import org.apache.kafka.clients.admin.NewTopic;
  import org.slf4j.Logger;
 diff --git a/kogito-quarkus-examples/process-kafka-quickstart-quarkus/pom.xml b/kogito-quarkus-examples/process-kafka-quickstart-quarkus/pom.xml
-index c39a6ed92..bc6755b0a 100644
+index 294e08f52..bc6755b0a 100644
 --- a/kogito-quarkus-examples/process-kafka-quickstart-quarkus/pom.xml
 +++ b/kogito-quarkus-examples/process-kafka-quickstart-quarkus/pom.xml
 @@ -11,14 +11,14 @@
    <name>Kogito Example :: Process with Kafka and Quarkus</name>
    <description>Kogito with Kafka - Quarkus</description>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -1799,18 +1799,18 @@ index c39a6ed92..bc6755b0a 100644
    <dependencyManagement>
      <dependencies>
 diff --git a/kogito-quarkus-examples/process-knative-quickstart-quarkus/pom.xml b/kogito-quarkus-examples/process-knative-quickstart-quarkus/pom.xml
-index 460768b61..622713d78 100644
+index 5d32855e6..622713d78 100644
 --- a/kogito-quarkus-examples/process-knative-quickstart-quarkus/pom.xml
 +++ b/kogito-quarkus-examples/process-knative-quickstart-quarkus/pom.xml
 @@ -12,14 +12,14 @@
    <description>Kogito with Knative Eventing - Quarkus</description>
    <properties>
      <version.com.github.tomakehurst.wiremock>2.33.2</version.com.github.tomakehurst.wiremock>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -1835,18 +1835,18 @@ index 0fddbe097..9f587f744 100644
  import org.junit.jupiter.api.AfterAll;
  import org.junit.jupiter.api.BeforeAll;
 diff --git a/kogito-quarkus-examples/process-mongodb-persistence-quarkus/pom.xml b/kogito-quarkus-examples/process-mongodb-persistence-quarkus/pom.xml
-index a9c9311a6..3fcb22315 100644
+index 094560f07..3fcb22315 100644
 --- a/kogito-quarkus-examples/process-mongodb-persistence-quarkus/pom.xml
 +++ b/kogito-quarkus-examples/process-mongodb-persistence-quarkus/pom.xml
 @@ -11,14 +11,14 @@
    <name>Kogito Example :: Process MongoDB Persistence Quarkus</name>
    <description>Process with MongoDB persistence - Quarkus</description>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -1874,18 +1874,18 @@ index 81b8e1b43..09dfeba1b 100644
  
  }
 diff --git a/kogito-quarkus-examples/process-monitoring-quarkus/pom.xml b/kogito-quarkus-examples/process-monitoring-quarkus/pom.xml
-index 8c7d5834d..34d9aba07 100755
+index 1669a3fdf..34d9aba07 100755
 --- a/kogito-quarkus-examples/process-monitoring-quarkus/pom.xml
 +++ b/kogito-quarkus-examples/process-monitoring-quarkus/pom.xml
 @@ -11,14 +11,14 @@
    <name>Kogito Example :: Process Monitoring :: Quarkus</name>
  
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -1941,18 +1941,18 @@ index a51cd75ee..291197179 100644
  import org.junit.jupiter.api.BeforeEach;
  import org.junit.jupiter.api.Test;
 diff --git a/kogito-quarkus-examples/process-outbox-mongodb-quarkus/pom.xml b/kogito-quarkus-examples/process-outbox-mongodb-quarkus/pom.xml
-index 278f1af66..e956fb11c 100644
+index 47aa6727e..e956fb11c 100644
 --- a/kogito-quarkus-examples/process-outbox-mongodb-quarkus/pom.xml
 +++ b/kogito-quarkus-examples/process-outbox-mongodb-quarkus/pom.xml
 @@ -15,14 +15,14 @@
  
    <properties>
      <DEBEZIUM_VERSION>1.7</DEBEZIUM_VERSION>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -1977,18 +1977,18 @@ index fc2e8fee7..54f7827a2 100644
  import org.kie.kogito.examples.demo.Order;
  
 diff --git a/kogito-quarkus-examples/process-performance-client/pom.xml b/kogito-quarkus-examples/process-performance-client/pom.xml
-index 44a9b4920..f15550c51 100755
+index 99cf83fa0..f15550c51 100755
 --- a/kogito-quarkus-examples/process-performance-client/pom.xml
 +++ b/kogito-quarkus-examples/process-performance-client/pom.xml
 @@ -13,14 +13,14 @@
    <name>Kogito Example :: Client Performance test</name>
    <description>Client Performance test</description>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -2000,18 +2000,18 @@ index 44a9b4920..f15550c51 100755
    <dependencyManagement>
      <dependencies>
 diff --git a/kogito-quarkus-examples/process-performance-quarkus/pom.xml b/kogito-quarkus-examples/process-performance-quarkus/pom.xml
-index 6edab7665..541bac1c4 100755
+index 0d527b438..541bac1c4 100755
 --- a/kogito-quarkus-examples/process-performance-quarkus/pom.xml
 +++ b/kogito-quarkus-examples/process-performance-quarkus/pom.xml
 @@ -13,14 +13,14 @@
    <name>Kogito Example :: Quarkus Performance test</name>
    <description>Quarkus Performance test</description>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -2023,18 +2023,18 @@ index 6edab7665..541bac1c4 100755
    <dependencyManagement>
      <dependencies>
 diff --git a/kogito-quarkus-examples/process-postgresql-persistence-quarkus/pom.xml b/kogito-quarkus-examples/process-postgresql-persistence-quarkus/pom.xml
-index 1bb1b9746..6f9a91b80 100644
+index 9068e217f..6f9a91b80 100644
 --- a/kogito-quarkus-examples/process-postgresql-persistence-quarkus/pom.xml
 +++ b/kogito-quarkus-examples/process-postgresql-persistence-quarkus/pom.xml
 @@ -16,14 +16,14 @@
    <name>Kogito Example :: Process PostgreSQL Persistence Quarkus</name>
    <description>Process with PostgreSQL persistence - Quarkus</description>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -2046,18 +2046,18 @@ index 1bb1b9746..6f9a91b80 100644
    <dependencyManagement>
      <dependencies>
 diff --git a/kogito-quarkus-examples/process-quarkus-example/pom.xml b/kogito-quarkus-examples/process-quarkus-example/pom.xml
-index c44633476..00bb4ba37 100755
+index 828f07f1f..00bb4ba37 100755
 --- a/kogito-quarkus-examples/process-quarkus-example/pom.xml
 +++ b/kogito-quarkus-examples/process-quarkus-example/pom.xml
 @@ -11,14 +11,14 @@
    <name>Kogito Example :: Process and Quarkus</name>
    <description>Order management service</description>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -2142,18 +2142,18 @@ index 3dece4add..934c56d38 100644
  import org.junit.jupiter.api.BeforeEach;
  import org.junit.jupiter.api.Test;
 diff --git a/kogito-quarkus-examples/process-rest-service-call-quarkus/pom.xml b/kogito-quarkus-examples/process-rest-service-call-quarkus/pom.xml
-index e2282f051..c73f6ca0c 100644
+index f15c86c1e..c73f6ca0c 100644
 --- a/kogito-quarkus-examples/process-rest-service-call-quarkus/pom.xml
 +++ b/kogito-quarkus-examples/process-rest-service-call-quarkus/pom.xml
 @@ -11,14 +11,14 @@
    <name>Kogito Example :: Process Service Rest Cal with Quarkus</name>
    <description>Kogito service invocation using REST - Quarkus</description>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -2236,18 +2236,18 @@ index 9d4f22920..828839877 100644
  import org.junit.jupiter.api.Disabled;
  import org.junit.jupiter.api.Test;
 diff --git a/kogito-quarkus-examples/process-rest-workitem-multi-quarkus/pom.xml b/kogito-quarkus-examples/process-rest-workitem-multi-quarkus/pom.xml
-index e79f51b53..4706ea592 100644
+index a0cdb5918..4706ea592 100644
 --- a/kogito-quarkus-examples/process-rest-workitem-multi-quarkus/pom.xml
 +++ b/kogito-quarkus-examples/process-rest-workitem-multi-quarkus/pom.xml
 @@ -11,14 +11,14 @@
    <name>Kogito Example :: Process Rest :: Quarkus</name>
    <description>Invoking multiple Rest WS using RestWorkItemHandler</description>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -2311,18 +2311,18 @@ index 9852e8da3..5eb548715 100644
  
  }
 diff --git a/kogito-quarkus-examples/process-rest-workitem-quarkus/pom.xml b/kogito-quarkus-examples/process-rest-workitem-quarkus/pom.xml
-index f37277202..cd47ab411 100644
+index 70c6af42c..cd47ab411 100644
 --- a/kogito-quarkus-examples/process-rest-workitem-quarkus/pom.xml
 +++ b/kogito-quarkus-examples/process-rest-workitem-quarkus/pom.xml
 @@ -11,14 +11,14 @@
    <name>Kogito Example :: Process Service Rest WorkItem call with Quarkus</name>
    <description>Kogito service invocation using REST work item and Quarkus</description>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -2381,18 +2381,18 @@ index ee59e0502..64fcf49a3 100644
  import org.junit.jupiter.api.Disabled;
  import org.junit.jupiter.api.Test;
 diff --git a/kogito-quarkus-examples/process-saga-quarkus/pom.xml b/kogito-quarkus-examples/process-saga-quarkus/pom.xml
-index 96b9799e3..7f8d2ec98 100644
+index 1cf320103..7f8d2ec98 100644
 --- a/kogito-quarkus-examples/process-saga-quarkus/pom.xml
 +++ b/kogito-quarkus-examples/process-saga-quarkus/pom.xml
 @@ -13,14 +13,14 @@
    <description>How to implement Saga with a BPMN Process using Compensations</description>
  
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -2475,18 +2475,18 @@ index 8c74346bd..113a1f869 100644
  import org.slf4j.Logger;
  import org.slf4j.LoggerFactory;
 diff --git a/kogito-quarkus-examples/process-scripts-quarkus/pom.xml b/kogito-quarkus-examples/process-scripts-quarkus/pom.xml
-index 7074cfe5f..1dc334ce4 100644
+index 8515e4db6..1dc334ce4 100644
 --- a/kogito-quarkus-examples/process-scripts-quarkus/pom.xml
 +++ b/kogito-quarkus-examples/process-scripts-quarkus/pom.xml
 @@ -11,14 +11,14 @@
    <name>Kogito Example :: Process Scripts With Quarkus</name>
    <description>Kogito scripts invocation - Quarkus</description>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -2513,18 +2513,18 @@ index 066d0a4e6..c46942ece 100644
  import org.junit.jupiter.api.Test;
  import org.kie.kogito.Model;
 diff --git a/kogito-quarkus-examples/process-service-calls-quarkus/pom.xml b/kogito-quarkus-examples/process-service-calls-quarkus/pom.xml
-index a62b8244b..4cd92aa14 100644
+index 8c439f235..4cd92aa14 100644
 --- a/kogito-quarkus-examples/process-service-calls-quarkus/pom.xml
 +++ b/kogito-quarkus-examples/process-service-calls-quarkus/pom.xml
 @@ -11,14 +11,14 @@
    <name>Kogito Example :: Process Service Calls with Quarkus</name>
    <description>Kogito service invocation - Quarkus</description>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -2618,18 +2618,18 @@ index 0b17a5600..ff04f1fde 100644
  import org.junit.jupiter.api.Test;
  import org.kie.kogito.Model;
 diff --git a/kogito-quarkus-examples/process-timer-quarkus/pom.xml b/kogito-quarkus-examples/process-timer-quarkus/pom.xml
-index 9611fd8b8..8ce39248d 100644
+index 32533e090..8ce39248d 100644
 --- a/kogito-quarkus-examples/process-timer-quarkus/pom.xml
 +++ b/kogito-quarkus-examples/process-timer-quarkus/pom.xml
 @@ -11,14 +11,14 @@
    <name>Kogito Example :: Process Timer with Quarkus</name>
    <description>Kogito with timers - Quarkus</description>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -2641,18 +2641,18 @@ index 9611fd8b8..8ce39248d 100644
    <dependencyManagement>
      <dependencies>
 diff --git a/kogito-quarkus-examples/process-usertasks-custom-lifecycle-quarkus/pom.xml b/kogito-quarkus-examples/process-usertasks-custom-lifecycle-quarkus/pom.xml
-index 6a060de7a..517163a3f 100644
+index 50dffbd7f..517163a3f 100644
 --- a/kogito-quarkus-examples/process-usertasks-custom-lifecycle-quarkus/pom.xml
 +++ b/kogito-quarkus-examples/process-usertasks-custom-lifecycle-quarkus/pom.xml
 @@ -11,14 +11,14 @@
    <name>Kogito Example :: Process Usertasks With Custom Lifecycle</name>
    <description>Kogito user tasks orchestration with custom life cycle - Quarkus</description>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -2692,18 +2692,18 @@ index 59efe6c70..b88193f30 100644
  import org.acme.travels.Address;
  import org.acme.travels.Traveller;
 diff --git a/kogito-quarkus-examples/process-usertasks-quarkus-with-console/pom.xml b/kogito-quarkus-examples/process-usertasks-quarkus-with-console/pom.xml
-index ae198ffa9..d71f4c641 100644
+index d0a90b39a..d71f4c641 100644
 --- a/kogito-quarkus-examples/process-usertasks-quarkus-with-console/pom.xml
 +++ b/kogito-quarkus-examples/process-usertasks-quarkus-with-console/pom.xml
 @@ -10,14 +10,14 @@
    <artifactId>process-usertasks-quarkus-with-console</artifactId>
    <name>Kogito Example :: Process with Usertasks Quarkus :: Console </name>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -2730,18 +2730,18 @@ index 01c683b6e..a99cfd301 100644
  import org.junit.jupiter.api.Test;
  import org.kie.kogito.Model;
 diff --git a/kogito-quarkus-examples/process-usertasks-quarkus/pom.xml b/kogito-quarkus-examples/process-usertasks-quarkus/pom.xml
-index 2b48963a6..9f9b6ed9a 100644
+index 912b40335..9f9b6ed9a 100644
 --- a/kogito-quarkus-examples/process-usertasks-quarkus/pom.xml
 +++ b/kogito-quarkus-examples/process-usertasks-quarkus/pom.xml
 @@ -11,14 +11,14 @@
    <name>Kogito Example :: Process with Usertasks Quarkus</name>
    <description>Kogito user tasks orchestration - Quarkus</description>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -2768,18 +2768,18 @@ index 385ee84c0..7d9a44719 100644
  import org.acme.travels.Address;
  import org.acme.travels.Traveller;
 diff --git a/kogito-quarkus-examples/process-usertasks-timer-quarkus-with-console/pom.xml b/kogito-quarkus-examples/process-usertasks-timer-quarkus-with-console/pom.xml
-index ece68c8a8..ddcf8411a 100644
+index d2f060946..ddcf8411a 100644
 --- a/kogito-quarkus-examples/process-usertasks-timer-quarkus-with-console/pom.xml
 +++ b/kogito-quarkus-examples/process-usertasks-timer-quarkus-with-console/pom.xml
 @@ -10,14 +10,14 @@
    <artifactId>process-usertasks-timer-quarkus-with-console</artifactId>
    <name>Kogito Example :: Process UserTasks with Timer Quarkus :: Console</name>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -2806,18 +2806,18 @@ index 01c683b6e..a99cfd301 100644
  import org.junit.jupiter.api.Test;
  import org.kie.kogito.Model;
 diff --git a/kogito-quarkus-examples/process-usertasks-with-security-oidc-quarkus-with-console/pom.xml b/kogito-quarkus-examples/process-usertasks-with-security-oidc-quarkus-with-console/pom.xml
-index 2064a7f09..803c65497 100644
+index 85006df8d..803c65497 100644
 --- a/kogito-quarkus-examples/process-usertasks-with-security-oidc-quarkus-with-console/pom.xml
 +++ b/kogito-quarkus-examples/process-usertasks-with-security-oidc-quarkus-with-console/pom.xml
 @@ -11,14 +11,14 @@
    <name>Kogito Example :: Process Usertasks Security OIDC Keycloak Quarkus :: Console</name>
    <description>Kogito user tasks orchestration with security enabled on REST api - open id connect adapter(keycloak)</description>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -2860,18 +2860,18 @@ index 4cdffa0e7..5de8dec89 100644
  @QuarkusTestResource(KafkaQuarkusTestResource.class)
  public class NativeApprovalsRestIT extends ApprovalsRestIT {
 diff --git a/kogito-quarkus-examples/process-usertasks-with-security-oidc-quarkus/pom.xml b/kogito-quarkus-examples/process-usertasks-with-security-oidc-quarkus/pom.xml
-index 03909f034..f9a18ee81 100644
+index f6b393614..f9a18ee81 100644
 --- a/kogito-quarkus-examples/process-usertasks-with-security-oidc-quarkus/pom.xml
 +++ b/kogito-quarkus-examples/process-usertasks-with-security-oidc-quarkus/pom.xml
 @@ -11,14 +11,14 @@
    <name>Kogito Example :: Process Usertasks With Security OIDC Keycloak Quarkus</name>
    <description>Kogito user tasks orchestration with security enabled on REST api - open id connect adapter(keycloak)</description>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -2914,18 +2914,18 @@ index 1d1eeaccf..122ce4f77 100644
  public class NativeApprovalsRestIT extends ApprovalsRestIT {
      // run the same tests only against native image
 diff --git a/kogito-quarkus-examples/process-usertasks-with-security-quarkus/pom.xml b/kogito-quarkus-examples/process-usertasks-with-security-quarkus/pom.xml
-index a550f697d..06f3bffcf 100644
+index 6f84b3d3e..06f3bffcf 100644
 --- a/kogito-quarkus-examples/process-usertasks-with-security-quarkus/pom.xml
 +++ b/kogito-quarkus-examples/process-usertasks-with-security-quarkus/pom.xml
 @@ -11,14 +11,14 @@
    <name>Kogito Example :: Process Usertasks With Security Quarkus</name>
    <description>Kogito user tasks orchestration with security enabled on REST api - Quarkus</description>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -2952,18 +2952,18 @@ index b752b25a5..a96c2739a 100644
  import org.acme.travels.Address;
  import org.acme.travels.Traveller;
 diff --git a/kogito-quarkus-examples/rules-incubation-api-quarkus/pom.xml b/kogito-quarkus-examples/rules-incubation-api-quarkus/pom.xml
-index 88e80f2e3..9231e0389 100644
+index 75331b945..9231e0389 100644
 --- a/kogito-quarkus-examples/rules-incubation-api-quarkus/pom.xml
 +++ b/kogito-quarkus-examples/rules-incubation-api-quarkus/pom.xml
 @@ -10,14 +10,14 @@
    <artifactId>rules-incubation-api-quarkus</artifactId>
    <name>Kogito Example :: Rules Incubation API With Quarkus</name>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -2998,18 +2998,18 @@ index 923a30f4f..c354510ec 100644
  import org.kie.kogito.examples.Hello;
  import org.kie.kogito.incubation.application.AppRoot;
 diff --git a/kogito-quarkus-examples/rules-legacy-quarkus-example/pom.xml b/kogito-quarkus-examples/rules-legacy-quarkus-example/pom.xml
-index 0e66423ae..5297b4716 100644
+index 3b0a40983..5297b4716 100644
 --- a/kogito-quarkus-examples/rules-legacy-quarkus-example/pom.xml
 +++ b/kogito-quarkus-examples/rules-legacy-quarkus-example/pom.xml
 @@ -10,14 +10,14 @@
    <artifactId>rules-legacy-quarkus-example</artifactId>
    <name>Kogito Example :: Rules Legacy API - Quarkus</name>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -3060,18 +3060,18 @@ index 3455e8798..b7324fef5 100644
  
      // Execute the same tests but in native mode.
 diff --git a/kogito-quarkus-examples/rules-quarkus-helloworld/pom.xml b/kogito-quarkus-examples/rules-quarkus-helloworld/pom.xml
-index 10356a40d..1c41a3b0c 100755
+index 3f593a155..1c41a3b0c 100755
 --- a/kogito-quarkus-examples/rules-quarkus-helloworld/pom.xml
 +++ b/kogito-quarkus-examples/rules-quarkus-helloworld/pom.xml
 @@ -10,14 +10,14 @@
    <artifactId>rules-quarkus-helloworld</artifactId>
    <name>Kogito Example :: Rules HelloWorld</name>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -3109,18 +3109,18 @@ index 689a1fd08..f2f6fd2d4 100644
  import org.junit.jupiter.api.Test;
  
 diff --git a/kogito-quarkus-examples/ruleunit-event-driven-quarkus/pom.xml b/kogito-quarkus-examples/ruleunit-event-driven-quarkus/pom.xml
-index c5ace8ee9..e845249aa 100644
+index d04d83799..e845249aa 100644
 --- a/kogito-quarkus-examples/ruleunit-event-driven-quarkus/pom.xml
 +++ b/kogito-quarkus-examples/ruleunit-event-driven-quarkus/pom.xml
 @@ -12,14 +12,14 @@
    <artifactId>ruleunit-event-driven-quarkus</artifactId>
    <name>Kogito Example :: Rule Unit Event-Driven :: Quarkus</name>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -3132,18 +3132,18 @@ index c5ace8ee9..e845249aa 100644
    <dependencyManagement>
      <dependencies>
 diff --git a/kogito-quarkus-examples/ruleunit-quarkus-example/pom.xml b/kogito-quarkus-examples/ruleunit-quarkus-example/pom.xml
-index 21a349276..364cbbb74 100644
+index 8093fb0f0..364cbbb74 100644
 --- a/kogito-quarkus-examples/ruleunit-quarkus-example/pom.xml
 +++ b/kogito-quarkus-examples/ruleunit-quarkus-example/pom.xml
 @@ -10,14 +10,14 @@
    <artifactId>ruleunit-quarkus-example</artifactId>
    <name>Kogito Example :: RuleUnit - Quarkus</name>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -3171,18 +3171,18 @@ index ae65452de..244cc6e02 100644
  
      // Execute the same tests but in native mode.
 diff --git a/kogito-quarkus-examples/trusty-tracing-quarkus-devservices/pom.xml b/kogito-quarkus-examples/trusty-tracing-quarkus-devservices/pom.xml
-index 17f1465cb..426d43584 100644
+index 90831591a..426d43584 100644
 --- a/kogito-quarkus-examples/trusty-tracing-quarkus-devservices/pom.xml
 +++ b/kogito-quarkus-examples/trusty-tracing-quarkus-devservices/pom.xml
 @@ -10,14 +10,14 @@
    <artifactId>trusty-tracing-quarkus-devservices</artifactId>
    <name>Kogito Example :: Trusty Tracing - Quarkus DevServices</name>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -3783,18 +3783,18 @@ index e51bbf698..c30159f15 100755
      <surefire.forkCount>1</surefire.forkCount>
      <failsafe.include>**/*IT.java</failsafe.include>
 diff --git a/serverless-workflow-examples/serverless-workflow-annotations-description/pom.xml b/serverless-workflow-examples/serverless-workflow-annotations-description/pom.xml
-index 092bbf53e..a0b3ebde7 100644
+index 13129a50a..a0b3ebde7 100644
 --- a/serverless-workflow-examples/serverless-workflow-annotations-description/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-annotations-description/pom.xml
 @@ -11,14 +11,14 @@
      <name>Kogito Example :: Serverless Workflow Annotations and Description:: Quarkus</name>
      <description>Kogito Serverless Workflow Example - Quarkus</description>
      <properties>
--        <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-        <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +        <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
          <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
          <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--        <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-        <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +        <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
          <version.org.assertj>3.22.0</version.org.assertj>
          <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
@@ -3805,18 +3805,18 @@ index 092bbf53e..a0b3ebde7 100644
          <maven.compiler.release>11</maven.compiler.release>
          <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-callback-events-over-http-quarkus/callback-event-service/pom.xml b/serverless-workflow-examples/serverless-workflow-callback-events-over-http-quarkus/callback-event-service/pom.xml
-index c9f21cc35..6f4e3d857 100644
+index 4e4602148..6f4e3d857 100644
 --- a/serverless-workflow-examples/serverless-workflow-callback-events-over-http-quarkus/callback-event-service/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-callback-events-over-http-quarkus/callback-event-service/pom.xml
 @@ -12,13 +12,13 @@
      <artifactId>callback-event-service</artifactId>
      <name>Kogito Example :: Serverless Workflow CallBack Over HTTP Quarkus :: Callback Event Service</name>
      <properties>
--        <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-        <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +        <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
          <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
          <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--        <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-        <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +        <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
          <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
          <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -3865,18 +3865,18 @@ index e0477fba4..36f2aac9c 100644
  import com.fasterxml.jackson.databind.ObjectMapper;
  
 diff --git a/serverless-workflow-examples/serverless-workflow-callback-events-over-http-quarkus/callback-workflow/pom.xml b/serverless-workflow-examples/serverless-workflow-callback-events-over-http-quarkus/callback-workflow/pom.xml
-index 5f4233d68..a20b704ed 100644
+index 76a5fd018..a20b704ed 100644
 --- a/serverless-workflow-examples/serverless-workflow-callback-events-over-http-quarkus/callback-workflow/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-callback-events-over-http-quarkus/callback-workflow/pom.xml
 @@ -13,13 +13,13 @@
      <name>Kogito Example :: Serverless Workflow CallBack Over HTTP Quarkus :: Service</name>
      <description>Kogito Serverless Workflow Callback Example Over HTTP - Quarkus</description>
      <properties>
--        <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-        <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +        <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
          <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
          <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--        <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-        <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +        <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
          <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
          <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -3886,18 +3886,18 @@ index 5f4233d68..a20b704ed 100644
          <maven.compiler.release>11</maven.compiler.release>
          <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-callback-quarkus/pom.xml b/serverless-workflow-examples/serverless-workflow-callback-quarkus/pom.xml
-index aefad1d13..4dbcc325b 100644
+index 2f1c84d57..4dbcc325b 100644
 --- a/serverless-workflow-examples/serverless-workflow-callback-quarkus/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-callback-quarkus/pom.xml
 @@ -10,13 +10,13 @@
    <name>Kogito Example :: Serverless Workflow Callback :: Quarkus</name>
    <description>Kogito Serverless Workflow Callback Example - Quarkus</description>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -3922,18 +3922,18 @@ index a1ee770e7..77b636420 100644
  import org.eclipse.microprofile.reactive.messaging.Acknowledgment;
  import org.eclipse.microprofile.reactive.messaging.Acknowledgment.Strategy;
 diff --git a/serverless-workflow-examples/serverless-workflow-camel-routes/pom.xml b/serverless-workflow-examples/serverless-workflow-camel-routes/pom.xml
-index 348e7d2ad..05e2b0dd8 100644
+index 519234897..05e2b0dd8 100644
 --- a/serverless-workflow-examples/serverless-workflow-camel-routes/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-camel-routes/pom.xml
 @@ -12,20 +12,20 @@
    <description>Kogito Serverless Workflow Camel Routes Example - Quarkus</description>
  
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -3951,18 +3951,18 @@ index 348e7d2ad..05e2b0dd8 100644
  
    <dependencyManagement>
 diff --git a/serverless-workflow-examples/serverless-workflow-compensation-quarkus/pom.xml b/serverless-workflow-examples/serverless-workflow-compensation-quarkus/pom.xml
-index 8a575972e..015d82784 100644
+index 480206687..015d82784 100644
 --- a/serverless-workflow-examples/serverless-workflow-compensation-quarkus/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-compensation-quarkus/pom.xml
 @@ -10,13 +10,13 @@
    <name>Kogito Example :: Serverless Workflow Compensation :: Quarkus</name>
    <description>Kogito Serverless Workflow Error Compensation - Quarkus</description>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -3972,18 +3972,18 @@ index 8a575972e..015d82784 100644
      <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
      <maven.compiler.release>11</maven.compiler.release>
 diff --git a/serverless-workflow-examples/serverless-workflow-consuming-events-over-http-quarkus/pom.xml b/serverless-workflow-examples/serverless-workflow-consuming-events-over-http-quarkus/pom.xml
-index ca1b5c002..15d303eec 100644
+index 4cc5b957b..15d303eec 100644
 --- a/serverless-workflow-examples/serverless-workflow-consuming-events-over-http-quarkus/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-consuming-events-over-http-quarkus/pom.xml
 @@ -12,13 +12,13 @@
      <name>Kogito Example :: Serverless Workflow Consuming Events Over HTTP :: Quarkus</name>
      <description>Kogito Serverless Workflow Consuming Events Over HTTP - Quarkus</description>
      <properties>
--        <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-        <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +        <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
          <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
          <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--        <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-        <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +        <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
          <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
          <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -3993,18 +3993,18 @@ index ca1b5c002..15d303eec 100644
          <maven.compiler.release>11</maven.compiler.release>
          <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-correlation-quarkus/pom.xml b/serverless-workflow-examples/serverless-workflow-correlation-quarkus/pom.xml
-index b8e80ce70..f67a88ec0 100644
+index 4cb87747c..f67a88ec0 100644
 --- a/serverless-workflow-examples/serverless-workflow-correlation-quarkus/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-correlation-quarkus/pom.xml
 @@ -10,13 +10,13 @@
    <name>Kogito Example :: Serverless Workflow Correlation :: Quarkus</name>
    <description>Kogito Serverless Workflow Correlation Example - Quarkus</description>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -4052,18 +4052,18 @@ index bb3edca5f..59f586060 100644
  import org.eclipse.microprofile.reactive.messaging.Channel;
  import org.eclipse.microprofile.reactive.messaging.Emitter;
 diff --git a/serverless-workflow-examples/serverless-workflow-custom-function-knative/custom-function-knative-service/pom.xml b/serverless-workflow-examples/serverless-workflow-custom-function-knative/custom-function-knative-service/pom.xml
-index a3e51c896..ceedd0272 100644
+index bb232125f..ceedd0272 100644
 --- a/serverless-workflow-examples/serverless-workflow-custom-function-knative/custom-function-knative-service/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-custom-function-knative/custom-function-knative-service/pom.xml
 @@ -12,13 +12,13 @@
      <artifactId>custom-function-knative-service</artifactId>
      <name>Kogito Example :: Serverless Workflow Custom Function Knative :: Service</name>
      <properties>
--        <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-        <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +        <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
          <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
          <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--        <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-        <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +        <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
          <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
          <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -4073,18 +4073,18 @@ index a3e51c896..ceedd0272 100644
          <maven.compiler.release>11</maven.compiler.release>
          <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-custom-function-knative/workflow/pom.xml b/serverless-workflow-examples/serverless-workflow-custom-function-knative/workflow/pom.xml
-index 0f6bb2142..94b538fb1 100644
+index a92ad9e89..94b538fb1 100644
 --- a/serverless-workflow-examples/serverless-workflow-custom-function-knative/workflow/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-custom-function-knative/workflow/pom.xml
 @@ -13,13 +13,13 @@
      <name>Kogito Example :: Serverless Workflow Custom Function Knative :: Workflow</name>
      <description>Kogito Serverless Workflow Custom Function Knative - Workflow</description>
      <properties>
--        <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-        <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +        <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
          <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
          <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--        <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-        <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +        <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
          <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
          <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -4094,18 +4094,18 @@ index 0f6bb2142..94b538fb1 100644
          <maven.compiler.release>11</maven.compiler.release>
          <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-custom-type/pom.xml b/serverless-workflow-examples/serverless-workflow-custom-type/pom.xml
-index d935254e4..43270cc84 100644
+index 519f3d236..43270cc84 100644
 --- a/serverless-workflow-examples/serverless-workflow-custom-type/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-custom-type/pom.xml
 @@ -12,13 +12,13 @@
    <properties>
       <version.compiler.plugin>3.8.1</version.compiler.plugin>
       <version.jar.plugin>3.1.0</version.jar.plugin> 
--     <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-     <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +     <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
       <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
       <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--     <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-     <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +     <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
       <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
       <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -4146,18 +4146,18 @@ index e1bbe63aa..b87cc7206 100644
  import org.kie.kogito.process.impl.CachedWorkItemHandlerConfig;
  
 diff --git a/serverless-workflow-examples/serverless-workflow-data-index-quarkus/pom.xml b/serverless-workflow-examples/serverless-workflow-data-index-quarkus/pom.xml
-index 206260946..2e0b986da 100644
+index b7b0a4ada..2e0b986da 100644
 --- a/serverless-workflow-examples/serverless-workflow-data-index-quarkus/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-data-index-quarkus/pom.xml
 @@ -10,13 +10,13 @@
    <name>Kogito Example :: Serverless Workflow Data Index :: Quarkus</name>
    <description>Kogito Serverless Workflow Data Index Example - Quarkus</description>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -4182,18 +4182,18 @@ index 80259f870..14cb03297 100644
  import org.eclipse.microprofile.reactive.messaging.Acknowledgment;
  import org.eclipse.microprofile.reactive.messaging.Acknowledgment.Strategy;
 diff --git a/serverless-workflow-examples/serverless-workflow-error-quarkus/pom.xml b/serverless-workflow-examples/serverless-workflow-error-quarkus/pom.xml
-index a60f0d1be..17baa4d8a 100644
+index f4f65c528..17baa4d8a 100644
 --- a/serverless-workflow-examples/serverless-workflow-error-quarkus/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-error-quarkus/pom.xml
 @@ -10,13 +10,13 @@
    <name>Kogito Example :: Serverless Workflow Error :: Quarkus</name>
    <description>Kogito Serverless Workflow Error Example - Quarkus</description>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -4216,18 +4216,18 @@ index 59c077d86..6468384d5 100644
  @ApplicationScoped
  public class EvenService {
 diff --git a/serverless-workflow-examples/serverless-workflow-events-quarkus/pom.xml b/serverless-workflow-examples/serverless-workflow-events-quarkus/pom.xml
-index fa6520d46..7379a037a 100644
+index 874e192c9..7379a037a 100644
 --- a/serverless-workflow-examples/serverless-workflow-events-quarkus/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-events-quarkus/pom.xml
 @@ -10,17 +10,17 @@
    <name>Kogito Example :: Serverless Workflow Events :: Quarkus</name>
    <description>Kogito Serverless Workflow Example - Quarkus</description>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -4332,18 +4332,18 @@ index 22a64e6db..4ea73f3a2 100644
  import org.apache.kafka.common.serialization.ByteArrayDeserializer;
  import org.apache.kafka.common.serialization.ByteArraySerializer;
 diff --git a/serverless-workflow-examples/serverless-workflow-expression-quarkus/pom.xml b/serverless-workflow-examples/serverless-workflow-expression-quarkus/pom.xml
-index f6bfdc911..2144e8b6b 100644
+index d866929bf..2144e8b6b 100644
 --- a/serverless-workflow-examples/serverless-workflow-expression-quarkus/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-expression-quarkus/pom.xml
 @@ -10,13 +10,13 @@
    <name>Kogito Example :: Serverless Workflow Expression :: Quarkus</name>
    <description>Kogito Serverless Workflow Expression Example - Quarkus</description>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -4353,18 +4353,18 @@ index f6bfdc911..2144e8b6b 100644
      <version.compiler.plugin>3.8.1</version.compiler.plugin>
      <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-foreach-quarkus/pom.xml b/serverless-workflow-examples/serverless-workflow-foreach-quarkus/pom.xml
-index 66fc3b52f..dffac3171 100644
+index 781162a98..dffac3171 100644
 --- a/serverless-workflow-examples/serverless-workflow-foreach-quarkus/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-foreach-quarkus/pom.xml
 @@ -10,13 +10,13 @@
    <name>Kogito Example :: Serverless Workflow For Each :: Quarkus</name>
    <description>Kogito Serverless Workflow For Each Example - Quarkus</description>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -4374,18 +4374,18 @@ index 66fc3b52f..dffac3171 100644
      <version.compiler.plugin>3.8.1</version.compiler.plugin>
      <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-functions-events-quarkus/pom.xml b/serverless-workflow-examples/serverless-workflow-functions-events-quarkus/pom.xml
-index 2ef6b7cd4..1d43def93 100644
+index 9424dc1b5..1d43def93 100644
 --- a/serverless-workflow-examples/serverless-workflow-functions-events-quarkus/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-functions-events-quarkus/pom.xml
 @@ -12,13 +12,13 @@
    <properties>
      <!-- fixed port for tests, see https://issues.redhat.com/browse/KOGITO-6406 -->
      <tests.quarkus.http.port>8080</tests.quarkus.http.port>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -4511,18 +4511,18 @@ index 8fc1044fe..81f8a9b04 100644
  import org.acme.sw.onboarding.model.Appointment;
  import org.acme.sw.onboarding.model.Doctor;
 diff --git a/serverless-workflow-examples/serverless-workflow-functions-quarkus/pom.xml b/serverless-workflow-examples/serverless-workflow-functions-quarkus/pom.xml
-index 40e68943a..a4136e6f8 100644
+index 35c91d68b..a4136e6f8 100644
 --- a/serverless-workflow-examples/serverless-workflow-functions-quarkus/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-functions-quarkus/pom.xml
 @@ -12,13 +12,13 @@
    <properties>
      <!-- fixed port for tests, see https://issues.redhat.com/browse/KOGITO-6406 -->
      <tests.quarkus.http.port>8080</tests.quarkus.http.port>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -4569,18 +4569,18 @@ index b9cbab2e8..6980366b7 100644
  import org.slf4j.Logger;
  import org.slf4j.LoggerFactory;
 diff --git a/serverless-workflow-examples/serverless-workflow-funqy/sw-funqy-services/pom.xml b/serverless-workflow-examples/serverless-workflow-funqy/sw-funqy-services/pom.xml
-index e4b9832f9..011e97147 100644
+index cda3b7296..011e97147 100644
 --- a/serverless-workflow-examples/serverless-workflow-funqy/sw-funqy-services/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-funqy/sw-funqy-services/pom.xml
 @@ -11,10 +11,10 @@
    <name>Kogito Example :: Serverless Workflow :: Funqy :: Services</name>
    <description>Kogito Serverless Workflow Funqy Services - Quarkus</description>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <version.compiler.plugin>3.8.1</version.compiler.plugin>
      <maven.compiler.release>11</maven.compiler.release>
@@ -4664,18 +4664,18 @@ index 8aa404d54..60910c580 100644
  import org.kogito.serverless.examples.input.Country;
  
 diff --git a/serverless-workflow-examples/serverless-workflow-funqy/sw-funqy-workflow/pom.xml b/serverless-workflow-examples/serverless-workflow-funqy/sw-funqy-workflow/pom.xml
-index 9b140d489..f72762b0b 100644
+index f651b169d..f72762b0b 100644
 --- a/serverless-workflow-examples/serverless-workflow-funqy/sw-funqy-workflow/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-funqy/sw-funqy-workflow/pom.xml
 @@ -11,13 +11,13 @@
    <name>Kogito Example :: Serverless Workflow :: Funqy :: Workflow</name>
    <description>Kogito Serverless Workflow Funqy Workflow - Quarkus</description>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -4685,18 +4685,18 @@ index 9b140d489..f72762b0b 100644
      <maven.compiler.release>11</maven.compiler.release>
      <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-greeting-quarkus/pom.xml b/serverless-workflow-examples/serverless-workflow-greeting-quarkus/pom.xml
-index c94f5392d..738e86c3f 100644
+index 7ac2e39db..738e86c3f 100644
 --- a/serverless-workflow-examples/serverless-workflow-greeting-quarkus/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-greeting-quarkus/pom.xml
 @@ -10,13 +10,13 @@
    <name>Kogito Example :: Serverless Workflow Greeting :: Quarkus</name>
    <description>Kogito Serverless Workflow Example - Quarkus</description>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -4706,18 +4706,18 @@ index c94f5392d..738e86c3f 100644
      <version.compiler.plugin>3.8.1</version.compiler.plugin>
      <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-greeting-rpc-quarkus/serverless-workflow-greeting-client-rpc-quarkus/pom.xml b/serverless-workflow-examples/serverless-workflow-greeting-rpc-quarkus/serverless-workflow-greeting-client-rpc-quarkus/pom.xml
-index 8368e7707..707894ba9 100644
+index 8c6563339..707894ba9 100644
 --- a/serverless-workflow-examples/serverless-workflow-greeting-rpc-quarkus/serverless-workflow-greeting-client-rpc-quarkus/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-greeting-rpc-quarkus/serverless-workflow-greeting-client-rpc-quarkus/pom.xml
 @@ -11,13 +11,13 @@
    <name>Kogito Example :: Serverless Workflow Greeting :: gRPC Client :: Quarkus</name>
    <description>Kogito Serverless Workflow Example that test a simple gRPC service - Quarkus</description>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -4749,18 +4749,18 @@ index c2ca6f930..d004b2cc1 100644
      </dependencies>
      <build>
 diff --git a/serverless-workflow-examples/serverless-workflow-hello-world/pom.xml b/serverless-workflow-examples/serverless-workflow-hello-world/pom.xml
-index 6b9e3f475..a2eeb214a 100644
+index 12e44987a..a2eeb214a 100644
 --- a/serverless-workflow-examples/serverless-workflow-hello-world/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-hello-world/pom.xml
 @@ -12,14 +12,14 @@
      <description>Kogito Serverless Workflow Example - Quarkus</description>
  
      <properties>
--        <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-        <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +        <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
          <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
          <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--        <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-        <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +        <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
          <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
          <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -5040,18 +5040,18 @@ index 22075c1a9..0a2f935c5 100644
  import org.acme.loanbroker.domain.Credit;
  import org.acme.loanbroker.domain.Quote;
 diff --git a/serverless-workflow-examples/serverless-workflow-loanbroker-showcase/pom.xml b/serverless-workflow-examples/serverless-workflow-loanbroker-showcase/pom.xml
-index 519104a0e..368067c17 100644
+index efd654500..368067c17 100644
 --- a/serverless-workflow-examples/serverless-workflow-loanbroker-showcase/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-loanbroker-showcase/pom.xml
 @@ -12,13 +12,13 @@
    <artifactId>serverless-workflow-loanbroker-showcase</artifactId>
    <packaging>pom</packaging>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -5070,18 +5070,18 @@ index 519104a0e..368067c17 100644
      <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
      <version.compiler.plugin>3.8.1</version.compiler.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-newsletter-subscription/pom.xml b/serverless-workflow-examples/serverless-workflow-newsletter-subscription/pom.xml
-index 8e793c303..d9f50f983 100644
+index 2e08e9a86..d9f50f983 100644
 --- a/serverless-workflow-examples/serverless-workflow-newsletter-subscription/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-newsletter-subscription/pom.xml
 @@ -12,13 +12,13 @@
    <artifactId>serverless-workflow-newsletter-subscription</artifactId>
    <packaging>pom</packaging>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -5217,18 +5217,18 @@ index 3c64999b2..c9fb43ee5 100644
  @ApplicationScoped
  public class SubscriptionServiceImpl implements SubscriptionService {
 diff --git a/serverless-workflow-examples/serverless-workflow-oauth2-orchestration-quarkus/acme-financial-service/pom.xml b/serverless-workflow-examples/serverless-workflow-oauth2-orchestration-quarkus/acme-financial-service/pom.xml
-index 2d13ed6ec..dd69b0cc3 100644
+index cdda9bb4f..dd69b0cc3 100644
 --- a/serverless-workflow-examples/serverless-workflow-oauth2-orchestration-quarkus/acme-financial-service/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-oauth2-orchestration-quarkus/acme-financial-service/pom.xml
 @@ -10,13 +10,13 @@
    <artifactId>acme-financial-service</artifactId>
    <name>Kogito Example :: Serverless Workflow Oauth2 Orchestration Example :: ACME Financial Service</name>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -5289,18 +5289,18 @@ index 725d728da..b253215fe 100644
  /**
   * Emulates the Acme Financial Services database, implementation and maintenance of this DB
 diff --git a/serverless-workflow-examples/serverless-workflow-oauth2-orchestration-quarkus/currency-exchange-workflow/pom.xml b/serverless-workflow-examples/serverless-workflow-oauth2-orchestration-quarkus/currency-exchange-workflow/pom.xml
-index 68578e014..b7f310a7f 100644
+index e0132a7d4..b7f310a7f 100644
 --- a/serverless-workflow-examples/serverless-workflow-oauth2-orchestration-quarkus/currency-exchange-workflow/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-oauth2-orchestration-quarkus/currency-exchange-workflow/pom.xml
 @@ -12,13 +12,13 @@
    <name>Kogito Example :: Serverless Workflow Oauth2 Orchestration Example :: Currency Exchange</name>
  
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -5323,18 +5323,18 @@ index 335f6f86a..903e39aef 100644
  import org.slf4j.Logger;
  import org.slf4j.LoggerFactory;
 diff --git a/serverless-workflow-examples/serverless-workflow-openvino-quarkus/pom.xml b/serverless-workflow-examples/serverless-workflow-openvino-quarkus/pom.xml
-index 549de9e67..e3016358b 100644
+index f9f8962f0..e3016358b 100644
 --- a/serverless-workflow-examples/serverless-workflow-openvino-quarkus/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-openvino-quarkus/pom.xml
 @@ -10,13 +10,13 @@
    <name>Kogito Example :: Serverless Workflow Openvino :: Quarkus</name>
    <description>Kogito Serverless Workflow OpenVino Example - Quarkus</description>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -5344,18 +5344,18 @@ index 549de9e67..e3016358b 100644
      <version.exec.plugin>1.6.0</version.exec.plugin>
      <version.compiler.plugin>3.8.1</version.compiler.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-order-processing/pom.xml b/serverless-workflow-examples/serverless-workflow-order-processing/pom.xml
-index b3213bf87..77a15e8cf 100644
+index 101b80b76..77a15e8cf 100644
 --- a/serverless-workflow-examples/serverless-workflow-order-processing/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-order-processing/pom.xml
 @@ -11,13 +11,13 @@
  
    <name>Kogito Example :: Serverless Workflow Order Processing</name>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -5378,18 +5378,18 @@ index 5426850f6..38aafc756 100644
  import org.junit.jupiter.api.AfterAll;
  import org.junit.jupiter.api.BeforeAll;
 diff --git a/serverless-workflow-examples/serverless-workflow-parallel-execution/pom.xml b/serverless-workflow-examples/serverless-workflow-parallel-execution/pom.xml
-index b2d250e49..16804f95a 100644
+index f8d635e57..16804f95a 100644
 --- a/serverless-workflow-examples/serverless-workflow-parallel-execution/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-parallel-execution/pom.xml
 @@ -12,14 +12,14 @@
      <description>Kogito Serverless Workflow Example - Quarkus</description>
  
      <properties>
--        <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-        <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +        <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
          <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
          <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--        <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-        <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +        <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
          <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
          <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -5401,18 +5401,18 @@ index b2d250e49..16804f95a 100644
          <version.compiler.plugin>3.8.1</version.compiler.plugin>
          <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-python-quarkus/pom.xml b/serverless-workflow-examples/serverless-workflow-python-quarkus/pom.xml
-index 61504e61c..162da1ab5 100644
+index 850e11d5b..162da1ab5 100644
 --- a/serverless-workflow-examples/serverless-workflow-python-quarkus/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-python-quarkus/pom.xml
 @@ -10,13 +10,13 @@
    <name>Kogito Example :: Serverless Workflow Python :: Quarkus</name>
    <description>Kogito Serverless Workflow Python Example - Quarkus</description>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -5422,18 +5422,18 @@ index 61504e61c..162da1ab5 100644
      <version.exec.plugin>1.6.0</version.exec.plugin>
      <version.compiler.plugin>3.8.1</version.compiler.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-qas-service-showcase/query-answer-service/pom.xml b/serverless-workflow-examples/serverless-workflow-qas-service-showcase/query-answer-service/pom.xml
-index f4b3bd3af..4152dd1c4 100644
+index 1ec7e7629..4152dd1c4 100644
 --- a/serverless-workflow-examples/serverless-workflow-qas-service-showcase/query-answer-service/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-qas-service-showcase/query-answer-service/pom.xml
 @@ -11,13 +11,13 @@
    <artifactId>query-answer-service</artifactId>
    <name>Kogito Example :: Serverless Workflow Query and Answer :: Workflow Service</name>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -5527,18 +5527,18 @@ index 9de564150..74d52d35b 100644
  public class WireMockQueryServiceResource implements QuarkusTestResourceLifecycleManager {
  
 diff --git a/serverless-workflow-examples/serverless-workflow-qas-service-showcase/query-service/pom.xml b/serverless-workflow-examples/serverless-workflow-qas-service-showcase/query-service/pom.xml
-index f11ff3de0..4b6b3b701 100644
+index 322691ea6..4b6b3b701 100644
 --- a/serverless-workflow-examples/serverless-workflow-qas-service-showcase/query-service/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-qas-service-showcase/query-service/pom.xml
 @@ -11,14 +11,14 @@
    <artifactId>query-service</artifactId>
    <name>Kogito Example :: Serverless Workflow Query and Answer :: Query Service</name>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>    
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -5626,18 +5626,18 @@ index b9cd6ca68..711ab3d1e 100644
  import org.eclipse.microprofile.reactive.messaging.Channel;
  import org.eclipse.microprofile.reactive.messaging.Emitter;
 diff --git a/serverless-workflow-examples/serverless-workflow-saga-quarkus/pom.xml b/serverless-workflow-examples/serverless-workflow-saga-quarkus/pom.xml
-index b225e1146..4fcd0924a 100644
+index ddc08d91b..4fcd0924a 100644
 --- a/serverless-workflow-examples/serverless-workflow-saga-quarkus/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-saga-quarkus/pom.xml
 @@ -10,13 +10,13 @@
    <description>How to implement Saga with a Serverless Workflow</description>
  
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -5718,18 +5718,18 @@ index eb3f3d82c..dc25daab8 100644
  import org.slf4j.Logger;
  import org.slf4j.LoggerFactory;
 diff --git a/serverless-workflow-examples/serverless-workflow-service-calls-quarkus/pom.xml b/serverless-workflow-examples/serverless-workflow-service-calls-quarkus/pom.xml
-index c1e5147ee..8b3f1d9d3 100644
+index d15fe8e64..8b3f1d9d3 100644
 --- a/serverless-workflow-examples/serverless-workflow-service-calls-quarkus/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-service-calls-quarkus/pom.xml
 @@ -10,13 +10,13 @@
    <name>Kogito Example :: Serverless Workflow Service Calls :: Quarkus</name>
    <description>Kogito Serverless Workflow Example - Quarkus</description>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -5792,18 +5792,18 @@ index 336414272..76521feee 100644
  import java.util.Map;
  
 diff --git a/serverless-workflow-examples/serverless-workflow-stock-profit/pom.xml b/serverless-workflow-examples/serverless-workflow-stock-profit/pom.xml
-index 0e2eec1dc..d7531a2f2 100644
+index 730e56f86..d7531a2f2 100644
 --- a/serverless-workflow-examples/serverless-workflow-stock-profit/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-stock-profit/pom.xml
 @@ -14,13 +14,13 @@
          <module>fake-stock-service</module>
      </modules>
      <properties>
--        <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-        <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +        <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
          <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
          <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--        <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-        <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +        <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
          <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
          <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -5853,18 +5853,18 @@ index 28f7461ba..f0e4fd61d 100644
  import java.math.RoundingMode;
  import java.text.NumberFormat;
 diff --git a/serverless-workflow-examples/serverless-workflow-temperature-conversion/conversion-workflow-full/pom.xml b/serverless-workflow-examples/serverless-workflow-temperature-conversion/conversion-workflow-full/pom.xml
-index 19b50d7ee..d1e45b1ff 100644
+index f3ee8d2f9..d1e45b1ff 100644
 --- a/serverless-workflow-examples/serverless-workflow-temperature-conversion/conversion-workflow-full/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-temperature-conversion/conversion-workflow-full/pom.xml
 @@ -10,13 +10,13 @@
    <artifactId>conversion-workflow-full</artifactId>
    <name>Kogito Example :: Serverless Workflow Temperature Conversion :: Conversion Full Service</name>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -5874,18 +5874,18 @@ index 19b50d7ee..d1e45b1ff 100644
      <maven.compiler.release>11</maven.compiler.release>
      <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-temperature-conversion/conversion-workflow-function/pom.xml b/serverless-workflow-examples/serverless-workflow-temperature-conversion/conversion-workflow-function/pom.xml
-index 226634f40..e7f5ac799 100644
+index a0a03fe0b..e7f5ac799 100644
 --- a/serverless-workflow-examples/serverless-workflow-temperature-conversion/conversion-workflow-function/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-temperature-conversion/conversion-workflow-function/pom.xml
 @@ -10,13 +10,13 @@
    <artifactId>conversion-workflow-function</artifactId>
    <name>Kogito Example :: Serverless Workflow Temperature Conversion :: Conversion Function Service</name>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -5895,18 +5895,18 @@ index 226634f40..e7f5ac799 100644
      <maven.compiler.release>11</maven.compiler.release>
      <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-temperature-conversion/conversion-workflow-spec/pom.xml b/serverless-workflow-examples/serverless-workflow-temperature-conversion/conversion-workflow-spec/pom.xml
-index 85e69a203..9e56146b4 100644
+index 8db50c271..9e56146b4 100644
 --- a/serverless-workflow-examples/serverless-workflow-temperature-conversion/conversion-workflow-spec/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-temperature-conversion/conversion-workflow-spec/pom.xml
 @@ -10,13 +10,13 @@
    <artifactId>conversion-workflow-spec</artifactId>
    <name>Kogito Example :: Serverless Workflow Temperature Conversion :: Conversion Spec Service</name>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -5916,18 +5916,18 @@ index 85e69a203..9e56146b4 100644
      <maven.compiler.release>11</maven.compiler.release>
      <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-temperature-conversion/conversion-workflow/pom.xml b/serverless-workflow-examples/serverless-workflow-temperature-conversion/conversion-workflow/pom.xml
-index 7985d0edf..1a4352b34 100644
+index 29686f3ca..1a4352b34 100644
 --- a/serverless-workflow-examples/serverless-workflow-temperature-conversion/conversion-workflow/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-temperature-conversion/conversion-workflow/pom.xml
 @@ -10,13 +10,13 @@
    <artifactId>conversion-workflow</artifactId>
    <name>Kogito Example :: Serverless Workflow Temperature Conversion :: Conversion Service</name>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -5937,18 +5937,18 @@ index 7985d0edf..1a4352b34 100644
      <maven.compiler.release>11</maven.compiler.release>
      <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-temperature-conversion/multiplication-service/pom.xml b/serverless-workflow-examples/serverless-workflow-temperature-conversion/multiplication-service/pom.xml
-index 8633beaa7..7f0331124 100644
+index 5d9b652af..7f0331124 100644
 --- a/serverless-workflow-examples/serverless-workflow-temperature-conversion/multiplication-service/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-temperature-conversion/multiplication-service/pom.xml
 @@ -10,10 +10,10 @@
    <artifactId>multiplication-service</artifactId>
    <name>Kogito Example :: Serverless Workflow Temperature Conversion :: Multiplication Service</name>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <version.compiler.plugin>3.8.1</version.compiler.plugin>
      <maven.compiler.release>11</maven.compiler.release>
@@ -5979,18 +5979,18 @@ index b88993082..2cd120fc4 100644
  import org.eclipse.microprofile.openapi.annotations.responses.APIResponseSchema;
  
 diff --git a/serverless-workflow-examples/serverless-workflow-temperature-conversion/subtraction-service/pom.xml b/serverless-workflow-examples/serverless-workflow-temperature-conversion/subtraction-service/pom.xml
-index 31759c381..33bb58bbc 100644
+index 50157e0d9..33bb58bbc 100644
 --- a/serverless-workflow-examples/serverless-workflow-temperature-conversion/subtraction-service/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-temperature-conversion/subtraction-service/pom.xml
 @@ -10,10 +10,10 @@
    <artifactId>subtraction-service</artifactId>
    <name>Kogito Example :: Serverless Workflow Temperature Conversion :: Subtraction Service</name>
    <properties>
--    <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +    <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <version.compiler.plugin>3.8.1</version.compiler.plugin>
      <maven.compiler.release>11</maven.compiler.release>
@@ -6021,18 +6021,18 @@ index fbddc22c5..671a17c91 100644
  import org.eclipse.microprofile.openapi.annotations.responses.APIResponseSchema;
  
 diff --git a/serverless-workflow-examples/serverless-workflow-testing-with-rest-assured/pom.xml b/serverless-workflow-examples/serverless-workflow-testing-with-rest-assured/pom.xml
-index 8796eaf6b..57f37d0a2 100644
+index 29a3d7a38..57f37d0a2 100644
 --- a/serverless-workflow-examples/serverless-workflow-testing-with-rest-assured/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-testing-with-rest-assured/pom.xml
 @@ -11,13 +11,13 @@
      <name>Kogito Example :: Serverless Workflow Testing with REST Assured :: Quarkus</name>
      <description>Kogito Serverless Workflow Example - Quarkus</description>
      <properties>
--        <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
+-        <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
 +        <quarkus-plugin.version>3.0.0.Final</quarkus-plugin.version>
          <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
          <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--        <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-        <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +        <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
          <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
          <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -6042,14 +6042,14 @@ index 8796eaf6b..57f37d0a2 100644
          <version.compiler.plugin>3.8.1</version.compiler.plugin>
          <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-embedded/pom.xml b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-embedded/pom.xml
-index a2b717ea7..d8a9582be 100644
+index 9ecc52d5a..d8a9582be 100644
 --- a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-embedded/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-embedded/pom.xml
 @@ -13,10 +13,10 @@
      <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -6102,14 +6102,14 @@ index b1f5f1026..153009579 100644
  import io.vertx.core.http.HttpMethod;
  import io.vertx.ext.web.Router;
 diff --git a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-extended/pom.xml b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-extended/pom.xml
-index f3f1985c6..bb27a5aa8 100644
+index 1d26d223f..bb27a5aa8 100644
 --- a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-extended/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-extended/pom.xml
 @@ -13,10 +13,10 @@
      <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
@@ -6164,14 +6164,14 @@ index b1f5f1026..153009579 100644
  import io.vertx.core.http.HttpMethod;
  import io.vertx.ext.web.Router;
 diff --git a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/pom.xml b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/pom.xml
-index 0e3126383..600c3e642 100644
+index d4cc05f68..600c3e642 100644
 --- a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/pom.xml
 @@ -13,10 +13,10 @@
      <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
--    <quarkus.platform.version>2.16.9.Final</quarkus.platform.version>
+-    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
