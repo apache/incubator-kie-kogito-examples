@@ -16,6 +16,6 @@ You will need:
 ### Compile and Run 
 
 ```sh
-mvn compile exec:java -Dexec.mainClass="org.kie.kogito.examples.sw.greeting.GreeterService"
+mvn compile exec:java -Dexec.mainClass="greeting.sw.org.acme.examples.GreeterService"
 ```
 

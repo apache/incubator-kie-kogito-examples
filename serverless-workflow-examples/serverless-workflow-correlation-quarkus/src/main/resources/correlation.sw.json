@@ -50,7 +50,7 @@
     {
       "name": "complete",
       "type": "custom",
-      "operation": "service:java:org.kie.kogito.examples.EventsService::complete"
+      "operation": "service:java:org.acme.examples.EventsService::complete"
     }
   ],
   "states": [

@@ -15,12 +15,12 @@
     {
       "name": "isEven",
       "type": "custom",
-      "operation": "service:java:org.kie.kogito.examples.EvenService::isEven"
+      "operation": "service:java:org.acme.examples.EvenService::isEven"
     },
     {
       "name": "isSqr",
       "type": "custom",
-      "operation": "service:java:org.kie.kogito.examples.EvenService::isSquare"
+      "operation": "service:java:org.acme.examples.EvenService::isSquare"
     },
     {
       "name": "printMessage",

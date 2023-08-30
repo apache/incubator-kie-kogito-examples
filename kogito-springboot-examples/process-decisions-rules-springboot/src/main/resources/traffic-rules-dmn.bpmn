@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_FcMNgJTYEDuJVMby5BR7SQ" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd http://www.omg.org/spec/DD/20100524/DC DC.xsd http://www.omg.org/spec/DD/20100524/DI DI.xsd " exporter="jBPM Process Modeler" exporterVersion="2.0" targetNamespace="http://www.omg.org/bpmn20">
   <bpmn2:itemDefinition id="_driverIdItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="_violationItem" structureRef="org.kie.kogito.traffic.Violation"/>
-  <bpmn2:itemDefinition id="_driverItem" structureRef="org.kie.kogito.traffic.licensevalidation.Driver"/>
-  <bpmn2:itemDefinition id="_fineItem" structureRef="org.kie.kogito.traffic.Fine"/>
-  <bpmn2:itemDefinition id="_validatedItem" structureRef="org.kie.kogito.traffic.licensevalidated.Validated"/>
+  <bpmn2:itemDefinition id="_violationItem" structureRef="org.acme.traffic.Violation"/>
+  <bpmn2:itemDefinition id="_driverItem" structureRef="org.acme.traffic.licensevalidation.Driver"/>
+  <bpmn2:itemDefinition id="_fineItem" structureRef="org.acme.traffic.Fine"/>
+  <bpmn2:itemDefinition id="_validatedItem" structureRef="org.acme.traffic.licensevalidated.Validated"/>
   <bpmn2:itemDefinition id="__B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_namespaceInputXItem" structureRef="java.lang.String"/>
   <bpmn2:itemDefinition id="__B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_modelInputXItem" structureRef="java.lang.String"/>
   <bpmn2:itemDefinition id="__B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_decisionInputXItem" structureRef="java.lang.String"/>
-  <bpmn2:itemDefinition id="__B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_ViolationInputXItem" structureRef="org.kie.kogito.traffic.Violation"/>
-  <bpmn2:itemDefinition id="__B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_DriverInputXItem" structureRef="org.kie.kogito.traffic.licensevalidation.Driver"/>
-  <bpmn2:itemDefinition id="__B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_ValidatedOutputXItem" structureRef="org.kie.kogito.traffic.licensevalidated.Validated"/>
-  <bpmn2:itemDefinition id="__B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_FineOutputXItem" structureRef="org.kie.kogito.traffic.Fine"/>
+  <bpmn2:itemDefinition id="__B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_ViolationInputXItem" structureRef="org.acme.traffic.Violation"/>
+  <bpmn2:itemDefinition id="__B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_DriverInputXItem" structureRef="org.acme.traffic.licensevalidation.Driver"/>
+  <bpmn2:itemDefinition id="__B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_ValidatedOutputXItem" structureRef="org.acme.traffic.licensevalidated.Validated"/>
+  <bpmn2:itemDefinition id="__B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_FineOutputXItem" structureRef="org.acme.traffic.Fine"/>
   <bpmn2:itemDefinition id="__93FFD317-476E-4624-84EF-994617572560_driverIdInputXItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="__93FFD317-476E-4624-84EF-994617572560_responseOutputXItem" structureRef="org.kie.kogito.traffic.licensevalidation.Driver"/>
+  <bpmn2:itemDefinition id="__93FFD317-476E-4624-84EF-994617572560_responseOutputXItem" structureRef="org.acme.traffic.licensevalidation.Driver"/>
   <bpmn2:itemDefinition id="__95EFED1F-73F8-47E7-9604-A81EFE5DE8F5_namespaceInputXItem" structureRef="java.lang.String"/>
   <bpmn2:itemDefinition id="__95EFED1F-73F8-47E7-9604-A81EFE5DE8F5_modelInputXItem" structureRef="java.lang.String"/>
   <bpmn2:itemDefinition id="__95EFED1F-73F8-47E7-9604-A81EFE5DE8F5_decisionInputXItem" structureRef="java.lang.String"/>
-  <bpmn2:itemDefinition id="__95EFED1F-73F8-47E7-9604-A81EFE5DE8F5_driverInputXItem" structureRef="org.kie.kogito.traffic.licensevalidation.Driver"/>
-  <bpmn2:itemDefinition id="__95EFED1F-73F8-47E7-9604-A81EFE5DE8F5_driverOutputXItem" structureRef="org.kie.kogito.traffic.licensevalidation.Driver"/>
+  <bpmn2:itemDefinition id="__95EFED1F-73F8-47E7-9604-A81EFE5DE8F5_driverInputXItem" structureRef="org.acme.traffic.licensevalidation.Driver"/>
+  <bpmn2:itemDefinition id="__95EFED1F-73F8-47E7-9604-A81EFE5DE8F5_driverOutputXItem" structureRef="org.acme.traffic.licensevalidation.Driver"/>
   <bpmn2:itemDefinition id="__3F719C8E-DA3F-46F8-B8F2-5F04DB132E9C_namespaceInputXItem" structureRef="java.lang.String"/>
   <bpmn2:itemDefinition id="__3F719C8E-DA3F-46F8-B8F2-5F04DB132E9C_modelInputXItem" structureRef="java.lang.String"/>
   <bpmn2:itemDefinition id="__3F719C8E-DA3F-46F8-B8F2-5F04DB132E9C_decisionInputXItem" structureRef="java.lang.String"/>
-  <bpmn2:itemDefinition id="__3F719C8E-DA3F-46F8-B8F2-5F04DB132E9C_validatedInputXItem" structureRef="org.kie.kogito.traffic.licensevalidated.Validated"/>
-  <bpmn2:itemDefinition id="__3F719C8E-DA3F-46F8-B8F2-5F04DB132E9C_validatedOutputXItem" structureRef="org.kie.kogito.traffic.licensevalidated.Validated"/>
-  <bpmn2:interface id="_93FFD317-476E-4624-84EF-994617572560_ServiceInterface" name="org.kie.kogito.traffic.DriverService" implementationRef="org.kie.kogito.traffic.DriverService">
+  <bpmn2:itemDefinition id="__3F719C8E-DA3F-46F8-B8F2-5F04DB132E9C_validatedInputXItem" structureRef="org.acme.traffic.licensevalidated.Validated"/>
+  <bpmn2:itemDefinition id="__3F719C8E-DA3F-46F8-B8F2-5F04DB132E9C_validatedOutputXItem" structureRef="org.acme.traffic.licensevalidated.Validated"/>
+  <bpmn2:interface id="_93FFD317-476E-4624-84EF-994617572560_ServiceInterface" name="org.acme.traffic.DriverService" implementationRef="org.acme.traffic.DriverService">
     <bpmn2:operation id="_93FFD317-476E-4624-84EF-994617572560_ServiceOperation" name="getDriver" implementationRef="getDriver"/>
   </bpmn2:interface>
   <bpmn2:collaboration id="_835BF56B-F802-4ABD-8F1A-F6110E669D6C" name="Default Collaboration">
     <bpmn2:participant id="_12DAED3F-4A2C-40B1-9716-A16BA1A05F2D" name="Pool Participant" processRef="traffic"/>
   </bpmn2:collaboration>
-  <bpmn2:process id="traffic" drools:packageName="com.example" drools:version="1.0" drools:adHoc="false" name="traffic" isExecutable="true" processType="Public">
+  <bpmn2:process id="traffic" drools:packageName="org.acme" drools:version="1.0" drools:adHoc="false" name="traffic" isExecutable="true" processType="Public">
     <bpmn2:property id="driverId" itemSubjectRef="_driverIdItem" name="driverId"/>
     <bpmn2:property id="violation" itemSubjectRef="_violationItem" name="violation"/>
     <bpmn2:property id="driver" itemSubjectRef="_driverItem" name="driver"/>
@@ -114,7 +114,7 @@
         </drools:metaData>
       </bpmn2:extensionElements>
     </bpmn2:sequenceFlow>
-    <bpmn2:businessRuleTask id="_3F719C8E-DA3F-46F8-B8F2-5F04DB132E9C" drools:ruleFlowGroup="unit:org.kie.kogito.traffic.licensevalidated.LicenseValidatedService" name="LicenseValidated&#10;DRL" implementation="http://www.jboss.org/drools/rule">
+    <bpmn2:businessRuleTask id="_3F719C8E-DA3F-46F8-B8F2-5F04DB132E9C" drools:ruleFlowGroup="unit:org.acme.traffic.licensevalidated.LicenseValidatedService" name="LicenseValidated&#10;DRL" implementation="http://www.jboss.org/drools/rule">
       <bpmn2:extensionElements>
         <drools:metaData name="elementname">
           <drools:metaValue><![CDATA[LicenseValidated
@@ -124,8 +124,8 @@ DRL]]></drools:metaValue>
       <bpmn2:incoming>_BB963FF4-CF17-4CA0-A727-9AFC2BE17C29</bpmn2:incoming>
       <bpmn2:outgoing>_E7EF578E-3735-42D9-BF0C-8CCBF398D41C</bpmn2:outgoing>
       <bpmn2:ioSpecification>
-        <bpmn2:dataInput id="_3F719C8E-DA3F-46F8-B8F2-5F04DB132E9C_validatedInputX" drools:dtype="org.kie.kogito.traffic.licensevalidated.Validated" itemSubjectRef="__3F719C8E-DA3F-46F8-B8F2-5F04DB132E9C_validatedInputXItem" name="validated"/>
-        <bpmn2:dataOutput id="_3F719C8E-DA3F-46F8-B8F2-5F04DB132E9C_validatedOutputX" drools:dtype="org.kie.kogito.traffic.licensevalidated.Validated" itemSubjectRef="__3F719C8E-DA3F-46F8-B8F2-5F04DB132E9C_validatedOutputXItem" name="validated"/>
+        <bpmn2:dataInput id="_3F719C8E-DA3F-46F8-B8F2-5F04DB132E9C_validatedInputX" drools:dtype="org.acme.traffic.licensevalidated.Validated" itemSubjectRef="__3F719C8E-DA3F-46F8-B8F2-5F04DB132E9C_validatedInputXItem" name="validated"/>
+        <bpmn2:dataOutput id="_3F719C8E-DA3F-46F8-B8F2-5F04DB132E9C_validatedOutputX" drools:dtype="org.acme.traffic.licensevalidated.Validated" itemSubjectRef="__3F719C8E-DA3F-46F8-B8F2-5F04DB132E9C_validatedOutputXItem" name="validated"/>
         <bpmn2:inputSet>
           <bpmn2:dataInputRefs>_3F719C8E-DA3F-46F8-B8F2-5F04DB132E9C_validatedInputX</bpmn2:dataInputRefs>
         </bpmn2:inputSet>
@@ -155,7 +155,7 @@ DRL]]></drools:metaValue>
       <bpmn2:outgoing>_D2252EFF-5EC4-4D61-B797-653F71652627</bpmn2:outgoing>
       <bpmn2:outgoing>_044AA388-325A-45DE-B783-4F48421B788B</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
-    <bpmn2:businessRuleTask id="_95EFED1F-73F8-47E7-9604-A81EFE5DE8F5" drools:ruleFlowGroup="unit:org.kie.kogito.traffic.licensevalidation.LicenseValidationService" name="LicenseValidation&#10;DRL" implementation="http://www.jboss.org/drools/rule">
+    <bpmn2:businessRuleTask id="_95EFED1F-73F8-47E7-9604-A81EFE5DE8F5" drools:ruleFlowGroup="unit:org.acme.traffic.licensevalidation.LicenseValidationService" name="LicenseValidation&#10;DRL" implementation="http://www.jboss.org/drools/rule">
       <bpmn2:extensionElements>
         <drools:metaData name="elementname">
           <drools:metaValue><![CDATA[LicenseValidation
@@ -165,8 +165,8 @@ DRL]]></drools:metaValue>
       <bpmn2:incoming>_A19108FE-08A2-4E80-B7A8-0254C49209A6</bpmn2:incoming>
       <bpmn2:outgoing>_D3E2F4B7-7739-452F-8D55-0C4F169D4A44</bpmn2:outgoing>
       <bpmn2:ioSpecification>
-        <bpmn2:dataInput id="_95EFED1F-73F8-47E7-9604-A81EFE5DE8F5_driverInputX" drools:dtype="org.kie.kogito.traffic.licensevalidation.Driver" itemSubjectRef="__95EFED1F-73F8-47E7-9604-A81EFE5DE8F5_driverInputXItem" name="driver"/>
-        <bpmn2:dataOutput id="_95EFED1F-73F8-47E7-9604-A81EFE5DE8F5_driverOutputX" drools:dtype="org.kie.kogito.traffic.licensevalidation.Driver" itemSubjectRef="__95EFED1F-73F8-47E7-9604-A81EFE5DE8F5_driverOutputXItem" name="driver"/>
+        <bpmn2:dataInput id="_95EFED1F-73F8-47E7-9604-A81EFE5DE8F5_driverInputX" drools:dtype="org.acme.traffic.licensevalidation.Driver" itemSubjectRef="__95EFED1F-73F8-47E7-9604-A81EFE5DE8F5_driverInputXItem" name="driver"/>
+        <bpmn2:dataOutput id="_95EFED1F-73F8-47E7-9604-A81EFE5DE8F5_driverOutputX" drools:dtype="org.acme.traffic.licensevalidation.Driver" itemSubjectRef="__95EFED1F-73F8-47E7-9604-A81EFE5DE8F5_driverOutputXItem" name="driver"/>
         <bpmn2:inputSet>
           <bpmn2:dataInputRefs>_95EFED1F-73F8-47E7-9604-A81EFE5DE8F5_driverInputX</bpmn2:dataInputRefs>
         </bpmn2:inputSet>
@@ -183,7 +183,7 @@ DRL]]></drools:metaValue>
         <bpmn2:targetRef>driver</bpmn2:targetRef>
       </bpmn2:dataOutputAssociation>
     </bpmn2:businessRuleTask>
-    <bpmn2:serviceTask id="_93FFD317-476E-4624-84EF-994617572560" drools:serviceimplementation="Java" drools:serviceinterface="org.kie.kogito.traffic.DriverService" drools:serviceoperation="getDriver" name="Get Driver Details" implementation="Java" operationRef="_93FFD317-476E-4624-84EF-994617572560_ServiceOperation">
+    <bpmn2:serviceTask id="_93FFD317-476E-4624-84EF-994617572560" drools:serviceimplementation="Java" drools:serviceinterface="org.acme.traffic.DriverService" drools:serviceoperation="getDriver" name="Get Driver Details" implementation="Java" operationRef="_93FFD317-476E-4624-84EF-994617572560_ServiceOperation">
       <bpmn2:extensionElements>
         <drools:metaData name="elementname">
           <drools:metaValue><![CDATA[Get Driver Details]]></drools:metaValue>
@@ -193,7 +193,7 @@ DRL]]></drools:metaValue>
       <bpmn2:outgoing>_A19108FE-08A2-4E80-B7A8-0254C49209A6</bpmn2:outgoing>
       <bpmn2:ioSpecification>
         <bpmn2:dataInput id="_93FFD317-476E-4624-84EF-994617572560_driverIdInputX" drools:dtype="String" itemSubjectRef="__93FFD317-476E-4624-84EF-994617572560_driverIdInputXItem" name="driverId"/>
-        <bpmn2:dataOutput id="_93FFD317-476E-4624-84EF-994617572560_responseOutputX" drools:dtype="org.kie.kogito.traffic.licensevalidation.Driver" itemSubjectRef="__93FFD317-476E-4624-84EF-994617572560_responseOutputXItem" name="response"/>
+        <bpmn2:dataOutput id="_93FFD317-476E-4624-84EF-994617572560_responseOutputX" drools:dtype="org.acme.traffic.licensevalidation.Driver" itemSubjectRef="__93FFD317-476E-4624-84EF-994617572560_responseOutputXItem" name="response"/>
         <bpmn2:inputSet>
           <bpmn2:dataInputRefs>_93FFD317-476E-4624-84EF-994617572560_driverIdInputX</bpmn2:dataInputRefs>
         </bpmn2:inputSet>
@@ -261,10 +261,10 @@ DMN]]></drools:metaValue>
         <bpmn2:dataInput id="_B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_namespaceInputX" drools:dtype="java.lang.String" itemSubjectRef="__B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_namespaceInputXItem" name="namespace"/>
         <bpmn2:dataInput id="_B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_decisionInputX" drools:dtype="java.lang.String" itemSubjectRef="__B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_decisionInputXItem" name="decision"/>
         <bpmn2:dataInput id="_B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_modelInputX" drools:dtype="java.lang.String" itemSubjectRef="__B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_modelInputXItem" name="model"/>
-        <bpmn2:dataInput id="_B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_ViolationInputX" drools:dtype="org.kie.kogito.traffic.Violation" itemSubjectRef="__B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_ViolationInputXItem" name="Violation"/>
-        <bpmn2:dataInput id="_B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_DriverInputX" drools:dtype="org.kie.kogito.traffic.licensevalidation.Driver" itemSubjectRef="__B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_DriverInputXItem" name="Driver"/>
-        <bpmn2:dataOutput id="_B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_ValidatedOutputX" drools:dtype="org.kie.kogito.traffic.licensevalidated.Validated" itemSubjectRef="__B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_ValidatedOutputXItem" name="Validated"/>
-        <bpmn2:dataOutput id="_B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_FineOutputX" drools:dtype="org.kie.kogito.traffic.Fine" itemSubjectRef="__B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_FineOutputXItem" name="Fine"/>
+        <bpmn2:dataInput id="_B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_ViolationInputX" drools:dtype="org.acme.traffic.Violation" itemSubjectRef="__B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_ViolationInputXItem" name="Violation"/>
+        <bpmn2:dataInput id="_B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_DriverInputX" drools:dtype="org.acme.traffic.licensevalidation.Driver" itemSubjectRef="__B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_DriverInputXItem" name="Driver"/>
+        <bpmn2:dataOutput id="_B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_ValidatedOutputX" drools:dtype="org.acme.traffic.licensevalidated.Validated" itemSubjectRef="__B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_ValidatedOutputXItem" name="Validated"/>
+        <bpmn2:dataOutput id="_B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_FineOutputX" drools:dtype="org.acme.traffic.Fine" itemSubjectRef="__B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_FineOutputXItem" name="Fine"/>
         <bpmn2:inputSet>
           <bpmn2:dataInputRefs>_B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_namespaceInputX</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>_B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_decisionInputX</bpmn2:dataInputRefs>

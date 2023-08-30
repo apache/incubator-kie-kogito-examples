@@ -4,7 +4,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.kie.kogito.examples</groupId>
+        <groupId>org.acme.examples</groupId>
         <artifactId>serverless-workflow-greeting-rpc-quarkus</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
@@ -152,7 +152,7 @@
                                 <image>dev.local/${USER}/${project.artifactId}:${project.version}</image>
                             </to>
                             <container>
-                                <mainClass>org.kie.kogito.examples.sw.greeting.GreeterService</mainClass>
+                                <mainClass>org.acme.examples.sw.greeting.GreeterService</mainClass>
                             </container>
                         </configuration>
                     </plugin>

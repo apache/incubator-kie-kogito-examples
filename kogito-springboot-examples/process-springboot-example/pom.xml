@@ -4,13 +4,13 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.kie.kogito.examples</groupId>
+    <groupId>org.acme.examples</groupId>
     <artifactId>kogito-springboot-examples</artifactId>
     <version>2.0.0-SNAPSHOT</version>
   </parent>
 
   <artifactId>process-springboot-example</artifactId>
-  <name>Kogito Example :: Process and Spring Boot</name>
+  <name>Kogito Example :: Process Spring Boot Example</name>
   <description>Order management service</description>
 
   <properties>

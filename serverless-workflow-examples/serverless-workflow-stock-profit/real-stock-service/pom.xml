@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <artifactId>serverless-workflow-stock-profit</artifactId>
-    <groupId>org.kie.kogito.examples</groupId>
+    <groupId>org.acme.examples</groupId>
     <version>1.0-SNAPSHOT</version>
   </parent>
   <artifactId>real-stock-service</artifactId>

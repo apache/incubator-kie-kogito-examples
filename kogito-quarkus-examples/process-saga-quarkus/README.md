@@ -146,10 +146,10 @@ Response example:
 In the console executing the application you can check the log it with the executed steps.
 
 ```text
-17:16:58:864 INFO  [org.kie.kogito.examples.StockService] Created Stock for 12345678 with Id: 8ab1ac13-38d0-49e6-ab40-1edd2dc39922
-17:16:58:865 INFO  [org.kie.kogito.examples.PaymentService] Created Payment for 12345678 with Id: 2bfc044a-ccb4-4072-a26e-5a533d835257
-17:16:58:865 INFO  [org.kie.kogito.examples.ShippingService] Created Shipping for 12345678 with Id: 84a45015-c98b-4e08-b4cd-cf05a19b87e1
-17:16:58:865 INFO  [org.kie.kogito.examples.OrderService] Success Order 12345678
+17:16:58:864 INFO  [org.acme.examples.StockService] Created Stock for 12345678 with Id: 8ab1ac13-38d0-49e6-ab40-1edd2dc39922
+17:16:58:865 INFO  [org.acme.examples.PaymentService] Created Payment for 12345678 with Id: 2bfc044a-ccb4-4072-a26e-5a533d835257
+17:16:58:865 INFO  [org.acme.examples.ShippingService] Created Shipping for 12345678 with Id: 84a45015-c98b-4e08-b4cd-cf05a19b87e1
+17:16:58:865 INFO  [org.acme.examples.OrderService] Success Order 12345678
 ```
 
 #### Simulating errors to activate the compensation flows
@@ -200,13 +200,13 @@ Response example:
 In the console executing the application you can check the log it with the executed steps.
 
 ```text
-17:16:17:723 INFO  [org.kie.kogito.examples.StockService] Created Stock for 12345678 with Id: 9098daa2-f40f-4231-995a-1c7d159df190
-17:16:17:724 INFO  [org.kie.kogito.examples.PaymentService] Created Payment for 12345678 with Id: d6ac4086-efe9-4a9e-849c-2b6d48dbc1f0
-17:16:17:724 INFO  [org.kie.kogito.examples.ShippingService] Created Shipping for 12345678 with Id: 39c40aa1-10af-42ad-8ba2-b8dd9c6279e1
-17:16:17:746 WARN  [org.kie.kogito.examples.ShippingService] Cancel Shipping for 39c40aa1-10af-42ad-8ba2-b8dd9c6279e1
-17:16:17:746 WARN  [org.kie.kogito.examples.PaymentService] Cancel Payment for d6ac4086-efe9-4a9e-849c-2b6d48dbc1f0
-17:16:17:747 WARN  [org.kie.kogito.examples.StockService] Cancel Stock for 9098daa2-f40f-4231-995a-1c7d159df190
-17:16:17:747 WARN  [org.kie.kogito.examples.OrderService] Failed Order 12345678
+17:16:17:723 INFO  [org.acme.examples.StockService] Created Stock for 12345678 with Id: 9098daa2-f40f-4231-995a-1c7d159df190
+17:16:17:724 INFO  [org.acme.examples.PaymentService] Created Payment for 12345678 with Id: d6ac4086-efe9-4a9e-849c-2b6d48dbc1f0
+17:16:17:724 INFO  [org.acme.examples.ShippingService] Created Shipping for 12345678 with Id: 39c40aa1-10af-42ad-8ba2-b8dd9c6279e1
+17:16:17:746 WARN  [org.acme.examples.ShippingService] Cancel Shipping for 39c40aa1-10af-42ad-8ba2-b8dd9c6279e1
+17:16:17:746 WARN  [org.acme.examples.PaymentService] Cancel Payment for d6ac4086-efe9-4a9e-849c-2b6d48dbc1f0
+17:16:17:747 WARN  [org.acme.examples.StockService] Cancel Stock for 9098daa2-f40f-4231-995a-1c7d159df190
+17:16:17:747 WARN  [org.acme.examples.OrderService] Failed Order 12345678
 ```
 
 ## Deploying with Kogito Operator

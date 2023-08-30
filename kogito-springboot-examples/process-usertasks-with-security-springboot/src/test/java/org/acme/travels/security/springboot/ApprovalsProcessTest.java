@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.acme.tests.KogitoInfinispanSpringbootApplication;
 import org.acme.travels.Address;
 import org.acme.travels.Traveller;
 import org.jbpm.process.instance.impl.humantask.HumanTaskTransition;
@@ -33,7 +34,6 @@ import org.kie.kogito.auth.SecurityPolicy;
 import org.kie.kogito.process.Process;
 import org.kie.kogito.process.ProcessInstance;
 import org.kie.kogito.process.WorkItem;
-import org.kie.kogito.tests.KogitoInfinispanSpringbootApplication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;

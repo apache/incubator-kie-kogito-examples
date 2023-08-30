@@ -58,9 +58,9 @@ Clone this repo if you haven't yet, edit the file [`src/main/resources/applicati
 and add the following data:
 
 ```properties
-org.kogito.examples.sw.github.service.key=<LOCAL PATH TO YOUR DER FILE>
-org.kogito.examples.sw.github.service.installation_id=<APP INSTALLATION ID>
-org.kogito.examples.sw.github.service.app_id=<APP ID>
+org.acme.examples.sw.github.service.key=<LOCAL PATH TO YOUR DER FILE>
+org.acme.examples.sw.github.service.installation_id=<APP INSTALLATION ID>
+org.acme.examples.sw.github.service.app_id=<APP ID>
 ``` 
 
 Replace `<LOCAL PATH TO YOUR DER FILE>` with the absolute path of the converted private key file (DER format).

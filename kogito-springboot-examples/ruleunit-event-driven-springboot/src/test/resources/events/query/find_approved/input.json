@@ -4,7 +4,7 @@
   "source": "SomeEventSource",
   "type": "RulesRequest",
   "subject": "TheSubject",
-  "kogitoruleunitid": "org.kie.kogito.queries.LoanUnit",
+  "kogitoruleunitid": "org.acme.queries.LoanUnit",
   "kogitoruleunitquery": "FindApproved",
   "data": {
     "maxAmount": 5000,

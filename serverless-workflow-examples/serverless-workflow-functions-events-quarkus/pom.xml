@@ -3,7 +3,7 @@
          xmlns="http://maven.apache.org/POM/4.0.0">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.kie.kogito.examples</groupId>
+  <groupId>org.acme.examples</groupId>
   <artifactId>serverless-workflow-functions-events-quarkus</artifactId>
   <version>1.0-SNAPSHOT</version>
 

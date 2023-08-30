@@ -32,13 +32,13 @@ These are the properties defined for the process, the most important one in this
 
 * #### Proces Variables
 
-The variables used in the process itself, but the focus in this example are the classes that are used to define the POJOs to interact the process with decisions, that are the [Violation](src/main/java/org/kie/kogito/traffic/Violation.java), [Driver](src/main/java/org/kie/kogito/traffic/Driver.java), [Fine](src/main/java/org/kie/kogito/traffic/Fine.java).
+The variables used in the process itself, but the focus in this example are the classes that are used to define the POJOs to interact the process with decisions, that are the [Violation](src/main/java/org/acme/traffic/Violation.java), [Driver](src/main/java/org/acme/traffic/Driver.java), [Fine](src/main/java/org/acme/traffic/Fine.java).
 
 <img src="docs/images/process-variables-embedded.png" width=300/>
 
 **Mapping data from Process to/from DMN**
 
-It is important to mention DMN for instance can define the Data Type in its structure, but we can align all attributes names in a Java class that is used as process variables, in case the attribute names contain spaces or are not following java conventions we can use [Jackson](https://github.com/FasterXML/jackson) annotations to make the process variable POJOs aligned with DMN data types, for instance in the [Violation](src/main/java/org/kie/kogito/traffic/Violation.java) class, where it is mapped the `speedLimit` attribute as `Speed Limit` using `@JsonProperty` annotation, in this case, this attribute from the process variable with Violation can be seamlessly integrated Violation Data Type defined in DMN.
+It is important to mention DMN for instance can define the Data Type in its structure, but we can align all attributes names in a Java class that is used as process variables, in case the attribute names contain spaces or are not following java conventions we can use [Jackson](https://github.com/FasterXML/jackson) annotations to make the process variable POJOs aligned with DMN data types, for instance in the [Violation](src/main/java/org/acme/traffic/Violation.java) class, where it is mapped the `speedLimit` attribute as `Speed Limit` using `@JsonProperty` annotation, in this case, this attribute from the process variable with Violation can be seamlessly integrated Violation Data Type defined in DMN.
 
 **Violation Data Type in DMN**
 
@@ -49,7 +49,7 @@ It is important to mention DMN for instance can define the Data Type in its stru
 
 Fetch for driver information, in this implementation it is just mocking a result, that simply fill with an expired license date in case the `driverId` is an odd number and with a valid date in case of an even number. In a real use case, it could be performing an external call to a service or a database to get this information.
 
-The service task implementation is done in the [DriverService](src/main/java/org/kie/kogito/traffic/DriverService.java) class.
+The service task implementation is done in the [DriverService](src/main/java/org/acme/traffic/DriverService.java) class.
 
 In the data assignment the input is the `driverId` and output is the `driver` variable, filled with all driver information.
 
@@ -59,7 +59,7 @@ Represents the task to do the call to the DRL service.
 
 <img src="docs/images/license-validation-drl-businessrule.png" width=150/>
 
-The properties to be set are mainly the `Rule Language`that should be set as `DRL` and the `Rule Flow Group` with `unit:` + `[the FQCN of the Rule Unit Data class]`, in this case [org.kie.kogito.traffic.LicenseValidationService](src/main/java/org/kie/kogito/traffic/LicenseValidationService.java).
+The properties to be set are mainly the `Rule Language`that should be set as `DRL` and the `Rule Flow Group` with `unit:` + `[the FQCN of the Rule Unit Data class]`, in this case [org.acme.traffic.LicenseValidationService](src/main/java/org/acme/traffic/LicenseValidationService.java).
 
 <img src="docs/images/license-validation-dmn-businessrule-properties.png" width=300/>
 
@@ -95,7 +95,7 @@ Just an example task where it could be performed any action based on the conditi
 
 This decision consistis in rules which are evaluated to check if a driver's license is expired or not according to the expiration date and thus populating the result in the information in the driver variable.
 
-The DRL file where this Rule Unit is declared is [LicenseValidationService.drl](src/main/resources/LicenseValidationService.drl) and the the Java class that contains the Rule Unit Data is [LicenseValidationService](src/main/java/org/kie/kogito/traffic/LicenseValidationService.java).
+The DRL file where this Rule Unit is declared is [LicenseValidationService.drl](src/main/resources/LicenseValidationService.drl) and the the Java class that contains the Rule Unit Data is [LicenseValidationService](src/main/java/org/acme/traffic/LicenseValidationService.java).
 
 ### Traffic Violation - DMN
 

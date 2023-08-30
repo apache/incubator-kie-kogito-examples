@@ -6,15 +6,15 @@
   "errors" : [
     {
       "name" : "reserve stock failed",
-      "code": "org.kie.kogito.examples.ServiceException"
+      "code": "org.acme.examples.ServiceException"
     },
     {
       "name": "process payment failed",
-      "code": "org.kie.kogito.examples.ServiceException"
+      "code": "org.acme.examples.ServiceException"
     },
     {
       "name": "shipping failed",
-      "code": "org.kie.kogito.examples.ServiceException"
+      "code": "org.acme.examples.ServiceException"
     }
     
   ],
@@ -23,42 +23,42 @@
     {
       "name": "reserveStock",
       "type": "custom",
-      "operation": "service:org.kie.kogito.examples.StockService::reserveStock"
+      "operation": "service:org.acme.examples.StockService::reserveStock"
     },
     {
       "name": "cancelStock",
        "type": "custom",
-      "operation": "service:org.kie.kogito.examples.StockService::cancelStock"
+      "operation": "service:org.acme.examples.StockService::cancelStock"
     },
     {
       "name": "processPayment",
       "type": "custom",
-      "operation": "service:org.kie.kogito.examples.PaymentService::processPayment"
+      "operation": "service:org.acme.examples.PaymentService::processPayment"
     },
     {
       "name": "cancelPayment",
       "type": "custom",
-      "operation": "service:org.kie.kogito.examples.PaymentService::cancelPayment"
+      "operation": "service:org.acme.examples.PaymentService::cancelPayment"
     },
     {
       "name": "scheduleShipping",
       "type": "custom",
-      "operation": "service:org.kie.kogito.examples.ShippingService::scheduleShipping"
+      "operation": "service:org.acme.examples.ShippingService::scheduleShipping"
     },
     {
       "name": "cancelShipping",
       "type": "custom",
-      "operation": "service:org.kie.kogito.examples.ShippingService::cancelShipping"
+      "operation": "service:org.acme.examples.ShippingService::cancelShipping"
     },
     {
       "name": "orderSuccess",
       "type": "custom",
-      "operation": "service:org.kie.kogito.examples.OrderService::success"
+      "operation": "service:org.acme.examples.OrderService::success"
     },
     {
       "name": "orderFailure",
       "type": "custom",
-      "operation": "service:org.kie.kogito.examples.OrderService::failure"
+      "operation": "service:org.acme.examples.OrderService::failure"
     },
     {
       "name": "log",

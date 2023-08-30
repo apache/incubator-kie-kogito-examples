@@ -1,32 +1,32 @@
 <bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_04BrQN2dEDmWOtnbRc-NJw" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd http://www.omg.org/spec/DD/20100524/DC DC.xsd http://www.omg.org/spec/DD/20100524/DI DI.xsd " exporter="jBPM Process Modeler" exporterVersion="2.0" targetNamespace="http://www.omg.org/bpmn20">
   <bpmn2:itemDefinition id="_driverIdItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="_violationItem" structureRef="org.kie.kogito.traffic.Violation"/>
-  <bpmn2:itemDefinition id="_driverItem" structureRef="org.kie.kogito.traffic.Driver"/>
-  <bpmn2:itemDefinition id="_trafficViolationResponseItem" structureRef="org.kie.kogito.traffic.TrafficViolationResponse"/>
+  <bpmn2:itemDefinition id="_violationItem" structureRef="org.acme.traffic.Violation"/>
+  <bpmn2:itemDefinition id="_driverItem" structureRef="org.acme.traffic.Driver"/>
+  <bpmn2:itemDefinition id="_trafficViolationResponseItem" structureRef="org.acme.traffic.TrafficViolationResponse"/>
   <bpmn2:itemDefinition id="__93FFD317-476E-4624-84EF-994617572560_driverIdInputXItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="__93FFD317-476E-4624-84EF-994617572560_responseOutputXItem" structureRef="org.kie.kogito.traffic.Driver"/>
+  <bpmn2:itemDefinition id="__93FFD317-476E-4624-84EF-994617572560_responseOutputXItem" structureRef="org.acme.traffic.Driver"/>
   <bpmn2:itemDefinition id="__D8D9E6BA-5940-41F5-BF3A-1A08ADA72A4C_MethodInputXItem" structureRef="String"/>
   <bpmn2:itemDefinition id="__D8D9E6BA-5940-41F5-BF3A-1A08ADA72A4C_UrlInputXItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="__D8D9E6BA-5940-41F5-BF3A-1A08ADA72A4C_driverInputXItem" structureRef="org.kie.kogito.traffic.Driver"/>
+  <bpmn2:itemDefinition id="__D8D9E6BA-5940-41F5-BF3A-1A08ADA72A4C_driverInputXItem" structureRef="org.acme.traffic.Driver"/>
   <bpmn2:itemDefinition id="__D8D9E6BA-5940-41F5-BF3A-1A08ADA72A4C_testInputXItem" structureRef="Integer"/>
   <bpmn2:itemDefinition id="__D8D9E6BA-5940-41F5-BF3A-1A08ADA72A4C_HostInputXItem" structureRef="String"/>
   <bpmn2:itemDefinition id="__D8D9E6BA-5940-41F5-BF3A-1A08ADA72A4C_PasswordInputXItem" structureRef="String"/>
   <bpmn2:itemDefinition id="__D8D9E6BA-5940-41F5-BF3A-1A08ADA72A4C_PortInputXItem" structureRef="Integer"/>
   <bpmn2:itemDefinition id="__D8D9E6BA-5940-41F5-BF3A-1A08ADA72A4C_UsernameInputXItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="__D8D9E6BA-5940-41F5-BF3A-1A08ADA72A4C_ResultOutputXItem" structureRef="org.kie.kogito.traffic.Driver"/>
+  <bpmn2:itemDefinition id="__D8D9E6BA-5940-41F5-BF3A-1A08ADA72A4C_ResultOutputXItem" structureRef="org.acme.traffic.Driver"/>
   <bpmn2:itemDefinition id="__38F4877F-50AD-4500-98E1-9B4FD3972291_MethodInputXItem" structureRef="String"/>
   <bpmn2:itemDefinition id="__38F4877F-50AD-4500-98E1-9B4FD3972291_UrlInputXItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="__38F4877F-50AD-4500-98E1-9B4FD3972291_ViolationInputXItem" structureRef="org.kie.kogito.traffic.Violation"/>
-  <bpmn2:itemDefinition id="__38F4877F-50AD-4500-98E1-9B4FD3972291_DriverInputXItem" structureRef="org.kie.kogito.traffic.Driver"/>
+  <bpmn2:itemDefinition id="__38F4877F-50AD-4500-98E1-9B4FD3972291_ViolationInputXItem" structureRef="org.acme.traffic.Violation"/>
+  <bpmn2:itemDefinition id="__38F4877F-50AD-4500-98E1-9B4FD3972291_DriverInputXItem" structureRef="org.acme.traffic.Driver"/>
   <bpmn2:itemDefinition id="__38F4877F-50AD-4500-98E1-9B4FD3972291_HostInputXItem" structureRef="String"/>
   <bpmn2:itemDefinition id="__38F4877F-50AD-4500-98E1-9B4FD3972291_PasswordInputXItem" structureRef="String"/>
   <bpmn2:itemDefinition id="__38F4877F-50AD-4500-98E1-9B4FD3972291_PortInputXItem" structureRef="Integer"/>
   <bpmn2:itemDefinition id="__38F4877F-50AD-4500-98E1-9B4FD3972291_UsernameInputXItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="__38F4877F-50AD-4500-98E1-9B4FD3972291_ResultOutputXItem" structureRef="org.kie.kogito.traffic.TrafficViolationResponse"/>
-  <bpmn2:interface id="_93FFD317-476E-4624-84EF-994617572560_ServiceInterface" name="org.kie.kogito.traffic.DriverService" implementationRef="org.kie.kogito.traffic.DriverService">
+  <bpmn2:itemDefinition id="__38F4877F-50AD-4500-98E1-9B4FD3972291_ResultOutputXItem" structureRef="org.acme.traffic.TrafficViolationResponse"/>
+  <bpmn2:interface id="_93FFD317-476E-4624-84EF-994617572560_ServiceInterface" name="org.acme.traffic.DriverService" implementationRef="org.acme.traffic.DriverService">
     <bpmn2:operation id="_93FFD317-476E-4624-84EF-994617572560_ServiceOperation" name="getDriver" implementationRef="getDriver"/>
   </bpmn2:interface>
-  <bpmn2:process id="traffic_wih" drools:packageName="com.example" drools:version="1.0" drools:adHoc="false" name="traffic_wih" isExecutable="true" processType="Public">
+  <bpmn2:process id="traffic_wih" drools:packageName="org.acme" drools:version="1.0" drools:adHoc="false" name="traffic_wih" isExecutable="true" processType="Public">
     <bpmn2:property id="driverId" itemSubjectRef="_driverIdItem" name="driverId"/>
     <bpmn2:property id="violation" itemSubjectRef="_violationItem" name="violation"/>
     <bpmn2:property id="driver" itemSubjectRef="_driverItem" name="driver"/>
@@ -108,14 +108,14 @@ DMN]]></drools:metaValue>
       <bpmn2:ioSpecification>
         <bpmn2:dataInput id="_38F4877F-50AD-4500-98E1-9B4FD3972291_MethodInputX" drools:dtype="String" itemSubjectRef="__38F4877F-50AD-4500-98E1-9B4FD3972291_MethodInputXItem" name="Method"/>
         <bpmn2:dataInput id="_38F4877F-50AD-4500-98E1-9B4FD3972291_UrlInputX" drools:dtype="String" itemSubjectRef="__38F4877F-50AD-4500-98E1-9B4FD3972291_UrlInputXItem" name="Url"/>
-        <bpmn2:dataInput id="_38F4877F-50AD-4500-98E1-9B4FD3972291_ViolationInputX" drools:dtype="org.kie.kogito.traffic.Violation" itemSubjectRef="__38F4877F-50AD-4500-98E1-9B4FD3972291_ViolationInputXItem" name="Violation"/>
-        <bpmn2:dataInput id="_38F4877F-50AD-4500-98E1-9B4FD3972291_DriverInputX" drools:dtype="org.kie.kogito.traffic.Driver" itemSubjectRef="__38F4877F-50AD-4500-98E1-9B4FD3972291_DriverInputXItem" name="Driver"/>
+        <bpmn2:dataInput id="_38F4877F-50AD-4500-98E1-9B4FD3972291_ViolationInputX" drools:dtype="org.acme.traffic.Violation" itemSubjectRef="__38F4877F-50AD-4500-98E1-9B4FD3972291_ViolationInputXItem" name="Violation"/>
+        <bpmn2:dataInput id="_38F4877F-50AD-4500-98E1-9B4FD3972291_DriverInputX" drools:dtype="org.acme.traffic.Driver" itemSubjectRef="__38F4877F-50AD-4500-98E1-9B4FD3972291_DriverInputXItem" name="Driver"/>
         <bpmn2:dataInput id="_38F4877F-50AD-4500-98E1-9B4FD3972291_HostInputX" drools:dtype="String" itemSubjectRef="__38F4877F-50AD-4500-98E1-9B4FD3972291_HostInputXItem" name="Host"/>
         <bpmn2:dataInput id="_38F4877F-50AD-4500-98E1-9B4FD3972291_PasswordInputX" drools:dtype="String" itemSubjectRef="__38F4877F-50AD-4500-98E1-9B4FD3972291_PasswordInputXItem" name="Password"/>
         <bpmn2:dataInput id="_38F4877F-50AD-4500-98E1-9B4FD3972291_PortInputX" drools:dtype="Integer" itemSubjectRef="__38F4877F-50AD-4500-98E1-9B4FD3972291_PortInputXItem" name="Port"/>
         <bpmn2:dataInput id="_38F4877F-50AD-4500-98E1-9B4FD3972291_UsernameInputX" drools:dtype="String" itemSubjectRef="__38F4877F-50AD-4500-98E1-9B4FD3972291_UsernameInputXItem" name="Username"/>
         <bpmn2:dataInput id="_38F4877F-50AD-4500-98E1-9B4FD3972291_TaskNameInputX" drools:dtype="Object" name="TaskName"/>
-        <bpmn2:dataOutput id="_38F4877F-50AD-4500-98E1-9B4FD3972291_ResultOutputX" drools:dtype="org.kie.kogito.traffic.TrafficViolationResponse" itemSubjectRef="__38F4877F-50AD-4500-98E1-9B4FD3972291_ResultOutputXItem" name="Result"/>
+        <bpmn2:dataOutput id="_38F4877F-50AD-4500-98E1-9B4FD3972291_ResultOutputX" drools:dtype="org.acme.traffic.TrafficViolationResponse" itemSubjectRef="__38F4877F-50AD-4500-98E1-9B4FD3972291_ResultOutputXItem" name="Result"/>
         <bpmn2:inputSet>
           <bpmn2:dataInputRefs>_38F4877F-50AD-4500-98E1-9B4FD3972291_MethodInputX</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>_38F4877F-50AD-4500-98E1-9B4FD3972291_UrlInputX</bpmn2:dataInputRefs>
@@ -177,14 +177,14 @@ DRL]]></drools:metaValue>
       <bpmn2:ioSpecification>
         <bpmn2:dataInput id="_D8D9E6BA-5940-41F5-BF3A-1A08ADA72A4C_MethodInputX" drools:dtype="String" itemSubjectRef="__D8D9E6BA-5940-41F5-BF3A-1A08ADA72A4C_MethodInputXItem" name="Method"/>
         <bpmn2:dataInput id="_D8D9E6BA-5940-41F5-BF3A-1A08ADA72A4C_UrlInputX" drools:dtype="String" itemSubjectRef="__D8D9E6BA-5940-41F5-BF3A-1A08ADA72A4C_UrlInputXItem" name="Url"/>
-        <bpmn2:dataInput id="_D8D9E6BA-5940-41F5-BF3A-1A08ADA72A4C_driverInputX" drools:dtype="org.kie.kogito.traffic.Driver" itemSubjectRef="__D8D9E6BA-5940-41F5-BF3A-1A08ADA72A4C_driverInputXItem" name="driver"/>
+        <bpmn2:dataInput id="_D8D9E6BA-5940-41F5-BF3A-1A08ADA72A4C_driverInputX" drools:dtype="org.acme.traffic.Driver" itemSubjectRef="__D8D9E6BA-5940-41F5-BF3A-1A08ADA72A4C_driverInputXItem" name="driver"/>
         <bpmn2:dataInput id="_D8D9E6BA-5940-41F5-BF3A-1A08ADA72A4C_testInputX" drools:dtype="Integer" itemSubjectRef="__D8D9E6BA-5940-41F5-BF3A-1A08ADA72A4C_testInputXItem" name="test"/>
         <bpmn2:dataInput id="_D8D9E6BA-5940-41F5-BF3A-1A08ADA72A4C_HostInputX" drools:dtype="String" itemSubjectRef="__D8D9E6BA-5940-41F5-BF3A-1A08ADA72A4C_HostInputXItem" name="Host"/>
         <bpmn2:dataInput id="_D8D9E6BA-5940-41F5-BF3A-1A08ADA72A4C_PasswordInputX" drools:dtype="String" itemSubjectRef="__D8D9E6BA-5940-41F5-BF3A-1A08ADA72A4C_PasswordInputXItem" name="Password"/>
         <bpmn2:dataInput id="_D8D9E6BA-5940-41F5-BF3A-1A08ADA72A4C_PortInputX" drools:dtype="Integer" itemSubjectRef="__D8D9E6BA-5940-41F5-BF3A-1A08ADA72A4C_PortInputXItem" name="Port"/>
         <bpmn2:dataInput id="_D8D9E6BA-5940-41F5-BF3A-1A08ADA72A4C_UsernameInputX" drools:dtype="String" itemSubjectRef="__D8D9E6BA-5940-41F5-BF3A-1A08ADA72A4C_UsernameInputXItem" name="Username"/>
         <bpmn2:dataInput id="_D8D9E6BA-5940-41F5-BF3A-1A08ADA72A4C_TaskNameInputX" drools:dtype="Object" name="TaskName"/>
-        <bpmn2:dataOutput id="_D8D9E6BA-5940-41F5-BF3A-1A08ADA72A4C_ResultOutputX" drools:dtype="org.kie.kogito.traffic.Driver" itemSubjectRef="__D8D9E6BA-5940-41F5-BF3A-1A08ADA72A4C_ResultOutputXItem" name="Result"/>
+        <bpmn2:dataOutput id="_D8D9E6BA-5940-41F5-BF3A-1A08ADA72A4C_ResultOutputX" drools:dtype="org.acme.traffic.Driver" itemSubjectRef="__D8D9E6BA-5940-41F5-BF3A-1A08ADA72A4C_ResultOutputXItem" name="Result"/>
         <bpmn2:inputSet>
           <bpmn2:dataInputRefs>_D8D9E6BA-5940-41F5-BF3A-1A08ADA72A4C_MethodInputX</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>_D8D9E6BA-5940-41F5-BF3A-1A08ADA72A4C_UrlInputX</bpmn2:dataInputRefs>
@@ -245,7 +245,7 @@ DRL]]></drools:metaValue>
       <bpmn2:outgoing>_8A36870E-651D-4E0A-B345-D5CFF2182F0F</bpmn2:outgoing>
       <bpmn2:outgoing>_044AA388-325A-45DE-B783-4F48421B788B</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
-    <bpmn2:serviceTask id="_93FFD317-476E-4624-84EF-994617572560" drools:serviceimplementation="Java" drools:serviceinterface="org.kie.kogito.traffic.DriverService" drools:serviceoperation="getDriver" name="Get Driver Details" implementation="Java" operationRef="_93FFD317-476E-4624-84EF-994617572560_ServiceOperation">
+    <bpmn2:serviceTask id="_93FFD317-476E-4624-84EF-994617572560" drools:serviceimplementation="Java" drools:serviceinterface="org.acme.traffic.DriverService" drools:serviceoperation="getDriver" name="Get Driver Details" implementation="Java" operationRef="_93FFD317-476E-4624-84EF-994617572560_ServiceOperation">
       <bpmn2:extensionElements>
         <drools:metaData name="elementname">
           <drools:metaValue><![CDATA[Get Driver Details]]></drools:metaValue>
@@ -255,7 +255,7 @@ DRL]]></drools:metaValue>
       <bpmn2:outgoing>_A19108FE-08A2-4E80-B7A8-0254C49209A6</bpmn2:outgoing>
       <bpmn2:ioSpecification>
         <bpmn2:dataInput id="_93FFD317-476E-4624-84EF-994617572560_driverIdInputX" drools:dtype="String" itemSubjectRef="__93FFD317-476E-4624-84EF-994617572560_driverIdInputXItem" name="driverId"/>
-        <bpmn2:dataOutput id="_93FFD317-476E-4624-84EF-994617572560_responseOutputX" drools:dtype="org.kie.kogito.traffic.Driver" itemSubjectRef="__93FFD317-476E-4624-84EF-994617572560_responseOutputXItem" name="response"/>
+        <bpmn2:dataOutput id="_93FFD317-476E-4624-84EF-994617572560_responseOutputX" drools:dtype="org.acme.traffic.Driver" itemSubjectRef="__93FFD317-476E-4624-84EF-994617572560_responseOutputXItem" name="response"/>
         <bpmn2:inputSet>
           <bpmn2:dataInputRefs>_93FFD317-476E-4624-84EF-994617572560_driverIdInputX</bpmn2:dataInputRefs>
         </bpmn2:inputSet>

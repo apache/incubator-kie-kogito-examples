@@ -4282,7 +4282,7 @@ diff --git a/serverless-workflow-examples/serverless-workflow-events-quarkus/src
 index 287b775c6..c969da8c7 100644
 --- a/serverless-workflow-examples/serverless-workflow-events-quarkus/src/main/java/org/kogito/serverless/examples/AvroMarshallerProducer.java
 +++ b/serverless-workflow-examples/serverless-workflow-events-quarkus/src/main/java/org/kogito/serverless/examples/AvroMarshallerProducer.java
-@@ -17,11 +17,11 @@ package org.kogito.serverless.examples;
+@@ -17,11 +17,11 @@ package org.acme.serverless.examples;
  
  import java.io.IOException;
  
@@ -4304,7 +4304,7 @@ index a9615feff..54a8b9a5a 100644
 +++ b/serverless-workflow-examples/serverless-workflow-events-quarkus/src/main/java/org/kogito/serverless/examples/DecisionResource.java
 @@ -15,11 +15,11 @@
   */
- package org.kogito.serverless.examples;
+ package org.acme.serverless.examples;
  
 -import javax.inject.Inject;
 -import javax.ws.rs.GET;
@@ -4600,77 +4600,77 @@ index 6f90bae6d..56b1e20e5 100644
 +++ b/serverless-workflow-examples/serverless-workflow-funqy/sw-funqy-services/src/main/java/org/kogito/serverless/examples/functions/ClassificationFunction.java
 @@ -15,7 +15,7 @@
   */
- package org.kogito.serverless.examples.functions;
+ package org.acme.serverless.examples.functions;
  
 -import javax.inject.Inject;
 +import jakarta.inject.Inject;
  
- import org.kogito.serverless.examples.input.Country;
- import org.kogito.serverless.examples.services.ClassificationService;
+ import org.acme.serverless.examples.input.Country;
+ import org.acme.serverless.examples.services.ClassificationService;
 diff --git a/serverless-workflow-examples/serverless-workflow-funqy/sw-funqy-services/src/main/java/org/kogito/serverless/examples/functions/CountriesFunction.java b/serverless-workflow-examples/serverless-workflow-funqy/sw-funqy-services/src/main/java/org/kogito/serverless/examples/functions/CountriesFunction.java
 index 750823546..f17e7bea9 100644
 --- a/serverless-workflow-examples/serverless-workflow-funqy/sw-funqy-services/src/main/java/org/kogito/serverless/examples/functions/CountriesFunction.java
 +++ b/serverless-workflow-examples/serverless-workflow-funqy/sw-funqy-services/src/main/java/org/kogito/serverless/examples/functions/CountriesFunction.java
 @@ -15,7 +15,7 @@
   */
- package org.kogito.serverless.examples.functions;
+ package org.acme.serverless.examples.functions;
  
 -import javax.inject.Inject;
 +import jakarta.inject.Inject;
  
- import org.kogito.serverless.examples.input.Country;
- import org.kogito.serverless.examples.services.CountriesService;
+ import org.acme.serverless.examples.input.Country;
+ import org.acme.serverless.examples.services.CountriesService;
 diff --git a/serverless-workflow-examples/serverless-workflow-funqy/sw-funqy-services/src/main/java/org/kogito/serverless/examples/functions/PopulationFunction.java b/serverless-workflow-examples/serverless-workflow-funqy/sw-funqy-services/src/main/java/org/kogito/serverless/examples/functions/PopulationFunction.java
 index 69066c4ec..8249c76b2 100644
 --- a/serverless-workflow-examples/serverless-workflow-funqy/sw-funqy-services/src/main/java/org/kogito/serverless/examples/functions/PopulationFunction.java
 +++ b/serverless-workflow-examples/serverless-workflow-funqy/sw-funqy-services/src/main/java/org/kogito/serverless/examples/functions/PopulationFunction.java
 @@ -15,7 +15,7 @@
   */
- package org.kogito.serverless.examples.functions;
+ package org.acme.serverless.examples.functions;
  
 -import javax.inject.Inject;
 +import jakarta.inject.Inject;
  
- import org.kogito.serverless.examples.input.Country;
- import org.kogito.serverless.examples.services.CountriesService;
+ import org.acme.serverless.examples.input.Country;
+ import org.acme.serverless.examples.services.CountriesService;
 diff --git a/serverless-workflow-examples/serverless-workflow-funqy/sw-funqy-services/src/main/java/org/kogito/serverless/examples/services/ClassificationService.java b/serverless-workflow-examples/serverless-workflow-funqy/sw-funqy-services/src/main/java/org/kogito/serverless/examples/services/ClassificationService.java
 index 3731e3707..1f9bd1377 100644
 --- a/serverless-workflow-examples/serverless-workflow-funqy/sw-funqy-services/src/main/java/org/kogito/serverless/examples/services/ClassificationService.java
 +++ b/serverless-workflow-examples/serverless-workflow-funqy/sw-funqy-services/src/main/java/org/kogito/serverless/examples/services/ClassificationService.java
-@@ -18,7 +18,7 @@ package org.kogito.serverless.examples.services;
+@@ -18,7 +18,7 @@ package org.acme.serverless.examples.services;
  import java.util.HashMap;
  import java.util.Map;
  
 -import javax.enterprise.context.ApplicationScoped;
 +import jakarta.enterprise.context.ApplicationScoped;
  
- import org.kogito.serverless.examples.input.Country;
+ import org.acme.serverless.examples.input.Country;
  
 diff --git a/serverless-workflow-examples/serverless-workflow-funqy/sw-funqy-services/src/main/java/org/kogito/serverless/examples/services/CountriesService.java b/serverless-workflow-examples/serverless-workflow-funqy/sw-funqy-services/src/main/java/org/kogito/serverless/examples/services/CountriesService.java
 index acce33496..a6ffe63d9 100644
 --- a/serverless-workflow-examples/serverless-workflow-funqy/sw-funqy-services/src/main/java/org/kogito/serverless/examples/services/CountriesService.java
 +++ b/serverless-workflow-examples/serverless-workflow-funqy/sw-funqy-services/src/main/java/org/kogito/serverless/examples/services/CountriesService.java
-@@ -18,7 +18,7 @@ package org.kogito.serverless.examples.services;
+@@ -18,7 +18,7 @@ package org.acme.serverless.examples.services;
  import java.util.ArrayList;
  import java.util.List;
  
 -import javax.enterprise.context.ApplicationScoped;
 +import jakarta.enterprise.context.ApplicationScoped;
  
- import org.kogito.serverless.examples.input.Country;
+ import org.acme.serverless.examples.input.Country;
  
 diff --git a/serverless-workflow-examples/serverless-workflow-funqy/sw-funqy-services/src/main/java/org/kogito/serverless/examples/services/PopulationService.java b/serverless-workflow-examples/serverless-workflow-funqy/sw-funqy-services/src/main/java/org/kogito/serverless/examples/services/PopulationService.java
 index 8aa404d54..60910c580 100644
 --- a/serverless-workflow-examples/serverless-workflow-funqy/sw-funqy-services/src/main/java/org/kogito/serverless/examples/services/PopulationService.java
 +++ b/serverless-workflow-examples/serverless-workflow-funqy/sw-funqy-services/src/main/java/org/kogito/serverless/examples/services/PopulationService.java
-@@ -18,7 +18,7 @@ package org.kogito.serverless.examples.services;
+@@ -18,7 +18,7 @@ package org.acme.serverless.examples.services;
  import java.util.HashMap;
  import java.util.Map;
  
 -import javax.enterprise.context.ApplicationScoped;
 +import jakarta.enterprise.context.ApplicationScoped;
  
- import org.kogito.serverless.examples.input.Country;
+ import org.acme.serverless.examples.input.Country;
  
 diff --git a/serverless-workflow-examples/serverless-workflow-funqy/sw-funqy-workflow/pom.xml b/serverless-workflow-examples/serverless-workflow-funqy/sw-funqy-workflow/pom.xml
 index f651b169d..f72762b0b 100644
@@ -5772,7 +5772,7 @@ diff --git a/serverless-workflow-examples/serverless-workflow-service-calls-quar
 index f49df157e..b6a6a617a 100644
 --- a/serverless-workflow-examples/serverless-workflow-service-calls-quarkus/src/test/java/org/kogito/serverless/examples/CountryServiceWorkflowTest.java
 +++ b/serverless-workflow-examples/serverless-workflow-service-calls-quarkus/src/test/java/org/kogito/serverless/examples/CountryServiceWorkflowTest.java
-@@ -18,8 +18,8 @@ package org.kogito.serverless.examples;
+@@ -18,8 +18,8 @@ package org.acme.serverless.examples;
  import java.util.HashMap;
  import java.util.Map;
  

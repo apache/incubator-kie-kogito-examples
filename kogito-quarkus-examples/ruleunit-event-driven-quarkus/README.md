@@ -108,7 +108,7 @@ Note: This does not yet work on Windows, GraalVM and Quarkus should be rolling o
 
 ## Example Usage
 
-Here is an example of a input event that triggers the evaluation of the [Loan Unit](src/main/resources/org/kie/kogito/queries/RuleUnitQuery.drl) queries
+Here is an example of a input event that triggers the evaluation of the [Loan Unit](src/main/resources/org/acme/queries/RuleUnitQuery.drl) queries
 included in this example. The `data` field contains the query input.
 
 Just send this payload to the configured input topic:
@@ -120,7 +120,7 @@ Just send this payload to the configured input topic:
   "source": "SomeEventSource",
   "type": "RulesRequest",
   "subject": "TheSubject",
-  "kogitoruleunitid": "org.kie.kogito.queries.LoanUnit",
+  "kogitoruleunitid": "org.acme.queries.LoanUnit",
   "kogitoruleunitquery": "FindApproved",
   "data": {
     "maxAmount": 5000,
@@ -166,7 +166,7 @@ And you should receive something similar to this in the output topic:
   "source": "find-approved",
   "type": "RulesResponse",
   "subject": "TheSubject",
-  "kogitoruleunitid": "org.kie.kogito.queries.LoanUnit",
+  "kogitoruleunitid": "org.acme.queries.LoanUnit",
   "kogitoruleunitquery": "FindApproved",
   "data": [
     {

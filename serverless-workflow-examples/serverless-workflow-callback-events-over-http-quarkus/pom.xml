@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.kie.kogito.examples</groupId>
+    <groupId>org.acme.examples</groupId>
     <artifactId>serverless-workflow-callback-events-over-http-quarkus</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>Kogito Example :: Serverless Workflow CallBack Over HTTP :: Quarkus</name>

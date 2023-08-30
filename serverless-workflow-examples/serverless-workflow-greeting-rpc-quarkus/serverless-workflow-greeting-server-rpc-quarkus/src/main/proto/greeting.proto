@@ -1,8 +1,6 @@
 syntax = "proto3";
 
-option java_package="org.kie.kogito.examples.sw.greeting";
-
-
+option java_package="org.acme.examples.sw.greeting";
 
 // The greeter service definition.
 service Greeter {

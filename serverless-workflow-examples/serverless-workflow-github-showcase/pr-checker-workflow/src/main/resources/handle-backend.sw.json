@@ -8,12 +8,12 @@
     {
       "name": "AddLabels",
       "type": "custom",
-      "operation": "service:java:org.kogito.examples.sw.github.workflow.GitHubService::addLabels"
+      "operation": "service:java:org.acme.examples.sw.github.workflow.GitHubService::addLabels"
     },
     {
       "name": "AddReviewers",
       "type": "custom",
-      "operation": "service:java:org.kogito.examples.sw.github.workflow.GitHubService::addReviewers"
+      "operation": "service:java:org.acme.examples.sw.github.workflow.GitHubService::addReviewers"
     }
   ],
   "events": [
