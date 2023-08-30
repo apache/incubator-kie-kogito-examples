@@ -67,7 +67,7 @@ List getExamplesBuildMvnOptions(JenkinsFolder jobFolder) {
 }
 
 // PR checks
-KogitoJobUtils.createAllEnvironmentsPerRepoPRJobs(this) { jobFolder -> getMultijobPRConfig(jobFolder) }
+// KogitoJobUtils.createAllEnvironmentsPerRepoPRJobs(this) { jobFolder -> getMultijobPRConfig(jobFolder) }
 
 // Init branch
 createSetupBranchJob()
@@ -98,7 +98,7 @@ if (isMainStream()) {
 
     // Quarkus 3
     if (EnvUtils.isEnvironmentEnabled(this, 'quarkus-3')) {
-        setupPrQuarkus3RewriteJob()
+        // setupPrQuarkus3RewriteJob()
         setupStandaloneQuarkus3RewriteJob()
     }
 }
