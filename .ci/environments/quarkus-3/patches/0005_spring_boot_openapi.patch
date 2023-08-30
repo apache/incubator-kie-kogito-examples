@@ -1,0 +1,13 @@
+diff --git a/kogito-springboot-examples/process-performance-springboot/pom.xml b/kogito-springboot-examples/process-performance-springboot/pom.xml
+index 56d501c11..756ce3f11 100755
+--- a/kogito-springboot-examples/process-performance-springboot/pom.xml
++++ b/kogito-springboot-examples/process-performance-springboot/pom.xml
+@@ -61,7 +61,7 @@
+     </dependency>
+     <dependency>
+       <groupId>org.springdoc</groupId>
+-      <artifactId>springdoc-openapi-ui</artifactId>
++      <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+     </dependency>
+     <dependency>
+       <groupId>org.springframework.boot</groupId>
