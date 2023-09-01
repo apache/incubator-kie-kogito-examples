@@ -88,7 +88,7 @@ public class OutboxIT {
         COMPOSE.waitingFor("kogito", Wait.forListeningPort());
         COMPOSE.withLocalCompose(true);
         //See https://github.com/testcontainers/testcontainers-java/issues/4565
-        // COMPOSE.withOptions("--compatibility");
+        COMPOSE.withOptions("--compatibility");
     }
 
     private static Consumer<OutputFrame> logger() {

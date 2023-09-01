@@ -1,8 +1,8 @@
-version: '2'
+version: '2.0'
 
 services:
   hello:
-    image: org.kie.kogito.examples/dmn-drools-springboot-metrics:1.0
+    image: org.acme.examples/dmn-drools-springboot-metrics:1.0
     ports:
       - 8080:8080
 
