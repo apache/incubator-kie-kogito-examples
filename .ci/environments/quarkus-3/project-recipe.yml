@@ -22,3 +22,8 @@ recipeList:
   - org.openrewrite.maven.ChangePropertyValue:
       key: version.org.apache.camel.quarkus
       newValue: 3.0.0-M1
+  - org.openrewrite.maven.ChangeDependencyGroupIdAndArtifactId:
+      oldGroupId: org.springdoc
+      oldArtifactId: springdoc-openapi-ui
+      newGroupId: org.springdoc
+      newArtifactId: springdoc-openapi-starter-webmvc-ui
