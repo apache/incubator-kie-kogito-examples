@@ -8,7 +8,7 @@ changeTarget = env.ghprbTargetBranch ?: CHANGE_TARGET
 
 pipeline {
     agent {
-        label 'kie-rhel8 && kie-mem16g && !built-in'
+        label 'kie-rhel8 && docker && kie-mem16g && !built-in'
     }
     tools {
         maven env.BUILD_MAVEN_TOOL
@@ -56,7 +56,7 @@ pipeline {
                             env.BUILD_MVN_OPTS = "${env.BUILD_MVN_OPTS ?: ''} -s ${MAVEN_SETTINGS_FILE} -Dmaven.wagon.http.ssl.insecure=true -Dmaven.test.failure.ignore=true"
                             echo "BUILD_MVN_OPTS = ${BUILD_MVN_OPTS}"
 
-                            sh '.ci/environments/quarkus-3/before.sh rewrite'
+                            util.runWithPythonVirtualEnv('.ci/environments/quarkus-3/before.sh rewrite', 'swf')
                         }
                     }
                 }
