@@ -15,7 +15,7 @@
  */
 package org.acme.travels.service;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import org.acme.travels.Address;
 import org.acme.travels.Hotel;

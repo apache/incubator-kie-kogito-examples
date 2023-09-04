@@ -15,7 +15,7 @@
  */
 package org.kie.kogito.examples;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class EvenService {

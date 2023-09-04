@@ -1,7 +1,7 @@
 package org.kie.kogito.examples;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.Observes;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Observes;
 
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.Router;

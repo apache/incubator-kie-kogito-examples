@@ -15,22 +15,20 @@
  */
 package org.acme.travels;
 
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.keycloak.representations.AccessTokenResponse;
 import org.kie.kogito.springboot.KogitoSpringbootApplication;
 import org.kie.kogito.testcontainers.springboot.InfinispanSpringBootTestResource;
 import org.kie.kogito.testcontainers.springboot.KafkaSpringBootTestResource;
 import org.kie.kogito.testcontainers.springboot.KeycloakSpringBootTestResource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
@@ -38,7 +36,7 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
-@ContextConfiguration(initializers = { KeycloakSpringBootTestResource.class, InfinispanSpringBootTestResource.Conditional.class, KafkaSpringBootTestResource.class })
+@ContextConfiguration(initializers = {KeycloakSpringBootTestResource.class, InfinispanSpringBootTestResource.Conditional.class, KafkaSpringBootTestResource.class})
 public class ApprovalsRestIT {
 
     @LocalServerPort
@@ -60,8 +58,7 @@ public class ApprovalsRestIT {
                 .when()
                 .post("/approvals")
                 .then()
-                .statusCode(400);
-
+                .statusCode(401);
     }
 
     @Test
@@ -96,7 +93,7 @@ public class ApprovalsRestIT {
                 .get("/approvals/" + id + "/tasks?user=admin&group=managers")
                 .then()
                 .statusCode(200)
-                .body("$.size", is(1))
+                .body("size()", is(1))
                 .body("[0].name", is("firstLineApproval"))
                 .extract()
                 .path("[0].id");
@@ -135,8 +132,8 @@ public class ApprovalsRestIT {
                 .param("client_secret", "secret")
                 .when()
                 .post(keycloakUrl + "/realms/kogito/protocol/openid-connect/token")
-                .as(AccessTokenResponse.class).getToken();
-
+                .then()
+                .extract()
+                .path("access_token");
     }
-
 }

@@ -19,6 +19,7 @@ import java.util.Collection;
 
 import org.kie.kogito.event.DataEvent;
 import org.kie.kogito.event.EventPublisher;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -27,7 +28,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Component
 public class LogEventPublisher implements EventPublisher {
 
-    ObjectMapper json = new ObjectMapper();
+    private ObjectMapper json;
+
+    @Autowired
+    public void setMapper(ObjectMapper json) {
+        this.json = json;
+    }
 
     @Override
     public void publish(DataEvent<?> event) {

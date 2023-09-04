@@ -22,8 +22,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
-
 import org.kie.kogito.addons.k8s.Endpoint;
 import org.kie.kogito.addons.k8s.EndpointQueryKey;
 import org.kie.kogito.addons.k8s.LocalEndpointDiscovery;
@@ -34,6 +32,8 @@ import org.kie.kogito.process.impl.DefaultWorkItemHandlerConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import jakarta.annotation.PostConstruct;
 
 @Component
 public class WorkItemHandlerConfig extends DefaultWorkItemHandlerConfig {
