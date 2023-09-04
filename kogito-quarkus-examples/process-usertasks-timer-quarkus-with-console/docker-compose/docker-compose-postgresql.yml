@@ -86,7 +86,7 @@ services:
 
   data-index:
     container_name: data-index
-    image: quay.io/kiegroup/kogito-data-index-postgresql:${KOGITO_VERSION}
+    image: quay.io/kiegroup/kogito-data-index-postgresql:1.44
     ports:
       - "8180:8080"
     depends_on:
@@ -106,7 +106,7 @@ services:
 
   jobs-service:
     container_name: jobs-service
-    image: quay.io/kiegroup/kogito-jobs-service-postgresql:${KOGITO_VERSION}
+    image: quay.io/kiegroup/kogito-jobs-service-postgresql:1.44
     ports:
       - "8580:8080"
     depends_on:
@@ -127,7 +127,7 @@ services:
 
   management-console:
     container_name: management-console
-    image: quay.io/kiegroup/kogito-management-console:${KOGITO_VERSION}
+    image: quay.io/kiegroup/kogito-management-console:1.44
     ports:
       - "8280:8080"
     depends_on:
@@ -148,7 +148,7 @@ services:
 
   task-console:
     container_name: task-console
-    image: quay.io/kiegroup/kogito-task-console:${KOGITO_VERSION}
+    image: quay.io/kiegroup/kogito-task-console:1.44
     ports:
       - "8380:8080"
     depends_on:

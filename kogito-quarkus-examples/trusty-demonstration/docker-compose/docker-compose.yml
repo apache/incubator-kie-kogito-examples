@@ -55,7 +55,7 @@ services:
       - kafka
 
   explainability:
-    image: quay.io/kiegroup/kogito-explainability:1.5
+    image: quay.io/kiegroup/kogito-explainability:1.44
     depends_on:
       - kafka
       - kogito-app
@@ -66,7 +66,7 @@ services:
       - 1336:8080
 
   trusty:
-    image: quay.io/kiegroup/kogito-trusty-infinispan:1.5
+    image: quay.io/kiegroup/kogito-trusty-infinispan:1.44
     depends_on:
       - kafka
       - infinispan
@@ -79,7 +79,7 @@ services:
       - 1337:8080
 
   trusty-ui:
-    image: quay.io/kiegroup/kogito-trusty-ui:1.5
+    image: quay.io/kiegroup/kogito-trusty-ui:1.44
     depends_on:
       - kafka
     environment:

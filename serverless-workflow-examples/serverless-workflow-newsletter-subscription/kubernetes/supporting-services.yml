@@ -143,7 +143,7 @@ spec:
     spec:
       containers:
         - name: jobs-service-postgresql
-          image: quay.io/kiegroup/kogito-jobs-service-allinone-nightly:latest
+          image: quay.io/kiegroup/kogito-jobs-service-allinone-nightly:1.44
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

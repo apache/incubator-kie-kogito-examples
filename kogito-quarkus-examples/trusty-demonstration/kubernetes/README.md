@@ -127,7 +127,7 @@ metadata:
 spec:
   serviceType: TrustyUI
   replicas: 1
-  image: quay.io/kiegroup/kogito-trusty-ui:1.4
+  image: quay.io/kiegroup/kogito-trusty-ui:1.44
   env:
     - name: KOGITO_TRUSTY_ENDPOINT
       value: http://172.17.0.2:1337

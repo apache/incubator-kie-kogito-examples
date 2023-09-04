@@ -1,4 +1,4 @@
-FROM quay.io/kiegroup/kogito-runtime-jvm:latest
+FROM quay.io/kiegroup/kogito-runtime-jvm:1.44
 
 ENV RUNTIME_TYPE springboot
 

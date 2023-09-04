@@ -8,7 +8,7 @@ if [ "${action}" == "uninstall" ]; then
 
 elif [ "${action}" == "install" ]; then
   echo "*** installing task console"
-  oc new-app quay.io/kiegroup/kogito-task-console:${KOGITO_VERSION} -n $(getProjectName) $(dryRun "NewApp")
+  oc new-app quay.io/kiegroup/kogito-task-console:1.44
   waitForPod kogito-task-console
   oc patch deployment kogito-task-console --patch "$(cat deployment-patch.yaml)" -n $(getProjectName) $(dryRun)
   waitForPod kogito-task-console
