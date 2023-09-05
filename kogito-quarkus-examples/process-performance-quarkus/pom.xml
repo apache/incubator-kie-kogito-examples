@@ -7,7 +7,7 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>kogito-quarkus-examples</artifactId>
-    <version>1.44.0-SNAPSHOT</version>
+    <version>1.44.0.Final</version>
   </parent>
   <artifactId>process-performance-quarkus</artifactId>
   <name>Kogito Example :: Quarkus Performance test</name>
@@ -19,8 +19,8 @@
     <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-    <kogito.bom.version>1.44.0-SNAPSHOT</kogito.bom.version>
-    <version.org.kie.kogito>1.44.0-SNAPSHOT</version.org.kie.kogito>
+    <kogito.bom.version>1.44.0.Final</kogito.bom.version>
+    <version.org.kie.kogito>1.44.0.Final</version.org.kie.kogito>
   </properties>
   <dependencyManagement>
     <dependencies>

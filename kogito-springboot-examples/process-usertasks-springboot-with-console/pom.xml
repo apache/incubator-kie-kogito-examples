@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>kogito-springboot-examples</artifactId>
-    <version>1.44.0-SNAPSHOT</version>
+    <version>1.44.0.Final</version>
   </parent>
 
   <artifactId>process-usertasks-springboot-with-console</artifactId>
@@ -15,8 +15,8 @@
 
   <properties>
     <enable.resource.infinispan>true</enable.resource.infinispan>
-    <version.org.kie.kogito>1.44.0-SNAPSHOT</version.org.kie.kogito>
-    <kogito.bom.version>1.44.0-SNAPSHOT</kogito.bom.version>
+    <version.org.kie.kogito>1.44.0.Final</version.org.kie.kogito>
+    <kogito.bom.version>1.44.0.Final</kogito.bom.version>
   </properties>
 
   <dependencyManagement>
