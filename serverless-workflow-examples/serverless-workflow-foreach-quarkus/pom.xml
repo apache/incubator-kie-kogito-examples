@@ -16,7 +16,7 @@
     <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
+    <kogito.bom.version>2.44.0-SNAPSHOT</kogito.bom.version>
     <maven.compiler.release>11</maven.compiler.release>
     <version.compiler.plugin>3.8.1</version.compiler.plugin>
     <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
