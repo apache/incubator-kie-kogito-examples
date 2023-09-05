@@ -11,7 +11,7 @@ recipeList:
     key: quarkus.platform.version
   }
 - org.openrewrite.maven.ChangePropertyValue: {
-    newValue: 9.44.0-SNAPSHOT,
+    newValue: 9.45.0-SNAPSHOT,
     key: version.org.drools
   }
 - org.openrewrite.maven.ChangePropertyValue: {
