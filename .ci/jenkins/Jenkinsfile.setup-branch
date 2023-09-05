@@ -11,7 +11,7 @@ kogitoAppsRepo = 'kogito-apps'
 
 pipeline {
     agent {
-        label 'kie-rhel8 && !built-in'
+        label 'ubuntu'
     }
 
     tools {
