@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>onboarding-example</artifactId>
-    <version>1.44.0-SNAPSHOT</version>
+    <version>1.44.0.Final</version>
   </parent>
   <artifactId>payroll</artifactId>
   <name>Kogito Example :: Onboarding Example :: Payroll with DMN</name>
