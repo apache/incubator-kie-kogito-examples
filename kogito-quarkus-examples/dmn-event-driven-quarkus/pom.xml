@@ -7,7 +7,7 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>kogito-quarkus-examples</artifactId>
-    <version>1.44.0.Final</version>
+    <version>1.44.1-SNAPSHOT</version>
   </parent>
   <artifactId>dmn-event-driven-quarkus</artifactId>
   <name>Kogito Example :: DMN Event-Driven :: Quarkus</name>
@@ -18,8 +18,8 @@
     <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-    <kogito.bom.version>1.44.0.Final</kogito.bom.version>
-    <version.org.kie.kogito>1.44.0.Final</version.org.kie.kogito>
+    <kogito.bom.version>1.44.1-SNAPSHOT</kogito.bom.version>
+    <version.org.kie.kogito>1.44.1-SNAPSHOT</version.org.kie.kogito>
   </properties>
   <dependencyManagement>
     <dependencies>

@@ -5,14 +5,14 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>kogito-springboot-examples</artifactId>
-    <version>1.44.0.Final</version>
+    <version>1.44.1-SNAPSHOT</version>
   </parent>
   <artifactId>decisiontable-springboot-example</artifactId>
   <name>Kogito Example :: Decision Table - Spring Boot</name>
 
   <properties>
-    <version.org.kie.kogito>1.44.0.Final</version.org.kie.kogito>
-    <kogito.bom.version>1.44.0.Final</kogito.bom.version>
+    <version.org.kie.kogito>1.44.1-SNAPSHOT</version.org.kie.kogito>
+    <kogito.bom.version>1.44.1-SNAPSHOT</kogito.bom.version>
   </properties>
 
   <dependencyManagement>
