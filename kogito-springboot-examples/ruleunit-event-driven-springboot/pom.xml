@@ -7,14 +7,14 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>kogito-springboot-examples</artifactId>
-    <version>2.44.0.Alpha</version>
+    <version>2.44.1-SNAPSHOT</version>
   </parent>
   <artifactId>ruleunit-event-driven-springboot</artifactId>
   <name>Kogito Example :: RuleUnit Event Driven :: Spring Boot</name>
 
   <properties>
-    <version.org.kie.kogito>2.44.0.Alpha</version.org.kie.kogito>
-    <kogito.bom.version>2.44.0.Alpha</kogito.bom.version>
+    <version.org.kie.kogito>2.44.1-SNAPSHOT</version.org.kie.kogito>
+    <kogito.bom.version>2.44.1-SNAPSHOT</kogito.bom.version>
   </properties>
 
   <dependencyManagement>

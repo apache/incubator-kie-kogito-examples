@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>kogito-travel-agency-example</artifactId>
-    <version>2.44.0.Alpha</version>
+    <version>2.44.1-SNAPSHOT</version>
   </parent>
   <artifactId>kogito-travel-agency-example-basic</artifactId>
   <name>Kogito Example :: Travel Agency :: Basic</name>
@@ -18,9 +18,9 @@
     <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-    <kogito.bom.version>2.44.0.Alpha</kogito.bom.version>
-    <version.org.kie.kogito>2.44.0.Alpha</version.org.kie.kogito>
-    <version.org.drools>9.44.0.Final</version.org.drools>
+    <kogito.bom.version>2.44.1-SNAPSHOT</kogito.bom.version>
+    <version.org.kie.kogito>2.44.1-SNAPSHOT</version.org.kie.kogito>
+    <version.org.drools>9.44.1-SNAPSHOT</version.org.drools>
   </properties>
   <dependencyManagement>
     <dependencies>

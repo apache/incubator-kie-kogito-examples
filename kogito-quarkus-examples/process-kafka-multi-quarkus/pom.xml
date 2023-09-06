@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>kogito-quarkus-examples</artifactId>
-    <version>2.44.0.Alpha</version>
+    <version>2.44.1-SNAPSHOT</version>
   </parent>
   <artifactId>process-kafka-multi-quarkus</artifactId>
   <name>Kogito Example :: Process with Kafka and Quarkus, multiple channels</name>
@@ -17,8 +17,8 @@
     <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-    <kogito.bom.version>2.44.0.Alpha</kogito.bom.version>
-    <version.org.kie.kogito>2.44.0.Alpha</version.org.kie.kogito>
+    <kogito.bom.version>2.44.1-SNAPSHOT</kogito.bom.version>
+    <version.org.kie.kogito>2.44.1-SNAPSHOT</version.org.kie.kogito>
   </properties>
   <dependencyManagement>
     <dependencies>
