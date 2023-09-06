@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.acme.examples</groupId>
@@ -9,6 +10,7 @@
 
   <name>Kogito Example :: Serverless Workflow Openvino :: Quarkus</name>
   <description>Kogito Serverless Workflow OpenVino Example - Quarkus</description>
+
   <properties>
     <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
@@ -20,7 +22,7 @@
     <maven.compiler.release>11</maven.compiler.release>
     <version.exec.plugin>1.6.0</version.exec.plugin>
     <version.compiler.plugin>3.8.1</version.compiler.plugin>
-    <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
+    <version.failsafe.plugin>3.1.2</version.failsafe.plugin>
     <version.org.assertj>3.22.0</version.org.assertj>
   </properties>
 
@@ -77,10 +79,10 @@
       <artifactId>rest-assured</artifactId>
       <scope>test</scope>
     </dependency>
-   <dependency>
+    <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
-       <version>${version.org.assertj}</version>
+      <version>${version.org.assertj}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -133,29 +135,29 @@
             <id>dependencies-install</id>
             <phase>generate-resources</phase>
             <goals>
-                <goal>exec</goal>
+              <goal>exec</goal>
             </goals>
             <configuration>
-                <executable>pip</executable>
-                <arguments>
-                    <argument>install</argument>
-                    <argument>-r</argument>
-                    <argument>${project.basedir}/requirements.txt</argument>
-                </arguments>
+              <executable>pip</executable>
+              <arguments>
+                <argument>install</argument>
+                <argument>-r</argument>
+                <argument>${project.basedir}/requirements.txt</argument>
+              </arguments>
             </configuration>
           </execution>
           <execution>
             <id>jep</id>
             <phase>generate-resources</phase>
             <goals>
-                <goal>exec</goal>
+              <goal>exec</goal>
             </goals>
             <configuration>
-                <executable>pip</executable>
-                <arguments>
-                    <argument>install</argument>
-                    <argument>jep</argument>
-                </arguments>
+              <executable>pip</executable>
+              <arguments>
+                <argument>install</argument>
+                <argument>jep</argument>
+              </arguments>
             </configuration>
           </execution>
         </executions>

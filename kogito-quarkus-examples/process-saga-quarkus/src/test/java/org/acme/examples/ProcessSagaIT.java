@@ -38,11 +38,11 @@ public class ProcessSagaIT {
                 "}";
         ExtractableResponse<Response> response = createOrder(payload);
         response.path("id");
-        assertThat(response.<String> path("paymentResponse.type")).isEqualTo("SUCCESS");
-        assertThat(response.<String> path("stockResponse.type")).isEqualTo("SUCCESS");
-        assertThat(response.<String> path("shippingResponse.type")).isEqualTo("SUCCESS");
-        assertThat(response.<String> path("orderResponse.type")).isEqualTo("SUCCESS");
-        assertThat(response.<String> path("orderResponse.resourceId")).isEqualTo(ORDER_ID);
+        assertThat(response.<String>path("paymentResponse.type")).isEqualTo("SUCCESS");
+        assertThat(response.<String>path("stockResponse.type")).isEqualTo("SUCCESS");
+        assertThat(response.<String>path("shippingResponse.type")).isEqualTo("SUCCESS");
+        assertThat(response.<String>path("orderResponse.type")).isEqualTo("SUCCESS");
+        assertThat(response.<String>path("orderResponse.resourceId")).isEqualTo(ORDER_ID);
     }
 
     @Test
@@ -53,11 +53,11 @@ public class ProcessSagaIT {
                 "}";
         ExtractableResponse<Response> response = createOrder(payload);
         response.path("id");
-        assertThat(response.<String> path("stockResponse.type")).isEqualTo("SUCCESS");
-        assertThat(response.<String> path("paymentResponse.type")).isEqualTo("SUCCESS");
-        assertThat(response.<String> path("shippingResponse.type")).isEqualTo("ERROR");
-        assertThat(response.<String> path("orderResponse.type")).isEqualTo("ERROR");
-        assertThat(response.<String> path("orderResponse.resourceId")).isEqualTo(ORDER_ID);
+        assertThat(response.<String>path("stockResponse.type")).isEqualTo("SUCCESS");
+        assertThat(response.<String>path("paymentResponse.type")).isEqualTo("SUCCESS");
+        assertThat(response.<String>path("shippingResponse.type")).isEqualTo("ERROR");
+        assertThat(response.<String>path("orderResponse.type")).isEqualTo("ERROR");
+        assertThat(response.<String>path("orderResponse.resourceId")).isEqualTo(ORDER_ID);
     }
 
     private ExtractableResponse<Response> createOrder(String payload) {

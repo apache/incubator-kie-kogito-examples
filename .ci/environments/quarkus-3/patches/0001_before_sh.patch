@@ -3812,7 +3812,7 @@ index 13129a50a..a0b3ebde7 100644
 +        <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
          <version.compiler.plugin>3.8.1</version.compiler.plugin>
          <maven.compiler.release>11</maven.compiler.release>
-         <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
+         <version.surefire.plugin>3.1.2</version.surefire.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-callback-events-over-http-quarkus/callback-event-service/pom.xml b/serverless-workflow-examples/serverless-workflow-callback-events-over-http-quarkus/callback-event-service/pom.xml
 index 4e4602148..6f4e3d857 100644
 --- a/serverless-workflow-examples/serverless-workflow-callback-events-over-http-quarkus/callback-event-service/pom.xml
@@ -3833,7 +3833,7 @@ index 4e4602148..6f4e3d857 100644
 +        <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
          <version.compiler.plugin>3.8.1</version.compiler.plugin>
          <maven.compiler.release>11</maven.compiler.release>
-         <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
+         <version.failsafe.plugin>3.1.2</version.failsafe.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-callback-events-over-http-quarkus/callback-event-service/src/main/java/org/kie/kogito/examples/CallbackResource.java b/serverless-workflow-examples/serverless-workflow-callback-events-over-http-quarkus/callback-event-service/src/main/java/org/kie/kogito/examples/CallbackResource.java
 index 91ad34b97..a28d9f40e 100644
 --- a/serverless-workflow-examples/serverless-workflow-callback-events-over-http-quarkus/callback-event-service/src/main/java/org/kie/kogito/examples/CallbackResource.java
@@ -3893,7 +3893,7 @@ index 76a5fd018..a20b704ed 100644
 +        <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
          <version.compiler.plugin>3.8.1</version.compiler.plugin>
          <maven.compiler.release>11</maven.compiler.release>
-         <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
+         <version.failsafe.plugin>3.1.2</version.failsafe.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-callback-quarkus/pom.xml b/serverless-workflow-examples/serverless-workflow-callback-quarkus/pom.xml
 index 2f1c84d57..4dbcc325b 100644
 --- a/serverless-workflow-examples/serverless-workflow-callback-quarkus/pom.xml
@@ -3914,7 +3914,7 @@ index 2f1c84d57..4dbcc325b 100644
 +    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
      <version.compiler.plugin>3.8.1</version.compiler.plugin>
      <maven.compiler.release>11</maven.compiler.release>
-     <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
+     <version.failsafe.plugin>3.1.2</version.failsafe.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-callback-quarkus/src/main/java/org/kie/kogito/examples/PrintService.java b/serverless-workflow-examples/serverless-workflow-callback-quarkus/src/main/java/org/kie/kogito/examples/PrintService.java
 index a1ee770e7..77b636420 100644
 --- a/serverless-workflow-examples/serverless-workflow-callback-quarkus/src/main/java/org/kie/kogito/examples/PrintService.java
@@ -3950,7 +3950,7 @@ index 519234897..05e2b0dd8 100644
 +    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
      <maven.compiler.release>11</maven.compiler.release>
      <version.compiler.plugin>3.8.1</version.compiler.plugin>
-     <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
+     <version.failsafe.plugin>3.1.2</version.failsafe.plugin>
      <!-- Used by the WSDL plugin -->
      <version.org.apache.cxf>3.5.4</version.org.apache.cxf>
      <!-- Aligned with Quarkus. We don't use the Camel Quarkus platform BOM to avoid upgrade delays in our CI. Feel free to use the BOM in your projects, though -->
@@ -3978,7 +3978,7 @@ index 480206687..015d82784 100644
 -    <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
 +    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
      <version.compiler.plugin>3.8.1</version.compiler.plugin>
-     <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
+     <version.failsafe.plugin>3.1.2</version.failsafe.plugin>
      <maven.compiler.release>11</maven.compiler.release>
 diff --git a/serverless-workflow-examples/serverless-workflow-consuming-events-over-http-quarkus/pom.xml b/serverless-workflow-examples/serverless-workflow-consuming-events-over-http-quarkus/pom.xml
 index 4cc5b957b..15d303eec 100644
@@ -4000,7 +4000,7 @@ index 4cc5b957b..15d303eec 100644
 +        <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
          <version.compiler.plugin>3.8.1</version.compiler.plugin>
          <maven.compiler.release>11</maven.compiler.release>
-         <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
+         <version.failsafe.plugin>3.1.2</version.failsafe.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-correlation-quarkus/pom.xml b/serverless-workflow-examples/serverless-workflow-correlation-quarkus/pom.xml
 index 4cb87747c..f67a88ec0 100644
 --- a/serverless-workflow-examples/serverless-workflow-correlation-quarkus/pom.xml
@@ -4021,7 +4021,7 @@ index 4cb87747c..f67a88ec0 100644
 +    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
      <version.compiler.plugin>3.8.1</version.compiler.plugin>
      <maven.compiler.release>11</maven.compiler.release>
-     <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
+     <version.failsafe.plugin>3.1.2</version.failsafe.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-correlation-quarkus/src/main/java/org/kie/kogito/examples/EventsService.java b/serverless-workflow-examples/serverless-workflow-correlation-quarkus/src/main/java/org/kie/kogito/examples/EventsService.java
 index ff08208ed..82e1404b2 100644
 --- a/serverless-workflow-examples/serverless-workflow-correlation-quarkus/src/main/java/org/kie/kogito/examples/EventsService.java
@@ -4080,7 +4080,7 @@ index bb232125f..ceedd0272 100644
 +        <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
          <version.compiler.plugin>3.8.1</version.compiler.plugin>
          <maven.compiler.release>11</maven.compiler.release>
-         <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
+         <version.failsafe.plugin>3.1.2</version.failsafe.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-custom-function-knative/workflow/pom.xml b/serverless-workflow-examples/serverless-workflow-custom-function-knative/workflow/pom.xml
 index a92ad9e89..94b538fb1 100644
 --- a/serverless-workflow-examples/serverless-workflow-custom-function-knative/workflow/pom.xml
@@ -4101,7 +4101,7 @@ index a92ad9e89..94b538fb1 100644
 +        <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
          <version.compiler.plugin>3.8.1</version.compiler.plugin>
          <maven.compiler.release>11</maven.compiler.release>
-         <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
+         <version.failsafe.plugin>3.1.2</version.failsafe.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-custom-type/pom.xml b/serverless-workflow-examples/serverless-workflow-custom-type/pom.xml
 index 519f3d236..43270cc84 100644
 --- a/serverless-workflow-examples/serverless-workflow-custom-type/pom.xml
@@ -4120,7 +4120,7 @@ index 519f3d236..43270cc84 100644
       <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
 -     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
 +     <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
-      <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
+      <version.failsafe.plugin>3.1.2</version.failsafe.plugin>
       <maven.compiler.release>11</maven.compiler.release>
       <version.org.slf4j>1.7.30</version.org.slf4j>
 diff --git a/serverless-workflow-examples/serverless-workflow-custom-type/serverless-workflow-custom-rpc/src/main/java/org/kie/kogito/examples/sw/custom/RPCCustomWorkItemHandler.java b/serverless-workflow-examples/serverless-workflow-custom-type/serverless-workflow-custom-rpc/src/main/java/org/kie/kogito/examples/sw/custom/RPCCustomWorkItemHandler.java
@@ -4174,7 +4174,7 @@ index b7b0a4ada..2e0b986da 100644
 +    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
      <version.compiler.plugin>3.8.1</version.compiler.plugin>
      <maven.compiler.release>11</maven.compiler.release>
-     <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
+     <version.failsafe.plugin>3.1.2</version.failsafe.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-data-index-quarkus/src/main/java/org/kie/kogito/examples/PrintService.java b/serverless-workflow-examples/serverless-workflow-data-index-quarkus/src/main/java/org/kie/kogito/examples/PrintService.java
 index 80259f870..14cb03297 100644
 --- a/serverless-workflow-examples/serverless-workflow-data-index-quarkus/src/main/java/org/kie/kogito/examples/PrintService.java
@@ -4210,7 +4210,7 @@ index f4f65c528..17baa4d8a 100644
 +    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
      <maven.compiler.release>11</maven.compiler.release>
      <version.compiler.plugin>3.8.1</version.compiler.plugin>
-     <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
+     <version.failsafe.plugin>3.1.2</version.failsafe.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-error-quarkus/src/main/java/org/kie/kogito/examples/EvenService.java b/serverless-workflow-examples/serverless-workflow-error-quarkus/src/main/java/org/kie/kogito/examples/EvenService.java
 index 59c077d86..6468384d5 100644
 --- a/serverless-workflow-examples/serverless-workflow-error-quarkus/src/main/java/org/kie/kogito/examples/EvenService.java
@@ -4244,7 +4244,7 @@ index 874e192c9..7379a037a 100644
 +    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
      <version.compiler.plugin>3.8.1</version.compiler.plugin>
      <maven.compiler.release>11</maven.compiler.release>
-     <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
+     <version.failsafe.plugin>3.1.2</version.failsafe.plugin>
 -    <version.org.kie.kogito>2.0.0-SNAPSHOT</version.org.kie.kogito>
 +    <version.org.kie.kogito>3.0.0-SNAPSHOT</version.org.kie.kogito>
    </properties>
@@ -4360,7 +4360,7 @@ index d866929bf..2144e8b6b 100644
 +    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
      <maven.compiler.release>11</maven.compiler.release>
      <version.compiler.plugin>3.8.1</version.compiler.plugin>
-     <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
+     <version.failsafe.plugin>3.1.2</version.failsafe.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-foreach-quarkus/pom.xml b/serverless-workflow-examples/serverless-workflow-foreach-quarkus/pom.xml
 index 781162a98..dffac3171 100644
 --- a/serverless-workflow-examples/serverless-workflow-foreach-quarkus/pom.xml
@@ -4381,7 +4381,7 @@ index 781162a98..dffac3171 100644
 +    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
      <maven.compiler.release>11</maven.compiler.release>
      <version.compiler.plugin>3.8.1</version.compiler.plugin>
-     <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
+     <version.failsafe.plugin>3.1.2</version.failsafe.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-functions-events-quarkus/pom.xml b/serverless-workflow-examples/serverless-workflow-functions-events-quarkus/pom.xml
 index 9424dc1b5..1d43def93 100644
 --- a/serverless-workflow-examples/serverless-workflow-functions-events-quarkus/pom.xml
@@ -4402,7 +4402,7 @@ index 9424dc1b5..1d43def93 100644
 +    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
      <version.compiler.plugin>3.8.1</version.compiler.plugin>
      <maven.compiler.release>11</maven.compiler.release>
-     <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
+     <version.surefire.plugin>3.1.2</version.surefire.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-functions-events-quarkus/src/main/java/org/acme/sw/onboarding/resources/AppointmentResource.java b/serverless-workflow-examples/serverless-workflow-functions-events-quarkus/src/main/java/org/acme/sw/onboarding/resources/AppointmentResource.java
 index b5584de03..1f9a0bdb8 100644
 --- a/serverless-workflow-examples/serverless-workflow-functions-events-quarkus/src/main/java/org/acme/sw/onboarding/resources/AppointmentResource.java
@@ -4539,7 +4539,7 @@ index 35c91d68b..a4136e6f8 100644
 +    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
      <version.compiler.plugin>3.8.1</version.compiler.plugin>
      <maven.compiler.release>11</maven.compiler.release>
-     <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
+     <version.failsafe.plugin>3.1.2</version.failsafe.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-functions-quarkus/src/main/java/org/acme/numbers/NumbersResource.java b/serverless-workflow-examples/serverless-workflow-functions-quarkus/src/main/java/org/acme/numbers/NumbersResource.java
 index b9cbab2e8..6980366b7 100644
 --- a/serverless-workflow-examples/serverless-workflow-functions-quarkus/src/main/java/org/acme/numbers/NumbersResource.java
@@ -4593,7 +4593,7 @@ index cda3b7296..011e97147 100644
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <version.compiler.plugin>3.8.1</version.compiler.plugin>
      <maven.compiler.release>11</maven.compiler.release>
-     <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
+     <version.failsafe.plugin>3.1.2</version.failsafe.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-funqy/sw-funqy-services/src/main/java/org/kogito/serverless/examples/functions/ClassificationFunction.java b/serverless-workflow-examples/serverless-workflow-funqy/sw-funqy-services/src/main/java/org/kogito/serverless/examples/functions/ClassificationFunction.java
 index 6f90bae6d..56b1e20e5 100644
 --- a/serverless-workflow-examples/serverless-workflow-funqy/sw-funqy-services/src/main/java/org/kogito/serverless/examples/functions/ClassificationFunction.java
@@ -4692,7 +4692,7 @@ index f651b169d..f72762b0b 100644
 +    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
      <version.compiler.plugin>3.8.1</version.compiler.plugin>
      <maven.compiler.release>11</maven.compiler.release>
-     <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
+     <version.failsafe.plugin>3.1.2</version.failsafe.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-greeting-quarkus/pom.xml b/serverless-workflow-examples/serverless-workflow-greeting-quarkus/pom.xml
 index 7ac2e39db..738e86c3f 100644
 --- a/serverless-workflow-examples/serverless-workflow-greeting-quarkus/pom.xml
@@ -4713,7 +4713,7 @@ index 7ac2e39db..738e86c3f 100644
 +    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
      <maven.compiler.release>11</maven.compiler.release>
      <version.compiler.plugin>3.8.1</version.compiler.plugin>
-     <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
+     <version.failsafe.plugin>3.1.2</version.failsafe.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-greeting-rpc-quarkus/serverless-workflow-greeting-client-rpc-quarkus/pom.xml b/serverless-workflow-examples/serverless-workflow-greeting-rpc-quarkus/serverless-workflow-greeting-client-rpc-quarkus/pom.xml
 index 8c6563339..707894ba9 100644
 --- a/serverless-workflow-examples/serverless-workflow-greeting-rpc-quarkus/serverless-workflow-greeting-client-rpc-quarkus/pom.xml
@@ -4734,14 +4734,14 @@ index 8c6563339..707894ba9 100644
 +    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
      <version.compiler.plugin>3.8.1</version.compiler.plugin>
      <maven.compiler.release>11</maven.compiler.release>
-     <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
+     <version.failsafe.plugin>3.1.2</version.failsafe.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-greeting-rpc-quarkus/serverless-workflow-greeting-server-rpc-quarkus/pom.xml b/serverless-workflow-examples/serverless-workflow-greeting-rpc-quarkus/serverless-workflow-greeting-server-rpc-quarkus/pom.xml
 index c2ca6f930..d004b2cc1 100644
 --- a/serverless-workflow-examples/serverless-workflow-greeting-rpc-quarkus/serverless-workflow-greeting-server-rpc-quarkus/pom.xml
 +++ b/serverless-workflow-examples/serverless-workflow-greeting-rpc-quarkus/serverless-workflow-greeting-server-rpc-quarkus/pom.xml
 @@ -16,7 +16,7 @@
          <maven.compiler.release>11</maven.compiler.release>
-         <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
+         <version.surefire.plugin>3.1.2</version.surefire.plugin>
          <version.com.google.protobuf>3.22.0</version.com.google.protobuf>
 -        <version.io.grpc>1.51.1</version.io.grpc>
 +        <version.io.grpc>1.54.0</version.io.grpc>
@@ -4779,7 +4779,7 @@ index 12e44987a..a2eeb214a 100644
 +        <version.org.kie.kogito>3.0.0-SNAPSHOT</version.org.kie.kogito>
          <maven.compiler.release>11</maven.compiler.release>
          <version.compiler.plugin>3.8.1</version.compiler.plugin>
-         <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
+         <version.surefire.plugin>3.1.2</version.surefire.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-loanbroker-showcase/aggregator/src/main/java/org/acme/serverless/loanbroker/aggregator/CloudEventDataFormat.java b/serverless-workflow-examples/serverless-workflow-loanbroker-showcase/aggregator/src/main/java/org/acme/serverless/loanbroker/aggregator/CloudEventDataFormat.java
 index 4a5671fe4..d3039a141 100644
 --- a/serverless-workflow-examples/serverless-workflow-loanbroker-showcase/aggregator/src/main/java/org/acme/serverless/loanbroker/aggregator/CloudEventDataFormat.java
@@ -5076,7 +5076,7 @@ index efd654500..368067c17 100644
 -    <version.org.apache.camel.quarkus>2.14.0</version.org.apache.camel.quarkus>
 +    <version.org.apache.camel.quarkus>3.0.0-M1</version.org.apache.camel.quarkus>
  
-     <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
+     <version.surefire.plugin>3.1.2</version.surefire.plugin>
      <version.compiler.plugin>3.8.1</version.compiler.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-newsletter-subscription/pom.xml b/serverless-workflow-examples/serverless-workflow-newsletter-subscription/pom.xml
 index 2e08e9a86..d9f50f983 100644
@@ -5096,7 +5096,7 @@ index 2e08e9a86..d9f50f983 100644
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
 -    <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
 +    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
-     <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
+     <version.surefire.plugin>3.1.2</version.surefire.plugin>
      <version.org.webjars.bootstrap>5.1.3</version.org.webjars.bootstrap>
      <version.org.webjars.jquery>3.6.0</version.org.webjars.jquery>
 diff --git a/serverless-workflow-examples/serverless-workflow-newsletter-subscription/subscription-flow/src/main/java/org/kie/kogito/examples/VertxRouter.java b/serverless-workflow-examples/serverless-workflow-newsletter-subscription/subscription-flow/src/main/java/org/kie/kogito/examples/VertxRouter.java
@@ -5245,7 +5245,7 @@ index cdda9bb4f..dd69b0cc3 100644
 +    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
      <version.compiler.plugin>3.8.1</version.compiler.plugin>
      <maven.compiler.release>11</maven.compiler.release>
-     <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
+     <version.failsafe.plugin>3.1.2</version.failsafe.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-oauth2-orchestration-quarkus/acme-financial-service/src/main/java/org/acme/AcmeFinancialApplication.java b/serverless-workflow-examples/serverless-workflow-oauth2-orchestration-quarkus/acme-financial-service/src/main/java/org/acme/AcmeFinancialApplication.java
 index af5d49198..c77a16ba7 100644
 --- a/serverless-workflow-examples/serverless-workflow-oauth2-orchestration-quarkus/acme-financial-service/src/main/java/org/acme/AcmeFinancialApplication.java
@@ -5317,7 +5317,7 @@ index e0132a7d4..b7f310a7f 100644
 +    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
      <version.compiler.plugin>3.8.1</version.compiler.plugin>
      <maven.compiler.release>11</maven.compiler.release>
-     <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
+     <version.failsafe.plugin>3.1.2</version.failsafe.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-oauth2-orchestration-quarkus/currency-exchange-workflow/src/main/java/org/kie/kogito/examples/ExchangeWorkflowHelper.java b/serverless-workflow-examples/serverless-workflow-oauth2-orchestration-quarkus/currency-exchange-workflow/src/main/java/org/kie/kogito/examples/ExchangeWorkflowHelper.java
 index 335f6f86a..903e39aef 100644
 --- a/serverless-workflow-examples/serverless-workflow-oauth2-orchestration-quarkus/currency-exchange-workflow/src/main/java/org/kie/kogito/examples/ExchangeWorkflowHelper.java
@@ -5408,7 +5408,7 @@ index f8d635e57..16804f95a 100644
 +        <version.org.kie.kogito>3.0.0-SNAPSHOT</version.org.kie.kogito>
          <maven.compiler.release>11</maven.compiler.release>
          <version.compiler.plugin>3.8.1</version.compiler.plugin>
-         <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
+         <version.surefire.plugin>3.1.2</version.surefire.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-python-quarkus/pom.xml b/serverless-workflow-examples/serverless-workflow-python-quarkus/pom.xml
 index 850e11d5b..162da1ab5 100644
 --- a/serverless-workflow-examples/serverless-workflow-python-quarkus/pom.xml
@@ -5746,7 +5746,7 @@ index d15fe8e64..8b3f1d9d3 100644
 +    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
      <version.compiler.plugin>3.8.1</version.compiler.plugin>
      <maven.compiler.release>11</maven.compiler.release>
-     <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
+     <version.surefire.plugin>3.1.2</version.surefire.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-service-calls-quarkus/src/main/java/org/kogito/serverless/examples/CountriesClassifierResource.java b/serverless-workflow-examples/serverless-workflow-service-calls-quarkus/src/main/java/org/kogito/serverless/examples/CountriesClassifierResource.java
 index 3917c23b4..2d64f52f3 100644
 --- a/serverless-workflow-examples/serverless-workflow-service-calls-quarkus/src/main/java/org/kogito/serverless/examples/CountriesClassifierResource.java
@@ -5820,7 +5820,7 @@ index 730e56f86..d7531a2f2 100644
 +        <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
          <version.compiler.plugin>3.8.1</version.compiler.plugin>
          <maven.compiler.release>11</maven.compiler.release>
-         <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
+         <version.surefire.plugin>3.1.2</version.surefire.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-stock-profit/real-stock-service/src/main/java/org/acme/RealStockPriceResource.java b/serverless-workflow-examples/serverless-workflow-stock-profit/real-stock-service/src/main/java/org/acme/RealStockPriceResource.java
 index 219f20cd6..26b3a8c66 100644
 --- a/serverless-workflow-examples/serverless-workflow-stock-profit/real-stock-service/src/main/java/org/acme/RealStockPriceResource.java
@@ -5881,7 +5881,7 @@ index f3ee8d2f9..d1e45b1ff 100644
 +    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
      <version.compiler.plugin>3.8.1</version.compiler.plugin>
      <maven.compiler.release>11</maven.compiler.release>
-     <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
+     <version.surefire.plugin>3.1.2</version.surefire.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-temperature-conversion/conversion-workflow-function/pom.xml b/serverless-workflow-examples/serverless-workflow-temperature-conversion/conversion-workflow-function/pom.xml
 index a0a03fe0b..e7f5ac799 100644
 --- a/serverless-workflow-examples/serverless-workflow-temperature-conversion/conversion-workflow-function/pom.xml
@@ -5902,7 +5902,7 @@ index a0a03fe0b..e7f5ac799 100644
 +    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
      <version.compiler.plugin>3.8.1</version.compiler.plugin>
      <maven.compiler.release>11</maven.compiler.release>
-     <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
+     <version.surefire.plugin>3.1.2</version.surefire.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-temperature-conversion/conversion-workflow-spec/pom.xml b/serverless-workflow-examples/serverless-workflow-temperature-conversion/conversion-workflow-spec/pom.xml
 index 8db50c271..9e56146b4 100644
 --- a/serverless-workflow-examples/serverless-workflow-temperature-conversion/conversion-workflow-spec/pom.xml
@@ -5923,7 +5923,7 @@ index 8db50c271..9e56146b4 100644
 +    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
      <version.compiler.plugin>3.8.1</version.compiler.plugin>
      <maven.compiler.release>11</maven.compiler.release>
-     <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
+     <version.surefire.plugin>3.1.2</version.surefire.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-temperature-conversion/conversion-workflow/pom.xml b/serverless-workflow-examples/serverless-workflow-temperature-conversion/conversion-workflow/pom.xml
 index 29686f3ca..1a4352b34 100644
 --- a/serverless-workflow-examples/serverless-workflow-temperature-conversion/conversion-workflow/pom.xml
@@ -5944,7 +5944,7 @@ index 29686f3ca..1a4352b34 100644
 +    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
      <version.compiler.plugin>3.8.1</version.compiler.plugin>
      <maven.compiler.release>11</maven.compiler.release>
-     <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
+     <version.surefire.plugin>3.1.2</version.surefire.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-temperature-conversion/multiplication-service/pom.xml b/serverless-workflow-examples/serverless-workflow-temperature-conversion/multiplication-service/pom.xml
 index 5d9b652af..7f0331124 100644
 --- a/serverless-workflow-examples/serverless-workflow-temperature-conversion/multiplication-service/pom.xml
@@ -5961,7 +5961,7 @@ index 5d9b652af..7f0331124 100644
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <version.compiler.plugin>3.8.1</version.compiler.plugin>
      <maven.compiler.release>11</maven.compiler.release>
-     <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
+     <version.surefire.plugin>3.1.2</version.surefire.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-temperature-conversion/multiplication-service/src/main/java/org/kie/kogito/examples/sw/temp/multiplication/OperationResource.java b/serverless-workflow-examples/serverless-workflow-temperature-conversion/multiplication-service/src/main/java/org/kie/kogito/examples/sw/temp/multiplication/OperationResource.java
 index b88993082..2cd120fc4 100644
 --- a/serverless-workflow-examples/serverless-workflow-temperature-conversion/multiplication-service/src/main/java/org/kie/kogito/examples/sw/temp/multiplication/OperationResource.java
@@ -6003,7 +6003,7 @@ index 50157e0d9..33bb58bbc 100644
 +    <quarkus.platform.version>3.0.0.Final</quarkus.platform.version>
      <version.compiler.plugin>3.8.1</version.compiler.plugin>
      <maven.compiler.release>11</maven.compiler.release>
-     <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
+     <version.surefire.plugin>3.1.2</version.surefire.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-temperature-conversion/subtraction-service/src/main/java/org/kie/kogito/examples/sw/temp/subtraction/OperationResource.java b/serverless-workflow-examples/serverless-workflow-temperature-conversion/subtraction-service/src/main/java/org/kie/kogito/examples/sw/temp/subtraction/OperationResource.java
 index fbddc22c5..671a17c91 100644
 --- a/serverless-workflow-examples/serverless-workflow-temperature-conversion/subtraction-service/src/main/java/org/kie/kogito/examples/sw/temp/subtraction/OperationResource.java
@@ -6049,7 +6049,7 @@ index 29a3d7a38..57f37d0a2 100644
 +        <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
          <maven.compiler.release>11</maven.compiler.release>
          <version.compiler.plugin>3.8.1</version.compiler.plugin>
-         <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
+         <version.surefire.plugin>3.1.2</version.surefire.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-embedded/pom.xml b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-embedded/pom.xml
 index 9ecc52d5a..d8a9582be 100644
 --- a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-embedded/pom.xml
@@ -6066,7 +6066,7 @@ index 9ecc52d5a..d8a9582be 100644
 +    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
      <maven.compiler.release>11</maven.compiler.release>
      <version.compiler.plugin>3.8.1</version.compiler.plugin>
-     <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
+     <version.surefire.plugin>3.1.2</version.surefire.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-embedded/src/main/java/org/kie/kogito/examples/EventsProducerResource.java b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-embedded/src/main/java/org/kie/kogito/examples/EventsProducerResource.java
 index 85ecdad6e..8a3b7a2cf 100644
 --- a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-embedded/src/main/java/org/kie/kogito/examples/EventsProducerResource.java
@@ -6126,7 +6126,7 @@ index 1d26d223f..bb27a5aa8 100644
 +    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
      <maven.compiler.release>11</maven.compiler.release>
      <version.compiler.plugin>3.8.1</version.compiler.plugin>
-     <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
+     <version.surefire.plugin>3.1.2</version.surefire.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-extended/src/main/java/org/kie/kogito/examples/EventsProducerResource.java b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-extended/src/main/java/org/kie/kogito/examples/EventsProducerResource.java
 index 3be5d1511..546c55c33 100644
 --- a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-extended/src/main/java/org/kie/kogito/examples/EventsProducerResource.java
@@ -6188,7 +6188,7 @@ index d4cc05f68..600c3e642 100644
 +    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
      <maven.compiler.release>11</maven.compiler.release>
      <version.compiler.plugin>3.8.1</version.compiler.plugin>
-     <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
+     <version.surefire.plugin>3.1.2</version.surefire.plugin>
 diff --git a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/src/main/java/org/kie/kogito/examples/CallbackStateTimeoutsClient.java b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/src/main/java/org/kie/kogito/examples/CallbackStateTimeoutsClient.java
 index 9b5f2cf6f..5ed665c99 100644
 --- a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/src/main/java/org/kie/kogito/examples/CallbackStateTimeoutsClient.java

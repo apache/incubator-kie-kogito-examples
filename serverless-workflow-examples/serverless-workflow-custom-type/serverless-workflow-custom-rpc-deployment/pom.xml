@@ -2,16 +2,38 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <parent>
-    <artifactId>serverless-workflow-custom-type</artifactId>
-    <groupId>org.acme.examples</groupId>
-    <version>1.0-SNAPSHOT</version>
-  </parent>
+
   <modelVersion>4.0.0</modelVersion>
 
+  <groupId>org.acme.examples</groupId>
+  <version>1.0-SNAPSHOT</version>
   <artifactId>serverless-workflow-custom-rpc-deployment</artifactId>
+
   <name>Kogito Example :: Serverless Workflow Custom RPC :: Deployment</name>
   <description>Custom addon to add custom rpc support</description>
+
+  <properties>
+    <version.compiler.plugin>3.8.1</version.compiler.plugin>
+    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
+    <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
+    <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
+    <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+    <maven.compiler.release>11</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>${kogito.bom.group-id}</groupId>
+        <artifactId>${kogito.bom.artifact-id}</artifactId>
+        <version>${kogito.bom.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <dependencies>
     <dependency>
@@ -19,7 +41,6 @@
       <artifactId>serverless-workflow-custom-rpc</artifactId>
       <version>${project.version}</version>
     </dependency>
-
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-quarkus-serverless-workflow-deployment</artifactId>

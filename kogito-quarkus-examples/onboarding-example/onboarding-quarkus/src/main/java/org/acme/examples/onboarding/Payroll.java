@@ -59,7 +59,7 @@ public class Payroll implements java.io.Serializable {
     }
 
     public Payroll(java.lang.Integer vacationDays, java.lang.Double taxRate,
-            java.util.Date paymentDate) {
+                   java.util.Date paymentDate) {
         this.vacationDays = vacationDays;
         this.taxRate = taxRate;
         this.paymentDate = paymentDate;

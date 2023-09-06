@@ -31,9 +31,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class CommonTestUtils {
 
     public static void testResult(final String inputData,
-            final String path,
-            final String targetField,
-            final Object expectedResult) {
+                                  final String path,
+                                  final String targetField,
+                                  final Object expectedResult) {
         given()
                 .contentType(ContentType.JSON)
                 .body(inputData)
@@ -45,7 +45,7 @@ public class CommonTestUtils {
     }
 
     public static void testResultWrongData(final String inputData,
-            final String path) {
+                                           final String path) {
         given()
                 .contentType(ContentType.JSON)
                 .body(inputData)
@@ -57,9 +57,9 @@ public class CommonTestUtils {
     }
 
     public static void testDescriptive(final String inputData,
-            final String basePath,
-            final String targetField,
-            final Map<String, Object> expectedResultMap) {
+                                       final String basePath,
+                                       final String targetField,
+                                       final Map<String, Object> expectedResultMap) {
         String path = basePath + "/descriptive";
         Object resultVariables = given()
                 .contentType(ContentType.JSON)
@@ -87,7 +87,7 @@ public class CommonTestUtils {
     }
 
     public static void testDescriptiveWrongData(final String inputData,
-            final String basePath) {
+                                                final String basePath) {
         String path = basePath + "/descriptive";
         given()
                 .contentType(ContentType.JSON)

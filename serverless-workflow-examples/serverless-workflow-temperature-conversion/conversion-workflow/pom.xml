@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
   <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>org.acme.examples</groupId>
-    <artifactId>serverless-workflow-temperature-conversion</artifactId>
-    <version>1.0-SNAPSHOT</version>
-  </parent>
+
   <artifactId>conversion-workflow</artifactId>
+  <groupId>org.acme.examples</groupId>
+  <version>1.0-SNAPSHOT</version>
+
   <name>Kogito Example :: Serverless Workflow Temperature Conversion :: Conversion Service</name>
+
   <properties>
     <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
@@ -19,10 +21,11 @@
     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
     <version.compiler.plugin>3.8.1</version.compiler.plugin>
     <maven.compiler.release>11</maven.compiler.release>
-    <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
+    <version.surefire.plugin>3.1.2</version.surefire.plugin>
     <version.failsafe.plugin>${version.surefire.plugin}</version.failsafe.plugin>
     <version.com.github.tomakehurst.wiremock>2.33.2</version.com.github.tomakehurst.wiremock>
   </properties>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -41,6 +44,7 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+
   <dependencies>
     <dependency>
       <groupId>org.kie.kogito</groupId>

@@ -45,6 +45,6 @@ Accept: application/json
 Content-Type: application/json
 
 {
-    "input" : "Jimmy",
-    "strategy" : "RETRY"
+  "input": "Jimmy",
+  "strategy": "RETRY"
 }

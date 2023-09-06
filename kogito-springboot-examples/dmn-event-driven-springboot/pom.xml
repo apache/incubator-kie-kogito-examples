@@ -5,17 +5,21 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>org.acme.examples</groupId>
-    <artifactId>kogito-springboot-examples</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
-  </parent>
   <artifactId>dmn-event-driven-springboot</artifactId>
+  <groupId>org.acme.examples</groupId>
+  <version>2.0.0-SNAPSHOT</version>
+
   <name>Kogito Example :: DMN Event-Driven :: Spring Boot</name>
 
   <properties>
     <version.org.kie.kogito>2.0.0-SNAPSHOT</version.org.kie.kogito>
     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+    <version.jib.plugin>3.3.1</version.jib.plugin>
+    <version.org.springframework.boot>2.6.6</version.org.springframework.boot>
+    <version.surefire.plugin>3.1.2</version.surefire.plugin>
+    <version.failsafe.plugin>${version.surefire.plugin}</version.failsafe.plugin>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
 
   <dependencyManagement>
@@ -85,6 +89,7 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${version.org.springframework.boot}</version>
         <executions>
           <execution>
             <goals>
@@ -92,6 +97,22 @@
             </goals>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <version>${version.failsafe.plugin}</version>
+        <configuration>
+          <classesDirectory>${project.build.outputDirectory}</classesDirectory>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>com.google.cloud.tools</groupId>
+        <artifactId>jib-maven-plugin</artifactId>
+        <version>${version.jib.plugin}</version>
+        <configuration>
+          <allowInsecureRegistries>true</allowInsecureRegistries>
+        </configuration>
       </plugin>
     </plugins>
   </build>

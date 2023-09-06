@@ -68,7 +68,7 @@ public class GrafanaDockerComposeIT {
                     .withPull(false)
                     .withLocalCompose(true)
                     //See https://github.com/testcontainers/testcontainers-java/issues/4565
-                   .withOptions("--compatibility");
+                    .withOptions("--compatibility");
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }

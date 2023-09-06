@@ -7,4 +7,4 @@ scrape_configs:
     metrics_path: /q/metrics
 
     static_configs:
-      - targets: ['kogito-app:8080']
+      - targets: [ 'kogito-app:8080' ]

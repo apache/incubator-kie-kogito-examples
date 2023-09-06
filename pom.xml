@@ -4,15 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>org.kie.kogito</groupId>
-    <artifactId>kogito-build-no-bom-parent</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
-  </parent>
 
   <groupId>org.acme.examples</groupId>
   <artifactId>kogito-examples</artifactId>
   <packaging>pom</packaging>
+  <version>2.0.0-SNAPSHOT</version>
 
   <name>Kogito Example</name>
   <description>Kogito Example</description>
@@ -32,8 +28,6 @@
   </licenses>
 
   <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
     <version.org.kie.kogito>2.0.0-SNAPSHOT</version.org.kie.kogito>
 
     <surefire.forkCount>1</surefire.forkCount>
@@ -41,15 +35,26 @@
     <failsafe.exclude>**/Native*IT.java</failsafe.exclude>
     <alphanetworkCompilerEnabled>false</alphanetworkCompilerEnabled>
     <tests.category></tests.category>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+<!--    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
+<!--    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>-->
     <!-- dependencies version -->
-    <version.org.skyscreamer>1.5.0</version.org.skyscreamer>
+<!--    <version.org.skyscreamer>1.5.0</version.org.skyscreamer>-->
     <!-- JKube -->
     <version.org.eclipse.jkube>1.4.0</version.org.eclipse.jkube>
     <!-- WebJars -->
     <version.org.webjars>4.5.3</version.org.webjars>
-    <version.jib.plugin>3.3.1</version.jib.plugin>
+    <!--    <version.jib.plugin>3.3.1</version.jib.plugin>-->
+
+    <version.deploy.plugin>2.8.2</version.deploy.plugin>
+    <version.surefire.plugin>3.1.2</version.surefire.plugin>
+    <version.failsafe.plugin>${version.surefire.plugin}</version.failsafe.plugin>
+    <version.source.plugin>3.0.1</version.source.plugin>
+    <version.jar.plugin>3.1.0</version.jar.plugin>
+    <version.enforcer.plugin>3.0.0-M2</version.enforcer.plugin>
+
+    <version.maven>3.8.6</version.maven>
+
+    <maven.compiler.release>11</maven.compiler.release>
   </properties>
 
   <!-- distributionManagement section -->
@@ -157,7 +162,7 @@
       <dependency>
         <groupId>org.kie.kogito</groupId>
         <artifactId>kogito-test-utils</artifactId>
-      <version>${version.org.kie.kogito}</version>
+        <version>${version.org.kie.kogito}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -190,7 +195,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-failsafe-plugin</artifactId>
-          <version>${version.surefire.plugin}</version>
+          <version>${version.failsafe.plugin}</version>
           <configuration>
             <forkCount>${surefire.forkCount}</forkCount>
             <reuseForks>true</reuseForks>
@@ -204,14 +209,14 @@
               <tests.category>${tests.category}</tests.category>
               <enable.resource.infinispan>${enable.resource.infinispan}</enable.resource.infinispan>
               <enable.resource.kafka>${enable.resource.kafka}</enable.resource.kafka>
-              <enable.resource.postgresql>${enable.resource.postgresql}</enable.resource.postgresql>
+              <!--              <enable.resource.postgresql>${enable.resource.postgresql}</enable.resource.postgresql>-->
               <enable.resource.mongodb>${enable.resource.mongodb}</enable.resource.mongodb>
               <container.image.keycloak>${container.image.keycloak}</container.image.keycloak>
               <container.image.infinispan>${container.image.infinispan}</container.image.infinispan>
               <container.image.kafka>${container.image.kafka}</container.image.kafka>
-              <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
+              <!--              <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>-->
             </systemPropertyVariables>
-            <classesDirectory>${project.build.outputDirectory}</classesDirectory>
+            <!--            <classesDirectory>${project.build.outputDirectory}</classesDirectory>-->
             <workingDirectory>${project.build.directory}/test-run</workingDirectory>
           </configuration>
           <executions>
@@ -223,6 +228,7 @@
             </execution>
           </executions>
         </plugin>
+        <!-- TODO add to every pom -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-enforcer-plugin</artifactId>
@@ -304,7 +310,9 @@
                 <archive>
                   <manifestEntries>
                     <Bundle-SymbolicName>${java.module.name}.tests</Bundle-SymbolicName>
-                    <Bundle-Version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.${osgi.snapshot.qualifier}</Bundle-Version>
+                    <Bundle-Version>
+                      ${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.${osgi.snapshot.qualifier}
+                    </Bundle-Version>
                     <Bundle-Name>${project.name}</Bundle-Name>
                     <Bundle-Vendor>${project.organization.name}</Bundle-Vendor>
                   </manifestEntries>
@@ -336,7 +344,9 @@
                   <manifestEntries>
                     <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
                     <Bundle-SymbolicName>${java.module.name}.source</Bundle-SymbolicName>
-                    <Bundle-Version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.${osgi.snapshot.qualifier}</Bundle-Version>
+                    <Bundle-Version>
+                      ${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.${osgi.snapshot.qualifier}
+                    </Bundle-Version>
                     <Bundle-Name>${project.name}</Bundle-Name>
                     <Bundle-Vendor>${project.organization.name}</Bundle-Vendor>
                     <Eclipse-SourceBundle>
@@ -356,7 +366,9 @@
                   <manifestEntries>
                     <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
                     <Bundle-SymbolicName>${java.module.name}.tests.source</Bundle-SymbolicName>
-                    <Bundle-Version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.${osgi.snapshot.qualifier}</Bundle-Version>
+                    <Bundle-Version>
+                      ${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.${osgi.snapshot.qualifier}
+                    </Bundle-Version>
                     <Bundle-Name>${project.name}</Bundle-Name>
                     <Bundle-Vendor>${project.organization.name}</Bundle-Vendor>
                     <Eclipse-SourceBundle>

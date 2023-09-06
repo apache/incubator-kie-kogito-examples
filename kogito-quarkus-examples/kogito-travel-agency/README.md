@@ -15,10 +15,11 @@ Each version is based on previous one so it allows people perform the implementa
 and to start any any place.
 
 [Base travel agency service](basic) - deals with all the basic steps to book flight and hotel.
-Consists of single service that has both business logic and decision logic included. 
+Consists of single service that has both business logic and decision logic included.
 
 [Travel agency and visa services with persistence](extended) - deals with all the basic steps to book flight and hotel.
-Consists of two services that have both business logic and decision logic included. Preserves data between service restarts and requires Infinispan server to be available.
+Consists of two services that have both business logic and decision logic included. Preserves data between service
+restarts and requires Infinispan server to be available.
 
 ## Contribution
 
@@ -31,4 +32,5 @@ Everyone is encouraged to contribute to this tutorial by
 
 ## Deploying with Kogito Operator
 
-In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).
+In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with
+the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).

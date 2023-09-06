@@ -1,16 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>org.acme.examples</groupId>
-    <artifactId>onboarding-example</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
-  </parent>
+
   <artifactId>onboarding-quarkus</artifactId>
+  <groupId>org.acme.examples</groupId>
+  <version>2.0.0-SNAPSHOT</version>
+
   <name>Kogito Example :: Onboarding Example :: Onboarding with Business Process Quarkus</name>
   <description>Onboarding function and service orchestration</description>
-  
+
+  <properties>
+    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
+    <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
+    <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
+    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
+    <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
+    <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
+    <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+    <version.org.kie.kogito>2.0.0-SNAPSHOT</version.org.kie.kogito>
+    <!-- Port 0 means dynamic port -->
+    <tests.quarkus.http.port>0</tests.quarkus.http.port>
+    <!-- override default to fast-jar packaging for forward-compatibility -->
+    <quarkus.package.type>fast-jar</quarkus.package.type>
+    <version.surefire.plugin>3.1.2</version.surefire.plugin>
+    <version.failsafe.plugin>${version.surefire.plugin}</version.failsafe.plugin>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>${quarkus.platform.group-id}</groupId>
+        <artifactId>${quarkus.platform.artifact-id}</artifactId>
+        <version>${quarkus.platform.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>${kogito.bom.group-id}</groupId>
+        <artifactId>${kogito.bom.artifact-id}</artifactId>
+        <version>${kogito.bom.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
   <dependencies>
     <dependency>
       <groupId>org.kie.kogito</groupId>
@@ -77,6 +117,7 @@
       <artifactId>quarkus-smallrye-health</artifactId>
     </dependency>
   </dependencies>
+
   <build>
     <finalName>${project.artifactId}</finalName>
     <plugins>
@@ -96,9 +137,46 @@
           <jvmArgs>-Dlocal=true</jvmArgs>
         </configuration>
       </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${version.surefire.plugin}</version>
+        <configuration>
+          <systemPropertyVariables>
+            <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+          </systemPropertyVariables>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <version>${version.failsafe.plugin}</version>
+        <configuration>
+          <systemPropertyVariables>
+            <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+            <quarkus.http.test-port>${tests.quarkus.http.port}</quarkus.http.test-port>
+          </systemPropertyVariables>
+        </configuration>
+      </plugin>
     </plugins>
+
   </build>
   <profiles>
+    <profile>
+      <id>default</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+    </profile>
+    <profile>
+      <id>native</id>
+      <activation>
+        <property>
+          <name>native</name>
+        </property>
+      </activation>
+    </profile>
     <profile>
       <id>persistence</id>
       <activation>
@@ -135,6 +213,23 @@
       <properties>
         <quarkus.kubernetes.deploy>true</quarkus.kubernetes.deploy>
         <quarkus.profile>knative</quarkus.profile>
+      </properties>
+    </profile>
+
+    <profile>
+      <id>kogito-apps-downstream-native</id>
+      <activation>
+        <property>
+          <name>kogito-apps-native</name>
+        </property>
+      </activation>
+      <properties>
+        <failsafe.include>**/Native*IT.java</failsafe.include>
+        <failsafe.exclude></failsafe.exclude>
+        <quarkus.package.type>native</quarkus.package.type>
+        <quarkus.native.native-image-xmx>8g</quarkus.native.native-image-xmx>
+        <!-- Native building needs a fixed port for tests -->
+        <tests.quarkus.http.port>8080</tests.quarkus.http.port>
       </properties>
     </profile>
   </profiles>

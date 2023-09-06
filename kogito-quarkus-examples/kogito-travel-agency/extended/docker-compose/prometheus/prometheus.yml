@@ -12,7 +12,7 @@ scrape_configs:
     #   password: 'kieserver1!'
 
     static_configs:
-      - targets: ['172.17.0.1:8080']
+      - targets: [ '172.17.0.1:8080' ]
 
   - job_name: 'visas'
 
@@ -25,4 +25,4 @@ scrape_configs:
     #   password: 'kieserver1!'
 
     static_configs:
-      - targets: ['172.17.0.1:8090']
+      - targets: [ '172.17.0.1:8090' ]

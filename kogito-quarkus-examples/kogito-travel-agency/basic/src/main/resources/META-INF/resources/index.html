@@ -5,8 +5,8 @@
     <title>Kogito Travel Agency</title>
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-      <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
@@ -53,14 +53,14 @@
                 'Accept': 'application/json'
             }
         });
-        $( function() {
-            $( "#tripBegin" ).datepicker({
+        $(function () {
+            $("#tripBegin").datepicker({
                 dateFormat: "yy-mm-dd"
             });
-            $( "#tripEnd" ).datepicker({
+            $("#tripEnd").datepicker({
                 dateFormat: "yy-mm-dd"
             });
-          } );
+        });
         load();
         initModal();
     });
@@ -97,56 +97,56 @@
         $.getJSON("/travels", function (data) {
             $.each(data, function (key, val) {
                 $("<tr><td>" + val.traveller.lastName + ", " + val.traveller.firstName + "</td>" +
-                "<td>" + val.trip.country + ", " + val.trip.city + "</td>" +
-                "<td>" + new Date(val.trip.begin).toLocaleDateString() + " - " + new Date(val.trip.end).toLocaleDateString() + "</td>" +
-                "<td>" + (val.trip.visaRequired ? 'Yes' : 'No') + "</td>" +
-                "<td>" + (val.hotel != null ? val.hotel.name : '') + "</td>" +
-                "<td>" + (val.flight != null ? val.flight.flightNumber : '')  + "</td>" +
-                        "<td>" +
-                        "<button class='btn btn-primary btn-sm' " +
-                        "data-toggle='modal' " +
-                        "data-target='#detailsModal' " +
-                        "data-firstname='" + val.traveller.firstName + "' " +
-                        "data-lastname='" + val.traveller.lastName + "' " +
-                        "data-email='" + val.traveller.email + "' " +
-                        "data-nationality='" + val.traveller.nationality + "' " +
-                        "data-visa-application='" + val.traveller.visaApplication + "' " +
-                        "data-country='" + val.trip.country + "' " +
-                        "data-city='" + val.trip.city + "' " +
-                        "data-begin='" + new Date(val.trip.begin).toLocaleDateString() + "' " +
-                        "data-end='" + new Date(val.trip.end).toLocaleDateString() + "' " +
-                        "data-hotelname='" + (val.hotel != null ? val.hotel.name : "") + "' " +
-                        "data-address='" + (val.hotel != null ? val.hotel.address.street : "") + "' " +
-                        "data-bookingnumber='" + (val.hotel != null ? val.hotel.bookingNumber : "") + "' " +
-                        "data-phone='" + (val.hotel != null ? val.hotel.phone : "") + "' " +
-                        "data-flightnumber='" + (val.flight != null ? val.flight.flightNumber : "") + "' " +
-                        "data-arrival='" + (val.flight != null ? new Date(val.flight.arrival).toLocaleString() : "") + "' " +
-                        "data-departure='" + (val.flight != null ? new Date(val.flight.departure).toLocaleString() : "") + "' " +
-                        "data-id='" + val.id + "'>" +
-                        "   <span>Details</span>" +
-                        "</button>&nbsp;" +
-                        "<button class='btn btn-primary btn-sm' " +
-                        "data-toggle='modal' " +
-                        "data-target='#tasksModal' " +
-                        "data-firstname='" + val.traveller.firstName + "' " +
-                        "data-lastname='" + val.traveller.lastName + "' " +
-                        "data-id='" + val.id + "'>" +
-                        "   <span>Tasks</span>" +
-                        "</button>&nbsp;" +
-                        "<button class='btn btn-danger btn-sm product-delete' data-id='" + val.id + "'>" +
-                        "   <span>Cancel</span>" +
-                        "</button>" +
-                        "</td>" +
-                        "</tr>").appendTo("#content");
+                    "<td>" + val.trip.country + ", " + val.trip.city + "</td>" +
+                    "<td>" + new Date(val.trip.begin).toLocaleDateString() + " - " + new Date(val.trip.end).toLocaleDateString() + "</td>" +
+                    "<td>" + (val.trip.visaRequired ? 'Yes' : 'No') + "</td>" +
+                    "<td>" + (val.hotel != null ? val.hotel.name : '') + "</td>" +
+                    "<td>" + (val.flight != null ? val.flight.flightNumber : '') + "</td>" +
+                    "<td>" +
+                    "<button class='btn btn-primary btn-sm' " +
+                    "data-toggle='modal' " +
+                    "data-target='#detailsModal' " +
+                    "data-firstname='" + val.traveller.firstName + "' " +
+                    "data-lastname='" + val.traveller.lastName + "' " +
+                    "data-email='" + val.traveller.email + "' " +
+                    "data-nationality='" + val.traveller.nationality + "' " +
+                    "data-visa-application='" + val.traveller.visaApplication + "' " +
+                    "data-country='" + val.trip.country + "' " +
+                    "data-city='" + val.trip.city + "' " +
+                    "data-begin='" + new Date(val.trip.begin).toLocaleDateString() + "' " +
+                    "data-end='" + new Date(val.trip.end).toLocaleDateString() + "' " +
+                    "data-hotelname='" + (val.hotel != null ? val.hotel.name : "") + "' " +
+                    "data-address='" + (val.hotel != null ? val.hotel.address.street : "") + "' " +
+                    "data-bookingnumber='" + (val.hotel != null ? val.hotel.bookingNumber : "") + "' " +
+                    "data-phone='" + (val.hotel != null ? val.hotel.phone : "") + "' " +
+                    "data-flightnumber='" + (val.flight != null ? val.flight.flightNumber : "") + "' " +
+                    "data-arrival='" + (val.flight != null ? new Date(val.flight.arrival).toLocaleString() : "") + "' " +
+                    "data-departure='" + (val.flight != null ? new Date(val.flight.departure).toLocaleString() : "") + "' " +
+                    "data-id='" + val.id + "'>" +
+                    "   <span>Details</span>" +
+                    "</button>&nbsp;" +
+                    "<button class='btn btn-primary btn-sm' " +
+                    "data-toggle='modal' " +
+                    "data-target='#tasksModal' " +
+                    "data-firstname='" + val.traveller.firstName + "' " +
+                    "data-lastname='" + val.traveller.lastName + "' " +
+                    "data-id='" + val.id + "'>" +
+                    "   <span>Tasks</span>" +
+                    "</button>&nbsp;" +
+                    "<button class='btn btn-danger btn-sm product-delete' data-id='" + val.id + "'>" +
+                    "   <span>Cancel</span>" +
+                    "</button>" +
+                    "</td>" +
+                    "</tr>").appendTo("#content");
             });
             initCallbacks();
         });
     }
 
     function initCallbacks() {
-        $(".product-delete").unbind().click(function() {
-           var id = $(this).data("id");
-           remove(id);
+        $(".product-delete").unbind().click(function () {
+            var id = $(this).data("id");
+            remove(id);
         });
 
     }
@@ -177,9 +177,25 @@
 
             productAction.click(function () {
 
-                var address = {street: $("#street").val(), city: $("#city").val(), zipCode: $("#zipCode").val(), country: $("#country").val()};
-                var traveller = {firstName: $("#firstName").val(), lastName: $("#lastName").val(), email: $("#email").val(), nationality: $("#nationality").val(), address: address};
-                var trip = {country: $("#destinationCountry").val(), city: $("#destinationCity").val(), begin: $("#tripBegin").val() + 'T00:00:00.000+02:00', end: $("#tripEnd").val() + 'T00:00:00.000+02:00'};
+                var address = {
+                    street: $("#street").val(),
+                    city: $("#city").val(),
+                    zipCode: $("#zipCode").val(),
+                    country: $("#country").val()
+                };
+                var traveller = {
+                    firstName: $("#firstName").val(),
+                    lastName: $("#lastName").val(),
+                    email: $("#email").val(),
+                    nationality: $("#nationality").val(),
+                    address: address
+                };
+                var trip = {
+                    country: $("#destinationCountry").val(),
+                    city: $("#destinationCity").val(),
+                    begin: $("#tripBegin").val() + 'T00:00:00.000+02:00',
+                    end: $("#tripEnd").val() + 'T00:00:00.000+02:00'
+                };
                 var travelRequest = JSON.stringify({traveller: traveller, trip: trip});
 
                 create(travelRequest);
@@ -198,7 +214,7 @@
             modal.find('#lastName').val(button.data("lastname"));
             modal.find('#email').val(button.data("email"));
             modal.find('#nationality').val(button.data("nationality"));
-            if(button.data("visa-application") !== null && button.data("visa-application") !== '') {
+            if (button.data("visa-application") !== null && button.data("visa-application") !== '') {
                 $('#visa-application-group').show();
                 modal.find('#visaApplication').attr('href', button.data("visa-application"));
             } else {
@@ -228,26 +244,26 @@
             modal.find('.modal-title').text("Tasks for " + button.data("lastname") + ", " + button.data("firstname"));
 
             $("#taskscontent").children().remove();
-            $.getJSON("/travels/"+ travelId + "/tasks", function (data) {
+            $.getJSON("/travels/" + travelId + "/tasks", function (data) {
                 $.each(data, function (index, task) {
                     let taskId = task.id;
                     let taskName = task.name;
                     let element = "<tr><td>" + taskName + "</td><td>";
                     if (taskName === 'VisaApplication') {
                         element += "<div class='form-group'><label for='sendVisaApplication'>Link to visa application</label><input class='form-control' type='text' id='sendVisaApplication' name='sendVisaApplication' required></div>" +
-                        "<button class='btn btn-primary btn-sm' onclick=\"sendVisaApplication('" + travelId + "', '" + taskName + "', '" + taskId + "')\" data-dismiss=\"modal\" " +
-                        "   <span>Send</span>" +
-                        "</button>";
+                            "<button class='btn btn-primary btn-sm' onclick=\"sendVisaApplication('" + travelId + "', '" + taskName + "', '" + taskId + "')\" data-dismiss=\"modal\" " +
+                            "   <span>Send</span>" +
+                            "</button>";
                     } else {
                         element += "<button class='btn btn-primary btn-sm' onclick=\"completeTask('" + travelId + "', '" + taskName + "', '" + taskId + "')\" data-dismiss=\"modal\" " +
-                        "   <span>Complete</span>" +
-                        "</button>";
+                            "   <span>Complete</span>" +
+                            "</button>";
                     }
-                    element +=	"</td></tr>";
+                    element += "</td></tr>";
                     $(element).appendTo("#taskscontent");
                 });
+            })
         })
-    })
     }
 </script>
 <div class="modal fade" id="productModal" tabindex="-1" role="dialog">
@@ -259,79 +275,93 @@
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
-                        <div class="row">
-                            <h3>Traveller</h3>
-                            <div class="col-md-6 col-sm-6 col-xs-6">
-                                <div class="form-group">
-                                    <label for="firstName">First Name</label> <input type="text"
-                                        class="form-control" id="firstName" name="firstName" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="lastName">Last Name</label> <input type="text"
-                                        class="form-control" id="lastName" name="lastName" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="email">Email</label> <input type="text"
-                                        class="form-control" id="email" name="email" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="nationality">Nationality</label> <input
-                                        type="text" class="form-control" id="nationality"
-                                        name="nationality" required>
-                                </div>
-
+                    <div class="row">
+                        <h3>Traveller</h3>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label> <input type="text"
+                                                                                 class="form-control" id="firstName"
+                                                                                 name="firstName" required>
                             </div>
-                            <div class="col-md-6 col-sm-6 col-xs-6">
-                                <div class="form-group">
-                                    <label for="street">Street</label> <input type="email"
-                                        class="form-control" id="street" name="street" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="city">City</label> <input type="text"
-                                        class="form-control" id="city" name="city" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="zipCode">Zip code</label> <input type="text"
-                                        class="form-control" id="zipCode" name="zipCode" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="country">Country</label> <input type="text"
-                                        class="form-control" id="country" name="country" required>
-                                </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label> <input type="text"
+                                                                               class="form-control" id="lastName"
+                                                                               name="lastName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label> <input type="text"
+                                                                        class="form-control" id="email" name="email"
+                                                                        required>
+                            </div>
+                            <div class="form-group">
+                                <label for="nationality">Nationality</label> <input
+                                    type="text" class="form-control" id="nationality"
+                                    name="nationality" required>
                             </div>
 
-                            <h3>Trip</h3>
-                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                <div class="form-group">
-                                    <label for="destinationCountry">Country</label> <input type="text"
-                                        class="form-control" id="destinationCountry" name="destinationCountry" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="destinationCity">City</label> <input type="text"
-                                        class="form-control" id="destinationCity" name="destinationCity" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="tripBegin">Begin at</label> <input type="text"
-                                        class="form-control" id="tripBegin" name="tripBegin" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="tripEnd">End at</label> <input
-                                        type="text" class="form-control" id="tripEnd"
-                                        name="tripEnd" required>
-                                </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group">
+                                <label for="street">Street</label> <input type="email"
+                                                                          class="form-control" id="street" name="street"
+                                                                          required>
+                            </div>
+                            <div class="form-group">
+                                <label for="city">City</label> <input type="text"
+                                                                      class="form-control" id="city" name="city"
+                                                                      required>
+                            </div>
+                            <div class="form-group">
+                                <label for="zipCode">Zip code</label> <input type="text"
+                                                                             class="form-control" id="zipCode"
+                                                                             name="zipCode" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="country">Country</label> <input type="text"
+                                                                            class="form-control" id="country"
+                                                                            name="country" required>
+                            </div>
+                        </div>
 
+                        <h3>Trip</h3>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                <label for="destinationCountry">Country</label> <input type="text"
+                                                                                       class="form-control"
+                                                                                       id="destinationCountry"
+                                                                                       name="destinationCountry"
+                                                                                       required>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default"
-                                    data-dismiss="modal">Cancel</button>
-                                <button type="button" id="productAction" class="btn btn-primary">Book your trip</button>
+                            <div class="form-group">
+                                <label for="destinationCity">City</label> <input type="text"
+                                                                                 class="form-control"
+                                                                                 id="destinationCity"
+                                                                                 name="destinationCity" required>
                             </div>
+                            <div class="form-group">
+                                <label for="tripBegin">Begin at</label> <input type="text"
+                                                                               class="form-control" id="tripBegin"
+                                                                               name="tripBegin" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="tripEnd">End at</label> <input
+                                    type="text" class="form-control" id="tripEnd"
+                                    name="tripEnd" required>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default"
+                                    data-dismiss="modal">Cancel
+                            </button>
+                            <button type="button" id="productAction" class="btn btn-primary">Book your trip</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 <div class="modal fade" id="detailsModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="dialog">
@@ -342,111 +372,129 @@
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6 col-xs-6">
-                                <div class="form-group">
-                                    <h3>Traveller</h3>
-                                </div>
-                                <div class="form-group">
-                                    <label for="firstName">First Name</label> <input type="text"
-                                        class="form-control" id="firstName" name="firstName" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="lastName">Last Name</label> <input type="text"
-                                        class="form-control" id="lastName" name="lastName" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="email">Email</label> <input type="text"
-                                        class="form-control" id="email" name="email" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="nationality">Nationality</label> <input
-                                        type="text" class="form-control" id="nationality"
-                                        name="form-control" readonly>
-                                </div>
-                                <div id="visa-application-group" class="form-group">
-                                    <label for="visaApplication">Visa application</label>
-                                    <p>
-                                        <a href="#" id="visaApplication" target="_blank" >Link to visa application</a>
-                                    </p>
-                                </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group">
+                                <h3>Traveller</h3>
                             </div>
-
-                            <div class="col-md-6 col-sm-6 col-xs-6">
-                                <div class="form-group">
-                                    <h3>Trip</h3>
-                                </div>
-                                <div class="form-group">
-                                    <label for="destinationCountry">Country</label> <input type="text"
-                                        class="form-control" id="destinationCountry" name="destinationCountry" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="destinationCity">City</label> <input type="text"
-                                        class="form-control" id="destinationCity" name="destinationCity" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="tripBegin">Begin at</label> <input type="text"
-                                        class="form-control" id="tripBegin" name="tripBegin" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="tripEnd">End at</label> <input
-                                        type="text" class="form-control" id="tripEnd"
-                                        name="tripEnd" readonly>
-                                </div>
+                            <div class="form-group">
+                                <label for="firstName">First Name</label> <input type="text"
+                                                                                 class="form-control" id="firstName"
+                                                                                 name="firstName" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label> <input type="text"
+                                                                               class="form-control" id="lastName"
+                                                                               name="lastName" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label> <input type="text"
+                                                                        class="form-control" id="email" name="email"
+                                                                        readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="nationality">Nationality</label> <input
+                                    type="text" class="form-control" id="nationality"
+                                    name="form-control" readonly>
+                            </div>
+                            <div id="visa-application-group" class="form-group">
+                                <label for="visaApplication">Visa application</label>
+                                <p>
+                                    <a href="#" id="visaApplication" target="_blank">Link to visa application</a>
+                                </p>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6 col-xs-6">
-                                <div class="form-group">
-                                    <h3>Hotel</h3>
-                                </div>
-                                <div class="form-group">
-                                    <label for="hotelname">Name</label> <input type="text"
-                                        class="form-control" id="hotelname" name="hotelname" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="bookingNumber">Booking Number</label> <input type="text"
-                                        class="form-control" id="bookingNumber" name="bookingNumber" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="address">Address</label> <input type="text"
-                                        class="form-control" id="address" name="address" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="phone">Phone</label> <input type="text"
-                                        class="form-control" id="phone" name="phone" readonly>
-                                </div>
-                            </div>
 
-                            <div class="col-md-6 col-sm-6 col-xs-6">
-                                <div class="form-group">
-                                    <h3>Flight</h3>
-                                </div>
-                                <div class="form-group">
-                                    <label for="flightNumber">Flight number</label> <input type="email"
-                                        class="form-control" id="flightNumber" name="flightNumber" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="departure">Departure</label> <input type="text"
-                                        class="form-control" id="departure" name="departure" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="arrival">Arrival</label> <input type="text"
-                                        class="form-control" id="arrival" name="arrival" readonly>
-                                </div>
-                                <div class="form-group">
-                                    &nbsp;
-                                </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group">
+                                <h3>Trip</h3>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                            <div class="form-group">
+                                <label for="destinationCountry">Country</label> <input type="text"
+                                                                                       class="form-control"
+                                                                                       id="destinationCountry"
+                                                                                       name="destinationCountry"
+                                                                                       readonly>
                             </div>
+                            <div class="form-group">
+                                <label for="destinationCity">City</label> <input type="text"
+                                                                                 class="form-control"
+                                                                                 id="destinationCity"
+                                                                                 name="destinationCity" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="tripBegin">Begin at</label> <input type="text"
+                                                                               class="form-control" id="tripBegin"
+                                                                               name="tripBegin" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="tripEnd">End at</label> <input
+                                    type="text" class="form-control" id="tripEnd"
+                                    name="tripEnd" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group">
+                                <h3>Hotel</h3>
+                            </div>
+                            <div class="form-group">
+                                <label for="hotelname">Name</label> <input type="text"
+                                                                           class="form-control" id="hotelname"
+                                                                           name="hotelname" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="bookingNumber">Booking Number</label> <input type="text"
+                                                                                         class="form-control"
+                                                                                         id="bookingNumber"
+                                                                                         name="bookingNumber" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Address</label> <input type="text"
+                                                                            class="form-control" id="address"
+                                                                            name="address" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone</label> <input type="text"
+                                                                        class="form-control" id="phone" name="phone"
+                                                                        readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group">
+                                <h3>Flight</h3>
+                            </div>
+                            <div class="form-group">
+                                <label for="flightNumber">Flight number</label> <input type="email"
+                                                                                       class="form-control"
+                                                                                       id="flightNumber"
+                                                                                       name="flightNumber" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="departure">Departure</label> <input type="text"
+                                                                                class="form-control" id="departure"
+                                                                                name="departure" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="arrival">Arrival</label> <input type="text"
+                                                                            class="form-control" id="arrival"
+                                                                            name="arrival" readonly>
+                            </div>
+                            <div class="form-group">
+                                &nbsp;
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 
 <div class="modal fade" id="tasksModal" tabindex="-1" role="dialog">
@@ -458,31 +506,31 @@
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
-                        <div class="row">
+                    <div class="row">
 
-                            <div class="col-md-12">
-                                <h1>Tasks</h1>
-                                <table class="table table-striped">
-                                    <thead>
-                                    <tr>
-                                        <th>Task name</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody id="taskscontent">
-                                    <!-- filled using Ajax -->
-                                    </tbody>
-                                </table>
-                            </div>
+                        <div class="col-md-12">
+                            <h1>Tasks</h1>
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Task name</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody id="taskscontent">
+                                <!-- filled using Ajax -->
+                                </tbody>
+                            </table>
+                        </div>
 
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                            </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </body>
 </html>

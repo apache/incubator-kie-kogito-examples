@@ -74,8 +74,8 @@ public class Employee implements java.io.Serializable {
     }
 
     public Employee(java.lang.String firstName, java.lang.String lastName,
-            java.lang.String personalId, java.util.Date birthDate,
-            Address address) {
+                    java.lang.String personalId, java.util.Date birthDate,
+                    Address address) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.personalId = personalId;

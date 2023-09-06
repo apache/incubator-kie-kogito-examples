@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
          xmlns="http://maven.apache.org/POM/4.0.0">
   <modelVersion>4.0.0</modelVersion>
 
@@ -9,17 +10,11 @@
 
   <packaging>pom</packaging>
   <name>Kogito Example :: Serverless Workflow Github Showcase</name>
+
   <modules>
     <module>pr-checker-workflow</module>
     <module>github-service</module>
     <module>notification-service</module>
   </modules>
-  <properties>
-    <jandex-plugin.version>3.0.5</jandex-plugin.version>
-    <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
-    <version.io.jjwt>0.11.2</version.io.jjwt>
-    <version.kohsuke.github>1.116</version.kohsuke.github>
-    <version.org.camel>2.13.0</version.org.camel>
-    <version.com.github.tomakehurst.wiremock>2.33.2</version.com.github.tomakehurst.wiremock>
-  </properties>
+
 </project>

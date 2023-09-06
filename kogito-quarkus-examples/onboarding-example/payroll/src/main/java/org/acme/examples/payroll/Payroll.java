@@ -65,7 +65,7 @@ public class Payroll implements java.io.Serializable {
     }
 
     public Payroll(java.math.BigDecimal vacationDays, java.math.BigDecimal taxRate,
-            String paymentDate) {
+                   String paymentDate) {
         this.vacationDays = vacationDays;
         this.taxRate = taxRate;
         this.paymentDate = paymentDate;

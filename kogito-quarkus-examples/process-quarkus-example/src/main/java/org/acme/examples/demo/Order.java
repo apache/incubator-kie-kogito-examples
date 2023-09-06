@@ -51,7 +51,7 @@ public class Order implements java.io.Serializable {
     }
 
     public Order(java.lang.String orderNumber, java.lang.Boolean shipped,
-            java.lang.Double total) {
+                 java.lang.Double total) {
         this.orderNumber = orderNumber;
         this.shipped = shipped;
         this.total = total;

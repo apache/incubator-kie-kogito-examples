@@ -64,7 +64,7 @@ public class Address implements java.io.Serializable {
     }
 
     public Address(java.lang.String street, java.lang.String city,
-            java.lang.String zipCode, java.lang.String country) {
+                   java.lang.String zipCode, java.lang.String country) {
         this.street = street;
         this.city = city;
         this.zipCode = zipCode;

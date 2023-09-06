@@ -4,13 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>org.acme.examples</groupId>
-    <artifactId>kogito-examples</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
-  </parent>
-
   <artifactId>kogito-quarkus-examples</artifactId>
+  <groupId>org.acme.examples</groupId>
+  <version>2.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Kogito Example :: Quarkus</name>
 
@@ -19,6 +15,10 @@
     <tests.quarkus.http.port>0</tests.quarkus.http.port>
     <!-- override default to fast-jar packaging for forward-compatibility -->
     <quarkus.package.type>fast-jar</quarkus.package.type>
+    <version.surefire.plugin>3.1.2</version.surefire.plugin>
+    <version.failsafe.plugin>${version.surefire.plugin}</version.failsafe.plugin>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
 
   <profiles>
@@ -171,50 +171,50 @@
       </modules>
     </profile>
 
-    <profile>
-      <id>kogito-apps-downstream-native</id>
-      <activation>
-        <property>
-          <name>kogito-apps-native</name>
-        </property>
-      </activation>
-      <properties>
-        <failsafe.include>**/Native*IT.java</failsafe.include>
-        <failsafe.exclude></failsafe.exclude>
-        <quarkus.package.type>native</quarkus.package.type>
-        <quarkus.native.native-image-xmx>8g</quarkus.native.native-image-xmx>
-        <!-- Native building needs a fixed port for tests -->
-        <tests.quarkus.http.port>8080</tests.quarkus.http.port>
-      </properties>
-    </profile>
+    <!--    <profile>-->
+    <!--      <id>kogito-apps-downstream-native</id>-->
+    <!--      <activation>-->
+    <!--        <property>-->
+    <!--          <name>kogito-apps-native</name>-->
+    <!--        </property>-->
+    <!--      </activation>-->
+    <!--      <properties>-->
+    <!--        <failsafe.include>**/Native*IT.java</failsafe.include>-->
+    <!--        <failsafe.exclude></failsafe.exclude>-->
+    <!--        <quarkus.package.type>native</quarkus.package.type>-->
+    <!--        <quarkus.native.native-image-xmx>8g</quarkus.native.native-image-xmx>-->
+    <!--        &lt;!&ndash; Native building needs a fixed port for tests &ndash;&gt;-->
+    <!--        <tests.quarkus.http.port>8080</tests.quarkus.http.port>-->
+    <!--      </properties>-->
+    <!--    </profile>-->
   </profiles>
 
-  <build>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>${version.surefire.plugin}</version>
-          <configuration>
-            <systemPropertyVariables>
-              <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-            </systemPropertyVariables>
-          </configuration>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-failsafe-plugin</artifactId>
-          <version>${version.surefire.plugin}</version>
-          <configuration>
-            <systemPropertyVariables>
-              <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-              <quarkus.http.test-port>${tests.quarkus.http.port}</quarkus.http.test-port>
-            </systemPropertyVariables>
-          </configuration>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-  </build>
+  <!--  <build>-->
+  <!---->
+  <!--      <plugins>-->
+  <!--        <plugin>-->
+  <!--          <groupId>org.apache.maven.plugins</groupId>-->
+  <!--          <artifactId>maven-surefire-plugin</artifactId>-->
+  <!--          <version>${version.surefire.plugin}</version>-->
+  <!--          <configuration>-->
+  <!--            <systemPropertyVariables>-->
+  <!--              <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>-->
+  <!--            </systemPropertyVariables>-->
+  <!--          </configuration>-->
+  <!--        </plugin>-->
+  <!--        <plugin>-->
+  <!--          <groupId>org.apache.maven.plugins</groupId>-->
+  <!--          <artifactId>maven-failsafe-plugin</artifactId>-->
+  <!--          <version>${version.failsafe.plugin}</version>-->
+  <!--          <configuration>-->
+  <!--            <systemPropertyVariables>-->
+  <!--              <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>-->
+  <!--              <quarkus.http.test-port>${tests.quarkus.http.port}</quarkus.http.test-port>-->
+  <!--            </systemPropertyVariables>-->
+  <!--          </configuration>-->
+  <!--        </plugin>-->
+  <!--      </plugins>-->
+  <!---->
+  <!--  </build>-->
 
 </project>

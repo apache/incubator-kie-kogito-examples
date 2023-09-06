@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>org.acme.examples</groupId>
-    <artifactId>kogito-springboot-examples</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
-  </parent>
 
   <artifactId>process-monitoring-springboot</artifactId>
+  <groupId>org.acme.examples</groupId>
+  <version>2.0.0-SNAPSHOT</version>
+
   <name>Kogito Example :: Process Monitoring :: Spring Boot</name>
 
   <properties>
     <version.org.kie.kogito>2.0.0-SNAPSHOT</version.org.kie.kogito>
     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+    <version.jib.plugin>3.3.1</version.jib.plugin>
+    <version.org.springframework.boot>2.6.6</version.org.springframework.boot>
+    <version.failsafe.plugin>3.1.2</version.failsafe.plugin>
+    <version.resources.plugin>3.1.0</version.resources.plugin>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
 
   <dependencyManagement>
@@ -78,6 +82,7 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${version.org.springframework.boot}</version>
         <executions>
           <execution>
             <goals>
@@ -88,6 +93,7 @@
       </plugin>
       <plugin>
         <artifactId>maven-resources-plugin</artifactId>
+        <version>${version.resources.plugin}</version>
         <executions>
           <execution>
             <id>copy-resources</id>
@@ -109,6 +115,22 @@
             </configuration>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <version>${version.failsafe.plugin}</version>
+        <configuration>
+          <classesDirectory>${project.build.outputDirectory}</classesDirectory>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>com.google.cloud.tools</groupId>
+        <artifactId>jib-maven-plugin</artifactId>
+        <version>${version.jib.plugin}</version>
+        <configuration>
+          <allowInsecureRegistries>true</allowInsecureRegistries>
+        </configuration>
       </plugin>
     </plugins>
   </build>

@@ -4,25 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>org.acme.examples</groupId>
-    <artifactId>kogito-examples</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
-  </parent>
-
   <artifactId>kogito-springboot-examples</artifactId>
+  <groupId>org.acme.examples</groupId>
+  <version>2.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>Kogito Example :: Spring Boot</name>
 
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.infinispan</groupId>
-        <artifactId>infinispan-spring-boot-starter-remote</artifactId>
-        <version>${version.org.infinispan}</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
+  <name>Kogito Example :: Spring Boot</name>
 
   <profiles>
     <profile>
@@ -128,24 +115,36 @@
     </profile>
   </profiles>
 
-  <build>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.springframework.boot</groupId>
-          <artifactId>spring-boot-maven-plugin</artifactId>
-          <version>${version.org.springframework.boot}</version>
-        </plugin>
-        <plugin>
-          <groupId>com.google.cloud.tools</groupId>
-          <artifactId>jib-maven-plugin</artifactId>
-          <version>${version.jib.plugin}</version>
-          <configuration>
-            <allowInsecureRegistries>true</allowInsecureRegistries>
-          </configuration>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-  </build>
-
+<!--  <build>-->
+<!--    <pluginManagement>-->
+<!--      <plugins>-->
+<!--        <plugin>-->
+<!--          <groupId>com.google.cloud.tools</groupId>-->
+<!--          <artifactId>jib-maven-plugin</artifactId>-->
+<!--          <version>${version.jib.plugin}</version>-->
+<!--          <configuration>-->
+<!--            <allowInsecureRegistries>true</allowInsecureRegistries>-->
+<!--          </configuration>-->
+<!--        </plugin>-->
+<!--      </plugins>-->
+<!--    </pluginManagement>-->
+<!--  </build>-->
+  <repositories>
+    <!-- Bootstrap repository to locate the parent pom when the parent pom
+      has not been build locally. -->
+    <repository>
+      <id>jboss-public-repository-group</id>
+      <name>JBoss Public Repository Group</name>
+      <url>https://repository.jboss.org/nexus/content/groups/public/</url>
+      <layout>default</layout>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>daily</updatePolicy>
+      </snapshots>
+    </repository>
+  </repositories>
 </project>

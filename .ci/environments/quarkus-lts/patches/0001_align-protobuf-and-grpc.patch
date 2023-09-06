@@ -5,7 +5,7 @@ index c2ca6f930..a50429305 100644
 @@ -15,8 +15,9 @@
          <version.compiler.plugin>3.8.1</version.compiler.plugin>
          <maven.compiler.release>11</maven.compiler.release>
-         <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
+         <version.surefire.plugin>3.1.2</version.surefire.plugin>
 -        <version.com.google.protobuf>3.22.0</version.com.google.protobuf>
 -        <version.io.grpc>1.51.1</version.io.grpc>
 +        <!-- Quarkus 2.13.x is using protobuf 3.19.6, but the correct version should be 3.21.1 to work properly with current io.grpc version -->

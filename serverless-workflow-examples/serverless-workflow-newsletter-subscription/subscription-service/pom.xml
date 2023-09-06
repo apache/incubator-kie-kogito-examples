@@ -2,22 +2,38 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <parent>
-    <artifactId>serverless-workflow-newsletter-subscription</artifactId>
-    <groupId>org.acme.examples</groupId>
-    <version>1.0-SNAPSHOT</version>
-  </parent>
+
   <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.acme.examples</groupId>
+  <artifactId>serverless-workflow-newsletter-subscription-service</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
 
   <name>Kogito Example :: Serverless Workflow Newsletter Subscription :: Subscription Service</name>
   <description>Regular Quarkus REST Service to serve the Subscription Service API</description>
-  <artifactId>serverless-workflow-newsletter-subscription-service</artifactId>
-  <packaging>jar</packaging>
+
   <properties>
+    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
+    <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
+    <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
+    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
+    <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
+    <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
+    <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+    <version.org.webjars.bootstrap>5.1.3</version.org.webjars.bootstrap>
+    <version.org.webjars.jquery>3.6.0</version.org.webjars.jquery>
     <version.org.assertj>3.22.0</version.org.assertj>
     <version.io.cloudevents>2.3.0</version.io.cloudevents>
     <version.io.quarkiverse.reactivemessaging.http>1.0.1</version.io.quarkiverse.reactivemessaging.http>
+    <version.failsafe.plugin>${version.surefire.plugin}</version.failsafe.plugin>
+    <version.surefire.plugin>3.1.2</version.surefire.plugin>
+    <version.compiler.plugin>3.8.1</version.compiler.plugin>
+    <maven.compiler.release>11</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -36,6 +52,7 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+
   <dependencies>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -161,7 +178,9 @@
         <quarkus.profile>knative</quarkus.profile>
         <enable.resource.postgresql>true</enable.resource.postgresql>
         <skipTests>true</skipTests>
-      </properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
       <dependencies>
         <dependency>
           <groupId>io.quarkus</groupId>

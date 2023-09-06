@@ -30,7 +30,7 @@ public class VisaApplication {
     }
 
     public VisaApplication(String firstName, String lastName, String city, String country, int duration,
-            String passportNumber) {
+                           String passportNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.city = city;

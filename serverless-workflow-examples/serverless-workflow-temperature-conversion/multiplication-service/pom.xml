@@ -1,14 +1,16 @@
 <?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
   <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>org.acme.examples</groupId>
-    <artifactId>serverless-workflow-temperature-conversion</artifactId>
-    <version>1.0-SNAPSHOT</version>
-  </parent>
+
   <artifactId>multiplication-service</artifactId>
+  <groupId>org.acme.examples</groupId>
+  <version>1.0-SNAPSHOT</version>
+
   <name>Kogito Example :: Serverless Workflow Temperature Conversion :: Multiplication Service</name>
+
   <properties>
     <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
@@ -16,9 +18,10 @@
     <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
     <version.compiler.plugin>3.8.1</version.compiler.plugin>
     <maven.compiler.release>11</maven.compiler.release>
-    <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
+    <version.surefire.plugin>3.1.2</version.surefire.plugin>
     <version.failsafe.plugin>${version.surefire.plugin}</version.failsafe.plugin>
   </properties>
+
   <dependencyManagement>
     <dependencies>
       <dependency>

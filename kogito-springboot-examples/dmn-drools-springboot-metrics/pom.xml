@@ -1,20 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns="http://maven.apache.org/POM/4.0.0"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>org.acme.examples</groupId>
-    <artifactId>kogito-springboot-examples</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
-  </parent>
   <artifactId>dmn-drools-springboot-metrics</artifactId>
+  <groupId>org.acme.examples</groupId>
+  <version>2.0.0-SNAPSHOT</version>
+
   <name>Kogito Example :: DMN Drools SpringBoot Metrics</name>
 
   <properties>
     <version.org.kie.kogito>2.0.0-SNAPSHOT</version.org.kie.kogito>
     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+    <version.org.testcontainers>1.17.3</version.org.testcontainers>
+    <version.jib.plugin>3.3.1</version.jib.plugin>
+    <version.failsafe.plugin>3.1.2</version.failsafe.plugin>
+    <version.org.springframework.boot>2.6.6</version.org.springframework.boot>
+    <version.clean.plugin>3.1.0</version.clean.plugin>
+    <version.resources.plugin>3.1.0</version.resources.plugin>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
 
   <dependencyManagement>
@@ -89,6 +95,7 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${version.org.springframework.boot}</version>
         <executions>
           <execution>
             <goals>
@@ -99,6 +106,7 @@
       </plugin>
       <plugin>
         <artifactId>maven-clean-plugin</artifactId>
+        <version>${version.clean.plugin}</version>
         <configuration>
           <filesets>
             <fileset>
@@ -119,6 +127,7 @@
       has to be executed after !-->
       <plugin>
         <artifactId>maven-resources-plugin</artifactId>
+        <version>${version.resources.plugin}</version>
         <executions>
           <execution>
             <id>copy-filtered-resources</id>
@@ -147,7 +156,8 @@
               <resources>
                 <resource>
                   <directory>
-                    ${project.build.directory}/classes/META-INF/resources/monitoring/dashboards</directory>
+                    ${project.build.directory}/classes/META-INF/resources/monitoring/dashboards
+                  </directory>
                   <filtering>false</filtering>
                   <excludes>
                     <exclude>**/list.json</exclude>
@@ -180,6 +190,7 @@
       <plugin>
         <groupId>com.google.cloud.tools</groupId>
         <artifactId>jib-maven-plugin</artifactId>
+        <version>${version.jib.plugin}</version>
         <configuration>
           <to>
             <image>${project.groupId}/${project.artifactId}:1.0</image>
@@ -193,6 +204,14 @@
             </goals>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <version>${version.failsafe.plugin}</version>
+        <configuration>
+          <classesDirectory>${project.build.outputDirectory}</classesDirectory>
+        </configuration>
       </plugin>
     </plugins>
   </build>

@@ -36,8 +36,8 @@ public class VisaApplicationPrometheusProcessEventListener extends MetricsProces
     private static final String NUMBER_OF_VISA_REJECTED_COUNTER_NAME = "acme_travels_visas_rejected_total";
 
     private static Counter getNumberOfVisaApplicationsApprovedCounter(String appId, String country, String duration,
-            String nationality,
-            CompositeMeterRegistry compositeMeterRegistry) {
+                                                                      String nationality,
+                                                                      CompositeMeterRegistry compositeMeterRegistry) {
         return Counter
                 .builder(NUMBER_OF_VISA_APPROVED_COUNTER_NAME)
                 .description("Approved visa applications")
@@ -46,8 +46,8 @@ public class VisaApplicationPrometheusProcessEventListener extends MetricsProces
     }
 
     private static Counter getNumberOfVisaApplicationsRejected(String appId, String country, String duration,
-            String nationality,
-            CompositeMeterRegistry compositeMeterRegistry) {
+                                                               String nationality,
+                                                               CompositeMeterRegistry compositeMeterRegistry) {
         return Counter
                 .builder(NUMBER_OF_VISA_REJECTED_COUNTER_NAME)
                 .description("Rejected visa applications")
@@ -59,7 +59,7 @@ public class VisaApplicationPrometheusProcessEventListener extends MetricsProces
     private final PrometheusMeterRegistry prometheusMeterRegistry;
 
     public VisaApplicationPrometheusProcessEventListener(String identifier, KogitoGAV kogitoGAV,
-            PrometheusMeterRegistry prometheusMeterRegistry) {
+                                                         PrometheusMeterRegistry prometheusMeterRegistry) {
         super(identifier, kogitoGAV, Metrics.globalRegistry);
         this.identifier = identifier;
         this.prometheusMeterRegistry = prometheusMeterRegistry;
@@ -89,11 +89,11 @@ public class VisaApplicationPrometheusProcessEventListener extends MetricsProces
                 getNumberOfVisaApplicationsApprovedCounter(identifier, safeValue(application.getCountry()),
                         String.valueOf(application.getDuration()),
                         safeValue(application.getNationality()), Metrics.globalRegistry)
-                                .increment();
+                        .increment();
             } else {
                 getNumberOfVisaApplicationsRejected(identifier, safeValue(application.getCountry()), String.valueOf(application.getDuration()),
                         safeValue(application.getNationality()), Metrics.globalRegistry)
-                                .increment();
+                        .increment();
             }
         }
     }

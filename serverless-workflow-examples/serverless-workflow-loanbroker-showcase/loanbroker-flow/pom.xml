@@ -1,17 +1,34 @@
 <?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <parent>
-    <artifactId>serverless-workflow-loanbroker-showcase</artifactId>
-    <groupId>org.acme.examples</groupId>
-    <version>1.0-SNAPSHOT</version>
-  </parent>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
+         xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
   <modelVersion>4.0.0</modelVersion>
 
-  <name>Kogito Example :: Serverless Workflow Loan Broker Showcase :: Flow</name>
   <artifactId>serverless-workflow-loanbroker-showcase-flow</artifactId>
+  <groupId>org.acme.examples</groupId>
+  <version>1.0-SNAPSHOT</version>
+
+  <name>Kogito Example :: Serverless Workflow Loan Broker Showcase :: Flow</name>
+
   <properties>
+    <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
+    <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
+    <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
+    <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
+    <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
+    <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+    <version.com.github.tomakehurst>2.33.2</version.com.github.tomakehurst>
+    <version.org.testcontainers>1.17.3</version.org.testcontainers>
+    <version.surefire.plugin>3.1.2</version.surefire.plugin>
+    <version.compiler.plugin>3.8.1</version.compiler.plugin>
+    <maven.compiler.release>11</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <skipITs>true</skipITs>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -30,6 +47,7 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+
   <dependencies>
     <!-- Kogito -->
     <dependency>
@@ -138,7 +156,8 @@
             </goals>
             <configuration>
               <systemPropertyVariables>
-                <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
+                <native.image.path>${project.build.directory}/${project.build.finalName}-runner
+                </native.image.path>
                 <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
                 <maven.home>${maven.home}</maven.home>
               </systemPropertyVariables>
