@@ -18,7 +18,7 @@
     <quarkus.platform.version>2.16.10.Final</quarkus.platform.version>
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-    <kogito.bom.version>1.44.1.Final</kogito.bom.version>
+    <kogito.bom.version>1.44.2-SNAPSHOT</kogito.bom.version>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
