@@ -67,6 +67,8 @@ List getExamplesBuildMvnOptions(JenkinsFolder jobFolder) {
 }
 
 // PR checks
+// Deactivated due to ghprb not available on Apache Jenkins
+// TODO create PR job with branch source plugin
 // KogitoJobUtils.createAllEnvironmentsPerRepoPRJobs(this) { jobFolder -> getMultijobPRConfig(jobFolder) }
 
 // Init branch
@@ -98,6 +100,8 @@ if (isMainStream()) {
 
     // Quarkus 3
     if (EnvUtils.isEnvironmentEnabled(this, 'quarkus-3')) {
+        // Deactivated due to ghprb not available on Apache Jenkins
+        // TODO create PR job with branch source plugin
         // setupPrQuarkus3RewriteJob()
         setupStandaloneQuarkus3RewriteJob()
     }
