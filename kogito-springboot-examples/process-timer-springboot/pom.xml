@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>kogito-springboot-examples</artifactId>
-    <version>1.44.1-SNAPSHOT</version>
+    <version>1.44.1.Final</version>
   </parent>
 
   <artifactId>process-timer-springboot</artifactId>
@@ -12,8 +12,8 @@
   <description>Kogito with timers - Spring Boot</description>
 
   <properties>
-    <version.org.kie.kogito>1.44.1-SNAPSHOT</version.org.kie.kogito>
-    <kogito.bom.version>1.44.1-SNAPSHOT</kogito.bom.version>
+    <version.org.kie.kogito>1.44.1.Final</version.org.kie.kogito>
+    <kogito.bom.version>1.44.1.Final</kogito.bom.version>
   </properties>
 
   <dependencyManagement>
