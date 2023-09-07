@@ -18,8 +18,9 @@ package org.acme;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
+
+import jakarta.annotation.PostConstruct;
 
 /**
  * Emulates the Acme Financial Services database, implementation and maintenance of this DB

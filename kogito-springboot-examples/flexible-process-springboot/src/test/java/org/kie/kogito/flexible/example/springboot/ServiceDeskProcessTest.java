@@ -27,7 +27,7 @@ import org.kie.kogito.flexible.example.model.SupportCase;
 import org.kie.kogito.flexible.example.service.TriageService;
 import org.kie.kogito.tests.KogitoSpringbootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 
