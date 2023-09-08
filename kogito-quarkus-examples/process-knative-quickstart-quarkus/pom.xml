@@ -11,7 +11,7 @@
   <name>Kogito Example :: Process with Knative Eventing and Quarkus</name>
   <description>Kogito with Knative Eventing - Quarkus</description>
   <properties>
-    <version.com.github.tomakehurst.wiremock>2.33.2</version.com.github.tomakehurst.wiremock>
+    <version.com.github.tomakehurst.wiremock>2.35.1</version.com.github.tomakehurst.wiremock>
     <quarkus-plugin.version>2.16.9.Final</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
