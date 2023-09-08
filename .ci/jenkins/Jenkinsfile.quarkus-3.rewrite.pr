@@ -39,7 +39,7 @@ pipeline {
                 script {
                     [ 'drools', 'kogito-runtimes', 'kogito-apps' ].each { project -> 
                         dir(project) {
-                            githubscm.checkoutIfExists(project, changeAuthor, changeBranch, 'kiegroup', changeTarget, true)
+                            githubscm.checkoutIfExists(project, changeAuthor, changeBranch, 'apache', changeTarget, true)
                             sh '.ci/environments/update.sh quarkus-3'
                             getMavenCommand().withProperty('quickly').run('clean install')
                         }
