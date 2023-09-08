@@ -121,7 +121,7 @@ void setupSpecificBuildChainNightlyJob(String envName, Closure defaultJobParamsG
 
 void createSetupBranchJob() {
     def jobParams = JobParamsUtils.getBasicJobParams(this, 'kogito-examples', JobType.SETUP_BRANCH, "${jenkins_path}/Jenkinsfile.setup-branch", 'Kogito Examples Init branch')
-    JobParamsUtils.setupJobParamsDefaultMavenConfiguration(this, jobParams)
+    JobParamsUtils.setupJobParamsAgentDockerBuilderImageConfiguration(this, jobParams)
     jobParams.env.putAll([
         JENKINS_EMAIL_CREDS_ID: "${JENKINS_EMAIL_CREDS_ID}",
 
@@ -148,7 +148,7 @@ void createSetupBranchJob() {
 
 void setupReleaseDeployJob() {
     def jobParams = JobParamsUtils.getBasicJobParams(this, 'kogito-examples-deploy', JobType.RELEASE, "${jenkins_path}/Jenkinsfile.deploy", 'Kogito Examples Deploy')
-    JobParamsUtils.setupJobParamsDefaultMavenConfiguration(this, jobParams)
+    JobParamsUtils.setupJobParamsAgentDockerBuilderImageConfiguration(this, jobParams)
     jobParams.env.putAll([
         PROPERTIES_FILE_NAME: 'deployment.properties',
 
@@ -190,7 +190,7 @@ void setupReleaseDeployJob() {
 
 void setupReleasePromoteJob() {
     def jobParams = JobParamsUtils.getBasicJobParams(this, 'kogito-examples-promote', JobType.RELEASE, "${jenkins_path}/Jenkinsfile.promote", 'Kogito Examples Promote')
-    JobParamsUtils.setupJobParamsDefaultMavenConfiguration(this, jobParams)
+    JobParamsUtils.setupJobParamsAgentDockerBuilderImageConfiguration(this, jobParams)
     jobParams.env.putAll([
         PROPERTIES_FILE_NAME: 'deployment.properties',
 
@@ -226,7 +226,7 @@ void setupReleasePromoteJob() {
 
 void setupPostReleaseJob() {
     def jobParams = JobParamsUtils.getBasicJobParams(this, 'kogito-examples-post-release', JobType.RELEASE, "${jenkins_path}/Jenkinsfile.post-release", 'Kogito Examples Post Release')
-    JobParamsUtils.setupJobParamsDefaultMavenConfiguration(this, jobParams)
+    JobParamsUtils.setupJobParamsAgentDockerBuilderImageConfiguration(this, jobParams)
     jobParams.env.putAll([
         JENKINS_EMAIL_CREDS_ID: "${JENKINS_EMAIL_CREDS_ID}",
 
@@ -250,7 +250,7 @@ void setupPostReleaseJob() {
 
 void setupPrQuarkus3RewriteJob() {
     def jobParams = JobParamsUtils.getBasicJobParamsWithEnv(this, 'kogito-examples.rewrite', JobType.PULL_REQUEST, 'quarkus-3', "${jenkins_path}/Jenkinsfile.quarkus-3.rewrite.pr", 'Kogito Examples Quarkus 3 rewrite patch regeneration')
-    JobParamsUtils.setupJobParamsDefaultMavenConfiguration(this, jobParams)
+    JobParamsUtils.setupJobParamsAgentDockerBuilderImageConfiguration(this, jobParams)
     jobParams.jenkinsfile = "${jenkins_path}/Jenkinsfile.quarkus-3.rewrite.pr"
     jobParams.pr.putAll([
         run_only_for_branches: [ "${GIT_BRANCH}" ],
@@ -270,7 +270,7 @@ void setupPrQuarkus3RewriteJob() {
 void setupStandaloneQuarkus3RewriteJob() {
     def jobParams = JobParamsUtils.getBasicJobParams(this, 'kogito-examples.quarkus-3.rewrite', JobType.TOOLS, "${jenkins_path}/Jenkinsfile.quarkus-3.rewrite.standalone", 'Kogito Examples Quarkus 3 rewrite patch regeneration')
     jobParams.env.putAll(EnvUtils.getEnvironmentEnvVars(this, 'quarkus-3'))
-    JobParamsUtils.setupJobParamsDefaultMavenConfiguration(this, jobParams)
+    JobParamsUtils.setupJobParamsAgentDockerBuilderImageConfiguration(this, jobParams)
     jobParams.env.putAll([
         AUTHOR_CREDS_ID: "${GIT_AUTHOR_CREDENTIALS_ID}",
         JENKINS_EMAIL_CREDS_ID: "${JENKINS_EMAIL_CREDS_ID}",
