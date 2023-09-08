@@ -1,0 +1,40 @@
+@Library('jenkins-pipeline-shared-libraries')_
+
+pr_check_script = null
+
+pipeline {
+    agent {
+        label env.ADDITIONAL_LABEL?.trim() ?: 'ubuntu'
+    }
+    options {
+        timestamps()
+        timeout(time: env.ADDITIONAL_TIMEOUT?.trim() ?: '180', unit: 'MINUTES')
+    }
+    environment {
+        BUILDCHAIN_PROJECT = 'kiegroup/kogito-examples'
+
+        KOGITO_EXAMPLES_BUILD_MVN_OPTS = '-Dvalidate-formatting'
+    }
+    stages {
+        stage('Initialize') {
+            steps {
+                script {
+                    // load `pr_check.groovy` file from kogito-pipelines:main
+                    dir('kogito-pipelines') {
+                        checkout(githubscm.resolveRepository('kogito-pipelines', 'kiegroup', 'apache_migration', false, 'kie-ci')) // TODO to change back to kiegroup:main
+                        pr_check_script = load 'dsl/scripts/pr_check.groovy'
+                    }
+                }
+            }
+        }
+        stage('PR check') {
+            steps {
+                script {
+                    dir('kogito-pipelines') {
+                        pr_check_script.launch()
+                    }
+                }
+            }
+        }
+    }
+}
