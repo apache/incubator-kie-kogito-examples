@@ -26,13 +26,13 @@ jobs:
         maven-version: ['3.8.7']
         include:
           - job_name: kogito-quarkus-examples
-            repository: kogito-examples
+            repository: incubator-kie-kogito-examples
             env_KOGITO_EXAMPLES_SUBFOLDER_POM: kogito-quarkus-examples/
           - job_name: kogito-springboot-examples
-            repository: kogito-examples
+            repository: incubator-kie-kogito-examples
             env_KOGITO_EXAMPLES_SUBFOLDER_POM: kogito-springboot-examples/
           - job_name: serverless-workflow-examples
-            repository: kogito-examples
+            repository: incubator-kie-kogito-examples
             env_KOGITO_EXAMPLES_SUBFOLDER_POM: serverless-workflow-examples/
       fail-fast: false
     runs-on: ${{ matrix.os }}
@@ -57,7 +57,7 @@ jobs:
         with:
           annotations-prefix: ${{ runner.os }}-${{ matrix.java-version }}/${{ matrix.maven-version }}
           github-token: "${{ secrets.GITHUB_TOKEN }}"
-          definition-file: https://raw.githubusercontent.com/${GROUP:apache}/kogito-pipelines/${BRANCH:main}/.ci/pull-request-config.yaml
+          definition-file: https://raw.githubusercontent.com/${GROUP:apache}/incubator-kie-kogito-pipelines/${BRANCH:main}/.ci/pull-request-config.yaml
       - name: Surefire Report
         uses: kiegroup/kie-ci/.ci/actions/surefire-report@main
         if: ${{ always() }}
