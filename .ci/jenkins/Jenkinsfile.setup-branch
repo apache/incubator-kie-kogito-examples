@@ -5,9 +5,9 @@ import org.kie.jenkins.MavenCommand
 
 examplesHelper = null
 
-droolsRepo = 'drools'
-kogitoRuntimesRepo = 'kogito-runtimes'
-kogitoAppsRepo = 'kogito-apps'
+droolsRepo = 'incubator-kie-drools'
+kogitoRuntimesRepo = 'incubator-kie-kogito-runtimes'
+kogitoAppsRepo = 'incubator-kie-kogito-apps'
 
 pipeline {
     agent {
