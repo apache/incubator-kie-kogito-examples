@@ -10,12 +10,10 @@ examplesHelper = null
 
 pipeline {
     agent {
-        label 'kie-rhel8 && docker && kie-mem16g && !built-in'
-    }
-
-    tools {
-        maven env.BUILD_MAVEN_TOOL
-        jdk env.BUILD_JDK_TOOL
+        docker { 
+            image env.AGENT_DOCKER_BUILDER_IMAGE
+            args env.AGENT_DOCKER_BUILDER_ARGS
+        }
     }
 
     options {
@@ -23,20 +21,11 @@ pipeline {
         timeout(time: 180, unit: 'MINUTES')
     }
 
-    // parameters {
-    // For parameters, check into ./dsl/jobs.groovy file
-    // }
-
     environment {
-        // Static env is defined into ./dsl/jobs.groovy file
-
         KOGITO_CI_EMAIL_TO = credentials("${JENKINS_EMAIL_CREDS_ID}")
 
-        // Keep here for visitibility
-        MAVEN_OPTS = '-Xms1024m -Xmx4g'
-
         PR_BRANCH_HASH = "${util.generateHash(10)}"
-        MAVEN_DEPLOY_LOCAL_DIR = "${WORKSPACE}/maven_deploy_dir"
+        MAVEN_DEPLOY_LOCAL_DIR = "/tmp/maven_deploy_dir"
     }
 
     stages {
@@ -132,7 +121,7 @@ pipeline {
                         if (params.SKIP_TESTS) {
                             mvnCmd.skipTests() // Conflict somehow with Python testing. If `skipTests={anyvalue}` is set, then exec plugin is not executed ...
                         }
-                        util.runWithPythonVirtualEnv(mvnCmd.getFullRunCommand('clean install'), 'swf')
+                        mvnCmd.run('clean install')
                     }
                 }
             }
@@ -259,7 +248,7 @@ void commitAndCreatePR() {
         prBody += '\nPlease review and merge.'
     }
     // Not using githubscm.commitChanges() because globbing won't work.
-    // See: https://github.com/kiegroup/kogito-runtimes/pull/570#discussion_r449268738
+    // See: https://github.com/apache/incubator-kie-kogito-runtimes/pull/570#discussion_r449268738
     addNotIgnoredPoms()
     sh "git commit -m '${commitMsg}'"
     githubscm.pushObject('origin', getPRBranch(), getGitAuthorCredsID())
@@ -275,7 +264,7 @@ boolean shouldStageArtifacts() {
 }
 
 boolean shouldDeployToRepository() {
-    return env.MAVEN_DEPLOY_REPOSITORY && env.MAVEN_REPO_CREDS_ID && getGitAuthor() == 'kiegroup'
+    return env.MAVEN_DEPLOY_REPOSITORY && env.MAVEN_REPO_CREDS_ID && getGitAuthor() == 'apache'
 }
 
 boolean isRelease() {
@@ -347,7 +336,7 @@ void runMavenDeploy(boolean localDeployment = false) {
 
     mvnCmd.skipTests(true).run('clean deploy')
 
-    util.runWithPythonVirtualEnv(mvnCmd.skipTests(true).getFullRunCommand('clean deploy'), 'swf')
+    mvnCmd.skipTests(true).run('clean deploy')
 }
 
 void runMavenStage() {
