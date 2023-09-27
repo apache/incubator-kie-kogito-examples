@@ -30,7 +30,7 @@ services:
 
   data-index:
     container_name: data-index
-    image: org.kie.kogito/data-index-service-postgresql:2.0.0-SNAPSHOT
+    image: quay.io/kiegroup/kogito-data-index-postgresql:${KOGITO_VERSION}
     ports:
       - "8180:8080"
     depends_on:

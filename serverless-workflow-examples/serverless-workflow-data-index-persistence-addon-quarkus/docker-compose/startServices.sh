@@ -14,8 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
-echo "Script requires your project to be compiled"
 echo "Script requires your project to be compiled with the right profile: ../mvn clean install -DskipTests -Pcontainer"
 
 PROJECT_VERSION=$(cd ../ && mvn help:evaluate -Dexpression=project.version -q -DforceStdout)

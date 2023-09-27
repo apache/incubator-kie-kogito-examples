@@ -99,11 +99,54 @@ The service based on the JSON workflow definition can be access by sending a req
 Complete curl command can be found below:
 
 ```sh
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/callback
+curl -X 'POST' \
+  'http://localhost:8080/greet?businessKey=1' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "workflowdata": {}
+}'
 ```
-
-After a while (note that to you need give time for event to be consumed)  you should see the log message printed in quarkus:
+The expected response should be something like:
 
 ```text
- Workflow data {"move":"This is the initial data in the model and has been modified by the event publisher"}
+ {"id":"fbd71379-a528-4ca4-849d-59fc1e26e7ef","workflowdata":{"greeting":"Hello from JSON Workflow,"}}
+```
+
+Then we can verify that the data has been properly indexed accessing to http://localhost:8180/graphiql/ and executing
+
+```text
+{ProcessInstances {
+id variables
+}}
+```
+
+And getting as a result:
+
+```text
+{
+  "data": {
+    "ProcessInstances": [
+      {
+        "id": "fbd71379-a528-4ca4-849d-59fc1e26e7ef",
+        "variables": {
+          "workflowdata": {
+            "greeting": "Hello from JSON Workflow,"
+          }
+        }
+      }
+    ]
+  }
+}
+```
+
+Or with the complete curl command can be found below:
+
+```sh
+curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST --data '{"query" : "{ProcessInstances {id variables}}" }' http://localhost:8180/graphql
+```
+
+Getting
+```text
+{"data":{"ProcessInstances":[{"id":"fbd71379-a528-4ca4-849d-59fc1e26e7ef","variables":{"workflowdata":{"greeting":"Hello from JSON Workflow,"}}}]}}
 ```
