@@ -47,6 +47,7 @@ services:
       QUARKUS_FLYWAY_BASELINE_ON_MIGRATE: "true"
       QUARKUS_FLYWAY_TABLE: FLYWAY_DATAINDEX_SERVICE
       QUARKUS_HIBERNATE_ORM_DATABASE_GENERATION: update
+      KOGITO_DATA_INDEX_QUARKUS_PROFILE: "http-events-support"
 
   serverless-workflow-service:
     container_name: serverless-workflow-service

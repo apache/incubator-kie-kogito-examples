@@ -2,7 +2,6 @@
   "id": "greet",
   "version": "1.0",
   "name": "Greeting workflow",
-  "expressionLang": "jsonpath",
   "description": "JSON based greeting workflow",
   "start": "ChooseOnLanguage",
   "functions": [
@@ -10,11 +9,6 @@
       "name": "greetFunction",
       "type": "custom",
       "operation": "sysout"
-    },
-    {
-       "name": "isEnglish",
-       "type": "expression",
-       "operation" : "$.[?(@.language  == 'English')]" 
     }
   ],
   "states": [
@@ -23,11 +17,11 @@
       "type": "switch",
       "dataConditions": [
         {
-          "condition": "fn:isEnglish",
+          "condition": "${ .language == \"English\" }",
           "transition": "GreetInEnglish"
         },
         {
-          "condition": "${ $.[?(@.language  == 'Spanish')] }",
+          "condition": "${ .language == \"Spanish\" }",
           "transition": "GreetInSpanish"
         }
       ],
@@ -39,7 +33,7 @@
       "name": "GreetInEnglish",
       "type": "inject",
       "data": {
-        "greeting": "Hello from JSON Workflow,"
+        "greeting": "Hello from JSON Workflow, "
       },
       "transition": "GreetPerson"
     },
@@ -47,7 +41,7 @@
       "name": "GreetInSpanish",
       "type": "inject",
       "data": {
-        "greeting": "Saludos desde JSON Workflow,"
+        "greeting": "Saludos desde JSON Workflow, "
       },
       "transition": "GreetPerson"
     },
@@ -60,7 +54,7 @@
           "functionRef": {
             "refName": "greetFunction",
             "arguments": {
-              "message": "$.greeting $.name"
+              "message": ".greeting+.name"
             }
           }
         }

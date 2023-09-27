@@ -94,44 +94,87 @@ All created containers can be removed by executing the ```docker-compose rm```.
 
 ### Submit a request
 
-The service based on the JSON workflow definition can be access by sending a request to http://localhost:8080/callback
+The service based on the JSON workflow definition can be access by sending a request to http://localhost:8080/greet'
+with following content
+
+```json
+{
+  "name": "John",
+  "language": "English"
+}
+```
 
 Complete curl command can be found below:
 
 ```sh
-curl -X 'POST' \
-  'http://localhost:8080/greet?businessKey=1' \
-  -H 'accept: */*' \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "workflowdata": {}
-}'
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"name": "John", "language": "English"}' http://localhost:8080/greet
 ```
-The expected response should be something like:
+
+Log after curl executed:
+
+```json
+{"id":"541a5363-1667-4f6d-a8b4-1299eba81eac","workflowdata":{"name":"John","language":"English","greeting":"Hello from JSON Workflow, "}}
+```
+
+In Quarkus you should see the log message printed:
 
 ```text
- {"id":"fbd71379-a528-4ca4-849d-59fc1e26e7ef","workflowdata":{"greeting":"Hello from JSON Workflow,"}}
+Hello from JSON Workflow, John
 ```
 
-Then we can verify that the data has been properly indexed accessing to http://localhost:8180/graphiql/ and executing
+If you would like to greet the person in Spanish, we need to pass the following data on workflow start:
+
+```json
+{
+  "name": "John",
+  "language": "Spanish"
+}
+```
+
+Complete curl command can be found below:
+
+```sh
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"name": "John", "language": "Spanish"}' http://localhost:8080/greet
+```
+
+In Quarkus you should now see the log message printed:
+
+```text
+Saludos desde JSON Workflow, John
+```
+
+Then we can verify that the data has been properly indexed accessing to http://localhost:8180/graphiql/ and executing the query:
 
 ```text
 {ProcessInstances {
-id variables
+  id 
+  variables
 }}
 ```
 
-And getting as a result:
+getting as a result:
 
 ```text
 {
   "data": {
     "ProcessInstances": [
       {
-        "id": "fbd71379-a528-4ca4-849d-59fc1e26e7ef",
+        "id": "0b95e8a1-b52f-48cf-b7d0-38fa3087d467",
         "variables": {
           "workflowdata": {
-            "greeting": "Hello from JSON Workflow,"
+            "name": "John",
+            "greeting": "Hello from JSON Workflow, ",
+            "language": "English"
+          }
+        }
+      },
+      {
+        "id": "141f7350-7802-4abc-985c-333caf1068f9",
+        "variables": {
+          "workflowdata": {
+            "name": "John",
+            "greeting": "Saludos desde JSON Workflow, ",
+            "language": "Spanish"
           }
         }
       }
@@ -140,13 +183,14 @@ And getting as a result:
 }
 ```
 
-Or with the complete curl command can be found below:
+Or by command line, executing the complete curl command can be found below:
 
 ```sh
 curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST --data '{"query" : "{ProcessInstances {id variables}}" }' http://localhost:8180/graphql
 ```
 
-Getting
+getting
+
 ```text
-{"data":{"ProcessInstances":[{"id":"fbd71379-a528-4ca4-849d-59fc1e26e7ef","variables":{"workflowdata":{"greeting":"Hello from JSON Workflow,"}}}]}}
+{"data":{"ProcessInstances":[{"id":"0b95e8a1-b52f-48cf-b7d0-38fa3087d467","variables":{"workflowdata":{"name":"John","greeting":"Hello from JSON Workflow, ","language":"English"}}},{"id":"141f7350-7802-4abc-985c-333caf1068f9","variables":{"workflowdata":{"name":"John","greeting":"Saludos desde JSON Workflow, ","language":"Spanish"}}}]}}
 ```
