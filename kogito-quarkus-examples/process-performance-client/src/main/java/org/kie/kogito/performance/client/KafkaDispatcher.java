@@ -23,7 +23,7 @@ import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.ByteArraySerializer;
-import org.kie.kogito.event.process.ProcessDataEvent;
+import org.kie.kogito.event.process.ProcessInstanceDataEvent;
 import org.kie.kogito.jackson.utils.ObjectMapperFactory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -31,7 +31,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class KafkaDispatcher implements RequestDispatcher {
 
-    private class ObjectCloudEvent extends ProcessDataEvent<Object> {
+    private class ObjectCloudEvent extends ProcessInstanceDataEvent<Object> {
         public ObjectCloudEvent(String trigger, Object data) {
             super(trigger, "java_client", data, null, null, null, null, null, null, null, null, null, null, null);
         }
