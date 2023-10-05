@@ -1,17 +1,17 @@
 <bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_fswpMKJxEDiZN4UVlvQdCA" exporter="jBPM Process Modeler" exporterVersion="2.0" targetNamespace="http://www.omg.org/bpmn20">
-  <bpmn2:itemDefinition id="_supportCaseItem" structureRef="org.kie.kogito.flexible.example.model.SupportCase"/>
+  <bpmn2:itemDefinition id="_supportCaseItem" structureRef="org.acme.flexible.example.model.SupportCase"/>
   <bpmn2:itemDefinition id="_supportGroupItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="_commentItem" structureRef="org.kie.kogito.flexible.example.model.Comment"/>
+  <bpmn2:itemDefinition id="_commentItem" structureRef="org.acme.flexible.example.model.Comment"/>
   <bpmn2:itemDefinition id="_authorItem" structureRef="String"/>
   <bpmn2:itemDefinition id="_textItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="__D514F716-3F06-468F-A487-892F6089C776_supportCaseInputXItem" structureRef="org.kie.kogito.flexible.example.model.SupportCase"/>
+  <bpmn2:itemDefinition id="__D514F716-3F06-468F-A487-892F6089C776_supportCaseInputXItem" structureRef="org.acme.flexible.example.model.SupportCase"/>
   <bpmn2:itemDefinition id="__D514F716-3F06-468F-A487-892F6089C776_commentInputXItem" structureRef="String"/>
   <bpmn2:itemDefinition id="__D514F716-3F06-468F-A487-892F6089C776_authorInputXItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="__D514F716-3F06-468F-A487-892F6089C776_supportCaseOutputXItem" structureRef="org.kie.kogito.flexible.example.model.SupportCase"/>
-  <bpmn2:itemDefinition id="__5B1A92B6-7044-4C8B-9011-62CD592F255F_supportCaseInputXItem" structureRef="org.kie.kogito.flexible.example.model.SupportCase"/>
+  <bpmn2:itemDefinition id="__D514F716-3F06-468F-A487-892F6089C776_supportCaseOutputXItem" structureRef="org.acme.flexible.example.model.SupportCase"/>
+  <bpmn2:itemDefinition id="__5B1A92B6-7044-4C8B-9011-62CD592F255F_supportCaseInputXItem" structureRef="org.acme.flexible.example.model.SupportCase"/>
   <bpmn2:itemDefinition id="__5B1A92B6-7044-4C8B-9011-62CD592F255F_commentInputXItem" structureRef="String"/>
   <bpmn2:itemDefinition id="__5B1A92B6-7044-4C8B-9011-62CD592F255F_authorInputXItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="__5B1A92B6-7044-4C8B-9011-62CD592F255F_supportCaseOutputXItem" structureRef="org.kie.kogito.flexible.example.model.SupportCase"/>
+  <bpmn2:itemDefinition id="__5B1A92B6-7044-4C8B-9011-62CD592F255F_supportCaseOutputXItem" structureRef="org.acme.flexible.example.model.SupportCase"/>
   <bpmn2:itemDefinition id="__C5983E55-DC49-4839-AC3E-3E8344A29262_SkippableInputXItem" structureRef="Object"/>
   <bpmn2:itemDefinition id="__C5983E55-DC49-4839-AC3E-3E8344A29262_PriorityInputXItem" structureRef="Object"/>
   <bpmn2:itemDefinition id="__C5983E55-DC49-4839-AC3E-3E8344A29262_CommentInputXItem" structureRef="Object"/>
@@ -56,10 +56,10 @@
   <bpmn2:itemDefinition id="__AD768963-CBF7-4269-9D43-51FE0D5D2556_NotCompletedNotifyInputXItem" structureRef="Object"/>
   <bpmn2:itemDefinition id="__AD768963-CBF7-4269-9D43-51FE0D5D2556_evaluationOutputXItem" structureRef="Integer"/>
   <bpmn2:itemDefinition id="__AD768963-CBF7-4269-9D43-51FE0D5D2556_commentOutputXItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="__BEAA2A42-CD36-4A08-BB42-4823EAA5C137_supportCaseInputXItem" structureRef="org.kie.kogito.flexible.example.model.SupportCase"/>
+  <bpmn2:itemDefinition id="__BEAA2A42-CD36-4A08-BB42-4823EAA5C137_supportCaseInputXItem" structureRef="org.acme.flexible.example.model.SupportCase"/>
   <bpmn2:itemDefinition id="__BEAA2A42-CD36-4A08-BB42-4823EAA5C137_evaluationInputXItem" structureRef="Integer"/>
   <bpmn2:itemDefinition id="__BEAA2A42-CD36-4A08-BB42-4823EAA5C137_commentInputXItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="__BEAA2A42-CD36-4A08-BB42-4823EAA5C137_supportCaseOutputXItem" structureRef="org.kie.kogito.flexible.example.model.SupportCase"/>
+  <bpmn2:itemDefinition id="__BEAA2A42-CD36-4A08-BB42-4823EAA5C137_supportCaseOutputXItem" structureRef="org.acme.flexible.example.model.SupportCase"/>
   <bpmn2:itemDefinition id="__BACB7C86-E7FA-4E2B-931A-CC02C812A698_SkippableInputXItem" structureRef="Object"/>
   <bpmn2:itemDefinition id="__BACB7C86-E7FA-4E2B-931A-CC02C812A698_PriorityInputXItem" structureRef="Object"/>
   <bpmn2:itemDefinition id="__BACB7C86-E7FA-4E2B-931A-CC02C812A698_CommentInputXItem" structureRef="Object"/>
@@ -72,42 +72,42 @@
   <bpmn2:itemDefinition id="__BACB7C86-E7FA-4E2B-931A-CC02C812A698_NotCompletedReassignInputXItem" structureRef="Object"/>
   <bpmn2:itemDefinition id="__BACB7C86-E7FA-4E2B-931A-CC02C812A698_NotStartedNotifyInputXItem" structureRef="Object"/>
   <bpmn2:itemDefinition id="__BACB7C86-E7FA-4E2B-931A-CC02C812A698_NotCompletedNotifyInputXItem" structureRef="Object"/>
-  <bpmn2:itemDefinition id="__BACB7C86-E7FA-4E2B-931A-CC02C812A698_supportCaseInputXItem" structureRef="org.kie.kogito.flexible.example.model.SupportCase"/>
-  <bpmn2:itemDefinition id="__BACB7C86-E7FA-4E2B-931A-CC02C812A698_supportCaseOutputXItem" structureRef="org.kie.kogito.flexible.example.model.SupportCase"/>
-  <bpmn2:itemDefinition id="__26E99F98-8E2E-4321-98A7-BE7570FF0BD2_supportCaseInputXItem" structureRef="org.kie.kogito.flexible.example.model.SupportCase"/>
+  <bpmn2:itemDefinition id="__BACB7C86-E7FA-4E2B-931A-CC02C812A698_supportCaseInputXItem" structureRef="org.acme.flexible.example.model.SupportCase"/>
+  <bpmn2:itemDefinition id="__BACB7C86-E7FA-4E2B-931A-CC02C812A698_supportCaseOutputXItem" structureRef="org.acme.flexible.example.model.SupportCase"/>
+  <bpmn2:itemDefinition id="__26E99F98-8E2E-4321-98A7-BE7570FF0BD2_supportCaseInputXItem" structureRef="org.acme.flexible.example.model.SupportCase"/>
   <bpmn2:itemDefinition id="__26E99F98-8E2E-4321-98A7-BE7570FF0BD2_supportGroupInputXItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="__26E99F98-8E2E-4321-98A7-BE7570FF0BD2_supportCaseOutputXItem" structureRef="org.kie.kogito.flexible.example.model.SupportCase"/>
-  <bpmn2:itemDefinition id="__D17F5E0D-779E-4AF4-9E33-6E37D8F54DA7_supportCaseInputXItem" structureRef="org.kie.kogito.flexible.example.model.SupportCase"/>
+  <bpmn2:itemDefinition id="__26E99F98-8E2E-4321-98A7-BE7570FF0BD2_supportCaseOutputXItem" structureRef="org.acme.flexible.example.model.SupportCase"/>
+  <bpmn2:itemDefinition id="__D17F5E0D-779E-4AF4-9E33-6E37D8F54DA7_supportCaseInputXItem" structureRef="org.acme.flexible.example.model.SupportCase"/>
   <bpmn2:itemDefinition id="__D17F5E0D-779E-4AF4-9E33-6E37D8F54DA7_supportGroupInputXItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="__D17F5E0D-779E-4AF4-9E33-6E37D8F54DA7_supportCaseOutputXItem" structureRef="org.kie.kogito.flexible.example.model.SupportCase"/>
+  <bpmn2:itemDefinition id="__D17F5E0D-779E-4AF4-9E33-6E37D8F54DA7_supportCaseOutputXItem" structureRef="org.acme.flexible.example.model.SupportCase"/>
   <bpmn2:itemDefinition id="__D792ADC8-9414-4F1A-9A3C-6339788A4EA3_namespaceInputXItem" structureRef="java.lang.String"/>
   <bpmn2:itemDefinition id="__D792ADC8-9414-4F1A-9A3C-6339788A4EA3_modelInputXItem" structureRef="java.lang.String"/>
   <bpmn2:itemDefinition id="__D792ADC8-9414-4F1A-9A3C-6339788A4EA3_decisionInputXItem" structureRef="java.lang.String"/>
   <bpmn2:itemDefinition id="__D792ADC8-9414-4F1A-9A3C-6339788A4EA3_ProductFamilyInputXItem" structureRef="String"/>
   <bpmn2:itemDefinition id="__D792ADC8-9414-4F1A-9A3C-6339788A4EA3_ProductNameInputXItem" structureRef="String"/>
   <bpmn2:itemDefinition id="__D792ADC8-9414-4F1A-9A3C-6339788A4EA3_SupportGroupOutputXItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="__5DCB19C5-63B3-4846-A8C7-9E383306E915_supportCaseInputXItem" structureRef="org.kie.kogito.flexible.example.model.SupportCase"/>
-  <bpmn2:itemDefinition id="__5DCB19C5-63B3-4846-A8C7-9E383306E915_supportCaseOutputXItem" structureRef="org.kie.kogito.flexible.example.model.SupportCase"/>
-  <bpmn2:interface id="_D514F716-3F06-468F-A487-892F6089C776_ServiceInterface" name="org.kie.kogito.flexible.example.service.CommentService" implementationRef="org.kie.kogito.flexible.example.service.CommentService">
+  <bpmn2:itemDefinition id="__5DCB19C5-63B3-4846-A8C7-9E383306E915_supportCaseInputXItem" structureRef="org.acme.flexible.example.model.SupportCase"/>
+  <bpmn2:itemDefinition id="__5DCB19C5-63B3-4846-A8C7-9E383306E915_supportCaseOutputXItem" structureRef="org.acme.flexible.example.model.SupportCase"/>
+  <bpmn2:interface id="_D514F716-3F06-468F-A487-892F6089C776_ServiceInterface" name="org.acme.flexible.example.service.CommentService" implementationRef="org.acme.flexible.example.service.CommentService">
     <bpmn2:operation id="_D514F716-3F06-468F-A487-892F6089C776_ServiceOperation" name="addSupportComment" implementationRef="addSupportComment"/>
   </bpmn2:interface>
-  <bpmn2:interface id="_5B1A92B6-7044-4C8B-9011-62CD592F255F_ServiceInterface" name="org.kie.kogito.flexible.example.service.CommentService" implementationRef="org.kie.kogito.flexible.example.service.CommentService">
+  <bpmn2:interface id="_5B1A92B6-7044-4C8B-9011-62CD592F255F_ServiceInterface" name="org.acme.flexible.example.service.CommentService" implementationRef="org.acme.flexible.example.service.CommentService">
     <bpmn2:operation id="_5B1A92B6-7044-4C8B-9011-62CD592F255F_ServiceOperation" name="addCustomerComment" implementationRef="addCustomerComment"/>
   </bpmn2:interface>
-  <bpmn2:interface id="_BEAA2A42-CD36-4A08-BB42-4823EAA5C137_ServiceInterface" name="org.kie.kogito.flexible.example.service.StateService" implementationRef="org.kie.kogito.flexible.example.service.StateService">
+  <bpmn2:interface id="_BEAA2A42-CD36-4A08-BB42-4823EAA5C137_ServiceInterface" name="org.acme.flexible.example.service.StateService" implementationRef="org.acme.flexible.example.service.StateService">
     <bpmn2:operation id="_BEAA2A42-CD36-4A08-BB42-4823EAA5C137_ServiceOperation" name="close" implementationRef="close"/>
   </bpmn2:interface>
-  <bpmn2:interface id="_26E99F98-8E2E-4321-98A7-BE7570FF0BD2_ServiceInterface" name="org.kie.kogito.flexible.example.service.TriageService" implementationRef="org.kie.kogito.flexible.example.service.TriageService">
+  <bpmn2:interface id="_26E99F98-8E2E-4321-98A7-BE7570FF0BD2_ServiceInterface" name="org.acme.flexible.example.service.TriageService" implementationRef="org.acme.flexible.example.service.TriageService">
     <bpmn2:operation id="_26E99F98-8E2E-4321-98A7-BE7570FF0BD2_ServiceOperation" name="assignEngineer" implementationRef="assignEngineer"/>
   </bpmn2:interface>
-  <bpmn2:interface id="_D17F5E0D-779E-4AF4-9E33-6E37D8F54DA7_ServiceInterface" name="org.kie.kogito.flexible.example.service.TriageService" implementationRef="org.kie.kogito.flexible.example.service.TriageService">
+  <bpmn2:interface id="_D17F5E0D-779E-4AF4-9E33-6E37D8F54DA7_ServiceInterface" name="org.acme.flexible.example.service.TriageService" implementationRef="org.acme.flexible.example.service.TriageService">
     <bpmn2:operation id="_D17F5E0D-779E-4AF4-9E33-6E37D8F54DA7_ServiceOperation" name="assignEngineer" implementationRef="assignEngineer"/>
   </bpmn2:interface>
-  <bpmn2:interface id="_5DCB19C5-63B3-4846-A8C7-9E383306E915_ServiceInterface" name="org.kie.kogito.flexible.example.service.StateService" implementationRef="org.kie.kogito.flexible.example.service.StateService">
+  <bpmn2:interface id="_5DCB19C5-63B3-4846-A8C7-9E383306E915_ServiceInterface" name="org.acme.flexible.example.service.StateService" implementationRef="org.acme.flexible.example.service.StateService">
     <bpmn2:operation id="_5DCB19C5-63B3-4846-A8C7-9E383306E915_ServiceOperation" name="resolve" implementationRef="resolve"/>
   </bpmn2:interface>
   <bpmn2:signal id="_-1717190808" name="CaseResolved"/>
-  <bpmn2:process id="serviceDesk" drools:packageName="org.kie.kogito.flexible.example" drools:version="1.0" drools:adHoc="true" name="service-desk" isExecutable="true" processType="Public">
+  <bpmn2:process id="serviceDesk" drools:packageName="org.acme.flexible.example" drools:version="1.0" drools:adHoc="true" name="service-desk" isExecutable="true" processType="Public">
     <bpmn2:property id="supportCase" itemSubjectRef="_supportCaseItem" name="supportCase"/>
     <bpmn2:property id="supportGroup" itemSubjectRef="_supportGroupItem" name="supportGroup"/>
     <bpmn2:sequenceFlow id="_C651F6F2-8C0D-4E9A-94B3-0BB337536F51" sourceRef="_5DCB19C5-63B3-4846-A8C7-9E383306E915" targetRef="_DDF2782E-04C8-4F37-84D0-E94F62EEF4A8">
@@ -167,7 +167,7 @@
         </bpmn2:assignment>
       </bpmn2:dataInputAssociation>
     </bpmn2:task>
-    <bpmn2:serviceTask id="_5DCB19C5-63B3-4846-A8C7-9E383306E915" drools:serviceimplementation="Java" drools:serviceinterface="org.kie.kogito.flexible.example.service.StateService" drools:serviceoperation="resolve" name="Resolve Case" implementation="Java" operationRef="_5DCB19C5-63B3-4846-A8C7-9E383306E915_ServiceOperation">
+    <bpmn2:serviceTask id="_5DCB19C5-63B3-4846-A8C7-9E383306E915" drools:serviceimplementation="Java" drools:serviceinterface="org.acme.flexible.example.service.StateService" drools:serviceoperation="resolve" name="Resolve Case" implementation="Java" operationRef="_5DCB19C5-63B3-4846-A8C7-9E383306E915_ServiceOperation">
       <bpmn2:extensionElements>
         <drools:metaData name="elementname">
           <drools:metaValue><![CDATA[Resolve Case]]></drools:metaValue>
@@ -175,8 +175,8 @@
       </bpmn2:extensionElements>
       <bpmn2:outgoing>_C651F6F2-8C0D-4E9A-94B3-0BB337536F51</bpmn2:outgoing>
       <bpmn2:ioSpecification>
-        <bpmn2:dataInput id="_5DCB19C5-63B3-4846-A8C7-9E383306E915_supportCaseInputX" drools:dtype="org.kie.kogito.flexible.example.model.SupportCase" itemSubjectRef="__5DCB19C5-63B3-4846-A8C7-9E383306E915_supportCaseInputXItem" name="supportCase"/>
-        <bpmn2:dataOutput id="_5DCB19C5-63B3-4846-A8C7-9E383306E915_supportCaseOutputX" drools:dtype="org.kie.kogito.flexible.example.model.SupportCase" itemSubjectRef="__5DCB19C5-63B3-4846-A8C7-9E383306E915_supportCaseOutputXItem" name="supportCase"/>
+        <bpmn2:dataInput id="_5DCB19C5-63B3-4846-A8C7-9E383306E915_supportCaseInputX" drools:dtype="org.acme.flexible.example.model.SupportCase" itemSubjectRef="__5DCB19C5-63B3-4846-A8C7-9E383306E915_supportCaseInputXItem" name="supportCase"/>
+        <bpmn2:dataOutput id="_5DCB19C5-63B3-4846-A8C7-9E383306E915_supportCaseOutputX" drools:dtype="org.acme.flexible.example.model.SupportCase" itemSubjectRef="__5DCB19C5-63B3-4846-A8C7-9E383306E915_supportCaseOutputXItem" name="supportCase"/>
         <bpmn2:inputSet>
           <bpmn2:dataInputRefs>_5DCB19C5-63B3-4846-A8C7-9E383306E915_supportCaseInputX</bpmn2:dataInputRefs>
         </bpmn2:inputSet>
@@ -296,7 +296,7 @@
           <bpmn2:targetRef>supportGroup</bpmn2:targetRef>
         </bpmn2:dataOutputAssociation>
       </bpmn2:businessRuleTask>
-      <bpmn2:serviceTask id="_D17F5E0D-779E-4AF4-9E33-6E37D8F54DA7" drools:serviceimplementation="Java" drools:serviceinterface="org.kie.kogito.flexible.example.service.TriageService" drools:serviceoperation="assignEngineer" name="Assign engineer" implementation="Java" operationRef="_D17F5E0D-779E-4AF4-9E33-6E37D8F54DA7_ServiceOperation">
+      <bpmn2:serviceTask id="_D17F5E0D-779E-4AF4-9E33-6E37D8F54DA7" drools:serviceimplementation="Java" drools:serviceinterface="org.acme.flexible.example.service.TriageService" drools:serviceoperation="assignEngineer" name="Assign engineer" implementation="Java" operationRef="_D17F5E0D-779E-4AF4-9E33-6E37D8F54DA7_ServiceOperation">
         <bpmn2:extensionElements>
           <drools:metaData name="elementname">
             <drools:metaValue><![CDATA[Assign engineer]]></drools:metaValue>
@@ -305,9 +305,9 @@
         <bpmn2:incoming>_4D493B33-AE13-464F-B7F5-4A7A9A9044BA</bpmn2:incoming>
         <bpmn2:outgoing>_5CF61231-028A-4E4A-AC50-01C1737FEC0A</bpmn2:outgoing>
         <bpmn2:ioSpecification>
-          <bpmn2:dataInput id="_D17F5E0D-779E-4AF4-9E33-6E37D8F54DA7_supportCaseInputX" drools:dtype="org.kie.kogito.flexible.example.model.SupportCase" itemSubjectRef="__D17F5E0D-779E-4AF4-9E33-6E37D8F54DA7_supportCaseInputXItem" name="supportCase"/>
+          <bpmn2:dataInput id="_D17F5E0D-779E-4AF4-9E33-6E37D8F54DA7_supportCaseInputX" drools:dtype="org.acme.flexible.example.model.SupportCase" itemSubjectRef="__D17F5E0D-779E-4AF4-9E33-6E37D8F54DA7_supportCaseInputXItem" name="supportCase"/>
           <bpmn2:dataInput id="_D17F5E0D-779E-4AF4-9E33-6E37D8F54DA7_supportGroupInputX" drools:dtype="String" itemSubjectRef="__D17F5E0D-779E-4AF4-9E33-6E37D8F54DA7_supportGroupInputXItem" name="supportGroup"/>
-          <bpmn2:dataOutput id="_D17F5E0D-779E-4AF4-9E33-6E37D8F54DA7_supportCaseOutputX" drools:dtype="org.kie.kogito.flexible.example.model.SupportCase" itemSubjectRef="__D17F5E0D-779E-4AF4-9E33-6E37D8F54DA7_supportCaseOutputXItem" name="supportCase"/>
+          <bpmn2:dataOutput id="_D17F5E0D-779E-4AF4-9E33-6E37D8F54DA7_supportCaseOutputX" drools:dtype="org.acme.flexible.example.model.SupportCase" itemSubjectRef="__D17F5E0D-779E-4AF4-9E33-6E37D8F54DA7_supportCaseOutputXItem" name="supportCase"/>
           <bpmn2:inputSet>
             <bpmn2:dataInputRefs>_D17F5E0D-779E-4AF4-9E33-6E37D8F54DA7_supportCaseInputX</bpmn2:dataInputRefs>
             <bpmn2:dataInputRefs>_D17F5E0D-779E-4AF4-9E33-6E37D8F54DA7_supportGroupInputX</bpmn2:dataInputRefs>
@@ -337,7 +337,7 @@
         <bpmn2:outgoing>_6B10C12D-99D4-4758-B2D3-32D8E527A287</bpmn2:outgoing>
         <bpmn2:outgoing>_28168759-AF8E-47D3-9FEA-8095507ABEB7</bpmn2:outgoing>
       </bpmn2:exclusiveGateway>
-      <bpmn2:serviceTask id="_26E99F98-8E2E-4321-98A7-BE7570FF0BD2" drools:serviceimplementation="Java" drools:serviceinterface="org.kie.kogito.flexible.example.service.TriageService" drools:serviceoperation="assignEngineer" name="Set assigned" implementation="Java" operationRef="_26E99F98-8E2E-4321-98A7-BE7570FF0BD2_ServiceOperation">
+      <bpmn2:serviceTask id="_26E99F98-8E2E-4321-98A7-BE7570FF0BD2" drools:serviceimplementation="Java" drools:serviceinterface="org.acme.flexible.example.service.TriageService" drools:serviceoperation="assignEngineer" name="Set assigned" implementation="Java" operationRef="_26E99F98-8E2E-4321-98A7-BE7570FF0BD2_ServiceOperation">
         <bpmn2:extensionElements>
           <drools:metaData name="elementname">
             <drools:metaValue><![CDATA[Set assigned]]></drools:metaValue>
@@ -345,9 +345,9 @@
         </bpmn2:extensionElements>
         <bpmn2:incoming>_DBE81078-2C21-4128-ADDE-CA5E170F0792</bpmn2:incoming>
         <bpmn2:ioSpecification>
-          <bpmn2:dataInput id="_26E99F98-8E2E-4321-98A7-BE7570FF0BD2_supportCaseInputX" drools:dtype="org.kie.kogito.flexible.example.model.SupportCase" itemSubjectRef="__26E99F98-8E2E-4321-98A7-BE7570FF0BD2_supportCaseInputXItem" name="supportCase"/>
+          <bpmn2:dataInput id="_26E99F98-8E2E-4321-98A7-BE7570FF0BD2_supportCaseInputX" drools:dtype="org.acme.flexible.example.model.SupportCase" itemSubjectRef="__26E99F98-8E2E-4321-98A7-BE7570FF0BD2_supportCaseInputXItem" name="supportCase"/>
           <bpmn2:dataInput id="_26E99F98-8E2E-4321-98A7-BE7570FF0BD2_supportGroupInputX" drools:dtype="String" itemSubjectRef="__26E99F98-8E2E-4321-98A7-BE7570FF0BD2_supportGroupInputXItem" name="supportGroup"/>
-          <bpmn2:dataOutput id="_26E99F98-8E2E-4321-98A7-BE7570FF0BD2_supportCaseOutputX" drools:dtype="org.kie.kogito.flexible.example.model.SupportCase" itemSubjectRef="__26E99F98-8E2E-4321-98A7-BE7570FF0BD2_supportCaseOutputXItem" name="supportCase"/>
+          <bpmn2:dataOutput id="_26E99F98-8E2E-4321-98A7-BE7570FF0BD2_supportCaseOutputX" drools:dtype="org.acme.flexible.example.model.SupportCase" itemSubjectRef="__26E99F98-8E2E-4321-98A7-BE7570FF0BD2_supportCaseOutputXItem" name="supportCase"/>
           <bpmn2:inputSet>
             <bpmn2:dataInputRefs>_26E99F98-8E2E-4321-98A7-BE7570FF0BD2_supportCaseInputX</bpmn2:dataInputRefs>
             <bpmn2:dataInputRefs>_26E99F98-8E2E-4321-98A7-BE7570FF0BD2_supportGroupInputX</bpmn2:dataInputRefs>
@@ -382,10 +382,10 @@
         <bpmn2:outgoing>_DBE81078-2C21-4128-ADDE-CA5E170F0792</bpmn2:outgoing>
         <bpmn2:ioSpecification>
           <bpmn2:dataInput id="_BACB7C86-E7FA-4E2B-931A-CC02C812A698_TaskNameInputX" drools:dtype="Object" itemSubjectRef="__BACB7C86-E7FA-4E2B-931A-CC02C812A698_TaskNameInputXItem" name="TaskName"/>
-          <bpmn2:dataInput id="_BACB7C86-E7FA-4E2B-931A-CC02C812A698_supportCaseInputX" drools:dtype="org.kie.kogito.flexible.example.model.SupportCase" itemSubjectRef="__BACB7C86-E7FA-4E2B-931A-CC02C812A698_supportCaseInputXItem" name="supportCase"/>
+          <bpmn2:dataInput id="_BACB7C86-E7FA-4E2B-931A-CC02C812A698_supportCaseInputX" drools:dtype="org.acme.flexible.example.model.SupportCase" itemSubjectRef="__BACB7C86-E7FA-4E2B-931A-CC02C812A698_supportCaseInputXItem" name="supportCase"/>
           <bpmn2:dataInput id="_BACB7C86-E7FA-4E2B-931A-CC02C812A698_SkippableInputX" drools:dtype="Object" itemSubjectRef="__BACB7C86-E7FA-4E2B-931A-CC02C812A698_SkippableInputXItem" name="Skippable"/>
           <bpmn2:dataInput id="_BACB7C86-E7FA-4E2B-931A-CC02C812A698_GroupIdInputX" drools:dtype="Object" itemSubjectRef="__BACB7C86-E7FA-4E2B-931A-CC02C812A698_GroupIdInputXItem" name="GroupId"/>
-          <bpmn2:dataOutput id="_BACB7C86-E7FA-4E2B-931A-CC02C812A698_supportCaseOutputX" drools:dtype="org.kie.kogito.flexible.example.model.SupportCase" itemSubjectRef="__BACB7C86-E7FA-4E2B-931A-CC02C812A698_supportCaseOutputXItem" name="supportCase"/>
+          <bpmn2:dataOutput id="_BACB7C86-E7FA-4E2B-931A-CC02C812A698_supportCaseOutputX" drools:dtype="org.acme.flexible.example.model.SupportCase" itemSubjectRef="__BACB7C86-E7FA-4E2B-931A-CC02C812A698_supportCaseOutputXItem" name="supportCase"/>
           <bpmn2:inputSet>
             <bpmn2:dataInputRefs>_BACB7C86-E7FA-4E2B-931A-CC02C812A698_TaskNameInputX</bpmn2:dataInputRefs>
             <bpmn2:dataInputRefs>_BACB7C86-E7FA-4E2B-931A-CC02C812A698_supportCaseInputX</bpmn2:dataInputRefs>
@@ -448,7 +448,7 @@
           </drools:metaData>
         </bpmn2:extensionElements>
       </bpmn2:sequenceFlow>
-      <bpmn2:serviceTask id="_BEAA2A42-CD36-4A08-BB42-4823EAA5C137" drools:serviceimplementation="Java" drools:serviceinterface="org.kie.kogito.flexible.example.service.StateService" drools:serviceoperation="close" name="Save questionnaire" implementation="Java" operationRef="_BEAA2A42-CD36-4A08-BB42-4823EAA5C137_ServiceOperation">
+      <bpmn2:serviceTask id="_BEAA2A42-CD36-4A08-BB42-4823EAA5C137" drools:serviceimplementation="Java" drools:serviceinterface="org.acme.flexible.example.service.StateService" drools:serviceoperation="close" name="Save questionnaire" implementation="Java" operationRef="_BEAA2A42-CD36-4A08-BB42-4823EAA5C137_ServiceOperation">
         <bpmn2:extensionElements>
           <drools:metaData name="elementname">
             <drools:metaValue><![CDATA[Save questionnaire]]></drools:metaValue>
@@ -456,10 +456,10 @@
         </bpmn2:extensionElements>
         <bpmn2:incoming>_56AFC157-45AE-44E0-A94D-52AE95EFC74B</bpmn2:incoming>
         <bpmn2:ioSpecification>
-          <bpmn2:dataInput id="_BEAA2A42-CD36-4A08-BB42-4823EAA5C137_supportCaseInputX" drools:dtype="org.kie.kogito.flexible.example.model.SupportCase" itemSubjectRef="__BEAA2A42-CD36-4A08-BB42-4823EAA5C137_supportCaseInputXItem" name="supportCase"/>
+          <bpmn2:dataInput id="_BEAA2A42-CD36-4A08-BB42-4823EAA5C137_supportCaseInputX" drools:dtype="org.acme.flexible.example.model.SupportCase" itemSubjectRef="__BEAA2A42-CD36-4A08-BB42-4823EAA5C137_supportCaseInputXItem" name="supportCase"/>
           <bpmn2:dataInput id="_BEAA2A42-CD36-4A08-BB42-4823EAA5C137_evaluationInputX" drools:dtype="Integer" itemSubjectRef="__BEAA2A42-CD36-4A08-BB42-4823EAA5C137_evaluationInputXItem" name="evaluation"/>
           <bpmn2:dataInput id="_BEAA2A42-CD36-4A08-BB42-4823EAA5C137_commentInputX" drools:dtype="String" itemSubjectRef="__BEAA2A42-CD36-4A08-BB42-4823EAA5C137_commentInputXItem" name="comment"/>
-          <bpmn2:dataOutput id="_BEAA2A42-CD36-4A08-BB42-4823EAA5C137_supportCaseOutputX" drools:dtype="org.kie.kogito.flexible.example.model.SupportCase" itemSubjectRef="__BEAA2A42-CD36-4A08-BB42-4823EAA5C137_supportCaseOutputXItem" name="supportCase"/>
+          <bpmn2:dataOutput id="_BEAA2A42-CD36-4A08-BB42-4823EAA5C137_supportCaseOutputX" drools:dtype="org.acme.flexible.example.model.SupportCase" itemSubjectRef="__BEAA2A42-CD36-4A08-BB42-4823EAA5C137_supportCaseOutputXItem" name="supportCase"/>
           <bpmn2:inputSet>
             <bpmn2:dataInputRefs>_BEAA2A42-CD36-4A08-BB42-4823EAA5C137_supportCaseInputX</bpmn2:dataInputRefs>
             <bpmn2:dataInputRefs>_BEAA2A42-CD36-4A08-BB42-4823EAA5C137_evaluationInputX</bpmn2:dataInputRefs>
@@ -667,7 +667,7 @@
           <bpmn2:targetRef>author</bpmn2:targetRef>
         </bpmn2:dataOutputAssociation>
       </bpmn2:userTask>
-      <bpmn2:serviceTask id="_5B1A92B6-7044-4C8B-9011-62CD592F255F" drools:serviceimplementation="Java" drools:serviceinterface="org.kie.kogito.flexible.example.service.CommentService" drools:serviceoperation="addCustomerComment" name="Add customer comment" implementation="Java" operationRef="_5B1A92B6-7044-4C8B-9011-62CD592F255F_ServiceOperation">
+      <bpmn2:serviceTask id="_5B1A92B6-7044-4C8B-9011-62CD592F255F" drools:serviceimplementation="Java" drools:serviceinterface="org.acme.flexible.example.service.CommentService" drools:serviceoperation="addCustomerComment" name="Add customer comment" implementation="Java" operationRef="_5B1A92B6-7044-4C8B-9011-62CD592F255F_ServiceOperation">
         <bpmn2:extensionElements>
           <drools:metaData name="elementname">
             <drools:metaValue><![CDATA[Add customer comment]]></drools:metaValue>
@@ -675,10 +675,10 @@
         </bpmn2:extensionElements>
         <bpmn2:incoming>_D49DA468-8A7B-4688-A8DB-5B09D1AE22B1</bpmn2:incoming>
         <bpmn2:ioSpecification>
-          <bpmn2:dataInput id="_5B1A92B6-7044-4C8B-9011-62CD592F255F_supportCaseInputX" drools:dtype="org.kie.kogito.flexible.example.model.SupportCase" itemSubjectRef="__5B1A92B6-7044-4C8B-9011-62CD592F255F_supportCaseInputXItem" name="supportCase"/>
+          <bpmn2:dataInput id="_5B1A92B6-7044-4C8B-9011-62CD592F255F_supportCaseInputX" drools:dtype="org.acme.flexible.example.model.SupportCase" itemSubjectRef="__5B1A92B6-7044-4C8B-9011-62CD592F255F_supportCaseInputXItem" name="supportCase"/>
           <bpmn2:dataInput id="_5B1A92B6-7044-4C8B-9011-62CD592F255F_commentInputX" drools:dtype="String" itemSubjectRef="__5B1A92B6-7044-4C8B-9011-62CD592F255F_commentInputXItem" name="comment"/>
           <bpmn2:dataInput id="_5B1A92B6-7044-4C8B-9011-62CD592F255F_authorInputX" drools:dtype="String" itemSubjectRef="__5B1A92B6-7044-4C8B-9011-62CD592F255F_authorInputXItem" name="author"/>
-          <bpmn2:dataOutput id="_5B1A92B6-7044-4C8B-9011-62CD592F255F_supportCaseOutputX" drools:dtype="org.kie.kogito.flexible.example.model.SupportCase" itemSubjectRef="__5B1A92B6-7044-4C8B-9011-62CD592F255F_supportCaseOutputXItem" name="supportCase"/>
+          <bpmn2:dataOutput id="_5B1A92B6-7044-4C8B-9011-62CD592F255F_supportCaseOutputX" drools:dtype="org.acme.flexible.example.model.SupportCase" itemSubjectRef="__5B1A92B6-7044-4C8B-9011-62CD592F255F_supportCaseOutputXItem" name="supportCase"/>
           <bpmn2:inputSet>
             <bpmn2:dataInputRefs>_5B1A92B6-7044-4C8B-9011-62CD592F255F_supportCaseInputX</bpmn2:dataInputRefs>
             <bpmn2:dataInputRefs>_5B1A92B6-7044-4C8B-9011-62CD592F255F_commentInputX</bpmn2:dataInputRefs>
@@ -705,7 +705,7 @@
           <bpmn2:targetRef>supportCase</bpmn2:targetRef>
         </bpmn2:dataOutputAssociation>
       </bpmn2:serviceTask>
-      <bpmn2:serviceTask id="_D514F716-3F06-468F-A487-892F6089C776" drools:serviceimplementation="Java" drools:serviceinterface="org.kie.kogito.flexible.example.service.CommentService" drools:serviceoperation="addSupportComment" name="Add support comment" implementation="Java" operationRef="_D514F716-3F06-468F-A487-892F6089C776_ServiceOperation">
+      <bpmn2:serviceTask id="_D514F716-3F06-468F-A487-892F6089C776" drools:serviceimplementation="Java" drools:serviceinterface="org.acme.flexible.example.service.CommentService" drools:serviceoperation="addSupportComment" name="Add support comment" implementation="Java" operationRef="_D514F716-3F06-468F-A487-892F6089C776_ServiceOperation">
         <bpmn2:extensionElements>
           <drools:metaData name="elementname">
             <drools:metaValue><![CDATA[Add support comment]]></drools:metaValue>
@@ -713,10 +713,10 @@
         </bpmn2:extensionElements>
         <bpmn2:incoming>_021482FA-6264-4060-B11B-ABD91159122A</bpmn2:incoming>
         <bpmn2:ioSpecification>
-          <bpmn2:dataInput id="_D514F716-3F06-468F-A487-892F6089C776_supportCaseInputX" drools:dtype="org.kie.kogito.flexible.example.model.SupportCase" itemSubjectRef="__D514F716-3F06-468F-A487-892F6089C776_supportCaseInputXItem" name="supportCase"/>
+          <bpmn2:dataInput id="_D514F716-3F06-468F-A487-892F6089C776_supportCaseInputX" drools:dtype="org.acme.flexible.example.model.SupportCase" itemSubjectRef="__D514F716-3F06-468F-A487-892F6089C776_supportCaseInputXItem" name="supportCase"/>
           <bpmn2:dataInput id="_D514F716-3F06-468F-A487-892F6089C776_commentInputX" drools:dtype="String" itemSubjectRef="__D514F716-3F06-468F-A487-892F6089C776_commentInputXItem" name="comment"/>
           <bpmn2:dataInput id="_D514F716-3F06-468F-A487-892F6089C776_authorInputX" drools:dtype="String" itemSubjectRef="__D514F716-3F06-468F-A487-892F6089C776_authorInputXItem" name="author"/>
-          <bpmn2:dataOutput id="_D514F716-3F06-468F-A487-892F6089C776_supportCaseOutputX" drools:dtype="org.kie.kogito.flexible.example.model.SupportCase" itemSubjectRef="__D514F716-3F06-468F-A487-892F6089C776_supportCaseOutputXItem" name="supportCase"/>
+          <bpmn2:dataOutput id="_D514F716-3F06-468F-A487-892F6089C776_supportCaseOutputX" drools:dtype="org.acme.flexible.example.model.SupportCase" itemSubjectRef="__D514F716-3F06-468F-A487-892F6089C776_supportCaseOutputXItem" name="supportCase"/>
           <bpmn2:inputSet>
             <bpmn2:dataInputRefs>_D514F716-3F06-468F-A487-892F6089C776_supportCaseInputX</bpmn2:dataInputRefs>
             <bpmn2:dataInputRefs>_D514F716-3F06-468F-A487-892F6089C776_commentInputX</bpmn2:dataInputRefs>
@@ -743,7 +743,7 @@
           <bpmn2:targetRef>supportCase</bpmn2:targetRef>
         </bpmn2:dataOutputAssociation>
       </bpmn2:serviceTask>
-      <bpmn2:completionCondition xsi:type="bpmn2:tFormalExpression" language="http://www.mvel.org/2.0"><![CDATA[org.kie.kogito.flexible.example.model.State.CLOSED.equals(supportCase.getState())]]></bpmn2:completionCondition>
+      <bpmn2:completionCondition xsi:type="bpmn2:tFormalExpression" language="http://www.mvel.org/2.0"><![CDATA[org.acme.flexible.example.model.State.CLOSED.equals(supportCase.getState())]]></bpmn2:completionCondition>
     </bpmn2:adHocSubProcess>
   </bpmn2:process>
   <bpmndi:BPMNDiagram>

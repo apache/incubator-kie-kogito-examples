@@ -137,7 +137,8 @@ $ mvn clean install -Pminikube
 # For Kubernetes or Knative just change the given profile to the respective platform (lower case).
 ```
 
-> NOTE: If you're targeting a Kubernetes or OpenShift cluster, consider the resources created on `target/kubernetes` directory.
+> NOTE: If you're targeting a Kubernetes or OpenShift cluster, consider the resources created on `target/kubernetes`
+> directory.
 
 Please see the official [Quarkus Guide](https://quarkus.io/guides/deploying-to-kubernetes) for more information.
 

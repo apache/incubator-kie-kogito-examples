@@ -94,35 +94,35 @@
 
         if ("WebSocket" in window) {
 
-           // Let us open a web socket
-           var ws = new WebSocket('{config:property('kogito.dataindex.ws.url') or 'ws://localhost:8180'}/graphql');
+            // Let us open a web socket
+            var ws = new WebSocket('{config:property('kogito.dataindex.ws.url') or 'ws://localhost:8180'}/graphql');
 
-           ws.onopen = function() {
-              // Web Socket is connected, send data using send()
-               ws.send('{"id" : "1", "type" : "connection_init"}');
-           };
+            ws.onopen = function () {
+                // Web Socket is connected, send data using send()
+                ws.send('{"id" : "1", "type" : "connection_init"}');
+            };
 
-           ws.onmessage = function (evt) {
-              var received_msg = evt.data;
-              let jsonObject = JSON.parse(received_msg);
-               if(jsonObject.type === 'connection_ack'){
-                   ws.send('{"id" : "2", "type" : "start", "payload" : { "query" : "subscription { TravelsUpdated { id, traveller { lastName, firstName, email, nationality, passportNumber } trip { city, country, begin, end, visaRequired } hotel { name, bookingNumber, phone, address { street } } flight { flightNumber, departure, arrival } visaResolution { approved } metadata { processInstances { businessKey, state } } } }"}}');
-               } else if(jsonObject.type === 'data') {
-                   var val = jsonObject.payload.data.TravelsUpdated;
+            ws.onmessage = function (evt) {
+                var received_msg = evt.data;
+                let jsonObject = JSON.parse(received_msg);
+                if (jsonObject.type === 'connection_ack') {
+                    ws.send('{"id" : "2", "type" : "start", "payload" : { "query" : "subscription { TravelsUpdated { id, traveller { lastName, firstName, email, nationality, passportNumber } trip { city, country, begin, end, visaRequired } hotel { name, bookingNumber, phone, address { street } } flight { flightNumber, departure, arrival } visaResolution { approved } metadata { processInstances { businessKey, state } } } }"}}');
+                } else if (jsonObject.type === 'data') {
+                    var val = jsonObject.payload.data.TravelsUpdated;
 
-                   var existing = document.getElementById(val.id);
-                   if (existing != null) {
-                       existing.remove();
-                   }
+                    var existing = document.getElementById(val.id);
+                    if (existing != null) {
+                        existing.remove();
+                    }
 
-                   appendDataRow(null, val);
-               }
-           };
+                    appendDataRow(null, val);
+                }
+            };
 
-           ws.onclose = function() {
+            ws.onclose = function () {
 
-              // websocket is closed.
-           };
+                // websocket is closed.
+            };
         }
     });
 
@@ -163,11 +163,15 @@
             passportNumber: $("#visa_passportNumber").val(),
             nationality: $("#visa_nationality").val()
         };
-        var visaApplicationRequest = JSON.stringify(\{visaApplication: application\});
+        var visaApplicationRequest = JSON.stringify(\{visaApplication: application\
+    }
 
-        $.post("/travels/" + $("#visa_p_id").val() + "/VisaApplication/" + $("#visa_t_id").val() + userFilter, visaApplicationRequest, function () {
+    )
+    ;
 
-        }, "json");
+    $.post("/travels/" + $("#visa_p_id").val() + "/VisaApplication/" + $("#visa_t_id").val() + userFilter, visaApplicationRequest, function () {
+
+    }, "json");
     }
 
     function completeTask(id, taskName, taskId) {
@@ -179,16 +183,16 @@
     function load() {
         $("#content").children().remove();
         var query = "{ \"query\": \"" +
-                "{ Travels { " +
-                "id " +
-                "traveller { lastName, firstName, email, nationality, passportNumber } " +
-                "trip { city, country, begin, end, visaRequired } " +
-                "hotel { name, bookingNumber, phone, address { street } } " +
-                "flight { flightNumber, departure, arrival } " +
-                "visaResolution { approved } " +
-                "metadata { processInstances { state, businessKey } } " +
-                "}}\"" +
-                "}";
+            "{ Travels { " +
+            "id " +
+            "traveller { lastName, firstName, email, nationality, passportNumber } " +
+            "trip { city, country, begin, end, visaRequired } " +
+            "hotel { name, bookingNumber, phone, address { street } } " +
+            "flight { flightNumber, departure, arrival } " +
+            "visaResolution { approved } " +
+            "metadata { processInstances { state, businessKey } } " +
+            "}}\"" +
+            "}";
         $.ajax({
             type: 'POST',
             url: graphql,
@@ -203,58 +207,58 @@
     }
 
     function appendDataRow(key, val) {
-      var active = $.grep(val.metadata.processInstances, function (pi) {
-          return pi.state == "ACTIVE"
-      }).length > 0;
-      var html =
-              "<tr id='" + val.id + "' class='" + (active ? "" : "active") + "'>" +
-              "<td>" + val.metadata.processInstances[0].businessKey + "</td>" +
-              "<td>" + val.traveller.lastName + ", " + val.traveller.firstName + "</td>" +
-              "<td>" + val.trip.country + ", " + val.trip.city + "</td>" +
-              "<td>" + val.trip.begin.substring(0, 10) + " - " + val.trip.end.substring(0, 10) + "</td>" +
-              "<td>" + (val.trip.visaRequired ? 'Yes' : 'No') + "</td>" +
-              "<td>" + (val.visaResolution != null ? (val.visaResolution.approved ? 'Yes' : 'No') : 'N/A')+ "</td>" +
-              "<td>" + (val.hotel != null ? val.hotel.name : '') + "</td>" +
-              "<td>" + (val.flight != null ? val.flight.flightNumber : '') + "</td>" +
-              "<td>" +
-              "<button class='btn btn-primary btn-sm' " +
-              "data-toggle='modal' " +
-              "data-target='#detailsModal' " +
-              "data-firstname='" + val.traveller.firstName + "' " +
-              "data-lastname='" + val.traveller.lastName + "' " +
-              "data-email='" + val.traveller.email + "' " +
-              "data-nationality='" + val.traveller.nationality + "' " +
-              "data-passportNumber='" + val.traveller.passportNumber + "' " +
-              "data-country='" + val.trip.country + "' " +
-              "data-city='" + val.trip.city + "' " +
-              "data-begin='" + val.trip.begin.substring(0, 10) + "' " +
-              "data-end='" + val.trip.end.substring(0, 10) + "' " +
-              "data-hotelname='" + (val.hotel != null ? val.hotel.name : "") + "' " +
-              "data-address='" + (val.hotel != null ? val.hotel.address.street : "") + "' " +
-              "data-bookingnumber='" + (val.hotel != null ? val.hotel.bookingNumber : "") + "' " +
-              "data-phone='" + (val.hotel != null ? val.hotel.phone : "") + "' " +
-              "data-flightnumber='" + (val.flight != null ? val.flight.flightNumber : "") + "' " +
-              "data-arrival='" + (val.flight != null ? val.flight.arrival : "") + "' " +
-              "data-departure='" + (val.flight != null ? val.flight.departure : "") + "' " +
-              "data-id='" + val.id + "'>" +
-              "   <span>Details</span>" +
-              "</button>&nbsp;";
-      if (active) {
-          html +=
-                  "<button class='btn btn-primary btn-sm' " +
-                  "data-toggle='modal' " +
-                  "data-target='#tasksModal' " +
-                  "data-firstname='" + val.traveller.firstName + "' " +
-                  "data-lastname='" + val.traveller.lastName + "' " +
-                  "data-id='" + val.id + "'>" +
-                  "   <span>Tasks</span>" +
-                  "</button>&nbsp;" +
-                  "<button class='btn btn-danger btn-sm product-delete' data-id='" + val.id + "'>" +
-                  "   <span>Cancel</span>" +
-                  "</button>";
-      }
-      html += "</td></tr>";
-      $(html).appendTo("#content");
+        var active = $.grep(val.metadata.processInstances, function (pi) {
+            return pi.state == "ACTIVE"
+        }).length > 0;
+        var html =
+            "<tr id='" + val.id + "' class='" + (active ? "" : "active") + "'>" +
+            "<td>" + val.metadata.processInstances[0].businessKey + "</td>" +
+            "<td>" + val.traveller.lastName + ", " + val.traveller.firstName + "</td>" +
+            "<td>" + val.trip.country + ", " + val.trip.city + "</td>" +
+            "<td>" + val.trip.begin.substring(0, 10) + " - " + val.trip.end.substring(0, 10) + "</td>" +
+            "<td>" + (val.trip.visaRequired ? 'Yes' : 'No') + "</td>" +
+            "<td>" + (val.visaResolution != null ? (val.visaResolution.approved ? 'Yes' : 'No') : 'N/A') + "</td>" +
+            "<td>" + (val.hotel != null ? val.hotel.name : '') + "</td>" +
+            "<td>" + (val.flight != null ? val.flight.flightNumber : '') + "</td>" +
+            "<td>" +
+            "<button class='btn btn-primary btn-sm' " +
+            "data-toggle='modal' " +
+            "data-target='#detailsModal' " +
+            "data-firstname='" + val.traveller.firstName + "' " +
+            "data-lastname='" + val.traveller.lastName + "' " +
+            "data-email='" + val.traveller.email + "' " +
+            "data-nationality='" + val.traveller.nationality + "' " +
+            "data-passportNumber='" + val.traveller.passportNumber + "' " +
+            "data-country='" + val.trip.country + "' " +
+            "data-city='" + val.trip.city + "' " +
+            "data-begin='" + val.trip.begin.substring(0, 10) + "' " +
+            "data-end='" + val.trip.end.substring(0, 10) + "' " +
+            "data-hotelname='" + (val.hotel != null ? val.hotel.name : "") + "' " +
+            "data-address='" + (val.hotel != null ? val.hotel.address.street : "") + "' " +
+            "data-bookingnumber='" + (val.hotel != null ? val.hotel.bookingNumber : "") + "' " +
+            "data-phone='" + (val.hotel != null ? val.hotel.phone : "") + "' " +
+            "data-flightnumber='" + (val.flight != null ? val.flight.flightNumber : "") + "' " +
+            "data-arrival='" + (val.flight != null ? val.flight.arrival : "") + "' " +
+            "data-departure='" + (val.flight != null ? val.flight.departure : "") + "' " +
+            "data-id='" + val.id + "'>" +
+            "   <span>Details</span>" +
+            "</button>&nbsp;";
+        if (active) {
+            html +=
+                "<button class='btn btn-primary btn-sm' " +
+                "data-toggle='modal' " +
+                "data-target='#tasksModal' " +
+                "data-firstname='" + val.traveller.firstName + "' " +
+                "data-lastname='" + val.traveller.lastName + "' " +
+                "data-id='" + val.id + "'>" +
+                "   <span>Tasks</span>" +
+                "</button>&nbsp;" +
+                "<button class='btn btn-danger btn-sm product-delete' data-id='" + val.id + "'>" +
+                "   <span>Cancel</span>" +
+                "</button>";
+        }
+        html += "</td></tr>";
+        $(html).appendTo("#content");
     }
 
     function initCallbacks() {
@@ -312,112 +316,115 @@
                     begin: $("#tripBegin").val() + 'T00:00:00.000+02:00',
                     end: $("#tripEnd").val() + 'T00:00:00.000+02:00'
                 };
-                var travelRequest = JSON.stringify(\{traveller: traveller, trip: trip\});
+                var travelRequest = JSON.stringify(\{traveller: traveller, trip: trip\
+            });
 
-                create(travelRequest);
-                $('#productModal').modal('toggle');
+            create(travelRequest);
+            $('#productModal').modal('toggle');
+        });
+
+    }
+
+    )
+
+    $("#detailsModal").on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var action = button.data('action');
+        var id = button.data('id');
+        var modal = $(this);
+        modal.find('.modal-title').text("Details of travel for " + button.data("lastname") + ", " + button.data("firstname"));
+        modal.find('#firstName').val(button.data("firstname"));
+        modal.find('#lastName').val(button.data("lastname"));
+        modal.find('#email').val(button.data("email"));
+        modal.find('#nationality').val(button.data("nationality"));
+        modal.find('#passportNumber').val(button.data("passportnumber"));
+
+        modal.find('#destinationCountry').val(button.data("country"));
+        modal.find('#destinationCity').val(button.data("city"));
+        modal.find('#tripBegin').val(button.data("begin"));
+        modal.find('#tripEnd').val(button.data("end"));
+
+        modal.find('#hotelname').val(button.data("hotelname"));
+        modal.find('#bookingNumber').val(button.data("bookingnumber"));
+        modal.find('#address').val(button.data("address"));
+        modal.find('#phone').val(button.data("phone"));
+
+        modal.find('#flightNumber').val(button.data("flightnumber"));
+        modal.find('#departure').val(button.data("departure"));
+        modal.find('#arrival').val(button.data("arrival"));
+    })
+
+    $("#tasksModal").on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var action = button.data('action');
+        var id = button.data('id');
+        var modal = $(this);
+        modal.find('.modal-title').text("Tasks for " + button.data("lastname") + ", " + button.data("firstname"));
+
+        $("#taskscontent").children().remove();
+        $.getJSON("/travels/" + id + "/tasks" + userFilter, function (data) {
+            $.each(data, function (key, val) {
+                if ("VisaApplication" == val.name) {
+                    $("<tr><td>" + val.name + "</td>" +
+                        "<td>" +
+                        "<button class='btn btn-primary btn-sm' " +
+                        "data-dismiss=\"modal\" " +
+                        "data-toggle='modal' " +
+                        "data-target='#visaApplicationModal' " +
+                        "data-id='" + id + "' " +
+                        "data-taskid='" + val.id + "'>" +
+                        "   <span>Apply</span>" +
+                        "</button>" +
+                        "</td>" +
+                        "</tr>").appendTo("#taskscontent");
+                } else {
+                    $("<tr><td>" + val.name + "</td>" +
+                        "<td>" +
+                        "<button class='btn btn-primary btn-sm' onclick=\"completeTask('" + id + "', '" + val.name + "', '" + val.id + userFilter + "')\" data-dismiss=\"modal\" " +
+                        "   <span>Complete</span>" +
+                        "</button>" +
+                        "</td>" +
+                        "</tr>").appendTo("#taskscontent");
+                }
             });
 
         })
 
-        $("#detailsModal").on('show.bs.modal', function (event) {
+        $("#visaApplicationModal").on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget);
-            var action = button.data('action');
+
             var id = button.data('id');
+            var taskid = button.data('taskid');
             var modal = $(this);
-            modal.find('.modal-title').text("Details of travel for " + button.data("lastname") + ", " + button.data("firstname"));
-            modal.find('#firstName').val(button.data("firstname"));
-            modal.find('#lastName').val(button.data("lastname"));
-            modal.find('#email').val(button.data("email"));
-            modal.find('#nationality').val(button.data("nationality"));
-            modal.find('#passportNumber').val(button.data("passportnumber"));
+            modal.find('.modal-title').text("Visa application");
 
-            modal.find('#destinationCountry').val(button.data("country"));
-            modal.find('#destinationCity').val(button.data("city"));
-            modal.find('#tripBegin').val(button.data("begin"));
-            modal.find('#tripEnd').val(button.data("end"));
+            $.getJSON("/travels/" + id + "/VisaApplication/" + taskid + userFilter, function (data) {
 
-            modal.find('#hotelname').val(button.data("hotelname"));
-            modal.find('#bookingNumber').val(button.data("bookingnumber"));
-            modal.find('#address').val(button.data("address"));
-            modal.find('#phone').val(button.data("phone"));
+                $("#visa_firstName").val(data.parameters.traveller.firstName);
+                $("#visa_lastName").val(data.parameters.traveller.lastName);
+                $("#visa_email").val(data.parameters.traveller.email);
+                $("#visa_nationality").val(data.parameters.traveller.nationality);
+                $("#visa_passportNumber").val(data.parameters.traveller.passportNumber);
 
-            modal.find('#flightNumber').val(button.data("flightnumber"));
-            modal.find('#departure').val(button.data("departure"));
-            modal.find('#arrival').val(button.data("arrival"));
+                $("#visa_destinationCity").val(data.parameters.trip.city);
+                $("#visa_destinationCountry").val(data.parameters.trip.country);
+                $("#visa_tripBegin").val(data.parameters.trip.begin);
+                $("#visa_tripEnd").val(data.parameters.trip.end);
+
+                $("#visa_p_id").val(id);
+                $("#visa_t_id").val(taskid);
+
+                const tripStart = new Date(data.parameters.trip.begin);
+                const tripEnd = new Date(data.parameters.trip.end);
+                const diffTime = Math.abs(tripEnd - tripStart);
+
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+                $("#visa_duration").val(diffDays);
+            });
+
         })
-
-        $("#tasksModal").on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget);
-            var action = button.data('action');
-            var id = button.data('id');
-            var modal = $(this);
-            modal.find('.modal-title').text("Tasks for " + button.data("lastname") + ", " + button.data("firstname"));
-
-            $("#taskscontent").children().remove();
-            $.getJSON("/travels/" + id + "/tasks"+userFilter, function (data) {
-                $.each(data, function (key, val) {
-                    if ("VisaApplication" == val.name) {
-                        $("<tr><td>" + val.name + "</td>" +
-                                "<td>" +
-                                "<button class='btn btn-primary btn-sm' " +
-                                "data-dismiss=\"modal\" " +
-                                "data-toggle='modal' " +
-                                "data-target='#visaApplicationModal' " +
-                                "data-id='" + id + "' " +
-                                "data-taskid='" + val.id + "'>" +
-                                "   <span>Apply</span>" +
-                                "</button>" +
-                                "</td>" +
-                                "</tr>").appendTo("#taskscontent");
-                    } else {
-                        $("<tr><td>" + val.name + "</td>" +
-                                "<td>" +
-                                "<button class='btn btn-primary btn-sm' onclick=\"completeTask('" + id + "', '" + val.name + "', '" + val.id + userFilter + "')\" data-dismiss=\"modal\" " +
-                                "   <span>Complete</span>" +
-                                "</button>" +
-                                "</td>" +
-                                "</tr>").appendTo("#taskscontent");
-                    }
-                });
-
-            })
-
-            $("#visaApplicationModal").on('show.bs.modal', function (event) {
-                var button = $(event.relatedTarget);
-
-                var id = button.data('id');
-                var taskid = button.data('taskid');
-                var modal = $(this);
-                modal.find('.modal-title').text("Visa application");
-
-                $.getJSON("/travels/" + id + "/VisaApplication/" + taskid + userFilter, function (data) {
-
-                    $("#visa_firstName").val(data.parameters.traveller.firstName);
-                    $("#visa_lastName").val(data.parameters.traveller.lastName);
-                    $("#visa_email").val(data.parameters.traveller.email);
-                    $("#visa_nationality").val(data.parameters.traveller.nationality);
-                    $("#visa_passportNumber").val(data.parameters.traveller.passportNumber);
-
-                    $("#visa_destinationCity").val(data.parameters.trip.city);
-                    $("#visa_destinationCountry").val(data.parameters.trip.country);
-                    $("#visa_tripBegin").val(data.parameters.trip.begin);
-                    $("#visa_tripEnd").val(data.parameters.trip.end);
-
-                    $("#visa_p_id").val(id);
-                    $("#visa_t_id").val(taskid);
-
-                    const tripStart = new Date(data.parameters.trip.begin);
-                    const tripEnd = new Date(data.parameters.trip.end);
-                    const diffTime = Math.abs(tripEnd - tripStart);
-
-                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-                    $("#visa_duration").val(diffDays);
-                });
-
-            })
-        })
+    })
     }
 </script>
 <div class="modal fade" id="productModal" tabindex="-1" role="dialog">
@@ -433,13 +440,17 @@
                         <h3>Traveller</h3>
                         <div class="col-md-6 col-sm-6 col-xs-6">
                             <div class="form-group">
-                                <label for="firstName">First Name</label> <input type="text" class="form-control" id="firstName" name="firstName" required>
+                                <label for="firstName">First Name</label> <input type="text" class="form-control"
+                                                                                 id="firstName" name="firstName"
+                                                                                 required>
                             </div>
                             <div class="form-group">
-                                <label for="lastName">Last Name</label> <input type="text" class="form-control" id="lastName" name="lastName" required>
+                                <label for="lastName">Last Name</label> <input type="text" class="form-control"
+                                                                               id="lastName" name="lastName" required>
                             </div>
                             <div class="form-group">
-                                <label for="email">Email</label> <input type="text" class="form-control" id="email" name="email" required>
+                                <label for="email">Email</label> <input type="text" class="form-control" id="email"
+                                                                        name="email" required>
                             </div>
                             <div class="form-group">
                                 <label for="nationality">Nationality</label>
@@ -456,19 +467,25 @@
                         <div class="col-md-6 col-sm-6 col-xs-6">
                             <div class="form-group">
                                 <label for="passportNumber">Passport Number</label> <input type="text"
-                                                                          class="form-control" id="passportNumber" name="passportNumber" required>
+                                                                                           class="form-control"
+                                                                                           id="passportNumber"
+                                                                                           name="passportNumber"
+                                                                                           required>
                             </div>
                             <div class="form-group">
                                 <label for="street">Street</label> <input type="email"
-                                                                          class="form-control" id="street" name="street" required>
+                                                                          class="form-control" id="street" name="street"
+                                                                          required>
                             </div>
                             <div class="form-group">
                                 <label for="city">City</label> <input type="text"
-                                                                      class="form-control" id="city" name="city" required>
+                                                                      class="form-control" id="city" name="city"
+                                                                      required>
                             </div>
                             <div class="form-group">
                                 <label for="zipCode">Zip code</label> <input type="text"
-                                                                             class="form-control" id="zipCode" name="zipCode" required>
+                                                                             class="form-control" id="zipCode"
+                                                                             name="zipCode" required>
                             </div>
                             <div class="form-group">
                                 <label for="country">Country</label>
@@ -485,20 +502,26 @@
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group">
                                 <label for="destinationCountry">Country</label> <input type="text"
-                                                                                       class="form-control" id="destinationCountry" name="destinationCountry" required>
+                                                                                       class="form-control"
+                                                                                       id="destinationCountry"
+                                                                                       name="destinationCountry"
+                                                                                       required>
                             </div>
                             <div class="form-group">
                                 <label for="destinationCity">City</label> <input type="text"
-                                                                                 class="form-control" id="destinationCity" name="destinationCity" required>
+                                                                                 class="form-control"
+                                                                                 id="destinationCity"
+                                                                                 name="destinationCity" required>
                             </div>
                             <div class="form-group">
                                 <label for="tripBegin">Begin at</label> <input type="text"
-                                                                               class="form-control" id="tripBegin" name="tripBegin" required>
+                                                                               class="form-control" id="tripBegin"
+                                                                               name="tripBegin" required>
                             </div>
                             <div class="form-group">
                                 <label for="tripEnd">End at</label> <input
-                                    type="text" class="form-control" id="tripEnd"
-                                    name="tripEnd" required>
+                                        type="text" class="form-control" id="tripEnd"
+                                        name="tripEnd" required>
                             </div>
 
                         </div>
@@ -532,24 +555,30 @@
                             </div>
                             <div class="form-group">
                                 <label for="firstName">First Name</label> <input type="text"
-                                                                                 class="form-control" id="firstName" name="firstName" readonly>
+                                                                                 class="form-control" id="firstName"
+                                                                                 name="firstName" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="lastName">Last Name</label> <input type="text"
-                                                                               class="form-control" id="lastName" name="lastName" readonly>
+                                                                               class="form-control" id="lastName"
+                                                                               name="lastName" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label> <input type="text"
-                                                                        class="form-control" id="email" name="email" readonly>
+                                                                        class="form-control" id="email" name="email"
+                                                                        readonly>
                             </div>
                             <div class="form-group">
                                 <label for="passportNumber">Passport Number</label> <input type="text"
-                                                                        class="form-control" id="passportNumber" name="passportNumber" readonly>
+                                                                                           class="form-control"
+                                                                                           id="passportNumber"
+                                                                                           name="passportNumber"
+                                                                                           readonly>
                             </div>
                             <div class="form-group">
                                 <label for="nationality">Nationality</label> <input
-                                    type="text" class="form-control" id="nationality"
-                                    name="form-control" readonly>
+                                        type="text" class="form-control" id="nationality"
+                                        name="form-control" readonly>
                             </div>
                         </div>
 
@@ -559,20 +588,26 @@
                             </div>
                             <div class="form-group">
                                 <label for="destinationCountry">Country</label> <input type="text"
-                                                                                       class="form-control" id="destinationCountry" name="destinationCountry" readonly>
+                                                                                       class="form-control"
+                                                                                       id="destinationCountry"
+                                                                                       name="destinationCountry"
+                                                                                       readonly>
                             </div>
                             <div class="form-group">
                                 <label for="destinationCity">City</label> <input type="text"
-                                                                                 class="form-control" id="destinationCity" name="destinationCity" readonly>
+                                                                                 class="form-control"
+                                                                                 id="destinationCity"
+                                                                                 name="destinationCity" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="tripBegin">Begin at</label> <input type="text"
-                                                                               class="form-control" id="tripBegin" name="tripBegin" readonly>
+                                                                               class="form-control" id="tripBegin"
+                                                                               name="tripBegin" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="tripEnd">End at</label> <input
-                                    type="text" class="form-control" id="tripEnd"
-                                    name="tripEnd" readonly>
+                                        type="text" class="form-control" id="tripEnd"
+                                        name="tripEnd" readonly>
                             </div>
                         </div>
                     </div>
@@ -582,16 +617,22 @@
                                 <h3>Hotel</h3>
                             </div>
                             <div class="form-group">
-                                <label for="hotelname">Name</label> <input type="text" class="form-control" id="hotelname" name="hotelname" readonly>
+                                <label for="hotelname">Name</label> <input type="text" class="form-control"
+                                                                           id="hotelname" name="hotelname" readonly>
                             </div>
                             <div class="form-group">
-                                <label for="bookingNumber">Booking Number</label> <input type="text" class="form-control" id="bookingNumber" name="bookingNumber" readonly>
+                                <label for="bookingNumber">Booking Number</label> <input type="text"
+                                                                                         class="form-control"
+                                                                                         id="bookingNumber"
+                                                                                         name="bookingNumber" readonly>
                             </div>
                             <div class="form-group">
-                                <label for="address">Address</label> <input type="text" class="form-control" id="address" name="address" readonly>
+                                <label for="address">Address</label> <input type="text" class="form-control"
+                                                                            id="address" name="address" readonly>
                             </div>
                             <div class="form-group">
-                                <label for="phone">Phone</label> <input type="text" class="form-control" id="phone" name="phone" readonly>
+                                <label for="phone">Phone</label> <input type="text" class="form-control" id="phone"
+                                                                        name="phone" readonly>
                             </div>
                         </div>
 
@@ -600,13 +641,18 @@
                                 <h3>Flight</h3>
                             </div>
                             <div class="form-group">
-                                <label for="flightNumber">Flight number</label> <input type="email" class="form-control" id="flightNumber" name="flightNumber" readonly>
+                                <label for="flightNumber">Flight number</label> <input type="email" class="form-control"
+                                                                                       id="flightNumber"
+                                                                                       name="flightNumber" readonly>
                             </div>
                             <div class="form-group">
-                                <label for="departure">Departure</label> <input type="text" class="form-control" id="departure" name="departure" readonly>
+                                <label for="departure">Departure</label> <input type="text" class="form-control"
+                                                                                id="departure" name="departure"
+                                                                                readonly>
                             </div>
                             <div class="form-group">
-                                <label for="arrival">Arrival</label> <input type="text" class="form-control" id="arrival" name="arrival" readonly>
+                                <label for="arrival">Arrival</label> <input type="text" class="form-control"
+                                                                            id="arrival" name="arrival" readonly>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -677,20 +723,25 @@
                             </div>
                             <div class="form-group">
                                 <label for="visa_firstName">First Name</label> <input type="text"
-                                                                                      class="form-control" id="visa_firstName" name="visa_firstName" readonly>
+                                                                                      class="form-control"
+                                                                                      id="visa_firstName"
+                                                                                      name="visa_firstName" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="visa_lastName">Last Name</label> <input type="text"
-                                                                                    class="form-control" id="visa_lastName" name="visa_lastName" readonly>
+                                                                                    class="form-control"
+                                                                                    id="visa_lastName"
+                                                                                    name="visa_lastName" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="visa_email">Email</label> <input type="text"
-                                                                             class="form-control" id="visa_email" name="visa_email" readonly>
+                                                                             class="form-control" id="visa_email"
+                                                                             name="visa_email" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="visa_nationality">Nationality</label> <input
-                                    type="text" class="form-control" id="visa_nationality"
-                                    name="visa_nationality" readonly>
+                                        type="text" class="form-control" id="visa_nationality"
+                                        name="visa_nationality" readonly>
                             </div>
                         </div>
 
@@ -700,20 +751,28 @@
                             </div>
                             <div class="form-group">
                                 <label for="visa_destinationCountry">Country</label> <input type="text"
-                                                                                            class="form-control" id="visa_destinationCountry" name="visa_destinationCountry" readonly>
+                                                                                            class="form-control"
+                                                                                            id="visa_destinationCountry"
+                                                                                            name="visa_destinationCountry"
+                                                                                            readonly>
                             </div>
                             <div class="form-group">
                                 <label for="visa_destinationCity">City</label> <input type="text"
-                                                                                      class="form-control" id="visa_destinationCity" name="visa_destinationCity" readonly>
+                                                                                      class="form-control"
+                                                                                      id="visa_destinationCity"
+                                                                                      name="visa_destinationCity"
+                                                                                      readonly>
                             </div>
                             <div class="form-group">
                                 <label for="visa_tripBegin">Begin at</label> <input type="text"
-                                                                                    class="form-control" id="visa_tripBegin" name="visa_tripBegin" readonly>
+                                                                                    class="form-control"
+                                                                                    id="visa_tripBegin"
+                                                                                    name="visa_tripBegin" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="visa_tripEnd">End at</label> <input
-                                    type="text" class="form-control" id="visa_tripEnd"
-                                    name="visa_tripEnd" readonly>
+                                        type="text" class="form-control" id="visa_tripEnd"
+                                        name="visa_tripEnd" readonly>
                             </div>
                         </div>
                     </div>
@@ -724,17 +783,24 @@
                             </div>
                             <div class="form-group">
                                 <label for="visa_passportNumber">Passport number</label> <input type="text"
-                                                                                                class="form-control" id="visa_passportNumber" name="visa_passportNumber" readonly>
+                                                                                                class="form-control"
+                                                                                                id="visa_passportNumber"
+                                                                                                name="visa_passportNumber"
+                                                                                                readonly>
                             </div>
                             <div class="form-group">
                                 <label for="visa_duration">Duration</label> <input type="text"
-                                                                                   class="form-control" id="visa_duration" name="visa_duration" readonly>
+                                                                                   class="form-control"
+                                                                                   id="visa_duration"
+                                                                                   name="visa_duration" readonly>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="submitVisaApplication()">Submit application</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal"
+                                    onclick="submitVisaApplication()">Submit application
+                            </button>
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         </div>
                     </div>

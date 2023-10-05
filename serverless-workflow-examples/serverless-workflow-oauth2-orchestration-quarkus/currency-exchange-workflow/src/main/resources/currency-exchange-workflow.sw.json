@@ -8,7 +8,7 @@
     {
       "name": "validateInputs",
       "type": "custom",
-      "operation": "service:org.kie.kogito.examples.ExchangeWorkflowHelper::validateInputs"
+      "operation": "service:org.acme.examples.ExchangeWorkflowHelper::validateInputs"
     },
     {
       "name": "getExchangeRate",

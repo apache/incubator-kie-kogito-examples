@@ -26,7 +26,7 @@
     {
       "name": "printInstanceId",
       "type": "custom",
-      "operation": "service:java:org.kie.kogito.examples.PrintService::printKogitoProcessId"
+      "operation": "service:java:org.acme.examples.PrintService::printKogitoProcessId"
     }
   ],
   "states": [

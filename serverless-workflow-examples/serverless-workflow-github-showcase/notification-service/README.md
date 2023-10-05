@@ -28,7 +28,7 @@ Copy the WebHook URL in the `src/main/resources/application.properties` file:
 
 ```properties
 # URL details not shown
-org.kogito.examples.sw.notification.slack.incoming=https://hooks.slack.com/services/(...)
+org.acme.examples.sw.notification.slack.incoming=https://hooks.slack.com/services/(...)
 ```
 
 Run the application with:

@@ -11,7 +11,7 @@
   <bpmn2:itemDefinition id="travellersType" structureRef="org.acme.travel.Traveller"/>
   <bpmn2:message id="_Dp_j0EzDEDizovwZ6iAEfA" itemRef="processedtravellersType" name="processedtravellers"/>
   <bpmn2:message id="_DqAK4EzDEDizovwZ6iAEfA" itemRef="travellersType" name="travellers"/>
-  <bpmn2:process id="Travelers" drools:packageName="org.kie.kogito.test" drools:version="1.0" drools:adHoc="false" name="Process travelers" isExecutable="true" processType="Public">
+  <bpmn2:process id="Travelers" drools:packageName="org.acme.test" drools:version="1.0" drools:adHoc="false" name="Process travelers" isExecutable="true" processType="Public">
     <bpmn2:property id="traveller" itemSubjectRef="_travellerItem" name="traveller"/>
     <bpmn2:sequenceFlow id="_D15CD483-D31D-42F8-A93A-AAAF44292D84" sourceRef="_8BEA9396-93DE-4D44-8CE2-4A146464264E" targetRef="_60FA6326-76DC-4DB2-AB06-DB8AC8EE8DC8">
       <bpmn2:extensionElements>

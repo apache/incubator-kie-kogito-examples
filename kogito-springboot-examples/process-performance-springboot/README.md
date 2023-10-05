@@ -49,5 +49,5 @@ java -jar target/process-performance-springboot.jar
 
 ## Example Usage
 
-Once the service is up and running, to collect throughput numbers you need to manually change parameters in code of, compile and  run class ```org.kie.kogito.performance.client.MainRunner``` in process-performace-client project
+Once the service is up and running, to collect throughput numbers you need to manually change parameters in code of, compile and  run class ```org.acme.performance.client.MainRunner``` in process-performace-client project
 

@@ -3,19 +3,19 @@ kind: ConfigMap
 metadata:
   name: kogito-configs
 data:
-    general.namespace: "${project_name}"
-    general.appsclusterhost: "${apps_cluster_host}"
-    keycloak.admin.user: 'admin'
-    keycloak.admin.password: 'admin'
-    keycloak.realm.json: '/tmp/kogito-realm.json'
-    keycloak.db.vendor: 'h2'
-    quarkus.infinispan.client.username: 'developer'
-    quarkus.infinispan.client.hosts: 'infinispan.${project_name}.svc.cluster.local:11222'
-    kafka.bootstrap.servers: 'kafka.${project_name}.svc.cluster.local:9092'
-    kogito.dataindex.props: '-Dkogito.protobuf.folder=/home/kogito/data/protobufs'
-    kogito.dataindex.httpurl: 'http://kogito-data-index-infinispan-${project_name}.${apps_cluster_host}'
-    kogito.dataindex.httpurl.with.graphql: 'http://kogito-data-index-infinispan-${project_name}.${apps_cluster_host}/graphql'
-    kogito.dataindex.wsurl: 'ws://kogito-data-index-infinispan-${project_name}.${apps_cluster_host}'
-    kogito.managementconsole.props: '-Dkogito.svg.folder.path=/home/kogito/data/svg -Dkogito.consoles.keycloak.config.url=http://keycloak-${project_name}.${apps_cluster_host}/auth/ -Dkogito.consoles.keycloak.config.health-check-url=http://keycloak-${project_name}.${apps_cluster_host}/auth/realms/kogito/.well-known/openid-configuration'
-    kogito.taskconsole.props: '-Dkogito.test.user-system.enabled=true -Dkogito.consoles.keycloak.config.url=http://keycloak-${project_name}.${apps_cluster_host}/auth/ -Dkogito.consoles.keycloak.config.health-check-url=http://keycloak-${project_name}.${apps_cluster_host}/auth/realms/kogito/.well-known/openid-configuration'
-    kogito.jobsservice.props: '-Dquarkus-profile=events-support -D%events-support.kafka.bootstrap.servers=kafka.${project_name}.svc.cluster.local:9092 -D%events-support.mp.messaging.outgoing.kogito-job-service-job-status-events.bootstrap.servers=kafka.${project_name}.svc.cluster.local:9092'
+  general.namespace: "${project_name}"
+  general.appsclusterhost: "${apps_cluster_host}"
+  keycloak.admin.user: 'admin'
+  keycloak.admin.password: 'admin'
+  keycloak.realm.json: '/tmp/kogito-realm.json'
+  keycloak.db.vendor: 'h2'
+  quarkus.infinispan.client.username: 'developer'
+  quarkus.infinispan.client.hosts: 'infinispan.${project_name}.svc.cluster.local:11222'
+  kafka.bootstrap.servers: 'kafka.${project_name}.svc.cluster.local:9092'
+  kogito.dataindex.props: '-Dkogito.protobuf.folder=/home/kogito/data/protobufs'
+  kogito.dataindex.httpurl: 'http://kogito-data-index-infinispan-${project_name}.${apps_cluster_host}'
+  kogito.dataindex.httpurl.with.graphql: 'http://kogito-data-index-infinispan-${project_name}.${apps_cluster_host}/graphql'
+  kogito.dataindex.wsurl: 'ws://kogito-data-index-infinispan-${project_name}.${apps_cluster_host}'
+  kogito.managementconsole.props: '-Dkogito.svg.folder.path=/home/kogito/data/svg -Dkogito.consoles.keycloak.config.url=http://keycloak-${project_name}.${apps_cluster_host}/auth/ -Dkogito.consoles.keycloak.config.health-check-url=http://keycloak-${project_name}.${apps_cluster_host}/auth/realms/kogito/.well-known/openid-configuration'
+  kogito.taskconsole.props: '-Dkogito.test.user-system.enabled=true -Dkogito.consoles.keycloak.config.url=http://keycloak-${project_name}.${apps_cluster_host}/auth/ -Dkogito.consoles.keycloak.config.health-check-url=http://keycloak-${project_name}.${apps_cluster_host}/auth/realms/kogito/.well-known/openid-configuration'
+  kogito.jobsservice.props: '-Dquarkus-profile=events-support -D%events-support.kafka.bootstrap.servers=kafka.${project_name}.svc.cluster.local:9092 -D%events-support.mp.messaging.outgoing.kogito-job-service-job-status-events.bootstrap.servers=kafka.${project_name}.svc.cluster.local:9092'

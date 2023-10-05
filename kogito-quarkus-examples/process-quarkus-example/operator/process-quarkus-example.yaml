@@ -25,10 +25,10 @@ apiVersion: app.kiegroup.org/v1beta1
 kind: KogitoRuntime
 metadata:
   name: process-quarkus-example
-# uncomment to enable persistence
-#spec:
-#  infra:
-#    - kogito-infinispan-infra
+  # uncomment to enable persistence
+  #spec:
+  #  infra:
+  #    - kogito-infinispan-infra
   #env:
   #  - name: MAVEN_ARGS_APPEND
   #    value: "-Ppersistence"

@@ -13,12 +13,12 @@
     {
       "name": "classifySmallMediumFunction",
       "type": "custom",
-      "operation": "service:org.kogito.serverless.examples.CountriesClassifierResource::classifySmallMedium"
+      "operation": "service:org.acme.serverless.examples.CountriesClassifierResource::classifySmallMedium"
     },
     {
       "name": "classifyLargeFunction",
       "type": "custom",
-      "operation": "service:org.kogito.serverless.examples.CountriesClassifierResource::classifyLarge"
+      "operation": "service:org.acme.serverless.examples.CountriesClassifierResource::classifyLarge"
     }
   ],
   "states": [

@@ -18,13 +18,13 @@ package org.acme.travels.springboot;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.acme.tests.KogitoInfinispanSpringbootApplication;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.kie.kogito.Model;
 import org.kie.kogito.process.Process;
 import org.kie.kogito.process.ProcessInstance;
-import org.kie.kogito.tests.KogitoInfinispanSpringbootApplication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;

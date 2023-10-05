@@ -8,7 +8,7 @@
   </appender>
 
   <root level="info">
-    <appender-ref ref="consoleAppender" />
+    <appender-ref ref="consoleAppender"/>
   </root>
 
 </configuration>

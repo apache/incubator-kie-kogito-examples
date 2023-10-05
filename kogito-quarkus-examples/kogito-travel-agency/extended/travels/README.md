@@ -1,42 +1,41 @@
 # Kogito Travel Agency
 
-
 ## Description
 
-**Kogito Travel Agency** and **Kogito Visas** communicate completely via events. First **Kogito Travel Agency** sends visa applications 
-for those travellers that require visas to visit given country, next based on visa application evaluation *(by user alice)*, **Kogito Visas**  sends back 
+**Kogito Travel Agency** and **Kogito Visas** communicate completely via events. First **Kogito Travel Agency** sends
+visa applications
+for those travellers that require visas to visit given country, next based on visa application evaluation *(by user
+alice)*, **Kogito Visas**  sends back
 the response with the visa processing outcome - approved or rejected.
-
 
 ## Activities to perform
 
 * Create project using Quarkus Maven plugin with following extensions
-	* Kogito
-	* OpenApi
+    * Kogito
+    * OpenApi
 * Import project into Eclipse IDE - requires BPMN modeller plugin installed
 * Create data model
-	* Traveller
-	* Hotel
-	* Flight
-	* Address
-	* Trip
-	* VisaApplication
+    * Traveller
+    * Hotel
+    * Flight
+    * Address
+    * Trip
+    * VisaApplication
 * Create service classes
-	* HotelBookingService
-	* FlightBookingService
+    * HotelBookingService
+    * FlightBookingService
 * Create decision logic
-	* Visa check
+    * Visa check
 * Create business logic
-	* Public business process to deal with complete travel request
-	* Private business process to deal with hotel booking
-	* Private business process to deal with flight booking
+    * Public business process to deal with complete travel request
+    * Private business process to deal with hotel booking
+    * Private business process to deal with flight booking
 * Create a test case that makes use of processes and decisions
 * Configure messaging and events
 * Create or import UI components using **Kogito Data Index Service**
 * Add metrics support for processes and decisions
 * Create dashboard based on metrics
 * Connect the **Kogito Management Console** to the  **Kogito Data Index Service**
-
 
 ## Data model
 
@@ -72,10 +71,10 @@ Final decision regarding visa application status
 
 <p align="center"><img width=75% height=75% src="docs/images/datamodel.png"></p>
 
-
 ## Decision logic
 
-The decision logic will be implemented as a decision table. The logic will be responsible for verifying whether a given traveller requires a visa to enter a given country or not. The decision logic reason over the following data/facts
+The decision logic will be implemented as a decision table. The logic will be responsible for verifying whether a given
+traveller requires a visa to enter a given country or not. The decision logic reason over the following data/facts
 
 * Destination that the traveller wants to go - country
 * Nationality of the traveller
@@ -84,7 +83,6 @@ The decision logic will be implemented as a decision table. The logic will be re
 The result will be “yes” or “no”.
 
 <p align="center"><img width=75% height=50% src="docs/images/decisiontable.png"></p>
-
 
 ## Business logic
 
@@ -104,7 +102,8 @@ Private process that will be responsible for booking a flight.
 
 ## Services
 
-There will be services implemented to carry on the hotel and flight booking. Implementation will be a CDI beans that will have hard coded logic to return a booked flight or hotel.
+There will be services implemented to carry on the hotel and flight booking. Implementation will be a CDI beans that
+will have hard coded logic to return a booked flight or hotel.
 
 * org.acme.travels.service.HotelBookingService
 * org.acme.travels.service.FlightBookingService
@@ -116,18 +115,22 @@ There will be services implemented to carry on the hotel and flight booking. Imp
 ### Prerequisites
 
 You will need:
-  - Java 11+ installed
-  - Environment variable JAVA_HOME set accordingly
-  - Maven 3.8.6+ installed
+
+- Java 11+ installed
+- Environment variable JAVA_HOME set accordingly
+- Maven 3.8.6+ installed
 
 When using native image compilation, you will also need:
-  - GraalVM 19.3.1+ installed
-  - Environment variable GRAALVM_HOME set accordingly
-  - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too, please refer to GraalVM installation documentation for more details.
+
+- GraalVM 19.3.1+ installed
+- Environment variable GRAALVM_HOME set accordingly
+- Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be
+  installed too, please refer to GraalVM installation documentation for more details.
 
 ### Starting the Kogito and Infrastructure Services
 
-This quickstart provides a docker compose template that starts all the required services. This setup ensures that all services are connected with a default configuration.
+This quickstart provides a docker compose template that starts all the required services. This setup ensures that all
+services are connected with a default configuration.
 
 You should start all the services before you execute any of the **Hiring** example, to do that please execute:
 
@@ -154,7 +157,9 @@ Once all services bootstrap, the following ports will be assigned on your local 
 - Keycloak server: 8480
 - Management Console: 8280
 
-> **_NOTE:_**  This step requires the project to be compiled, please consider running a ```mvn clean install``` command on the project root before running the ```startServices.sh``` script for the first time or any time you modify the project.
+> **_NOTE:_**  This step requires the project to be compiled, please consider running a ```mvn clean install``` command
+> on the project root before running the ```startServices.sh``` script for the first time or any time you modify the
+> project.
 
 Once started you can simply stop all services by executing the ```docker-compose stop```.
 
@@ -162,17 +167,19 @@ All created containers can be removed by executing the ```docker-compose rm```.
 
 ### Using Keycloak as Authentication Server
 
-In this Quickstart we'll be using [Keycloak](https://www.keycloak.org/) as *Authentication Server*. It will be started as a part of the project *Infrastructure Services*, you can check the configuration on the project [docker-compose.yml](docker-compose/docker-compose.yml) in [docker-compose](docker-compose) folder.
+In this Quickstart we'll be using [Keycloak](https://www.keycloak.org/) as *Authentication Server*. It will be started
+as a part of the project *Infrastructure Services*, you can check the configuration on the
+project [docker-compose.yml](docker-compose/docker-compose.yml) in [docker-compose](docker-compose) folder.
 
 It will install the *Kogito Realm* that comes with a predefined set of users:
-| Login         | Password   | Roles               |
+| Login | Password | Roles |
 | ------------- | ---------- | ------------------- |
-|    admin      |   admin    | *admin*, *managers* |
-|    alice      |   alice    | *user*              |
-|    jdoe       |   jdoe     | *managers*          |
+| admin | admin | *admin*, *managers* |
+| alice | alice | *user*              |
+| jdoe | jdoe | *managers*          |
 
-Once Keycloak is started, you should be able to access your *Keycloak Server* at [localhost:8480/auth](http://localhost:8480/auth) with *admin* user.
-
+Once Keycloak is started, you should be able to access your *Keycloak Server*
+at [localhost:8480/auth](http://localhost:8480/auth) with *admin* user.
 
 ### Compile and Run in Local Dev Mode
 
@@ -180,10 +187,14 @@ Once Keycloak is started, you should be able to access your *Keycloak Server* at
 mvn clean package quarkus:dev    
 ```
 
-NOTE: With dev mode of Quarkus you can take advantage of hot reload for business assets like processes, rules and decision
-tables and java code. No need to redeploy or restart your running application.During this workshop we will create a software system for a startup travel agency called Kogito Travel Agency. The first iteration of the system will consist of a set of services that are able to deal with travel requests and the booking of hotels and flights.
+NOTE: With dev mode of Quarkus you can take advantage of hot reload for business assets like processes, rules and
+decision
+tables and java code. No need to redeploy or restart your running application.During this workshop we will create a
+software system for a startup travel agency called Kogito Travel Agency. The first iteration of the system will consist
+of a set of services that are able to deal with travel requests and the booking of hotels and flights.
 
 ### Compile and Run using Local Native Image
+
 Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
 
 ```
@@ -196,14 +207,9 @@ To run the generated native executable, generated in `target/`, execute
 ./target/travels-{version}-runner
 ```
 
-
 ### Start the Kogito Jobs Service
 
-
-
-
 ## Known issues
-
 
 ## User interface
 
@@ -370,5 +376,7 @@ curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST h
 
 ### Querying the technical cache
 
-When running **Kogito Data Index Service** on dev mode, the GraphiQL UI is available at [http://localhost:8180](http://localhost:8180/) and allow to
-perform different queries on the model as is explained at [wiki/Data-Index-service](https://github.com/kiegroup/kogito-runtimes/wiki/Data-Index-Service)
+When running **Kogito Data Index Service** on dev mode, the GraphiQL UI is available
+at [http://localhost:8180](http://localhost:8180/) and allow to
+perform different queries on the model as is explained
+at [wiki/Data-Index-service](https://github.com/kiegroup/kogito-runtimes/wiki/Data-Index-Service)

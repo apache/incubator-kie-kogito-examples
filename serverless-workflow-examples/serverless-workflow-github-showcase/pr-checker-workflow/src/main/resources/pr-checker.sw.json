@@ -8,7 +8,7 @@
     {
       "name": "FetchPRFiles",
       "type": "custom",
-      "operation": "service:java:org.kogito.examples.sw.github.workflow.GitHubService::fetchPRFiles"
+      "operation": "service:java:org.acme.examples.sw.github.workflow.GitHubService::fetchPRFiles"
     }
   ],
   "events": [

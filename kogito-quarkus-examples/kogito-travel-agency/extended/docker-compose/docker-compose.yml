@@ -20,8 +20,8 @@ services:
     container_name: zookeeper
     image: strimzi/kafka:0.20.1-kafka-2.6.0
     command: [
-        "sh", "-c",
-        "bin/zookeeper-server-start.sh config/zookeeper.properties"
+      "sh", "-c",
+      "bin/zookeeper-server-start.sh config/zookeeper.properties"
     ]
     ports:
       - "2181:2181"
@@ -32,8 +32,8 @@ services:
     image: strimzi/kafka:0.20.1-kafka-2.6.0
     container_name: kafka
     command: [
-        "sh", "-c",
-        "bin/kafka-server-start.sh config/server.properties --override inter.broker.listener.name=$${KAFKA_INTER_BROKER_LISTENER_NAME} --override listener.security.protocol.map=$${KAFKA_LISTENER_SECURITY_PROTOCOL_MAP} --override listeners=$${KAFKA_LISTENERS} --override advertised.listeners=$${KAFKA_ADVERTISED_LISTENERS} --override zookeeper.connect=$${KAFKA_ZOOKEEPER_CONNECT}"
+      "sh", "-c",
+      "bin/kafka-server-start.sh config/server.properties --override inter.broker.listener.name=$${KAFKA_INTER_BROKER_LISTENER_NAME} --override listener.security.protocol.map=$${KAFKA_LISTENER_SECURITY_PROTOCOL_MAP} --override listeners=$${KAFKA_LISTENERS} --override advertised.listeners=$${KAFKA_ADVERTISED_LISTENERS} --override zookeeper.connect=$${KAFKA_ZOOKEEPER_CONNECT}"
     ]
     depends_on:
       - zookeeper

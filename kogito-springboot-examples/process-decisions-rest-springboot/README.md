@@ -23,7 +23,7 @@ It is based on the traffic violation evaluation process, where it is required to
   
 ![Traffic Process](docs/images/traffic-rules-dmn-service-task.png)
 
-In this approach it requires coding, to provide an implementation in the application responsible to execute the task, in this case, a REST/HTTP call. The implementation is up to the user, but here it's been used what the platform provides, like the [RestTemplate](https://spring.io/guides/gs/consuming-rest/). Details can be seen in the classes [LicenseValidationRestService](src/main/java/org/kie/kogito/traffic/LicenseValidationRestService.java) and [TrafficViolationRestService](src/main/java/org/kie/kogito/traffic/TrafficViolationRestService.java).
+In this approach it requires coding, to provide an implementation in the application responsible to execute the task, in this case, a REST/HTTP call. The implementation is up to the user, but here it's been used what the platform provides, like the [RestTemplate](https://spring.io/guides/gs/consuming-rest/). Details can be seen in the classes [LicenseValidationRestService](src/main/java/org/acme/traffic/LicenseValidationRestService.java) and [TrafficViolationRestService](src/main/java/org/acme/traffic/TrafficViolationRestService.java).
 
 The BPMN file where this process is declared is [traffic-rules-dmn-service-task.bpmn](src/main/resources/traffic-rules-dmn-service-task.bpmn)
 
@@ -44,13 +44,13 @@ These are the properties defined for the process, the most important one in this
 
 * #### Proces Variables
 
-The variables used in the process itself, but the focus in this example are the classes that are used to define the POJOs to interact the process with decisions, that are the [Violation](src/main/java/org/kie/kogito/traffic/Violation.java), [Driver](src/main/java/org/kie/kogito/traffic/Driver.java), [Fine](src/main/java/org/kie/kogito/traffic/Fine.java) and [TrafficViolationResponse](src/main/java/org/kie/kogito/traffic/TrafficViolationResponse.java).
+The variables used in the process itself, but the focus in this example are the classes that are used to define the POJOs to interact the process with decisions, that are the [Violation](src/main/java/org/acme/traffic/Violation.java), [Driver](src/main/java/org/acme/traffic/Driver.java), [Fine](src/main/java/org/acme/traffic/Fine.java) and [TrafficViolationResponse](src/main/java/org/acme/traffic/TrafficViolationResponse.java).
 
 <img src="docs/images/process-variables.png" width=300/>
 
 **Mapping data from Process to/from DMN**
 
-It is important to mention DMN for instance can define the Data Type in its structure, but we can align all attributes names in a Java class that is used as process variables, in case the attribute names contain spaces or are not following java conventions we can use [Jackson](https://github.com/FasterXML/jackson) annotations to make the process variable POJOs aligned with DMN data types, for instance in the [Violation](src/main/java/org/kie/kogito/traffic/Violation.java) class, where it is mapped the `speedLimit` attribute as `Speed Limit` using `@JsonProperty` annotation, in this case, this attribute from the process variable with Violation can be seamlessly integrated Violation Data Type defined in DMN.
+It is important to mention DMN for instance can define the Data Type in its structure, but we can align all attributes names in a Java class that is used as process variables, in case the attribute names contain spaces or are not following java conventions we can use [Jackson](https://github.com/FasterXML/jackson) annotations to make the process variable POJOs aligned with DMN data types, for instance in the [Violation](src/main/java/org/acme/traffic/Violation.java) class, where it is mapped the `speedLimit` attribute as `Speed Limit` using `@JsonProperty` annotation, in this case, this attribute from the process variable with Violation can be seamlessly integrated Violation Data Type defined in DMN.
 
 **Violation Data Type in DMN**
 
@@ -61,7 +61,7 @@ It is important to mention DMN for instance can define the Data Type in its stru
 
 Fetch for driver information, in this implementation it is just mocking a result, that simply fill with an expired license date in case the `driverId` is an odd number and with a valid date in case of an even number. In a real use case, it could be performing an external call to a service or a database to get this information.
 
-The service task implementation is done in the [DriverService](src/main/java/org/kie/kogito/traffic/DriverService.java) class.
+The service task implementation is done in the [DriverService](src/main/java/org/acme/traffic/DriverService.java) class.
 
 In the data assignment the input is the `driverId` and output is the `driver` variable, filled with all driver information.
 
@@ -102,7 +102,7 @@ The implementation properties where it is necessary to set the Java class implem
 
 <img src="docs/images/traffic-violation-drl-service-task-properties.png" width=300/>
 
-The input for this task is the `Driver` and `Violation` variables, and the output is the `Suspended` and `Fine` that are wrapped into the [TrafficViolationResponse](src/main/java/org/kie/kogito/traffic/TrafficViolationResponse.java).
+The input for this task is the `Driver` and `Violation` variables, and the output is the `Suspended` and `Fine` that are wrapped into the [TrafficViolationResponse](src/main/java/org/acme/traffic/TrafficViolationResponse.java).
 
 ![Traffic Violation Service Data](docs/images/traffic-violation-drl-service-task-data.png)
 
@@ -111,7 +111,7 @@ The input for this task is the `Driver` and `Violation` variables, and the outpu
 
 <img src="docs/images/traffic-violation-drl-wih.png" width=150/>
 
-The input for this task is the `Driver` and `Violation` variables, and the output is the `Suspended` and `Fine` that are wrapped into the [TrafficViolationResponse](src/main/java/org/kie/kogito/traffic/TrafficViolationResponse.java). For REST Work Item the URL and HTTP Method are set as input parameters in the process itselt, that is different from the Service Task approaach.
+The input for this task is the `Driver` and `Violation` variables, and the output is the `Suspended` and `Fine` that are wrapped into the [TrafficViolationResponse](src/main/java/org/acme/traffic/TrafficViolationResponse.java). For REST Work Item the URL and HTTP Method are set as input parameters in the process itselt, that is different from the Service Task approaach.
 
 ![Traffic Violation WIH Data](docs/images/traffic-violation-drl-wih-data.png)
 
@@ -129,7 +129,7 @@ Just an example task where it could be performed any action based on the conditi
 
 This decision consistis in rules which are evaluated to check if a driver's license is expired or not according to the expiration date and thus populating the result in the information in the driver variable.
 
-The DRL file where this Rule Unit is declared is [LicenseValidationService.drl](src/main/resources/LicenseValidationService.drl) and the the Java class that contains the Rule Unit Data is [LicenseValidationService](src/main/java/org/kie/kogito/traffic/LicenseValidationService.java).
+The DRL file where this Rule Unit is declared is [LicenseValidationService.drl](src/main/resources/LicenseValidationService.drl) and the the Java class that contains the Rule Unit Data is [LicenseValidationService](src/main/java/org/acme/traffic/LicenseValidationService.java).
 
 ### Traffic Violation - DMN
 

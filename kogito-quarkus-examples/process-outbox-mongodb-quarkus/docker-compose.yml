@@ -1,4 +1,4 @@
-version: '2'
+version: '2.0'
 services:
   kafka:
     image: vectorized/redpanda:v21.11.8
@@ -73,7 +73,7 @@ services:
       - KAFKA_HOST=kafka:29092
       - CONNECT_HOST=connect:8083
   kogito:
-    image: org.kie.kogito.examples/process-outbox-mongodb-quarkus:1.0
+    image: org.acme.examples/process-outbox-mongodb-quarkus:1.0
     ports:
       - "8080:8080"
     links:

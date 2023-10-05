@@ -97,7 +97,7 @@ In order to have the DMN generated resources properly scanned by Spring Boot, pl
 The generated classes must be included in the annotation definitions of the main `Application` class:
 
 ```
-@SpringBootApplication(scanBasePackages={"org.kie.kogito.**", "org.kie.kogito.app.**", "http*"})
+@SpringBootApplication(scanBasePackages={"org.kie.kogito.**", "org.acme.**", "http*"})
 public class KogitoSpringbootApplication {
 
     public static void main(String[] args) {

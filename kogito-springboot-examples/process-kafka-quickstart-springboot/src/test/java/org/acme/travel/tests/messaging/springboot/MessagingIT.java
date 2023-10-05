@@ -23,12 +23,12 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
+import org.acme.tests.KogitoKafkaQuickstartSpringbootApplication;
 import org.acme.travel.Traveller;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.test.springboot.kafka.KafkaTestClient;
 import org.kie.kogito.testcontainers.springboot.KafkaSpringBootTestResource;
-import org.kie.kogito.tests.KogitoKafkaQuickstartSpringbootApplication;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

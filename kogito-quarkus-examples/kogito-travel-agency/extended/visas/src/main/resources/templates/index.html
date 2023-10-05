@@ -79,48 +79,48 @@
 
         if ("WebSocket" in window) {
 
-           // Let us open a web socket
-           var ws = new WebSocket('{config:property('kogito.dataindex.ws.url') or 'ws://localhost:8180'}/graphql');
+            // Let us open a web socket
+            var ws = new WebSocket('{config:property('kogito.dataindex.ws.url') or 'ws://localhost:8180'}/graphql');
 
-           ws.onopen = function() {
-              // Web Socket is connected, send data using send()
-               ws.send('{"id" : "1", "type" : "connection_init"}');
-           };
+            ws.onopen = function () {
+                // Web Socket is connected, send data using send()
+                ws.send('{"id" : "1", "type" : "connection_init"}');
+            };
 
-           ws.onmessage = function (evt) {
-              var received_msg = evt.data;
-              let jsonObject = JSON.parse(received_msg);
-               if(jsonObject.type === 'connection_ack'){
-                   ws.send('{"id" : "2", "type" : "start", "payload" : { "query" : "subscription { VisaApplicationsUpdated { id, visaApplication { lastName, firstName, country, city, nationality, duration, passportNumber }, visaResolution { approved },  metadata { processInstances { state  } } } }"}}');
-               } else if(jsonObject.type === 'data') {
-                   var val = jsonObject.payload.data.VisaApplicationsUpdated;
+            ws.onmessage = function (evt) {
+                var received_msg = evt.data;
+                let jsonObject = JSON.parse(received_msg);
+                if (jsonObject.type === 'connection_ack') {
+                    ws.send('{"id" : "2", "type" : "start", "payload" : { "query" : "subscription { VisaApplicationsUpdated { id, visaApplication { lastName, firstName, country, city, nationality, duration, passportNumber }, visaResolution { approved },  metadata { processInstances { state  } } } }"}}');
+                } else if (jsonObject.type === 'data') {
+                    var val = jsonObject.payload.data.VisaApplicationsUpdated;
 
-                   var existing = document.getElementById(val.id);
-                   if (existing != null) {
-                       existing.remove();
-                   }
+                    var existing = document.getElementById(val.id);
+                    if (existing != null) {
+                        existing.remove();
+                    }
 
-                   appendDataRow(null, val);
-               }
-           };
+                    appendDataRow(null, val);
+                }
+            };
 
-           ws.onclose = function() {
+            ws.onclose = function () {
 
-              // websocket is closed.
-           };
+                // websocket is closed.
+            };
         }
     });
 
     function load() {
         $("#content").children().remove();
         var query = "{ \"query\": \"" +
-                "{ VisaApplications { " +
-                "id " +
-                "visaApplication { lastName, firstName, country, city, nationality, duration, passportNumber } " +
-                "visaResolution { approved } " +
-                "metadata { processInstances { state  } } " +
-                "}}\"" +
-                "}";
+            "{ VisaApplications { " +
+            "id " +
+            "visaApplication { lastName, firstName, country, city, nationality, duration, passportNumber } " +
+            "visaResolution { approved } " +
+            "metadata { processInstances { state  } } " +
+            "}}\"" +
+            "}";
 
         $.ajax({
             type: 'POST',
@@ -136,35 +136,35 @@
     }
 
     function appendDataRow(key, val) {
-      var active = $.grep(val.metadata.processInstances, function (pi) {
-          return pi.state == "ACTIVE"
-      }).length > 0;
-      var html =
-              "<tr id='" + val.id + "' class='" + (active ? "" : "active") + "'><td>" + val.visaApplication.lastName + ", " + val.visaApplication.firstName + "</td>" +
-              "<td>" + val.visaApplication.country + ", " + val.visaApplication.city + "</td>" +
-              "<td>" + val.visaApplication.duration + " days</td>" +
-              "<td>" + val.visaApplication.passportNumber + "</td>" +
-              "<td>" + val.visaApplication.nationality + "</td>" +
-              "<td>" + (val.visaResolution.approved ? 'Yes' : 'No') + "</td>" +
-              "<td>";
-      if (active) {
-          html +=
-                  "<button class='btn btn-primary btn-sm' " +
-                  "data-toggle='modal' " +
-                  "data-target='#detailsModal' " +
-                  "data-firstname='" + val.visaApplication.firstName + "' " +
-                  "data-lastname='" + val.visaApplication.lastName + "' " +
-                  "data-duration='" + val.visaApplication.duration + "' " +
-                  "data-passportnumber='" + val.visaApplication.passportNumber + "' " +
-                  "data-country='" + val.visaApplication.country + "' " +
-                  "data-nationality='" + val.visaApplication.nationality + "' " +
-                  "data-city='" + val.visaApplication.city + "' " +
-                  "data-id='" + val.id + "'>" +
-                  "   <span>Approval</span>" +
-                  "</button>&nbsp;";
-      }
-      html += "</td></tr>";
-      $(html).appendTo("#content");
+        var active = $.grep(val.metadata.processInstances, function (pi) {
+            return pi.state == "ACTIVE"
+        }).length > 0;
+        var html =
+            "<tr id='" + val.id + "' class='" + (active ? "" : "active") + "'><td>" + val.visaApplication.lastName + ", " + val.visaApplication.firstName + "</td>" +
+            "<td>" + val.visaApplication.country + ", " + val.visaApplication.city + "</td>" +
+            "<td>" + val.visaApplication.duration + " days</td>" +
+            "<td>" + val.visaApplication.passportNumber + "</td>" +
+            "<td>" + val.visaApplication.nationality + "</td>" +
+            "<td>" + (val.visaResolution.approved ? 'Yes' : 'No') + "</td>" +
+            "<td>";
+        if (active) {
+            html +=
+                "<button class='btn btn-primary btn-sm' " +
+                "data-toggle='modal' " +
+                "data-target='#detailsModal' " +
+                "data-firstname='" + val.visaApplication.firstName + "' " +
+                "data-lastname='" + val.visaApplication.lastName + "' " +
+                "data-duration='" + val.visaApplication.duration + "' " +
+                "data-passportnumber='" + val.visaApplication.passportNumber + "' " +
+                "data-country='" + val.visaApplication.country + "' " +
+                "data-nationality='" + val.visaApplication.nationality + "' " +
+                "data-city='" + val.visaApplication.city + "' " +
+                "data-id='" + val.id + "'>" +
+                "   <span>Approval</span>" +
+                "</button>&nbsp;";
+        }
+        html += "</td></tr>";
+        $(html).appendTo("#content");
     }
 
     function initCallbacks() {
@@ -186,11 +186,15 @@
             approved: Boolean(decision),
             reason: "Manual approval"
         };
-        var visaApplicationRequest = JSON.stringify(\{application: vapplication, resolution: vResolution\});
+        var visaApplicationRequest = JSON.stringify(\{application: vapplication, resolution: vResolution\
+    }
 
-        $.post("/visaApplications/" + $("#visa_p_id").val() + "/ApplicationApproval/" + $("#visa_t_id").val() + userFilter, visaApplicationRequest, function () {
+    )
+    ;
 
-        }, "json");
+    $.post("/visaApplications/" + $("#visa_p_id").val() + "/ApplicationApproval/" + $("#visa_t_id").val() + userFilter, visaApplicationRequest, function () {
+
+    }, "json");
     }
 
     function initModal() {
@@ -201,7 +205,7 @@
             var id = button.data('id');
             var modal = $(this);
 
-            $.getJSON("/visaApplications/" + id + "/tasks"+userFilter, function (data) {
+            $.getJSON("/visaApplications/" + id + "/tasks" + userFilter, function (data) {
                 $.each(data, function (key, val) {
                     if ("ApplicationApproval" == val.name) {
                         modal.find('.modal-title').text("Visa application for " + button.data("lastname") + ", " + button.data("firstname"));
@@ -243,15 +247,19 @@
                             </div>
                             <div class="form-group">
                                 <label for="firstName">First Name</label> <input type="text"
-                                                                                 class="form-control" id="firstName" name="firstName" readonly>
+                                                                                 class="form-control" id="firstName"
+                                                                                 name="firstName" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="lastName">Last Name</label> <input type="text"
-                                                                               class="form-control" id="lastName" name="lastName" readonly>
+                                                                               class="form-control" id="lastName"
+                                                                               name="lastName" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="nationality">Nationality</label> <input type="text"
-                                                                                    class="form-control" id="nationality" name="nationality" readonly>
+                                                                                    class="form-control"
+                                                                                    id="nationality" name="nationality"
+                                                                                    readonly>
                             </div>
                         </div>
 
@@ -261,11 +269,14 @@
                             </div>
                             <div class="form-group">
                                 <label for="destinationCountry">Country</label> <input type="text"
-                                                                                       class="form-control" id="country" name="destinationCountry" readonly>
+                                                                                       class="form-control" id="country"
+                                                                                       name="destinationCountry"
+                                                                                       readonly>
                             </div>
                             <div class="form-group">
                                 <label for="destinationCity">City</label> <input type="text"
-                                                                                 class="form-control" id="city" name="destinationCity" readonly>
+                                                                                 class="form-control" id="city"
+                                                                                 name="destinationCity" readonly>
                             </div>
 
                         </div>
@@ -277,7 +288,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="duration">Duration</label> <input type="text"
-                                                                              class="form-control" id="duration" name="duration" readonly>
+                                                                              class="form-control" id="duration"
+                                                                              name="duration" readonly>
                             </div>
 
                         </div>
@@ -288,14 +300,21 @@
                             </div>
                             <div class="form-group">
                                 <label for="passportNumber">Passport number</label> <input type="email"
-                                                                                           class="form-control" id="passportNumber" name="passportNumber" readonly>
+                                                                                           class="form-control"
+                                                                                           id="passportNumber"
+                                                                                           name="passportNumber"
+                                                                                           readonly>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="submitVisaApplicationApproval(true)">Approve</button>
-                            <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="submitVisaApplicationApproval(false)">Reject</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal"
+                                    onclick="submitVisaApplicationApproval(true)">Approve
+                            </button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal"
+                                    onclick="submitVisaApplicationApproval(false)">Reject
+                            </button>
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         </div>
                     </div>
