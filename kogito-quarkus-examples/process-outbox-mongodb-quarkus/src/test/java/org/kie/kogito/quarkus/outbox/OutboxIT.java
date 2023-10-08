@@ -154,6 +154,7 @@ public class OutboxIT {
         kafkaClient.consume(Set.of(PROCESS_EVENTS_TOPIC, USERTASK_EVENTS_TOPIC), message -> {
             String type = JsonPath.read(message, "$.type");
             if ("ProcessInstanceVariableDataEvent".equals(type)) {
+                LOGGER.info("ProcessInstanceVariableDataEvent: {}", message);
                 String varName = JsonPath.read(message, "$.data.variableName");
                 if ("order".equals(varName)) {
                     String orderNumber = JsonPath.read(message, "$.data.variableValue.orderNumber");
@@ -163,6 +164,7 @@ public class OutboxIT {
                     }
                 }
             } else if ("UserTaskInstanceVariableDataEvent".equals(type)) {
+                LOGGER.info("UserTaskInstanceVariableDataEvent: {}", message);
                 String varName = JsonPath.read(message, "$.data.variableName");
                 if ("order".equals(varName)) {
                     String orderNumber = JsonPath.read(message, "$.data.variableValue.orderNumber");
