@@ -20,7 +20,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.jbpm.process.instance.impl.humantask.BaseHumanTaskLifeCycle;
-import org.jbpm.process.instance.impl.humantask.HumanTaskWorkItemImpl;
+import org.jbpm.process.instance.impl.humantask.InternalHumanTaskWorkItem;
 import org.jbpm.process.instance.impl.humantask.phases.Claim;
 import org.jbpm.process.instance.impl.humantask.phases.Release;
 import org.jbpm.process.instance.impl.humantask.phases.Skip;
@@ -101,7 +101,7 @@ public class CustomHumanTaskLifeCycle implements LifeCycle<Map<String, Object>> 
         logger.debug("Transition method invoked for work item {} to transition to {}, currently in phase {} and status {}", workItem.getStringId(), transition.phase(), workItem.getPhaseId(),
                 workItem.getPhaseStatus());
 
-        HumanTaskWorkItemImpl humanTaskWorkItem = (HumanTaskWorkItemImpl) workItem;
+        InternalHumanTaskWorkItem humanTaskWorkItem = (InternalHumanTaskWorkItem) workItem;
 
         LifeCyclePhase targetPhase = phases.get(transition.phase());
         if (targetPhase == null) {
@@ -141,7 +141,6 @@ public class CustomHumanTaskLifeCycle implements LifeCycle<Map<String, Object>> 
 
     @Override
     public Map<String, Object> data(KogitoWorkItem workItem) {
-
-        return ((HumanTaskWorkItemImpl) workItem).getResults();
+        return ((InternalHumanTaskWorkItem) workItem).getResults();
     }
 }
