@@ -152,9 +152,9 @@ public class OutboxIT {
         CountDownLatch processEventCounter = new CountDownLatch(2);
         CountDownLatch userTaskEventCounter = new CountDownLatch(1);
         kafkaClient.consume(Set.of(PROCESS_EVENTS_TOPIC, USERTASK_EVENTS_TOPIC), message -> {
+            LOGGER.info("ProcessInstanceVariableDataEvent: {}", message);
             String type = JsonPath.read(message, "$.type");
             if ("ProcessInstanceVariableDataEvent".equals(type)) {
-                LOGGER.info("ProcessInstanceVariableDataEvent: {}", message);
                 String varName = JsonPath.read(message, "$.data.variableName");
                 if ("order".equals(varName)) {
                     String orderNumber = JsonPath.read(message, "$.data.variableValue.orderNumber");
@@ -164,13 +164,12 @@ public class OutboxIT {
                     }
                 }
             } else if ("UserTaskInstanceVariableDataEvent".equals(type)) {
-                LOGGER.info("UserTaskInstanceVariableDataEvent: {}", message);
                 String varName = JsonPath.read(message, "$.data.variableName");
                 if ("order".equals(varName)) {
                     String orderNumber = JsonPath.read(message, "$.data.variableValue.orderNumber");
                     boolean shipped = JsonPath.read(message, "$.data.variableValue.shipped");
                     if ("23570".equals(orderNumber) && !shipped) {
-                        processEventCounter.countDown();
+                        userTaskEventCounter.countDown();
                     }
                 }
             }
