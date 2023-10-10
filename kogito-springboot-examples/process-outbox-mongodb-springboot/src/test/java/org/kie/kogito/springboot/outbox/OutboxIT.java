@@ -165,7 +165,7 @@ public class OutboxIT {
                 }
             } else if ("UserTaskInstanceVariableDataEvent".equals(type)) {
                 String varName = JsonPath.read(message, "$.data.variableName");
-                if ("order".equals(varName)) {
+                if ("input1".equals(varName)) {
                     String orderNumber = JsonPath.read(message, "$.data.variableValue.orderNumber");
                     boolean shipped = JsonPath.read(message, "$.data.variableValue.shipped");
                     if ("23570".equals(orderNumber) && !shipped) {
