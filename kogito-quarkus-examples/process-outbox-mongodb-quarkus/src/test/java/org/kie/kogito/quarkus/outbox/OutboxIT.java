@@ -57,7 +57,6 @@ public class OutboxIT {
 
     private static final String PROCESS_EVENTS_TOPIC = "kogito-processinstances-events";
     private static final String USERTASK_EVENTS_TOPIC = "kogito-usertaskinstances-events";
-    private static final String VARIABLE_EVENTS_TOPIC = "kogito-variables-events";
     private static final int KOGITO_PORT = 8080;
     private static final int KAFKA_PORT = 9092;
     private static final int DEBEZIUM_PORT = 8083;
@@ -156,18 +155,25 @@ public class OutboxIT {
         CountDownLatch processEventCounter = new CountDownLatch(2);
         CountDownLatch userTaskEventCounter = new CountDownLatch(1);
         kafkaClient.consume(Set.of(PROCESS_EVENTS_TOPIC, USERTASK_EVENTS_TOPIC), message -> {
+            LOGGER.info("ProcessInstanceVariableDataEvent: {}", message);
             String type = JsonPath.read(message, "$.type");
-            if ("ProcessInstanceEvent".equals(type)) {
-                String orderNumber = JsonPath.read(message, "$.data.variables.order.orderNumber");
-                boolean shipped = JsonPath.read(message, "$.data.variables.order.shipped");
-                if ("23570".equals(orderNumber) && !shipped) {
-                    processEventCounter.countDown();
+            if ("ProcessInstanceVariableDataEvent".equals(type)) {
+                String varName = JsonPath.read(message, "$.data.variableName");
+                if ("order".equals(varName)) {
+                    String orderNumber = JsonPath.read(message, "$.data.variableValue.orderNumber");
+                    boolean shipped = JsonPath.read(message, "$.data.variableValue.shipped");
+                    if ("23570".equals(orderNumber) && !shipped) {
+                        processEventCounter.countDown();
+                    }
                 }
-            } else if ("UserTaskInstanceEvent".equals(type)) {
-                String orderNumber = JsonPath.read(message, "$.data.inputs.input1.orderNumber");
-                boolean shipped = JsonPath.read(message, "$.data.inputs.input1.shipped");
-                if ("23570".equals(orderNumber) && !shipped) {
-                    userTaskEventCounter.countDown();
+            } else if ("UserTaskInstanceVariableDataEvent".equals(type)) {
+                String varName = JsonPath.read(message, "$.data.variableName");
+                if ("input1".equals(varName)) {
+                    String orderNumber = JsonPath.read(message, "$.data.variableValue.orderNumber");
+                    boolean shipped = JsonPath.read(message, "$.data.variableValue.shipped");
+                    if ("23570".equals(orderNumber) && !shipped) {
+                        userTaskEventCounter.countDown();
+                    }
                 }
             }
         });
@@ -195,11 +201,12 @@ public class OutboxIT {
                         .get("/connectors/{connector}/topics")
                         .then()
                         .statusCode(200)
-                        .body("kogito-connector.topics", hasSize(3))
-                        .body("kogito-connector.topics", hasItems(PROCESS_EVENTS_TOPIC, USERTASK_EVENTS_TOPIC, VARIABLE_EVENTS_TOPIC)));
+                        .body("kogito-connector.topics", hasSize(2))
+                        .body("kogito-connector.topics", hasItems(PROCESS_EVENTS_TOPIC, USERTASK_EVENTS_TOPIC)));
 
         // Check process events pushed
         assertTrue(processEventCounter.await(TIMEOUT.getSeconds(), TimeUnit.SECONDS));
+
         assertTrue(userTaskEventCounter.await(TIMEOUT.getSeconds(), TimeUnit.SECONDS));
     }
 }
