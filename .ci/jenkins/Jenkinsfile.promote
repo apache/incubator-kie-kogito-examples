@@ -27,7 +27,7 @@ pipeline {
         stage('Initialization') {
             steps {
                 script {
-                    cleanWs()
+                    cleanWs(disableDeferredWipeout: true)
 
                     checkout scm
                     examplesHelper = load '.ci/jenkins/helper_scripts/examples.groovy'
@@ -77,7 +77,7 @@ pipeline {
         }
         cleanup {
             script {
-                util.cleanNode('docker')
+                util.cleanNode()
             }
         }
     }
