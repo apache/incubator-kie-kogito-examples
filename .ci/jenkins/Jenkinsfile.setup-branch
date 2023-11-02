@@ -94,11 +94,28 @@ pipeline {
                     dir(getRepoName()) {
                         def oldKogitoVersion = readMavenPom(file: 'pom.xml').version
                         echo "Got old Kogito version ${oldKogitoVersion}"
-
-                        maven.mvnVersionsUpdateParentAndChildModules(getMavenCommand(), getKogitoVersion(), true)
-                        maven.mvnSetVersionProperty(getMavenCommand(), 'version.org.kie.kogito', getKogitoVersion())
-                        maven.mvnSetVersionProperty(getMavenCommand(), 'kogito.bom.version', getKogitoVersion())
-                        maven.mvnSetVersionProperty(getMavenCommand(), 'version.org.drools', getDroolsVersion())
+                        configFileProvider([configFile(fileId: env.MAVEN_SETTINGS_CONFIG_FILE_ID, variable: 'MAVEN_SETTINGS_FILE')]){
+                            maven.mvnVersionsUpdateParentAndChildModules(
+                                getMavenCommand().withSettingsXmlFile(MAVEN_SETTINGS_FILE),
+                                getKogitoVersion(),
+                                true
+                            )
+                            maven.mvnSetVersionProperty(
+                                getMavenCommand().withSettingsXmlFile(MAVEN_SETTINGS_FILE),
+                                'version.org.kie.kogito',
+                                getKogitoVersion()
+                            )
+                            maven.mvnSetVersionProperty(
+                                getMavenCommand().withSettingsXmlFile(MAVEN_SETTINGS_FILE),
+                                'kogito.bom.version',
+                                getKogitoVersion()
+                            )
+                            maven.mvnSetVersionProperty(
+                                getMavenCommand().withSettingsXmlFile(MAVEN_SETTINGS_FILE),
+                                'version.org.drools',
+                                getDroolsVersion()
+                            )
+                        }
 
                         if (getKogitoVersion() != oldKogitoVersion) {
                             def status = sh(script: "grep -ir '${oldKogitoVersion}' --include='pom.xml'", returnStatus: true)

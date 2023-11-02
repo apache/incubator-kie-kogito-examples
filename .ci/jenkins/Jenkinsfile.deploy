@@ -93,11 +93,28 @@ pipeline {
                     dir(getRepoName()) {
                         def oldKogitoVersion = readMavenPom(file: 'pom.xml').version
                         echo "Got old Kogito version ${oldKogitoVersion}"
-
-                        maven.mvnVersionsUpdateParentAndChildModules(getMavenCommand(), getProjectVersion(), true)
-                        maven.mvnSetVersionProperty(getMavenCommand(), 'version.org.kie.kogito', getProjectVersion())
-                        maven.mvnSetVersionProperty(getMavenCommand(), 'kogito.bom.version', getProjectVersion())
-                        maven.mvnSetVersionProperty(getMavenCommand(), 'version.org.drools', getDroolsVersion())
+                        configFileProvider([configFile(fileId: env.MAVEN_SETTINGS_CONFIG_FILE_ID, variable: 'MAVEN_SETTINGS_FILE')]){
+                            maven.mvnVersionsUpdateParentAndChildModules(
+                                getMavenCommand().withSettingsXmlFile(MAVEN_SETTINGS_FILE),
+                                getProjectVersion(),
+                                true
+                            )
+                            maven.mvnSetVersionProperty(
+                                getMavenCommand().withSettingsXmlFile(MAVEN_SETTINGS_FILE),
+                                'version.org.kie.kogito',
+                                getProjectVersion()
+                            )
+                            maven.mvnSetVersionProperty(
+                                getMavenCommand().withSettingsXmlFile(MAVEN_SETTINGS_FILE),
+                                'kogito.bom.version',
+                                getProjectVersion()
+                            )
+                            maven.mvnSetVersionProperty(
+                                getMavenCommand().withSettingsXmlFile(MAVEN_SETTINGS_FILE),
+                                'version.org.drools',
+                                getDroolsVersion()
+                            )
+                        }
 
                         if (getProjectVersion() != oldKogitoVersion) {
                             def status = sh(script: "grep -ir '${oldKogitoVersion}' --include='pom.xml'", returnStatus: true)
@@ -345,10 +362,8 @@ void runMavenDeploy(boolean localDeployment = false) {
 }
 
 void runMavenStage() {
-    MavenCommand mavenCommand = getMavenCommand()
     configFileProvider([configFile(fileId: env.MAVEN_SETTINGS_CONFIG_FILE_ID, variable: 'MAVEN_SETTINGS_FILE')]){
-        mavenCommand.withSettingsXmlFile(MAVEN_SETTINGS_FILE)
-        MavenStagingHelper stagingHelper = getStagingHelper(mavenCommand)
+        MavenStagingHelper stagingHelper = getStagingHelper(getMavenCommand().withSettingsXmlFile(MAVEN_SETTINGS_FILE))
         deployProperties.putAll(stagingHelper.stageLocalArtifacts(env.NEXUS_STAGING_PROFILE_ID, getLocalDeploymentFolder()))
         stagingHelper.promoteStagingRepository(env.NEXUS_BUILD_PROMOTION_PROFILE_ID)
     }
