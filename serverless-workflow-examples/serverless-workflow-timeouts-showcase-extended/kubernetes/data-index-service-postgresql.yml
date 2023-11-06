@@ -62,6 +62,8 @@ spec:
               name: http
               protocol: TCP
           env:
+            - name: KOGITO_SERVICE_URL
+              value: http://data-index-service-postgresql
             - name: KUBERNETES_NAMESPACE
               valueFrom:
                 fieldRef:
@@ -76,7 +78,7 @@ spec:
               value: postgresql
             - name: QUARKUS_HIBERNATE_ORM_DATABASE_GENERATION
               value: update
-            - name: QUARKUS_KAFKA_HEALTH_ENABLE
+            - name: QUARKUS_SMALLRYE_HEALTH_CHECK__IO_QUARKUS_KAFKA_CLIENT_HEALTH_KAFKAHEALTHCHECK__ENABLED
               value: "false"
             - name: QUARKUS_HTTP_CORS
               value: "true"
@@ -92,12 +94,92 @@ spec:
 apiVersion: eventing.knative.dev/v1
 kind: Trigger
 metadata:
-  name: data-index-service-postgresql-processes-trigger
+  name: data-index-service-postgresql-process-definition-trigger
 spec:
   broker: default
   filter:
     attributes:
-      type: ProcessInstanceEvent
+      type: ProcessDefinitionEvent
+  subscriber:
+    ref:
+      apiVersion: v1
+      kind: Service
+      name: data-index-service-postgresql
+    uri: /definitions
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: data-index-service-postgresql-process-error-trigger
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: ProcessInstanceErrorDataEvent
+  subscriber:
+    ref:
+      apiVersion: v1
+      kind: Service
+      name: data-index-service-postgresql
+    uri: /processes
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: data-index-service-postgresql-process-node-trigger
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: ProcessInstanceNodeDataEvent
+  subscriber:
+    ref:
+      apiVersion: v1
+      kind: Service
+      name: data-index-service-postgresql
+    uri: /processes
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: data-index-service-postgresql-process-sla-trigger
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: ProcessInstanceSLADataEvent
+  subscriber:
+    ref:
+      apiVersion: v1
+      kind: Service
+      name: data-index-service-postgresql
+    uri: /processes
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: data-index-service-postgresql-process-state-trigger
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: ProcessInstanceStateDataEvent
+  subscriber:
+    ref:
+      apiVersion: v1
+      kind: Service
+      name: data-index-service-postgresql
+    uri: /processes
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: data-index-service-postgresql-process-variable-trigger
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: ProcessInstanceVariableDataEvent
   subscriber:
     ref:
       apiVersion: v1
