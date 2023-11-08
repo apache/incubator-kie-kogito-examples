@@ -103,7 +103,7 @@ Closure setupAdditionalTimeoutForDefaultNightly = { script ->
 }
 
 Closure nightlyJobParamsGetter = isMainStream() ? JobParamsUtils.DEFAULT_PARAMS_GETTER : setup4AMCronTriggerJobParamsGetter
-KogitoJobUtils.createNightlyBuildChainBuildAndDeployJobForCurrentRepo(this, '', true, setupAdditionalTimeoutForDefaultNightly)
+KogitoJobUtils.createNightlyBuildChainBuildAndTestJobForCurrentRepo(this, '', true, setupAdditionalTimeoutForDefaultNightly)
 setupSpecificBuildChainNightlyJob('native', nightlyJobParamsGetter)
 setupNightlyQuarkusIntegrationJob('quarkus-main', nightlyJobParamsGetter)
 setupNightlyQuarkusIntegrationJob('quarkus-branch', nightlyJobParamsGetter)
