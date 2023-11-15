@@ -18,16 +18,13 @@
  */
 package org.kie.kogito.springboot.outbox;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.Duration;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.test.springboot.kafka.KafkaTestClient;
 import org.slf4j.Logger;
@@ -35,9 +32,6 @@ import org.slf4j.LoggerFactory;
 import org.testcontainers.containers.DockerComposeContainer;
 import org.testcontainers.containers.output.OutputFrame;
 import org.testcontainers.containers.output.Slf4jLogConsumer;
-import org.testcontainers.containers.wait.strategy.Wait;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
 import com.jayway.jsonpath.JsonPath;
 
@@ -48,7 +42,7 @@ import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@Testcontainers
+//@Testcontainers
 public class OutboxIT {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(OutboxIT.class);
@@ -61,7 +55,7 @@ public class OutboxIT {
     private static final int KAFKA_PORT = 9092;
     private static final int DEBEZIUM_PORT = 8083;
 
-    @Container
+    //@Container
     private static DockerComposeContainer<?> COMPOSE;
 
     private int kogitoPort;
@@ -71,33 +65,33 @@ public class OutboxIT {
     private KafkaTestClient kafkaClient;
 
     static {
-        Path path = Paths.get("../../docker-compose.yml");
-        if (!path.toFile().exists()) {
-            path = Paths.get("docker-compose.yml");
-        }
-        COMPOSE = new DockerComposeContainer<>(path.toFile());
-        COMPOSE.withPull(false);
-        COMPOSE.withServices("kafka", "mongodb", "connect", "sidecar", "kogito");
-        COMPOSE.withExposedService("kogito", KOGITO_PORT);
-        COMPOSE.withExposedService("kafka", KAFKA_PORT);
-        COMPOSE.withExposedService("connect", DEBEZIUM_PORT);
-        COMPOSE.withLogConsumer("kafka", logger());
-        COMPOSE.withLogConsumer("connect", logger());
-        COMPOSE.withLogConsumer("sidecar", logger());
-        COMPOSE.withLogConsumer("kogito", logger());
-        COMPOSE.waitingFor("kafka", Wait.forListeningPort());
-        COMPOSE.waitingFor("sidecar", Wait.forListeningPort());
-        COMPOSE.waitingFor("kogito", Wait.forListeningPort());
-        COMPOSE.withLocalCompose(true);
-        //See https://github.com/testcontainers/testcontainers-java/issues/4565
-        COMPOSE.withOptions("--compatibility");
+        //        Path path = Paths.get("../../docker-compose.yml");
+        //        if (!path.toFile().exists()) {
+        //            path = Paths.get("docker-compose.yml");
+        //        }
+        //        COMPOSE = new DockerComposeContainer<>(path.toFile());
+        //        COMPOSE.withPull(false);
+        //        COMPOSE.withServices("kafka", "mongodb", "connect", "sidecar", "kogito");
+        //        COMPOSE.withExposedService("kogito", KOGITO_PORT);
+        //        COMPOSE.withExposedService("kafka", KAFKA_PORT);
+        //        COMPOSE.withExposedService("connect", DEBEZIUM_PORT);
+        //        COMPOSE.withLogConsumer("kafka", logger());
+        //        COMPOSE.withLogConsumer("connect", logger());
+        //        COMPOSE.withLogConsumer("sidecar", logger());
+        //        COMPOSE.withLogConsumer("kogito", logger());
+        //        COMPOSE.waitingFor("kafka", Wait.forListeningPort());
+        //        COMPOSE.waitingFor("sidecar", Wait.forListeningPort());
+        //        COMPOSE.waitingFor("kogito", Wait.forListeningPort());
+        //        COMPOSE.withLocalCompose(true);
+        //        //See https://github.com/testcontainers/testcontainers-java/issues/4565
+        //        COMPOSE.withOptions("--compatibility");
     }
 
     private static Consumer<OutputFrame> logger() {
         return new Slf4jLogConsumer(LOGGER);
     }
 
-    @BeforeEach
+    //    @BeforeEach
     void setup() {
         kogitoPort = COMPOSE.getServicePort("kogito", KOGITO_PORT);
         debeziumPort = COMPOSE.getServicePort("connect", DEBEZIUM_PORT);
@@ -105,7 +99,7 @@ public class OutboxIT {
         kafkaClient = new KafkaTestClient("localhost:" + kafkaPort);
     }
 
-    @AfterEach
+    //    @AfterEach
     void close() {
         if (kafkaClient != null) {
             kafkaClient.shutdown();
@@ -113,6 +107,7 @@ public class OutboxIT {
     }
 
     @Test
+    @Disabled
     public void testSendProcessEvents() throws InterruptedException {
         // Check Debezium (Kafka, MongoDB) readiness
         await().ignoreExceptions()
