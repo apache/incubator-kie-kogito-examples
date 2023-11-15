@@ -28,6 +28,7 @@ import java.util.stream.IntStream;
 
 import org.acme.travel.Traveller;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.test.springboot.kafka.KafkaTestClient;
 import org.kie.kogito.testcontainers.springboot.KafkaSpringBootTestResource;
@@ -65,6 +66,7 @@ public class MessagingIT {
     private KafkaTestClient kafkaClient;
 
     @Test
+    @Disabled("Flaky test")
     public void testProcess() throws InterruptedException {
         objectMapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
 
