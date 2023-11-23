@@ -91,8 +91,16 @@ String getGitAuthor() {
     return env.GIT_AUTHOR
 }
 
-String getGitAuthorCredsID() {
-    return env.AUTHOR_CREDS_ID
+String getGitAuthorCredsId() {
+    return env.GIT_AUTHOR_CREDS_ID
+}
+
+String getGitAuthorPushCredsId() {
+    return env.GIT_AUTHOR_PUSH_CREDS_ID
+}
+
+String getGitAuthorPushTokenCredsId() {
+    return env.GIT_AUTHOR_PUSH_TOKEN_CREDS_ID
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -101,13 +109,13 @@ String getGitAuthorCredsID() {
 
 void checkoutTag(String repo, String tagName, String localBranchName = tagName) {
     deleteDir()
-    checkout(githubscm.resolveRepository(repo, getGitAuthor(), getBuildBranch(), false, getGitAuthorCredsID()))
+    checkout(githubscm.resolveRepository(repo, getGitAuthor(), getBuildBranch(), false, getGitAuthorCredsId()))
     // Need to manually checkout branch since we are in 'detached HEAD' state after the git checkout command.
     sh "git checkout tags/${tagName} -b ${localBranchName}"
 }
 
 void setDefaultBranch(String defaultBranch) {
-    withCredentials([string(credentialsId: env.GITHUB_TOKEN_CREDS_ID, variable: 'GITHUB_TOKEN')]) {
+    withCredentials([string(credentialsId: getGitAuthorPushTokenCredsId(), variable: 'GITHUB_TOKEN')]) {
         // gh command from https://github.com/cli/cli/issues/929#issuecomment-629253585
         def newDefaultBranch = sh(script: "../gh api -XPATCH 'repos/${getGitAuthor()}/${getRepoName()}' -f default_branch=${defaultBranch} | jq '.default_branch'", returnStdout: true).trim()
         if (newDefaultBranch == "\"${defaultBranch}\"") {
@@ -120,7 +128,7 @@ void setDefaultBranch(String defaultBranch) {
 
 void forcePushProtectedBranch(String defaultBranch, String tempBranch) {
     setDefaultBranch(tempBranch)
-    withCredentials([usernamePassword(credentialsId: getGitAuthorCredsID(), usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
+    withCredentials([usernamePassword(credentialsId: getGitAuthorPushCredsId(), usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
         sh """
         git config --local credential.helper \"!f() { echo username=\\$GIT_USERNAME; echo password=\\$GIT_PASSWORD; }; f\"
         git push --delete origin ${defaultBranch}
