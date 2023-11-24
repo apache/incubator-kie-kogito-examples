@@ -34,8 +34,8 @@
   <name>Kogito Example :: DMN Tracing - Spring Boot</name>
 
   <properties>
-    <version.org.kie.kogito>2.0.0-SNAPSHOT</version.org.kie.kogito>
-    <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+    <version.org.kie.kogito>3.0.0-SNAPSHOT</version.org.kie.kogito>
+    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
   </properties>
 
   <dependencyManagement>

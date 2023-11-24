@@ -30,13 +30,13 @@
   <name>Kogito Example :: Serverless Workflow Python :: Quarkus</name>
   <description>Kogito Serverless Workflow Python Example - Quarkus</description>
   <properties>
-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
+    <quarkus-plugin.version>3.5.2</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-    <quarkus.platform.version>2.16.12.Final</quarkus.platform.version>
+    <quarkus.platform.version>3.5.2</quarkus.platform.version>
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-    <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
     <maven.compiler.release>11</maven.compiler.release>
     <version.exec.plugin>1.6.0</version.exec.plugin>
     <version.compiler.plugin>3.8.1</version.compiler.plugin>

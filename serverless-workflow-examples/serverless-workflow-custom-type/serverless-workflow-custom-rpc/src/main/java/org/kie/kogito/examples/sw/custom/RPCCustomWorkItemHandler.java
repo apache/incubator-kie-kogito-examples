@@ -23,7 +23,7 @@ import java.io.UncheckedIOException;
 import java.util.Iterator;
 import java.util.Map;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import org.kie.kogito.examples.sw.custom.CalculatorClient.OperationId;
 import org.kie.kogito.internal.process.runtime.KogitoWorkItem;

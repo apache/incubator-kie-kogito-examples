@@ -21,7 +21,7 @@ package org.kogito.serverless.examples.services;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import org.kogito.serverless.examples.input.Country;
 

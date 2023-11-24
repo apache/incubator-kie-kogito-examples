@@ -31,14 +31,14 @@
   <name>Kogito Example :: Process Business Rules Quarkus</name>
   <description>Kogito business rules invocation - Quarkus</description>
   <properties>
-    <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
+    <quarkus-plugin.version>3.5.2</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-    <quarkus.platform.version>2.16.12.Final</quarkus.platform.version>
+    <quarkus.platform.version>3.5.2</quarkus.platform.version>
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-    <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
-    <version.org.kie.kogito>2.0.0-SNAPSHOT</version.org.kie.kogito>
+    <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
+    <version.org.kie.kogito>3.0.0-SNAPSHOT</version.org.kie.kogito>
   </properties>
   <dependencyManagement>
     <dependencies>

@@ -21,8 +21,8 @@ package org.acme.serverless.loanbroker.aggregator;
 import java.net.URI;
 import java.util.concurrent.TimeUnit;
 
-import javax.inject.Inject;
-import javax.ws.rs.core.MediaType;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.core.MediaType;
 
 import org.acme.serverless.loanbroker.aggregator.model.BankQuote;
 import org.apache.camel.Exchange;

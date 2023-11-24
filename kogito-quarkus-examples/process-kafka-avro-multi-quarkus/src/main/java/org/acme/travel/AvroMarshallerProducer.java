@@ -18,11 +18,11 @@
  */
 package org.acme.travel;
 
+import jakarta.annotation.PostConstruct;
 import java.io.IOException;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Produces;
 
 import org.kie.kogito.event.EventMarshaller;
 import org.kie.kogito.event.EventUnmarshaller;

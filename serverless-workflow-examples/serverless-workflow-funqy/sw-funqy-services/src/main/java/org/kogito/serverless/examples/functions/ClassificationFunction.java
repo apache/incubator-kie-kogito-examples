@@ -18,7 +18,7 @@
  */
 package org.kogito.serverless.examples.functions;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import org.kogito.serverless.examples.input.Country;
 import org.kogito.serverless.examples.services.ClassificationService;

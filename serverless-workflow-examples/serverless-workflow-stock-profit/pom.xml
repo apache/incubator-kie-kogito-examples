@@ -34,18 +34,18 @@
         <module>fake-stock-service</module>
     </modules>
     <properties>
-        <quarkus-plugin.version>2.16.10.Final</quarkus-plugin.version>
+        <quarkus-plugin.version>3.5.2</quarkus-plugin.version>
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
         <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-        <quarkus.platform.version>2.16.12.Final</quarkus.platform.version>
+        <quarkus.platform.version>3.5.2</quarkus.platform.version>
         <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
         <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-        <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+        <kogito.bom.version>3.0.0-SNAPSHOT</kogito.bom.version>
         <version.compiler.plugin>3.8.1</version.compiler.plugin>
         <maven.compiler.release>11</maven.compiler.release>
         <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
         <version.failsafe.plugin>${version.surefire.plugin}</version.failsafe.plugin>
-        <version.com.github.tomakehurst.wiremock>2.33.2</version.com.github.tomakehurst.wiremock>
+        <version.com.github.tomakehurst.wiremock>3.0.0-beta-8</version.com.github.tomakehurst.wiremock>
     </properties>
     <dependencyManagement>
         <dependencies>
