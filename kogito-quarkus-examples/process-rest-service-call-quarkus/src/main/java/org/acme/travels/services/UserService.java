@@ -18,8 +18,8 @@
  */
 package org.acme.travels.services;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 import org.acme.travels.quarkus.User;
 import org.acme.travels.rest.UsersRemoteService;

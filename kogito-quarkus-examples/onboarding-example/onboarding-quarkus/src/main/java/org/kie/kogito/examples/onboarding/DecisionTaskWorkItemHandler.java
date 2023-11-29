@@ -20,7 +20,7 @@ package org.kie.kogito.examples.onboarding;
 
 import java.util.Map;
 
-import javax.ws.rs.HttpMethod;
+import jakarta.ws.rs.HttpMethod;
 
 import org.kie.kogito.addons.quarkus.k8s.workitems.QuarkusDiscoveredEndpointCaller;
 import org.kie.kogito.internal.process.runtime.KogitoWorkItem;

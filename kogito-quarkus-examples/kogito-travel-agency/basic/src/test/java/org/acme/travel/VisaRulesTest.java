@@ -20,7 +20,7 @@ package org.acme.travel;
 
 import java.util.Date;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import org.acme.travels.Address;
 import org.acme.travels.Traveller;

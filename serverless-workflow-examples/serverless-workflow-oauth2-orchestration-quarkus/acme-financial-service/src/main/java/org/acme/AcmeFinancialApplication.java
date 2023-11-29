@@ -44,6 +44,6 @@ import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
                                                 tokenUrl = "http://localhost:8281/auth/realms/kogito/protocol/openid-connect/token",
                                                 scopes = {})))
                 }))
-public class AcmeFinancialApplication extends javax.ws.rs.core.Application {
+public class AcmeFinancialApplication extends jakarta.ws.rs.core.Application {
 
 }

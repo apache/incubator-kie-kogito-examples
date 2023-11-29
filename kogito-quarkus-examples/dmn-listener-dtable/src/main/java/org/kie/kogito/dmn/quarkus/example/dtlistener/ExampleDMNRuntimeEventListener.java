@@ -21,7 +21,7 @@ package org.kie.kogito.dmn.quarkus.example.dtlistener;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import org.kie.dmn.api.core.event.AfterEvaluateDecisionTableEvent;
 import org.kie.dmn.core.api.event.DefaultDMNRuntimeEventListener;

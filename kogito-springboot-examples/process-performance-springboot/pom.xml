@@ -79,9 +79,14 @@
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-spring-boot-starter</artifactId>
     </dependency>
-    <dependency>
+    <!--~~(Unable to download POM. Tried repositories:
+https://repository.jboss.org/nexus/content/groups/public/: HTTP 404
+https://repo.maven.apache.org/maven2: HTTP 404
+https://oss.sonatype.org/content/repositories/releases: HTTP 404
+https://maven.repository.redhat.com/ga: HTTP 404
+https://repo.maven.apache.org/maven2: Did not attempt to download because of a previous failure to retrieve from this repository.)~~>--><dependency>
       <groupId>org.springdoc</groupId>
-      <artifactId>springdoc-openapi-ui</artifactId>
+      <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>

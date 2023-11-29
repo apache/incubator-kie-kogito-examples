@@ -20,8 +20,8 @@ package org.acme;
 
 import java.time.ZonedDateTime;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 import org.kie.kogito.internal.process.runtime.KogitoProcessContext;
 import org.slf4j.Logger;
