@@ -18,8 +18,8 @@
  */
 package org.kie.kogito.app;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 import org.kie.kogito.drools.core.config.DefaultRuleEventListenerConfig;
 import org.kie.kogito.examples.CustomRuleEventListener;

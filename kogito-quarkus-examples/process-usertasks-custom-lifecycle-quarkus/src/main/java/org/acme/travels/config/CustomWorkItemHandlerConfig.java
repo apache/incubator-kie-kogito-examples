@@ -18,7 +18,7 @@
  */
 package org.acme.travels.config;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import org.acme.travels.usertasks.CustomHumanTaskLifeCycle;
 import org.jbpm.process.instance.impl.humantask.HumanTaskWorkItemHandler;

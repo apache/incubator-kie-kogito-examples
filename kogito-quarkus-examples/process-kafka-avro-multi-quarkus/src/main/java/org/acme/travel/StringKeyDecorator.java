@@ -18,7 +18,7 @@
  */
 package org.acme.travel;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import org.eclipse.microprofile.reactive.messaging.Message;
 import org.kie.kogito.addon.quarkus.common.reactive.messaging.MessageDecorator;

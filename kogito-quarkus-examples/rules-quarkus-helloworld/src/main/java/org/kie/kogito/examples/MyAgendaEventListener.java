@@ -20,7 +20,7 @@ package org.kie.kogito.examples;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.inject.Singleton;
+import jakarta.inject.Singleton;
 
 import org.drools.core.event.DefaultAgendaEventListener;
 import org.jboss.logging.Logger;

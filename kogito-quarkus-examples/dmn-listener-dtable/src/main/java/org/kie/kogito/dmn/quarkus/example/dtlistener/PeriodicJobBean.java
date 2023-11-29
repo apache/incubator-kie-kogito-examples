@@ -20,8 +20,8 @@ package org.kie.kogito.dmn.quarkus.example.dtlistener;
 
 import java.util.concurrent.TimeUnit;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 import org.kie.dmn.api.core.event.AfterEvaluateDecisionTableEvent;
 import org.kie.dmn.model.api.DecisionTable;

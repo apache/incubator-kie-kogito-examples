@@ -20,10 +20,10 @@ package org.acme.travel;
 
 import java.io.IOException;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Produces;
 
+import jakarta.annotation.PostConstruct;
 import org.kie.kogito.event.EventMarshaller;
 import org.kie.kogito.event.EventUnmarshaller;
 import org.kie.kogito.event.avro.AvroEventMarshaller;

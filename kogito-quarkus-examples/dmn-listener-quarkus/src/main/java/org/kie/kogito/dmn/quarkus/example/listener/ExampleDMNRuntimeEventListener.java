@@ -18,7 +18,7 @@
  */
 package org.kie.kogito.dmn.quarkus.example.listener;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 /**
  * This class demonstrates one of the two methods offered by Kogito to inject custom

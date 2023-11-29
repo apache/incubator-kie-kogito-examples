@@ -21,7 +21,7 @@ package org.acme.sw.onboarding.resources;
 import java.time.Duration;
 import java.util.UUID;
 
-import javax.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.MediaType;
 
 import org.junit.jupiter.api.Test;
 
