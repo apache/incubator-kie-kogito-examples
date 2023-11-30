@@ -201,6 +201,9 @@
         <groupId>com.google.cloud.tools</groupId>
         <artifactId>jib-maven-plugin</artifactId>
         <configuration>
+          <from>
+            <image>registry.access.redhat.com/ubi8/openjdk-17:latest</image>
+          </from>
           <to>
             <image>${project.groupId}/${project.artifactId}:1.0</image>
           </to>
