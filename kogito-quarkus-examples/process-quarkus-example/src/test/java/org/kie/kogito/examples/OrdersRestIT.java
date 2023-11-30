@@ -77,7 +77,7 @@ public class OrdersRestIT {
 
         // test getting the created order
         given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
-                .body("$.size()", is(1), "[0].id", is(firstCreatedId));
+                .body("size()", is(1), "[0].id", is(firstCreatedId));
 
         // test getting order by id
         given()
@@ -115,7 +115,7 @@ public class OrdersRestIT {
                 .get("/orders")
                 .then()
                 .statusCode(200)
-                .body("$.size()", is(1), "[0].id", is(secondCreatedId));
+                .body("size()", is(1), "[0].id", is(secondCreatedId));
 
         // delete second before finishing
         given()
@@ -131,7 +131,7 @@ public class OrdersRestIT {
                 .get("/orders")
                 .then()
                 .statusCode(200)
-                .body("$.size()", is(0));
+                .body("size()", is(0));
     }
 
     @Test
@@ -153,7 +153,7 @@ public class OrdersRestIT {
 
         // test getting the created order
         given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
-                .body("$.size()", is(1), "[0].id", is(firstCreatedId));
+                .body("size()", is(1), "[0].id", is(firstCreatedId));
 
         // test retrieving error info using process management addon
         given().accept(ContentType.JSON).when().get("/management/processes/demo.orders/instances/" + firstCreatedId + "/error").then()
@@ -174,7 +174,7 @@ public class OrdersRestIT {
         given().accept(ContentType.JSON).when().delete("/orders/" + firstCreatedId).then().statusCode(200);
         // get all orders make sure there is zero
         given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
-                .body("$.size()", is(0));
+                .body("size()", is(0));
     }
 
     @Test
@@ -188,7 +188,7 @@ public class OrdersRestIT {
 
         // test getting the created order
         given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
-                .body("$.size()", is(1), "[0].id", is(firstCreatedId));
+                .body("size()", is(1), "[0].id", is(firstCreatedId));
 
         // test getting order by id
         given().accept(ContentType.JSON).when().get("/orders/" + firstCreatedId).then()
@@ -196,7 +196,7 @@ public class OrdersRestIT {
 
         // test getting order items subprocess
         String orderItemsId = given().accept(ContentType.JSON).when().get("/orderItems").then().statusCode(200)
-                .body("$.size()", is(1)).extract().path("[0].id");
+                .body("size()", is(1)).extract().path("[0].id");
 
         // test getting order items by id
         given().accept(ContentType.JSON).when().get("/orderItems/" + orderItemsId).then()
@@ -209,7 +209,7 @@ public class OrdersRestIT {
                 .get("/orderItems/" + orderItemsId + "/tasks?user=john")
                 .then()
                 .statusCode(200)
-                .body("$.size", is(1))
+                .body("size()", is(1))
                 .body("[0].name", is("Verify order"))
                 .extract()
                 .path("[0].id");
@@ -228,11 +228,11 @@ public class OrdersRestIT {
 
         // get all orders make sure there is zero
         given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
-                .body("$.size()", is(0));
+                .body("size()", is(0));
 
         // get all order items make sure there is zero
         given().accept(ContentType.JSON).when().get("/orderItems").then().statusCode(200)
-                .body("$.size()", is(0));
+                .body("size()", is(0));
     }
 
     @Test
@@ -246,7 +246,7 @@ public class OrdersRestIT {
 
         // test getting the created order
         given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
-                .body("$.size()", is(1), "[0].id", is(firstCreatedId));
+                .body("size()", is(1), "[0].id", is(firstCreatedId));
 
         // test getting order by id
         given().accept(ContentType.JSON).when().get("/orders/" + firstCreatedId).then()
@@ -254,7 +254,7 @@ public class OrdersRestIT {
 
         // test getting order items subprocess
         String orderItemsId = given().accept(ContentType.JSON).when().get("/orderItems?businessKey=ORD-0001").then().statusCode(200)
-                .body("$.size()", is(1)).extract().path("[0].id");
+                .body("size()", is(1)).extract().path("[0].id");
 
         // test getting order items by id
         given().accept(ContentType.JSON).when().get("/orderItems/" + orderItemsId).then()
@@ -267,7 +267,7 @@ public class OrdersRestIT {
                 .get("/orderItems/" + orderItemsId + "/tasks?user=john")
                 .then()
                 .statusCode(200)
-                .body("$.size", is(1))
+                .body("size()", is(1))
                 .body("[0].name", is("Verify order"));
 
         // test deleting order items
@@ -275,11 +275,11 @@ public class OrdersRestIT {
 
         // get all orders make sure there is zero
         given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
-                .body("$.size()", is(0));
+                .body("size()", is(0));
 
         // get all order items make sure there is zero
         given().accept(ContentType.JSON).when().get("/orderItems").then().statusCode(200)
-                .body("$.size()", is(0));
+                .body("size()", is(0));
     }
 
     @Test
@@ -293,7 +293,7 @@ public class OrdersRestIT {
         assertNotNull(id);
         // get all orders make sure there is one
         given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
-                .body("$.size()", is(1));
+                .body("size()", is(1));
 
         // get order by its custom ID and test
         given().accept(ContentType.JSON).body(orderPayload).when().get("/orders/{id}", id).then()
@@ -310,13 +310,13 @@ public class OrdersRestIT {
 
         // get all orders make sure there is one
         given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
-                .body("$.size()", is(1));
+                .body("size()", is(1));
 
         // test deleting order items by custom ID
         given().accept(ContentType.JSON).when().delete("/orders/{id}", id).then().statusCode(200);
 
         // get all orders make sure there is zero
         given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
-                .body("$.size()", is(0));
+                .body("size()", is(0));
     }
 }

@@ -87,7 +87,7 @@ public class ProcessMetricsTest {
 
         // test getting the created order
         given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
-                .body("$.size()", is(1), "[0].id", is(firstCreatedId));
+                .body("size()", is(1), "[0].id", is(firstCreatedId));
 
         given()
                 .when()

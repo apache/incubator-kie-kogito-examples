@@ -42,7 +42,7 @@ public class DealsRestIT {
         // test getting the created deal
         given().accept(ContentType.JSON)
                 .when().get("/deals")
-                .then().log().ifValidationFails().statusCode(200).body("$.size()", is(1), "[0].id", is(dealId));
+                .then().log().ifValidationFails().statusCode(200).body("size()", is(1), "[0].id", is(dealId));
 
         // test getting order by id
         given().accept(ContentType.JSON)
@@ -52,12 +52,12 @@ public class DealsRestIT {
         // get deals for review
         String dealReviewId = given().accept(ContentType.JSON)
                 .when().get("/dealreviews")
-                .then().log().ifValidationFails().statusCode(200).body("$.size()", is(1)).body("[0].id", notNullValue()).extract().path("[0].id");
+                .then().log().ifValidationFails().statusCode(200).body("size()", is(1)).body("[0].id", notNullValue()).extract().path("[0].id");
 
         // get task for john
         String taskId = given().accept(ContentType.JSON)
                 .when().get("/dealreviews/{uuid}/tasks?user=john", dealReviewId)
-                .then().log().ifValidationFails().statusCode(200).body("$.size()", is(1)).extract().path("[0].id");
+                .then().log().ifValidationFails().statusCode(200).body("size()", is(1)).extract().path("[0].id");
 
         // complete review task
         given().contentType(ContentType.JSON).accept(ContentType.JSON).body("{\"review\" : \"very good work\"}")
@@ -67,11 +67,11 @@ public class DealsRestIT {
         //verify no deals to review
         given().accept(ContentType.JSON)
                 .when().get("/dealreviews")
-                .then().log().ifValidationFails().statusCode(200).body("$.size()", is(0));
+                .then().log().ifValidationFails().statusCode(200).body("size()", is(0));
 
         //verify no deals
         given().accept(ContentType.JSON)
                 .when().get("/deals")
-                .then().log().ifValidationFails().statusCode(200).body("$.size()", is(0));
+                .then().log().ifValidationFails().statusCode(200).body("size()", is(0));
     }
 }
