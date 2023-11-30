@@ -65,7 +65,7 @@ public class DealsRestIT {
         given().accept(ContentType.JSON)
                 .when().get("/deals")
                 .then().statusCode(200)
-                .body("$.size()", is(1))
+                .body("size()", is(1))
                 .body("[0].id", is(dealId))
                 .body("[0].name", is(deal));
 
@@ -78,7 +78,7 @@ public class DealsRestIT {
         String dealReviewId = given().accept(ContentType.JSON)
                 .when().get("/dealreviews")
                 .then().statusCode(200)
-                .body("$.size()", is(1))
+                .body("size()", is(1))
                 .body("[0].id", notNullValue())
                 .body("[0].deal", is(deal))
                 .extract().path("[0].id");
@@ -87,7 +87,7 @@ public class DealsRestIT {
         String taskId = given().accept(ContentType.JSON)
                 .when().get("/dealreviews/{uuid}/tasks?user=john", dealReviewId)
                 .then().statusCode(200)
-                .body("$.size", is(1))
+                .body("size()", is(1))
                 .body("[0].name", is("review"))
                 .body("[0].parameters.deal", is(deal))
                 .extract().path("[0].id");
@@ -103,12 +103,12 @@ public class DealsRestIT {
         //verify no deals to review
         given().accept(ContentType.JSON)
                 .when().get("/dealreviews")
-                .then().statusCode(200).body("$.size()", is(0));
+                .then().statusCode(200).body("size()", is(0));
 
         //verify no deals
         given().accept(ContentType.JSON)
                 .when().get("/deals")
-                .then().statusCode(200).body("$.size()", is(0));
+                .then().statusCode(200).body("size()", is(0));
     }
 
     @Test

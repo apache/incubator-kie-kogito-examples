@@ -83,7 +83,7 @@ public class ApprovalsRestTest {
                 .get("/approvals")
                 .then()
                 .statusCode(200)
-                .body("$.size()", is(1), "[0].id", is(id));
+                .body("size()", is(1), "[0].id", is(id));
 
         // get just started approval
         given()

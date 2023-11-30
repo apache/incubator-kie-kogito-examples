@@ -72,7 +72,7 @@ public class ApprovalsRestIT {
                 .get("/approvals")
                 .then()
                 .statusCode(200)
-                .body("$.size()", is(1), "[0].id", is(id));
+                .body("size()", is(1), "[0].id", is(id));
 
         // get just started approval
         given()
@@ -94,7 +94,7 @@ public class ApprovalsRestIT {
                 .get("/approvals/" + id + "/tasks?user=admin&group=managers")
                 .then()
                 .statusCode(200)
-                .body("$.size", is(1))
+                .body("size()", is(1))
                 .body("[0].name", is("firstLineApproval"))
                 .extract()
                 .path("[0].id");
