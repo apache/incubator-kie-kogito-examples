@@ -38,7 +38,7 @@
     <dependencies>
       <dependency>
         <groupId>org.infinispan</groupId>
-        <artifactId>infinispan-spring-boot-starter-remote</artifactId>
+        <artifactId>infinispan-spring-boot3-starter-remote</artifactId>
         <version>${version.org.infinispan}</version>
       </dependency>
     </dependencies>
