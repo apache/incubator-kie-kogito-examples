@@ -2,7 +2,7 @@
 
 ## Description
 
-This example is meant to let you understand how to deploy on Kubernetes the [Inventory Logic Tutorial](https://redhat-scholars.github.io/serverless-workflow/osl/index.html) using the [Operator](https://github.com/kiegroup/kogito-serverless-operator).
+This example is meant to let you understand how to deploy on Kubernetes the [Inventory Logic Tutorial](https://redhat-scholars.github.io/serverless-workflow/osl/index.html) using the [Operator](https://github.com/apache/incubator-kie-kogito-serverless-operator).
 We'll report here for this reason only a short summary of the workflow use case, and we'd suggest you [read the complete documentation](https://redhat-scholars.github.io/serverless-workflow/osl/index.html) about this tutorial if you need more details about it.
 
 ### Use Case

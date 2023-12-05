@@ -5,7 +5,7 @@
 A quickstart project that processes users in the system. It's main purpose is to to call external REST service
 to load a given user by its username.
 
-There are two ways to invoke a rest web service in Kogito: programmatically, as shown in this other [example](https://github.com/kiegroup/kogito-examples/tree/stable/kogito-quarkus-examples/process-service-calls-quarkus) or using RestWorkItemHandler, as in this example. 
+There are two ways to invoke a rest web service in Kogito: programmatically, as shown in this other [example](https://github.com/apache/incubator-kie-kogito-examples/tree/stable/kogito-quarkus-examples/process-service-calls-quarkus) or using RestWorkItemHandler, as in this example.
 
 Note that in order to user a WorkItem in Kogito Editor, corresponding .wid file needs to located together with the bpmn file under the same directory
 

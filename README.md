@@ -5,7 +5,7 @@ This module contains a number of examples that you can take a look at and try ou
 Since Kogito aims at supporting both Quarkus and Spring Boot each example usually provides both type of projects.
 
 - Default branch is `stable`, pointing to the latest released version.
-- **[You can also check all versions by looking at releases.](https://github.com/kiegroup/kogito-examples/releases/latest)**
+- **[You can also check all versions by looking at releases.](https://github.com/apache/incubator-kie-kogito-examples/releases/latest)**
 
 ## Use alternative Quarkus platforms
 

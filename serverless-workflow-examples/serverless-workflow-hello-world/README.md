@@ -1,1 +1,1 @@
-Serverless Workflow guide: https://github.com/kiegroup/kogito-docs/blob/main/serverlessworkflow/modules/ROOT/pages/getting-started/create-your-first-workflow-service.adoc
+Serverless Workflow guide: https://github.com/apache/incubator-kie-kogito-docs/blob/main/serverlessworkflow/modules/ROOT/pages/getting-started/create-your-first-workflow-service.adoc

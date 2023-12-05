@@ -227,4 +227,4 @@ EOF
 ### Querying the technical cache
 
 When running **Kogito Data Index Service** on dev mode, the GraphiQL UI is available at [http://localhost:8180](http://localhost:8180/) and allow to
-perform different queries on the model as is explained at [wiki/Data-Index-service](https://github.com/kiegroup/kogito-runtimes/wiki/Data-Index-Service)
+perform different queries on the model as is explained at [wiki/Data-Index-service](https://github.com/apache/incubator-kie-kogito-runtimes/wiki/Data-Index-Service)

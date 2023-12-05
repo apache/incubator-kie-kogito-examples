@@ -3,7 +3,7 @@
 ## Description
 
 A quickstart project that deals with traveller processing carried by rules. It illustrates how easy it is to make the Kogito processes and rules to work with Knative Eventing. This project is based on
-the example [Process with Kafka](https://github.com/kiegroup/kogito-examples/tree/main/kogito-quarkus-examples/process-kafka-quickstart-quarkus).
+the example [Process with Kafka](https://github.com/apache/incubator-kie-kogito-examples/tree/main/kogito-quarkus-examples/process-kafka-quickstart-quarkus).
 
 This example shows
 

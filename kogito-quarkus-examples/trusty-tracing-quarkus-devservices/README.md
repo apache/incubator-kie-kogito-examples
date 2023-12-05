@@ -21,7 +21,7 @@ You will need:
 mvn clean compile quarkus:dev
 ```
 
-The tracing addon emits tracing events to a Kafka broker running within Quarkus DevServices. A [Trusty Service](https://github.com/kiegroup/kogito-apps/tree/main/trusty) 
+The tracing addon emits tracing events to a Kafka broker running within Quarkus DevServices. A [Trusty Service](https://github.com/apache/incubator-kie-kogito-apps/tree/main/trusty)
 instance, also running within Quarkus DevServices, consumes the events and stores them in a PostgreSQL instance running 
 within Quarkus DevServices too. Within Quarkus DevMode the DevMode UI can be launched by pressing [d]  or navigating to
 http://localhost:8080/q/dev/.
