@@ -25,7 +25,7 @@ spec:
   type: RemoteSource
   gitSource:
     contextDir: kogito-quarkus-examples/kogito-travel-agency/extended/visas
-    uri: "https://github.com/kiegroup/kogito-examples/"
+    uri: "https://github.com/apache/incubator-kie-kogito-examples/"
   # set your maven nexus repository to speed up the build time
   #mavenMirrorURL:
 ---

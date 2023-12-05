@@ -36,7 +36,7 @@ curl -d '{"approver" : "john", "order" : {"orderNumber" : "12345", "shipped" : f
 
 <p align="center"><img src="docs/images/kafdrop_process_events_messages.png"></p>
 
-6. With the Kafka broker info from step 8, run the Kogito Data Index Service with MongoDB to consume Kafka messages: https://github.com/kiegroup/kogito-runtimes/wiki/Data-Index-Service
+6. With the Kafka broker info from step 8, run the Kogito Data Index Service with MongoDB to consume Kafka messages: https://github.com/apache/incubator-kie-kogito-runtimes/wiki/Data-Index-Service
 
 7. Shut down the cluster
 ```shell

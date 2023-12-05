@@ -2,7 +2,7 @@
 
 ## Description
 
-This example contains a BPMN that performs two consecutive REST invocations using [RestWorkItemHandler](https://github.com/kiegroup/kogito-runtimes/blob/main/kogito-workitems/kogito-rest-workitem/src/main/java/org/kogito/workitem/rest/RestWorkItemHandler.java), an alternative declarative approach to service programatic calls. 
+This example contains a BPMN that performs two consecutive REST invocations using [RestWorkItemHandler](https://github.com/apache/incubator-kie-kogito-runtimes/blob/main/kogito-workitems/kogito-rest-workitem/src/main/java/org/kogito/workitem/rest/RestWorkItemHandler.java), an alternative declarative approach to service programatic calls.
 
 Note that in order to user a WorkItem in Kogito Editor, corresponding .wid file needs to located together with the bpmn file under the same directory
 

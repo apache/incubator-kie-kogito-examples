@@ -40,7 +40,7 @@ spec:
   #  value: "my value"
   gitSource:
     contextDir: kogito-quarkus-examples/process-infinispan-persistence-springboot
-    uri: 'https://github.com/kiegroup/kogito-examples'
+    uri: 'https://github.com/apache/incubator-kie-kogito-examples'
   # set your maven nexus repository to speed up the build time
   #mavenMirrorURL:
 ---

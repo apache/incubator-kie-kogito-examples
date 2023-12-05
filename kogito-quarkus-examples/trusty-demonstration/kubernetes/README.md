@@ -62,7 +62,7 @@ KOGITO_VERSION=v1.5.0
 
 Deploy the kogito operator in the cluster
 ```bash
-wget https://github.com/kiegroup/kogito-operator/releases/download/${KOGITO_VERSION}/kogito-operator.yaml
+wget https://github.com/apache/incubator-kie-kogito-operator/releases/download/${KOGITO_VERSION}/kogito-operator.yaml
 kubectl apply -f kogito-operator.yaml
 ```
 

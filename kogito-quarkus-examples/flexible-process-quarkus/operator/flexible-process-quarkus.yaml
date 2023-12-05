@@ -29,7 +29,7 @@ spec:
   #  value: "my value"
   gitSource:
     contextDir: kogito-quarkus-examples/flexible-process-quarkus
-    uri: 'https://github.com/kiegroup/kogito-examples'
+    uri: 'https://github.com/apache/incubator-kie-kogito-examples'
   # set your maven nexus repository to speed up the build time
   #mavenMirrorURL: 
 ---
