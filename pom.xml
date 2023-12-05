@@ -135,9 +135,9 @@
   </pluginRepositories>
 
   <scm>
-    <connection>scm:git:https://github.com/kiegroup/kogito-examples.git</connection>
-    <developerConnection>scm:git:git@github.com:kiegroup/kogito-examples.git</developerConnection>
-    <url>https://github.com/kiegroup/kogito-examples</url>
+    <connection>scm:git:https://github.com/apache/incubator-kie-kogito-examples.git</connection>
+    <developerConnection>scm:git:git@github.com:apache/incubator-kie-kogito-examples.git</developerConnection>
+    <url>https://github.com/apache/incubator-kie-kogito-examples</url>
   </scm>
 
   <developers>
