@@ -166,7 +166,6 @@ postgres-7f78499688-lc8n6                        1/1     Running   0            
 ```
 configmap/greeting-props created
 sonataflow.sonataflow.org/greeting created
-sonataflowplatform.sonataflow.org/sonataflow-platform created
 ```
 
 Give some time for the sonataflow operator to build and deploy the workflow.
@@ -266,7 +265,6 @@ configmap/greeting-props created
 configmap/helloworld-props created
 sonataflow.sonataflow.org/greeting created
 sonataflow.sonataflow.org/helloworld created
-sonataflowplatform.sonataflow.org/sonataflow-platform created
 ```
 
 Give some time for the sonataflow operator to build and deploy the workflows.
