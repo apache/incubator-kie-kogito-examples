@@ -1,0 +1,5 @@
+resources:
+- ../../platforms/dataindex_platform
+- ../../infra/service_discovery
+- ../../workflows/sonataflow-greeting
+- ../../workflows/sonataflow-helloworld
