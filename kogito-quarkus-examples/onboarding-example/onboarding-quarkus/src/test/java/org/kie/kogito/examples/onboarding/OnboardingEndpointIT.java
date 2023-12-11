@@ -26,8 +26,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-import jakarta.inject.Inject;
-
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.examples.test.RecordedOutputWorkItemHandler;
 import org.kie.kogito.internal.process.runtime.KogitoWorkItem;
@@ -39,6 +37,8 @@ import io.fabric8.kubernetes.client.server.mock.EnableKubernetesMockClient;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
+
+import jakarta.inject.Inject;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.core.Is.is;
