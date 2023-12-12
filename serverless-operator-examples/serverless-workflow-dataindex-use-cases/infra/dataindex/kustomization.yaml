@@ -1,0 +1,17 @@
+resources:
+- 01-postgres.yaml
+- 02-dataindex.yaml
+
+secretGenerator:
+  - name: postgres-secrets
+    literals:
+      - POSTGRES_USER=sonataflow
+      - POSTGRES_PASSWORD=sonataflow
+      - POSTGRES_DB=sonataflow
+      - PGDATA=/var/lib/postgresql/data/mydata
+
+configMapGenerator:
+  - name: dataindex-properties
+    files:
+      - application.properties
+

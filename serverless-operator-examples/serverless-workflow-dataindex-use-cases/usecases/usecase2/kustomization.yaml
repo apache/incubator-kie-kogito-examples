@@ -1,0 +1,4 @@
+resources:
+- ../../infra/service_discovery
+- ../../workflows/sonataflow-greeting
+- ../../workflows/sonataflow-helloworld
