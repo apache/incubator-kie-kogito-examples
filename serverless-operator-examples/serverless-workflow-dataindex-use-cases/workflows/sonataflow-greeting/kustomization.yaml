@@ -1,0 +1,3 @@
+resources:
+- 02-configmap_greeting-props.yaml
+- 03-sonataflow_greeting.yaml
