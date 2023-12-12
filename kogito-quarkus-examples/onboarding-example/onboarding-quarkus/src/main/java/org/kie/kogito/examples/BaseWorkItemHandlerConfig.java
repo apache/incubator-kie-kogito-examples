@@ -25,9 +25,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import jakarta.inject.Inject;
-
-import jakarta.annotation.PostConstruct;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.kie.kogito.addons.k8s.Endpoint;
 import org.kie.kogito.addons.k8s.EndpointQueryKey;
@@ -36,6 +33,9 @@ import org.kie.kogito.addons.quarkus.k8s.workitems.QuarkusDiscoveredEndpointCall
 import org.kie.kogito.examples.onboarding.DecisionTaskWorkItemHandler;
 import org.kie.kogito.internal.process.runtime.KogitoWorkItemHandler;
 import org.kie.kogito.process.impl.DefaultWorkItemHandlerConfig;
+
+import jakarta.annotation.PostConstruct;
+import jakarta.inject.Inject;
 
 public abstract class BaseWorkItemHandlerConfig extends DefaultWorkItemHandlerConfig {
 
