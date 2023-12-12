@@ -43,7 +43,7 @@ public class CreditBureauMock implements QuarkusTestResourceLifecycleManager {
         wireMockServer.stubFor(get(urlPathMatching("/*"))
                 .willReturn(aResponse()
                         .withHeader("Content-Type", MediaType.APPLICATION_JSON)
-                        .withBody("{ \"SSN\":\"123-45-6789\",\"score\":470,\"history\":4}}")
+                        .withBody("{ \"SSN\":\"123-45-6789\",\"score\":470,\"history\":4 }")
                         .withStatus(200)));
 
         // inject the endpoint to the generated RESTClient Stub
