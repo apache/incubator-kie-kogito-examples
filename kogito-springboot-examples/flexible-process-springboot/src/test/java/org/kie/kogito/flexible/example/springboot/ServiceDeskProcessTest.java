@@ -215,7 +215,7 @@ class ServiceDeskProcessTest {
                 .basePath(BASE_PATH)
                 .contentType(ContentType.JSON)
                 .when()
-                .get("/")
+                .get("")
                 .as(List.class);
 
         assertTrue(processes.isEmpty());
