@@ -24,9 +24,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import jakarta.inject.Inject;
-import jakarta.inject.Named;
-
 import org.acme.travels.Address;
 import org.acme.travels.Flight;
 import org.acme.travels.Hotel;
@@ -47,6 +44,9 @@ import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.core.StringContains.containsString;

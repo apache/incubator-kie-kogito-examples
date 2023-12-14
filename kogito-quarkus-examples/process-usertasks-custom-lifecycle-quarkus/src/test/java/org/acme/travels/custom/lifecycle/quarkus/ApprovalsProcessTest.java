@@ -23,9 +23,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import jakarta.inject.Inject;
-import jakarta.inject.Named;
-
 import org.acme.travels.Address;
 import org.acme.travels.Traveller;
 import org.acme.travels.usertasks.Start;
@@ -43,6 +40,9 @@ import org.kie.kogito.process.WorkItem;
 import org.kie.kogito.process.workitem.InvalidTransitionException;
 
 import io.quarkus.test.junit.QuarkusTest;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

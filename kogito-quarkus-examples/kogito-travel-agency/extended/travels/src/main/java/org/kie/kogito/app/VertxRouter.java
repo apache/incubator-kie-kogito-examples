@@ -18,10 +18,6 @@
  */
 package org.kie.kogito.app;
 
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.event.Observes;
-import jakarta.inject.Inject;
-
 import io.quarkus.qute.Location;
 import io.quarkus.qute.Template;
 import io.vertx.core.Vertx;
@@ -29,6 +25,10 @@ import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.FaviconHandler;
 import io.vertx.ext.web.handler.LoggerHandler;
 import io.vertx.ext.web.handler.StaticHandler;
+
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Observes;
+import jakarta.inject.Inject;
 
 import static io.vertx.core.http.HttpMethod.GET;
 

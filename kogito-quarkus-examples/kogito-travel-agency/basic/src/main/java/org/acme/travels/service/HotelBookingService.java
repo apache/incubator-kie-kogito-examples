@@ -18,11 +18,11 @@
  */
 package org.acme.travels.service;
 
-import jakarta.enterprise.context.ApplicationScoped;
-
 import org.acme.travels.Address;
 import org.acme.travels.Hotel;
 import org.acme.travels.Trip;
+
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class HotelBookingService {

@@ -20,9 +20,6 @@ package org.kie.kogito.dmn.quarkus.example.dtlistener;
 
 import java.util.concurrent.TimeUnit;
 
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
-
 import org.kie.dmn.api.core.event.AfterEvaluateDecisionTableEvent;
 import org.kie.dmn.model.api.DecisionTable;
 import org.kie.kogito.decision.DecisionModels;
@@ -30,6 +27,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import io.quarkus.scheduler.Scheduled;
+
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 /**
  * This example periodic Job uses a pre-identified DMN model coordinates.

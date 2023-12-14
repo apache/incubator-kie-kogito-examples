@@ -20,10 +20,10 @@ package org.kie.kogito.traffic;
 
 import java.util.Collections;
 
+import org.eclipse.microprofile.rest.client.inject.RestClient;
+
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-
-import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 @ApplicationScoped
 public class LicenseValidationRestService {

@@ -21,9 +21,6 @@ package org.acme.travels.quarkus;
 import java.util.HashMap;
 import java.util.Map;
 
-import jakarta.inject.Inject;
-import jakarta.inject.Named;
-
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.Model;
@@ -31,6 +28,9 @@ import org.kie.kogito.process.Process;
 import org.kie.kogito.process.ProcessInstance;
 
 import io.quarkus.test.junit.QuarkusTest;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

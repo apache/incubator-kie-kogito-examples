@@ -18,9 +18,9 @@
  */
 package org.kie.kogito.dmn.quarkus.example.listener;
 
-import jakarta.enterprise.context.ApplicationScoped;
-
 import org.kie.kogito.dmn.config.CachedDecisionEventListenerConfig;
+
+import jakarta.enterprise.context.ApplicationScoped;
 
 /**
  * This class demonstrates one of the two methods offered by Kogito to inject custom

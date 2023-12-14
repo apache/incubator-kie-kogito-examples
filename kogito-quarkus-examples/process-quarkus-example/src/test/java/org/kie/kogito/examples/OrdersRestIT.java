@@ -18,9 +18,6 @@
  */
 package org.kie.kogito.examples;
 
-import jakarta.inject.Inject;
-import jakarta.inject.Named;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.Model;
@@ -31,6 +28,9 @@ import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;

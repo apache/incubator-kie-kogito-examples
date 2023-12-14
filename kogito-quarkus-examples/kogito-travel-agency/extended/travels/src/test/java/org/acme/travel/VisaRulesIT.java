@@ -20,8 +20,6 @@ package org.acme.travel;
 
 import java.util.Date;
 
-import jakarta.inject.Inject;
-
 import org.acme.travels.Address;
 import org.acme.travels.Traveller;
 import org.acme.travels.Trip;
@@ -31,6 +29,8 @@ import org.kie.api.runtime.KieRuntimeBuilder;
 import org.kie.api.runtime.KieSession;
 
 import io.quarkus.test.junit.QuarkusTest;
+
+import jakarta.inject.Inject;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

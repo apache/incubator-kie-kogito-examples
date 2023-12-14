@@ -18,11 +18,11 @@
  */
 package org.kie.kogito.flexible.example.service;
 
-import jakarta.enterprise.context.ApplicationScoped;
-
 import org.kie.kogito.flexible.example.model.Comment;
 import org.kie.kogito.flexible.example.model.State;
 import org.kie.kogito.flexible.example.model.SupportCase;
+
+import jakarta.enterprise.context.ApplicationScoped;
 
 import static org.kie.kogito.flexible.example.model.State.WAITING_FOR_CUSTOMER;
 import static org.kie.kogito.flexible.example.model.State.WAITING_FOR_OWNER;

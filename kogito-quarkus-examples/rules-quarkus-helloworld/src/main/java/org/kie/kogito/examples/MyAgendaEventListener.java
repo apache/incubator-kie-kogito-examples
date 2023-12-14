@@ -20,11 +20,11 @@ package org.kie.kogito.examples;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import jakarta.inject.Singleton;
-
 import org.drools.core.event.DefaultAgendaEventListener;
 import org.jboss.logging.Logger;
 import org.kie.api.event.rule.AfterMatchFiredEvent;
+
+import jakarta.inject.Singleton;
 
 @Singleton
 public class MyAgendaEventListener extends DefaultAgendaEventListener {

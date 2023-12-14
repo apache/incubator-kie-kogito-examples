@@ -21,10 +21,10 @@ package org.kie.kogito.dmn.quarkus.example.dtlistener;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import jakarta.enterprise.context.ApplicationScoped;
-
 import org.kie.dmn.api.core.event.AfterEvaluateDecisionTableEvent;
 import org.kie.dmn.core.api.event.DefaultDMNRuntimeEventListener;
+
+import jakarta.enterprise.context.ApplicationScoped;
 
 /**
  * This class demonstrates one possible use of the `AfterEvaluateDecisionTableEvent` asynchronously to the listener.
