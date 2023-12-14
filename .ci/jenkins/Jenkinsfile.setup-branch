@@ -148,6 +148,7 @@ pipeline {
                         if (githubscm.isThereAnyChanges()) {
                             def commitMsg = "Update version to Kogito ${getKogitoVersion()} / Drools ${getDroolsVersion()}"
 
+                            githubscm.setUserConfigFromCreds(getGitAuthorPushCredsId())
                             githubscm.commitChanges(commitMsg)
                             githubscm.pushObject('origin', getBuildBranch(), getGitAuthorPushCredsId())
                         } else {
