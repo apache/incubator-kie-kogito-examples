@@ -123,11 +123,11 @@ You should see a similar output like this:
 STEP 1: FROM adoptopenjdk:11-jre-hotspot
 STEP 2: RUN mkdir -p /opt/app/lib
 --> Using cache 26183c5ad8a51a030030a250db0c99e649fdd9668ef4766d0b66782d0dad7573
-STEP 3: COPY target/github-service-2.0.0-SNAPSHOT-runner.jar /opt/app
+STEP 3: COPY target/github-service-999-SNAPSHOT-runner.jar /opt/app
 --> 31bc2627d32
 STEP 4: COPY target/lib/*.jar /opt/app/lib
 --> 62eae5cdde7
-STEP 5: CMD ["java", "-jar", "/opt/app/github-service-2.0.0-SNAPSHOT-runner.jar"]
+STEP 5: CMD ["java", "-jar", "/opt/app/github-service-999-SNAPSHOT-runner.jar"]
 STEP 6: COMMIT quay.io/ricardozanini/github-service:latest
 --> 7c555a3060c
 7c555a3060c666582824552d8824f2787b59b67b506fb933b171764bde894730

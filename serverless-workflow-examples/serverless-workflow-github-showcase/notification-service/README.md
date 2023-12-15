@@ -86,11 +86,11 @@ You should see a similar output like this:
 STEP 1: FROM adoptopenjdk:11-jre-hotspot
 STEP 2: RUN mkdir -p /opt/app/lib
 --> Using cache 26183c5ad8a51a030030a250db0c99e649fdd9668ef4766d0b66782d0dad7573
-STEP 3: COPY target/notification-service-2.0.0-SNAPSHOT-runner.jar /opt/app
+STEP 3: COPY target/notification-service-999-SNAPSHOT-runner.jar /opt/app
 --> 2a5b658411b
 STEP 4: COPY target/lib/*.jar /opt/app/lib
 --> 5fedac21977
-STEP 5: CMD ["java", "-jar", "/opt/app/notification-service-2.0.0-SNAPSHOT-runner.jar"]
+STEP 5: CMD ["java", "-jar", "/opt/app/notification-service-999-SNAPSHOT-runner.jar"]
 STEP 6: COMMIT quay.io/your_namespace/notification-service:latest
 --> afe502d1940
 afe502d1940d65f151c051008bb2057344607408c192787a726399d23d90c2d3

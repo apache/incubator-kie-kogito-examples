@@ -26,7 +26,7 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>kogito-springboot-examples</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
+    <version>999-SNAPSHOT</version>
   </parent>
 
   <artifactId>process-usertasks-with-security-oidc-springboot-with-console</artifactId>
@@ -35,8 +35,8 @@
 
   <properties>
     <enable.resource.infinispan>true</enable.resource.infinispan>
-    <version.org.kie.kogito>2.0.0-SNAPSHOT</version.org.kie.kogito>
-    <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+    <version.org.kie.kogito>999-SNAPSHOT</version.org.kie.kogito>
+    <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
   </properties>
 
   <dependencyManagement>

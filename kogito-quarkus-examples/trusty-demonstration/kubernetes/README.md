@@ -146,7 +146,7 @@ metadata:
     app: dmn-tracing-quarkus
 spec:
   replicas: 1
-  image: quay.io/<YOUR_NAMESPACE>/dmn-tracing-quarkus:2.0.0-snapshot # <---- replace with your image
+  image: quay.io/<YOUR_NAMESPACE>/dmn-tracing-quarkus:999-SNAPSHOT # <---- replace with your image
   infra:
     - kogito-kafka-infra
   env:

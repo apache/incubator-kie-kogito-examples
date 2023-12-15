@@ -16,11 +16,11 @@ recipeList:
   }
 - org.openrewrite.maven.ChangePropertyValue: {
     key: version.org.kie.kogito,
-    newValue: 2.0.0-SNAPSHOT
+    newValue: 999-SNAPSHOT
   }
 - org.openrewrite.maven.ChangePropertyValue: {
     key: kogito.bom.version,
-    newValue: 2.0.0-SNAPSHOT
+    newValue: 999-SNAPSHOT
   }
 - org.kie.kogito.Quarkus3Migration
 - org.kie.ManagedDependencies
