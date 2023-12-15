@@ -20,9 +20,9 @@ package org.kie.kogito.examples.quarkus;
 
 import java.util.Random;
 
-import javax.enterprise.context.ApplicationScoped;
-
 import org.kie.kogito.examples.quarkus.demo.Order;
+
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class CalculationService {

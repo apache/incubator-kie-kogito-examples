@@ -18,9 +18,9 @@
  */
 package org.kie.kogito.pmml.quarkus.example;
 
-import io.quarkus.test.junit.NativeImageTest;
+import io.quarkus.test.junit.QuarkusIntegrationTest;
 
-@NativeImageTest
+@QuarkusIntegrationTest
 public class NativeSampleMineTestIT extends SampleMineTest {
 
     // Execute the same tests but in native mode.

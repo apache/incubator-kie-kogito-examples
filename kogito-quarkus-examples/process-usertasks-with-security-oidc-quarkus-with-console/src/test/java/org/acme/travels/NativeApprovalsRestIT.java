@@ -22,9 +22,9 @@ import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 import org.kie.kogito.testcontainers.quarkus.KeycloakQuarkusTestResource;
 
 import io.quarkus.test.common.QuarkusTestResource;
-import io.quarkus.test.junit.NativeImageTest;
+import io.quarkus.test.junit.QuarkusIntegrationTest;
 
-@NativeImageTest
+@QuarkusIntegrationTest
 @QuarkusTestResource(KeycloakQuarkusTestResource.class)
 @QuarkusTestResource(KafkaQuarkusTestResource.class)
 public class NativeApprovalsRestIT extends ApprovalsRestIT {

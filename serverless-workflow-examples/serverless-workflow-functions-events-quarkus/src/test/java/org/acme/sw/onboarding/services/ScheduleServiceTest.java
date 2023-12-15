@@ -21,7 +21,7 @@ package org.acme.sw.onboarding.services;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import org.acme.sw.onboarding.model.Appointment;
 import org.acme.sw.onboarding.model.Doctor;

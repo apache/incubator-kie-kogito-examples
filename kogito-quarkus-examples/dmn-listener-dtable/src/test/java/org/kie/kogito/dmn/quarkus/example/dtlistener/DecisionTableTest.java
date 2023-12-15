@@ -20,13 +20,13 @@ package org.kie.kogito.dmn.quarkus.example.dtlistener;
 
 import java.util.concurrent.TimeUnit;
 
-import javax.inject.Inject;
-
 import org.junit.jupiter.api.Test;
 
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+
+import jakarta.inject.Inject;
 
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;

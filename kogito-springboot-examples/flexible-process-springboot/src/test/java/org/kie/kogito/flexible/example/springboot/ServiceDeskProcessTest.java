@@ -30,7 +30,7 @@ import org.kie.kogito.flexible.example.model.SupportCase;
 import org.kie.kogito.flexible.example.service.TriageService;
 import org.kie.kogito.tests.KogitoSpringbootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 
@@ -184,7 +184,7 @@ class ServiceDeskProcessTest {
                 .get("/tasks")
                 .then()
                 .statusCode(200)
-                .body("$.size", is(1))
+                .body("size()", is(1))
                 .body("[0].name", is("Questionnaire"))
                 .extract()
                 .path("[0].id");
@@ -215,7 +215,7 @@ class ServiceDeskProcessTest {
                 .basePath(BASE_PATH)
                 .contentType(ContentType.JSON)
                 .when()
-                .get("/")
+                .get("")
                 .as(List.class);
 
         assertTrue(processes.isEmpty());

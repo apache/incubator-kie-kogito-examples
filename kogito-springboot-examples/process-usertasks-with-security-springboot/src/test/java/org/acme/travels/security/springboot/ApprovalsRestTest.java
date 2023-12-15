@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.kie.kogito.tests.KogitoInfinispanSpringbootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -81,7 +81,7 @@ public class ApprovalsRestTest {
                 .get("/approvals")
                 .then()
                 .statusCode(200)
-                .body("$.size()", is(1), "[0].id", is(id));
+                .body("size()", is(1), "[0].id", is(id));
 
         // get just started approval
         given()
@@ -102,7 +102,7 @@ public class ApprovalsRestTest {
                 .get("/approvals/" + id + "/tasks?user=admin&group=managers")
                 .then()
                 .statusCode(200)
-                .body("$.size", is(1))
+                .body("size()", is(1))
                 .body("[0].name", is("firstLineApproval"))
                 .extract()
                 .path("[0].id");

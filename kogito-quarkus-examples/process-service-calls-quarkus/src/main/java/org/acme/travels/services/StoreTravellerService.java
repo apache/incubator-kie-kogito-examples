@@ -21,9 +21,9 @@ package org.acme.travels.services;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.enterprise.context.ApplicationScoped;
-
 import org.acme.travels.quarkus.Traveller;
+
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class StoreTravellerService {

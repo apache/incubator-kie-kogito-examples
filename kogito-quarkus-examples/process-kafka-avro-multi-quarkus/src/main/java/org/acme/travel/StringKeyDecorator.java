@@ -18,12 +18,12 @@
  */
 package org.acme.travel;
 
-import javax.enterprise.context.ApplicationScoped;
-
 import org.eclipse.microprofile.reactive.messaging.Message;
 import org.kie.kogito.addon.quarkus.common.reactive.messaging.MessageDecorator;
 
 import io.smallrye.reactive.messaging.kafka.api.OutgoingKafkaRecordMetadata;
+
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class StringKeyDecorator implements MessageDecorator {

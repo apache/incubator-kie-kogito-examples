@@ -133,23 +133,25 @@ deleted file mode 100644
 index add510733..000000000
 --- a/kogito-springboot-examples/process-usertasks-with-security-oidc-springboot-with-console/src/main/java/org/kie/kogito/springboot/KeycloakResolverConfig.java
 +++ /dev/null
-@@ -1,30 +0,0 @@
+@@ -1,32 +0,0 @@
 -/*
-- * Copyright 2022 Red Hat, Inc. and/or its affiliates.
+- * Licensed to the Apache Software Foundation (ASF) under one
+- * or more contributor license agreements.  See the NOTICE file
+- * distributed with this work for additional information
+- * regarding copyright ownership.  The ASF licenses this file
+- * to you under the Apache License, Version 2.0 (the
+- * "License"); you may not use this file except in compliance
+- * with the License.  You may obtain a copy of the License at
 - *
-- * Licensed under the Apache License, Version 2.0 (the "License");
-- * you may not use this file except in compliance with the License.
-- * You may obtain a copy of the License at
+- *   http://www.apache.org/licenses/LICENSE-2.0
 - *
-- *       http://www.apache.org/licenses/LICENSE-2.0
-- *
-- * Unless required by applicable law or agreed to in writing, software
-- * distributed under the License is distributed on an "AS IS" BASIS,
-- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-- * See the License for the specific language governing permissions and
-- * limitations under the License.
+- * Unless required by applicable law or agreed to in writing,
+- * software distributed under the License is distributed on an
+- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+- * KIND, either express or implied.  See the License for the
+- * specific language governing permissions and limitations
+- * under the License.
 - */
--
 -package org.kie.kogito.springboot;
 -
 -import org.keycloak.adapters.springboot.KeycloakSpringBootConfigResolver;
@@ -168,7 +170,7 @@ diff --git a/kogito-springboot-examples/process-usertasks-with-security-oidc-spr
 index 171e1bc03..3d3238bea 100644
 --- a/kogito-springboot-examples/process-usertasks-with-security-oidc-springboot-with-console/src/main/resources/application.properties
 +++ b/kogito-springboot-examples/process-usertasks-with-security-oidc-springboot-with-console/src/main/resources/application.properties
-@@ -1,22 +1,7 @@
+@@ -19,22 +19,7 @@
  server.address=0.0.0.0
  infinispan.remote.server-list=127.0.0.1:11222
  
@@ -262,7 +264,7 @@ diff --git a/kogito-springboot-examples/process-usertasks-with-security-oidc-spr
 index 7740348dd..a1451ed66 100644
 --- a/kogito-springboot-examples/process-usertasks-with-security-oidc-springboot-with-console/src/test/resources/application.properties
 +++ b/kogito-springboot-examples/process-usertasks-with-security-oidc-springboot-with-console/src/test/resources/application.properties
-@@ -1,8 +1,5 @@
+@@ -19,8 +19,5 @@
  
 -keycloak.realm=kogito
 -keycloak.resource=kogito-app
@@ -376,23 +378,25 @@ deleted file mode 100644
 index add510733..000000000
 --- a/kogito-springboot-examples/process-usertasks-with-security-oidc-springboot/src/main/java/org/kie/kogito/springboot/KeycloakResolverConfig.java
 +++ /dev/null
-@@ -1,30 +0,0 @@
+@@ -1,32 +0,0 @@
 -/*
-- * Copyright 2022 Red Hat, Inc. and/or its affiliates.
+- * Licensed to the Apache Software Foundation (ASF) under one
+- * or more contributor license agreements.  See the NOTICE file
+- * distributed with this work for additional information
+- * regarding copyright ownership.  The ASF licenses this file
+- * to you under the Apache License, Version 2.0 (the
+- * "License"); you may not use this file except in compliance
+- * with the License.  You may obtain a copy of the License at
 - *
-- * Licensed under the Apache License, Version 2.0 (the "License");
-- * you may not use this file except in compliance with the License.
-- * You may obtain a copy of the License at
+- *   http://www.apache.org/licenses/LICENSE-2.0
 - *
-- *       http://www.apache.org/licenses/LICENSE-2.0
-- *
-- * Unless required by applicable law or agreed to in writing, software
-- * distributed under the License is distributed on an "AS IS" BASIS,
-- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-- * See the License for the specific language governing permissions and
-- * limitations under the License.
+- * Unless required by applicable law or agreed to in writing,
+- * software distributed under the License is distributed on an
+- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+- * KIND, either express or implied.  See the License for the
+- * specific language governing permissions and limitations
+- * under the License.
 - */
--
 -package org.kie.kogito.springboot;
 -
 -import org.keycloak.adapters.springboot.KeycloakSpringBootConfigResolver;
@@ -492,7 +496,7 @@ diff --git a/kogito-springboot-examples/process-usertasks-with-security-oidc-spr
 index a2dac0b06..3be2ed592 100644
 --- a/kogito-springboot-examples/process-usertasks-with-security-oidc-springboot/src/test/resources/application.properties
 +++ b/kogito-springboot-examples/process-usertasks-with-security-oidc-springboot/src/test/resources/application.properties
-@@ -1,7 +1,3 @@
+@@ -19,7 +19,3 @@
 -keycloak.auth-server-url=http://localhost:8281/auth
 -keycloak.realm=kogito
 -keycloak.resource=kogito-app

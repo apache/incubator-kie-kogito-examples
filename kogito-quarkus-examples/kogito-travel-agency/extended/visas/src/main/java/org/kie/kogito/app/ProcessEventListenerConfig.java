@@ -18,16 +18,16 @@
  */
 package org.kie.kogito.app;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-
 import org.kie.kogito.KogitoGAV;
 import org.kie.kogito.config.ConfigBean;
 import org.kie.kogito.process.impl.DefaultProcessEventListenerConfig;
 
 import io.micrometer.prometheus.PrometheusMeterRegistry;
+
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 @ApplicationScoped
 public class ProcessEventListenerConfig extends DefaultProcessEventListenerConfig {

@@ -168,7 +168,7 @@ class ServiceDeskProcessTest {
                 .get("/tasks")
                 .then()
                 .statusCode(200)
-                .body("$.size", is(1))
+                .body("size()", is(1))
                 .body("[0].name", is("Questionnaire"))
                 .extract()
                 .path("[0].id");

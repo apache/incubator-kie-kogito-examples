@@ -20,15 +20,15 @@ package org.acme.travel;
 
 import java.io.IOException;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
-
 import org.kie.kogito.event.EventMarshaller;
 import org.kie.kogito.event.EventUnmarshaller;
 import org.kie.kogito.event.avro.AvroEventMarshaller;
 import org.kie.kogito.event.avro.AvroEventUnmarshaller;
 import org.kie.kogito.event.avro.AvroIO;
+
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Produces;
 
 @ApplicationScoped
 public class AvroMarshallerProducer {

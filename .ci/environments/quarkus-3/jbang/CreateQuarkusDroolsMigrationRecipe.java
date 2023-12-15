@@ -28,13 +28,13 @@ import java.util.Map;
 import org.apache.commons.io.IOUtils;
 
 import io.quarkus.devtools.project.BuildTool;
-import io.quarkus.devtools.project.update.QuarkusUpdateRecipe;
-import io.quarkus.devtools.project.update.QuarkusUpdateRecipeIO;
-import io.quarkus.devtools.project.update.operations.UpdatePropertyOperation;
+import io.quarkus.devtools.project.update.rewrite.QuarkusUpdateRecipe;
+import io.quarkus.devtools.project.update.rewrite.QuarkusUpdateRecipeIO;
+import io.quarkus.devtools.project.update.rewrite.operations.UpdatePropertyOperation;
 
 ///usr/bin/env jbang "$0" "$@" ; exit $?
 // Version to be changed when needed
-//DEPS io.quarkus:quarkus-devtools-common:3.0.0.Final
+//DEPS io.quarkus:quarkus-devtools-common:3.2.9.Final
 
 /*
  * This script will generate the final `quarkus3.yml` file based on:
@@ -49,8 +49,8 @@ import io.quarkus.devtools.project.update.operations.UpdatePropertyOperation;
  */
 class CreateQuarkusProjectMigrationRecipe {
 
-    static final String QUARKUS_VERSION = "3.0.0.Final";
-    static final String QUARKUS_UPDATES_BASE_URL = "https://raw.githubusercontent.com/quarkusio/quarkus-updates/1.0.0/recipes/src/main/resources/quarkus-updates/core/3alpha.yaml";
+    static final String QUARKUS_VERSION = "3.2.9.Final";
+    static final String QUARKUS_UPDATES_BASE_URL = "https://github.com/quarkusio/quarkus-updates/blob/main/recipes/src/main/resources/quarkus-updates/core/3.2.yaml";
 
     static final Path quarkus3DownloadedRecipePath = Paths.get("quarkus3-base-recipe.yml");
     static final Path quarkus3GeneratedRecipePath = Paths.get("quarkus3.yml");

@@ -56,7 +56,7 @@
 
     <dependency>
       <groupId>io.cloudevents</groupId>
-      <artifactId>cloudevents-http-restful-ws</artifactId>
+      <artifactId>cloudevents-http-restful-ws-jakarta</artifactId>
       <version>${version.io.cloudevents}</version>
     </dependency>
     <dependency>

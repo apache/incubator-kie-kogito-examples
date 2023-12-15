@@ -20,8 +20,6 @@ package org.kie.kogito.examples;
 
 import java.util.Map;
 
-import javax.ws.rs.core.MediaType;
-
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -33,6 +31,8 @@ import com.github.tomakehurst.wiremock.matching.EqualToPattern;
 
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.RestAssured;
+
+import jakarta.ws.rs.core.MediaType;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.matchingJsonPath;

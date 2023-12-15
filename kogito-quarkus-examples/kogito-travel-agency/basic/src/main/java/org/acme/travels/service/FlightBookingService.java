@@ -18,10 +18,10 @@
  */
 package org.acme.travels.service;
 
-import javax.enterprise.context.ApplicationScoped;
-
 import org.acme.travels.Flight;
 import org.acme.travels.Trip;
+
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class FlightBookingService {

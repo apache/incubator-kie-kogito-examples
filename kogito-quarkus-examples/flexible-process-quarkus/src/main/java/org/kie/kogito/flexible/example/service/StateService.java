@@ -18,11 +18,11 @@
  */
 package org.kie.kogito.flexible.example.service;
 
-import javax.enterprise.context.ApplicationScoped;
-
 import org.kie.kogito.flexible.example.model.Questionnaire;
 import org.kie.kogito.flexible.example.model.State;
 import org.kie.kogito.flexible.example.model.SupportCase;
+
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class StateService {

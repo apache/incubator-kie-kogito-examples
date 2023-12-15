@@ -18,11 +18,11 @@
  */
 package org.acme.travels.config;
 
-import javax.enterprise.context.ApplicationScoped;
-
 import org.acme.travels.usertasks.CustomHumanTaskLifeCycle;
 import org.jbpm.process.instance.impl.humantask.HumanTaskWorkItemHandler;
 import org.kie.kogito.process.impl.DefaultWorkItemHandlerConfig;
+
+import jakarta.enterprise.context.ApplicationScoped;
 
 /**
  * Custom work item handler configuration to change default work item handler for user tasks

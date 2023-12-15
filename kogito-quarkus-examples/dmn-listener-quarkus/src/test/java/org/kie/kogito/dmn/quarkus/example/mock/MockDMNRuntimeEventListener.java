@@ -21,11 +21,11 @@ package org.kie.kogito.dmn.quarkus.example.mock;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.enterprise.context.ApplicationScoped;
-
 import org.kie.dmn.api.core.event.AfterEvaluateAllEvent;
 import org.kie.dmn.api.core.event.BeforeEvaluateAllEvent;
 import org.kie.dmn.api.core.event.DMNRuntimeEventListener;
+
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class MockDMNRuntimeEventListener implements DMNRuntimeEventListener {

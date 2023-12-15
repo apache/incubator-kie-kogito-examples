@@ -18,9 +18,9 @@
  */
 package org.acme.wih;
 
-import javax.enterprise.context.ApplicationScoped;
-
 import org.kie.kogito.process.impl.DefaultWorkItemHandlerConfig;
+
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class CustomWorkItemHandlerConfig extends DefaultWorkItemHandlerConfig {

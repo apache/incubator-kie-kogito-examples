@@ -21,7 +21,7 @@ package org.acme.sw.onboarding.resources;
 import java.time.Duration;
 import java.util.UUID;
 
-import javax.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.MediaType;
 
 import org.junit.jupiter.api.Test;
 
@@ -45,7 +45,7 @@ class OnboardingIT {
                 .get("/onboarding/schedule/appointment")
                 .then()
                 .statusCode(200)
-                .extract().path("$.size()");
+                .extract().path("size()");
 
         given()
                 .body("{ \"name\": \"Yoda\", \"dateOfBirth\": \"1963-08-15\", \"symptoms\":[\"seizures\"]}")
