@@ -27,14 +27,14 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>kogito-springboot-examples</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
+    <version>999-SNAPSHOT</version>
   </parent>
   <artifactId>dmn-pmml-springboot-example</artifactId>
   <name>Kogito Example :: DMN :: PMML - Spring Boot</name>
 
   <properties>
-    <version.org.kie.kogito>2.0.0-SNAPSHOT</version.org.kie.kogito>
-    <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+    <version.org.kie.kogito>999-SNAPSHOT</version.org.kie.kogito>
+    <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
   </properties>
 
   <dependencyManagement>

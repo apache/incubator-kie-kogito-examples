@@ -27,8 +27,8 @@ index 63c361520..cc9745dbc 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
-     <version.org.kie.kogito>2.0.0-SNAPSHOT</version.org.kie.kogito>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
+     <version.org.kie.kogito>999-SNAPSHOT</version.org.kie.kogito>
 -    <version.org.drools>8.45.0-SNAPSHOT</version.org.drools>
 +    <version.org.drools>9.45.0-SNAPSHOT</version.org.drools>
    </properties>
@@ -66,7 +66,7 @@ index 83c508d91..df6487ae0 100755
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/dmn-drools-quarkus-metrics/src/main/java/org/kie/kogito/app/CustomDMNRuntimeEventListener.java b/kogito-quarkus-examples/dmn-drools-quarkus-metrics/src/main/java/org/kie/kogito/app/CustomDMNRuntimeEventListener.java
 index 94edbbc1d..43dfd1bfb 100644
 --- a/kogito-quarkus-examples/dmn-drools-quarkus-metrics/src/main/java/org/kie/kogito/app/CustomDMNRuntimeEventListener.java
@@ -113,7 +113,7 @@ index 85be15407..d09a126d5 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/dmn-event-driven-quarkus/src/test/java/org/kie/kogito/examples/NativeDmnEventDrivenIT.java b/kogito-quarkus-examples/dmn-event-driven-quarkus/src/test/java/org/kie/kogito/examples/NativeDmnEventDrivenIT.java
 index d1767133d..63ffb7a9e 100644
 --- a/kogito-quarkus-examples/dmn-event-driven-quarkus/src/test/java/org/kie/kogito/examples/NativeDmnEventDrivenIT.java
@@ -146,7 +146,7 @@ index 96fbbc69a..18490b6f9 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/dmn-incubation-api-quarkus/src/main/java/org/acme/CustomRestDecision.java b/kogito-quarkus-examples/dmn-incubation-api-quarkus/src/main/java/org/acme/CustomRestDecision.java
 index 5793b7734..d068f50f3 100644
 --- a/kogito-quarkus-examples/dmn-incubation-api-quarkus/src/main/java/org/acme/CustomRestDecision.java
@@ -186,7 +186,7 @@ index 18a5607b0..c11e900e5 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/dmn-knative-quickstart-quarkus/src/test/java/org/kie/kogito/examples/CloudEventListenerTest.java b/kogito-quarkus-examples/dmn-knative-quickstart-quarkus/src/test/java/org/kie/kogito/examples/CloudEventListenerTest.java
 index f24123502..7f70a7f00 100644
 --- a/kogito-quarkus-examples/dmn-knative-quickstart-quarkus/src/test/java/org/kie/kogito/examples/CloudEventListenerTest.java
@@ -216,7 +216,7 @@ index 2d3314241..420ec8488 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/dmn-listener-dtable/src/main/java/org/kie/kogito/dmn/quarkus/example/dtlistener/ExampleDMNRuntimeEventListener.java b/kogito-quarkus-examples/dmn-listener-dtable/src/main/java/org/kie/kogito/dmn/quarkus/example/dtlistener/ExampleDMNRuntimeEventListener.java
 index 9ec21218d..6a54bb2a1 100644
 --- a/kogito-quarkus-examples/dmn-listener-dtable/src/main/java/org/kie/kogito/dmn/quarkus/example/dtlistener/ExampleDMNRuntimeEventListener.java
@@ -274,7 +274,7 @@ index ca94ca307..4d5bb9bbe 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/dmn-listener-quarkus/src/main/java/org/kie/kogito/dmn/quarkus/example/listener/ExampleDMNRuntimeEventListener.java b/kogito-quarkus-examples/dmn-listener-quarkus/src/main/java/org/kie/kogito/dmn/quarkus/example/listener/ExampleDMNRuntimeEventListener.java
 index 0111e6522..7b3ddbbf5 100644
 --- a/kogito-quarkus-examples/dmn-listener-quarkus/src/main/java/org/kie/kogito/dmn/quarkus/example/listener/ExampleDMNRuntimeEventListener.java
@@ -359,7 +359,7 @@ index 05301df8a..6343566f3 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/dmn-pmml-quarkus-example/src/test/java/org/kie/kogito/dmn/pmml/quarkus/example/NativeDMNRegressionIT.java b/kogito-quarkus-examples/dmn-pmml-quarkus-example/src/test/java/org/kie/kogito/dmn/pmml/quarkus/example/NativeDMNRegressionIT.java
 index 01c155dd9..40fdfa152 100644
 --- a/kogito-quarkus-examples/dmn-pmml-quarkus-example/src/test/java/org/kie/kogito/dmn/pmml/quarkus/example/NativeDMNRegressionIT.java
@@ -440,7 +440,7 @@ index 8a932a810..89f6f06b3 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/dmn-quarkus-example/src/test/java/org/kie/kogito/dmn/quarkus/example/NativeTrafficViolationIT.java b/kogito-quarkus-examples/dmn-quarkus-example/src/test/java/org/kie/kogito/dmn/quarkus/example/NativeTrafficViolationIT.java
 index 6473b17a5..b43c7dca8 100644
 --- a/kogito-quarkus-examples/dmn-quarkus-example/src/test/java/org/kie/kogito/dmn/quarkus/example/NativeTrafficViolationIT.java
@@ -473,7 +473,7 @@ index 48bdfd91e..e982f3678 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/dmn-tracing-quarkus/src/test/java/org/kie/kogito/dmn/quarkus/tracing/NativeLoanEligibilityIT.java b/kogito-quarkus-examples/dmn-tracing-quarkus/src/test/java/org/kie/kogito/dmn/quarkus/tracing/NativeLoanEligibilityIT.java
 index 46d1ae53b..1f643270e 100644
 --- a/kogito-quarkus-examples/dmn-tracing-quarkus/src/test/java/org/kie/kogito/dmn/quarkus/tracing/NativeLoanEligibilityIT.java
@@ -506,7 +506,7 @@ index 86c9c57a0..a6f6d478a 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/flexible-process-quarkus/src/main/java/org/kie/kogito/flexible/example/service/CommentService.java b/kogito-quarkus-examples/flexible-process-quarkus/src/main/java/org/kie/kogito/flexible/example/service/CommentService.java
 index 7b504cf9a..a5dda59b1 100644
 --- a/kogito-quarkus-examples/flexible-process-quarkus/src/main/java/org/kie/kogito/flexible/example/service/CommentService.java
@@ -562,8 +562,8 @@ index a3874f262..80fb256dc 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
-     <version.org.kie.kogito>2.0.0-SNAPSHOT</version.org.kie.kogito>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
+     <version.org.kie.kogito>999-SNAPSHOT</version.org.kie.kogito>
 -    <version.org.drools>8.45.0-SNAPSHOT</version.org.drools>
 +    <version.org.drools>9.45.0-SNAPSHOT</version.org.drools>
    </properties>
@@ -686,8 +686,8 @@ index 1465b59d6..b16c42a83 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
-     <version.org.kie.kogito>2.0.0-SNAPSHOT</version.org.kie.kogito>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
+     <version.org.kie.kogito>999-SNAPSHOT</version.org.kie.kogito>
 -    <version.org.drools>8.45.0-SNAPSHOT</version.org.drools>
 +    <version.org.drools>9.45.0-SNAPSHOT</version.org.drools>
    </properties>
@@ -852,7 +852,7 @@ index bb7c2b4b9..42a3618e9 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/kogito-travel-agency/extended/visas/src/main/java/org/kie/kogito/app/ProcessEventListenerConfig.java b/kogito-quarkus-examples/kogito-travel-agency/extended/visas/src/main/java/org/kie/kogito/app/ProcessEventListenerConfig.java
 index 5520f975d..498b085a3 100644
 --- a/kogito-quarkus-examples/kogito-travel-agency/extended/visas/src/main/java/org/kie/kogito/app/ProcessEventListenerConfig.java
@@ -1016,7 +1016,7 @@ index b95eb4134..f152f28cf 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/pmml-event-driven-quarkus/pom.xml b/kogito-quarkus-examples/pmml-event-driven-quarkus/pom.xml
 index 6f2f29147..502bddea3 100644
 --- a/kogito-quarkus-examples/pmml-event-driven-quarkus/pom.xml
@@ -1033,7 +1033,7 @@ index 6f2f29147..502bddea3 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/pmml-incubation-api-quarkus/pom.xml b/kogito-quarkus-examples/pmml-incubation-api-quarkus/pom.xml
 index 352a35036..6912af097 100644
 --- a/kogito-quarkus-examples/pmml-incubation-api-quarkus/pom.xml
@@ -1050,7 +1050,7 @@ index 352a35036..6912af097 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/pmml-incubation-api-quarkus/src/main/java/org/acme/CustomRestPrediction.java b/kogito-quarkus-examples/pmml-incubation-api-quarkus/src/main/java/org/acme/CustomRestPrediction.java
 index 59548a409..a57a681d9 100644
 --- a/kogito-quarkus-examples/pmml-incubation-api-quarkus/src/main/java/org/acme/CustomRestPrediction.java
@@ -1090,7 +1090,7 @@ index a08e5d33b..dc01b2462 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/pmml-quarkus-example/src/test/java/org/kie/kogito/pmml/quarkus/example/NativeLinRegTestIT.java b/kogito-quarkus-examples/pmml-quarkus-example/src/test/java/org/kie/kogito/pmml/quarkus/example/NativeLinRegTestIT.java
 index 412e98f29..59bc2c9cc 100644
 --- a/kogito-quarkus-examples/pmml-quarkus-example/src/test/java/org/kie/kogito/pmml/quarkus/example/NativeLinRegTestIT.java
@@ -1171,7 +1171,7 @@ index 5d7341f08..f0a44d2d7 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/process-business-rules-quarkus/src/test/java/org/acme/travels/PersonProcessTest.java b/kogito-quarkus-examples/process-business-rules-quarkus/src/test/java/org/acme/travels/PersonProcessTest.java
 index dd8a43a8d..08226d572 100644
 --- a/kogito-quarkus-examples/process-business-rules-quarkus/src/test/java/org/acme/travels/PersonProcessTest.java
@@ -1203,7 +1203,7 @@ index cec871f85..8e29251fc 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/process-decisions-quarkus/src/main/java/org/kie/kogito/traffic/DriverService.java b/kogito-quarkus-examples/process-decisions-quarkus/src/main/java/org/kie/kogito/traffic/DriverService.java
 index 5458de220..e9dbf0399 100644
 --- a/kogito-quarkus-examples/process-decisions-quarkus/src/main/java/org/kie/kogito/traffic/DriverService.java
@@ -1248,7 +1248,7 @@ index 46dbf226b..e6633199c 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/process-decisions-rest-quarkus/src/main/java/org/kie/kogito/traffic/DriverService.java b/kogito-quarkus-examples/process-decisions-rest-quarkus/src/main/java/org/kie/kogito/traffic/DriverService.java
 index 5458de220..e9dbf0399 100644
 --- a/kogito-quarkus-examples/process-decisions-rest-quarkus/src/main/java/org/kie/kogito/traffic/DriverService.java
@@ -1365,7 +1365,7 @@ index 7f63a1d70..e749449dc 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/process-decisions-rules-quarkus/src/main/java/org/kie/kogito/traffic/DriverService.java b/kogito-quarkus-examples/process-decisions-rules-quarkus/src/main/java/org/kie/kogito/traffic/DriverService.java
 index fec1d8fae..10bc01a8f 100644
 --- a/kogito-quarkus-examples/process-decisions-rules-quarkus/src/main/java/org/kie/kogito/traffic/DriverService.java
@@ -1410,7 +1410,7 @@ index b02e685a3..52eedb254 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/process-error-handling/src/main/java/org/acme/wih/CustomWorkItemHandlerConfig.java b/kogito-quarkus-examples/process-error-handling/src/main/java/org/acme/wih/CustomWorkItemHandlerConfig.java
 index 08a1e85ab..42e99a989 100644
 --- a/kogito-quarkus-examples/process-error-handling/src/main/java/org/acme/wih/CustomWorkItemHandlerConfig.java
@@ -1455,7 +1455,7 @@ index ea50ff223..188e761fa 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/process-incubation-api-quarkus/src/main/java/org/acme/CustomRestProcess.java b/kogito-quarkus-examples/process-incubation-api-quarkus/src/main/java/org/acme/CustomRestProcess.java
 index 1e5fecc2e..ac0057e99 100644
 --- a/kogito-quarkus-examples/process-incubation-api-quarkus/src/main/java/org/acme/CustomRestProcess.java
@@ -1495,7 +1495,7 @@ index 8b75d8310..168afdeaa 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/process-infinispan-persistence-quarkus/src/test/java/org/acme/deals/NativeDealsRestIT.java b/kogito-quarkus-examples/process-infinispan-persistence-quarkus/src/test/java/org/acme/deals/NativeDealsRestIT.java
 index 7c1d63b9c..81c1c5d0a 100644
 --- a/kogito-quarkus-examples/process-infinispan-persistence-quarkus/src/test/java/org/acme/deals/NativeDealsRestIT.java
@@ -1528,7 +1528,7 @@ index 14d2d10d5..ae5408429 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/process-kafka-avro-multi-quarkus/src/main/java/org/acme/travel/AvroMarshallerProducer.java b/kogito-quarkus-examples/process-kafka-avro-multi-quarkus/src/main/java/org/acme/travel/AvroMarshallerProducer.java
 index cf98c74d0..ca9dbed97 100644
 --- a/kogito-quarkus-examples/process-kafka-avro-multi-quarkus/src/main/java/org/acme/travel/AvroMarshallerProducer.java
@@ -1589,7 +1589,7 @@ index ead567505..34e39311e 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/process-kafka-persistence-quarkus/pom.xml b/kogito-quarkus-examples/process-kafka-persistence-quarkus/pom.xml
 index e8bdd2dbd..788688ada 100644
 --- a/kogito-quarkus-examples/process-kafka-persistence-quarkus/pom.xml
@@ -1606,7 +1606,7 @@ index e8bdd2dbd..788688ada 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/process-kafka-persistence-quarkus/src/main/java/org/acme/deals/Application.java b/kogito-quarkus-examples/process-kafka-persistence-quarkus/src/main/java/org/acme/deals/Application.java
 index 500211eef..31e358c1e 100644
 --- a/kogito-quarkus-examples/process-kafka-persistence-quarkus/src/main/java/org/acme/deals/Application.java
@@ -1641,7 +1641,7 @@ index ee9c72379..bd6b31ca3 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/process-knative-quickstart-quarkus/pom.xml b/kogito-quarkus-examples/process-knative-quickstart-quarkus/pom.xml
 index fae239f4c..05b2c763d 100644
 --- a/kogito-quarkus-examples/process-knative-quickstart-quarkus/pom.xml
@@ -1658,7 +1658,7 @@ index fae239f4c..05b2c763d 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/process-knative-quickstart-quarkus/src/test/java/org/acme/travel/CloudEventListenerTest.java b/kogito-quarkus-examples/process-knative-quickstart-quarkus/src/test/java/org/acme/travel/CloudEventListenerTest.java
 index bb41eb641..b3c4b483c 100644
 --- a/kogito-quarkus-examples/process-knative-quickstart-quarkus/src/test/java/org/acme/travel/CloudEventListenerTest.java
@@ -1688,7 +1688,7 @@ index 4a5fcdc5e..4d2426005 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/process-mongodb-persistence-quarkus/src/test/java/org/acme/deals/NativeDealsRestIT.java b/kogito-quarkus-examples/process-mongodb-persistence-quarkus/src/test/java/org/acme/deals/NativeDealsRestIT.java
 index 7c1d63b9c..81c1c5d0a 100644
 --- a/kogito-quarkus-examples/process-mongodb-persistence-quarkus/src/test/java/org/acme/deals/NativeDealsRestIT.java
@@ -1721,7 +1721,7 @@ index 127fcc8ba..2310ab011 100755
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/process-monitoring-quarkus/src/main/java/org/kie/kogito/examples/quarkus/CalculationService.java b/kogito-quarkus-examples/process-monitoring-quarkus/src/main/java/org/kie/kogito/examples/quarkus/CalculationService.java
 index 4b23a5b71..8a0af9cfe 100644
 --- a/kogito-quarkus-examples/process-monitoring-quarkus/src/main/java/org/kie/kogito/examples/quarkus/CalculationService.java
@@ -1782,7 +1782,7 @@ index ad4154d11..ae30cc85e 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/process-outbox-mongodb-quarkus/src/main/java/org/kie/kogito/examples/CalculationService.java b/kogito-quarkus-examples/process-outbox-mongodb-quarkus/src/main/java/org/kie/kogito/examples/CalculationService.java
 index d15814e74..effee0cf2 100644
 --- a/kogito-quarkus-examples/process-outbox-mongodb-quarkus/src/main/java/org/kie/kogito/examples/CalculationService.java
@@ -1812,7 +1812,7 @@ index 47055d85a..f6377b829 100755
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/process-performance-quarkus/pom.xml b/kogito-quarkus-examples/process-performance-quarkus/pom.xml
 index 392a3811e..22fe7f04e 100755
 --- a/kogito-quarkus-examples/process-performance-quarkus/pom.xml
@@ -1829,7 +1829,7 @@ index 392a3811e..22fe7f04e 100755
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/process-postgresql-persistence-quarkus/pom.xml b/kogito-quarkus-examples/process-postgresql-persistence-quarkus/pom.xml
 index 56c7177a6..222649aa3 100644
 --- a/kogito-quarkus-examples/process-postgresql-persistence-quarkus/pom.xml
@@ -1846,7 +1846,7 @@ index 56c7177a6..222649aa3 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/process-quarkus-example/pom.xml b/kogito-quarkus-examples/process-quarkus-example/pom.xml
 index 3ddbf677b..50e0eff1a 100755
 --- a/kogito-quarkus-examples/process-quarkus-example/pom.xml
@@ -1863,7 +1863,7 @@ index 3ddbf677b..50e0eff1a 100755
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/process-quarkus-example/src/main/java/org/kie/kogito/examples/CalculationService.java b/kogito-quarkus-examples/process-quarkus-example/src/main/java/org/kie/kogito/examples/CalculationService.java
 index d15814e74..effee0cf2 100644
 --- a/kogito-quarkus-examples/process-quarkus-example/src/main/java/org/kie/kogito/examples/CalculationService.java
@@ -1953,7 +1953,7 @@ index 0e8d192f2..bd895768b 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 @@ -86,7 +86,7 @@
      <dependency>
        <groupId>io.smallrye</groupId>
@@ -2041,7 +2041,7 @@ index 2615d701e..0f4ea2f9e 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/process-rest-workitem-multi-quarkus/src/main/java/org/acme/numbers/NumbersResource.java b/kogito-quarkus-examples/process-rest-workitem-multi-quarkus/src/main/java/org/acme/numbers/NumbersResource.java
 index e9278eb87..728d6ebf0 100644
 --- a/kogito-quarkus-examples/process-rest-workitem-multi-quarkus/src/main/java/org/acme/numbers/NumbersResource.java
@@ -2107,7 +2107,7 @@ index acba305ec..34fd93191 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/process-rest-workitem-quarkus/src/main/java/org/acme/travels/rest/UsersRemoteService.java b/kogito-quarkus-examples/process-rest-workitem-quarkus/src/main/java/org/acme/travels/rest/UsersRemoteService.java
 index ea11debf3..0c4d0b2b9 100644
 --- a/kogito-quarkus-examples/process-rest-workitem-quarkus/src/main/java/org/acme/travels/rest/UsersRemoteService.java
@@ -2171,7 +2171,7 @@ index 268b257b3..f9d412070 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/process-saga-quarkus/src/main/java/org/kie/kogito/examples/MockService.java b/kogito-quarkus-examples/process-saga-quarkus/src/main/java/org/kie/kogito/examples/MockService.java
 index e30cc4f33..80ec53e9d 100644
 --- a/kogito-quarkus-examples/process-saga-quarkus/src/main/java/org/kie/kogito/examples/MockService.java
@@ -2259,7 +2259,7 @@ index 9d7b6eef2..093678103 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/process-scripts-quarkus/src/test/java/org/acme/travels/quarkus/ScriptsProcessTest.java b/kogito-quarkus-examples/process-scripts-quarkus/src/test/java/org/acme/travels/quarkus/ScriptsProcessTest.java
 index 7b15e87bf..a3396a5c4 100644
 --- a/kogito-quarkus-examples/process-scripts-quarkus/src/test/java/org/acme/travels/quarkus/ScriptsProcessTest.java
@@ -2291,7 +2291,7 @@ index ef026a813..19cc12c08 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/process-service-calls-quarkus/src/main/java/org/acme/travels/services/GreetingTravellerService.java b/kogito-quarkus-examples/process-service-calls-quarkus/src/main/java/org/acme/travels/services/GreetingTravellerService.java
 index bdb582dc6..37396540d 100644
 --- a/kogito-quarkus-examples/process-service-calls-quarkus/src/main/java/org/acme/travels/services/GreetingTravellerService.java
@@ -2390,7 +2390,7 @@ index 5be2f70ca..b87e5dea2 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/process-usertasks-custom-lifecycle-quarkus/pom.xml b/kogito-quarkus-examples/process-usertasks-custom-lifecycle-quarkus/pom.xml
 index 82bd7a37c..d18c87e01 100644
 --- a/kogito-quarkus-examples/process-usertasks-custom-lifecycle-quarkus/pom.xml
@@ -2407,7 +2407,7 @@ index 82bd7a37c..d18c87e01 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/process-usertasks-custom-lifecycle-quarkus/src/main/java/org/acme/travels/config/CustomWorkItemHandlerConfig.java b/kogito-quarkus-examples/process-usertasks-custom-lifecycle-quarkus/src/main/java/org/acme/travels/config/CustomWorkItemHandlerConfig.java
 index 432626a6a..56afaf5a5 100644
 --- a/kogito-quarkus-examples/process-usertasks-custom-lifecycle-quarkus/src/main/java/org/acme/travels/config/CustomWorkItemHandlerConfig.java
@@ -2452,7 +2452,7 @@ index 215bf2816..0981df91e 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/process-usertasks-quarkus-with-console/src/test/java/org/kie/kogito/hr/HiringProcessIT.java b/kogito-quarkus-examples/process-usertasks-quarkus-with-console/src/test/java/org/kie/kogito/hr/HiringProcessIT.java
 index 6498bd21e..c01f3a1c3 100644
 --- a/kogito-quarkus-examples/process-usertasks-quarkus-with-console/src/test/java/org/kie/kogito/hr/HiringProcessIT.java
@@ -2484,7 +2484,7 @@ index e58b699d9..2fcc67c7b 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/process-usertasks-quarkus/src/test/java/org/acme/travels/quarkus/ApprovalsProcessTest.java b/kogito-quarkus-examples/process-usertasks-quarkus/src/test/java/org/acme/travels/quarkus/ApprovalsProcessTest.java
 index fe83cee7d..19aa1ccdd 100644
 --- a/kogito-quarkus-examples/process-usertasks-quarkus/src/test/java/org/acme/travels/quarkus/ApprovalsProcessTest.java
@@ -2516,7 +2516,7 @@ index d0a1f4b11..70b529739 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/process-usertasks-timer-quarkus-with-console/src/test/java/org/kie/kogito/hr/HiringProcessIT.java b/kogito-quarkus-examples/process-usertasks-timer-quarkus-with-console/src/test/java/org/kie/kogito/hr/HiringProcessIT.java
 index 6498bd21e..c01f3a1c3 100644
 --- a/kogito-quarkus-examples/process-usertasks-timer-quarkus-with-console/src/test/java/org/kie/kogito/hr/HiringProcessIT.java
@@ -2548,7 +2548,7 @@ index e7c36a816..e66aa01d9 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/process-usertasks-with-security-oidc-quarkus-with-console/src/test/java/org/acme/travels/ApprovalsProcessIT.java b/kogito-quarkus-examples/process-usertasks-with-security-oidc-quarkus-with-console/src/test/java/org/acme/travels/ApprovalsProcessIT.java
 index 555c26934..f2267b250 100644
 --- a/kogito-quarkus-examples/process-usertasks-with-security-oidc-quarkus-with-console/src/test/java/org/acme/travels/ApprovalsProcessIT.java
@@ -2596,7 +2596,7 @@ index d2667bf10..ca690e71e 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/process-usertasks-with-security-oidc-quarkus/src/test/java/org/acme/travels/ApprovalsProcessIT.java b/kogito-quarkus-examples/process-usertasks-with-security-oidc-quarkus/src/test/java/org/acme/travels/ApprovalsProcessIT.java
 index dbb5892ac..2e6175893 100644
 --- a/kogito-quarkus-examples/process-usertasks-with-security-oidc-quarkus/src/test/java/org/acme/travels/ApprovalsProcessIT.java
@@ -2644,7 +2644,7 @@ index d03c73a0c..93fdb65ab 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/process-usertasks-with-security-quarkus/src/test/java/org/acme/travels/security/quarkus/ApprovalsProcessTest.java b/kogito-quarkus-examples/process-usertasks-with-security-quarkus/src/test/java/org/acme/travels/security/quarkus/ApprovalsProcessTest.java
 index 49bd7599c..4acd8e1a6 100644
 --- a/kogito-quarkus-examples/process-usertasks-with-security-quarkus/src/test/java/org/acme/travels/security/quarkus/ApprovalsProcessTest.java
@@ -2676,7 +2676,7 @@ index bc22e6e59..4829382b3 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/rules-incubation-api-quarkus/src/main/java/org/acme/CustomRestRules.java b/kogito-quarkus-examples/rules-incubation-api-quarkus/src/main/java/org/acme/CustomRestRules.java
 index 852701dc0..1d0bd3fd0 100644
 --- a/kogito-quarkus-examples/rules-incubation-api-quarkus/src/main/java/org/acme/CustomRestRules.java
@@ -2716,7 +2716,7 @@ index 440b84bb3..da0211c91 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/rules-legacy-quarkus-example/src/main/java/org/kie/kogito/legacy/FindApprovedLoansEndpoint.java b/kogito-quarkus-examples/rules-legacy-quarkus-example/src/main/java/org/kie/kogito/legacy/FindApprovedLoansEndpoint.java
 index 3251732e6..11ba78689 100644
 --- a/kogito-quarkus-examples/rules-legacy-quarkus-example/src/main/java/org/kie/kogito/legacy/FindApprovedLoansEndpoint.java
@@ -2772,7 +2772,7 @@ index 9f037e739..5924d01aa 100755
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/rules-quarkus-helloworld/src/main/java/org/kie/kogito/examples/MyAgendaEventListener.java b/kogito-quarkus-examples/rules-quarkus-helloworld/src/main/java/org/kie/kogito/examples/MyAgendaEventListener.java
 index bd902dfab..dc347a1e9 100644
 --- a/kogito-quarkus-examples/rules-quarkus-helloworld/src/main/java/org/kie/kogito/examples/MyAgendaEventListener.java
@@ -2815,7 +2815,7 @@ index f646f38cb..3749ef506 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/ruleunit-quarkus-example/pom.xml b/kogito-quarkus-examples/ruleunit-quarkus-example/pom.xml
 index 71a9b159e..7fe00e968 100644
 --- a/kogito-quarkus-examples/ruleunit-quarkus-example/pom.xml
@@ -2832,7 +2832,7 @@ index 71a9b159e..7fe00e968 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-quarkus-examples/ruleunit-quarkus-example/src/test/java/org/kie/kogito/decisiontable/quarkus/ruleunit/NativeRestQueryTestIT.java b/kogito-quarkus-examples/ruleunit-quarkus-example/src/test/java/org/kie/kogito/decisiontable/quarkus/ruleunit/NativeRestQueryTestIT.java
 index f5bde5e2e..670132084 100644
 --- a/kogito-quarkus-examples/ruleunit-quarkus-example/src/test/java/org/kie/kogito/decisiontable/quarkus/ruleunit/NativeRestQueryTestIT.java
@@ -2865,7 +2865,7 @@ index d8f669c65..dfda0b35a 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/kogito-springboot-examples/onboarding-springboot/src/main/java/org/kie/kogito/examples/WorkItemHandlerConfig.java b/kogito-springboot-examples/onboarding-springboot/src/main/java/org/kie/kogito/examples/WorkItemHandlerConfig.java
 index ce4fc064e..80b339b16 100644
 --- a/kogito-springboot-examples/onboarding-springboot/src/main/java/org/kie/kogito/examples/WorkItemHandlerConfig.java
@@ -2941,7 +2941,7 @@ index c0fc27e9e..93475069b 100644
 +        <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
          <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
          <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-         <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+         <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/serverless-workflow-examples/serverless-workflow-callback-events-over-http-quarkus/callback-event-service/src/main/java/org/kie/kogito/examples/CallbackResource.java b/serverless-workflow-examples/serverless-workflow-callback-events-over-http-quarkus/callback-event-service/src/main/java/org/kie/kogito/examples/CallbackResource.java
 index ad4ec0dbd..30abcfa76 100644
 --- a/serverless-workflow-examples/serverless-workflow-callback-events-over-http-quarkus/callback-event-service/src/main/java/org/kie/kogito/examples/CallbackResource.java
@@ -2997,7 +2997,7 @@ index f6eb1c2c0..49ecfb2ff 100644
 +        <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
          <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
          <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-         <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+         <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/serverless-workflow-examples/serverless-workflow-callback-quarkus/pom.xml b/serverless-workflow-examples/serverless-workflow-callback-quarkus/pom.xml
 index 72d2ee473..bd3206729 100644
 --- a/serverless-workflow-examples/serverless-workflow-callback-quarkus/pom.xml
@@ -3014,7 +3014,7 @@ index 72d2ee473..bd3206729 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/serverless-workflow-examples/serverless-workflow-callback-quarkus/src/main/java/org/kie/kogito/examples/PrintService.java b/serverless-workflow-examples/serverless-workflow-callback-quarkus/src/main/java/org/kie/kogito/examples/PrintService.java
 index f9c11c476..d9981b011 100644
 --- a/serverless-workflow-examples/serverless-workflow-callback-quarkus/src/main/java/org/kie/kogito/examples/PrintService.java
@@ -3046,7 +3046,7 @@ index d8a96c321..f84c5a7e7 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 @@ -45,7 +45,7 @@
      <!-- Used by the WSDL plugin -->
      <version.org.apache.cxf>3.5.4</version.org.apache.cxf>
@@ -3072,7 +3072,7 @@ index 0fe774a1e..b994a3488 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/serverless-workflow-examples/serverless-workflow-consuming-events-over-http-quarkus/pom.xml b/serverless-workflow-examples/serverless-workflow-consuming-events-over-http-quarkus/pom.xml
 index 8aee17c92..5be67e4fa 100644
 --- a/serverless-workflow-examples/serverless-workflow-consuming-events-over-http-quarkus/pom.xml
@@ -3089,7 +3089,7 @@ index 8aee17c92..5be67e4fa 100644
 +        <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
          <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
          <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-         <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+         <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/serverless-workflow-examples/serverless-workflow-correlation-quarkus/pom.xml b/serverless-workflow-examples/serverless-workflow-correlation-quarkus/pom.xml
 index 24cd75228..0f6bd5fe2 100644
 --- a/serverless-workflow-examples/serverless-workflow-correlation-quarkus/pom.xml
@@ -3106,7 +3106,7 @@ index 24cd75228..0f6bd5fe2 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/serverless-workflow-examples/serverless-workflow-correlation-quarkus/src/main/java/org/kie/kogito/examples/EventsService.java b/serverless-workflow-examples/serverless-workflow-correlation-quarkus/src/main/java/org/kie/kogito/examples/EventsService.java
 index 57675763e..004e81d95 100644
 --- a/serverless-workflow-examples/serverless-workflow-correlation-quarkus/src/main/java/org/kie/kogito/examples/EventsService.java
@@ -3161,7 +3161,7 @@ index 1914cedeb..ea5894f6b 100644
 +        <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
          <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
          <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-         <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+         <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/serverless-workflow-examples/serverless-workflow-custom-function-knative/workflow/pom.xml b/serverless-workflow-examples/serverless-workflow-custom-function-knative/workflow/pom.xml
 index af3e62b21..e9da2daa0 100644
 --- a/serverless-workflow-examples/serverless-workflow-custom-function-knative/workflow/pom.xml
@@ -3178,7 +3178,7 @@ index af3e62b21..e9da2daa0 100644
 +        <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
          <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
          <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-         <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+         <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/serverless-workflow-examples/serverless-workflow-custom-type/pom.xml b/serverless-workflow-examples/serverless-workflow-custom-type/pom.xml
 index 8085e97bf..b18c5c8e4 100644
 --- a/serverless-workflow-examples/serverless-workflow-custom-type/pom.xml
@@ -3195,7 +3195,7 @@ index 8085e97bf..b18c5c8e4 100644
 +     <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
       <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
       <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-      <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+      <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/serverless-workflow-examples/serverless-workflow-custom-type/serverless-workflow-custom-rpc/src/main/java/org/kie/kogito/examples/sw/custom/RPCCustomWorkItemHandler.java b/serverless-workflow-examples/serverless-workflow-custom-type/serverless-workflow-custom-rpc/src/main/java/org/kie/kogito/examples/sw/custom/RPCCustomWorkItemHandler.java
 index b1a2e5b5f..64beded70 100644
 --- a/serverless-workflow-examples/serverless-workflow-custom-type/serverless-workflow-custom-rpc/src/main/java/org/kie/kogito/examples/sw/custom/RPCCustomWorkItemHandler.java
@@ -3243,7 +3243,7 @@ index bfde7f534..d24d70d95 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/serverless-workflow-examples/serverless-workflow-data-index-quarkus/pom.xml b/serverless-workflow-examples/serverless-workflow-data-index-quarkus/pom.xml
 index b37eb2600..ef70881e1 100644
 --- a/serverless-workflow-examples/serverless-workflow-data-index-quarkus/pom.xml
@@ -3260,7 +3260,7 @@ index b37eb2600..ef70881e1 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/serverless-workflow-examples/serverless-workflow-data-index-quarkus/src/main/java/org/kie/kogito/examples/PrintService.java b/serverless-workflow-examples/serverless-workflow-data-index-quarkus/src/main/java/org/kie/kogito/examples/PrintService.java
 index f9c11c476..d9981b011 100644
 --- a/serverless-workflow-examples/serverless-workflow-data-index-quarkus/src/main/java/org/kie/kogito/examples/PrintService.java
@@ -3292,7 +3292,7 @@ index fab569e2d..2add53bcb 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/serverless-workflow-examples/serverless-workflow-error-quarkus/src/main/java/org/kie/kogito/examples/EvenService.java b/serverless-workflow-examples/serverless-workflow-error-quarkus/src/main/java/org/kie/kogito/examples/EvenService.java
 index 102e7050e..1130ba4cf 100644
 --- a/serverless-workflow-examples/serverless-workflow-error-quarkus/src/main/java/org/kie/kogito/examples/EvenService.java
@@ -3322,7 +3322,7 @@ index 42015ef29..9a556a93b 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/serverless-workflow-examples/serverless-workflow-events-quarkus/src/main/java/org/kogito/serverless/examples/ApplicantResource.java b/serverless-workflow-examples/serverless-workflow-events-quarkus/src/main/java/org/kogito/serverless/examples/ApplicantResource.java
 index 962bca9ae..243e1597f 100644
 --- a/serverless-workflow-examples/serverless-workflow-events-quarkus/src/main/java/org/kogito/serverless/examples/ApplicantResource.java
@@ -3429,7 +3429,7 @@ index 4bff67873..97816766e 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/serverless-workflow-examples/serverless-workflow-foreach-quarkus/pom.xml b/serverless-workflow-examples/serverless-workflow-foreach-quarkus/pom.xml
 index 4c517682a..19367e860 100644
 --- a/serverless-workflow-examples/serverless-workflow-foreach-quarkus/pom.xml
@@ -3446,7 +3446,7 @@ index 4c517682a..19367e860 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/serverless-workflow-examples/serverless-workflow-functions-events-quarkus/pom.xml b/serverless-workflow-examples/serverless-workflow-functions-events-quarkus/pom.xml
 index b0cd39f8a..a5d880f2d 100644
 --- a/serverless-workflow-examples/serverless-workflow-functions-events-quarkus/pom.xml
@@ -3463,7 +3463,7 @@ index b0cd39f8a..a5d880f2d 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/serverless-workflow-examples/serverless-workflow-functions-events-quarkus/src/main/java/org/acme/sw/onboarding/resources/AppointmentResource.java b/serverless-workflow-examples/serverless-workflow-functions-events-quarkus/src/main/java/org/acme/sw/onboarding/resources/AppointmentResource.java
 index d6839cefc..b805fe09f 100644
 --- a/serverless-workflow-examples/serverless-workflow-functions-events-quarkus/src/main/java/org/acme/sw/onboarding/resources/AppointmentResource.java
@@ -3596,7 +3596,7 @@ index 14b98cc70..a8c818df3 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/serverless-workflow-examples/serverless-workflow-functions-quarkus/src/main/java/org/acme/numbers/NumbersResource.java b/serverless-workflow-examples/serverless-workflow-functions-quarkus/src/main/java/org/acme/numbers/NumbersResource.java
 index 61f8df813..94b4b4fba 100644
 --- a/serverless-workflow-examples/serverless-workflow-functions-quarkus/src/main/java/org/acme/numbers/NumbersResource.java
@@ -3744,7 +3744,7 @@ index 5445c3381..15df8bd5c 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/serverless-workflow-examples/serverless-workflow-greeting-quarkus/pom.xml b/serverless-workflow-examples/serverless-workflow-greeting-quarkus/pom.xml
 index 319f2aa55..f29cd564b 100644
 --- a/serverless-workflow-examples/serverless-workflow-greeting-quarkus/pom.xml
@@ -3761,7 +3761,7 @@ index 319f2aa55..f29cd564b 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/serverless-workflow-examples/serverless-workflow-greeting-rpc-quarkus/serverless-workflow-greeting-client-rpc-quarkus/pom.xml b/serverless-workflow-examples/serverless-workflow-greeting-rpc-quarkus/serverless-workflow-greeting-client-rpc-quarkus/pom.xml
 index d9c8e7fef..bd0608a96 100644
 --- a/serverless-workflow-examples/serverless-workflow-greeting-rpc-quarkus/serverless-workflow-greeting-client-rpc-quarkus/pom.xml
@@ -3778,7 +3778,7 @@ index d9c8e7fef..bd0608a96 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/serverless-workflow-examples/serverless-workflow-greeting-rpc-quarkus/serverless-workflow-greeting-server-rpc-quarkus/pom.xml b/serverless-workflow-examples/serverless-workflow-greeting-rpc-quarkus/serverless-workflow-greeting-server-rpc-quarkus/pom.xml
 index 38823aaf3..1ebfc54e1 100644
 --- a/serverless-workflow-examples/serverless-workflow-greeting-rpc-quarkus/serverless-workflow-greeting-server-rpc-quarkus/pom.xml
@@ -3817,7 +3817,7 @@ index c46eb1d4d..fa1e63c3e 100644
 +        <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
          <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
          <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-         <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+         <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/serverless-workflow-examples/serverless-workflow-loanbroker-showcase/aggregator/src/main/java/org/acme/serverless/loanbroker/aggregator/CloudEventDataFormat.java b/serverless-workflow-examples/serverless-workflow-loanbroker-showcase/aggregator/src/main/java/org/acme/serverless/loanbroker/aggregator/CloudEventDataFormat.java
 index 8f7f2656a..1d43db8cf 100644
 --- a/serverless-workflow-examples/serverless-workflow-loanbroker-showcase/aggregator/src/main/java/org/acme/serverless/loanbroker/aggregator/CloudEventDataFormat.java
@@ -4105,7 +4105,7 @@ index 2f3aa05ae..15cbe74b7 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 @@ -48,7 +48,7 @@
      <version.io.cloudevents>2.3.0</version.io.cloudevents>
      <!-- See: https://camel.apache.org/camel-quarkus/2.14.x/index.html -->
@@ -4131,7 +4131,7 @@ index ea63860b7..6ba442632 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/serverless-workflow-examples/serverless-workflow-newsletter-subscription/subscription-flow/src/main/java/org/kie/kogito/examples/VertxRouter.java b/serverless-workflow-examples/serverless-workflow-newsletter-subscription/subscription-flow/src/main/java/org/kie/kogito/examples/VertxRouter.java
 index dbc0a78da..d3cc018ee 100644
 --- a/serverless-workflow-examples/serverless-workflow-newsletter-subscription/subscription-flow/src/main/java/org/kie/kogito/examples/VertxRouter.java
@@ -4274,7 +4274,7 @@ index 51d24ba27..1355fe0a3 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/serverless-workflow-examples/serverless-workflow-oauth2-orchestration-quarkus/acme-financial-service/src/main/java/org/acme/AcmeFinancialApplication.java b/serverless-workflow-examples/serverless-workflow-oauth2-orchestration-quarkus/acme-financial-service/src/main/java/org/acme/AcmeFinancialApplication.java
 index 53b19b078..70b3949b4 100644
 --- a/serverless-workflow-examples/serverless-workflow-oauth2-orchestration-quarkus/acme-financial-service/src/main/java/org/acme/AcmeFinancialApplication.java
@@ -4342,7 +4342,7 @@ index 57e58af69..fe205c696 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/serverless-workflow-examples/serverless-workflow-oauth2-orchestration-quarkus/currency-exchange-workflow/src/main/java/org/kie/kogito/examples/ExchangeWorkflowHelper.java b/serverless-workflow-examples/serverless-workflow-oauth2-orchestration-quarkus/currency-exchange-workflow/src/main/java/org/kie/kogito/examples/ExchangeWorkflowHelper.java
 index ad5242c4c..0a46100be 100644
 --- a/serverless-workflow-examples/serverless-workflow-oauth2-orchestration-quarkus/currency-exchange-workflow/src/main/java/org/kie/kogito/examples/ExchangeWorkflowHelper.java
@@ -4372,7 +4372,7 @@ index 97239b23f..516df0160 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/serverless-workflow-examples/serverless-workflow-order-processing/src/test/java/org/kie/kogito/examples/sw/orders/processing/VerifyWorkflowExecutionIT.java b/serverless-workflow-examples/serverless-workflow-order-processing/src/test/java/org/kie/kogito/examples/sw/orders/processing/VerifyWorkflowExecutionIT.java
 index d4c151f61..85af1b21e 100644
 --- a/serverless-workflow-examples/serverless-workflow-order-processing/src/test/java/org/kie/kogito/examples/sw/orders/processing/VerifyWorkflowExecutionIT.java
@@ -4402,7 +4402,7 @@ index 58265c8da..4347130da 100644
 +        <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
          <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
          <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-         <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+         <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/serverless-workflow-examples/serverless-workflow-python-quarkus/pom.xml b/serverless-workflow-examples/serverless-workflow-python-quarkus/pom.xml
 index 5aa233eaf..9cb789d52 100644
 --- a/serverless-workflow-examples/serverless-workflow-python-quarkus/pom.xml
@@ -4419,7 +4419,7 @@ index 5aa233eaf..9cb789d52 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/serverless-workflow-examples/serverless-workflow-qas-service-showcase/query-answer-service/pom.xml b/serverless-workflow-examples/serverless-workflow-qas-service-showcase/query-answer-service/pom.xml
 index 45a1c3250..543c6d04e 100644
 --- a/serverless-workflow-examples/serverless-workflow-qas-service-showcase/query-answer-service/pom.xml
@@ -4436,7 +4436,7 @@ index 45a1c3250..543c6d04e 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/serverless-workflow-examples/serverless-workflow-qas-service-showcase/query-answer-service/src/main/java/org/acme/InMemoryQueryRecordRepository.java b/serverless-workflow-examples/serverless-workflow-qas-service-showcase/query-answer-service/src/main/java/org/acme/InMemoryQueryRecordRepository.java
 index 5bb71867a..ed0cd4b7d 100644
 --- a/serverless-workflow-examples/serverless-workflow-qas-service-showcase/query-answer-service/src/main/java/org/acme/InMemoryQueryRecordRepository.java
@@ -4537,7 +4537,7 @@ index fc4aa3716..67bd06d6b 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 -    <version.io.quarkiverse.reactivemessaging.http>1.0.1</version.io.quarkiverse.reactivemessaging.http>
 +    <version.io.quarkiverse.reactivemessaging.http>2.0.2</version.io.quarkiverse.reactivemessaging.http>
      <version.io.cloudevents>2.3.0</version.io.cloudevents>
@@ -4635,7 +4635,7 @@ index 9287dcc49..7f35d307b 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/serverless-workflow-examples/serverless-workflow-saga-quarkus/src/main/java/org/kie/kogito/examples/MockService.java b/serverless-workflow-examples/serverless-workflow-saga-quarkus/src/main/java/org/kie/kogito/examples/MockService.java
 index 82876846d..448ffd017 100644
 --- a/serverless-workflow-examples/serverless-workflow-saga-quarkus/src/main/java/org/kie/kogito/examples/MockService.java
@@ -4723,7 +4723,7 @@ index b6a257031..82453aafc 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/serverless-workflow-examples/serverless-workflow-service-calls-quarkus/src/main/java/org/kogito/serverless/examples/CountriesClassifierResource.java b/serverless-workflow-examples/serverless-workflow-service-calls-quarkus/src/main/java/org/kogito/serverless/examples/CountriesClassifierResource.java
 index 454973c6a..3c4b2766a 100644
 --- a/serverless-workflow-examples/serverless-workflow-service-calls-quarkus/src/main/java/org/kogito/serverless/examples/CountriesClassifierResource.java
@@ -4793,7 +4793,7 @@ index 4612ce5a3..e1cb6c09a 100644
 +        <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
          <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
          <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-         <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+         <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/serverless-workflow-examples/serverless-workflow-stock-profit/real-stock-service/src/main/java/org/acme/RealStockPriceResource.java b/serverless-workflow-examples/serverless-workflow-stock-profit/real-stock-service/src/main/java/org/acme/RealStockPriceResource.java
 index e35167dbc..0b782a18c 100644
 --- a/serverless-workflow-examples/serverless-workflow-stock-profit/real-stock-service/src/main/java/org/acme/RealStockPriceResource.java
@@ -4850,7 +4850,7 @@ index 66c3ed73c..ff2a13a0f 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/serverless-workflow-examples/serverless-workflow-temperature-conversion/conversion-workflow-function/pom.xml b/serverless-workflow-examples/serverless-workflow-temperature-conversion/conversion-workflow-function/pom.xml
 index 7aaddd213..b03af7549 100644
 --- a/serverless-workflow-examples/serverless-workflow-temperature-conversion/conversion-workflow-function/pom.xml
@@ -4867,7 +4867,7 @@ index 7aaddd213..b03af7549 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/serverless-workflow-examples/serverless-workflow-temperature-conversion/conversion-workflow-spec/pom.xml b/serverless-workflow-examples/serverless-workflow-temperature-conversion/conversion-workflow-spec/pom.xml
 index 7a44ced07..b9414c4fb 100644
 --- a/serverless-workflow-examples/serverless-workflow-temperature-conversion/conversion-workflow-spec/pom.xml
@@ -4884,7 +4884,7 @@ index 7a44ced07..b9414c4fb 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/serverless-workflow-examples/serverless-workflow-temperature-conversion/conversion-workflow/pom.xml b/serverless-workflow-examples/serverless-workflow-temperature-conversion/conversion-workflow/pom.xml
 index 02a3bb2d6..f0ec67e6b 100644
 --- a/serverless-workflow-examples/serverless-workflow-temperature-conversion/conversion-workflow/pom.xml
@@ -4901,7 +4901,7 @@ index 02a3bb2d6..f0ec67e6b 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/serverless-workflow-examples/serverless-workflow-temperature-conversion/multiplication-service/pom.xml b/serverless-workflow-examples/serverless-workflow-temperature-conversion/multiplication-service/pom.xml
 index cbcfdbb10..68af4e1bb 100644
 --- a/serverless-workflow-examples/serverless-workflow-temperature-conversion/multiplication-service/pom.xml
@@ -5002,7 +5002,7 @@ index 84b3a1fbb..369ae6af4 100644
 +        <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
          <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
          <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-         <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+         <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-embedded/pom.xml b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-embedded/pom.xml
 index b7bcddea9..366a6a6ff 100644
 --- a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-embedded/pom.xml
@@ -5015,7 +5015,7 @@ index b7bcddea9..366a6a6ff 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-embedded/src/main/java/org/kie/kogito/examples/EventsProducerResource.java b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-embedded/src/main/java/org/kie/kogito/examples/EventsProducerResource.java
 index 3a5d73b35..7611e766a 100644
 --- a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-embedded/src/main/java/org/kie/kogito/examples/EventsProducerResource.java
@@ -5072,7 +5072,7 @@ index 212a3f485..cb1103f3f 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-extended/src/main/java/org/kie/kogito/examples/EventsProducerResource.java b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-extended/src/main/java/org/kie/kogito/examples/EventsProducerResource.java
 index b0e5df59b..ab6046e46 100644
 --- a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-extended/src/main/java/org/kie/kogito/examples/EventsProducerResource.java
@@ -5131,7 +5131,7 @@ index ce003a536..f93590e4e 100644
 +    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
      <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
      <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-     <kogito.bom.version>2.0.0-SNAPSHOT</kogito.bom.version>
+     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
 diff --git a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/src/main/java/org/kie/kogito/examples/CallbackStateTimeoutsClient.java b/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/src/main/java/org/kie/kogito/examples/CallbackStateTimeoutsClient.java
 index 5e7ca7d49..85b416b85 100644
 --- a/serverless-workflow-examples/serverless-workflow-timeouts-showcase-operator-devprofile/src/main/java/org/kie/kogito/examples/CallbackStateTimeoutsClient.java

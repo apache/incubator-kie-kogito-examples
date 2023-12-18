@@ -122,14 +122,14 @@ spec:
     selector:
       matchLabels:
         app.kubernetes.io/name: jobs-service-postgresql
-        app.kubernetes.io/version: 2.0.0-SNAPSHOT
+        app.kubernetes.io/version: 999-SNAPSHOT
 ---
 apiVersion: v1
 kind: Service
 metadata:
   labels:
     app.kubernetes.io/name: jobs-service-postgresql
-    app.kubernetes.io/version: 2.0.0-SNAPSHOT
+    app.kubernetes.io/version: 999-SNAPSHOT
   name: jobs-service-postgresql
 spec:
   ports:
@@ -138,7 +138,7 @@ spec:
       targetPort: 8080
   selector:
     app.kubernetes.io/name: jobs-service-postgresql
-    app.kubernetes.io/version: 2.0.0-SNAPSHOT
+    app.kubernetes.io/version: 999-SNAPSHOT
   type: ClusterIP
 ---
 apiVersion: apps/v1
@@ -146,19 +146,19 @@ kind: Deployment
 metadata:
   labels:
     app.kubernetes.io/name: jobs-service-postgresql
-    app.kubernetes.io/version: 2.0.0-SNAPSHOT
+    app.kubernetes.io/version: 999-SNAPSHOT
   name: jobs-service-postgresql
 spec:
   replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: jobs-service-postgresql
-      app.kubernetes.io/version: 2.0.0-SNAPSHOT
+      app.kubernetes.io/version: 999-SNAPSHOT
   template:
     metadata:
       labels:
         app.kubernetes.io/name: jobs-service-postgresql
-        app.kubernetes.io/version: 2.0.0-SNAPSHOT
+        app.kubernetes.io/version: 999-SNAPSHOT
     spec:
       containers:
         - name: jobs-service-postgresql
