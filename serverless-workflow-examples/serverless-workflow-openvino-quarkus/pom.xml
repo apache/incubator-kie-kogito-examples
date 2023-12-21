@@ -174,7 +174,7 @@
                 <executable>pip</executable>
                 <arguments>
                     <argument>install</argument>
-                    <argument>jep</argument>
+                    <argument>jep==4.2.0</argument>
                 </arguments>
             </configuration>
           </execution>
