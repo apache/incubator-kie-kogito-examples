@@ -95,21 +95,6 @@
       </modules>
     </profile>
 
-    <!--
-      https://issues.redhat.com/browse/KOGITO-8341 
-      Prod profile defined here with empty modules
-      So the check does still run on that subproject
-      but no module is checked
-    -->
-    <profile>
-      <id>productized</id>
-      <activation>
-        <property>
-          <name>productized</name>
-        </property>
-      </activation>
-    </profile>
-
     <profile>
       <id>springboot</id>
       <activation>
