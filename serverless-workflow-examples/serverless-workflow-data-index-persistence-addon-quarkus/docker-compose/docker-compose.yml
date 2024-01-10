@@ -7,7 +7,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./sql:/docker-entrypoint-initdb.d:Z
+      - ./sql:/docker-entrypoint-initdb.d
     healthcheck:
       test: [ "CMD", "pg_isready", "-q", "-d", "kogito", "-U", "kogito-user" ]
       timeout: 45s
