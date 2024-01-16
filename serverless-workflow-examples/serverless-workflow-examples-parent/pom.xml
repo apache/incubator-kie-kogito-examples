@@ -22,25 +22,35 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-    <modelVersion>4.0.0</modelVersion>
+  <groupId>org.kie.kogito.examples</groupId>
+  <artifactId>serverless-workflow-examples-parent</artifactId>
+  <version>999-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>Kogito Example :: Serverless Workflow Examples :: Parent</name>
 
-    <parent>
-      <groupId>org.kie.kogito.examples</groupId>
-      <artifactId>serverless-workflow-examples-parent</artifactId>
-      <version>999-SNAPSHOT</version>
-      <relativePath>../serverless-workflow-examples-parent/pom.xml</relativePath>
-    </parent>
+  <properties>
+    <!-- Reproducible builds -->
+    <project.build.outputTimestamp>2024-01-16T00:00:00Z</project.build.outputTimestamp>
+    <version.maven.artifact.plugin>3.4.1</version.maven.artifact.plugin>
+  </properties>
 
-    <groupId>org.kie.kogito.examples</groupId>
-    <artifactId>serverless-workflow-custom-function-knative</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <name>Kogito Example :: Serverless Workflow Custom Function :: Quarkus</name>
-    <description>Kogito Serverless Workflow Custom Function Knative Example - Quarkus</description>
-    <packaging>pom</packaging>
 
-    <modules>
-        <module>custom-function-knative-service</module>
-        <module>workflow</module>
-    </modules>
+  <build>
+    <pluginManagement>
+      <plugins>
+        <!-- Reproducible builds -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-artifact-plugin</artifactId>
+          <version>${version.maven.artifact.plugin}</version>
+          <configuration>
+            <outputTimestamp>${project.build.outputTimestamp}</outputTimestamp>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
 </project>
