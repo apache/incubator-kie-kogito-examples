@@ -3,14 +3,17 @@
 ## Description
 
 This example showcases a basic implementation of the **Hiring** process that drives a *Candidate* through different 
-interviews until it gets hired.
+interviews until he gets hired.
 
 This quickstart project shows a simple example user task orchestration including the use of DMN decisions to
 generate the candidate offer and timers to skip Human tasks.
 
-This example also takes advantage of the `kogito-addons-quarkus-data-index-persistence-postgresql` that enables the 
-*Kogito runtime* directly persist into the *Data-Index* Database simplifying the communication of both services by removing
-the need of events (Kafka/HTTP) between them.
+This example also demonstrates how to configure the whole *Kogito* environment using the new *Simplified Architecture* that
+enable simplifying the communication among *Kogito* services removing the need of events (Kafka/HTTP) between them. This can 
+be achieved using the following *Quarkus* addons:
+- `kogito-addons-quarkus-data-index-persistence-postgresql`: enables the *Kogito Runtime* persisting directly into the 
+*Data-Index* database.
+- `kogito-addons-quarkus-jobs`: enables collocating the *Jobs Service* inside the *Kogito Runtime*.
 
 ## The Java models
 
@@ -48,21 +51,21 @@ This example makes use of the *New Hiring Offer* DMN to generate a base offer fo
 In this simple DMN we have an `Offer` *Decision*, that will generate the candidate offer, which
 has a requirement of a `CandidateData` *Input Data*.
 
-<p align="center">
-    <img width=55%  src="docs/images/new_hiring_offer_dmn.png">
+<p style="text-align:center">
+    <img width=55%  src="docs/images/new_hiring_offer_dmn.png" alt="DMN Diagram">
 </p>
 
 The DMN defines the following data types (`tCandidateData` & `tOffer` ) matching the POJOs defined in the project 
 (`CandidateData.java` & `Offer.java`):
-<p align="center">
-    <img width=75%  src="docs/images/new_hiring_offer_dmn_types.png">
+<p style="text-align:center">
+    <img width=75%  src="docs/images/new_hiring_offer_dmn_types.png" alt="DMN Type Definitions">
 </p>
 
 As expected, `CandidateData` *Input Data* & `Offer` *Decision* have a `tCandidateData` data
 
 The `Offer` decision uses the following *Boxed Expression* to generate the `tOffer`:
-<p align="center">
-    <img width=75%  src="docs/images/new_hiring_offer_dmn_decission.png">
+<p style="text-align:center">
+    <img width=75%  src="docs/images/new_hiring_offer_dmn_decision.png" alt="DMN Decision">
 </p>
 
 ## The Hiring Process
@@ -79,8 +82,8 @@ The process handles the following _Variables_:
 
 ### The BPMN Process
 
-<p align="center">
-    <img width=75%  src="docs/images/hiring_diagram.png">
+<p style="text-align:center">
+    <img width=75%  src="docs/images/hiring_diagram.png" alt="Hiring Process Diagram">
 </p>
 
 The process starts receiving the `CandidateData` as an input and storing it into the `candidateData` variable, and if the 
@@ -91,16 +94,16 @@ The **Generate base offer** is a *Business Rule Task* that will use the *New Hir
 `NewHiringOffer.dmn` to generate the an `Offer` based on the candidate experience and skills. The task takes the `candidateData`
 as an input and will produce an instance of `org.kie.kogito.hr.Offer` that will be stored in the `offer` variable.
 
-<p align="center">
-    <img width=75%  src="docs/images/generate_offer_assignments.png">
+<p style="text-align:center">
+    <img width=75%  src="docs/images/generate_offer_assignments.png" alt="Offer assignments">
 </p>
 
 After the `offer` has been generated, the process will jump into the **HR Interview** *Human Task*, where the candidate we'll 
 be interviewed by the *HR* department. The task takes the `candidateData` and `offer` as inputs and as an output will produce
 the `hr_approve` boolean and an updated `offer`.
 
-<p align="center">
-    <img width=75%  src="docs/images/hr_interview_assignments.png">
+<p style="text-align:center">
+    <img width=75%  src="docs/images/hr_interview_assignments.png" alt="HR Interview assignments">
 </p>
 
 The **HR Interview** *Human Task* also has a *Boundary Timer Event* that will prevent the task to delay and will cancel the
@@ -111,8 +114,8 @@ If **HR Interview** successfully completed, the process will jump into the **IT 
 we'll have a second interview with the *IT* department. Again, this task will take the `candidateData` and `offer` as inputs 
 but as an output will produce the `it_approve` boolean.
 
-<p align="center">
-    <img width=75%  src="docs/images/it_interview_assignments.png">
+<p style="text-align:center">
+    <img width=75%  src="docs/images/it_interview_assignments.png" alt="IT Interview assignments">
 </p>
 
 Once both tasks are completed, if the candidate got the approvals from *HR* & *IT*  (both `hr_interview` & `hr_interview` being true)
@@ -124,9 +127,9 @@ and the process will end.
 ## Running the example
 ### Prerequisites
 
-* Java 11+ installed
+* Java 17+ installed
 * Environment variable JAVA_HOME set accordingly
-* Maven 3.8.6+ installed
+* Maven 3.9.3+ installed
 * Docker and Docker Compose to run the required example infrastructure.
 
 And when using native image compilation, you will also need:
@@ -142,7 +145,6 @@ This quickstart provides a docker compose template that starts all the required 
 - PostgreSQL: 5432
 - Kafka: 9092
 - Data Index: 8180
-- Jobs Service: 8580
 - Management Console: 8280
 - Task Console: 8380
 - Keycloak: 8480
@@ -152,8 +154,8 @@ This quickstart provides a docker compose template that starts all the required 
 To help bootstraping the Infrastructure Services, the example provides the `startServices.sh` script inside the *docker-compose* 
 folder.
 
-> **_NOTE:_**  starting the Infrastructure Services, please consider running a ```mvn clean package -Pcontainer``` 
-> command on the project root before running the ```startServices.sh``` script for the first time or any time you modify the project.
+> **_NOTE_**: the docker compose template requires using _extra_hosts_ to allow the services use the host network, this may 
+> carry some issues if you are using a **podman** version older than **4.7**.
 
 ### Building & Running the example
 
@@ -176,6 +178,9 @@ you can run the same `startServices.sh` script but passing the `example` argumen
 sh startServices.sh example
 ```
 
+> **_NOTE:_**  starting the Infrastructure Services, please consider running a ```mvn clean package -Pcontainer```
+> command on the project root before running the ```startServices.sh``` script for the first time or any time you modify the project.
+> 
 ### Running the example in Development mode
 
 To run the example in Development mode, just run the following command in a Terminal:
@@ -184,7 +189,7 @@ To run the example in Development mode, just run the following command in a Term
 mvn clean package quarkus:dev -Pdevelopment
 ```
 
-The Development Mode will embed all the needed Infrastructure Services (PostgreSQL, Data-Index & Jobs Service) and wont 
+The Development Mode will embed all the needed Infrastructure Services (PostgreSQL, Data-Index & Jobs Service) and won't 
 require any extra step.
 
 The `development` profile includes the **Runtime Tools Quarkus Extension** that exposes a new section in the **Quarkus Dev-UI** 
@@ -229,7 +234,7 @@ If everything went well you may get a response like:
 ```
 
 In the server log You may find a trace like:
-```text
+```
 New Hiring has been created for candidate: Jon Snow
 ###################################
 Generated offer for candidate: Jon Snow
@@ -265,7 +270,7 @@ If everything went well you may get a response like:
 ```
 
 In the server log You may find a trace like:
-```text
+```
 New Hiring has been created for candidate: Jon Snow
 ###################################
 Candidate Jon Snow don't meet the requirements for the position but we'll keep it on records for the future!
@@ -288,34 +293,66 @@ Once Keycloak is started, you should be able to access your *Keycloak Server* at
 
 > **_NOTE:_** This example uses keycloak authentication to enable security only in the consoles not in runtime.
 
-### Show active Hiring process instance at Kogito Management Console
+### Using the Kogito Runtime Consoles to interact with the Hiring Process
 
-To access the Kogito Management Console just open your browser and navigate to ``http://localhost:8280``. You'll be redirected to the *Keycloak* log in page.
+The following *step-by-step* guides will show how to take advantage of both *Kogito Management Console* and *Kogito Task Console* 
+to operate with the instances of *Hiring* process.
 
-<p align="center">
-    <img width=75%  src="docs/images/keycloak-login.png">
-</p>
+To be able to follow the guides, please make sure that the example has been built using the `container` and all the *Infractructure Services* 
+are started as explained in the [Building & Running the example](#building--running-the-example) section.
 
-Once there, log in using any of the users specified in the [Using Keycloak as Authentication Server](#using-keycloak-as-authentication-server)
+> **_NOTE_**: For more information about how to operate with the *Kogito Runtime Consoles*, please refer to the 
+> [Management Console](https://docs.kogito.kie.org/latest/html_single/#con-management-console_kogito-developing-process-services) & [Task Console](https://docs.kogito.kie.org/latest/html_single/#con-task-console_kogito-developing-process-services) documentation.
 
-<p align="center">
-    <img width=75%  src="docs/images/mc_list.png">
-</p>
+#### Show active Hiring process instance at Kogito Management Console
 
-> **_NOTE:_**  For more information about how to work with Kogito Management Console, please refer to the [Kogito Documentation](https://docs.kogito.kie.org/latest/html_single/#con-management-console_kogito-developing-process-services) page.
+In this first guide we'll see how to user the *Management Console* to view the state of an active process instance.
 
-Check the process instance details to see where is the execution path
+1. With the example built and all the *Infrastructure Services* running, let's start an instance of the *Hiring* process. To do so, in a Terminal just run:
 
-<p align="center">
-    <img width=75%  src="docs/images/MC_details_1.png">
-</p>
+    ```bash
+    curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST http://localhost:8080/hiring -d '{"candidateData": { "name": "Jon", "lastName": "Snow", "email": "jon@snow.org", "experience": 5, "skills": ["Java", "Kogito", "Fencing"]}}'
+    ```
+   
+   If everything went well, you should get a response like:
+   ```json
+    {"id":"064a6372-b5bb-4eff-a059-d7b24d4ac64a","offer":{"category":"Senior Software Engineer","salary":40450}}
+   ```
+   Which indicates that a new process instance with id **064a6372-b5bb-4eff-a059-d7b24d4ac64a** has been started.
 
-We have configured the timer to avoid the *HR interview* after reasonable time (3min, just for testing purpose)
 
-Let's give the app more than 3min to see the timer in action.
+2. Now let's check the process instance state with the *Kogito Management Console*. To do so, in your browser navigate 
+   to http://localhost:8280 and log in using any of the users specified in the [Using Keycloak as Authentication Server](#using-keycloak-as-authentication-server).
+   
+   Once you are logged in, you should be redirected to the **Process Instances** page where you should be able to see
+   the started process instance in active state.
+   
 
-Check the process instance details
+   <p style="text-align:center">
+       <img width=75%  src="docs/images/g1_1_mc_list.png" alt="Process List">
+   </p>
 
-<p align="center">
-    <img width=75%  src="docs/images/MC_details_2_IT_executed_job.png">
-</p>
+
+3. Click on the instance **id** to navigate into the *Process Details* page. In there you'll be able to see different panels displaying relevant information about the instance state, such as the *Diagram*, *Timeline*, *Details*, *Variables*, *Jobs*...
+
+
+   <p style="text-align:center">
+       <img width=75%  src="docs/images/g1_2_mc_details.png" alt="Process Details">
+   </p>
+
+   Now check the **Diagram** panel, in there you'll se the instance execution path. Notice that it's stopped *HR Interview* Human Task node.
+   The task has *Timer* that will skip the task if it's not completed in a given time (3 minutes in this example). You should be able to see the 
+   associated *Job* in the **Jobs** panel. Now, let's wait 3 minutes to see the timer in action.
+
+4. After 3 minutes, the scheduled *Job* should have been executed, making the process instance skip the *HR Interview* task.
+   In the **Process Details** page, click the *Refresh* button to see the process instance state.
+
+   <p style="text-align:center">
+       <img width=75%  src="docs/images/g1_3_mc_details_executed_job.png" alt="Process Details after timer">
+   </p>
+
+   Again, check the *Diagram* panel to see the process instance execution path and the *HR Interview* task 
+   should have been skipped and the process instance continued its execution by following the *Application denied* path
+   reaching the *Completed* state.
+
+   Notice in the *Jobs* panel that the associated *Job* has the **Executed** status.

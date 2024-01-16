@@ -4,14 +4,13 @@ To allow a quick setup of all services required to run this demo, we provide a d
 - Postgresql
 - PgAdmin
 - Kogito Data Index
-- Kogito Jobs Service
 - Kogito Example Service (Only available if the example has been compiled using the `container` mvn profile eg: ```mvn cleanp package -Dcontainer```)
 - Kogito Management Console
 - Kogito Task Console
 - Keycloak
 
 The docker compose template provides three profiles to enable starting only the set of services you want to use. The profiles are:
-- **infra**: Starts only the minimal infrastructure to run the example (Postgresql, pgadmin, Kogito Data Index & Jobs Service)
+- **infra**: Starts only the minimal infrastructure to run the example (Postgresql, pgadmin, Kogito Data Index)
 - **example**: Starts the services in *infra* profile and the Kogito Example Service. Requires the example to be compiled using the `container` mvn profile eg: ```mvn cleanp package -Dcontainer```.
 - **full** (default): includes all the above and also starts the **Management Console**, **Task Console** and a **Keycloak** to handle the consoles authentication. Requires the example to be compiled using the `container` mvn profile eg: ```mvn cleanp package -Dcontainer```.
 
@@ -31,7 +30,6 @@ Once the services are started (depending on the profile), the following ports wi
 - Postgresql: 5432
 - PgAdmin: 8055
 - Kogito Data Index: 8180
-- Kogito Jobs: 8580
 - Kogito Example Service: 8080
 - Kogito Management Console: 8280
 - Kogito Task Console: 8380
