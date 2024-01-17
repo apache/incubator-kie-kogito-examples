@@ -41,6 +41,7 @@
         <activeByDefault>true</activeByDefault>
       </activation>
       <modules>
+        <module>serverless-workflow-examples-parent</module>
         <module>serverless-workflow-annotations-description</module>
         <module>serverless-workflow-callback-events-over-http-quarkus</module>
         <module>serverless-workflow-callback-quarkus</module>

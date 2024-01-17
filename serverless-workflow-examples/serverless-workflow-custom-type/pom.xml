@@ -23,6 +23,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
 
+  <parent>
+    <groupId>org.kie.kogito.examples</groupId>
+    <artifactId>serverless-workflow-examples-parent</artifactId>
+    <version>999-SNAPSHOT</version>
+    <relativePath>../serverless-workflow-examples-parent/pom.xml</relativePath>
+  </parent>
+
   <groupId>org.kie.kogito.examples</groupId>
   <artifactId>serverless-workflow-custom-type</artifactId>
   <version>1.0-SNAPSHOT</version>
@@ -31,7 +38,6 @@
   
   <properties>
      <version.compiler.plugin>3.8.1</version.compiler.plugin>
-     <version.jar.plugin>3.1.0</version.jar.plugin> 
      <quarkus-plugin.version>3.2.9.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>

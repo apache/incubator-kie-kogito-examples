@@ -25,6 +25,13 @@
 
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+      <groupId>org.kie.kogito.examples</groupId>
+      <artifactId>serverless-workflow-examples-parent</artifactId>
+      <version>999-SNAPSHOT</version>
+      <relativePath>../serverless-workflow-examples-parent/pom.xml</relativePath>
+    </parent>
+
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>serverless-workflow-consuming-events-over-http-quarkus</artifactId>
 
