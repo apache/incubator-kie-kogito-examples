@@ -35,6 +35,7 @@
   <name>Kogito Example :: Quarkus</name>
 
   <properties>
+    <java.module.name>org.kie.kogito.examples.quarkus</java.module.name>
     <!-- Port 0 means dynamic port -->
     <tests.quarkus.http.port>0</tests.quarkus.http.port>
     <!-- override default to fast-jar packaging for forward-compatibility -->

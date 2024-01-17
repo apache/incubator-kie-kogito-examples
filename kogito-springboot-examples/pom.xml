@@ -34,6 +34,10 @@
   <packaging>pom</packaging>
   <name>Kogito Example :: Spring Boot</name>
 
+  <properties>
+    <java.module.name>org.kie.kogito.examples.springboot</java.module.name>
+  </properties>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
