@@ -38,7 +38,6 @@
   
   <properties>
      <version.compiler.plugin>3.8.1</version.compiler.plugin>
-     <version.jar.plugin>3.1.0</version.jar.plugin> 
      <quarkus-plugin.version>3.2.9.Final</quarkus-plugin.version>
      <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
      <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
