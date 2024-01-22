@@ -105,7 +105,12 @@ kubectl apply -f kubernetes/data-index-service-postgresql.yml -n timeouts-showca
 
 service/data-index-service-postgresql created
 deployment.apps/data-index-service-postgresql created
-trigger.eventing.knative.dev/data-index-service-postgresql-processes-trigger created
+trigger.eventing.knative.dev/data-index-service-postgresql-process-definition-trigger created
+trigger.eventing.knative.dev/data-index-service-postgresql-process-error-trigger created
+trigger.eventing.knative.dev/data-index-service-postgresql-process-node-trigger created
+trigger.eventing.knative.dev/data-index-service-postgresql-process-sla-trigger created
+trigger.eventing.knative.dev/data-index-service-postgresql-process-state-trigger created
+trigger.eventing.knative.dev/data-index-service-postgresql-process-variable-trigger created
 trigger.eventing.knative.dev/data-index-service-postgresql-jobs-trigger created
 ```
 
