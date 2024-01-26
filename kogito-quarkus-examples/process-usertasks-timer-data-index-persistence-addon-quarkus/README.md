@@ -6,7 +6,7 @@ This example showcases a basic implementation of the **Hiring** process that dri
 interviews until he gets hired.
 
 This quickstart project shows a simple example user task orchestration including the use of DMN decisions to
-generate the candidate offer and timers to skip Human tasks.
+generate the candidate offer and timers to skip User Tasks.
 
 This example also demonstrates how to configure the whole *Kogito* environment using the new *Simplified Architecture* that
 enable simplifying the communication among *Kogito* services removing the need of events (Kafka/HTTP) between them. This can 
@@ -51,22 +51,33 @@ This example makes use of the *New Hiring Offer* DMN to generate a base offer fo
 In this simple DMN we have an `Offer` *Decision*, that will generate the candidate offer, which
 has a requirement of a `CandidateData` *Input Data*.
 
-<p style="text-align:center">
-    <img width=55%  src="docs/images/new_hiring_offer_dmn.png" alt="DMN Diagram">
-</p>
+<div style="text-align:center">
+   <figure>
+      <img width=55%  src="docs/images/new_hiring_offer_dmn.png" alt="DMN Diagram">
+      <figcaption>New Hiring Offer DMN diagram</figcaption>
+   </figure>
+</div>
 
 The DMN defines the following data types (`tCandidateData` & `tOffer` ) matching the POJOs defined in the project 
 (`CandidateData.java` & `Offer.java`):
-<p style="text-align:center">
-    <img width=75%  src="docs/images/new_hiring_offer_dmn_types.png" alt="DMN Type Definitions">
-</p>
+
+<div style="text-align:center">
+   <figure>
+      <img width=75%  src="docs/images/new_hiring_offer_dmn_types.png" alt="DMN Type Definitions">
+      <figcaption>New Hiring Offer DMN types</figcaption>
+   </figure>
+</div>
 
 As expected, `CandidateData` *Input Data* & `Offer` *Decision* have a `tCandidateData` data
 
 The `Offer` decision uses the following *Boxed Expression* to generate the `tOffer`:
-<p style="text-align:center">
-    <img width=75%  src="docs/images/new_hiring_offer_dmn_decision.png" alt="DMN Decision">
-</p>
+
+<div style="text-align:center">
+   <figure>
+      <img width=75%  src="docs/images/new_hiring_offer_dmn_decision.png" alt="DMN Decision">
+      <figcaption>New Hiring Offer DMN decision</figcaption>
+   </figure>
+</div>
 
 ## The Hiring Process
 ### Process variables
@@ -82,9 +93,12 @@ The process handles the following _Variables_:
 
 ### The BPMN Process
 
-<p style="text-align:center">
-    <img width=75%  src="docs/images/hiring_diagram.png" alt="Hiring Process Diagram">
-</p>
+<div style="text-align:center">
+   <figure>
+      <img width=75%  src="docs/images/hiring_diagram.png" alt="Hiring Process Diagram">
+      <figcaption>Hiring Process Diagram</figcaption>
+   </figure>
+</div>
 
 The process starts receiving the `CandidateData` as an input and storing it into the `candidateData` variable, and if the 
 candidate meets two minimal requirements, the process will continue and reach the **Generate base offer**, otherwise the 
@@ -94,35 +108,46 @@ The **Generate base offer** is a *Business Rule Task* that will use the *New Hir
 `NewHiringOffer.dmn` to generate the an `Offer` based on the candidate experience and skills. The task takes the `candidateData`
 as an input and will produce an instance of `org.kie.kogito.hr.Offer` that will be stored in the `offer` variable.
 
-<p style="text-align:center">
-    <img width=75%  src="docs/images/generate_offer_assignments.png" alt="Offer assignments">
-</p>
 
-After the `offer` has been generated, the process will jump into the **HR Interview** *Human Task*, where the candidate we'll 
+<div style="text-align:center">
+   <figure>
+      <img width=75%  src="docs/images/generate_offer_assignments.png" alt="Offer assignments">
+      <figcaption><b>Generate base Offer</b> data assignments</figcaption>
+   </figure>
+</div>
+
+After the `offer` has been generated, the process will jump into the **HR Interview** *User Task*, where the candidate we'll 
 be interviewed by the *HR* department. The task takes the `candidateData` and `offer` as inputs and as an output will produce
 the `hr_approve` boolean and an updated `offer`.
 
-<p style="text-align:center">
-    <img width=75%  src="docs/images/hr_interview_assignments.png" alt="HR Interview assignments">
-</p>
+<div style="text-align:center">
+   <figure>
+      <img width=75%  src="docs/images/hr_interview_assignments.png" alt="HR Interview assignments">
+      <figcaption><b>HR Interviewr</b> task data assignments</figcaption>
+   </figure>
+</div>
 
-The **HR Interview** *Human Task* also has a *Boundary Timer Event* that will prevent the task to delay and will cancel the
+The **HR Interview** *User Task* also has a *Boundary Timer Event* that will prevent the task to delay and will cancel the
 task after certain time (for example purpose just 3 minutes). This *Boundary Timer Event* will schedule a Job in the Jobs Service 
 that when trigger will notify the *Kogito Runtime* to cancel the task and  deny the application.
 
-If **HR Interview** successfully completed, the process will jump into the **IT Interview** *Human Task*. Again the candidate 
+If **HR Interview** successfully completed, the process will jump into the **IT Interview** *User Task*. Again the candidate 
 we'll have a second interview with the *IT* department. Again, this task will take the `candidateData` and `offer` as inputs 
 but as an output will produce the `it_approve` boolean.
 
-<p style="text-align:center">
-    <img width=75%  src="docs/images/it_interview_assignments.png" alt="IT Interview assignments">
-</p>
+<div style="text-align:center">
+   <figure>
+      <img width=75%  src="docs/images/it_interview_assignments.png" alt="IT Interview assignments">
+      <figcaption><b>IT Interviewr</b> task data assignments</figcaption>
+   </figure>
+</div>
+
 
 Once both tasks are completed, if the candidate got the approvals from *HR* & *IT*  (both `hr_interview` & `hr_interview` being true)
 the process will jump into the **Send Offer to Candidate** *Script Task* that will notify the candidate about the offer 
 and the process will end.
 
-> **NOTE:** for simplicity, all the *Human Tasks* in this example are assigned to the *jdoe* user present in the keycloak configuration
+> **NOTE:** for simplicity, all the *User Tasks* in this example are assigned to the *jdoe* user present in the keycloak configuration
 
 ## Running the example
 ### Prerequisites
@@ -306,7 +331,9 @@ are started as explained in the [Building & Running the example](#building--runn
 
 #### Show active Hiring process instance at Kogito Management Console
 
-In this first guide we'll see how to user the *Management Console* to view the state of an active process instance.
+*Kogito Management Console* is the tool that enables the user to view and administrate process instances in our *Kogito application*.
+
+In this guide we'll see how to use the *Kogito Management Console* to view the state of the Hiring process instances.
 
 1. With the example built and all the *Infrastructure Services* running, let's start an instance of the *Hiring* process. To do so, in a Terminal just run:
 
@@ -328,31 +355,185 @@ In this first guide we'll see how to user the *Management Console* to view the s
    the started process instance in active state.
    
 
-   <p style="text-align:center">
-       <img width=75%  src="docs/images/g1_1_mc_list.png" alt="Process List">
-   </p>
+   <div style="text-align:center;">
+      <figure>
+         <img width=75%  src="docs/images/g1_1_mc_list.png" alt="Process List">
+         <figcaption><b>Process List</b> in <i>Kogito Management Console</i></figcaption>
+      </figure>
+   </div>
 
 
 3. Click on the instance **id** to navigate into the *Process Details* page. In there you'll be able to see different panels displaying relevant information about the instance state, such as the *Diagram*, *Timeline*, *Details*, *Variables*, *Jobs*...
 
 
-   <p style="text-align:center">
-       <img width=75%  src="docs/images/g1_2_mc_details.png" alt="Process Details">
-   </p>
+   <div style="text-align:center">
+      <figure>
+         <img width=75%  src="docs/images/g1_2_mc_details.png" alt="Process Details">
+         <figcaption><b>Process Instance Details</b> page</figcaption>
+      </figure>
+   </div>
 
-   Now check the **Diagram** panel, in there you'll se the instance execution path. Notice that it's stopped *HR Interview* Human Task node.
+   Now check the **Diagram** panel, in there you'll se the instance execution path. Notice that it's stopped *HR Interview* *User Task* waiting for some input from the user.
    The task has *Timer* that will skip the task if it's not completed in a given time (3 minutes in this example). You should be able to see the 
    associated *Job* in the **Jobs** panel. Now, let's wait 3 minutes to see the timer in action.
 
 4. After 3 minutes, the scheduled *Job* should have been executed, making the process instance skip the *HR Interview* task.
    In the **Process Details** page, click the *Refresh* button to see the process instance state.
 
-   <p style="text-align:center">
-       <img width=75%  src="docs/images/g1_3_mc_details_executed_job.png" alt="Process Details after timer">
-   </p>
+   <div style="text-align:center">
+      <figure>
+         <img width=75%  src="docs/images/g1_3_mc_details_executed_job.png" alt="Process Details after timer">
+         <figcaption>Process Instance completed after the timer execution.</figcaption>
+      </figure>
+   </div>
 
    Again, check the *Diagram* panel to see the process instance execution path and the *HR Interview* task 
    should have been skipped and the process instance continued its execution by following the *Application denied* path
    reaching the *Completed* state.
 
    Notice in the *Jobs* panel that the associated *Job* has the **Executed** status.
+
+#### Complete Hiring process instances using Kogito Task Console
+
+When a *Kogito* process reaches a *User Task*, the process execution stops waiting for the user input
+that will enable the *User Task* to finish and allowing the process execution to continue.
+
+*Kogito Task Console* is the tool that enables the user interacting with the process *User Tasks* and provide the necesary data
+for the process to continue (usually wiht forms).
+
+In this guide, we'll see how to complete the process *User Tasks* using the *Kogito Task Console* to interact with the process *User Tasks* 
+using the engine autogenerated forms.
+
+> **_NOTE_**: For simplicity, all the *User Tasks* are assigned to the user *jdoe*. Please make sure you use the *jdoe*/*jdoe* credentials
+> when logging in the *Task Console*
+
+1. With the example built and all the *Infrastructure Services* running, let's start an instance of the *Hiring* process. To do so, in a Terminal just run:
+
+    ```bash
+    curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST http://localhost:8080/hiring -d '{"candidateData": { "name": "Jon", "lastName": "Snow", "email": "jon@snow.org", "experience": 5, "skills": ["Java", "Kogito", "Fencing"]}}'
+    ```
+
+   If everything went well, you should get a response like:
+   ```json
+    {"id":"3cf0d58f-a824-4046-ba6c-c2e79edc1df7","offer":{"category":"Senior Software Engineer","salary":40450}}
+   ```
+   Which indicates that a new process instance with id **3cf0d58f-a824-4046-ba6c-c2e79edc1df7** has been started.
+
+
+2. Let's check the process instance state. Again browse to http://localhost:8280 to access the *Kogito Management Console*,
+   and in the **Process List** click the **Id** column to open the **Process Details** page.
+
+   <div style="text-align:center;">
+      <figure>
+         <img width=75%  src="docs/images/g2_1_mc_list.png" alt="Process List"/>
+         <figcaption>Process List in <i>Kogito Management Console</i></figcaption>
+      </figure>
+   </div>
+
+   <div style="text-align:center">
+      <figure>
+         <img width=75%  src="docs/images/g2_2_mc_details.png" alt="Process Details">
+         <figcaption>Process instance Details page.</figcaption>
+      </figure>
+   </div>
+
+   As expected, the process instance is stopped in the *HR Interview* task waiting for some input from the user. Let's try to 
+   complete the task.
+
+
+3. Now open the *Kogito Task Console* by browsing to http://localhost:8380 and login using the **jdoe/jdoe** credentials.
+   After logging in, you'll be redirected to the **Task Inbox** page, which contains the list of *Active* tasks assigned to the 
+   logged user. In this case you should be able to see only the new *HR Interview* task.
+
+   <div style="text-align:center;">
+      <figure>
+         <img width=75%  src="docs/images/g2_3_tc_inbox.png" alt="Task Inbox"/>
+         <figcaption><b>Task Inbox</b> in <i>Kogito Task Console</i></figcaption>
+      </figure>
+   </div>
+
+   Click on the **HR Interview** task to open the form and complete it!
+
+
+4. The **Task Form** is the main component to interact with User Tasks, it allows the user to provide the data required by 
+   the task and transition it to the next phase, allowing the Process to continue. The **Task Form** is autogenerated based
+   on the *User Task* data assignments.
+
+   
+   <div style="text-align:center;">
+      <figure>
+         <img width=75%  src="docs/images/g2_4_tc_hr_form.png" alt="HR Interview Form"/>
+         <figcaption><i>HR Interview</i> <b>Task Form</b></figcaption>
+      </figure>
+   </div>
+
+   
+   *HR Interview* Form allows you to edit the actual **Offer** that will be sent to the *Candidate* and also approve or deny 
+   the job application with the **Approve** checkbox.
+   
+   Now, check the **Approve** checkbox click the  **Complete** button in order to submit the form and complete the task. If the
+   task could be successfully completed, a notification should appear in the screen and the form will stay in Read-Only mode.
+
+
+   <div style="text-align:center;">
+      <figure>
+         <img width=75%  src="docs/images/g2_5_tc_hr_form_notification.png" alt="HR Interview Form Notification"/>
+         <figcaption><i>HR Interview</i> Success notification!</figcaption>
+      </figure>
+   </div>
+
+   With the *HR Interview* task successfully completed the process has moved forward and reached the *IT Interview* task.
+
+   Optionally, you can check the process instance state in the **Kogito Management Console** and verify the current
+   execution path.
+
+   <div style="text-align:center;">
+      <figure>
+         <img width=75%  src="docs/images/g2_6_mc_details.png" alt="Process Details"/>
+         <figcaption>Process Instance details stopped in <i>IT Interview</i></figcaption>
+      </figure>
+   </div>
+
+5. Now is time to complete the **IT Interview** task and complete this Hiring process instance. In **Task Console**, go 
+   back to  **Task Inbox** and as expected, there you'll see that **HR Interview** is no longer available and a new
+   **IT Interview** has appeared.
+
+   <div style="text-align:center;">
+      <figure>
+         <img width=75%  src="docs/images/g2_7_tc_inbox.png" alt="Task Inbox"/>
+         <figcaption><i>IT Interview</i> in <b>Task Inbox</b></figcaption>
+      </figure>
+   </div>
+
+   As done in Step #3, click in the **IT Interview** task to open the task form. *IT Interview* task only needs the 
+   candidate **Approval** to be submitted. Please, check the **Approval** field and click the **Complete** button to
+   submit the form.
+
+   <div style="text-align:center;">
+      <figure>
+         <img width=75%  src="docs/images/g2_8_tc_it_form.png" alt="IT Interview Form"/>
+         <figcaption><i>IT Interview</i> <b>Task Form</b></figcaption>
+      </figure>
+   </div>
+
+
+6. After the form is submitted the *IT Task* should be completed and the process should continue, notifying the *Candidate* 
+   that he has succesfully finished the Hiring process. Please go back to **Task Inbox** to verify there are no other active tasks
+   waiting for you.
+
+   <div style="text-align:center;">
+      <figure>
+         <img width=75%  src="docs/images/g2_9_tc_inbox_empty.png" alt="Empty Task Inbox"/>
+         <figcaption>Empty **Task Inbox** after completing the *IT Interview* Task</figcaption>
+      </figure>
+   </div>
+
+   You can also open use *Kogito Management Console* to check the state of the process instance and verify that the
+   instance has been successfully completed.
+
+   <div style="text-align:center;">
+      <figure>
+         <img width=75%  src="docs/images/g2_10_mc_details_completed.png" alt="Hiring Process succesfully completed"/>
+         <figcaption>Hiring Process sucessfully completed</figcaption>
+      </figure>
+   </div>
