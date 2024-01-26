@@ -18,6 +18,7 @@
  */
 package org.acme.travel.tests.multimessaging.springboot;
 
+import java.io.UncheckedIOException;
 import java.net.URI;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
@@ -29,7 +30,6 @@ import java.util.stream.IntStream;
 
 import org.acme.travel.Traveller;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.test.springboot.kafka.KafkaTestClient;
 import org.kie.kogito.testcontainers.springboot.KafkaSpringBootTestResource;
@@ -69,7 +69,6 @@ public class MultiMessagingIT {
     private KafkaTestClient kafkaClient;
 
     @Test
-    @Disabled("Flaky test")
     public void testProcess() throws InterruptedException {
         objectMapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
 
@@ -116,8 +115,8 @@ public class MultiMessagingIT {
                     .withTime(OffsetDateTime.now())
                     .withData(objectMapper.writeValueAsString(traveller).getBytes())
                     .build());
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        } catch (JsonProcessingException e) {
+            throw new UncheckedIOException(e);
         }
     }
 
