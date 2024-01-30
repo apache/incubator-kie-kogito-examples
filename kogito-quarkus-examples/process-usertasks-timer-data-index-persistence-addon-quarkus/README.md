@@ -8,7 +8,7 @@ interviews until he gets hired.
 This quickstart project shows a simple example user task orchestration including the use of DMN decisions to
 generate the candidate offer and timers to skip User Tasks.
 
-This example also demonstrates how to configure the whole *Kogito* environment using the new *Simplified Architecture* that
+This example also demonstrates how to configure the whole *Kogito* environment using the new *Compact Architecture* that
 enable simplifying the communication among *Kogito* services removing the need of events (Kafka/HTTP) between them. This can 
 be achieved using the following *Quarkus* addons:
 - `kogito-addons-quarkus-data-index-persistence-postgresql`: enables the *Kogito Runtime* persisting directly into the 
@@ -168,7 +168,6 @@ And when using native image compilation, you will also need:
 This quickstart provides a docker compose template that starts all the required services. This setup ensures that all services are connected with a default configuration.
 
 - PostgreSQL: 5432
-- Kafka: 9092
 - Data Index: 8180
 - Management Console: 8280
 - Task Console: 8380
@@ -188,7 +187,7 @@ To build the example, on a Terminal, run the following command:
 ```shell
 mvn clean package -Pcontainer
 ```
-This will build the example quarkus application and create a Docker image that will be started in the 
+This will build the example quarkus application and create a Docker image that will be started in the `docker-compose` template.
 
 To execute the full example (including consoles), open a Terminal and run the following command inside the `docker-compose` folder:
 
@@ -196,7 +195,7 @@ To execute the full example (including consoles), open a Terminal and run the fo
 sh startServices.sh 
 ```
 
-If you want to start only the example and the minimal Infrastructure Services (PostgreSQL, Data-Index and Jobs Service), 
+Additionally, if you want to start only the example and the minimal Infrastructure Services (PostgreSQL, Data-Index and Jobs Service), 
 you can run the same `startServices.sh` script but passing the `example` argument 
 
 ```shell
@@ -205,7 +204,7 @@ sh startServices.sh example
 
 > **_NOTE:_**  starting the Infrastructure Services, please consider running a ```mvn clean package -Pcontainer```
 > command on the project root before running the ```startServices.sh``` script for the first time or any time you modify the project.
-> 
+
 ### Running the example in Development mode
 
 To run the example in Development mode, just run the following command in a Terminal:

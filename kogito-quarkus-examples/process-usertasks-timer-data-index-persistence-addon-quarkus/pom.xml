@@ -139,6 +139,16 @@
       <groupId>org.kie.kogito</groupId>
       <artifactId>jobs-service-postgresql-common</artifactId>
     </dependency>
+
+    <!-- Data Audit -->
+    <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-addons-data-audit-jpa-quarkus</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-addons-data-audit-quarkus</artifactId>
+    </dependency>
   </dependencies>
   <profiles>
     <profile>

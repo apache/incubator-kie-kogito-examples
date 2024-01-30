@@ -25,6 +25,7 @@ CREATE DATABASE keycloak
     TABLESPACE = pg_default
     CONNECTION LIMIT = -1;
 
+GRANT ALL PRIVILEGES ON DATABASE postgres TO "kogito-user";
 GRANT ALL PRIVILEGES ON DATABASE kogito TO "kogito-user";
 GRANT ALL PRIVILEGES ON DATABASE kogito TO postgres;
 

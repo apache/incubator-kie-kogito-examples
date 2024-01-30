@@ -3,7 +3,7 @@ version: '3'
 services:
   postgres:
     container_name: postgres
-    image: postgres:13.4-alpine3.14
+    image: postgres:16.1-alpine3.19
     profiles: [ "infra", "example", "full" ]
     ports:
       - "5432:5432"
@@ -20,7 +20,7 @@ services:
 
   pgadmin:
     container_name: pgadmin
-    image: dpage/pgadmin4:7.8
+    image: dpage/pgadmin4:8.2
     profiles: [ "infra", "example", "full" ]
     ports:
       - 8055:80
@@ -28,9 +28,18 @@ services:
       - postgres
     volumes:
       - ./pgadmin/servers.json:/pgadmin4/servers.json
+      - ./pgadmin/pgpass:/pgadmin4/pgpass
+    entrypoint: >
+      /bin/sh -c "
+      cp -f /pgadmin4/pgpass /var/lib/pgadmin/;
+      chmod 600 /var/lib/pgadmin/pgpass;
+      /entrypoint.sh
+      "
     environment:
-      PGADMIN_DEFAULT_EMAIL: user@user.org
+      PGADMIN_DEFAULT_EMAIL: user@kogito.org
       PGADMIN_DEFAULT_PASSWORD: pass
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: 'False'
 
   data-index:
     container_name: data-index
@@ -53,6 +62,7 @@ services:
       QUARKUS_FLYWAY_TABLE: FLYWAY_DATAINDEX_SERVICE
       QUARKUS_HIBERNATE_ORM_DATABASE_GENERATION: update
       KOGITO_DATA_INDEX_QUARKUS_PROFILE: "http-events-support"
+      KOGITO_DATA_INDEX_PROPS: -Dkogito.protobuf.folder=/home/kogito/data/protobufs/
     extra_hosts:
       - "${DOCKER_GATEWAY_HOST}:host-gateway"
 
@@ -62,7 +72,6 @@ services:
     profiles: ["example", "full"]
     ports:
       - "8080:8080"
-      - "5005:5005"
     depends_on:
       data-index:
         condition: service_started
@@ -76,7 +85,6 @@ services:
       KOGITO_JOBS_SERVICE_URL: http://${DOCKER_GATEWAY_HOST}:8080
       KOGITO_SERVICE_URL: http://${DOCKER_GATEWAY_HOST}:8080
       KOGITO_DATAINDEX_HTTP_URL: http://${DOCKER_GATEWAY_HOST}:8180
-      KOGITO_QUARKUS_JVM_PROPS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -Dquarkus.datasource.reactive.url=postgresql://postgres:5432/kogito
     extra_hosts:
       - "${DOCKER_GATEWAY_HOST}:host-gateway"
 
