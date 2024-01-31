@@ -57,10 +57,6 @@ services:
       QUARKUS_DATASOURCE_USERNAME: kogito-user
       QUARKUS_DATASOURCE_PASSWORD: kogito-pass
       QUARKUS_HTTP_CORS_ORIGINS: "/.*/"
-      QUARKUS_FLYWAY_MIGRATE_AT_START: "true"
-      QUARKUS_FLYWAY_BASELINE_ON_MIGRATE: "true"
-      QUARKUS_FLYWAY_TABLE: FLYWAY_DATAINDEX_SERVICE
-      QUARKUS_HIBERNATE_ORM_DATABASE_GENERATION: update
       KOGITO_DATA_INDEX_QUARKUS_PROFILE: "http-events-support"
       KOGITO_DATA_INDEX_PROPS: -Dkogito.protobuf.folder=/home/kogito/data/protobufs/
     extra_hosts:
