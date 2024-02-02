@@ -39,7 +39,7 @@
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
     <kogito.bom.version>1.29.0.Final</kogito.bom.version>  <!-- Setup to latest version which worked -->
     <version.compiler.plugin>3.8.1</version.compiler.plugin>
-    <maven.compiler.release>11</maven.compiler.release>
+    <maven.compiler.release>17</maven.compiler.release>
   </properties>
   <dependencyManagement>
     <dependencies>

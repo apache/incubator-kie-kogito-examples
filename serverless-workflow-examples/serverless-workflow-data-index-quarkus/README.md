@@ -50,9 +50,9 @@ In this way a container for PostgreSQL will be started on port 5432.
 ### Prerequisites
  
 You will need:
-  - Java 11+ installed
+  - Java 17+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.8.6+ installed
+  - Maven 3.9.6+ installed
   - Docker and Docker Compose to run the required example infrastructure.
 
 When using native image compilation, you will also need: 
@@ -118,11 +118,13 @@ Once all services bootstrap, the following ports will be assigned on your local 
 - PgAdmin: 8055
 - serverless-workflow-service: 8080
 
-> **_NOTE:_**  This step requires the project to be compiled, please consider running a ```mvn clean package -Dcontainer``` command on the project root before running the ```docker-compose up``` for the first time or any time you modify the project.
+> **_NOTE:_**  This step requires the project to be compiled, please consider running a ```mvn clean package -P container,data-index-addon``` command on the project root before running the ```docker-compose up``` for the first time or any time you modify the project.
 
 Once started you can simply stop all services by executing the ```docker-compose -f docker-compose.yml stop```.
 
 All created containers can be removed by executing the ```docker-compose -f docker-compose.yml rm```.
+
+Data Index GraphQL UI is available at http://localhost:8080/q/graphql-ui/
 
 This example provides also the configuration needed to see the dataindex deployed as a standalone service following the steps:
 - Execute
@@ -205,4 +207,4 @@ After a while (note that to you need give time for event to be consumed)  you sh
 
 ### Query process details in Data Index
 
-Data Index GraphQL UI is available at http://localhost:8080/q/graphql-ui/
+Data Index GraphQL UI is available at http://localhost:8180/graphiql/

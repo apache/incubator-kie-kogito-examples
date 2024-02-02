@@ -11,9 +11,9 @@ The flow, given an image file name containing a dog image, returns that dog's ra
 ### Prerequisites
  
 You will need:
-  - Java 11+ installed
+  - Java 17+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.8.6+ installed
+  - Maven 3.9.6+ installed
   - Python 3+ installed. In Linux system is usually pre-installed. In case you have an older version or you are not using Linux, check [here](https://wiki.python.org/moin/BeginnersGuide/Download)
   - Pip installed. In case it not there, run `python -m ensurepip --upgrade`
   - Python required libraries, equivalent to run `pip install -r requirements.txt` and `pip install jep`, will be automatically installed when running Maven. 
