@@ -50,9 +50,9 @@ In this way a container for PostgreSQL will be started on port 5432.
 ### Prerequisites
  
 You will need:
-  - Java 11+ installed
+  - Java 17+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.8.6+ installed
+  - Maven 3.9.6+ installed
   - Docker and Docker Compose to run the required example infrastructure.
 
 When using native image compilation, you will also need: 

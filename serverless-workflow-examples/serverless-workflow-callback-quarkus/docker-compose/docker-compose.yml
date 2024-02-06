@@ -83,7 +83,7 @@ services:
 
   data-index:
     container_name: data-index
-    image: quay.io/kiegroup/kogito-data-index-postgresql:${KOGITO_VERSION}
+    image: quay.io/kiegroup/kogito-data-index-postgresql-nightly:latest
     ports:
       - "8180:8080"
     depends_on:
@@ -97,6 +97,10 @@ services:
       QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgres:5432/kogito"
       QUARKUS_DATASOURCE_USERNAME: kogito-user
       QUARKUS_DATASOURCE_PASSWORD: kogito-pass
+      QUARKUS_PROFILE: kafka-events-support
+      KOGITO_DATA_INDEX_QUARKUS_PROFILE: kafka-events-support
+      QUARKUS_FLYWAY_MIGRATE_AT_START: "true"
+      QUARKUS_FLYWAY_TABLE: data-index-flyway
       KAFKA_BOOTSTRAP_SERVERS: kafka:29092
       QUARKUS_HTTP_CORS_ORIGINS: "/.*/"
       KOGITO_DATA_INDEX_PROPS: -Dquarkus.hibernate-orm.database.generation=update

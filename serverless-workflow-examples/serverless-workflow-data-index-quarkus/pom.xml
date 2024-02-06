@@ -45,7 +45,7 @@
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
     <version.compiler.plugin>3.8.1</version.compiler.plugin>
-    <maven.compiler.release>11</maven.compiler.release>
+    <maven.compiler.release>17</maven.compiler.release>
     <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
   </properties>
 
@@ -148,7 +148,6 @@
     <profile>
       <id>data-index-addon</id>
       <activation>
-        <activeByDefault>true</activeByDefault>
         <property>
           <name>data-index-addon</name>
         </property>
@@ -202,6 +201,7 @@
     <profile>
       <id>data-index-standalone</id> <!-- Requires execute docker-compose/startServices.sh -->
       <activation>
+        <activeByDefault>true</activeByDefault>
         <property>
           <name>data-index-standalone</name>
         </property>

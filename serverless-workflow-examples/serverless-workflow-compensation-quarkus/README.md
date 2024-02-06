@@ -13,9 +13,9 @@ The process result is a boolean field `compensated` which value should match `sh
 ### Prerequisites
  
 You will need:
-  - Java 11+ installed
+  - Java 17+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.8.6+ installed
+  - Maven 3.9.6+ installed
 
 When using native image compilation, you will also need: 
   - [GraalVm](https://www.graalvm.org/downloads/) 19.3.1+ installed

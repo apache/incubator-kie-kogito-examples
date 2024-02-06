@@ -47,7 +47,7 @@
     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
     <version.compiler.plugin>3.8.1</version.compiler.plugin>
     <version.com.github.tomakehurst.wiremock>2.33.2</version.com.github.tomakehurst.wiremock>
-    <maven.compiler.release>11</maven.compiler.release>
+    <maven.compiler.release>17</maven.compiler.release>
     <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
   </properties>
 
