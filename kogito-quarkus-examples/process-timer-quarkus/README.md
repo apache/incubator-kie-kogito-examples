@@ -316,9 +316,3 @@ Before timer... waiting for  R2/PT1S
 After Timer
 After Timer
 ```
-
-## Deploy on OpenShift
-
-This example can run on OpenShift 4 instance. Use [Kogito operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift) to deploy this example and instantiate also the Jobs service. Kogito operator will take care of configuring this example to successfully connect to the Jobs service.
-
-In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with the Kogito Operator.

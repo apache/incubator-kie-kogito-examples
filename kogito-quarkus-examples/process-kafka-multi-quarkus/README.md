@@ -248,6 +248,3 @@ mp.messaging.outgoing.no\u0020travel.connector=smallrye-kafka
 mp.messaging.outgoing.no\u0020travel.topic=cancelledtravellers
 mp.messaging.outgoing.no\u0020travel.value.serializer=org.apache.kafka.common.serialization.StringSerializer
 ```
-## Deploying with Kogito Operator
-
-In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).

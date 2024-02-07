@@ -198,7 +198,3 @@ where uuid is the id of the deal review and tuuid is the id of the user task you
 ```
 Review of the deal very good work for traveller Doe
 ```
-
-## Deploying with Kogito Operator
-
-In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).

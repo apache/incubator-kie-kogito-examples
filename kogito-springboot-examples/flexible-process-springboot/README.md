@@ -77,10 +77,6 @@ In addition, various clients to interact with this service can be easily generat
 
 When running in either Quarkus Development or Native mode, we also leverage the [Quarkus OpenAPI extension](https://quarkus.io/guides/openapi-swaggerui#use-swagger-ui-for-development) that exposes [Swagger UI](http://localhost:8080/swagger-ui.html) that you can use to look at available REST endpoints and send test requests.
 
-## Deploying with the Kogito Operator
-
-In the [operator](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).
-
 ## Usage example
 
 ### Create a support case

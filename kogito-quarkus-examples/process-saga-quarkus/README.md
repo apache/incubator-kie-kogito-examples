@@ -208,7 +208,3 @@ In the console executing the application you can check the log it with the execu
 17:16:17:747 WARN  [org.kie.kogito.examples.StockService] Cancel Stock for 9098daa2-f40f-4231-995a-1c7d159df190
 17:16:17:747 WARN  [org.kie.kogito.examples.OrderService] Failed Order 12345678
 ```
-
-## Deploying with Kogito Operator
-
-In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).
