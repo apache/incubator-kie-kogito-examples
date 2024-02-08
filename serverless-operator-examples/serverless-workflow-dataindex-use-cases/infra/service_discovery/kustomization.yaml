@@ -1,0 +1,3 @@
+resources:
+- 01-service-discovery-role.yaml
+- 02-service-discovery-rolebinding.yaml
