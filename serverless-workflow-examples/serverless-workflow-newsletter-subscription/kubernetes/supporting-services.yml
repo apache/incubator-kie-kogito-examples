@@ -173,6 +173,8 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
+            - name: KOGITO_SERVICE_URL
+              value: http://jobs-service-postgresql
             - name: JOBS_SERVICE_PERSISTENCE
               value: "postgresql"
             - name: KOGITO_JOBS_SERVICE_HTTP_JOB_STATUS_CHANGE_EVENTS
