@@ -99,7 +99,6 @@
         <module>process-usertasks-with-security-oidc-quarkus-with-console</module>
         <module>process-usertasks-with-security-oidc-quarkus</module>
         <module>process-usertasks-with-security-quarkus</module>
-        <module>rules-incubation-api-quarkus</module>
         <module>rules-legacy-quarkus-example</module>
         <module>rules-quarkus-helloworld</module>
         <module>ruleunit-event-driven-quarkus</module>

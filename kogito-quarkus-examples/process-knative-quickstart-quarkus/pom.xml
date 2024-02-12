@@ -40,6 +40,7 @@
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
     <version.org.kie.kogito>999-SNAPSHOT</version.org.kie.kogito>
+    <version.org.drools>999-SNAPSHOT</version.org.drools>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -57,6 +58,13 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+      <dependency>
+        <groupId>org.drools</groupId>
+        <artifactId>drools-bom</artifactId>
+        <version>${version.org.drools}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <dependencies>
@@ -69,8 +77,8 @@
       <artifactId>quarkus-resteasy-jackson</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-quarkus-rules</artifactId>
+      <groupId>org.drools</groupId>
+      <artifactId>drools-quarkus</artifactId>
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
