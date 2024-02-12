@@ -140,7 +140,3 @@ Hello from YAML Workflow, John
 ```
 
 You can also change the language parameter value to "Spanish" to get the greeting in Spanish.
-
-## Deploying with Kogito Operator
-
-In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).

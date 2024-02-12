@@ -17,15 +17,15 @@
 # under the License.
 #
 
-apiVersion: sw.kogito.kie.org/v1alpha08
-kind: KogitoServerlessWorkflow
+apiVersion: sonataflow.org/v1alpha08
+kind: SonataFlow
 metadata:
   name: startevent
   annotations:
-    sw.kogito.kie.org/description: Serverless Workflow for each example on k8s!
-    sw.kogito.kie.org/version: 0.0.1
-    sw.kogito.kie.org/profile: dev
-    sw.kogito.kie.org/resource-openapi: openapi-configmap
+    sonataflow.org/description: Serverless Workflow for each example on k8s!
+    sonataflow.org/version: 0.0.1
+    sonataflow.org/profile: dev
+    sonataflow.org/resource-openapi: openapi-configmap
 spec:
   flow:
     start: printWaitMessage

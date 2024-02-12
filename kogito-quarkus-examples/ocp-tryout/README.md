@@ -92,8 +92,6 @@ All configuration required to make those connections as well as initializations 
 - `kogito.jobsservice.props` - command line properties for the job service
 
 ## Constraints
-- Developer Sandbox does not allow to install additional operators - (https://www.youtube.com/watch?v=oDqw8aBGDD8 from 18.02.2021 - time: 9:09)
-  => cannot use Kogito Operator install
 - Developer Sandbox sets [resource quotas](https://github.com/codeready-toolchain/host-operator/blob/master/deploy/templates/nstemplatetiers/base/cluster.yaml) per user name
 
 ### Memory and cpu requests and limits

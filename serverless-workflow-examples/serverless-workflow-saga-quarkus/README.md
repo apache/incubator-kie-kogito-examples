@@ -191,9 +191,3 @@ In the console executing the application, you can check the log with the execute
 2021-12-21 09:20:45,968 INFO  [org.kie.kog.exa.StockService] (executor-thread-0) Cancel Stock 8cc0144b-87e0-47ed-8d8f-eedbe4b69abe
 2021-12-21 09:20:45,970 INFO  [org.kie.kog.exa.OrderService] (executor-thread-0) Order Failed 03e6cf79-3301-434b-b5e1-d6899b5639aa
 ```
-
-## Deploying with Kogito Operator
-
-In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).
-
-See also: [SAGA PATTERN WITH PROCESSES AND KOGITO – PART 1](https://blog.kie.org/2021/11/saga-pattern-with-processes-and-kogito-part-1.html)

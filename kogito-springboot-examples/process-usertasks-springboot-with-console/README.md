@@ -227,7 +227,3 @@ Check the process instance details at Kogito Management Console, and verify the 
 <p align="center">
     <img width=75%  src="docs/images/MC_details3.png">
 </p>
-
-## Deploying with Kogito Operator
-
-In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).

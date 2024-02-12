@@ -148,14 +148,7 @@ A Serverless Workflow service that works as a Github bot application, which reac
 - Rules on Quarkus with Unit: see [README.md](kogito-quarkus-examples/ruleunit-quarkus-example/README.md)
 - Process on Quarkus: see [README.md](kogito-quarkus-examples/process-quarkus-example/README.md)
 - Process on Spring Boot: see [README.md](kogito-springboot-examples/process-springboot-example/README.md)
-- Trusty on Quarkus: see [README.md](kogito-quarkus-examples/trusty-demonstration/README.md)
 - Trusty on Quarkus (DevUI integration): see [README.md](kogito-quarkus-examples/trusty-tracing-devservices/README.md)
-
-## Trying the examples with the Kogito Operator
-
-Most examples have a directory named `operator` including the YAML files to deploy it using the Kogito Operator in an OpenShift cluster.
-Please refer to the [Kogito Documentation](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift)
-of how to install the operator to your environment in order to try it there.
 
 ## Getting Help
 ### Issues

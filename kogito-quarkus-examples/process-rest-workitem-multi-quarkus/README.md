@@ -93,9 +93,3 @@ curl response will be something like this, which includes field `sum`, the resul
 ```text
 {"id":"8e79ac60-c0c1-40d0-808e-8d3585307661","randomNumber":8,"sum":344,"inputNumbers":{"numbers":[1,2,3,4,5,6,7,8,7]}}
 ```
-
-
-```
-## Deploying with Kogito Operator
-
-In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).
