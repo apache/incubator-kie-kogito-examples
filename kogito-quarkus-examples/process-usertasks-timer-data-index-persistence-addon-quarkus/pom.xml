@@ -211,9 +211,6 @@
                 <copy todir="./docker-compose/svg" overwrite="true">
                   <fileset dir="target/classes/META-INF/processSVG/"/>
                 </copy>
-                <copy todir="./docker-compose/persistence" overwrite="true">
-                  <fileset dir="target/classes/META-INF/resources/persistence/protobuf/"/>
-                </copy>
               </target>
             </configuration>
           </execution>

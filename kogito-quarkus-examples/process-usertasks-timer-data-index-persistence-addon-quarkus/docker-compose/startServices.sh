@@ -38,13 +38,6 @@ elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
    echo "DOCKER_GATEWAY_HOST=172.17.0.1" >> ".env"
 fi
 
-if [ ! -d "./persistence" ]
-then
-  echo "$KOGITO_EXAMPLE_PERSISTENCE does not exist. Have you compiled the project? mvn clean install -DskipTests"
-  exit 1
-fi
-PERSISTENCE_FOLDER=./persistence
-
 if [ ! -d "./svg" ]
 then
     echo "$KOGITO_EXAMPLE_SVG_FOLDER does not exist. Have you compiled the project? mvn clean install -DskipTests"
