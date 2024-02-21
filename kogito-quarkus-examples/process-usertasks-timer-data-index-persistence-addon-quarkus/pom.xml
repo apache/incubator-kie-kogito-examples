@@ -126,13 +126,13 @@
 
     <!-- Data Index Persistence -->
     <dependency>
-      <groupId>org.kie.kogito</groupId>
+      <groupId>org.kie</groupId>
       <artifactId>kogito-addons-quarkus-data-index-persistence-postgresql</artifactId>
     </dependency>
 
     <!-- Jobs Service -->
     <dependency>
-      <groupId>org.kie.kogito</groupId>
+      <groupId>org.kie</groupId>
       <artifactId>kogito-addons-quarkus-jobs</artifactId>
     </dependency>
     <dependency>
@@ -142,12 +142,12 @@
 
     <!-- Data Audit -->
     <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-addons-data-audit-jpa-quarkus</artifactId>
+      <groupId>org.kie</groupId>
+      <artifactId>kogito-addons-quarkus-data-audit-jpa</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-addons-data-audit-quarkus</artifactId>
+      <groupId>org.kie</groupId>
+      <artifactId>kogito-addons-quarkus-data-audit</artifactId>
     </dependency>
   </dependencies>
   <profiles>
@@ -170,8 +170,8 @@
       </properties>
       <dependencies>
         <dependency>
-          <groupId>org.kie.kogito</groupId>
-          <artifactId>runtime-tools-quarkus-extension</artifactId>
+          <groupId>org.jbpm</groupId>
+          <artifactId>jbpm-quarkus-devui</artifactId>
         </dependency>
       </dependencies>
     </profile>

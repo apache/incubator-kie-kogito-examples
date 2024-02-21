@@ -104,8 +104,8 @@
       <artifactId>kogito-quarkus-serverless-workflow</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-quarkus-serverless-workflow-devui</artifactId>
+      <groupId>org.sonataflow</groupId>
+      <artifactId>sonataflow-quarkus-devui</artifactId>
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
@@ -132,13 +132,13 @@
 
     <!-- Embedded jobs service -->
     <dependency>
-      <groupId>org.kie.kogito</groupId>
+      <groupId>org.kie</groupId>
       <artifactId>kogito-addons-quarkus-jobs-service-embedded</artifactId>
     </dependency>
 
     <!-- Embedded data index -->
     <dependency>
-      <groupId>org.kie.kogito</groupId>
+      <groupId>org.kie</groupId>
       <artifactId>kogito-addons-quarkus-data-index-inmemory</artifactId>
     </dependency>
 
