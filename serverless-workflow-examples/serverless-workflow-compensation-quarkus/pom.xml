@@ -37,10 +37,10 @@
   <name>Kogito Example :: Serverless Workflow Compensation :: Quarkus</name>
   <description>Kogito Serverless Workflow Error Compensation - Quarkus</description>
   <properties>
-    <quarkus-plugin.version>3.2.9.Final</quarkus-plugin.version>
+    <quarkus-plugin.version>3.2.10.Final</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-    <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
+    <quarkus.platform.version>3.2.10.Final</quarkus.platform.version>
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>

@@ -42,7 +42,7 @@
     <module>notification-service</module>
   </modules>
   <properties>
-    <jandex-plugin.version>3.0.5</jandex-plugin.version>
+    <jandex-plugin.version>3.1.6</jandex-plugin.version>
     <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
     <version.io.jjwt>0.11.2</version.io.jjwt>
     <version.kohsuke.github>1.116</version.kohsuke.github>
