@@ -73,8 +73,8 @@
       <artifactId>drools-quarkus-rules</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-quarkus-processes</artifactId>
+      <groupId>org.jbpm</groupId>
+      <artifactId>jbpm-quarkus</artifactId>
     </dependency>
     <!-- Knative dependencies -->
     <dependency>

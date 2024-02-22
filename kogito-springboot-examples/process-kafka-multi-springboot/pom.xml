@@ -68,10 +68,10 @@
       <artifactId>jackson-databind</artifactId>
     </dependency>
 
-    <!-- kogito -->
+    <!-- jBPM -->
     <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-processes-spring-boot-starter</artifactId>
+      <groupId>org.jbpm</groupId>
+      <artifactId>jbpm-spring-boot-starter</artifactId>
     </dependency>
 
     <dependency>
