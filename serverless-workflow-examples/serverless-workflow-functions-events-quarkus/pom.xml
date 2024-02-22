@@ -73,8 +73,8 @@
   </dependencyManagement>
   <dependencies>
     <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-quarkus-rules</artifactId>
+      <groupId>org.drools</groupId>
+      <artifactId>drools-quarkus-rules</artifactId>
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
