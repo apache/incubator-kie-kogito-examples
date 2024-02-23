@@ -55,12 +55,12 @@
       <artifactId>spring-boot-starter-actuator</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-rules-spring-boot-starter</artifactId>
+      <groupId>org.drools</groupId>
+      <artifactId>drools-rules-spring-boot-starter</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-addons-springboot-events-rules</artifactId>
+      <groupId>org.drools</groupId>
+      <artifactId>drools-addons-springboot-events-rules</artifactId>
     </dependency>
 
     <dependency>
