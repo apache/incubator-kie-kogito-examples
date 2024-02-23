@@ -94,8 +94,8 @@
       <artifactId>jackson-databind</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-quarkus-serverless-workflow-devui</artifactId>
+      <groupId>org.sonataflow</groupId>
+      <artifactId>sonataflow-quarkus-devui</artifactId>
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
