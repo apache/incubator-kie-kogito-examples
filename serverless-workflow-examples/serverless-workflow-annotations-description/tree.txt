@@ -1,0 +1,6 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --< org.kie.kogito.examples:serverless-workflow-annotations-description >--
+[INFO] Building Kogito Example :: Serverless Workflow Annotations and Description:: Quarkus 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
