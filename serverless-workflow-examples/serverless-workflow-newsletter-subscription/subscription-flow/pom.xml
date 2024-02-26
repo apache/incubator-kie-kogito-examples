@@ -72,8 +72,8 @@
 
     <!-- Kogito extensions -->
     <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-quarkus-serverless-workflow</artifactId>
+      <groupId>org.sonataflow</groupId>
+      <artifactId>sonataflow-quarkus</artifactId>
     </dependency>
 
     <!-- Service Discovery-->
