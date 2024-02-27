@@ -93,13 +93,16 @@ public class ProcessMetricsTest {
                         String.format("kogito_process_instance_running_total{app_id=\"default-process-monitoring-listener\",artifactId=\"%s\",process_id=\"demo.orderItems\",version=\"%s\"} 1.0",
                                 PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
                 .body(containsString(
-                        String.format("kogito_work_item_duration_seconds_max{artifactId=\"%s\",name=\"org.kie.kogito.examples.quarkus.CalculationService_calculateTotal_3_Handler\",version=\"%s\"}",
+                        String.format(
+                                "kogito_work_item_duration_seconds_max{artifactId=\"%s\",name=\"org.kie.kogito.examples.quarkus.CalculationService_calculateTotal_ServiceTask_1_Handler\",version=\"%s\"}",
                                 PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
                 .body(containsString(
-                        String.format("kogito_work_item_duration_seconds_count{artifactId=\"%s\",name=\"org.kie.kogito.examples.quarkus.CalculationService_calculateTotal_3_Handler\",version=\"%s\"}",
+                        String.format(
+                                "kogito_work_item_duration_seconds_count{artifactId=\"%s\",name=\"org.kie.kogito.examples.quarkus.CalculationService_calculateTotal_ServiceTask_1_Handler\",version=\"%s\"}",
                                 PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
                 .body(containsString(
-                        String.format("kogito_work_item_duration_seconds_sum{artifactId=\"%s\",name=\"org.kie.kogito.examples.quarkus.CalculationService_calculateTotal_3_Handler\",version=\"%s\"}",
+                        String.format(
+                                "kogito_work_item_duration_seconds_sum{artifactId=\"%s\",name=\"org.kie.kogito.examples.quarkus.CalculationService_calculateTotal_ServiceTask_1_Handler\",version=\"%s\"}",
                                 PROJECT_ARTIFACT_ID, PROJECT_VERSION)));
     }
 }
