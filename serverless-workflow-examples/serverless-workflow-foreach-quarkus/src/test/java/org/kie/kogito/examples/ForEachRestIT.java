@@ -41,7 +41,7 @@ class ForEachRestIT {
                 .post("/foreach")
                 .then()
                 .statusCode(201)
-                .body("workflowdata.output", is(Arrays.asList(2, 3, 4)))
+                .body("workflowdata.output", is(Arrays.asList(4, 6, 8)))
                 .body("workflowdata.input", nullValue());
     }
 }
