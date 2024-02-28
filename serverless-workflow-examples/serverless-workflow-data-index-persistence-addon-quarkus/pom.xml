@@ -49,7 +49,7 @@
   </dependencyManagement>
   <dependencies>
     <dependency>
-      <groupId>org.sonataflow</groupId>
+      <groupId>org.apache.sonataflow</groupId>
       <artifactId>sonataflow-quarkus</artifactId>
     </dependency>
     <dependency>
@@ -77,7 +77,7 @@
       <artifactId>kogito-addons-quarkus-process-management</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.sonataflow</groupId>
+      <groupId>org.apache.sonataflow</groupId>
       <artifactId>sonataflow-quarkus-devui</artifactId>
     </dependency>
     <dependency>

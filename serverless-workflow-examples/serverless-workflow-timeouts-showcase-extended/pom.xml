@@ -93,7 +93,7 @@
 
     <!-- Serverless workflow extensions -->
     <dependency>
-      <groupId>org.sonataflow</groupId>
+      <groupId>org.apache.sonataflow</groupId>
       <artifactId>sonataflow-quarkus</artifactId>
     </dependency>
     <dependency>
@@ -105,7 +105,7 @@
       <artifactId>kogito-addons-quarkus-fabric8-kubernetes-service-catalog</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.sonataflow</groupId>
+      <groupId>org.apache.sonataflow</groupId>
       <artifactId>sonataflow-quarkus-devui</artifactId>
     </dependency>
     <dependency>

@@ -72,7 +72,7 @@
 
     <!-- Kogito extensions -->
     <dependency>
-      <groupId>org.sonataflow</groupId>
+      <groupId>org.apache.sonataflow</groupId>
       <artifactId>sonataflow-quarkus</artifactId>
     </dependency>
 
@@ -102,7 +102,7 @@
 
     <!-- Dev ui and sources -->
     <dependency>
-      <groupId>org.sonataflow</groupId>
+      <groupId>org.apache.sonataflow</groupId>
       <artifactId>sonataflow-quarkus-devui</artifactId>
     </dependency>
     <dependency>

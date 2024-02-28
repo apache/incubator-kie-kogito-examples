@@ -53,7 +53,7 @@
   <dependencies>
     <!-- Kogito -->
     <dependency>
-      <groupId>org.sonataflow</groupId>
+      <groupId>org.apache.sonataflow</groupId>
       <artifactId>sonataflow-quarkus</artifactId>
     </dependency>
     <dependency>
