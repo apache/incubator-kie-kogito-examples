@@ -97,11 +97,11 @@
       <artifactId>kogito-quarkus-serverless-workflow</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-addons-quarkus-kubernetes</artifactId>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-addons-quarkus-kubernetes</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.kie.kogito</groupId>
+      <groupId>org.kie</groupId>
       <artifactId>kogito-addons-quarkus-fabric8-kubernetes-service-catalog</artifactId>
     </dependency>
     <dependency>
@@ -109,8 +109,8 @@
       <artifactId>sonataflow-quarkus-devui</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-addons-quarkus-source-files</artifactId>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-addons-quarkus-source-files</artifactId>
     </dependency>
 
     <!-- Showcase UI dependencies -->
