@@ -131,8 +131,8 @@
       </properties>
       <dependencies>
         <dependency>
-          <groupId>org.kie.kogito</groupId>
-          <artifactId>kogito-addons-quarkus-persistence-infinispan</artifactId>
+          <groupId>org.kie</groupId>
+          <artifactId>kie-addons-quarkus-persistence-infinispan</artifactId>
         </dependency>
       </dependencies>
     </profile>

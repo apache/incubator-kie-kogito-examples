@@ -216,20 +216,20 @@
       </properties>
       <dependencies>
         <dependency>
-          <groupId>org.kie.kogito</groupId>
-          <artifactId>kogito-addons-quarkus-events-process</artifactId>
+          <groupId>org.kie</groupId>
+          <artifactId>kie-addons-quarkus-events-process</artifactId>
         </dependency>
         <dependency>
-          <groupId>org.kie.kogito</groupId>
-          <artifactId>kogito-addons-quarkus-knative-eventing</artifactId>
+          <groupId>org.kie</groupId>
+          <artifactId>kie-addons-quarkus-knative-eventing</artifactId>
         </dependency>
         <dependency>
-          <groupId>org.kie.kogito</groupId>
+          <groupId>org.kie</groupId>
           <artifactId>kogito-addons-quarkus-jobs-knative-eventing</artifactId>
         </dependency>
         <dependency>
-          <groupId>org.kie.kogito</groupId>
-          <artifactId>kogito-addons-quarkus-persistence-jdbc</artifactId>
+          <groupId>org.kie</groupId>
+          <artifactId>kie-addons-quarkus-persistence-jdbc</artifactId>
         </dependency>
         <dependency>
           <groupId>io.quarkus</groupId>

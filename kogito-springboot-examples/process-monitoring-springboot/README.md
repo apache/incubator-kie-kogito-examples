@@ -20,8 +20,8 @@ Import the following dependency in your `pom.xml`:
 ```XML
 
 <dependency>
-  <groupId>org.kie.kogito</groupId>
-  <artifactId>kogito-addons-springboot-monitoring-prometheus</artifactId>
+  <groupId>org.kie</groupId>
+  <artifactId>kie-addons-springboot-monitoring-prometheus</artifactId>
 </dependency>
 ```
 
