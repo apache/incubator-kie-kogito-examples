@@ -77,8 +77,8 @@
       <artifactId>drools-quarkus-rules</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.apache.sonataflow</groupId>
-      <artifactId>sonataflow-quarkus</artifactId>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-quarkus-serverless-workflow</artifactId>
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
@@ -109,7 +109,7 @@
       <artifactId>quarkus-smallrye-health</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.apache.sonataflow</groupId>
+      <groupId>org.sonataflow</groupId>
       <artifactId>sonataflow-quarkus-devui</artifactId>
     </dependency>
     <dependency>

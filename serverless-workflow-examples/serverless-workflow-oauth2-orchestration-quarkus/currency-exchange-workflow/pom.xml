@@ -83,11 +83,11 @@
       <artifactId>quarkus-oidc-client-filter</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.apache.sonataflow</groupId>
-      <artifactId>sonataflow-quarkus</artifactId>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-quarkus-serverless-workflow</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.apache.sonataflow</groupId>
+      <groupId>org.sonataflow</groupId>
   <artifactId>sonataflow-quarkus-devui</artifactId>
     </dependency>
     <dependency>
