@@ -201,7 +201,6 @@
     <profile>
       <id>data-index-standalone</id> <!-- Requires execute docker-compose/startServices.sh -->
       <activation>
-        <activeByDefault>true</activeByDefault>
         <property>
           <name>data-index-standalone</name>
         </property>
