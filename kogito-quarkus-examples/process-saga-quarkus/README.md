@@ -43,7 +43,7 @@ This is the BPMN process that represents the Order Saga, and it is the one being
 ### Prerequisites
 
 You will need:
-  - Java 11+ installed
+  - Java 17+ installed
   - Environment variable JAVA_HOME set accordingly
   - Maven 3.8.6+ installed
 
