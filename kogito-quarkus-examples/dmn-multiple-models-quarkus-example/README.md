@@ -1,8 +1,8 @@
-# DMN + Quarkus example
+# DMN + Quarkus example with multiple models
 
 ## Description
 
-A simple DMN service to evaluate a traffic violation.
+A simple DMN service to evaluate different models (traffic violation, habitability) with also importing feature (traffic violation).
 
 Demonstrates DMN on Kogito capabilities, including REST interface code generation.
 
@@ -50,7 +50,7 @@ mvn clean package -Pnative
 To run the generated native executable, generated in `target/`, execute
 
 ```
-./target/dmn-quarkus-example-runner
+./target/dmn-multiple-models-quarkus-example-runner
 ```
 
 Note: This does not yet work on Windows, GraalVM and Quarkus should be rolling out support for Windows soon.
@@ -128,3 +128,44 @@ Example response:
   "Should the driver be suspended?":"No"
 }
 ```
+
+The difference from the [dmn-quarkus-example](../dmn-quarkus-example) is that, in the current one, the `Traffic Model` features the import declaration, with definitions coming from the ` Imported Model`.
+
+### POST /habitability
+
+Returns habitability information from the given inputs -- oxygen and temperature:
+
+Given inputs:
+
+```json
+{
+  "oxygene": 70,
+  "temperature": 30
+}
+```
+
+Curl command (using the JSON object above):
+
+```sh
+curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"oxygene": 70, "temperature": 30}' http://localhost:8080/habitability
+```
+or on Windows:
+
+```sh
+curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" -d "{\"oxygene\": 70, \"temperature\": 30}" http://localhost:8080/habitability
+```
+
+As response, habitability information is returned.
+
+Example response:
+
+```json
+{
+  "oxygene": 70,
+  "temperature": 30,
+  "habitability": "somehow doable"
+}
+```
+
+
+

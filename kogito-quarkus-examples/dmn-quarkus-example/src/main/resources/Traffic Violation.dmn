@@ -126,7 +126,7 @@
     </dmn:decisionTable>
   </dmn:decision>
   <dmn:inputData id="_1F9350D7-146D-46F1-85D8-15B5B68AF22A" name="Driver">
-    <dmn:variable id="_A80F16DF-0DB4-43A2-B041-32900B1A3F3D" name="Driver" typeRef="Imported Model.tDriver"/>
+    <dmn:variable id="_A80F16DF-0DB4-43A2-B041-32900B1A3F3D" name="Driver" typeRef="tDriver"/>
   </dmn:inputData>
   <dmn:decision id="_8A408366-D8E9-4626-ABF3-5F69AA01F880" name="Should the driver be suspended?">
     <dmn:question>Should the driver be suspended due to points on his license?</dmn:question>
