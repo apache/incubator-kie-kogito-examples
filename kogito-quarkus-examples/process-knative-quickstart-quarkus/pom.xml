@@ -78,8 +78,8 @@
     </dependency>
     <!-- Knative dependencies -->
     <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-addons-quarkus-knative-eventing</artifactId>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-addons-quarkus-knative-eventing</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>

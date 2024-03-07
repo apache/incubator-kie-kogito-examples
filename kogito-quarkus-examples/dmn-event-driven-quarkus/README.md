@@ -14,9 +14,9 @@ The main goal behind the addon is to allow Kogito DMN services to be used as par
 ### Prerequisites
 
 You will need:
-  - Java 11+ installed
+  - Java 17+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.8.6+ installed
+  - Maven 3.9.6+ installed
   - [Docker Engine](https://docs.docker.com/engine/) and [Docker Compose](https://docs.docker.com/compose/) installed
 
 When using native image compilation, you will also need:
@@ -30,8 +30,8 @@ Like the other Kogito AddOns, the only required step to enable it is to include 
 
 ```xml
 <dependency>
-  <groupId>org.kie.kogito</groupId>
-  <artifactId>kogito-addons-quarkus-events-decisions</artifactId>
+  <groupId>org.kie</groupId>
+  <artifactId>kie-addons-quarkus-events-decisions</artifactId>
 </dependency>
 ```
 

@@ -7,9 +7,9 @@ This example demonstrates how to enable and consume the runtime metrics monitori
 ### Prerequisites
  
 You will need:
-  - Java 11+ installed 
+  - Java 17+ installed 
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.8.6+ installed
+  - Maven 3.9.6+ installed
   - Docker 19+ (only if you want to run the integration tests and/or you want to use the `docker-compose` script provided in this example).
   
 ### How to enable the feature
@@ -18,8 +18,8 @@ Import the following dependency in your `pom.xml`:
 
 ```XML
 <dependency>
- <groupId>org.kie.kogito</groupId>
- <artifactId>kogito-addons-quarkus-monitoring-prometheus</artifactId>
+ <groupId>org.kie</groupId>
+ <artifactId>kie-addons-quarkus-monitoring-prometheus</artifactId>
 </dependency>
 ```
 

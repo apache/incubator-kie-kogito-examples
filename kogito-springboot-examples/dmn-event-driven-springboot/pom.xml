@@ -61,8 +61,8 @@
       <artifactId>drools-decisions-spring-boot-starter</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-addons-springboot-events-decisions</artifactId>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-addons-springboot-events-decisions</artifactId>
     </dependency>
 
     <dependency>

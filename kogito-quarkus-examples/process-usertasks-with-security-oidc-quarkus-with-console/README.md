@@ -24,9 +24,9 @@ This example shows
 ### Prerequisites
 
 You will need:
-  - Java 11+ installed
+  - Java 17+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.8.6+ installed
+  - Maven 3.9.6+ installed
   - [jq](https://stedolan.github.io/jq) tool installed. You can download it from [here](https://stedolan.github.io/jq/download)
   - Docker and Docker Compose to run the required example infrastructure.
 

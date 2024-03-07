@@ -44,7 +44,7 @@
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
-    <maven.compiler.release>11</maven.compiler.release>
+    <maven.compiler.release>17</maven.compiler.release>
     <version.exec.plugin>1.6.0</version.exec.plugin>
     <version.compiler.plugin>3.8.1</version.compiler.plugin>
     <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
@@ -91,8 +91,8 @@
       <artifactId>sonataflow-quarkus-devui</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-addons-quarkus-source-files</artifactId>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-addons-quarkus-source-files</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
