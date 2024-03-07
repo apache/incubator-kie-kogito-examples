@@ -9,7 +9,7 @@ You can easily deploy this example on Minikube by using the provided `deploy.sh`
 
 1. Installed Minikube
 2. Installed [Knative Quickstart](https://knative.dev/docs/getting-started/quickstart-install/) on your Minikube installation. It adds a new `knative` profile to your cluster, so bear in mind that every command on Minikube must be followed by `-p knative`.
-3. Installed JDK 11, Maven, NPM, and Docker in order to build all the parts of the example.
+3. Installed JDK 17, Maven, NPM, and Docker in order to build all the parts of the example.
 
 Start the tunnel in a separate terminal:
 
