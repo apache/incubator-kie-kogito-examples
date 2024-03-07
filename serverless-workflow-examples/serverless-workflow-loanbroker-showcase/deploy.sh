@@ -143,7 +143,7 @@ add_flow_url_to_ui() {
 
 expose_loanbroker_ui() {
     echo "Exposing UI, please run 'minikube tunnel -p knative' in a separate terminal"
-    kubectl expose deployment loanbroker-ui --name=loanbroker-ui-external --type=LoadBalancer --port=8080 -n ${NAMESPACE}
+    kubectl expose deployment serverless-workflow-loanbroker-showcase-ui --name=loanbroker-ui-external --type=LoadBalancer --port=8080 -n ${NAMESPACE}
     sleep 5
     LOANBROKER_EXTERNAL_IP=$(kubectl get service loanbroker-ui-external -o=jsonpath --template="{.status.loadBalancer.ingress[0].ip}" -n loanbroker-example)
     echo "To access the loanbroker-example UI please use this url: http://$LOANBROKER_EXTERNAL_IP:8080"

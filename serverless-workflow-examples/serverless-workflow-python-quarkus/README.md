@@ -9,7 +9,7 @@ This example contains a simple workflow definition that executes numpy generator
 ### Prerequisites
  
 You will need:
-  - Java 11+ installed
+  - Java 17+ installed
   - Environment variable JAVA_HOME set accordingly
   - Maven 3.8.6+ installed
   - Python3 installed

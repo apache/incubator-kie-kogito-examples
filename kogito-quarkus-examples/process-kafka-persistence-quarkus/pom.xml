@@ -66,8 +66,8 @@
       <artifactId>jbpm-with-drools-quarkus</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-addons-quarkus-persistence-kafka</artifactId>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-addons-quarkus-persistence-kafka</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
