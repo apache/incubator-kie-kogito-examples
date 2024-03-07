@@ -1,474 +1,0 @@
-[INFO] Scanning for projects...
-[INFO] ------------------------------------------------------------------------
-[INFO] Detecting the operating system and CPU architecture
-[INFO] ------------------------------------------------------------------------
-[INFO] os.detected.name: osx
-[INFO] os.detected.arch: aarch_64
-[INFO] os.detected.version: 14.3
-[INFO] os.detected.version.major: 14
-[INFO] os.detected.version.minor: 3
-[INFO] os.detected.classifier: osx-aarch_64
-[INFO] 
-[INFO] --< org.kie.kogito.examples:process-usertasks-timer-data-index-persistence-addon-quarkus >--
-[INFO] Building Kogito Example :: Process Usertasks with Timer Data Index persistence addon Quarkus 999-SNAPSHOT
-[INFO]   from pom.xml
-[INFO] --------------------------------[ jar ]---------------------------------
-[INFO] 
-[INFO] --- dependency:3.5.0:tree (default-cli) @ process-usertasks-timer-data-index-persistence-addon-quarkus ---
-Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-archiver/4.6.0/plexus-archiver-4.6.0.pom
-Progress (1): 1.4/6.5 kBProgress (1): 2.8/6.5 kBProgress (1): 4.1/6.5 kBProgress (1): 5.5/6.5 kBProgress (1): 6.5 kB                        Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-archiver/4.6.0/plexus-archiver-4.6.0.pom (6.5 kB at 25 kB/s)
-Downloading from central: https://repo.maven.apache.org/maven2/com/github/luben/zstd-jni/1.5.2-5/zstd-jni-1.5.2-5.pom
-Progress (1): 1.4/1.9 kBProgress (1): 1.9 kB                        Downloaded from central: https://repo.maven.apache.org/maven2/com/github/luben/zstd-jni/1.5.2-5/zstd-jni-1.5.2-5.pom (1.9 kB at 106 kB/s)
-Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-dependency-analyzer/1.13.0/maven-dependency-analyzer-1.13.0.pom
-Progress (1): 1.4/5.5 kBProgress (1): 2.8/5.5 kBProgress (1): 4.1/5.5 kBProgress (1): 5.5/5.5 kBProgress (1): 5.5 kB                        Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-dependency-analyzer/1.13.0/maven-dependency-analyzer-1.13.0.pom (5.5 kB at 263 kB/s)
-Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-model/3.1.0/maven-model-3.1.0.jar
-Progress (1): 16/164 kBProgress (1): 33/164 kBProgress (1): 49/164 kBProgress (1): 66/164 kBProgress (1): 82/164 kBProgress (1): 98/164 kBProgress (1): 115/164 kBProgress (1): 131/164 kBProgress (1): 147/164 kBProgress (1): 164 kB                        Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-model/3.1.0/maven-model-3.1.0.jar (164 kB at 3.1 MB/s)
-Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-archiver/4.6.0/plexus-archiver-4.6.0.jar
-Downloading from central: https://repo.maven.apache.org/maven2/com/github/luben/zstd-jni/1.5.2-5/zstd-jni-1.5.2-5.jar
-Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-dependency-analyzer/1.13.0/maven-dependency-analyzer-1.13.0.jar
-Progress (1): 16/216 kBProgress (1): 32/216 kBProgress (1): 49/216 kBProgress (1): 65/216 kBProgress (1): 81/216 kBProgress (1): 98/216 kBProgress (1): 114/216 kBProgress (1): 130/216 kBProgress (1): 147/216 kBProgress (1): 163/216 kBProgress (1): 180/216 kBProgress (1): 196/216 kBProgress (1): 212/216 kBProgress (1): 216 kB                        Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-archiver/4.6.0/plexus-archiver-4.6.0.jar (216 kB at 4.2 MB/s)
-Progress (1): 0/6.3 MBProgress (1): 0/6.3 MBProgress (1): 0/6.3 MBProgress (1): 0/6.3 MBProgress (1): 0/6.3 MBProgress (1): 0/6.3 MBProgress (1): 0/6.3 MBProgress (2): 0/6.3 MB | 1.4/37 kBProgress (2): 0/6.3 MB | 2.8/37 kBProgress (2): 0/6.3 MB | 4.1/37 kBProgress (2): 0/6.3 MB | 5.5/37 kBProgress (2): 0/6.3 MB | 5.5/37 kBProgress (2): 0/6.3 MB | 6.9/37 kBProgress (2): 0/6.3 MB | 8.3/37 kBProgress (2): 0/6.3 MB | 9.7/37 kBProgress (2): 0/6.3 MB | 11/37 kB Progress (2): 0/6.3 MB | 12/37 kBProgress (2): 0/6.3 MB | 14/37 kBProgress (2): 0/6.3 MB | 15/37 kBProgress (2): 0/6.3 MB | 17/37 kBProgress (2): 0/6.3 MB | 18/37 kBProgress (2): 0/6.3 MB | 19/37 kBProgress (2): 0/6.3 MB | 21/37 kBProgress (2): 0/6.3 MB | 22/37 kBProgress (2): 0/6.3 MB | 23/37 kBProgress (2): 0/6.3 MB | 25/37 kBProgress (2): 0/6.3 MB | 26/37 kBProgress (2): 0/6.3 MB | 28/37 kBProgress (2): 0/6.3 MB | 29/37 kBProgress (2): 0/6.3 MB | 30/37 kBProgress (2): 0/6.3 MB | 32/37 kBProgress (2): 0/6.3 MB | 33/37 kBProgress (2): 0/6.3 MB | 34/37 kBProgress (2): 0/6.3 MB | 36/37 kBProgress (2): 0/6.3 MB | 37/37 kBProgress (2): 0/6.3 MB | 37 kB                                 Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-dependency-analyzer/1.13.0/maven-dependency-analyzer-1.13.0.jar (37 kB at 549 kB/s)
-Progress (1): 0/6.3 MBProgress (1): 0.1/6.3 MBProgress (1): 0.1/6.3 MBProgress (1): 0.1/6.3 MBProgress (1): 0.1/6.3 MBProgress (1): 0.1/6.3 MBProgress (1): 0.1/6.3 MBProgress (1): 0.2/6.3 MBProgress (1): 0.2/6.3 MBProgress (1): 0.2/6.3 MBProgress (1): 0.2/6.3 MBProgress (1): 0.2/6.3 MBProgress (1): 0.2/6.3 MBProgress (1): 0.3/6.3 MBProgress (1): 0.3/6.3 MBProgress (1): 0.3/6.3 MBProgress (1): 0.3/6.3 MBProgress (1): 0.3/6.3 MBProgress (1): 0.3/6.3 MBProgress (1): 0.4/6.3 MBProgress (1): 0.4/6.3 MBProgress (1): 0.4/6.3 MBProgress (1): 0.4/6.3 MBProgress (1): 0.4/6.3 MBProgress (1): 0.4/6.3 MBProgress (1): 0.5/6.3 MBProgress (1): 0.5/6.3 MBProgress (1): 0.5/6.3 MBProgress (1): 0.5/6.3 MBProgress (1): 0.5/6.3 MBProgress (1): 0.5/6.3 MBProgress (1): 0.5/6.3 MBProgress (1): 0.6/6.3 MBProgress (1): 0.6/6.3 MBProgress (1): 0.6/6.3 MBProgress (1): 0.6/6.3 MBProgress (1): 0.6/6.3 MBProgress (1): 0.6/6.3 MBProgress (1): 0.7/6.3 MBProgress (1): 0.7/6.3 MBProgress (1): 0.7/6.3 MBProgress (1): 0.7/6.3 MBProgress (1): 0.7/6.3 MBProgress (1): 0.7/6.3 MBProgress (1): 0.8/6.3 MBProgress (1): 0.8/6.3 MBProgress (1): 0.8/6.3 MBProgress (1): 0.8/6.3 MBProgress (1): 0.8/6.3 MBProgress (1): 0.8/6.3 MBProgress (1): 0.9/6.3 MBProgress (1): 0.9/6.3 MBProgress (1): 0.9/6.3 MBProgress (1): 0.9/6.3 MBProgress (1): 0.9/6.3 MBProgress (1): 0.9/6.3 MBProgress (1): 1.0/6.3 MBProgress (1): 1.0/6.3 MBProgress (1): 1.0/6.3 MBProgress (1): 1.0/6.3 MBProgress (1): 1.0/6.3 MBProgress (1): 1.0/6.3 MBProgress (1): 1.1/6.3 MBProgress (1): 1.1/6.3 MBProgress (1): 1.1/6.3 MBProgress (1): 1.1/6.3 MBProgress (1): 1.1/6.3 MBProgress (1): 1.1/6.3 MBProgress (1): 1.2/6.3 MBProgress (1): 1.2/6.3 MBProgress (1): 1.2/6.3 MBProgress (1): 1.2/6.3 MBProgress (1): 1.2/6.3 MBProgress (1): 1.2/6.3 MBProgress (1): 1.3/6.3 MBProgress (1): 1.3/6.3 MBProgress (1): 1.3/6.3 MBProgress (1): 1.3/6.3 MBProgress (1): 1.3/6.3 MBProgress (1): 1.3/6.3 MBProgress (1): 1.4/6.3 MBProgress (1): 1.4/6.3 MBProgress (1): 1.4/6.3 MBProgress (1): 1.4/6.3 MBProgress (1): 1.4/6.3 MBProgress (1): 1.4/6.3 MBProgress (1): 1.5/6.3 MBProgress (1): 1.5/6.3 MBProgress (1): 1.5/6.3 MBProgress (1): 1.5/6.3 MBProgress (1): 1.5/6.3 MBProgress (1): 1.5/6.3 MBProgress (1): 1.5/6.3 MBProgress (1): 1.6/6.3 MBProgress (1): 1.6/6.3 MBProgress (1): 1.6/6.3 MBProgress (1): 1.6/6.3 MBProgress (1): 1.6/6.3 MBProgress (1): 1.6/6.3 MBProgress (1): 1.7/6.3 MBProgress (1): 1.7/6.3 MBProgress (1): 1.7/6.3 MBProgress (1): 1.7/6.3 MBProgress (1): 1.7/6.3 MBProgress (1): 1.7/6.3 MBProgress (1): 1.8/6.3 MBProgress (1): 1.8/6.3 MBProgress (1): 1.8/6.3 MBProgress (1): 1.8/6.3 MBProgress (1): 1.8/6.3 MBProgress (1): 1.8/6.3 MBProgress (1): 1.9/6.3 MBProgress (1): 1.9/6.3 MBProgress (1): 1.9/6.3 MBProgress (1): 1.9/6.3 MBProgress (1): 1.9/6.3 MBProgress (1): 1.9/6.3 MBProgress (1): 2.0/6.3 MBProgress (1): 2.0/6.3 MBProgress (1): 2.0/6.3 MBProgress (1): 2.0/6.3 MBProgress (1): 2.0/6.3 MBProgress (1): 2.0/6.3 MBProgress (1): 2.1/6.3 MBProgress (1): 2.1/6.3 MBProgress (1): 2.1/6.3 MBProgress (1): 2.1/6.3 MBProgress (1): 2.1/6.3 MBProgress (1): 2.1/6.3 MBProgress (1): 2.2/6.3 MBProgress (1): 2.2/6.3 MBProgress (1): 2.2/6.3 MBProgress (1): 2.2/6.3 MBProgress (1): 2.2/6.3 MBProgress (1): 2.2/6.3 MBProgress (1): 2.3/6.3 MBProgress (1): 2.3/6.3 MBProgress (1): 2.3/6.3 MBProgress (1): 2.3/6.3 MBProgress (1): 2.3/6.3 MBProgress (1): 2.3/6.3 MBProgress (1): 2.4/6.3 MBProgress (1): 2.4/6.3 MBProgress (1): 2.4/6.3 MBProgress (1): 2.4/6.3 MBProgress (1): 2.4/6.3 MBProgress (1): 2.4/6.3 MBProgress (1): 2.5/6.3 MBProgress (1): 2.5/6.3 MBProgress (1): 2.5/6.3 MBProgress (1): 2.5/6.3 MBProgress (1): 2.5/6.3 MBProgress (1): 2.5/6.3 MBProgress (1): 2.5/6.3 MBProgress (1): 2.6/6.3 MBProgress (1): 2.6/6.3 MBProgress (1): 2.6/6.3 MBProgress (1): 2.6/6.3 MBProgress (1): 2.6/6.3 MBProgress (1): 2.6/6.3 MBProgress (1): 2.7/6.3 MBProgress (1): 2.7/6.3 MBProgress (1): 2.7/6.3 MBProgress (1): 2.7/6.3 MBProgress (1): 2.7/6.3 MBProgress (1): 2.7/6.3 MBProgress (1): 2.8/6.3 MBProgress (1): 2.8/6.3 MBProgress (1): 2.8/6.3 MBProgress (1): 2.8/6.3 MBProgress (1): 2.8/6.3 MBProgress (1): 2.8/6.3 MBProgress (1): 2.9/6.3 MBProgress (1): 2.9/6.3 MBProgress (1): 2.9/6.3 MBProgress (1): 2.9/6.3 MBProgress (1): 2.9/6.3 MBProgress (1): 2.9/6.3 MBProgress (1): 3.0/6.3 MBProgress (1): 3.0/6.3 MBProgress (1): 3.0/6.3 MBProgress (1): 3.0/6.3 MBProgress (1): 3.0/6.3 MBProgress (1): 3.0/6.3 MBProgress (1): 3.1/6.3 MBProgress (1): 3.1/6.3 MBProgress (1): 3.1/6.3 MBProgress (1): 3.1/6.3 MBProgress (1): 3.1/6.3 MBProgress (1): 3.1/6.3 MBProgress (1): 3.2/6.3 MBProgress (1): 3.2/6.3 MBProgress (1): 3.2/6.3 MBProgress (1): 3.2/6.3 MBProgress (1): 3.2/6.3 MBProgress (1): 3.2/6.3 MBProgress (1): 3.3/6.3 MBProgress (1): 3.3/6.3 MBProgress (1): 3.3/6.3 MBProgress (1): 3.3/6.3 MBProgress (1): 3.3/6.3 MBProgress (1): 3.3/6.3 MBProgress (1): 3.4/6.3 MBProgress (1): 3.4/6.3 MBProgress (1): 3.4/6.3 MBProgress (1): 3.4/6.3 MBProgress (1): 3.4/6.3 MBProgress (1): 3.4/6.3 MBProgress (1): 3.4/6.3 MBProgress (1): 3.5/6.3 MBProgress (1): 3.5/6.3 MBProgress (1): 3.5/6.3 MBProgress (1): 3.5/6.3 MBProgress (1): 3.5/6.3 MBProgress (1): 3.5/6.3 MBProgress (1): 3.6/6.3 MBProgress (1): 3.6/6.3 MBProgress (1): 3.6/6.3 MBProgress (1): 3.6/6.3 MBProgress (1): 3.6/6.3 MBProgress (1): 3.6/6.3 MBProgress (1): 3.7/6.3 MBProgress (1): 3.7/6.3 MBProgress (1): 3.7/6.3 MBProgress (1): 3.7/6.3 MBProgress (1): 3.7/6.3 MBProgress (1): 3.7/6.3 MBProgress (1): 3.8/6.3 MBProgress (1): 3.8/6.3 MBProgress (1): 3.8/6.3 MBProgress (1): 3.8/6.3 MBProgress (1): 3.8/6.3 MBProgress (1): 3.8/6.3 MBProgress (1): 3.9/6.3 MBProgress (1): 3.9/6.3 MBProgress (1): 3.9/6.3 MBProgress (1): 3.9/6.3 MBProgress (1): 3.9/6.3 MBProgress (1): 3.9/6.3 MBProgress (1): 4.0/6.3 MBProgress (1): 4.0/6.3 MBProgress (1): 4.0/6.3 MBProgress (1): 4.0/6.3 MBProgress (1): 4.0/6.3 MBProgress (1): 4.0/6.3 MBProgress (1): 4.1/6.3 MBProgress (1): 4.1/6.3 MBProgress (1): 4.1/6.3 MBProgress (1): 4.1/6.3 MBProgress (1): 4.1/6.3 MBProgress (1): 4.1/6.3 MBProgress (1): 4.2/6.3 MBProgress (1): 4.2/6.3 MBProgress (1): 4.2/6.3 MBProgress (1): 4.2/6.3 MBProgress (1): 4.2/6.3 MBProgress (1): 4.2/6.3 MBProgress (1): 4.3/6.3 MBProgress (1): 4.3/6.3 MBProgress (1): 4.3/6.3 MBProgress (1): 4.3/6.3 MBProgress (1): 4.3/6.3 MBProgress (1): 4.3/6.3 MBProgress (1): 4.4/6.3 MBProgress (1): 4.4/6.3 MBProgress (1): 4.4/6.3 MBProgress (1): 4.4/6.3 MBProgress (1): 4.4/6.3 MBProgress (1): 4.4/6.3 MBProgress (1): 4.4/6.3 MBProgress (1): 4.5/6.3 MBProgress (1): 4.5/6.3 MBProgress (1): 4.5/6.3 MBProgress (1): 4.5/6.3 MBProgress (1): 4.5/6.3 MBProgress (1): 4.5/6.3 MBProgress (1): 4.6/6.3 MBProgress (1): 4.6/6.3 MBProgress (1): 4.6/6.3 MBProgress (1): 4.6/6.3 MBProgress (1): 4.6/6.3 MBProgress (1): 4.6/6.3 MBProgress (1): 4.7/6.3 MBProgress (1): 4.7/6.3 MBProgress (1): 4.7/6.3 MBProgress (1): 4.7/6.3 MBProgress (1): 4.7/6.3 MBProgress (1): 4.7/6.3 MBProgress (1): 4.8/6.3 MBProgress (1): 4.8/6.3 MBProgress (1): 4.8/6.3 MBProgress (1): 4.8/6.3 MBProgress (1): 4.8/6.3 MBProgress (1): 4.8/6.3 MBProgress (1): 4.9/6.3 MBProgress (1): 4.9/6.3 MBProgress (1): 4.9/6.3 MBProgress (1): 4.9/6.3 MBProgress (1): 4.9/6.3 MBProgress (1): 4.9/6.3 MBProgress (1): 5.0/6.3 MBProgress (1): 5.0/6.3 MBProgress (1): 5.0/6.3 MBProgress (1): 5.0/6.3 MBProgress (1): 5.0/6.3 MBProgress (1): 5.0/6.3 MBProgress (1): 5.1/6.3 MBProgress (1): 5.1/6.3 MBProgress (1): 5.1/6.3 MBProgress (1): 5.1/6.3 MBProgress (1): 5.1/6.3 MBProgress (1): 5.1/6.3 MBProgress (1): 5.2/6.3 MBProgress (1): 5.2/6.3 MBProgress (1): 5.2/6.3 MBProgress (1): 5.2/6.3 MBProgress (1): 5.2/6.3 MBProgress (1): 5.2/6.3 MBProgress (1): 5.3/6.3 MBProgress (1): 5.3/6.3 MBProgress (1): 5.3/6.3 MBProgress (1): 5.3/6.3 MBProgress (1): 5.3/6.3 MBProgress (1): 5.3/6.3 MBProgress (1): 5.4/6.3 MBProgress (1): 5.4/6.3 MBProgress (1): 5.4/6.3 MBProgress (1): 5.4/6.3 MBProgress (1): 5.4/6.3 MBProgress (1): 5.4/6.3 MBProgress (1): 5.4/6.3 MBProgress (1): 5.5/6.3 MBProgress (1): 5.5/6.3 MBProgress (1): 5.5/6.3 MBProgress (1): 5.5/6.3 MBProgress (1): 5.5/6.3 MBProgress (1): 5.5/6.3 MBProgress (1): 5.6/6.3 MBProgress (1): 5.6/6.3 MBProgress (1): 5.6/6.3 MBProgress (1): 5.6/6.3 MBProgress (1): 5.6/6.3 MBProgress (1): 5.6/6.3 MBProgress (1): 5.7/6.3 MBProgress (1): 5.7/6.3 MBProgress (1): 5.7/6.3 MBProgress (1): 5.7/6.3 MBProgress (1): 5.7/6.3 MBProgress (1): 5.7/6.3 MBProgress (1): 5.8/6.3 MBProgress (1): 5.8/6.3 MBProgress (1): 5.8/6.3 MBProgress (1): 5.8/6.3 MBProgress (1): 5.8/6.3 MBProgress (1): 5.8/6.3 MBProgress (1): 5.9/6.3 MBProgress (1): 5.9/6.3 MBProgress (1): 5.9/6.3 MBProgress (1): 5.9/6.3 MBProgress (1): 5.9/6.3 MBProgress (1): 5.9/6.3 MBProgress (1): 6.0/6.3 MBProgress (1): 6.0/6.3 MBProgress (1): 6.0/6.3 MBProgress (1): 6.0/6.3 MBProgress (1): 6.0/6.3 MBProgress (1): 6.0/6.3 MBProgress (1): 6.1/6.3 MBProgress (1): 6.1/6.3 MBProgress (1): 6.1/6.3 MBProgress (1): 6.1/6.3 MBProgress (1): 6.1/6.3 MBProgress (1): 6.1/6.3 MBProgress (1): 6.2/6.3 MBProgress (1): 6.2/6.3 MBProgress (1): 6.2/6.3 MBProgress (1): 6.2/6.3 MBProgress (1): 6.2/6.3 MBProgress (1): 6.2/6.3 MBProgress (1): 6.3/6.3 MBProgress (1): 6.3/6.3 MBProgress (1): 6.3/6.3 MBProgress (1): 6.3/6.3 MBProgress (1): 6.3 MB                        Downloaded from central: https://repo.maven.apache.org/maven2/com/github/luben/zstd-jni/1.5.2-5/zstd-jni-1.5.2-5.jar (6.3 MB at 25 MB/s)
-[INFO] org.kie.kogito.examples:process-usertasks-timer-data-index-persistence-addon-quarkus:jar:999-SNAPSHOT
-[INFO] +- io.quarkus:quarkus-resteasy:jar:3.8.1:compile
-[INFO] |  +- io.quarkus:quarkus-vertx-http:jar:3.8.1:compile
-[INFO] |  |  +- io.quarkus:quarkus-security-runtime-spi:jar:3.8.1:compile
-[INFO] |  |  +- io.quarkus:quarkus-mutiny:jar:3.8.1:compile
-[INFO] |  |  |  +- io.quarkus:quarkus-smallrye-context-propagation:jar:3.8.1:compile
-[INFO] |  |  |  |  \- io.smallrye:smallrye-context-propagation:jar:2.1.0:compile
-[INFO] |  |  |  |     +- io.smallrye:smallrye-context-propagation-api:jar:2.1.0:compile
-[INFO] |  |  |  |     \- io.smallrye:smallrye-context-propagation-storage:jar:2.1.0:compile
-[INFO] |  |  |  \- io.smallrye.reactive:mutiny-smallrye-context-propagation:jar:2.5.7:compile
-[INFO] |  |  +- io.smallrye.common:smallrye-common-vertx-context:jar:2.1.2:compile
-[INFO] |  |  |  \- io.smallrye.common:smallrye-common-constraint:jar:2.1.2:compile
-[INFO] |  |  +- io.quarkus.security:quarkus-security:jar:2.0.3.Final:compile
-[INFO] |  |  +- io.smallrye.reactive:smallrye-mutiny-vertx-web:jar:3.9.0:compile
-[INFO] |  |  |  +- io.smallrye.reactive:smallrye-mutiny-vertx-web-common:jar:3.9.0:compile
-[INFO] |  |  |  +- io.smallrye.reactive:smallrye-mutiny-vertx-auth-common:jar:3.9.0:compile
-[INFO] |  |  |  +- io.smallrye.reactive:smallrye-mutiny-vertx-bridge-common:jar:3.9.0:compile
-[INFO] |  |  |  \- io.smallrye.reactive:smallrye-mutiny-vertx-uri-template:jar:3.9.0:compile
-[INFO] |  |  +- io.vertx:vertx-web:jar:4.5.3:compile
-[INFO] |  |  |  \- io.vertx:vertx-bridge-common:jar:4.5.3:compile
-[INFO] |  |  \- io.github.crac:org-crac:jar:0.1.3:compile
-[INFO] |  \- io.quarkus:quarkus-resteasy-server-common:jar:3.8.1:compile
-[INFO] |     +- io.quarkus:quarkus-resteasy-common:jar:3.8.1:compile
-[INFO] |     |  +- org.jboss.resteasy:resteasy-core:jar:6.2.7.Final:compile
-[INFO] |     |  |  \- com.ibm.async:asyncutil:jar:0.1.0:compile
-[INFO] |     |  +- org.eclipse.angus:angus-activation:jar:2.0.1:compile
-[INFO] |     |  \- org.jboss.resteasy.microprofile:microprofile-config:jar:2.1.5.Final:compile
-[INFO] |     +- org.jboss.resteasy:resteasy-cdi:jar:6.2.7.Final:compile
-[INFO] |     |  \- org.jboss.resteasy:resteasy-core-spi:jar:6.2.7.Final:compile
-[INFO] |     \- jakarta.validation:jakarta.validation-api:jar:3.0.2:compile
-[INFO] +- io.quarkus:quarkus-resteasy-jackson:jar:3.8.1:compile
-[INFO] |  +- io.quarkus:quarkus-jackson:jar:3.8.1:compile
-[INFO] |  |  +- com.fasterxml.jackson.core:jackson-databind:jar:2.16.1:compile
-[INFO] |  |  +- com.fasterxml.jackson.datatype:jackson-datatype-jdk8:jar:2.16.1:compile
-[INFO] |  |  \- com.fasterxml.jackson.module:jackson-module-parameter-names:jar:2.16.1:compile
-[INFO] |  +- org.jboss.resteasy:resteasy-jackson2-provider:jar:6.2.7.Final:compile
-[INFO] |  |  +- com.fasterxml.jackson.core:jackson-core:jar:2.16.1:compile
-[INFO] |  |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.16.1:compile
-[INFO] |  |  +- com.fasterxml.jackson.jakarta.rs:jackson-jakarta-rs-base:jar:2.16.1:compile
-[INFO] |  |  +- com.fasterxml.jackson.jakarta.rs:jackson-jakarta-rs-json-provider:jar:2.16.1:compile
-[INFO] |  |  +- com.fasterxml.jackson.module:jackson-module-jakarta-xmlbind-annotations:jar:2.16.1:compile
-[INFO] |  |  +- com.github.java-json-tools:json-patch:jar:1.13:compile
-[INFO] |  |  |  +- com.github.java-json-tools:msg-simple:jar:1.2:compile
-[INFO] |  |  |  |  \- com.github.java-json-tools:btf:jar:1.3:compile
-[INFO] |  |  |  \- com.github.java-json-tools:jackson-coreutils:jar:2.0:compile
-[INFO] |  |  \- org.jboss.logging:jboss-logging:jar:3.5.3.Final:compile
-[INFO] |  \- jakarta.xml.bind:jakarta.xml.bind-api:jar:4.0.0:compile
-[INFO] |     \- jakarta.activation:jakarta.activation-api:jar:2.1.2:compile
-[INFO] +- io.quarkus:quarkus-smallrye-openapi:jar:3.8.1:compile
-[INFO] |  +- io.smallrye:smallrye-open-api-core:jar:3.9.0:compile
-[INFO] |  |  +- org.eclipse.microprofile.config:microprofile-config-api:jar:3.0.3:compile
-[INFO] |  |  +- com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:jar:2.16.1:compile
-[INFO] |  |  |  \- org.yaml:snakeyaml:jar:2.2:compile
-[INFO] |  |  \- io.smallrye:jandex:jar:3.1.6:compile
-[INFO] |  +- io.quarkus:quarkus-core:jar:3.8.1:compile
-[INFO] |  |  +- jakarta.annotation:jakarta.annotation-api:jar:2.1.1:compile
-[INFO] |  |  +- jakarta.enterprise:jakarta.enterprise.cdi-api:jar:4.0.1:compile
-[INFO] |  |  |  +- jakarta.enterprise:jakarta.enterprise.lang-model:jar:4.0.1:compile
-[INFO] |  |  |  \- jakarta.el:jakarta.el-api:jar:5.0.1:compile
-[INFO] |  |  +- jakarta.inject:jakarta.inject-api:jar:2.0.1:compile
-[INFO] |  |  +- io.smallrye.common:smallrye-common-os:jar:2.1.2:compile
-[INFO] |  |  +- io.quarkus:quarkus-ide-launcher:jar:3.8.1:compile
-[INFO] |  |  +- io.quarkus:quarkus-development-mode-spi:jar:3.8.1:compile
-[INFO] |  |  +- io.smallrye.config:smallrye-config:jar:3.5.4:compile
-[INFO] |  |  |  \- io.smallrye.config:smallrye-config-core:jar:3.5.4:compile
-[INFO] |  |  |     +- io.smallrye.common:smallrye-common-classloader:jar:2.1.2:compile
-[INFO] |  |  |     \- io.smallrye.config:smallrye-config-common:jar:3.5.4:compile
-[INFO] |  |  +- org.jboss.logmanager:jboss-logmanager:jar:3.0.4.Final:compile
-[INFO] |  |  |  +- io.smallrye.common:smallrye-common-cpu:jar:2.1.2:compile
-[INFO] |  |  |  +- io.smallrye.common:smallrye-common-expression:jar:2.1.2:compile
-[INFO] |  |  |  |  \- io.smallrye.common:smallrye-common-function:jar:2.1.2:compile
-[INFO] |  |  |  +- io.smallrye.common:smallrye-common-net:jar:2.1.2:compile
-[INFO] |  |  |  \- io.smallrye.common:smallrye-common-ref:jar:2.1.2:compile
-[INFO] |  |  +- org.jboss.logging:jboss-logging-annotations:jar:2.2.1.Final:compile
-[INFO] |  |  +- org.jboss.threads:jboss-threads:jar:3.5.1.Final:compile
-[INFO] |  |  +- org.jboss.slf4j:slf4j-jboss-logmanager:jar:2.0.0.Final:compile
-[INFO] |  |  +- org.wildfly.common:wildfly-common:jar:1.7.0.Final:compile
-[INFO] |  |  +- io.quarkus:quarkus-bootstrap-runner:jar:3.8.1:compile
-[INFO] |  |  |  \- io.smallrye.common:smallrye-common-io:jar:2.1.2:compile
-[INFO] |  |  \- io.quarkus:quarkus-fs-util:jar:0.0.10:compile
-[INFO] |  +- io.quarkus:quarkus-arc:jar:3.8.1:compile
-[INFO] |  |  +- io.quarkus.arc:arc:jar:3.8.1:compile
-[INFO] |  |  \- org.eclipse.microprofile.context-propagation:microprofile-context-propagation-api:jar:1.3:compile
-[INFO] |  \- io.quarkus:quarkus-swagger-ui:jar:3.8.1:compile
-[INFO] +- io.quarkus:quarkus-smallrye-health:jar:3.8.1:compile
-[INFO] |  +- io.smallrye:smallrye-health:jar:4.1.0:compile
-[INFO] |  |  +- org.eclipse.microprofile.health:microprofile-health-api:jar:4.0.1:compile
-[INFO] |  |  +- io.smallrye:smallrye-health-api:jar:4.1.0:compile
-[INFO] |  |  \- jakarta.json:jakarta.json-api:jar:2.1.3:compile
-[INFO] |  +- io.smallrye:smallrye-health-provided-checks:jar:4.1.0:compile
-[INFO] |  \- io.quarkus:quarkus-jsonp:jar:3.8.1:compile
-[INFO] |     \- org.eclipse.parsson:parsson:jar:1.1.5:compile
-[INFO] +- org.jbpm:jbpm-with-drools-quarkus:jar:999-SNAPSHOT:compile
-[INFO] |  +- org.drools:drools-quarkus-rules:jar:999-SNAPSHOT:compile
-[INFO] |  |  +- org.kie.kogito:kogito-quarkus-common:jar:999-SNAPSHOT:compile
-[INFO] |  |  |  +- org.kie.kogito:kogito-rest-workitem:jar:999-SNAPSHOT:compile
-[INFO] |  |  |  |  \- org.kie.kogito:kogito-rest-utils:jar:999-SNAPSHOT:compile
-[INFO] |  |  |  |     \- io.smallrye.reactive:smallrye-mutiny-vertx-auth-oauth2:jar:3.10.0:compile
-[INFO] |  |  |  |        \- io.vertx:vertx-auth-oauth2:jar:4.5.3:compile
-[INFO] |  |  |  +- org.mvel:mvel2:jar:2.5.0.Final:compile
-[INFO] |  |  |  +- com.jayway.jsonpath:json-path:jar:2.9.0:compile
-[INFO] |  |  |  +- net.minidev:json-smart:jar:2.4.10:compile
-[INFO] |  |  |  |  \- net.minidev:accessors-smart:jar:2.4.9:compile
-[INFO] |  |  |  |     \- org.ow2.asm:asm:jar:9.6:compile
-[INFO] |  |  |  \- io.quarkus.arc:arc-processor:jar:3.8.1:compile
-[INFO] |  |  |     \- io.quarkus.gizmo:gizmo:jar:1.7.0:compile
-[INFO] |  |  |        \- org.ow2.asm:asm-util:jar:9.6:compile
-[INFO] |  |  |           +- org.ow2.asm:asm-tree:jar:9.6:compile
-[INFO] |  |  |           \- org.ow2.asm:asm-analysis:jar:9.6:compile
-[INFO] |  |  +- org.kie.kogito:kogito-api-incubation-rules-services:jar:999-SNAPSHOT:compile
-[INFO] |  |  |  \- org.kie.kogito:kogito-api-incubation-rules:jar:999-SNAPSHOT:compile
-[INFO] |  |  +- io.cloudevents:cloudevents-json-jackson:jar:2.5.0:compile
-[INFO] |  |  |  \- io.cloudevents:cloudevents-core:jar:2.5.0:compile
-[INFO] |  |  \- org.kie.kogito:kogito-drools:jar:999-SNAPSHOT:compile
-[INFO] |  |     +- org.drools:drools-ruleunits-api:jar:999-SNAPSHOT:compile
-[INFO] |  |     |  \- org.kie:kie-internal:jar:999-SNAPSHOT:compile
-[INFO] |  |     +- org.drools:drools-compiler:jar:999-SNAPSHOT:compile
-[INFO] |  |     |  +- org.drools:drools-drl-parser:jar:999-SNAPSHOT:compile
-[INFO] |  |     |  +- org.drools:drools-drl-extensions:jar:999-SNAPSHOT:compile
-[INFO] |  |     |  +- org.drools:drools-wiring-api:jar:999-SNAPSHOT:compile
-[INFO] |  |     |  +- org.drools:drools-base:jar:999-SNAPSHOT:compile
-[INFO] |  |     |  +- org.drools:drools-drl-ast:jar:999-SNAPSHOT:compile
-[INFO] |  |     |  +- org.drools:drools-kiesession:jar:999-SNAPSHOT:compile
-[INFO] |  |     |  +- org.drools:drools-ecj:jar:999-SNAPSHOT:compile
-[INFO] |  |     |  |  \- org.eclipse.jdt:ecj:jar:3.33.0:compile
-[INFO] |  |     |  +- org.kie:kie-util-xml:jar:999-SNAPSHOT:compile
-[INFO] |  |     |  +- org.kie:kie-util-maven-support:jar:999-SNAPSHOT:compile
-[INFO] |  |     |  \- org.antlr:antlr-runtime:jar:3.5.2:compile
-[INFO] |  |     +- org.drools:drools-ruleunits-impl:jar:999-SNAPSHOT:compile
-[INFO] |  |     \- org.drools:drools-model-codegen:jar:999-SNAPSHOT:compile
-[INFO] |  |        +- org.drools:drools-model-compiler:jar:999-SNAPSHOT:compile
-[INFO] |  |        +- org.drools:drools-model-prototype:jar:999-SNAPSHOT:compile
-[INFO] |  |        +- org.drools:drools-mvel-parser:jar:999-SNAPSHOT:compile
-[INFO] |  |        \- org.drools:drools-mvel-compiler:jar:999-SNAPSHOT:compile
-[INFO] |  +- org.drools:drools-quarkus-decisions:jar:999-SNAPSHOT:compile
-[INFO] |  |  +- org.kie.kogito:kogito-api-incubation-decisions-services:jar:999-SNAPSHOT:compile
-[INFO] |  |  |  \- org.kie.kogito:kogito-api-incubation-decisions:jar:999-SNAPSHOT:compile
-[INFO] |  |  \- org.kie.kogito:kogito-dmn:jar:999-SNAPSHOT:compile
-[INFO] |  |     +- org.kie:kie-dmn-core:jar:999-SNAPSHOT:compile
-[INFO] |  |     |  +- org.kie:kie-dmn-backend:jar:999-SNAPSHOT:compile
-[INFO] |  |     |  |  \- com.thoughtworks.xstream:xstream:jar:1.4.20:compile
-[INFO] |  |     |  |     \- io.github.x-stream:mxparser:jar:1.2.2:compile
-[INFO] |  |     |  |        \- xmlpull:xmlpull:jar:1.1.3.1:compile
-[INFO] |  |     |  +- org.drools:drools-canonical-model:jar:999-SNAPSHOT:compile
-[INFO] |  |     |  +- org.drools:drools-alphanetwork-compiler:jar:999-SNAPSHOT:compile
-[INFO] |  |     |  \- org.jpmml:pmml-model:jar:1.6.4:compile
-[INFO] |  |     \- org.kie:kie-dmn-validation:jar:999-SNAPSHOT:compile
-[INFO] |  |        \- org.drools:drools-commands:jar:999-SNAPSHOT:compile
-[INFO] |  \- org.kie.kogito:kogito-quarkus-predictions:jar:999-SNAPSHOT:compile
-[INFO] |     +- org.kie.kogito:kogito-pmml:jar:999-SNAPSHOT:compile
-[INFO] |     |  +- org.kie.kogito:kogito-pmml-dependencies:pom:999-SNAPSHOT:compile
-[INFO] |     |  |  +- org.kie:kie-pmml-dependencies:jar:999-SNAPSHOT:compile
-[INFO] |     |  |  |  +- org.kie:kie-pmml-api:jar:999-SNAPSHOT:compile
-[INFO] |     |  |  |  |  \- org.apache.commons:commons-math3:jar:3.4.1:compile
-[INFO] |     |  |  |  +- org.kie:kie-pmml-commons:jar:999-SNAPSHOT:compile
-[INFO] |     |  |  |  |  \- org.apache.commons:commons-text:jar:1.11.0:compile
-[INFO] |     |  |  |  +- org.kie:kie-pmml-compiler-api:jar:999-SNAPSHOT:compile
-[INFO] |     |  |  |  +- org.kie:kie-pmml-compiler-core:jar:999-SNAPSHOT:compile
-[INFO] |     |  |  |  +- org.kie:kie-pmml-compiler-commons:jar:999-SNAPSHOT:compile
-[INFO] |     |  |  |  +- org.kie:kie-pmml-evaluator-api:jar:999-SNAPSHOT:compile
-[INFO] |     |  |  |  +- org.kie:kie-pmml-evaluator-core:jar:999-SNAPSHOT:compile
-[INFO] |     |  |  |  +- org.kie:kie-pmml-evaluator-utils:jar:999-SNAPSHOT:compile
-[INFO] |     |  |  |  +- org.kie:kie-pmml-models-drools-common:jar:999-SNAPSHOT:compile
-[INFO] |     |  |  |  +- org.kie:kie-pmml-models-regression-model:jar:999-SNAPSHOT:compile
-[INFO] |     |  |  |  +- org.kie:kie-pmml-models-regression-compiler:jar:999-SNAPSHOT:compile
-[INFO] |     |  |  |  +- org.kie:kie-pmml-models-regression-evaluator:jar:999-SNAPSHOT:compile
-[INFO] |     |  |  |  +- org.kie:kie-pmml-models-mining-model:jar:999-SNAPSHOT:compile
-[INFO] |     |  |  |  +- org.kie:kie-pmml-models-mining-compiler:jar:999-SNAPSHOT:compile
-[INFO] |     |  |  |  +- org.kie:kie-pmml-models-mining-evaluator:jar:999-SNAPSHOT:compile
-[INFO] |     |  |  |  +- org.kie:kie-pmml-models-clustering-model:jar:999-SNAPSHOT:compile
-[INFO] |     |  |  |  +- org.kie:kie-pmml-models-clustering-compiler:jar:999-SNAPSHOT:compile
-[INFO] |     |  |  |  +- org.kie:kie-pmml-models-clustering-evaluator:jar:999-SNAPSHOT:compile
-[INFO] |     |  |  |  \- org.assertj:assertj-core:jar:3.22.0:test
-[INFO] |     |  |  +- org.kie:kie-pmml-models-drools-tree-model:jar:999-SNAPSHOT:compile
-[INFO] |     |  |  +- org.kie:kie-pmml-models-drools-tree-compiler:jar:999-SNAPSHOT:compile
-[INFO] |     |  |  +- org.kie:kie-pmml-models-drools-tree-evaluator:jar:999-SNAPSHOT:compile
-[INFO] |     |  |  |  \- org.kie:kie-pmml-compiler-api:jar:tests:999-SNAPSHOT:compile
-[INFO] |     |  |  +- org.kie:kie-pmml-models-drools-scorecard-model:jar:999-SNAPSHOT:compile
-[INFO] |     |  |  +- org.kie:kie-pmml-models-drools-scorecard-compiler:jar:999-SNAPSHOT:compile
-[INFO] |     |  |  \- org.kie:kie-pmml-models-drools-scorecard-evaluator:jar:999-SNAPSHOT:compile
-[INFO] |     |  \- org.kie.kogito:kogito-efesto-drl:pom:999-SNAPSHOT:compile
-[INFO] |     |     +- org.kie:kie-drl-compilation-common:jar:999-SNAPSHOT:compile
-[INFO] |     |     |  \- org.kie:kie-drl-api:jar:999-SNAPSHOT:compile
-[INFO] |     |     \- org.kie:kie-drl-map-input-runtime:jar:999-SNAPSHOT:compile
-[INFO] |     |        \- org.kie:kie-drl-runtime-common:jar:999-SNAPSHOT:compile
-[INFO] |     \- org.kie.kogito:kogito-api-incubation-predictions-services:jar:999-SNAPSHOT:compile
-[INFO] |        \- org.kie.kogito:kogito-api-incubation-predictions:jar:999-SNAPSHOT:compile
-[INFO] +- org.jbpm:jbpm-quarkus:jar:999-SNAPSHOT:compile
-[INFO] |  +- org.kie.kogito:kogito-quarkus-workflow-common:jar:999-SNAPSHOT:compile
-[INFO] |  |  +- io.smallrye.reactive:smallrye-mutiny-vertx-web-client:jar:3.10.0:compile
-[INFO] |  |  \- org.kie.kogito:process-serialization-protobuf:jar:999-SNAPSHOT:compile
-[INFO] |  |     +- com.google.protobuf:protobuf-java:jar:3.22.0:compile
-[INFO] |  |     +- com.google.protobuf:protobuf-java-util:jar:3.22.0:compile
-[INFO] |  |     |  +- com.google.code.findbugs:jsr305:jar:3.0.2:compile
-[INFO] |  |     |  +- com.google.errorprone:error_prone_annotations:jar:2.24.0:compile
-[INFO] |  |     |  \- com.google.j2objc:j2objc-annotations:jar:2.8:compile
-[INFO] |  |     \- org.infinispan.protostream:protostream:jar:4.6.2.Final:compile
-[INFO] |  |        +- com.squareup:protoparser:jar:4.0.3:compile
-[INFO] |  |        \- org.javassist:javassist:jar:3.29.1-GA:compile
-[INFO] |  +- org.kie.kogito:kogito-api-incubation-processes-services:jar:999-SNAPSHOT:compile
-[INFO] |  |  \- org.kie.kogito:kogito-api-incubation-processes:jar:999-SNAPSHOT:compile
-[INFO] |  |     \- org.kie.kogito:kogito-api-incubation-common:jar:999-SNAPSHOT:compile
-[INFO] |  +- org.kie.kogito:kogito-quarkus-incubation-common:jar:999-SNAPSHOT:compile
-[INFO] |  |  +- org.kie.kogito:kogito-api-incubation-application:jar:999-SNAPSHOT:compile
-[INFO] |  |  \- org.kie.kogito:kogito-api-incubation-common-objectmapper:jar:999-SNAPSHOT:compile
-[INFO] |  +- org.kie.kogito:jbpm-bpmn2:jar:999-SNAPSHOT:compile
-[INFO] |  |  +- org.kie.kogito:jbpm-flow-builder:jar:999-SNAPSHOT:compile
-[INFO] |  |  \- org.kie:kie-dmn-feel:jar:999-SNAPSHOT:compile
-[INFO] |  |     +- org.kie:kie-dmn-model:jar:999-SNAPSHOT:compile
-[INFO] |  |     +- org.kie:kie-dmn-api:jar:999-SNAPSHOT:compile
-[INFO] |  |     +- org.antlr:antlr4-runtime:jar:4.13.0:compile
-[INFO] |  |     \- ch.obermuhlner:big-math:jar:2.0.1:compile
-[INFO] |  \- org.eclipse.microprofile.openapi:microprofile-openapi-api:jar:3.1.1:compile
-[INFO] +- org.kie.kogito:kogito-addons-quarkus-process-management:jar:999-SNAPSHOT:compile
-[INFO] |  +- org.kie.kogito:kogito-addons-process-management:jar:999-SNAPSHOT:compile
-[INFO] |  +- org.kie.kogito:kogito-api:jar:999-SNAPSHOT:compile
-[INFO] |  |  +- org.kie:kie-api:jar:999-SNAPSHOT:compile
-[INFO] |  |  \- io.cloudevents:cloudevents-api:jar:2.5.0:compile
-[INFO] |  +- org.kie.kogito:kogito-addons-quarkus-rest-exception-handler:jar:999-SNAPSHOT:compile
-[INFO] |  |  \- org.kie.kogito:kogito-addons-rest-exception-handler:jar:999-SNAPSHOT:compile
-[INFO] |  \- org.kie.kogito:jbpm-flow:jar:999-SNAPSHOT:compile
-[INFO] |     +- org.kie.kogito:kogito-events-api:jar:999-SNAPSHOT:compile
-[INFO] |     +- org.kie.kogito:process-workitems:jar:999-SNAPSHOT:compile
-[INFO] |     |  \- org.drools:drools-core:jar:999-SNAPSHOT:compile
-[INFO] |     |     +- org.drools:drools-wiring-static:jar:999-SNAPSHOT:compile
-[INFO] |     |     \- commons-codec:commons-codec:jar:1.16.1:compile
-[INFO] |     \- org.drools:drools-mvel:jar:999-SNAPSHOT:compile
-[INFO] +- org.kie.kogito:kogito-addons-quarkus-jobs-management:jar:999-SNAPSHOT:compile
-[INFO] |  +- org.kie.kogito:kogito-addons-jobs-management-common:jar:999-SNAPSHOT:compile
-[INFO] |  +- org.kie.kogito:kogito-addons-jobs-api:jar:999-SNAPSHOT:compile
-[INFO] |  +- org.kie.kogito:kogito-addons-quarkus-rest-callback:jar:999-SNAPSHOT:compile
-[INFO] |  +- io.quarkus:quarkus-vertx:jar:3.8.1:compile
-[INFO] |  |  +- io.quarkus:quarkus-netty:jar:3.8.1:compile
-[INFO] |  |  |  +- io.netty:netty-codec:jar:4.1.106.Final:compile
-[INFO] |  |  |  +- io.netty:netty-codec-http:jar:4.1.106.Final:compile
-[INFO] |  |  |  +- io.netty:netty-codec-http2:jar:4.1.106.Final:compile
-[INFO] |  |  |  +- io.netty:netty-handler:jar:4.1.106.Final:compile
-[INFO] |  |  |  |  \- io.netty:netty-transport-native-unix-common:jar:4.1.106.Final:compile
-[INFO] |  |  |  \- com.aayushatharva.brotli4j:brotli4j:jar:1.14.0:compile
-[INFO] |  |  |     +- com.aayushatharva.brotli4j:service:jar:1.14.0:compile
-[INFO] |  |  |     \- com.aayushatharva.brotli4j:native-osx-aarch64:jar:1.14.0:compile
-[INFO] |  |  +- io.netty:netty-codec-haproxy:jar:4.1.106.Final:compile
-[INFO] |  |  |  +- io.netty:netty-buffer:jar:4.1.106.Final:compile
-[INFO] |  |  |  \- io.netty:netty-transport:jar:4.1.106.Final:compile
-[INFO] |  |  +- io.smallrye.common:smallrye-common-annotation:jar:2.1.2:compile
-[INFO] |  |  +- io.quarkus:quarkus-virtual-threads:jar:3.8.1:compile
-[INFO] |  |  +- io.quarkus:quarkus-vertx-latebound-mdc-provider:jar:3.8.1:compile
-[INFO] |  |  +- io.smallrye.reactive:smallrye-mutiny-vertx-core:jar:3.9.0:compile
-[INFO] |  |  |  +- io.smallrye.reactive:smallrye-mutiny-vertx-runtime:jar:3.9.0:compile
-[INFO] |  |  |  \- io.smallrye.reactive:vertx-mutiny-generator:jar:3.9.0:compile
-[INFO] |  |  |     \- io.vertx:vertx-codegen:jar:4.5.3:compile
-[INFO] |  |  \- io.smallrye:smallrye-fault-tolerance-vertx:jar:6.2.6:compile
-[INFO] |  +- io.vertx:vertx-web-client:jar:4.5.3:compile
-[INFO] |  |  +- io.vertx:vertx-uri-template:jar:4.5.3:compile
-[INFO] |  |  +- io.vertx:vertx-web-common:jar:4.5.3:compile
-[INFO] |  |  +- io.vertx:vertx-auth-common:jar:4.5.3:compile
-[INFO] |  |  \- io.vertx:vertx-core:jar:4.5.3:compile
-[INFO] |  |     +- io.netty:netty-common:jar:4.1.106.Final:compile
-[INFO] |  |     +- io.netty:netty-handler-proxy:jar:4.1.106.Final:compile
-[INFO] |  |     |  \- io.netty:netty-codec-socks:jar:4.1.106.Final:compile
-[INFO] |  |     +- io.netty:netty-resolver:jar:4.1.106.Final:compile
-[INFO] |  |     \- io.netty:netty-resolver-dns:jar:4.1.106.Final:compile
-[INFO] |  |        \- io.netty:netty-codec-dns:jar:4.1.106.Final:compile
-[INFO] |  +- org.slf4j:slf4j-api:jar:2.0.6:compile
-[INFO] |  \- com.fasterxml.jackson.datatype:jackson-datatype-jsr310:jar:2.16.1:compile
-[INFO] +- org.kie.kogito:kogito-addons-quarkus-process-svg:jar:999-SNAPSHOT:compile
-[INFO] |  +- org.kie.kogito:kogito-addons-process-svg:jar:999-SNAPSHOT:compile
-[INFO] |  +- jakarta.ws.rs:jakarta.ws.rs-api:jar:3.1.0:compile
-[INFO] |  \- io.quarkus:quarkus-security:jar:3.8.1:compile
-[INFO] |     \- jakarta.interceptor:jakarta.interceptor-api:jar:2.1.0:compile
-[INFO] +- org.kie.kogito:kogito-addons-quarkus-source-files:jar:999-SNAPSHOT:compile
-[INFO] |  +- org.kie.kogito:kogito-services:jar:999-SNAPSHOT:compile
-[INFO] |  +- org.kie.kogito:kogito-codegen-api:jar:999-SNAPSHOT:compile
-[INFO] |  |  +- com.github.javaparser:javaparser-core:jar:3.25.1:compile
-[INFO] |  |  \- org.drools:drools-codegen-common:jar:999-SNAPSHOT:compile
-[INFO] |  +- org.kie.kogito:kogito-codegen-core:jar:999-SNAPSHOT:compile
-[INFO] |  |  \- org.drools:drools-io:jar:999-SNAPSHOT:compile
-[INFO] |  |     \- org.drools:drools-util:jar:999-SNAPSHOT:compile
-[INFO] |  +- io.quarkus:quarkus-elytron-security-properties-file:jar:3.8.1:compile
-[INFO] |  |  +- io.quarkus:quarkus-elytron-security:jar:3.8.1:compile
-[INFO] |  |  |  \- io.quarkus:quarkus-elytron-security-common:jar:3.8.1:compile
-[INFO] |  |  +- org.wildfly.security:wildfly-elytron-auth-server:jar:2.2.3.Final:compile
-[INFO] |  |  |  +- org.wildfly.security:wildfly-elytron-auth:jar:2.2.3.Final:compile
-[INFO] |  |  |  +- org.wildfly.security:wildfly-elytron-base:jar:2.2.3.Final:compile
-[INFO] |  |  |  +- org.wildfly.security:wildfly-elytron-credential:jar:2.2.3.Final:compile
-[INFO] |  |  |  |  +- org.wildfly.security:wildfly-elytron-asn1:jar:2.2.3.Final:compile
-[INFO] |  |  |  |  +- org.wildfly.security:wildfly-elytron-keystore:jar:2.2.3.Final:compile
-[INFO] |  |  |  |  |  \- org.wildfly.security:wildfly-elytron-x500-cert:jar:2.2.3.Final:compile
-[INFO] |  |  |  |  |     \- org.wildfly.security:wildfly-elytron-x500-cert-util:jar:2.2.3.Final:compile
-[INFO] |  |  |  |  \- org.wildfly.security:wildfly-elytron-provider-util:jar:2.2.3.Final:compile
-[INFO] |  |  |  +- org.wildfly.security:wildfly-elytron-permission:jar:2.2.3.Final:compile
-[INFO] |  |  |  +- org.wildfly.security:wildfly-elytron-util:jar:2.2.3.Final:compile
-[INFO] |  |  |  \- org.wildfly.security:wildfly-elytron-x500:jar:2.2.3.Final:compile
-[INFO] |  |  +- org.wildfly.security:wildfly-elytron-password-impl:jar:2.2.3.Final:compile
-[INFO] |  |  +- org.wildfly.security:wildfly-elytron-realm:jar:2.2.3.Final:compile
-[INFO] |  |  |  \- org.wildfly.security:wildfly-elytron-encryption:jar:2.2.3.Final:compile
-[INFO] |  |  +- jakarta.authorization:jakarta.authorization-api:jar:2.1.0:compile
-[INFO] |  |  |  \- jakarta.servlet:jakarta.servlet-api:jar:6.0.0:compile
-[INFO] |  |  \- jakarta.authentication:jakarta.authentication-api:jar:3.0.0:compile
-[INFO] |  \- org.kie:efesto-dependencies:jar:999-SNAPSHOT:compile
-[INFO] |     +- org.kie:efesto-common-utils:jar:999-SNAPSHOT:compile
-[INFO] |     +- org.kie:efesto-common-api:jar:999-SNAPSHOT:compile
-[INFO] |     |  \- org.kie:kie-memory-compiler:jar:999-SNAPSHOT:compile
-[INFO] |     +- org.kie:efesto-common-core:jar:999-SNAPSHOT:compile
-[INFO] |     +- org.kie:efesto-compilation-manager-api:jar:999-SNAPSHOT:compile
-[INFO] |     +- org.kie:efesto-compilation-manager-core:jar:999-SNAPSHOT:compile
-[INFO] |     +- org.kie:efesto-runtime-manager-api:jar:999-SNAPSHOT:compile
-[INFO] |     \- org.kie:efesto-runtime-manager-core:jar:999-SNAPSHOT:compile
-[INFO] +- io.quarkus:quarkus-jdbc-postgresql:jar:3.8.1:compile
-[INFO] |  \- org.postgresql:postgresql:jar:42.7.2:compile
-[INFO] +- io.quarkus:quarkus-agroal:jar:3.8.1:compile
-[INFO] |  +- io.quarkus:quarkus-datasource:jar:3.8.1:compile
-[INFO] |  |  \- io.quarkus:quarkus-datasource-common:jar:3.8.1:compile
-[INFO] |  +- io.quarkus:quarkus-narayana-jta:jar:3.8.1:compile
-[INFO] |  |  +- io.quarkus:quarkus-transaction-annotations:jar:3.8.1:compile
-[INFO] |  |  +- io.smallrye:smallrye-context-propagation-jta:jar:2.1.0:compile
-[INFO] |  |  +- jakarta.transaction:jakarta.transaction-api:jar:2.0.1:compile
-[INFO] |  |  +- io.smallrye.reactive:smallrye-reactive-converter-api:jar:3.0.1:compile
-[INFO] |  |  +- io.smallrye.reactive:smallrye-reactive-converter-mutiny:jar:3.0.1:compile
-[INFO] |  |  +- org.jboss.narayana.jta:narayana-jta:jar:7.0.0.Final:compile
-[INFO] |  |  |  +- jakarta.resource:jakarta.resource-api:jar:2.1.0:compile
-[INFO] |  |  |  +- org.jboss.invocation:jboss-invocation:jar:2.0.0.Final:compile
-[INFO] |  |  |  \- org.eclipse.microprofile.reactive-streams-operators:microprofile-reactive-streams-operators-api:jar:3.0:compile
-[INFO] |  |  \- org.jboss.narayana.jts:narayana-jts-integration:jar:7.0.0.Final:compile
-[INFO] |  +- io.agroal:agroal-api:jar:2.1:compile
-[INFO] |  +- io.agroal:agroal-narayana:jar:2.1:compile
-[INFO] |  |  \- org.jboss:jboss-transaction-spi:jar:8.0.0.Final:compile
-[INFO] |  +- io.agroal:agroal-pool:jar:2.1:compile
-[INFO] |  \- io.quarkus:quarkus-credentials:jar:3.8.1:compile
-[INFO] +- org.kie.kogito:kogito-addons-quarkus-persistence-jdbc:jar:999-SNAPSHOT:compile
-[INFO] |  +- org.kie.kogito:kogito-addons-persistence-jdbc:jar:999-SNAPSHOT:compile
-[INFO] |  \- io.quarkus:quarkus-flyway:jar:3.8.1:compile
-[INFO] |     \- org.flywaydb:flyway-core:jar:9.22.3:compile
-[INFO] |        +- com.fasterxml.jackson.dataformat:jackson-dataformat-toml:jar:2.16.1:compile
-[INFO] |        \- com.google.code.gson:gson:jar:2.10.1:compile
-[INFO] +- org.kie:kogito-addons-quarkus-data-index-persistence-postgresql:jar:999-SNAPSHOT:compile
-[INFO] |  +- org.kie:kogito-addons-quarkus-data-index-persistence-common-runtime:jar:999-SNAPSHOT:compile
-[INFO] |  |  +- org.kie.kogito:data-index-common:jar:999-SNAPSHOT:compile
-[INFO] |  |  |  +- org.kie.kogito:data-index-storage-api:jar:999-SNAPSHOT:compile
-[INFO] |  |  |  |  \- org.kie.kogito:persistence-commons-api:jar:999-SNAPSHOT:compile
-[INFO] |  |  |  +- io.quarkus:quarkus-smallrye-fault-tolerance:jar:3.8.1:compile
-[INFO] |  |  |  |  +- io.smallrye:smallrye-fault-tolerance:jar:6.2.6:compile
-[INFO] |  |  |  |  |  +- org.eclipse.microprofile.fault-tolerance:microprofile-fault-tolerance-api:jar:4.0.2:compile
-[INFO] |  |  |  |  |  +- io.smallrye:smallrye-fault-tolerance-api:jar:6.2.6:compile
-[INFO] |  |  |  |  |  +- io.smallrye:smallrye-fault-tolerance-core:jar:6.2.6:compile
-[INFO] |  |  |  |  |  \- io.smallrye:smallrye-fault-tolerance-autoconfig-core:jar:6.2.6:compile
-[INFO] |  |  |  |  +- org.jboss.logging:commons-logging-jboss-logging:jar:1.0.0.Final:compile
-[INFO] |  |  |  |  +- io.smallrye:smallrye-fault-tolerance-context-propagation:jar:6.2.6:compile
-[INFO] |  |  |  |  \- io.smallrye:smallrye-fault-tolerance-mutiny:jar:6.2.6:compile
-[INFO] |  |  |  \- com.google.guava:guava:jar:32.0.0-jre:compile
-[INFO] |  |  |     +- com.google.guava:failureaccess:jar:1.0.1:compile
-[INFO] |  |  |     +- com.google.guava:listenablefuture:jar:9999.0-empty-to-avoid-conflict-with-guava:compile
-[INFO] |  |  |     \- org.checkerframework:checker-qual:jar:3.42.0:compile
-[INFO] |  |  \- io.quarkus:quarkus-oidc:jar:3.8.1:compile
-[INFO] |  |     +- io.quarkus:quarkus-oidc-common:jar:3.8.1:compile
-[INFO] |  |     |  \- io.quarkus:quarkus-smallrye-jwt-build:jar:3.8.1:compile
-[INFO] |  |     |     \- io.smallrye:smallrye-jwt-build:jar:4.4.0:compile
-[INFO] |  |     \- io.smallrye:smallrye-jwt:jar:4.4.0:compile
-[INFO] |  |        +- org.eclipse.microprofile.jwt:microprofile-jwt-auth-api:jar:2.1:compile
-[INFO] |  |        +- org.bitbucket.b_c:jose4j:jar:0.9.3:compile
-[INFO] |  |        \- io.smallrye:smallrye-jwt-common:jar:4.4.0:compile
-[INFO] |  \- org.kie.kogito:data-index-storage-postgresql:jar:999-SNAPSHOT:compile
-[INFO] |     +- org.kie.kogito:data-index-storage-jpa-common:jar:999-SNAPSHOT:compile
-[INFO] |     |  +- org.kie.kogito:persistence-commons-jpa:jar:999-SNAPSHOT:compile
-[INFO] |     |  |  +- io.quarkus:quarkus-hibernate-orm-panache:jar:3.8.1:compile
-[INFO] |     |  |  |  +- io.quarkus:quarkus-hibernate-orm-panache-common:jar:3.8.1:compile
-[INFO] |     |  |  |  |  \- io.quarkus:quarkus-panache-hibernate-common:jar:3.8.1:compile
-[INFO] |     |  |  |  \- io.quarkus:quarkus-panache-common:jar:3.8.1:compile
-[INFO] |     |  |  \- org.hibernate.orm:hibernate-ant:jar:6.4.4.Final:compile
-[INFO] |     |  \- org.mapstruct:mapstruct:jar:1.5.5.Final:compile
-[INFO] |     \- org.kie.kogito:persistence-commons-postgresql:jar:999-SNAPSHOT:compile
-[INFO] +- org.kie:kogito-addons-quarkus-jobs:jar:999-SNAPSHOT:compile
-[INFO] |  +- org.kie.kogito:jobs-service-api:jar:999-SNAPSHOT:compile
-[INFO] |  +- org.kie.kogito:jobs-service-internal-api:jar:999-SNAPSHOT:compile
-[INFO] |  |  \- io.smallrye.reactive:mutiny:jar:2.5.7:compile
-[INFO] |  +- org.kie.kogito:kogito-timer:jar:999-SNAPSHOT:compile
-[INFO] |  \- org.kie.kogito:jobs-service-common:jar:999-SNAPSHOT:compile
-[INFO] |     +- org.kie:kogito-addons-quarkus-job-http-recipient:jar:999-SNAPSHOT:compile
-[INFO] |     |  \- org.kie.kogito:job-recipient-common-http:jar:999-SNAPSHOT:compile
-[INFO] |     +- org.kie:kogito-addons-quarkus-job-sink-recipient:jar:999-SNAPSHOT:compile
-[INFO] |     +- io.quarkus:quarkus-smallrye-reactive-messaging:jar:3.8.1:compile
-[INFO] |     |  +- io.quarkus:quarkus-mutiny-reactive-streams-operators:jar:3.8.1:compile
-[INFO] |     |  |  +- org.eclipse.microprofile.reactive-streams-operators:microprofile-reactive-streams-operators-core:jar:3.0:compile
-[INFO] |     |  |  \- io.smallrye.reactive:mutiny-reactive-streams-operators:jar:2.5.7:compile
-[INFO] |     |  +- io.quarkus:quarkus-smallrye-reactive-messaging-kotlin:jar:3.8.1:compile
-[INFO] |     |  |  \- io.smallrye.reactive:smallrye-reactive-messaging-api:jar:4.16.2:compile
-[INFO] |     |  |     \- io.opentelemetry:opentelemetry-api:jar:1.32.0:compile
-[INFO] |     |  |        \- io.opentelemetry:opentelemetry-context:jar:1.32.0:compile
-[INFO] |     |  +- io.smallrye.reactive:smallrye-reactive-messaging-provider:jar:4.16.2:compile
-[INFO] |     |  \- io.smallrye.reactive:smallrye-reactive-messaging-health:jar:4.16.2:compile
-[INFO] |     +- io.smallrye.reactive:smallrye-reactive-messaging-in-memory:jar:4.16.2:compile
-[INFO] |     \- org.apache.commons:commons-lang3:jar:3.14.0:compile
-[INFO] +- org.kie.kogito:jobs-service-postgresql-common:jar:999-SNAPSHOT:compile
-[INFO] |  +- io.smallrye.reactive:mutiny-zero-flow-adapters:jar:1.0.0:compile
-[INFO] |  |  \- org.reactivestreams:reactive-streams:jar:1.0.4:compile
-[INFO] |  \- io.quarkus:quarkus-reactive-pg-client:jar:3.8.1:compile
-[INFO] |     +- io.quarkus:quarkus-reactive-datasource:jar:3.8.1:compile
-[INFO] |     |  \- io.vertx:vertx-sql-client:jar:4.5.3:compile
-[INFO] |     +- io.vertx:vertx-pg-client:jar:4.5.3:compile
-[INFO] |     +- com.ongres.scram:client:jar:2.1:compile
-[INFO] |     |  \- com.ongres.scram:common:jar:2.1:compile
-[INFO] |     |     \- com.ongres.stringprep:saslprep:jar:1.1:compile
-[INFO] |     |        \- com.ongres.stringprep:stringprep:jar:1.1:compile
-[INFO] |     \- io.smallrye.reactive:smallrye-mutiny-vertx-pg-client:jar:3.9.0:compile
-[INFO] |        \- io.smallrye.reactive:smallrye-mutiny-vertx-sql-client:jar:3.9.0:compile
-[INFO] +- org.kie:kogito-addons-quarkus-data-audit-jpa:jar:999-SNAPSHOT:compile
-[INFO] |  +- org.kie:kogito-addons-data-audit-jpa-common:jar:999-SNAPSHOT:compile
-[INFO] |  |  \- jakarta.persistence:jakarta.persistence-api:jar:3.1.0:compile
-[INFO] |  +- org.kie.kogito:data-audit-common:jar:999-SNAPSHOT:compile
-[INFO] |  |  +- com.graphql-java:graphql-java-extended-scalars:jar:19.0:compile
-[INFO] |  |  \- com.graphql-java:graphql-java:jar:21.1:compile
-[INFO] |  |     \- com.graphql-java:java-dataloader:jar:3.2.0:compile
-[INFO] |  +- org.kie.kogito:kogito-events-core:jar:999-SNAPSHOT:compile
-[INFO] |  |  \- org.kie.kogito:kogito-jackson-utils:jar:999-SNAPSHOT:compile
-[INFO] |  +- io.quarkus:quarkus-reactive-routes:jar:3.8.1:compile
-[INFO] |  +- io.quarkiverse.reactivemessaging.http:quarkus-reactive-messaging-http:jar:2.1.0:compile
-[INFO] |  |  \- io.smallrye.reactive:mutiny-zero:jar:1.0.0:compile
-[INFO] |  +- io.quarkus:quarkus-vertx-graphql:jar:3.8.1:compile
-[INFO] |  |  \- io.vertx:vertx-web-graphql:jar:4.5.3:compile
-[INFO] |  +- io.quarkus:quarkus-hibernate-orm:jar:3.8.1:compile
-[INFO] |  |  +- org.hibernate.orm:hibernate-core:jar:6.4.4.Final:compile
-[INFO] |  |  |  \- com.fasterxml:classmate:jar:1.6.0:runtime
-[INFO] |  |  +- net.bytebuddy:byte-buddy:jar:1.14.7:compile
-[INFO] |  |  +- org.hibernate.common:hibernate-commons-annotations:jar:6.0.6.Final:compile
-[INFO] |  |  +- org.hibernate.orm:hibernate-graalvm:jar:6.4.4.Final:compile
-[INFO] |  |  +- org.glassfish.jaxb:jaxb-runtime:jar:4.0.3:compile
-[INFO] |  |  |  \- org.glassfish.jaxb:jaxb-core:jar:4.0.4:compile
-[INFO] |  |  |     +- org.glassfish.jaxb:txw2:jar:4.0.4:compile
-[INFO] |  |  |     \- com.sun.istack:istack-commons-runtime:jar:4.1.2:compile
-[INFO] |  |  +- org.hibernate:quarkus-local-cache:jar:0.3.0:compile
-[INFO] |  |  \- io.quarkus:quarkus-caffeine:jar:3.8.1:compile
-[INFO] |  |     \- com.github.ben-manes.caffeine:caffeine:jar:3.1.5:compile
-[INFO] |  \- io.quarkus:quarkus-jdbc-h2:jar:3.8.1:compile
-[INFO] |     +- com.h2database:h2:jar:2.2.224:compile
-[INFO] |     \- org.locationtech.jts:jts-core:jar:1.17.0:compile
-[INFO] \- org.kie:kogito-addons-quarkus-data-audit:jar:999-SNAPSHOT:compile
-[INFO]    \- org.kie.kogito:data-audit-common:jar:tests:999-SNAPSHOT:compile
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  3.214 s
-[INFO] Finished at: 2024-03-05T11:45:34+01:00
-[INFO] ------------------------------------------------------------------------
