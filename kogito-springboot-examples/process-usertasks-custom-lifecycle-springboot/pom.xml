@@ -90,8 +90,8 @@
       <id>notification</id>
       <dependencies>
         <dependency>
-          <groupId>org.kie.kogito</groupId>
-          <artifactId>kogito-addons-springboot-mail</artifactId>
+          <groupId>org.jbpm</groupId>
+          <artifactId>jbpm-addons-springboot-mail</artifactId>
         </dependency>
         <dependency>
           <groupId>org.jbpm</groupId>
@@ -107,15 +107,15 @@
       <id>persistence</id>
       <dependencies>
         <dependency>
-          <groupId>org.kie.kogito</groupId>
-          <artifactId>kogito-addons-springboot-persistence-infinispan</artifactId>
+          <groupId>org.kie</groupId>
+          <artifactId>kie-addons-springboot-persistence-infinispan</artifactId>
         </dependency>
         <dependency>
           <groupId>org.infinispan</groupId>
           <artifactId>infinispan-spring-boot3-starter-remote</artifactId>
         </dependency>
         <dependency>
-          <groupId>org.kie.kogito</groupId>
+          <groupId>org.kie</groupId>
           <artifactId>kogito-addons-springboot-jobs-management</artifactId>
         </dependency>
       </dependencies>

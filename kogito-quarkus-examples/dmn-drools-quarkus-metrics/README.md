@@ -18,8 +18,8 @@ Import the following dependency in your `pom.xml`:
 
 ```XML
 <dependency>
- <groupId>org.kie.kogito</groupId>
- <artifactId>kogito-addons-quarkus-monitoring-prometheus</artifactId>
+ <groupId>org.kie</groupId>
+ <artifactId>kie-addons-quarkus-monitoring-prometheus</artifactId>
 </dependency>
 ```
 

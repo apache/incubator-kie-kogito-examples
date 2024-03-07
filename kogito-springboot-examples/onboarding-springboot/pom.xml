@@ -58,12 +58,12 @@
       <artifactId>spring-boot-starter-actuator</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-addons-springboot-monitoring-prometheus</artifactId>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-addons-springboot-monitoring-prometheus</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-addons-springboot-kubernetes</artifactId>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-addons-springboot-kubernetes</artifactId>
     </dependency>
 
     <dependency>
@@ -120,8 +120,8 @@
       </properties>
       <dependencies>
         <dependency>
-          <groupId>org.kie.kogito</groupId>
-          <artifactId>kogito-addons-springboot-persistence-infinispan</artifactId>
+          <groupId>org.kie</groupId>
+          <artifactId>kie-addons-springboot-persistence-infinispan</artifactId>
         </dependency>
         <dependency>
           <groupId>org.infinispan</groupId>

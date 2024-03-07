@@ -77,8 +77,8 @@
       <artifactId>jbpm-with-drools-quarkus</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-addons-quarkus-persistence-jdbc</artifactId>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-addons-quarkus-persistence-jdbc</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -134,8 +134,8 @@
       </activation>
       <dependencies>
         <dependency>
-          <groupId>org.kie.kogito</groupId>
-          <artifactId>kogito-addons-quarkus-events-process</artifactId>
+          <groupId>org.kie</groupId>
+          <artifactId>kie-addons-quarkus-events-process</artifactId>
         </dependency>
         <dependency>
           <groupId>io.quarkus</groupId>

@@ -61,7 +61,7 @@
       <id>jobs-service</id>
       <dependencies>
         <dependency>
-          <groupId>org.kie.kogito</groupId>
+          <groupId>org.kie</groupId>
           <artifactId>kogito-addons-springboot-jobs-management</artifactId>
         </dependency>
       </dependencies>
@@ -82,13 +82,13 @@
 
     <!-- Comment to disable jobs service integration -->
     <dependency>
-      <groupId>org.kie.kogito</groupId>
+      <groupId>org.kie</groupId>
       <artifactId>kogito-addons-springboot-jobs-management</artifactId>
     </dependency>
 
     <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-addons-springboot-process-management</artifactId>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-addons-springboot-process-management</artifactId>
     </dependency>
 
     <!-- uncomment these two to enable persistence for Kogito -->
@@ -97,8 +97,8 @@
       <artifactId>infinispan-spring-boot3-starter-remote</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-addons-springboot-persistence-infinispan</artifactId>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-addons-springboot-persistence-infinispan</artifactId>
     </dependency> -->
 
   </dependencies>

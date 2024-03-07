@@ -78,14 +78,14 @@
     </dependency>
     <!-- Comment to disable jobs service integration -->
     <dependency>
-      <groupId>org.kie.kogito</groupId>
+      <groupId>org.kie</groupId>
       <artifactId>kogito-addons-quarkus-jobs-management</artifactId>
     </dependency>
     <!-- uncomment this to enable persistence for kogito -->
     <!--
     <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-addons-quarkus-persistence-infinispan</artifactId>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-addons-quarkus-persistence-infinispan</artifactId>
     </dependency>
     -->
     <dependency>

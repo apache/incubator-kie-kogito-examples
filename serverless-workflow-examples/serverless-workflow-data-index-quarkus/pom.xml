@@ -73,8 +73,8 @@
       <artifactId>kogito-quarkus-serverless-workflow</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-addons-quarkus-messaging</artifactId>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-addons-quarkus-messaging</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -98,8 +98,8 @@
       <artifactId>quarkus-resteasy-jackson</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-addons-quarkus-persistence-jdbc</artifactId>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-addons-quarkus-persistence-jdbc</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -159,7 +159,7 @@
       </properties>
       <dependencies>
         <dependency>
-          <groupId>org.kie.kogito</groupId>
+          <groupId>org.kie</groupId>
           <artifactId>kogito-addons-quarkus-data-index-postgresql</artifactId>
         </dependency>
       </dependencies>
@@ -218,16 +218,16 @@
           <artifactId>quarkus-container-image-jib</artifactId>
         </dependency>
         <dependency>
-          <groupId>org.kie.kogito</groupId>
-          <artifactId>kogito-addons-quarkus-events-process</artifactId>
+          <groupId>org.kie</groupId>
+          <artifactId>kie-addons-quarkus-events-process</artifactId>
         </dependency>
         <dependency>
-          <groupId>org.kie.kogito</groupId>
-          <artifactId>kogito-addons-quarkus-process-management</artifactId>
+          <groupId>org.kie</groupId>
+          <artifactId>kie-addons-quarkus-process-management</artifactId>
         </dependency>
         <dependency>
-          <groupId>org.kie.kogito</groupId>
-          <artifactId>kogito-addons-quarkus-source-files</artifactId>
+          <groupId>org.kie</groupId>
+          <artifactId>kie-addons-quarkus-source-files</artifactId>
         </dependency>
       </dependencies>
     </profile>

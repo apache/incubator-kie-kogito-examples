@@ -25,8 +25,8 @@ Like the other Kogito AddOns, the only required step to enable it is to include 
 
 ```xml
 <dependency>
-  <groupId>org.kie.kogito</groupId>
-  <artifactId>kogito-addons-springboot-event-rules</artifactId>
+  <groupId>org.drools</groupId>
+  <artifactId>drools-addons-springboot-event-rules</artifactId>
 </dependency>
 ```
 

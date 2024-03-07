@@ -148,7 +148,7 @@ To be able to use Kogito Job Service as timer service , an additional dependency
 
 ```xml
 <dependency>
-  <groupId>org.kie.kogito</groupId>
+  <groupId>org.kie</groupId>
   <artifactId>kogito-addons-quarkus-jobs-management</artifactId>
 </dependency>
 ```

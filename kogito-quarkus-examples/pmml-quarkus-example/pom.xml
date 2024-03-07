@@ -59,8 +59,8 @@
   </dependencyManagement>
   <dependencies>
     <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-quarkus-predictions</artifactId>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-quarkus-predictions</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>

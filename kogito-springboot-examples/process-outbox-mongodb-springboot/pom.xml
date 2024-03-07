@@ -69,12 +69,12 @@
       <artifactId>spring-boot-starter-data-mongodb</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-addons-springboot-persistence-mongodb</artifactId>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-addons-springboot-persistence-mongodb</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-addons-springboot-events-mongodb</artifactId>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-addons-springboot-events-mongodb</artifactId>
     </dependency>
 
     <!-- test related -->

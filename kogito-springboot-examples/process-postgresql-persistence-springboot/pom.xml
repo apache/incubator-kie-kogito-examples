@@ -66,8 +66,8 @@
       <artifactId>kogito-api</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-addons-springboot-persistence-jdbc</artifactId>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-addons-springboot-persistence-jdbc</artifactId>
     </dependency>
     <dependency>
       <groupId>org.postgresql</groupId>
@@ -130,8 +130,8 @@
       </activation>
       <dependencies>
         <dependency>
-          <groupId>org.kie.kogito</groupId>
-          <artifactId>kogito-addons-springboot-events-process-kafka</artifactId>
+          <groupId>org.kie</groupId>
+          <artifactId>kie-addons-springboot-events-process-kafka</artifactId>
         </dependency>
       </dependencies>
     </profile>
