@@ -59,6 +59,7 @@
         <module>dmn-pmml-quarkus-example</module>
         <module>dmn-quarkus-example</module>
         <module>dmn-resource-jar-quarkus-example</module>
+        <module>dmn-multiple-models-quarkus-example</module>
         <module>dmn-tracing-quarkus</module>
         <module>flexible-process-quarkus</module>
         <module>kogito-travel-agency</module>
