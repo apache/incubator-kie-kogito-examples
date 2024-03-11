@@ -8,7 +8,7 @@
     {
       "name": "greet",
       "type": "custom",
-      "operation": "knative:services.v1.serving.knative.dev/default/custom-function-knative-service?path=/plainJsonFunction"
+      "operation": "knative:services.v1.serving.knative.dev/custom-functions/custom-function-knative-service?path=/plainJsonFunction"
     }
   ],
   "states": [

@@ -8,7 +8,7 @@
     {
       "name": "greet",
       "type": "custom",
-      "operation": "knative:services.v1.serving.knative.dev/default/custom-function-knative-service?path=/cloudEventFunction&asCloudEvent=true"
+      "operation": "knative:services.v1.serving.knative.dev/custom-functions/custom-function-knative-service?path=/cloudEventFunction&asCloudEvent=true"
     }
   ],
   "states": [
@@ -19,7 +19,12 @@
         {
           "functionRef": {
             "refName": "greet",
-            "arguments": ".cloudevent"
+            "arguments": {
+              "specversion" : ".cloudevent.specversion",
+              "type": ".cloudevent.type",
+              "source": ".cloudevent.source",
+              "data": ".cloudevent.data"
+            }
           }
         }
       ],
