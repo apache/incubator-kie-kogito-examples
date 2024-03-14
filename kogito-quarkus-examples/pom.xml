@@ -33,6 +33,9 @@
   <artifactId>kogito-quarkus-examples</artifactId>
   <packaging>pom</packaging>
   <name>Kogito Example :: Quarkus</name>
+  <modules>
+    <module>dmn-15-quarkus-example</module>
+  </modules>
 
   <properties>
     <java.module.name>org.kie.kogito.examples.quarkus</java.module.name>
