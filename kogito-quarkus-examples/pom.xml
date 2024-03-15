@@ -33,9 +33,6 @@
   <artifactId>kogito-quarkus-examples</artifactId>
   <packaging>pom</packaging>
   <name>Kogito Example :: Quarkus</name>
-  <modules>
-    <module>dmn-15-quarkus-example</module>
-  </modules>
 
   <properties>
     <java.module.name>org.kie.kogito.examples.quarkus</java.module.name>
@@ -53,6 +50,7 @@
       </activation>
       <modules>
         <module>decisiontable-quarkus-example</module>
+        <module>dmn-15-quarkus-example</module>
         <module>dmn-drools-quarkus-metrics</module>
         <module>dmn-event-driven-quarkus</module>
         <module>dmn-incubation-api-quarkus</module>
@@ -130,12 +128,15 @@
       </activation>
       <modules>
         <module>decisiontable-quarkus-example</module>
+        <module>dmn-15-quarkus-example</module>
         <module>dmn-drools-quarkus-metrics</module>
         <module>dmn-event-driven-quarkus</module>
         <module>dmn-knative-quickstart-quarkus</module>
         <module>dmn-listener-quarkus</module>
         <module>dmn-pmml-quarkus-example</module>
         <module>dmn-quarkus-example</module>
+        <module>dmn-resource-jar-quarkus-example</module>
+        <module>dmn-multiple-models-quarkus-example</module>
         <module>dmn-tracing-quarkus</module>
         <module>flexible-process-quarkus</module>
         <module>kogito-travel-agency</module>
