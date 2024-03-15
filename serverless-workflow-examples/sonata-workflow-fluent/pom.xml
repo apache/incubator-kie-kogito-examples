@@ -7,13 +7,12 @@
   </parent>
   <artifactId>sonata-workflow-fluent</artifactId>
   <name>Kogito Example :: Sonata Workflow:: Java Embedded examples</name>
-  <version>2.0.0-SNAPSHOT</version>
   <properties>
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
     <maven.compiler.release>17</maven.compiler.release>
-    <version.failsafe.plugin>${version.surefire.plugin}</version.failsafe.plugin>
+    <java.module.name>SonataWorkflowFluent</java.module.name>
   </properties>
   <dependencyManagement>
     <dependencies>

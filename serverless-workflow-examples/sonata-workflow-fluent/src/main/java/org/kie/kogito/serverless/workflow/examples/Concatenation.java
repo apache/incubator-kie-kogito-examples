@@ -35,9 +35,9 @@ import static org.kie.kogito.serverless.workflow.fluent.FunctionBuilder.expr;
 import static org.kie.kogito.serverless.workflow.fluent.StateBuilder.operation;
 import static org.kie.kogito.serverless.workflow.fluent.WorkflowBuilder.workflow;
 
-public class ConcatenationExample {
+public class Concatenation {
 
-    private static final Logger logger = LoggerFactory.getLogger(ConcatenationExample.class);
+    private static final Logger logger = LoggerFactory.getLogger(Concatenation.class);
 
     public static void main(String[] args) {
         try (StaticWorkflowApplication application = StaticWorkflowApplication.create()) {

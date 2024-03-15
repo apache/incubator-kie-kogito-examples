@@ -63,7 +63,7 @@ public class WorkflowFluentExamplesTest {
 
     @Test
     void testForEachJavaDefinition() {
-        assertThat(application.execute(ForEachJavaExample.getWorkflow(), Map.of("names", Arrays.asList("Javi", "Mark"), "fileName", "message.txt")).getWorkflowdata().get("messages"))
+        assertThat(application.execute(ForEachJava.getWorkflow(), Map.of("names", Arrays.asList("Javi", "Mark"), "fileName", "message.txt")).getWorkflowdata().get("messages"))
                 .containsExactly(new TextNode("Javi , congratulations, you are a happy user of serverless workflow"),
                         new TextNode("Mark , congratulations, you are a happy user of serverless workflow"));
     }
@@ -76,7 +76,7 @@ public class WorkflowFluentExamplesTest {
 
     @Test
     void testConcatenationDefinition() {
-        assertThat(application.execute(ConcatenationExample.getWorkflow(), Map.of("name", "Javier", "surname", "Tirado")).getWorkflowdata())
+        assertThat(application.execute(Concatenation.getWorkflow(), Map.of("name", "Javier", "surname", "Tirado")).getWorkflowdata())
                 .isEqualTo(new TextNode("My name is Javier and my surname is Tirado"));
     }
 
