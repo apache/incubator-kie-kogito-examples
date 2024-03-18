@@ -12,7 +12,7 @@
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
     <maven.compiler.release>17</maven.compiler.release>
-    <java.module.name>SonataWorkflowFluent</java.module.name>
+    <java.module.name>SonataFlowFluent</java.module.name>
   </properties>
   <dependencyManagement>
     <dependencies>
