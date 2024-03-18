@@ -6,7 +6,7 @@
     <version>999-SNAPSHOT</version>
   </parent>
   <artifactId>sonata-workflow-fluent</artifactId>
-  <name>Kogito Example :: Sonata Workflow:: Java Embedded examples</name>
+  <name>Kogito Example :: SonataFlow :: Java Embedded examples</name>
   <properties>
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
