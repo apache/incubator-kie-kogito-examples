@@ -81,9 +81,9 @@ public class WorkflowFluentExamplesTest {
     }
 
     @Test
-    void testDivissionDefinition() throws IOException {
+    void testDivisionDefinition() throws IOException {
         assertThat(application.execute(
-                getWorkflow("division.sw.json"), Map.of("number1", 4, "number2", 2)).getWorkflowdata().get("response")).isEqualTo(new IntNode(2));
+                getWorkflow("division.sw.json"), Map.of("numerator", 4, "denominator", 2)).getWorkflowdata().get("response")).isEqualTo(new IntNode(2));
     }
 
     @Test

@@ -1,13 +1,13 @@
 {
   "id": "division",
   "version": "1.0",
-  "name": "Workflow Expression example",
+  "name": "division",
   "start": "divide",
   "functions": [
     {
       "name": "divide",
       "type": "expression",
-      "operation": ".number1 / .number2"
+      "operation": ".numerator / .denominator"
     }
   ],
   "states": [
