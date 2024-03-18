@@ -1,0 +1,26 @@
+{
+  "id": "division",
+  "version": "1.0",
+  "name": "division",
+  "start": "divide",
+  "functions": [
+    {
+      "name": "divide",
+      "type": "expression",
+      "operation": ".numerator / .denominator"
+    }
+  ],
+  "states": [
+    {
+      "name": "divide",
+      "type": "operation",
+      "actions": [
+        {
+          "name": "divide",
+          "functionRef": "divide"
+        }
+      ],
+      "end": true
+    }
+  ]
+}
