@@ -78,6 +78,7 @@
         <module>serverless-workflow-timeouts-showcase-extended</module>
         <module>serverless-workflow-timeouts-showcase-operator-devprofile</module>
         <module>serverless-workflow-python-quarkus</module>
+        <module>sonata-workflow-fluent</module>
       </modules>
     </profile>
 
