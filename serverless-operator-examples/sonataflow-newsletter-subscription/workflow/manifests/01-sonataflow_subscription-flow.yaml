@@ -15,7 +15,7 @@ spec:
   flow:
     dataInputSchema:
       failOnValidationErrors: true
-      schema: schemas/subscription-schema.json
+      schema: subscription-schema.json
     events:
     - dataOnly: true
       kind: produced
@@ -27,16 +27,16 @@ spec:
       type: confirm.subscription
     functions:
     - name: subscribeToNewsletter
-      operation: specs/subscription-service.yaml#subscribe
+      operation: subscription-service.yaml#subscribe
       type: rest
     - name: confirmSubscription
-      operation: specs/subscription-service.yaml#confirm
+      operation: subscription-service.yaml#confirm
       type: rest
     - name: deleteSubscription
-      operation: specs/subscription-service.yaml#delete
+      operation: subscription-service.yaml#delete
       type: rest
     - name: verifyEmail
-      operation: specs/subscription-service.yaml#verify
+      operation: subscription-service.yaml#verify
       type: rest
     start:
       stateName: VerifyEmail
@@ -133,10 +133,8 @@ spec:
     configMaps:
     - configMap:
         name: 01-subscription-flow-resources
-      workflowPath: schemas
     - configMap:
         name: 02-subscription-flow-resources
-      workflowPath: specs
 status:
   address: {}
   lastTimeRecoverAttempt: null

@@ -46,6 +46,10 @@ data:
     mp.messaging.outgoing.kogito-job-service-job-request-events.url=${K_SINK:http://localhost:8280/v2/jobs/events}
     mp.messaging.outgoing.kogito-job-service-job-request-events.method=POST
 
+    mp.messaging.outgoing.kogito-processdefinitions-events.connector=quarkus-http
+
+    mp.messaging.outgoing.kogito-processinstances-events.connector=quarkus-http
+
     kogito.events.usertasks.enabled=false
     kogito.events.variables.enabled=false
 

@@ -1,0 +1,13 @@
+{
+    "specversion": "1.0",
+    "id": "dad76364-1cf1-48ca-bf95-485a511f8707",
+    "source": "demo",
+    "type": "confirm.subscription",
+    "kogitoprocrefid": "378e64f6-dbff-4486-932c-390ade04f65b",
+    "datacontenttype": "application/json",
+    "time": "2024-03-20T15:35:29.967831-03:00",
+    "data": {
+        "id": "378e64f6-dbff-4486-932c-390ade04f65b",
+        "confirmed": true
+    }
+}
