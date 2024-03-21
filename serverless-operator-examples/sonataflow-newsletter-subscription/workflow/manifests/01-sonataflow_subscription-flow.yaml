@@ -1,0 +1,142 @@
+apiVersion: sonataflow.org/v1alpha08
+kind: SonataFlow
+metadata:
+  annotations:
+    sonataflow.org/description: ""
+    sonataflow.org/expressionLang: jq
+    sonataflow.org/version: "1.0"
+  creationTimestamp: null
+  labels:
+    app: subscription-flow
+    sonataflow.org/workflow-app: subscription-flow
+  name: subscription-flow
+  namespace: newsletter-subscription
+spec:
+  flow:
+    dataInputSchema:
+      failOnValidationErrors: true
+      schema: schemas/subscription-schema.json
+    events:
+    - dataOnly: true
+      kind: produced
+      name: NewSubscriptionEvent
+      type: new.subscription
+    - dataOnly: true
+      kind: consumed
+      name: ConfirmSubscriptionEvent
+      type: confirm.subscription
+    functions:
+    - name: subscribeToNewsletter
+      operation: specs/subscription-service.yaml#subscribe
+      type: rest
+    - name: confirmSubscription
+      operation: specs/subscription-service.yaml#confirm
+      type: rest
+    - name: deleteSubscription
+      operation: specs/subscription-service.yaml#delete
+      type: rest
+    - name: verifyEmail
+      operation: specs/subscription-service.yaml#verify
+      type: rest
+    start:
+      stateName: VerifyEmail
+    states:
+    - actionMode: sequential
+      actions:
+      - actionDataFilter:
+          useResults: true
+        functionRef:
+          arguments:
+            email: ${ .email }
+          invoke: sync
+          refName: verifyEmail
+      name: VerifyEmail
+      transition:
+        nextState: ExitIfEmailExists
+      type: operation
+    - dataConditions:
+      - condition: ${ .emailExists == false }
+        transition:
+          nextState: SubscribeAndWaitForConfirmation
+      defaultCondition:
+        transition:
+          nextState: NoSubscription
+      name: ExitIfEmailExists
+      type: switch
+    - action:
+        actionDataFilter:
+          useResults: true
+        functionRef:
+          arguments:
+            email: ${ .email }
+            id: $WORKFLOW.instanceId
+            name: ${ .name }
+          invoke: sync
+          refName: subscribeToNewsletter
+      eventRef: ConfirmSubscriptionEvent
+      name: SubscribeAndWaitForConfirmation
+      timeouts:
+        eventTimeout: PT3M
+      transition:
+        nextState: CheckConfirmation
+      type: callback
+    - dataConditions:
+      - condition: ${ .confirmed == true }
+        transition:
+          nextState: ConfirmSubscription
+      defaultCondition:
+        transition:
+          nextState: DeleteSubscription
+      name: CheckConfirmation
+      type: switch
+    - actionMode: sequential
+      actions:
+      - actionDataFilter:
+          useResults: true
+        functionRef:
+          arguments:
+            email: ${ .email }
+            id: $WORKFLOW.instanceId
+            name: ${ .name }
+          invoke: sync
+          refName: confirmSubscription
+      end:
+        produceEvents:
+        - data: null
+          eventRef: NewSubscriptionEvent
+        terminate: true
+      name: ConfirmSubscription
+      type: operation
+    - actionMode: sequential
+      actions:
+      - actionDataFilter:
+          useResults: true
+        functionRef:
+          arguments:
+            id: $WORKFLOW.instanceId
+          invoke: sync
+          refName: deleteSubscription
+      end:
+        terminate: true
+      name: DeleteSubscription
+      type: operation
+    - data:
+        subscribed: true
+      end:
+        terminate: true
+      name: NoSubscription
+      type: inject
+  podTemplate:
+    container:
+      resources: {}
+  resources:
+    configMaps:
+    - configMap:
+        name: 01-subscription-flow-resources
+      workflowPath: schemas
+    - configMap:
+        name: 02-subscription-flow-resources
+      workflowPath: specs
+status:
+  address: {}
+  lastTimeRecoverAttempt: null

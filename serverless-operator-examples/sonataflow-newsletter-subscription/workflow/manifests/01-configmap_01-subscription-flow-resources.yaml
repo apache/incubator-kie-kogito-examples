@@ -1,0 +1,23 @@
+apiVersion: v1
+data:
+  subscription-schema.json: |-
+    {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type": "object",
+        "properties": {
+            "name": {
+                "type": "string"
+            },
+            "email": {
+                "type": "string"
+            }
+        },
+        "required": [
+            "email"
+        ]
+    }
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: 01-subscription-flow-resources
+  namespace: newsletter-subscription
