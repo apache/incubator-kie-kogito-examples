@@ -1,0 +1,130 @@
+#
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+#
+
+---
+openapi: 3.0.3
+info:
+  title: serverless-workflow-newsletter-subscription-service API
+  version: 999-SNAPSHOT
+paths:
+  /subscription:
+    get:
+      tags:
+      - Subscription Resource
+      operationId: fetch
+      parameters:
+      - name: email
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+    post:
+      tags:
+      - Subscription Resource
+      operationId: subscribe
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Subscription'
+      responses:
+        "200":
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+  /subscription/{id}:
+    delete:
+      tags:
+        - Subscription Resource
+      operationId: delete
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+  /subscription/confirm:
+    put:
+      tags:
+      - Subscription Resource
+      operationId: confirm
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Subscription'
+      responses:
+        "200":
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+  /subscription/verify:
+    get:
+      tags:
+      - Subscription Resource
+      operationId: verify
+      parameters:
+      - name: email
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailVerificationReply'
+components:
+  schemas:
+    EmailVerificationReply:
+      type: object
+      properties:
+        email:
+          type: string
+        emailExists:
+          type: boolean
+    Subscription:
+      type: object
+      properties:
+        email:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        verified:
+          type: boolean
