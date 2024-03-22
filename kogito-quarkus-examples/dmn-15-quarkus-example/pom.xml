@@ -100,7 +100,10 @@
       </resource>
       <!-- DMN generated resources unpacked from org.kie.kogito.examples:dmn-resource-jar -->
       <resource>
-        <directory>${project.build.directory}/generated-resources</directory>
+        <directory>${project.build.directory}/generated-resources/valid_models/DMNv1_x</directory>
+      </resource>
+      <resource>
+        <directory>${project.build.directory}/generated-resources/valid_models/DMNv1_5</directory>
       </resource>
     </resources>
     <plugins>
