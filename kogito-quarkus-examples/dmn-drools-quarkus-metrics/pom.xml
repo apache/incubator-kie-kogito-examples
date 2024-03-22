@@ -138,7 +138,7 @@
         <directory>src/test/filtered-resources</directory>
         <filtering>true</filtering>
       </resource>
-      <!-- DMN generated resources unpacked from org.kie.kogito.examples:dmn-resource-jar -->
+      <!-- DMN generated resources unpacked from org.kie:kie-dmn-test-resources -->
       <resource>
         <directory>${project.build.directory}/generated-resources/valid_models/DMNv1_x</directory>
       </resource>
@@ -170,7 +170,7 @@
           </filesets>
         </configuration>
       </plugin>
-      <!-- Unpack DMN resources from from org.kie.kogito.examples:dmn-resource-jar -->
+      <!-- Unpack DMN resources from org.kie:kie-dmn-test-resources -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
