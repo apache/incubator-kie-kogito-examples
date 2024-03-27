@@ -86,7 +86,6 @@
         <module>process-usertasks-custom-lifecycle-springboot</module>
         <module>process-usertasks-springboot-with-console</module>
         <module>process-usertasks-springboot</module>
-        <module>process-usertasks-with-security-oidc-springboot-with-console</module>
         <module>process-usertasks-with-security-oidc-springboot</module>
         <module>process-usertasks-with-security-springboot</module>
         <module>rules-legacy-springboot-example</module>
