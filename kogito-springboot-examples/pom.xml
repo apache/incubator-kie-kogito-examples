@@ -84,7 +84,6 @@
         <module>process-springboot-example</module>
         <module>process-timer-springboot</module>
         <module>process-usertasks-custom-lifecycle-springboot</module>
-        <module>process-usertasks-springboot-with-console</module>
         <module>process-usertasks-springboot</module>
         <module>process-usertasks-with-security-oidc-springboot</module>
         <module>process-usertasks-with-security-springboot</module>
