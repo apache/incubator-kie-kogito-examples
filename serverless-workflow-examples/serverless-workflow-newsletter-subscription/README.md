@@ -22,12 +22,6 @@ This example demonstrates a few features powered by the Kogito implementation of
 
 In a Knative environment, the services involved in this use case can be scaled to zero and resume from the exact stage it was, saving cluster resources in the process.
 
-## Using Quarkus Dev Services
-
-You can use the Workflow Instance management dev service when in Quarkus Dev Mode (`quarkus dev` from the [subscription-flow](subscription-flow) module root) to visualize the details of a given workflow instance:
-
-![Quarkus Dev UI](docs/dev-console.png)
-
 ## The User Interface
 
 The [Newsletter Subscription Flow](subscription-flow) application has a user interface to interact with the workflow without having to rely on the command line to push events or making HTTP requests: 
