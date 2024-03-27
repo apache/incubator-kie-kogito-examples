@@ -67,10 +67,6 @@
       <artifactId>kie-addons-quarkus-tracing-decision</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.jbpm</groupId>
-      <artifactId>jbpm-quarkus-devui</artifactId>
-    </dependency>
-    <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-resteasy</artifactId>
     </dependency>

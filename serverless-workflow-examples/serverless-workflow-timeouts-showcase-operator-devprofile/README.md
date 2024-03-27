@@ -251,10 +251,6 @@ firefox $EVENT_STATE_TIMEOUTS_ROOT/q/dev
 ```shell
 firefox $WORKFLOW_TIMEOUTS_ROOT/q/dev
 ```
-#### Dev UI SonataFlow Tools View
-
-![](docs/DevUIWorkflows.png)
-
 #### Dev UI SonataFlow Data Index View 
 
 ![](docs/DevUIDataIndex.png)
