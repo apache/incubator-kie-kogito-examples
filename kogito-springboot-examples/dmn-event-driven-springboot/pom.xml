@@ -36,6 +36,7 @@
   <properties>
     <version.org.kie.kogito>999-SNAPSHOT</version.org.kie.kogito>
     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
+    <dependency-plugin.version>3.6.1</dependency-plugin.version>
   </properties>
 
   <dependencyManagement>
@@ -46,6 +47,12 @@
         <version>${kogito.bom.version}</version>
         <type>pom</type>
         <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.kie</groupId>
+        <artifactId>kie-dmn-test-resources</artifactId>
+        <version>${project.version}</version>
+        <classifier>tests</classifier>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -65,6 +72,11 @@
       <artifactId>kie-addons-springboot-events-decisions</artifactId>
     </dependency>
 
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-dmn-test-resources</artifactId>
+      <classifier>tests</classifier>
+    </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-spring-boot-test-utils</artifactId>
@@ -95,7 +107,45 @@
 
   <build>
     <finalName>${project.artifactId}</finalName>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+      <!-- DMN generated resources unpacked from org.kie:kie-dmn-test-resources -->
+      <resource>
+        <directory>${project.build.directory}/generated-resources/valid_models/DMNv1_x</directory>
+      </resource>
+    </resources>
     <plugins>
+      <!-- Unpack DMN resources from org.kie:kie-dmn-test-resources -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>${dependency-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>unpack</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>unpack</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>org.kie</groupId>
+                  <artifactId>kie-dmn-test-resources</artifactId>
+                  <version>${project.version}</version>
+                  <classifier>tests</classifier>
+                  <type>jar</type>
+                  <overWrite>true</overWrite>
+                  <outputDirectory>${project.build.directory}/generated-resources</outputDirectory>
+                  <includes>valid_models/**/Traffic Violation.dmn</includes>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.kie.kogito</groupId>
         <artifactId>kogito-maven-plugin</artifactId>
