@@ -1,0 +1,74 @@
+{
+  "id": "start",
+  "version": "1.0",
+  "specVersion": "0.8",
+  "expressionLang": "jsonpath",
+  "name": "Workflow event test",
+  "description": "An example of how to consume events over HTTP",
+  "start": "printWaitMessage",
+  "events": [
+    {
+      "name": "startEvent",
+      "source": "",
+      "type": "start"
+    },
+    {
+      "name": "moveEvent",
+      "source": "",
+      "type": "move"
+    }
+  ],
+  "functions": [
+    {
+      "name": "printMessage",
+      "type": "custom",
+      "operation": "sysout"
+    }
+  ],
+  "states": [
+    {
+      "name": "printWaitMessage",
+      "type": "event",
+      "onEvents": [
+        {
+          "eventRefs": ["startEvent"],
+          "actions": [
+            {
+              "name": "printAfterStart",
+              "functionRef": {
+                "refName": "printMessage",
+                "arguments": {
+                  "message": "$[*]"
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "transition": "waitForEvent"
+    },
+    {
+      "name": "waitForEvent",
+      "type": "event",
+      "onEvents": [
+        {
+          "eventRefs": [
+            "moveEvent"
+          ],
+          "actions": [
+            {
+              "name": "printAfterEvent",
+              "functionRef": {
+                "refName": "printMessage",
+                "arguments": {
+                  "message": "$[*]"
+                }
+              }
+            }
+          ]
+        }
+       ], 
+      "end": true
+    }
+  ]
+}
