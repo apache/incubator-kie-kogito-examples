@@ -47,6 +47,7 @@
         <module>serverless-workflow-callback-quarkus</module>
         <module>serverless-workflow-camel-routes</module>
         <module>serverless-workflow-compensation-quarkus</module>
+        <module>serverless-workflow-consuming-events-over-http-quarkus</module>
         <module>serverless-workflow-correlation-quarkus</module>
         <module>serverless-workflow-custom-function-knative</module>
         <module>serverless-workflow-custom-type</module>
