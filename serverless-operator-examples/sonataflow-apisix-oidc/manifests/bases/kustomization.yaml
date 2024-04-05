@@ -20,8 +20,8 @@ resources:
 
 images:
 - name: postgres
-  newName: postgres
-  newTag: 13.2-alpine
+  newName: docker.io/library/postgres
+  newTag: alpine3.19
 - name: keycloak
   newName: quay.io/keycloak/keycloak
   newTag: 24.0.2

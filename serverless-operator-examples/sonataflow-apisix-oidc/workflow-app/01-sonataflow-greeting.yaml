@@ -48,7 +48,7 @@ spec:
       - name: GreetPerson
         type: operation
         stateDataFilter:
-            output: "${ {\"message\": (.greeting + .name)} }"
+            output: "${ {\"message\": (.greeting + $WORKFLOW.identity)} }"
         actions:
           - name: greetAction
             functionRef:

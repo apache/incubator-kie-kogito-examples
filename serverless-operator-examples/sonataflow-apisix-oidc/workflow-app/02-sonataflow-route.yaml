@@ -32,7 +32,7 @@ spec:
       enable: true
       config:
         client_id: apisix-ingress
-        client_secret: <the_secret>
+        client_secret: 
         discovery: http://keycloak.keycloak.svc.cluster.local:8080/realms/sonataflow/.well-known/openid-configuration
         scope: profile email
         bearer_only: true

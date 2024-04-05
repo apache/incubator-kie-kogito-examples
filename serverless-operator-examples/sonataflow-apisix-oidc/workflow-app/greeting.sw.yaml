@@ -45,7 +45,7 @@ states:
     - name: GreetPerson
       type: operation
       stateDataFilter:
-        output: "${ \"message\": (.greeting + .name)} }"
+        output: "${ { \"message\": (.greeting + .name) } }"
       actions:
         - name: greetAction
           functionRef:
