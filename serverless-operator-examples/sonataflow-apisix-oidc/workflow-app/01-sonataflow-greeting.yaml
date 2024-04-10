@@ -30,9 +30,9 @@ spec:
       - name: ChooseOnLanguage
         type: switch
         dataConditions:
-          - condition: "${ .language == \"English\" }"
+          - condition: '${ .language == "English" }'
             transition: GreetInEnglish
-          - condition: "${ .language == \"Spanish\" }"
+          - condition: '${ .language == "Spanish" }'
             transition: GreetInSpanish
         defaultCondition: GreetInEnglish
       - name: GreetInEnglish
@@ -48,7 +48,7 @@ spec:
       - name: GreetPerson
         type: operation
         stateDataFilter:
-            output: "${ {\"message\": (.greeting + $WORKFLOW.identity)} }"
+          output: '${ {"message": (.greeting + $WORKFLOW.identity)} }'
         actions:
           - name: greetAction
             functionRef:

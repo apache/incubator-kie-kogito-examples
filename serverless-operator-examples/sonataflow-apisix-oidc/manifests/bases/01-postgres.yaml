@@ -45,7 +45,7 @@ spec:
       containers:
         - name: postgres
           image: postgres
-          imagePullPolicy: 'IfNotPresent'
+          imagePullPolicy: "IfNotPresent"
           ports:
             - containerPort: 5432
           volumeMounts:
@@ -69,9 +69,9 @@ spec:
               memory: "256Mi"
               cpu: "500m"
       volumes:
-      - name: storage
-        persistentVolumeClaim:
-          claimName: postgres-pvc
+        - name: storage
+          persistentVolumeClaim:
+            claimName: postgres-pvc
 ---
 apiVersion: v1
 kind: Service

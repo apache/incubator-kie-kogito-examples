@@ -18,23 +18,23 @@ metadata:
   name: sonataflow
 spec:
   http:
-  - name: greeting
-    match:
-      hosts:
-      - local.greeting.sonataflow.org
-      paths:
-      - "/*"
-    backends:
-    - serviceName: greeting
-      servicePort: 80
-    plugins:
-    - name: openid-connect
-      enable: true
-      config:
-        client_id: apisix-ingress
-        client_secret: 
-        discovery: http://keycloak.keycloak.svc.cluster.local:8080/realms/sonataflow/.well-known/openid-configuration
-        scope: profile email
-        bearer_only: true
-        realm: sonataflow
-        introspection_endpoint_auth_method: client_secret_post
+    - name: greeting
+      match:
+        hosts:
+          - local.greeting.sonataflow.org
+        paths:
+          - "/*"
+      backends:
+        - serviceName: greeting
+          servicePort: 80
+      plugins:
+        - name: openid-connect
+          enable: true
+          config:
+            client_id: apisix-ingress
+            client_secret:
+            discovery: http://keycloak.keycloak.svc.cluster.local:8080/realms/sonataflow/.well-known/openid-configuration
+            scope: profile email
+            bearer_only: true
+            realm: sonataflow
+            introspection_endpoint_auth_method: client_secret_post

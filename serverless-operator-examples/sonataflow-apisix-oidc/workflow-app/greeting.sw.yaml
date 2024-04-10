@@ -12,44 +12,44 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-id: 'workflow_unique_identifier'
-version: '0.1'
-specVersion: '0.8'
-name: 'Workflow name'
-description: 'Workflow description'
+id: "workflow_unique_identifier"
+version: "0.1"
+specVersion: "0.8"
+name: "Workflow name"
+description: "Workflow description"
 functions:
-      - name: greetFunction
-        type: custom
-        operation: sysout
+  - name: greetFunction
+    type: custom
+    operation: sysout
 start: ChooseOnLanguage
 states:
-    - name: ChooseOnLanguage
-      type: switch
-      dataConditions:
-      - condition: "${ .language == \"English\" }"
+  - name: ChooseOnLanguage
+    type: switch
+    dataConditions:
+      - condition: '${ .language == "English" }'
         transition: GreetInEnglish
-      - condition: "${ .language == \"Spanish\" }"
+      - condition: '${ .language == "Spanish" }'
         transition: GreetInSpanish
-      defaultCondition:
-        transition: GreetInEnglish
-    - name: GreetInEnglish
-      type: inject
-      data:
-        greeting: "Hello from YAML Workflow, "
-      transition: GreetPerson
-    - name: GreetInSpanish
-      type: inject
-      data:
-        greeting: "Saludos desde YAML Workflow, "
-      transition: GreetPerson
-    - name: GreetPerson
-      type: operation
-      stateDataFilter:
-        output: "${ { \"message\": (.greeting + .name) } }"
-      actions:
-        - name: greetAction
-          functionRef:
-            refName: greetFunction
-            arguments:
-                message: ".greeting+.name"
-      end: true
+    defaultCondition:
+      transition: GreetInEnglish
+  - name: GreetInEnglish
+    type: inject
+    data:
+      greeting: "Hello from YAML Workflow, "
+    transition: GreetPerson
+  - name: GreetInSpanish
+    type: inject
+    data:
+      greeting: "Saludos desde YAML Workflow, "
+    transition: GreetPerson
+  - name: GreetPerson
+    type: operation
+    stateDataFilter:
+      output: '${ { "message": (.greeting + .name) } }'
+    actions:
+      - name: greetAction
+        functionRef:
+          refName: greetFunction
+          arguments:
+            message: ".greeting+.name"
+    end: true
