@@ -38,12 +38,12 @@ spec:
       - name: GreetInEnglish
         type: inject
         data:
-          greeting: "Hello from JSON Workflow, "
+          greeting: "Hello from YAML Workflow, "
         transition: GreetPerson
       - name: GreetInSpanish
         type: inject
         data:
-          greeting: "Saludos desde JSON Workflow, "
+          greeting: "Saludos desde YAML Workflow, "
         transition: GreetPerson
       - name: GreetPerson
         type: operation
