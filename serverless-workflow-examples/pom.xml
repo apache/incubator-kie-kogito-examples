@@ -53,6 +53,7 @@
         <module>serverless-workflow-custom-type</module>
         <module>serverless-workflow-data-index-persistence-addon-quarkus</module>
         <module>serverless-workflow-data-index-quarkus</module>
+        <module>serverless-workflow-dmn-quarkus</module>
         <module>serverless-workflow-error-quarkus</module>
         <module>serverless-workflow-events-quarkus</module>
         <module>serverless-workflow-expression-quarkus</module>
