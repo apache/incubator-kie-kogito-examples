@@ -189,6 +189,11 @@ mvn clean package -Pcontainer
 ```
 This will build the example quarkus application and create a Docker image that will be started in the `docker-compose` template.
 
+To ensure compatibility across different environments, including those not utilizing docker desktop, there is need to use different host address
+> macOS/Windows: Use 'host.docker.internal' as it is configured by docker to point to the host machine.
+>Linux: Use 172.17.0.1 which is default gateway for docker on linux systems.
+These settings are integrated into startServices.sh to adjust the .env file used by docker-compose.
+
 To execute the full example (including consoles), open a Terminal and run the following command inside the `docker-compose` folder:
 
 ```shell
