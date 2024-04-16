@@ -168,12 +168,6 @@
       <properties>
         <quarkus.profile>dev</quarkus.profile>
       </properties>
-      <dependencies>
-        <dependency>
-          <groupId>org.jbpm</groupId>
-          <artifactId>jbpm-quarkus-devui</artifactId>
-        </dependency>
-      </dependencies>
     </profile>
   </profiles>
   <build>

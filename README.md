@@ -148,7 +148,7 @@ A Serverless Workflow service that works as a Github bot application, which reac
 - Rules on Quarkus with Unit: see [README.md](kogito-quarkus-examples/ruleunit-quarkus-example/README.md)
 - Process on Quarkus: see [README.md](kogito-quarkus-examples/process-quarkus-example/README.md)
 - Process on Spring Boot: see [README.md](kogito-springboot-examples/process-springboot-example/README.md)
-- Trusty on Quarkus (DevUI integration): see [README.md](kogito-quarkus-examples/trusty-tracing-devservices/README.md)
+- Trusty on Quarkus: see [README.md](kogito-quarkus-examples/trusty-tracing-devservices/README.md)
 
 ## Getting Help
 ### Issues

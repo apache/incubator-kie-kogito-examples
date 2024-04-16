@@ -95,11 +95,9 @@
         <module>process-service-calls-quarkus</module>
         <module>process-timer-quarkus</module>
         <module>process-usertasks-custom-lifecycle-quarkus</module>
-        <module>process-usertasks-quarkus-with-console</module>
         <module>process-usertasks-quarkus</module>
         <module>process-usertasks-timer-quarkus-with-console</module>
         <module>process-usertasks-timer-data-index-persistence-addon-quarkus</module>
-        <module>process-usertasks-with-security-oidc-quarkus-with-console</module>
         <module>process-usertasks-with-security-oidc-quarkus</module>
         <module>process-usertasks-with-security-quarkus</module>
         <module>rules-incubation-api-quarkus</module>
@@ -160,10 +158,8 @@
         <module>process-service-calls-quarkus</module>
         <module>process-timer-quarkus</module>
         <module>process-usertasks-custom-lifecycle-quarkus</module>
-        <module>process-usertasks-quarkus-with-console</module>
         <module>process-usertasks-quarkus</module>
         <module>process-usertasks-timer-quarkus-with-console</module>
-        <module>process-usertasks-with-security-oidc-quarkus-with-console</module>
         <module>process-usertasks-with-security-oidc-quarkus</module>
         <module>process-usertasks-with-security-quarkus</module>
         <module>rules-quarkus-helloworld</module>

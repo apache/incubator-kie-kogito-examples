@@ -208,8 +208,3 @@ Additionally, the Quarkus Dev UI will be available at http://localhost:8080/q/de
 #### Dev UI Main View
 
 ![](docs/DevUIGeneral.png)
-
-#### Dev UI Serverless Workflow Tools View
-
-![](docs/DevUIWorkflows.png)
-
