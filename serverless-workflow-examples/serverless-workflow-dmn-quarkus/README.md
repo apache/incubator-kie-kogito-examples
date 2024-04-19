@@ -4,7 +4,7 @@
 
 This example contains a simple workflow service that use DMN. 
 The services are described using JSON format as defined in the 
-[CNCF Serverless Workflow specification](https://github.com/cncf/wg-serverless/tree/main/workflow/spec).
+[CNCF Serverless Workflow specification](https://github.com/serverlessworkflow/specification).
 
 The workflow expects as JSON input containing driver details and a traffic violation 
 (see details in the [Submit a request](#Submit-a-request) section).
