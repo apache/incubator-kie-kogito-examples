@@ -2,7 +2,6 @@ import org.jenkinsci.plugins.workflow.libs.Library
 @Library('jenkins-pipeline-shared-libraries')_
 
 import org.kie.jenkins.MavenCommand
-import org.kie.jenkins.MavenStagingHelper
 
 deployProperties = [:]
 
@@ -26,7 +25,6 @@ pipeline {
         KOGITO_CI_EMAIL_TO = credentials("${JENKINS_EMAIL_CREDS_ID}")
 
         PR_BRANCH_HASH = "${util.generateHash(10)}"
-        MAVEN_DEPLOY_LOCAL_DIR = "/tmp/maven_deploy_dir"
     }
 
     stages {
@@ -130,20 +128,17 @@ pipeline {
         stage('Build kogito-examples') {
             steps {
                 script {
-                    dir(getRepoName()) {
-                        def mvnCmd = getMavenCommand()
-                            .withOptions(env.BUILD_MVN_OPTS_CURRENT ? [ env.BUILD_MVN_OPTS_CURRENT ] : [])
-                            .withOptions(env.KOGITO_EXAMPLES_BUILD_MVN_OPTS ? [ env.KOGITO_EXAMPLES_BUILD_MVN_OPTS ] : [])
-                            .withProperty('maven.test.failure.ignore', true)
-                        
-                        if (params.SKIP_TESTS) {
-                            mvnCmd.skipTests() // Conflict somehow with Python testing. If `skipTests={anyvalue}` is set, then exec plugin is not executed ...
-                        }
-                        configFileProvider([configFile(fileId: env.MAVEN_SETTINGS_CONFIG_FILE_ID, variable: 'MAVEN_SETTINGS_FILE')]){
-                            mvnCmd
-                                .withSettingsXmlFile(MAVEN_SETTINGS_FILE)
-                                .run('clean install')
-                        }
+                    def mvnCmd = getMavenCommand()
+                        .withOptions(env.BUILD_MVN_OPTS_CURRENT ? [ env.BUILD_MVN_OPTS_CURRENT ] : [])
+                        .withOptions(env.KOGITO_EXAMPLES_BUILD_MVN_OPTS ? [ env.KOGITO_EXAMPLES_BUILD_MVN_OPTS ] : [])
+                        .withProperty('maven.test.failure.ignore', true)
+                    if (params.SKIP_TESTS) {
+                        mvnCmd.skipTests() // Conflict somehow with Python testing. If `skipTests={anyvalue}` is set, then exec plugin is not executed ...
+                    }
+                    configFileProvider([configFile(fileId: env.MAVEN_SETTINGS_CONFIG_FILE_ID, variable: 'MAVEN_SETTINGS_FILE')]){
+                        mvnCmd
+                            .withSettingsXmlFile(MAVEN_SETTINGS_FILE)
+                            .run('clean install')
                     }
                 }
             }
@@ -156,37 +151,22 @@ pipeline {
                 }
             }
         }
-        stage('Deploy kogito-examples locally') {
-            steps {
-                script {
-                    dir(getRepoName()) {
-                        runMavenDeploy(true)
-                    }
-                }
-            }
-        }
-        stage('Upload artifacts to given repository') {
+        stage('Deploy parent poms') {
             when {
-                expression { return !isRelease() && shouldDeployToRepository() }
+                expression { shouldDeployToRepository() }
             }
             steps {
                 script {
-                    dir(getRepoName()) {
-                        // Deploy to specific repository with credentials
-                        maven.uploadLocalArtifacts(env.MAVEN_REPO_CREDS_ID, getLocalDeploymentFolder(), getMavenRepoZipUrl())
-                    }
-                }
-            }
-        }
-        stage('Stage artifacts') {
-            when {
-                expression { return shouldStageArtifacts() }
-            }
-            steps {
-                script {
-                    dir(getRepoName()) {
-                        // Stage release artifacts
-                        runMavenStage()
+                    withCredentials([usernamePassword(credentialsId: env.MAVEN_REPO_CREDS_ID, usernameVariable: 'REPOSITORY_USER', passwordVariable: 'REPOSITORY_TOKEN')]) {
+                        configFileProvider([configFile(fileId: env.MAVEN_SETTINGS_CONFIG_FILE_ID, variable: 'MAVEN_SETTINGS_FILE')]){
+                            getMavenCommand()
+                                .withOptions(env.BUILD_MVN_OPTS_CURRENT ? [ env.BUILD_MVN_OPTS_CURRENT ] : [])
+                                .withOptions(env.KOGITO_EXAMPLES_BUILD_MVN_OPTS ? [ env.KOGITO_EXAMPLES_BUILD_MVN_OPTS ] : [])
+                                .withOptions("-pl .,kogito-quarkus-examples,kogito-springboot-examples,serverless-workflow-examples")
+                                .skipTests(true)
+                                .withSettingsXmlFile(MAVEN_SETTINGS_FILE)
+                                .run("deploy -DdeployAtEnd -Dapache.repository.username=${REPOSITORY_USER} -Dapache.repository.password=${REPOSITORY_TOKEN} -DretryFailedDeploymentCount=5")
+                        }
                     }
                 }
             }
@@ -278,14 +258,6 @@ void commitAndCreatePR() {
     deployProperties["${getRepoName()}.pr.link"] = githubscm.createPRWithLabels(commitMsg, prBody, getBuildBranch(), ['skip-ci'] as String[], getGitAuthorCredsId())
 }
 
-boolean isSpecificArtifactsUpload() {
-    return env.MAVEN_DEPLOY_REPOSITORY && env.MAVEN_REPO_CREDS_ID
-}
-
-boolean shouldStageArtifacts() {
-    return isRelease()
-}
-
 boolean shouldDeployToRepository() {
     return env.MAVEN_DEPLOY_REPOSITORY && env.MAVEN_REPO_CREDS_ID && getGitAuthor() == 'apache'
 }
@@ -337,54 +309,14 @@ void setDeployPropertyIfNeeded(String key, def value) {
     }
 }
 
-MavenCommand getMavenCommand() {
+MavenCommand getMavenCommand(String directory = '') {
+    directory = directory ?: getRepoName()
     MavenCommand mvnCmd = new MavenCommand(this, ['-fae', '-ntp'])
                                 .withOptions(env.BUILD_MVN_OPTS ? [ env.BUILD_MVN_OPTS ] : [])
+                                .inDirectory(directory)
                                 .withProperty('full')
     if (env.MAVEN_DEPENDENCIES_REPOSITORY) {
         mvnCmd.withDependencyRepositoryInSettings('deps-repo', env.MAVEN_DEPENDENCIES_REPOSITORY)
     }
     return mvnCmd
-}
-
-void runMavenDeploy(boolean localDeployment = false) {
-    mvnCmd = getMavenCommand()
-                .withOptions(env.BUILD_MVN_OPTS_CURRENT ? [ env.BUILD_MVN_OPTS_CURRENT ] : [])
-                .withOptions(env.KOGITO_EXAMPLES_BUILD_MVN_OPTS ? [ env.KOGITO_EXAMPLES_BUILD_MVN_OPTS ] : [])
-
-    if (localDeployment) {
-        mvnCmd.withLocalDeployFolder(getLocalDeploymentFolder())
-    } else if (env.MAVEN_DEPLOY_REPOSITORY) {
-        mvnCmd.withDeployRepository(env.MAVEN_DEPLOY_REPOSITORY)
-    }
-
-    mvnCmd.withOptions(examplesHelper.getDeployableArtifactIds().collect { "-pl :${it} "})
-    configFileProvider([configFile(fileId: env.MAVEN_SETTINGS_CONFIG_FILE_ID, variable: 'MAVEN_SETTINGS_FILE')]){
-        mvnCmd
-            .skipTests(true)
-            .withSettingsXmlFile(MAVEN_SETTINGS_FILE)
-            .run('clean deploy')
-    }
-}
-
-void runMavenStage() {
-    configFileProvider([configFile(fileId: env.MAVEN_SETTINGS_CONFIG_FILE_ID, variable: 'MAVEN_SETTINGS_FILE')]){
-        MavenStagingHelper stagingHelper = getStagingHelper(getMavenCommand().withSettingsXmlFile(MAVEN_SETTINGS_FILE))
-        deployProperties.putAll(stagingHelper.stageLocalArtifacts(env.NEXUS_STAGING_PROFILE_ID, getLocalDeploymentFolder()))
-        stagingHelper.promoteStagingRepository(env.NEXUS_BUILD_PROMOTION_PROFILE_ID)
-    }
-}
-
-MavenStagingHelper getStagingHelper(def mavenCommand) {
-    return new MavenStagingHelper(this, mavenCommand)
-                .withNexusReleaseUrl(env.NEXUS_RELEASE_URL)
-                .withNexusReleaseRepositoryId(env.NEXUS_RELEASE_REPOSITORY_ID)
-}
-
-String getLocalDeploymentFolder() {
-    return "${env.MAVEN_DEPLOY_LOCAL_DIR}/${getRepoName()}"
-}
-
-String getMavenRepoZipUrl() {
-    return "${env.MAVEN_DEPLOY_REPOSITORY.replaceAll('/content/', '/service/local/').replaceFirst('/*$', '')}/content-compressed"
 }
