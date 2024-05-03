@@ -11,6 +11,8 @@ The main feature of this demo is that if the number is odd, an exception is thro
 
 Hence, this workflow expects JSON input containing a natural number. This number is passed using a service operation to `EvenService` java class. If the number is even, the workflow moves to the next defined state, injecting "even" `numberType`. But if the number is odd, the class throws an `IllegalArgumentException`. This exception is handled and redirected to odd inject node by using [inline workflow error handling](https://github.com/serverlessworkflow/specification/blob/main/specification.md#Workflow-Error-Handling).  This basically consists on adding `onErrors` field, where the expected exception is specified in `code` and the target state (a node injecting "odd" `numberType`) in `transition`. Finally, both execution paths finish on the same node, which prints the calculated `eventType`.
 
+As per 0.8 version of the specification, there is no standard way to set a process in error. To do that, users can use a custom metadata key called `errorMessage` which will contain either the error message to be associated to the process instance or an expression that returns the error message to associated to the process instance. In addition to the workflow described before, this example includes a file called `errorWithMEtadata.sw.json` that illustrate the usage of such metadata. 
+
 
 ## Installing and Running
 
