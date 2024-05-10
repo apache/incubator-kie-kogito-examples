@@ -232,6 +232,12 @@ metadata:
   namespace: loanbroker-example
 spec:
   template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/minScale: "1"
+        autoscaling.knative.dev/maxScale: "1"
+      labels:
+        app.kubernetes.io/name: event-display
     spec:
       containers:
         -  # This corresponds to
