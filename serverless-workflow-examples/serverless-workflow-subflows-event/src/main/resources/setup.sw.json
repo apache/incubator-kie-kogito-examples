@@ -1,0 +1,18 @@
+{
+  "id": "setup",
+  "version": "1.0",
+  "specVersion": "0.8",
+  "name": "setup",
+  "start": "doIt",
+  "states": [
+    {
+      "name": "doIt",
+      "type": "inject",
+      "data" :  {
+           "param1": "This is param1",
+           "param2": "This is param2"
+      },
+      "end": true
+    }
+  ]
+}
