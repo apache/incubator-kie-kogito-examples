@@ -41,8 +41,8 @@
   <url>http://kogito.kie.org</url>
   <inceptionYear>2019</inceptionYear>
   <organization>
-    <name>JBoss by Red Hat</name>
-    <url>http://www.jboss.org/</url>
+    <name>The Apache Software Foundation</name>
+    <url>https://apache.org/</url>
   </organization>
 
   <licenses>
@@ -55,7 +55,7 @@
 
   <scm>
     <connection>scm:git:https://github.com/apache/incubator-kie-kogito-examples.git</connection>
-    <developerConnection>scm:git:git@github.com:apache/incubator-kie-kogito-examples.git</developerConnection>
+    <developerConnection>scm:git:https://github.com/apache/incubator-kie-kogito-examples.git</developerConnection>
     <url>https://github.com/apache/incubator-kie-kogito-examples</url>
   </scm>
 
