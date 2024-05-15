@@ -102,7 +102,7 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-health</artifactId>
     </dependency>
-    <!-- EXP -->
+    <!-- SCESIM -->
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-scenario-simulation</artifactId>
@@ -111,11 +111,6 @@
     <dependency>
       <groupId>org.drools</groupId>
       <artifactId>drools-xml-support</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.datatype</groupId>
-      <artifactId>jackson-datatype-jdk8</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>

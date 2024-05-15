@@ -47,7 +47,7 @@
           </expressionIdentifier>
           <factIdentifier>
             <name>1|1</name>
-            <className>com.myspace.helloworld.Hello</className>
+            <className>org.kie.kogito.legacy.Hello</className>
           </factIdentifier>
           <className>java.lang.String</className>
           <factAlias>Hello</factAlias>
@@ -70,7 +70,7 @@
           </expressionIdentifier>
           <factIdentifier>
             <name>1|1</name>
-            <className>com.myspace.helloworld.Hello</className>
+            <className>org.kie.kogito.legacy.Hello</className>
           </factIdentifier>
           <className>java.lang.String</className>
           <factAlias>Hello</factAlias>
@@ -93,7 +93,7 @@
           </expressionIdentifier>
           <factIdentifier>
             <name>1|1</name>
-            <className>com.myspace.helloworld.Hello</className>
+            <className>org.kie.kogito.legacy.Hello</className>
           </factIdentifier>
           <className>java.lang.Boolean</className>
           <factAlias>Hello</factAlias>
@@ -131,7 +131,7 @@
           <FactMappingValue>
             <factIdentifier>
               <name>1|1</name>
-              <className>com.myspace.helloworld.Hello</className>
+              <className>org.kie.kogito.legacy.Hello</className>
             </factIdentifier>
             <expressionIdentifier>
               <name>1|1</name>
@@ -142,7 +142,7 @@
           <FactMappingValue>
             <factIdentifier>
               <name>1|1</name>
-              <className>com.myspace.helloworld.Hello</className>
+              <className>org.kie.kogito.legacy.Hello</className>
             </factIdentifier>
             <expressionIdentifier>
               <name>1|2</name>
@@ -153,7 +153,7 @@
           <FactMappingValue>
             <factIdentifier>
               <name>1|1</name>
-              <className>com.myspace.helloworld.Hello</className>
+              <className>org.kie.kogito.legacy.Hello</className>
             </factIdentifier>
             <expressionIdentifier>
               <name>1715763614877</name>
@@ -190,7 +190,7 @@
           <FactMappingValue>
             <factIdentifier>
               <name>1|1</name>
-              <className>com.myspace.helloworld.Hello</className>
+              <className>org.kie.kogito.legacy.Hello</className>
             </factIdentifier>
             <expressionIdentifier>
               <name>1|1</name>
@@ -201,7 +201,7 @@
           <FactMappingValue>
             <factIdentifier>
               <name>1|1</name>
-              <className>com.myspace.helloworld.Hello</className>
+              <className>org.kie.kogito.legacy.Hello</className>
             </factIdentifier>
             <expressionIdentifier>
               <name>1|2</name>
@@ -212,7 +212,7 @@
           <FactMappingValue>
             <factIdentifier>
               <name>1|1</name>
-              <className>com.myspace.helloworld.Hello</className>
+              <className>org.kie.kogito.legacy.Hello</className>
             </factIdentifier>
             <expressionIdentifier>
               <name>1715763614877</name>
