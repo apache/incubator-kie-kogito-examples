@@ -162,7 +162,7 @@ spec:
     spec:
       containers:
         - name: jobs-service-postgresql
-          image: quay.io/kiegroup/kogito-jobs-service-allinone-nightly:latest
+          image: quay.io/kiegroup/kogito-jobs-service-postgresql-nightly:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
@@ -175,8 +175,6 @@ spec:
                   fieldPath: metadata.namespace
             - name: KOGITO_SERVICE_URL
               value: http://jobs-service-postgresql
-            - name: JOBS_SERVICE_PERSISTENCE
-              value: "postgresql"
             - name: KOGITO_JOBS_SERVICE_HTTP_JOB_STATUS_CHANGE_EVENTS
               value: "true"
             - name: QUARKUS_DATASOURCE_USERNAME

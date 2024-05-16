@@ -54,7 +54,7 @@ public class QuotesAggregatorRoute extends EndpointRouteBuilder {
                         .getTypeConverterRegistry()
                         .addTypeConverter(CloudEvent.class, AggregationResponse.class,
                         cloudEventsConverter);
-                
+
                 from("direct:aggregator")
                         .routeId("quotes-aggregator")
                         .aggregate(header(IntegrationConstants.KOGITO_FLOW_ID_HEADER), new QuotesAggregationStrategy())
