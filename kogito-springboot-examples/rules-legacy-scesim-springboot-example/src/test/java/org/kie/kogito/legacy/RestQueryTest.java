@@ -19,7 +19,6 @@
 package org.kie.kogito.legacy;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
@@ -55,7 +54,6 @@ public class RestQueryTest {
                     "}";
 
     @Test
-    @Disabled // temporary
     public void testApproved() {
         given()
                 .body(JSON_APPROVED_PAYLOAD)
@@ -68,7 +66,6 @@ public class RestQueryTest {
     }
 
     @Test
-    @Disabled // temporary
     public void testDenied() {
         given()
                 .body(JSON_DENIED_PAYLOAD)

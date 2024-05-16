@@ -35,6 +35,7 @@
   <properties>
     <version.org.kie.kogito>999-SNAPSHOT</version.org.kie.kogito>
     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
+    <kogito.sources.keep>true</kogito.sources.keep>
   </properties>
 
   <dependencyManagement>

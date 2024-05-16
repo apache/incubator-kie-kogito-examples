@@ -2,7 +2,7 @@
 
 ## Description
 
-A simple rule service to validate `Hello` fact.
+A simple rule service to validate `Hello` fact and testing it using Scenario Simulation.
 
 An injectable KieRuntimeBuilder is generated, so you can create Drools v7 KieBase and KieSession out of it.
 
@@ -107,3 +107,11 @@ Example response:
 ```json
 {"greeting":"bar","approved":false}
 ```
+# SCESIM usage
+
+Scesim+rules project created inside Business central should work, with the following requirements:
+1. use the pom as defined in the current project
+
+## Caveat
+Requires org.drools:drools-xml-support dependency
+For the moment being, "globals" are unsupported
