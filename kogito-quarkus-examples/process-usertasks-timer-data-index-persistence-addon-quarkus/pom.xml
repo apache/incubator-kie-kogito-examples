@@ -38,7 +38,7 @@
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
     <kogito-apps.bom.artifact-id>kogito-apps-bom</kogito-apps.bom.artifact-id>
-    <version.org.kie.kogito>999-SNAPSHOT</version.org.kie.kogito>
+    <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -52,14 +52,14 @@
       <dependency>
         <groupId>${kogito.bom.group-id}</groupId>
         <artifactId>${kogito.bom.artifact-id}</artifactId>
-        <version>${version.org.kie.kogito}</version>
+        <version>${kogito.bom.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>${kogito.bom.group-id}</groupId>
         <artifactId>${kogito-apps.bom.artifact-id}</artifactId>
-        <version>${version.org.kie.kogito}</version>
+        <version>${kogito.bom.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
