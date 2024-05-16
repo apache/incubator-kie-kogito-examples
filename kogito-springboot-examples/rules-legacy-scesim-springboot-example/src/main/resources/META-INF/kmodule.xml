@@ -1,6 +1,1 @@
-<kmodule xmlns="http://www.drools.org/xsd/kmodule">
-
-<!--  <kbase name="HelloRuleKB" packages="org.kie.kogito.legacy" default="true">-->
-<!--    <ksession name="HelloRule" type="stateful" default="true"/>-->
-<!--  </kbase>-->
-</kmodule>
+<kmodule xmlns="http://www.drools.org/xsd/kmodule" />
