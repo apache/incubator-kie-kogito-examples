@@ -88,6 +88,7 @@
         <module>process-usertasks-with-security-oidc-springboot</module>
         <module>process-usertasks-with-security-springboot</module>
         <module>rules-legacy-springboot-example</module>
+        <module>rules-legacy-scesim-springboot-example</module>
         <module>ruleunit-event-driven-springboot</module>
         <module>ruleunit-springboot-example</module>
       </modules>
