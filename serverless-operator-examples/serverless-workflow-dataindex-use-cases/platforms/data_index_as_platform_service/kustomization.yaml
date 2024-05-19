@@ -1,6 +1,10 @@
 resources:
 - 01-postgres.yaml
-- 02-dataindex.yaml
+- 02-sonataflow_platform.yaml
+- 03-data-index-service-ingress.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
 
 secretGenerator:
   - name: postgres-secrets
@@ -10,8 +14,5 @@ secretGenerator:
       - POSTGRES_DB=sonataflow
       - PGDATA=/var/lib/postgresql/data/mydata
 
-configMapGenerator:
-  - name: dataindex-properties
-    files:
-      - application.properties
-
+sortOptions:
+  order: fifo

@@ -7,9 +7,11 @@ Collection of artifacts to test SonataFlow Use Cases TP2.
 1. Minikube installed
 
 We recommend that you start Minikube with the following parameters, note that the `registry` addon must be enabled.
+Additionally, the ingress addon is also enabled facilitate data-index querying by using an Ingress. Note that the Ingress provided is just en example to expose the data-index graphiql.
+This is not mandatory, and in production environments you must provide your own setup if needed, or even use an OpenShift route, etc.
 
 ```shell
-minikube start --cpus 4 --memory 10240 --addons registry --addons metrics-server --insecure-registry "10.0.0.0/24" --insecure-registry "localhost:5000"
+minikube start --cpus 4 --memory 10240 --addons registry --addons metrics-server --addons ingress --insecure-registry "10.0.0.0/24" --insecure-registry "localhost:5000"
 ```
 
 To verify that the registry addon was property added you can execute this command:
@@ -24,6 +26,15 @@ minikube addons list | grep registry
 | registry-creds              | minikube | disabled     | 3rd party (UPMC Enterprises)   |
 ```
 
+To verify that the ingress addon was property added you can execute this command:
+
+```shell
+minikube addons list | grep ingress
+```
+
+```
+| ingress                     | minikube | enabled ✅   | Kubernetes                     |
+```
 
 2. kubectl installed
 
@@ -62,17 +73,16 @@ kubectl create namespace data-index-usecase
 2. Deploy the Data Index Service:
 
 ```shell
-kubectl kustomize infra/dataindex | kubectl apply -f - -n data-index-usecase
+kubectl kustomize platforms/data_index_as_platform_service | kubectl apply -f - -n data-index-usecase
 ```
 
 ```
-configmap/dataindex-properties-hg9ff8bff5 created
-secret/postgres-secrets-22tkgc2dt7 created
-service/data-index-service-postgresql created
-service/postgres created
 persistentvolumeclaim/postgres-pvc created
-deployment.apps/data-index-service-postgresql created
 deployment.apps/postgres created
+service/postgres created
+sonataflowplatform.sonataflow.org/sonataflow-platform created
+ingress.networking.k8s.io/data-index-service-ingress created
+secret/postgres-secrets created
 ```
 
 This will deploy a Data Index for you in the `data-index-usecase` namespace. (If you don't use a namespace the `default` is used instead)
@@ -93,14 +103,15 @@ postgres-7f78499688-j6282                        1/1     Running   0            
 To access the Data Index, using Minikube you can run:
 
 ```shell
-minikube service data-index-service-postgresql --url -n data-index-usecase 
+minikube ip
 ```
 
 Example output:
 ```
-http://192.168.49.2:30352
+192.168.49.2
 ```
-The output is the Data Index URL, so you can access the GraphiQL UI by using a url like this http://192.168.49.2:30352/grpahiql/  (host and por might be different in your installation.)
+
+Use the returned ip to access the data-index-service GraphiQL by using the Ingress with a url like this http://192.168.49.2/graphiql/ (that ip might be different in your installation.)
 
 For more information about Data Index and this deployment see [Data Index standalone service](https://sonataflow.org/serverlessworkflow/latest/data-index/data-index-service.html) in SonataFlow guides.
 
@@ -130,19 +141,18 @@ kubectl create namespace usecase1
 ```
 
 2. Deploy the Data Index Service:
+
 ```shell
-kubectl kustomize infra/dataindex | kubectl apply -f - -n usecase1
+kubectl kustomize platforms/data_index_as_platform_service | kubectl apply -f - -n usecase1
 ```
 
 ```
-configmap/dataindex-properties-hg9ff8bff5 created
-secret/postgres-secrets-22tkgc2dt7 created
-service/data-index-service-postgresql created
-service/postgres created
 persistentvolumeclaim/postgres-pvc created
-deployment.apps/data-index-service-postgresql created
 deployment.apps/postgres created
-
+service/postgres created
+sonataflowplatform.sonataflow.org/sonataflow-platform created
+ingress.networking.k8s.io/data-index-service-ingress created
+secret/postgres-secrets created
 ```
 
 Give some time for the data index to start, you can check that it's running by executing.
@@ -164,7 +174,6 @@ postgres-7f78499688-lc8n6                        1/1     Running   0            
  ```
 
 ```
-configmap/greeting-props created
 sonataflow.sonataflow.org/greeting created
 ```
 
@@ -227,19 +236,18 @@ kubectl create namespace usecase2
 ```
 
 2. Deploy the Data Index Service:
+3. 
 ```shell
-kubectl kustomize infra/dataindex | kubectl apply -f - -n usecase2
+kubectl kustomize platforms/data_index_as_platform_service | kubectl apply -f - -n usecase2
 ```
 
 ```
-configmap/dataindex-properties-hg9ff8bff5 created
-secret/postgres-secrets-22tkgc2dt7 created
-service/data-index-service-postgresql created
-service/postgres created
 persistentvolumeclaim/postgres-pvc created
-deployment.apps/data-index-service-postgresql created
 deployment.apps/postgres created
-
+service/postgres created
+sonataflowplatform.sonataflow.org/sonataflow-platform created
+ingress.networking.k8s.io/data-index-service-ingress created
+secret/postgres-secrets created
 ```
 
 Give some time for the data index to start, you can check that it's running by executing.
@@ -261,8 +269,6 @@ postgres-7f78499688-lc8n6                        1/1     Running   0            
  ```
 
 ```
-configmap/greeting-props created
-configmap/helloworld-props created
 sonataflow.sonataflow.org/greeting created
 sonataflow.sonataflow.org/helloworld created
 ```
@@ -325,12 +331,12 @@ This procedure apply to all use cases with that deploys the Data Index Service.
 1. Get the Data Index Url:
 
 ```shell
-minikube service data-index-service-postgresql --url -n my_usecase
+minikube ip
 ```
 
 2. Open the GrahiqlUI
 
-Using the url returned in 1, open a browser window in the following url http://192.168.49.2:32409/graphiql/, note that IP and port will be different in your installation, and don't forget to add the last slash "/" to the url, otherwise the GraphiqlUI won't be opened.
+Using the ip returned in 1, open a browser window in the following url http://192.168.49.2/graphiql/, note that IP will be different in your installation, and don't forget to add the last slash "/" to the url, otherwise the GraphiqlUI won't be opened.
 
 
 To see the process instances information you can execute this query:
