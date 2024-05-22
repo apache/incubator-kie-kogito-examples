@@ -1,1 +1,0 @@
-slackWebHook={SLACK_WEBHOOK}

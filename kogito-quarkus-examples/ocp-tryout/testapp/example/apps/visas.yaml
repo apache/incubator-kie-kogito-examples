@@ -18,7 +18,7 @@
 #
 
 image:
-  repository: quay.io/kiegroup/examples-visas
-  tag: "1.16.0.final"
+  repository: quay.io/<your namespace>/examples-visas
+  tag: "latest"
 
 applicationPort: 8080

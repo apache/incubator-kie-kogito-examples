@@ -47,7 +47,7 @@ Installation from pre-build images
       ```
       # example
       image:
-        repository: quay.io/kiegroup/examples-travels
+        repository: docker.io/apache/incubator-kie-examples-travels
         tag: 1.16.0.final
       applicationPort: 8080
       ```
