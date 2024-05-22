@@ -44,7 +44,7 @@ services:
 
   data-index:
     container_name: data-index
-    image: quay.io/kiegroup/kogito-data-index-postgresql-nightly:${KOGITO_VERSION}
+    image: docker.io/apache/incubator-kie-kogito-data-index-postgresql:${KOGITO_VERSION}
     profiles: [ "infra", "example", "full" ]
     ports:
       - "8180:8080"
@@ -111,7 +111,7 @@ services:
 
   management-console:
     container_name: management-console
-    image: quay.io/kiegroup/kogito-management-console:${KOGITO_VERSION}
+    image: docker.io/apache/incubator-kie-kogito-management-console:${KOGITO_VERSION}
     profiles: ["full"]
     ports:
       - 8280:8080
@@ -129,7 +129,7 @@ services:
 
   task-console:
     container_name: task-console
-    image: quay.io/kiegroup/kogito-task-console:${KOGITO_VERSION}
+    image: docker.io/apache/incubator-kie-kogito-task-console:${KOGITO_VERSION}
     profiles: ["full"]
     ports:
       - 8380:8080

@@ -152,50 +152,6 @@
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
-      <dependencies>
-        <dependency>
-          <groupId>org.kie</groupId>
-          <artifactId>kie-addons-quarkus-persistence-infinispan</artifactId>
-        </dependency>
-      </dependencies>
-    </profile>
-    <profile>
-      <id>infinispan</id>
-      <properties>
-        <quarkus.profile>infinispan</quarkus.profile>
-        <skipTests>true</skipTests>
-      </properties>
-      <dependencies>
-        <dependency>
-          <groupId>org.kie</groupId>
-          <artifactId>kie-addons-quarkus-persistence-infinispan</artifactId>
-        </dependency>
-      </dependencies>
-      <build>
-        <plugins>
-          <plugin>
-            <artifactId>maven-antrun-plugin</artifactId>
-            <executions>
-              <execution>
-                <phase>package</phase>
-                <goals>
-                  <goal>run</goal>
-                </goals>
-                <configuration>
-                  <target>
-                    <copy todir="./docker-compose/svg" overwrite="true">
-                      <fileset dir="target/classes/META-INF/processSVG/"/>
-                    </copy>
-                    <copy todir="./docker-compose/persistence" overwrite="true">
-                      <fileset dir="target/classes/META-INF/resources/persistence/protobuf/"/>
-                    </copy>
-                  </target>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
     </profile>
     <profile>
       <id>postgresql</id>
