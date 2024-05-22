@@ -118,6 +118,18 @@
     <version.maven.artifact.plugin>3.4.1</version.maven.artifact.plugin>
   </properties>
 
+  <repositories>
+    <!-- useful to resolve parent pom when it is a SNAPSHOT -->
+    <repository>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <id>apache.snapshots</id>
+      <name>Apache Snapshot Repository</name>
+      <url>https://repository.apache.org/snapshots</url>
+    </repository>
+  </repositories>
+
   <profiles>
     <profile>
       <id>default</id>
