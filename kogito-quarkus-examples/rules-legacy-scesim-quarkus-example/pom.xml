@@ -28,7 +28,7 @@
     <version>999-SNAPSHOT</version>
   </parent>
   <artifactId>rules-legacy-scesim-quarkus-example</artifactId>
-  <name>Kogito Example :: Rules Legacy API HELLO - Quarkus :: SCESIM</name>
+  <name>Kogito Example :: Rules Legacy API HELLO - Quarkus :: Test Scenario</name>
   <properties>
     <quarkus-plugin.version>3.8.4</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>

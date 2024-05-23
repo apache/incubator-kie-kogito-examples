@@ -30,7 +30,7 @@
     <version>999-SNAPSHOT</version>
   </parent>
   <artifactId>rules-legacy-scesim-springboot-example</artifactId>
-  <name>Kogito Example :: Rules Legacy API HELLO - Spring Boot :: SCESIM</name>
+  <name>Kogito Example :: Rules Legacy API HELLO - Spring Boot :: Test Scenario</name>
 
   <properties>
     <version.org.kie.kogito>999-SNAPSHOT</version.org.kie.kogito>
