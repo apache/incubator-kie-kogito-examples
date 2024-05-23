@@ -16,7 +16,7 @@
   specific language governing permissions and limitations
   under the License.
   -->
-# RuleUnit + Spring Boot example
+# RuleUnit + Spring Boot + Test Scenario example
 
 ## Description
 
@@ -96,12 +96,12 @@ Example response:
 ```json
 {"greeting":"bar","approved":false}
 ```
-# SCESIM usage
+# Test Scenario usage
 
-Scesim+rules project created inside Business central should work, with the following requirements:
+Test Scenario + rules project created inside Business central should work, with the following requirements:
 1. use the pom as defined in the current project
-2. set the `kogito.sources.keep` variable to true
+2. set the `kogito.sources.keep` variable to `true`
 
 ## Caveat
-Requires org.drools:drools-xml-support dependency
+Requires `org.drools:drools-xml-support` dependency
 For the moment being, "globals" are unsupported
