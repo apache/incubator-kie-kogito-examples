@@ -1,4 +1,3 @@
-#!/bin/bash
 #
 # Licensed to the Apache Software Foundation (ASF) under one
 # or more contributor license agreements.  See the NOTICE file
@@ -18,19 +17,13 @@
 # under the License.
 #
 
-
-action=$1
-
-if [ "${action}" == "uninstall" ]; then
-  echo "*** uninstalling infinispan"
-  helm uninstall infinispan -n $(getProjectName)
-  oc delete pvc,secret --selector clusterName=infinispan -n $(getProjectName)
-
-elif [ "${action}" == "install" ]; then
-  echo "*** installing infinispan"
-  helm repo add openshift-helm-charts https://charts.openshift.io/
-  helm install infinispan openshift-helm-charts/infinispan-infinispan --version "0.2.0" -f infinispan-values.yaml -n $(getProjectName) $(dryRun "Helm")
-
-else
-  echo "*** no such action: $action"
-fi
+database_service_name: postgresql
+memory_limit: 512Mi
+volume_capacity: 1Gi
+config:
+  postgresql_database: kogito
+  postgresql_password: kogito-pass
+  postgresql_user: kogito-user
+  port: 5432
+image:
+  tag: "postgres:16.1-alpine3.19"
