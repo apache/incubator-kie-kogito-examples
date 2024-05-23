@@ -21,7 +21,7 @@ spec:
   template:
     spec:
       containers:
-        - name: kogito-jobs-service-infinispan
+        - name: kogito-jobs-service-postgresql
           env:
             - name: ENABLE_EVENTS
               value: 'true'
@@ -30,23 +30,41 @@ spec:
                 configMapKeyRef:
                   name: kogito-configs
                   key: kogito.jobsservice.props
-            - name: QUARKUS_INFINISPAN_CLIENT_HOSTS
+            - name: KOGITO_DATA_INDEX_PROPS
               valueFrom:
                 configMapKeyRef:
                   name: kogito-configs
-                  key: quarkus.infinispan.client.hosts
-            - name: QUARKUS_INFINISPAN_CLIENT_USE_AUTH
-              value: 'true'
-            - name: QUARKUS_INFINISPAN_CLIENT_USERNAME
+                  key: kogito.dataindex.props
+            - name: KOGITO_PERSISTENCE_TYPE
               valueFrom:
                 configMapKeyRef:
                   name: kogito-configs
-                  key: quarkus.infinispan.client.username
-            - name: QUARKUS_INFINISPAN_CLIENT_PASSWORD
+                  key: kogito.persistence.type
+            - name: QUARKUS_DATASOURCE_JDBC_URL
               valueFrom:
-                secretKeyRef:
-                  name: infinispan-generated-secret
-                  key: password
+                configMapKeyRef:
+                  name: kogito-configs
+                  key: quarkus.datasource.jdbc.url
+            - name: QUARKUS_DATASOURCE_REACTIVE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: kogito-configs
+                  key: quarkus.datasource.reactive.url
+            - name: QUARKUS_DATASOURCE_DB_KIND
+              valueFrom:
+                configMapKeyRef:
+                  name: kogito-configs
+                  key: quarkus.datasource.db-kind
+            - name: QUARKUS_DATASOURCE_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: kogito-configs
+                  key: quarkus.datasource.username
+            - name: QUARKUS_DATASOURCE_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: kogito-configs
+                  key: quarkus.datasource.password
           resources:
             limits:
               cpu: '1'

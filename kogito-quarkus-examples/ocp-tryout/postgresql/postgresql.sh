@@ -1,3 +1,4 @@
+#!/bin/bash
 #
 # Licensed to the Apache Software Foundation (ASF) under one
 # or more contributor license agreements.  See the NOTICE file
@@ -17,25 +18,19 @@
 # under the License.
 #
 
-images:
-  server: quay.io/infinispan/server:14.0.4.Final
-deploy:
-  infinispan:
-    server:
-      endpoints:
-        - securityRealm: default
-          socketBinding: default
-        - connectors:
-            hotrod:
-              hotrodConnector:
-                authentication:
-                  sasl:
-                    mechanisms: DIGEST-MD5
-                    qop: auth
-                    serverName: infinispan
-            rest:
-              restConnector:
-                authentication:
-                  mechanisms: BASIC
-          securityRealm: metrics
-          socketBinding: metrics
+
+action=$1
+
+if [ "${action}" == "uninstall" ]; then
+  echo "*** uninstalling postgresql"
+  helm uninstall postgresql -n $(getProjectName)
+  oc delete pvc,secret --selector clusterName=postgresql -n $(getProjectName)
+
+elif [ "${action}" == "install" ]; then
+  echo "*** installing postgresql"
+  helm repo add openshift-helm-charts https://charts.openshift.io/
+  helm install postgresql openshift-helm-charts/redhat-postgresql-persistent --version "0.0.3" -f postgresql-values.yaml -n $(getProjectName) $(dryRun "Helm")
+
+else
+  echo "*** no such action: $action"
+fi
