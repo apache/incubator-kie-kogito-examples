@@ -16,7 +16,7 @@
   specific language governing permissions and limitations
   under the License.
   -->
-# Rules with Legacy API + Quarkus example
+# Rules with Legacy API + Quarkus + SCESIM example
 
 ## Description
 
@@ -131,5 +131,5 @@ Scesim+rules project created inside Business central should work, with the follo
 1. use the pom as defined in the current project
 
 ## Caveat
-Requires org.drools:drools-xml-support dependency
+Requires `org.drools:drools-xml-support` dependency
 For the moment being, "globals" are unsupported
