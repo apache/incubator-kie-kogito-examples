@@ -61,7 +61,6 @@
         <module>dmn-quarkus-example</module>
         <module>dmn-resource-jar-quarkus-example</module>
         <module>dmn-multiple-models-quarkus-example</module>
-        <module>dmn-tracing-quarkus</module>
         <module>flexible-process-quarkus</module>
         <module>kogito-travel-agency</module>
         <module>onboarding-example</module>
@@ -106,7 +105,6 @@
         <module>rules-quarkus-helloworld</module>
         <module>ruleunit-event-driven-quarkus</module>
         <module>ruleunit-quarkus-example</module>
-        <module>trusty-tracing-quarkus-devservices</module>
       </modules>
     </profile>
 
