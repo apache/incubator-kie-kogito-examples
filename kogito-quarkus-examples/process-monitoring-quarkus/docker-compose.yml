@@ -21,7 +21,7 @@ version: '2'
 
 services:
   hello:
-    build: .
+    image: org.kie.kogito.examples/process-monitoring-quarkus:1.0
     ports:
       - 8080:8080
 
