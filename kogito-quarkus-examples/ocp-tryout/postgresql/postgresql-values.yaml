@@ -1,4 +1,3 @@
-#!/bin/bash
 #
 # Licensed to the Apache Software Foundation (ASF) under one
 # or more contributor license agreements.  See the NOTICE file
@@ -18,21 +17,13 @@
 # under the License.
 #
 
-
-action=$1
-type=$2
-
-if [ "${action}" == "uninstall" ]; then
-  echo "*** uninstalling jobs service"
-  oc delete all,configmap --selector app=kogito-jobs-service-${type} -n $(getProjectName)
-
-elif [ "${action}" == "install" ]; then
-  echo "*** installing jobs service"
-  oc new-app docker.io/apache/incubator-kie-kogito-jobs-service-${type}:${KOGITO_VERSION} -n $(getProjectName) $(dryRun "NewApp")
-  waitForPod kogito-jobs-service
-  oc patch deployment kogito-jobs-service-${type} --patch "$(cat deployment-patch.yaml)" -n $(getProjectName) $(dryRun)
-  waitForPod kogito-jobs-service
-  oc expose service/kogito-jobs-service-${type} -n $(getProjectName) $(dryRun)
-else
-  echo "*** no such action: $action"
-fi
+database_service_name: postgresql
+memory_limit: 512Mi
+volume_capacity: 1Gi
+config:
+  postgresql_database: kogito
+  postgresql_password: kogito-pass
+  postgresql_user: kogito-user
+  port: 5432
+image:
+  tag: "postgres:16.1-alpine3.19"

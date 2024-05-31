@@ -24,7 +24,7 @@ source common-functions.sh
 
 action=uninstall
 
-components=(SHARED_CONFIG INFINISPAN KAFKA KEYCLOAK \
+components=(SHARED_CONFIG POSTGRESQL KAFKA KEYCLOAK \
            KOGITO_DATA_INDEX KOGITO_MANAGEMENT_CONSOLE KOGITO_TASK_CONSOLE KOGITO_JOBS_SERVICE \
            TEST_APP)
 # override the installer properties configuration if needed
@@ -68,8 +68,8 @@ function uninstall(){
   componentAction "${TEST_APP}" "testapp"
 
   dbType=""
-  if [ "${INFINISPAN}" == "Y" ]; then
-    dbType="infinispan"
+  if [ "${POSTGRESQL}" == "Y" ]; then
+    dbType="postgresql"
   fi
 
   componentAction "${KOGITO_DATA_INDEX}" "kogito-data-index" "${dbType}"
@@ -77,7 +77,7 @@ function uninstall(){
   componentAction "${KOGITO_TASK_CONSOLE}" "kogito-task-console"
   componentAction "${KOGITO_JOBS_SERVICE}" "kogito-jobs-service" "${dbType}"
 
-  componentAction "${INFINISPAN}" "infinispan"
+  componentAction "${POSTGRESQL}" "postgresql"
   componentAction "${KAFKA}" "kafka"
   componentAction "${KEYCLOAK}" "keycloak"
 

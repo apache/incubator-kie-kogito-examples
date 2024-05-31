@@ -18,7 +18,7 @@
 #
 
 image:
-  repository: quay.io/kiegroup/examples-travels
-  tag: "1.16.0.final"
+  repository: quay.io/<your namespace>/examples-travels
+  tag: "latest"
 
 applicationPort: 8080

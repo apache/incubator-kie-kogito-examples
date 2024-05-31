@@ -20,19 +20,17 @@
 
 
 action=$1
-type=$2
 
 if [ "${action}" == "uninstall" ]; then
-  echo "*** uninstalling jobs service"
-  oc delete all,configmap --selector app=kogito-jobs-service-${type} -n $(getProjectName)
+  echo "*** uninstalling postgresql"
+  helm uninstall postgresql -n $(getProjectName)
+  oc delete pvc,secret --selector clusterName=postgresql -n $(getProjectName)
 
 elif [ "${action}" == "install" ]; then
-  echo "*** installing jobs service"
-  oc new-app docker.io/apache/incubator-kie-kogito-jobs-service-${type}:${KOGITO_VERSION} -n $(getProjectName) $(dryRun "NewApp")
-  waitForPod kogito-jobs-service
-  oc patch deployment kogito-jobs-service-${type} --patch "$(cat deployment-patch.yaml)" -n $(getProjectName) $(dryRun)
-  waitForPod kogito-jobs-service
-  oc expose service/kogito-jobs-service-${type} -n $(getProjectName) $(dryRun)
+  echo "*** installing postgresql"
+  helm repo add openshift-helm-charts https://charts.openshift.io/
+  helm install postgresql openshift-helm-charts/redhat-postgresql-persistent --version "0.0.3" -f postgresql-values.yaml -n $(getProjectName) $(dryRun "Helm")
+
 else
   echo "*** no such action: $action"
 fi

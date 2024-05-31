@@ -135,6 +135,5 @@ Example response:
 ## Integration example with Trusty Service
 
 When the tracing addon is enabled, the tracing events are emitted and pushed to a Kafka broker. The [Trusty Service](https://github.com/apache/incubator-kie-kogito-apps/tree/main/trusty) can consume such events and store them on a storage. The Trusty Service exposes then some api to consume the information that has been collected.
-A `docker-compose` example is provided in the current folder. In particular, when `docker-compose up` is run, a Kafka broker, an Infinispan container and the latest build of the trusty service configured to use Infinispan are deployed. 
-Once the services are up and running, after a decision has been evaluated, you can access the trusty service API to list the evaluations at `localhost:8081/executions` for example.
+
 

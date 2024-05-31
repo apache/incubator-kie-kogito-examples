@@ -20,16 +20,21 @@
 spec:
   template:
     spec:
+      volumes:
+        - name: app-pvc
+          configMap:
+            name: data-index-config
       containers:
-        - name: kogito-jobs-service-postgresql
+        - name: kogito-data-index-postgresql
+          volumeMounts:
+            - name: app-pvc
+              mountPath: /home/kogito/data/protobufs
           env:
-            - name: ENABLE_EVENTS
-              value: 'true'
-            - name: KOGITO_JOBS_PROPS
+            - name: KAFKA_BOOTSTRAP_SERVERS
               valueFrom:
                 configMapKeyRef:
                   name: kogito-configs
-                  key: kogito.jobsservice.props
+                  key: kafka.bootstrap.servers
             - name: KOGITO_DATA_INDEX_PROPS
               valueFrom:
                 configMapKeyRef:
