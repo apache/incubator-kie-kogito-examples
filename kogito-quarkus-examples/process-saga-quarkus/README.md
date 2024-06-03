@@ -100,7 +100,7 @@ Once the service is up and running, you can use the following examples to intera
 
 ### Starting the Order Saga
 
-#### POST /orders
+#### POST /order
 
 Allows to start a new Order Saga with the given data:
 
@@ -116,7 +116,7 @@ Given data:
 Curl command (using the JSON object above):
 
 ```sh
-curl -H "Content-Type: application/json" -X POST http://localhost:8080/orders -d '{"orderId" : "03e6cf79-3301-434b-b5e1-d6899b5639aa"}'
+curl -H "Content-Type: application/json" -X POST http://localhost:8080/order -d '{"orderId" : "03e6cf79-3301-434b-b5e1-d6899b5639aa"}'
 ```
 The response for the request is returned with attributes representing the response of each step, either
  success or failure. The `orderResponse` attribute indicates if the order can be confirmed in case of success or
@@ -173,7 +173,7 @@ Example:
 Curl command (using the JSON object above):
 
 ```sh
-curl -H "Content-Type: application/json" -X POST http://localhost:8080/orders -d '{"orderId" : "03e6cf79-3301-434b-b5e1-d6899b5639aa", "failService" : "PaymentService"}' 
+curl -H "Content-Type: application/json" -X POST http://localhost:8080/order -d '{"orderId" : "03e6cf79-3301-434b-b5e1-d6899b5639aa", "failService" : "PaymentService"}' 
 ```
 
 Response example:
