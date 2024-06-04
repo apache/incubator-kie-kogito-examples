@@ -211,7 +211,7 @@ Should return something like
 ```
 
 
-Then to see the Task created perfor the following command
+Then to see the Task created perform the following command
 
 ```
 curl http://localhost:8080/persons/{uuid}/ChildrenHandling/{tuuid}
