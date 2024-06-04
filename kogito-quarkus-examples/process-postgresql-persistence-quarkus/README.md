@@ -59,7 +59,7 @@ It utilizes PostgreSQL server as the backend store.
 
 This quickstart requires a PostgreSQL server to be available with a database, a user and credentials already created
 , these configurations should then be set in the data source URL parameter in [applications.properties](src/main/resources/application.properties) file with the key
- `quarkus.datasource.reactive.url`, i.e `quarkus.datasource.reactive.url=postgresql://localhost:5432/kogito` here are the [full settings for URI](https://quarkus.io/guides/reactive-sql-clients#reactive-datasource)
+ `quarkus.datasource.jdbc.url`, i.e `quarkus.datasource.jdbc.url=postgresql://localhost:5432/kogito`.
  
 You must set the property `kogito.persistence.type=postgresql` to enable PostgreSQL persistence. There is also a
 configuration to allow the application to run DDL scripts during the initialization, which you can enable with the
