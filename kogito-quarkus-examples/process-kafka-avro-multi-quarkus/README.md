@@ -14,13 +14,12 @@ A quick reminder of what the original example was doing:
     * if not processed traveller, info is logged and then process instance finishes sending a reply to a different Kafka topic
 
 The functionality is still the same, but the format of the event, rather than being a cloudevent JSON format, it is a representation of the traveller object using Avro format. To help us deal with the serialization details,
-[jackson-kafka-avro-serializer](https://github.com/productboardlabs/jackson-kafka-avro-serializer) dependency is added to `pom.xml`
+`kie-addons-quarkus-marshallers-avro` dependency is added to `pom.xml`
 
 ```
-  <dependency>
-        <groupId>io.github.productboardlabs</groupId>
-        <artifactId>jackson-kafka-avro-serializer</artifactId>
-        <version>0.7.0</version>
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-addons-quarkus-marshallers-avro</artifactId>
     </dependency>
 ```
 

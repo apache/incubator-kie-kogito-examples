@@ -130,11 +130,11 @@ Content (cloud event format)
 
 ```json
 {
-  "specversion": "0.3",
+  "specversion": "1.0",
   "id": "21627e26-31eb-43e7-8343-92a696fd96b1",
   "source": "",
   "type": "travellers",
-  "time": "2022-02-24T13:25:16+0000",
+  "time": "2022-02-24T13:25:16Z",
   "data": {
 	"firstName" : "Jan",
 	"lastName" : "Kowalski",
@@ -146,7 +146,7 @@ Content (cloud event format)
 One liner
 
 ```json
-{"specversion": "0.3","id": "21627e26-31eb-43e7-8343-92a696fd96b1","source": "","type": "travellers", "time": "2022-02-24T13:25:16+0000","data": { "firstName" : "Jan", "lastName" : "Kowalski", "email" : "jan.kowalski@example.com", "nationality" : "Polish"}}
+{"specversion": "1.0","id": "21627e26-31eb-43e7-8343-92a696fd96b1","source": "","type": "travellers", "time": "2022-02-24T13:25:16Z","data": { "firstName" : "Jan", "lastName" : "Kowalski", "email" : "jan.kowalski@example.com", "nationality" : "Polish"}}
 ```
 
 this will then trigger the successful processing of the traveller and put another message on `processedtravellers` topic.
@@ -162,11 +162,11 @@ With the following content (Cloud Event Format)
 
 ```json
 {
-  "specversion": "0.3",
+  "specversion": "1.0",
   "id": "31627e26-31eb-43e7-8343-92a696fd96b1",
   "source": "",
   "type": "travellers",
-  "time": "2022-02-24T13:25:16+0000",
+  "time": "2022-02-24T13:25:16Z",
   "data": {
 	"firstName" : "John",
 	"lastName" : "Doe",
@@ -179,7 +179,7 @@ With the following content (Cloud Event Format)
 One Liner
 
 ```json
-{"specversion": "0.3","id": "31627e26-31eb-43e7-8343-92a696fd96b1","source": "","type": "travellers", "time": "2022-02-24T13:25:16+0000","data": { "firstName" : "John", "lastName" : "Doe", "email" : "john.doe@example.com", "nationality" : "American"}}
+{"specversion": "1.0","id": "31627e26-31eb-43e7-8343-92a696fd96b1","source": "","type": "travellers", "time": "2022-02-24T13:25:16Z","data": { "firstName" : "John", "lastName" : "Doe", "email" : "john.doe@example.com", "nationality" : "American"}}
 ```
 
 this will not result in message being send to `processedtravelers` topic.
