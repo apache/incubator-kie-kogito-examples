@@ -279,7 +279,7 @@ After the Curl command, you should see a similar console log
     "Suspended": "yes",
     "ValidLicense": false
   },
-    "fine": null,
+    "fine": {"Amount": 500.0, "Points": 3},
     "violation": {
         "Code": null,
         "Date": null,

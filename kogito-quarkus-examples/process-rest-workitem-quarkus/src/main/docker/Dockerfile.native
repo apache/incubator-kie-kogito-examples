@@ -7,11 +7,11 @@
 #
 # Then, build the image with:
 #
-# docker build -f src/main/docker/Dockerfile.native -t quarkus/kogito-infinispan-persistence-quarkus .
+# docker build -f src/main/docker/Dockerfile.native -t quarkus/process-rest-workitem-quarkus .
 #
 # Then run the container using:
 #
-# docker run -i --rm -p 8080:8080 quarkus/kogito-infinispan-persistence-quarkus
+# docker run -i --rm -p 8080:8080 quarkus/process-rest-workitem-quarkus
 #
 ###
 FROM registry.access.redhat.com/ubi8/ubi-minimal
