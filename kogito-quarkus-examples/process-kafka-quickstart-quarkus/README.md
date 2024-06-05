@@ -159,11 +159,11 @@ Content (cloud event format)
 
 ```json
 {
-  "specversion": "0.3",
+  "specversion": "1.0",
   "id": "21627e26-31eb-43e7-8343-92a696fd96b1",
   "source": "",
   "type": "travellers",
-  "time": "2022-02-24T13:25:16+0000",
+  "time": "2022-02-24T13:25:16Z",
   "data": {
 	"firstName" : "Jan",
 	"lastName" : "Kowalski",
@@ -175,7 +175,7 @@ Content (cloud event format)
 One liner
 
 ```json
-{"specversion": "0.3","id": "21627e26-31eb-43e7-8343-92a696fd96b1","source": "","type": "travellers", "time": "2022-02-24T13:25:16+0000","data": { "firstName" : "Jan", "lastName" : "Kowalski", "email" : "jan.kowalski@example.com", "nationality" : "Polish"}}
+{"specversion": "1.0","id": "21627e26-31eb-43e7-8343-92a696fd96b1","source": "","type": "travellers", "time": "2022-02-24T13:25:16Z","data": { "firstName" : "Jan", "lastName" : "Kowalski", "email" : "jan.kowalski@example.com", "nationality" : "Polish"}}
 ```
 
 
@@ -183,29 +183,27 @@ this will then trigger the successful processing of the traveller and put anothe
 
 ```json
 {
-  "specversion": "0.3",
-  "id": "86f69dd6-7145-4188-aeaa-e44622eeec86",
-  "source": "",
-  "type": "TravellersMessageDataEvent_3",
-  "time": "2019-10-03T16:22:40.373523+02:00[Europe/Warsaw]",
-  "data": {
-    "firstName": "Jan",
-    "lastName": "Kowalski",
-    "email": "jan.kowalski@example.com",
-    "nationality": "Polish",
-    "processed": true
-  },
-  "kogitoProcessinstanceId": "4fb091c2-82f7-4655-8687-245a4ab07483",
-  "kogitoParentProcessinstanceId": null,
-  "kogitoRootProcessinstanceId": null,
-  "kogitoProcessId": "Travellers",
-  "kogitoRootProcessId": null,
-  "kogitoProcessinstanceState": "1",
-  "kogitoReferenceId": null
+	"specversion": "1.0",
+	"id": "e84a4591-3581-42cd-bb2a-fac989ffd1a0",
+	"source": "/process/Travelers",
+	"type": "processedtravellers",
+	"time": "2024-06-05T11:30:49.722368+02:00",
+	"kogitoproctype": "BPMN",
+	"kogitoprocinstanceid": "66d1c981-9d6d-4c01-bc43-b712dc73b6cc",
+	"kogitoprocist": "Active",
+	"kogitoprocversion": "1.0",
+	"kogitoprocid": "Travelers",
+	"data": {
+		"firstName": "Jan",
+		"lastName": "Kowalski",
+		"email": "jan.kowalski@example.com",
+		"nationality": "Polish",
+		"processed": true
+	}
 }
 ```
 
-there are bunch of extension attributes that starts with `kogito` to provide some context of the execution and the event producer.
+there are a bunch of extension attributes that starts with `kogito` to provide some context of the execution and the event producer.
 
 To take the other path of the process put following message on `travellers` topic
 
@@ -219,11 +217,11 @@ With the following content (Cloud Event Format)
 
 ```json
 {
-  "specversion": "0.3",
+  "specversion": "1.0",
   "id": "31627e26-31eb-43e7-8343-92a696fd96b1",
   "source": "",
   "type": "travellers",
-  "time": "2022-02-24T13:25:16+0000",
+  "time": "2022-02-24T13:25:16Z",
   "data": {
 	"firstName" : "John",
 	"lastName" : "Doe",
@@ -236,7 +234,7 @@ With the following content (Cloud Event Format)
 One Liner
 
 ```json
-{"specversion": "0.3","id": "31627e26-31eb-43e7-8343-92a696fd96b1","source": "","type": "travellers", "time": "2022-02-24T13:25:16+0000","data": { "firstName" : "John", "lastName" : "Doe", "email" : "john.doe@example.com", "nationality" : "American"}}
+{"specversion": "1.0","id": "31627e26-31eb-43e7-8343-92a696fd96b1","source": "","type": "travellers", "time": "2022-02-24T13:25:16Z","data": { "firstName" : "John", "lastName" : "Doe", "email" : "john.doe@example.com", "nationality" : "American"}}
 ```
 
-this will not result in message being send to `processedtravelers` topic.
+this will not result in message being sent to `processedtravelers` topic.
