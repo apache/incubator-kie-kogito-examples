@@ -1,0 +1,19 @@
+{
+    "name" : "simple to addedtask migration",
+    "processMigrationPlan" : {
+        "sourceProcessDefinition" : {
+            "processId" : "simple",
+            "processVersion" : "1.0"
+        },
+        "targetProcessDefinition" : {
+            "processId" : "addedtask",
+            "processVersion" : "1.0"
+        },
+        "nodeInstanceMigrationPlan" : [
+            {
+                "sourceNodeId" : "_8430CA7E-8CC6-4C2C-9664-6B5BBD5E36CB",
+                "targetNodeId" : "_1D65864A-96AF-44FC-92CE-2073B9FBA7D0"
+            }
+        ]
+    }
+}

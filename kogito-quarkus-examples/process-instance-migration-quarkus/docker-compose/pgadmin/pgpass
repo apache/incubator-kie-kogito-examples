@@ -1,0 +1,3 @@
+postgres:5432:kogito:kogito-user:kogito-pass
+postgres:5432:keycloak:kogito-user:kogito-pass
+postgres:5432:postgres:kogito-user:kogito-pass
