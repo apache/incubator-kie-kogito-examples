@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 registry.access.redhat.com/ubi9/openjdk-17:1.18
+FROM --platform=linux/amd64 registry.access.redhat.com/ubi9/openjdk-17:1.20
 
 ENV RUNTIME_TYPE quarkus
 
