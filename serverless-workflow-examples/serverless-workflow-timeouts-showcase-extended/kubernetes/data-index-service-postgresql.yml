@@ -55,7 +55,7 @@ spec:
     spec:
       containers:
         - name: data-index-service-postgresql
-          image: quay.io/kiegroup/kogito-data-index-postgresql-nightly:latest
+          image: quay.io/kiegroup/kogito-data-index-postgresql-nightly:10.0
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

@@ -25,7 +25,7 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>kogito-quarkus-examples</artifactId>
-    <version>999-SNAPSHOT</version>
+    <version>10.0.999-SNAPSHOT</version>
   </parent>
   <artifactId>dmn-pmml-quarkus-example</artifactId>
   <name>Kogito Example :: DMN :: PMML - QUARKUS</name>
@@ -36,8 +36,8 @@
     <quarkus.platform.version>3.8.4</quarkus.platform.version>
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-    <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
-    <version.org.kie.kogito>999-SNAPSHOT</version.org.kie.kogito>
+    <kogito.bom.version>10.0.999-SNAPSHOT</kogito.bom.version>
+    <version.org.kie.kogito>10.0.999-SNAPSHOT</version.org.kie.kogito>
   </properties>
 
   <dependencyManagement>

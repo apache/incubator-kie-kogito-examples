@@ -26,7 +26,7 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>kogito-springboot-examples</artifactId>
-    <version>999-SNAPSHOT</version>
+    <version>10.0.999-SNAPSHOT</version>
   </parent>
 
   <artifactId>process-usertasks-with-security-springboot</artifactId>
@@ -34,8 +34,8 @@
   <description>Kogito usertasks orchestration with security enabled on REST api - Spring Boot</description>
 
   <properties>
-    <version.org.kie.kogito>999-SNAPSHOT</version.org.kie.kogito>
-    <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
+    <version.org.kie.kogito>10.0.999-SNAPSHOT</version.org.kie.kogito>
+    <kogito.bom.version>10.0.999-SNAPSHOT</kogito.bom.version>
   </properties>
 
   <dependencyManagement>

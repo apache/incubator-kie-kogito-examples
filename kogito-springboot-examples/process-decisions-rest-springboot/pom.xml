@@ -25,15 +25,15 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>kogito-springboot-examples</artifactId>
-    <version>999-SNAPSHOT</version>
+    <version>10.0.999-SNAPSHOT</version>
   </parent>
   <artifactId>process-decisions-rest-springboot</artifactId>
   <name>Kogito Example :: Process :: Decisions :: REST :: Spring Boot</name>
   <description>Process with DMN and DRL integration through REST - Spring Boot</description>
 
   <properties>
-    <version.org.kie.kogito>999-SNAPSHOT</version.org.kie.kogito>
-    <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
+    <version.org.kie.kogito>10.0.999-SNAPSHOT</version.org.kie.kogito>
+    <kogito.bom.version>10.0.999-SNAPSHOT</kogito.bom.version>
   </properties>
 
   <dependencyManagement>

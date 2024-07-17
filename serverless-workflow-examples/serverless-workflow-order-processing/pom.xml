@@ -44,7 +44,7 @@
     <quarkus.platform.version>3.8.4</quarkus.platform.version>
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-    <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
+    <kogito.bom.version>10.0.999-SNAPSHOT</kogito.bom.version>
     <version.compiler.plugin>3.8.1</version.compiler.plugin>
     <version.com.github.tomakehurst.wiremock>2.33.2</version.com.github.tomakehurst.wiremock>
     <maven.compiler.release>17</maven.compiler.release>
