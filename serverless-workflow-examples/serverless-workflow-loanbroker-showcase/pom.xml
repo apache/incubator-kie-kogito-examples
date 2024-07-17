@@ -43,7 +43,7 @@
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.version>3.8.4</quarkus.platform.version>
-    <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
+    <version.org.kie.kogito>999-SNAPSHOT</version.org.kie.kogito>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>

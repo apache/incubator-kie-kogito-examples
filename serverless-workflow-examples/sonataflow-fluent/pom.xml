@@ -8,7 +8,7 @@
   <artifactId>sonataflow-fluent</artifactId>
   <name>Kogito Example :: SonataFlow :: Java Embedded examples</name>
   <properties>
-    <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
+    <version.org.kie.kogito>999-SNAPSHOT</version.org.kie.kogito>
     <maven.compiler.release>17</maven.compiler.release>
     <java.module.name>SonataFlowFluent</java.module.name>
   </properties>
@@ -17,7 +17,7 @@
 	  <dependency>
         <groupId>org.kie.kogito</groupId>
         <artifactId>kogito-bom</artifactId>
-        <version>${kogito.bom.version}</version>
+        <version>${version.org.kie.kogito}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>

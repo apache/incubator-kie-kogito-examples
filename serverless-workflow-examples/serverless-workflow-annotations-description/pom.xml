@@ -43,9 +43,7 @@
         <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
         <quarkus.platform.version>3.8.4</quarkus.platform.version>
         <version.org.assertj>3.22.0</version.org.assertj>
-    
-    
-        <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
+        <version.org.kie.kogito>999-SNAPSHOT</version.org.kie.kogito>
         <version.compiler.plugin>3.8.1</version.compiler.plugin>
         <maven.compiler.release>17</maven.compiler.release>
         <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
@@ -62,7 +60,7 @@
             <dependency>
                 <groupId>org.kie.kogito</groupId>
                 <artifactId>kogito-bom</artifactId>
-                <version>${kogito.bom.version}</version>
+                <version>${version.org.kie.kogito}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

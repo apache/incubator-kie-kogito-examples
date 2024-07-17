@@ -41,7 +41,7 @@
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
     <quarkus.platform.version>3.8.4</quarkus.platform.version>
-    <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
+    <version.org.kie.kogito>999-SNAPSHOT</version.org.kie.kogito>
     <maven.compiler.release>17</maven.compiler.release>
     <version.exec.plugin>1.6.0</version.exec.plugin>
     <version.compiler.plugin>3.8.1</version.compiler.plugin>
@@ -61,7 +61,7 @@
       <dependency>
         <groupId>org.kie.kogito</groupId>
         <artifactId>kogito-bom</artifactId>
-        <version>${kogito.bom.version}</version>
+        <version>${version.org.kie.kogito}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
