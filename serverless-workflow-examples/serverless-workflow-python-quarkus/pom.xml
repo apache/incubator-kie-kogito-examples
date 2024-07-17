@@ -41,8 +41,6 @@
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
     <quarkus.platform.version>3.8.4</quarkus.platform.version>
-
-
     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
     <maven.compiler.release>17</maven.compiler.release>
     <version.exec.plugin>1.6.0</version.exec.plugin>

@@ -8,8 +8,6 @@
   <artifactId>sonataflow-fluent</artifactId>
   <name>Kogito Example :: SonataFlow :: Java Embedded examples</name>
   <properties>
-
-
     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
     <maven.compiler.release>17</maven.compiler.release>
     <java.module.name>SonataFlowFluent</java.module.name>

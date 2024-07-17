@@ -36,8 +36,6 @@
     <project.build.outputTimestamp>2024-01-16T00:00:00Z</project.build.outputTimestamp>
     <version.maven.artifact.plugin>3.4.1</version.maven.artifact.plugin>
   </properties>
-
-
   <build>
     <pluginManagement>
       <plugins>

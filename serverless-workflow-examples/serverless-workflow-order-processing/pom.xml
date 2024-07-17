@@ -42,8 +42,6 @@
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
     <quarkus.platform.version>3.8.4</quarkus.platform.version>
-
-
     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
     <version.compiler.plugin>3.8.1</version.compiler.plugin>
     <version.com.github.tomakehurst.wiremock>2.33.2</version.com.github.tomakehurst.wiremock>
