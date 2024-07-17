@@ -35,8 +35,8 @@
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.version>3.8.4</quarkus.platform.version>
-    <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
-    <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
+
+
     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
     <version.com.github.tomakehurst.wiremock>2.33.2</version.com.github.tomakehurst.wiremock>
   </properties>
@@ -50,8 +50,8 @@
         <scope>import</scope>
       </dependency>
       <dependency>
-        <groupId>${kogito.bom.group-id}</groupId>
-        <artifactId>${kogito.bom.artifact-id}</artifactId>
+        <groupId>org.kie.kogito</groupId>
+        <artifactId>kogito-bom</artifactId>
         <version>${kogito.bom.version}</version>
         <type>pom</type>
         <scope>import</scope>

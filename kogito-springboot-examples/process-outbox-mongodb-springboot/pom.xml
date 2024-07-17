@@ -36,7 +36,7 @@
   <properties>
     <DEBEZIUM_VERSION>1.7</DEBEZIUM_VERSION>
     <version.org.kie.kogito>999-SNAPSHOT</version.org.kie.kogito>
-    <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
+
   </properties>
 
   <dependencyManagement>
@@ -44,7 +44,7 @@
       <dependency>
         <groupId>org.kie.kogito</groupId>
         <artifactId>kogito-spring-boot-bom</artifactId>
-        <version>${kogito.bom.version}</version>
+        <version>${version.org.kie.kogito}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
