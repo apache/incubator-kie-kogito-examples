@@ -9,9 +9,9 @@ A simple DMN service to evaluate a loan approval and generate tracing events tha
 ### Prerequisites
 
 You will need:
-  - Java 11+ installed
+  - Java 17+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.8.1+ installed
+  - Maven 3.9.6+ installed
 
 When using native image compilation, you will also need:
   - [GraalVM 19.3.1](https://github.com/oracle/graal/releases/tag/vm-19.3.1) installed
@@ -134,10 +134,7 @@ Example response:
 
 ## Integration example with Trusty Service
 
-When the tracing addon is enabled, the tracing events are emitted and pushed to a Kafka broker. The [Trusty Service](https://github.com/kiegroup/kogito-apps/tree/main/trusty) can consume such events and store them on a storage. The Trusty Service exposes then some api to consume the information that has been collected. 
+When the tracing addon is enabled, the tracing events are emitted and pushed to a Kafka broker. The [Trusty Service](https://github.com/apache/incubator-kie-kogito-apps/tree/main/trusty) can consume such events and store them on a storage. The Trusty Service exposes then some api to consume the information that has been collected.
 A `docker-compose` example is provided in the current folder. In particular, when `docker-compose up` is run, a Kafka broker, an Infinispan container and the latest build of the trusty service configured to use Infinispan are deployed. 
 Once the services are up and running, after a decision has been evaluated, you can access the trusty service API to list the evaluations at `localhost:8081/executions` for example.
 
-## Deploying with Kogito Operator
-
-In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).

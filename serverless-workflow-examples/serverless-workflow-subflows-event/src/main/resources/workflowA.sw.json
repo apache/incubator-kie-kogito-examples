@@ -1,0 +1,17 @@
+{
+  "id": "workflowA",
+  "version": "1.0",
+  "specVersion": "0.8",
+  "name": "workflowB",
+  "start": "doIt",
+  "states": [
+    {
+      "name": "doIt",
+      "type": "inject",
+      "data" :  {
+           "param3": "This is workflow A"
+      },
+      "end": true
+    }
+  ]
+}

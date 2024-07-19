@@ -1,4 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+
+-->
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
@@ -7,27 +27,12 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>kogito-examples</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
+    <version>999-SNAPSHOT</version>
   </parent>
 
   <artifactId>serverless-workflow-examples</artifactId>
   <packaging>pom</packaging>
   <name>Kogito Example :: Serverless Workflow</name>
-
-  <properties>
-    <!-- Port 0 means dynamic port -->
-    <tests.quarkus.http.port>0</tests.quarkus.http.port>
-    <!-- override default to fast-jar packaging for forward-compatibility -->
-    <quarkus.package.type>fast-jar</quarkus.package.type>
-    <!-- quarkus platform related properties -->
-    <quarkus-plugin.version>2.11.0.Final</quarkus-plugin.version>
-    <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
-    <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-    <quarkus.platform.version>2.11.0.Final</quarkus.platform.version>
-    <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
-    <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-    <kogito.bom.version>${project.version}</kogito.bom.version>
-  </properties>
 
   <profiles>
     <profile>
@@ -36,11 +41,19 @@
         <activeByDefault>true</activeByDefault>
       </activation>
       <modules>
+        <module>serverless-workflow-examples-parent</module>
         <module>serverless-workflow-annotations-description</module>
+        <module>serverless-workflow-callback-events-over-http-quarkus</module>
         <module>serverless-workflow-callback-quarkus</module>
+        <module>serverless-workflow-camel-routes</module>
         <module>serverless-workflow-compensation-quarkus</module>
         <module>serverless-workflow-consuming-events-over-http-quarkus</module>
         <module>serverless-workflow-correlation-quarkus</module>
+        <module>serverless-workflow-custom-function-knative</module>
+        <module>serverless-workflow-custom-type</module>
+        <module>serverless-workflow-data-index-persistence-addon-quarkus</module>
+        <module>serverless-workflow-data-index-quarkus</module>
+        <module>serverless-workflow-dmn-quarkus</module>
         <module>serverless-workflow-error-quarkus</module>
         <module>serverless-workflow-events-quarkus</module>
         <module>serverless-workflow-expression-quarkus</module>
@@ -48,16 +61,25 @@
         <module>serverless-workflow-functions-events-quarkus</module>
         <module>serverless-workflow-functions-quarkus</module>
         <module>serverless-workflow-funqy</module>
-        <module>serverless-workflow-github-showcase</module>
         <module>serverless-workflow-greeting-quarkus</module>
         <module>serverless-workflow-greeting-rpc-quarkus</module>
-        <module>serverless-workflow-order-processing</module>
-        <module>serverless-workflow-saga-quarkus</module>
-        <module>serverless-workflow-service-calls-quarkus</module>
-        <module>serverless-workflow-temperature-conversion</module>
-        <module>serverless-workflow-qas-service-showcase</module>
+        <module>serverless-workflow-hello-world</module>
+        <module>serverless-workflow-loanbroker-showcase</module>
         <module>serverless-workflow-newsletter-subscription</module>
         <module>serverless-workflow-oauth2-orchestration-quarkus</module>
+        <module>serverless-workflow-order-processing</module>
+        <module>serverless-workflow-parallel-execution</module>
+        <module>serverless-workflow-qas-service-showcase</module>
+        <module>serverless-workflow-saga-quarkus</module>
+        <module>serverless-workflow-service-calls-quarkus</module>
+        <module>serverless-workflow-stock-profit</module>
+        <module>serverless-workflow-temperature-conversion</module>
+        <module>serverless-workflow-testing-with-rest-assured</module>
+        <module>serverless-workflow-timeouts-showcase-embedded</module>
+        <module>serverless-workflow-timeouts-showcase-extended</module>
+        <module>serverless-workflow-timeouts-showcase-operator-devprofile</module>
+        <module>serverless-workflow-python-quarkus</module>
+        <module>sonataflow-fluent</module>
       </modules>
     </profile>
 
@@ -68,11 +90,8 @@
           <name>persistence</name>
         </property>
       </activation>
-      <properties>
-        <tests.category>persistence</tests.category>
-      </properties>
       <modules>
-        <module>serverless-workflow-callback-quarkus</module>
+        <module>serverless-workflow-compensation-quarkus</module>
         <module>serverless-workflow-qas-service-showcase</module>
         <module>serverless-workflow-newsletter-subscription</module>
       </modules>
@@ -80,14 +99,6 @@
 
     <profile>
       <id>native</id>
-      <properties>
-        <failsafe.include>**/Native*IT.java</failsafe.include>
-        <failsafe.exclude></failsafe.exclude>
-        <quarkus.package.type>native</quarkus.package.type>
-        <quarkus.native.native-image-xmx>8g</quarkus.native.native-image-xmx>
-        <!-- Native building needs a fixed port for tests -->
-        <tests.quarkus.http.port>8080</tests.quarkus.http.port>
-      </properties>
       <activation>
         <property>
           <name>native</name>
@@ -95,81 +106,32 @@
       </activation>
       <modules>
         <module>serverless-workflow-callback-quarkus</module>
+        <module>serverless-workflow-data-index-quarkus</module>
         <module>serverless-workflow-compensation-quarkus</module>
-        <module>serverless-workflow-error-quarkus</module>
-        <module>serverless-workflow-events-quarkus</module>
-        <module>serverless-workflow-expression-quarkus</module>
-        <module>serverless-workflow-functions-events-quarkus</module>
-        <module>serverless-workflow-functions-quarkus</module>
-        <module>serverless-workflow-funqy</module>
-        <module>serverless-workflow-greeting-quarkus</module>
-        <module>serverless-workflow-service-calls-quarkus</module>
-        <module>serverless-workflow-temperature-conversion</module>
-      </modules>
-    </profile>
-
-    <profile>
-      <id>productized</id>
-      <activation>
-        <property>
-          <name>productized</name>
-        </property>
-      </activation>
-      <modules>
-        <module>serverless-workflow-annotations-description</module>
-        <module>serverless-workflow-callback-quarkus</module>
-        <module>serverless-workflow-compensation-quarkus</module>
-        <module>serverless-workflow-consuming-events-over-http-quarkus</module>
-        <module>serverless-workflow-correlation-quarkus</module>
         <module>serverless-workflow-error-quarkus</module>
         <module>serverless-workflow-events-quarkus</module>
         <module>serverless-workflow-expression-quarkus</module>
         <module>serverless-workflow-foreach-quarkus</module>
-        <module>serverless-workflow-functions-quarkus</module>
         <module>serverless-workflow-funqy</module>
         <module>serverless-workflow-greeting-quarkus</module>
-        <module>serverless-workflow-greeting-rpc-quarkus</module>
-        <module>serverless-workflow-order-processing</module>
-        <module>serverless-workflow-saga-quarkus</module>
+        <module>serverless-workflow-newsletter-subscription</module>
+        <module>serverless-workflow-oauth2-orchestration-quarkus</module>
         <module>serverless-workflow-service-calls-quarkus</module>
         <module>serverless-workflow-temperature-conversion</module>
-        <module>serverless-workflow-qas-service-showcase</module>
-        <module>serverless-workflow-newsletter-subscription</module>
+        <module>serverless-workflow-custom-type</module>
+      </modules>
+    </profile>
+
+    <profile>
+      <id>openvino</id>
+      <activation>
+        <property>
+          <name>openvino</name>
+        </property>
+      </activation>
+      <modules>
+       <module>serverless-workflow-openvino-quarkus</module>
       </modules>
     </profile>
   </profiles>
-
-  <build>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>${quarkus.platform.group-id}</groupId>
-          <artifactId>quarkus-maven-plugin</artifactId>
-          <version>${quarkus-plugin.version}</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>${version.surefire.plugin}</version>
-          <configuration>
-            <systemPropertyVariables>
-              <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-            </systemPropertyVariables>
-          </configuration>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-failsafe-plugin</artifactId>
-          <version>${version.surefire.plugin}</version>
-          <configuration>
-            <systemPropertyVariables>
-              <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-              <quarkus.http.test-port>${tests.quarkus.http.port}</quarkus.http.test-port>
-            </systemPropertyVariables>
-          </configuration>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-  </build>
-
 </project>

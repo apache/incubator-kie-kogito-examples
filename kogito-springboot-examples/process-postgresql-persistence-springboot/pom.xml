@@ -1,4 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+
+-->
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -6,19 +26,24 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>kogito-springboot-examples</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
+    <version>999-SNAPSHOT</version>
   </parent>
 
   <artifactId>process-postgresql-persistence-springboot</artifactId>
   <name>Kogito Example :: Process PostgreSQL Persistence Spring Boot</name>
   <description>Kogito with PostgreSQL persistence - Spring Boot</description>
 
+  <properties>
+    <version.org.kie.kogito>999-SNAPSHOT</version.org.kie.kogito>
+    <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
+  </properties>
+
   <dependencyManagement>
     <dependencies>
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-spring-boot-bom</artifactId>
-      <version>${project.version}</version>
+      <version>${kogito.bom.version}</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
@@ -33,12 +58,24 @@
 
     <!-- kogito -->
     <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-processes-spring-boot-starter</artifactId>
+      <groupId>org.jbpm</groupId>
+      <artifactId>jbpm-spring-boot-starter</artifactId>
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-addons-springboot-persistence-jdbc</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-jdbc</artifactId>
     </dependency>
 
     <dependency>
@@ -46,7 +83,7 @@
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
-    
+
     <dependency>
       <groupId>io.rest-assured</groupId>
       <artifactId>rest-assured</artifactId>
@@ -55,7 +92,7 @@
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-spring-boot-test-utils</artifactId>
-      <version>${project.version}</version>
+      <version>${version.org.kie.kogito}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -78,87 +115,12 @@
       <plugin>
         <groupId>org.kie.kogito</groupId>
         <artifactId>kogito-maven-plugin</artifactId>
-        <version>${kogito.version}</version>
+        <version>${version.org.kie.kogito}</version>
         <extensions>true</extensions>
       </plugin>
     </plugins>
   </build>
   <profiles>
-    <profile>
-      <id>persistence</id>
-      <activation>
-        <property>
-          <name>persistence</name>
-        </property>
-      </activation>
-      <dependencies>
-        <dependency>
-          <groupId>org.kie.kogito</groupId>
-          <artifactId>kogito-addons-springboot-persistence-postgresql</artifactId>
-        </dependency>
-      </dependencies>
-      <build>
-       <plugins>
-         <plugin>
-           <artifactId>maven-antrun-plugin</artifactId>
-           <executions>
-             <execution>
-                <phase>generate-sources</phase>
-               <goals>
-                 <goal>run</goal>
-               </goals>
-               <configuration>
-                 <target>
-                   <delete file="src/main/resources/application.properties"/>
-                   <copy file="src/main/resources/postgresql.properties"
-                         tofile="src/main/resources/application.properties"/>
-                 </target>
-               </configuration>
-             </execution>
-           </executions>
-         </plugin>
-       </plugins>
-     </build>
-    </profile>
-    <profile>
-     <id>jdbc-persistence</id>
-     <dependencies>
-        <dependency>
-          <groupId>org.kie.kogito</groupId>
-          <artifactId>kogito-addons-springboot-persistence-jdbc</artifactId>
-        </dependency>
-        <dependency>
-          <groupId>org.postgresql</groupId>
-          <artifactId>postgresql</artifactId>
-        </dependency>
-        <dependency>
-         <groupId>org.springframework.boot</groupId>
-         <artifactId>spring-boot-starter-jdbc</artifactId>
-        </dependency>
-      </dependencies>
-     <build>
-       <plugins>
-         <plugin>
-           <artifactId>maven-antrun-plugin</artifactId>
-           <executions>
-             <execution>
-                <phase>generate-sources</phase>
-               <goals>
-                 <goal>run</goal>
-               </goals>
-               <configuration>
-                 <target>
-                   <delete file="src/main/resources/application.properties"/>
-                   <copy file="src/main/resources/jdbc.properties"
-                         tofile="src/main/resources/application.properties"/>
-                 </target>
-               </configuration>
-             </execution>
-           </executions>
-         </plugin>
-       </plugins>
-     </build>
-   </profile>
     <profile>
       <id>events</id>
       <activation>
@@ -168,36 +130,10 @@
       </activation>
       <dependencies>
         <dependency>
-          <groupId>org.kie.kogito</groupId>
-          <artifactId>kogito-addons-springboot-events-process-kafka</artifactId>
+          <groupId>org.kie</groupId>
+          <artifactId>kie-addons-springboot-events-process-kafka</artifactId>
         </dependency>
       </dependencies>
-      <build>
-        <plugins>
-          <plugin>
-            <artifactId>maven-antrun-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>append-events</id>
-                <phase>generate-sources</phase>
-                <goals>
-                  <goal>run</goal>
-                </goals>
-                <configuration>
-                   <target>
-                    <concat destfile="src/main/resources/application-temp.properties">
-                      <fileset file="src/main/resources/application.properties" />
-                      <fileset file="src/main/resources/events.properties" />
-                    </concat>
-                    <delete file="src/main/resources/application.properties"/>
-                    <move file="src/main/resources/application-temp.properties" tofile="src/main/resources/application.properties"/>
-                  </target>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
     </profile>
   </profiles>
 </project>

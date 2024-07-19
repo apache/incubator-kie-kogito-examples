@@ -60,9 +60,9 @@ Public process that will be responsible for processing visa application
 ### Prerequisites
 
 You will need:
-  - Java 11+ installed
+  - Java 17+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.8.1+ installed
+  - Maven 3.9.6+ installed
 
 When using native image compilation, you will also need:
   - GraalVM 19.3.1+ installed
@@ -227,4 +227,4 @@ EOF
 ### Querying the technical cache
 
 When running **Kogito Data Index Service** on dev mode, the GraphiQL UI is available at [http://localhost:8180](http://localhost:8180/) and allow to
-perform different queries on the model as is explained at [wiki/Data-Index-service](https://github.com/kiegroup/kogito-runtimes/wiki/Data-Index-Service)
+perform different queries on the model as is explained at [wiki/Data-Index-service](https://github.com/apache/incubator-kie-kogito-runtimes/wiki/Data-Index-Service)

@@ -26,9 +26,9 @@ events.
 
 You will need:
 
-- Java 11+ installed
+- Java 17+ installed
 - Environment variable JAVA_HOME set accordingly
-- Maven 3.8.1+ installed
+- Maven 3.9.6+ installed
 
 When using native image compilation, you will also need:
 
@@ -113,7 +113,7 @@ __  ____  __  _____   ___  __ ____  ______
         - SubscriberMethod{method:'org.kie.kogito.addon.cloudevents.quarkus.QuarkusCloudEventPublisher#onEvent', incoming:'kogito_incoming_stream'} has no upstream
 
 2021-07-05 17:09:09,892 INFO  [org.kie.kog.add.clo.qua.QuarkusKogitoExtensionInitializer] (Quarkus Main Thread) Registered Kogito CloudEvent extension
-2021-07-05 17:09:09,902 INFO  [io.quarkus] (Quarkus Main Thread) dmn-knative-quickstart-quarkus 2.0.0-SNAPSHOT on JVM (powered by Quarkus 2.0.0.Final) started in 0.610s. Listening on: http://localhost:8080
+2021-07-05 17:09:09,902 INFO  [io.quarkus] (Quarkus Main Thread) dmn-knative-quickstart-quarkus 999-SNAPSHOT on JVM (powered by Quarkus 2.0.0.Final) started in 0.610s. Listening on: http://localhost:8080
 2021-07-05 17:09:09,903 INFO  [io.quarkus] (Quarkus Main Thread) Profile dev activated. Live Coding activated.
 2021-07-05 17:09:09,903 INFO  [io.quarkus] (Quarkus Main Thread) Installed features: [cdi, kogito-decisions, resteasy, resteasy-jackson, servlet, smallrye-context-propagation, smallrye-reactive-messaging, vertx, vertx-web]
 ``` 

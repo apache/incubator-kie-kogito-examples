@@ -9,8 +9,8 @@ This example demonstrates how to enable and consume the runtime metrics monitori
 You will need:
   - Java 11+ installed 
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.8.1+ installed
-    - Docker 19+ (only if you want to run the integration tests and/or you want to use the `docker-compose` script provided in this example).
+  - Maven 3.8.6+ installed
+  - Docker 19+ (only if you want to run the integration tests and/or you want to use the `docker-compose` script provided in this example).
 
 ### How to enable the feature
 
@@ -18,8 +18,8 @@ Import the following dependency in your `pom.xml`:
 
 ```XML
 <dependency>
- <groupId>org.kie.kogito</groupId>
- <artifactId>kogito-addons-springboot-monitoring-prometheus</artifactId>
+ <groupId>org.kie</groupId>
+ <artifactId>kie-addons-springboot-monitoring-prometheus</artifactId>
 </dependency>
 ```
 
@@ -64,7 +64,7 @@ Custom dashboards will be available in the grafana panel, together with auto-gen
 ### Compile and Run in Local Dev Mode
 
 It is possible to use `docker-compose` to demonstrate how to inject the generated dashboards in the volume of the grafana container:
-1. Run `mvn clean package` to build the project and generate dashboards.  A docker image tagged `org.kie.kogito.examples/dmn-drools-springboot-metrics-example:1.0` will be built (docker must be installed on your system).
+1. Run `mvn clean package -Dcontainer` to build the project and generate dashboards.  A docker image tagged `org.kie.kogito.examples/dmn-drools-springboot-metrics-example:1.0` will be built (docker must be installed on your system).
 2. Run `docker-compose up` to start the applications. 
 
 The volumes of the grafana container are properly set in the `docker-compose.yml` file, so that the dashboards are properly loaded at startup.

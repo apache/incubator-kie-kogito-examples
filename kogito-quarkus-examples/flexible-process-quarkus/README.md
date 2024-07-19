@@ -43,9 +43,9 @@ will terminate.
 
 You will need:
 
-* Java 11+ installed
+* Java 17+ installed
 * Environment variable JAVA_HOME set accordingly
-* Maven 3.8.1+ installed
+* Maven 3.9.6+ installed
 
 When using native image compilation, you will also need:
 
@@ -99,10 +99,6 @@ You can take a look at the [OpenAPI definition](http://localhost:8080/openapi?fo
 In addition, various clients to interact with this service can be easily generated using this OpenAPI definition.
 
 When running in either Quarkus Development or Native mode, we also leverage the [Quarkus OpenAPI extension](https://quarkus.io/guides/openapi-swaggerui#use-swagger-ui-for-development) that exposes [Swagger UI](http://localhost:8080/swagger-ui/) that you can use to look at available REST endpoints and send test requests.
-
-## Deploying with the Kogito Operator
-
-In the [operator](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).
 
 ## Usage example
 

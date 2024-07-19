@@ -43,9 +43,9 @@ This is the BPMN process that represents the Order Saga, and it is the one being
 ### Prerequisites
 
 You will need:
-  - Java 11+ installed
+  - Java 17+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.8.1+ installed
+  - Maven 3.8.6+ installed
 
 When using native image compilation, you will also need:
   - [GraalVM 19.1.1](https://github.com/oracle/graal/releases/tag/vm-19.1.1) installed
@@ -66,6 +66,11 @@ java -jar target/process-saga-quarkus-runner.jar
 ```
 
 ### Package and Run using Local Native Image
+Note that the following configuration property needs to be added to `application.properties` in order to enable automatic registration of `META-INF/services` entries required by the workflow engine:
+```
+quarkus.native.auto-service-loader-registration=true
+```
+
 Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
 
 ```
@@ -95,7 +100,7 @@ Once the service is up and running, you can use the following examples to intera
 
 ### Starting the Order Saga
 
-#### POST /orders
+#### POST /order
 
 Allows to start a new Order Saga with the given data:
 
@@ -111,7 +116,7 @@ Given data:
 Curl command (using the JSON object above):
 
 ```sh
-curl -H "Content-Type: application/json" -X POST http://localhost:8080/orders -d '{"orderId" : "03e6cf79-3301-434b-b5e1-d6899b5639aa"}'
+curl -H "Content-Type: application/json" -X POST http://localhost:8080/order -d '{"orderId" : "03e6cf79-3301-434b-b5e1-d6899b5639aa"}'
 ```
 The response for the request is returned with attributes representing the response of each step, either
  success or failure. The `orderResponse` attribute indicates if the order can be confirmed in case of success or
@@ -146,10 +151,10 @@ Response example:
 In the console executing the application you can check the log it with the executed steps.
 
 ```text
-17:16:58:864 INFO  [org.kie.kogito.StockService] Created Stock for 12345678 with Id: 8ab1ac13-38d0-49e6-ab40-1edd2dc39922
-17:16:58:865 INFO  [org.kie.kogito.PaymentService] Created Payment for 12345678 with Id: 2bfc044a-ccb4-4072-a26e-5a533d835257
-17:16:58:865 INFO  [org.kie.kogito.ShippingService] Created Shipping for 12345678 with Id: 84a45015-c98b-4e08-b4cd-cf05a19b87e1
-17:16:58:865 INFO  [org.kie.kogito.OrderService] Success Order 12345678
+17:16:58:864 INFO  [org.kie.kogito.examples.StockService] Created Stock for 12345678 with Id: 8ab1ac13-38d0-49e6-ab40-1edd2dc39922
+17:16:58:865 INFO  [org.kie.kogito.examples.PaymentService] Created Payment for 12345678 with Id: 2bfc044a-ccb4-4072-a26e-5a533d835257
+17:16:58:865 INFO  [org.kie.kogito.examples.ShippingService] Created Shipping for 12345678 with Id: 84a45015-c98b-4e08-b4cd-cf05a19b87e1
+17:16:58:865 INFO  [org.kie.kogito.examples.OrderService] Success Order 12345678
 ```
 
 #### Simulating errors to activate the compensation flows
@@ -168,7 +173,7 @@ Example:
 Curl command (using the JSON object above):
 
 ```sh
-curl -H "Content-Type: application/json" -X POST http://localhost:8080/orders -d '{"orderId" : "03e6cf79-3301-434b-b5e1-d6899b5639aa", "failService" : "PaymentService"}' 
+curl -H "Content-Type: application/json" -X POST http://localhost:8080/order -d '{"orderId" : "03e6cf79-3301-434b-b5e1-d6899b5639aa", "failService" : "PaymentService"}' 
 ```
 
 Response example:
@@ -200,15 +205,11 @@ Response example:
 In the console executing the application you can check the log it with the executed steps.
 
 ```text
-17:16:17:723 INFO  [org.kie.kogito.StockService] Created Stock for 12345678 with Id: 9098daa2-f40f-4231-995a-1c7d159df190
-17:16:17:724 INFO  [org.kie.kogito.PaymentService] Created Payment for 12345678 with Id: d6ac4086-efe9-4a9e-849c-2b6d48dbc1f0
-17:16:17:724 INFO  [org.kie.kogito.ShippingService] Created Shipping for 12345678 with Id: 39c40aa1-10af-42ad-8ba2-b8dd9c6279e1
-17:16:17:746 WARN  [org.kie.kogito.ShippingService] Cancel Shipping for 39c40aa1-10af-42ad-8ba2-b8dd9c6279e1
-17:16:17:746 WARN  [org.kie.kogito.PaymentService] Cancel Payment for d6ac4086-efe9-4a9e-849c-2b6d48dbc1f0
-17:16:17:747 WARN  [org.kie.kogito.StockService] Cancel Stock for 9098daa2-f40f-4231-995a-1c7d159df190
-17:16:17:747 WARN  [org.kie.kogito.OrderService] Failed Order 12345678
+17:16:17:723 INFO  [org.kie.kogito.examples.StockService] Created Stock for 12345678 with Id: 9098daa2-f40f-4231-995a-1c7d159df190
+17:16:17:724 INFO  [org.kie.kogito.examples.PaymentService] Created Payment for 12345678 with Id: d6ac4086-efe9-4a9e-849c-2b6d48dbc1f0
+17:16:17:724 INFO  [org.kie.kogito.examples.ShippingService] Created Shipping for 12345678 with Id: 39c40aa1-10af-42ad-8ba2-b8dd9c6279e1
+17:16:17:746 WARN  [org.kie.kogito.examples.ShippingService] Cancel Shipping for 39c40aa1-10af-42ad-8ba2-b8dd9c6279e1
+17:16:17:746 WARN  [org.kie.kogito.examples.PaymentService] Cancel Payment for d6ac4086-efe9-4a9e-849c-2b6d48dbc1f0
+17:16:17:747 WARN  [org.kie.kogito.examples.StockService] Cancel Stock for 9098daa2-f40f-4231-995a-1c7d159df190
+17:16:17:747 WARN  [org.kie.kogito.examples.OrderService] Failed Order 12345678
 ```
-
-## Deploying with Kogito Operator
-
-In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).

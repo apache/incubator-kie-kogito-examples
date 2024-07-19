@@ -1,17 +1,20 @@
 /*
- * Copyright 2020 Red Hat, Inc. and/or its affiliates.
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ *   http://www.apache.org/licenses/LICENSE-2.0
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
 package org.kie.kogito.examples.demo;
 
@@ -22,13 +25,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.kie.kogito.Model;
 import org.kie.kogito.examples.DemoApplication;
 import org.kie.kogito.process.Process;
-import org.kie.kogito.process.ProcessInstanceReadMode;
 import org.kie.kogito.testcontainers.springboot.InfinispanSpringBootTestResource;
 import org.kie.kogito.testcontainers.springboot.KafkaSpringBootTestResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -40,6 +42,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.kie.kogito.test.utils.ProcessInstancesTestUtils.abort;
 
 @SuppressWarnings("rawtypes")
 @ExtendWith(SpringExtension.class)
@@ -59,7 +62,7 @@ public class PersonsRestIT {
         RestAssured.port = port;
 
         // need it when running with persistence
-        personProcess.instances().values(ProcessInstanceReadMode.MUTABLE).forEach(pi -> pi.abort());
+        abort(personProcess.instances());
     }
 
     @Test
@@ -73,7 +76,7 @@ public class PersonsRestIT {
 
         // get all persons make sure there is zero
         given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)
-                .body("$.size()", is(0));
+                .body("size()", is(0));
     }
 
     @Test
@@ -87,7 +90,7 @@ public class PersonsRestIT {
 
         // test getting the created order
         given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)
-                .body("$.size()", is(1), "[0].id", is(firstCreatedId));
+                .body("size()", is(1), "[0].id", is(firstCreatedId));
 
         // test getting task
         String taskInfo = given()
@@ -96,7 +99,7 @@ public class PersonsRestIT {
                 .get("/persons/" + firstCreatedId + "/tasks?user=admin")
                 .then()
                 .statusCode(200)
-                .body("$.size", is(1))
+                .body("size()", is(1))
                 .body("[0].name", is("ChildrenHandling"))
                 .extract()
                 .path("[0].id");
@@ -114,7 +117,7 @@ public class PersonsRestIT {
 
         // get all persons make sure there is zero
         given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)
-                .body("$.size()", is(0));
+                .body("size()", is(0));
     }
 
     @Test
@@ -128,7 +131,7 @@ public class PersonsRestIT {
 
         // test getting the created order
         given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)
-                .body("$.size()", is(1), "[0].id", is(firstCreatedId));
+                .body("size()", is(1), "[0].id", is(firstCreatedId));
 
         // test getting task
         String taskInfo = given()
@@ -137,7 +140,7 @@ public class PersonsRestIT {
                 .get("/persons/" + firstCreatedId + "/tasks?user=admin")
                 .then()
                 .statusCode(200)
-                .body("$.size", is(1))
+                .body("size()", is(1))
                 .body("[0].name", is("ChildrenHandling"))
                 .extract()
                 .path("[0].id");
@@ -154,7 +157,7 @@ public class PersonsRestIT {
 
         // get all persons make sure there is zero
         given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)
-                .body("$.size()", is(0));
+                .body("size()", is(0));
     }
 
     @Test
@@ -168,7 +171,7 @@ public class PersonsRestIT {
 
         // test getting the created order
         given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)
-                .body("$.size()", is(1), "[0].id", is(firstCreatedId));
+                .body("size()", is(1), "[0].id", is(firstCreatedId));
 
         // test getting task with wrong user
         given()
@@ -177,7 +180,7 @@ public class PersonsRestIT {
                 .get("/persons/" + firstCreatedId + "/tasks?user=john")
                 .then()
                 .statusCode(200)
-                .body("$.size", is(0));
+                .body("size()", is(0));
 
         String taskInfo = given()
                 .accept(ContentType.JSON)
@@ -185,7 +188,7 @@ public class PersonsRestIT {
                 .get("/persons/" + firstCreatedId + "/tasks?user=admin")
                 .then()
                 .statusCode(200)
-                .body("$.size", is(1))
+                .body("size()", is(1))
                 .body("[0].name", is("ChildrenHandling"))
                 .extract()
                 .path("[0].id");
@@ -213,7 +216,7 @@ public class PersonsRestIT {
 
         // get all persons make sure there is zero
         given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)
-                .body("$.size()", is(0));
+                .body("size()", is(0));
     }
 
     @Test
@@ -227,7 +230,7 @@ public class PersonsRestIT {
 
         // test getting the created order
         given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)
-                .body("$.size()", is(1), "[0].id", is(firstCreatedId));
+                .body("size()", is(1), "[0].id", is(firstCreatedId));
 
         // test getting task
         String taskId = given()
@@ -236,7 +239,7 @@ public class PersonsRestIT {
                 .get("/persons/" + firstCreatedId + "/tasks?user=admin")
                 .then()
                 .statusCode(200)
-                .body("$.size", is(1))
+                .body("size()", is(1))
                 .body("[0].name", is("ChildrenHandling"))
                 .extract()
                 .path("[0].id");
@@ -257,7 +260,7 @@ public class PersonsRestIT {
 
         // get all persons make sure there is zero
         given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)
-                .body("$.size()", is(0));
+                .body("size()", is(0));
     }
 
     // Disabled until KOGITO-1787 is fixed
@@ -277,7 +280,7 @@ public class PersonsRestIT {
 
         // test getting the created order
         given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)
-                .body("$.size()", is(1), "[0].id", is(firstCreatedId), "[0].person.adult", is(false));
+                .body("size()", is(1), "[0].id", is(firstCreatedId), "[0].person.adult", is(false));
 
         // test getting task
         String taskInfo = given()
@@ -286,7 +289,7 @@ public class PersonsRestIT {
                 .get("/persons/" + firstCreatedId + "/tasks?user=admin")
                 .then()
                 .statusCode(200)
-                .body("$.size", is(1))
+                .body("size()", is(1))
                 .body("[0].name", is("ChildrenHandling"))
                 .extract()
                 .path("[0].id");
@@ -304,7 +307,7 @@ public class PersonsRestIT {
 
         // get all persons make sure there is zero
         given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)
-                .body("$.size()", is(0));
+                .body("size()", is(0));
     }
 
     @Test
@@ -321,7 +324,7 @@ public class PersonsRestIT {
 
         // test getting the created order
         given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)
-                .body("$.size()", is(1), "[0].id", is(firstCreatedId), "[0].person.adult", is(false));
+                .body("size()", is(1), "[0].id", is(firstCreatedId), "[0].person.adult", is(false));
 
         // test getting task
         given()
@@ -330,7 +333,7 @@ public class PersonsRestIT {
                 .get("/persons/" + firstCreatedId + "/tasks?user=admin")
                 .then()
                 .statusCode(200)
-                .body("$.size", is(1))
+                .body("size()", is(1))
                 .body("[0].name", is("ChildrenHandling"));
 
         // abort process instance via management interface
@@ -339,7 +342,7 @@ public class PersonsRestIT {
 
         // get all persons make sure there is zero
         given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)
-                .body("$.size()", is(0));
+                .body("size()", is(0));
     }
 
     @Test
@@ -356,7 +359,7 @@ public class PersonsRestIT {
 
         // test getting the created order
         given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)
-                .body("$.size()", is(1), "[0].id", is(firstCreatedId), "[0].person.adult", is(false));
+                .body("size()", is(1), "[0].id", is(firstCreatedId), "[0].person.adult", is(false));
 
         // test getting task
         String taskInfo = given()
@@ -365,13 +368,13 @@ public class PersonsRestIT {
                 .get("/persons/" + firstCreatedId + "/tasks?user=admin")
                 .then()
                 .statusCode(200)
-                .body("$.size", is(1))
+                .body("size()", is(1))
                 .body("[0].name", is("ChildrenHandling"))
                 .extract()
                 .path("[0].id");
 
         String nodeInstanceId = given().contentType(ContentType.JSON).accept(ContentType.JSON).when().get("/management/processes/persons/instances/" + firstCreatedId + "/nodeInstances").then()
-                .statusCode(200).body("$.size()", is(1)).extract().path("[0].nodeInstanceId");
+                .statusCode(200).body("size()", is(1)).extract().path("[0].nodeInstanceId");
 
         // retrigger node instance via management interface
         given().contentType(ContentType.JSON).accept(ContentType.JSON).when().post("/management/processes/persons/instances/" + firstCreatedId + "/nodeInstances/" + nodeInstanceId).then()
@@ -379,14 +382,14 @@ public class PersonsRestIT {
 
         taskInfo = given().accept(ContentType.JSON).when().get("/persons/" + firstCreatedId + "/tasks?user=admin").then()
                 .statusCode(200)
-                .body("$.size", is(1))
+                .body("size()", is(1))
                 .body("[0].name", is("ChildrenHandling"))
                 .extract()
                 .path("[0].id");
 
         String retriggeredNodeInstanceId =
                 given().contentType(ContentType.JSON).accept(ContentType.JSON).when().get("/management/processes/persons/instances/" + firstCreatedId + "/nodeInstances").then()
-                        .statusCode(200).body("$.size()", is(1)).extract().path("[0].nodeInstanceId");
+                        .statusCode(200).body("size()", is(1)).extract().path("[0].nodeInstanceId");
         // since node instance was retriggered it must have different ids
         assertNotEquals(nodeInstanceId, retriggeredNodeInstanceId);
 
@@ -403,7 +406,7 @@ public class PersonsRestIT {
 
         // get all persons make sure there is zero
         given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)
-                .body("$.size()", is(0));
+                .body("size()", is(0));
     }
 
     @Test
@@ -420,7 +423,7 @@ public class PersonsRestIT {
 
         // test getting the created order
         given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)
-                .body("$.size()", is(1), "[0].id", is(firstCreatedId), "[0].person.adult", is(false));
+                .body("size()", is(1), "[0].id", is(firstCreatedId), "[0].person.adult", is(false));
 
         // test getting task
         String taskId = given()
@@ -429,13 +432,13 @@ public class PersonsRestIT {
                 .get("/persons/" + firstCreatedId + "/tasks?user=admin")
                 .then()
                 .statusCode(200)
-                .body("$.size", is(1))
+                .body("size()", is(1))
                 .body("[0].name", is("ChildrenHandling"))
                 .extract()
                 .path("[0].id");
 
         String nodeInstanceId = given().contentType(ContentType.JSON).accept(ContentType.JSON).when().get("/management/processes/persons/instances/" + firstCreatedId + "/nodeInstances").then()
-                .statusCode(200).body("$.size()", is(1)).extract().path("[0].nodeInstanceId");
+                .statusCode(200).body("size()", is(1)).extract().path("[0].nodeInstanceId");
 
         // cancel node instance
         given().contentType(ContentType.JSON).accept(ContentType.JSON).when().delete("/management/processes/persons/instances/" + firstCreatedId + "/nodeInstances/" + nodeInstanceId).then()
@@ -451,14 +454,14 @@ public class PersonsRestIT {
                 .get("/persons/" + firstCreatedId + "/tasks?user=admin")
                 .then()
                 .statusCode(200)
-                .body("$.size", is(1))
+                .body("size()", is(1))
                 .body("[0].name", is("ChildrenHandling"))
                 .extract()
                 .path("[0].id");
 
         String retriggeredNodeInstanceId =
                 given().contentType(ContentType.JSON).accept(ContentType.JSON).when().get("/management/processes/persons/instances/" + firstCreatedId + "/nodeInstances").then()
-                        .statusCode(200).body("$.size()", is(1)).extract().path("[0].nodeInstanceId");
+                        .statusCode(200).body("size()", is(1)).extract().path("[0].nodeInstanceId");
         // since node instance was retriggered it must have different ids
         assertNotEquals(nodeInstanceId, retriggeredNodeInstanceId);
 
@@ -475,6 +478,6 @@ public class PersonsRestIT {
 
         // get all persons make sure there is zero
         given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)
-                .body("$.size()", is(0));
+                .body("size()", is(0));
     }
 }

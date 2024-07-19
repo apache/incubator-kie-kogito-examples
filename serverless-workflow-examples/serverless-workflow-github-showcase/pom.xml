@@ -1,13 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+
+-->
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
          xmlns="http://maven.apache.org/POM/4.0.0">
   <modelVersion>4.0.0</modelVersion>
+
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
-    <artifactId>serverless-workflow-examples</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
+    <artifactId>serverless-workflow-examples-parent</artifactId>
+    <version>999-SNAPSHOT</version>
+    <relativePath>../serverless-workflow-examples-parent/pom.xml</relativePath>
   </parent>
+
+  <groupId>org.kie.kogito.examples</groupId>
   <artifactId>serverless-workflow-github-showcase</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
   <packaging>pom</packaging>
   <name>Kogito Example :: Serverless Workflow Github Showcase</name>
   <modules>
@@ -16,11 +42,11 @@
     <module>notification-service</module>
   </modules>
   <properties>
-    <jandex-plugin.version>1.0.7</jandex-plugin.version>
-    <surefire-plugin.version>2.22.1</surefire-plugin.version>
+    <jandex-plugin.version>3.1.6</jandex-plugin.version>
+    <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
     <version.io.jjwt>0.11.2</version.io.jjwt>
     <version.kohsuke.github>1.116</version.kohsuke.github>
-    <version.org.camel>1.0.1</version.org.camel>
-    <version.com.github.tomakehurst.wiremock>2.27.2</version.com.github.tomakehurst.wiremock>
+    <version.org.camel>3.9.0</version.org.camel>
+    <version.com.github.tomakehurst.wiremock>2.33.2</version.com.github.tomakehurst.wiremock>
   </properties>
 </project>

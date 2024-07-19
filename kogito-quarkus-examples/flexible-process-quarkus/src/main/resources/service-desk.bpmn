@@ -743,7 +743,7 @@
           <bpmn2:targetRef>supportCase</bpmn2:targetRef>
         </bpmn2:dataOutputAssociation>
       </bpmn2:serviceTask>
-      <bpmn2:completionCondition xsi:type="bpmn2:tFormalExpression" language="http://www.mvel.org/2.0"><![CDATA[org.kie.kogito.flexible.example.model.State.CLOSED.equals(supportCase.getState())]]></bpmn2:completionCondition>
+      <bpmn2:completionCondition xsi:type="bpmn2:tFormalExpression" language="java"><![CDATA[org.kie.kogito.flexible.example.model.State.CLOSED.equals(supportCase.getState())]]></bpmn2:completionCondition>
     </bpmn2:adHocSubProcess>
   </bpmn2:process>
   <bpmndi:BPMNDiagram>

@@ -9,7 +9,9 @@ The workflow is described using JSON format as defined in the
 The workflow expects a JSON input containing the temperature in Fahrenheits:
 
 ```json
-{"workflowdata" : { "fahrenheit": 100  } }
+{
+  "fahrenheit": 100
+}
 ```
 
 The workflow starts defining the constants to be used during the computation.
@@ -22,9 +24,9 @@ Finally, the result will be returned to the caller, the final product of the equ
 
 You will need:
 
-- Java 11+ installed
+- Java 17+ installed
 - Environment variable `JAVA_HOME` set accordingly
-- Maven 3.8.1+ installed
+- Maven 3.9.6+ installed
 
 When using native image compilation, you will also need:
 
@@ -87,7 +89,7 @@ Complete curl command can be found below:
 curl -X POST \
     -H 'Content-Type:application/json' \
     -H 'Accept:application/json' \
-    -d '{"workflowdata" : { "fahrenheit": 100  } }' \
+    -d '{"fahrenheit": 100}' \
     http://localhost:8080/fahrenheit_to_celsius | jq .
 ```
 
@@ -106,7 +108,3 @@ You should have a reply similar to this one:
   }
 }
 ```
-
-## Deploying with Kogito Operator
-
-In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).

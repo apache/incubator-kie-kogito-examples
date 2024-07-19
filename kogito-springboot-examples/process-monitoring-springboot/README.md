@@ -10,7 +10,7 @@ You will need:
 
 - Java 11+ installed
 - Environment variable JAVA_HOME set accordingly
-- Maven 3.8.1+ installed
+- Maven 3.8.6+ installed
 - Docker 19+ (only if you want to run the integration tests and/or you want to use the `docker-compose` script provided in this example).
 
 ### How to enable the feature
@@ -20,8 +20,8 @@ Import the following dependency in your `pom.xml`:
 ```XML
 
 <dependency>
-  <groupId>org.kie.kogito</groupId>
-  <artifactId>kogito-addons-springboot-monitoring-prometheus</artifactId>
+  <groupId>org.kie</groupId>
+  <artifactId>kie-addons-springboot-monitoring-prometheus</artifactId>
 </dependency>
 ```
 
@@ -32,9 +32,9 @@ path `target/resources/dashboards/`. You can then inject those Grafana dashboard
 
 The use case is summarized in the following schema:
 
-![RuntimeMetrics](https://user-images.githubusercontent.com/18282531/76740726-a0cbdd80-676e-11ea-8cc3-63ed5cbb3ac8.png)
+![RuntimeMetrics](./docs/schema.png)
 
-To summarize, the kogito app will expose by default an endpoint `/metrics` with the prometheus variables, and a prometheus instance will simply fetch
+To summarize, the kogito app will expose by default an endpoint `/actuator/prometheus` with the prometheus variables, and a prometheus instance will simply fetch
 the data from there.
 
 ### Dashboards

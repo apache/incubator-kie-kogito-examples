@@ -1,0 +1,30 @@
+{
+  "id": "jsongreetbidistream",
+  "version": "1.0",
+  "name": "gRPC Bidirectional Stream Greeting workflow",
+  "description": "JSON based greeting workflow using gRPC",
+  "start": "GreetPerson",
+  "functions": [
+    {
+      "name": "SayHelloMultipleLanguages",
+      "type": "rpc",
+      "operation": "classpath:greeting.proto#Greeter#SayHelloMultipleLanguages"
+    }
+  ],
+  "states": [
+    {
+      "name": "GreetPerson",
+      "type": "operation",
+      "actions": [
+        {
+          "name": "SayHelloMultipleLanguages",
+          "functionRef" : {
+            "refName": "SayHelloMultipleLanguages",
+            "arguments": ".helloRequests"
+          }
+        }
+      ],
+      "end": true
+    }
+  ]
+}

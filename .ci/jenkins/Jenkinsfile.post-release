@@ -1,0 +1,140 @@
+import org.jenkinsci.plugins.workflow.libs.Library
+@Library('jenkins-pipeline-shared-libraries')_
+
+pipeline {
+    agent {
+        docker { 
+            image env.AGENT_DOCKER_BUILDER_IMAGE
+            args env.AGENT_DOCKER_BUILDER_ARGS
+            label util.avoidFaultyNodes()
+        }
+    }
+
+    options {
+        timestamps()
+        timeout(time: 120, unit: 'MINUTES')
+        disableConcurrentBuilds(abortPrevious: true)
+    }
+
+    environment {
+        CI_EMAIL_TO = credentials("${JENKINS_EMAIL_CREDS_ID}")
+    }
+
+    stages {
+        stage('Initialization') {
+            steps {
+                script {
+                    cleanWs(disableDeferredWipeout: true)
+
+                    if (params.DISPLAY_NAME) {
+                        currentBuild.displayName = params.DISPLAY_NAME
+                    }
+
+                    // Verify version is set and if on right release branch
+                    assert getProjectVersion()
+                    assert getBuildBranch() == util.getReleaseBranchFromVersion(getProjectVersion())
+                }
+            }
+        }
+        stage('Reset stable branch') {
+            steps {
+                script {
+                    String stableBranchName = 'stable'
+                    dir(getRepoName()) {
+                        checkoutTag(getRepoName(), getGitTag(), stableBranchName)
+                        forcePushProtectedBranch(stableBranchName, 'main')
+                    }
+                }
+            }
+        }
+    }
+    post {
+        unsuccessful {
+            sendNotification()
+        }
+        cleanup {
+            script {
+                util.cleanNode()
+            }
+        }
+    }
+}
+
+void sendNotification() {
+    if (params.SEND_NOTIFICATION) {
+        mailer.sendMarkdownTestSummaryNotification('Post Release', "[${getBuildBranch()}] Kogito Examples", [env.CI_EMAIL_TO])
+    } else {
+        echo 'No notification sent per configuration'
+    }
+}
+
+//////////////////////////////////////////////////////////////////////////////
+// Getter / Setter
+//////////////////////////////////////////////////////////////////////////////
+
+String getRepoName() {
+    return env.REPO_NAME
+}
+
+String getProjectVersion() {
+    return params.PROJECT_VERSION
+}
+
+String getGitTag() {
+    return params.GIT_TAG ?: getProjectVersion()
+}
+
+String getBuildBranch() {
+    return params.BUILD_BRANCH_NAME
+}
+
+String getGitAuthor() {
+    return env.GIT_AUTHOR
+}
+
+String getGitAuthorCredsId() {
+    return env.GIT_AUTHOR_CREDS_ID
+}
+
+String getGitAuthorPushCredsId() {
+    return env.GIT_AUTHOR_PUSH_CREDS_ID
+}
+
+String getGitAuthorPushTokenCredsId() {
+    return env.GIT_AUTHOR_PUSH_TOKEN_CREDS_ID
+}
+
+//////////////////////////////////////////////////////////////////////////////
+// Git
+//////////////////////////////////////////////////////////////////////////////
+
+void checkoutTag(String repo, String tagName, String localBranchName = tagName) {
+    deleteDir()
+    checkout(githubscm.resolveRepository(repo, getGitAuthor(), getBuildBranch(), false, getGitAuthorCredsId()))
+    // Need to manually checkout branch since we are in 'detached HEAD' state after the git checkout command.
+    sh "git checkout tags/${tagName} -b ${localBranchName}"
+}
+
+void setDefaultBranch(String defaultBranch) {
+    withCredentials([string(credentialsId: getGitAuthorPushTokenCredsId(), variable: 'GITHUB_TOKEN')]) {
+        // gh command from https://github.com/cli/cli/issues/929#issuecomment-629253585
+        def newDefaultBranch = sh(script: "../gh api -XPATCH 'repos/${getGitAuthor()}/${getRepoName()}' -f default_branch=${defaultBranch} | jq '.default_branch'", returnStdout: true).trim()
+        if (newDefaultBranch == "\"${defaultBranch}\"") {
+            echo "[INFO] ${getGitAuthor()}/${getRepoName()}'s default branch has been updated to ${newDefaultBranch}."
+        } else {
+            error 'Couldn\'t update default branch.'
+        }
+    }
+}
+
+void forcePushProtectedBranch(String defaultBranch, String tempBranch) {
+    setDefaultBranch(tempBranch)
+    withCredentials([usernamePassword(credentialsId: getGitAuthorPushCredsId(), usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
+        sh """
+        git config --local credential.helper \"!f() { echo username=\\$GIT_USERNAME; echo password=\\$GIT_PASSWORD; }; f\"
+        git push --delete origin ${defaultBranch}
+        git push origin ${defaultBranch}
+        """
+    }
+    setDefaultBranch(defaultBranch)
+}

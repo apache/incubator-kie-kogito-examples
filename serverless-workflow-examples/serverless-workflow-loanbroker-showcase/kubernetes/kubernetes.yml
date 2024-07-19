@@ -1,0 +1,258 @@
+#
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+#
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: loanbroker-example
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: loanbroker-bank1
+  namespace: loanbroker-example
+spec:
+  template:
+    metadata:
+      creationTimestamp: null
+    spec:
+      containerConcurrency: 0
+      containers:
+      - env:
+        - name: BANK_ID
+          value: Bank1
+        - name: MAX_LOAN_AMOUNT
+          value: "500000"
+        - name: MIN_CREDIT_SCORE
+          value: "300"
+        - name: BASE_RATE
+          value: "3"
+        image: dev.local/loanbroker-bank:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /health/liveness
+            port: 0
+        name: user-container
+        readinessProbe:
+          httpGet:
+            path: /health/readiness
+            port: 0
+          successThreshold: 1
+        resources: {}
+      enableServiceLinks: false
+      timeoutSeconds: 300
+  traffic:
+  - latestRevision: true
+    percent: 100
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: loanbroker-bank2
+  namespace: loanbroker-example
+spec:
+  template:
+    metadata:
+      creationTimestamp: null
+    spec:
+      containerConcurrency: 0
+      containers:
+      - env:
+        - name: BANK_ID
+          value: Bank2
+        - name: MAX_LOAN_AMOUNT
+          value: "65536"
+        - name: MIN_CREDIT_SCORE
+          value: "100"
+        - name: BASE_RATE
+          value: "2"
+        image: dev.local/loanbroker-bank:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /health/liveness
+            port: 0
+        name: user-container
+        readinessProbe:
+          httpGet:
+            path: /health/readiness
+            port: 0
+          successThreshold: 1
+        resources: {}
+      enableServiceLinks: false
+      timeoutSeconds: 300
+  traffic:
+  - latestRevision: true
+    percent: 100
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: loanbroker-bank3
+  namespace: loanbroker-example
+spec:
+  template:
+    metadata:
+      creationTimestamp: null
+    spec:
+      containerConcurrency: 0
+      containers:
+      - env:
+        - name: BANK_ID
+          value: Bank3
+        - name: MAX_LOAN_AMOUNT
+          value: "10000"
+        - name: MIN_CREDIT_SCORE
+          value: "400"
+        - name: BASE_RATE
+          value: "2"
+        image: dev.local/loanbroker-bank:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /health/liveness
+            port: 0
+        name: user-container
+        readinessProbe:
+          httpGet:
+            path: /health/readiness
+            port: 0
+          successThreshold: 1
+        resources: {}
+      enableServiceLinks: false
+      timeoutSeconds: 300
+  traffic:
+  - latestRevision: true
+    percent: 100
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: loanbroker-credit-bureau
+  namespace: loanbroker-example
+spec:
+  template:
+    metadata:
+      creationTimestamp: null
+    spec:
+      containerConcurrency: 0
+      containers:
+      - image: dev.local/loanbroker-credit-bureau:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /health/liveness
+            port: 0
+        name: user-container
+        readinessProbe:
+          httpGet:
+            path: /health/readiness
+            port: 0
+          successThreshold: 1
+        resources: {}
+      enableServiceLinks: false
+      timeoutSeconds: 300
+  traffic:
+  - latestRevision: true
+    percent: 100
+---
+# trigger for the Bank Function
+# remove it once kn func implements this feature
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: trigger-aggregator-bank1-quote
+  namespace: loanbroker-example
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: kogito.serverless.workflow.request.quote
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: loanbroker-bank1
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: trigger-aggregator-bank2-quote
+  namespace: loanbroker-example
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: kogito.serverless.workflow.request.quote
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: loanbroker-bank2
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: trigger-aggregator-bank3-quote
+  namespace: loanbroker-example
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: kogito.serverless.workflow.request.quote
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: loanbroker-bank3
+---
+# use for debugging
+# simple knative application to display the routed messages
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: event-display
+  namespace: loanbroker-example
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/minScale: "1"
+        autoscaling.knative.dev/maxScale: "1"
+      labels:
+        app.kubernetes.io/name: event-display
+    spec:
+      containers:
+        -  # This corresponds to
+          # https://github.com/knative/eventing-contrib/tree/main/cmd/event_display
+          image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display@sha256:a214514d6ba674d7393ec8448dd272472b2956207acb3f83152d3071f0ab1911
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: trigger-eventdisplay
+  namespace: loanbroker-example
+spec:
+  broker: default
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: event-display

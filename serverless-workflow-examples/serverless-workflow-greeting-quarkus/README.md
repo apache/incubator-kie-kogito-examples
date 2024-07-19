@@ -24,9 +24,9 @@ The function then prints out the greeting to the console.
 ### Prerequisites
  
 You will need:
-  - Java 11+ installed
+  - Java 17+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.8.1+ installed
+  - Maven 3.9.6+ installed
 
 When using native image compilation, you will also need: 
   - [GraalVm](https://www.graalvm.org/downloads/) 19.3.1+ installed
@@ -73,17 +73,15 @@ with following content
 
 ```json
 {
-  "workflowdata": {
-   "name" : "John",
-   "language": "English"
-  }
+  "name": "John",
+  "language": "English"
 }
 ```
 
 Complete curl command can be found below:
 
 ```sh
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : {"name": "John", "language": "English"}}' http://localhost:8080/jsongreet
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"name": "John", "language": "English"}' http://localhost:8080/jsongreet
 ```
 
 Log after curl executed:
@@ -102,17 +100,15 @@ If you would like to greet the person in Spanish, we need to pass the following 
 
 ```json
 {
-  "workflowdata": {
-   "name" : "John",
-   "language": "Spanish"
-  }
+  "name": "John",
+  "language": "Spanish"
 }
 ```
 
 Complete curl command can be found below:
 
 ```sh
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : {"name": "John", "language": "Spanish"}}' http://localhost:8080/jsongreet
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"name": "John", "language": "Spanish"}' http://localhost:8080/jsongreet
 ```
 
 In Quarkus you should now see the log message printed: 
@@ -126,17 +122,15 @@ using the same content:
 
 ```json
 {
-  "workflowdata": {
-   "name" : "John",
-   "language": "English"
-  }
+  "name": "John",
+  "language": "English"
 }
 ``` 
 
 Complete curl command can be found below:
 
 ```sh
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : {"name": "John", "language": "English"}}' http://localhost:8080/yamlgreet
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"name": "John", "language": "English"}' http://localhost:8080/yamlgreet
 ```
  
 In Quarkus you should see the log message:
@@ -146,7 +140,3 @@ Hello from YAML Workflow, John
 ```
 
 You can also change the language parameter value to "Spanish" to get the greeting in Spanish.
-
-## Deploying with Kogito Operator
-
-In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).

@@ -4,6 +4,7 @@
   "source": "PredicatesMining",
   "type": "PredictionResponseFull",
   "subject": "TheSubject",
+  "kogitopmmlfilename": "test_miningmodel.pmml",
   "kogitopmmlmodelname": "PredicatesMining",
   "data": {
     "segmentIndex": 0,

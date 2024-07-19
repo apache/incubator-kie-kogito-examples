@@ -39,7 +39,7 @@ $ curl -X POST \
   http://localhost:8080
 ```
 
-The [workflow](src/main/resources/onbording.sw.json) will then call a sequence of REST services:
+The [workflow](src/main/resources/onboarding.sw.json) will then call a sequence of REST services:
 
 1. `StoreNewPatient` will store the patient in the internal database for later processing
 2. `AssignDoctorToPatient` will run a set of [rules](https://docs.jboss.org/kogito/release/latest/html_single/#con-drl-rule-units_drl-rules) 
@@ -61,9 +61,9 @@ Also, there is the Swagger UI that can also be used to explore the APIs in this 
 ### Prerequisites
  
 You will need:
-  - Java 11+ installed
+  - Java 17+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.8.1+ installed
+  - Maven 3.9.6+ installed
 
 When using native image compilation, you will also need: 
   - [GraalVm](https://www.graalvm.org/downloads/) 20.2.0+ installed

@@ -1,36 +1,34 @@
 /*
- * Copyright 2021 Red Hat, Inc. and/or its affiliates.
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ *   http://www.apache.org/licenses/LICENSE-2.0
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
 package org.acme.deals;
 
 import org.junit.jupiter.api.Test;
-import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 
-import io.quarkus.test.common.QuarkusTestResource;
-import io.quarkus.test.common.ResourceArg;
-import io.quarkus.test.junit.QuarkusTest;
+import io.quarkus.test.junit.QuarkusIntegrationTest;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource.KOGITO_KAFKA_TOPICS;
 
-@QuarkusTest
-@QuarkusTestResource(value = KafkaQuarkusTestResource.class, initArgs = { @ResourceArg(name = KOGITO_KAFKA_TOPICS, value = "kogito.process") })
+@QuarkusIntegrationTest
 public class DealsRestIT {
 
     static {
@@ -51,7 +49,7 @@ public class DealsRestIT {
         given().accept(ContentType.JSON)
                 .when().get("/deals")
                 .then().statusCode(200)
-                .body("$.size()", is(1))
+                .body("size()", is(1))
                 .body("[0].id", is(dealId))
                 .body("[0].name", is(deal));
 
@@ -64,7 +62,7 @@ public class DealsRestIT {
         String dealReviewId = given().accept(ContentType.JSON)
                 .when().get("/dealreviews")
                 .then().statusCode(200)
-                .body("$.size()", is(1))
+                .body("size()", is(1))
                 .body("[0].id", notNullValue())
                 .body("[0].deal", is(deal))
                 .extract().path("[0].id");
@@ -73,7 +71,7 @@ public class DealsRestIT {
         String taskId = given().accept(ContentType.JSON)
                 .when().get("/dealreviews/{uuid}/tasks?user=john", dealReviewId)
                 .then().statusCode(200)
-                .body("$.size", is(1))
+                .body("size()", is(1))
                 .body("[0].name", is("review"))
                 .body("[0].parameters.deal", is(deal))
                 .extract().path("[0].id");
@@ -89,11 +87,11 @@ public class DealsRestIT {
         //verify no deals to review
         given().accept(ContentType.JSON)
                 .when().get("/dealreviews")
-                .then().statusCode(200).body("$.size()", is(0));
+                .then().statusCode(200).body("size()", is(0));
 
         //verify no deals
         given().accept(ContentType.JSON)
                 .when().get("/deals")
-                .then().statusCode(200).body("$.size()", is(0));
+                .then().statusCode(200).body("size()", is(0));
     }
 }

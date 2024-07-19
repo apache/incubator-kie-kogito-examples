@@ -6,15 +6,15 @@
   "errors" : [
     {
       "name" : "reserve stock failed",
-      "code": "org.kie.kogito.ServiceException"
+      "code": "org.kie.kogito.examples.ServiceException"
     },
     {
       "name": "process payment failed",
-      "code": "org.kie.kogito.ServiceException"
+      "code": "org.kie.kogito.examples.ServiceException"
     },
     {
       "name": "shipping failed",
-      "code": "org.kie.kogito.ServiceException"
+      "code": "org.kie.kogito.examples.ServiceException"
     }
     
   ],
@@ -23,42 +23,42 @@
     {
       "name": "reserveStock",
       "type": "custom",
-      "operation": "service:org.kie.kogito.StockService::reserveStock"
+      "operation": "service:org.kie.kogito.examples.StockService::reserveStock"
     },
     {
       "name": "cancelStock",
        "type": "custom",
-      "operation": "service:org.kie.kogito.StockService::cancelStock"
+      "operation": "service:org.kie.kogito.examples.StockService::cancelStock"
     },
     {
       "name": "processPayment",
       "type": "custom",
-      "operation": "service:org.kie.kogito.PaymentService::processPayment"
+      "operation": "service:org.kie.kogito.examples.PaymentService::processPayment"
     },
     {
       "name": "cancelPayment",
       "type": "custom",
-      "operation": "service:org.kie.kogito.PaymentService::cancelPayment"
+      "operation": "service:org.kie.kogito.examples.PaymentService::cancelPayment"
     },
     {
       "name": "scheduleShipping",
       "type": "custom",
-      "operation": "service:org.kie.kogito.ShippingService::scheduleShipping"
+      "operation": "service:org.kie.kogito.examples.ShippingService::scheduleShipping"
     },
     {
       "name": "cancelShipping",
       "type": "custom",
-      "operation": "service:org.kie.kogito.ShippingService::cancelShipping"
+      "operation": "service:org.kie.kogito.examples.ShippingService::cancelShipping"
     },
     {
       "name": "orderSuccess",
       "type": "custom",
-      "operation": "service:org.kie.kogito.OrderService::success"
+      "operation": "service:org.kie.kogito.examples.OrderService::success"
     },
     {
       "name": "orderFailure",
       "type": "custom",
-      "operation": "service:org.kie.kogito.OrderService::failure"
+      "operation": "service:org.kie.kogito.examples.OrderService::failure"
     },
     {
       "name": "log",
@@ -238,9 +238,7 @@
           }
         }
       ],
-      "end": {
-        "terminate": "true"
-      }
+      "end": true
     },
     {
       "name": "CompleteOrder",
@@ -260,9 +258,7 @@
           }
         }
       ],
-      "end": {
-        "terminate": "true"
-      }
+      "end": true
     }
   ]
 }

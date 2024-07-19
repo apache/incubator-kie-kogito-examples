@@ -50,9 +50,9 @@ In this way, a container for PostgreSQL will be started on port 5432.
 ### Prerequisites
 
 You will need:
-- Java 11+ installed
+- Java 17+ installed
 - Environment variable JAVA_HOME set accordingly
-- Maven 3.8.1+ installed
+- Maven 3.9.6+ installed
 
 When using native image compilation, you will also need:
 - [GraalVm](https://www.graalvm.org/downloads/) 19.3.1+ installed
@@ -116,7 +116,7 @@ Use the following curl command to create a new serverless workflow instance:
 
 ```sh
 curl -X 'POST' 'http://localhost:8080/qaservice' -H 'accept: application/json' -H 'Content-Type: application/json' \
--d '{ "workflowdata" : { "query" : "the text for my query" } }'
+-d '{ "query" : "the text for my query" }'
 ```
 
 Use the following curl command to list the knowledge database:

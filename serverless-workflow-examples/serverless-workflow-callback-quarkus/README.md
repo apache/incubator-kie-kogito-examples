@@ -31,7 +31,7 @@ In this way a container for Kafka will be started on port 9092.
 
 ### PostgreSQL
 
-Alternatively, you can run this example using persistence with a PostgreSQL server.
+This example also requires persistence with a PostgreSQL server.
 
 Configuration for setting up the connection can be found in [applications.properties](src/main/resources/application.properties) file, which
 follows the Quarkus JDBC settings, for more information please check [JDBC Configuration Reference](https://quarkus.io/guides/datasource#jdbc-configuration).
@@ -50,14 +50,18 @@ In this way a container for PostgreSQL will be started on port 5432.
 ### Prerequisites
  
 You will need:
-  - Java 11+ installed
+  - Java 17+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.8.1+ installed
+  - Maven 3.9.6+ installed
+  - Docker and Docker Compose to run the required example infrastructure.
 
 When using native image compilation, you will also need: 
-  - [GraalVm](https://www.graalvm.org/downloads/) 19.3.1+ installed
-  - Environment variable GRAALVM_HOME set accordingly
-  - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too.  You also need 'native-image' installed in GraalVM (using 'gu install native-image'). Please refer to [GraalVM installation documentation](https://www.graalvm.org/docs/reference-manual/aot-compilation/#prerequisites) for more details.
+    - GraalVM 20.3+ installed
+    - Environment variable GRAALVM_HOME set accordingly
+    - GraalVM native image needs as well native-image extension: https://www.graalvm.org/reference-manual/native-image/
+    - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too, please refer to GraalVM installation documentation for more details.
+
+NOTE: Quarkus provides a way of creating a native Linux executable without GraalVM installed, leveraging a container runtime such as Docker or Podman. More details in  https://quarkus.io/guides/building-native-image#container-runtime 
 
 ### Compile and Run in Local Dev Mode
 
@@ -65,29 +69,48 @@ When using native image compilation, you will also need:
 mvn clean package quarkus:dev
 ```
 
-### Compile and Run in JVM mode
+### Start infrastructure services
+
+You should start all the services before you execute any of the **Callback** example, to do that please execute:
 
 ```sh
-mvn clean package 
-java -jar target/quarkus-app/quarkus-run.jar
+mvn clean package -Pcontainer
 ```
 
-or on Windows
+For Linux and MacOS:
 
-```sh
-mvn clean package
-java -jar target\quarkus-app\quarkus-run.jar
+1. Open a Terminal
+2. Go to docker-compose folder
+3. Run the ```startServices.sh``` script
+
+```bash
+cd docker-compose && sh ./startServices.sh
 ```
 
-### Compile and Run in JVM mode using PostgreSQL persistence
-
-To enable persistence, please append `-Ppersistence` to your Maven command.
-That will ensure the correct dependencies are in place, and automatically set the required properties to connect
-with the PostgreSQL instance from the provided docker compose.
-
-```sh
-mvn clean package -Peristence 
+Tip: If you get permission denied while creating the postgres container, consider to use SELinux context.
+Update the following line:
+```yaml
+    - ./sql:/docker-entrypoint-initdb.d
 ```
+to
+```yaml
+    - ./sql:/docker-entrypoint-initdb.d:Z
+```
+
+Once all services bootstrap, the following ports will be assigned on your local machine:
+
+- PostgreSQL: 5432
+- Kafka: 9092
+- Data Index: 8180
+- PgAdmin: 8055
+- sw-callback-service :8080
+
+> **_NOTE:_**  This step requires the project to be compiled, please consider running a ```mvn clean package -Dcontainer``` command on the project root before running the ```startServices.sh``` script for the first time or any time you modify the project.
+
+Once started you can simply stop all services by executing the ```docker-compose -f docker-compose.yml stop```.
+
+All created containers can be removed by executing the ```docker-compose -f docker-compose.yml rm```.
+
 
 ### Compile and Run using Local Native Image
 Note that this requires GRAALVM_HOME to point to a valid GraalVM installation

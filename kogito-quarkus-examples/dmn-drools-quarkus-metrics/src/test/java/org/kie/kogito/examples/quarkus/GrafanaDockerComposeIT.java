@@ -1,17 +1,20 @@
 /*
- * Copyright 2020 Red Hat, Inc. and/or its affiliates.
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ *   http://www.apache.org/licenses/LICENSE-2.0
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
 package org.kie.kogito.examples.quarkus;
 
@@ -19,10 +22,7 @@ import java.io.File;
 import java.net.URISyntaxException;
 import java.time.Duration;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 import org.kie.kogito.testcontainers.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +39,6 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.core.IsNot.not;
 
 @Testcontainers
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class GrafanaDockerComposeIT {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GrafanaDockerComposeIT.class);
@@ -68,20 +67,14 @@ public class GrafanaDockerComposeIT {
                             Wait.forHttp("/api/v1/targets")
                                     .forResponsePredicate(x -> x.contains("\"health\":\"up\""))
                                     .withStartupTimeout(STARTUP_MINUTES_TIMEOUT))
-                    .withLogConsumer("prometheus_1", new Slf4jLogConsumer(LOGGER));
+                    .withLogConsumer("prometheus_1", new Slf4jLogConsumer(LOGGER))
+                    .withPull(false)
+                    .withLocalCompose(true)
+                    //See https://github.com/testcontainers/testcontainers-java/issues/4565
+                    .withOptions("--compatibility");
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    @BeforeAll
-    void setup() {
-        environment.start();
-    }
-
-    @AfterAll
-    void cleanup() {
-        environment.stop();
     }
 
     @Test
@@ -137,6 +130,6 @@ public class GrafanaDockerComposeIT {
                 .when()
                 .get("/q/metrics")
                 .then()
-                .header("Content-Type", "text/plain; version=0.0.4; charset=utf-8");
+                .header("Content-Type", "application/openmetrics-text; version=1.0.0; charset=utf-8");
     }
 }

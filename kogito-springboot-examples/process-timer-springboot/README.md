@@ -86,7 +86,7 @@ This needs to be given when starting process instance as delay attribute of type
 You will need:
   - Java 11+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.8.1+ installed
+  - Maven 3.8.6+ installed
 
 ### Compile and Run in Local Dev Mode
 
@@ -289,12 +289,6 @@ java -Dquarkus.http.port=8085 -Dquarkus.mongodb.connection-string=mongodb://{use
 In all cases replace `{version}` with actual Kogito version to be used (Job Service is available from 0.6.0)
 
 After that you can redo the timer queries described above.
-
-## Deploy on OpenShift
-
-This example can run on OpenShift 4 instance. Use [Kogito operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift) to deploy this example and instantiate also the Jobs service. Kogito operator will take care of configuring this example to successfully connect to the Jobs service.
-
-In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with the Kogito Operator.
 
 ### Test your application
 

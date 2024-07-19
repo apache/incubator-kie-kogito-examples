@@ -1,0 +1,39 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Quicksand:wght@300;400;600;700&display=swap");
+
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+
+$font-family-base: "Open Sans";
+$display-font-family: "Quicksand";
+$headings-font-family: "Quicksand";
+
+$primary: #41cee8;
+$secondary: $gray-600 !default;
+$success: $green !default;
+$info: $cyan !default;
+$warning: $yellow !default;
+$danger: $red !default;
+$light: $gray-100 !default;
+$dark: black;
+
+$theme-colors: (
+  "primary": $primary,
+  "secondary": $secondary,
+  "success": $success,
+  "info": $info,
+  "warning": $warning,
+  "danger": $danger,
+  "light": $light,
+  "dark": $dark,
+);
+
+@import "bootstrap";
+@import "bootstrap-icons";
+
+body {
+  background-color: $gray-200;
+}
+
+.main {
+  margin-top: 1.5rem;
+}

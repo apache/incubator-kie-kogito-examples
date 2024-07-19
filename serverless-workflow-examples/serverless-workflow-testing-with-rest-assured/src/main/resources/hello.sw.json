@@ -1,0 +1,20 @@
+{
+  "id": "hello",
+  "version": "1.0",
+  "name": "Hello workflow",
+  "description": "JSON based hello workflow",
+  "start": "Hello",
+  "states": [
+    {
+      "name": "Hello",
+      "type": "inject",
+      "data": {
+        "hello": "Hello, "
+      },
+      "stateDataFilter": {
+        "output": "${ {greeting: .hello+.name} }"
+      },
+      "end": true
+    }
+  ]
+}

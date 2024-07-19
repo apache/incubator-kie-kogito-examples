@@ -16,7 +16,7 @@ The main goal behind the addon is to allow Kogito DRL services to be used as par
 You will need:
   - Java 11+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.8.1+ installed
+  - Maven 3.8.6+ installed
   - [Docker Engine](https://docs.docker.com/engine/) and [Docker Compose](https://docs.docker.com/compose/) installed
 
 ### Enable The AddOn
@@ -25,8 +25,8 @@ Like the other Kogito AddOns, the only required step to enable it is to include 
 
 ```xml
 <dependency>
-  <groupId>org.kie.kogito</groupId>
-  <artifactId>kogito-addons-springboot-event-rules</artifactId>
+  <groupId>org.drools</groupId>
+  <artifactId>drools-addons-springboot-event-rules</artifactId>
 </dependency>
 ```
 

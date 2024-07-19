@@ -18,9 +18,9 @@ Finally, the resulting integer is printed using sysout script.
 ### Prerequisites
  
 You will need:
-  - Java 11+ installed
+  - Java 17+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.8.1+ installed
+  - Maven 3.9.6+ installed
 
 When using native image compilation, you will also need: 
   - [GraalVm](https://www.graalvm.org/downloads/) 20.2.0+ installed
@@ -67,45 +67,41 @@ with following content
 
 ```json
 {
-  "workflowdata": {
-   "inputNumbers": [
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            7
-        ]
-  }
+  "inputNumbers": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    7
+  ]
 }
 ```
 
 Complete curl command can be found below:
 
 ```sh
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : {"inputNumbers": [1,2,3,4,5,6,7,8,7]}}' http://localhost:8080/RestExample
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"inputNumbers": [1,2,3,4,5,6,7,8,7]}' http://localhost:8080/RestExample
 ```
 
 Log after curl executed:
 
 ```json
 {
-    "workflowdata": {
-        "inputNumbers": [
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            7
-        ]
-    }
+  "inputNumbers": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    7
+  ]
 }
 ```
 
@@ -114,6 +110,3 @@ In Quarkus you should see the log message printed:
 ```text
 The sum is: 387
 ```
-## Deploying with Kogito Operator
-
-In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).

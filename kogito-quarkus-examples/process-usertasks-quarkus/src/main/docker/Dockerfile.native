@@ -7,14 +7,14 @@
 #
 # Then, build the image with:
 #
-# docker build -f src/main/docker/Dockerfile.native -t quarkus/kogito-infinispan-persistence-quarkus .
+# docker build -f src/main/docker/Dockerfile.native -t quarkus/process-usertasks-quarkus .
 #
 # Then run the container using:
 #
-# docker run -i --rm -p 8080:8080 quarkus/kogito-infinispan-persistence-quarkus
+# docker run -i --rm -p 8080:8080 quarkus/process-usertasks-quarkus
 #
 ###
-FROM registry.access.redhat.com/ubi8/ubi-minimal
+FROM --platform=linux/amd64 registry.access.redhat.com/ubi9/ubi-minimal:9.4
 WORKDIR /work/
 COPY target/*-runner /work/application
 RUN chmod 775 /work

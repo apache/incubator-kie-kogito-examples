@@ -1,28 +1,27 @@
 /*
- * Copyright 2020 Red Hat, Inc. and/or its affiliates.
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ *   http://www.apache.org/licenses/LICENSE-2.0
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
 package org.kie.kogito.examples;
-
-import javax.inject.Inject;
-import javax.inject.Named;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.Model;
 import org.kie.kogito.process.Process;
-import org.kie.kogito.process.ProcessInstanceReadMode;
 import org.kie.kogito.testcontainers.quarkus.InfinispanQuarkusTestResource;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 
@@ -30,11 +29,15 @@ import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
 
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.kie.kogito.test.utils.ProcessInstancesTestUtils.abort;
 
 @QuarkusTest
 @QuarkusTestResource(value = InfinispanQuarkusTestResource.Conditional.class)
@@ -52,8 +55,8 @@ public class OrdersRestIT {
     @BeforeEach
     public void cleanUp() {
         // need it when running with persistence
-        orderProcess.instances().values(ProcessInstanceReadMode.MUTABLE).forEach(pi -> pi.abort());
-        orderItemsProcess.instances().values(ProcessInstanceReadMode.MUTABLE).forEach(pi -> pi.abort());
+        abort(orderProcess.instances());
+        abort(orderItemsProcess.instances());
     }
 
     @Test
@@ -74,7 +77,7 @@ public class OrdersRestIT {
 
         // test getting the created order
         given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
-                .body("$.size()", is(1), "[0].id", is(firstCreatedId));
+                .body("size()", is(1), "[0].id", is(firstCreatedId));
 
         // test getting order by id
         given()
@@ -112,7 +115,7 @@ public class OrdersRestIT {
                 .get("/orders")
                 .then()
                 .statusCode(200)
-                .body("$.size()", is(1), "[0].id", is(secondCreatedId));
+                .body("size()", is(1), "[0].id", is(secondCreatedId));
 
         // delete second before finishing
         given()
@@ -128,7 +131,7 @@ public class OrdersRestIT {
                 .get("/orders")
                 .then()
                 .statusCode(200)
-                .body("$.size()", is(0));
+                .body("size()", is(0));
     }
 
     @Test
@@ -150,7 +153,7 @@ public class OrdersRestIT {
 
         // test getting the created order
         given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
-                .body("$.size()", is(1), "[0].id", is(firstCreatedId));
+                .body("size()", is(1), "[0].id", is(firstCreatedId));
 
         // test retrieving error info using process management addon
         given().accept(ContentType.JSON).when().get("/management/processes/demo.orders/instances/" + firstCreatedId + "/error").then()
@@ -171,7 +174,7 @@ public class OrdersRestIT {
         given().accept(ContentType.JSON).when().delete("/orders/" + firstCreatedId).then().statusCode(200);
         // get all orders make sure there is zero
         given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
-                .body("$.size()", is(0));
+                .body("size()", is(0));
     }
 
     @Test
@@ -185,7 +188,7 @@ public class OrdersRestIT {
 
         // test getting the created order
         given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
-                .body("$.size()", is(1), "[0].id", is(firstCreatedId));
+                .body("size()", is(1), "[0].id", is(firstCreatedId));
 
         // test getting order by id
         given().accept(ContentType.JSON).when().get("/orders/" + firstCreatedId).then()
@@ -193,7 +196,7 @@ public class OrdersRestIT {
 
         // test getting order items subprocess
         String orderItemsId = given().accept(ContentType.JSON).when().get("/orderItems").then().statusCode(200)
-                .body("$.size()", is(1)).extract().path("[0].id");
+                .body("size()", is(1)).extract().path("[0].id");
 
         // test getting order items by id
         given().accept(ContentType.JSON).when().get("/orderItems/" + orderItemsId).then()
@@ -206,7 +209,7 @@ public class OrdersRestIT {
                 .get("/orderItems/" + orderItemsId + "/tasks?user=john")
                 .then()
                 .statusCode(200)
-                .body("$.size", is(1))
+                .body("size()", is(1))
                 .body("[0].name", is("Verify order"))
                 .extract()
                 .path("[0].id");
@@ -225,11 +228,11 @@ public class OrdersRestIT {
 
         // get all orders make sure there is zero
         given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
-                .body("$.size()", is(0));
+                .body("size()", is(0));
 
         // get all order items make sure there is zero
         given().accept(ContentType.JSON).when().get("/orderItems").then().statusCode(200)
-                .body("$.size()", is(0));
+                .body("size()", is(0));
     }
 
     @Test
@@ -243,7 +246,7 @@ public class OrdersRestIT {
 
         // test getting the created order
         given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
-                .body("$.size()", is(1), "[0].id", is(firstCreatedId));
+                .body("size()", is(1), "[0].id", is(firstCreatedId));
 
         // test getting order by id
         given().accept(ContentType.JSON).when().get("/orders/" + firstCreatedId).then()
@@ -251,7 +254,7 @@ public class OrdersRestIT {
 
         // test getting order items subprocess
         String orderItemsId = given().accept(ContentType.JSON).when().get("/orderItems?businessKey=ORD-0001").then().statusCode(200)
-                .body("$.size()", is(1)).extract().path("[0].id");
+                .body("size()", is(1)).extract().path("[0].id");
 
         // test getting order items by id
         given().accept(ContentType.JSON).when().get("/orderItems/" + orderItemsId).then()
@@ -264,7 +267,7 @@ public class OrdersRestIT {
                 .get("/orderItems/" + orderItemsId + "/tasks?user=john")
                 .then()
                 .statusCode(200)
-                .body("$.size", is(1))
+                .body("size()", is(1))
                 .body("[0].name", is("Verify order"));
 
         // test deleting order items
@@ -272,11 +275,11 @@ public class OrdersRestIT {
 
         // get all orders make sure there is zero
         given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
-                .body("$.size()", is(0));
+                .body("size()", is(0));
 
         // get all order items make sure there is zero
         given().accept(ContentType.JSON).when().get("/orderItems").then().statusCode(200)
-                .body("$.size()", is(0));
+                .body("size()", is(0));
     }
 
     @Test
@@ -290,7 +293,7 @@ public class OrdersRestIT {
         assertNotNull(id);
         // get all orders make sure there is one
         given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
-                .body("$.size()", is(1));
+                .body("size()", is(1));
 
         // get order by its custom ID and test
         given().accept(ContentType.JSON).body(orderPayload).when().get("/orders/{id}", id).then()
@@ -307,13 +310,13 @@ public class OrdersRestIT {
 
         // get all orders make sure there is one
         given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
-                .body("$.size()", is(1));
+                .body("size()", is(1));
 
         // test deleting order items by custom ID
         given().accept(ContentType.JSON).when().delete("/orders/{id}", id).then().statusCode(200);
 
         // get all orders make sure there is zero
         given().accept(ContentType.JSON).when().get("/orders").then().statusCode(200)
-                .body("$.size()", is(0));
+                .body("size()", is(0));
     }
 }

@@ -1,0 +1,37 @@
+{
+  "id": "cloudEventKnativeFunction",
+  "version": "1.0",
+  "name": "Test Knative function",
+  "description": "This workflow tests a Knative function",
+  "start": "invokeFunction",
+  "functions": [
+    {
+      "name": "greet",
+      "type": "custom",
+      "operation": "knative:services.v1.serving.knative.dev/custom-functions/custom-function-knative-service?path=/cloudEventFunction&asCloudEvent=true"
+    }
+  ],
+  "states": [
+    {
+      "name": "invokeFunction",
+      "type": "operation",
+      "actions": [
+        {
+          "functionRef": {
+            "refName": "greet",
+            "arguments": {
+              "specversion" : ".cloudevent.specversion",
+              "type": ".cloudevent.type",
+              "source": ".cloudevent.source",
+              "data": ".cloudevent.data"
+            }
+          }
+        }
+      ],
+      "stateDataFilter": {
+        "output": "${ {id: .id, specversion: .specversion, source: .source, type: .type} }"
+      },
+      "end": true
+    }
+  ]
+}

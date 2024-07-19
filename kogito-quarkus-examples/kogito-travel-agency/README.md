@@ -28,7 +28,3 @@ Everyone is encouraged to contribute to this tutorial by
 * create new versions of the tutorial by starting from the last version
 * blogging about it
 * using it on conferences and workshops
-
-## Deploying with Kogito Operator
-
-In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).

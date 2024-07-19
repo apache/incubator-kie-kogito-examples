@@ -1,4 +1,4 @@
-FROM mongo:4.4.10
+FROM library/mongo:4.4.14
 
 COPY init.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/init.sh

@@ -1,0 +1,86 @@
+#
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+#
+
+apiVersion: sonataflow.org/v1alpha08
+kind: SonataFlow
+metadata:
+  name: callbackstatetimeouts
+  annotations:
+    sonataflow.org/description: Callback State Timeouts Example k8s
+    sonataflow.org/version: 0.0.1
+    sonataflow.org/profile: dev
+spec:
+  flow:
+    start: PrintStartMessage
+    events:
+      - name: callbackEvent
+        source: ''
+        type: callback_event_type
+    functions:
+      - name: systemOut
+        type: custom
+        operation: sysout
+    states:
+      - name: PrintStartMessage
+        type: operation
+        actions:
+          - name: printSystemOut
+            functionRef:
+              refName: systemOut
+              arguments:
+                message: "${\"callback-state-timeouts: \" + $WORKFLOW.instanceId + \" has started.\"}"
+        transition: CallbackState
+      - name: CallbackState
+        type: callback
+        action:
+          name: callbackAction
+          functionRef:
+            refName: systemOut
+            arguments:
+              message: "${\"callback-state-timeouts: \" + $WORKFLOW.instanceId + \" has executed the callbackFunction.\"}"
+        eventRef: callbackEvent
+        transition: CheckEventArrival
+        timeouts:
+          eventTimeout: PT30S
+      - name: CheckEventArrival
+        type: switch
+        dataConditions:
+          - condition: "${ .eventData != null }"
+            transition: EventArrived
+        defaultCondition:
+          transition: EventNotArrived
+      - name: EventArrived
+        type: inject
+        data:
+          exitMessage: "The callback event has arrived."
+        transition: PrintExitMessage
+      - name: EventNotArrived
+        type: inject
+        data:
+          exitMessage: "The callback event has not arrived, and the timeout has overdue."
+        transition: PrintExitMessage
+      - name: PrintExitMessage
+        type: operation
+        actions:
+          - name: printSystemOut
+            functionRef:
+              refName: systemOut
+              arguments:
+                message: "${\"callback-state-timeouts: \" + $WORKFLOW.instanceId + \" has finalized. \" + .exitMessage + \" eventData: \" + .eventData}"
+        end: true

@@ -1,0 +1,3 @@
+resources:
+- ../../workflows/sonataflow-greeting
+- ../../workflows/sonataflow-helloworld

@@ -17,9 +17,9 @@ orchestrate any services you want.
 ### Prerequisites
  
 You will need:
-  - Java 11+ installed
+  - Java 17+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.8.1+ installed
+  - Maven 3.9.6+ installed
 
 When using native image compilation, you will also need: 
   - [GraalVm](https://www.graalvm.org/downloads/) 19.3.1+ installed
@@ -35,7 +35,7 @@ cd sw-funqy-services
 mvn clean install quarkus:dev
 ```
 
-this service will start on port 8080
+this service will start on port 8082
 
 Then we need to start our workflow service, namely `sw-funqy-workflow`
 
@@ -52,7 +52,7 @@ http://localhost:8081
 
 Type in a country name into the form (note currently only "Germany", "USA", "Brazil" and "Serbia" are supported).
 This will trigger our workflow instances running on port 8081. 
-The workflow execution will orchestrate our 3 Funqy functions (running on port 8080) in order
+The workflow execution will orchestrate our 3 Funqy functions (running on port 8082) in order
 to gather all the country information, and will display it on the page.
 
 Have fun :)

@@ -1,3 +1,22 @@
+#
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+#
+
 version: '2.1'
 
 services:
@@ -63,7 +82,7 @@ services:
 
   keycloak:
     container_name: keycloak
-    image: quay.io/keycloak/keycloak:${KEYCLOAK_VERSION}-legacy
+    image: quay.io/keycloak/keycloak:legacy
     ports:
       - "8480:8080"
     volumes:
@@ -90,8 +109,10 @@ services:
     ports:
       - "8180:8080"
     depends_on:
-      - kafka
-      - postgres
+      kafka:
+        condition: service_started
+      postgres:
+        condition: service_healthy
     volumes:
       - ./target/protobuf:/home/kogito/data/protobufs/
     environment:
@@ -99,24 +120,29 @@ services:
       QUARKUS_DATASOURCE_USERNAME: kogito-user
       QUARKUS_DATASOURCE_PASSWORD: kogito-pass
       KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+      QUARKUS_HTTP_CORS_ORIGINS: "/.*/"
       KOGITO_DATA_INDEX_PROPS: -Dquarkus.hibernate-orm.database.generation=update
 
   jobs-service:
     container_name: jobs-service
     image: quay.io/kiegroup/kogito-jobs-service-postgresql:${KOGITO_VERSION}
-    network_mode: "host"
+    ports:
+      - "8580:8080"
     depends_on:
-      - kafka
-      - postgres
+      kafka:
+        condition: service_started
+      postgres:
+        condition: service_healthy
     environment:
-      QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://localhost:5432/kogito"
+      QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgres:5432/kogito"
+      QUARKUS_DATASOURCE_REACTIVE_URL: "postgresql://postgres:5432/kogito"
       QUARKUS_DATASOURCE_USERNAME: kogito-user
       QUARKUS_DATASOURCE_PASSWORD: kogito-pass
-      ENABLE_EVENTS: "true"
-      KOGITO_JOBS_PROPS: -Dquarkus-profile=events-support -D%events-support.kafka.bootstrap.servers=http://localhost:9092
-          -D%events-support.mp.messaging.outgoing.kogito-job-service-job-status-events.bootstrap.servers=http://localhost:9092
-          -Dquarkus.flyway.migrate-at-start=true -Dquarkus.datasource.reactive.url=postgresql://localhost:5432/kogito
-          -Dkogito.service.url=http://localhost:8580 -D%events-support.quarkus.http.port=8580
+      QUARKUS_FLYWAY_BASELINE_ON_MIGRATE: "true"
+      KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+      QUARKUS_PROFILE: events-support
+      QUARKUS_HTTP_PORT: 8580
+      QUARKUS_HTTP_CORS_ORIGINS: "/.*/"
 
   management-console:
     container_name: management-console
@@ -133,7 +159,8 @@ services:
     volumes:
       - ../target/classes/META-INF/processSVG/:/home/kogito/data/svg/
     environment:
-      KOGITO_DATAINDEX_HTTP_URL: http://${DOCKER_GATEWAY_HOST}:8180/graphql
+      KOGITO_DATAINDEX_HTTP_URL: http://${DOCKER_GATEWAY_HOST:-host.docker.internal}:8180/graphql
+      QUARKUS_HTTP_CORS_ORIGINS: "/.*/"
       KOGITO_MANAGEMENT_CONSOLE_PROPS: -Dkogito.consoles.keycloak.config.url=http://localhost:8480/auth
         -Dkogito.consoles.keycloak.config.health-check-url=http://localhost:8480/auth/realms/kogito/.well-known/openid-configuration
         -Dkogito.svg.folder.path=/home/kogito/data/svg
@@ -149,6 +176,7 @@ services:
       keycloak:
         condition: service_healthy
     environment:
-      KOGITO_DATAINDEX_HTTP_URL: http://${DOCKER_GATEWAY_HOST}:8180/graphql
+      KOGITO_DATAINDEX_HTTP_URL: http://${DOCKER_GATEWAY_HOST:-host.docker.internal}:8180/graphql
+      QUARKUS_HTTP_CORS_ORIGINS: "/.*/"
       KOGITO_TASK_CONSOLE_PROPS: -Dkogito.consoles.keycloak.config.url=http://localhost:8480/auth
         -Dkogito.consoles.keycloak.config.health-check-url=http://localhost:8480/auth/realms/kogito/.well-known/openid-configuration

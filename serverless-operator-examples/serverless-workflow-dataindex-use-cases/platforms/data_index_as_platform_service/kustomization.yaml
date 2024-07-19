@@ -1,0 +1,18 @@
+resources:
+- 01-postgres.yaml
+- 02-sonataflow_platform.yaml
+- 03-data-index-service-ingress.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+secretGenerator:
+  - name: postgres-secrets
+    literals:
+      - POSTGRES_USER=sonataflow
+      - POSTGRES_PASSWORD=sonataflow
+      - POSTGRES_DB=sonataflow
+      - PGDATA=/var/lib/postgresql/data/mydata
+
+sortOptions:
+  order: fifo

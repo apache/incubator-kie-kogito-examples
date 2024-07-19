@@ -1,9 +1,28 @@
+#
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+#
+
 version: '2.1'
 
 services:
 
   infinispan:
-    image: infinispan/server:13.0.2.Final
+    image: infinispan/server:14.0.4.Final
     container_name: infinispan
     ports:
         - "11222:11222"
@@ -52,7 +71,7 @@ services:
 
   keycloak:
     container_name: keycloak
-    image: quay.io/keycloak/keycloak:${KEYCLOAK_VERSION}-legacy
+    image: quay.io/keycloak/keycloak:legacy
     ports:
       - "8480:8080"
     volumes:
@@ -80,29 +99,30 @@ services:
     volumes:
       - ./persistence/:/home/kogito/data/protobufs/
     environment:
-      QUARKUS_INFINISPAN_CLIENT_SERVER_LIST: infinispan:11222
+      QUARKUS_INFINISPAN_CLIENT_HOSTS: infinispan:11222
       QUARKUS_INFINISPAN_CLIENT_USE_AUTH: "false"
       KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+      QUARKUS_HTTP_CORS_ORIGINS: "/.*/"
       KOGITO_DATA_INDEX_PROPS: -Dkogito.protobuf.folder=/home/kogito/data/protobufs/
 
   jobs-service:
     container_name: jobs-service
-    network_mode: "host"
     image: quay.io/kiegroup/kogito-jobs-service-infinispan:${KOGITO_VERSION}
+    ports:
+      - "8580:8080"
     depends_on:
       kafka:
         condition: service_started
       infinispan:
         condition: service_healthy
-      data-index:
-        condition: service_started
     environment:
+      KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+      QUARKUS_PROFILE: events-support
+      QUARKUS_HTTP_PORT: 8580
       QUARKUS_INFINISPAN_CLIENT_USE_AUTH: "false"
-      ENABLE_EVENTS: "true"
-      KOGITO_JOBS_PROPS: -Dquarkus-profile=events-support -D%events-support.quarkus.http.port=8580 -D%events-support.kafka.bootstrap.servers=localhost:9092
-                         -D%events-support.mp.messaging.outgoing.kogito-job-service-job-status-events.bootstrap.servers=localhost:9092
-                         -Dkogito.service.url=http://localhost:8580
-                         
+      QUARKUS_INFINISPAN_CLIENT_HOSTS: infinispan:11222
+      QUARKUS_HTTP_CORS_ORIGINS: "/.*/"
+
   management-console:
    container_name: management-console
    image: quay.io/kiegroup/kogito-management-console:${KOGITO_VERSION}
@@ -118,7 +138,8 @@ services:
    volumes:
      - ./svg/:/home/kogito/data/svg/
    environment:
-      KOGITO_DATAINDEX_HTTP_URL: http://${DOCKER_GATEWAY_HOST}:8180/graphql
+      KOGITO_DATAINDEX_HTTP_URL: http://${DOCKER_GATEWAY_HOST:-host.docker.internal}:8180/graphql
+      QUARKUS_HTTP_CORS_ORIGINS: "/.*/"
       KOGITO_MANAGEMENT_CONSOLE_PROPS: -Dkogito.consoles.keycloak.config.url=http://localhost:8480/auth -Dkogito.consoles.keycloak.config.health-check-url=http://localhost:8480/auth/realms/kogito/.well-known/openid-configuration -Dkogito.svg.folder.path=/home/kogito/data/svg
 
   task-console:
@@ -132,5 +153,6 @@ services:
       keycloak:
         condition: service_healthy
     environment:
-      KOGITO_DATAINDEX_HTTP_URL: http://${DOCKER_GATEWAY_HOST}:8180/graphql
+      KOGITO_DATAINDEX_HTTP_URL: http://${DOCKER_GATEWAY_HOST:-host.docker.internal}:8180/graphql
+      QUARKUS_HTTP_CORS_ORIGINS: "/.*/"
       KOGITO_TASK_CONSOLE_PROPS: -Dkogito.consoles.keycloak.config.url=http://localhost:8480/auth -Dkogito.consoles.keycloak.config.health-check-url=http://localhost:8480/auth/realms/kogito/.well-known/openid-configuration

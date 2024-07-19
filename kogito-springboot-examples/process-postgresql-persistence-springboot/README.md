@@ -85,12 +85,12 @@ Optionally and for convenience, a docker-compose [configuration file](docker-com
 You will need:
   - Java 11+ installed 
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.8.1+ installed
+  - Maven 3.8.6+ installed
 
 ### Compile and Run in Local Dev Mode
 
 ```
-mvn clean package spring-boot:run -Ppersistence
+mvn clean package spring-boot:run
 ```
 
 NOTE: With dev mode of Quarkus you can take advantage of hot reload for business assets like processes, rules, decision tables and java code. No need to redeploy or restart your running application.
@@ -105,7 +105,7 @@ kogito.persistence.optimistic.lock=true
 ### Compile and Run using uberjar
 
 ```
-mvn clean package -Ppersistence 
+mvn clean package
 ```
   
 To run the generated native executable, generated in `target/`, execute

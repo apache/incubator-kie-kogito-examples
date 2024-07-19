@@ -10,9 +10,9 @@ PostgreSQL instance and a User Interface can be launched from Quarkus DevMode to
 ### Prerequisites
 
 You will need:
-  - Java 11+ installed
+  - Java 17+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.8.1+ installed
+  - Maven 3.9.6+ installed
   - A Docker environment
 
 ### Compile and Run in Local Dev Mode
@@ -21,14 +21,9 @@ You will need:
 mvn clean compile quarkus:dev
 ```
 
-The tracing addon emits tracing events to a Kafka broker running within Quarkus DevServices. A [Trusty Service](https://github.com/kiegroup/kogito-apps/tree/main/trusty) 
+The tracing addon emits tracing events to a Kafka broker running within Quarkus DevServices. A [Trusty Service](https://github.com/apache/incubator-kie-kogito-apps/tree/main/trusty)
 instance, also running within Quarkus DevServices, consumes the events and stores them in a PostgreSQL instance running 
-within Quarkus DevServices too. Within Quarkus DevMode the DevMode UI can be launched by pressing [d]  or navigating to
-http://localhost:8080/q/dev/.
-
-![DEV-UI](TrustyTracingQuarkusDevUi.png)
-
-The DevUI can be used to launch the Audit Investigation console from the Kogito Runtime Tools card.
+within Quarkus DevServices too. 
 
 ## Example Usage
 

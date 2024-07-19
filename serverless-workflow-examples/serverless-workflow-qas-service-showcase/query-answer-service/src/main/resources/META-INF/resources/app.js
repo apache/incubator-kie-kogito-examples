@@ -44,9 +44,7 @@ function createQuery() {
     const form = $('#createQueryForm');
     const query = form.find('#query').val();
     const processInputJson = {
-        "workflowdata": {
-            "query": query
-        }
+        "query": query
     };
     const processInput = JSON.stringify(processInputJson);
     $.ajax({

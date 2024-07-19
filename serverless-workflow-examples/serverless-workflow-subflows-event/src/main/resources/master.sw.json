@@ -1,0 +1,66 @@
+{
+  "id": "master",
+  "version": "1.0",
+  "specVersion": "0.8",
+  "name": "master",
+  "start": "setup",
+  "events": [
+    {
+      "name": "executeA",
+      "source": "",
+      "type": "executeA"
+    },
+    {
+      "name": "executeB",
+      "source": "",
+      "type": "executeB"
+    }
+  ],
+  "states": [
+    {
+      "name": "setup",
+      "type" : "operation",
+      "actions": [{
+        "name": "setup",
+        "subFlowRef" : "setup"
+       }], 
+       "transition": "waitForEvents"  
+     }, 
+     {
+        "name": "waitForEvents",
+        "type": "event",
+         "onEvents": [
+         {
+          "eventRefs": [
+            "executeA"
+          ],
+          "actions": [ 
+          {
+            "name": "workflowA",
+            "subFlowRef": "workflowA",
+            "actionDataFilter" : {
+              "useResults": false
+            }
+          }
+          ]
+        },
+        { 
+         "eventRefs": [
+            "executeB"
+          ],
+          "actions": [ 
+          {
+            "name": "workflowB",
+            "subFlowRef": "workflowB",
+            "actionDataFilter" : {
+              "useResults": false
+            }
+          }
+          ]
+        }
+       ],
+       "exclusive": false,
+       "end" : true 
+     }
+  ]
+}

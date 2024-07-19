@@ -11,7 +11,7 @@ A simple DMN service to evaluate a loan approval and generate tracing events tha
 You will need:
   - Java 11+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.8.1+ installed
+  - Maven 3.8.6+ installed
 
 ### Configuration of the tracing addon
 
@@ -108,6 +108,6 @@ Example response:
 
 ## Integration example with Trusty Service
 
-When the tracing addon is enabled, the tracing events are emitted and pushed to a Kafka broker. The [Trusty Service](https://github.com/kiegroup/kogito-apps/tree/main/trusty) can consume such events and store them on a storage. The Trusty Service exposes then some api to consume the information that has been collected. 
+When the tracing addon is enabled, the tracing events are emitted and pushed to a Kafka broker. The [Trusty Service](https://github.com/apache/incubator-kie-kogito-apps/tree/main/trusty) can consume such events and store them on a storage. The Trusty Service exposes then some api to consume the information that has been collected.
 A `docker-compose` example is provided in the current folder. In particular, when `docker-compose up` is run, a Kafka broker, an Infinispan container and the nightly build of the trusty service are deployed. 
 Once the services are up and running, after a decision has been evaluated, you can access the trusty service swagger at `localhost:8081/swagger-ui.html` and try to query what are the evaluations of the last day at `localhost:8081/v1/executions` for example.

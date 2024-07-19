@@ -147,7 +147,7 @@ The DMN file where this decision is declared is [TrafficViolation.dmn](src/main/
 You will need:
   - Java 11+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.8.1+ installed
+  - Maven 3.8.6+ installed
 
 ### Compile and Run in Local Dev Mode
 
@@ -305,8 +305,3 @@ After the Curl command, you should see a similar console log
 }
 ```
 In this case the driver license is expired when the DRL is evaluated because the  DriverService generated an expired date for the driver's license thus DMN is not evaluated, so the `validLicense` is `false` and  `trafficViolationResponse` is `null`. 
-
-
-## Deploying with Kogito Operator
-
-In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).

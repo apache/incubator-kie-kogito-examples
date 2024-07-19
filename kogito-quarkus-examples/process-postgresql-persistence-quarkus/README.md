@@ -59,7 +59,7 @@ It utilizes PostgreSQL server as the backend store.
 
 This quickstart requires a PostgreSQL server to be available with a database, a user and credentials already created
 , these configurations should then be set in the data source URL parameter in [applications.properties](src/main/resources/application.properties) file with the key
- `quarkus.datasource.reactive.url`, i.e `quarkus.datasource.reactive.url=postgresql://localhost:5432/kogito` here are the [full settings for URI](https://quarkus.io/guides/reactive-sql-clients#reactive-datasource)
+ `quarkus.datasource.jdbc.url`, i.e `quarkus.datasource.jdbc.url=postgresql://localhost:5432/kogito`.
  
 You must set the property `kogito.persistence.type=postgresql` to enable PostgreSQL persistence. There is also a
 configuration to allow the application to run DDL scripts during the initialization, which you can enable with the
@@ -83,9 +83,9 @@ Optionally and for convenience, a docker-compose [configuration file](docker-com
 ### Prerequisites
 
 You will need:
-  - Java 11+ installed
+  - Java 17+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.8.1+ installed
+  - Maven 3.9.6+ installed
 
 When using native image compilation, you will also need:
   - GraalVM 19.3+ installed
@@ -96,12 +96,10 @@ When using native image compilation, you will also need:
 ### Compile and Run in Local Dev Mode
 
 ```sh
-mvn clean compile quarkus:dev -Ppersistence
+mvn clean compile quarkus:dev
 ```
 
 NOTE: With dev mode of Quarkus you can take advantage of hot reload for business assets like processes, rules, decision tables and java code. No need to redeploy or restart your running application.
-
-Once PostgreSQL is up and running you can build this project with -Ppersistence OR -Pjdbc-persistence in an exact same way as without persistence. These extra profile in maven configuration add additional dependencies needed to work with Postgres as persistent store using Reactive or JDBC based postgres clients.
 
 Kogito runtimes need to be able to safely handle concurrent requests to shared instances such as process instances, tasks, etc.
 This feature is optional and can be pluggable with persistence using the following property and value to the src/main/resources/application.properties file.
@@ -112,34 +110,39 @@ kogito.persistence.optimistic.lock=true
 Additionally, you can use below commands to set this property at runtime and build and run the application 
 
 ```
-mvn clean compile quarkus:dev -Dkogito.persistence.optimistic.lock=true -Ppersistence
+mvn clean compile quarkus:dev -Dkogito.persistence.optimistic.lock=true
 ```
 or 
 
 ```
-mvn clean package -Ppersistence
+mvn clean package
 java -Dkogito.persistence.optimistic.lock=true -jar target/quarkus-app/quarkus-run.jar
 ```
 
 ### Package and Run in JVM mode
 
 ```sh
-mvn clean package -Ppersistence
+mvn clean package
 java -jar target/quarkus-app/quarkus-run.jar  
 ```
 
 or on windows
 
 ```sh
-mvn clean package -Ppersistence
+mvn clean package
 java -jar target\quarkus-app\quarkus-run.jar
 ```
 
 ### Package and Run using Local Native Image
+Note that the following configuration property needs to be added to `application.properties` in order to enable automatic registration of `META-INF/services` entries required by the workflow engine:
+```
+quarkus.native.auto-service-loader-registration=true
+```
+
 Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
 
 ```sh
-mvn clean package -Ppersistence,native
+mvn clean package -Pnative
 ```
 
 To run the generated native executable, generated in `target/`, execute

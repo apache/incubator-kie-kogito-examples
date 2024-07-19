@@ -13,9 +13,9 @@ Based on these two processes (defined using BPMN 2.0 format), the custom data ob
 ### Prerequisites
 
 You will need:
-  - Java 11+ installed
+  - Java 17+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.8.1+ installed
+  - Maven 3.9.6+ installed
 
 When using native image compilation, you will also need:
   - [GraalVM 19.1.1](https://github.com/oracle/graal/releases/tag/vm-19.1.1) installed
@@ -43,6 +43,11 @@ java -jar target\quarkus-app\quarkus-run.jar
 ```
 
 ### Package and Run using Local Native Image
+Note that the following configuration property needs to be added to `application.properties` in order to enable automatic registration of `META-INF/services` entries required by the workflow engine:
+```
+quarkus.native.auto-service-loader-registration=true
+```
+
 Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
 
 ```
@@ -63,7 +68,7 @@ Kogito runtime supports multiple persistence types, including Infinispan.
 In order to use the Infinispan based persistence, you need to have a Infinispan server installed and available over the network.
 The default configuration, expects the server to be running on:
 ```
-quarkus.infinispan-client.server-list=localhost:11222
+quarkus.infinispan-client.hosts=localhost:11222
 ```
 If you need to change it, you can do so by updating the application.properties file located in src/main/resources.
 
@@ -292,7 +297,3 @@ Example response:
   }
 }
 ```
-
-## Deploying with Kogito Operator
-
-In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).

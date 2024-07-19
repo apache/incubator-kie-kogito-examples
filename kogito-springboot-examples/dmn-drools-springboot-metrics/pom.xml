@@ -1,22 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+
+-->
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>kogito-springboot-examples</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
+    <version>999-SNAPSHOT</version>
   </parent>
   <artifactId>dmn-drools-springboot-metrics</artifactId>
   <name>Kogito Example :: DMN Metrics SpringBoot</name>
+
+  <properties>
+    <version.org.kie.kogito>999-SNAPSHOT</version.org.kie.kogito>
+    <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
+  </properties>
 
   <dependencyManagement>
     <dependencies>
       <dependency>
         <groupId>org.kie.kogito</groupId>
         <artifactId>kogito-spring-boot-bom</artifactId>
-        <version>${project.version}</version>
+        <version>${kogito.bom.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -25,17 +51,17 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-decisions-spring-boot-starter</artifactId>
+      <groupId>org.drools</groupId>
+      <artifactId>drools-decisions-spring-boot-starter</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-rules-spring-boot-starter</artifactId>
+      <groupId>org.drools</groupId>
+      <artifactId>drools-rules-spring-boot-starter</artifactId>
     </dependency>
 
     <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-addons-springboot-monitoring-prometheus</artifactId>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-addons-springboot-monitoring-prometheus</artifactId>
     </dependency>
 
     <dependency>
@@ -77,6 +103,7 @@
       <plugin>
         <groupId>org.kie.kogito</groupId>
         <artifactId>kogito-maven-plugin</artifactId>
+        <version>${version.org.kie.kogito}</version>
         <extensions>true</extensions>
       </plugin>
       <plugin>
@@ -108,7 +135,8 @@
           </filesets>
         </configuration>
       </plugin>
-      <!-- Keep this after kogito-maven-plugin, since both are bind to package phase, and this one has to be executed after !-->
+      <!-- Keep this after kogito-maven-plugin, since both are bind to package phase, and this one
+      has to be executed after !-->
       <plugin>
         <artifactId>maven-resources-plugin</artifactId>
         <executions>
@@ -138,7 +166,8 @@
               <outputDirectory>${project.basedir}/docker-compose/grafana/provisioning/dashboards</outputDirectory>
               <resources>
                 <resource>
-                  <directory>${project.build.directory}/classes/META-INF/resources/monitoring/dashboards</directory>
+                  <directory>
+                    ${project.build.directory}/classes/META-INF/resources/monitoring/dashboards</directory>
                   <filtering>false</filtering>
                   <excludes>
                     <exclude>**/list.json</exclude>
@@ -168,38 +197,26 @@
           </execution>
         </executions>
       </plugin>
-      <!-- Keep this after maven-resources-plugin, since both copy-docker-compose-for-tests and this one are bind to pre-integration-test phase, and this one has to be executed after !-->
       <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
+        <groupId>com.google.cloud.tools</groupId>
+        <artifactId>jib-maven-plugin</artifactId>
+        <configuration>
+          <from>
+            <image>registry.access.redhat.com/ubi8/openjdk-17:latest</image>
+          </from>
+          <to>
+            <image>${project.groupId}/${project.artifactId}:1.0</image>
+          </to>
+        </configuration>
         <executions>
-          <!--
-            Create new docker image using Dockerfile which must be present in current working directory.
-            Tag the image using maven project version information.
-          -->
           <execution>
-            <id>docker-build</id>
-            <phase>pre-integration-test</phase>
+            <phase>package</phase>
             <goals>
-              <goal>exec</goal>
+              <goal>dockerBuild</goal>
             </goals>
-            <configuration>
-              <skip>${skipTests}</skip>
-              <executable>docker</executable>
-              <workingDirectory>${project.basedir}</workingDirectory>
-              <arguments>
-                <argument>build</argument>
-                <argument>-f</argument>
-                <argument>${project.basedir}/src/test/resources/DockerfileTest</argument>
-                <argument>-t</argument>
-                <argument>${project.groupId}/${project.artifactId}:1.0</argument>
-                <argument>.</argument>
-              </arguments>
-            </configuration>
           </execution>
         </executions>
       </plugin>
     </plugins>
   </build>
-
 </project>

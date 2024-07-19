@@ -3,7 +3,7 @@
 ## Description
 
 A quickstart project that deals with traveller processing carried by rules. It illustrates how easy it is to make the Kogito processes and rules to work with Knative Eventing. This project is based on
-the example [Process with Kafka](https://github.com/kiegroup/kogito-examples/tree/main/kogito-quarkus-examples/process-kafka-quickstart-quarkus).
+the example [Process with Kafka](https://github.com/apache/incubator-kie-kogito-examples/tree/main/kogito-quarkus-examples/process-kafka-quickstart-quarkus).
 
 This example shows
 
@@ -78,9 +78,9 @@ For local testing only you can use [Podman](https://podman.io/getting-started/in
 
 You will need:
 
-- Java 11+ installed
+- Java 17+ installed
 - Environment variable JAVA_HOME set accordingly
-- Maven 3.8.1+ installed
+- Maven 3.9.6+ installed
 
 When using native image compilation, you will also need:
 
@@ -120,6 +120,10 @@ java -jar target\quarkus-app\quarkus-run.jar
 ```
 
 ### Package and Run using Local Native Image
+Note that the following configuration property needs to be added to `application.properties` in order to enable automatic registration of `META-INF/services` entries required by the workflow engine:
+```
+quarkus.native.auto-service-loader-registration=true
+```
 
 Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
 
@@ -176,7 +180,7 @@ __  ____  __  _____   ___  __ ____  ______
 
 2021-05-18 14:50:50,111 INFO  [org.kie.kog.add.clo.qua.QuarkusKogitoExtensionInitializer] (Quarkus Main Thread) Registered Kogito CloudEvent extension
 2021-05-18 14:50:50,114 INFO  [org.kie.kog.ser.eve.imp.AbstractMessageConsumer] (Quarkus Main Thread) Consumer for class org.acme.travel.Traveller started.
-2021-05-18 14:50:50,164 INFO  [io.quarkus] (Quarkus Main Thread) process-knative-quickstart-quarkus 2.0.0-SNAPSHOT on JVM (powered by Quarkus 1.13.3.Final) started in 3.118s. Listening on: http://localhost:8080
+2021-05-18 14:50:50,164 INFO  [io.quarkus] (Quarkus Main Thread) process-knative-quickstart-quarkus 999-SNAPSHOT on JVM (powered by Quarkus 1.13.3.Final) started in 3.118s. Listening on: http://localhost:8080
 2021-05-18 14:50:50,164 INFO  [io.quarkus] (Quarkus Main Thread) Profile dev activated. Live Coding activated.
 2021-05-18 14:50:50,164 INFO  [io.quarkus] (Quarkus Main Thread) Installed features: [cdi, kogito-decisions, kogito-predictions, kogito-processes, kogito-rules, mutiny, rest-client, rest-client-jackson, resteasy, resteasy-jackson, servlet, smallrye-context-propagation, smallrye-health, smallrye-openapi, smallrye-reactive-messaging, swagger-ui, vertx, vertx-web]
 ``` 

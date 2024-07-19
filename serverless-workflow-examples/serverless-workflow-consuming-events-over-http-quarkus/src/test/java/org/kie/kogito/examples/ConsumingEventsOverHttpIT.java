@@ -1,25 +1,31 @@
 /*
- * Copyright 2022 Red Hat, Inc. and/or its affiliates.
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ *   http://www.apache.org/licenses/LICENSE-2.0
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
 package org.kie.kogito.examples;
 
 import java.net.URI;
 import java.time.OffsetDateTime;
 import java.util.Collections;
+import java.util.Map;
 import java.util.UUID;
 
+import io.restassured.response.ExtractableResponse;
+import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -39,7 +45,9 @@ import static org.awaitility.Awaitility.await;
 @QuarkusIntegrationTest
 class ConsumingEventsOverHttpIT {
 
-    private static final String CHANNEL_NAME = "move";
+    private static final String START_CHANNEL_NAME = "start";
+
+    private static final String MOVE_CHANNEL_NAME = "move";
 
     @BeforeAll
     static void init() {
@@ -48,27 +56,35 @@ class ConsumingEventsOverHttpIT {
 
     @Test
     void testEventOverHttp() {
+
+        ExtractableResponse<Response> response = given()
+                .contentType(ContentType.JSON)
+                .when()
+                .body(generateCloudEvent(START_CHANNEL_NAME, "kogitobusinesskey", "test-business-key",
+                        Collections.singletonMap("message", "Hello!")))
+                .post("/startevent")
+                .then()
+                .log()
+                .all()
+                .statusCode(202)
+                .extract();
+
+
         String id = given()
                 .contentType(ContentType.JSON)
                 .when()
-                .body(Collections.singletonMap("workflowdata", Collections.emptyMap()))
-                .post("/start")
+                .get("/start")
                 .then()
-                .statusCode(201)
-                .extract().path("id");
+                .statusCode(200)
+                .extract().path("[0].id");
 
-        given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .get("/start/{id}", id)
-                .then()
-                .statusCode(200);
 
         given()
                 .contentType(ContentType.JSON)
                 .when()
-                .body(generateCloudEvent(id))
-                .post("/")
+                .body(generateCloudEvent(MOVE_CHANNEL_NAME, "kogitoprocrefid", id, Collections.singletonMap(MOVE_CHANNEL_NAME,
+                        "This has been injected by the event")))
+                .post("/move")
                 .then()
                 .statusCode(202);
 
@@ -84,7 +100,7 @@ class ConsumingEventsOverHttpIT {
                         .statusCode(404));
     }
 
-    private String generateCloudEvent(String id) {
+    private String generateCloudEvent(String channelName, String extensionKey, String value, Map<String, String> data) {
         ObjectMapper objectMapper = new ObjectMapper().registerModule(JsonFormat.getCloudEventJacksonModule())
                 .configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
 
@@ -92,11 +108,10 @@ class ConsumingEventsOverHttpIT {
             return objectMapper.writeValueAsString(CloudEventBuilder.v1()
                     .withId(UUID.randomUUID().toString())
                     .withSource(URI.create(""))
-                    .withType(CHANNEL_NAME)
+                    .withType(channelName)
                     .withTime(OffsetDateTime.now())
-                    .withExtension("kogitoprocrefid", id)
-                    .withData(objectMapper.writeValueAsBytes(Collections.singletonMap(CHANNEL_NAME,
-                            "This has been injected by the event")))
+                    .withExtension(extensionKey, value)
+                    .withData(objectMapper.writeValueAsBytes(data))
                     .build());
         } catch (Exception e) {
             throw new IllegalArgumentException(e);

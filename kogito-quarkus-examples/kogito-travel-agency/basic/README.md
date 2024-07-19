@@ -99,9 +99,9 @@ There will be services implemented to carry on the hotel and flight booking. Imp
 
 You will need:
 
-* Java 11+ installed
+* Java 17+ installed
 * Environment variable JAVA_HOME set accordingly
-* Maven 3.5.2+ installed
+* Maven 3.9.6+ installed
 
 When using native image compilation, you will also need:
 

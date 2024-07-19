@@ -14,9 +14,9 @@ The service is described using JSON format as defined in the
 ### Prerequisites
  
 You will need:
-  - Java 11+ installed
+  - Java 17+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.8.1+ installed
+  - Maven 3.9.6+ installed
 
 When using native image compilation, you will also need: 
   - [GraalVm](https://www.graalvm.org/downloads/) 19.3.1+ installed
@@ -63,7 +63,7 @@ The service based on the JSON workflow definition can be access by sending a req
 Complete curl command can be found below:
 
 ```text
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : {"input": [1,2,3]}}' http://localhost:8080/foreach
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"input": [1,2,3]}' http://localhost:8080/foreach
 ```
 
 
@@ -81,3 +81,8 @@ once completed, it should return:
  }
 ```
 
+### Building and Deploying Workflow using CLI + Kogito Serverless Workflow Operator
+For this prepare your environment by following the instructions from [here]().
+
+Refer to [Serverless Workflow Guide](), to know how to build and deploy workflows using CLI + Kogito Serverless Workflow Operator.
+Refer to [Serverless Workflow Guide](https://kiegroup.github.io/kogito-docs/serverlessworkflow/latest/cloud/index.html), to know more about Kogito Serverless Workflow Operator.

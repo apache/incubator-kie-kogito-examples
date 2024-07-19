@@ -9,7 +9,8 @@ The figure below illustrates the overall architecture of this use case.
 1. Once a new subscription request comes, the flow will evaluate if it's not already subscribed.
 2. Case not, it will attempt to subscribe the new user and wait for the confirmation.
 3. Once a new event containing the confirmation arrives, the flow will resume and subscribe the new user.
-4. By the end, a new event containing the details of the subscription is broadcasted in the environment, so other actors can react upon it.
+4. Subscriptions that are not confirmed during a configured period of time, are considered timed-out and are automatically removed from the system.
+5. By the end, a new event containing the details of the subscription is broadcasted in the environment, so other actors can react upon it.
 
 ![Workflow](docs/newsletter-subscription-flow.png)
 
@@ -20,12 +21,6 @@ This example demonstrates a few features powered by the Kogito implementation of
 3. Consuming and producing CloudEvents
 
 In a Knative environment, the services involved in this use case can be scaled to zero and resume from the exact stage it was, saving cluster resources in the process.
-
-## Using Quarkus Dev Services
-
-You can use the Workflow Instance management dev service when in Quarkus Dev Mode (`quarkus dev` from the [subscription-flow](subscription-flow) module root) to visualize the details of a given workflow instance:
-
-![Quarkus Dev UI](docs/dev-console.png)
 
 ## The User Interface
 
@@ -78,9 +73,15 @@ In this example we use a regular, in-memory, broker. Feel free to adapt the exam
 Deploy the services with the following command:
 
 ```shell
-# the namespace name is very important. If you decide to change the namespace, please be update the query-answer-service Knative properties.
+# the namespace name is very important. If you decide to change the namespace, please be update the subscription-flow Knative properties.
 $ kubectl create ns newsletter-showcase
-# install the subscription-flow and the Postgres database
+# install the supporting services to run the example in knative, the PostgreSQL database, the Jobs Service and the event-display application.
+$ kubectl apply -f kubernetes/supporting-services.yml -n newsletter-showcase
+
+# Install the data index service to be able to index the information related with the ProcessInstances and Jobs events 
+$ kubectl apply -f kubernetes/data-index-services.yml -n newsletter-showcase
+
+# install the subscription-flow
 $ kubectl apply -f subscription-flow/target/kubernetes/knative.yml -n newsletter-showcase
 $ kubectl apply -f subscription-flow/target/kubernetes/kogito.yml -n newsletter-showcase
 # install the subscription-service 
@@ -100,6 +101,25 @@ subscription-service   http://subscription-service.newsletter-showcase.127.0.0.1
 
 The `URL` column has the applications' endpoint.
 
+To access to the IP where the Data Index service exposes the GraphQL-UI execute:
+
+```shell
+$ kubectl get services -n newsletter-showcase
+
+NAME                                 TYPE           CLUSTER-IP       EXTERNAL-IP                                         PORT(S)                                              AGE
+data-index-service-postgresql        ClusterIP      10.100.228.32    <none>                                              80/TCP                                               7m22s
+default-kne-trigger-kn-channel       ExternalName   <none>           imc-dispatcher.knative-eventing.svc.cluster.local   80/TCP                                               7h50m
+event-display                        ExternalName   <none>           kourier-internal.kourier-system.svc.cluster.local   80/TCP                                               7h49m
+event-display-00001                  ClusterIP      10.100.114.14    <none>                                              80/TCP,443/TCP                                       7h50m
+event-display-00001-private          ClusterIP      10.109.69.197    <none>                                              80/TCP,443/TCP,9090/TCP,9091/TCP,8022/TCP,8012/TCP   7h50m
+jobs-service-postgresql              ClusterIP      10.102.232.229   <none>                                              80/TCP                                               7h50m
+newsletter-postgres                  ClusterIP      10.111.31.14     <none>                                              5432/TCP                                             7h50m
+subscription-flow                    ExternalName   <none>           kourier-internal.kourier-system.svc.cluster.local   80/TCP                                               7h34m
+subscription-service                 ExternalName   <none>           kourier-internal.kourier-system.svc.cluster.local   80/TCP                                               7h24m
+```
+
+The `CLUSTER-IP` column has the data-index IP, assigned in each installation. In this case putting 10.100.228.32 in a browser it will show the http://10.100.228.32/graphiql/
+
 Expose the URLs in your local environment. In a separated terminal, run:
 
 ```shell
@@ -110,3 +130,17 @@ $ minikube tunnel --profile knative
 Open the URLs in your browser and try playing with your services scaling to 0.
 
 Note that even when the pod is scaled back after a short period of time, your data remains there. That's the power of a stateful Kogito Serverless Workflow!
+
+### Cleaning-up your environment
+
+The recommended procedure to remove the showcase from your local minikube is to delete the `newsletter-showcase` namespace by executing the following command. 
+
+```shell
+# delete the newsletter-showcase 
+$ kubectl delete namespace newsletter-showcase
+
+# the deletion procedure might take some time to complete, don't cancel it. 
+# in meantime an output like this is printed in the terminal window. 
+namespace "newsletter-showcase" deleted
+```
+

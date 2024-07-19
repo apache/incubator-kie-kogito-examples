@@ -1,0 +1,1 @@
+Serverless Workflow guide: https://github.com/apache/incubator-kie-kogito-docs/blob/main/serverlessworkflow/modules/ROOT/pages/service-orchestration/configuring-openapi-services-endpoints.adoc

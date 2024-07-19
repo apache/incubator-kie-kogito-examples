@@ -55,17 +55,13 @@
       "name": "finish_compensate",
       "type": "operation",
       "actions": [],
-      "end": {
-        "terminate": "true"
-      }
+      "end": true
     },
     {
       "name": "finish_not_compensate",
       "type": "operation",
       "actions": [],
-      "end": {
-        "terminate": "true"
-      }
+      "end": true
     }
   ]
 }

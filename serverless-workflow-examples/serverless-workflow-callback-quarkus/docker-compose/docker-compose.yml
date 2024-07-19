@@ -1,6 +1,52 @@
-version: "3"
+#
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+#
+
+version: '2.1'
 
 services:
+  postgres:
+    container_name: postgres
+    image: postgres:13.4-alpine3.14
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d:Z
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "kogito", "-U", "kogito-user" ]
+      timeout: 45s
+      interval: 10s
+      retries: 50
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+  pgadmin-compose:
+    image: dpage/pgadmin4:5.0
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user@user.org
+      PGADMIN_DEFAULT_PASSWORD: pass
+    ports:
+      - 8055:80
+    depends_on:
+      - postgres
+    container_name: pgadmin-container
+
   zookeeper:
     container_name: zookeeper
     image: strimzi/kafka:0.20.1-kafka-2.6.0
@@ -35,10 +81,53 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       LOG_DIR: "/tmp/logs"
 
-  postgres:
-    image: postgres:13.4-alpine3.14
-    container_name: postgres
-    environment:
-      POSTGRES_PASSWORD: pass
+  data-index:
+    container_name: data-index
+    image: quay.io/kiegroup/kogito-data-index-postgresql-nightly:latest
     ports:
-      - 5432:5432
+      - "8180:8080"
+    depends_on:
+      kafka:
+        condition: service_started
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./../target/classes/META-INF/resources/persistence/protobuf:/home/kogito/data/protobufs/
+    environment:
+      QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgres:5432/kogito"
+      QUARKUS_DATASOURCE_USERNAME: kogito-user
+      QUARKUS_DATASOURCE_PASSWORD: kogito-pass
+      QUARKUS_PROFILE: kafka-events-support
+      KOGITO_DATA_INDEX_QUARKUS_PROFILE: kafka-events-support
+      QUARKUS_FLYWAY_MIGRATE_AT_START: "true"
+      QUARKUS_FLYWAY_TABLE: data-index-flyway
+      KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+      QUARKUS_HTTP_CORS_ORIGINS: "/.*/"
+      KOGITO_DATA_INDEX_PROPS: -Dquarkus.hibernate-orm.database.generation=update
+
+  sw-callback-service:
+    container_name: sw-callback-service
+    image: dev.local/${USER}/serverless-workflow-callback-quarkus:1.0-SNAPSHOT
+    ports:
+      - "8080:8080"
+    depends_on:
+      kafka:
+        condition: service_started
+      postgres:
+        condition: service_healthy
+      data-index:
+        condition: service_started
+    volumes:
+      - ./../target/classes/META-INF/processSVG/:/home/kogito/data/svg/
+    environment:
+      QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgres:5432/kogito"
+      QUARKUS_DATASOURCE_USERNAME: kogito-user
+      QUARKUS_DATASOURCE_PASSWORD: kogito-pass
+      QUARKUS_DATASOURCE_DB_KIND: postgresql
+      KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+      KOGITO_SERVICE_URL: http://sw-callback-service:8080
+      KOGITO_DATAINDEX_HTTP_URL: http://data-index:8180
+      QUARKUS_FLYWAY_BASELINE_ON_MIGRATE: "true"
+      QUARKUS_HTTP_CORS_ORIGINS: "/.*/"
+    extra_hosts:
+      - "data-index:host-gateway"

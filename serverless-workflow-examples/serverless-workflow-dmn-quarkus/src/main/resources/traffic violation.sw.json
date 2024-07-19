@@ -1,0 +1,24 @@
+{
+  "id" : "traffic-violation",
+  "name" : "traffic-violation",
+  "version" : "1_0",
+  "start" : "traffic-violation",
+  "functions" : [ {
+    "name" : "DMNTest",
+    "operation" : "dmn",
+    "type" : "custom",
+    "metadata" : {
+      "file" : "Traffic Violation.dmn",
+      "namespace" : "https://github.com/kiegroup/drools/kie-dmn/_A4BCA8B8-CF08-433F-93B2-A2598F19ECFF",
+      "model" : "Traffic Violation"
+    }
+  } ],
+  "states" : [ {
+    "actions" : [ {
+      "functionRef" : "DMNTest"
+    } ],
+    "name" : "traffic-violation",
+    "type" : "operation",
+    "end" : true
+  } ]
+}

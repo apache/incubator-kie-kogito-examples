@@ -1,3 +1,8 @@
+**DEPRECATION NOTICE**
+
+> This example has a few old concepts from architecture and integration perspective. [We are working on an updated version of this example](https://issues.redhat.com/browse/KOGITO-8169). Until there, please try our other examples in this directory.
+> In case you still need to run it, latest Kogito version which worked was KOGITO 1.29.0.Final.
+
 ## Serverless Workflow GitHub Showcase
 
 In this example we will deploy a GitHub "bot" application that will
@@ -38,13 +43,13 @@ You can follow the [Knative documentation](https://knative.dev/docs/install/serv
 4. **Knative** Serving and Eventing components installed. 
 We recommend [installing the Knative Operator](https://knative.dev/docs/install/knative-with-operators/) and install the rest of the components
 through it as described in their documentation.
-5. **Kogito Operator** installed in the namespace `kogito-github`. [Download the latest release](https://github.com/kiegroup/kogito-operator/releases), and run: `NAMESPACE=kogito-github ./hack/install.sh`.
+5. **Kogito Operator** installed in the namespace `kogito-github`. [Download the latest release](https://github.com/apache/incubator-kie-kogito-operator/releases), and run: `NAMESPACE=kogito-github ./hack/install.sh`.
 Alternatively, you can also install it via [OperatorHub](https://operatorhub.io/operator/kogito-operator).
 
 In your local machine you will need:
 
-1. To clone this repository and go to `serverless-workflow-github-showcase` directory (`git clone https://github.com/kiegroup/kogito-examples.git && cd serverless-workflow-github-showcase`)
-2. [Java 11 SDK](https://openjdk.java.net/install/)
+1. To clone this repository and go to `serverless-workflow-github-showcase` directory (`git clone https://github.com/apache/incubator-kie-kogito-examples.git && cd serverless-workflow-github-showcase`)
+2. [Java 17 SDK](https://openjdk.java.net/install/)
 3. [Maven 3.8.1+](https://maven.apache.org/install.html)
 4. [Podman](https://podman.io/getting-started/installation.html) or Docker to build the images
 5. `kubectl` or `oc` client

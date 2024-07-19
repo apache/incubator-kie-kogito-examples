@@ -4,6 +4,7 @@
   "source": "LinReg",
   "type": "PredictionResponse",
   "subject": "TheSubject",
+  "kogitopmmlfilename": "test_regression.pmml",
   "kogitopmmlmodelname": "LinReg",
   "data": {
     "fld4": 52.5

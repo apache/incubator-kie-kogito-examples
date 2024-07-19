@@ -14,13 +14,12 @@ A quick reminder of what the original example was doing:
     * if not processed traveller, info is logged and then process instance finishes sending a reply to a different Kafka topic
 
 The functionality is still the same, but the format of the event, rather than being a cloudevent JSON format, it is a representation of the traveller object using Avro format. To help us deal with the serialization details,
-[jackson-kafka-avro-serializer](https://github.com/productboardlabs/jackson-kafka-avro-serializer) dependency is added to `pom.xml`
+`kie-addons-quarkus-marshallers-avro` dependency is added to `pom.xml`
 
 ```
-  <dependency>
-        <groupId>io.github.productboardlabs</groupId>
-        <artifactId>jackson-kafka-avro-serializer</artifactId>
-        <version>0.7.0</version>
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-addons-quarkus-marshallers-avro</artifactId>
     </dependency>
 ```
 
@@ -89,9 +88,9 @@ https://kafka.apache.org/quickstart
 ### Prerequisites
 
 You will need:
-  - Java 11+ installed
+  - Java 17+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.8.1+ installed
+  - Maven 3.9.6+ installed
 
 When using native image compilation, you will also need:
   - GraalVM 19.3+ installed
@@ -122,6 +121,11 @@ java -jar target\quarkus-app\quarkus-run.jar
 ```
 
 ### Package and Run using Local Native Image
+Note that the following configuration property needs to be added to `application.properties` in order to enable automatic registration of `META-INF/services` entries required by the workflow engine:
+```
+quarkus.native.auto-service-loader-registration=true
+```
+
 Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
 
 ```

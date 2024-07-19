@@ -4,6 +4,7 @@
   "source": "SomeEventSource",
   "type": "PredictionRequest",
   "subject": "TheSubject",
+  "kogitopmmlfilename": "test_tree.pmml",
   "kogitopmmlmodelname": "SampleMine",
   "kogitopmmlfullresult": true,
   "data": {

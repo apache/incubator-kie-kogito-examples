@@ -12,15 +12,17 @@ Hence, this workflow expects JSON input containing a natural number. This number
 
 In the next step, the workflow calls the `PublishRestService` via REST. This service evaluates the `numberType` from the previous step and either returns with a successful response if the number is `even`, or with a failure response (HTTP status code 400) if the number is `odd`. The failure event is handled as the action node contains an `onError` definition. The referenced error is defined as `"code": "HTTP:400"`. If this exception is encountered, the workflow execution continues on an error path that prints out the failure.
 
+As per 0.8 version of the specification, there is no standard way to set a process in error. To do that, users can use a custom metadata key called `errorMessage` which will contain either the error message to be associated to the process instance or an expression that returns the error message to associated to the process instance. In addition to the workflow described before, this example includes a file called `errorWithMEtadata.sw.json` that illustrate the usage of such metadata. 
+
 
 ## Installing and Running
 
 ### Prerequisites
  
 You will need:
-  - Java 11+ installed
+  - Java 17+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.8.1+ installed
+  - Maven 3.9.6+ installed
 
 When using native image compilation, you will also need: 
   - [GraalVm](https://www.graalvm.org/downloads/) 19.3.1+ installed
@@ -67,16 +69,14 @@ with following content
 
 ```json
 {
-  "workflowdata": {
-   "number" : 2
-  }
+  "number": 2
 }
 ```
 
 Complete curl command can be found below:
 
 ```sh
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : {"number": 2}}' http://localhost:8080/error
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"number": 2}' http://localhost:8080/error
 ```
 
 
@@ -90,16 +90,14 @@ If you would like to check odd number
 
 ```json
 {
-  "workflowdata": {
-   "number" : 1
-  }
+  "number": 1
 }
 ```
 
 Complete curl command can be found below:
 
 ```sh
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : {"number": 1}}' http://localhost:8080/error
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"number": 1}' http://localhost:8080/error
 ```
 
 In Quarkus you should see the log message printed:

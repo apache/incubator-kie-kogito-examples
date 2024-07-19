@@ -56,3 +56,5 @@ kogito-travel-agency/extended/scripts/persistence/
 /kogito-quarkus-examples/ocp-tryout/uninstallLogs.txt
 /kogito-quarkus-examples/ocp-tryout/installLogs.txt
 /kogito-quarkus-examples/ocp-tryout/keycloak/kogito-realm.json
+
+**/docker-compose/.env

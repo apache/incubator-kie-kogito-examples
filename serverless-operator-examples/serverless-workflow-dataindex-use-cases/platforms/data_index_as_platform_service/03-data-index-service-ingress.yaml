@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: data-index-service-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/app-root: /
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: sonataflow-platform-data-index-service
+                port:
+                  number: 80

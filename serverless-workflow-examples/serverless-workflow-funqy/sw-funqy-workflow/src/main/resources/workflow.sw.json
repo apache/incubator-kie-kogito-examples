@@ -1,10 +1,10 @@
 {
   "id": "countryworkflow",
-  "version": "1.0",
-  "name": "Country Workflow",
-  "expressionLang": "jsonpath",
+  "version": "1.0.0",
+  "name": "Country WorkWorkflowflow",
   "description": "Workflow for countries",
   "start": "GetCountryInfo",
+  "specVersion": "0.8",
   "states": [
     {
       "name": "GetCountryInfo",
@@ -13,19 +13,19 @@
         {
           "functionRef": {
             "refName": "countryFunction",
-            "arguments":  "$.name"
+            "arguments":  "${ . }"
           }
         },
         {
           "functionRef": {
             "refName": "populationFunction",
-            "arguments": "$.name"
+            "arguments": "${ . }"
           }
         },
         {
           "functionRef": {
             "refName": "classificationFunction",
-            "arguments":  "$.name"
+            "arguments":  "${ . }"
           }
         }
       ],

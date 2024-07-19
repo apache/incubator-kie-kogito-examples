@@ -19,9 +19,10 @@ This is the infrastructure required to integrate with [Knative Eventing](https:/
 ### Prerequisites
  
 You will need:
-  - Java 11+ installed
+  - Java 17+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.8.1+ installed
+  - Maven 3.9.6+ installed
+  - [Docker Engine](https://docs.docker.com/engine/) and [Docker Compose](https://docs.docker.com/compose/) installed
 
 When using native image compilation, you will also need: 
   - [GraalVm](https://www.graalvm.org/downloads/) 19.3.1+ installed
@@ -63,13 +64,19 @@ To run the generated native executable, generated in `target/`, execute
 
 ### Submit a request
 
-The service based on the JSON workflow definition can be started by sending a request to http://localhost:8080/start'
-with following content 
+The service based on the JSON workflow definition can be started by publishing an HTTP event to 'http://localhost:8080/startevent'
+with following content:
 
 ```json
 {
-  "workflowdata": {
-   "message" : "Hello"
+  "specversion": "1.0",
+  "id": "dad76364-1cf1-48ca-bf95-485a511f8707",
+  "source": "",
+  "type": "start",
+  "kogitobusinesskey": "cloud-event-test",
+  "time": "2023-01-17T15:35:29.967831-03:00",
+  "data": {
+    "message": "Hello!"
   }
 }
 ```
@@ -77,22 +84,16 @@ with following content
 Complete curl command can be found below:
 
 ```sh
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"workflowdata" : {"message": "Hello"}}' http://localhost:8080/start
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d  '{"specversion":"1.0","id": "dad76364-1cf1-48ca-bf95-485a511f8707","source":"","type":"start","kogitobusinesskey": "cloud-event-test","time":"2023-01-17T15:35:29.967831-03:00","data":{"message":"Hello!"}}' http://localhost:8080/startevent
 ```
 
-Should return something like this ("id" will change):
-
-```json
-{
-  "id":"f9a75f77-7269-4b18-93cd-2955e3406cd4",
-  "workflowdata":{
-    "message":"Hello"
-  },
-  "waitForEvent_9":null
-}
+After executing the command, in the Quarkus console log may appear some messages printed. The first one notifying that an
+instance of the 'start' workflow has been started with a given id (notice that the id might change), for example like:
+```shell
+Starting workflow 'start' (4a254d46-0cbf-41f8-8e27-15b3da625561)
 ```
 
-You should see the message printed to the console in Quarkus log.
+You may also find another one printing the `message` we send in the event `data`.
 ```shell
 [ "Hello" ]
 ```
@@ -105,8 +106,8 @@ use in "kogitoprocrefid" field the id returned by the previous request)
   "specversion":"1.0",
   "source":"",
   "type":"move",
-  "time":"2022-01-06T15:35:29.967831-03:00",
-  "kogitoprocrefid":"f9a75f77-7269-4b18-93cd-2955e3406cd4",
+  "time":"2023-01-17T15:35:29.967831-03:00",
+  "kogitoprocrefid":"4a254d46-0cbf-41f8-8e27-15b3da625561",
   "data":{
     "move":"This has been injected by the event"
   }
@@ -116,7 +117,7 @@ use in "kogitoprocrefid" field the id returned by the previous request)
 Complete curl command can be found below:
 
 ```shell
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"specversion":"1.0","id":"e4604756-f58e-440e-9619-484b92408308","source":"","type":"move","time":"2022-01-06T15:35:29.967831-03:00","kogitoprocrefid":"f9a75f77-7269-4b18-93cd-2955e3406cd4","data":{"move":"This has been injected by the event"}}' http://localhost:8080/
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"specversion":"1.0","id":"e4604756-f58e-440e-9619-484b92408308","source":"","type":"move","time":"2023-01-17T15:35:29.967831-03:00","kogitoprocrefid":"4a254d46-0cbf-41f8-8e27-15b3da625561","data":{"move":"This has been injected by the event"}}' http://localhost:8080/move
 ```
 
 The workflow will consume the event and print the message you sent to the console.
@@ -124,3 +125,9 @@ The workflow will consume the event and print the message you sent to the consol
 ```shell
 [ "Hello", "This has been injected by the event" ]
 ```
+
+### Building and Deploying Workflow using CLI + Kogito Serverless Workflow Operator
+For this prepare your environment by following the instructions from [here]().
+
+Refer to [Serverless Workflow Guide](), to know how to build and deploy workflows using CLI + Kogito Serverless Workflow Operator.
+Refer to [Serverless Workflow Guide](https://kiegroup.github.io/kogito-docs/serverlessworkflow/latest/cloud/index.html), to know more about Kogito Serverless Workflow Operator.

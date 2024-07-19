@@ -1,9 +1,0 @@
-{
-  "specversion": "1.0",
-  "id": "b5cf8477-53ed-400c-94ea-09c0bfa3fb3f",
-  "source": "PredicatesMining",
-  "type": "PredictionResponseError",
-  "subject": "TheSubject",
-  "kogitopmmlmodelname": "PredicatesMining",
-  "data": "BAD_REQUEST"
-}

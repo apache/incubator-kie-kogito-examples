@@ -1,0 +1,30 @@
+{
+  "id": "jsongreetclientstream",
+  "version": "1.0",
+  "name": "gRPC Client Stream Greeting workflow",
+  "description": "JSON based greeting workflow using gRPC",
+  "start": "GreetPerson",
+  "functions": [
+    {
+      "name": "SayHelloMultipleLanguagesAtOnce",
+      "type": "rpc",
+      "operation": "classpath:greeting.proto#Greeter#SayHelloMultipleLanguagesAtOnce"
+    }
+  ],
+  "states": [
+    {
+      "name": "GreetPerson",
+      "type": "operation",
+      "actions": [
+        {
+          "name": "SayHelloMultipleLanguagesAtOnce",
+          "functionRef" : {
+            "refName": "SayHelloMultipleLanguagesAtOnce",
+            "arguments": ".helloRequests"
+          }
+        }
+      ],
+      "end": true
+    }
+  ]
+}

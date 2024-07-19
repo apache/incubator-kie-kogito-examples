@@ -32,9 +32,9 @@ This is the Serverless Workflow that represents the Order Saga.
 ### Prerequisites
 
 You will need:
-  - Java 11+ installed
+  - Java 17+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.8.1+ installed
+  - Maven 3.9.6+ installed
 
 When using native image compilation, you will also need:
   - [GraalVM 21.3.0+](https://github.com/oracle/graal/releases/tag/vm-21.3.0)
@@ -78,17 +78,15 @@ Given data:
 
 ```json
 {
-  "workflowdata": {
-   "orderId": "03e6cf79-3301-434b-b5e1-d6899b5639aa",
-   "failService" : "none"
-  }
+  "orderId": "03e6cf79-3301-434b-b5e1-d6899b5639aa",
+  "failService": "none"
 }
 ```
 
 Curl command (using the JSON object above):
 
 ```sh
-curl -H "Content-Type: application/json" -X POST http://localhost:8080/order_saga_error_workflow -d '{"workflowdata": {"orderId": "03e6cf79-3301-434b-b5e1-d6899b5639aa","failService" : "none"}}'
+curl -H "Content-Type: application/json" -X POST http://localhost:8080/order_saga_error_workflow -d '{"orderId": "03e6cf79-3301-434b-b5e1-d6899b5639aa","failService" : "none"}'
 ```
 The response for the request is returned with attributes representing the response of each step, either
  success or failure. The `orderResponse` attribute indicates if the order can be confirmed in case of success or
@@ -125,10 +123,10 @@ Response example:
 In the console executing the application, you can check the log with the executed steps.
 
 ```text
-2021-12-21 09:25:07,375 INFO  [org.kie.kog.StockService] (executor-thread-0) Reserve Stock for order 03e6cf79-3301-434b-b5e1-d6899b5639aa
-2021-12-21 09:25:07,398 INFO  [org.kie.kog.PaymentService] (executor-thread-0) Process Payment for order 03e6cf79-3301-434b-b5e1-d6899b5639aa
-2021-12-21 09:25:07,401 INFO  [org.kie.kog.ShippingService] (executor-thread-0) Schedule Shipping for order 03e6cf79-3301-434b-b5e1-d6899b5639aa
-2021-12-21 09:25:07,403 INFO  [org.kie.kog.OrderService] (executor-thread-0) Order Success 03e6cf79-3301-434b-b5e1-d6899b5639aa
+2021-12-21 09:25:07,375 INFO  [org.kie.kog.exa.StockService] (executor-thread-0) Reserve Stock for order 03e6cf79-3301-434b-b5e1-d6899b5639aa
+2021-12-21 09:25:07,398 INFO  [org.kie.kog.exa.PaymentService] (executor-thread-0) Process Payment for order 03e6cf79-3301-434b-b5e1-d6899b5639aa
+2021-12-21 09:25:07,401 INFO  [org.kie.kog.exa.ShippingService] (executor-thread-0) Schedule Shipping for order 03e6cf79-3301-434b-b5e1-d6899b5639aa
+2021-12-21 09:25:07,403 INFO  [org.kie.kog.exa.OrderService] (executor-thread-0) Order Success 03e6cf79-3301-434b-b5e1-d6899b5639aa
 ```
 
 #### Simulating errors to activate the compensation flows
@@ -139,17 +137,15 @@ Example:
 
 ```json
 {
-  "workflowdata": {
-   "orderId": "03e6cf79-3301-434b-b5e1-d6899b5639aa",
-   "failService" : "ShippingService"
-  }
+  "orderId": "03e6cf79-3301-434b-b5e1-d6899b5639aa",
+  "failService": "ShippingService"
 }
 ```
 Curl command (using the JSON object above):
 
 ```sh
                                                                                                         }
-curl -H "Content-Type: application/json" -X POST http://localhost:8080/order_saga_error_workflow  -d '{"workflowdata": {"orderId": "03e6cf79-3301-434b-b5e1-d6899b5639aa","failService" : "ShippingService"}}' 
+curl -H "Content-Type: application/json" -X POST http://localhost:8080/order_saga_error_workflow  -d '{"orderId": "03e6cf79-3301-434b-b5e1-d6899b5639aa","failService" : "ShippingService"}' 
 ```
 
 Response example:
@@ -187,17 +183,11 @@ Response example:
 In the console executing the application, you can check the log with the executed steps.
 
 ```text
-2021-12-21 09:20:45,960 INFO  [org.kie.kog.StockService] (executor-thread-0) Reserve Stock for order 03e6cf79-3301-434b-b5e1-d6899b5639aa
-2021-12-21 09:20:45,962 INFO  [org.kie.kog.PaymentService] (executor-thread-0) Process Payment for order 03e6cf79-3301-434b-b5e1-d6899b5639aa
-2021-12-21 09:20:45,964 INFO  [org.kie.kog.ShippingService] (executor-thread-0) Schedule Shipping for order 03e6cf79-3301-434b-b5e1-d6899b5639aa
-2021-12-21 09:20:45,964 ERROR [org.kie.kog.MockService] (executor-thread-0) Error in ShippingService for 03e6cf79-3301-434b-b5e1-d6899b5639aa
-2021-12-21 09:20:45,966 INFO  [org.kie.kog.PaymentService] (executor-thread-0) Cancel Payment a1068ef3-63cc-464e-820a-c049d1a5e3a6
-2021-12-21 09:20:45,968 INFO  [org.kie.kog.StockService] (executor-thread-0) Cancel Stock 8cc0144b-87e0-47ed-8d8f-eedbe4b69abe
-2021-12-21 09:20:45,970 INFO  [org.kie.kog.OrderService] (executor-thread-0) Order Failed 03e6cf79-3301-434b-b5e1-d6899b5639aa
+2021-12-21 09:20:45,960 INFO  [org.kie.kog.exa.StockService] (executor-thread-0) Reserve Stock for order 03e6cf79-3301-434b-b5e1-d6899b5639aa
+2021-12-21 09:20:45,962 INFO  [org.kie.kog.exa.PaymentService] (executor-thread-0) Process Payment for order 03e6cf79-3301-434b-b5e1-d6899b5639aa
+2021-12-21 09:20:45,964 INFO  [org.kie.kog.exa.ShippingService] (executor-thread-0) Schedule Shipping for order 03e6cf79-3301-434b-b5e1-d6899b5639aa
+2021-12-21 09:20:45,964 ERROR [org.kie.kog.exa.MockService] (executor-thread-0) Error in ShippingService for 03e6cf79-3301-434b-b5e1-d6899b5639aa
+2021-12-21 09:20:45,966 INFO  [org.kie.kog.exa.PaymentService] (executor-thread-0) Cancel Payment a1068ef3-63cc-464e-820a-c049d1a5e3a6
+2021-12-21 09:20:45,968 INFO  [org.kie.kog.exa.StockService] (executor-thread-0) Cancel Stock 8cc0144b-87e0-47ed-8d8f-eedbe4b69abe
+2021-12-21 09:20:45,970 INFO  [org.kie.kog.exa.OrderService] (executor-thread-0) Order Failed 03e6cf79-3301-434b-b5e1-d6899b5639aa
 ```
-
-## Deploying with Kogito Operator
-
-In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).
-
-See also: [SAGA PATTERN WITH PROCESSES AND KOGITO – PART 1](https://blog.kie.org/2021/11/saga-pattern-with-processes-and-kogito-part-1.html)

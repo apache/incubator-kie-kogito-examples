@@ -1,14 +1,14 @@
 {
   "id": "foreach",
-  "version": "1.0",
+  "specVersion": "0.8",
   "name": "Workflow ForEach example",
   "description": "An example of how to use for each state",
   "start": "start",
   "functions": [
     {
-      "name": "printMessage",
-      "type": "custom",
-      "operation": "sysout"
+      "name": "double",
+      "type": "expression",
+      "operation": "$WORKFLOW.prevActionResult*2"
     },
     {
       "name": "increase",
@@ -30,22 +30,13 @@
       "actions": [
         {
           "name":"increase",
-          "functionRef": {
-            "refName": "increase"
-          }
+          "functionRef": "increase"
         },
         {
-          "name": "printAction",
-          "functionRef": {
-            "refName": "printMessage",
-            "arguments": {
-              "message": ".item"
-            }
-          }
+          "name": "double",
+          "functionRef": "double"
         }],
-        "end": {
-         "terminate": "true"
-         }
+        "end": true
     }
   ]
 }

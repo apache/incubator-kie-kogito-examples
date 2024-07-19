@@ -15,7 +15,7 @@ Make sure you meet the [prerequisites](#prerequisites) and then start [here](#in
 
 ### Available Infrastructure
 - Persistence:
-  - infinispan/server:13.0.2.Final via helm chart
+  - infinispan/server:14.0.4.Final via helm chart
 - Messaging:
   - bitnami/kafka:2.8.1-debian-10-r31 via helm chart
 - Authorization/Authentication:
@@ -75,8 +75,8 @@ All configuration required to make those connections as well as initializations 
 - `keycloak.realm.json` - Keycloak initialization file for the Kogito realm creating clients, users, etc. used in Kogito examples
 - `keycloak.db.vendor` - Keycloak persistence
 ### Infinispan Configurations
-- `quarkus.infinispan.client.serverlist` - the infinispan url used by the Kogito application; can be internal service url
-- `quarkus.infinispan.client.authusername` - the user used by the Kogito application to access the infinispan service
+- `quarkus.infinispan.client.hosts` - the infinispan url used by the Kogito application; can be internal service url
+- `quarkus.infinispan.client.username` - the user used by the Kogito application to access the infinispan service
 ### Kafka Configurations
 - `kafka.bootstrap.servers` - the kafka url used by the Kogito application; can be internal service url
 ### Kogito Dataindex Configurations
@@ -92,8 +92,6 @@ All configuration required to make those connections as well as initializations 
 - `kogito.jobsservice.props` - command line properties for the job service
 
 ## Constraints
-- Developer Sandbox does not allow to install additional operators - (https://www.youtube.com/watch?v=oDqw8aBGDD8 from 18.02.2021 - time: 9:09)
-  => cannot use Kogito Operator install
 - Developer Sandbox sets [resource quotas](https://github.com/codeready-toolchain/host-operator/blob/master/deploy/templates/nstemplatetiers/base/cluster.yaml) per user name
 
 ### Memory and cpu requests and limits

@@ -1,37 +1,35 @@
 /*
- * Copyright 2021 Red Hat, Inc. and/or its affiliates.
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ *   http://www.apache.org/licenses/LICENSE-2.0
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
-
 package org.acme.it;
 
 import java.net.URI;
 import java.time.OffsetDateTime;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 import java.util.UUID;
 
 import org.acme.QueryRecord;
-import org.eclipse.microprofile.config.ConfigProvider;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.kie.kogito.test.quarkus.QuarkusTestProperty;
 import org.kie.kogito.test.quarkus.kafka.KafkaTestClient;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
-import org.kie.kogito.testcontainers.quarkus.PostgreSqlQuarkusTestResource;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -47,12 +45,11 @@ import io.restassured.path.json.JsonPath;
 import static io.restassured.RestAssured.given;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
+import static org.awaitility.Awaitility.await;
 
+@QuarkusIntegrationTest
 @QuarkusTestResource(WireMockQueryServiceResource.class)
 @QuarkusTestResource(KafkaQuarkusTestResource.class)
-@QuarkusTestResource(QueryAnswerServiceIT.ConditionalPostgreSqlQuarkusTestResource.class)
-@QuarkusIntegrationTest
 class QueryAnswerServiceIT {
 
     private static final String QUERY = "THE FORMULATED QUERY";
@@ -60,13 +57,14 @@ class QueryAnswerServiceIT {
     private static final String QUERY_ANSWER_SERVICE_URL = "/qaservice";
     private static final String QUERY_ANSWER_SERVICE_GET_BY_ID_URL = QUERY_ANSWER_SERVICE_URL + "/{id}";
 
+    @QuarkusTestProperty(name = KafkaQuarkusTestResource.KOGITO_KAFKA_PROPERTY)
+    private String kafkaBootstrapServers;
     private ObjectMapper objectMapper;
 
     private KafkaTestClient kafkaClient;
 
     @BeforeEach
     void setup() {
-        String kafkaBootstrapServers = ConfigProvider.getConfig().getValue(KafkaQuarkusTestResource.KOGITO_KAFKA_PROPERTY, String.class);
         kafkaClient = new KafkaTestClient(kafkaBootstrapServers);
         objectMapper = new ObjectMapper()
                 .registerModule(new JavaTimeModule())
@@ -77,7 +75,7 @@ class QueryAnswerServiceIT {
     @Test
     void queryAnswerProcessCycle() throws Exception {
         // start a new process instance by sending a query and collect the process instance id.
-        String processInput = "{\"workflowdata\": {\"query\": \"" + QUERY + "\"} }";
+        String processInput = "{\"query\": \"" + QUERY + "\"}";
         String processInstanceId = given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
@@ -145,22 +143,4 @@ class QueryAnswerServiceIT {
         kafkaClient.shutdown();
     }
 
-    /**
-     * https://issues.redhat.com/browse/KOGITO-6582
-     */
-    public static class ConditionalPostgreSqlQuarkusTestResource extends PostgreSqlQuarkusTestResource {
-
-        public ConditionalPostgreSqlQuarkusTestResource() {
-            enableConditional();
-        }
-
-        private boolean isEnabled() {
-            return Optional.ofNullable(System.getProperty("enable.resource.postgresql")).map(property -> property.equalsIgnoreCase(Boolean.TRUE.toString())).orElse(false);
-        }
-
-        @Override
-        protected Map<String, String> getProperties() {
-            return isEnabled() ? super.getProperties() : new HashMap<>();
-        }
-    }
 }

@@ -1,14 +1,34 @@
 <?xml version="1.0"?>
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+
+-->
 <project
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-    xmlns="http://maven.apache.org/POM/4.0.0">
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+        xmlns="http://maven.apache.org/POM/4.0.0">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>kogito-quarkus-examples</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
+    <version>999-SNAPSHOT</version>
   </parent>
 
   <artifactId>process-postgresql-persistence-quarkus</artifactId>
@@ -16,13 +36,14 @@
   <name>Kogito Example :: Process PostgreSQL Persistence Quarkus</name>
   <description>Process with PostgreSQL persistence - Quarkus</description>
   <properties>
-    <quarkus-plugin.version>2.11.0.Final</quarkus-plugin.version>
+    <quarkus-plugin.version>3.8.4</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-    <quarkus.platform.version>2.11.0.Final</quarkus.platform.version>
+    <quarkus.platform.version>3.8.4</quarkus.platform.version>
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-    <kogito.bom.version>${project.version}</kogito.bom.version>
+    <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
+    <version.org.kie.kogito>999-SNAPSHOT</version.org.kie.kogito>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -52,8 +73,20 @@
       <artifactId>quarkus-resteasy-jackson</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-quarkus</artifactId>
+      <groupId>org.jbpm</groupId>
+      <artifactId>jbpm-with-drools-quarkus</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-addons-quarkus-persistence-jdbc</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-jdbc-postgresql</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-agroal</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -71,11 +104,6 @@
     <dependency>
       <groupId>io.rest-assured</groupId>
       <artifactId>rest-assured</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-quarkus-test-utils</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -98,117 +126,16 @@
   </build>
   <profiles>
     <profile>
-      <id>persistence</id>
-      <activation>
-        <property>
-          <name>persistence</name>
-        </property>
-      </activation>
-      <dependencies>
-        <dependency>
-          <groupId>org.kie.kogito</groupId>
-          <artifactId>kogito-addons-quarkus-persistence-postgresql</artifactId>
-        </dependency>
-      </dependencies>
-      <build>
-       <plugins>
-         <plugin>
-           <artifactId>maven-antrun-plugin</artifactId>
-           <executions>
-             <execution>
-                <phase>generate-sources</phase>
-               <goals>
-                 <goal>run</goal>
-               </goals>
-               <configuration>
-                 <target>
-                   <delete file="src/main/resources/application.properties"/>
-                   <copy file="src/main/resources/postgresql.properties"
-                         tofile="src/main/resources/application.properties"/>
-                 </target>
-               </configuration>
-             </execution>
-           </executions>
-         </plugin>
-       </plugins>
-     </build>
-    </profile>
-    <profile>
-     <id>jdbc-persistence</id>
-     <dependencies>
-        <dependency>
-          <groupId>org.kie.kogito</groupId>
-          <artifactId>kogito-addons-quarkus-persistence-jdbc</artifactId>
-        </dependency>
-        <dependency>
-          <groupId>io.quarkus</groupId>
-          <artifactId>quarkus-jdbc-postgresql</artifactId>
-        </dependency>
-        <dependency>
-         <groupId>io.quarkus</groupId>
-         <artifactId>quarkus-agroal</artifactId>
-        </dependency>
-     </dependencies>
-     <build>
-       <plugins>
-         <plugin>
-           <artifactId>maven-antrun-plugin</artifactId>
-           <executions>
-             <execution>
-                <phase>generate-sources</phase>
-               <goals>
-                 <goal>run</goal>
-               </goals>
-               <configuration>
-                 <target>
-                   <delete file="src/main/resources/application.properties"/>
-                   <copy file="src/main/resources/jdbc.properties"
-                         tofile="src/main/resources/application.properties"/>
-                 </target>
-               </configuration>
-             </execution>
-           </executions>
-         </plugin>
-       </plugins>
-     </build>
-   </profile>
-    <profile>
       <id>events</id>
       <activation>
         <property>
           <name>events</name>
         </property>
       </activation>
-      <build>
-        <plugins>
-         <plugin>
-           <artifactId>maven-antrun-plugin</artifactId>
-           <executions>
-             <execution>
-               <id>append-events</id>
-               <phase>generate-sources</phase>
-               <goals>
-                 <goal>run</goal>
-               </goals>
-               <configuration>
-                 <target>
-                   <concat destfile="src/main/resources/application-temp.properties">
-                     <fileset file="src/main/resources/application.properties" />
-                     <fileset file="src/main/resources/events.properties" />
-                   </concat>
-                   <delete file="src/main/resources/application.properties"/>
-                   <move file="src/main/resources/application-temp.properties" tofile="src/main/resources/application.properties"/>
-                 </target>
-               </configuration>
-             </execution>
-           </executions>
-         </plugin>
-        </plugins>
-      </build>
       <dependencies>
         <dependency>
-          <groupId>org.kie.kogito</groupId>
-          <artifactId>kogito-addons-quarkus-events-process</artifactId>
+          <groupId>org.kie</groupId>
+          <artifactId>kie-addons-quarkus-events-process</artifactId>
         </dependency>
         <dependency>
           <groupId>io.quarkus</groupId>

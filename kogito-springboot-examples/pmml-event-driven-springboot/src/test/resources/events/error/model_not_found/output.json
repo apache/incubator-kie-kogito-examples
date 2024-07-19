@@ -1,9 +1,0 @@
-{
-  "specversion": "1.0",
-  "id": "25c2d7d1-f66f-4301-8503-b8843cbb844b",
-  "source": "aName",
-  "type": "PredictionResponseError",
-  "subject": "TheSubject",
-  "kogitopmmlmodelname": "aName",
-  "data": "MODEL_NOT_FOUND"
-}

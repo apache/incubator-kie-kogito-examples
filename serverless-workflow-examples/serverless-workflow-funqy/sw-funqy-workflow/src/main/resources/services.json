@@ -20,7 +20,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object"
+                "$ref": "#/components/schemas/Country"
               }
             }
           }
@@ -31,7 +31,7 @@
             "content": {
               "application/json;charset=utf-8": {
                 "schema": {
-                  "type": "object"
+                  "$ref": "#/components/schemas/Country"
                 }
               }
             }
@@ -48,7 +48,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object"
+                "$ref": "#/components/schemas/Country"
               }
             }
           }
@@ -59,7 +59,7 @@
             "content": {
               "application/json;charset=utf-8": {
                 "schema": {
-                  "type": "object"
+                  "$ref": "#/components/schemas/Country"
                 }
               }
             }
@@ -76,7 +76,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object"
+                "$ref": "#/components/schemas/Country"
               }
             }
           }
@@ -87,10 +87,37 @@
             "content": {
               "application/json;charset=utf-8": {
                 "schema": {
-                  "type": "object"
+                  "$ref": "#/components/schemas/Country"
                 }
               }
             }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Country": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "capital": {
+            "type": "string"
+          },
+          "classifier": {
+            "type": "string"
+          },
+          "population": {
+            "type": "string"
+          },
+          "region": {
+            "type": "string"
           }
         }
       }

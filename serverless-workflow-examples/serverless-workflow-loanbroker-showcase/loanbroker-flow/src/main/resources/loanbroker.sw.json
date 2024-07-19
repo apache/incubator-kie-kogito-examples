@@ -1,0 +1,127 @@
+{
+  "id": "loanbroker",
+  "name": "loanbroker",
+  "specVersion": "0.8",
+  "start": "GetCreditScore",
+  "dataInputSchema": "loanbroker.schema.json",
+  "functions": [
+    {
+      "name": "getCreditScore",
+      "operation": "specs/credit-bureau.yaml#getCustomerCreditScore",
+      "type": "rest"
+    },
+    {
+      "name": "fetchQuotes",
+      "operation": "specs/aggregator.yaml#fetchQuotesByInstance",
+      "type": "rest"
+    }
+  ],
+  "events": [
+    {
+      "name": "requestQuote",
+      "type": "kogito.serverless.workflow.request.quote",
+      "kind": "produced"
+    },
+    {
+      "name": "aggregatedQuotesResponse",
+      "type": "kogito.serverless.loanbroker.aggregated.quotes.response",
+      "kind": "consumed",
+      "source": "/kogito/serverless/loanbroker/aggregator"
+    },
+    {
+      "name": "loanBrokerRequestedQuotes",
+      "type": "kogito.serverless.workflow.aggregated.quotes",
+      "kind": "produced"
+    },
+    {
+      "name": "loanBrokerRequestedQuotesTimeout",
+      "type": "kogito.serverless.workflow.aggregated.quotes.timeout",
+      "kind": "produced"
+    }
+  ],
+  "states": [
+    {
+      "name": "GetCreditScore",
+      "type": "operation",
+      "actions": [
+        {
+          "functionRef": {
+            "refName": "getCreditScore",
+            "arguments": {
+              "SSN": "${ .SSN }"
+            }
+          },
+          "actionDataFilter": {
+            "toStateData": "${ .credit }"
+          }
+        }
+      ],
+      "stateDataFilter": {
+        "output": "${ {  amount, term, credit } }"
+      },
+      "transition": "RequestQuote"
+    },
+    {
+      "name": "RequestQuote",
+      "type": "callback",
+      "action": {
+        "eventRef": {
+          "triggerEventRef": "requestQuote"
+        }
+      },
+      "eventRef": "aggregatedQuotesResponse",
+      "eventDataFilter": {
+        "data": "${ {\"aggregatedQuotesArrived\" : true} }"
+      },
+      "transition": "CheckRequestQuoteArrived",
+      "timeouts": {
+        "eventTimeout": "PT10S"
+      }
+    },
+    {
+      "name": "CheckRequestQuoteArrived",
+      "type": "switch",
+      "dataConditions": [
+        {
+          "condition": "${ .aggregatedQuotesArrived }",
+          "transition": "FetchQuotes"
+        }
+      ],
+      "defaultCondition": {
+        "end": {
+          "produceEvents": [
+            {
+              "eventRef": "loanBrokerRequestedQuotesTimeout"
+            }
+          ],
+          "terminate": true
+        }
+      }
+    },
+    {
+      "name": "FetchQuotes",
+      "type": "operation",
+      "actions": [
+        {
+          "functionRef": {
+            "refName": "fetchQuotes",
+            "arguments": {
+              "id": "$WORKFLOW.instanceId"
+            }
+          },
+          "actionDataFilter": {
+            "toStateData": "${ .quotes }"
+          }
+        }
+      ],
+      "end": {
+        "produceEvents": [
+          {
+            "eventRef": "loanBrokerRequestedQuotes"
+          }
+        ],
+        "terminate": true
+      }
+    }
+  ]
+}

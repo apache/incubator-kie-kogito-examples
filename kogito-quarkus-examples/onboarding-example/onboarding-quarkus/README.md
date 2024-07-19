@@ -17,6 +17,10 @@ mvn clean package quarkus:dev
 ```
 
 ### Compile and Run using Local Native Image
+Note that the following configuration property needs to be added to `application.properties` in order to enable automatic registration of `META-INF/services` entries required by the workflow engine:
+```
+quarkus.native.auto-service-loader-registration=true
+```
 
 Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
 
@@ -41,7 +45,7 @@ persistence, you need to have an Infinispan server installed and available over 
 expects the server to be running on:
 
 ```
-quarkus.infinispan-client.server-list=localhost:11222
+quarkus.infinispan-client.hosts=localhost:11222
 ```
 
 If you need to change it, you can do so by updating the `application.properties` file located in `src/main/resources`.

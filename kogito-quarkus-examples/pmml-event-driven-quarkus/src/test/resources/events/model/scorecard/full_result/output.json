@@ -4,6 +4,7 @@
   "source": "SimpleScorecard",
   "type": "PredictionResponseFull",
   "subject": "TheSubject",
+  "kogitopmmlfilename": "test_scorecard.pmml",
   "kogitopmmlmodelname": "SimpleScorecard",
   "data": {
     "segmentIndex": 0,

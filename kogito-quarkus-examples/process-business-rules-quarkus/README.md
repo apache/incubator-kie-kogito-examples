@@ -54,9 +54,9 @@ This example shows
 ### Prerequisites
 
 You will need:
-  - Java 11+ installed
+  - Java 17+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.8.1+ installed
+  - Maven 3.9.6+ installed
 
 When using native image compilation, you will also need:
   - GraalVM 19.3+ installed
@@ -87,6 +87,11 @@ java -jar target\quarkus-app\quarkus-run.jar
 ```
 
 ### Package and Run using Local Native Image
+Note that the following configuration property needs to be added to `application.properties` in order to enable automatic registration of `META-INF/services` entries required by the workflow engine:
+```
+quarkus.native.auto-service-loader-registration=true
+```
+
 Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
 
 ```sh
@@ -206,7 +211,7 @@ Should return something like
 ```
 
 
-Then to see the Task created perfor the following command
+Then to see the Task created perform the following command
 
 ```
 curl http://localhost:8080/persons/{uuid}/ChildrenHandling/{tuuid}
@@ -249,7 +254,3 @@ Should return something similar to
 }
 ```
 and there should be no outstanding task for the person anymore.
-
-## Deploying with Kogito Operator
-
-In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).

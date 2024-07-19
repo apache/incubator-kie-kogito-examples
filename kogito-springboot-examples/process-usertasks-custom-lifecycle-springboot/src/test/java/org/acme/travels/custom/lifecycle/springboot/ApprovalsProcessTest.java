@@ -1,17 +1,20 @@
 /*
- * Copyright 2020 Red Hat, Inc. and/or its affiliates.
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ *   http://www.apache.org/licenses/LICENSE-2.0
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
 package org.acme.travels.custom.lifecycle.springboot;
 
@@ -29,12 +32,12 @@ import org.jbpm.process.instance.impl.workitem.Complete;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.kie.kogito.Model;
+import org.kie.kogito.auth.IdentityProviders;
 import org.kie.kogito.auth.SecurityPolicy;
 import org.kie.kogito.process.Process;
 import org.kie.kogito.process.ProcessInstance;
 import org.kie.kogito.process.WorkItem;
 import org.kie.kogito.process.workitem.InvalidTransitionException;
-import org.kie.kogito.services.identity.StaticIdentityProvider;
 import org.kie.kogito.tests.KogitoInfinispanSpringbootApplication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -70,8 +73,7 @@ public class ApprovalsProcessTest {
         processInstance.start();
         assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_ACTIVE, processInstance.status());
 
-        StaticIdentityProvider identity = new StaticIdentityProvider("admin", Collections.singletonList("managers"));
-        SecurityPolicy policy = SecurityPolicy.of(identity);
+        SecurityPolicy policy = SecurityPolicy.of(IdentityProviders.of("admin", Collections.singletonList("managers")));
 
         processInstance.workItems(policy);
 
@@ -85,8 +87,7 @@ public class ApprovalsProcessTest {
         workItems = processInstance.workItems(policy);
         assertEquals(0, workItems.size());
 
-        identity = new StaticIdentityProvider("john", Collections.singletonList("managers"));
-        policy = SecurityPolicy.of(identity);
+        policy = SecurityPolicy.of(IdentityProviders.of("john", Collections.singletonList("managers")));
 
         processInstance.workItems(policy);
 
@@ -119,8 +120,7 @@ public class ApprovalsProcessTest {
         processInstance.start();
         assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_ACTIVE, processInstance.status());
 
-        StaticIdentityProvider identity = new StaticIdentityProvider("admin", Collections.singletonList("managers"));
-        SecurityPolicy policy = SecurityPolicy.of(identity);
+        SecurityPolicy policy = SecurityPolicy.of(IdentityProviders.of("admin", Collections.singletonList("managers")));
 
         List<WorkItem> workItems = processInstance.workItems(policy);
         assertEquals(1, workItems.size());
@@ -131,7 +131,7 @@ public class ApprovalsProcessTest {
         try {
             processInstance.transitionWorkItem(wiId, new HumanTaskTransition(Complete.ID,
                     Collections.singletonMap("approved", true),
-                    SecurityPolicy.of(new StaticIdentityProvider("admin", Collections.singletonList("managers")))));
+                    SecurityPolicy.of(IdentityProviders.of("admin", Collections.singletonList("managers")))));
             fail("It's not possible to complete non started tasks");
         } catch (InvalidTransitionException e) {
             // expected
@@ -145,8 +145,7 @@ public class ApprovalsProcessTest {
         workItems = processInstance.workItems(policy);
         assertEquals(0, workItems.size());
 
-        identity = new StaticIdentityProvider("john", Collections.singletonList("managers"));
-        policy = SecurityPolicy.of(identity);
+        policy = SecurityPolicy.of(IdentityProviders.of("john", Collections.singletonList("managers")));
 
         processInstance.workItems(policy);
 
