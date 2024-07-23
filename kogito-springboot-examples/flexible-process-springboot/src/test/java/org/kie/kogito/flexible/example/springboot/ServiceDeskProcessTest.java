@@ -109,6 +109,8 @@ class ServiceDeskProcessTest {
         String location = given()
                 .basePath(BASE_PATH)
                 .contentType(ContentType.JSON)
+                .queryParam("user", "kelly")
+                .queryParam("group", "support")
                 .when()
                 .post("/{id}/ReceiveSupportComment", id)
                 .then()
@@ -140,9 +142,12 @@ class ServiceDeskProcessTest {
 
     private void addCustomerComment(String id) {
         String location = given()
-                .basePath(BASE_PATH + "/" + id).contentType(ContentType.JSON)
+                .basePath(BASE_PATH)
+                .contentType(ContentType.JSON)
+                .queryParam("user", "Paco")
+                .queryParam("group", "customer")
                 .when()
-                .post("/ReceiveCustomerComment")
+                .post("/{id}/ReceiveCustomerComment", id)
                 .then()
                 .statusCode(201)
                 .header("Location", notNullValue())
@@ -171,17 +176,25 @@ class ServiceDeskProcessTest {
     }
 
     private void resolveCase(String id) {
-        given().basePath(BASE_PATH + "/" + id).contentType(ContentType.JSON).when().post("/Resolve_Case").then()
-                .statusCode(200).body("supportCase.state", is(State.RESOLVED.name()));
+        given()
+                .basePath(BASE_PATH)
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/{id}/Resolve_Case", id)
+                .then()
+                .statusCode(200)
+                .body("supportCase.state", is(State.RESOLVED.name()));
     }
 
     @SuppressWarnings("unchecked")
     private void sendQuestionnaire(String id) {
         String taskId = given()
-                .basePath(BASE_PATH + "/" + id)
+                .basePath(BASE_PATH)
                 .contentType(ContentType.JSON)
+                .queryParam("user", "Paco")
+                .queryParam("group", "customer")
                 .when()
-                .get("/tasks")
+                .get("/{id}/tasks", id)
                 .then()
                 .statusCode(200)
                 .body("size()", is(1))
@@ -195,13 +208,13 @@ class ServiceDeskProcessTest {
         params.put("evaluation", 10);
 
         given()
-                .basePath(BASE_PATH + "/" + id)
+                .basePath(BASE_PATH)
                 .queryParam("user", "Paco")
                 .queryParam("group", "customer")
                 .contentType(ContentType.JSON)
                 .when()
                 .body(params)
-                .post("/Questionnaire/" + taskId)
+                .post("/{id}/Questionnaire/{taskId}", id, taskId)
                 .then()
                 .statusCode(200)
                 .body("supportCase.state", is(State.CLOSED.name()))
