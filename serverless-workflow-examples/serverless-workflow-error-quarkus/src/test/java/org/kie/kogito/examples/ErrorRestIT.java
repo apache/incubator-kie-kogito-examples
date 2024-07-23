@@ -46,7 +46,7 @@ public class ErrorRestIT {
                 .post("/error")
                 .then()
                 .statusCode(201)
-                .body("workflowdata.numberType", is("odd"));
+                .body("workflowdata.numberType", is("even"));
         given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)

@@ -8,7 +8,11 @@
   "errors": [
     {
       "name": "odd number",
-      "code": "java.lang.RuntimeException"
+      "code": "Odd situation"
+     },
+     {
+      "name": "bad request",
+      "code": "HTTP:400"
      }
   ],
   "functions": [
@@ -18,9 +22,9 @@
       "operation": "service:java:org.kie.kogito.examples.EvenService::isEven"
     },
     {
-      "name": "isSqr",
+      "name": "publishPerfectSquare",
       "type": "custom",
-      "operation": "service:java:org.kie.kogito.examples.EvenService::isSquare"
+      "operation": "rest:post:/publish/{type}/{number}"
     },
     {
       "name": "printMessage",
@@ -41,15 +45,6 @@
               "number": "$.number"
             }
           }
-        },
-        {
-          "name": "checkSqrAction",
-          "functionRef": {
-            "refName": "isSqr",
-            "arguments": {
-              "number": "$.number"
-            }
-          }
         }
       ],
       "transition": "even",
@@ -66,7 +61,7 @@
       "data": {
         "numberType": "even"
       },
-      "transition": "finish"
+      "transition": "print"
     },
     {
       "name": "odd",
@@ -74,10 +69,10 @@
       "data": {
         "numberType": "odd"
       },
-      "transition": "finish"
+      "transition": "print"
     },
     {
-      "name": "finish",
+      "name": "print",
       "type": "operation",
       "actions": [
         {
@@ -86,6 +81,53 @@
             "refName": "printMessage",
             "arguments": {
               "message": "$.numberType"
+            }
+          }
+        }
+      ],
+      "transition": "publish"
+    },
+    {
+      "name": "publish",
+      "type": "operation",
+      "actions": [
+        {
+          "name": "publishAction",
+          "functionRef" : {
+            "refName": "publishPerfectSquare",
+            "arguments": {
+              "type": "$.numberType",
+              "number": "$.number"
+            }
+          }
+        }
+      ],
+      "end": true,
+      "onErrors": [
+        {
+          "errorRef": "bad request",
+          "transition": "setError"
+        }
+      ]
+    },
+    {
+      "name": "setError",
+      "type": "inject",
+      "data": {
+        "errormessage": "Fail to publish result"
+      },
+      "transition": "reportError"
+    },
+    {
+      "name": "reportError",
+      "type": "operation",
+      "actions": [
+        {
+          "name": "printAction",
+          "functionRef": {
+            "refName": "printMessage",
+            "arguments": {
+              "message": "errormessage"
             }
           }
         }

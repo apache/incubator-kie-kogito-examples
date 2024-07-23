@@ -28,11 +28,4 @@ public class EvenService {
             throw new IllegalArgumentException("Odd situation");
         }
     }
-
-    public void isSquare(int number) {
-        double sqrt = Math.sqrt(number);
-        if (sqrt == Math.round(sqrt)) {
-            throw new RuntimeException("Number has a perfect square");
-        }
-    }
 }

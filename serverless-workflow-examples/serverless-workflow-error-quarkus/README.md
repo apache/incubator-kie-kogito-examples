@@ -6,10 +6,11 @@ This example contains a simple workflow service that illustrate error handling.
 The service is described using JSON format as defined in the 
 [CNCF Serverless Workflow specification](https://github.com/serverlessworkflow/specification).
 
-The workflow check if the number is odd or even and print a message indicating that. 
-The main feature of this demo is that if the number is odd, an exception is thrown, and it is the exception error handling the one that sets the odd message. 
+The workflow consists of a Java service that determines if a provided number is odd or even, followed by a call to a REST service to publish any even number. The main feature of this demo is to show different ways of exception handling within a workflow. In the Java service, if the number is odd, an exception is thrown, and it is the exception error handling the one that sets the odd message. If the REST service call returns a 400 response, the exception error handling mechanism causes the workflow to follow an error path instead of propagating this exception to the caller.
 
-Hence, this workflow expects JSON input containing a natural number. This number is passed using a service operation to `EvenService` java class. If the number is even, the workflow moves to the next defined state, injecting "even" `numberType`. But if the number is odd, the class throws an `IllegalArgumentException`. This exception is handled and redirected to odd inject node by using [inline workflow error handling](https://github.com/serverlessworkflow/specification/blob/main/specification.md#Workflow-Error-Handling).  This basically consists on adding `onErrors` field, where the expected exception is specified in `code` and the target state (a node injecting "odd" `numberType`) in `transition`. Finally, both execution paths finish on the same node, which prints the calculated `eventType`.
+Hence, this workflow expects JSON input containing a natural number. This number is passed using a service operation to `EvenService` java class. If the number is even, the workflow moves to the next defined state, injecting "even" `numberType`. But if the number is odd, the class throws an `IllegalArgumentException`. This exception is handled and redirected to odd inject node by using [inline workflow error handling](https://github.com/serverlessworkflow/specification/blob/main/specification.md#Workflow-Error-Handling).  This basically consists on adding `onErrors` field, where the expected exception is specified in `code` and the target state (a node injecting "odd" `numberType`) in `transition`. Both execution paths then finish on the same node, which prints the calculated `numberType`.
+
+In the next step, the workflow calls the `PublishRestService` via REST. This service evaluates the `numberType` from the previous step and either returns with a successful response if the number is `even`, or with a failure response (HTTP status code 400) if the number is `odd`. The failure event is handled as the action node contains an `onError` definition. The referenced error is defined as `"code": "HTTP:400"`. If this exception is encountered, the workflow execution continues on an error path that prints out the failure.
 
 As per 0.8 version of the specification, there is no standard way to set a process in error. To do that, users can use a custom metadata key called `errorMessage` which will contain either the error message to be associated to the process instance or an expression that returns the error message to associated to the process instance. In addition to the workflow described before, this example includes a file called `errorWithMEtadata.sw.json` that illustrate the usage of such metadata. 
 
@@ -103,4 +104,5 @@ In Quarkus you should see the log message printed:
 
 ```text
 odd
+Fail to publish result
 ```
