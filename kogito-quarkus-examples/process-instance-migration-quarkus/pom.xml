@@ -124,6 +124,12 @@
       <artifactId>kie-addons-quarkus-persistence-jdbc</artifactId>
     </dependency>
 
+    <!-- Data Index Addon -->
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>kogito-addons-quarkus-data-index-postgresql</artifactId>
+    </dependency>
+
     <!-- Data Index Persistence -->
     <dependency>
       <groupId>org.kie</groupId>

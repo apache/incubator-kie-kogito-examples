@@ -51,7 +51,6 @@ And when using native image compilation, you will also need:
 This quickstart provides a docker compose template that starts all the required services. This setup ensures that all services are connected with a default configuration.
 
 - PostgreSQL: 5432
-- Data Index: 8180
 - PgAdmin: 8055
 - Kogito Process Instance Migration Service: 8080
 
@@ -166,6 +165,15 @@ The response will contain information about the migration:
    "numberOfProcessInstanceMigrated":1
 }
 ```
+
+Alternatively, use the following endpoint to migrate just a single process instance:
+```bash
+curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST http://localhost:8080/management/processes/simple/instances/2a507f63-9db1-4d15-b64c-9e14f922d470/migrate -d '{
+  "targetProcessId": "modified",
+  "targetProcessVersion": "1.0"
+}'
+```
+
 
 Note that the invocation of the `migrate` endpoint is the first step of the PIM functionality. It flags the selected process instance(s) as migrated to the defined target process definition. The second step of the migration will happen the next time the process instance is unmarshalled. This would be the case when the process instance is triggered to continue its execution. If you want to test whether this unmarshalling step is successful after the migration, the following PUT call can be used without triggering the execution of the process instance:
 ```bash
