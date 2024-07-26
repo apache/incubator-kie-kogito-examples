@@ -34,18 +34,12 @@
     <module>basic</module>
     <module>extended</module>
   </modules>
-  <properties>
-    <quarkus-plugin.version>3.8.4</quarkus-plugin.version>
-    <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
-    <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-    <quarkus.platform.version>3.8.4</quarkus.platform.version>
-  </properties>
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>${quarkus.platform.group-id}</groupId>
-        <artifactId>${quarkus.platform.artifact-id}</artifactId>
-        <version>${quarkus.platform.version}</version>
+        <groupId>io.quarkus</groupId>
+        <artifactId>quarkus-bom</artifactId>
+        <version>3.8.4</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
