@@ -1,0 +1,64 @@
+version: '3'
+
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:16.1-alpine3.19
+    profiles: [ "infra", "example", "full" ]
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d:Z
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "kogito", "-U", "kogito-user" ]
+      timeout: 45s
+      interval: 10s
+      retries: 50
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4:8.2
+    profiles: [ "infra", "example", "full" ]
+    ports:
+      - 8055:80
+    depends_on:
+      - postgres
+    volumes:
+      - ./pgadmin/servers.json:/pgadmin4/servers.json
+      - ./pgadmin/pgpass:/pgadmin4/pgpass
+    entrypoint: >
+      /bin/sh -c "
+      cp -f /pgadmin4/pgpass /var/lib/pgadmin/;
+      chmod 600 /var/lib/pgadmin/pgpass;
+      /entrypoint.sh
+      "
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user@kogito.org
+      PGADMIN_DEFAULT_PASSWORD: pass
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: 'False'
+      GUNICORN_ACCESS_LOGFILE: '/dev/null'
+
+  kogito-process-instance-migration-service:
+    container_name: kogito-process-instance-migration-service
+    image: dev.local/${USER}/kogito-process-instance-migration-service:1.0-SNAPSHOT
+    profiles: ["example", "full"]
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      QUARKUS_HTTP_CORS_ORIGINS: "/.*/"
+      QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgres:5432/kogito"
+      QUARKUS_DATASOURCE_REACTIVE_URL: "postgresql://postgres:5432/kogito"
+      QUARKUS_DATASOURCE_USERNAME: kogito-user
+      QUARKUS_DATASOURCE_PASSWORD: kogito-pass
+      QUARKUS_DATASOURCE_DB_KIND: postgresql
+      KOGITO_JOBS_SERVICE_URL: http://${DOCKER_GATEWAY_HOST}:8080
+      KOGITO_SERVICE_URL: http://${DOCKER_GATEWAY_HOST}:8080
+      KOGITO_DATAINDEX_HTTP_URL: http://${DOCKER_GATEWAY_HOST}:8080
+    extra_hosts:
+      - "${DOCKER_GATEWAY_HOST}:host-gateway"
