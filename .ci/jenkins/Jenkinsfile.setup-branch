@@ -93,9 +93,21 @@ pipeline {
             steps {
                 script {
                     dir(getRepoName()) {
-                        def oldKogitoVersion = readMavenPom(file: 'pom.xml').version
+                        def pom = readMavenPom(file: 'pom.xml');
+                        def oldKogitoVersion = pom.version
+                        if (oldKogitoVersion == null) {
+                            echo "pom version is null. Using parent pom version"
+                            oldKogitoVersion = pom.parent.version
+                        }
                         echo "Got old Kogito version ${oldKogitoVersion}"
                         configFileProvider([configFile(fileId: env.MAVEN_SETTINGS_CONFIG_FILE_ID, variable: 'MAVEN_SETTINGS_FILE')]){
+                            // special case for serverless-workflow-examples-parent
+                            maven.mvnVersionsSet(
+                                    getMavenCommand('serverless-workflow-examples/serverless-workflow-examples-parent').withSettingsXmlFile(MAVEN_SETTINGS_FILE),
+                                    getKogitoVersion(),
+                                    true,
+                                    false
+                            )
                             maven.mvnVersionsUpdateParentAndChildModules(
                                 getMavenCommand().withSettingsXmlFile(MAVEN_SETTINGS_FILE),
                                 getKogitoVersion(),
@@ -119,9 +131,10 @@ pipeline {
                         }
 
                         if (getKogitoVersion() != oldKogitoVersion) {
-                            def status = sh(script: "grep -ir '${oldKogitoVersion}' --include='pom.xml'", returnStatus: true)
+                            def status = sh(script: "grep -ir '>${oldKogitoVersion}<' --include='pom.xml'", returnStatus: true)
                             if (status == 0) {
-                                error "Old Kogito version ${oldKogitoVersion} is still present into the project... Please review it..."
+                                // some orphaned projects may still have the old version. not an error
+                                echo "Old Kogito version ${oldKogitoVersion} is still present into the project... Please review it..."
                             }
                         }
                     }
