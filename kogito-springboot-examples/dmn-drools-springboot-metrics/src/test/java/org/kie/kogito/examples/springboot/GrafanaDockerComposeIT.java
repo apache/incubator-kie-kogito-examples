@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
 import org.kie.kogito.testcontainers.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.testcontainers.containers.DockerComposeContainer;
+import org.testcontainers.containers.ComposeContainer;
 import org.testcontainers.containers.output.Slf4jLogConsumer;
 import org.testcontainers.containers.wait.strategy.Wait;
 import org.testcontainers.junit.jupiter.Container;
@@ -54,24 +54,22 @@ public class GrafanaDockerComposeIT {
     private static final String PROJECT_ARTIFACT_ID = ProjectMetadataProvider.getProjectArtifactId();
 
     @Container
-    public static DockerComposeContainer environment;
+    public static ComposeContainer environment;
 
     static {
         try {
-            environment = new DockerComposeContainer(new File(GrafanaDockerComposeIT.class.getClassLoader().getResource("./docker-compose.yml").toURI()))
-                    .withExposedService("grafana_1", GRAFANA_PORT, Wait.forListeningPort().withStartupTimeout(STARTUP_MINUTES_TIMEOUT))
-                    .withLogConsumer("grafana_1", new Slf4jLogConsumer(LOGGER))
-                    .withExposedService("hello_1", KOGITO_APPLICATION_PORT, Wait.forListeningPort().withStartupTimeout(STARTUP_MINUTES_TIMEOUT))
-                    .withLogConsumer("hello_1", new Slf4jLogConsumer(LOGGER))
-                    .withExposedService("prometheus_1", PROMETHEUS_PORT,
+            environment = new ComposeContainer(new File(GrafanaDockerComposeIT.class.getClassLoader().getResource("./docker-compose.yml").toURI()))
+                    .withExposedService("grafana-1", GRAFANA_PORT, Wait.forListeningPort().withStartupTimeout(STARTUP_MINUTES_TIMEOUT))
+                    .withLogConsumer("grafana-1", new Slf4jLogConsumer(LOGGER))
+                    .withExposedService("hello-1", KOGITO_APPLICATION_PORT, Wait.forListeningPort().withStartupTimeout(STARTUP_MINUTES_TIMEOUT))
+                    .withLogConsumer("hello-1", new Slf4jLogConsumer(LOGGER))
+                    .withExposedService("prometheus-1", PROMETHEUS_PORT,
                             Wait.forHttp("/api/v1/targets")
                                     .forResponsePredicate(x -> x.contains("\"health\":\"up\""))
                                     .withStartupTimeout(STARTUP_MINUTES_TIMEOUT))
-                    .withLogConsumer("prometheus_1", new Slf4jLogConsumer(LOGGER))
+                    .withLogConsumer("prometheus-1", new Slf4jLogConsumer(LOGGER))
                     .withPull(false)
-                    .withLocalCompose(true)
-                    //See https://github.com/testcontainers/testcontainers-java/issues/4565
-                    .withOptions("--compatibility");
+                    .withLocalCompose(true);
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
