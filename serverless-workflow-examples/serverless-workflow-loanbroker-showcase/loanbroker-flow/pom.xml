@@ -42,9 +42,9 @@
         <scope>import</scope>
       </dependency>
       <dependency>
-        <groupId>${kogito.bom.group-id}</groupId>
-        <artifactId>${kogito.bom.artifact-id}</artifactId>
-        <version>${kogito.bom.version}</version>
+        <groupId>org.kie.kogito</groupId>
+        <artifactId>kogito-bom</artifactId>
+        <version>${version.org.kie.kogito}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>

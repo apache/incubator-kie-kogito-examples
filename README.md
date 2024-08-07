@@ -17,19 +17,6 @@ If you want to use an alternative BOM when building the Quarkus quickstarts you 
 mvn -Dquarkus.platform.artifact-id=quarkus-universe-bom clean install
 ```
 
-Because the Kogito project is part of the Quarkus Platform, the same applies also to Kogito BOM being used.
-
-By default `org.kie.kogito:kogito-bom` is used, but, when needed, this can be overridden using Maven properties:
-* `kogito.bom.*` for Kogito BOM overrides
-
-The properties defined in each of the modules and can be overridden as follows:
-* Kogito BOM
-  ```
-  mvn -Dkogito.bom.group-id=io.quarkus.platform -Dkogito.bom.artifact-id=quarkus-kogito-bom -Dkogito.bom.version=2.2.3.Final
-  ```
-> Note: It's important to keep BOM versions aligned when overriding. In case of Quarkus Platform this means using a single
-> version value for all two (`quarkus.platform.version`, `kogito.bom.version`) properties.
-
 ## Contribution
 
 Everyone is encouraged to contribute to these examples by

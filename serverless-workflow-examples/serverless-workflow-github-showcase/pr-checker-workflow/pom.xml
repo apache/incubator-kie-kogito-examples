@@ -35,9 +35,7 @@
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
     <quarkus.platform.version>2.13.1.Final</quarkus.platform.version>
-    <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
-    <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-    <kogito.bom.version>1.29.0.Final</kogito.bom.version>  <!-- Setup to latest version which worked -->
+    <version.org.kie.kogito>1.29.0.Final</version.org.kie.kogito>  <!-- Setup to latest version which worked -->
     <version.compiler.plugin>3.8.1</version.compiler.plugin>
     <maven.compiler.release>17</maven.compiler.release>
   </properties>
@@ -51,9 +49,9 @@
         <scope>import</scope>
       </dependency>
       <dependency>
-        <groupId>${kogito.bom.group-id}</groupId>
-        <artifactId>${kogito.bom.artifact-id}</artifactId>
-        <version>${kogito.bom.version}</version>
+        <groupId>org.kie.kogito</groupId>
+        <artifactId>kogito-bom</artifactId>
+        <version>${version.org.kie.kogito}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
