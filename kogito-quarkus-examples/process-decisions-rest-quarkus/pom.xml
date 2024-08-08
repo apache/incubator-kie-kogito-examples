@@ -33,26 +33,22 @@
   <properties>
     <tests.quarkus.http.port>8080</tests.quarkus.http.port>
     <quarkus-plugin.version>3.8.4</quarkus-plugin.version>
-    <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
-    <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
     <quarkus.platform.version>3.8.4</quarkus.platform.version>
-    <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
-    <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
     <version.org.kie.kogito>999-SNAPSHOT</version.org.kie.kogito>
   </properties>
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>${quarkus.platform.group-id}</groupId>
-        <artifactId>${quarkus.platform.artifact-id}</artifactId>
+        <groupId>io.quarkus</groupId>
+        <artifactId>quarkus-bom</artifactId>
         <version>${quarkus.platform.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
-        <groupId>${kogito.bom.group-id}</groupId>
-        <artifactId>${kogito.bom.artifact-id}</artifactId>
+        <groupId>org.kie.kogito</groupId>
+        <artifactId>kogito-bom</artifactId>
         <version>${kogito.bom.version}</version>
         <type>pom</type>
         <scope>import</scope>
@@ -113,7 +109,7 @@
     <finalName>${project.artifactId}</finalName>
     <plugins>
       <plugin>
-        <groupId>${quarkus.platform.group-id}</groupId>
+        <groupId>io.quarkus</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
         <version>${quarkus-plugin.version}</version>
         <executions>

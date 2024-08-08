@@ -32,32 +32,28 @@
   <description>Process Instance Migration example - Quarkus</description>
   <properties>
     <quarkus-plugin.version>3.8.4</quarkus-plugin.version>
-    <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
-    <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
     <quarkus.platform.version>3.8.4</quarkus.platform.version>
-    <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
-    <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
     <kogito-apps.bom.artifact-id>kogito-apps-bom</kogito-apps.bom.artifact-id>
     <version.org.kie.kogito>999-SNAPSHOT</version.org.kie.kogito>
   </properties>
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>${quarkus.platform.group-id}</groupId>
-        <artifactId>${quarkus.platform.artifact-id}</artifactId>
+        <groupId>io.quarkus</groupId>
+        <artifactId>quarkus-bom</artifactId>
         <version>${quarkus.platform.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
-        <groupId>${kogito.bom.group-id}</groupId>
-        <artifactId>${kogito.bom.artifact-id}</artifactId>
+        <groupId>org.kie.kogito</groupId>
+        <artifactId>kogito-bom</artifactId>
         <version>${version.org.kie.kogito}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
-        <groupId>${kogito.bom.group-id}</groupId>
+        <groupId>org.kie.kogito</groupId>
         <artifactId>${kogito-apps.bom.artifact-id}</artifactId>
         <version>${version.org.kie.kogito}</version>
         <type>pom</type>
@@ -187,7 +183,7 @@
         </configuration>
       </plugin>
       <plugin>
-        <groupId>${quarkus.platform.group-id}</groupId>
+        <groupId>io.quarkus</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
         <version>${quarkus-plugin.version}</version>
         <executions>
