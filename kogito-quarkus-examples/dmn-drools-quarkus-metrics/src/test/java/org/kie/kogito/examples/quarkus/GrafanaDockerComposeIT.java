@@ -69,7 +69,7 @@ public class GrafanaDockerComposeIT {
                                     .withStartupTimeout(STARTUP_MINUTES_TIMEOUT))
                     .withLogConsumer("prometheus-1", new Slf4jLogConsumer(LOGGER))
                     .withPull(false)
-                    .withLocalCompose(true);                   
+                    .withLocalCompose(true);
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
