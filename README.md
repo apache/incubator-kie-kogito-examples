@@ -141,6 +141,12 @@ A Serverless Workflow service that works as a Github bot application, which reac
 
 * [on Quarkus](serverless-workflow-examples/serverless-workflow-github-showcase)
 
+## Serverless Workflow Correlation
+
+* [on Quarkus (JDBC)](serverless-workflow-examples/serverless-workflow-correlation-quarkus)
+* [on Quarkus (MongoDB)](serverless-workflow-examples/serverless-workflow-correlation-mongodb-quarkus)
+
+
 ## Other Misc Examples
 
 - Onboarding example combining 1 process and two decision services: see [README.md](kogito-quarkus-examples/onboarding-example/README.md)
