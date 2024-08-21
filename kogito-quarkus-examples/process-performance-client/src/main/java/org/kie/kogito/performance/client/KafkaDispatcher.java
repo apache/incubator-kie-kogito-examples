@@ -31,6 +31,7 @@ import org.kie.kogito.jackson.utils.ObjectMapperFactory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 public class KafkaDispatcher implements RequestDispatcher {
 
@@ -46,7 +47,7 @@ public class KafkaDispatcher implements RequestDispatcher {
 
     public KafkaDispatcher(String trigger) {
         this.trigger = trigger;
-        this.objectMapper = ObjectMapperFactory.get();
+        this.objectMapper = ObjectMapperFactory.get().disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         Map<String, Object> properties = Collections.singletonMap(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,
                 "localhost:9092");
         kafkaProducer = new KafkaProducer<>(properties, new ByteArraySerializer(), new ByteArraySerializer());
