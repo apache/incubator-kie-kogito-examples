@@ -1,0 +1,84 @@
+#
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+#
+
+id: loan-workflow
+version: "1.0"
+name: Acme Loan Workflow
+start: extractUserName
+functions:
+  - name: extractUser
+    type: custom
+    operation: "service:org.acme.workflow.auth.JWTParserHelper::extractUser"
+  - name: getStatement
+    type: rest
+    operation: specs/acme-financial-service.yaml#getStatement
+  - name: calcBalance
+    type: expression
+    operation: "${ .statements | map(.amount) | add  }"
+states:
+  - name: extractUserName
+    type: operation
+    actions:
+      - name: extractUserAction
+        functionRef:
+          # we use a custom java function to extract the token from the custom auth header propagated to the target service
+          refName: extractUser
+          arguments:
+            token: "${ $WORKFLOW.headers.\"X-Authorization-acme_financial_auth\" }"
+    stateDataFilter:
+      output: "${ { user: .preferred_username } }"
+    transition: checkBalance
+  - name: checkBalance
+    type: operation
+    actions:
+      - name: getStatementAction
+        functionRef:
+          # The input for this function is the access token that contains info about the authenticated user in the financial service
+          refName: getStatement
+        actionDataFilter:
+          results: "${ { statements: . } }"
+      - name: calcBalanceAction
+        functionRef:
+          refName: calcBalance
+        actionDataFilter:
+          results: "${ { balance: . } }"
+    transition: checkLoan
+  - name: checkLoan
+    type: switch
+    dataConditions:
+      - condition: "${ .balance >= 30.00 }"
+        transition:
+          nextState: loanApproved
+      - condition: "${ .balance < 30.00 }"
+        transition:
+          nextState: loanDenied
+  - name: loanApproved
+    type: inject
+    data:
+      loanApproved: true
+    stateDataFilter:
+      output: "${ { message: \"Congrats \\(.user)! Your loan has been approved!\", loanApproved } }"
+    end: true
+  - name: loanDenied
+    type: inject
+    data:
+      loanApproved: false
+    stateDataFilter:
+      output: "${ { message: \"Sorry \\(.user). Your loan has been denied.\", loanApproved } }"
+    end: true

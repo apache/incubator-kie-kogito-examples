@@ -1,0 +1,281 @@
+{
+	"info": {
+		"_postman_id": "345054ed-fe34-4117-9435-466b21d97bfd",
+		"name": "Token Exchange",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1268158"
+	},
+	"item": [
+		{
+			"name": "Acme Financial Service",
+			"item": [
+				{
+					"name": "Request Access Token Acme Financial Service",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "secret",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "financial-service",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "bob",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "bob",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "workflow-app",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{keycloak_url}}/realms/acme/protocol/openid-connect/token",
+							"host": [
+								"{{keycloak_url}}"
+							],
+							"path": [
+								"realms",
+								"acme",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Statement",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJEWjZlaWwwME12MTE1eDNwQ0hfTy1lQWpKQVIxTW5mRE1pN3YybkdrRjI0In0.eyJleHAiOjE3MjQzMzczMjgsImlhdCI6MTcyNDMzNzAyOCwianRpIjoiMmE0ZDRiNWEtMzBmZi00NTQ1LWJmYzktNWY2N2QxMThhZWE4IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDkwL3JlYWxtcy9hY21lIiwiYXVkIjpbIndvcmtmbG93LWFwcCIsImFjY291bnQiXSwic3ViIjoiMDdhN2E5MGQtOGQ2Mi00NmYxLWE5ZDItMzJmYTEzM2RhYzBiIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiZmluYW5jaWFsLXNlcnZpY2UiLCJzaWQiOiIxMDkxNGQ2Ni02MDI0LTQ1ZjItODIxMy00Yzc1MDZiMTExOGMiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIi8qIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLWFjbWUiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiY3VzdG9tZXIiXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6IndvcmtmbG93LWFwcCBlbWFpbCBwcm9maWxlIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInByZWZlcnJlZF91c2VybmFtZSI6ImFsaWNlIn0.iV-lHdl_RyLZPFAGyJ0zxVFq_IVTf9Ct-hGKvB507S73md2npTfZ-4KMcEYUfWQg_CcE0lGUghpV_9BFrzAWO-TWvLPEc_RJ6GpQqPhgJGM3LUges1WeubevFqEAmj91DR8RjGiZ3OitLmbtdALonbjvZXMjuGoteJbQFVwL7l1NqShkSM8cyy4XUpsyvBh8G0b2nY_bjp08r1ZH0g-awhpWTfyj61CYPcuB1ImMXLvhckooSOoEUmutUcEvnEZ8r_kZaP9tKTvpIDV9-IIH9DSBUPIdHpOaWkLEkUshK8xO6uqYVR34-39azssbfJ38HNMzewPV15IP7EZRsdwXoQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{financial_service_url}}/financial-service/statement",
+							"host": [
+								"{{financial_service_url}}"
+							],
+							"path": [
+								"financial-service",
+								"statement"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Keycloak",
+			"item": [
+				{
+					"name": "Workflow App Get Access Token",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "secret",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "workflow-app",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "urn:ietf:params:oauth:grant-type:token-exchange",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{keycloak_url}}/realms/acme/protocol/openid-connect/token",
+							"host": [
+								"{{keycloak_url}}"
+							],
+							"path": [
+								"realms",
+								"acme",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Workflow App Token Exchange Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "urn:ietf:params:oauth:grant-type:token-exchange",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "workflow-app",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "secret",
+									"type": "text"
+								},
+								{
+									"key": "subject_token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJEWjZlaWwwME12MTE1eDNwQ0hfTy1lQWpKQVIxTW5mRE1pN3YybkdrRjI0In0.eyJleHAiOjE3MjQyNTgyMjMsImlhdCI6MTcyNDI1NzkyMywianRpIjoiODg0ZGIyZDMtMDQwYy00YTE3LWJkZTYtYWE1NjU3ODBiYjU1IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDkwL3JlYWxtcy9hY21lIiwiYXVkIjpbIndvcmtmbG93LWFwcCIsImFjY291bnQiXSwic3ViIjoiZmI5NWNlYTctYzcwYy00MTlmLWEyMzktNjg1OWI5NWZlNzA2IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiZmluYW5jaWFsLXNlcnZpY2UiLCJzaWQiOiJhNjNjOGI4MC0wMTQyLTRlMzUtOThmMS0wZDg0YTk1NDg4MjgiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIi8qIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLWFjbWUiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiY3VzdG9tZXIiXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6IndvcmtmbG93LWFwcCBlbWFpbCBwcm9maWxlIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInByZWZlcnJlZF91c2VybmFtZSI6ImJvYiJ9.LYPYXDjkpx2S8aPUQriC8JC344yHh9AJr3wSfWIfJnN0fx4cjDbr8Uhq45gWopUJ6URQqy0fa3u-Bu1V8EwIgCF5-om9rbDbeBgicHwfgogjrpbQL6YN5ScwOgk5wcNkOTJsr9O_UeFGqDvd-3cVQtBquAs1a5I-65a3lRJGeu06N51sFh87fs_E6XCWNrz6UMrQwPpTiN80omz04w0scPCIKQpp27fy495ZyHgZaNUJWKw40iNLMyNFHBRrlCREbYeVHeqPALO1c2cdW4BkXFCSgXbBPLV6VFI-D4p-rdrqCYZmaDP4c4DxWT_kenQvHPaqzDIWXdbbWZC73Z54WA",
+									"type": "text"
+								},
+								{
+									"key": "subject_token_type",
+									"value": "urn:ietf:params:oauth:token-type:access_token",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{keycloak_url}}/realms/acme/protocol/openid-connect/token",
+							"host": [
+								"{{keycloak_url}}"
+							],
+							"path": [
+								"realms",
+								"acme",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Start Workflow",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Authorization-acme_financial_auth",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJEWjZlaWwwME12MTE1eDNwQ0hfTy1lQWpKQVIxTW5mRE1pN3YybkdrRjI0In0.eyJleHAiOjE3MjQzNDEzODIsImlhdCI6MTcyNDM0MTA4MiwianRpIjoiMDE2MGVhMDEtNTFhMi00NDJjLWEyNTAtYTVmZmY1N2IyOTI2IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDkwL3JlYWxtcy9hY21lIiwiYXVkIjpbIndvcmtmbG93LWFwcCIsImFjY291bnQiXSwic3ViIjoiZmI5NWNlYTctYzcwYy00MTlmLWEyMzktNjg1OWI5NWZlNzA2IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiZmluYW5jaWFsLXNlcnZpY2UiLCJzaWQiOiIxNmFmYTRjZC1iMTEyLTQyNTktYWE3Yi01OTQzODBiZWU3MzUiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIi8qIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLWFjbWUiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiY3VzdG9tZXIiXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6IndvcmtmbG93LWFwcCBlbWFpbCBwcm9maWxlIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInByZWZlcnJlZF91c2VybmFtZSI6ImJvYiJ9.p0pb9S1X8d4nfgscXgaG2R6BpR6LG9YXC07j2__HApFN7Wx3qqDoQ2gBJRjrhdWQiqp6bVeouy3DPZM4E5cn2UQI5eww4orE3lg9Dy9rbpDcYXwTxLlwNoibfpIBCEDkwIqNeJ9NNxNBpTnBaipYM-t4BXs9bFPgRAZK6ql5KF3qmWGoXD31ZWp8UJ_nnFzvg7DWlsqxH2-FHTj-VuZ7iMNJ0PuxGgKdZR1HHajYzbs2WGKYlQ4jIRdJax1BqpJAHKjEF4U1FKY3XCF-GZqmwq4exUuxYz-K4WW2iOdPeO8IlDzGVsxB9pBKth7eBqLCPvryuBxx9dZK9H1nijXPUQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{workflow_url}}/loan-workflow",
+					"host": [
+						"{{workflow_url}}"
+					],
+					"path": [
+						"loan-workflow"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "keycloak_url",
+			"value": "http://localhost:9090/",
+			"type": "string"
+		},
+		{
+			"key": "financial_service_url",
+			"value": "http://localhost:8181/",
+			"type": "string"
+		},
+		{
+			"key": "workflow_url",
+			"value": "http://localhost:8080/",
+			"type": "string"
+		}
+	]
+}
