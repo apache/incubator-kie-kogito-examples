@@ -88,6 +88,75 @@
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-pmml</artifactId>
+      <exclusions>
+        <!-- Drools models -->
+        <!-- Tree -->
+        <exclusion>
+          <groupId>org.kie</groupId>
+          <artifactId>kie-pmml-models-drools-tree-model</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.kie</groupId>
+          <artifactId>kie-pmml-models-drools-tree-compiler</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.kie</groupId>
+          <artifactId>kie-pmml-models-drools-tree-evaluator</artifactId>
+        </exclusion>
+        <!-- Scorecard -->
+        <exclusion>
+          <groupId>org.kie</groupId>
+          <artifactId>kie-pmml-models-drools-scorecard-model</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.kie</groupId>
+          <artifactId>kie-pmml-models-drools-scorecard-compiler</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.kie</groupId>
+          <artifactId>kie-pmml-models-drools-scorecard-evaluator</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.kie.kogito</groupId>
+          <artifactId>kogito-drools</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.drools</groupId>
+          <artifactId>drools-mvel</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.drools</groupId>
+          <artifactId>drools-mvel-parser</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.drools</groupId>
+          <artifactId>drools-model-compiler</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.drools</groupId>
+          <artifactId>drools-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.drools</groupId>
+          <artifactId>drools-compiler</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.drools</groupId>
+          <artifactId>drools-canonical-model</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.drools</groupId>
+          <artifactId>drools-wiring-api</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.drools</groupId>
+          <artifactId>drools-ruleunit</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.kie.kogito</groupId>
+          <artifactId>kogito-efesto-drl</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
     <dependency>
