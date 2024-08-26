@@ -41,10 +41,10 @@ public class OperationsMockService implements QuarkusTestResourceLifecycleManage
     public Map<String, String> start() {
         multiplicationService =
                 this.startServer(8282,
-                        "{  \"product\": 37.808 }");
+                        "37.808", "text/plain");
         subtractionService =
                 this.startServer(8181,
-                        "{ \"difference\": 68.0 }");
+                        "{ \"difference\": 68.0 }", "application/json");
         return Collections.emptyMap();
     }
 
@@ -58,13 +58,13 @@ public class OperationsMockService implements QuarkusTestResourceLifecycleManage
         }
     }
 
-    private WireMockServer startServer(final int port, final String response) {
+    private WireMockServer startServer(final int port, final String response, final String contentType) {
         final WireMockServer server = new WireMockServer(port);
         server.start();
         server.stubFor(post(urlEqualTo("/"))
                 .withHeader(CloudEventExtensionConstants.PROCESS_ID, WireMock.matching(".*"))
                 .willReturn(aResponse()
-                        .withHeader("Content-Type", "application/json")
+                        .withHeader("Content-Type", contentType)
                         .withBody(response)));
         return server;
     }

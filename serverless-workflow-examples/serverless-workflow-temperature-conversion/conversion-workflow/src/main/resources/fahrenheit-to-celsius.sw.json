@@ -43,6 +43,9 @@
           "functionRef": {
             "refName": "multiplication",
             "arguments":  "{ leftElement: .difference, rightElement: .multiplyValue }"
+          },
+          "actionDataFilter" : {
+             "results" : "{product: .}"
           }
         }
       ],

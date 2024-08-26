@@ -2,24 +2,14 @@
   "id": "expression",
   "version": "1.0",
   "name": "Workflow Expression example",
-  "constants" : {
-    "Dog" : {
-      "castellano" : "perro",
-      "leones": "perru",
-      "gallego" : "can",
-      "aragones" : "cocho",
-      "catalan" : "gos",
-      "vasco": "txakurra"
-    }
-  },
   "dataInputSchema" : "schema/expression.json",
   "description": "An example of how to use a JQ expression assignment",
-  "start": "squareState",
   "extensions" : [ {
       "extensionid": "workflow-output-schema",
       "outputSchema": "schema/result.json"
      }
   ],
+  "start": "max",
   "functions": [
     {
       "name": "max",
@@ -27,14 +17,14 @@
       "operation": "{max: .numbers | max_by(.x), min: .numbers | min_by(.y)}"
     },
     {
-      "name": "printMessage",
-      "type": "custom",
-      "operation": "sysout"
+      "name": "square",
+      "type": "expression",
+      "operation": ".number | sqrt"
     }
   ],
   "states": [
     {
-      "name": "squareState",
+      "name": "max",
       "type": "operation",
       "actions": [
         {
@@ -48,23 +38,22 @@
           }
         }
       ],
-      "transition": "finish"
+      "transition": "square"
     },
     {
-      "name": "finish",
+      "name": "square",
       "type": "operation",
       "stateDataFilter": {
-        "input": "{result: .number}"
+       "output": "{result}"
       },
       "actions": [
         {
-          "name": "printAction",
-          "functionRef": {
-            "refName": "printMessage",
-            "arguments": {
-              "message": ".result"
+          "name": "square",
+          "functionRef": "square"
+           ,
+            "actionDataFilter" : {
+              "toStateData": ".result" 
             }
-          }
         }
       ],
       "end": true
