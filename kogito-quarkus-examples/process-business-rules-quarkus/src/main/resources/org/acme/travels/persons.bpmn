@@ -15,7 +15,6 @@
   <bpmn2:itemDefinition id="__D9CFCEE9-BCDF-48D0-8CB4-A55584DF0D9D_personInputXItem" structureRef="org.acme.travels.Person"/>
   <bpmn2:itemDefinition id="__7B8CC121-6F99-464A-93F8-9EAC4BE4601A_namespaceInputXItem" structureRef="java.lang.String"/>
   <bpmn2:itemDefinition id="__7B8CC121-6F99-464A-93F8-9EAC4BE4601A_modelInputXItem" structureRef="java.lang.String"/>
-  <bpmn2:itemDefinition id="__7B8CC121-6F99-464A-93F8-9EAC4BE4601A_decisionInputXItem" structureRef="java.lang.String"/>
   <bpmn2:itemDefinition id="__7B8CC121-6F99-464A-93F8-9EAC4BE4601A_personsInputXItem" structureRef="org.amce.travels.Person"/>
   <bpmn2:process id="persons" drools:packageName="org.acme.travels" drools:version="1.0" drools:adHoc="false" name="persons" isExecutable="true">
     <bpmn2:property id="person" itemSubjectRef="_personItem" name="person"/>

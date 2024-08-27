@@ -6,17 +6,14 @@
   <bpmn2:itemDefinition id="_vacationDaysItem" isCollection="false" structureRef="Integer"/>
   <bpmn2:itemDefinition id="_taxRateItem" isCollection="false" structureRef="java.lang.Double"/>
   <bpmn2:itemDefinition id="_paymentDateItem" isCollection="false" structureRef="java.util.Date"/>
-  <bpmn2:itemDefinition id="__D2DE6249-804E-432D-9600-6B0F618B457C_DecisionInputXItem" isCollection="false" structureRef="String"/>
   <bpmn2:itemDefinition id="__D2DE6249-804E-432D-9600-6B0F618B457C_ModelInputXItem" isCollection="false" structureRef="String"/>
   <bpmn2:itemDefinition id="__D2DE6249-804E-432D-9600-6B0F618B457C_NamespaceInputXItem" isCollection="false" structureRef="String"/>
   <bpmn2:itemDefinition id="__D2DE6249-804E-432D-9600-6B0F618B457C_employeeInputXItem" isCollection="false" structureRef="org.kie.kogito.examples.onboarding.Employee"/>
   <bpmn2:itemDefinition id="__D2DE6249-804E-432D-9600-6B0F618B457C_taxRateOutputXItem" isCollection="false" structureRef="java.lang.Double"/>
   <bpmn2:itemDefinition id="__AE1BFAA6-7AFD-455F-95B4-FA619A2095CF_ModelInputXItem" isCollection="false" structureRef="String"/>
   <bpmn2:itemDefinition id="__AE1BFAA6-7AFD-455F-95B4-FA619A2095CF_NamespaceInputXItem" isCollection="false" structureRef="String"/>
-  <bpmn2:itemDefinition id="__AE1BFAA6-7AFD-455F-95B4-FA619A2095CF_DecisionInputXItem" isCollection="false" structureRef="String"/>
   <bpmn2:itemDefinition id="__AE1BFAA6-7AFD-455F-95B4-FA619A2095CF_employeeInputXItem" isCollection="false" structureRef="org.kie.kogito.examples.onboarding.Employee"/>
   <bpmn2:itemDefinition id="__AE1BFAA6-7AFD-455F-95B4-FA619A2095CF_vacationDaysOutputXItem" isCollection="false" structureRef="Integer"/>
-  <bpmn2:itemDefinition id="__83EB46B5-7186-4575-8AA0-1A8FCCE1D163_DecisionInputXItem" isCollection="false" structureRef="String"/>
   <bpmn2:itemDefinition id="__83EB46B5-7186-4575-8AA0-1A8FCCE1D163_ModelInputXItem" isCollection="false" structureRef="String"/>
   <bpmn2:itemDefinition id="__83EB46B5-7186-4575-8AA0-1A8FCCE1D163_NamespaceInputXItem" isCollection="false" structureRef="String"/>
   <bpmn2:itemDefinition id="__83EB46B5-7186-4575-8AA0-1A8FCCE1D163_employeeInputXItem" isCollection="false" structureRef="org.kie.kogito.examples.onboarding.Employee"/>
@@ -93,7 +90,6 @@
       <bpmn2:incoming>_B94F71D7-E34E-4513-B06D-33F6EF74C9E6</bpmn2:incoming>
       <bpmn2:outgoing>_344D9BF6-D173-4BEC-943B-5E4394A6B6C7</bpmn2:outgoing>
       <bpmn2:ioSpecification id="_fWl5ZWdbEemTPrcubws9TA">
-        <bpmn2:dataInput id="_83EB46B5-7186-4575-8AA0-1A8FCCE1D163_DecisionInputX" drools:dtype="String" itemSubjectRef="__83EB46B5-7186-4575-8AA0-1A8FCCE1D163_DecisionInputXItem" name="Decision"/>
         <bpmn2:dataInput id="_83EB46B5-7186-4575-8AA0-1A8FCCE1D163_ModelInputX" drools:dtype="String" itemSubjectRef="__83EB46B5-7186-4575-8AA0-1A8FCCE1D163_ModelInputXItem" name="Model"/>
         <bpmn2:dataInput id="_83EB46B5-7186-4575-8AA0-1A8FCCE1D163_NamespaceInputX" drools:dtype="String" itemSubjectRef="__83EB46B5-7186-4575-8AA0-1A8FCCE1D163_NamespaceInputXItem" name="Namespace"/>
         <bpmn2:dataInput id="_83EB46B5-7186-4575-8AA0-1A8FCCE1D163_employeeInputX" drools:dtype="org.kie.kogito.examples.onboarding.Employee" itemSubjectRef="__83EB46B5-7186-4575-8AA0-1A8FCCE1D163_employeeInputXItem" name="employee"/>
@@ -171,7 +167,6 @@
       <bpmn2:ioSpecification id="_fWl5e2dbEemTPrcubws9TA">
         <bpmn2:dataInput id="_AE1BFAA6-7AFD-455F-95B4-FA619A2095CF_ModelInputX" drools:dtype="String" itemSubjectRef="__AE1BFAA6-7AFD-455F-95B4-FA619A2095CF_ModelInputXItem" name="Model"/>
         <bpmn2:dataInput id="_AE1BFAA6-7AFD-455F-95B4-FA619A2095CF_NamespaceInputX" drools:dtype="String" itemSubjectRef="__AE1BFAA6-7AFD-455F-95B4-FA619A2095CF_NamespaceInputXItem" name="Namespace"/>
-        <bpmn2:dataInput id="_AE1BFAA6-7AFD-455F-95B4-FA619A2095CF_DecisionInputX" drools:dtype="String" itemSubjectRef="__AE1BFAA6-7AFD-455F-95B4-FA619A2095CF_DecisionInputXItem" name="Decision"/>
         <bpmn2:dataInput id="_AE1BFAA6-7AFD-455F-95B4-FA619A2095CF_employeeInputX" drools:dtype="org.kie.kogito.examples.onboarding.Employee" itemSubjectRef="__AE1BFAA6-7AFD-455F-95B4-FA619A2095CF_employeeInputXItem" name="employee"/>
         <bpmn2:dataInput id="_AE1BFAA6-7AFD-455F-95B4-FA619A2095CF_TaskNameInputX" drools:dtype="Object" name="TaskName"/>
         <bpmn2:dataOutput id="_AE1BFAA6-7AFD-455F-95B4-FA619A2095CF_vacationDaysOutputX" drools:dtype="Integer" itemSubjectRef="__AE1BFAA6-7AFD-455F-95B4-FA619A2095CF_vacationDaysOutputXItem" name="vacationDays"/>
@@ -240,7 +235,6 @@
       <bpmn2:incoming>_622BF92E-6590-44B6-B83D-10C0D8067D09</bpmn2:incoming>
       <bpmn2:outgoing>_7597C8A1-CC2B-4345-99A2-3F3A71C1FDA1</bpmn2:outgoing>
       <bpmn2:ioSpecification id="_fWmgemdbEemTPrcubws9TA">
-        <bpmn2:dataInput id="_D2DE6249-804E-432D-9600-6B0F618B457C_DecisionInputX" drools:dtype="String" itemSubjectRef="__D2DE6249-804E-432D-9600-6B0F618B457C_DecisionInputXItem" name="Decision"/>
         <bpmn2:dataInput id="_D2DE6249-804E-432D-9600-6B0F618B457C_ModelInputX" drools:dtype="String" itemSubjectRef="__D2DE6249-804E-432D-9600-6B0F618B457C_ModelInputXItem" name="Model"/>
         <bpmn2:dataInput id="_D2DE6249-804E-432D-9600-6B0F618B457C_NamespaceInputX" drools:dtype="String" itemSubjectRef="__D2DE6249-804E-432D-9600-6B0F618B457C_NamespaceInputXItem" name="Namespace"/>
         <bpmn2:dataInput id="_D2DE6249-804E-432D-9600-6B0F618B457C_employeeInputX" drools:dtype="org.kie.kogito.examples.onboarding.Employee" itemSubjectRef="__D2DE6249-804E-432D-9600-6B0F618B457C_employeeInputXItem" name="employee"/>

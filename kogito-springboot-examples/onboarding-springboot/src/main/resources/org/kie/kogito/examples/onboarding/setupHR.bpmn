@@ -6,7 +6,7 @@
   <bpmn2:itemDefinition id="__C2C840B8-C669-4134-91DD-81B664982F57_ModelInputXItem" structureRef="String"/>
   <bpmn2:itemDefinition id="__C2C840B8-C669-4134-91DD-81B664982F57_NamespaceInputXItem" structureRef="String"/>
   <bpmn2:itemDefinition id="__C2C840B8-C669-4134-91DD-81B664982F57_employeeInputXItem" structureRef="org.kie.kogito.examples.onboarding.Employee"/>
-  <bpmn2:itemDefinition id="__C2C840B8-C669-4134-91DD-81B664982F57_DecisionInputXItem" structureRef="String"/>
+  <bpmn2:itemDefinition id="__C2C840B8-C669-4134-91DD-81B664982F57_TaskNameInputXItem" structureRef="Object"/>
   <bpmn2:itemDefinition id="__C2C840B8-C669-4134-91DD-81B664982F57_managerOutputXItem" structureRef="String"/>
   <bpmn2:itemDefinition id="__C2C840B8-C669-4134-91DD-81B664982F57_departmentOutputXItem" structureRef="String"/>
   <bpmn2:process id="onboarding.setupHR" drools:packageName="org.kie.kogito.examples.onboarding" drools:version="1.0" drools:adHoc="false" name="setupHR" isExecutable="true" processType="Private">
@@ -51,8 +51,7 @@
         <bpmn2:dataInput id="_C2C840B8-C669-4134-91DD-81B664982F57_ModelInputX" drools:dtype="String" itemSubjectRef="__C2C840B8-C669-4134-91DD-81B664982F57_ModelInputXItem" name="Model"/>
         <bpmn2:dataInput id="_C2C840B8-C669-4134-91DD-81B664982F57_NamespaceInputX" drools:dtype="String" itemSubjectRef="__C2C840B8-C669-4134-91DD-81B664982F57_NamespaceInputXItem" name="Namespace"/>
         <bpmn2:dataInput id="_C2C840B8-C669-4134-91DD-81B664982F57_employeeInputX" drools:dtype="org.kie.kogito.examples.onboarding.Employee" itemSubjectRef="__C2C840B8-C669-4134-91DD-81B664982F57_employeeInputXItem" name="employee"/>
-        <bpmn2:dataInput id="_C2C840B8-C669-4134-91DD-81B664982F57_DecisionInputX" drools:dtype="String" itemSubjectRef="__C2C840B8-C669-4134-91DD-81B664982F57_DecisionInputXItem" name="Decision"/>
-        <bpmn2:dataInput id="_C2C840B8-C669-4134-91DD-81B664982F57_TaskNameInputX" drools:dtype="Object" itemSubjectRef="__C2C840B8-C669-4134-91DD-81B664982F57_DecisionInputXItem" name="TaskName"/>
+        <bpmn2:dataInput id="_C2C840B8-C669-4134-91DD-81B664982F57_TaskNameInputX" drools:dtype="Object" itemSubjectRef="__C2C840B8-C669-4134-91DD-81B664982F57_TaskNameInputXItem" name="TaskName"/>
         <bpmn2:dataOutput id="_C2C840B8-C669-4134-91DD-81B664982F57_managerOutputX" drools:dtype="String" itemSubjectRef="__C2C840B8-C669-4134-91DD-81B664982F57_managerOutputXItem" name="manager"/>
         <bpmn2:dataOutput id="_C2C840B8-C669-4134-91DD-81B664982F57_departmentOutputX" drools:dtype="String" itemSubjectRef="__C2C840B8-C669-4134-91DD-81B664982F57_departmentOutputXItem" name="department"/>
         <bpmn2:inputSet id="_7gwnglrCEem3t4ZSfERqCw">

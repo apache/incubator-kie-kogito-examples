@@ -7,7 +7,6 @@
   <bpmn2:itemDefinition id="_validatedItem" structureRef="org.kie.kogito.traffic.licensevalidated.Validated"/>
   <bpmn2:itemDefinition id="__B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_namespaceInputXItem" structureRef="java.lang.String"/>
   <bpmn2:itemDefinition id="__B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_modelInputXItem" structureRef="java.lang.String"/>
-  <bpmn2:itemDefinition id="__B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_decisionInputXItem" structureRef="java.lang.String"/>
   <bpmn2:itemDefinition id="__B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_ViolationInputXItem" structureRef="org.kie.kogito.traffic.Violation"/>
   <bpmn2:itemDefinition id="__B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_DriverInputXItem" structureRef="org.kie.kogito.traffic.licensevalidation.Driver"/>
   <bpmn2:itemDefinition id="__B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_ValidatedOutputXItem" structureRef="org.kie.kogito.traffic.licensevalidated.Validated"/>
@@ -16,12 +15,10 @@
   <bpmn2:itemDefinition id="__93FFD317-476E-4624-84EF-994617572560_responseOutputXItem" structureRef="org.kie.kogito.traffic.licensevalidation.Driver"/>
   <bpmn2:itemDefinition id="__95EFED1F-73F8-47E7-9604-A81EFE5DE8F5_namespaceInputXItem" structureRef="java.lang.String"/>
   <bpmn2:itemDefinition id="__95EFED1F-73F8-47E7-9604-A81EFE5DE8F5_modelInputXItem" structureRef="java.lang.String"/>
-  <bpmn2:itemDefinition id="__95EFED1F-73F8-47E7-9604-A81EFE5DE8F5_decisionInputXItem" structureRef="java.lang.String"/>
   <bpmn2:itemDefinition id="__95EFED1F-73F8-47E7-9604-A81EFE5DE8F5_driverInputXItem" structureRef="org.kie.kogito.traffic.licensevalidation.Driver"/>
   <bpmn2:itemDefinition id="__95EFED1F-73F8-47E7-9604-A81EFE5DE8F5_driverOutputXItem" structureRef="org.kie.kogito.traffic.licensevalidation.Driver"/>
   <bpmn2:itemDefinition id="__3F719C8E-DA3F-46F8-B8F2-5F04DB132E9C_namespaceInputXItem" structureRef="java.lang.String"/>
   <bpmn2:itemDefinition id="__3F719C8E-DA3F-46F8-B8F2-5F04DB132E9C_modelInputXItem" structureRef="java.lang.String"/>
-  <bpmn2:itemDefinition id="__3F719C8E-DA3F-46F8-B8F2-5F04DB132E9C_decisionInputXItem" structureRef="java.lang.String"/>
   <bpmn2:itemDefinition id="__3F719C8E-DA3F-46F8-B8F2-5F04DB132E9C_validatedInputXItem" structureRef="org.kie.kogito.traffic.licensevalidated.Validated"/>
   <bpmn2:itemDefinition id="__3F719C8E-DA3F-46F8-B8F2-5F04DB132E9C_validatedOutputXItem" structureRef="org.kie.kogito.traffic.licensevalidated.Validated"/>
   <bpmn2:interface id="_93FFD317-476E-4624-84EF-994617572560_ServiceInterface" name="org.kie.kogito.traffic.DriverService" implementationRef="org.kie.kogito.traffic.DriverService">
@@ -259,7 +256,6 @@ DMN]]></drools:metaValue>
       <bpmn2:outgoing>_BB963FF4-CF17-4CA0-A727-9AFC2BE17C29</bpmn2:outgoing>
       <bpmn2:ioSpecification>
         <bpmn2:dataInput id="_B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_namespaceInputX" drools:dtype="java.lang.String" itemSubjectRef="__B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_namespaceInputXItem" name="namespace"/>
-        <bpmn2:dataInput id="_B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_decisionInputX" drools:dtype="java.lang.String" itemSubjectRef="__B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_decisionInputXItem" name="decision"/>
         <bpmn2:dataInput id="_B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_modelInputX" drools:dtype="java.lang.String" itemSubjectRef="__B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_modelInputXItem" name="model"/>
         <bpmn2:dataInput id="_B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_ViolationInputX" drools:dtype="org.kie.kogito.traffic.Violation" itemSubjectRef="__B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_ViolationInputXItem" name="Violation"/>
         <bpmn2:dataInput id="_B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_DriverInputX" drools:dtype="org.kie.kogito.traffic.licensevalidation.Driver" itemSubjectRef="__B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_DriverInputXItem" name="Driver"/>
