@@ -246,7 +246,6 @@
           <bpmn2:dataOutput id="_D792ADC8-9414-4F1A-9A3C-6339788A4EA3_SupportGroupOutputX" drools:dtype="String" itemSubjectRef="__D792ADC8-9414-4F1A-9A3C-6339788A4EA3_SupportGroupOutputXItem" name="SupportGroup"/>
           <bpmn2:inputSet>
             <bpmn2:dataInputRefs>_D792ADC8-9414-4F1A-9A3C-6339788A4EA3_namespaceInputX</bpmn2:dataInputRefs>
-            <bpmn2:dataInputRefs>_D792ADC8-9414-4F1A-9A3C-6339788A4EA3_decisionInputX</bpmn2:dataInputRefs>
             <bpmn2:dataInputRefs>_D792ADC8-9414-4F1A-9A3C-6339788A4EA3_modelInputX</bpmn2:dataInputRefs>
             <bpmn2:dataInputRefs>_D792ADC8-9414-4F1A-9A3C-6339788A4EA3_ProductFamilyInputX</bpmn2:dataInputRefs>
             <bpmn2:dataInputRefs>_D792ADC8-9414-4F1A-9A3C-6339788A4EA3_ProductNameInputX</bpmn2:dataInputRefs>
@@ -260,13 +259,6 @@
           <bpmn2:assignment>
             <bpmn2:from xsi:type="bpmn2:tFormalExpression"><![CDATA[https://kiegroup.org/dmn/_F8C450CC-F8B7-4E1E-A0EC-93E78572E912]]></bpmn2:from>
             <bpmn2:to xsi:type="bpmn2:tFormalExpression"><![CDATA[_D792ADC8-9414-4F1A-9A3C-6339788A4EA3_namespaceInputX]]></bpmn2:to>
-          </bpmn2:assignment>
-        </bpmn2:dataInputAssociation>
-        <bpmn2:dataInputAssociation>
-          <bpmn2:targetRef>_D792ADC8-9414-4F1A-9A3C-6339788A4EA3_decisionInputX</bpmn2:targetRef>
-          <bpmn2:assignment>
-            <bpmn2:from xsi:type="bpmn2:tFormalExpression"><![CDATA[triage]]></bpmn2:from>
-            <bpmn2:to xsi:type="bpmn2:tFormalExpression"><![CDATA[_D792ADC8-9414-4F1A-9A3C-6339788A4EA3_decisionInputX]]></bpmn2:to>
           </bpmn2:assignment>
         </bpmn2:dataInputAssociation>
         <bpmn2:dataInputAssociation>

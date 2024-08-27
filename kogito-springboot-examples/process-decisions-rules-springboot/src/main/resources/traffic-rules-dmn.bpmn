@@ -263,7 +263,6 @@ DMN]]></drools:metaValue>
         <bpmn2:dataOutput id="_B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_FineOutputX" drools:dtype="org.kie.kogito.traffic.Fine" itemSubjectRef="__B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_FineOutputXItem" name="Fine"/>
         <bpmn2:inputSet>
           <bpmn2:dataInputRefs>_B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_namespaceInputX</bpmn2:dataInputRefs>
-          <bpmn2:dataInputRefs>_B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_decisionInputX</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>_B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_modelInputX</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>_B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_ViolationInputX</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>_B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_DriverInputX</bpmn2:dataInputRefs>
@@ -278,13 +277,6 @@ DMN]]></drools:metaValue>
         <bpmn2:assignment>
           <bpmn2:from xsi:type="bpmn2:tFormalExpression"><![CDATA[https://github.com/kiegroup/drools/kie-dmn/_A4BCA8B8-CF08-433F-93B2-A2598F19ECFF]]></bpmn2:from>
           <bpmn2:to xsi:type="bpmn2:tFormalExpression"><![CDATA[_B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_namespaceInputX]]></bpmn2:to>
-        </bpmn2:assignment>
-      </bpmn2:dataInputAssociation>
-      <bpmn2:dataInputAssociation>
-        <bpmn2:targetRef>_B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_decisionInputX</bpmn2:targetRef>
-        <bpmn2:assignment>
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression"><![CDATA[Traffic Violation]]></bpmn2:from>
-          <bpmn2:to xsi:type="bpmn2:tFormalExpression"><![CDATA[_B076DF7E-91A5-47C7-B3FC-2C2EC06E5941_decisionInputX]]></bpmn2:to>
         </bpmn2:assignment>
       </bpmn2:dataInputAssociation>
       <bpmn2:dataInputAssociation>

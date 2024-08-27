@@ -58,7 +58,6 @@
           <bpmn2:dataInputRefs>_C2C840B8-C669-4134-91DD-81B664982F57_ModelInputX</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>_C2C840B8-C669-4134-91DD-81B664982F57_NamespaceInputX</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>_C2C840B8-C669-4134-91DD-81B664982F57_employeeInputX</bpmn2:dataInputRefs>
-          <bpmn2:dataInputRefs>_C2C840B8-C669-4134-91DD-81B664982F57_DecisionInputX</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>_C2C840B8-C669-4134-91DD-81B664982F57_TaskNameInputX</bpmn2:dataInputRefs>
         </bpmn2:inputSet>
         <bpmn2:outputSet id="_7gwng1rCEem3t4ZSfERqCw">
@@ -83,13 +82,6 @@
       <bpmn2:dataInputAssociation id="_7gwnjFrCEem3t4ZSfERqCw">
         <bpmn2:sourceRef>employee</bpmn2:sourceRef>
         <bpmn2:targetRef>_C2C840B8-C669-4134-91DD-81B664982F57_employeeInputX</bpmn2:targetRef>
-      </bpmn2:dataInputAssociation>
-      <bpmn2:dataInputAssociation id="_7gwnjVrCEem3t4ZSfERqCw">
-        <bpmn2:targetRef>_C2C840B8-C669-4134-91DD-81B664982F57_DecisionInputX</bpmn2:targetRef>
-        <bpmn2:assignment id="_7gwnjlrCEem3t4ZSfERqCw">
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_7gwnj1rCEem3t4ZSfERqCw"><![CDATA[department/first]]></bpmn2:from>
-          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_7gwnkFrCEem3t4ZSfERqCw">_C2C840B8-C669-4134-91DD-81B664982F57_DecisionInputX</bpmn2:to>
-        </bpmn2:assignment>
       </bpmn2:dataInputAssociation>
       <bpmn2:dataInputAssociation id="_7gwnkVrCEem3t4ZSfERqCw">
         <bpmn2:targetRef>_C2C840B8-C669-4134-91DD-81B664982F57_TaskNameInputX</bpmn2:targetRef>

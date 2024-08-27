@@ -250,7 +250,6 @@
         <bpmn2:dataOutput id="_DD24B4AE-8804-4D6E-B90B-98689CF6EF37_statusOutputX" drools:dtype="String" itemSubjectRef="__DD24B4AE-8804-4D6E-B90B-98689CF6EF37_statusOutputXItem" name="status"/>
         <bpmn2:dataOutput id="_DD24B4AE-8804-4D6E-B90B-98689CF6EF37_messageOutputX" drools:dtype="String" itemSubjectRef="__DD24B4AE-8804-4D6E-B90B-98689CF6EF37_messageOutputXItem" name="message"/>
         <bpmn2:inputSet id="_YwdwTlr1EemSce_o1Tqd5Q">
-          <bpmn2:dataInputRefs>_DD24B4AE-8804-4D6E-B90B-98689CF6EF37_DecisionInputX</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>_DD24B4AE-8804-4D6E-B90B-98689CF6EF37_ModelInputX</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>_DD24B4AE-8804-4D6E-B90B-98689CF6EF37_NamespaceInputX</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>_DD24B4AE-8804-4D6E-B90B-98689CF6EF37_employeeInputX</bpmn2:dataInputRefs>
@@ -261,13 +260,6 @@
           <bpmn2:dataOutputRefs>_DD24B4AE-8804-4D6E-B90B-98689CF6EF37_messageOutputX</bpmn2:dataOutputRefs>
         </bpmn2:outputSet>
       </bpmn2:ioSpecification>
-      <bpmn2:dataInputAssociation id="_YwdwUFr1EemSce_o1Tqd5Q">
-        <bpmn2:targetRef>_DD24B4AE-8804-4D6E-B90B-98689CF6EF37_DecisionInputX</bpmn2:targetRef>
-        <bpmn2:assignment id="_YwdwUVr1EemSce_o1Tqd5Q">
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_YwdwUlr1EemSce_o1Tqd5Q"><![CDATA[employee-validation/first]]></bpmn2:from>
-          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_YwdwU1r1EemSce_o1Tqd5Q">_DD24B4AE-8804-4D6E-B90B-98689CF6EF37_DecisionInputX</bpmn2:to>
-        </bpmn2:assignment>
-      </bpmn2:dataInputAssociation>
       <bpmn2:dataInputAssociation id="_YwdwVFr1EemSce_o1Tqd5Q">
         <bpmn2:targetRef>_DD24B4AE-8804-4D6E-B90B-98689CF6EF37_ModelInputX</bpmn2:targetRef>
         <bpmn2:assignment id="_YwdwVVr1EemSce_o1Tqd5Q">
@@ -354,7 +346,6 @@
         <bpmn2:dataOutput id="_16FFBBF8-8373-46D4-A278-F305AFA7F4B1_emailOutputX" drools:dtype="String" itemSubjectRef="__16FFBBF8-8373-46D4-A278-F305AFA7F4B1_emailOutputXItem" name="email"/>
         <bpmn2:dataOutput id="_16FFBBF8-8373-46D4-A278-F305AFA7F4B1_employeeIdOutputX" drools:dtype="String" itemSubjectRef="__16FFBBF8-8373-46D4-A278-F305AFA7F4B1_employeeIdOutputXItem" name="employeeId"/>
         <bpmn2:inputSet id="_YweXU1r1EemSce_o1Tqd5Q">
-          <bpmn2:dataInputRefs>_16FFBBF8-8373-46D4-A278-F305AFA7F4B1_DecisionInputX</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>_16FFBBF8-8373-46D4-A278-F305AFA7F4B1_ModelInputX</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>_16FFBBF8-8373-46D4-A278-F305AFA7F4B1_NamespaceInputX</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>_9D7A4927-BFCB-4F17-A4D4-E3D03B3FBE40_employeeInputX</bpmn2:dataInputRefs>
@@ -365,13 +356,6 @@
           <bpmn2:dataOutputRefs>_16FFBBF8-8373-46D4-A278-F305AFA7F4B1_employeeIdOutputX</bpmn2:dataOutputRefs>
         </bpmn2:outputSet>
       </bpmn2:ioSpecification>
-      <bpmn2:dataInputAssociation id="_YweXVVr1EemSce_o1Tqd5Q">
-        <bpmn2:targetRef>_16FFBBF8-8373-46D4-A278-F305AFA7F4B1_DecisionInputX</bpmn2:targetRef>
-        <bpmn2:assignment id="_YweXVlr1EemSce_o1Tqd5Q">
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_YweXV1r1EemSce_o1Tqd5Q"><![CDATA[id]]></bpmn2:from>
-          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_YweXWFr1EemSce_o1Tqd5Q">_16FFBBF8-8373-46D4-A278-F305AFA7F4B1_DecisionInputX</bpmn2:to>
-        </bpmn2:assignment>
-      </bpmn2:dataInputAssociation>
       <bpmn2:dataInputAssociation id="_YweXWVr1EemSce_o1Tqd5Q">
         <bpmn2:targetRef>_16FFBBF8-8373-46D4-A278-F305AFA7F4B1_ModelInputX</bpmn2:targetRef>
         <bpmn2:assignment id="_YweXWlr1EemSce_o1Tqd5Q">

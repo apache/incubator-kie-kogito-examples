@@ -96,7 +96,6 @@
         <bpmn2:dataInput id="_83EB46B5-7186-4575-8AA0-1A8FCCE1D163_TaskNameInputX" drools:dtype="Object" name="TaskName"/>
         <bpmn2:dataOutput id="_83EB46B5-7186-4575-8AA0-1A8FCCE1D163_paymentDateOutputX" drools:dtype="java.util.Date" itemSubjectRef="__83EB46B5-7186-4575-8AA0-1A8FCCE1D163_paymentDateOutputXItem" name="paymentDate"/>
         <bpmn2:inputSet id="_fWl5ZmdbEemTPrcubws9TA">
-          <bpmn2:dataInputRefs>_83EB46B5-7186-4575-8AA0-1A8FCCE1D163_DecisionInputX</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>_83EB46B5-7186-4575-8AA0-1A8FCCE1D163_ModelInputX</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>_83EB46B5-7186-4575-8AA0-1A8FCCE1D163_NamespaceInputX</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>_83EB46B5-7186-4575-8AA0-1A8FCCE1D163_employeeInputX</bpmn2:dataInputRefs>
@@ -106,13 +105,6 @@
           <bpmn2:dataOutputRefs>_83EB46B5-7186-4575-8AA0-1A8FCCE1D163_paymentDateOutputX</bpmn2:dataOutputRefs>
         </bpmn2:outputSet>
       </bpmn2:ioSpecification>
-      <bpmn2:dataInputAssociation id="_fWl5aGdbEemTPrcubws9TA">
-        <bpmn2:targetRef>_83EB46B5-7186-4575-8AA0-1A8FCCE1D163_DecisionInputX</bpmn2:targetRef>
-        <bpmn2:assignment id="_fWl5aWdbEemTPrcubws9TA">
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_fWl5amdbEemTPrcubws9TA"><![CDATA[payments/date]]></bpmn2:from>
-          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_fWl5a2dbEemTPrcubws9TA">_83EB46B5-7186-4575-8AA0-1A8FCCE1D163_DecisionInputX</bpmn2:to>
-        </bpmn2:assignment>
-      </bpmn2:dataInputAssociation>
       <bpmn2:dataInputAssociation id="_fWl5bGdbEemTPrcubws9TA">
         <bpmn2:targetRef>_83EB46B5-7186-4575-8AA0-1A8FCCE1D163_ModelInputX</bpmn2:targetRef>
         <bpmn2:assignment id="_fWl5bWdbEemTPrcubws9TA">
@@ -173,7 +165,6 @@
         <bpmn2:inputSet id="_fWl5fGdbEemTPrcubws9TA">
           <bpmn2:dataInputRefs>_AE1BFAA6-7AFD-455F-95B4-FA619A2095CF_ModelInputX</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>_AE1BFAA6-7AFD-455F-95B4-FA619A2095CF_NamespaceInputX</bpmn2:dataInputRefs>
-          <bpmn2:dataInputRefs>_AE1BFAA6-7AFD-455F-95B4-FA619A2095CF_DecisionInputX</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>_AE1BFAA6-7AFD-455F-95B4-FA619A2095CF_employeeInputX</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>_AE1BFAA6-7AFD-455F-95B4-FA619A2095CF_TaskNameInputX</bpmn2:dataInputRefs>
         </bpmn2:inputSet>
@@ -193,13 +184,6 @@
         <bpmn2:assignment id="_fWl5g2dbEemTPrcubws9TA">
           <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_fWl5hGdbEemTPrcubws9TA"><![CDATA[test]]></bpmn2:from>
           <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_fWl5hWdbEemTPrcubws9TA">_AE1BFAA6-7AFD-455F-95B4-FA619A2095CF_NamespaceInputX</bpmn2:to>
-        </bpmn2:assignment>
-      </bpmn2:dataInputAssociation>
-      <bpmn2:dataInputAssociation id="_fWmgcGdbEemTPrcubws9TA">
-        <bpmn2:targetRef>_AE1BFAA6-7AFD-455F-95B4-FA619A2095CF_DecisionInputX</bpmn2:targetRef>
-        <bpmn2:assignment id="_fWmgcWdbEemTPrcubws9TA">
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_fWmgcmdbEemTPrcubws9TA"><![CDATA[vacations/days]]></bpmn2:from>
-          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_fWmgc2dbEemTPrcubws9TA">_AE1BFAA6-7AFD-455F-95B4-FA619A2095CF_DecisionInputX</bpmn2:to>
         </bpmn2:assignment>
       </bpmn2:dataInputAssociation>
       <bpmn2:dataInputAssociation id="_fWmgdGdbEemTPrcubws9TA">
@@ -241,7 +225,6 @@
         <bpmn2:dataInput id="_D2DE6249-804E-432D-9600-6B0F618B457C_TaskNameInputX" drools:dtype="Object" name="TaskName"/>
         <bpmn2:dataOutput id="_D2DE6249-804E-432D-9600-6B0F618B457C_taxRateOutputX" drools:dtype="java.lang.Double" itemSubjectRef="__D2DE6249-804E-432D-9600-6B0F618B457C_taxRateOutputXItem" name="taxRate"/>
         <bpmn2:inputSet id="_fWmge2dbEemTPrcubws9TA">
-          <bpmn2:dataInputRefs>_D2DE6249-804E-432D-9600-6B0F618B457C_DecisionInputX</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>_D2DE6249-804E-432D-9600-6B0F618B457C_ModelInputX</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>_D2DE6249-804E-432D-9600-6B0F618B457C_NamespaceInputX</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>_D2DE6249-804E-432D-9600-6B0F618B457C_employeeInputX</bpmn2:dataInputRefs>
@@ -251,13 +234,6 @@
           <bpmn2:dataOutputRefs>_D2DE6249-804E-432D-9600-6B0F618B457C_taxRateOutputX</bpmn2:dataOutputRefs>
         </bpmn2:outputSet>
       </bpmn2:ioSpecification>
-      <bpmn2:dataInputAssociation id="_fWmgfWdbEemTPrcubws9TA">
-        <bpmn2:targetRef>_D2DE6249-804E-432D-9600-6B0F618B457C_DecisionInputX</bpmn2:targetRef>
-        <bpmn2:assignment id="_fWmgfmdbEemTPrcubws9TA">
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_fWmgf2dbEemTPrcubws9TA"><![CDATA[taxes/rate]]></bpmn2:from>
-          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_fWmggGdbEemTPrcubws9TA">_D2DE6249-804E-432D-9600-6B0F618B457C_DecisionInputX</bpmn2:to>
-        </bpmn2:assignment>
-      </bpmn2:dataInputAssociation>
       <bpmn2:dataInputAssociation id="_fWmggWdbEemTPrcubws9TA">
         <bpmn2:targetRef>_D2DE6249-804E-432D-9600-6B0F618B457C_ModelInputX</bpmn2:targetRef>
         <bpmn2:assignment id="_fWmggmdbEemTPrcubws9TA">
