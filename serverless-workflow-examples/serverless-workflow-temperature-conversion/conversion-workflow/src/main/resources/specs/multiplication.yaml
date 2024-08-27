@@ -40,14 +40,11 @@ paths:
      responses:
         "200":
           description: OK
-          content: 
-            application/json:
-              schema: 
-                type: object
-                properties:
-                  product:
-                    format: float
-                    type: number
+          content:
+            text/plain:
+              schema:
+                type: number
+                format: float
 components:
   schemas:
     MultiplicationOperation:

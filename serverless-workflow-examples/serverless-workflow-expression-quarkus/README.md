@@ -5,7 +5,7 @@
 This example contains a simple workflow service that illustrate JQ expression usage. 
 The service is described using JSON format as defined in the 
 [CNCF Serverless Workflow specification](https://github.com/serverlessworkflow/specification).
-The service accepts an array of complex numbers (x being the real coordinate and y the imaginary one) and return the max real coordinate. 
+The service accepts an array of complex numbers (x being the real coordinate and y the imaginary one) and return the square of the max real coordinate. 
 
 
 ## Installing and Running
@@ -84,11 +84,6 @@ curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d 
 ```
 
 
-In Quarkus you should see the log message printed:
-
-```text
-4
-```
 
 And the returned data will be something similar to 
 
@@ -96,7 +91,7 @@ And the returned data will be something similar to
 {
     "id": "9f30a25e-61d4-4e80-bc7c-eb04db51564c",
     "workflowdata": {
-        "result": 4
+        "result": 2.0
     }
 }
 ```

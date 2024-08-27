@@ -22,6 +22,7 @@ import org.junit.jupiter.api.Test;
 
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
@@ -32,13 +33,14 @@ class OperationResourceIT {
 
     @Test
     void testRestExample() {
-        final OperationResource.Result result = given()
+        Response result = given()
                 .contentType(ContentType.JSON)
-                .when()
                 .body(new MultiplicationOperation(2, 2))
-                .post("/")
                 .then()
-                .statusCode(200).extract().as(OperationResource.Result.class);
-        assertThat(result.getProduct(), is(4f));
+                .response().contentType(ContentType.TEXT)
+                .statusCode(200)
+                .when()
+                .post("/");
+        assertThat(Float.parseFloat(result.asString()), is(4f));
     }
 }

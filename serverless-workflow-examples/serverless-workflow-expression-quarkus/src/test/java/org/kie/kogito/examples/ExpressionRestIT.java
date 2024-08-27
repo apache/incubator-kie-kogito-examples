@@ -39,7 +39,7 @@ class ExpressionRestIT {
                 .post("/expression")
                 .then()
                 .statusCode(201)
-                .body("workflowdata.result", is(4))
+                .body("workflowdata.result", is(2.0f))
                 .body("workflowdata.number", nullValue());
     }
 }
