@@ -23,7 +23,6 @@
   <bpmn2:itemDefinition id="visasapprovedType" structureRef="org.acme.travels.VisaResolution"/>
   <bpmn2:itemDefinition id="_BusinessRuleTask_1_namespaceInputXItem" structureRef="java.lang.String"/>
   <bpmn2:itemDefinition id="_BusinessRuleTask_1_modelInputXItem" structureRef="java.lang.String"/>
-  <bpmn2:itemDefinition id="_BusinessRuleTask_1_decisionInputXItem" structureRef="java.lang.String"/>
   <bpmn2:itemDefinition id="_BusinessRuleTask_1_applicationInputXItem" structureRef="org.acme.travels.VisaApplication"/>
   <bpmn2:itemDefinition id="_BusinessRuleTask_1_resolutionInputXItem" structureRef="org.acme.travels.VisaResolution"/>
   <bpmn2:itemDefinition id="_BusinessRuleTask_1_resolutionOutputXItem" structureRef="org.acme.travels.VisaResolution"/>

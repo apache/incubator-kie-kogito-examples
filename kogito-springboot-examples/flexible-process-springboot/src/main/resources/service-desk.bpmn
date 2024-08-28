@@ -83,7 +83,6 @@
   <bpmn2:itemDefinition id="__D17F5E0D-779E-4AF4-9E33-6E37D8F54DA7_supportCaseOutputXItem" structureRef="org.kie.kogito.flexible.example.model.SupportCase"/>
   <bpmn2:itemDefinition id="__D792ADC8-9414-4F1A-9A3C-6339788A4EA3_namespaceInputXItem" structureRef="java.lang.String"/>
   <bpmn2:itemDefinition id="__D792ADC8-9414-4F1A-9A3C-6339788A4EA3_modelInputXItem" structureRef="java.lang.String"/>
-  <bpmn2:itemDefinition id="__D792ADC8-9414-4F1A-9A3C-6339788A4EA3_decisionInputXItem" structureRef="java.lang.String"/>
   <bpmn2:itemDefinition id="__D792ADC8-9414-4F1A-9A3C-6339788A4EA3_ProductFamilyInputXItem" structureRef="String"/>
   <bpmn2:itemDefinition id="__D792ADC8-9414-4F1A-9A3C-6339788A4EA3_ProductNameInputXItem" structureRef="String"/>
   <bpmn2:itemDefinition id="__D792ADC8-9414-4F1A-9A3C-6339788A4EA3_SupportGroupOutputXItem" structureRef="String"/>
@@ -241,14 +240,12 @@
         <bpmn2:outgoing>_4D493B33-AE13-464F-B7F5-4A7A9A9044BA</bpmn2:outgoing>
         <bpmn2:ioSpecification>
           <bpmn2:dataInput id="_D792ADC8-9414-4F1A-9A3C-6339788A4EA3_namespaceInputX" drools:dtype="java.lang.String" itemSubjectRef="__D792ADC8-9414-4F1A-9A3C-6339788A4EA3_namespaceInputXItem" name="namespace"/>
-          <bpmn2:dataInput id="_D792ADC8-9414-4F1A-9A3C-6339788A4EA3_decisionInputX" drools:dtype="java.lang.String" itemSubjectRef="__D792ADC8-9414-4F1A-9A3C-6339788A4EA3_decisionInputXItem" name="decision"/>
           <bpmn2:dataInput id="_D792ADC8-9414-4F1A-9A3C-6339788A4EA3_modelInputX" drools:dtype="java.lang.String" itemSubjectRef="__D792ADC8-9414-4F1A-9A3C-6339788A4EA3_modelInputXItem" name="model"/>
           <bpmn2:dataInput id="_D792ADC8-9414-4F1A-9A3C-6339788A4EA3_ProductFamilyInputX" drools:dtype="String" itemSubjectRef="__D792ADC8-9414-4F1A-9A3C-6339788A4EA3_ProductFamilyInputXItem" name="ProductFamily"/>
           <bpmn2:dataInput id="_D792ADC8-9414-4F1A-9A3C-6339788A4EA3_ProductNameInputX" drools:dtype="String" itemSubjectRef="__D792ADC8-9414-4F1A-9A3C-6339788A4EA3_ProductNameInputXItem" name="ProductName"/>
           <bpmn2:dataOutput id="_D792ADC8-9414-4F1A-9A3C-6339788A4EA3_SupportGroupOutputX" drools:dtype="String" itemSubjectRef="__D792ADC8-9414-4F1A-9A3C-6339788A4EA3_SupportGroupOutputXItem" name="SupportGroup"/>
           <bpmn2:inputSet>
             <bpmn2:dataInputRefs>_D792ADC8-9414-4F1A-9A3C-6339788A4EA3_namespaceInputX</bpmn2:dataInputRefs>
-            <bpmn2:dataInputRefs>_D792ADC8-9414-4F1A-9A3C-6339788A4EA3_decisionInputX</bpmn2:dataInputRefs>
             <bpmn2:dataInputRefs>_D792ADC8-9414-4F1A-9A3C-6339788A4EA3_modelInputX</bpmn2:dataInputRefs>
             <bpmn2:dataInputRefs>_D792ADC8-9414-4F1A-9A3C-6339788A4EA3_ProductFamilyInputX</bpmn2:dataInputRefs>
             <bpmn2:dataInputRefs>_D792ADC8-9414-4F1A-9A3C-6339788A4EA3_ProductNameInputX</bpmn2:dataInputRefs>
@@ -262,13 +259,6 @@
           <bpmn2:assignment>
             <bpmn2:from xsi:type="bpmn2:tFormalExpression"><![CDATA[https://kiegroup.org/dmn/_F8C450CC-F8B7-4E1E-A0EC-93E78572E912]]></bpmn2:from>
             <bpmn2:to xsi:type="bpmn2:tFormalExpression"><![CDATA[_D792ADC8-9414-4F1A-9A3C-6339788A4EA3_namespaceInputX]]></bpmn2:to>
-          </bpmn2:assignment>
-        </bpmn2:dataInputAssociation>
-        <bpmn2:dataInputAssociation>
-          <bpmn2:targetRef>_D792ADC8-9414-4F1A-9A3C-6339788A4EA3_decisionInputX</bpmn2:targetRef>
-          <bpmn2:assignment>
-            <bpmn2:from xsi:type="bpmn2:tFormalExpression"><![CDATA[triage]]></bpmn2:from>
-            <bpmn2:to xsi:type="bpmn2:tFormalExpression"><![CDATA[_D792ADC8-9414-4F1A-9A3C-6339788A4EA3_decisionInputX]]></bpmn2:to>
           </bpmn2:assignment>
         </bpmn2:dataInputAssociation>
         <bpmn2:dataInputAssociation>

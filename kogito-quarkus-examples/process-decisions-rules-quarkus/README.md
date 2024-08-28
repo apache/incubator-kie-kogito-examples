@@ -73,7 +73,7 @@ Similar to the License Validation Task, but it represents the task to do the cal
 
 <img src="docs/images/traffic-violation-dmn-businessrule.png" width=150/>
 
-The properties to be set are mainly the `Rule Language`that should be set as `DMN` and the `Namespace`, `Decision Name` and `DMN Model Name` must be set with the values defined in in the DMN, in this case [TrafficViolation.dmn](src/main/resources/TrafficViolation.dmn).
+The properties to be set are mainly the `Rule Language`that should be set as `DMN` and the `Namespace` and `DMN Model Name` must be set with the values defined in in the DMN, in this case [TrafficViolation.dmn](src/main/resources/TrafficViolation.dmn).
 
 <img src="docs/images/traffic-violation-dmn-businessrule-properties.png" width=300/>
 

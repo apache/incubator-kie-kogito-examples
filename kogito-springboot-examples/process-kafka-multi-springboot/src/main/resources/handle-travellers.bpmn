@@ -4,7 +4,6 @@
   <bpmn2:itemDefinition id="processedtravellersType" structureRef="org.acme.travel.Traveller"/>
   <bpmn2:itemDefinition id="__60FA6326-76DC-4DB2-AB06-DB8AC8EE8DC8_namespaceInputXItem" structureRef="java.lang.String"/>
   <bpmn2:itemDefinition id="__60FA6326-76DC-4DB2-AB06-DB8AC8EE8DC8_modelInputXItem" structureRef="java.lang.String"/>
-  <bpmn2:itemDefinition id="__60FA6326-76DC-4DB2-AB06-DB8AC8EE8DC8_decisionInputXItem" structureRef="java.lang.String"/>
   <bpmn2:itemDefinition id="__60FA6326-76DC-4DB2-AB06-DB8AC8EE8DC8_travellerInputXItem" structureRef="org.acme.travel.Traveller"/>
   <bpmn2:itemDefinition id="__60FA6326-76DC-4DB2-AB06-DB8AC8EE8DC8_travellerOutputXItem" structureRef="org.acme.travel.Traveller"/>
   <bpmn2:itemDefinition id="__8BEA9396-93DE-4D44-8CE2-4A146464264E_eventOutputXItem" structureRef="org.acme.travel.Traveller"/>

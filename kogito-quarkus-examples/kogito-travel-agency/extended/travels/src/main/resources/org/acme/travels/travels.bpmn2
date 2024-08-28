@@ -44,7 +44,6 @@
   <bpmn2:itemDefinition id="__24FBB8D6-EF2D-4DCC-846D-D8C5E21849D2_tripInputXItem" structureRef="org.acme.travels.Trip"/>
   <bpmn2:itemDefinition id="__54ABE1ED-61BE-45F9-812C-795A5D4ED35E_namespaceInputXItem" structureRef="java.lang.String"/>
   <bpmn2:itemDefinition id="__54ABE1ED-61BE-45F9-812C-795A5D4ED35E_modelInputXItem" structureRef="java.lang.String"/>
-  <bpmn2:itemDefinition id="__54ABE1ED-61BE-45F9-812C-795A5D4ED35E_decisionInputXItem" structureRef="java.lang.String"/>
   <bpmn2:itemDefinition id="__54ABE1ED-61BE-45F9-812C-795A5D4ED35E_travellerInputXItem" structureRef="org.acme.travels.Traveller"/>
   <bpmn2:itemDefinition id="__54ABE1ED-61BE-45F9-812C-795A5D4ED35E_tripInputXItem" structureRef="org.acme.travels.Trip"/>
   <bpmn2:itemDefinition id="__54ABE1ED-61BE-45F9-812C-795A5D4ED35E_tripOutputXItem" structureRef="org.acme.travels.Trip"/>

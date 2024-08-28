@@ -15,7 +15,6 @@
   <bpmn2:itemDefinition id="_UserTask_1_personInputXItem" structureRef="org.kie.kogito.examples.demo.Person"/>
   <bpmn2:itemDefinition id="_BusinessRuleTask_1_namespaceInputXItem" structureRef="java.lang.String"/>
   <bpmn2:itemDefinition id="_BusinessRuleTask_1_modelInputXItem" structureRef="java.lang.String"/>
-  <bpmn2:itemDefinition id="_BusinessRuleTask_1_decisionInputXItem" structureRef="java.lang.String"/>
   <bpmn2:itemDefinition id="_BusinessRuleTask_1_personsInputXItem" structureRef="org.kie.kogito.examples.demo.Person"/>
   <bpmn2:itemDefinition id="_BusinessRuleTask_1_personsOutputXItem" structureRef="org.kie.kogito.examples.demo.Person"/>
   <bpmn2:process id="persons" drools:packageName="org.kie.kogito.examples.demo" drools:version="1.0" drools:adHoc="false" name="Person Process" isExecutable="true" processType="Public">

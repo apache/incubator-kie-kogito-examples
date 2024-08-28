@@ -40,7 +40,6 @@
   <bpmn2:itemDefinition id="_UserTask_1_visaApplicationOutputXItem" structureRef="String"/>
   <bpmn2:itemDefinition id="_BusinessRuleTask_1_namespaceInputXItem" structureRef="java.lang.String"/>
   <bpmn2:itemDefinition id="_BusinessRuleTask_1_modelInputXItem" structureRef="java.lang.String"/>
-  <bpmn2:itemDefinition id="_BusinessRuleTask_1_decisionInputXItem" structureRef="java.lang.String"/>
   <bpmn2:itemDefinition id="_BusinessRuleTask_1_travellerInputXItem" structureRef="org.acme.travels.Traveller"/>
   <bpmn2:itemDefinition id="_BusinessRuleTask_1_tripInputXItem" structureRef="org.acme.travels.Trip"/>
   <bpmn2:itemDefinition id="_BusinessRuleTask_1_tripOutputXItem" structureRef="org.acme.travels.Trip"/>
