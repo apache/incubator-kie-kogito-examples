@@ -78,7 +78,7 @@ Once the service is up and running, you can use the following example to interac
 Post "hello":
 
 ```sh
-curl -H "Content-Type: application/json" -X POST -d '{"strings":["world"]}' http://localhost:8080/hello
+curl -H "Content-Type: application/json" -X POST -d '{"strings":["hello"]}' http://localhost:8080/hello
 ```
 
 the service will return `["hello", "world"]`
