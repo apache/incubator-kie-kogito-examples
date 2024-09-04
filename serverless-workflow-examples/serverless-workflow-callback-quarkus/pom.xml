@@ -37,10 +37,10 @@
   <name>Kogito Example :: Serverless Workflow Callback :: Quarkus</name>
   <description>Kogito Serverless Workflow Callback Example - Quarkus</description>
   <properties>
-    <quarkus-plugin.version>3.8.4</quarkus-plugin.version>
+    <quarkus-plugin.version>3.8.6</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-    <quarkus.platform.version>3.8.4</quarkus.platform.version>
+    <quarkus.platform.version>3.8.6</quarkus.platform.version>
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
