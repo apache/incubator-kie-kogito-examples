@@ -31,10 +31,10 @@
   <name>Kogito Example :: Process Service Rest Cal with Quarkus</name>
   <description>Kogito service invocation using REST - Quarkus</description>
   <properties>
-    <quarkus-plugin.version>3.8.4</quarkus-plugin.version>
+    <quarkus-plugin.version>3.8.6</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-    <quarkus.platform.version>3.8.4</quarkus.platform.version>
+    <quarkus.platform.version>3.8.6</quarkus.platform.version>
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
@@ -86,7 +86,7 @@
     <dependency>
       <groupId>io.smallrye</groupId>
       <artifactId>smallrye-context-propagation-propagators-rxjava2</artifactId>
-      <version>2.1.0</version>
+      <version>2.1.2</version>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
