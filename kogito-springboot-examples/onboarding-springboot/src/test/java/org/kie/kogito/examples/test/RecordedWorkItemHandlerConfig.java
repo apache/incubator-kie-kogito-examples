@@ -23,7 +23,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import org.kie.kogito.internal.process.runtime.KogitoWorkItemHandler;
+import org.kie.kogito.internal.process.workitem.KogitoWorkItemHandler;
 import org.kie.kogito.process.impl.DefaultWorkItemHandlerConfig;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;

@@ -31,7 +31,7 @@ import org.kie.kogito.addons.k8s.EndpointQueryKey;
 import org.kie.kogito.addons.k8s.LocalEndpointDiscovery;
 import org.kie.kogito.addons.quarkus.k8s.workitems.QuarkusDiscoveredEndpointCaller;
 import org.kie.kogito.examples.onboarding.DecisionTaskWorkItemHandler;
-import org.kie.kogito.internal.process.runtime.KogitoWorkItemHandler;
+import org.kie.kogito.internal.process.workitem.KogitoWorkItemHandler;
 import org.kie.kogito.process.impl.DefaultWorkItemHandlerConfig;
 
 import jakarta.annotation.PostConstruct;

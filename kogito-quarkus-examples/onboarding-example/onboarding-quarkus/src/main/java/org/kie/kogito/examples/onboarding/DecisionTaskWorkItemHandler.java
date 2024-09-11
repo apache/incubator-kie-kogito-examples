@@ -19,15 +19,18 @@
 package org.kie.kogito.examples.onboarding;
 
 import java.util.Map;
+import java.util.Optional;
 
 import org.kie.kogito.addons.quarkus.k8s.workitems.QuarkusDiscoveredEndpointCaller;
-import org.kie.kogito.internal.process.runtime.KogitoWorkItem;
-import org.kie.kogito.internal.process.runtime.KogitoWorkItemHandler;
-import org.kie.kogito.internal.process.runtime.KogitoWorkItemManager;
+import org.kie.kogito.internal.process.workitem.KogitoWorkItem;
+import org.kie.kogito.internal.process.workitem.KogitoWorkItemHandler;
+import org.kie.kogito.internal.process.workitem.KogitoWorkItemManager;
+import org.kie.kogito.internal.process.workitem.WorkItemTransition;
+import org.kie.kogito.process.workitems.impl.DefaultKogitoWorkItemHandler;
 
 import jakarta.ws.rs.HttpMethod;
 
-public class DecisionTaskWorkItemHandler implements KogitoWorkItemHandler {
+public class DecisionTaskWorkItemHandler extends DefaultKogitoWorkItemHandler {
 
     private QuarkusDiscoveredEndpointCaller endpointCaller;
 
@@ -36,14 +39,9 @@ public class DecisionTaskWorkItemHandler implements KogitoWorkItemHandler {
     }
 
     @Override
-    public void executeWorkItem(KogitoWorkItem workItem, KogitoWorkItemManager manager) {
+    public Optional<WorkItemTransition> activateWorkItemHandler(KogitoWorkItemManager manager, KogitoWorkItemHandler handler, KogitoWorkItem workItem, WorkItemTransition transition) {
         Map<String, Object> results = endpointCaller.discoverAndCall(workItem, System.getenv("NAMESPACE"), "Decision", HttpMethod.POST);
-        manager.completeWorkItem(workItem.getStringId(), results);
-    }
-
-    @Override
-    public void abortWorkItem(KogitoWorkItem workItem, KogitoWorkItemManager manager) {
-
+        return Optional.of(handler.completeTransition(workItem.getPhaseStatus(), results));
     }
 
     @Override

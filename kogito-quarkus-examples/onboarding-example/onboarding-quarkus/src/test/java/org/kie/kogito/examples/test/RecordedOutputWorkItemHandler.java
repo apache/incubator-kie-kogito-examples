@@ -20,26 +20,23 @@ package org.kie.kogito.examples.test;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 
-import org.kie.kogito.internal.process.runtime.KogitoWorkItem;
-import org.kie.kogito.internal.process.runtime.KogitoWorkItemHandler;
-import org.kie.kogito.internal.process.runtime.KogitoWorkItemManager;
+import org.kie.kogito.internal.process.workitem.KogitoWorkItem;
+import org.kie.kogito.internal.process.workitem.KogitoWorkItemHandler;
+import org.kie.kogito.internal.process.workitem.KogitoWorkItemManager;
+import org.kie.kogito.internal.process.workitem.WorkItemTransition;
+import org.kie.kogito.process.workitems.impl.DefaultKogitoWorkItemHandler;
 
-public class RecordedOutputWorkItemHandler implements KogitoWorkItemHandler {
+public class RecordedOutputWorkItemHandler extends DefaultKogitoWorkItemHandler {
 
     private Map<String, Function<KogitoWorkItem, Map<String, Object>>> recorded = new HashMap<>();
 
     @Override
-    public void executeWorkItem(KogitoWorkItem workItem, KogitoWorkItemManager manager) {
+    public Optional<WorkItemTransition> activateWorkItemHandler(KogitoWorkItemManager manager, KogitoWorkItemHandler handler, KogitoWorkItem workItem, WorkItemTransition transition) {
         Map<String, Object> results = recorded.remove(workItem.getParameter("TaskName")).apply(workItem);
-
-        manager.completeWorkItem(workItem.getStringId(), results);
-    }
-
-    @Override
-    public void abortWorkItem(KogitoWorkItem workItem, KogitoWorkItemManager manager) {
-
+        return Optional.of(handler.completeTransition(workItem.getPhaseStatus(), results));
     }
 
     public void record(String name, Function<KogitoWorkItem, Map<String, Object>> item) {
