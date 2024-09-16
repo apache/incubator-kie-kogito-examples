@@ -130,12 +130,6 @@
       <artifactId>kogito-addons-quarkus-data-index-postgresql</artifactId>
     </dependency>
 
-    <!-- Data Index Persistence -->
-    <dependency>
-      <groupId>org.kie</groupId>
-      <artifactId>kogito-addons-quarkus-data-index-persistence-postgresql</artifactId>
-    </dependency>
-
     <!-- Jobs Service -->
     <dependency>
       <groupId>org.kie</groupId>
