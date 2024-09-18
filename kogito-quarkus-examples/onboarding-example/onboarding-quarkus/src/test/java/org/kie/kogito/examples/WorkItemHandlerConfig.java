@@ -19,7 +19,7 @@
 package org.kie.kogito.examples;
 
 import org.kie.kogito.examples.test.RecordedOutputWorkItemHandler;
-import org.kie.kogito.internal.process.runtime.KogitoWorkItemHandler;
+import org.kie.kogito.internal.process.workitem.KogitoWorkItemHandler;
 
 public class WorkItemHandlerConfig extends BaseWorkItemHandlerConfig {
 

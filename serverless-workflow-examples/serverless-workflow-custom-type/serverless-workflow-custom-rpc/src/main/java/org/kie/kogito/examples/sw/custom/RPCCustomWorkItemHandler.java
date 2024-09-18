@@ -26,9 +26,8 @@ import java.util.Map;
 import jakarta.enterprise.context.ApplicationScoped;
 
 import org.kie.kogito.examples.sw.custom.CalculatorClient.OperationId;
-import org.kie.kogito.internal.process.runtime.KogitoWorkItem;
+import org.kie.kogito.internal.process.workitem.KogitoWorkItem;
 import org.kie.kogito.serverless.workflow.WorkflowWorkItemHandler;
-
 
 @ApplicationScoped
 public class RPCCustomWorkItemHandler extends WorkflowWorkItemHandler {
@@ -37,23 +36,23 @@ public class RPCCustomWorkItemHandler extends WorkflowWorkItemHandler {
     public static final String HOST = "host";
     public static final String PORT = "port";
     public static final String OPERATION = "operation";
-    
+
     @Override
-    protected Object internalExecute(KogitoWorkItem workItem, Map<String, Object> parameters)  {
+    protected Object internalExecute(KogitoWorkItem workItem, Map<String, Object> parameters) {
         try {
             Iterator<?> iter = parameters.values().iterator();
             Map<String, Object> metadata = workItem.getNodeInstance().getNode().getMetaData();
             String operationId = (String) metadata.get(OPERATION);
             if (operationId == null) {
-                throw new IllegalArgumentException ("Operation is a mandatory parameter");
+                throw new IllegalArgumentException("Operation is a mandatory parameter");
             }
-            return CalculatorClient.invokeOperation((String)metadata.getOrDefault(HOST,"localhost"), (int) metadata.getOrDefault(PORT, 8082), 
-                    OperationId.valueOf(operationId.toUpperCase()), (Integer)iter.next(), (Integer)iter.next());
-        } catch (IOException io ) {
+            return CalculatorClient.invokeOperation((String) metadata.getOrDefault(HOST, "localhost"), (int) metadata.getOrDefault(PORT, 8082),
+                    OperationId.valueOf(operationId.toUpperCase()), (Integer) iter.next(), (Integer) iter.next());
+        } catch (IOException io) {
             throw new UncheckedIOException(io);
         }
     }
-    
+
     @Override
     public String getName() {
         return NAME;

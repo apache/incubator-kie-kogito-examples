@@ -28,8 +28,8 @@ import java.util.function.Function;
 
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.examples.test.RecordedOutputWorkItemHandler;
-import org.kie.kogito.internal.process.runtime.KogitoWorkItem;
-import org.kie.kogito.internal.process.runtime.KogitoWorkItemHandler;
+import org.kie.kogito.internal.process.workitem.KogitoWorkItem;
+import org.kie.kogito.internal.process.workitem.KogitoWorkItemHandler;
 import org.kie.kogito.process.ProcessConfig;
 import org.kie.kogito.testcontainers.quarkus.InfinispanQuarkusTestResource;
 

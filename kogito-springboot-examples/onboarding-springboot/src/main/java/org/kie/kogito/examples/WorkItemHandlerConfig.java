@@ -30,7 +30,7 @@ import org.kie.kogito.addons.k8s.EndpointQueryKey;
 import org.kie.kogito.addons.k8s.LocalEndpointDiscovery;
 import org.kie.kogito.addons.springboot.k8s.workitems.SpringDiscoveredEndpointCaller;
 import org.kie.kogito.examples.onboarding.DecisionTaskWorkItemHandler;
-import org.kie.kogito.internal.process.runtime.KogitoWorkItemHandler;
+import org.kie.kogito.internal.process.workitem.KogitoWorkItemHandler;
 import org.kie.kogito.process.impl.DefaultWorkItemHandlerConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

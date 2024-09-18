@@ -18,8 +18,7 @@
  */
 package org.acme.travels.config;
 
-import org.acme.travels.usertasks.CustomHumanTaskLifeCycle;
-import org.jbpm.process.instance.impl.humantask.HumanTaskWorkItemHandler;
+import org.acme.travels.usertasks.CustomHumanTaskWorkItemHandler;
 import org.kie.kogito.process.impl.DefaultWorkItemHandlerConfig;
 import org.springframework.stereotype.Component;
 
@@ -36,6 +35,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomWorkItemHandlerConfig extends DefaultWorkItemHandlerConfig {
     {
-        register("Human Task", new HumanTaskWorkItemHandler(new CustomHumanTaskLifeCycle()));
+        register("Human Task", new CustomHumanTaskWorkItemHandler());
     }
 }

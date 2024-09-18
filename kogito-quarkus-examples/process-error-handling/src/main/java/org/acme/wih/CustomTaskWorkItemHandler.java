@@ -20,20 +20,23 @@ package org.acme.wih;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import org.kie.api.runtime.process.ProcessWorkItemHandlerException;
-import org.kie.kogito.internal.process.runtime.KogitoWorkItem;
-import org.kie.kogito.internal.process.runtime.KogitoWorkItemHandler;
-import org.kie.kogito.internal.process.runtime.KogitoWorkItemManager;
+import org.kie.kogito.internal.process.workitem.KogitoWorkItem;
+import org.kie.kogito.internal.process.workitem.KogitoWorkItemHandler;
+import org.kie.kogito.internal.process.workitem.KogitoWorkItemManager;
+import org.kie.kogito.internal.process.workitem.WorkItemTransition;
+import org.kie.kogito.process.workitems.impl.DefaultKogitoWorkItemHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class CustomTaskWorkItemHandler implements KogitoWorkItemHandler {
+public class CustomTaskWorkItemHandler extends DefaultKogitoWorkItemHandler {
 
     private static final Logger LOG = LoggerFactory.getLogger(CustomTaskWorkItemHandler.class);
 
     @Override
-    public void executeWorkItem(KogitoWorkItem workItem, KogitoWorkItemManager manager) {
+    public Optional<WorkItemTransition> activateWorkItemHandler(KogitoWorkItemManager manager, KogitoWorkItemHandler handler, KogitoWorkItem workItem, WorkItemTransition transition) {
         LOG.debug("start");
         LOG.debug("Passed parameters:");
 
@@ -51,15 +54,22 @@ public class CustomTaskWorkItemHandler implements KogitoWorkItemHandler {
         if (input.matches("(RETRY|COMPLETE|RETHROW)")) {
             handleError(input);
         } else if (input.contentEquals("ABORT")) {
-            manager.abortWorkItem(workItem.getStringId());
+            return Optional.of(handler.abortTransition(workItem.getPhaseStatus()));
         } else {
             // Don’t forget to finish the work item otherwise the process
             // will be active infinitely and never will pass the flow
             // to the next node.
-            manager.completeWorkItem(workItem.getStringId(), results);
+            return Optional.of(handler.completeTransition(workItem.getPhaseStatus(), results));
         }
 
         LOG.debug("end");
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<WorkItemTransition> abortWorkItemHandler(KogitoWorkItemManager manager, KogitoWorkItemHandler handler, KogitoWorkItem workitem, WorkItemTransition transition) {
+        LOG.debug("ABORT!");
+        return Optional.empty();
     }
 
     private void handleError(String strategy) {
@@ -68,9 +78,4 @@ public class CustomTaskWorkItemHandler implements KogitoWorkItemHandler {
                 new IllegalStateException(strategy + " strategy test"));
     }
 
-    @Override
-    public void abortWorkItem(KogitoWorkItem workItem, KogitoWorkItemManager manager) {
-        LOG.debug("ABORT!");
-        manager.abortWorkItem(workItem.getStringId());
-    }
 }
