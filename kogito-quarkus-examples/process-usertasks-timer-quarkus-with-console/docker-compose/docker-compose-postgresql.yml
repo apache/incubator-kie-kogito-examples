@@ -17,11 +17,11 @@
 # under the License.
 #
 
-version: '2.1'
+version: '3'
 
 services:
   postgres:
-    image: postgres:13.4-alpine3.14
+    image: postgres:16.1-alpine3.19
     ports:
       - "5432:5432"
     volumes:
@@ -32,19 +32,30 @@ services:
       interval: 10s
       retries: 50
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
 
-  pgadmin-compose:
-    image: dpage/pgadmin4:5.0
-    environment:
-      PGADMIN_DEFAULT_EMAIL: user@user.org
-      PGADMIN_DEFAULT_PASSWORD: pass
+  pgadmin:
+    image: dpage/pgadmin4:8.2
     ports:
       - 8055:80
     depends_on:
       - postgres
-    container_name: pgadmin-container
+    volumes:
+      - ./pgadmin/servers.json:/pgadmin4/servers.json
+      - ./pgadmin/pgpass:/pgadmin4/pgpass
+    entrypoint: >
+      /bin/sh -c "
+      cp -f /pgadmin4/pgpass /var/lib/pgadmin/;
+      chmod 600 /var/lib/pgadmin/pgpass;
+      /entrypoint.sh
+      "
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user@kogito.org
+      PGADMIN_DEFAULT_PASSWORD: pass
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: "False"
+      GUNICORN_ACCESS_LOGFILE: "/dev/null"
 
   zookeeper:
     container_name: zookeeper
@@ -95,7 +106,7 @@ services:
     environment:
       DB_VENDOR: POSTGRES
       DB_ADDR: postgres
-      DB_DATABASE: kogito
+      DB_DATABASE: keycloak
       DB_USER: kogito-user
       DB_SCHEMA: public
       DB_PASSWORD: kogito-pass
@@ -105,7 +116,7 @@ services:
 
   data-index:
     container_name: data-index
-    image: quay.io/kiegroup/kogito-data-index-postgresql:${KOGITO_VERSION}
+    image: docker.io/apache/incubator-kie-kogito-data-index-postgresql:${KOGITO_VERSION}
     ports:
       - "8180:8080"
     depends_on:
@@ -125,7 +136,7 @@ services:
 
   jobs-service:
     container_name: jobs-service
-    image: quay.io/kiegroup/kogito-jobs-service-postgresql:${KOGITO_VERSION}
+    image: docker.io/apache/incubator-kie-kogito-jobs-service-postgresql:${KOGITO_VERSION}
     ports:
       - "8580:8080"
     depends_on:
@@ -146,7 +157,7 @@ services:
 
   management-console:
     container_name: management-console
-    image: quay.io/kiegroup/kogito-management-console:${KOGITO_VERSION}
+    image: docker.io/apache/incubator-kie-kogito-management-console:${KOGITO_VERSION}
     ports:
       - "8280:8080"
     depends_on:
@@ -159,15 +170,16 @@ services:
     volumes:
       - ../target/classes/META-INF/processSVG/:/home/kogito/data/svg/
     environment:
-      KOGITO_DATAINDEX_HTTP_URL: http://${DOCKER_GATEWAY_HOST:-host.docker.internal}:8180/graphql
-      QUARKUS_HTTP_CORS_ORIGINS: "/.*/"
-      KOGITO_MANAGEMENT_CONSOLE_PROPS: -Dkogito.consoles.keycloak.config.url=http://localhost:8480/auth
-        -Dkogito.consoles.keycloak.config.health-check-url=http://localhost:8480/auth/realms/kogito/.well-known/openid-configuration
-        -Dkogito.svg.folder.path=/home/kogito/data/svg
+      RUNTIME_TOOLS_MANAGEMENT_CONSOLE_KOGITO_ENV_MODE: "PROD"
+      RUNTIME_TOOLS_MANAGEMENT_CONSOLE_DATA_INDEX_ENDPOINT: http://${DOCKER_GATEWAY_HOST:-host.docker.internal}:8180/graphql
+      KOGITO_CONSOLES_KEYCLOAK_HEALTH_CHECK_URL: http://localhost:8480/auth/realms/kogito/.well-known/openid-configuration
+      KOGITO_CONSOLES_KEYCLOAK_URL: http://localhost:8480/auth
+      KOGITO_CONSOLES_KEYCLOAK_REALM: kogito
+      KOGITO_CONSOLES_KEYCLOAK_CLIENT_ID: kogito-console-quarkus
 
   task-console:
     container_name: task-console
-    image: quay.io/kiegroup/kogito-task-console:${KOGITO_VERSION}
+    image: docker.io/apache/incubator-kie-kogito-task-console:${KOGITO_VERSION}
     ports:
       - "8380:8080"
     depends_on:
@@ -176,7 +188,9 @@ services:
       keycloak:
         condition: service_healthy
     environment:
-      KOGITO_DATAINDEX_HTTP_URL: http://${DOCKER_GATEWAY_HOST:-host.docker.internal}:8180/graphql
-      QUARKUS_HTTP_CORS_ORIGINS: "/.*/"
-      KOGITO_TASK_CONSOLE_PROPS: -Dkogito.consoles.keycloak.config.url=http://localhost:8480/auth
-        -Dkogito.consoles.keycloak.config.health-check-url=http://localhost:8480/auth/realms/kogito/.well-known/openid-configuration
+      RUNTIME_TOOLS_TASK_CONSOLE_KOGITO_ENV_MODE: "PROD"
+      RUNTIME_TOOLS_TASK_CONSOLE_DATA_INDEX_ENDPOINT: http://${DOCKER_GATEWAY_HOST:-host.docker.internal}:8180/graphql
+      KOGITO_CONSOLES_KEYCLOAK_HEALTH_CHECK_URL: http://localhost:8480/auth/realms/kogito/.well-known/openid-configuration
+      KOGITO_CONSOLES_KEYCLOAK_URL: http://localhost:8480/auth
+      KOGITO_CONSOLES_KEYCLOAK_REALM: kogito
+      KOGITO_CONSOLES_KEYCLOAK_CLIENT_ID: kogito-console-quarkus

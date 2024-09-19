@@ -20,31 +20,41 @@
 version: "3"
 
 services:
-  postgres-compose:
-    image: postgres:13.4-alpine3.14
-    environment:
-      POSTGRES_PASSWORD: pass
+  postgres:
+    image: postgres:16.1-alpine3.19
     ports:
       - 5432:5432
     volumes:
-      - ${HOME}/postgresql/data:/var/lib/postgresql/data
       - ./sql:/docker-entrypoint-initdb.d/
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
     networks:
       - postgres-compose-network
-    container_name: postgres-container
 
-  pgadmin-compose:
-    image: dpage/pgadmin4:5.0
-    environment:
-      PGADMIN_DEFAULT_EMAIL: user@user.org
-      PGADMIN_DEFAULT_PASSWORD: pass
+  pgadmin:
+    image: dpage/pgadmin4:8.2
     ports:
       - 8055:80
     depends_on:
-      - postgres-compose
+      - postgres
+    volumes:
+      - ./pgadmin/servers.json:/pgadmin4/servers.json
+      - ./pgadmin/pgpass:/pgadmin4/pgpass
+    entrypoint: >
+      /bin/sh -c "
+      cp -f /pgadmin4/pgpass /var/lib/pgadmin/;
+      chmod 600 /var/lib/pgadmin/pgpass;
+      /entrypoint.sh
+      "
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user@kogito.org
+      PGADMIN_DEFAULT_PASSWORD: pass
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: "False"
+      GUNICORN_ACCESS_LOGFILE: "/dev/null"
     networks:
       - postgres-compose-network
-    container_name: pgadmin-container
 
 networks:
   postgres-compose-network:
