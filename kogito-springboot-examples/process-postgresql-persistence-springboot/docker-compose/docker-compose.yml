@@ -23,6 +23,7 @@ services:
   postgres-compose:
     image: postgres:13.4-alpine3.14
     environment:
+      PGDATA: /var/lib/pg_data
       POSTGRES_PASSWORD: pass
     ports:
       - 5432:5432
