@@ -132,7 +132,7 @@ services:
       QUARKUS_DATASOURCE_PASSWORD: kogito-pass
       KAFKA_BOOTSTRAP_SERVERS: kafka:29092
       QUARKUS_HTTP_CORS_ORIGINS: "/.*/"
-      KOGITO_DATA_INDEX_PROPS: -Dquarkus.hibernate-orm.database.generation=update
+      KIE_FLYWAY_ENABLED: true
 
   jobs-service:
     container_name: jobs-service
@@ -149,11 +149,11 @@ services:
       QUARKUS_DATASOURCE_REACTIVE_URL: "postgresql://postgres:5432/kogito"
       QUARKUS_DATASOURCE_USERNAME: kogito-user
       QUARKUS_DATASOURCE_PASSWORD: kogito-pass
-      QUARKUS_FLYWAY_BASELINE_ON_MIGRATE: "true"
       KAFKA_BOOTSTRAP_SERVERS: kafka:29092
       QUARKUS_PROFILE: events-support
       QUARKUS_HTTP_PORT: 8580
       QUARKUS_HTTP_CORS_ORIGINS: "/.*/"
+      KIE_FLYWAY_ENABLED: true
 
   management-console:
     container_name: management-console
