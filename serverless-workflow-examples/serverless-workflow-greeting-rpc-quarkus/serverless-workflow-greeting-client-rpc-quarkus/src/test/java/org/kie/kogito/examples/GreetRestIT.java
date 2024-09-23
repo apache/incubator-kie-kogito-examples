@@ -174,7 +174,7 @@ class GreetRestIT {
                 .post("/jsongreetbidistreamerror")
                 .then()
                 .statusCode(500)
-                .body("message", allOf(containsString("io.grpc.StatusRuntimeException"), containsString("OUT_OF_RANGE")));
+                .body("message", allOf(equalTo("OUT_OF_RANGE")));
     }
 
 }
