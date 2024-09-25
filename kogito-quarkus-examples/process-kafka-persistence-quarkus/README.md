@@ -157,7 +157,7 @@ To make use of this application it is as simple as putting a sending request to 
 
 Complete curl command can be found below:
 
-```bash
+```
 curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"name" : "my fancy deal", "traveller" : { "firstName" : "John", "lastName" : "Doe", "email" : "jon.doe@example.com", "nationality" : "American","address" : { "street" : "main street", "city" : "Boston", "zipCode" : "10005", "country" : "US" }}}' http://localhost:8080/deals
 ```
 
@@ -167,22 +167,22 @@ this will then trigger the review user task that you can work.
 
 First you can display all active reviews of deals
 
-```bash
+```
 curl -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/dealreviews
 ```
 
 based on the response you can select one of the reviews to see more details
 
-```sh
-curl -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/dealreviews/873d5e18-d66e-4597-9285-7029333e02b5/tasks?user=john
+```
+curl -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/dealreviews/{uuid}/tasks?user=john
 ```
 
 where uuid is the id of the deal review you want to work with.
 
 Next you can get the details assigned to review user task by
 
-```sh
-curl -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/dealreviews/873d5e18-d66e-4597-9285-7029333e02b5/review/f7b4ca4e-3d5d-491a-a980-685276960976?user=john
+```
+curl -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/dealreviews/{uuid}/review/{tuuid}?user=john
 ```
 
 where uuid is the id of the deal review and tuuid is the id of the user task you want to get
@@ -192,8 +192,8 @@ where uuid is the id of the deal review and tuuid is the id of the user task you
 
 Last but not least you can complete review user task by
 
-```sh
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"review" : "very good work"}' http://localhost:8080/dealreviews/aed07cad-eac3-490b-8cc5-06120377e09b/review/f8fcc076-31f5-4890-b48f-d2af22a218e6?user=john
+```
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"review" : "very good work"}' http://localhost:8080/dealreviews/{uuid}/review/{tuuid}?user=john
 ```
 
 where uuid is the id of the deal review and tuuid is the id of the user task you want to get
