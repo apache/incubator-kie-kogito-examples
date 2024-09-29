@@ -28,12 +28,15 @@ import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
+import static java.util.Collections.emptyMap;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
 @QuarkusTest
 @QuarkusTestResource(KeycloakQuarkusTestResource.class)
 public class ApprovalsRestIT {
+
+    private static final String USER_TASK_BASE_PATH = "/usertasks/instance";
 
     @QuarkusTestProperty(name = "quarkus.oidc.auth-server-url")
     private String keycloakUrl;
@@ -50,7 +53,6 @@ public class ApprovalsRestIT {
                 .statusCode(401);
     }
 
-    @SuppressWarnings("rawtypes")
     @Test
     public void testStartApprovalAuthorized() {
 
@@ -85,31 +87,32 @@ public class ApprovalsRestIT {
                 .body("id", is(id));
 
         // tasks assigned in just started approval
-
-        String taskInfo = given()
-                .auth()
-                .oauth2(getAccessToken("mary"))
-                .accept(ContentType.JSON)
+        String userTaskId = given()
+                .auth().oauth2(getAccessToken("mary"))
+                .basePath(USER_TASK_BASE_PATH)
+                .queryParam("user", "mary")
+                .queryParam("group", "managers")
+                .contentType(ContentType.JSON)
                 .when()
-                .get("/approvals/" + id + "/tasks?user=admin&group=managers")
+                .get()
                 .then()
                 .statusCode(200)
-                .body("size()", is(1))
-                .body("[0].name", is("firstLineApproval"))
                 .extract()
+                .body()
                 .path("[0].id");
 
-        String payload = "{}";
         given()
-                .auth().oauth2(getAccessToken("mary"))
                 .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .body(payload)
+                .auth().oauth2(getAccessToken("mary"))
+                .basePath(USER_TASK_BASE_PATH)
+                .queryParam("transitionId", "complete")
+                .queryParam("user", "manager")
+                .queryParam("group", "managers")
+                .body(emptyMap())
                 .when()
-                .post("/approvals/" + id + "/firstLineApproval/" + taskInfo + "?user=mary&group=managers")
+                .post("/{userTaskId}/transition", userTaskId)
                 .then()
-                .statusCode(200)
-                .body("id", is(id));
+                .statusCode(200);
 
         // lastly abort the approval
         given()

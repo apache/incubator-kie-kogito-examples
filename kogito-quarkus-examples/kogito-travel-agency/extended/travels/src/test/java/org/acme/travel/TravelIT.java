@@ -41,6 +41,9 @@ import org.kie.kogito.process.ProcessInstance;
 import org.kie.kogito.process.WorkItem;
 import org.kie.kogito.testcontainers.quarkus.InfinispanQuarkusTestResource;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
+import org.kie.kogito.usertask.UserTaskInstance;
+import org.kie.kogito.usertask.UserTasks;
+import org.kie.kogito.usertask.impl.lifecycle.DefaultUserTaskLifeCycle;
 
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
@@ -49,6 +52,7 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 import static io.restassured.RestAssured.given;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.core.StringContains.containsString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -74,31 +78,31 @@ public class TravelIT {
     @Named("travels")
     Process<? extends Model> travelsProcess;
 
-    private ProcessInstance<?> processInstance;
+    @Inject
+    UserTasks userTasks;
 
     @BeforeEach
     public void cleanUp() {
         abort(travelsProcess.instances());
-        processInstance = null;
     }
 
     @Test
     public void testTravelNoVisaRequired() {
-        whenNewTravel(TRAVELLER_FROM_POLAND, TRIP_TO_POLAND);
-        thenProcessIsActive();
-        thenHotelAndFlightAreChosen();
+        String processInstance = whenNewTravel(TRAVELLER_FROM_POLAND, TRIP_TO_POLAND);
+        thenProcessIsActive(processInstance);
+        thenHotelAndFlightAreChosen(processInstance);
 
-        whenConfirmTravel();
-        thenProcessIsCompleted();
+        whenConfirmTravel(processInstance);
+        thenProcessIsCompleted(processInstance);
     }
 
     @Test
     public void testTravelVisaRequired() {
-        whenNewTravel(TRAVELLER_FROM_POLAND, TRIP_TO_US);
-        thenProcessIsActive();
+        String processInstance = whenNewTravel(TRAVELLER_FROM_POLAND, TRIP_TO_US);
+        thenProcessIsActive(processInstance);
 
-        whenAddVisaApplication();
-        thenProcessIsActive();
+        whenAddVisaApplication(processInstance);
+        thenProcessIsActive(processInstance);
     }
 
     @Test
@@ -114,7 +118,7 @@ public class TravelIT {
                                 PROJECT_ARTIFACT_ID, PROJECT_VERSION)));
     }
 
-    private void whenNewTravel(Traveller traveller, Trip trip) {
+    private String whenNewTravel(Traveller traveller, Trip trip) {
         Model m = travelsProcess.createModel();
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("traveller", traveller);
@@ -122,26 +126,38 @@ public class TravelIT {
 
         m.fromMap(parameters);
 
-        this.processInstance = travelsProcess.createInstance(m);
-        this.processInstance.start();
+        ProcessInstance<?> processInstance = travelsProcess.createInstance(m);
+        processInstance.start();
+        return processInstance.id();
     }
 
-    private void whenConfirmTravel() {
-        WorkItem workItem = thenNextStepIs(STEP_CONFIRM_TRAVEL, SECURITY_POLICY_JDOE);
-        Map<String, Object> results = new HashMap<>();
-        results.put("approve", true);
-        processInstance.completeWorkItem(workItem.getId(), results, SECURITY_POLICY_JDOE);
+    private void whenConfirmTravel(String processInstance) {
+        WorkItem workItem = thenNextStepIs(processInstance, STEP_CONFIRM_TRAVEL, SECURITY_POLICY_JDOE);
+        assertThat(workItem).isNotNull();
+
+        List<UserTaskInstance> userTaskInstances = userTasks.instances().findByIdentity(IdentityProviders.of("jdoe"));
+        userTaskInstances.forEach(ut -> {
+            ut.setOutput("approve", true);
+            ut.transition(DefaultUserTaskLifeCycle.COMPLETE, Collections.emptyMap(), IdentityProviders.of("jdoe"));
+        });
+
     }
 
-    private void whenAddVisaApplication() {
-        Map<String, Object> results = new HashMap<>();
-        results.put("visaApplication", new VisaApplication("Jan", "Kowalski", "New York", "US", 10, "XXX098765"));
-        results.put("visaResolution", new VisaResolution(true, "Test reason"));
-        WorkItem workItem = thenNextStepIs(STEP_VISA_APPLICATION, SECURITY_POLICY_JDOE);
-        processInstance.completeWorkItem(workItem.getId(), results, SECURITY_POLICY_JDOE);
+    private void whenAddVisaApplication(String id) {
+        ProcessInstance<? extends Model> processInstance = travelsProcess.instances().findById(id).get();
+        WorkItem workItem = thenNextStepIs(processInstance.id(), STEP_VISA_APPLICATION, SECURITY_POLICY_JDOE);
+        assertThat(workItem).isNotNull();
+        List<UserTaskInstance> userTaskInstances = userTasks.instances().findByIdentity(IdentityProviders.of("jdoe"));
+        userTaskInstances.forEach(ut -> {
+            ut.setOutput("visaApplication", new VisaApplication("Jan", "Kowalski", "New York", "US", 10, "XXX098765"));
+            ut.setOutput("visaResolution", new VisaResolution(true, "Test reason"));
+            ut.transition(DefaultUserTaskLifeCycle.COMPLETE, Collections.emptyMap(), IdentityProviders.of("jdoe"));
+        });
+
     }
 
-    private WorkItem thenNextStepIs(String expected, SecurityPolicy policy) {
+    private WorkItem thenNextStepIs(String id, String expected, SecurityPolicy policy) {
+        ProcessInstance<? extends Model> processInstance = travelsProcess.instances().findById(id).get();
         List<WorkItem> workItems = processInstance.workItems(policy);
         assertEquals(1, workItems.size());
         WorkItem next = workItems.get(0);
@@ -149,15 +165,17 @@ public class TravelIT {
         return next;
     }
 
-    private void thenProcessIsActive() {
-        assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_ACTIVE, this.processInstance.status());
+    private void thenProcessIsActive(String id) {
+        ProcessInstance<? extends Model> processInstance = travelsProcess.instances().findById(id).get();
+        assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_ACTIVE, processInstance.status());
     }
 
-    private void thenProcessIsCompleted() {
-        assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_COMPLETED, this.processInstance.status());
+    private void thenProcessIsCompleted(String id) {
+        assertThat(travelsProcess.instances().findById(id)).isEmpty();
     }
 
-    private void thenHotelAndFlightAreChosen() {
+    private void thenHotelAndFlightAreChosen(String id) {
+        ProcessInstance<? extends Model> processInstance = travelsProcess.instances().findById(id).get();
         Model result = (Model) processInstance.variables();
         assertEquals(6, result.toMap().size());
         Hotel hotel = (Hotel) result.toMap().get("hotel");

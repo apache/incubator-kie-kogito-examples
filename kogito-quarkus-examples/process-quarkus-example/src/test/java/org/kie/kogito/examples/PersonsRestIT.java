@@ -18,6 +18,8 @@
  */
 package org.kie.kogito.examples;
 
+import java.util.Collections;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
@@ -34,17 +36,19 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 import static io.restassured.RestAssured.given;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.kie.kogito.test.utils.ProcessInstancesTestUtils.abort;
 
-@SuppressWarnings("rawtypes")
 @QuarkusTest
 @QuarkusTestResource(value = InfinispanQuarkusTestResource.Conditional.class)
 @QuarkusTestResource(value = KafkaQuarkusTestResource.Conditional.class)
 public class PersonsRestIT {
+
+    private static String USER_TASK_BASE_PATH = "/usertasks/instance";
 
     @Inject
     @Named("persons")
@@ -236,19 +240,45 @@ public class PersonsRestIT {
                 .body("[0].name", is("ChildrenHandling"))
                 .extract()
                 .path("[0].id");
+
+        assertThat(taskId).isNotNull();
         // test claim task
-        String fixedOrderPayload = "{}";
-        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(fixedOrderPayload).when().post("/persons/" + firstCreatedId + "/ChildrenHandling/" + taskId + "?phase=claim&user=admin")
+
+        String userTaskId = given()
+                .basePath(USER_TASK_BASE_PATH)
+                .queryParam("user", "admin")
+                .queryParam("group", "admins")
+                .contentType(ContentType.JSON)
+                .when()
+                .get()
                 .then()
-                .statusCode(200).body("id", is(firstCreatedId));
-        // test release task
-        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(fixedOrderPayload).when().post("/persons/" + firstCreatedId + "/ChildrenHandling/" + taskId + "?phase=release&user=admin")
+                .statusCode(200)
+                .extract()
+                .body()
+                .path("[0].id");
+        given()
+                .contentType(ContentType.JSON)
+                .basePath(USER_TASK_BASE_PATH)
+                .queryParam("transitionId", "release")
+                .queryParam("user", "admin")
+                .queryParam("group", "admins")
+                .body(Collections.emptyMap())
+                .when()
+                .post("/{userTaskId}/transition", userTaskId)
                 .then()
-                .statusCode(200).body("id", is(firstCreatedId));
-        // test skip
-        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(fixedOrderPayload).when().post("/persons/" + firstCreatedId + "/ChildrenHandling/" + taskId + "?phase=skip&user=admin")
+                .statusCode(200);
+
+        given()
+                .contentType(ContentType.JSON)
+                .basePath(USER_TASK_BASE_PATH)
+                .queryParam("transitionId", "skip")
+                .queryParam("user", "admin")
+                .queryParam("group", "admins")
+                .body(Collections.emptyMap())
+                .when()
+                .post("/{userTaskId}/transition", userTaskId)
                 .then()
-                .statusCode(200).body("id", is(firstCreatedId));
+                .statusCode(200);
 
         // get all persons make sure there is zero
         given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)

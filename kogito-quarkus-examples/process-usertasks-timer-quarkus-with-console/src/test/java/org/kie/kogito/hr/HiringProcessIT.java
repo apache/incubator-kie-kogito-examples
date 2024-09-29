@@ -19,12 +19,14 @@
 package org.kie.kogito.hr;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.Model;
+import org.kie.kogito.auth.IdentityProvider;
 import org.kie.kogito.auth.IdentityProviders;
 import org.kie.kogito.auth.SecurityPolicy;
 import org.kie.kogito.process.Process;
@@ -32,6 +34,9 @@ import org.kie.kogito.process.ProcessInstance;
 import org.kie.kogito.process.WorkItem;
 import org.kie.kogito.testcontainers.quarkus.InfinispanQuarkusTestResource;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
+import org.kie.kogito.usertask.UserTaskInstance;
+import org.kie.kogito.usertask.UserTasks;
+import org.kie.kogito.usertask.impl.lifecycle.DefaultUserTaskLifeCycle;
 
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
@@ -39,6 +44,7 @@ import io.quarkus.test.junit.QuarkusTest;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -50,6 +56,9 @@ public class HiringProcessIT {
     @Named("hiring")
     @Inject
     Process<? extends Model> hiringProcess;
+
+    @Inject
+    UserTasks userTasks;
 
     @Test
     public void testApprovalProcess() {
@@ -65,28 +74,33 @@ public class HiringProcessIT {
         processInstance.start();
         assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_ACTIVE, processInstance.status());
 
-        SecurityPolicy policy = SecurityPolicy.of(IdentityProviders.of("jdoe", Arrays.asList("HR", "IT")));
+        IdentityProvider jdoeUser = IdentityProviders.of("jdoe", Arrays.asList("HR", "IT"));
+        SecurityPolicy policy = SecurityPolicy.of(jdoeUser);
 
         processInstance.workItems(policy);
 
         List<WorkItem> workItems = processInstance.workItems(policy);
         assertEquals(1, workItems.size());
-        Map<String, Object> results = new HashMap<>();
-        results.put("approve", true);
-        processInstance.completeWorkItem(workItems.get(0).getId(), results, policy);
+
+        List<UserTaskInstance> userTaskInstances = userTasks.instances().findByIdentity(IdentityProviders.of("jdoe"));
+        userTaskInstances.forEach(ut -> {
+            ut.setOutput("approve", true);
+            ut.transition(DefaultUserTaskLifeCycle.COMPLETE, Collections.emptyMap(), IdentityProviders.of("jdoe"));
+        });
 
         processInstance.workItems(policy);
 
         workItems = processInstance.workItems(policy);
         assertEquals(1, workItems.size());
 
-        results.put("approve", false);
-        processInstance.completeWorkItem(workItems.get(0).getId(), results, policy);
-        assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_COMPLETED, processInstance.status());
+        userTaskInstances = userTasks.instances().findByIdentity(IdentityProviders.of("jdoe"));
+        userTaskInstances.forEach(ut -> {
+            ut.setOutput("approve", false);
+            ut.transition(DefaultUserTaskLifeCycle.COMPLETE, Collections.emptyMap(), IdentityProviders.of("jdoe"));
+        });
 
-        Model result = (Model) processInstance.variables();
-        assertEquals(3, result.toMap().size());
-        assertEquals(true, result.toMap().get("hr_approval"));
-        assertEquals(false, result.toMap().get("it_approval"));
+        // process does not exist anymore
+        assertThat(hiringProcess.instances().findById(processInstance.id())).isEmpty();
+
     }
 }

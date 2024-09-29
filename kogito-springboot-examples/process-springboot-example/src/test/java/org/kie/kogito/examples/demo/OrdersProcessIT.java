@@ -27,6 +27,7 @@ import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.kie.kogito.Model;
+import org.kie.kogito.auth.IdentityProvider;
 import org.kie.kogito.auth.IdentityProviders;
 import org.kie.kogito.auth.SecurityPolicy;
 import org.kie.kogito.examples.DemoApplication;
@@ -36,6 +37,9 @@ import org.kie.kogito.process.ProcessInstances;
 import org.kie.kogito.process.WorkItem;
 import org.kie.kogito.testcontainers.springboot.InfinispanSpringBootTestResource;
 import org.kie.kogito.testcontainers.springboot.KafkaSpringBootTestResource;
+import org.kie.kogito.usertask.UserTaskInstance;
+import org.kie.kogito.usertask.UserTasks;
+import org.kie.kogito.usertask.impl.lifecycle.DefaultUserTaskLifeCycle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -62,6 +66,9 @@ public class OrdersProcessIT {
     @Qualifier("demo.orderItems")
     Process<? extends Model> orderItemsProcess;
 
+    @Autowired
+    UserTasks userTasks;
+
     private SecurityPolicy policy = SecurityPolicy.of(IdentityProviders.of("john", Collections.singletonList("managers")));
 
     @Test
@@ -86,9 +93,11 @@ public class OrdersProcessIT {
 
         ProcessInstance<?> childProcessInstance = getFirst(orderItemProcesses);
 
-        List<WorkItem> workItems = childProcessInstance.workItems(policy);
-        assertEquals(1, workItems.size());
-        childProcessInstance.completeWorkItem(workItems.get(0).getId(), null, policy);
+        IdentityProvider johnUser = IdentityProviders.of("john", Collections.singletonList("managers"));
+        List<UserTaskInstance> userTaskInstances = userTasks.instances().findByIdentity(johnUser);
+        userTaskInstances.forEach(ut -> {
+            ut.transition(DefaultUserTaskLifeCycle.COMPLETE, Collections.emptyMap(), johnUser);
+        });
 
         assertEquals(ProcessInstance.STATE_COMPLETED, childProcessInstance.status());
         Optional<?> pi = orderProcess.instances().findById(processInstance.id());
@@ -133,7 +142,11 @@ public class OrdersProcessIT {
         List<WorkItem> workItems = childProcessInstance.workItems(policy);
         assertEquals(1, workItems.size());
 
-        childProcessInstance.completeWorkItem(workItems.get(0).getId(), null, policy);
+        IdentityProvider johnUser = IdentityProviders.of("john", Collections.singletonList("managers"));
+        List<UserTaskInstance> userTaskInstances = userTasks.instances().findByIdentity(johnUser);
+        userTaskInstances.forEach(ut -> {
+            ut.transition(DefaultUserTaskLifeCycle.COMPLETE, Collections.emptyMap(), johnUser);
+        });
 
         assertEquals(ProcessInstance.STATE_COMPLETED, childProcessInstance.status());
         assertEquals(ProcessInstance.STATE_COMPLETED, processInstance.status());

@@ -18,6 +18,8 @@
  */
 package org.kie.kogito.examples.demo;
 
+import java.util.Collections;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
@@ -38,6 +40,7 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -49,6 +52,7 @@ import static org.kie.kogito.test.utils.ProcessInstancesTestUtils.abort;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = DemoApplication.class)
 @ContextConfiguration(initializers = { InfinispanSpringBootTestResource.Conditional.class, KafkaSpringBootTestResource.Conditional.class })
 public class PersonsRestIT {
+    private static final String USER_TASK_BASE_PATH = "/usertasks/instance";
 
     @Autowired
     @Qualifier("persons")
@@ -244,19 +248,44 @@ public class PersonsRestIT {
                 .extract()
                 .path("[0].id");
 
+        assertThat(taskId).isNotNull();
         // test claim task
-        String fixedOrderPayload = "{}";
-        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(fixedOrderPayload).when().post("/persons/" + firstCreatedId + "/ChildrenHandling/" + taskId + "?phase=claim&user=admin")
+        String userTaskId = given()
+                .basePath(USER_TASK_BASE_PATH)
+                .queryParam("user", "admin")
+                .queryParam("group", "admins")
+                .contentType(ContentType.JSON)
+                .when()
+                .get()
                 .then()
-                .statusCode(200).body("id", is(firstCreatedId));
-        // test release task
-        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(fixedOrderPayload).when().post("/persons/" + firstCreatedId + "/ChildrenHandling/" + taskId + "?phase=release&user=admin")
+                .statusCode(200)
+                .extract()
+                .body()
+                .path("[0].id");
+
+        given()
+                .contentType(ContentType.JSON)
+                .basePath(USER_TASK_BASE_PATH)
+                .queryParam("transitionId", "release")
+                .queryParam("user", "admin")
+                .queryParam("group", "admins")
+                .body(Collections.emptyMap())
+                .when()
+                .post("/{userTaskId}/transition", userTaskId)
                 .then()
-                .statusCode(200).body("id", is(firstCreatedId));
-        // test skip
-        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(fixedOrderPayload).when().post("/persons/" + firstCreatedId + "/ChildrenHandling/" + taskId + "?phase=skip&user=admin")
+                .statusCode(200);
+
+        given()
+                .contentType(ContentType.JSON)
+                .basePath(USER_TASK_BASE_PATH)
+                .queryParam("transitionId", "skip")
+                .queryParam("user", "admin")
+                .queryParam("group", "admins")
+                .body(Collections.emptyMap())
+                .when()
+                .post("/{userTaskId}/transition", userTaskId)
                 .then()
-                .statusCode(200).body("id", is(firstCreatedId));
+                .statusCode(200);
 
         // get all persons make sure there is zero
         given().accept(ContentType.JSON).when().get("/persons").then().statusCode(200)
@@ -272,7 +301,7 @@ public class PersonsRestIT {
         // test new person
         String addPersonPayload = "{\"person\" : {\"name\" : \"Jane Doe\", \"age\" : 30}}";
         String firstCreatedId = given().contentType(ContentType.JSON).accept(ContentType.JSON)
-                .header("X-KOGITO-StartFromNode", "UserTask_1")// this instructs to start from user task and skip any node before it
+                .header("X-KOGITO-StartFromNode", "UserTask_2")// this instructs to start from user task and skip any node before it
                 .body(addPersonPayload).when()
                 .post("/persons").then().statusCode(201)
                 .body("id", notNullValue(), "person.adult", is(false))// since rule evaluation was skipped adult is still false even though age is about the 18 limit
@@ -445,7 +474,7 @@ public class PersonsRestIT {
                 .statusCode(200);
 
         // then trigger new node instance via management interface
-        given().contentType(ContentType.JSON).accept(ContentType.JSON).when().post("/management/processes/persons/instances/" + firstCreatedId + "/nodes/UserTask_1").then()
+        given().contentType(ContentType.JSON).accept(ContentType.JSON).when().post("/management/processes/persons/instances/" + firstCreatedId + "/nodes/UserTask_2").then()
                 .statusCode(200);
 
         taskId = given()
