@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Licensed to the Apache Software Foundation (ASF) under one
 # or more contributor license agreements.  See the NOTICE file
@@ -27,7 +27,7 @@ echo "Project version: ${PROJECT_VERSION}"
 
 if [[ $PROJECT_VERSION == *SNAPSHOT ]];
 then
-  KOGITO_VERSION="latest"
+  KOGITO_VERSION="main"
 else
   KOGITO_VERSION=${PROJECT_VERSION%.*}
 fi
