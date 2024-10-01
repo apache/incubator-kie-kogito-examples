@@ -146,7 +146,7 @@ To make use of this application it is as simple as putting a sending request to 
 
 Complete curl command can be found below:
 
-```
+```bash
 curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"name" : "my fancy deal", "traveller" : { "firstName" : "John", "lastName" : "Doe", "email" : "jon.doe@example.com", "nationality" : "American","address" : { "street" : "main street", "city" : "Boston", "zipCode" : "10005", "country" : "US" }}}' http://localhost:8080/deals
 ```
 
@@ -156,13 +156,13 @@ this will then trigger the review user task that you can work with.
 
 First you can display all active reviews of deals
 
-```
+```bash
 curl -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/dealreviews
 ```
 
 based on the response you can select one of the reviews to see more details
 
-```
+```bash
 curl -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/dealreviews/{uuid}/tasks?user=john
 ```
 
