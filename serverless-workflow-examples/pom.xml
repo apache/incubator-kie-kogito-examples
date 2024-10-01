@@ -49,6 +49,7 @@
         <module>serverless-workflow-compensation-quarkus</module>
         <module>serverless-workflow-consuming-events-over-http-quarkus</module>
         <module>serverless-workflow-correlation-quarkus</module>
+        <module>serverless-workflow-correlation-quarkus-mongodb</module>
         <module>serverless-workflow-custom-function-knative</module>
         <module>serverless-workflow-custom-type</module>
         <module>serverless-workflow-data-index-persistence-addon-quarkus</module>
