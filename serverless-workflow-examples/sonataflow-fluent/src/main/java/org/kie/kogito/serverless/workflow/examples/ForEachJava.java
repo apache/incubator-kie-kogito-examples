@@ -57,7 +57,7 @@ public class ForEachJava {
                 // then for each element in input names concatenate it with that message
                 .next(forEach(".names").loopVar("name").outputCollection(".messages")
                         // jq expression that suffix each name with the message retrieved from the file
-                        .action(call(expr("concat", ".name+.adviceMessage")))
+                        .action(call(expr("concat", "$name+.adviceMessage")))
                         // only return messages list as result of the flow
                         .outputFilter("{messages}"))
                 .end().build();
