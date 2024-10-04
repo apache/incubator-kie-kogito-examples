@@ -18,19 +18,16 @@
  */
 package org.acme.newsletter.subscription.service;
 
+import io.quarkus.arc.DefaultBean;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.ApplicationScoped;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
-
-import jakarta.enterprise.context.ApplicationScoped;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import io.quarkus.arc.DefaultBean;
-import jakarta.annotation.PostConstruct;
 
 /**
  * This default implementation is used when the persistence is not enabled.

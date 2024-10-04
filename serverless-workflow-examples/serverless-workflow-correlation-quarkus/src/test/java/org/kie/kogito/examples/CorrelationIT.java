@@ -18,18 +18,16 @@
  */
 package org.kie.kogito.examples;
 
-import java.util.concurrent.atomic.AtomicReference;
-
-import org.junit.jupiter.api.Test;
-
-import io.quarkus.test.junit.QuarkusIntegrationTest;
-import io.restassured.http.ContentType;
-
 import static io.restassured.RestAssured.given;
 import static java.util.concurrent.TimeUnit.MINUTES;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
 import static org.hamcrest.Matchers.notNullValue;
+
+import io.quarkus.test.junit.QuarkusIntegrationTest;
+import io.restassured.http.ContentType;
+import java.util.concurrent.atomic.AtomicReference;
+import org.junit.jupiter.api.Test;
 
 @QuarkusIntegrationTest
 class CorrelationIT {

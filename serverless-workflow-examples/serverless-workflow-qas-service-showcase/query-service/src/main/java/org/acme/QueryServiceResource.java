@@ -18,11 +18,11 @@
  */
 package org.acme;
 
-import java.net.URI;
-import java.time.OffsetDateTime;
-import java.util.List;
-import java.util.UUID;
-
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.cloudevents.core.builder.CloudEventBuilder;
+import io.cloudevents.jackson.JsonCloudEventData;
+import io.quarkus.reactivemessaging.http.runtime.OutgoingHttpMetadata;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
@@ -32,19 +32,15 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-
+import java.net.URI;
+import java.time.OffsetDateTime;
+import java.util.List;
+import java.util.UUID;
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Emitter;
 import org.eclipse.microprofile.reactive.messaging.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import io.cloudevents.core.builder.CloudEventBuilder;
-import io.cloudevents.jackson.JsonCloudEventData;
-import io.quarkus.reactivemessaging.http.runtime.OutgoingHttpMetadata;
 
 @Path("query-service")
 @ApplicationScoped

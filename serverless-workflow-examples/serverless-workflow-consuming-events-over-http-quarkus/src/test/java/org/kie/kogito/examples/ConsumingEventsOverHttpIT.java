@@ -18,29 +18,26 @@
  */
 package org.kie.kogito.examples;
 
-import java.net.URI;
-import java.time.OffsetDateTime;
-import java.util.Collections;
-import java.util.Map;
-import java.util.UUID;
-
-import io.restassured.response.ExtractableResponse;
-import io.restassured.response.Response;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import static io.restassured.RestAssured.given;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.await;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import io.cloudevents.core.builder.CloudEventBuilder;
 import io.cloudevents.jackson.JsonFormat;
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-
-import static io.restassured.RestAssured.given;
-import static java.util.concurrent.TimeUnit.SECONDS;
-import static org.awaitility.Awaitility.await;
+import io.restassured.response.ExtractableResponse;
+import io.restassured.response.Response;
+import java.net.URI;
+import java.time.OffsetDateTime;
+import java.util.Collections;
+import java.util.Map;
+import java.util.UUID;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 @QuarkusIntegrationTest
 class ConsumingEventsOverHttpIT {

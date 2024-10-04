@@ -18,28 +18,10 @@
  */
 package org.acme.loanbroker;
 
-import java.io.IOException;
-import java.net.URI;
-import java.util.Collections;
-import java.util.Objects;
-import java.util.concurrent.LinkedBlockingDeque;
-import java.util.concurrent.TimeUnit;
-
-import jakarta.inject.Inject;
-import jakarta.websocket.ClientEndpoint;
-import jakarta.websocket.ContainerProvider;
-import jakarta.websocket.DeploymentException;
-import jakarta.websocket.OnMessage;
-import jakarta.websocket.Session;
-import jakarta.ws.rs.core.MediaType;
-
-import org.acme.loanbroker.domain.Credit;
-import org.acme.loanbroker.domain.Quote;
-import org.acme.loanbroker.domain.QuotesResponse;
-import org.junit.jupiter.api.Test;
+import static io.restassured.RestAssured.given;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import io.cloudevents.CloudEvent;
 import io.cloudevents.core.builder.CloudEventBuilder;
 import io.cloudevents.core.data.PojoCloudEventData;
@@ -47,9 +29,23 @@ import io.cloudevents.core.provider.EventFormatProvider;
 import io.cloudevents.jackson.JsonFormat;
 import io.quarkus.test.common.http.TestHTTPResource;
 import io.quarkus.test.junit.QuarkusTest;
-
-import static io.restassured.RestAssured.given;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import jakarta.inject.Inject;
+import jakarta.websocket.ClientEndpoint;
+import jakarta.websocket.ContainerProvider;
+import jakarta.websocket.DeploymentException;
+import jakarta.websocket.OnMessage;
+import jakarta.websocket.Session;
+import jakarta.ws.rs.core.MediaType;
+import java.io.IOException;
+import java.net.URI;
+import java.util.Collections;
+import java.util.Objects;
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.TimeUnit;
+import org.acme.loanbroker.domain.Credit;
+import org.acme.loanbroker.domain.Quote;
+import org.acme.loanbroker.domain.QuotesResponse;
+import org.junit.jupiter.api.Test;
 
 @QuarkusTest
 public class AppResourceTest {

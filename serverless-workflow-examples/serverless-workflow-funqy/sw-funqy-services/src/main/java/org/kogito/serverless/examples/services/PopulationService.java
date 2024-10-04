@@ -18,11 +18,9 @@
  */
 package org.kogito.serverless.examples.services;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import java.util.HashMap;
 import java.util.Map;
-
-import jakarta.enterprise.context.ApplicationScoped;
-
 import org.kogito.serverless.examples.input.Country;
 
 @ApplicationScoped

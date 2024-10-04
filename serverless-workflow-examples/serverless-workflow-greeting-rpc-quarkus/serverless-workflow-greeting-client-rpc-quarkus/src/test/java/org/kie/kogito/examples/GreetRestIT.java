@@ -18,19 +18,6 @@
  */
 package org.kie.kogito.examples;
 
-import java.io.IOException;
-
-import org.eclipse.microprofile.config.ConfigProvider;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.kie.kogito.examples.sw.greeting.GreeterService;
-
-import io.grpc.Server;
-import io.restassured.RestAssured;
-import io.quarkus.test.junit.QuarkusIntegrationTest;
-import io.restassured.http.ContentType;
-
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.containsString;
@@ -38,6 +25,17 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.aMapWithSize;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.hasSize;
+
+import io.grpc.Server;
+import io.quarkus.test.junit.QuarkusIntegrationTest;
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import java.io.IOException;
+import org.eclipse.microprofile.config.ConfigProvider;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.kie.kogito.examples.sw.greeting.GreeterService;
 
 @QuarkusIntegrationTest
 class GreetRestIT {

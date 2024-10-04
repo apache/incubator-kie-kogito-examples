@@ -15,6 +15,7 @@
  */
 package org.kie.kogito.examples;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.annotation.PostConstruct;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
@@ -23,11 +24,8 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Path("/publish")
 @Produces(MediaType.APPLICATION_JSON)

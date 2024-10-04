@@ -18,16 +18,15 @@
  */
 package org.acme;
 
-import com.github.tomakehurst.wiremock.WireMockServer;
-import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
-import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
-
-import java.util.Map;
-
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.get;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlMatching;
+
+import com.github.tomakehurst.wiremock.WireMockServer;
+import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
+import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
+import java.util.Map;
 
 public class MockServices implements QuarkusTestResourceLifecycleManager {
 

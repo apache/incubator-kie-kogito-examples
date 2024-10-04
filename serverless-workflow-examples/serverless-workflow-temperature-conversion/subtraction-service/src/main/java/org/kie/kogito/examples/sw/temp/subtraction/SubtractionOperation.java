@@ -18,9 +18,8 @@
  */
 package org.kie.kogito.examples.sw.temp.subtraction;
 
-import java.util.Objects;
-
 import io.quarkus.runtime.annotations.RegisterForReflection;
+import java.util.Objects;
 
 /**
  * See: <a href="https://en.wikipedia.org/wiki/Subtraction">Subtraction</a>

@@ -18,17 +18,15 @@
  */
 package org.kogito.serverless.examples;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
-
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.jboss.resteasy.annotations.SseElementType;
 import org.reactivestreams.Publisher;
-
-import com.fasterxml.jackson.databind.JsonNode;
 
 @Path("/decisions")
 public class DecisionResource {

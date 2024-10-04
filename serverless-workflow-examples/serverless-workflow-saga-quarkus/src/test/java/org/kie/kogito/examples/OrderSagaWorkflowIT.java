@@ -18,15 +18,14 @@
  */
 package org.kie.kogito.examples;
 
-import org.junit.jupiter.api.Test;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.notNullValue;
 
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
-
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.notNullValue;
+import org.junit.jupiter.api.Test;
 
 @QuarkusIntegrationTest
 public class OrderSagaWorkflowIT {

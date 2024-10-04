@@ -18,22 +18,16 @@
  */
 package org.acme.serverless.loanbroker.aggregator;
 
-import java.net.URI;
-import java.util.concurrent.TimeUnit;
-
-import jakarta.inject.Inject;
-import jakarta.ws.rs.core.MediaType;
-
-import org.acme.serverless.loanbroker.aggregator.model.BankQuote;
-import org.apache.camel.Exchange;
-import org.hamcrest.core.Is;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Test;
+import static com.github.tomakehurst.wiremock.client.WireMock.containing;
+import static com.github.tomakehurst.wiremock.client.WireMock.equalTo;
+import static com.github.tomakehurst.wiremock.client.WireMock.postRequestedFor;
+import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
+import static org.acme.serverless.loanbroker.aggregator.IntegrationConstants.KOGITO_FLOW_ID_HEADER;
+import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tomakehurst.wiremock.WireMockServer;
-
 import io.cloudevents.CloudEvent;
 import io.cloudevents.core.builder.CloudEventBuilder;
 import io.cloudevents.core.data.PojoCloudEventData;
@@ -42,13 +36,15 @@ import io.cloudevents.jackson.JsonFormat;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.RestAssured;
-
-import static com.github.tomakehurst.wiremock.client.WireMock.containing;
-import static com.github.tomakehurst.wiremock.client.WireMock.equalTo;
-import static com.github.tomakehurst.wiremock.client.WireMock.postRequestedFor;
-import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
-import static org.acme.serverless.loanbroker.aggregator.IntegrationConstants.KOGITO_FLOW_ID_HEADER;
-import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.core.MediaType;
+import java.net.URI;
+import java.util.concurrent.TimeUnit;
+import org.acme.serverless.loanbroker.aggregator.model.BankQuote;
+import org.apache.camel.Exchange;
+import org.hamcrest.core.Is;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 
 @QuarkusTest
 @QuarkusTestResource(SinkMockTestResource.class)

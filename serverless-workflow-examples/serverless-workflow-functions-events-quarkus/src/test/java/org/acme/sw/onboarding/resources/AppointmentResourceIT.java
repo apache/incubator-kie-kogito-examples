@@ -18,22 +18,19 @@
  */
 package org.acme.sw.onboarding.resources;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import jakarta.ws.rs.core.MediaType;
-
-import org.junit.jupiter.api.Test;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.ValidatableResponse;
-
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import jakarta.ws.rs.core.MediaType;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import org.junit.jupiter.api.Test;
 
 @QuarkusIntegrationTest
 class AppointmentResourceIT {

@@ -18,23 +18,19 @@
  */
 package org.acme.loanbroker;
 
-import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
-
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.quarkus.vertx.ConsumeEvent;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.websocket.OnOpen;
 import jakarta.websocket.Session;
 import jakarta.websocket.server.ServerEndpoint;
-
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import org.acme.loanbroker.domain.QuotesResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import io.quarkus.vertx.ConsumeEvent;
 
 @ServerEndpoint("/socket/quote/new")
 @ApplicationScoped

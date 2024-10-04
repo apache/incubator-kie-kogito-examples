@@ -18,29 +18,25 @@
  */
 package org.kie.kogito.examples;
 
-import java.net.URI;
-import java.time.OffsetDateTime;
-import java.util.Collections;
-import java.util.UUID;
-
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.cloudevents.core.builder.CloudEventBuilder;
+import io.vertx.core.Vertx;
+import io.vertx.ext.web.client.WebClient;
+import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.core.MediaType;
-
-import jakarta.annotation.PostConstruct;
+import java.net.URI;
+import java.time.OffsetDateTime;
+import java.util.Collections;
+import java.util.UUID;
 import org.kie.kogito.event.cloudevents.CloudEventExtensionConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import io.cloudevents.core.builder.CloudEventBuilder;
-import io.vertx.core.Vertx;
-import io.vertx.ext.web.client.WebClient;
 
 @ApplicationScoped
 @Path("/event")

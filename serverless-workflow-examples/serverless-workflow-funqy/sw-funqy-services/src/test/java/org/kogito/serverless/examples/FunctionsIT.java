@@ -18,15 +18,13 @@
  */
 package org.kogito.serverless.examples;
 
+import static io.restassured.RestAssured.given;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.quarkus.test.junit.QuarkusTest;
 import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.Test;
 import org.kogito.serverless.examples.input.Country;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import io.quarkus.test.junit.QuarkusTest;
-
-import static io.restassured.RestAssured.given;
 
 @QuarkusTest
 public class FunctionsIT {

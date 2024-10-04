@@ -18,19 +18,16 @@
  */
 package org.kie.kogito.serverless;
 
-import java.util.Collections;
-import java.util.Map;
-
-import org.kie.kogito.event.cloudevents.CloudEventExtensionConstants;
-
-import com.github.tomakehurst.wiremock.WireMockServer;
-import com.github.tomakehurst.wiremock.client.WireMock;
-
-import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
-
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.post;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
+
+import com.github.tomakehurst.wiremock.WireMockServer;
+import com.github.tomakehurst.wiremock.client.WireMock;
+import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
+import java.util.Collections;
+import java.util.Map;
+import org.kie.kogito.event.cloudevents.CloudEventExtensionConstants;
 
 public class OperationsMockService implements QuarkusTestResourceLifecycleManager {
 

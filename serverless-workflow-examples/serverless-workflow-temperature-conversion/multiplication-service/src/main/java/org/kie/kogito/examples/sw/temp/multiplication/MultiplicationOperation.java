@@ -18,9 +18,8 @@
  */
 package org.kie.kogito.examples.sw.temp.multiplication;
 
-import java.util.Objects;
-
 import io.quarkus.runtime.annotations.RegisterForReflection;
+import java.util.Objects;
 
 /**
  * See: <a href="https://en.wikipedia.org/wiki/Multiplication">Multiplication</a>

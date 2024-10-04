@@ -18,17 +18,15 @@
  */
 package org.kogito.serverless.examples;
 
-import java.util.Collections;
-import java.util.Map;
+import static com.github.tomakehurst.wiremock.client.WireMock.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
-
 import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
-
-import static com.github.tomakehurst.wiremock.client.WireMock.*;
+import java.util.Collections;
+import java.util.Map;
 
 public class RestServiceMockServer implements QuarkusTestResourceLifecycleManager {
 

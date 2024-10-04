@@ -18,13 +18,11 @@
  */
 package org.kogito.serverless.examples;
 
-import java.io.IOException;
-
+import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Named;
-
-import jakarta.annotation.PostConstruct;
+import java.io.IOException;
 import org.kie.kogito.addon.quarkus.messaging.common.ChannelFormat;
 import org.kie.kogito.event.CloudEventUnmarshallerFactory;
 import org.kie.kogito.event.avro.AvroCloudEventUnmarshallerFactory;

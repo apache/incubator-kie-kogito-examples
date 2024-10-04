@@ -18,15 +18,14 @@
  */
 package org.kie.kogito.examples;
 
-import org.junit.jupiter.api.Test;
+import static io.restassured.RestAssured.given;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.await;
 
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-
-import static io.restassured.RestAssured.given;
-import static java.util.concurrent.TimeUnit.SECONDS;
-import static org.awaitility.Awaitility.await;
+import org.junit.jupiter.api.Test;
 
 @QuarkusIntegrationTest
 class CallbackRestIT {

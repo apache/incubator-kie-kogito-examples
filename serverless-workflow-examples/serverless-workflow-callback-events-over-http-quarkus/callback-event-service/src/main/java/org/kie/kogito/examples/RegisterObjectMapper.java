@@ -18,12 +18,10 @@
  */
 package org.kie.kogito.examples;
 
-import jakarta.enterprise.context.ApplicationScoped;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import io.cloudevents.jackson.JsonFormat;
 import io.quarkus.jackson.ObjectMapperCustomizer;
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class RegisterObjectMapper implements ObjectMapperCustomizer{

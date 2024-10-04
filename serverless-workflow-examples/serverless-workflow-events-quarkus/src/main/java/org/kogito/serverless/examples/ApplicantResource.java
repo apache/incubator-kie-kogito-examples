@@ -18,10 +18,9 @@
  */
 package org.kogito.serverless.examples;
 
-import java.io.IOException;
-import java.net.URI;
-import java.util.UUID;
-
+import com.fasterxml.jackson.databind.JsonNode;
+import io.cloudevents.core.builder.CloudEventBuilder;
+import jakarta.annotation.PostConstruct;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.InternalServerErrorException;
@@ -29,8 +28,9 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
-
-import jakarta.annotation.PostConstruct;
+import java.io.IOException;
+import java.net.URI;
+import java.util.UUID;
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Emitter;
 import org.kie.kogito.event.CloudEventMarshaller;
@@ -38,10 +38,6 @@ import org.kie.kogito.event.avro.AvroCloudEventMarshaller;
 import org.kie.kogito.event.avro.AvroIO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.fasterxml.jackson.databind.JsonNode;
-
-import io.cloudevents.core.builder.CloudEventBuilder;
 
 @Path("/newapplicant")
 public class ApplicantResource {

@@ -18,18 +18,15 @@
  */
 package org.acme.newsletter.subscription.service;
 
-import java.util.UUID;
-
-import org.junit.jupiter.api.Test;
+import static io.restassured.RestAssured.given;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 import io.restassured.http.ContentType;
-
-import static io.restassured.RestAssured.given;
-import static org.assertj.core.api.Assertions.assertThat;
+import java.util.UUID;
+import org.junit.jupiter.api.Test;
 
 @QuarkusIntegrationTest
 public class SubscriptionResourceIT {

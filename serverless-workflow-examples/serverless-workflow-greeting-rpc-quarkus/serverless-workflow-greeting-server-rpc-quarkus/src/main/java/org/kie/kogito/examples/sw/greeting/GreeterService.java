@@ -18,17 +18,15 @@
  */
 package org.kie.kogito.examples.sw.greeting;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.kie.kogito.examples.sw.greeting.Greeting.HelloReply;
-import org.kie.kogito.examples.sw.greeting.Greeting.HelloRequest;
-
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import org.kie.kogito.examples.sw.greeting.Greeting.HelloReply;
+import org.kie.kogito.examples.sw.greeting.Greeting.HelloRequest;
 
 public class GreeterService extends GreeterGrpc.GreeterImplBase {
 

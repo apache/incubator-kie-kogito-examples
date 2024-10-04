@@ -18,6 +18,9 @@
  */
 package org.acme.serverless.loanbroker.aggregator.resources;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.cloudevents.CloudEvent;
+import io.cloudevents.jackson.PojoCloudEventDataMapper;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.POST;
@@ -25,18 +28,12 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-
 import org.acme.serverless.loanbroker.aggregator.IntegrationConstants;
 import org.acme.serverless.loanbroker.aggregator.model.BankQuote;
 import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import io.cloudevents.CloudEvent;
-import io.cloudevents.jackson.PojoCloudEventDataMapper;
 
 @Path("/")
 @ApplicationScoped

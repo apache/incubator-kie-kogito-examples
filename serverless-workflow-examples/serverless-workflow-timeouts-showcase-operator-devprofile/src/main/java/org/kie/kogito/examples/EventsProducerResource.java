@@ -22,8 +22,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.cloudevents.core.builder.CloudEventBuilder;
 import io.cloudevents.jackson.JsonCloudEventData;
-import org.eclipse.microprofile.rest.client.inject.RestClient;
-
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
@@ -36,6 +34,7 @@ import jakarta.ws.rs.core.Response;
 import java.net.URI;
 import java.time.OffsetDateTime;
 import java.util.UUID;
+import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 /**
  * Helper resource with convenient operations to produce events for the serverless workflows that are waiting for

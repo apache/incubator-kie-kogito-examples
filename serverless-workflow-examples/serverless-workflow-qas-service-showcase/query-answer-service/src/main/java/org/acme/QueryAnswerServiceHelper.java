@@ -18,20 +18,17 @@
  */
 package org.acme;
 
-import java.time.ZonedDateTime;
-
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
-
-import org.kie.kogito.internal.process.runtime.KogitoProcessContext;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.fasterxml.jackson.databind.JsonNode;
-
 import static org.acme.QueryRecord.ERROR;
 import static org.acme.QueryRecord.PENDING;
 import static org.acme.QueryRecord.RESOLVED;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import java.time.ZonedDateTime;
+import org.kie.kogito.internal.process.runtime.KogitoProcessContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Helper class used from the SW workflow actions to update the queries and answers being constructed.

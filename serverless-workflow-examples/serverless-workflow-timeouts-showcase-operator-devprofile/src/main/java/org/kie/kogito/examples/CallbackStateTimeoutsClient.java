@@ -18,7 +18,7 @@
  */
 package org.kie.kogito.examples;
 
-import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
+import static org.kie.kogito.examples.CallbackStateTimeoutsClient.CONFIG_KEY;
 
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DefaultValue;
@@ -31,8 +31,7 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.HttpHeaders;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-
-import static org.kie.kogito.examples.CallbackStateTimeoutsClient.CONFIG_KEY;
+import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 @Path("/")
 @RegisterRestClient(configKey = CONFIG_KEY)

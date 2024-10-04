@@ -21,7 +21,6 @@ package org.kie.kogito.examples;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.cloudevents.jackson.JsonFormat;
 import io.quarkus.jackson.ObjectMapperCustomizer;
-
 import jakarta.inject.Singleton;
 
 /**

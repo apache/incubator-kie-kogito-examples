@@ -18,21 +18,6 @@
  */
 package org.acme.newsletter.subscription.flow;
 
-import java.util.Collections;
-import java.util.Map;
-
-import org.acme.newsletter.subscription.service.Subscription;
-import org.acme.newsletter.subscription.service.SubscriptionResource;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.tomakehurst.wiremock.WireMockServer;
-import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
-import com.github.tomakehurst.wiremock.matching.EqualToPattern;
-import com.github.tomakehurst.wiremock.matching.UrlPathPattern;
-
-import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
-
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.get;
 import static com.github.tomakehurst.wiremock.client.WireMock.post;
@@ -41,6 +26,18 @@ import static jakarta.ws.rs.core.HttpHeaders.CONTENT_TYPE;
 import static jakarta.ws.rs.core.MediaType.APPLICATION_JSON;
 import static org.acme.newsletter.subscription.flow.SubscriptionConstants.EMAIL;
 import static org.acme.newsletter.subscription.flow.SubscriptionConstants.newSubscription;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.tomakehurst.wiremock.WireMockServer;
+import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
+import com.github.tomakehurst.wiremock.matching.EqualToPattern;
+import com.github.tomakehurst.wiremock.matching.UrlPathPattern;
+import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
+import java.util.Collections;
+import java.util.Map;
+import org.acme.newsletter.subscription.service.Subscription;
+import org.acme.newsletter.subscription.service.SubscriptionResource;
 
 public class SubscriptionServiceMock implements QuarkusTestResourceLifecycleManager {
 

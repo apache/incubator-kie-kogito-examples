@@ -18,19 +18,15 @@
  */
 package org.acme.loanbroker;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.cloudevents.CloudEvent;
+import io.cloudevents.jackson.PojoCloudEventDataMapper;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
-
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
-
 import org.acme.loanbroker.domain.QuotesResponse;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import io.cloudevents.CloudEvent;
-import io.cloudevents.jackson.PojoCloudEventDataMapper;
 
 @ApplicationScoped
 public class QuotesRepository {
