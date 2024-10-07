@@ -18,20 +18,18 @@
  */
 package org.kogito.serverless.examples;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
+import static com.github.tomakehurst.wiremock.client.WireMock.get;
+import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
-
 import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
-
-import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
-import static com.github.tomakehurst.wiremock.client.WireMock.get;
-import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class RestCountriesMockServer implements QuarkusTestResourceLifecycleManager {
 

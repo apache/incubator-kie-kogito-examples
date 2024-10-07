@@ -18,8 +18,6 @@
  */
 package org.acme.serverless.loanbroker.aggregator.resources;
 
-import java.util.List;
-
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
@@ -28,7 +26,7 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-
+import java.util.List;
 import org.acme.serverless.loanbroker.aggregator.QuotesRepositoryProcessor;
 import org.acme.serverless.loanbroker.aggregator.model.BankQuote;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;

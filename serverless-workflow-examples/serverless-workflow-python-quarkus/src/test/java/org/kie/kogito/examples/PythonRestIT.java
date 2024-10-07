@@ -18,16 +18,13 @@
  */
 package org.kie.kogito.examples;
 
-import org.junit.jupiter.api.Test;
-
-import com.fasterxml.jackson.databind.JsonNode;
-
-import io.quarkus.test.junit.QuarkusIntegrationTest;
-import io.restassured.http.ContentType;
-
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import io.quarkus.test.junit.QuarkusIntegrationTest;
+import io.restassured.http.ContentType;
+import org.junit.jupiter.api.Test;
 
 @QuarkusIntegrationTest
 public class PythonRestIT {

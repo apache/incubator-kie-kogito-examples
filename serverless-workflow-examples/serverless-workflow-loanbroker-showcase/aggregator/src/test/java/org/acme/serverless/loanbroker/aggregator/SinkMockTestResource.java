@@ -18,17 +18,15 @@
  */
 package org.acme.serverless.loanbroker.aggregator;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import com.github.tomakehurst.wiremock.WireMockServer;
-
-import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
-
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.post;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
+
+import com.github.tomakehurst.wiremock.WireMockServer;
+import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SinkMockTestResource implements QuarkusTestResourceLifecycleManager {
     private WireMockServer server;

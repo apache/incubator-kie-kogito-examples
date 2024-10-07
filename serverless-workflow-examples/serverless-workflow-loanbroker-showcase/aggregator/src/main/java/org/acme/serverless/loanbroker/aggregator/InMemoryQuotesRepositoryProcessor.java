@@ -18,13 +18,11 @@
  */
 package org.acme.serverless.loanbroker.aggregator;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
-import jakarta.enterprise.context.ApplicationScoped;
-
 import org.acme.serverless.loanbroker.aggregator.model.BankQuote;
 import org.apache.camel.Exchange;
 import org.slf4j.Logger;

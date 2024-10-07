@@ -20,7 +20,6 @@ package org.acme.serverless.loanbroker.aggregator.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-
 import org.acme.serverless.loanbroker.aggregator.IntegrationConstants;
 import org.acme.serverless.loanbroker.aggregator.QuotesAggregationStrategy;
 import org.apache.camel.Exchange;

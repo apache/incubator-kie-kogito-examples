@@ -18,15 +18,7 @@
  */
 package org.acme;
 
-import java.util.List;
-import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
-
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
-import jakarta.annotation.PostConstruct;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import static java.util.stream.Collectors.toList;
 
 import io.quarkus.arc.properties.IfBuildProperty;
 import io.quarkus.runtime.Startup;
@@ -34,8 +26,14 @@ import io.vertx.mutiny.sqlclient.Row;
 import io.vertx.mutiny.sqlclient.RowIterator;
 import io.vertx.mutiny.sqlclient.RowSet;
 import io.vertx.mutiny.sqlclient.Tuple;
-
-import static java.util.stream.Collectors.toList;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import java.util.List;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This PostgreSqlQueryRequestRepository implementation is used when the application is built with the persistence profile.

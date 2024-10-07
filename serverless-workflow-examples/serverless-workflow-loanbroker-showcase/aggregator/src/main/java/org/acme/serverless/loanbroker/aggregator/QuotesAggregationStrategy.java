@@ -20,7 +20,6 @@ package org.acme.serverless.loanbroker.aggregator;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.acme.serverless.loanbroker.aggregator.model.BankQuote;
 import org.apache.camel.AggregationStrategy;
 import org.apache.camel.Exchange;

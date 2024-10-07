@@ -18,6 +18,11 @@
  */
 package org.acme;
 
+import io.quarkus.arc.properties.IfBuildProperty;
+import io.quarkus.runtime.Startup;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,16 +32,9 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
 import javax.sql.DataSource;
-import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import io.quarkus.arc.properties.IfBuildProperty;
-import io.quarkus.runtime.Startup;
 
 /**
  * This PostgreSqlQueryRecordRepository implementation is used when the application is build with the persistence profile.

@@ -18,13 +18,12 @@
  */
 package org.acme.sw.onboarding.queries;
 
-import java.util.ArrayList;
-
-import org.acme.sw.onboarding.model.Doctor;
-import org.junit.jupiter.api.Test;
-import org.drools.ruleunits.api.DataObserver;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.ArrayList;
+import org.acme.sw.onboarding.model.Doctor;
+import org.drools.ruleunits.api.DataObserver;
+import org.junit.jupiter.api.Test;
 
 class AssignmentUnitPlainTest {
 

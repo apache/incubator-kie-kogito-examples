@@ -18,13 +18,11 @@
  */
 package org.kogito.serverless.examples.functions;
 
+import io.quarkus.funqy.Funq;
 import jakarta.inject.Inject;
-
 import org.kogito.serverless.examples.input.Country;
 import org.kogito.serverless.examples.services.CountriesService;
 import org.kogito.serverless.examples.services.PopulationService;
-
-import io.quarkus.funqy.Funq;
 
 public class PopulationFunction {
     @Inject

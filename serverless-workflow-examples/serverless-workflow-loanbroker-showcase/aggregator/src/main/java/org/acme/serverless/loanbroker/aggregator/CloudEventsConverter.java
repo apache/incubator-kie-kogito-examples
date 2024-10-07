@@ -18,24 +18,20 @@
  */
 package org.acme.serverless.loanbroker.aggregator;
 
-import java.net.URI;
-import java.util.UUID;
-
-import jakarta.inject.Inject;
-import jakarta.inject.Singleton;
-import jakarta.ws.rs.core.MediaType;
-
-import org.apache.camel.Exchange;
-import org.apache.camel.TypeConversionException;
-import org.apache.camel.support.TypeConverterSupport;
+import static org.acme.serverless.loanbroker.aggregator.IntegrationConstants.KOGITO_FLOW_ID_HEADER;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import io.cloudevents.CloudEvent;
 import io.cloudevents.core.builder.CloudEventBuilder;
 import io.cloudevents.core.data.PojoCloudEventData;
-
-import static org.acme.serverless.loanbroker.aggregator.IntegrationConstants.KOGITO_FLOW_ID_HEADER;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
+import jakarta.ws.rs.core.MediaType;
+import java.net.URI;
+import java.util.UUID;
+import org.apache.camel.Exchange;
+import org.apache.camel.TypeConversionException;
+import org.apache.camel.support.TypeConverterSupport;
 
 @Singleton
 public class CloudEventsConverter extends TypeConverterSupport {

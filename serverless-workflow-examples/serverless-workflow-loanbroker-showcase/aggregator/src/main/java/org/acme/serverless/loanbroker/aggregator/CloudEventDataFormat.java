@@ -18,20 +18,16 @@
  */
 package org.acme.serverless.loanbroker.aggregator;
 
-import java.io.InputStream;
-import java.io.OutputStream;
-
-import jakarta.inject.Inject;
-import jakarta.inject.Singleton;
-
-import org.apache.camel.Exchange;
-import org.apache.camel.spi.DataFormat;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import io.cloudevents.CloudEvent;
 import io.cloudevents.core.provider.EventFormatProvider;
 import io.cloudevents.jackson.JsonFormat;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
+import java.io.InputStream;
+import java.io.OutputStream;
+import org.apache.camel.Exchange;
+import org.apache.camel.spi.DataFormat;
 
 @Singleton
 public class CloudEventDataFormat implements DataFormat {

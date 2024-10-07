@@ -18,19 +18,16 @@
  */
 package org.acme.serverless.loanbroker.flow;
 
-import java.util.Collections;
-import java.util.Map;
-
-import jakarta.ws.rs.core.MediaType;
-
-import com.github.tomakehurst.wiremock.WireMockServer;
-import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
-
-import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
-
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.get;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlPathMatching;
+
+import com.github.tomakehurst.wiremock.WireMockServer;
+import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
+import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
+import jakarta.ws.rs.core.MediaType;
+import java.util.Collections;
+import java.util.Map;
 
 public class CreditBureauMock implements QuarkusTestResourceLifecycleManager {
 

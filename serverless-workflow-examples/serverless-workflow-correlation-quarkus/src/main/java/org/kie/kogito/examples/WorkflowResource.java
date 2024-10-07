@@ -18,26 +18,22 @@
  */
 package org.kie.kogito.examples;
 
-import java.net.URI;
-import java.time.OffsetDateTime;
-import java.util.Collections;
-import java.util.Map;
-import java.util.UUID;
-
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.cloudevents.core.builder.CloudEventBuilder;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.core.Response;
-
+import java.net.URI;
+import java.time.OffsetDateTime;
+import java.util.Collections;
+import java.util.Map;
+import java.util.UUID;
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Emitter;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import io.cloudevents.core.builder.CloudEventBuilder;
 
 /**
  * Helper class used to facilitate testing using REST

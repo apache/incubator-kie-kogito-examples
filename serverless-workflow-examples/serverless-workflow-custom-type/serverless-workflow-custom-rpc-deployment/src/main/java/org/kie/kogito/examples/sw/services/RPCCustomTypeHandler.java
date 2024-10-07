@@ -18,17 +18,16 @@
  */
 package org.kie.kogito.examples.sw.services;
 
+import static org.kie.kogito.examples.sw.custom.RPCCustomWorkItemHandler.NAME;
+import static org.kie.kogito.examples.sw.custom.RPCCustomWorkItemHandler.OPERATION;
+import static org.kie.kogito.serverless.workflow.parser.FunctionTypeHandlerFactory.trimCustomOperation;
+
+import io.serverlessworkflow.api.Workflow;
+import io.serverlessworkflow.api.functions.FunctionDefinition;
 import org.jbpm.ruleflow.core.RuleFlowNodeContainerFactory;
 import org.jbpm.ruleflow.core.factory.WorkItemNodeFactory;
 import org.kie.kogito.serverless.workflow.parser.ParserContext;
 import org.kie.kogito.serverless.workflow.parser.types.WorkItemTypeHandler;
-
-import io.serverlessworkflow.api.Workflow;
-import io.serverlessworkflow.api.functions.FunctionDefinition;
-
-import static org.kie.kogito.examples.sw.custom.RPCCustomWorkItemHandler.NAME;
-import static org.kie.kogito.examples.sw.custom.RPCCustomWorkItemHandler.OPERATION;
-import static org.kie.kogito.serverless.workflow.parser.FunctionTypeHandlerFactory.trimCustomOperation;
 
 public class RPCCustomTypeHandler extends WorkItemTypeHandler{
 

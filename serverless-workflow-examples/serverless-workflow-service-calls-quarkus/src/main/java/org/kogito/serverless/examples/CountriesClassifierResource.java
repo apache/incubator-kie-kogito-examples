@@ -18,20 +18,17 @@
  */
 package org.kogito.serverless.examples;
 
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.Set;
-
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
-
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.Set;
 import org.jboss.logging.Logger;
-
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Path("/countryclassifier")
 @Produces(MediaType.APPLICATION_JSON)

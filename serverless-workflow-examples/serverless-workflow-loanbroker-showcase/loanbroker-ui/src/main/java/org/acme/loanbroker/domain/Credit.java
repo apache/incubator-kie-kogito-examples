@@ -21,7 +21,6 @@ package org.acme.loanbroker.domain;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
-
 import java.util.Objects;
 
 public class Credit {

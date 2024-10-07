@@ -18,13 +18,11 @@
  */
 package org.kogito.serverless.examples.functions;
 
+import io.quarkus.funqy.Funq;
 import jakarta.inject.Inject;
-
 import org.kogito.serverless.examples.input.Country;
 import org.kogito.serverless.examples.services.ClassificationService;
 import org.kogito.serverless.examples.services.CountriesService;
-
-import io.quarkus.funqy.Funq;
 
 public class ClassificationFunction {
     @Inject

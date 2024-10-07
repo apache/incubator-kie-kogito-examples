@@ -18,16 +18,14 @@
  */
 package org.acme.newsletter.subscription.flow;
 
-import java.util.Collections;
-import java.util.Map;
+import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
+import static com.github.tomakehurst.wiremock.client.WireMock.post;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
-
 import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
-
-import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
-import static com.github.tomakehurst.wiremock.client.WireMock.post;
+import java.util.Collections;
+import java.util.Map;
 
 // Mocking our Knative broker, the new.subscriber event should be broadcast to it
 public class SinkMock implements QuarkusTestResourceLifecycleManager {

@@ -18,21 +18,18 @@
  */
 package org.acme.sw.onboarding.resources;
 
-import java.time.Duration;
-import java.util.UUID;
-
-import jakarta.ws.rs.core.MediaType;
-
-import org.junit.jupiter.api.Test;
-
-import io.quarkus.test.junit.QuarkusIntegrationTest;
-import io.restassured.http.ContentType;
-
 import static io.restassured.RestAssured.given;
 import static java.lang.String.format;
 import static org.awaitility.Awaitility.await;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
+
+import io.quarkus.test.junit.QuarkusIntegrationTest;
+import io.restassured.http.ContentType;
+import jakarta.ws.rs.core.MediaType;
+import java.time.Duration;
+import java.util.UUID;
+import org.junit.jupiter.api.Test;
 
 @QuarkusIntegrationTest
 class OnboardingIT {

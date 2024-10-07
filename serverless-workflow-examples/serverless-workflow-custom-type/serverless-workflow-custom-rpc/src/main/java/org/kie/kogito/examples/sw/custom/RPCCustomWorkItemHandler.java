@@ -18,13 +18,11 @@
  */
 package org.kie.kogito.examples.sw.custom;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.util.Iterator;
 import java.util.Map;
-
-import jakarta.enterprise.context.ApplicationScoped;
-
 import org.kie.kogito.examples.sw.custom.CalculatorClient.OperationId;
 import org.kie.kogito.internal.process.workitem.KogitoWorkItem;
 import org.kie.kogito.serverless.workflow.WorkflowWorkItemHandler;

@@ -18,10 +18,9 @@
  */
 package org.acme.serverless.loanbroker.aggregator.model;
 
+import io.quarkus.runtime.annotations.RegisterForReflection;
 import java.io.Serializable;
 import java.util.Objects;
-
-import io.quarkus.runtime.annotations.RegisterForReflection;
 
 @RegisterForReflection
 public class BankQuote implements Serializable {

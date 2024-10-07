@@ -18,8 +18,10 @@
  */
 package org.acme.sw.onboarding.queries;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import java.util.List;
-
 import org.acme.sw.onboarding.model.Doctor;
 import org.acme.sw.onboarding.model.Patient;
 import org.acme.sw.onboarding.model.SymptomSpecialty;
@@ -28,10 +30,6 @@ import org.acme.sw.onboarding.services.SymptomSpecialtyService;
 import org.drools.ruleunits.api.DataSource;
 import org.drools.ruleunits.api.DataStore;
 import org.drools.ruleunits.api.RuleUnitData;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

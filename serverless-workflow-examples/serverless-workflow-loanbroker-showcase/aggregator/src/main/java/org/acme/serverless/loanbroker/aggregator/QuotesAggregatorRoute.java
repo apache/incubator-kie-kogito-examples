@@ -18,15 +18,13 @@
  */
 package org.acme.serverless.loanbroker.aggregator;
 
+import io.cloudevents.CloudEvent;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-
 import org.acme.serverless.loanbroker.aggregator.model.AggregationResponse;
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.endpoint.EndpointRouteBuilder;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
-
-import io.cloudevents.CloudEvent;
 
 /**
  * Aggregation Strategy for all quotes received.

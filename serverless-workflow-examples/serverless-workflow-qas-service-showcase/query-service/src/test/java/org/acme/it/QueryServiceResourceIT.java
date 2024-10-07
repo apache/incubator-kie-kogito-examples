@@ -18,17 +18,15 @@
  */
 package org.acme.it;
 
-import java.util.List;
-
-import org.acme.QueryRequest;
-import org.junit.jupiter.api.Test;
+import static io.restassured.RestAssured.given;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
-
-import static io.restassured.RestAssured.given;
-import static org.assertj.core.api.Assertions.assertThat;
+import java.util.List;
+import org.acme.QueryRequest;
+import org.junit.jupiter.api.Test;
 
 @QuarkusIntegrationTest
 class QueryServiceResourceIT {
