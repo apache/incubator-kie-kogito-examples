@@ -18,6 +18,7 @@
  */
 package org.kie.kogito.flexible.example.springboot;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,6 +52,7 @@ class ServiceDeskProcessTest {
     int port;
 
     private static final String BASE_PATH = "/serviceDesk";
+    private static final String USER_TASK_BASE_PATH = "/usertasks/instance";
 
     static {
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
@@ -68,7 +70,6 @@ class ServiceDeskProcessTest {
         addCustomerComment(id);
         resolveCase(id);
         sendQuestionnaire(id);
-
         checkAllProcessesFinished();
     }
 
@@ -106,32 +107,75 @@ class ServiceDeskProcessTest {
     }
 
     private void addSupportComment(String id) {
-        String location = given()
+        given()
                 .basePath(BASE_PATH)
                 .contentType(ContentType.JSON)
                 .queryParam("user", "kelly")
                 .queryParam("group", "support")
                 .when()
-                .post("/{id}/ReceiveSupportComment", id)
+                .post("/{id}/ReceiveSupportComment/trigger", id)
                 .then()
                 .statusCode(201)
                 .header("Location", notNullValue())
                 .extract()
                 .header("Location");
 
-        String taskId = location.substring(location.lastIndexOf("/") + 1);
+        String userTaskId = given()
+                .basePath(USER_TASK_BASE_PATH)
+                .queryParam("user", "kelly")
+                .queryParam("group", "support")
+                .contentType(ContentType.JSON)
+                .when()
+                .get()
+                .then()
+                .statusCode(200)
+                .extract()
+                .body()
+                .path("[0].id");
+
+        given()
+                .contentType(ContentType.JSON)
+                .basePath(USER_TASK_BASE_PATH)
+                .queryParam("transitionId", "claim")
+                .queryParam("user", "kelly")
+                .queryParam("group", "support")
+                .body(Collections.emptyMap())
+                .when()
+                .post("/{userTaskId}/transition", userTaskId)
+                .then()
+                .statusCode(200);
 
         Map<String, Object> params = new HashMap<>();
         params.put("comment", "Have you tried to turn it off and on again?");
 
         given()
-                .basePath(BASE_PATH)
+                .contentType(ContentType.JSON)
+                .basePath(USER_TASK_BASE_PATH)
                 .queryParam("user", "kelly")
                 .queryParam("group", "support")
+                .body(params)
+                .when()
+                .put("/{userTaskId}/outputs", userTaskId)
+                .then()
+                .statusCode(200);
+
+        given()
+                .contentType(ContentType.JSON)
+                .basePath(USER_TASK_BASE_PATH)
+                .queryParam("transitionId", "complete")
+                .queryParam("user", "kelly")
+                .queryParam("group", "support")
+                .body(Collections.emptyMap())
+                .when()
+                .post("/{userTaskId}/transition", userTaskId)
+                .then()
+                .statusCode(200);
+
+        given()
+                .basePath(BASE_PATH)
                 .contentType(ContentType.JSON)
                 .when()
-                .body(params)
-                .post("/{id}/ReceiveSupportComment/{taskId}", id, taskId)
+                .get(id)
                 .then()
                 .statusCode(200)
                 .body("supportCase.state", is(State.WAITING_FOR_CUSTOMER.name()))
@@ -141,38 +185,82 @@ class ServiceDeskProcessTest {
     }
 
     private void addCustomerComment(String id) {
-        String location = given()
+        given()
                 .basePath(BASE_PATH)
                 .contentType(ContentType.JSON)
                 .queryParam("user", "Paco")
                 .queryParam("group", "customer")
                 .when()
-                .post("/{id}/ReceiveCustomerComment", id)
+                .post("/{id}/ReceiveCustomerComment/trigger", id)
                 .then()
                 .statusCode(201)
                 .header("Location", notNullValue())
                 .extract()
                 .header("Location");
 
-        String taskId = location.substring(location.lastIndexOf("/") + 1);
+        String userTaskId = given()
+                .basePath(USER_TASK_BASE_PATH)
+                .queryParam("user", "Paco")
+                .queryParam("group", "customer")
+                .contentType(ContentType.JSON)
+                .when()
+                .get()
+                .then()
+                .statusCode(200)
+                .extract()
+                .body()
+                .path("[0].id");
+
+        given()
+                .contentType(ContentType.JSON)
+                .basePath(USER_TASK_BASE_PATH)
+                .queryParam("transitionId", "claim")
+                .queryParam("user", "Paco")
+                .queryParam("group", "customer")
+                .body(Collections.emptyMap())
+                .when()
+                .post("/{userTaskId}/transition", userTaskId)
+                .then()
+                .statusCode(200);
 
         Map<String, Object> params = new HashMap<>();
         params.put("comment", "Great idea!");
 
         given()
-                .basePath(BASE_PATH)
+                .contentType(ContentType.JSON)
+                .basePath(USER_TASK_BASE_PATH)
                 .queryParam("user", "Paco")
                 .queryParam("group", "customer")
+                .body(params)
+                .when()
+                .put("/{userTaskId}/outputs", userTaskId)
+                .then()
+                .statusCode(200);
+
+        given()
+                .contentType(ContentType.JSON)
+                .basePath(USER_TASK_BASE_PATH)
+                .queryParam("transitionId", "complete")
+                .queryParam("user", "Paco")
+                .queryParam("group", "customer")
+                .body(Collections.emptyMap())
+                .when()
+                .post("/{userTaskId}/transition", userTaskId)
+                .then()
+                .statusCode(200);
+
+        given()
+                .basePath(BASE_PATH)
                 .contentType(ContentType.JSON)
                 .when()
-                .body(params)
-                .post("/{id}/ReceiveCustomerComment/{taskId}", id, taskId)
+                .get(id)
                 .then()
                 .statusCode(200)
                 .body("supportCase.state", is(State.WAITING_FOR_OWNER.name()))
                 .body("supportCase.comments[1].text", is(params.get("comment")))
                 .body("supportCase.comments[1].author", is("Paco"))
                 .body("supportCase.comments[1].date", notNullValue());
+
     }
 
     private void resolveCase(String id) {
@@ -186,9 +274,8 @@ class ServiceDeskProcessTest {
                 .body("supportCase.state", is(State.RESOLVED.name()));
     }
 
-    @SuppressWarnings("unchecked")
     private void sendQuestionnaire(String id) {
-        String taskId = given()
+        given()
                 .basePath(BASE_PATH)
                 .contentType(ContentType.JSON)
                 .queryParam("user", "Paco")
@@ -201,26 +288,59 @@ class ServiceDeskProcessTest {
                 .body("[0].name", is("Questionnaire"))
                 .extract()
                 .path("[0].id");
-        ;
+
+        String userTaskId = given()
+                .basePath(USER_TASK_BASE_PATH)
+                .queryParam("user", "Paco")
+                .queryParam("group", "customer")
+                .contentType(ContentType.JSON)
+                .when()
+                .get()
+                .then()
+                .statusCode(200)
+                .extract()
+                .body()
+                .path("[0].id");
+
+        given()
+                .contentType(ContentType.JSON)
+                .basePath(USER_TASK_BASE_PATH)
+                .queryParam("transitionId", "claim")
+                .queryParam("user", "Paco")
+                .queryParam("group", "customer")
+                .body(Collections.emptyMap())
+                .when()
+                .post("/{userTaskId}/transition", userTaskId)
+                .then()
+                .statusCode(200);
 
         Map<String, Object> params = new HashMap<>();
         params.put("comment", "Kogito is great!");
         params.put("evaluation", 10);
 
         given()
-                .basePath(BASE_PATH)
+                .contentType(ContentType.JSON)
+                .basePath(USER_TASK_BASE_PATH)
                 .queryParam("user", "Paco")
                 .queryParam("group", "customer")
-                .contentType(ContentType.JSON)
-                .when()
                 .body(params)
-                .post("/{id}/Questionnaire/{taskId}", id, taskId)
+                .when()
+                .put("/{userTaskId}/outputs", userTaskId)
                 .then()
-                .statusCode(200)
-                .body("supportCase.state", is(State.CLOSED.name()))
-                .body("supportCase.questionnaire.comment", is(params.get("comment")))
-                .body("supportCase.questionnaire.evaluation", is(params.get("evaluation")))
-                .body("supportCase.questionnaire.date", notNullValue());
+                .statusCode(200);
+
+        given()
+                .contentType(ContentType.JSON)
+                .basePath(USER_TASK_BASE_PATH)
+                .queryParam("transitionId", "complete")
+                .queryParam("user", "Paco")
+                .queryParam("group", "customer")
+                .body(Collections.emptyMap())
+                .when()
+                .post("/{userTaskId}/transition", userTaskId)
+                .then()
+                .statusCode(200);
+
     }
 
     private void checkAllProcessesFinished() {

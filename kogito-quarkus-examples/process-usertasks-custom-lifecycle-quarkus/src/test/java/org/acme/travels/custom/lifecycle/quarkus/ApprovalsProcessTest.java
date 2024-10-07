@@ -25,16 +25,17 @@ import java.util.Map;
 
 import org.acme.travels.Address;
 import org.acme.travels.Traveller;
+import org.acme.travels.usertasks.CustomUserTaskLifeCycle;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.Model;
 import org.kie.kogito.auth.IdentityProvider;
 import org.kie.kogito.auth.IdentityProviders;
 import org.kie.kogito.auth.SecurityPolicy;
-import org.kie.kogito.internal.process.workitem.InvalidTransitionException;
-import org.kie.kogito.internal.process.workitem.KogitoWorkItemHandler;
 import org.kie.kogito.process.Process;
 import org.kie.kogito.process.ProcessInstance;
 import org.kie.kogito.process.WorkItem;
+import org.kie.kogito.usertask.UserTaskInstance;
+import org.kie.kogito.usertask.UserTasks;
 
 import io.quarkus.test.junit.QuarkusTest;
 
@@ -42,9 +43,9 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 import static java.util.Collections.singletonList;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @QuarkusTest
 public class ApprovalsProcessTest {
@@ -52,6 +53,9 @@ public class ApprovalsProcessTest {
     @Named("approvals")
     @Inject
     Process<? extends Model> approvalsProcess;
+
+    @Inject
+    UserTasks userTasks;
 
     @Test
     public void testApprovalProcess() {
@@ -76,9 +80,6 @@ public class ApprovalsProcessTest {
         assertEquals(1, workItems.size());
         Map<String, Object> results = new HashMap<>();
         results.put("approved", true);
-        KogitoWorkItemHandler handler = approvalsProcess.getKogitoWorkItemHandler(workItems.get(0).getWorkItemHandlerName());
-        processInstance.transitionWorkItem(workItems.get(0).getId(), handler.newTransition("start", workItems.get(0).getPhaseStatus(), Collections.emptyMap(), policy));
-        workItems = processInstance.workItems(policy);
         processInstance.completeWorkItem(workItems.get(0).getId(), results, policy);
 
         policy = SecurityPolicy.of(IdentityProviders.of("admin", singletonList("mgmt")));
@@ -94,16 +95,8 @@ public class ApprovalsProcessTest {
         assertEquals(1, workItems.size());
 
         results.put("approved", false);
-        processInstance.transitionWorkItem(workItems.get(0).getId(), handler.newTransition("start", workItems.get(0).getPhaseStatus(), Collections.emptyMap(), policy));
-        workItems = processInstance.workItems(policy);
         processInstance.completeWorkItem(workItems.get(0).getId(), results, policy);
-        assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_COMPLETED, processInstance.status());
-
-        Model result = (Model) processInstance.variables();
-        assertEquals(4, result.toMap().size());
-        assertEquals(result.toMap().get("approver"), "admin");
-        assertEquals(result.toMap().get("firstLineApproval"), true);
-        assertEquals(result.toMap().get("secondLineApproval"), false);
+        assertThat(approvalsProcess.instances().findById(processInstance.id())).isNotPresent();
     }
 
     @Test
@@ -128,18 +121,15 @@ public class ApprovalsProcessTest {
         List<WorkItem> workItems = processInstance.workItems(policy);
         assertEquals(1, workItems.size());
 
-        final String wiId = workItems.get(0).getId();
-
-        // test to make sure you can't complete if the task is not in started state
-        assertThrows(InvalidTransitionException.class, () -> processInstance.completeWorkItem(wiId,
-                Collections.singletonMap("approved", true),
-                SecurityPolicy.of(IdentityProviders.of("admin", Collections.singletonList("managers")))));
-
-        // now test going through phases
-        KogitoWorkItemHandler handler = approvalsProcess.getKogitoWorkItemHandler(workItems.get(0).getWorkItemHandlerName());
-        processInstance.transitionWorkItem(workItems.get(0).getId(), handler.newTransition("start", workItems.get(0).getPhaseStatus(), Collections.emptyMap(), policy));
-        workItems = processInstance.workItems(policy);
-        processInstance.transitionWorkItem(workItems.get(0).getId(), handler.newTransition("complete", workItems.get(0).getPhaseStatus(), Collections.singletonMap("approved", true), policy));
+        List<UserTaskInstance> userTaskInstances = userTasks.instances().findByIdentity(identity);
+        assertThat(userTaskInstances).isNotEmpty();
+        userTaskInstances.forEach(ut -> {
+            IdentityProvider userIdentity = IdentityProviders.of("manager", Collections.singletonList("managers"));
+            ut.transition(CustomUserTaskLifeCycle.START, Collections.emptyMap(), userIdentity);
+            assertThat(ut.getStatus()).isEqualTo(CustomUserTaskLifeCycle.RESERVED);
+            ut.setOutput("approved", true);
+            ut.transition(CustomUserTaskLifeCycle.COMPLETE, Collections.emptyMap(), userIdentity);
+        });
 
         policy = SecurityPolicy.of(IdentityProviders.of("admin", singletonList("mgmt")));
         workItems = processInstance.workItems(policy);
@@ -148,21 +138,20 @@ public class ApprovalsProcessTest {
         identity = IdentityProviders.of("john", Collections.singletonList("managers"));
         policy = SecurityPolicy.of(identity);
 
-        processInstance.workItems(policy);
-
         workItems = processInstance.workItems(policy);
         assertEquals(1, workItems.size());
 
-        processInstance.transitionWorkItem(workItems.get(0).getId(), handler.newTransition("start", workItems.get(0).getPhaseStatus(), Collections.emptyMap(), policy));
-        workItems = processInstance.workItems(policy);
-        processInstance.transitionWorkItem(workItems.get(0).getId(), handler.newTransition("complete", workItems.get(0).getPhaseStatus(), Collections.singletonMap("approved", false), policy));
+        userTaskInstances = userTasks.instances().findByIdentity(identity);
+        assertThat(userTaskInstances).isNotEmpty();
+        userTaskInstances.forEach(ut -> {
+            IdentityProvider userIdentity = IdentityProviders.of("john", Collections.singletonList("managers"));
+            assertThat(ut.getStatus()).isEqualTo(CustomUserTaskLifeCycle.ACTIVE);
+            ut.transition(CustomUserTaskLifeCycle.START, Collections.emptyMap(), userIdentity);
+            ut.transition(CustomUserTaskLifeCycle.CLAIM, Collections.emptyMap(), userIdentity);
+            ut.setOutput("approved", false);
+            ut.transition(CustomUserTaskLifeCycle.COMPLETE, Collections.emptyMap(), userIdentity);
+        });
 
-        assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_COMPLETED, processInstance.status());
-
-        Model result = (Model) processInstance.variables();
-        assertEquals(4, result.toMap().size());
-        assertEquals(result.toMap().get("approver"), "admin");
-        assertEquals(result.toMap().get("firstLineApproval"), true);
-        assertEquals(result.toMap().get("secondLineApproval"), false);
+        assertThat(approvalsProcess.instances().findById(processInstance.id())).isNotPresent();
     }
 }

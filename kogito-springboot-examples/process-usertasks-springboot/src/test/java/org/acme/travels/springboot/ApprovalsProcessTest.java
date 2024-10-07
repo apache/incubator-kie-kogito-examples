@@ -28,13 +28,16 @@ import org.acme.travels.Traveller;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.kie.kogito.Model;
+import org.kie.kogito.auth.IdentityProvider;
 import org.kie.kogito.auth.IdentityProviders;
 import org.kie.kogito.auth.SecurityPolicy;
-import org.kie.kogito.internal.process.workitem.KogitoWorkItemHandler;
 import org.kie.kogito.process.Process;
 import org.kie.kogito.process.ProcessInstance;
 import org.kie.kogito.process.WorkItem;
 import org.kie.kogito.tests.KogitoInfinispanSpringbootApplication;
+import org.kie.kogito.usertask.UserTaskInstance;
+import org.kie.kogito.usertask.UserTasks;
+import org.kie.kogito.usertask.impl.lifecycle.DefaultUserTaskLifeCycle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -42,6 +45,8 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import static java.util.Collections.singletonList;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -53,6 +58,9 @@ public class ApprovalsProcessTest {
     @Autowired
     @Qualifier("approvals")
     Process<? extends Model> approvalsProcess;
+
+    @Autowired
+    UserTasks userTasks;
 
     @Test
     public void testApprovalProcess() {
@@ -91,7 +99,7 @@ public class ApprovalsProcessTest {
 
         Model result = (Model) processInstance.variables();
         assertEquals(4, result.toMap().size());
-        assertEquals(result.toMap().get("approver"), "admin");
+        assertEquals(result.toMap().get("approver"), "manager");
         assertEquals(result.toMap().get("firstLineApproval"), true);
         assertEquals(result.toMap().get("secondLineApproval"), false);
     }
@@ -110,38 +118,47 @@ public class ApprovalsProcessTest {
         processInstance.start();
         assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_ACTIVE, processInstance.status());
 
-        SecurityPolicy policy = SecurityPolicy.of(IdentityProviders.of("admin", Collections.singletonList("managers")));
+        IdentityProvider identity = IdentityProviders.of("admin", singletonList("managers"));
+        SecurityPolicy policy = SecurityPolicy.of(identity);
 
         processInstance.workItems(policy);
 
         List<WorkItem> workItems = processInstance.workItems(policy);
         assertEquals(1, workItems.size());
 
-        KogitoWorkItemHandler handler = approvalsProcess.getKogitoWorkItemHandler(workItems.get(0).getWorkItemHandlerName());
-        processInstance.transitionWorkItem(workItems.get(0).getId(), handler.newTransition("claim", workItems.get(0).getPhaseStatus(), Collections.emptyMap(), policy));
-        workItems = processInstance.workItems(policy);
-        processInstance.transitionWorkItem(workItems.get(0).getId(), handler.newTransition("complete", workItems.get(0).getPhaseStatus(), Collections.singletonMap("approved", true), policy));
+        List<UserTaskInstance> userTaskInstances = userTasks.instances().findByIdentity(identity);
+        assertThat(userTaskInstances).isNotEmpty();
+        userTaskInstances.forEach(ut -> {
+            IdentityProvider userIdentity = IdentityProviders.of("manager", singletonList("managers"));
+            assertThat(ut.getStatus()).isEqualTo(DefaultUserTaskLifeCycle.RESERVED);
+            ut.setOutput("approved", true);
+            ut.transition(DefaultUserTaskLifeCycle.COMPLETE, Collections.emptyMap(), userIdentity);
+        });
 
-        policy = SecurityPolicy.of(IdentityProviders.of("admin", Collections.singletonList("mgmt")));
+        policy = SecurityPolicy.of(IdentityProviders.of("admin", singletonList("mgmt")));
         workItems = processInstance.workItems(policy);
         assertEquals(0, workItems.size());
 
-        policy = SecurityPolicy.of(IdentityProviders.of("john", Collections.singletonList("managers")));
-
-        processInstance.workItems(policy);
+        identity = IdentityProviders.of("john", singletonList("managers"));
+        policy = SecurityPolicy.of(identity);
 
         workItems = processInstance.workItems(policy);
         assertEquals(1, workItems.size());
 
-        processInstance.transitionWorkItem(workItems.get(0).getId(), handler.newTransition("claim", workItems.get(0).getPhaseStatus(), Collections.emptyMap(), policy));
-        workItems = processInstance.workItems(policy);
-        processInstance.transitionWorkItem(workItems.get(0).getId(), handler.newTransition("complete", workItems.get(0).getPhaseStatus(), Collections.singletonMap("approved", false), policy));
-
+        userTaskInstances = userTasks.instances().findByIdentity(identity);
+        assertThat(userTaskInstances).isNotEmpty();
+        userTaskInstances.forEach(ut -> {
+            IdentityProvider userIdentity = IdentityProviders.of("john", singletonList("managers"));
+            ut.transition(DefaultUserTaskLifeCycle.CLAIM, Collections.emptyMap(), userIdentity);
+            assertThat(ut.getStatus()).isEqualTo(DefaultUserTaskLifeCycle.RESERVED);
+            ut.setOutput("approved", false);
+            ut.transition(DefaultUserTaskLifeCycle.COMPLETE, Collections.emptyMap(), userIdentity);
+        });
         assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_COMPLETED, processInstance.status());
 
         Model result = (Model) processInstance.variables();
         assertEquals(4, result.toMap().size());
-        assertEquals(result.toMap().get("approver"), "admin");
+        assertEquals(result.toMap().get("approver"), "manager");
         assertEquals(result.toMap().get("firstLineApproval"), true);
         assertEquals(result.toMap().get("secondLineApproval"), false);
     }

@@ -156,7 +156,7 @@ DMN]]></drools:metaValue>
       <bpmn2:dataInputAssociation>
         <bpmn2:targetRef>_38F4877F-50AD-4500-98E1-9B4FD3972291_TaskNameInputX</bpmn2:targetRef>
         <bpmn2:assignment>
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression"><![CDATA[Rest]]></bpmn2:from>
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression"><![CDATA[Rest1]]></bpmn2:from>
           <bpmn2:to xsi:type="bpmn2:tFormalExpression"><![CDATA[_38F4877F-50AD-4500-98E1-9B4FD3972291_TaskNameInputX]]></bpmn2:to>
         </bpmn2:assignment>
       </bpmn2:dataInputAssociation>
@@ -228,7 +228,7 @@ DRL]]></drools:metaValue>
       <bpmn2:dataInputAssociation>
         <bpmn2:targetRef>_D8D9E6BA-5940-41F5-BF3A-1A08ADA72A4C_TaskNameInputX</bpmn2:targetRef>
         <bpmn2:assignment>
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression"><![CDATA[Rest]]></bpmn2:from>
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression"><![CDATA[Rest2]]></bpmn2:from>
           <bpmn2:to xsi:type="bpmn2:tFormalExpression"><![CDATA[_D8D9E6BA-5940-41F5-BF3A-1A08ADA72A4C_TaskNameInputX]]></bpmn2:to>
         </bpmn2:assignment>
       </bpmn2:dataInputAssociation>
