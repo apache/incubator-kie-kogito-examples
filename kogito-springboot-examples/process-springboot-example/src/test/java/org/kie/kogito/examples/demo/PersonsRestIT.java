@@ -18,8 +18,6 @@
  */
 package org.kie.kogito.examples.demo;
 
-import java.util.Collections;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
@@ -29,6 +27,7 @@ import org.kie.kogito.examples.DemoApplication;
 import org.kie.kogito.process.Process;
 import org.kie.kogito.testcontainers.springboot.InfinispanSpringBootTestResource;
 import org.kie.kogito.testcontainers.springboot.KafkaSpringBootTestResource;
+import org.kie.kogito.usertask.model.TransitionInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -47,7 +46,6 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.kie.kogito.test.utils.ProcessInstancesTestUtils.abort;
 
-@SuppressWarnings("rawtypes")
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = DemoApplication.class)
 @ContextConfiguration(initializers = { InfinispanSpringBootTestResource.Conditional.class, KafkaSpringBootTestResource.Conditional.class })
@@ -266,10 +264,9 @@ public class PersonsRestIT {
         given()
                 .contentType(ContentType.JSON)
                 .basePath(USER_TASK_BASE_PATH)
-                .queryParam("transitionId", "release")
                 .queryParam("user", "admin")
                 .queryParam("group", "admins")
-                .body(Collections.emptyMap())
+                .body(new TransitionInfo("release"))
                 .when()
                 .post("/{userTaskId}/transition", userTaskId)
                 .then()
@@ -278,10 +275,9 @@ public class PersonsRestIT {
         given()
                 .contentType(ContentType.JSON)
                 .basePath(USER_TASK_BASE_PATH)
-                .queryParam("transitionId", "skip")
                 .queryParam("user", "admin")
                 .queryParam("group", "admins")
-                .body(Collections.emptyMap())
+                .body(new TransitionInfo("skip"))
                 .when()
                 .post("/{userTaskId}/transition", userTaskId)
                 .then()

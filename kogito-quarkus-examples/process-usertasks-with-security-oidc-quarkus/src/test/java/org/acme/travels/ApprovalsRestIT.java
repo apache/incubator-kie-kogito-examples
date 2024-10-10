@@ -22,13 +22,13 @@ import org.junit.jupiter.api.Test;
 import org.keycloak.representations.AccessTokenResponse;
 import org.kie.kogito.test.quarkus.QuarkusTestProperty;
 import org.kie.kogito.testcontainers.quarkus.KeycloakQuarkusTestResource;
+import org.kie.kogito.usertask.model.TransitionInfo;
 
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
-import static java.util.Collections.emptyMap;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
@@ -105,10 +105,9 @@ public class ApprovalsRestIT {
                 .contentType(ContentType.JSON)
                 .auth().oauth2(getAccessToken("mary"))
                 .basePath(USER_TASK_BASE_PATH)
-                .queryParam("transitionId", "complete")
                 .queryParam("user", "manager")
                 .queryParam("group", "managers")
-                .body(emptyMap())
+                .body(new TransitionInfo("complete"))
                 .when()
                 .post("/{userTaskId}/transition", userTaskId)
                 .then()
