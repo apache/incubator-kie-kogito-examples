@@ -27,13 +27,11 @@ import org.kie.kogito.Model;
 import org.kie.kogito.process.Process;
 import org.kie.kogito.testcontainers.quarkus.InfinispanQuarkusTestResource;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
+import org.kie.kogito.usertask.model.TransitionInfo;
 
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
-
-import jakarta.inject.Inject;
-import jakarta.inject.Named;
 
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -42,6 +40,9 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.kie.kogito.test.utils.ProcessInstancesTestUtils.abort;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 @QuarkusTest
 @QuarkusTestResource(value = InfinispanQuarkusTestResource.Conditional.class)
@@ -259,10 +260,9 @@ public class PersonsRestIT {
         given()
                 .contentType(ContentType.JSON)
                 .basePath(USER_TASK_BASE_PATH)
-                .queryParam("transitionId", "release")
                 .queryParam("user", "admin")
                 .queryParam("group", "admins")
-                .body(Collections.emptyMap())
+                .body(new TransitionInfo("release"))
                 .when()
                 .post("/{userTaskId}/transition", userTaskId)
                 .then()
@@ -271,7 +271,7 @@ public class PersonsRestIT {
         given()
                 .contentType(ContentType.JSON)
                 .basePath(USER_TASK_BASE_PATH)
-                .queryParam("transitionId", "skip")
+                .body(new TransitionInfo("skip"))
                 .queryParam("user", "admin")
                 .queryParam("group", "admins")
                 .body(Collections.emptyMap())
