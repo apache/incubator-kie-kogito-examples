@@ -1,0 +1,45 @@
+---
+openapi: 3.0.3
+info:
+  title: Acme Financial Service API
+  version: 1.0.0
+paths:
+  /financial-service/statement:
+    get:
+      tags:
+        - Acme Financial Resource
+      operationId: getStatement
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/StatementEntry"
+      security:
+        - acme-financial-oauth:
+            - customer
+components:
+  schemas:
+    LocalDate:
+      format: date
+      type: string
+      example: 2022-03-10
+    StatementEntry:
+      type: object
+      properties:
+        amount:
+          format: double
+          type: number
+        date:
+          $ref: "#/components/schemas/LocalDate"
+  securitySchemes:
+    acme-financial-oauth:
+      type: oauth2
+      flows:
+        clientCredentials:
+          authorizationUrl: http://localhost:9090/auth/realms/acme/protocol/openid-connect/auth
+          tokenUrl: http://localhost:9090/auth/realms/kogito/acme/openid-connect/token
+          scopes: {}
