@@ -13,7 +13,7 @@
     {
       "name": "increase",
       "type": "expression",
-      "operation": ".item + 1"
+      "operation": "$item + 1"
       
     }
   ],
