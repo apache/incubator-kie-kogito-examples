@@ -18,7 +18,6 @@
  */
 package org.kie.kogito.flexible.example.quarkus;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -199,10 +198,9 @@ class ServiceDeskProcessTest {
         given()
                 .contentType(ContentType.JSON)
                 .basePath(USER_TASK_BASE_PATH)
-                .queryParam("transitionId", "claim")
                 .queryParam("user", "Paco")
                 .queryParam("group", "customer")
-                .body(Collections.emptyMap())
+                .body(new TransitionInfo("claim"))
                 .when()
                 .post("/{userTaskId}/transition", userTaskId)
                 .then()
@@ -225,10 +223,9 @@ class ServiceDeskProcessTest {
         given()
                 .contentType(ContentType.JSON)
                 .basePath(USER_TASK_BASE_PATH)
-                .queryParam("transitionId", "complete")
                 .queryParam("user", "Paco")
                 .queryParam("group", "customer")
-                .body(Collections.emptyMap())
+                .body(new TransitionInfo("complete"))
                 .when()
                 .post("/{userTaskId}/transition", userTaskId)
                 .then()
@@ -290,10 +287,9 @@ class ServiceDeskProcessTest {
         given()
                 .contentType(ContentType.JSON)
                 .basePath(USER_TASK_BASE_PATH)
-                .queryParam("transitionId", "claim")
                 .queryParam("user", "Paco")
                 .queryParam("group", "customer")
-                .body(Collections.emptyMap())
+                .body(new TransitionInfo("claim"))
                 .when()
                 .post("/{userTaskId}/transition", userTaskId)
                 .then()
@@ -317,10 +313,9 @@ class ServiceDeskProcessTest {
         given()
                 .contentType(ContentType.JSON)
                 .basePath(USER_TASK_BASE_PATH)
-                .queryParam("transitionId", "complete")
                 .queryParam("user", "Paco")
                 .queryParam("group", "customer")
-                .body(Collections.emptyMap())
+                .body(new TransitionInfo("complete"))
                 .when()
                 .post("/{userTaskId}/transition", userTaskId)
                 .then()

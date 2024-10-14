@@ -18,8 +18,6 @@
  */
 package org.kie.kogito.examples;
 
-import java.util.Collections;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
@@ -33,6 +31,9 @@ import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
 
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.CoreMatchers.is;
@@ -40,9 +41,6 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.kie.kogito.test.utils.ProcessInstancesTestUtils.abort;
-
-import jakarta.inject.Inject;
-import jakarta.inject.Named;
 
 @QuarkusTest
 @QuarkusTestResource(value = InfinispanQuarkusTestResource.Conditional.class)
@@ -271,10 +269,9 @@ public class PersonsRestIT {
         given()
                 .contentType(ContentType.JSON)
                 .basePath(USER_TASK_BASE_PATH)
-                .body(new TransitionInfo("skip"))
                 .queryParam("user", "admin")
                 .queryParam("group", "admins")
-                .body(Collections.emptyMap())
+                .body(new TransitionInfo("skip"))
                 .when()
                 .post("/{userTaskId}/transition", userTaskId)
                 .then()
