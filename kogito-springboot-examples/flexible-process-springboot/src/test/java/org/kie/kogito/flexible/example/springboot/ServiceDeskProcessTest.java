@@ -18,7 +18,6 @@
  */
 package org.kie.kogito.flexible.example.springboot;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +29,7 @@ import org.kie.kogito.flexible.example.model.State;
 import org.kie.kogito.flexible.example.model.SupportCase;
 import org.kie.kogito.flexible.example.service.TriageService;
 import org.kie.kogito.tests.KogitoSpringbootApplication;
+import org.kie.kogito.usertask.model.TransitionInfo;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.annotation.DirtiesContext;
@@ -136,10 +136,9 @@ class ServiceDeskProcessTest {
         given()
                 .contentType(ContentType.JSON)
                 .basePath(USER_TASK_BASE_PATH)
-                .queryParam("transitionId", "claim")
                 .queryParam("user", "kelly")
                 .queryParam("group", "support")
-                .body(Collections.emptyMap())
+                .body(new TransitionInfo("claim"))
                 .when()
                 .post("/{userTaskId}/transition", userTaskId)
                 .then()
@@ -162,10 +161,9 @@ class ServiceDeskProcessTest {
         given()
                 .contentType(ContentType.JSON)
                 .basePath(USER_TASK_BASE_PATH)
-                .queryParam("transitionId", "complete")
                 .queryParam("user", "kelly")
                 .queryParam("group", "support")
-                .body(Collections.emptyMap())
+                .body(new TransitionInfo("complete"))
                 .when()
                 .post("/{userTaskId}/transition", userTaskId)
                 .then()
@@ -214,10 +212,9 @@ class ServiceDeskProcessTest {
         given()
                 .contentType(ContentType.JSON)
                 .basePath(USER_TASK_BASE_PATH)
-                .queryParam("transitionId", "claim")
                 .queryParam("user", "Paco")
                 .queryParam("group", "customer")
-                .body(Collections.emptyMap())
+                .body(new TransitionInfo("claim"))
                 .when()
                 .post("/{userTaskId}/transition", userTaskId)
                 .then()
@@ -240,10 +237,9 @@ class ServiceDeskProcessTest {
         given()
                 .contentType(ContentType.JSON)
                 .basePath(USER_TASK_BASE_PATH)
-                .queryParam("transitionId", "complete")
                 .queryParam("user", "Paco")
                 .queryParam("group", "customer")
-                .body(Collections.emptyMap())
+                .body(new TransitionInfo("complete"))
                 .when()
                 .post("/{userTaskId}/transition", userTaskId)
                 .then()
@@ -305,10 +301,9 @@ class ServiceDeskProcessTest {
         given()
                 .contentType(ContentType.JSON)
                 .basePath(USER_TASK_BASE_PATH)
-                .queryParam("transitionId", "claim")
                 .queryParam("user", "Paco")
                 .queryParam("group", "customer")
-                .body(Collections.emptyMap())
+                .body(new TransitionInfo("claim"))
                 .when()
                 .post("/{userTaskId}/transition", userTaskId)
                 .then()
@@ -332,10 +327,9 @@ class ServiceDeskProcessTest {
         given()
                 .contentType(ContentType.JSON)
                 .basePath(USER_TASK_BASE_PATH)
-                .queryParam("transitionId", "complete")
                 .queryParam("user", "Paco")
                 .queryParam("group", "customer")
-                .body(Collections.emptyMap())
+                .body(new TransitionInfo("complete"))
                 .when()
                 .post("/{userTaskId}/transition", userTaskId)
                 .then()
