@@ -1,0 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - "../kubernetes"
+
+images:
+- name: postgres
+  newName: registry.redhat.io/rhel9/postgresql-13
+  newTag: 1-173
