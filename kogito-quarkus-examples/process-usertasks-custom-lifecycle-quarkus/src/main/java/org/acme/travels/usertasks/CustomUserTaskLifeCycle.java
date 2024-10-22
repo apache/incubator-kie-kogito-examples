@@ -139,9 +139,9 @@ public class CustomUserTaskLifeCycle implements UserTaskLifeCycle {
     public Optional<UserTaskTransitionToken> claim(UserTaskInstance userTaskInstance, UserTaskTransitionToken token, IdentityProvider identityProvider) {
         if (userTaskInstance instanceof DefaultUserTaskInstance defaultUserTaskInstance) {
             if (token.data().containsKey(PARAMETER_USER)) {
-                defaultUserTaskInstance.setActuaOwner((String) token.data().get(PARAMETER_USER));
+                defaultUserTaskInstance.setActualOwner((String) token.data().get(PARAMETER_USER));
             } else {
-                defaultUserTaskInstance.setActuaOwner(identityProvider.getName());
+                defaultUserTaskInstance.setActualOwner(identityProvider.getName());
             }
         }
         return Optional.empty();
@@ -149,7 +149,7 @@ public class CustomUserTaskLifeCycle implements UserTaskLifeCycle {
 
     public Optional<UserTaskTransitionToken> release(UserTaskInstance userTaskInstance, UserTaskTransitionToken token, IdentityProvider identityProvider) {
         if (userTaskInstance instanceof DefaultUserTaskInstance defaultUserTaskInstance) {
-            defaultUserTaskInstance.setActuaOwner(null);
+            defaultUserTaskInstance.setActualOwner(null);
         }
         return Optional.empty();
     }
@@ -164,7 +164,7 @@ public class CustomUserTaskLifeCycle implements UserTaskLifeCycle {
             userTaskInstance.getMetadata().put(PARAMETER_NOTIFY, token.data().get(PARAMETER_NOTIFY));
         }
         if (userTaskInstance instanceof DefaultUserTaskInstance defaultUserTaskInstance) {
-            defaultUserTaskInstance.setActuaOwner(identityProvider.getName());
+            defaultUserTaskInstance.setActualOwner(identityProvider.getName());
         }
         return Optional.empty();
     }
