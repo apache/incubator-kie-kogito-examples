@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20230324/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20230324/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:kie="https://kie.org/dmn/extensions/1.0" expressionLanguage="https://www.omg.org/spec/DMN/20230324/FEEL/" namespace="https://kie.org/dmn/_C83DFD16-A42A-46BE-A843-370444580E0F" id="_59A70DE1-0632-4FB6-9CB7-65078F7AF698" name="loan-application-age-limit">
+  <itemDefinition id="_2459F73D-EAF3-4EDD-A3FB-97344CA403E3" name="tLoanApplicationApprovement" isCollection="false" typeLanguage="https://www.omg.org/spec/DMN/20230324/FEEL/">
+    <itemComponent id="_62D7770C-1055-4D9A-BA87-EF136DE654C8" name="explanation" isCollection="false" typeLanguage="https://www.omg.org/spec/DMN/20230324/FEEL/">
+      <typeRef>string</typeRef>
+    </itemComponent>
+    <itemComponent id="_EAF6907A-E451-4D02-BA2C-804E76F916D6" name="approved" isCollection="false" typeLanguage="https://www.omg.org/spec/DMN/20230324/FEEL/">
+      <typeRef>boolean</typeRef>
+    </itemComponent>
+  </itemDefinition>
+  <itemDefinition id="_E4AA39DC-481F-49F7-9CA7-D249F551985E" name="tApplicant" isCollection="false" typeLanguage="https://www.omg.org/spec/DMN/20230324/FEEL/">
+    <itemComponent id="_D398CE7E-FC86-4EAD-9360-3C61455EC057" name="age" isCollection="false" typeLanguage="https://www.omg.org/spec/DMN/20230324/FEEL/">
+      <typeRef>number</typeRef>
+    </itemComponent>
+    <itemComponent id="_3EDECFB6-F06C-4868-B3E2-1DB3EEE04463" name="id" isCollection="false" typeLanguage="https://www.omg.org/spec/DMN/20230324/FEEL/">
+      <typeRef>string</typeRef>
+    </itemComponent>
+  </itemDefinition>
+  <itemDefinition id="_AE374AB2-D1A6-40C1-A0D9-9534A15C586C" name="tLoanAppplication" isCollection="false" typeLanguage="https://www.omg.org/spec/DMN/20230324/FEEL/">
+    <itemComponent id="_AF09DCC8-FE56-4C4C-B2FE-C651502956DE" name="applicantId" isCollection="false" typeLanguage="https://www.omg.org/spec/DMN/20230324/FEEL/">
+      <typeRef>string</typeRef>
+    </itemComponent>
+  </itemDefinition>
+  <inputData name="Applicant" id="_3F350396-EDCE-45ED-A79C-36E223C1C64F">
+    <variable name="Applicant" id="_B5CC6F04-E112-47DE-95C0-6A54847E2DBF" typeRef="tApplicant" />
+  </inputData>
+  <inputData name="Application" id="_31B84BC6-CD44-41B0-8C2A-DCAB988B5539">
+    <variable name="Application" id="_025F4BD4-F062-497C-9E58-AFFA15F5988C" typeRef="tLoanAppplication" />
+  </inputData>
+  <decision name="Approvement" id="_4FFD7A89-B23A-4C60-9291-F81D4C76B8E6">
+    <variable id="_CD4143CF-2E72-4769-BD12-AAFBB8B9ED0A" name="Approvement" typeRef="tLoanApplicationApprovement" />
+    <informationRequirement id="_176A28AB-700E-4CAB-83EB-337F5D3A2988">
+      <requiredInput href="#_3F350396-EDCE-45ED-A79C-36E223C1C64F" />
+    </informationRequirement>
+    <informationRequirement id="_C5BEFEEF-23DE-4E76-8F5D-A7155ED071CF">
+      <requiredInput href="#_31B84BC6-CD44-41B0-8C2A-DCAB988B5539" />
+    </informationRequirement>
+    <decisionTable id="_822C1E0F-24EE-42D6-818D-D1B13759A19E" typeRef="tLoanApplicationApprovement" hitPolicy="UNIQUE" label="Approvement">
+      <input id="_025319AB-389F-4655-A9DE-92D5DCA1F687">
+        <inputExpression id="_A5ECE5A2-C517-403E-9305-0AE056E3C0BA" typeRef="number">
+          <text>Applicant.age</text>
+        </inputExpression>
+      </input>
+      <input id="_1495BC9C-3467-457E-9987-646DD5AB36FF">
+        <inputExpression id="_C0E419BA-2E4A-4139-A413-F22BB6A0197F" typeRef="string">
+          <text>Application.applicantId</text>
+        </inputExpression>
+      </input>
+      <output id="_E5DAA228-CCBE-45FD-AC5A-4346E95A7FEF" name="explanation" typeRef="string" />
+      <output id="_C70949DD-29AE-4108-BBC4-DEDB6BF05717" name="approved" typeRef="boolean" />
+      <annotation name="Annotations" />
+      <rule id="_E3941011-487A-414F-A161-5D14FB4C7F02">
+        <inputEntry id="_3F454BEC-FF77-4F75-8C76-695871961C0F">
+          <text>&lt; 21</text>
+        </inputEntry>
+        <inputEntry id="_741A375C-8A41-45E7-837D-2867776A31BB">
+          <text>? = Applicant.id</text>
+        </inputEntry>
+        <outputEntry id="_BA3CDAA0-A826-47D0-9420-546CD92A2975">
+          <text>&quot;Underage&quot;</text>
+        </outputEntry>
+        <outputEntry id="_53C5A1E8-C101-4CAB-924F-6EFC007D1430">
+          <text>false</text>
+        </outputEntry>
+        <annotationEntry>
+          <text>// Your annotations here</text>
+        </annotationEntry>
+      </rule>
+      <rule id="_66A79323-438D-4BCE-8697-EA3C37AA1811">
+        <inputEntry id="_6501CA05-D3D3-4684-83E7-F35B84BDA1B7">
+          <text>&gt;= 21</text>
+        </inputEntry>
+        <inputEntry id="_A6FAFECF-6EE7-4696-A5F0-212889167E00">
+          <text>? = Applicant.id</text>
+        </inputEntry>
+        <outputEntry id="_2E9AB455-5191-4934-A7A2-03401A9BDAD8">
+          <text>&quot;Old enough&quot;</text>
+        </outputEntry>
+        <outputEntry id="_488BD2EF-BBDA-46AB-8EF3-607C926E1821">
+          <text>true</text>
+        </outputEntry>
+        <annotationEntry>
+          <text></text>
+        </annotationEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="_F6322840-6C34-484A-94F7-B24C2620BD9D" name="Default DRD" useAlternativeInputDataShape="false">
+      <di:extension>
+        <kie:ComponentsWidthsExtension>
+          <kie:ComponentWidths dmnElementRef="_822C1E0F-24EE-42D6-818D-D1B13759A19E">
+            <kie:width>60</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>160</kie:width>
+            <kie:width>118</kie:width>
+            <kie:width>118</kie:width>
+            <kie:width>240</kie:width>
+          </kie:ComponentWidths>
+        </kie:ComponentsWidthsExtension>
+      </di:extension>
+      <dmndi:DMNShape id="_2ECE37B9-FE2E-4696-AA20-42C78771D62D" dmnElementRef="_3F350396-EDCE-45ED-A79C-36E223C1C64F" isCollapsed="false" isListedInputData="false">
+        <dc:Bounds x="360" y="180" width="160" height="80" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="_7E6DF7DB-959E-46D7-8799-784F8699D598" dmnElementRef="_31B84BC6-CD44-41B0-8C2A-DCAB988B5539" isCollapsed="false" isListedInputData="false">
+        <dc:Bounds x="680" y="180" width="160" height="80" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="_BE51EA5F-E8E0-4805-9CAE-D46E714F8706" dmnElementRef="_4FFD7A89-B23A-4C60-9291-F81D4C76B8E6" isCollapsed="false" isListedInputData="false">
+        <dc:Bounds x="520" y="40" width="160" height="80" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="_06607E5C-AFA0-4616-841F-33713EB490D8" dmnElementRef="_176A28AB-700E-4CAB-83EB-337F5D3A2988" sourceElement="_2ECE37B9-FE2E-4696-AA20-42C78771D62D" targetElement="_BE51EA5F-E8E0-4805-9CAE-D46E714F8706">
+        <di:waypoint x="440" y="220" />
+        <di:waypoint x="600" y="80" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="_F5D5AFFD-ADF9-4FED-9613-5B5F4180215A" dmnElementRef="_C5BEFEEF-23DE-4E76-8F5D-A7155ED071CF" sourceElement="_7E6DF7DB-959E-46D7-8799-784F8699D598" targetElement="_BE51EA5F-E8E0-4805-9CAE-D46E714F8706">
+        <di:waypoint x="760" y="220" />
+        <di:waypoint x="600" y="80" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
