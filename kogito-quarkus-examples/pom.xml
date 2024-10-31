@@ -49,6 +49,7 @@
         <activeByDefault>true</activeByDefault>
       </activation>
       <modules>
+        <module>process-business-calendar-example</module>
         <module>decisiontable-quarkus-example</module>
         <module>decisions-embedded-mode-example</module>
         <module>dmn-15-quarkus-example</module>
