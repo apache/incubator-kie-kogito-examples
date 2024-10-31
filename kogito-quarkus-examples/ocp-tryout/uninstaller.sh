@@ -25,7 +25,7 @@ source common-functions.sh
 action=uninstall
 
 components=(SHARED_CONFIG INFINISPAN KAFKA KEYCLOAK \
-           KOGITO_DATA_INDEX KOGITO_MANAGEMENT_CONSOLE KOGITO_TASK_CONSOLE KOGITO_JOBS_SERVICE \
+           KOGITO_DATA_INDEX KOGITO_MANAGEMENT_CONSOLE KOGITO_JOBS_SERVICE \
            TEST_APP)
 # override the installer properties configuration if needed
 function overrideEnvVariables(){
@@ -74,7 +74,6 @@ function uninstall(){
 
   componentAction "${KOGITO_DATA_INDEX}" "kogito-data-index" "${dbType}"
   componentAction "${KOGITO_MANAGEMENT_CONSOLE}" "kogito-management-console"
-  componentAction "${KOGITO_TASK_CONSOLE}" "kogito-task-console"
   componentAction "${KOGITO_JOBS_SERVICE}" "kogito-jobs-service" "${dbType}"
 
   componentAction "${INFINISPAN}" "infinispan"

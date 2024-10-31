@@ -87,7 +87,7 @@ cd <path_to_process-usertasks-quarkus-with-console>/docker-compose
 3. Run the ```startServices.sh``` script
 
 ```bash
-sh ./startServices.sh
+./startServices.sh
 ```
 
 Once all services bootstrap, the following ports will be assigned on your local machine:
