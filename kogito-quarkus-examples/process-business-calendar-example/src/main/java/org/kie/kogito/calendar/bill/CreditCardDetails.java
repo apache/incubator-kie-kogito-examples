@@ -17,26 +17,35 @@
  * under the License.
  */
 
-package org.kie.kogito.calendar.transaction;
+package org.kie.kogito.calendar.bill;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import jakarta.enterprise.context.ApplicationScoped;
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class CreditCardDetails {
+    private String cardNumber;
+    private String status = "Bill Due";
 
-@ApplicationScoped
-public class TransactionService {
-
-    private Logger logger = LoggerFactory.getLogger(TransactionService.class);
-
-    public TransactionModel processTransaction(String transactionId) {
-        logger.info("processing transaction");
-        return new TransactionModel(transactionId, 100.0, "SourceAccount", "BeneficiaryAccount");
+    public CreditCardDetails() {
     }
 
-    public TransactionModel completeTransaction(TransactionModel transactionModel) {
-        transactionModel.setStatus("Amount credited, transaction completed");
-        logger.info("completing transaction");
-        return transactionModel;
+    public CreditCardDetails(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+
+    public String getCardNumber() {
+        return cardNumber;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
