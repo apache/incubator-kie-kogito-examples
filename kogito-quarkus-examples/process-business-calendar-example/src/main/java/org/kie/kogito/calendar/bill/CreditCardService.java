@@ -39,4 +39,10 @@ public class CreditCardService {
         logger.info("settling bill");
         return creditCardDetails;
     }
+
+    public CreditCardDetails cancelPayment(CreditCardDetails creditCardDetails) {
+        creditCardDetails.setStatus("Payment cancelled, money will be refunded if it it is debited");
+        logger.info("cancelling bill");
+        return creditCardDetails;
+    }
 }
