@@ -162,7 +162,7 @@ pipeline {
                             getMavenCommand()
                                 .withOptions(env.BUILD_MVN_OPTS_CURRENT ? [ env.BUILD_MVN_OPTS_CURRENT ] : [])
                                 .withOptions(env.KOGITO_EXAMPLES_BUILD_MVN_OPTS ? [ env.KOGITO_EXAMPLES_BUILD_MVN_OPTS ] : [])
-                                .withOptions("-pl .,kogito-quarkus-examples,kogito-springboot-examples,serverless-workflow-examples")
+                                .withOptions("-pl .,kogito-java-examples,kogito-quarkus-examples,kogito-springboot-examples,serverless-workflow-examples")
                                 .skipTests(true)
                                 .withSettingsXmlFile(MAVEN_SETTINGS_FILE)
                                 .run("deploy -DdeployAtEnd -Dapache.repository.username=${REPOSITORY_USER} -Dapache.repository.password=${REPOSITORY_TOKEN} -DretryFailedDeploymentCount=5")

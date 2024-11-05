@@ -47,6 +47,15 @@ Map getMultijobPRConfig(JenkinsFolder jobFolder) {
         buildchain: true,
         jobs : [
             [
+                id: 'kogito-java-examples',
+                primary: true,
+                env : [
+                    // Sonarcloud analysis is disabled for examples
+                    KOGITO_EXAMPLES_SUBFOLDER_POM: 'kogito-java-examples/',
+                    BUILD_MVN_OPTS_CURRENT: "${defaultBuildMvnOptsCurrent} ${getExamplesBuildMvnOptions(jobFolder).join(' ')}",
+                ]
+            ],
+            [
                 id: 'kogito-quarkus-examples',
                 primary: true,
                 env : [
