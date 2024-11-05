@@ -50,7 +50,6 @@
       </activation>
       <modules>
         <module>decisiontable-quarkus-example</module>
-        <module>decisions-embedded-mode-example</module>
         <module>dmn-15-quarkus-example</module>
         <module>dmn-drools-quarkus-metrics</module>
         <module>dmn-event-driven-quarkus</module>
@@ -100,7 +99,6 @@
         <module>process-usertasks-timer-quarkus-with-console</module>
         <module>process-usertasks-with-security-oidc-quarkus</module>
         <module>process-usertasks-with-security-quarkus</module>
-        <module>rules-embedded-mode-example</module>
         <module>rules-incubation-api-quarkus</module>
         <module>rules-legacy-quarkus-example</module>
         <module>rules-legacy-scesim-quarkus-example</module>
