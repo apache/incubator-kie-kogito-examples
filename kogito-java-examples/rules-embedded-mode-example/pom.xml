@@ -21,16 +21,16 @@
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.kie.kogito.decisions.embedded</groupId>
-    <artifactId>decisions-embedded-mode-example</artifactId>
-    <name>Kogito Example :: Decision Embedded Mode</name>
+    <groupId>org.kie.kogito.rules.embedded</groupId>
+    <artifactId>rules-embedded-mode-example</artifactId>
+    <name>Kogito Example :: Rule Embedded Mode</name>
     <version>999-SNAPSHOT</version>
     <packaging>kjar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <exec.mainClass>org.kie.kogito.decisions.embedded.DecisionsEmbeddedModeExample</exec.mainClass>
+        <exec.mainClass>org.kie.kogito.rules.embedded.RulesEmbeddedModeExample</exec.mainClass>
 
         <version.org.kie.kogito>999-SNAPSHOT</version.org.kie.kogito>
         <version.org.drools>999-SNAPSHOT</version.org.drools>
@@ -38,30 +38,15 @@
         <version.kogito.bom>999-SNAPSHOT</version.kogito.bom>
         <version.org.kie>999-SNAPSHOT</version.org.kie>
 
-        <version.quarkus.platform>3.8.6</version.quarkus.platform>
         <version.org.slf4j>2.0.13</version.org.slf4j>
     </properties>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>io.quarkus</groupId>
-                <artifactId>quarkus-bom</artifactId>
-                <version>${version.quarkus.platform}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
                 <groupId>org.drools</groupId>
                 <artifactId>drools-bom</artifactId>
                 <version>${version.org.drools}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.kie.kogito</groupId>
-                <artifactId>kogito-bom</artifactId>
-                <version>${version.kogito.bom}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -79,10 +64,15 @@
             <artifactId>drools-model-compiler</artifactId>
         </dependency>
 
+        <!-- DebugRuleRuntimeEventListener -->
         <dependency>
-            <groupId>org.kie</groupId>
-            <artifactId>kie-dmn-core</artifactId>
-            <version>${version.org.kie}</version>
+            <groupId>org.drools</groupId>
+            <artifactId>drools-core</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.drools</groupId>
+            <artifactId>drools-mvel</artifactId>
         </dependency>
 
         <dependency>
@@ -103,16 +93,13 @@
         </dependency>
     </dependencies>
 
-      <build>
+    <build>
         <plugins>
             <plugin>
                 <groupId>org.kie</groupId>
                 <artifactId>kie-maven-plugin</artifactId>
                 <version>${version.org.kie}</version>
                 <extensions>true</extensions>
-                <configuration>
-                    <validateDMN>disable</validateDMN>
-                </configuration>
             </plugin>
         </plugins>
     </build>
