@@ -24,6 +24,7 @@ import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 
@@ -50,7 +51,8 @@ public class CreditCardProcessIT {
                 .when()
                 .get("/" + PROCESS_ID)
                 .then()
-                .statusCode(200);
+                .statusCode(200)
+                .body(equalTo("[]"));
 
     }
 }
