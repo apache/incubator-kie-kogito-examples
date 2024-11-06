@@ -6,18 +6,18 @@ This project is an illustrative example demonstrating the impact of a business c
 
 **BPMN2-BusinessCalendarBankTransaction.bpmn2**:
 Defines the workflow for processing credit card transactions. 
-Includes tasks such as processing the bill, verifying payment, handling boundary timers, and potential cancellation.
+Includes tasks such as processing the credit bill, verifying payment, handling timers, cancelling and bill settlement.
 
 **CreditCardService.java**:
 Implements the logic for handling credit card payment processes.
 
 **calendar.properties**:
-Configures business hours, holidays, and other calendar parameters that affect job scheduling and timer behavior.
+Configures business hours, holidays, and other calendar properties that affect scheduling and timer behavior.
 
 ### BPMN Process Details
 
 The BPMN model (`BPMN2-BusinessCalendarBankTransaction.bpmn2`) defines a workflow that includes the following main elements:
-<p align="center"><img width=50% height=50% src="docs/images/CreditCardModel.png"></p>
+<p align="center"><img width=75% height=50% src="docs/images/CreditCardModel.png"></p>
 
 ### Start Event
 
@@ -44,7 +44,7 @@ Attached to a human task to simulate waiting for manual confirmation or user act
 <p align="center"><img width=75% height=50% src="docs/images/Timer.png"></p>
 
 ### Cancel Payment
-Executed if the timer expires without action, leading to the cancellation of the payment process and notifying that the transaction failed.
+Executed if the timer expires without human action, leading to the cancellation of the payment process.
 
 * Cancel Payment (Top)
   <p align="center"><img width=75% height=50% src="docs/images/CancelPaymentTop.png"></p>
@@ -57,7 +57,7 @@ Executed if the timer expires without action, leading to the cancellation of the
 
 ### Settle Payment
 
-The final step where the payment is settled successfully, completing the process.
+The final step where the payment is settled successfully on manual verification.
 
 * Settle Payment (Top)
  <p align="center"><img width=75% height=50% src="docs/images/SettlePaymentTop.png"></p>
@@ -68,6 +68,23 @@ The final step where the payment is settled successfully, completing the process
 * Settle Payment Assignments
 <p align="center"><img width=75% height=50% src="docs/images/SettlePaymentAssign.png"></p>
 
+## Adding `calendar.properties` 
+
+The `calendar.properties` file, when present, activates business calendar functionality that influences timer behavior in the BPMN model. It can delay job execution based on defined working hours, days of the week, and holidays.
+
+### calendar.properties Description
+<p align="center"><img width=75% height=50% src="docs/images/BusinessCalendarDescription.png"></p>
+
+### Example `calendar.properties`
+
+```properties
+business.start.hour=0
+business.end.hour=24
+business.hours.per.day=24
+business.days.per.week=7
+business.holiday.date.format=yyyy-MM-dd
+#business.cal.timezone= system default timezone
+```
 ## Build and run
 
 ### Prerequisites
@@ -134,51 +151,38 @@ When running in either Quarkus Development or Native mode, we also leverage the 
 
 ##curl command can be found below:
 
-### To start workflow
+### To start the process
 
 ```sh
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{
-    "id": "test-instance",
-    "creditCardNumber": null,
-    "creditCardDetails": {
-        "cardNumber": "434354343",
-        "status": "Bill Due"
-    }
-}' http://localhost:8080/BusinessCalendarCreditBill
+curl -X POST http://localhost:8080/BusinessCalendarCreditBill -H "Content-Type: application/json" -d '{
+  "creditCardNumber": null,
+  "creditCardDetails": {
+    "cardNumber": "434353433",
+    "status": "Bill Due"
+  }
+}'
 ```
 
-### To check Active Tasks
+### To retrieve instances
 
 ```sh
-curl -X GET -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/BusinessCalendarCreditBill/<instance-id>/tasks
+curl -X GET -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/BusinessCalendarCreditBill
 ```
 
-### To check user tasks
+### To retrieve all active usertasks across all process instances
 
 ```sh
 curl -X GET -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/usertasks/instance
 ```
+## Comparision of timer with and without calendar.properties
 
-## How `calendar.properties` affects the functionality
+### Testing without calendar.properties
+The timer for the Verify Payment task will follow a straightforward countdown based on real time. If the specified time elapses i.e., 1 minute, it immediately moves to cancel payment task, regardless of the working hours or holidays.
 
-The `calendar.properties` file, when present, activates business calendar functionality that influences timer behavior in the BPMN model. It can delay job execution based on defined working hours, days of the week, and holidays.
-
-### Example `calendar.properties`
-
-```properties
-business.start.hour=0
-business.end.hour=24
-business.hours.per.day=24
-business.days.per.week=7
-business.holiday.date.format=yyyy-MM-dd
-```
-## Without calendar.properties
-* POST Request: The workflow is initiated successfully, and timers trigger immediately based on their configured duration.  
-* GET Request for Active Tasks: The response includes active tasks with an activate phase, confirming immediate activation without delay.  
-* Example Test Results Without calendar.properties:  
+* Example test results without calendar.properties:  
 
 
-* POST
+* POST/ BusinessCalendarCreditBill
 ```json
 {
   "id": "0a4105cc-54fb-4d17-a2bd-9b660e98df75",
@@ -190,7 +194,7 @@ business.holiday.date.format=yyyy-MM-dd
 }
 ```
 
-* GET
+* GET/ BusinessCalendarCreditBill
 ```json
 [
     {
@@ -204,14 +208,58 @@ business.holiday.date.format=yyyy-MM-dd
     }
 ]
 ```
-## With calendar.properties
-* POST Request: The workflow starts successfully, but timer activation respects the constraints defined in calendar.properties.
-* GET Request for Active Tasks: The response may return 404 Not Found, indicating that the timer has not triggered due to scheduling delays imposed by the business calendar (e.g., holidays or non-working periods).  
+* After 1 minute when we send request for GET again we get empty array representing the cancellation.
+```json
+[]
+```
+### Example of logs representing the process from start to complete
+<p align="center"><img width=75% height=50% src="docs/images/WithoutPropertiesLogs.png"></p>
 
-* Example Test Results With calendar.properties:
+* Starting workflow 'BusinessCalendarCreditBill': Indicates the initiation of the workflow.
 
+* Triggered node 'Process Credit Bill': The workflow moves to process the credit bill.
 
-* POST
+* Paying credit card represents the action to process the bill in the CreditCardService.
+
+* Triggered node 'Verify Payment': The workflow enters the verification phase, awaiting manual approval.
+
+* Job started: After the specified timer duration, the workflow checks for verification. If not verified, it triggers the cancellation path.
+
+* Triggered node 'Cancel Payment': The cancellation process initiates due to the timer expiry.
+
+* cancelling bill: Represents the action taken by the CreditCardService to cancel the bill.
+
+* Hence, without calendar.properties, timer fires immediately after their configured interval, activating tasks without delay.
+
+## Testing with calendar.properties (During non-working hours/Specified Holiday)
+### Configuring calendar.properties with a holiday
+
+```properties
+business.holiday.date.format=yy-MM-dd
+business.holiday.date=2024-11-05
+```
+
+* For repeated holidays in a year
+```properties
+business.holiday.date.format=dd/MM
+business.holiday.date=14/11,25/12,01/01
+```
+
+* Weekend's
+```properties
+business.weekend.days=7,1 
+```
+* Example of calendar.properties for testing during non-working hours
+```properties
+business.end.hour=17
+business.hours.per.day=8
+business.start.hour=10
+business.holiday.date.format=yyyy-MM-dd
+business.days.per.week =7
+#business.cal.timezone= system default timezone
+```
+
+* POST/ BusinessCalendarCreditBill
 ```json
 {
     "id": "b2b1d0bb-7946-4be6-81eb-0da35ff4a5d0",
@@ -223,32 +271,30 @@ business.holiday.date.format=yyyy-MM-dd
 }
 ```
 
-* GET
+* GET/ BusinessCalendarCreditBill
+```json
+{
+    "id": "b2b1d0bb-7946-4be6-81eb-0da35ff4a5d0",
+    "creditCardNumber": null,
+    "creditCardDetails": {
+        "cardNumber": "434354343",
+        "status": "Bill Due"
+    }
+}
 ```
-404 Not Found
-```
+* Now, even after 1 minute, the process will be in Active State.
 
-## Comparision with and without calendar.properties
-* Without calendar.properties:  
-Timers fire immediately after their configured interval, activating tasks without delay.
+### Example of logs representing the active state during non-working hours/specified holiday
 
-* With calendar.properties:  
-The timer may delay job execution if the current date is defined as a holiday or falls outside of working hours, resulting in inactive tasks or 404 Not Found responses when checking for active tasks.
+<p align="center"><img width=75% height=50% src="docs/images/WithPropertiesLogs.png"></p>
 
-## Configuring holiday in calendar.properties
+* Process Start: The BusinessCalendarCreditBill process begins, workflow logs indicate the start of the process and initialization of nodes.
 
-```properties
-business.holiday.date.format=yy-MM-dd
-business.holiday.date=2024-11-05,2024-12-25
-```
+* Process Credit Bill: The Process Credit Bill task is triggered, logging a message to indicate that the credit card bill is being processed.
 
-### For repeated holidays in a year
-```properties
-business.holiday.date.format=dd/MM
-business.holiday.date=14/11,25/12, 01/01
-```
+* Verify Payment: The process moves to the Verify Payment task. Since a timer is associated with this task, it would typically trigger an action if verification is not completed within a specified duration (e.g., one minute). 
 
-### Weekend days
-```properties
-business.weekend.days=7,1 
-```
+* However, due to the non-working hours, the timer will pause and not count down on this day. As a result, the workflow remains active without moving to the next step (i.e., cancellation due to timeout).
+
+* Timer Resumption on Next Business Day: The timer will resume at the beginning of the next working hour/day, after the non-working hour/holiday has ended. The timer is set to fire after one minute of active business time.
+
