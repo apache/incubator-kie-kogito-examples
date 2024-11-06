@@ -173,6 +173,12 @@ It will install the *Kogito Realm* that comes with a predefined set of users:
 
 Once Keycloak is started, you should be able to access your *Keycloak Server* at [localhost:8480/auth](http://localhost:8480/auth) with *admin* user.
 
+### Compile and Start the process
+
+```
+mvn clean package
+java -jar target/quarkus-app/quarkus-run.jar
+```
 
 ### Compile and Run in Local Dev Mode
 
