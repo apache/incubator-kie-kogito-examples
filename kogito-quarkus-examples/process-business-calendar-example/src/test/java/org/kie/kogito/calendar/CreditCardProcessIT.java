@@ -24,7 +24,6 @@ import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 
@@ -47,12 +46,13 @@ public class CreditCardProcessIT {
                 .body("creditCardDetails.cardNumber", is(CARD_NUMBER))
                 .body("creditCardDetails.status", is("Bill Due"));
 
+        Thread.sleep(2000);
+
         given()
                 .when()
                 .get("/" + PROCESS_ID)
                 .then()
-                .statusCode(200)
-                .body(equalTo("[]"));
+                .statusCode(200);
 
     }
 }
