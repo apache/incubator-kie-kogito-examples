@@ -106,7 +106,7 @@ mvn clean compile spring-boot:run
 
 ```sh
 mvn clean package
-java -jar ./target/dmn-springboot-example.jar
+java -jar ./target/dmn-15-springboot-example.jar
 ```
 
 ## Example Usage

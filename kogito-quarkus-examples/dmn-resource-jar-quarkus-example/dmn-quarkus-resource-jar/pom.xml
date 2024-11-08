@@ -9,7 +9,7 @@
     <version>999-SNAPSHOT</version>
   </parent>
 
-  <artifactId>dmn-resource-jar</artifactId>
+  <artifactId>dmn-quarkus-resource-jar</artifactId>
 
   <properties>
     <maven.compiler.source>17</maven.compiler.source>

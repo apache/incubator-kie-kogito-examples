@@ -33,6 +33,9 @@
   <artifactId>kogito-springboot-examples</artifactId>
   <packaging>pom</packaging>
   <name>Kogito Example :: Spring Boot</name>
+  <modules>
+    <module>dmn-resource-jar-springboot-example/dmn-springboot-consumer-example</module>
+  </modules>
 
   <properties>
     <java.module.name>org.kie.kogito.examples.springboot</java.module.name>
@@ -61,6 +64,7 @@
         <module>dmn-event-driven-springboot</module>
         <module>dmn-listener-springboot</module>
         <module>dmn-pmml-springboot-example</module>
+        <module>dmn-resource-jar-springboot-example</module>
         <module>dmn-springboot-example</module>
         <module>dmn-tracing-springboot</module>
         <module>flexible-process-springboot</module>
@@ -109,6 +113,7 @@
         <module>dmn-event-driven-springboot</module>
         <module>dmn-listener-springboot</module>
         <module>dmn-pmml-springboot-example</module>
+        <module>dmn-resource-jar-springboot-example</module>
         <module>dmn-springboot-example</module>
         <module>dmn-tracing-springboot</module>
         <module>flexible-process-springboot</module>
