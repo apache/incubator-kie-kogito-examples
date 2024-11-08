@@ -20,11 +20,14 @@ jobs:
     timeout-minutes: 180
     strategy:
       matrix:
-        job_name: [ kogito-quarkus-examples, kogito-springboot-examples, serverless-workflow-examples ]
+        job_name: [ kogito-java-examples, kogito-quarkus-examples, kogito-springboot-examples, serverless-workflow-examples ]
         os: [ubuntu-latest]
         java-version: [17]
         maven-version: ['3.9.6']
         include:
+          - job_name: kogito-java-examples
+            repository: incubator-kie-kogito-examples
+            env_KOGITO_EXAMPLES_SUBFOLDER_POM: kogito-java-examples/
           - job_name: kogito-quarkus-examples
             repository: incubator-kie-kogito-examples
             env_KOGITO_EXAMPLES_SUBFOLDER_POM: kogito-quarkus-examples/
