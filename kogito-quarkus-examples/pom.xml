@@ -49,7 +49,6 @@
         <activeByDefault>true</activeByDefault>
       </activation>
       <modules>
-        <module>process-business-calendar-example</module>
         <module>decisiontable-quarkus-example</module>
         <module>dmn-15-quarkus-example</module>
         <module>dmn-drools-quarkus-metrics</module>
@@ -68,6 +67,7 @@
         <module>pmml-event-driven-quarkus</module>
         <module>pmml-incubation-api-quarkus</module>
         <module>pmml-quarkus-example</module>
+        <module>process-business-calendar-example</module>
         <module>process-business-rules-quarkus</module>
         <module>process-decisions-quarkus</module>
         <module>process-decisions-rest-quarkus</module>
