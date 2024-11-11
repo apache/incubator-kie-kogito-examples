@@ -1,6 +1,6 @@
 # Process Business Calendar Example
 
-This project is an illustrative example demonstrating the impact of a business calendar on process execution within a Quarkus application . It showcases a business process involving credit card bill processing, which adapts to a business calendar defined in `calendar.properties`. This configuration modifies timer behaviors to respect working hours, holidays, and other schedule-based constraints.
+This project is an illustrative example demonstrating the impact of a business calendar on process execution within a Quarkus application. It showcases a business process involving credit card bill processing, which adapts to a business calendar defined in calendar.properties. This configuration modifies timer behaviors to respect working hours, holidays, and other schedule-based constraints.
 
 ### Main Components
 
@@ -122,9 +122,9 @@ You can take a look at the [OpenAPI definition](http://localhost:8080/openapi?fo
 
 In addition, various clients to interact with this service can be easily generated using this OpenAPI definition.
 
-When running in either Quarkus Development or Native mode, we also leverage the [Quarkus OpenAPI extension](https://quarkus.io/guides/openapi-swaggerui#use-swagger-ui-for-development) that exposes [Swagger UI](http://localhost:8080/swagger-ui/) that you can use to look at available REST endpoints and send test requests.
+When running in either Quarkus Development or Native mode, we also leverage the [Quarkus OpenAPI extension](https://quarkus.io/guides/openapi-swaggerui#use-swagger-ui-for-development) that exposes [Swagger UI](http://localhost:8080/q/swagger-ui/) that you can use to look at available REST endpoints and send test requests.
 
-##curl command can be found below:
+## curl command can be found below:
 
 ### To start the process
 
@@ -143,13 +143,30 @@ curl -X GET http://localhost:8080/BusinessCalendarCreditBill \
 -H "Accept: application/json"
 
 ```
+### To retrieve status of particular instance using id
 
-## Comparision of timer with and without calendar.properties
+```sh
+curl -X GET http://localhost:8080/BusinessCalendarCreditBill/{id} \
+-H "Content-Type: application/json" \
+-H "Accept: application/json"
+
+```
+
+## Comparison of timer with and without calendar.properties
 
 ### Testing without calendar.properties
-The timer for the Verify Payment task will follow a straightforward countdown based on real time. If the specified time elapses i.e., 1 second, it immediately moves to cancel payment task, regardless of the working hours or holidays.
+Without the calendar properties file, the behavior of the timer depends on the system current time settings (Default properties)
 
-* Example test results without calendar.properties:  
+* business.days.per.week - specifies number of working days per week (default 5)
+* business.hours.per.day - specifies number of working hours per day (default 8)
+* business.start.hour - specifies starting hour of work day (default 9)
+* business.end.hour - specifies ending hour of work day (default 17)
+* business.holidays - specifies holidays in yyy-MM-dd format
+* business.holiday.date.format - specifies holiday date format used (default yyyy-MM-dd)
+* business.weekend.days - specifies days of the weekend (default Saturday and Sunday i.e 6,7)
+
+### Example test results without calendar.properties (working hours)
+* The timer for the Verify Payment task will follow a straightforward countdown based on real time. If the specified time elapses i.e., 1 second, it immediately moves to cancel payment task.
 
 
 * POST/ BusinessCalendarCreditBill
@@ -170,8 +187,8 @@ curl -X GET http://localhost:8080/BusinessCalendarCreditBill \
 ```
 <p align="center"><img width=75% height=50% src="docs/images/Get1.png"></p>
 
-### Example of logs representing the process from start to complete
-<p align="center"><img width=75% height=50% src="docs/images/WithoutPropertiesLogs.png"></p>
+### Example of logs representing the process from start to active
+<p align="center"><img width=75% height=50% src="docs/images/WithPropertiesLogs.png"></p>
 
 
 * The workflow 'BusinessCalendarCreditBill' began at 08:11:58,353 with a unique identifier 130f2eab-ab2e-413d-958e-414d1b3b0dc7.
@@ -194,33 +211,60 @@ curl -X GET http://localhost:8080/BusinessCalendarCreditBill \
 
 * Hence, without calendar.properties, timer fires immediately after their configured interval, activating tasks without delay.
 
+### Example test results without calendar.properties (non-working hours)
+* During non-working hours, the timer for the Verify Payment task will not trigger and the process remains in active state, does not move to cancel payment task.
+
+* POST/ BusinessCalendarCreditBill
+```sh
+curl -X POST http://localhost:8080/BusinessCalendarCreditBill \
+-H "Content-Type: application/json" \
+-d '{"creditCardNumber": null, "creditCardDetails": {"cardNumber": "434353433", "status": "Bill Due"}}'
+```
+<p align="center"><img width=75% height=50% src="docs/images/Post3.png"></p>
+
+
+* GET/ BusinessCalendarCreditBill
+```sh
+curl -X GET http://localhost:8080/BusinessCalendarCreditBill \
+-H "Content-Type: application/json" \
+-H "Accept: application/json"
+
+```
+* Now, even after 1 second, the process will be in Active State.
+
+<p align="center"><img width=75% height=50% src="docs/images/Get3.png"></p>
+
+### Example of logs representing the active state during non-working hours
+
+<p align="center"><img width=75% height=50% src="docs/images/WithoutPropertiesLogsNW.png"></p>
+
+
 ## Testing with calendar.properties (During non-working hours/Specified Holiday)
 ### Steps to create & configure calendar.properties with a holiday/non-working hours
 
-* Create a calendar.properties file in the src/main/resources directory. This file activates the Business Calendar feature and essential configurations
+* Based on requirement, create/Modify calendar.properties file in the src/main/resources directory. This file activates the Business Calendar feature and essential configurations
 
-* Configure calendar.properties: The calendar.properties file should define the business hours, holidays, and other relevant settings. Below is an example of the format:
+### calendar.properties format
+* business.days.per.week - specifies number of working days per week 
+* business.hours.per.day - specifies number of working hours per day 
+* business.start.hour - specifies starting hour of work day 
+* business.end.hour - specifies ending hour of work day 
+* business.holidays - specifies holidays in yyy-MM-dd format
+* business.holiday.date.format - specifies holiday date format used 
+* business.weekend.days - specifies days of the weekend (If weekend has to considered as working days, consider a value out of range 1-7, i.e. 8)
+* business.cal.timezone - system default timezone
+
 ```properties
 business.end.hour=24
 business.hours.per.day=24
 business.start.hour=0
 business.holiday.date.format=yyyy-MM-dd
 business.holidays=2024-11-07
-#define today's date as holiday for testing purposes
 business.days.per.week =7
+business.weekend.days = 8
 #business.cal.timezone= system default timezone
 ```
 
-* For repeated holidays in a year
-```properties
-business.holiday.date.format=dd/MM
-business.holidays=14/11,25/12,01/01
-```
-
-* Weekend's
-```properties
-business.weekend.days=7,1 
-```
 * After calendar.properties file is added, build the example again "mvn clean compile quarkus:dev" or type 's' in the quarkus terminal and hit enter just to restart.
 
 * POST/ BusinessCalendarCreditBill
