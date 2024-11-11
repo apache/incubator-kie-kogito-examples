@@ -187,7 +187,7 @@ curl -X GET http://localhost:8080/BusinessCalendarCreditBill \
 ```
 <p align="center"><img width=75% height=50% src="docs/images/Get1.png"></p>
 
-### Example of logs representing the process from start to active
+### Example of logs representing the process from start to completion
 <p align="center"><img width=75% height=50% src="docs/images/WithPropertiesLogs.png"></p>
 
 
@@ -242,7 +242,7 @@ curl -X GET http://localhost:8080/BusinessCalendarCreditBill \
 ## Testing with calendar.properties (During non-working hours/Specified Holiday)
 ### Steps to create & configure calendar.properties with a holiday/non-working hours
 
-* Based on requirement, create/Modify calendar.properties file in the src/main/resources directory. This file activates the Business Calendar feature and essential configurations
+* Based on requirement, create/modify calendar.properties file in the src/main/resources directory. This file activates the Business Calendar feature and essential configurations
 
 ### calendar.properties format
 * business.days.per.week - specifies number of working days per week 
@@ -266,6 +266,7 @@ business.weekend.days = 8
 ```
 
 * After calendar.properties file is added, build the example again "mvn clean compile quarkus:dev" or type 's' in the quarkus terminal and hit enter just to restart.
+
 
 * POST/ BusinessCalendarCreditBill
 ```sh
