@@ -56,10 +56,12 @@
       </activation>
       <modules>
         <module>decisiontable-springboot-example</module>
+        <module>dmn-15-springboot-example</module>
         <module>dmn-drools-springboot-metrics</module>
         <module>dmn-event-driven-springboot</module>
         <module>dmn-listener-springboot</module>
         <module>dmn-pmml-springboot-example</module>
+        <module>dmn-resource-jar-springboot-example</module>
         <module>dmn-springboot-example</module>
         <module>dmn-tracing-springboot</module>
         <module>flexible-process-springboot</module>
@@ -103,10 +105,12 @@
       </activation>
       <modules>
         <module>decisiontable-springboot-example</module>
+        <module>dmn-15-springboot-example</module>
         <module>dmn-drools-springboot-metrics</module>
         <module>dmn-event-driven-springboot</module>
         <module>dmn-listener-springboot</module>
         <module>dmn-pmml-springboot-example</module>
+        <module>dmn-resource-jar-springboot-example</module>
         <module>dmn-springboot-example</module>
         <module>dmn-tracing-springboot</module>
         <module>flexible-process-springboot</module>
