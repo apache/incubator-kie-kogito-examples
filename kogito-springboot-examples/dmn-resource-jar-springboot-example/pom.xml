@@ -19,30 +19,29 @@
     under the License.
 
 -->
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
   <modelVersion>4.0.0</modelVersion>
+
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
-    <artifactId>kogito-quarkus-examples</artifactId>
+    <artifactId>kogito-springboot-examples</artifactId>
     <version>999-SNAPSHOT</version>
   </parent>
-  <artifactId>dmn-resource-jar-quarkus-example</artifactId>
+  <artifactId>dmn-resource-jar-springboot-example</artifactId>
   <name>Kogito Example :: DMN :: Resource jar providing model</name>
+  <packaging>pom</packaging>
 
   <properties>
-    <quarkus-plugin.version>3.8.6</quarkus-plugin.version>
-    <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
-    <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-    <quarkus.platform.version>3.8.6</quarkus.platform.version>
-    <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
-    <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-    <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
     <version.org.kie.kogito>999-SNAPSHOT</version.org.kie.kogito>
+    <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
   </properties>
-  <packaging>pom</packaging>
+
   <modules>
-    <module>dmn-quarkus-resource-jar</module>
-    <module>dmn-quarkus-consumer-example</module>
+    <module>dmn-springboot-resource-jar</module>
+    <module>dmn-springboot-consumer-example</module>
   </modules>
+
 </project>

@@ -9,7 +9,7 @@
     <version>999-SNAPSHOT</version>
   </parent>
 
-  <artifactId>dmn-consumer-example</artifactId>
+  <artifactId>dmn-quarkus-consumer-example</artifactId>
 
   <properties>
     <quarkus-plugin.version>3.8.6</quarkus-plugin.version>
@@ -26,7 +26,7 @@
     <dependencies>
       <dependency>
         <groupId>org.kie.kogito.examples</groupId>
-        <artifactId>dmn-resource-jar</artifactId>
+        <artifactId>dmn-quarkus-resource-jar</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
@@ -48,7 +48,7 @@
   <dependencies>
     <dependency>
       <groupId>org.kie.kogito.examples</groupId>
-      <artifactId>dmn-resource-jar</artifactId>
+      <artifactId>dmn-quarkus-resource-jar</artifactId>
     </dependency>
     <dependency>
       <groupId>org.drools</groupId>
@@ -96,7 +96,7 @@
       <resource>
         <directory>src/main/resources</directory>
       </resource>
-      <!-- DMN generated resources unpacked from org.kie.kogito.examples:dmn-resource-jar -->
+      <!-- DMN generated resources unpacked from org.kie.kogito.examples:dmn-quarkus-resource-jar -->
       <resource>
         <directory>${project.build.directory}/generated-resources</directory>
       </resource>
@@ -114,7 +114,7 @@
           </execution>
         </executions>
       </plugin>
-      <!-- Unpack DMN resources from from org.kie.kogito.examples:dmn-resource-jar -->
+      <!-- Unpack DMN resources from from org.kie.kogito.examples:dmn-quarkus-resource-jar -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
@@ -130,7 +130,7 @@
               <artifactItems>
                 <artifactItem>
                   <groupId>org.kie.kogito.examples</groupId>
-                  <artifactId>dmn-resource-jar</artifactId>
+                  <artifactId>dmn-quarkus-resource-jar</artifactId>
                   <version>${project.version}</version>
                   <type>jar</type>
                   <overWrite>true</overWrite>

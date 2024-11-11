@@ -23,24 +23,25 @@ When using native image compilation, you will also need:
 ### Compile and Run in Local Dev Mode
 
 ```
-cd ./dmn-consumer-example
-mvn clean compile quarkus:dev
+mvn clean install
+cd ./dmn-quarkus-consumer-example
+mvn quarkus:dev
 ```
 
-(This requires a previous installation of `dmn-resource-jar`)
+(This requires a previous installation of `dmn-quarkus-resource-jar`)
 
 ### Package and Run in JVM mode
 
 ```
 mvn clean package
-java -jar ./dmn-consumer-example/target/quarkus-app/quarkus-run.jar
+java -jar ./dmn-quarkus-consumer-example/target/quarkus-app/quarkus-run.jar
 ```
 
 or on Windows
 
 ```
 mvn clean package
-java -jar .\dmn-consumer-example\target\quarkus-app\quarkus-run.jar
+java -jar .\dmn-quarkus-consumer-example\target\quarkus-app\quarkus-run.jar
 ```
 
 ### Package and Run using Local Native Image
@@ -50,10 +51,10 @@ Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
 mvn clean package -Pnative
 ```
 
-To run the generated native executable, generated in `./dmn-consumer-example/target/`, execute
+To run the generated native executable, generated in `./dmn-quarkus-consumer-example/target/`, execute
 
 ```
-./dmn-consumer-example/target/dmn-consumer-example-runner
+./dmn-quarkus-consumer-example/target/dmn-quarkus-consumer-example-runner
 ```
 
 Note: This does not yet work on Windows, GraalVM and Quarkus should be rolling out support for Windows soon.
@@ -74,12 +75,12 @@ Validate the functionality of DMN models before deploying them into a production
 To define test scenarios you need to create a .scesim file inside your project and link it to the DMN model you want to be tested. Run all Test Scenarios, executing:
 
 ```sh
-cd ./dmn-consumer-example
+cd ./dmn-quarkus-consumer-example
 mvn clean test
 ```
 See results in surefire test report `target/surefire-reports` 
 
-(This requires a previous installation of `dmn-resource-jar`)
+(This requires a previous installation of `dmn-quarkus-resource-jar`)
 
 ## Example Usage
 
