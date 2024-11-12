@@ -1,6 +1,6 @@
 # Process Business Calendar Example
 
-This project is an illustrative example demonstrating the impact of a business calendar on process execution within a Quarkus application. It showcases a business process involving credit card bill processing, which adapts to a business calendar defined in calendar.properties. This configuration modifies timer behaviors to respect working hours, holidays, and other schedule-based constraints.
+This example demonstrates the impact of a business calendar on process execution within a Quarkus application. It showcases a business process involving credit card bill processing, which adapts to a business calendar defined in calendar.properties. This configuration modifies timer behaviors to respect working hours, holidays, and other schedule-based constraints.
 
 ### Main Components
 
@@ -152,22 +152,30 @@ curl -X GET http://localhost:8080/BusinessCalendarCreditBill/{id} \
 
 ```
 
-## Comparison of timer with and without calendar.properties
+## Understanding timer behaviour with respect to working and non-working days without calendar.properties
 
-### Testing without calendar.properties
-Without the calendar properties file, the behavior of the timer depends on the system current time settings (Default properties)
+### 1. What is a working hour/working day and what happens when event occurs in a working hour ?
 
-* business.days.per.week - specifies number of working days per week (default 5)
-* business.hours.per.day - specifies number of working hours per day (default 8)
-* business.start.hour - specifies starting hour of work day (default 9)
-* business.end.hour - specifies ending hour of work day (default 17)
-* business.holidays - specifies holidays in yyy-MM-dd format
-* business.holiday.date.format - specifies holiday date format used (default yyyy-MM-dd)
-* business.weekend.days - specifies days of the weekend (default Saturday and Sunday i.e 6,7)
+**Default Values**:
+When the calendar.properties file is not present in the src/main/resources directory or not explicitly provided, a set of default properties will be used. This ensures Business Calendar feature still functions without a calendar.properties file.
+* **business.days.per.week** defaults to 5, meaning only Monday to Friday are considered working days.
+* **business.hours.per.day** defaults to 8, representing an 8-hour workday.
+* **business.start.hour** defaults to 9, and business.end.hour defaults to 17 (i.e.,9 AM to 5 PM workday).
+* **business.weekend.days** defaults to Saturday and Sunday i.e., 7,1
+* **business.holidays** will be considered empty, meaning no predefined holidays unless specified.
+* The absence of a calendar.properties file means the system will treat all configurations based on the default settings whose output corresponds to the systems time and day.
+* Timer will be triggered only during the default working hours (9 AM to 5 PM) and on the default working days (Monday to Friday).
 
-### Example test results without calendar.properties (working hours)
+### 2. What is a non-working hour/non-working day and what happens when event occurs in a non-working hour ?
+
+* Considering the default properties as mentioned above, if a task is executed after working hours i.e., non-working hours (e.g., at 7 PM), the system will delay its execution until the start of the next working hour/working day (9 AM). For example, if a task timer is set to trigger at 7 PM on a Friday, it will not execute until 9 AM on Monday (assuming a standard 5-day workweek).
+* If a task becomes due or is scheduled to start outside business hours, it will remain in a pending state until business hours resume.
+* If the business calendar is configured with a 5-day workweek (business.days.per.week=5), any tasks scheduled over the weekend will not resume until the following Monday at the start of business hours.
+
+### Testing without calendar.properties (working hours)
+**Note**: The test was performed at 16:13 on Monday, which falls under default working hours 
+
 * The timer for the Verify Payment task will follow a straightforward countdown based on real time. If the specified time elapses i.e., 1 second, it immediately moves to cancel payment task.
-
 
 * POST/ BusinessCalendarCreditBill
 ```sh
@@ -190,28 +198,11 @@ curl -X GET http://localhost:8080/BusinessCalendarCreditBill \
 ### Example of logs representing the process from start to completion
 <p align="center"><img width=75% height=50% src="docs/images/WithPropertiesLogs.png"></p>
 
+* At 16:13:20,606, job 18e97326-897b-4f1b-8121-b09ea9eb37d7 was started, indicating that the timer was triggered approximately after one second as expected.
 
-* The workflow 'BusinessCalendarCreditBill' began at 08:11:58,353 with a unique identifier 130f2eab-ab2e-413d-958e-414d1b3b0dc7.
+### Testing without calendar.properties (non-working hours)
+**Note**: The test was performed at 08:27 on Monday, which does not fall in the default working hours range
 
-* At 08:11:58,364, the node 'Start' was triggered.
-
-* The subsequent node 'Process Credit Bill' was activated at 08:11:58,368.
-
-* The 'Verify Payment' node was triggered at 08:11:58,397.
-
-* A human task was registered at 08:11:58,444.
-
-* The workflow transitioned to an 'Active' state at 08:11:58,496.
-
-* Importantly, the log at 08:11:59,406 indicates that the job e3646ed7-76bf-498c-aa72-7086f4b847c6 was started, emphasizing that the timer was triggered after 1 second as anticipated.
-
-* The 'Cancel Payment' node triggered at 08:11:59,425. CreditCardService logged the bill cancellation. 
-
-* The final node 'End' was initiated at 08:11:59,430. The workflow completed successfully at 08:11:59,478.
-
-* Hence, without calendar.properties, timer fires immediately after their configured interval, activating tasks without delay.
-
-### Example test results without calendar.properties (non-working hours)
 * During non-working hours, the timer for the Verify Payment task will not trigger and the process remains in active state, does not move to cancel payment task.
 
 * POST/ BusinessCalendarCreditBill
@@ -230,7 +221,7 @@ curl -X GET http://localhost:8080/BusinessCalendarCreditBill \
 -H "Accept: application/json"
 
 ```
-* Now, even after 1 second, the process will be in Active State.
+* Now, even after 1 second, the process will be in Active State but not completed state.
 
 <p align="center"><img width=75% height=50% src="docs/images/Get3.png"></p>
 
@@ -238,35 +229,36 @@ curl -X GET http://localhost:8080/BusinessCalendarCreditBill \
 
 <p align="center"><img width=75% height=50% src="docs/images/WithoutPropertiesLogsNW.png"></p>
 
-
-## Testing with calendar.properties (During non-working hours/Specified Holiday)
-### Steps to create & configure calendar.properties with a holiday/non-working hours
-
-* Based on requirement, create/modify calendar.properties file in the src/main/resources directory. This file activates the Business Calendar feature and essential configurations
+## Adding calendar.properties
 
 ### calendar.properties format
-* business.days.per.week - specifies number of working days per week 
-* business.hours.per.day - specifies number of working hours per day 
-* business.start.hour - specifies starting hour of work day 
-* business.end.hour - specifies ending hour of work day 
-* business.holidays - specifies holidays in yyy-MM-dd format
-* business.holiday.date.format - specifies holiday date format used 
-* business.weekend.days - specifies days of the weekend (If weekend has to considered as working days, consider a value out of range 1-7, i.e. 8)
-* business.cal.timezone - system default timezone
 
-```properties
-business.end.hour=24
-business.hours.per.day=24
-business.start.hour=0
-business.holiday.date.format=yyyy-MM-dd
-business.holidays=2024-11-07
-business.days.per.week =7
-business.weekend.days = 8
-#business.cal.timezone= system default timezone
+**Customized Values**:
+You can override the default values by specifying your own configurations.
+
+```Properties
+business.start.hour=0                    # specifies starting hour of work day 
+business.end.hour=24                     # specifies ending hour of work day (e.g., to cover an 24hrs schedule 0 to 24)
+business.hours.per.day=24                # Defines the number of hours per working day (e.g., business.hours.per.day=24 for a 24-hour workday)
+business.days.per.week =7                # Defines how many days are considered working days (e.g.,7 means all days are working days)
+business.holiday.date.format=yyyy-MM-dd  # specifies holiday date format used
+business.holidays=2024-11-07             # Add custom holidays that are non-working days, specified in the format defined by business.holiday.date.format 
+business.weekend.days = 8                # Define specific days as weekends (e.g., setting business.weekend.days=1,2 for Sunday and Monday, if weekend has to considered as working days, consider a value out of range 1-7, i.e. 8)
+business.timezone=America/Toronto        # Optionally specify the timezone for your business hours, if not configured, it corresponds to systems time/day.
 ```
 
-* After calendar.properties file is added, build the example again "mvn clean compile quarkus:dev" or type 's' in the quarkus terminal and hit enter just to restart.
+## Understanding timer behaviour with calendar.properties 
 
+**Behavior During Working Hours and non-working hours**:
+* **Tasks within working hours**: When a task or timer is scheduled within the defined working hours (e.g., between business.start.hour=0 and business.end.hour=24), the task will be completed immediately once it becomes due. For example, if a task is scheduled to trigger at 10 AM on a Tuesday, and your working hours are from 0 to 24, the task will execute as expected at 10 AM.
+* **Handling custom working days**: If calendar.properties file specifies business.days.per.week=6, the system will treat these days as working days, tasks scheduled on any of these days will be processed during the defined working hours. For example, if a task is due at 10 AM on Saturday, and you’ve configured Saturday as a working day, the task will execute as completed.
+* **Holiday handling during working hours**: Even if a task is scheduled within the defined working hours, it will be delayed if it falls on a configured holiday. For example, if you have business.days.per.week =7 business.weekend.days=6,7 the task will not execute on the weekend days mentioned. Instead, it will be postponed to the next working day at the defined business.start.hour. This ensures that no tasks are executed on days that are considered holidays, even if they fall within regular business hours.
+* **Timezone**: If you specify a timezone using business.cal.timezone, the calendar will adjust all scheduling based on this timezone, regardless of system time.
+
+### Testing with calendar.properties (During non-working hours/Specified Holiday)
+**Note**: The test was performed considering 24-hour workday properties with configured holiday i.e., business.holidays=2024-11-07
+
+* After calendar.properties file is added, build the example again "mvn clean compile quarkus:dev" or type 's' in the quarkus terminal and hit enter just to restart.
 
 * POST/ BusinessCalendarCreditBill
 ```sh
