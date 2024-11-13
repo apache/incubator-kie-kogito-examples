@@ -53,7 +53,7 @@
   <bpmn2:collaboration id="_DCDB6E8C-F47A-4DBC-B34A-046A81E24F95" name="Default Collaboration">
     <bpmn2:participant id="_D18AFD4D-A5A8-4C66-8259-5D9CF9B946FA" name="Pool Participant" processRef="BusinessCalendarCreditBill"/>
   </bpmn2:collaboration>
-  <bpmn2:process id="BusinessCalendarCreditBill" drools:packageName="org.kie.calendar.bill" drools:version="1.0" drools:adHoc="false" name="BusinessCalendar-CreditBill" isExecutable="true" processType="Public">
+  <bpmn2:process id="BusinessCalendarCreditBill" drools:packageName="org.kie.kogito.calendar.bill" drools:version="1.0" drools:adHoc="false" name="BusinessCalendar-CreditBill" isExecutable="true" processType="Public">
     <bpmn2:property id="creditCardNumber" itemSubjectRef="_creditCardNumberItem" name="creditCardNumber"/>
     <bpmn2:property id="creditCardDetails" itemSubjectRef="_creditCardDetailsItem" name="creditCardDetails"/>
     <bpmn2:sequenceFlow id="_3319AF07-1259-4E0B-95FB-4D7439C2D1BB" sourceRef="_C10EDD5D-0C5F-4ADB-9B85-28D3B9C7D2A7" targetRef="_049D6ACC-0D5B-4C91-9382-D5B8417F3902"/>
