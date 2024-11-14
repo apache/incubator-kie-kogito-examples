@@ -173,8 +173,8 @@ business.hours.per.day=24
 business.start.hour=0
 business.holiday.date.format=yyyy-MM-dd
 business.holidays=2024-10-30
-business.days.per.week =5
-business.weekend.days =6,7
+business.days.per.week=5
+business.weekend.days=6,7
 business.cal.timezone=America/Toronto
 ```
 **Behavior**:
