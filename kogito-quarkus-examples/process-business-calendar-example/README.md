@@ -69,12 +69,6 @@ You will need:
 - Environment variable JAVA_HOME set accordingly
 - Maven 3.9.6+ installed
 
-When using native image compilation, you will also need:
-- GraalVM 19.3+ installed
-- Environment variable GRAALVM_HOME set accordingly
-- GraalVM native image needs as well native-image extension: https://www.graalvm.org/reference-manual/native-image/
-- Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too, please refer to GraalVM installation documentation for more details.
-
 ### Compile and Run in Local Dev Mode
 
 ```sh
@@ -95,24 +89,6 @@ or on windows
 ```sh
 mvn clean package
 java -jar target\quarkus-app\quarkus-run.jar
-```
-
-### Package and Run using Local Native Image
-Note that the following configuration property needs to be added to `application.properties` in order to enable automatic registration of `META-INF/services` entries required by the workflow engine:
-```
-quarkus.native.auto-service-loader-registration=true
-```
-
-Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
-
-```sh
-mvn clean package -Pnative
-```
-
-To run the generated native executable, generated in `target/`, execute
-
-```sh
-./target/process-usertasks-quarkus-runner
 ```
 
 ### OpenAPI (Swagger) documentation
@@ -152,27 +128,63 @@ curl -X GET http://localhost:8080/BusinessCalendarCreditBill/{id} \
 
 ```
 
-## Understanding timer behaviour with respect to working and non-working days without calendar.properties
+## Understanding calendar.properties
+**Default Behavior**: If you do not input custom values in a calendar.properties file, the system will use the following default settings:
 
-### 1. What is a working hour/working day and what happens when event occurs in a working hour ?
-
-**Default Values**:
-When the calendar.properties file is not present in the src/main/resources directory or not explicitly provided, a set of default properties will be used. This ensures Business Calendar feature still functions without a calendar.properties file.
 * **business.days.per.week** defaults to 5, meaning only Monday to Friday are considered working days.
+
 * **business.hours.per.day** defaults to 8, representing an 8-hour workday.
+
 * **business.start.hour** defaults to 9, and business.end.hour defaults to 17 (i.e.,9 AM to 5 PM workday).
-* **business.weekend.days** defaults to Saturday and Sunday i.e., 7,1
-* **business.holidays** will be considered empty, meaning no predefined holidays unless specified.
-* The absence of a calendar.properties file means the system will treat all configurations based on the default settings whose output corresponds to the systems time and day.
-* Timer will be triggered only during the default working hours (9 AM to 5 PM) and on the default working days (Monday to Friday).
 
-### 2. What is a non-working hour/non-working day and what happens when event occurs in a non-working hour ?
+* **business.weekend.days** defaults to Saturday and Sunday (Sunday-1, Monday-2, Tuesday-3, Wednesday-4, Thursday-5, Friday-6, Saturday-7).
 
+* **business.holiday.date.format** defaults to yyyy-MM-dd, (input must match format defined format).
+
+* **business.holidays** by default will be considered empty, meaning no predefined holidays unless specified, if specified, it should be in the format defined by business.holiday.date.format, Holidays can be specified as individual dates (e.g., 2024-12-25,2024-12-31) or as a range of dates (e.g., 2024-11-12:2024-11-14).
+
+* **business.timezone** defaults to the system’s default timezone, if configured, valid time-zone as per Valid timezone as per https://docs.oracle.com/javase/7/docs/api/java/util/TimeZone.html should be specfied.
+
+**Behavior**:
 * Considering the default properties as mentioned above, if a task is executed after working hours i.e., non-working hours (e.g., at 7 PM), the system will delay its execution until the start of the next working hour/working day (9 AM). For example, if a task timer is set to trigger at 7 PM on a Friday, it will not execute until 9 AM on Monday (assuming a standard 5-day workweek).
 * If a task becomes due or is scheduled to start outside business hours, it will remain in a pending state until business hours resume.
 * If the business calendar is configured with a 5-day workweek (business.days.per.week=5), any tasks scheduled over the weekend will not resume until the following Monday at the start of business hours.
 
-### Testing without calendar.properties (working hours)
+
+## Configuring Custom Calendar.Properties
+### Note: Important Guidelines for Configuring `calendar.properties`
+To override default values, configure calendar.properties file based on requirements. In order to ensure more aligned functionality, please follow the rules outlined below. Adhering to these guidelines will help ensure that tasks are executed as expected. Incorrect configurations may result in unintended behavior, so it's recommended to input accurate values.
+
+| Property                     | Valid Range                                                                                                            | Description                                                                                                                                                                                    |
+|------------------------------|------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `business.start.hour`       | 0-23                                                                                                                   | Start hour of the workday                                                                                                                                                                      |
+| `business.end.hour`         | 0-23                                                                                                                   | End hour of the workday                                                                                                                                                                        |
+| `business.hours.per.day`    | 1-24                                                                                                                   | Total working hours in a day                                                                                                                                                                   |
+| `business.days.per.week`    | 1-7                                                                                                                    | Total working days per week                                                                                                                                                                    |
+| `business.weekend.days`     | 0-7                                                                                                                    | Days considered as weekends (e.g., 1 = Sunday, 7 = Saturday). In case you want to consider all the days as working days i.e., no weekend days, input 0 as value considering working days as 7. |
+| `business.holiday.date.format`       | (yyyy-MM-DD)                                                                                                           | List of holidays                                                                                                                                                                               |
+| `business.holidays`   | Dates aligned with business.holiday.date.format                                                                        | Date format for holidays                                                                                                                                                                       |
+| `business.cal.timezone`     | Valid timezone as per [Java TimeZone Documentation](https://docs.oracle.com/javase/7/docs/api/java/util/TimeZone.html) | Timezone for calculations                                                                                                                                                                      |
+
+### Example of custom calendar.properties
+```Properties
+business.end.hour=23
+business.hours.per.day=24
+business.start.hour=0
+business.holiday.date.format=yyyy-MM-dd
+business.holidays=2024-10-30
+business.days.per.week =5
+business.weekend.days =6,7
+business.cal.timezone=America/Toronto
+```
+**Behavior**:
+* **Tasks within working hours**: When a task or timer is scheduled within the defined working hours (e.g., between business.start.hour=0 and business.end.hour=24), the task will be completed immediately once it becomes due. For example, if a task is scheduled to trigger at 10 AM on a Tuesday, and your working hours are from 0 to 24, the task will execute as expected at 10 AM.
+* **Handling custom working days**: If calendar.properties file specifies business.days.per.week=6, the system will treat these days as working days, tasks scheduled on any of these days will be processed during the defined working hours. For example, if a task is due at 10 AM on Saturday, and you’ve configured Saturday as a working day, the task will execute as completed.
+* **Weekend handling**: Even if a task is executed within the defined working hours, it will be delayed if it falls on a configured weekend. For example, if you have business.days.per.week =5 and business.weekend.days=6,7 the task will not execute on the weekend days mentioned. Instead, it will be postponed to the next working day at the defined business.start.hour. This ensures that no tasks are executed on days that are considered holidays, even if they fall within regular business hours.
+* **Holiday handling**: if a task is executed within the defined working hours, it will be delayed if it falls on a configured holiday. For example, if you have business.holdays = 2024-10-30 and a task is executed on the same day in a working hour, it will not execute, instead it will be postponed to the next working day at the defined business.start.hour. This ensures that no tasks are executed on days that are considered holidays, even if they fall within regular business hours.
+* **Timezone**: If you specify a timezone using business.cal.timezone, the calendar will adjust all scheduling based on this timezone, regardless of system time else systems time will be considered.
+
+## Testing with default calendar.properties (working hours)
 **Note**: The test was performed at 16:13 on Monday, which falls under default working hours 
 
 * The timer for the Verify Payment task will follow a straightforward countdown based on real time. If the specified time elapses i.e., 1 second, it immediately moves to cancel payment task.
@@ -200,7 +212,7 @@ curl -X GET http://localhost:8080/BusinessCalendarCreditBill \
 
 * At 16:13:20,606, job 18e97326-897b-4f1b-8121-b09ea9eb37d7 was started, indicating that the timer was triggered approximately after one second as expected.
 
-### Testing without calendar.properties (non-working hours)
+## Testing with default calendar.properties (non-working hours)
 **Note**: The test was performed at 08:27 on Monday, which does not fall in the default working hours range
 
 * During non-working hours, the timer for the Verify Payment task will not trigger and the process remains in active state, does not move to cancel payment task.
@@ -229,33 +241,7 @@ curl -X GET http://localhost:8080/BusinessCalendarCreditBill \
 
 <p align="center"><img width=75% height=50% src="docs/images/WithoutPropertiesLogsNW.png"></p>
 
-## Adding calendar.properties
-
-### calendar.properties format
-
-**Customized Values**:
-You can override the default values by specifying your own configurations.
-
-```Properties
-business.start.hour=0                    # specifies starting hour of work day 
-business.end.hour=24                     # specifies ending hour of work day (e.g., to cover an 24hrs schedule 0 to 24)
-business.hours.per.day=24                # Defines the number of hours per working day (e.g., business.hours.per.day=24 for a 24-hour workday)
-business.days.per.week =7                # Defines how many days are considered working days (e.g.,7 means all days are working days)
-business.holiday.date.format=yyyy-MM-dd  # specifies holiday date format used
-business.holidays=2024-11-07             # Add custom holidays that are non-working days, specified in the format defined by business.holiday.date.format 
-business.weekend.days = 8                # Define specific days as weekends (e.g., setting business.weekend.days=1,2 for Sunday and Monday, if weekend has to considered as working days, consider a value out of range 1-7, i.e. 8)
-business.timezone=America/Toronto        # Optionally specify the timezone for your business hours, if not configured, it corresponds to systems time/day.
-```
-
-## Understanding timer behaviour with calendar.properties 
-
-**Behavior During Working Hours and non-working hours**:
-* **Tasks within working hours**: When a task or timer is scheduled within the defined working hours (e.g., between business.start.hour=0 and business.end.hour=24), the task will be completed immediately once it becomes due. For example, if a task is scheduled to trigger at 10 AM on a Tuesday, and your working hours are from 0 to 24, the task will execute as expected at 10 AM.
-* **Handling custom working days**: If calendar.properties file specifies business.days.per.week=6, the system will treat these days as working days, tasks scheduled on any of these days will be processed during the defined working hours. For example, if a task is due at 10 AM on Saturday, and you’ve configured Saturday as a working day, the task will execute as completed.
-* **Holiday handling during working hours**: Even if a task is scheduled within the defined working hours, it will be delayed if it falls on a configured holiday. For example, if you have business.days.per.week =7 and business.weekend.days=6,7 the task will not execute on the weekend days mentioned. Instead, it will be postponed to the next working day at the defined business.start.hour. This ensures that no tasks are executed on days that are considered holidays, even if they fall within regular business hours.
-* **Timezone**: If you specify a timezone using business.cal.timezone, the calendar will adjust all scheduling based on this timezone, regardless of system time.
-
-### Testing with calendar.properties (During non-working hours/Specified Holiday)
+## Testing with calendar.properties (During non-working hours/Specified Holiday)
 **Note**: The test was performed considering 24-hour workday properties with configured holiday i.e., business.holidays=2024-11-07
 
 * After calendar.properties file is added, build the example again "mvn clean compile quarkus:dev" or type 's' in the quarkus terminal and hit enter just to restart.

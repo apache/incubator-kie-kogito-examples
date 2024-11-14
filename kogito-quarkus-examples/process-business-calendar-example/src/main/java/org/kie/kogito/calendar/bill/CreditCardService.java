@@ -41,7 +41,7 @@ public class CreditCardService {
     }
 
     public CreditCardDetails cancelPayment(CreditCardDetails creditCardDetails) {
-        creditCardDetails.setStatus("Payment cancelled, money will be refunded if it it is debited");
+        creditCardDetails.setStatus("Payment cancelled, money will be refunded if it is debited");
         logger.info("cancelling bill");
         return creditCardDetails;
     }
