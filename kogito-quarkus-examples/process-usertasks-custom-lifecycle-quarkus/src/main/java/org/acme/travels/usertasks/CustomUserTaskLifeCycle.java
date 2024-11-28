@@ -171,7 +171,7 @@ public class CustomUserTaskLifeCycle implements UserTaskLifeCycle {
 
     private String assignStrategy(UserTaskInstance userTaskInstance, IdentityProvider identityProvider) {
         UserTaskAssignmentStrategy assignmentStrategy = userTaskInstance.getUserTask().getAssignmentStrategy();
-        return assignmentStrategy.computeAssigment(userTaskInstance, identityProvider).orElse(null);
+        return assignmentStrategy.computeAssignment(userTaskInstance, identityProvider).orElse(null);
     }
 
     private void checkPermission(UserTaskInstance userTaskInstance, IdentityProvider identityProvider) {
