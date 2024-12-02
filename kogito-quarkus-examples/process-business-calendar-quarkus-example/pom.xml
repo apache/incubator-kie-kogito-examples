@@ -30,7 +30,7 @@
         <version>999-SNAPSHOT</version>
     </parent>
     
-    <artifactId>process-business-calendar-example</artifactId>
+    <artifactId>process-business-calendar-quarkus-example</artifactId>
     <name>Kogito Example :: Process Business Calendar</name>
     
     <properties>
