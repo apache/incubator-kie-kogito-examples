@@ -131,7 +131,14 @@ https://repo.maven.apache.org/maven2: Did not attempt to download because of a p
         <groupId>org.kie.kogito</groupId>
         <artifactId>kogito-maven-plugin</artifactId>
         <version>${version.org.kie.kogito}</version>
-        <extensions>true</extensions>
+        <executions>
+          <execution>
+            <phase>compile</phase>
+            <goals>
+              <goal>generateModel</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
