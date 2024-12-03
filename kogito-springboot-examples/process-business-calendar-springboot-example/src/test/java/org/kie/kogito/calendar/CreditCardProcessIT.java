@@ -18,14 +18,17 @@
  */
 package org.kie.kogito.calendar;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.kie.kogito.process.ProcessConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
@@ -42,8 +45,16 @@ public class CreditCardProcessIT {
     private static final String PROCESS_ID = "BusinessCalendarCreditBill";
     private static final String CARD_NUMBER = "434354343";
 
+    @LocalServerPort
+    private int port;
+
     @Autowired
     ProcessConfig processConfig;
+
+    @BeforeEach
+    public void setUp() {
+        RestAssured.port = port;
+    }
 
     @Test
     public void testCardPaymentInWorkingDay() throws Exception {
