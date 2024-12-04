@@ -1,0 +1,36 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  annotations:
+    app.quarkus.io/commit-id: eeb187b96e1d3526959459ca0c9e0d618eeede46
+    app.quarkus.io/build-timestamp: 2024-03-20 - 17:25:36 +0000
+  labels:
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/name: subscription-service
+  name: subscription-service
+spec:
+  template:
+    spec:
+      containers:
+        - env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: POSTGRESQL_PASSWORD
+                  name: postgres-secrets
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  key: POSTGRESQL_USER
+                  name: postgres-secrets
+            - name: POSTGRES_HOST
+              value: postgres
+          image: newsletter-subs-service
+          imagePullPolicy: IfNotPresent
+          name: subscription-service
+          securityContext:
+            runAsNonRoot: true
+          ports:
+            - containerPort: 8080
+              name: http1
+              protocol: TCP
