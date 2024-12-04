@@ -7,7 +7,6 @@ To allow a quick setup of all services required to run this demo, we provide a d
 - Kogito Data Index
 - Kogito Jobs
 - Kogito Management Console
-- Kogito Task Console
 - Keycloak
 
 In order to use it, please ensure you have Docker Compose installed on your machine, otherwise follow the instructions available
@@ -22,7 +21,6 @@ Once all services bootstrap, the following ports will be assigned on your local 
 - Data Index: 8180
 - Jobs: 8580
 - Management Console: 8280
-- Task Console: 8380
 - Keycloak: 8480
 
 ### Postgresql deployment:

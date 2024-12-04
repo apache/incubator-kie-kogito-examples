@@ -143,7 +143,7 @@ cd <path_to_process-usertasks-quarkus-with-console>/docker-compose
 3. Run the ```startServices.sh``` script
 
 ```bash
-sh ./startServices.sh
+./startServices.sh
 ```
 
 Once all services bootstrap, the following ports will be assigned on your local machine:
@@ -173,6 +173,12 @@ It will install the *Kogito Realm* that comes with a predefined set of users:
 
 Once Keycloak is started, you should be able to access your *Keycloak Server* at [localhost:8480/auth](http://localhost:8480/auth) with *admin* user.
 
+### Compile and Start the process
+
+```
+mvn clean package
+java -jar target/quarkus-app/quarkus-run.jar
+```
 
 ### Compile and Run in Local Dev Mode
 
