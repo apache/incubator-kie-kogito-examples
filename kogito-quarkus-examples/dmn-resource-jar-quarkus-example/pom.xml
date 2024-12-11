@@ -42,7 +42,7 @@
   </properties>
   <packaging>pom</packaging>
   <modules>
-    <module>dmn-resource-jar</module>
-    <module>dmn-consumer-example</module>
+    <module>dmn-quarkus-resource-jar</module>
+    <module>dmn-quarkus-consumer-example</module>
   </modules>
 </project>

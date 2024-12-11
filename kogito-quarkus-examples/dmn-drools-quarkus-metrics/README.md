@@ -31,7 +31,7 @@ The use case is summarized in the following schema:
  
 ![RuntimeMetrics](https://user-images.githubusercontent.com/18282531/76740726-a0cbdd80-676e-11ea-8cc3-63ed5cbb3ac8.png)
 
-To summarize, the kogito app will expose by default an endpoint `/metrics` with the prometheus variables, and a prometheus instance will simply fetch the data from there.
+To summarize, the kogito app will expose by default an endpoint `/q/metrics` with the prometheus variables, and a prometheus instance will simply fetch the data from there.
 
 ### Dashboards
 
@@ -81,7 +81,7 @@ Post "hello":
 curl -H "Content-Type: application/json" -X POST -d '{"strings":["world"]}' http://localhost:8080/hello
 ```
 
-the service will return `["hello", "world"]`
+the service will return `["world"]`
 
 ### POST /LoanEligibility
 

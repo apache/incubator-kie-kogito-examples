@@ -63,7 +63,7 @@ In this case, the models are contained in the `org.kie:kie-dmn-test-resources` a
 
 Extracted models could be found under `target/generated-resources/valid_models.DMNv1_5` directory.
 
-This example also features the `org.kie.dmn.runtime.typecheck` enviropnment variable, to enforce constraint checks
+This example also features the `org.kie.dmn.runtime.typecheck` environment variable, to enforce constraint checks
 
 ```xml
       <plugin>

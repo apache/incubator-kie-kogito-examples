@@ -56,16 +56,19 @@
       </activation>
       <modules>
         <module>decisiontable-springboot-example</module>
+        <module>dmn-15-springboot-example</module>
         <module>dmn-drools-springboot-metrics</module>
         <module>dmn-event-driven-springboot</module>
         <module>dmn-listener-springboot</module>
         <module>dmn-pmml-springboot-example</module>
+        <module>dmn-resource-jar-springboot-example</module>
         <module>dmn-springboot-example</module>
         <module>dmn-tracing-springboot</module>
         <module>flexible-process-springboot</module>
         <module>onboarding-springboot</module>
         <module>pmml-event-driven-springboot</module>
         <module>pmml-springboot-example</module>
+        <module>process-business-calendar-springboot-example</module>
         <module>process-business-rules-springboot</module>
         <module>process-decisions-rest-springboot</module>
         <module>process-decisions-rules-springboot</module>
@@ -103,15 +106,18 @@
       </activation>
       <modules>
         <module>decisiontable-springboot-example</module>
+        <module>dmn-15-springboot-example</module>
         <module>dmn-drools-springboot-metrics</module>
         <module>dmn-event-driven-springboot</module>
         <module>dmn-listener-springboot</module>
         <module>dmn-pmml-springboot-example</module>
+        <module>dmn-resource-jar-springboot-example</module>
         <module>dmn-springboot-example</module>
         <module>dmn-tracing-springboot</module>
         <module>flexible-process-springboot</module>
         <module>pmml-event-driven-springboot</module>
         <module>pmml-springboot-example</module>
+        <module>process-business-calendar-springboot-example</module>
         <module>process-business-rules-springboot</module>
         <module>process-infinispan-persistence-springboot</module>
         <module>process-kafka-multi-springboot</module>

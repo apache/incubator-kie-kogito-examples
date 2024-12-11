@@ -137,6 +137,7 @@
         <activeByDefault>true</activeByDefault>
       </activation>
       <modules>
+        <module>kogito-java-examples</module>
         <module>kogito-quarkus-examples</module>
         <module>kogito-springboot-examples</module>
         <module>serverless-workflow-examples</module>
