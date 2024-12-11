@@ -816,15 +816,14 @@
     },
     {
       "clientId": "kogito-console-quarkus",
-      "rootUrl": "http://localhost:8380",
-      "adminUrl": "http://localhost:8380/",
-      "baseUrl": "http://localhost:8380/",
+      "rootUrl": "http://localhost:8280",
+      "adminUrl": "http://localhost:8280/",
+      "baseUrl": "http://localhost:8280/",
       "surrogateAuthRequired": false,
       "enabled": true,
       "clientAuthenticatorType": "client-secret",
       "secret": "**********",
       "redirectUris": [
-        "http://localhost:8380/*",
         "http://localhost:8280/*"
       ],
       "webOrigins": [
