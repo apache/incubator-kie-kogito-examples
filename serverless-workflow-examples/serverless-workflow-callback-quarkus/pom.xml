@@ -154,6 +154,7 @@
           <systemPropertyVariables>
             <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
             <maven.home>${maven.home}</maven.home>
+            <container.image.kafka>${container.image.kafka}</container.image.kafka>
           </systemPropertyVariables>
         </configuration>
         <executions>
