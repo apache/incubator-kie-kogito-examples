@@ -410,11 +410,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
-        <configuration>
-          <systemPropertyVariables>
-            <container.image.kafka>${container.image.kafka}</container.image.kafka>
-          </systemPropertyVariables>
-        </configuration>
       </plugin>
     </plugins>
   </build>
