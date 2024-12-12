@@ -213,7 +213,7 @@ mvn clean package -Pnative -Pinfinispan
 To run the generated native executable, generated in `target/`, execute
 
 ```sh
-./target/./target/process-usertasks-timer-quarkus-with-console-runner
+./target/process-usertasks-timer-quarkus-with-console-runner
 ```
 
 
