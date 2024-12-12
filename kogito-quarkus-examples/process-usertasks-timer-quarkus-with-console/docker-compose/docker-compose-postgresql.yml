@@ -175,7 +175,7 @@ services:
       - ../target/classes/META-INF/processSVG/:/home/kogito/data/svg/
     environment:
       RUNTIME_TOOLS_MANAGEMENT_CONSOLE_KOGITO_ENV_MODE: "PROD"
-      RUNTIME_TOOLS_MANAGEMENT_CONSOLE_DATA_INDEX_ENDPOINT: http://${DOCKER_GATEWAY_HOST:-host.docker.internal}:8180/graphql
+      RUNTIME_TOOLS_MANAGEMENT_CONSOLE_DATA_INDEX_ENDPOINT: http://127.0.0.1:8180/graphql
       KOGITO_CONSOLES_KEYCLOAK_HEALTH_CHECK_URL: http://localhost:8480/auth/realms/kogito/.well-known/openid-configuration
       KOGITO_CONSOLES_KEYCLOAK_URL: http://localhost:8480/auth
       KOGITO_CONSOLES_KEYCLOAK_REALM: kogito
