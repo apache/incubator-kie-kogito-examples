@@ -18,7 +18,6 @@ will add additional handling to the approved or rejected visa applications _(by 
 * Create project using Quarkus Maven plugin with following extensions
 	* Kogito
 	* OpenApi
-* Import project into Eclipse IDE - requires BPMN modeller plugin installed
 * Create data model	
 	* VisaApplication
 * Create decision logic
@@ -78,16 +77,16 @@ You should start all the services before you execute any of the **Hiring** examp
 For Linux and MacOS:
 
 1. Open a Terminal
-2. Go to the process-usertasks-quarkus-with-console folder at kogito-examples
+2. Go to the kogito-travel-agency folder at kogito-examples
 
 ```bash
-cd <path_to_process-usertasks-quarkus-with-console>/docker-compose
+cd <path_to_kogito-travel-agency>/docker-compose
 ```
 
 3. Run the ```startServices.sh``` script
 
 ```bash
-sh ./startServices.sh
+./startServices.sh
 ```
 
 Once all services bootstrap, the following ports will be assigned on your local machine:
@@ -116,6 +115,13 @@ It will install the *Kogito Realm* that comes with a predefined set of users:
 |    jdoe       |   jdoe     | *managers*          |
 
 Once Keycloak is started, you should be able to access your *Keycloak Server* at [localhost:8480/auth](http://localhost:8480/auth) with *admin* user.
+
+### Compile and Start the process
+
+```
+mvn clean package
+java -jar target/quarkus-app/quarkus-run.jar
+```
 
 ### Compile and Run in Local Dev Mode
 

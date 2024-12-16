@@ -138,21 +138,6 @@ services:
    volumes:
      - ./svg/:/home/kogito/data/svg/
    environment:
-      KOGITO_DATAINDEX_HTTP_URL: http://${DOCKER_GATEWAY_HOST:-host.docker.internal}:8180/graphql
+      KOGITO_DATAINDEX_HTTP_URL: http://127.0.0.1:8180/graphql
       QUARKUS_HTTP_CORS_ORIGINS: "/.*/"
       KOGITO_MANAGEMENT_CONSOLE_PROPS: -Dkogito.consoles.keycloak.config.url=http://localhost:8480/auth -Dkogito.consoles.keycloak.config.health-check-url=http://localhost:8480/auth/realms/kogito/.well-known/openid-configuration -Dkogito.svg.folder.path=/home/kogito/data/svg
-
-  task-console:
-    container_name: task-console
-    image: quay.io/kiegroup/kogito-task-console:${KOGITO_VERSION}
-    ports:
-      - 8380:8080
-    depends_on:
-      data-index:
-        condition: service_started
-      keycloak:
-        condition: service_healthy
-    environment:
-      KOGITO_DATAINDEX_HTTP_URL: http://${DOCKER_GATEWAY_HOST:-host.docker.internal}:8180/graphql
-      QUARKUS_HTTP_CORS_ORIGINS: "/.*/"
-      KOGITO_TASK_CONSOLE_PROPS: -Dkogito.consoles.keycloak.config.url=http://localhost:8480/auth -Dkogito.consoles.keycloak.config.health-check-url=http://localhost:8480/auth/realms/kogito/.well-known/openid-configuration

@@ -23,7 +23,5 @@ There is one config map per infrastructure component.
 - `kogito.dataindex.wsurl` - the dataindex url, protocol: ws
 #### Kogito Management Console Config
 - `kogito.managementconsole.props` - command line properties for the management console
-#### Kogito Task Console Config
-- `kogito.taskconsole.props` - command line properties for the task console
 #### Kogito Job Service Config
 - `kogito.jobsservice.props` - command line properties for the job service 

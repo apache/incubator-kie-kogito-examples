@@ -18,7 +18,6 @@ The required *Kogito and Infrastructure Services* for this example are:
 - Kogito Data Index
 - Kogito Jobs Service 
 - Kogito Management Console
-- Kogito Task Console
 - Keycloak
 
 ## Running the Quickstart
@@ -63,13 +62,13 @@ You should start all the services before you execute any of the **Hiring** examp
 3. Run the ```startServices.sh``` script
 
 ```bash
-sh ./startServices.sh
+./startServices.sh
 ```
 
 or
 
 ```bash
-sh ./startServices.sh postgresql
+./startServices.sh postgresql
 ```
 
 Once all services bootstrap, the following ports will be assigned on your local machine:
@@ -79,7 +78,6 @@ Once all services bootstrap, the following ports will be assigned on your local 
 - Data Index: 8180
 - Jobs Service: 8580
 - Management Console: 8280
-- Task Console: 8380
 - Keycloak: 8480
 - PgAdmin: 8055
 
@@ -157,7 +155,7 @@ You should start all the services before you execute any of the **Hiring** examp
 3. Run the ```startServices.sh``` script with infinispan argument
 
 ```bash
-sh ./startServices.sh infinispan
+./startServices.sh infinispan
 ```
 
 Once all services bootstrap, the following ports will be assigned on your local machine:
@@ -167,7 +165,6 @@ Once all services bootstrap, the following ports will be assigned on your local 
 - Data Index: 8180
 - Jobs Service: 8580
 - Management Console: 8280
-- Task Console: 8380
 - Keycloak: 8480
 
 > **_NOTE:_**  This step requires the project to be compiled, please consider running a ```mvn clean install -Pinfinispan``` command on the project root before running the ```startServices.sh infinispan``` script for the first time or any time you modify the project.
@@ -216,7 +213,7 @@ mvn clean package -Pnative -Pinfinispan
 To run the generated native executable, generated in `target/`, execute
 
 ```sh
-./target/./target/process-usertasks-timer-quarkus-with-console-runner
+./target/process-usertasks-timer-quarkus-with-console-runner
 ```
 
 
@@ -298,54 +295,6 @@ Job panel shows the job details related to the timer execution:
     <img width=75%  src="docs/images/Job_details.png">
 </p>
 
-### Execute IT Interview task at Kogito Task Console
-
-To access the Kogito Task Console just open your browser and navigate to ``http://localhost:8280``. You'll be redirected to the *Keycloak* log in page.
-
-<p align="center">
-    <img width=75%  src="docs/images/keycloak-login.png">
-</p>
-
-Once there, log in using any of the users specified in the [Using Keycloak as Authentication Server](#using-keycloak-as-authentication-server) 
-
-> **_NOTE:_**  For more information about how to work with Kogito Task Console, please refer to the [Kogito Documentation](https://docs.jboss.org/kogito/release/latest/html_single/#con-task-console_kogito-developing-process-services) page.
-
-Access to Task Console again and verify IT Interview is available  
-<p align="center">
-    <img width=75%  src="docs/images/TC_listIT.png">
-</p>
-
-Access to IT Interview task, and complete.  
-<p align="center">
-    <img width=75%  src="docs/images/IT_task.png">
-</p>
-
-After complete the task, check the list of tasks show both completed tasks  
-<p align="center">
-    <img width=75%  src="docs/images/TC_listIT_completed.png">
-</p>
-
-Check the process instance details to verify the instance have been completed 
-
-<p align="center">
-    <img width=75%  src="docs/images/MC_details_3_completed_executed_job.png">
-</p>
-
-Jobs can be accessed in two ways on Management console:
-
-You can navigate to the process details page which has a dedicated panel showing a list of jobs associated with the process instance.
-
-You can also check the list of all the jobs available by navigating to the Jobs section.
-
-<p align="center">
-    <img width=75%  src="docs/images/JobsManagement.png">
-</p>
-
-Let's verify the HR interview has been avoided looking at application logs.
-<p align="center">
-    <img width=100%  src="docs/images/HR_interview_avoided_logs.png">
-</p>
-
 ### Submit a new request to start new hiring
 
 In a Terminal you can execute this command to start a **Hiring** process for the "Jon Snow" candidate:
@@ -361,38 +310,3 @@ curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST h
 }
 EOF
 ```
-
-### Execute HR Interview task before timer expires at Kogito Task Console
-
-Access the Kogito Task Console.
-
-<p align="center">
-    <img width=75%  src="docs/images/TC_listHR.png">
-</p>
-
-Access to HR Interview task and complete
-  
-<p align="center">
-    <img width=75%  src="docs/images/HR_task.png">
-</p>
-
-Check the process instance details at Kogito Management Console to see the execution path reflects the completed task
-
-<p align="center">
-    <img width=75%  src="docs/images/MC_details_4_IT_no_job.png">
-</p>
-
-Verify the job associated is displayed as cancelled regarding the HR Interview Task has been completed.
-
-Execute IT Interview task as it was described before, and access to the process instance details and see that it has been completed. 
-
-<p align="center">
-    <img width=75%  src="docs/images/MC_details_5_completed_no_job.png">
-</p>
-
-Finally, verify the HR interview has been completed by looking at application logs.
-
-<p align="center">
-    <img width=100%  src="docs/images/HR_interview_completed_logs.png">
-</p>
- 
