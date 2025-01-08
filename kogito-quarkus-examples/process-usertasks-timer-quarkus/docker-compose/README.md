@@ -6,8 +6,6 @@ To allow a quick setup of all services required to run this demo, we provide a d
 - Kafka
 - Kogito Data Index
 - Kogito Jobs
-- Kogito Management Console
-- Keycloak
 
 In order to use it, please ensure you have Docker Compose installed on your machine, otherwise follow the instructions available
 in [here](https://docs.docker.com/compose/install/).
@@ -20,8 +18,6 @@ Once all services bootstrap, the following ports will be assigned on your local 
 - Kafka: 9092
 - Data Index: 8180
 - Jobs: 8580
-- Management Console: 8280
-- Keycloak: 8480
 
 ### Postgresql deployment:
 

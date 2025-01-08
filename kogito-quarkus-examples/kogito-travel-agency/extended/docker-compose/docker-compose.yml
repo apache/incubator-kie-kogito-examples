@@ -126,18 +126,3 @@ services:
       QUARKUS_HTTP_CORS_ORIGINS: "/.*/"
       KAFKA_BOOTSTRAP_SERVERS: kafka:29092
       KOGITO_DATA_INDEX_PROPS: -Dkogito.protobuf.folder=/home/kogito/data/protobufs/
-
-  management-console:
-    container_name: management-console
-    image: quay.io/kiegroup/kogito-management-console:${KOGITO_VERSION}
-    ports:
-      - 8280:8080
-    depends_on:
-      data-index:
-        condition: service_started
-    volumes:
-      - ./svg/:/home/kogito/data/svg/
-    environment:
-      KOGITO_DATAINDEX_HTTP_URL: http://${DOCKER_GATEWAY_HOST:-host.docker.internal}:8180/graphql
-      KOGITO_MANAGEMENT_CONSOLE_PROPS: -Dkogito.consoles.keycloak.config.url=http://localhost:8480/auth -Dkogito.consoles.keycloak.config.health-check-url=http://localhost:8480/auth/realms/kogito/.well-known/openid-configuration -Dkogito.svg.folder.path=/home/kogito/data/svg
-      QUARKUS_HTTP_CORS_ORIGINS: "/.*/"

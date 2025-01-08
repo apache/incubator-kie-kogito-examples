@@ -24,7 +24,6 @@ Make sure you meet the [prerequisites](#prerequisites) and then start [here](#in
 ### Available Kogito services
 Installation from pre-build images
 - [Data Index](https://docs.jboss.org/kogito/release/1.15.0/html_single/#con-data-index-service_kogito-configuring)
-- [Management console](https://docs.jboss.org/kogito/release/1.15.0/html_single/#con-management-console_kogito-developing-process-services) 
 - [Jobs service](https://docs.jboss.org/kogito/release/latest/html_single/#con-jobs-service_kogito-configuring)
 
 ## Architecture 
@@ -83,8 +82,6 @@ All configuration required to make those connections as well as initializations 
 - `kogito.dataindex.httpurl` - the dataindex url, protocol: http
 - `kogito.dataindex.httpurl.with.graphql` - the dataindex graphql url
 - `kogito.dataindex.wsurl` - the dataindex url, protocol: ws
-### Kogito Management Console Configurations
-- `kogito.managementconsole.props` - command line properties for the management console
 ### Kogito Job Service Configurations
 - `kogito.jobsservice.props` - command line properties for the job service
 
@@ -99,7 +96,6 @@ if marked `-` then namespace defaults are applied
 |**namespace default per deployment/statefulSet**|10m|64Mi|1|750Mi|
 |keycloak|-|-|-|-|
 |kogito-data-index-infinispan|-|-|-|500Mi|
-|kogito-management-console|-|-|-|500Mi|
 |kogito-jobs-service|-|-|-|500Mi|
 |kogito-travel-agency-travels-jvm|-|-|-|500Mi|
 |kogito-travel-agency-visas-jvm|-|-|-|500Mi|

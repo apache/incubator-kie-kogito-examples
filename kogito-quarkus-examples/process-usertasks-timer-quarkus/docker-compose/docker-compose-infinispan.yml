@@ -69,23 +69,6 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       LOG_DIR: "/tmp/logs"
 
-  keycloak:
-    container_name: keycloak
-    image: quay.io/keycloak/keycloak:legacy
-    ports:
-      - "8480:8080"
-    volumes:
-      - ./keycloak/kogito-realm.json:/tmp/kogito-realm.json
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8080/auth/realms/kogito" ]
-      interval: 1s
-      timeout: 1s
-      retries: 50
-    environment:
-      KEYCLOAK_USER: admin
-      KEYCLOAK_PASSWORD: admin
-      KEYCLOAK_IMPORT: /tmp/kogito-realm.json
-
   data-index:
     container_name: data-index
     image: quay.io/kiegroup/kogito-data-index-infinispan:${KOGITO_VERSION}
@@ -122,22 +105,3 @@ services:
       QUARKUS_INFINISPAN_CLIENT_USE_AUTH: "false"
       QUARKUS_INFINISPAN_CLIENT_HOSTS: infinispan:11222
       QUARKUS_HTTP_CORS_ORIGINS: "/.*/"
-
-  management-console:
-   container_name: management-console
-   image: quay.io/kiegroup/kogito-management-console:${KOGITO_VERSION}
-   ports:
-     - 8280:8080
-   depends_on:
-     data-index:
-       condition: service_started
-     jobs-service:
-       condition: service_started
-     keycloak:
-       condition: service_healthy
-   volumes:
-     - ./svg/:/home/kogito/data/svg/
-   environment:
-      KOGITO_DATAINDEX_HTTP_URL: http://127.0.0.1:8180/graphql
-      QUARKUS_HTTP_CORS_ORIGINS: "/.*/"
-      KOGITO_MANAGEMENT_CONSOLE_PROPS: -Dkogito.consoles.keycloak.config.url=http://localhost:8480/auth -Dkogito.consoles.keycloak.config.health-check-url=http://localhost:8480/auth/realms/kogito/.well-known/openid-configuration -Dkogito.svg.folder.path=/home/kogito/data/svg
