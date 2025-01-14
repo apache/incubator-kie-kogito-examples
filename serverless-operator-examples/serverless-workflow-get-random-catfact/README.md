@@ -26,7 +26,9 @@ In order to ensure the developed workflows does what it is meant to do, `run` co
 
 ### Deploy the example to cluster
 
-Once the workflow is stable and working, `deploy` command allows users to create deployments of the workflow on the targetted cluster. To deploy a workflow application, [{product_name} plugin for Knative CLI](https://sonataflow.org/serverlessworkflow/main/testing-and-troubleshooting/kn-plugin-workflow-overview.html) relies on configuration in `<home_directory>/.kube/config`. If you cluster has managed access, users need to login prior to the use of CLI.
+Once the workflow is doing what it is expected to do, the `deploy` command allows users to create deployments of the workflow on the targeted cluster. To deploy a workflow application, [{product_name} plugin for Knative CLI](https://sonataflow.org/serverlessworkflow/main/testing-and-troubleshooting/kn-plugin-workflow-overview.html) relies on configuration in `<home_directory>/.kube/config`. If you cluster has managed access, users need to login prior to the use of CLI. 
+
+Please note that by default, the `deploy` command deploys the workflow in `dev` mode. This mode allows you to examine the deployment in actual k8s cluster environment, with same development features as `run` command does locally. Follow the guide to understand how to deploy the workflow in different modes, suitable for post-development scenarios.
 
 1. Create a namespace for your deployment `oc create namespace catfactexample`
 2. Navigate to the root directory of the example
