@@ -10,4 +10,4 @@ In this folder, you can find examples showcasing SonataFlow applications and the
 * Docker or Podman, required for local development scenarios.
 * Access to a Kubernetes cluster.
 * Worklow plugin for KN CLI installed.
-* Visual Studio Code with serverless workflow ediotr extension installed.
+* Visual Studio Code with serverless workflow editor extension installed.
