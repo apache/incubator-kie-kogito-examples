@@ -7,7 +7,7 @@ The goal of this example is to showcase use of [{product_name} plugin for Knativ
 ### Use Case
 
 This example is doing basic decision based on input provided to the workflow. If the input matches a string, workflow will query a specific endpoint and store the result, otherwise it uses a static string.
-The example contains workflow defintion, necesarry application.properties and an openAPI spec file to be able to query external service.
+The example contains workflow definition, necessary application.properties and an openAPI spec file to be able to query external service.
 
 ### Prerequisites
 
