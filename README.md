@@ -1,7 +1,7 @@
 # IMPORTANT NOTICE
 
-Right now, this repository is undergoing updates and might contains outdated, non-working example. The stable branch is pointing to old release and not to `10.0.0` relased in Apache KIE.
-We are working hard to introduce a new stable branch with the updated versions and working example. Stay tuned. This NOTICE will be removed once the repository is safe to work with 10.0.0 release.
+Right now, this repository is undergoing updates and might contains outdated, non-working examples. The stable branch is pointing to old release and not to `10.0.0` released in Apache KIE.
+We are working hard to introduce a new stable branch with the updated versions and working examples. Stay tuned. This NOTICE will be removed once the repository is safe to work with 10.0.0 release.
 Thank you for your patience and apologies for the inconvenience.
 
 
