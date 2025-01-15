@@ -1,3 +1,11 @@
+# IMPORTANT NOTICE
+
+Right now, this repository is undergoing updates and might contain outdated, non-working examples. The stable branch is pointing to old release and not to `10.0.0` released in Apache KIE.
+We are working hard to introduce a new stable branch with the updated versions and working examples. Stay tuned. This NOTICE will be removed once the repository is safe to work with 10.0.0 release.
+Thank you for your patience and apologies for the inconvenience.
+
+
+
 # Kogito Examples
 
 This module contains a number of examples that you can take a look at and try out yourself.  Please take a look at the readme of each individual example for more details on how the example works and how to run it yourself (either locally or on Kubernetes).
