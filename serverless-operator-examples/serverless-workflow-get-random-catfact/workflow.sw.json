@@ -9,7 +9,7 @@
       {
          "name": "getCatFact",
          "operation": "specs/catfacts.json#getRandomFact"
-      },
+      },  
       {
         "name": "sysOutFunction",
         "type": "custom",
@@ -26,10 +26,6 @@
           "transition": "GetRandomFact"
         }
       ],
-      "timeouts": {
-        "stateExecTimeout": "P4D",
-        "eventTimeout" : "P4D"
-      },
       "defaultCondition": {
         "transition": "GetOneStaticFact"
       }
@@ -53,11 +49,7 @@
           }
         }
       ],
-      "transition": "PrintTheFact",
-      "timeouts": {
-        "stateExecTimeout": "P4D",
-        "eventTimeout" : "P4D"
-      }
+      "transition": "PrintTheFact"
     },
     {
       "name": "PrintTheFact",
