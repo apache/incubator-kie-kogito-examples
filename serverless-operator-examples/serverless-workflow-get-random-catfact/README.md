@@ -36,6 +36,11 @@ Please note that by default, the `deploy` command deploys the workflow in `dev` 
 4. Access your cluster, you should see new deployment in `catfactexample` namespace
 5. Management console can be accessed on the `<WORKFLOW_GENERATED_ROUTE_URL>/q/dev-ui/org.apache.kie.sonataflow.sonataflow-quarkus-devui/workflows`
 
+[NOTE]
+====
+To retrieve the <WORKFLOW_GENERATED_ROUTE_URL> in different environments, please follow the guide in their documentation: [Minikube](https://minikube.sigs.k8s.io/docs/handbook/accessing/) and [Kind](https://kind.sigs.k8s.io/docs/user/ingress/).
+====
+
 ### Undeploy the example from cluster
 
 In order to get rid of the deployment, `undeploy` command allows user to cleanup the deployed resources.
