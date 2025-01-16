@@ -91,29 +91,6 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       LOG_DIR: "/tmp/logs"
 
-  keycloak:
-    container_name: keycloak
-    image: quay.io/keycloak/keycloak:legacy
-    ports:
-      - "8480:8080"
-    volumes:
-      - ./keycloak/kogito-realm.json:/tmp/kogito-realm.json
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8080/auth/realms/kogito" ]
-      interval: 1s
-      timeout: 1s
-      retries: 50
-    environment:
-      DB_VENDOR: POSTGRES
-      DB_ADDR: postgres
-      DB_DATABASE: keycloak
-      DB_USER: kogito-user
-      DB_SCHEMA: public
-      DB_PASSWORD: kogito-pass
-      KEYCLOAK_USER: admin
-      KEYCLOAK_PASSWORD: admin
-      KEYCLOAK_IMPORT: /tmp/kogito-realm.json
-
   data-index:
     container_name: data-index
     image: docker.io/apache/incubator-kie-kogito-data-index-postgresql:${KOGITO_VERSION}
@@ -158,26 +135,3 @@ services:
       QUARKUS_PROFILE: events-support
       QUARKUS_HTTP_PORT: 8580
       QUARKUS_HTTP_CORS_ORIGINS: "/.*/"
-
-  management-console:
-    container_name: management-console
-    image: docker.io/apache/incubator-kie-kogito-management-console:${KOGITO_VERSION}
-    ports:
-      - "8280:8080"
-    depends_on:
-      data-index:
-        condition: service_started
-      jobs-service:
-        condition: service_started
-      keycloak:
-        condition: service_healthy
-    volumes:
-      - ../target/classes/META-INF/processSVG/:/home/kogito/data/svg/
-    environment:
-      RUNTIME_TOOLS_MANAGEMENT_CONSOLE_KOGITO_ENV_MODE: "PROD"
-      RUNTIME_TOOLS_MANAGEMENT_CONSOLE_DATA_INDEX_ENDPOINT: http://127.0.0.1:8180/graphql
-      KOGITO_CONSOLES_KEYCLOAK_HEALTH_CHECK_URL: http://localhost:8480/auth/realms/kogito/.well-known/openid-configuration
-      KOGITO_CONSOLES_KEYCLOAK_URL: http://localhost:8480/auth
-      KOGITO_CONSOLES_KEYCLOAK_REALM: kogito
-      KOGITO_CONSOLES_KEYCLOAK_CLIENT_ID: kogito-console-quarkus
-

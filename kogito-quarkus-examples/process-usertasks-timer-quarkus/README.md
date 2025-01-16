@@ -7,8 +7,6 @@ This Quickstart showcases a basic implementation of the **Hiring** process.
 This quickstart project shows very typical user task orchestration with a timer that avoids to execute the HR Interview task 
 after some reasonable time.(configured for test purposes to 40 seconds)
 
-> **_NOTE:_** This example uses keycloak authentication to enable security only in the consoles and not in runtime.
-
 <p align="center"><img width=75% height=50% src="docs/images/Process-with-job.png"></p>
 
 The required *Kogito and Infrastructure Services* for this example are:
@@ -17,8 +15,6 @@ The required *Kogito and Infrastructure Services* for this example are:
 - Kafka
 - Kogito Data Index
 - Kogito Jobs Service 
-- Kogito Management Console
-- Keycloak
 
 ## Running the Quickstart
 
@@ -77,8 +73,6 @@ Once all services bootstrap, the following ports will be assigned on your local 
 - Kafka: 9092
 - Data Index: 8180
 - Jobs Service: 8580
-- Management Console: 8280
-- Keycloak: 8480
 - PgAdmin: 8055
 
 > **_NOTE:_**  This step requires the project to be compiled, please consider running a ```mvn clean install``` command on the project root before running the ```startServices.sh``` script for the first time or any time you modify the project.
@@ -132,7 +126,7 @@ mvn clean package -Pnative -Ppostgresql
 To run the generated native executable, generated in `target/`, execute
 
 ```sh
-./target/./target/process-usertasks-timer-quarkus-with-console-runner
+./target/./target/process-usertasks-timer-quarkus
 ```
 
 ### Run Example with Infinispan
@@ -164,8 +158,6 @@ Once all services bootstrap, the following ports will be assigned on your local 
 - Kafka: 9092
 - Data Index: 8180
 - Jobs Service: 8580
-- Management Console: 8280
-- Keycloak: 8480
 
 > **_NOTE:_**  This step requires the project to be compiled, please consider running a ```mvn clean install -Pinfinispan``` command on the project root before running the ```startServices.sh infinispan``` script for the first time or any time you modify the project.
 
@@ -213,22 +205,8 @@ mvn clean package -Pnative -Pinfinispan
 To run the generated native executable, generated in `target/`, execute
 
 ```sh
-./target/process-usertasks-timer-quarkus-with-console-runner
+./target/process-usertasks-timer-quarkus
 ```
-
-
-### Using Keycloak as Authentication Server
-
-In this Quickstart we'll be using [Keycloak](https://www.keycloak.org/) as *Authentication Server*. It will be started as a part of the project *Infrastructure Services*, you can check the configuration on the project [docker-compose.yml](docker-compose/docker-compose.yml) in [docker-compose](docker-compose) folder.
-
-It will install the *Kogito Realm* that comes with a predefined set of users:
-| Login         | Password   | Roles               |
-| ------------- | ---------- | ------------------- |
-|    admin      |   admin    | *admin*, *managers* |
-|    alice      |   alice    | *user*              |
-|    jdoe       |   jdoe     | *managers*          |
-
-Once Keycloak is started, you should be able to access your *Keycloak Server* at [localhost:8480/auth](http://localhost:8480/auth) with *admin* user.
 
 ### Submit a request to start new hiring
 
@@ -256,44 +234,6 @@ curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST h
 }
 EOF
 ```
-
-### Show active Hiring process instance at Kogito Management Console
-
-To access the Kogito Management Console just open your browser and navigate to ``http://localhost:8280``. You'll be redirected to the *Keycloak* log in page.
-
-<p align="center">
-    <img width=75%  src="docs/images/keycloak-login.png">
-</p>
-
-Once there, log in using any of the users specified in the [Using Keycloak as Authentication Server](#using-keycloak-as-authentication-server) 
-
-<p align="center">
-    <img width=75%  src="docs/images/MC_list.png">
-</p>
-
-> **_NOTE:_**  For more information about how to work with Kogito Management Console, please refer to the [Kogito Documentation](https://docs.jboss.org/kogito/release/latest/html_single/#con-management-console_kogito-developing-process-services) page.
-
-Check the process instance details to see where is the execution path 
-
-<p align="center">
-    <img width=75%  src="docs/images/MC_details_1_new_hiring.png">
-</p>
-
-We have configured the timer to avoid the HR interview after reasonable time (40s, just for testing purpose)
-
-Let's give the app more than 40s to see the timer in action.
-
-Check the process instance details 
-
-<p align="center">
-    <img width=75%  src="docs/images/MC_details_2_IT_executed_job.png">
-</p>
-
-Job panel shows the job details related to the timer execution:
-  
-<p align="center">
-    <img width=75%  src="docs/images/Job_details.png">
-</p>
 
 ### Submit a new request to start new hiring
 

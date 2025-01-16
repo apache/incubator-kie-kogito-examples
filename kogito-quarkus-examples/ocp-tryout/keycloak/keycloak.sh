@@ -23,9 +23,7 @@ action=$1
 
 # NOTE: if need to update kogito_realm.json, edit content of kogito-realm-orig.json here
 function updateClientRedirectUrls(){
-  mngConsole=\"http://kogito-management-console-$(getProjectName).$(getClusterAppsHostname)/*\"
-  additionalRedirectUris=["${mngConsole}"]
-  (jq '(.clients[] | select(.clientId=="kogito-console-quarkus") | .redirectUris) |= . + '${additionalRedirectUris} kogito-realm-orig.json) > kogito-realm.json
+  (jq '(.clients[] | select(.clientId=="kogito-console-quarkus") | .redirectUris) |= . + ' kogito-realm-orig.json) > kogito-realm.json
 }
 updateClientRedirectUrls
 

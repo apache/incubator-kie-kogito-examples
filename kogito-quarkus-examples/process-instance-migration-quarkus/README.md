@@ -95,9 +95,6 @@ mvn clean package quarkus:dev -Pdevelopment
 The Development Mode will embed all the needed Infrastructure Services (PostgreSQL, Data-Index & Jobs Service) and won't 
 require any extra step.
 
-The `development` profile includes the **Runtime Tools Quarkus Extension** that exposes a new section in the **Quarkus Dev-UI** 
-with the **Management Console** functionalities. **Quarkus Dev-UI** is available at http://localhost:8080/q/dev
-
 > **_NOTE:_**  For more information about how to work with Kogito Runtime Tools Quarkus Extension, please refer to the [Kogito Documentation](https://docs.kogito.kie.org/latest/html_single/#con-runtime-tools-dev-ui_kogito-developing-process-services) page.
 
 ### Executing an instance of the Simple Process

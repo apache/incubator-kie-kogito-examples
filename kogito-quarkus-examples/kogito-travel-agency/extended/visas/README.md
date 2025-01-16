@@ -95,7 +95,6 @@ Once all services bootstrap, the following ports will be assigned on your local 
 - Kafka: 9092
 - Data Index: 8180
 - Keycloak server: 8480
-- Management Console: 8280
 
 > **_NOTE:_**  This step requires the project to be compiled, please consider running a ```mvn clean install``` command on the project root before running the ```startServices.sh``` script for the first time or any time you modify the project.
 
