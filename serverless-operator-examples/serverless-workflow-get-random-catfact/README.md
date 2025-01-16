@@ -12,7 +12,7 @@ The example contains workflow definition, necessary application.properties and a
 ### Prerequisites
 
 1. Install [{product_name} plugin for Knative CLI](https://sonataflow.org/serverlessworkflow/main/testing-and-troubleshooting/kn-plugin-workflow-overview.html)
-2. Install the [Operator](https://kiegroup.github.io/kogito-docs/serverlessworkflow/latest/cloud/operator/install-serverless-operator.html)
+2. Install the [{product_name} Operator](https://kiegroup.github.io/kogito-docs/serverlessworkflow/latest/cloud/operator/install-serverless-operator.html)
 3. Checkout this example locally
 
 ### Run the example in local environment
@@ -53,11 +53,16 @@ In order to get rid of the deployment, `undeploy` command allows user to cleanup
 
 By default, `deploy` command generates the Kubernetes definitions during the deployment. In order to customize these files, use `--custom-generated-manifests-dir=./manifests` parameter to store the generated Kubernetes manifests. Once modified, use `--custom-manifests-dir=./manifests` to use the already generated manifests.
 
+In this example we will make necesarry adjustments to deploy the workflow in `preview` mode. This mode offers deployment setup closer to production and allows user to check and validate different custom configuration and supporting services setup.
+Please note that in  `preview` mode the management console is no longer available.
+
 1. Navigate to the root directory of the example.
-2. Execute `kn workflow deploy -n catfactexample --custom-generated-manifests-dir=./manifests`
-3. Navigate to the `/.manifests` folder and modify the files.
-4. Navigate to root directory of the example.
-5. Execute `kn workflow deploy -n catfactexample --custom-manifests-dir=./manifests`
+2. Execute `kn workflow deploy -n catfactexample --custom-generated-manifests-dir=./manifests`. This command will generate Kubernetes YAML definitions based on your workflow in this location.
+3. Undeploy the `kn workflow deploy -n catfactexample --custom-generated-manifests-dir=./manifests`
+4. Navigate to the `/.manifests` folder and modify the files. For example, add `sonataflow.org/profile: preview` under `annotations`.
+5. Navigate to root directory of the example.
+6. Execute `kn workflow deploy -n catfactexample --custom-manifests-dir=./manifests`
+7. The workflow is now deployed with `sonataflow.org/profile: preview` annotation.
 
 Another option is to use `gen-manifest` to create the Kubernetes manifests, run `kn workflow gen-manifest --help` to see the documentation for this command. The procedure to deploy is as follows:
 
@@ -66,6 +71,5 @@ Another option is to use `gen-manifest` to create the Kubernetes manifests, run 
 3. Execute `kn workflow deploy -n catfactexample --custom-manifests-dir=./manifests`
 4. The workflow is now deployed with `sonataflow.org/profile: preview` annotation.
 
-
-Once the application is deployed, you can trigger the workflows. This is as simple as sending a
-HTTP POST request to the endpoint of your workflow application. For example `curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -d '{"fact":"random"}' http://<URL_TO_HOST>/getcatfactinformation` where `URL_TO_HOST` depends on the environment you are in.
+If the application deployment uses the `preview` profile, the route is no longer generated for you. It is up to the user to generate, whether the workflow should be exposed to public or not. 
+In order to trigger the workflows try sending a HTTP POST request to the endpoint of your workflow application. For example `curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -d '{"fact":"random"}' http://<URL_TO_HOST>/getcatfactinformation` where `URL_TO_HOST` depends on the environment you are in.
