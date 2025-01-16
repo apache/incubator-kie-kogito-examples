@@ -33,12 +33,12 @@ Please note that by default, the `deploy` command deploys the workflow in `dev` 
 1. Create a namespace for your deployment `oc create namespace catfactexample`
 2. Navigate to the root directory of the example
 3. Execute `kn workflow deploy -n catfactexample`
-4. Access your cluster, you should see new deployment in `catfactexample` namespace
+4. Access your cluster, you should see new deployment in `catfactexample` namespace. Note the Route associated with the deployment. For example `<WORKFLOW_GENERATED_ROUTE_URL>`
 5. Management console can be accessed on the `<WORKFLOW_GENERATED_ROUTE_URL>/q/dev-ui/org.apache.kie.sonataflow.sonataflow-quarkus-devui/workflows`
 
 [NOTE]
 ====
-To retrieve the <WORKFLOW_GENERATED_ROUTE_URL> in different environments, please follow the guide in their documentation: [Minikube](https://minikube.sigs.k8s.io/docs/handbook/accessing/) and [Kind](https://kind.sigs.k8s.io/docs/user/ingress/).
+To retrieve the `<WORKFLOW_GENERATED_ROUTE_URL>` in different environments, please follow the guides provided for the environment. Here are examples from [Minikube](https://minikube.sigs.k8s.io/docs/handbook/accessing/) and [Kind](https://kind.sigs.k8s.io/docs/user/ingress/).
 ====
 
 ### Undeploy the example from cluster
