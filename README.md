@@ -34,22 +34,6 @@ cd ./incubator-kie-kogito-examples/serverless-workflow-examples/serverless-workf
 
 > Found an issue? Please report it [here](https://github.com/apache/incubator-kie-kogito-examples/issues/new?template=bug_report.yml) and we will take a look.
 
-### Recommended examples to start with
-
-#### Drools
-
-* Quarkus - [TODO:Rules example]()
-* SpringBoot - [TODO: Rules example]
-
-#### Kogito
-
-* Quarkus - [TODO:Process Quarkus Example]()
-
-#### Sonataflow
-
-* Quarkus - [SonataFlow Greeting Example]()
-* Kubernetes - [SonataFlow Catfact Example]()
-
 ## Contribution
 
 Everyone is encouraged to contribute to these examples by:
