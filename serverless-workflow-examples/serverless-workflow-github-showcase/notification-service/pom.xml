@@ -36,7 +36,7 @@
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
     <quarkus.platform.version>2.13.1.Final</quarkus.platform.version>
     <version.io.cloudevents>2.3.0</version.io.cloudevents>
-    <version.compiler.plugin>3.8.1</version.compiler.plugin>
+    <version.compiler.plugin>3.13.0</version.compiler.plugin>
     <maven.compiler.release>17</maven.compiler.release>
   </properties>
   <dependencyManagement>
