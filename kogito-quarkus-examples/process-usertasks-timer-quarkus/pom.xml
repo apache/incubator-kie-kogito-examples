@@ -27,8 +27,8 @@
     <version>999-SNAPSHOT</version>
   </parent>
 
-  <artifactId>process-usertasks-timer-quarkus-with-console</artifactId>
-  <name>Kogito Example :: Process UserTasks with Timer Quarkus :: Console</name>
+  <artifactId>process-usertasks-timer-quarkus</artifactId>
+  <name>Kogito Example :: Process UserTasks with Timer Quarkus</name>
   <properties>
     <quarkus-plugin.version>3.8.6</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
