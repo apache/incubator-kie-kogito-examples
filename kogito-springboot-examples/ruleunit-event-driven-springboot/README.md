@@ -70,15 +70,21 @@ mvn clean compile spring-boot:run
 
 ```
 mvn clean package
-java -jar target/dmn-event-driven-springboot.jar
+java -jar target/ruleunit-event-driven-springboot.jar
 ```
 
 or on Windows
 
 ```
 mvn clean package
-java -jar target\dmn-event-driven-springboot.jar
+java -jar target\ruleunit-event-driven-springboot.jar
 ```
+
+## OpenAPI (Swagger) documentation
+[Specification at swagger.io](https://swagger.io/docs/specification/about/)
+
+The [Swagger](http://localhost:8080/swagger-ui/index.html) page shows all the available endpoints, and it could be used to test them.
+You can take a look at the [OpenAPI definition](http://localhost:8080/v3/api-docs) - automatically generated and included in this service - to determine all available operations exposed by this service. For easy readability you can visualize the OpenAPI definition file using a UI tool like for example available [Swagger Editor](https://editor.swagger.io).
 
 ## Example Usage
 
