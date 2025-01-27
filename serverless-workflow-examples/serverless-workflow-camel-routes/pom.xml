@@ -48,7 +48,7 @@
     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
     <maven.compiler.release>17</maven.compiler.release>
     <version.compiler.plugin>3.13.0</version.compiler.plugin>
-    <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
+    <version.failsafe.plugin>3.3.1</version.failsafe.plugin>
     <!-- Used by the WSDL plugin -->
     <version.org.apache.cxf>3.5.4</version.org.apache.cxf>
     <!-- Aligned with Quarkus. We don't use the Camel Quarkus platform BOM to avoid upgrade delays in our CI. Feel free to use the BOM in your projects, though -->
@@ -174,7 +174,7 @@
         </property>
       </activation>
       <properties>
-        <quarkus.package.type>native</quarkus.package.type>
+        <quarkus.native.enabled>true</quarkus.native.enabled>
       </properties>
     </profile>
   </profiles>

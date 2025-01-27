@@ -45,7 +45,7 @@
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
     <version.compiler.plugin>3.13.0</version.compiler.plugin>
-    <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
+    <version.failsafe.plugin>3.3.1</version.failsafe.plugin>
     <maven.compiler.release>17</maven.compiler.release>
     <version.io.quarkiverse.embedded.postgresql>0.3.0</version.io.quarkiverse.embedded.postgresql>
   </properties>
@@ -151,7 +151,7 @@
         </property>
       </activation>
       <properties>
-        <quarkus.package.type>native</quarkus.package.type>
+        <quarkus.native.enabled>true</quarkus.native.enabled>
       </properties>
     </profile>
     <profile>
