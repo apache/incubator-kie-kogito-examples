@@ -1,4 +1,0 @@
-kubernetes/base/apply_image_ns.yaml
-kubernetes/base/patch_repository.yaml
-kubernetes/base/patch_trigger.yaml
-kubernetes/local/patch-virtual-service.yaml
