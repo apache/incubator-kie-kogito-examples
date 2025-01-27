@@ -135,7 +135,7 @@ __  ____  __  _____   ___  __ ____  ______
 2021-04-13 17:39:41,034 WARN  [io.qua.arc.pro.BeanArchives] (build-45) Failed to index byte: Class does not exist in ClassLoader QuarkusClassLoader:Deployment Class Loader
 2021-04-13 17:39:41,754 INFO  [org.kie.kog.ser.eve.imp.AbstractMessageConsumer] (Quarkus Main Thread) Consumer for class com.fasterxml.jackson.databind.JsonNode started.
 2021-04-13 17:39:41,776 INFO  [org.kie.kog.add.clo.qua.QuarkusKogitoExtensionInitializer] (Quarkus Main Thread) Registered Kogito CloudEvent extension
-2021-04-13 17:39:41,827 INFO  [io.quarkus] (Quarkus Main Thread) serverless-workflow-order-processing 10.0.0 on JVM (powered by Quarkus 1.11.5.Final) started in 2.815s. Listening on: http://localhost:8080
+2021-04-13 17:39:41,827 INFO  [io.quarkus] (Quarkus Main Thread) serverless-workflow-order-processing 10.0.0 on JVM (powered by Quarkus 3.8.4.Final) started in 2.815s. Listening on: http://localhost:8080
 2021-04-13 17:39:41,827 INFO  [io.quarkus] (Quarkus Main Thread) Profile dev activated. Live Coding activated.
 2021-04-13 17:39:41,827 INFO  [io.quarkus] (Quarkus Main Thread) Installed features: [cdi, mutiny, rest-client, rest-client-jackson, resteasy, resteasy-jackson, servlet, smallrye-context-propagation, smallrye-health, smallrye-openapi, smallrye-reactive-messaging, swagger-ui, vertx]
 ``` 

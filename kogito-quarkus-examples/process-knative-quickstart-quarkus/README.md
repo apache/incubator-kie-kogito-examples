@@ -180,7 +180,7 @@ __  ____  __  _____   ___  __ ____  ______
 
 2021-05-18 14:50:50,111 INFO  [org.kie.kog.add.clo.qua.QuarkusKogitoExtensionInitializer] (Quarkus Main Thread) Registered Kogito CloudEvent extension
 2021-05-18 14:50:50,114 INFO  [org.kie.kog.ser.eve.imp.AbstractMessageConsumer] (Quarkus Main Thread) Consumer for class org.acme.travel.Traveller started.
-2021-05-18 14:50:50,164 INFO  [io.quarkus] (Quarkus Main Thread) process-knative-quickstart-quarkus 999-SNAPSHOT on JVM (powered by Quarkus 1.13.3.Final) started in 3.118s. Listening on: http://localhost:8080
+2021-05-18 14:50:50,164 INFO  [io.quarkus] (Quarkus Main Thread) process-knative-quickstart-quarkus 10.0.0 on JVM (powered by Quarkus 3.8.4 .Final) started in 3.118s. Listening on: http://localhost:8080
 2021-05-18 14:50:50,164 INFO  [io.quarkus] (Quarkus Main Thread) Profile dev activated. Live Coding activated.
 2021-05-18 14:50:50,164 INFO  [io.quarkus] (Quarkus Main Thread) Installed features: [cdi, kogito-decisions, kogito-predictions, kogito-processes, kogito-rules, mutiny, rest-client, rest-client-jackson, resteasy, resteasy-jackson, servlet, smallrye-context-propagation, smallrye-health, smallrye-openapi, smallrye-reactive-messaging, swagger-ui, vertx, vertx-web]
 ``` 
