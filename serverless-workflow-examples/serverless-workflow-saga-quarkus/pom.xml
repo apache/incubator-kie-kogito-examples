@@ -47,7 +47,7 @@
     <version.compiler.plugin>3.13.0</version.compiler.plugin>
     <maven.compiler.release>17</maven.compiler.release>
     <version.org.assertj>3.22.0</version.org.assertj>
-    <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
+    <version.surefire.plugin>3.3.1</version.surefire.plugin>
     <version.failsafe.plugin>${version.surefire.plugin}</version.failsafe.plugin>
   </properties>
 

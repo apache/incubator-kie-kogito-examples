@@ -77,7 +77,7 @@
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-webjars-locator</artifactId>
+      <artifactId>quarkus-web-dependency-locator</artifactId>
     </dependency>
     <dependency>
       <groupId>io.cloudevents</groupId>
@@ -196,7 +196,7 @@
       </activation>
       <properties>
         <skipITs>false</skipITs>
-        <quarkus.package.type>native</quarkus.package.type>
+        <quarkus.native.enabled>true</quarkus.native.enabled>
       </properties>
     </profile>
   </profiles>

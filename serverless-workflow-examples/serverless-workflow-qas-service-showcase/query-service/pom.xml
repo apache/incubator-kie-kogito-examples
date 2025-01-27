@@ -104,7 +104,7 @@
     <!-- UI dependencies -->
     <dependency>
       <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-webjars-locator</artifactId>
+      <artifactId>quarkus-web-dependency-locator</artifactId>
     </dependency>
     <dependency>
       <groupId>org.webjars</groupId>
@@ -194,7 +194,7 @@
       <dependencies>
         <dependency>
           <groupId>io.quarkus</groupId>
-          <artifactId>quarkus-smallrye-reactive-messaging-kafka</artifactId>
+          <artifactId>quarkus-messaging-kafka</artifactId>
         </dependency>
       </dependencies>
     </profile>
@@ -209,7 +209,7 @@
       <dependencies>
         <dependency>
           <groupId>io.quarkus</groupId>
-          <artifactId>quarkus-smallrye-reactive-messaging-kafka</artifactId>
+          <artifactId>quarkus-messaging-kafka</artifactId>
         </dependency>
       </dependencies>
     </profile>

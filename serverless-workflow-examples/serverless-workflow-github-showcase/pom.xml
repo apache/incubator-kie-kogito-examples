@@ -43,7 +43,7 @@
   </modules>
   <properties>
     <jandex-plugin.version>3.1.6</jandex-plugin.version>
-    <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
+    <version.surefire.plugin>3.3.1</version.surefire.plugin>
     <version.io.jjwt>0.11.2</version.io.jjwt>
     <version.kohsuke.github>1.116</version.kohsuke.github>
     <version.org.camel>3.9.0</version.org.camel>

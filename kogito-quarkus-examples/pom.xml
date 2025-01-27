@@ -39,7 +39,7 @@
     <!-- Port 0 means dynamic port -->
     <tests.quarkus.http.port>0</tests.quarkus.http.port>
     <!-- override default to fast-jar packaging for forward-compatibility -->
-    <quarkus.package.type>fast-jar</quarkus.package.type>
+    <quarkus.package.jar.type>fast-jar</quarkus.package.jar.type>
   </properties>
 
   <profiles>
@@ -114,7 +114,7 @@
       <properties>
         <failsafe.include>**/Native*IT.java</failsafe.include>
         <failsafe.exclude></failsafe.exclude>
-        <quarkus.package.type>native</quarkus.package.type>
+        <quarkus.native.enabled>true</quarkus.native.enabled>
         <quarkus.native.native-image-xmx>8g</quarkus.native.native-image-xmx>
         <!-- Native building needs a fixed port for tests -->
         <tests.quarkus.http.port>8080</tests.quarkus.http.port>
@@ -189,7 +189,7 @@
       <properties>
         <failsafe.include>**/Native*IT.java</failsafe.include>
         <failsafe.exclude></failsafe.exclude>
-        <quarkus.package.type>native</quarkus.package.type>
+        <quarkus.native.enabled>true</quarkus.native.enabled>
         <quarkus.native.native-image-xmx>8g</quarkus.native.native-image-xmx>
         <!-- Native building needs a fixed port for tests -->
         <tests.quarkus.http.port>8080</tests.quarkus.http.port>

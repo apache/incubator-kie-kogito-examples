@@ -48,7 +48,7 @@
     <version.compiler.plugin>3.13.0</version.compiler.plugin>
     <version.com.github.tomakehurst.wiremock>2.33.2</version.com.github.tomakehurst.wiremock>
     <maven.compiler.release>17</maven.compiler.release>
-    <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
+    <version.failsafe.plugin>3.3.1</version.failsafe.plugin>
   </properties>
 
   <dependencyManagement>
