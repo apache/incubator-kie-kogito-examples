@@ -82,7 +82,7 @@ spec:
       containers:
         - name: jobs-service-postgresql
 <<<<<<< HEAD
-          image: quay.io/kiegroup/kogito-jobs-service-postgresql-nightly:10.0
+          image: docker.io/apache/incubator-kie-kogito-jobs-service-postgresql-nightly:10.0
 =======
           image: docker.io/apache/incubator-kie-kogito-jobs-service-postgresql:main
 >>>>>>> e5e150f18 (Fix kie-issues #1217 Remove infinispan based images from a few examples (#1927))

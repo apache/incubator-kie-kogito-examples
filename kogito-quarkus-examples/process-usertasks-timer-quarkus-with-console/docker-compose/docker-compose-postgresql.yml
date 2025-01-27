@@ -105,7 +105,7 @@ services:
 
   data-index:
     container_name: data-index
-    image: quay.io/kiegroup/kogito-data-index-postgresql:10.0
+    image: docker.io/apache/incubator-kie-kogito-data-index-postgresql:10.0
     ports:
       - "8180:8080"
     depends_on:
@@ -125,7 +125,7 @@ services:
 
   jobs-service:
     container_name: jobs-service
-    image: quay.io/kiegroup/kogito-jobs-service-postgresql:10.0
+    image: docker.io/apache/incubator-kie-kogito-jobs-service-postgresql:10.0
     ports:
       - "8580:8080"
     depends_on:

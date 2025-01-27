@@ -29,7 +29,7 @@ if [ "${action}" == "uninstall" ]; then
 elif [ "${action}" == "install" ]; then
   echo "*** installing jobs service"
 <<<<<<< HEAD
-  oc new-app quay.io/kiegroup/kogito-jobs-service-${type}:10.0
+  oc new-app docker.io/apache/incubator-kie-kogito-jobs-service-${type}:10.0
 =======
   oc new-app docker.io/apache/incubator-kie-kogito-jobs-service-${type}:${KOGITO_VERSION} -n $(getProjectName) $(dryRun "NewApp")
 >>>>>>> e5e150f18 (Fix kie-issues #1217 Remove infinispan based images from a few examples (#1927))

@@ -38,7 +38,7 @@ elif [ "${action}" == "install" ]; then
     oc label -f- --dry-run=client -o yaml --local=true app=kogito-data-index-"${type}" | \
     oc apply -f- -n $(getProjectName) $(dryRun)
 <<<<<<< HEAD
-  oc new-app quay.io/kiegroup/kogito-data-index-"${type}":10.0
+  oc new-app docker.io/apache/incubator-kie-kogito-data-index-"${type}":10.0
 =======
   oc new-app docker.io/apache/incubator-kie-kogito-data-index-"${type}":"${KOGITO_VERSION}" -n $(getProjectName) $(dryRun "NewApp")
 >>>>>>> e5e150f18 (Fix kie-issues #1217 Remove infinispan based images from a few examples (#1927))
