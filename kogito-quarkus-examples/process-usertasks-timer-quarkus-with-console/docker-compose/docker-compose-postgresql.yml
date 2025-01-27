@@ -125,7 +125,7 @@ services:
 
   jobs-service:
     container_name: jobs-service
-    image: docker.io/apache/incubator-kie-kogito-jobs-service-postgresql:10.0
+    image: docker.io/apache/incubator-kie-kogito-jobs-service-postgresql:10.0.0
     ports:
       - "8580:8080"
     depends_on:
