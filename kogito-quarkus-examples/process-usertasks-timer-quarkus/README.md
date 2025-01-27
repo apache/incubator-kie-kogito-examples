@@ -11,7 +11,7 @@ after some reasonable time.(configured for test purposes to 40 seconds)
 
 The required *Kogito and Infrastructure Services* for this example are:
 
-- Infinispan / Postgresql
+- Postgresql
 - Kafka
 - Kogito Data Index
 - Kogito Jobs Service 

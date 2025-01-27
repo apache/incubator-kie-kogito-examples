@@ -1,7 +1,7 @@
 ## Kogito and Infrastructure services
 
 To allow a quick setup of all services required to run this demo, we provide a docker compose template that starts the following services:
-- Infinispan
+- PostgreSQL
 - Kafka
 - Prometheus
 - Grafana
@@ -32,7 +32,7 @@ In order to use it, please ensure you have Docker Compose installed on your mach
     docker-compose up
 
   Once all services bootstrap, the following ports will be assigned on your local machine:
-  - Infinispan: 11222
+  - PostgreSQL: 5432
   - Kafka: 9092
   - Prometheus: 9090
   - Grafana: 3000
