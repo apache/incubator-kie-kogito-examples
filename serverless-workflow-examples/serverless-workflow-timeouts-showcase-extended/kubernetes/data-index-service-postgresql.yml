@@ -55,11 +55,7 @@ spec:
     spec:
       containers:
         - name: data-index-service-postgresql
-<<<<<<< HEAD
-          image: docker.io/apache/incubator-kie-kogito-data-index-postgresql-nightly:10.0
-=======
-          image: docker.io/apache/incubator-kie-kogito-data-index-postgresql:main
->>>>>>> e5e150f18 (Fix kie-issues #1217 Remove infinispan based images from a few examples (#1927))
+          image: docker.io/apache/incubator-kie-kogito-data-index-postgresql-nightly:10.0.0
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

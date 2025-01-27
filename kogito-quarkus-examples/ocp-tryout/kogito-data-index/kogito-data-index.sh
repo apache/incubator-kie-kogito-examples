@@ -37,11 +37,7 @@ elif [ "${action}" == "install" ]; then
   oc create configmap data-index-config --from-file=../testapp/protobuf -o yaml --dry-run=client | \
     oc label -f- --dry-run=client -o yaml --local=true app=kogito-data-index-"${type}" | \
     oc apply -f- -n $(getProjectName) $(dryRun)
-<<<<<<< HEAD
-  oc new-app docker.io/apache/incubator-kie-kogito-data-index-"${type}":10.0
-=======
   oc new-app docker.io/apache/incubator-kie-kogito-data-index-"${type}":"${KOGITO_VERSION}" -n $(getProjectName) $(dryRun "NewApp")
->>>>>>> e5e150f18 (Fix kie-issues #1217 Remove infinispan based images from a few examples (#1927))
   waitForPod kogito-data-index
   oc patch deployment kogito-data-index-"${type}" --patch "$(cat deployment-patch-"${type}".yaml)" -n $(getProjectName) $(dryRun)
   waitForPod kogito-data-index

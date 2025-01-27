@@ -19,10 +19,7 @@
 #
 
 
-<<<<<<< HEAD:kogito-quarkus-examples/ocp-tryout/kogito-task-console/kogito-task-console.sh
-=======
 server.address=0.0.0.0
->>>>>>> e5e150f18 (Fix kie-issues #1217 Remove infinispan based images from a few examples (#1927)):kogito-springboot-examples/dmn-15-springboot-example/src/main/resources/application.properties
 action=$1
 
 if [ "${action}" == "uninstall" ]; then

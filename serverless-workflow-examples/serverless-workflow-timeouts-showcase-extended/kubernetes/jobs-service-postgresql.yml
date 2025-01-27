@@ -81,11 +81,7 @@ spec:
     spec:
       containers:
         - name: jobs-service-postgresql
-<<<<<<< HEAD
-          image: docker.io/apache/incubator-kie-kogito-jobs-service-postgresql-nightly:10.0
-=======
-          image: docker.io/apache/incubator-kie-kogito-jobs-service-postgresql:main
->>>>>>> e5e150f18 (Fix kie-issues #1217 Remove infinispan based images from a few examples (#1927))
+          image: docker.io/apache/incubator-kie-kogito-jobs-service-postgresql-nightly:10.0.0
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
