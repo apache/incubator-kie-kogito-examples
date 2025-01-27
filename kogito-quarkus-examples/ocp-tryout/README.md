@@ -15,7 +15,7 @@ Make sure you meet the [prerequisites](#prerequisites) and then start [here](#in
 
 ### Available Infrastructure
 - Persistence:
-  - infinispan/server:14.0.4.Final via helm chart
+  - PostgreSQL via helm chart
 - Messaging:
   - bitnami/kafka:2.8.1-debian-10-r31 via helm chart
 - Authorization/Authentication:
@@ -49,8 +49,8 @@ Installation from pre-build images
       ```
       # example
       image:
-        repository: quay.io/kiegroup/examples-travels
-        tag: 1.16.0.final
+        repository: quay.io/<your namespace>/kogito-examples-travels
+        tag: 10.0.0.final
       applicationPort: 8080
       ```
     - `./testapp/protobuf`: For each Kogito application to be installed add its protobuf files under the `protobuf` folder. Protobuf files for the Kogito examples can be found under folder `target/classes/META-INF/resources/persistence/protobuf`. 
@@ -74,9 +74,13 @@ All configuration required to make those connections as well as initializations 
 - `keycloak.admin.password` - the administration consoles' users' password
 - `keycloak.realm.json` - Keycloak initialization file for the Kogito realm creating clients, users, etc. used in Kogito examples
 - `keycloak.db.vendor` - Keycloak persistence
-### Infinispan Configurations
-- `quarkus.infinispan.client.hosts` - the infinispan url used by the Kogito application; can be internal service url
-- `quarkus.infinispan.client.username` - the user used by the Kogito application to access the infinispan service
+#### PostgreSQL Configurations
+- `kogito.persistence.type`
+- `quarkus.datasource.db-kind`
+- `quarkus.datasource.username`
+- `quarkus.datasource.password`
+- `quarkus.datasource.jdbc.url`
+- `quarkus.datasource.reactive.url`
 ### Kafka Configurations
 - `kafka.bootstrap.servers` - the kafka url used by the Kogito application; can be internal service url
 ### Kogito Dataindex Configurations
@@ -107,7 +111,6 @@ if marked `-` then namespace defaults are applied
 |kogito-jobs-service|-|-|-|500Mi|
 |kogito-travel-agency-travels-jvm|-|-|-|500Mi|
 |kogito-travel-agency-visas-jvm|-|-|-|500Mi|
-|infinispan|500m|512Mi|500m|512Mi|
 |kafka|-|-|-|-|
 |kafka-zookeeper|250m|256Mi|-|-|
 |**sum**|-|-|-|6512Mi|

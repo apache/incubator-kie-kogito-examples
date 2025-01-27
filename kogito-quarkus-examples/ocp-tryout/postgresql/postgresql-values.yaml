@@ -17,8 +17,13 @@
 # under the License.
 #
 
+database_service_name: postgresql
+memory_limit: 512Mi
+volume_capacity: 1Gi
+config:
+  postgresql_database: kogito
+  postgresql_password: kogito-pass
+  postgresql_user: kogito-user
+  port: 5432
 image:
-  repository: quay.io/<your namespace>/examples-travels
-  tag: "latest"
-
-applicationPort: 8080
+  tag: "postgres:16.1-alpine3.19"

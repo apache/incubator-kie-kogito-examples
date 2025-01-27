@@ -146,7 +146,7 @@ services:
 
   management-console:
     container_name: management-console
-    image: quay.io/kiegroup/kogito-management-console:10.0
+    image: docker.io/apache/incubator-kie-kogito-management-console:${KOGITO_VERSION}
     ports:
       - "8280:8080"
     depends_on:
@@ -167,7 +167,7 @@ services:
 
   task-console:
     container_name: task-console
-    image: quay.io/kiegroup/kogito-task-console:10.0
+    image: docker.io/apache/incubator-kie-kogito-task-console:${KOGITO_VERSION}
     ports:
       - "8380:8080"
     depends_on:

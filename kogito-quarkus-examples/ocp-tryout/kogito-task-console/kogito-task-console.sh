@@ -19,6 +19,10 @@
 #
 
 
+<<<<<<< HEAD:kogito-quarkus-examples/ocp-tryout/kogito-task-console/kogito-task-console.sh
+=======
+server.address=0.0.0.0
+>>>>>>> e5e150f18 (Fix kie-issues #1217 Remove infinispan based images from a few examples (#1927)):kogito-springboot-examples/dmn-15-springboot-example/src/main/resources/application.properties
 action=$1
 
 if [ "${action}" == "uninstall" ]; then
@@ -27,7 +31,7 @@ if [ "${action}" == "uninstall" ]; then
 
 elif [ "${action}" == "install" ]; then
   echo "*** installing task console"
-  oc new-app quay.io/kiegroup/kogito-task-console:10.0
+  oc new-app docker.io/apache/incubator-kie-kogito-task-console:${KOGITO_VERSION} -n $(getProjectName) $(dryRun "NewApp")
   waitForPod kogito-task-console
   oc patch deployment kogito-task-console --patch "$(cat deployment-patch.yaml)" -n $(getProjectName) $(dryRun)
   waitForPod kogito-task-console

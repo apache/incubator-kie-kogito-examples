@@ -21,19 +21,31 @@ version: '2.1'
 
 services:
 
-  infinispan:
-    image: infinispan/server:14.0.4.Final
-    container_name: infinispan
+  postgres:
+    image: postgres:13.4-alpine3.14
     ports:
-      - "11222:11222"
-    command: "-c infinispan-demo.xml"
+      - "5432:5432"
     volumes:
-      - ./infinispan/infinispan.xml:/opt/infinispan/server/conf/infinispan-demo.xml:z
+      - ./sql:/docker-entrypoint-initdb.d/
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:11222/rest/v2/cache-managers/default/health/status" ]
-      interval: 1s
-      timeout: 1s
+      test: [ "CMD", "pg_isready", "-q", "-d", "kogito", "-U", "kogito-user" ]
+      timeout: 45s
+      interval: 10s
       retries: 50
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+  pgadmin-compose:
+    image: dpage/pgadmin4:5.0
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user@user.org
+      PGADMIN_DEFAULT_PASSWORD: pass
+    ports:
+      - 8055:80
+    depends_on:
+      - postgres
+    container_name: pgadmin-container
 
   zookeeper:
     container_name: zookeeper
@@ -110,26 +122,27 @@ services:
 
   data-index:
     container_name: data-index
-    image: quay.io/kiegroup/kogito-data-index-infinispan:10.0
+    image: docker.io/apache/incubator-kie-kogito-data-index-postgresql:${KOGITO_VERSION}
     ports:
       - "8180:8080"
     depends_on:
       kafka:
         condition: service_started
-      infinispan:
+      postgres:
         condition: service_healthy
     volumes:
       - ./target/protobuf:/home/kogito/data/protobufs/
     environment:
-      QUARKUS_INFINISPAN_CLIENT_HOSTS: infinispan:11222
-      QUARKUS_INFINISPAN_CLIENT_USE_AUTH: "false"
-      QUARKUS_HTTP_CORS_ORIGINS: "/.*/"
+      QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgres:5432/kogito"
+      QUARKUS_DATASOURCE_USERNAME: kogito-user
+      QUARKUS_DATASOURCE_PASSWORD: kogito-pass
       KAFKA_BOOTSTRAP_SERVERS: kafka:29092
-      KOGITO_DATA_INDEX_PROPS: -Dkogito.protobuf.folder=/home/kogito/data/protobufs/
+      QUARKUS_HTTP_CORS_ORIGINS: "/.*/"
+      KOGITO_DATA_INDEX_PROPS: -Dquarkus.hibernate-orm.database.generation=update
 
   management-console:
     container_name: management-console
-    image: quay.io/kiegroup/kogito-management-console:10.0
+    image: docker.io/apache/incubator-kie-kogito-management-console:${KOGITO_VERSION}
     ports:
       - 8280:8080
     depends_on:
@@ -146,7 +159,7 @@ services:
 
   task-console:
     container_name: task-console
-    image: quay.io/kiegroup/kogito-task-console:10.0
+    image: docker.io/apache/incubator-kie-kogito-task-console:${KOGITO_VERSION}
     ports:
       - 8380:8080
     depends_on:
