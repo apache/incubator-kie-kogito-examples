@@ -28,7 +28,7 @@ if [ "${action}" == "uninstall" ]; then
 
 elif [ "${action}" == "install" ]; then
   echo "*** installing jobs service"
-  oc new-app docker.io/apache/incubator-kie-kogito-jobs-service-${type}:${KOGITO_VERSION} -n $(getProjectName) $(dryRun "NewApp")
+  oc new-app mirror.gcr.io/apache/incubator-kie-kogito-jobs-service-${type}:${KOGITO_VERSION} -n $(getProjectName) $(dryRun "NewApp")
   waitForPod kogito-jobs-service
   oc patch deployment kogito-jobs-service-${type} --patch "$(cat deployment-patch.yaml)" -n $(getProjectName) $(dryRun)
   waitForPod kogito-jobs-service
