@@ -31,10 +31,10 @@
   <artifactId>query-service</artifactId>
   <name>Kogito Example :: Serverless Workflow Query and Answer :: Query Service</name>
   <properties>
-    <quarkus-plugin.version>3.8.6</quarkus-plugin.version>
+    <quarkus-plugin.version>3.15.3</quarkus-plugin.version>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>    
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
-    <quarkus.platform.version>3.8.6</quarkus.platform.version>
+    <quarkus.platform.version>3.15.3</quarkus.platform.version>
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
@@ -74,6 +74,10 @@
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-resteasy-client-oidc-filter</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-openapi</artifactId>
     </dependency>
     <dependency>
@@ -100,7 +104,7 @@
     <!-- UI dependencies -->
     <dependency>
       <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-webjars-locator</artifactId>
+      <artifactId>quarkus-web-dependency-locator</artifactId>
     </dependency>
     <dependency>
       <groupId>org.webjars</groupId>
@@ -190,7 +194,7 @@
       <dependencies>
         <dependency>
           <groupId>io.quarkus</groupId>
-          <artifactId>quarkus-smallrye-reactive-messaging-kafka</artifactId>
+          <artifactId>quarkus-messaging-kafka</artifactId>
         </dependency>
       </dependencies>
     </profile>
@@ -205,7 +209,7 @@
       <dependencies>
         <dependency>
           <groupId>io.quarkus</groupId>
-          <artifactId>quarkus-smallrye-reactive-messaging-kafka</artifactId>
+          <artifactId>quarkus-messaging-kafka</artifactId>
         </dependency>
       </dependencies>
     </profile>

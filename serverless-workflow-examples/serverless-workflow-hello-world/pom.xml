@@ -39,17 +39,17 @@
     <description>Kogito Serverless Workflow Example - Quarkus</description>
 
     <properties>
-        <quarkus-plugin.version>3.8.6</quarkus-plugin.version>
+        <quarkus-plugin.version>3.15.3</quarkus-plugin.version>
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
         <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-        <quarkus.platform.version>3.8.6</quarkus.platform.version>
+        <quarkus.platform.version>3.15.3</quarkus.platform.version>
         <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
         <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
         <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
         <version.org.kie.kogito>999-SNAPSHOT</version.org.kie.kogito>
         <maven.compiler.release>17</maven.compiler.release>
-        <version.compiler.plugin>3.8.1</version.compiler.plugin>
-        <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
+        <version.compiler.plugin>3.13.0</version.compiler.plugin>
+        <version.surefire.plugin>3.3.1</version.surefire.plugin>
         <version.failsafe.plugin>${version.surefire.plugin}</version.failsafe.plugin>
     </properties>
     <dependencyManagement>
@@ -83,6 +83,10 @@
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-resteasy-jackson</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-resteasy-client-oidc-filter</artifactId>
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
@@ -188,7 +192,7 @@
                 </property>
             </activation>
             <properties>
-                <quarkus.package.type>native</quarkus.package.type>
+                <quarkus.native.enabled>true</quarkus.native.enabled>
             </properties>
         </profile>
     </profiles>

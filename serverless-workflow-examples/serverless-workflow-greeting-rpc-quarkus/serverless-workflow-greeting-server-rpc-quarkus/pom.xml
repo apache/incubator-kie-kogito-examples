@@ -32,9 +32,9 @@
     <name>Kogito Example :: Serverless Workflow Greeting :: gRPC Server :: Quarkus</name>
     <description>Kogito Serverless Workflow Example that defines a simple gRPC service - Quarkus</description>
     <properties>
-        <version.compiler.plugin>3.8.1</version.compiler.plugin>
+        <version.compiler.plugin>3.13.0</version.compiler.plugin>
         <maven.compiler.release>17</maven.compiler.release>
-        <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
+        <version.surefire.plugin>3.3.1</version.surefire.plugin>
         <version.com.google.protobuf>3.22.0</version.com.google.protobuf>
         <version.io.grpc>1.56.0</version.io.grpc>
         <version.kr.motd.maven.os>1.6.0</version.kr.motd.maven.os>
