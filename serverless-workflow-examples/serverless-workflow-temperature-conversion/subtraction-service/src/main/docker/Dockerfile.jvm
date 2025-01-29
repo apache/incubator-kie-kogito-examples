@@ -7,7 +7,7 @@
 #
 # Then, build the image with:
 #
-# docker build -f src/main/docker/Dockerfile.jvm -t quay.io/<namespace>/subtraction-service:1.19 .
+# docker build -f src/main/docker/Dockerfile.jvm -t quay.io/<namespace>/subtraction-service:latest .
 #
 # Then run the container using:
 #
@@ -18,7 +18,7 @@
 #
 # Then run the container using :
 #
-# docker run -i --rm -p 8080:8080 -p 5005:5005 -e JAVA_ENABLE_DEBUG="true" quay.io/<namespace>/subtraction-service:1.19
+# docker run -i --rm -p 8080:8080 -p 5005:5005 -e JAVA_ENABLE_DEBUG="true" quay.io/<namespace>/subtraction-service:latest
 #
 ###
 FROM registry.access.redhat.com/ubi8/ubi-minimal:8.3 

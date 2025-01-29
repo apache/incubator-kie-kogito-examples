@@ -7,18 +7,18 @@
 #
 # Then, build the image with:
 #
-# docker build -f src/main/docker/Dockerfile.jvm -t quay.io/<namespace>/multiplication-service:1.19 .
+# docker build -f src/main/docker/Dockerfile.jvm -t quay.io/<namespace>/multiplication-service:latest .
 #
 # Then run the container using:
 #
-# docker run -i --rm -p 8080:8080 quay.io/<namespace>/multiplication-service:1.19
+# docker run -i --rm -p 8080:8080 quay.io/<namespace>/multiplication-service:latest
 #
 # If you want to include the debug port into your docker image
 # you will have to expose the debug port (default 5005) like this :  EXPOSE 8080 5050
 #
 # Then run the container using :
 #
-# docker run -i --rm -p 8080:8080 -p 5005:5005 -e JAVA_ENABLE_DEBUG="true" quay.io/<namespace>/multiplication-service:1.19
+# docker run -i --rm -p 8080:8080 -p 5005:5005 -e JAVA_ENABLE_DEBUG="true" quay.io/<namespace>/multiplication-service:latest
 #
 ###
 FROM registry.access.redhat.com/ubi8/ubi-minimal:8.3 

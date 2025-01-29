@@ -45,7 +45,7 @@ spec:
     spec:
       initContainers:
         - name: init-postgres
-          image: registry.access.redhat.com/ubi9/ubi-minimal:1.19
+          image: registry.access.redhat.com/ubi9/ubi-minimal:latest
           imagePullPolicy: IfNotPresent
           command:
             [

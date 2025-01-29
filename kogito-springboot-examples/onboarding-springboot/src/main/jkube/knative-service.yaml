@@ -25,7 +25,7 @@ spec:
   template:
     spec:
       containers:
-        - image: kogito/onboarding-springboot:1.19
+        - image: kogito/onboarding-springboot:latest
           imagePullPolicy: IfNotPresent
           serviceAccountName: onboarding-springboot
           ports:

@@ -20,7 +20,7 @@ spec:
       podTemplate:
         initContainers:
           - name: init-postgres
-            image: registry.access.redhat.com/ubi9/ubi-minimal:1.19
+            image: registry.access.redhat.com/ubi9/ubi-minimal:latest
             imagePullPolicy: IfNotPresent
             command: [ 'sh', '-c', 'until (echo 1 > /dev/tcp/postgres.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local/5432) >/dev/null 2>&1; do echo "Waiting for postgres server"; sleep 3; done;' ]
 
