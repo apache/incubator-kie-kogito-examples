@@ -7,11 +7,11 @@
 #
 # Then, build the image with:
 #
-# docker build -f src/main/docker/Dockerfile.native -t quay.io/<namespace>/multiplication-service:latest .
+# docker build -f src/main/docker/Dockerfile.native -t quay.io/<namespace>/multiplication-service:1.19 .
 #
 # Then run the container using:
 #
-# docker run -i --rm -p 8080:8080 quay.io/<namespace>/multiplication-service:latest
+# docker run -i --rm -p 8080:8080 quay.io/<namespace>/multiplication-service:1.19
 #
 ###
 FROM registry.access.redhat.com/ubi8/ubi-minimal:8.3

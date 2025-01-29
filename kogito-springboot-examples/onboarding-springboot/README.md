@@ -123,7 +123,7 @@ spec:
   template:
     spec:
       containers:
-        - image: kogito/onboarding-springboot:latest
+        - image: kogito/onboarding-springboot:1.19
           imagePullPolicy: IfNotPresent
           serviceAccountName: onboarding-springboot
           ports:

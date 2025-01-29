@@ -28,7 +28,7 @@ spec:
  template:
   spec:
    containers:
-    - image: quay.io/<your_namespace>/subtraction-service:latest
+    - image: quay.io/<your_namespace>/subtraction-service:1.19
 ---
 apiVersion: serving.knative.dev/v1
 kind: Service
@@ -38,4 +38,4 @@ spec:
  template:
   spec:
    containers:
-    - image: quay.io/<your_namespace>/multiplication-service:latest
+    - image: quay.io/<your_namespace>/multiplication-service:1.19

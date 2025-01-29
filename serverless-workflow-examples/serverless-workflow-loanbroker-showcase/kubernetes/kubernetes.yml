@@ -43,7 +43,7 @@ spec:
           value: "300"
         - name: BASE_RATE
           value: "3"
-        image: dev.local/loanbroker-bank:latest
+        image: dev.local/loanbroker-bank:1.19
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -83,7 +83,7 @@ spec:
           value: "100"
         - name: BASE_RATE
           value: "2"
-        image: dev.local/loanbroker-bank:latest
+        image: dev.local/loanbroker-bank:1.19
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -123,7 +123,7 @@ spec:
           value: "400"
         - name: BASE_RATE
           value: "2"
-        image: dev.local/loanbroker-bank:latest
+        image: dev.local/loanbroker-bank:1.19
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -154,7 +154,7 @@ spec:
     spec:
       containerConcurrency: 0
       containers:
-      - image: dev.local/loanbroker-credit-bureau:latest
+      - image: dev.local/loanbroker-credit-bureau:1.19
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
