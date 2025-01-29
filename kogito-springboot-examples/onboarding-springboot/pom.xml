@@ -181,7 +181,7 @@
                 <image>
                   <name>kogito/%a</name>
                   <build>
-                    <from>registry.access.redhat.com/ubi8/openjdk-11:latest</from>
+                    <from>registry.access.redhat.com/ubi8/openjdk-17:1.20</from>
                     <assembly>
                       <targetDir>/deployments</targetDir>
                     </assembly>
