@@ -81,7 +81,7 @@ spec:
     spec:
       containers:
         - name: jobs-service-postgresql
-          image: docker.io/apache/incubator-kie-kogito-jobs-service-postgresql-nightly:10.0.0
+          image: mirror.gcr.io/apache/incubator-kie-kogito-jobs-service-postgresql:10.0.0
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

@@ -49,7 +49,7 @@ services:
 
   data-index:
     container_name: data-index
-    image: docker.io/apache/incubator-kie-kogito-data-index-postgresql:main
+    image: mirror.gcr.io/apache/incubator-kie-kogito-data-index-postgresql:10.0.0
     ports:
       - "8180:8080"
     depends_on:

@@ -20,7 +20,7 @@ resources:
 
 images:
   - name: postgres
-    newName: docker.io/library/postgres
+    newName: mirror.gcr.io/library/postgres
     newTag: alpine3.19
   - name: keycloak
     newName: quay.io/keycloak/keycloak
