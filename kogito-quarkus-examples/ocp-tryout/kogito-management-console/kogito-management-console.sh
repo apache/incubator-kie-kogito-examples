@@ -36,7 +36,7 @@ elif [ "${action}" == "install" ]; then
   oc create configmap kogito-management-config --from-file=../testapp/svg -o yaml --dry-run=client | \
     oc label -f- --dry-run=client -o yaml --local=true app=kogito-management-console | \
     oc apply -f- -n $(getProjectName) $(dryRun)
-  oc new-app mirror.gcr.io/apache/incubator-kie-kogito-management-console:10.0
+  oc new-app docker.io/apache/incubator-kie-kogito-management-console:10.0
   waitForPod kogito-management-console
   oc patch deployment kogito-management-console --patch "$(cat deployment-patch.yaml)" -n $(getProjectName) $(dryRun)
   waitForPod kogito-management-console

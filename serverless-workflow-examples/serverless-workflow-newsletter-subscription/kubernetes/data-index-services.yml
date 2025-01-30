@@ -55,7 +55,7 @@ spec:
     spec:
       containers:
         - name: data-index-service-postgresql
-          image: mirror.gcr.io/apache/incubator-kie-kogito-data-index-postgresql:10.0.0
+          image: docker.io/apache/incubator-kie-kogito-data-index-postgresql:10.0.0
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
