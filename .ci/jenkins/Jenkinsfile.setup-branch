@@ -137,7 +137,7 @@ pipeline {
                     String[] versionSplit = getKogitoVersion().split("\\.")
                     String reducedTag = "${versionSplit[0]}.${versionSplit[1]}"
                     sh """
-                        grep -r -l --exclude-dir=.ci 'mirror.gcr.io/apache/incubator-kie-' | xargs -I{} sed -i 's|mirror.gcr.io/apache/incubator-kie-\\(.*\\):.*|mirror.gcr.io/apache/incubator-kie-\\1:${reducedTag}|g' {}
+                        grep -r -l --exclude-dir=.ci 'docker.io/apache/incubator-kie-' | xargs -I{} sed -i 's|docker.io/apache/incubator-kie-\\(.*\\):.*|docker.io/apache/incubator-kie-\\1:${reducedTag}|g' {}
                     """
                 }
             }
