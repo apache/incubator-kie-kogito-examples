@@ -14,7 +14,7 @@
 # docker run -i --rm -p 8080:8080 quarkus/kogito-travel-agency-travels-jvm
 #
 ###
-FROM --platform=linux/amd64 registry.access.redhat.com/ubi9/openjdk-17:1.20
+FROM --platform=linux/amd64 registry.access.redhat.com/ubi9/openjdk-17-runtime:1.20
 ENV JAVA_OPTIONS="-Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jboss.logmanager.LogManager"
 ENV AB_ENABLED=jmx_exporter
 
@@ -22,5 +22,3 @@ COPY target/quarkus-app/lib/ /deployments/lib/
 COPY target/quarkus-app/*.jar /deployments/
 COPY target/quarkus-app/app/ /deployments/app/
 COPY target/quarkus-app/quarkus/ /deployments/quarkus/
-
-ENTRYPOINT [ "/deployments/run-java.sh" ]

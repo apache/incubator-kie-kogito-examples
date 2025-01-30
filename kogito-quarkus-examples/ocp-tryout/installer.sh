@@ -19,7 +19,7 @@
 #
 
 
-# firstly, any Kogito unrelated infrastructure like infinispan, kafka, etc. is installed
+# firstly, any Kogito unrelated infrastructure like postgresql, kafka, etc. is installed
 # secondly, any Kogito services like data-index, management console, etc. is installed
 # thirdly, the application to try out is installed
 
@@ -28,8 +28,8 @@ source common-functions.sh
 
 action=install
 
-components=(SHARED_CONFIG INFINISPAN KAFKA KEYCLOAK \
-           KOGITO_DATA_INDEX KOGITO_MANAGEMENT_CONSOLE KOGITO_TASK_CONSOLE KOGITO_JOBS_SERVICE \
+components=(SHARED_CONFIG KAFKA KEYCLOAK \
+           KOGITO_DATA_INDEX KOGITO_JOBS_SERVICE \
            TEST_APP)
 # override the installer properties configuration if needed
 function overrideEnvVariables(){
@@ -103,11 +103,11 @@ function install(){
 
   componentAction "${SHARED_CONFIG}" "kogito-shared"
 
-  componentAction "${INFINISPAN}" "infinispan"
+  componentAction "${POSTGRESQL}" "postgresql"
   componentAction "${KAFKA}" "kafka"
   componentAction "${KEYCLOAK}" "keycloak"
 
-  dbType="infinispan"
+  dbType="postgresql"
 
   componentAction "${KOGITO_DATA_INDEX}" "kogito-data-index" "${dbType}"
   componentAction "${KOGITO_MANAGEMENT_CONSOLE}" "kogito-management-console"

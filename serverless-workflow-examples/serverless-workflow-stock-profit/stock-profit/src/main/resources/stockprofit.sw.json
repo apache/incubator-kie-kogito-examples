@@ -1,7 +1,7 @@
 {
   "id": "stockprofit",
   "specVersion": "0.8",
-  "version": "999-SNAPSHOT",
+  "version": "10.0.0",
   "name": "Stock profit Workflow",
   "start": "GetStockPrice",
   "functions": [

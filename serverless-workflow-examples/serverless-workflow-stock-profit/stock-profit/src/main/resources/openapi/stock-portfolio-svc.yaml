@@ -21,7 +21,7 @@
 openapi: 3.0.3
 info:
   title: stock-portfolio-service API
-  version: 999-SNAPSHOT
+  version: 10.0.0
 paths:
   /profit/{symbol}:
     get:

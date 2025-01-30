@@ -25,7 +25,7 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>kogito-travel-agency-example-extended</artifactId>
-    <version>10.0.999-SNAPSHOT</version>
+    <version>10.0.0</version>
   </parent>
   <artifactId>visas</artifactId>
   <name>Kogito Example :: Travel Agency :: Visas</name>
@@ -36,8 +36,8 @@
     <quarkus.platform.version>3.8.4</quarkus.platform.version>
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-    <kogito.bom.version>10.0.999-SNAPSHOT</kogito.bom.version>
-    <version.org.kie.kogito>10.0.999-SNAPSHOT</version.org.kie.kogito>
+    <kogito.bom.version>10.0.0</kogito.bom.version>
+    <version.org.kie.kogito>10.0.0</version.org.kie.kogito>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -110,10 +110,6 @@
     </dependency>
     <dependency>
       <groupId>org.kie</groupId>
-      <artifactId>kie-addons-quarkus-persistence-infinispan</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.kie</groupId>
       <artifactId>kie-addons-quarkus-events-process</artifactId>
     </dependency>
     <dependency>
@@ -125,6 +121,35 @@
       <artifactId>kie-addons-quarkus-source-files</artifactId>
     </dependency>
   </dependencies>
+  <profiles>
+    <profile>
+      <id>default</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+    </profile>
+    <profile>
+      <id>postgresql</id>
+      <properties>
+        <quarkus.profile>postgresql</quarkus.profile>
+        <skipTests>true</skipTests>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>org.kie</groupId>
+          <artifactId>kie-addons-quarkus-persistence-jdbc</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>io.quarkus</groupId>
+          <artifactId>quarkus-jdbc-postgresql</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>io.quarkus</groupId>
+          <artifactId>quarkus-agroal</artifactId>
+        </dependency>
+      </dependencies>
+      </profile>
+  </profiles>
   <build>
     <finalName>${project.artifactId}</finalName>
     <plugins>

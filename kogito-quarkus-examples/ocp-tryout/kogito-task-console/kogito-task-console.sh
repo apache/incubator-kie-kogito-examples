@@ -19,6 +19,7 @@
 #
 
 
+server.address=0.0.0.0
 action=$1
 
 if [ "${action}" == "uninstall" ]; then
@@ -27,7 +28,7 @@ if [ "${action}" == "uninstall" ]; then
 
 elif [ "${action}" == "install" ]; then
   echo "*** installing task console"
-  oc new-app quay.io/kiegroup/kogito-task-console:10.0
+  oc new-app docker.io/apache/incubator-kie-kogito-task-console:${KOGITO_VERSION} -n $(getProjectName) $(dryRun "NewApp")
   waitForPod kogito-task-console
   oc patch deployment kogito-task-console --patch "$(cat deployment-patch.yaml)" -n $(getProjectName) $(dryRun)
   waitForPod kogito-task-console

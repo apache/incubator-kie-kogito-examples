@@ -37,7 +37,7 @@
     <quarkus.platform.version>3.8.4</quarkus.platform.version>
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-    <kogito.bom.version>10.0.999-SNAPSHOT</kogito.bom.version>
+    <kogito.bom.version>10.0.0</kogito.bom.version>
     <version.io.quarkiverse.reactivemessaging.http>2.0.2</version.io.quarkiverse.reactivemessaging.http>
     <version.io.cloudevents>2.3.0</version.io.cloudevents>
   </properties>

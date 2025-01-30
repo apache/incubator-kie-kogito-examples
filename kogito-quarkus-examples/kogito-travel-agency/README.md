@@ -18,7 +18,7 @@ and to start any any place.
 Consists of single service that has both business logic and decision logic included. 
 
 [Travel agency and visa services with persistence](extended) - deals with all the basic steps to book flight and hotel.
-Consists of two services that have both business logic and decision logic included. Preserves data between service restarts and requires Infinispan server to be available.
+Consists of two services that have both business logic and decision logic included. Preserves data between service restarts and requires PostgreSQL server to be available.
 
 ## Contribution
 

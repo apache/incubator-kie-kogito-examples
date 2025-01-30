@@ -25,15 +25,15 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>kogito-springboot-examples</artifactId>
-    <version>10.0.999-SNAPSHOT</version>
+    <version>10.0.0</version>
   </parent>
   <artifactId>onboarding-springboot</artifactId>
   <name>Kogito Example :: Onboarding Example :: Onboarding with Business Process Spring Boot</name>
   <description>Onboarding function and service orchestration</description>
   
   <properties>
-    <version.org.kie.kogito>10.0.999-SNAPSHOT</version.org.kie.kogito>
-    <kogito.bom.version>10.0.999-SNAPSHOT</kogito.bom.version>
+    <version.org.kie.kogito>10.0.0</version.org.kie.kogito>
+    <kogito.bom.version>10.0.0</kogito.bom.version>
   </properties>
 
   <dependencyManagement>
@@ -181,7 +181,7 @@
                 <image>
                   <name>kogito/%a</name>
                   <build>
-                    <from>registry.access.redhat.com/ubi8/openjdk-11:latest</from>
+                    <from>registry.access.redhat.com/ubi8/openjdk-17:1.20</from>
                     <assembly>
                       <targetDir>/deployments</targetDir>
                     </assembly>

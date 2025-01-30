@@ -11,9 +11,13 @@ There is one config map per infrastructure component.
 - `keycloak.admin.password` - the administration consoles' users' password
 - `keycloak.realm.json` - Keycloak initialization file for the Kogito realm creating clients, users, etc. used in Kogito examples
 - `keycloak.db.vendor` - Keycloak persistence
-#### Infinispan Config
-- `quarkus.infinispan.client.hosts` - the infinispan url used by the Kogito application; can be internal service url
-- `quarkus.infinispan.client.username` - the user used by the Kogito application to access the infinispan service
+#### PostgreSQL Config
+- `kogito.persistence.type`
+- `quarkus.datasource.db-kind`
+- `quarkus.datasource.username`
+- `quarkus.datasource.password`
+- `quarkus.datasource.jdbc.url`
+- `quarkus.datasource.reactive.url`
 #### Kafka Config
 - `kafka.bootstrap.servers` - the kafka url used by the Kogito application; can be internal service url
 #### Kogito Dataindex Config

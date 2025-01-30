@@ -92,7 +92,7 @@ sh ./startServices.sh
 
 Once all services bootstrap, the following ports will be assigned on your local machine:
 
-- Infinispan: 11222
+- PostgreSQL: 5432
 - Kafka: 9092
 - Data Index: 8180
 - Keycloak server: 8480

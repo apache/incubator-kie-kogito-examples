@@ -28,14 +28,14 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>kogito-springboot-examples</artifactId>
-    <version>10.0.999-SNAPSHOT</version>
+    <version>10.0.0</version>
   </parent>
   <artifactId>dmn-listener-springboot</artifactId>
   <name>Kogito Example :: DMN with listeners - Spring Boot</name>
 
   <properties>
-    <version.org.kie.kogito>10.0.999-SNAPSHOT</version.org.kie.kogito>
-    <kogito.bom.version>10.0.999-SNAPSHOT</kogito.bom.version>
+    <version.org.kie.kogito>10.0.0</version.org.kie.kogito>
+    <kogito.bom.version>10.0.0</kogito.bom.version>
   </properties>
 
   <dependencyManagement>
