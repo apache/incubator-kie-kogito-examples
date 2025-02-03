@@ -1,6 +1,8 @@
 package org.kie.kogito.calendar.bill;
 
 import org.kie.kogito.calendar.BusinessCalendar;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import io.quarkus.runtime.StartupEvent;
 
@@ -13,13 +15,15 @@ public class CalendarService {
     @Inject
     BusinessCalendar businessCalendar;
 
+    Logger logger = LoggerFactory.getLogger(CalendarService.class);
+
     void onStart(@Observes StartupEvent ev) {
-        System.out.println("CalendarService started");
+        logger.info("CalendarService started");
         checkBusinessCalendar();
     }
 
     public void checkBusinessCalendar() {
         long time = businessCalendar.calculateBusinessTimeAsDuration("test");
-        System.out.println("time: " + time + " from business calendar: " + businessCalendar.getClass().getName());
+        logger.info("time: {} from business calendar: {}", time, businessCalendar.getClass().getName());
     }
 }

@@ -14,6 +14,6 @@ public class CustomBusinessCalendarProducer {
 
     @Produces
     public BusinessCalendar createBusinessCalendar() {
-        return new CustomBusinessCalendar();
+        return new NoHolidayOneHourDelayCalendar();
     }
 }
