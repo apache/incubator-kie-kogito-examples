@@ -22,7 +22,7 @@ If you want to use an alternative BOM when building the Apache KIE Quarkus quick
 mvn -Dquarkus.platform.artifact-id=quarkus-universe-bom clean install
 ```
 Currently, only [Drools](https://github.com/apache/incubator-kie-drools) is part of the Quarkus Platform.
-> Note: Integration of Kogito and Sonataflow is in progress.
+> Note: Integration of Kogito and Sonataflow are in progress.
 
 ## Getting started with the examples
 
