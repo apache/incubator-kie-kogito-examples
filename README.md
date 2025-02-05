@@ -52,7 +52,7 @@ Everyone is encouraged to contribute to these examples by:
 - Do you have a [reproducer](https://stackoverflow.com/help/minimal-reproducible-example) for your issue?
   - If so, please open a new issue in [Github](https://github.com/apache/incubator-kie-kogito-examples/issues) repository with the details of your issue and affected example.
 - Are you encountering an issue but unsure of what is going on?
-  - Start a new threads in our [Apache KIE Zulip chat](https://kie.zulipchat.com/). Please use the channel which the example is rellated to.
+  - Start a new thread in our [Apache KIE Zulip chat](https://kie.zulipchat.com/). Please use the channel which the example is related to.
   - Please provide as much relevant information as you can as to what could be causing the issue and a reproducer. Our developers will help you figure out what's going wrong.
 
 ### Requests
