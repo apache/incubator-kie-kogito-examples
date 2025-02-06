@@ -6,7 +6,11 @@ Apache KIE Examples showcase use cases, features, applications, know-how's of ev
 
 Apache KIE Examples are currently updated after a stable release.
 
-Current, default branch is `stable-10.0.0`, pointing to the latest released version.
+## Branches
+
+Current stable branch is `10.0.x`, pointing to the latest released `10.0.0` version.
+
+Current development branch is `main`.
 
 ## Use alternative Quarkus platforms with examples
 
@@ -18,7 +22,7 @@ If you want to use an alternative BOM when building the Apache KIE Quarkus quick
 mvn -Dquarkus.platform.artifact-id=quarkus-universe-bom clean install
 ```
 Currently, only [Drools](https://github.com/apache/incubator-kie-drools) is part of the Quarkus Platform.
-> Note: Integration of Kogito and Sonataflow is in progress.
+> Note: Integration of Kogito and Sonataflow are in progress.
 
 ## Getting started with the examples
 
@@ -48,7 +52,7 @@ Everyone is encouraged to contribute to these examples by:
 - Do you have a [reproducer](https://stackoverflow.com/help/minimal-reproducible-example) for your issue?
   - If so, please open a new issue in [Github](https://github.com/apache/incubator-kie-kogito-examples/issues) repository with the details of your issue and affected example.
 - Are you encountering an issue but unsure of what is going on?
-  - Start a new threads in our [Apache KIE Zulip chat](https://kie.zulipchat.com/). Please use the channel which the example is rellated to.
+  - Start a new thread in our [Apache KIE Zulip chat](https://kie.zulipchat.com/). Please use the channel which the example is related to.
   - Please provide as much relevant information as you can as to what could be causing the issue and a reproducer. Our developers will help you figure out what's going wrong.
 
 ### Requests
