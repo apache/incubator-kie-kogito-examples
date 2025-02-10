@@ -21,7 +21,7 @@ package org.kie.kogito.calendar;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.kie.kogito.calendar.bill.NoHolidayOneHourDelayCalendar;
+import org.kie.kogito.calendar.bill.OneHourDelayCalendar;
 import org.kie.kogito.process.ProcessConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -76,7 +76,7 @@ public class CreditCardProcessIT {
 
         Thread.sleep(2000);
         BusinessCalendar businessCalendar = processConfig.getBusinessCalendar();
-        assertInstanceOf(NoHolidayOneHourDelayCalendar.class, businessCalendar);
+        assertInstanceOf(OneHourDelayCalendar.class, businessCalendar);
         assertThat(businessCalendar).isNotNull();
         long timeDuration = businessCalendar.calculateBusinessTimeAsDuration("1s");
         if (timeDuration > 1000L) {
