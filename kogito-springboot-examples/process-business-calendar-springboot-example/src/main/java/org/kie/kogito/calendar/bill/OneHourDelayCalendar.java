@@ -6,11 +6,13 @@ import org.jbpm.process.core.timer.BusinessCalendarImpl;
 import org.kie.kogito.calendar.BusinessCalendar;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 /**
  * Custom implementation of BusinessCalendar interface that is configured with properties.
  * BusinessCalendarImpl is used to calculate business time.
  */
+@Component
 public class OneHourDelayCalendar implements BusinessCalendar {
 
     private static final Logger logger = LoggerFactory.getLogger(OneHourDelayCalendar.class);
