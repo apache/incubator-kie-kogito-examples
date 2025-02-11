@@ -3,6 +3,7 @@
 ## Description
 
 A simple DMN service to evaluate a model (traffic violation) that is imported from a different jar.
+It also features the usage of custom DMN profiles, imported from a dependency and declared inside the application.properties file.
 
 Demonstrates DMN on Kogito capabilities, including REST interface code generation.
 
