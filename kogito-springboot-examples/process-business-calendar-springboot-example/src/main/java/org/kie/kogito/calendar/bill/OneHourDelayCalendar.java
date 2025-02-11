@@ -42,7 +42,7 @@ public class OneHourDelayCalendar implements BusinessCalendar {
         calendar.setTime(date);
         calendar.add(Calendar.HOUR, 1);
         Date dateAfterOneHour = calendar.getTime();
-        logger.info("Date after one hour: {}", dateAfterOneHour);
+        logger.debug("Date after one hour: {}", dateAfterOneHour);
         return dateAfterOneHour;
     }
 
