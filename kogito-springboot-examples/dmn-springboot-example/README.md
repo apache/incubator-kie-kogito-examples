@@ -2,7 +2,9 @@
 
 ## Description
 
-A simple DMN service to evaluate a traffic violation.
+A simple DMN service to evaluate a traffic violation and a model with input constraints.
+
+The org.kie.dmn.runtime.typecheck=true property is used to enable type and value check.
 
 ## Installing and Running
 
@@ -81,6 +83,107 @@ Example response:
     "Amount":500
   },
   "Should the driver be suspended?":"No"
+}
+```
+
+### POST /AllowedValuesChecksInsideCollection
+
+Valid interests for the model are: Golf, Computer, Hockey, Jogging
+
+Given valid input:
+
+```json
+{
+ "p1": {
+  "Name": "Joe",
+  "Interests": [
+   "Golf"
+  ]
+ }
+}
+```
+
+Curl command (using the JSON object above):
+
+```sh
+curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d 'p1": {"Name":"Joe","Interests":["Golf"]}' http://localhost:8080/AllowedValuesChecksInsideCollection
+```
+
+As response, interests information is returned.
+
+Example response:
+```json
+{
+ "p1": {
+  "Interests": [
+   "Golf"
+  ],
+  "Name": "Joe"
+ },
+ "MyDecision": "The Person Joe likes 1 thing(s)."
+}
+```
+
+With invalid value
+
+```json
+{
+ "p1": {
+  "Name": "Joe",
+  "Interests": [
+   "Dancing"
+  ]
+ }
+}
+```
+
+Curl command (using the JSON object above):
+
+```sh
+curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d 'p1": {"Name":"Joe","Interests":["Dancing"]}' http://localhost:8080/AllowedValuesChecksInsideCollection
+```
+
+As response, error information is returned.
+
+Example response:
+```json
+{
+ "namespace": "http://www.trisotech.com/definitions/_238bd96d-47cd-4746-831b-504f3e77b442",
+ "modelName": "AllowedValuesChecksInsideCollection",
+ "dmnContext": {
+  "p1": {
+   "Interests": [
+    "Dancing"
+   ],
+   "Name": "Joe"
+  }
+ },
+ "messages": [
+  {
+   "severity": "ERROR",
+   "message": "Error while evaluating node 'MyDecision' for dependency 'p1': the dependency value '{Interests=[Dancing], Name=Joe}' is not allowed by the declared type (DMNType{ http://www.trisotech.com/definitions/_238bd96d-47cd-4746-831b-504f3e77b442 : Person })",
+   "messageType": "ERROR_EVAL_NODE",
+   "sourceId": "_27453770-68e3-48da-8605-d33a653c09ef",
+   "level": "ERROR"
+  }
+ ],
+ "decisionResults": [
+  {
+   "decisionId": "_ed3b9794-9306-4b6a-b4f9-5486be3c5515",
+   "decisionName": "MyDecision",
+   "result": null,
+   "messages": [
+    {
+     "severity": "ERROR",
+     "message": "Error while evaluating node 'MyDecision' for dependency 'p1': the dependency value '{Interests=[Dancing], Name=Joe}' is not allowed by the declared type (DMNType{ http://www.trisotech.com/definitions/_238bd96d-47cd-4746-831b-504f3e77b442 : Person })",
+     "messageType": "ERROR_EVAL_NODE",
+     "sourceId": "_27453770-68e3-48da-8605-d33a653c09ef",
+     "level": "ERROR"
+    }
+   ],
+   "evaluationStatus": "SKIPPED"
+  }
+ ]
 }
 ```
 
