@@ -19,15 +19,23 @@
 package org.kie.kogito.dmn.consumer.example;
 
 import org.junit.jupiter.api.Test;
+import org.kie.kogito.decision.DecisionModel;
+import org.kie.kogito.decision.DecisionModels;
+import org.kie.kogito.dmn.DmnDecisionModel;
+import org.kie.kogito.dmn.consumer.example.customprofiles.CustomDMNProfile;
 
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.is;
 
 @QuarkusTest
 public class TrafficViolationTest {
+
+    @jakarta.inject.Inject
+    DecisionModels decisionModels;
 
     @Test
     public void testEvaluateTrafficViolation() {
@@ -48,5 +56,15 @@ public class TrafficViolationTest {
                 .then()
                 .statusCode(200)
                 .body("'Should the driver be suspended?'", is("No"));
+    }
+
+    @Test
+    void testCustomDMNProfile() {
+        assertThat(decisionModels).isNotNull();
+        DecisionModel decisionModel = decisionModels.getDecisionModel("https://github.com/kiegroup/drools/kie-dmn/_A4BCA8B8-CF08-433F-93B2-A2598F19ECFF", "Traffic Violation");
+        assertThat(decisionModel).isNotNull().isInstanceOf(DmnDecisionModel.class);
+        DmnDecisionModel dmnDecisionModel = (DmnDecisionModel) decisionModel;
+        assertThat(dmnDecisionModel).isNotNull();
+        assertThat(dmnDecisionModel.getProfiles()).anyMatch(profile -> profile instanceof CustomDMNProfile);
     }
 }
