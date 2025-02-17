@@ -1,6 +1,6 @@
 # Apache KIE Examples
 
-This repository contains a number of examples for [Drools](https://github.com/apache/incubator-kie-drools), [jBPM](https://www.jbpm.org), [Kogito](https://github.com/apache/incubator-kie-kogito-runtimes) and [Sonataflow](https://sonataflow.org) that you can take a look at and try out yourself.  Please take a look at the readme of each individual example for more details on how the example works and how to run it yourself.
+This repository contains a number of examples for [Drools](https://github.com/apache/incubator-kie-drools), [jBPM](https://www.jbpm.org), [Kogito](https://github.com/apache/incubator-kie-kogito-runtimes) and [SonataFlow](https://sonataflow.org) that you can take a look at and try out yourself.  Please take a look at the readme of each individual example for more details on how the example works and how to run it yourself.
 
 Apache KIE Examples showcase use cases, features, applications, know-how's of everything our community's technology has to offer.
 
