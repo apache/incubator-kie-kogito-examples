@@ -276,3 +276,149 @@ curl -X GET http://localhost:8080/BusinessCalendarCreditBill \
 
 * On next business day, timer will resume at the beginning of the next working hour/day, after the non-working hour/holiday has ended. The timer is set to fire after one second of active business time.
 
+# Custom Business Calendar
+
+### Why Create a Custom Business Calendar?
+- Custom schedules that differ from the default behavior.
+- Modify, delay, or override time calculations.
+- Implement custom business logic for when tasks should be triggered.
+
+---
+
+### Implementing a Custom Business Calendar
+
+There are two ways to define a custom business calendar:
+- Implementing from scratch: We can implement the BusinessCalendar interface and provide custom logic.
+- Implementing on top of BusinessCalendarImpl: This allows modifying the default implementation with minimal changes.
+
+For demonstration, an example is provided (OneHourDelayCalendar.java), which adds 1 hour to all calculated times. However, you are free to define your own logic.
+
+---
+
+### Option 1: Creating a Custom Business Calendar in the Default Package or in a different package within org.kie.kogito.calendar
+
+If you place the custom business calendar in the existing package (org.kie.kogito.calendar.bill), only **@ApplicationScoped** is required for dependency injection.
+
+**Steps**
+1. **Navigate to**: *src/main/java/org/kie/kogito/calendar*
+2. **Create a new class** (e.g., CustomBusinessCalendar.java).
+3. **Implement your business logic with @Component**
+
+```java
+package org.kie.kogito.calendar.bill;
+
+import java.util.*;
+import org.kie.kogito.calendar.BusinessCalendar;
+import org.springframework.stereotype.Component;
+/**
+ * Custom Business Calendar Example.
+ * Modify this class to implement your own scheduling logic.
+ */
+@Component
+public class CustomBusinessCalendar implements BusinessCalendar {
+
+    @Override
+    public long calculateBusinessTimeAsDuration(String timeExpression) {
+        // Implement custom logic to calculate business time duration
+        return 0;
+    }
+
+    @Override
+    public Date calculateBusinessTimeAsDate(String timeExpression) {
+        // Implement custom logic to return the scheduled date
+        return new Date();
+    }
+}
+```
+---
+
+4. **Activate the Custom Calendar**
+- By default, spring does not allow us to override the default bean, hence we add the below configuration **application.properties**:
+
+```spring.main.allow-bean-definition-overriding=true```
+
+---
+
+### Example: Testing custom calendar implementation (OneHourDelayCalendar) that adds 1 hour to all returned times.
+
+**Below is an example implementation of a OneHourDelayCalendar which uses existing BusinessCalendarImpl.**
+
+```java
+
+package org.kie.kogito.calendar.custom;
+
+import java.util.*;
+
+import org.jbpm.process.core.timer.BusinessCalendarImpl;
+import org.kie.kogito.calendar.BusinessCalendar;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
+/**
+ * Custom implementation of BusinessCalendar interface that is configured with properties.
+ * BusinessCalendarImpl is used to calculate business time.
+ */
+@Component
+public class OneHourDelayCalendar implements BusinessCalendar {
+
+  private static final Logger logger = LoggerFactory.getLogger(OneHourDelayCalendar.class);
+  private final BusinessCalendar businessCalendar;
+
+  public OneHourDelayCalendar() {
+    logger.debug("Instantiating OneHourDelayCalendar");
+    this.businessCalendar = BusinessCalendarImpl.builder().build();
+  }
+
+  /**
+   * @inheritDoc
+   */
+  @Override
+  public long calculateBusinessTimeAsDuration(String timeExpression) {
+    long time = calculateBusinessTimeAsDate(timeExpression).getTime();
+    long timeDuration = time - System.currentTimeMillis();
+    logger.debug("calculated time: {}, calculated time duration: {}", time, timeDuration);
+    return timeDuration;
+  }
+
+  /**
+   * @inheritDoc
+   */
+  @Override
+  public Date calculateBusinessTimeAsDate(String timeExpression) {
+    Date date = this.businessCalendar.calculateBusinessTimeAsDate(timeExpression);
+    Calendar calendar = Calendar.getInstance();
+    calendar.setTime(date);
+    calendar.add(Calendar.HOUR, 1);
+    Date dateAfterOneHour = calendar.getTime();
+    logger.debug("Date after one hour: {}", dateAfterOneHour);
+    return dateAfterOneHour;
+  }
+
+}
+  ```
+
+### Testing the Custom Business Calendar
+
+To verify that your implementation works:
+1.	Run:
+
+```mvn clean compile spring-boot:run```
+or
+```sh
+mvn clean package
+```
+```sh
+java -jar .\target\process-business-calendar-springboot-example.jar
+```
+
+2.	Check behavior
+- Start a process : POST/ BusinessCalendarCreditBill
+```sh
+curl -X POST http://localhost:8080/BusinessCalendarCreditBill \
+-H "Content-Type: application/json" \
+-d '{"creditCardNumber": null, "creditCardDetails": {"cardNumber": "434353433", "status": "Bill Due"}}'
+```
+- Verify in logs if the time reflects the expected change
+<p align="center"><img width=75% height=50% src="docs/images/OneHourDelayCalendarSpring.png"></p>
+When POST/ BusinessCalendarCreditBill is sent on Mon Feb 17 at 07:16, the logs will show the time delay of 1 hour i.e., 08:16.
