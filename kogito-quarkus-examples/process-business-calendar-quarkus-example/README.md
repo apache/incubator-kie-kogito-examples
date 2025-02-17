@@ -284,3 +284,172 @@ curl -X GET http://localhost:8080/BusinessCalendarCreditBill \
 
 * On next business day, timer will resume at the beginning of the next working hour/day, after the non-working hour/holiday has ended. The timer is set to fire after one second of active business time.
 
+
+# Custom Business Calendar 
+
+### Why Create a Custom Business Calendar?
+- Custom schedules that differ from the default behavior.
+- Modify, delay, or override time calculations.
+- Implement custom business logic for when tasks should be triggered.
+
+This guide explains how to implement a custom business calendar allowing full flexibility.
+
+---
+
+### Implementing a Custom Business Calendar
+
+There are two ways to define a custom business calendar:
+- Implementing from scratch: We can implement the BusinessCalendar interface and provide custom logic. 
+- Implementing on top of BusinessCalendarImpl: This allows modifying the default implementation with minimal changes.
+
+For demonstration, an example is provided (OneHourDelayCalendar.java), which adds 1 hour to all calculated times. However, you are free to define your own logic.
+
+---
+
+### Option 1: Creating a Custom Business Calendar in the Default Package
+
+If you place the custom business calendar in the existing package (org.kie.kogito.calendar.bill), only **@ApplicationScoped** is required for dependency injection.
+
+**Steps**
+1. **Navigate to**: *kogito-quarkus-examples/process-business-calendar-quarkus-example/src/main/java/org/kie/kogito/calendar/bill*
+2. **Create a new class** (e.g., CustomBusinessCalendar.java).
+3. Implement your custom business logic by either implementing BusinessCalendar or extending an existing implementation:
+
+```java
+package org.kie.kogito.calendar.bill;
+
+import java.util.*;
+import org.kie.kogito.calendar.BusinessCalendar;
+import jakarta.enterprise.context.ApplicationScoped;
+
+/**
+ * Custom Business Calendar Example.
+ * Modify this class to implement your own scheduling logic.
+ */
+@ApplicationScoped
+public class CustomBusinessCalendar implements BusinessCalendar {
+
+    @Override
+    public long calculateBusinessTimeAsDuration(String timeExpression) {
+        // Implement custom logic to calculate business time duration
+        return 0;
+    }
+
+    @Override
+    public Date calculateBusinessTimeAsDate(String timeExpression) {
+        // Implement custom logic to return the scheduled date
+        return new Date();
+    }
+}
+```
+---
+### Option 2: Creating a Custom Business Calendar in a Separate Package within org.kie.kogito.calendar 
+
+**Steps**
+1. Navigate to:*kogito-quarkus-examples/process-business-calendar-quarkus-example/src/main/java/org/kie/kogito/calendar/custom*
+2. Create a new class (e.g., CustomBusinessCalendar.java).
+3. Implement your business logic with @Alternative annotation:
+
+```java
+package org.kie.kogito.calendar.custom;
+
+import java.util.*;
+import org.kie.kogito.calendar.BusinessCalendar;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Alternative;
+
+/**
+* Custom Business Calendar Example.
+* Modify this class to implement your own scheduling logic.
+  */
+  @ApplicationScoped
+  @Alternative
+  public class CustomBusinessCalendar implements BusinessCalendar {
+
+  @Override
+  public long calculateBusinessTimeAsDuration(String timeExpression) {
+  // Implement custom logic to calculate business time duration
+  return 0;
+  }
+
+  @Override
+  public Date calculateBusinessTimeAsDate(String timeExpression) {
+  // Implement custom logic to return the scheduled date
+  return new Date();
+  }
+  }
+  ```
+
+4. **Activate the Custom Calendar**
+- Since this class is in a new package, configure it in **application.properties**:
+
+```quarkus.arc.selected-alternatives=org.kie.kogito.calendar.custom.CustomBusinessCalendar```
+
+---
+
+### Example: Testing custom calendar implementation (OneHourDelayCalendar) that adds 1 hour to all returned times.
+
+**Below is an example implementation of a OneHourDelayCalendar which uses existing BusinessCalendarImpl.**
+
+```java
+
+package org.kie.kogito.calendar.bill;
+
+import java.util.*;
+
+import org.jbpm.process.core.timer.BusinessCalendarImpl;
+import org.kie.kogito.calendar.BusinessCalendar;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import jakarta.enterprise.context.ApplicationScoped;
+
+/**
+* Example implementation of a custom business calendar.
+* This implementation adds 1 hour to all times.
+  */
+  @ApplicationScoped
+  public class OneHourDelayCalendar implements BusinessCalendar {
+
+  private static final Logger logger = LoggerFactory.getLogger(OneHourDelayCalendar.class);
+  private final BusinessCalendar businessCalendar;
+
+  public OneHourDelayCalendar() {
+  logger.debug("Instantiating OneHourDelayCalendar");
+  this.businessCalendar = BusinessCalendarImpl.builder().build();
+  }
+
+  @Override
+  public long calculateBusinessTimeAsDuration(String timeExpression) {
+  long time = calculateBusinessTimeAsDate(timeExpression).getTime();
+  return time - System.currentTimeMillis();
+  }
+
+  @Override
+  public Date calculateBusinessTimeAsDate(String timeExpression) {
+  Date originalDate = this.businessCalendar.calculateBusinessTimeAsDate(timeExpression);
+  Calendar calendar = Calendar.getInstance();
+  calendar.setTime(originalDate);
+  calendar.add(Calendar.HOUR, 1); // Adds 1 hour
+  return calendar.getTime();
+  }
+  }
+  ```
+
+### Testing the Custom Business Calendar
+
+To verify that your implementation works:
+1.	Run:
+
+```mvn clean compile quarkus:dev```
+
+2.	Check behavior
+- Start a process : POST/ BusinessCalendarCreditBill
+```sh
+curl -X POST http://localhost:8080/BusinessCalendarCreditBill \
+-H "Content-Type: application/json" \
+-d '{"creditCardNumber": null, "creditCardDetails": {"cardNumber": "434353433", "status": "Bill Due"}}'
+```
+- Verify in logs if the time reflects the expected change
+<p align="center"><img width=75% height=50% src="docs/images/onehourdelay.png"></p>
+When POST/ BusinessCalendarCreditBill is sent on Mon Feb 17 at 05:41, the logs will show the time delay of 1 hour i.e., 06:41.
