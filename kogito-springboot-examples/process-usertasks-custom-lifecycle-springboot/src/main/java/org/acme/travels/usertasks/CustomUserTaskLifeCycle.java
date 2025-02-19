@@ -88,7 +88,8 @@ public class CustomUserTaskLifeCycle implements UserTaskLifeCycle {
     }
 
     @Override
-    public List<UserTaskTransition> allowedTransitions(UserTaskInstance userTaskInstance) {
+    public List<UserTaskTransition> allowedTransitions(UserTaskInstance userTaskInstance, IdentityProvider identity) {
+        checkPermission(userTaskInstance, identity);
         return transitions.stream().filter(t -> t.source().equals(userTaskInstance.getStatus())).toList();
     }
 
