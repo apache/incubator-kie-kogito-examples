@@ -19,6 +19,7 @@
 package org.kie.kogito.calendar;
 
 import org.junit.jupiter.api.Test;
+import org.kie.kogito.calendar.bill.OneHourDelayCalendar;
 import org.kie.kogito.process.ProcessConfig;
 
 import io.quarkus.test.junit.QuarkusTest;
@@ -29,6 +30,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 @QuarkusTest
 public class CreditCardProcessIT {
@@ -57,6 +59,7 @@ public class CreditCardProcessIT {
         Thread.sleep(2000);
         BusinessCalendar businessCalendar = processConfig.getBusinessCalendar();
         assertThat(businessCalendar).isNotNull();
+        assertInstanceOf(OneHourDelayCalendar.class, businessCalendar);
         long timeDuration = businessCalendar.calculateBusinessTimeAsDuration("1s");
         if (timeDuration > 1000L) {
             given()
