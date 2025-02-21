@@ -1,0 +1,71 @@
+{
+  "id": "getCatFactInformation",
+  "version": "1.0",
+  "specVersion": "0.8.0",
+  "name": "Get cat fact",
+  "description": "Description",
+  "start": "GreetOrCatFact",
+   "functions": [
+      {
+         "name": "getCatFact",
+         "operation": "specs/catfacts.json#getRandomFact"
+      },  
+      {
+        "name": "sysOutFunction",
+        "type": "custom",
+        "operation": "sysout"
+      }
+   ],
+  "states": [
+    {
+      "name": "GreetOrCatFact",
+      "type": "switch",
+      "dataConditions": [
+        {
+          "condition": "${ .fact == \"random\"}",
+          "transition": "GetRandomFact"
+        }
+      ],
+      "defaultCondition": {
+        "transition": "GetOneStaticFact"
+      }
+    },
+    {
+      "name": "GetOneStaticFact",
+      "type": "inject",
+      "data": {
+        "message": "Cats are very cute"
+      },
+      "transition": "PrintTheFact"
+    },
+    {
+      "name": "GetRandomFact",
+      "type": "operation",
+      "actions": [
+        {
+          "name": "getRandomFact",
+          "functionRef": {
+              "refName": "getCatFact"
+          }
+        }
+      ],
+      "transition": "PrintTheFact"
+    },
+    {
+      "name": "PrintTheFact",
+      "type": "operation",
+      "actions": [
+        {
+          "name": "greetAction",
+          "functionRef": {
+            "refName": "sysOutFunction",
+            "arguments": {
+              "message": "${\"Fact is that: \" + .message + .fact }"
+            }
+          }
+        }
+      ],
+      "end": true
+    }
+  ]
+}
