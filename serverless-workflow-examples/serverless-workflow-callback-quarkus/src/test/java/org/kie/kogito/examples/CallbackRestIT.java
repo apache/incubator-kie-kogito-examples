@@ -19,6 +19,7 @@
 package org.kie.kogito.examples;
 
 import static io.restassured.RestAssured.given;
+import static java.util.concurrent.TimeUnit.MINUTES;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
 
@@ -36,7 +37,19 @@ class CallbackRestIT {
 
     @Test
     void testCallbackRest() {
-        String id = given()
+         await()
+            .atMost(2, MINUTES)
+            .pollDelay(2, SECONDS)
+            .pollInterval(1, SECONDS)
+            .untilAsserted(() -> {
+                given()
+                    .contentType(ContentType.JSON)
+                    .accept(ContentType.JSON)
+                    .get("/q/health")
+                    .then()
+                    .statusCode(200);
+            });
+            String id = given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
                 .post("/callback")
