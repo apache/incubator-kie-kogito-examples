@@ -298,8 +298,8 @@ This guide explains how to implement a custom business calendar allowing full fl
 
 ### Creating a Custom Business Calendar 
 
-- By default, calendar.properties is used to configure default business calendar. However, a custom business calendar can be implemented but either calendar.properties or the kogito.processes.businessCalendar property in application.properties must exist.
-- To test the created custom business calendar with property set in application.properties, calendar.properties should not exist.
+- By default, calendar.properties is used to configure default business calendar. 
+- If a custom business calendar has to be implemented, calendar.properties should NOT exist. Instead, add the following property to application.properties: ```kogito.processes.businessCalendar=org.kie.kogito.calendar.CustomCalendar```
 
 **Steps**
 1. **Navigate to**: *kogito-quarkus-examples/process-business-calendar-quarkus-example/src/main/java/org/kie/kogito/calendar*
