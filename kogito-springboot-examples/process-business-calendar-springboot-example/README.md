@@ -294,7 +294,7 @@ This guide explains how to implement a custom business calendar allowing full fl
 
 **Steps**
 1. **Navigate to**: *kogito-quarkus-examples/process-business-calendar-quarkus-example/src/main/java/org/kie/kogito/calendar*
-2. **Create a new custom business calendar class** (e.g., OneHourDelayCalendar.java).
+2. **Create a new custom business calendar class** (e.g., CustomCalendar.java).
 3. Ensure it implements the BusinessCalendar interface.The implementation should be a concrete class(not an interface or abstract class).
 4. Set the property ```kogito.processes.businessCalendar=org.kie.kogito.calendar.custom.CustomCalendar```  in application.properties to the fully qualified class name of the custom business calendar.
 5. To test the created custom business calendar with property set in application.properties, calendar.properties should not exist.
@@ -314,7 +314,7 @@ import org.kie.kogito.calendar.BusinessCalendar;
  * Custom Business Calendar Example.
  * Modify this class to implement your own scheduling logic.
  */
-public class OneHourDelayCalendar implements BusinessCalendar {
+public class CustomCalendar implements BusinessCalendar {
 
     @Override
     public long calculateBusinessTimeAsDuration(String timeExpression) {
@@ -331,7 +331,7 @@ public class OneHourDelayCalendar implements BusinessCalendar {
 ```
 ---
 
-### Testing custom calendar implementation (OneHourDelayCalendar).
+### Testing custom calendar implementation
 
 To verify that your custom implementation works:
 1.	Run:
