@@ -276,3 +276,76 @@ curl -X GET http://localhost:8080/BusinessCalendarCreditBill \
 
 * On next business day, timer will resume at the beginning of the next working hour/day, after the non-working hour/holiday has ended. The timer is set to fire after one second of active business time.
 
+## Custom Business Calendar Flexibility
+
+**Why Create a Custom Business Calendar?**
+- Custom schedules that differ from the default behavior.
+- Modify, delay, or override time calculations.
+- Implement custom business logic for when tasks should be triggered.
+
+This guide explains how to implement a custom business calendar allowing full flexibility.
+
+---
+
+### Creating a Custom Business Calendar
+
+- By default, calendar.properties is used to configure default business calendar.
+- If a custom business calendar has to be implemented, calendar.properties should NOT exist. Instead, add the following property to application.properties: ```kogito.processes.businessCalendar=org.kie.kogito.calendar.CustomCalendar```
+
+**Steps**
+1. **Navigate to**: *kogito-quarkus-examples/process-business-calendar-quarkus-example/src/main/java/org/kie/kogito/calendar*
+2. **Create a new custom business calendar class** (e.g., CustomCalendar.java).
+3. Ensure it implements the BusinessCalendar interface.The implementation should be a concrete class(not an interface or abstract class).
+4. Set the property ```kogito.processes.businessCalendar=org.kie.kogito.calendar.custom.CustomCalendar```  in application.properties to the fully qualified class name of the custom business calendar.
+5. To test the created custom business calendar with property set in application.properties, calendar.properties should not exist.
+
+
+
+**Implement your custom business logic**
+- For demonstration, an example is provided below. However, you are free to define your own logic.
+
+```java
+package org.kie.kogito.calendar.custom;
+
+import java.util.*;
+import org.kie.kogito.calendar.BusinessCalendar;
+
+/**
+ * Custom Business Calendar Example.
+ * Modify this class to implement your own scheduling logic.
+ */
+public class CustomCalendar implements BusinessCalendar {
+
+    @Override
+    public long calculateBusinessTimeAsDuration(String timeExpression) {
+        // Implement custom logic to calculate business time duration
+        return 0;
+    }
+
+    @Override
+    public Date calculateBusinessTimeAsDate(String timeExpression) {
+        // Implement custom logic to return the scheduled date
+        return new Date();
+    }
+}
+```
+---
+
+### Testing custom calendar implementation
+
+To verify that your custom implementation works:
+1.	Run:
+
+```mvn clean compile spring-boot:run```
+
+or
+
+```mvn clean package```
+
+```java -jar target/process-business-rules-springboot.jar```
+
+
+- Verify in generated sources within target folder if it reflects the expected change
+<p align="center"><img width=75% height=50% src="docs/images/CustomCalendarClassSpring.png"></p>
+
+
