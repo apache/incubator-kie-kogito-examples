@@ -159,7 +159,7 @@ Because the person is evaluated as an adult, no outstanding tasks should be here
 We can verify there is no task running for Children Handling using following command:
 
 ```sh
-curl http://localhost:8080/persons/{uuid}/tasks
+curl http://localhost:8080/usertasks/instance?user=jdoe
 ```
 where uuid is the id returned in the previous step.
 
