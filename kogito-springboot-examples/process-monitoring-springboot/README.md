@@ -134,61 +134,71 @@ Example response:
 ]
 ```
 
-### GET /orderItems/{id}/tasks
+### GET /usertasks/instance
 
-Getting user tasks awaiting user action
+Getting user tasks details awaiting user action
 
 ```sh
-curl -X GET http://localhost:8080/orderItems/66c11e3e-c211-4cee-9a07-848b5e861bc5/tasks?user=john
+curl -X GET http://localhost:8080/usertasks/instance?user=john
 ```
 Example response:
+
 ```json
 [
-  {"id":"62f1c985-d31c-4ead-9906-2fe8d05937f0","name":"Verify order"}
+  {
+    "id": "bcbe9d60-4847-45f0-8069-e983f3f055e6",
+    "userTaskId": "UserTask_1",
+    "status": {
+      "terminate": null,
+      "name": "Reserved"
+    },
+    "taskName": "Verify order",
+    ...
 ]
 ```
 
-### GET /orderItems/{id}/Verify_order/{tid}
-
-Getting user task details
-
-```sh
-curl -X GET http://localhost:8080/orderItems/66c11e3e-c211-4cee-9a07-848b5e861bc5/Verify_order/62f1c985-d31c-4ead-9906-2fe8d05937f0?user=john
-```
-Example response:
-```json
-{
-  "id":"62f1c985-d31c-4ead-9906-2fe8d05937f0",
-  "input1":
-  {
-    "orderNumber":"12345",
-    "shipped":false,
-    "total":0.537941914075738
-  },
-  "name":"Verify order"
-}
-```
-
-### POST /orderItems/{id}/Verify_order/{tid}
+### POST /usertasks/instance/{taskId}/transition
 
 Complete user task
 
 ```sh
-curl -d '{}' -H "Content-Type: application/json" -X POST http://localhost:8080/orderItems/66c11e3e-c211-4cee-9a07-848b5e861bc5/Verify_order/62f1c985-d31c-4ead-9906-2fe8d05937f0?user=john
+curl -X POST "http://localhost:8080/usertasks/instance/{taskId}/transition?user=john" -H "content-type: application/json" -d '{"transitionId": "complete","data": {"approve": true}}'
 ```
-
 
 As response the updated order is returned.
 
 Example response:
+
 ```json
 {
-  "id":"66c11e3e-c211-4cee-9a07-848b5e861bc5",
-  "order":
-  {
-    "orderNumber":"12345",
-    "shipped":false,
-    "total":0.537941914075738
-  }
+  "id": "bcbe9d60-4847-45f0-8069-e983f3f055e6",
+  "userTaskId": "UserTask_1",
+  "status": {
+    "terminate": "COMPLETED",
+    "name": "Completed"
+  },
+  "taskName": "Verify order",
+  "taskDescription": null,
+  "taskPriority": "1",
+  "potentialUsers": [
+    "john"
+  ],
+  "potentialGroups": [],
+  "adminUsers": [],
+  "adminGroups": [],
+  "excludedUsers": [],
+  "externalReferenceId": "eeae84c0-234d-472f-9fa0-004a2cf34cdc",
+  "actualOwner": "john",
+  "inputs": {
+    "input1": {
+      "orderNumber": "12345",
+      "shipped": false,
+      "total": 0.8903945184162633
+    }
+  },
+  "outputs": {
+    "approve": true
+  },
+  ...
 }
 ```

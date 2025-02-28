@@ -131,7 +131,7 @@ Because the person is evaluated as an adult, no outstanding tasks should be here
 We can verify there is no task running for Children Handling using following command:
 
 ```
-curl http://localhost:8080/persons/{uuid}/tasks
+curl http://localhost:8080/usertasks/instance?user=jdoe
 ```
 where uuid is the id returned in the previous step.
 
@@ -169,60 +169,38 @@ After the Curl command you should see a similar console log
 
 Because the person is not evaluated as an adult, there should be outstanding tasks for given person.
 
-To verify there is a running task for Children
+To verify there is a running user task for Children
 
 ```sh
-curl http://localhost:8080/persons/{uuid}/tasks
+curl http://localhost:8080/usertasks/instance?user=jdoe 
 ```
-where uuid is the id returned from the preivous step.
 
 Should return something like
 
 ```json
-[{"id":"c59054b9-aa1d-4771-bc5e-40f8b32d3ff5","name":"ChildrenHandling".....}]
+[{"id":"1676f775-0759-4579-9676-f5c433689c2a","userTaskId":"_D9CFCEE9-BCDF-48D0-8CB4-A55584DF0D9D",...}]
 ```
 
-
-Then to see the Task created perform the following command
+Then we can complete the user task and validate child with
 
 ```sh
-curl http://localhost:8080/persons/{uuid}/ChildrenHandling/{tuuid}
+curl -X POST "http://localhost:8080/usertasks/instance/{userTaskId}/transition?user=jdoe" -H "content-type: application/json" -d '{"transitionId": "complete","data": {"approve": true}}'
 ```
 
-where uuid is persons id and tuuid is task id.
-
-It should return something similar to
-
-```json
-{
-    "person":{
-        "name":"john",
-        "age":5,
-        "adult":false
-    },
-    "id":"c59054b9-aa1d-4771-bc5e-40f8b32d3ff5",
-    "name":"ChildrenHandling"
-}
-```
-
-Then we can complete the task and validate child with
-
-```sh
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{}' http://localhost:8080/persons/{uuid}/ChildrenHandling/{tuuid}
-```
-
-Where uuid is persons id and tuuid is task id
+Where userTaskId is id returned from the previous query
 
 Should return something similar to
 
 ```json
 {
-    "id":"09f98756-b273-4ceb-9308-fae7cc423904",
-    "person":{
-        "name":"john",
-        "age":5,
-        "adult":false
-    }
+  "id": "1676f775-0759-4579-9676-f5c433689c2a",
+  "userTaskId": "_D9CFCEE9-BCDF-48D0-8CB4-A55584DF0D9D",
+  "status": {
+    "terminate": "COMPLETED",
+    "name": "Completed"
+  },
+  "taskName": "ChildrenHandling",
+  ...
 }
 ```
 and there should be no outstanding task for the person anymore.

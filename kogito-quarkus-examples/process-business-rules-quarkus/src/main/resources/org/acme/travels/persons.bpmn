@@ -1,4 +1,5 @@
-<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_ugUwUE8QEDiTNMCLyjv0ag" exporter="jBPM Process Modeler" exporterVersion="2.0" targetNamespace="http://www.omg.org/bpmn20">
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_IppPkNaGED23pdY9m9EzMw" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd http://www.omg.org/spec/DD/20100524/DC DC.xsd http://www.omg.org/spec/DD/20100524/DI DI.xsd " exporter="jBPM Process Modeler" exporterVersion="2.0" targetNamespace="http://www.omg.org/bpmn20">
   <bpmn2:itemDefinition id="_personItem" structureRef="org.acme.travels.Person"/>
   <bpmn2:itemDefinition id="__D9CFCEE9-BCDF-48D0-8CB4-A55584DF0D9D_SkippableInputXItem" structureRef="Object"/>
   <bpmn2:itemDefinition id="__D9CFCEE9-BCDF-48D0-8CB4-A55584DF0D9D_PriorityInputXItem" structureRef="Object"/>
@@ -13,18 +14,23 @@
   <bpmn2:itemDefinition id="__D9CFCEE9-BCDF-48D0-8CB4-A55584DF0D9D_NotStartedNotifyInputXItem" structureRef="Object"/>
   <bpmn2:itemDefinition id="__D9CFCEE9-BCDF-48D0-8CB4-A55584DF0D9D_NotCompletedNotifyInputXItem" structureRef="Object"/>
   <bpmn2:itemDefinition id="__D9CFCEE9-BCDF-48D0-8CB4-A55584DF0D9D_personInputXItem" structureRef="org.acme.travels.Person"/>
+  <bpmn2:itemDefinition id="__7B8CC121-6F99-464A-93F8-9EAC4BE4601A_fileNameInputXItem" structureRef="java.lang.String"/>
   <bpmn2:itemDefinition id="__7B8CC121-6F99-464A-93F8-9EAC4BE4601A_namespaceInputXItem" structureRef="java.lang.String"/>
   <bpmn2:itemDefinition id="__7B8CC121-6F99-464A-93F8-9EAC4BE4601A_modelInputXItem" structureRef="java.lang.String"/>
+  <bpmn2:itemDefinition id="__7B8CC121-6F99-464A-93F8-9EAC4BE4601A_decisionInputXItem" structureRef="java.lang.String"/>
   <bpmn2:itemDefinition id="__7B8CC121-6F99-464A-93F8-9EAC4BE4601A_personsInputXItem" structureRef="org.amce.travels.Person"/>
-  <bpmn2:process id="persons" drools:packageName="org.acme.travels" drools:version="1.0" drools:adHoc="false" name="persons" isExecutable="true">
+  <bpmn2:collaboration id="_483C93B5-FF4A-4D4C-BA46-9BFA66A634EC" name="Default Collaboration">
+    <bpmn2:participant id="_2B87CE59-811E-4547-B7DE-A12A918C76CA" name="Pool Participant" processRef="persons"/>
+  </bpmn2:collaboration>
+  <bpmn2:process id="persons" drools:packageName="org.acme.travels" drools:version="1.0" drools:adHoc="false" name="persons" isExecutable="true" processType="Public">
     <bpmn2:property id="person" itemSubjectRef="_personItem" name="person"/>
     <bpmn2:sequenceFlow id="_41D07816-A956-491C-9787-5B8C0B8C4F58" sourceRef="_F2CC5C1D-5116-4C20-8702-A8357341790F" targetRef="_7B8CC121-6F99-464A-93F8-9EAC4BE4601A">
       <bpmn2:extensionElements>
         <drools:metaData name="isAutoConnection.source">
-          <drools:metaValue>true</drools:metaValue>
+          <drools:metaValue><![CDATA[true]]></drools:metaValue>
         </drools:metaData>
         <drools:metaData name="isAutoConnection.target">
-          <drools:metaValue>true</drools:metaValue>
+          <drools:metaValue><![CDATA[true]]></drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
     </bpmn2:sequenceFlow>
@@ -32,23 +38,23 @@
     <bpmn2:sequenceFlow id="_C93EF8F2-D9C0-45D1-A3D6-C8A376D07806" sourceRef="_D9CFCEE9-BCDF-48D0-8CB4-A55584DF0D9D" targetRef="_6BDF2751-F544-4AFC-AB47-8C5F52EC97AD">
       <bpmn2:extensionElements>
         <drools:metaData name="isAutoConnection.source">
-          <drools:metaValue>true</drools:metaValue>
+          <drools:metaValue><![CDATA[true]]></drools:metaValue>
         </drools:metaData>
         <drools:metaData name="isAutoConnection.target">
-          <drools:metaValue>true</drools:metaValue>
+          <drools:metaValue><![CDATA[true]]></drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="_22717A42-3E59-431B-8AF8-C5061A69B295" sourceRef="_CB2B4CEB-E636-4F0C-904B-3468083FF1EF" targetRef="_D9CFCEE9-BCDF-48D0-8CB4-A55584DF0D9D">
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_ugcsIE8QEDiTNMCLyjv0ag" language="http://www.java.com/java">return person.isAdult() == false;</bpmn2:conditionExpression>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java"><![CDATA[return person.isAdult() == false;]]></bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="_FA444C47-2749-42FF-ACE3-7CF52A2AB11A" sourceRef="_CB2B4CEB-E636-4F0C-904B-3468083FF1EF" targetRef="_44052DCF-2D80-48EC-9691-556FEDD102FD">
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_ugcsIU8QEDiTNMCLyjv0ag" language="http://www.java.com/java">return person.isAdult() == true;</bpmn2:conditionExpression>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java"><![CDATA[return person.isAdult() == true;]]></bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:endEvent id="_6BDF2751-F544-4AFC-AB47-8C5F52EC97AD" name="End Event 1">
       <bpmn2:extensionElements>
         <drools:metaData name="elementname">
-          <drools:metaValue>End Event 1</drools:metaValue>
+          <drools:metaValue><![CDATA[End Event 1]]></drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
       <bpmn2:incoming>_C93EF8F2-D9C0-45D1-A3D6-C8A376D07806</bpmn2:incoming>
@@ -56,7 +62,7 @@
     <bpmn2:startEvent id="_F2CC5C1D-5116-4C20-8702-A8357341790F" name="StartProcess">
       <bpmn2:extensionElements>
         <drools:metaData name="elementname">
-          <drools:metaValue>StartProcess</drools:metaValue>
+          <drools:metaValue><![CDATA[StartProcess]]></drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
       <bpmn2:outgoing>_41D07816-A956-491C-9787-5B8C0B8C4F58</bpmn2:outgoing>
@@ -64,18 +70,18 @@
     <bpmn2:businessRuleTask id="_7B8CC121-6F99-464A-93F8-9EAC4BE4601A" drools:ruleFlowGroup="unit:org.acme.travels.PersonValidationService" name="Evaluate Person" implementation="http://www.jboss.org/drools/rule">
       <bpmn2:extensionElements>
         <drools:metaData name="elementname">
-          <drools:metaValue>Evaluate Person</drools:metaValue>
+          <drools:metaValue><![CDATA[Evaluate Person]]></drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
       <bpmn2:incoming>_41D07816-A956-491C-9787-5B8C0B8C4F58</bpmn2:incoming>
       <bpmn2:outgoing>_29B77FA9-3C5F-4EC3-9F37-5D74C182F3C0</bpmn2:outgoing>
-      <bpmn2:ioSpecification id="_ugd6QE8QEDiTNMCLyjv0ag">
+      <bpmn2:ioSpecification>
         <bpmn2:dataInput id="_7B8CC121-6F99-464A-93F8-9EAC4BE4601A_personsInputX" drools:dtype="org.amce.travels.Person" itemSubjectRef="__7B8CC121-6F99-464A-93F8-9EAC4BE4601A_personsInputXItem" name="persons"/>
-        <bpmn2:inputSet id="_ugd6QU8QEDiTNMCLyjv0ag">
+        <bpmn2:inputSet>
           <bpmn2:dataInputRefs>_7B8CC121-6F99-464A-93F8-9EAC4BE4601A_personsInputX</bpmn2:dataInputRefs>
         </bpmn2:inputSet>
       </bpmn2:ioSpecification>
-      <bpmn2:dataInputAssociation id="_ugehUE8QEDiTNMCLyjv0ag">
+      <bpmn2:dataInputAssociation>
         <bpmn2:sourceRef>person</bpmn2:sourceRef>
         <bpmn2:targetRef>_7B8CC121-6F99-464A-93F8-9EAC4BE4601A_personsInputX</bpmn2:targetRef>
       </bpmn2:dataInputAssociation>
@@ -83,7 +89,7 @@
     <bpmn2:exclusiveGateway id="_CB2B4CEB-E636-4F0C-904B-3468083FF1EF" name="Exclusive Gateway 1" gatewayDirection="Diverging">
       <bpmn2:extensionElements>
         <drools:metaData name="elementname">
-          <drools:metaValue>Exclusive Gateway 1</drools:metaValue>
+          <drools:metaValue><![CDATA[Exclusive Gateway 1]]></drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
       <bpmn2:incoming>_29B77FA9-3C5F-4EC3-9F37-5D74C182F3C0</bpmn2:incoming>
@@ -93,53 +99,58 @@
     <bpmn2:userTask id="_D9CFCEE9-BCDF-48D0-8CB4-A55584DF0D9D" name="Special handling for children">
       <bpmn2:extensionElements>
         <drools:metaData name="elementname">
-          <drools:metaValue>Special handling for children</drools:metaValue>
+          <drools:metaValue><![CDATA[Special handling for children]]></drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
       <bpmn2:incoming>_22717A42-3E59-431B-8AF8-C5061A69B295</bpmn2:incoming>
       <bpmn2:outgoing>_C93EF8F2-D9C0-45D1-A3D6-C8A376D07806</bpmn2:outgoing>
-      <bpmn2:ioSpecification id="_ugfIYE8QEDiTNMCLyjv0ag">
+      <bpmn2:ioSpecification>
         <bpmn2:dataInput id="_D9CFCEE9-BCDF-48D0-8CB4-A55584DF0D9D_TaskNameInputX" drools:dtype="Object" itemSubjectRef="__D9CFCEE9-BCDF-48D0-8CB4-A55584DF0D9D_TaskNameInputXItem" name="TaskName"/>
         <bpmn2:dataInput id="_D9CFCEE9-BCDF-48D0-8CB4-A55584DF0D9D_personInputX" drools:dtype="org.acme.travels.Person" itemSubjectRef="__D9CFCEE9-BCDF-48D0-8CB4-A55584DF0D9D_personInputXItem" name="person"/>
         <bpmn2:dataInput id="_D9CFCEE9-BCDF-48D0-8CB4-A55584DF0D9D_SkippableInputX" drools:dtype="Object" itemSubjectRef="__D9CFCEE9-BCDF-48D0-8CB4-A55584DF0D9D_SkippableInputXItem" name="Skippable"/>
         <bpmn2:dataInput id="_D9CFCEE9-BCDF-48D0-8CB4-A55584DF0D9D_PriorityInputX" drools:dtype="Object" itemSubjectRef="__D9CFCEE9-BCDF-48D0-8CB4-A55584DF0D9D_PriorityInputXItem" name="Priority"/>
-        <bpmn2:inputSet id="_ugfvcE8QEDiTNMCLyjv0ag">
+        <bpmn2:inputSet>
           <bpmn2:dataInputRefs>_D9CFCEE9-BCDF-48D0-8CB4-A55584DF0D9D_TaskNameInputX</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>_D9CFCEE9-BCDF-48D0-8CB4-A55584DF0D9D_personInputX</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>_D9CFCEE9-BCDF-48D0-8CB4-A55584DF0D9D_SkippableInputX</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>_D9CFCEE9-BCDF-48D0-8CB4-A55584DF0D9D_PriorityInputX</bpmn2:dataInputRefs>
         </bpmn2:inputSet>
       </bpmn2:ioSpecification>
-      <bpmn2:dataInputAssociation id="_ugfvcU8QEDiTNMCLyjv0ag">
+      <bpmn2:dataInputAssociation>
         <bpmn2:targetRef>_D9CFCEE9-BCDF-48D0-8CB4-A55584DF0D9D_TaskNameInputX</bpmn2:targetRef>
-        <bpmn2:assignment id="_ugfvck8QEDiTNMCLyjv0ag">
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_uggWgE8QEDiTNMCLyjv0ag">ChildrenHandling</bpmn2:from>
-          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_ugg9kE8QEDiTNMCLyjv0ag">_D9CFCEE9-BCDF-48D0-8CB4-A55584DF0D9D_TaskNameInputX</bpmn2:to>
+        <bpmn2:assignment>
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression"><![CDATA[ChildrenHandling]]></bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression"><![CDATA[_D9CFCEE9-BCDF-48D0-8CB4-A55584DF0D9D_TaskNameInputX]]></bpmn2:to>
         </bpmn2:assignment>
       </bpmn2:dataInputAssociation>
-      <bpmn2:dataInputAssociation id="_ugg9kU8QEDiTNMCLyjv0ag">
+      <bpmn2:dataInputAssociation>
         <bpmn2:sourceRef>person</bpmn2:sourceRef>
         <bpmn2:targetRef>_D9CFCEE9-BCDF-48D0-8CB4-A55584DF0D9D_personInputX</bpmn2:targetRef>
       </bpmn2:dataInputAssociation>
-      <bpmn2:dataInputAssociation id="_ugg9kk8QEDiTNMCLyjv0ag">
+      <bpmn2:dataInputAssociation>
         <bpmn2:targetRef>_D9CFCEE9-BCDF-48D0-8CB4-A55584DF0D9D_SkippableInputX</bpmn2:targetRef>
-        <bpmn2:assignment id="_ugg9k08QEDiTNMCLyjv0ag">
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_ugg9lE8QEDiTNMCLyjv0ag">true</bpmn2:from>
-          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_ugg9lU8QEDiTNMCLyjv0ag">_D9CFCEE9-BCDF-48D0-8CB4-A55584DF0D9D_SkippableInputX</bpmn2:to>
+        <bpmn2:assignment>
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression"><![CDATA[true]]></bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression"><![CDATA[_D9CFCEE9-BCDF-48D0-8CB4-A55584DF0D9D_SkippableInputX]]></bpmn2:to>
         </bpmn2:assignment>
       </bpmn2:dataInputAssociation>
-      <bpmn2:dataInputAssociation id="_ugg9lk8QEDiTNMCLyjv0ag">
+      <bpmn2:dataInputAssociation>
         <bpmn2:targetRef>_D9CFCEE9-BCDF-48D0-8CB4-A55584DF0D9D_PriorityInputX</bpmn2:targetRef>
-        <bpmn2:assignment id="_ugg9l08QEDiTNMCLyjv0ag">
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_ugg9mE8QEDiTNMCLyjv0ag">1</bpmn2:from>
-          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_ughkoE8QEDiTNMCLyjv0ag">_D9CFCEE9-BCDF-48D0-8CB4-A55584DF0D9D_PriorityInputX</bpmn2:to>
+        <bpmn2:assignment>
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression"><![CDATA[1]]></bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression"><![CDATA[_D9CFCEE9-BCDF-48D0-8CB4-A55584DF0D9D_PriorityInputX]]></bpmn2:to>
         </bpmn2:assignment>
       </bpmn2:dataInputAssociation>
+      <bpmn2:potentialOwner id="_IpsS4NaGED23pdY9m9EzMw">
+        <bpmn2:resourceAssignmentExpression id="_Ips58NaGED23pdY9m9EzMw">
+          <bpmn2:formalExpression>jdoe</bpmn2:formalExpression>
+        </bpmn2:resourceAssignmentExpression>
+      </bpmn2:potentialOwner>
     </bpmn2:userTask>
     <bpmn2:endEvent id="_44052DCF-2D80-48EC-9691-556FEDD102FD" name="End Event 2">
       <bpmn2:extensionElements>
         <drools:metaData name="elementname">
-          <drools:metaValue>End Event 2</drools:metaValue>
+          <drools:metaValue><![CDATA[End Event 2]]></drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
       <bpmn2:incoming>_FA444C47-2749-42FF-ACE3-7CF52A2AB11A</bpmn2:incoming>
@@ -188,7 +199,7 @@
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
-  <bpmn2:relationship id="_ugjZ0E8QEDiTNMCLyjv0ag" type="BPSimData">
+  <bpmn2:relationship type="BPSimData">
     <bpmn2:extensionElements>
       <bpsim:BPSimData>
         <bpsim:Scenario id="default" name="Simulationscenario">
@@ -243,7 +254,7 @@
         </bpsim:Scenario>
       </bpsim:BPSimData>
     </bpmn2:extensionElements>
-    <bpmn2:source>_ugUwUE8QEDiTNMCLyjv0ag</bpmn2:source>
-    <bpmn2:target>_ugUwUE8QEDiTNMCLyjv0ag</bpmn2:target>
+    <bpmn2:source>_IppPkNaGED23pdY9m9EzMw</bpmn2:source>
+    <bpmn2:target>_IppPkNaGED23pdY9m9EzMw</bpmn2:target>
   </bpmn2:relationship>
 </bpmn2:definitions>
