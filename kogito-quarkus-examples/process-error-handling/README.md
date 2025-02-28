@@ -159,36 +159,18 @@ curl --request POST \
   --data '{"name" : "RETRY"}'
 ```
 
-An `error-handling` process instance is created, issue the following command to retrieve the process instance id:
+An `error-handling` process instance is created.
+
+Get the user tasks
 
 ```sh
-curl --request GET \
-  --url http://localhost:8080/error_handling \
-  --header 'accept: application/json' \
-  --header 'content-type: application/json'
-```
-
-Get the tasks from the process instance you got.
-
-**Make sure** to replace the _process instance id_:
-
-```sh
-curl --request GET \
-  --url http://localhost:8080/error_handling/11b37d40-3c01-4384-92cc-044ac8939dcc/tasks \
-  --header 'accept: application/json' \
-  --header 'content-type: application/json'
+curl http://localhost:8080/usertasks/instance?user=jdoe
 ```
 
 Complete the `Repair` task.
 
-**Make sure** to replace the _process instance id_ and _task instance id_:
-
 ```sh
-curl --request POST \
-  --url 'http://localhost:8080/error_handling/11b37d40-3c01-4384-92cc-044ac8939dcc/Repair/5b947a11-67f3-4b77-b0d3-1fd422e6600d?phase=complete' \
-  --header 'accept: application/json' \
-  --header 'content-type: application/json' \
-  --data '{"input" : "Jimmy", "strategy" : "RETRY"}'
+curl -X POST "http://localhost:8080/usertasks/instance/{userTaskId}/transition?user=jdoe" -H "content-type: application/json" -d '{"transitionId": "complete","data": {"input" : "Jimmy", "strategy" : "RETRY", "approve": true}}'
 ```
 
 The WIH logic is executed again using the new input parameter provided by the `error-handling` process.
@@ -208,11 +190,7 @@ Follow all the step in the previous paragraph, but complete the `Repair` task pr
 - **Complete strategy** The WIH logic is skipped but the task is marked completed, the main process proceeds picking the result provided by the `error-handling` process
 
   ```sh
-  curl --request POST \
-    --url 'http://localhost:8080/error_handling/11b37d40-3c01-4384-92cc-044ac8939dcc/Repair/5b947a11-67f3-4b77-b0d3-1fd422e6600d?phase=complete' \
-    --header 'accept: application/json' \
-    --header 'content-type: application/json' \
-    --data '{"result" : "Hello Jimmy","strategy" : "COMPLETE"}'
+  curl -X POST "http://localhost:8080/usertasks/instance/{userTaskId}/transition?user=jdoe" -H "content-type: application/json" -d '{"transitionId": "complete","data": {"result" : "Hello Jimmy", "strategy" : "COMPLETE", "approve": true}}'
   ```
 
   From the console output you should spot this line:
@@ -223,11 +201,7 @@ Follow all the step in the previous paragraph, but complete the `Repair` task pr
 - **Abort strategy** The WIH logic is skipped and the task is marked aborted, the main process proceeds but the `Custom Task` result is **null**. 
 
   ```sh
-  curl --request POST \
-    --url 'http://localhost:8080/error_handling/11b37d40-3c01-4384-92cc-044ac8939dcc/Repair/5b947a11-67f3-4b77-b0d3-1fd422e6600d?phase=complete' \
-    --header 'accept: application/json' \
-    --header 'content-type: application/json' \
-    --data '{"strategy" : "ABORT"}'
+  curl -X POST "http://localhost:8080/usertasks/instance/{userTaskId}/transition?user=jdoe" -H "content-type: application/json" -d '{"transitionId": "complete","data": {"strategy" : "ABORT", "approve": true}}'
   ```
 
   From the console output you should spot this line:
@@ -239,11 +213,7 @@ Follow all the step in the previous paragraph, but complete the `Repair` task pr
 - **Rethrow strategy** The WIH logic is skipped and the main process get an exception 
 
   ```sh
-  curl --request POST \
-    --url 'http://localhost:8080/error_handling/11b37d40-3c01-4384-92cc-044ac8939dcc/Repair/5b947a11-67f3-4b77-b0d3-1fd422e6600d?phase=complete' \
-    --header 'accept: application/json' \
-    --header 'content-type: application/json' \
-    --data '{"strategy" : "RETHROW"}'
+  curl -X POST "http://localhost:8080/usertasks/instance/{userTaskId}/transition?user=jdoe" -H "content-type: application/json" -d '{"transitionId": "complete","data": {"strategy" : "RETHROW", "approve": true}}'
   ```
 
   From the console output you should spot this line:
