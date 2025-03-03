@@ -290,14 +290,14 @@ This guide explains how to implement a custom business calendar allowing full fl
 ### Creating a Custom Business Calendar
 
 - By default, calendar.properties is used to configure default business calendar.
-- If a custom business calendar has to be implemented, calendar.properties should NOT exist. Instead, add the following property to application.properties: ```kogito.processes.businessCalendar=org.kie.kogito.calendar.CustomCalendar```
+- If a custom business calendar has to be implemented, calendar.properties should NOT exist. Instead, add the following property to application.properties: ```kogito.processes.businessCalendar=org.kie.kogito.calendar.custom.CustomCalendar```
 
 **Steps**
-1. **Navigate to**: *kogito-quarkus-examples/process-business-calendar-quarkus-example/src/main/java/org/kie/kogito/calendar*
+1. **Navigate to**: *kogito-quarkus-examples/process-business-calendar-quarkus-example/src/main/java/org/kie/kogito/calendar/custom* (create the custom folder if it does not exist).
 2. **Create a new custom business calendar class** (e.g., CustomCalendar.java).
 3. Ensure it implements the BusinessCalendar interface.The implementation should be a concrete class(not an interface or abstract class).
 4. Set the property ```kogito.processes.businessCalendar=org.kie.kogito.calendar.custom.CustomCalendar```  in application.properties to the fully qualified class name of the custom business calendar.
-5. To test the created custom business calendar with property set in application.properties, calendar.properties should not exist.
+5. Remove the calendar.properties file within src/main/resources to allow the CustomCalendar class to be registered instead of the default BusinessCalendarImpl provided out of the box.
 
 
 
@@ -319,7 +319,8 @@ public class CustomCalendar implements BusinessCalendar {
     @Override
     public long calculateBusinessTimeAsDuration(String timeExpression) {
         // Implement custom logic to calculate business time duration
-        return 0;
+      // Note:The returned long value is in milliseconds. Duration can be set at least 1000 ms or longer to prevent immediate execution.
+        return 1000;
     }
 
     @Override
