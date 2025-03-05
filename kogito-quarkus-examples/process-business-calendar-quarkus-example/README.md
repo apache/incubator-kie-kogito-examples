@@ -131,7 +131,7 @@ curl -X GET http://localhost:8080/BusinessCalendarCreditBill/{id} \
 ## Understanding calendar.properties
 **Default Behavior**: If you do not input custom values in a calendar.properties file, the system will use the following default settings:
 
-* **business.start.hour** defaults to 9, and business.end.hour defaults to 17 (i.e.,9 AM to 5 PM workday).
+* **business.start.hour** defaults to 9, and **business.end.hour** defaults to 17 (i.e.,9 AM to 5 PM workday).
 
 * **business.weekend.days** defaults to Saturday and Sunday (Sunday-1, Monday-2, Tuesday-3, Wednesday-4, Thursday-5, Friday-6, Saturday-7).
 
