@@ -139,13 +139,13 @@ curl -X GET http://localhost:8080/BusinessCalendarCreditBill/{id} \
 
 * **business.holidays** by default will be considered empty, meaning no predefined holidays unless specified, if specified, it should be in the format defined by business.holiday.date.format, Holidays can be specified as individual dates (e.g., 2024-12-25,2024-12-31) or as a range of dates (e.g., 2024-11-12:2024-11-14).
 
-* **business.cal.timezone** defaults to the system’s default timezone, if configured, valid time-zone as per Valid timezone as per https://docs.oracle.com/javase/7/docs/api/java/util/TimeZone.html should be specfied.
+* **business.cal.timezone** defaults to the system’s default timezone, if configured, valid time-zone as per Valid timezone as per https://docs.oracle.com/javase/7/docs/api/java/util/TimeZone.html should be specified.
 
-**Calculated fields**:
+**Calculated Properties (Do not include in `calendar.properties` file)**:
 
 * **business.days.per.week**: calculated value, 7 - business.weekend.days.
 
-* **business.hours.per.day** : Calculated value, business.end.hour - business.start.hour
+* **business.hours.per.day** : Calculated value, business.end.hour - business.start.hour.
 
 **Behavior**:
 * Considering the default properties as mentioned above, if a task is executed after working hours i.e., non-working hours (e.g., at 7 PM), the system will delay its execution until the start of the next working hour/working day (9 AM). For example, if a task timer is set to trigger at 7 PM on a Friday, it will not execute until 9 AM on Monday (assuming a standard 5-day workweek).
