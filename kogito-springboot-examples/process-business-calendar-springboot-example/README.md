@@ -291,7 +291,7 @@ This guide explains how to implement a custom business calendar allowing full fl
 - If a custom business calendar has to be implemented, calendar.properties should NOT exist. Instead, add the following property to application.properties: ```kogito.processes.businessCalendar=org.kie.kogito.calendar.custom.CustomCalendar```
 
 **Steps**
-1. **Navigate to**: *kogito-quarkus-examples/process-business-calendar-quarkus-example/src/main/java/org/kie/kogito/calendar/custom* (create the custom folder if it does not exist).
+1. **Navigate to**: *kogito-springboot-examples/process-business-calendar-quarkus-example/src/main/java/org/kie/kogito/calendar/custom* (create the custom folder if it does not exist).
 2. **Create a new custom business calendar class** (e.g., CustomCalendar.java).
 3. Ensure it implements the `BusinessCalendar` interface.The implementation should be a concrete class(not an interface or abstract class).
 4. Set the property ```kogito.processes.businessCalendar=org.kie.kogito.calendar.custom.CustomCalendar```  in `application.properties` to the fully qualified class name of the custom business calendar.
