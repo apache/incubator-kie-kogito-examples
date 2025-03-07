@@ -3,7 +3,7 @@ version: '3'
 services:
   postgres:
     container_name: postgres
-    image: postgres:16.1-alpine3.19
+    image: postgres:16.8-alpine3.21
     profiles: [ "infra", "example", "full" ]
     ports:
       - "5432:5432"
@@ -20,7 +20,7 @@ services:
 
   pgadmin:
     container_name: pgadmin
-    image: dpage/pgadmin4:8.2
+    image: dpage/pgadmin4:9.1
     profiles: [ "infra", "example", "full" ]
     ports:
       - 8055:80

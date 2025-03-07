@@ -22,7 +22,7 @@ version: '2.1'
 services:
 
   postgres:
-    image: postgres:13.4-alpine3.14
+    image: postgres:16.8-alpine3.21
     ports:
       - "5432:5432"
     volumes:
@@ -37,7 +37,7 @@ services:
       - POSTGRES_PASSWORD=postgres
 
   pgadmin-compose:
-    image: dpage/pgadmin4:5.0
+    image: dpage/pgadmin4:9.1
     environment:
       PGADMIN_DEFAULT_EMAIL: user@user.org
       PGADMIN_DEFAULT_PASSWORD: pass
