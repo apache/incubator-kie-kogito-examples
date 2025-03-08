@@ -21,7 +21,7 @@ version: "3"
 
 services:
   postgres-compose:
-    image: postgres:16.1-alpine3.19
+    image: postgres:16.8-alpine3.21
     container_name: postgres
     environment:
       POSTGRES_USER: postgres
@@ -39,7 +39,7 @@ services:
       - postgres-compose-network
 
   pgadmin-compose:
-    image: dpage/pgadmin4:8.2
+    image: dpage/pgadmin4:9.1
     container_name: pgadmin
     ports:
       - 8055:80
