@@ -106,7 +106,7 @@ Given valid input:
 Curl command (using the JSON object above):
 
 ```sh
-curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d 'p1": {"Name":"Joe","Interests":["Golf"]}' http://localhost:8080/AllowedValuesChecksInsideCollection
+curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"p1": {"Name":"Joe","Interests":["Golf"]}}' http://localhost:8080/AllowedValuesChecksInsideCollection
 ```
 
 As response, interests information is returned.
@@ -140,7 +140,7 @@ With invalid value
 Curl command (using the JSON object above):
 
 ```sh
-curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d 'p1": {"Name":"Joe","Interests":["Dancing"]}' http://localhost:8080/AllowedValuesChecksInsideCollection
+curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"p1": {"Name":"Joe","Interests":["Dancing"]}}' http://localhost:8080/AllowedValuesChecksInsideCollection
 ```
 
 As response, error information is returned.
