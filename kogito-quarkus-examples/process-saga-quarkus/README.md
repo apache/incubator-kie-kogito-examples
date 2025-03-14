@@ -62,7 +62,7 @@ mvn clean compile quarkus:dev
 
 ```
 mvn clean package
-java -jar target/process-saga-quarkus-runner.jar
+java -jar target\quarkus-app\quarkus-run.jar
 ```
 
 ### Package and Run using Local Native Image
@@ -126,35 +126,34 @@ Response example:
 
 ```json
     {
-    "id": "799742b9-2903-45a3-be96-e7798f9425eb",
-    "stockResponse": {
-        "type": "SUCCESS",
-        "resourceId": "c408e18d-6ec7-48bf-8396-ef2d45ab53d5"
-    },
-    "paymentResponse": {
-        "type": "SUCCESS",
-        "resourceId": "700672de-b897-4db6-b45e-411e2ade83a0"
-    },
-    "orderId": "12345678",
-    "failService": "",
-    "orderResponse": {
-        "type": "SUCCESS",
-        "resourceId": "12345678"
-    },
-    "shippingResponse": {
-        "type": "SUCCESS",
-        "resourceId": "3c3b8324-7e58-45ca-a939-244c19002e36"
-    }
+  "id": "157a5e40-df97-4bc5-8a5e-4bd1fe30c2a8",
+  "stockResponse": {
+    "type": "SUCCESS",
+    "resourceId": "779afb46-f035-47bc-85bf-3da0f590b847"
+  },
+  "paymentResponse": {
+    "type": "SUCCESS",
+    "resourceId": "216e8738-2f0b-4e1f-9787-4d561fcda692"
+  },
+  "orderId": "03e6cf79-3301-434b-b5e1-d6899b5639aa",
+  "orderResponse": {
+    "type": "SUCCESS",
+    "resourceId": "03e6cf79-3301-434b-b5e1-d6899b5639aa"
+  },
+  "shippingResponse": {
+    "type": "SUCCESS",
+    "resourceId": "a49e88f8-6f1b-45dc-9cc0-a8f0217e3223"
+  }
 }
 ```
 
 In the console executing the application you can check the log it with the executed steps.
 
 ```text
-17:16:58:864 INFO  [org.kie.kogito.examples.StockService] Created Stock for 12345678 with Id: 8ab1ac13-38d0-49e6-ab40-1edd2dc39922
-17:16:58:865 INFO  [org.kie.kogito.examples.PaymentService] Created Payment for 12345678 with Id: 2bfc044a-ccb4-4072-a26e-5a533d835257
-17:16:58:865 INFO  [org.kie.kogito.examples.ShippingService] Created Shipping for 12345678 with Id: 84a45015-c98b-4e08-b4cd-cf05a19b87e1
-17:16:58:865 INFO  [org.kie.kogito.examples.OrderService] Success Order 12345678
+2025-03-14 11:17:52,915 INFO  [org.kie.kog.exa.StockService] (executor-thread-1) Reserve Stock for order 03e6cf79-3301-434b-b5e1-d6899b5639aa
+2025-03-14 11:17:52,927 INFO  [org.kie.kog.exa.PaymentService] (executor-thread-1) Process Payment for order 03e6cf79-3301-434b-b5e1-d6899b5639aa
+2025-03-14 11:17:52,930 INFO  [org.kie.kog.exa.ShippingService] (executor-thread-1) Schedule Shipping for order 03e6cf79-3301-434b-b5e1-d6899b5639aa
+2025-03-14 11:17:52,932 INFO  [org.kie.kog.exa.OrderService] (executor-thread-1) Order Success for order 03e6cf79-3301-434b-b5e1-d6899b5639aa
 ```
 
 #### Simulating errors to activate the compensation flows
@@ -180,36 +179,32 @@ Response example:
 
 ```json
 {
-    "id": "ef9c8b05-381c-456d-bf43-fbf5331a5e29",
-    "stockResponse": {
-        "type": "SUCCESS",
-        "resourceId": "9098daa2-f40f-4231-995a-1c7d159df190"
-    },
-    "paymentResponse": {
-        "type": "SUCCESS",
-        "resourceId": "d6ac4086-efe9-4a9e-849c-2b6d48dbc1f0"
-    },
-    "orderId": "12345678",
-    "failService": "ShippingService",
-    "orderResponse": {
-        "type": "ERROR",
-        "resourceId": "12345678"
-    },
-    "shippingResponse": {
-        "type": "ERROR",
-        "resourceId": "39c40aa1-10af-42ad-8ba2-b8dd9c6279e1"
-    }
+  "id": "b32c2c16-046b-40d5-8d99-c7b854cdbe24",
+  "stockResponse": {
+    "type": "SUCCESS",
+    "resourceId": "2671b316-b3c4-4afb-ae4c-d8df526c15c7"
+  },
+  "paymentResponse": {
+    "type": "ERROR",
+    "resourceId": "0ffcca70-c541-4926-bcf9-68ebb0211855"
+  },
+  "orderId": "03e6cf79-3301-434b-b5e1-d6899b5639aa",
+  "orderResponse": {
+    "type": "ERROR",
+    "resourceId": "03e6cf79-3301-434b-b5e1-d6899b5639aa"
+  },
+  "shippingResponse": null
 }
 ```
 
 In the console executing the application you can check the log it with the executed steps.
 
 ```text
-17:16:17:723 INFO  [org.kie.kogito.examples.StockService] Created Stock for 12345678 with Id: 9098daa2-f40f-4231-995a-1c7d159df190
-17:16:17:724 INFO  [org.kie.kogito.examples.PaymentService] Created Payment for 12345678 with Id: d6ac4086-efe9-4a9e-849c-2b6d48dbc1f0
-17:16:17:724 INFO  [org.kie.kogito.examples.ShippingService] Created Shipping for 12345678 with Id: 39c40aa1-10af-42ad-8ba2-b8dd9c6279e1
-17:16:17:746 WARN  [org.kie.kogito.examples.ShippingService] Cancel Shipping for 39c40aa1-10af-42ad-8ba2-b8dd9c6279e1
-17:16:17:746 WARN  [org.kie.kogito.examples.PaymentService] Cancel Payment for d6ac4086-efe9-4a9e-849c-2b6d48dbc1f0
-17:16:17:747 WARN  [org.kie.kogito.examples.StockService] Cancel Stock for 9098daa2-f40f-4231-995a-1c7d159df190
-17:16:17:747 WARN  [org.kie.kogito.examples.OrderService] Failed Order 12345678
+2025-03-14 11:21:03,575 INFO  [org.kie.kog.exa.StockService] (executor-thread-1) Reserve Stock for order 03e6cf79-3301-434b-b5e1-d6899b5639aa
+2025-03-14 11:21:03,579 INFO  [org.kie.kog.exa.PaymentService] (executor-thread-1) Process Payment for order 03e6cf79-3301-434b-b5e1-d6899b5639aa
+2025-03-14 11:21:03,583 INFO  [org.kie.kog.exa.OrderService] (executor-thread-1) Order Failed for order 03e6cf79-3301-434b-b5e1-d6899b5639aa
+2025-03-14 11:21:03,591 INFO  [org.jbp.pro.ins.con.exc.CompensationScopeInstance] (executor-thread-1) Compensating 2 exception _49632170-78A4-4962-B98C-E2962724056C
+2025-03-14 11:21:03,646 INFO  [org.kie.kog.exa.PaymentService] (executor-thread-1) Cancel Payment for payment 0ffcca70-c541-4926-bcf9-68ebb0211855
+2025-03-14 11:21:03,648 INFO  [org.jbp.pro.ins.con.exc.CompensationScopeInstance] (executor-thread-1) Compensating 2 exception _F12F8E21-9130-49C3-A73F-F3B0093104FB
+2025-03-14 11:21:03,648 INFO  [org.kie.kog.exa.StockService] (executor-thread-1) Cancel Stock for  order 2671b316-b3c4-4afb-ae4c-d8df526c15c7
 ```
