@@ -365,7 +365,7 @@ Curl command (using the JSON object above):
 
 ```sh
 curl -X 'POST' \
-  'http://localhost:8080/Imported Model' \
+  'http://localhost:8080/Imported%20Model' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -383,7 +383,7 @@ or on Windows:
 
 ```sh
 curl -X 'POST' \
-  'http://localhost:8080/Imported Model' \
+  'http://localhost:8080/Imported%20Model' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d "{
@@ -440,7 +440,7 @@ Curl command (using the JSON object above):
 
 ```sh
 curl -X 'POST' \
-  'http://localhost:8080/Importing empty-named Model' \
+  'http://localhost:8080/Importing%20empty-named%20Model' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -458,7 +458,7 @@ or on Windows:
 
 ```sh
 curl -X 'POST' \
-  'http://localhost:8080/Importing empty-named Model' \
+  'http://localhost:8080/Importing%20empty-named%20Model' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d "{
