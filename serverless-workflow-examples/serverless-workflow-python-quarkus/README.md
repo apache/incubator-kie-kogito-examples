@@ -2,7 +2,7 @@
 
 ## Description
 
-This example contains a simple workflow definition that executes numpy generator
+This example contains a simple workflow definition that executes a python standard function library
 
 ## Installing and Running
 
@@ -13,9 +13,7 @@ You will need:
   - Environment variable JAVA_HOME set accordingly
   - Maven 3.8.6+ installed
   - Python3 installed
-  - Python required libraries, equivalent to run `pip install -r requirements.txt`, will be automatically installed when running Maven. 
   
-> **_NOTE:_** Requirements.txt install Jep as the last one because it depends on the NumPy library to work correctly.
 
 When using native image compilation, you will also need: 
   - [GraalVm](https://www.graalvm.org/downloads/) 19.3.1+ installed
@@ -66,4 +64,4 @@ The service based on the JSON workflow definition can be access by sending an em
 
 `curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{}' http://localhost:8080/python_helloworld`
 
-It will return as result a random array of three numbers. 
+It will return as result the current year
