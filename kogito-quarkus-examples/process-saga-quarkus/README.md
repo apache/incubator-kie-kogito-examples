@@ -62,7 +62,7 @@ mvn clean compile quarkus:dev
 
 ```
 mvn clean package
-java -jar target\quarkus-app\quarkus-run.jar
+java -jar target/quarkus-app/quarkus-run.jar
 ```
 
 ### Package and Run using Local Native Image
