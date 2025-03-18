@@ -39,6 +39,6 @@ public class PythonRestIT {
                 .then()
                 .statusCode(201)
                 .extract().as(JsonNode.class);
-        assertThat(node.get("workflowdata").get("result")).hasSize(3);
+        assertThat(node.get("workflowdata").get("year").intValue()).isGreaterThanOrEqualTo(2025);
     }
 }
