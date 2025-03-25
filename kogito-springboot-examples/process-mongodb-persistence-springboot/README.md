@@ -119,18 +119,18 @@ In addition, various clients to interact with this service can be easily generat
 
 To make use of this application it is as simple as putting a sending request to `http://localhost:8080/deals`  with following content 
 
-```
+```json
 {
 "name" : "my fancy deal",
-"traveller" : { 
-  "firstName" : "John", 
-  "lastName" : "Doe", 
-  "email" : "jon.doe@example.com", 
+"traveller" : {
+  "firstName" : "John",
+  "lastName" : "Doe",
+  "email" : "jon.doe@example.com",
   "nationality" : "American",
-  "address" : { 
-  	"street" : "main street", 
-  	"city" : "Boston", 
-  	"zipCode" : "10005", 
+  "address" : {
+  	"street" : "main street",
+  	"city" : "Boston",
+  	"zipCode" : "10005",
   	"country" : "US" }
   }
 }
@@ -147,43 +147,27 @@ this will then trigger the review user task that you can work with.
 
 ### Get review task for given deal
 
-First you can display all active reviews of deals
+You can display all active reviews of deals by running
 
+```sh
+curl http://localhost:8080/usertasks/instance?user=john
 ```
-curl -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/dealreviews
-```
-
-based on the response you can select one of the reviews to see more details
-
-```
-curl -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/dealreviews/{uuid}/tasks?user=john
-```
-
-where uuid is the id of the deal review you want to work with.
-
-Next you can get the details assigned to review user task by
-
-```
-curl -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/dealreviews/{uuid}/review/{tuuid}?user=john
-```
-
-where uuid is the id of the deal review and tuuid is the id of the user task you want to get
-
 
 ### Complete review task for given deal
 
 Last but not least you can complete review user task by
 
-```
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"review" : "very good work"}' http://localhost:8080/dealreviews/{uuid}/review/{tuuid}?user=john
+```sh
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"transitionId":"complete","data":{"review" : "very good work"}}' http://localhost:8080/usertasks/instance/{tuuid}/transition?user=john
 ```
 
-where uuid is the id of the deal review and tuuid is the id of the user task you want to get
+where tuuid is the id of the user task you want to complete
 
-* Review Log should look similar to 	
+* Review Log should look similar to
 
 ```
 Review of the deal very good work for traveller Doe
 ```
+
 You can also query the process instance information and model variables from the database and review the same using tools like MongoDB Compass, download community version from below link
 https://www.mongodb.com/try/download/compass
