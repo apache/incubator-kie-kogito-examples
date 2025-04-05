@@ -138,38 +138,21 @@ this will then trigger the review user task that you can work.
 
 ### Get review task for given deal
 
-First you can display all active reviews of deals
+You can display all active reviews of deals by running
 
 ```sh
-curl -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/dealreviews
+curl http://localhost:8080/usertasks/instance?user=john
 ```
-
-based on the response you can select one of the reviews to see more details
-
-```sh
-curl -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/dealreviews/{uuid}/tasks?user=john
-```
-
-where uuid is the id of the deal review you want to work with.
-
-Next you can get the details assigned to review user task by
-
-```sh
-curl -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/dealreviews/{uuid}/review/{tuuid}?user=john
-```
-
-where uuid is the id of the deal review and tuuid is the id of the user task you want to get
-
 
 ### Complete review task for given deal
 
 Last but not least you can complete review user task by
 
 ```sh
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"review" : "very good work"}' http://localhost:8080/dealreviews/{uuid}/review/{tuuid}?user=john
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"transitionId":"complete","data":{"review" : "very good work"}}' http://localhost:8080/usertasks/instance/{tuuid}/transition?user=john
 ```
 
-where uuid is the id of the deal review and tuuid is the id of the user task you want to get
+where tuuid is the id of the user task you want to complete
 
 * Review Log should look similar to
 

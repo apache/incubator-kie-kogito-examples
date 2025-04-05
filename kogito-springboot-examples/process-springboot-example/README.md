@@ -145,61 +145,50 @@ Example response:
 ]
 ```
 
-### GET /orderItems/{id}/tasks
+### GET /usertasks/instance?user={user}
 
 Getting user tasks awaiting user action
 
 ```sh
-curl -X GET http://localhost:8080/orderItems/66c11e3e-c211-4cee-9a07-848b5e861bc5/tasks?user=john
+curl -X GET http://localhost:8080/usertasks/instance?user=john
 ```
 Example response:
+
 ```json
 [
-  {"id":"62f1c985-d31c-4ead-9906-2fe8d05937f0","name":"Verify order"}
+  {
+    "id": "1dd3123a-aa2c-4b68-93c3-fd0c2abe76c8",
+    "userTaskId": "UserTask_1",
+    "status": {
+      "terminate": null,
+      "name": "Reserved"
+    },
+    "taskName": "Verify order",
+    ...
 ]
 ```
 
-### GET /orderItems/{id}/Verify_order/{tid}
-
-Getting user task details
-
-```sh
-curl -X GET http://localhost:8080/orderItems/66c11e3e-c211-4cee-9a07-848b5e861bc5/Verify_order/62f1c985-d31c-4ead-9906-2fe8d05937f0?user=john
-```
-Example response:
-```json
-{
-  "id":"62f1c985-d31c-4ead-9906-2fe8d05937f0",
-  "input1":
-  {
-    "orderNumber":"12345",
-    "shipped":false,
-    "total":0.537941914075738
-  },
-  "name":"Verify order"
-}
-```
-
-### POST /orderItems/{id}/Verify_order/{tid}
+### POST /usertasks/instance/{taskId}/transition?user={user}
 
 Complete user task
 
 ```sh
-curl -d '{}' -H "Content-Type: application/json" -X POST http://localhost:8080/orderItems/66c11e3e-c211-4cee-9a07-848b5e861bc5/Verify_order/62f1c985-d31c-4ead-9906-2fe8d05937f0?user=john
+curl -d '{"transitionId": "complete"}' -H "Content-Type: application/json" -X POST http://localhost:8080/usertasks/instance/1dd3123a-aa2c-4b68-93c3-fd0c2abe76c8/transition?user=john
 ```
-
 
 As response the updated order is returned.
 
 Example response:
+
 ```json
 {
-  "id":"66c11e3e-c211-4cee-9a07-848b5e861bc5",
-  "order":
-  {
-    "orderNumber":"12345",
-    "shipped":false,
-    "total":0.537941914075738
-  }
-}
+  "id": "1dd3123a-aa2c-4b68-93c3-fd0c2abe76c8",
+  "userTaskId": "UserTask_1",
+  "status": {
+    "terminate": "COMPLETED",
+    "name": "Completed"
+  },
+  "taskName": "Verify order",
+  ...
+]
 ```
