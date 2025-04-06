@@ -38,16 +38,6 @@
     <java.module.name>org.kie.kogito.examples.springboot</java.module.name>
   </properties>
 
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.infinispan</groupId>
-        <artifactId>infinispan-spring-boot3-starter-remote</artifactId>
-        <version>${version.org.infinispan}</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
-
   <profiles>
     <profile>
       <id>default</id>
@@ -73,7 +63,6 @@
         <module>process-decisions-rest-springboot</module>
         <module>process-decisions-rules-springboot</module>
         <module>process-decisions-springboot</module>
-        <module>process-infinispan-persistence-springboot</module>
         <module>process-kafka-multi-springboot</module>
         <module>process-kafka-quickstart-springboot</module>
         <module>process-mongodb-persistence-springboot</module>
@@ -119,7 +108,6 @@
         <module>pmml-springboot-example</module>
         <module>process-business-calendar-springboot-example</module>
         <module>process-business-rules-springboot</module>
-        <module>process-infinispan-persistence-springboot</module>
         <module>process-kafka-multi-springboot</module>
         <module>process-kafka-quickstart-springboot</module>
         <module>process-mongodb-persistence-springboot</module>

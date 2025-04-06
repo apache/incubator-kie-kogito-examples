@@ -116,27 +116,6 @@
   
   <profiles>
     <profile>
-      <id>persistence</id>
-      <activation>
-        <property>
-          <name>persistence</name>
-        </property>
-      </activation>
-      <properties>
-        <enable.resource.infinispan>true</enable.resource.infinispan>
-      </properties>
-      <dependencies>
-        <dependency>
-          <groupId>org.kie</groupId>
-          <artifactId>kie-addons-springboot-persistence-infinispan</artifactId>
-        </dependency>
-        <dependency>
-          <groupId>org.infinispan</groupId>
-          <artifactId>infinispan-spring-boot3-starter-remote</artifactId>
-        </dependency>
-      </dependencies>
-    </profile>
-    <profile>
       <id>kubernetes</id>
       <activation>
         <property>
