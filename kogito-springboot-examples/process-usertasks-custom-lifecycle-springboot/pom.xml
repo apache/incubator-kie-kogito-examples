@@ -47,13 +47,6 @@
       <type>pom</type>
       <scope>import</scope>
     </dependency>
-      <dependency>
-        <groupId>org.infinispan</groupId>
-        <artifactId>infinispan-bom</artifactId>
-        <version>${version.org.infinispan}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -106,14 +99,6 @@
     <profile>
       <id>persistence</id>
       <dependencies>
-        <dependency>
-          <groupId>org.kie</groupId>
-          <artifactId>kie-addons-springboot-persistence-infinispan</artifactId>
-        </dependency>
-        <dependency>
-          <groupId>org.infinispan</groupId>
-          <artifactId>infinispan-spring-boot3-starter-remote</artifactId>
-        </dependency>
         <dependency>
           <groupId>org.kie</groupId>
           <artifactId>kogito-addons-springboot-jobs-management</artifactId>

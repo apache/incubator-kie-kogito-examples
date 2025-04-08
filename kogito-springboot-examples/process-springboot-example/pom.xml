@@ -41,13 +41,6 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>org.infinispan</groupId>
-        <artifactId>infinispan-bom</artifactId>
-        <version>${version.org.infinispan}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <dependency>
         <groupId>org.kie.kogito</groupId>
         <artifactId>kogito-spring-boot-bom</artifactId>
         <version>${kogito.bom.version}</version>
@@ -130,27 +123,6 @@
   </build>
 
   <profiles>
-    <profile>
-      <id>persistence</id>
-      <activation>
-        <property>
-          <name>persistence</name>
-        </property>
-      </activation>
-      <properties>
-        <enable.resource.infinispan>true</enable.resource.infinispan>
-      </properties>
-      <dependencies>
-        <dependency>
-          <groupId>org.kie</groupId>
-          <artifactId>kie-addons-springboot-persistence-infinispan</artifactId>
-        </dependency>
-        <dependency>
-          <groupId>org.infinispan</groupId>
-          <artifactId>infinispan-spring-boot3-starter-remote</artifactId>
-        </dependency>
-      </dependencies>
-    </profile>
     <profile>
       <id>events</id>
       <activation>
