@@ -30,7 +30,6 @@
     <relativePath>../serverless-workflow-examples-parent/pom.xml</relativePath>
   </parent>
 
-  <groupId>org.kie.kogito.examples</groupId>
   <artifactId>serverless-workflow-timeouts-showcase-embedded</artifactId>
   <version>1.0-SNAPSHOT</version>
   <name>Kogito Example :: Serverless Workflow Timeouts Showcase Embedded</name>
@@ -133,7 +132,8 @@
     <!-- Embedded jobs service -->
     <dependency>
       <groupId>org.kie</groupId>
-      <artifactId>kogito-addons-quarkus-jobs-service-embedded</artifactId>
+      <artifactId>kogito-addons-quarkus-jobs</artifactId>
+      <version>999-SNAPSHOT</version>
     </dependency>
 
     <!-- Embedded data index -->
