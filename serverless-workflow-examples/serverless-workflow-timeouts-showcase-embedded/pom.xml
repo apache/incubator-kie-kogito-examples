@@ -73,6 +73,7 @@
         <artifactId>quarkus-embedded-postgresql</artifactId>
         <version>${version.io.quarkiverse.embedded.postgresql}</version>
       </dependency>
+      
     </dependencies>
   </dependencyManagement>
   <dependencies>
@@ -133,7 +134,6 @@
     <dependency>
       <groupId>org.kie</groupId>
       <artifactId>kogito-addons-quarkus-jobs</artifactId>
-      <version>999-SNAPSHOT</version>
     </dependency>
 
     <!-- Embedded data index -->
