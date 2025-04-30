@@ -26,7 +26,7 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>serverless-workflow-examples-parent</artifactId>
-    <version>999-SNAPSHOT</version>
+    <version>10.1.999-SNAPSHOT</version>
     <relativePath>../serverless-workflow-examples-parent/pom.xml</relativePath>
   </parent>
 
@@ -43,7 +43,7 @@
     <quarkus.platform.version>2.16.12.Final</quarkus.platform.version>
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-    <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
+    <kogito.bom.version>10.1.999-SNAPSHOT</kogito.bom.version>
     <maven.compiler.release>17</maven.compiler.release>
     <version.exec.plugin>1.6.0</version.exec.plugin>
     <version.compiler.plugin>3.13.0</version.compiler.plugin>
