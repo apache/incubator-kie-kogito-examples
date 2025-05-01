@@ -28,14 +28,14 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>kogito-springboot-examples</artifactId>
-    <version>999-SNAPSHOT</version>
+    <version>10.1.999-SNAPSHOT</version>
   </parent>
   <artifactId>dmn-event-driven-springboot</artifactId>
   <name>Kogito Example :: DMN Event-Driven :: Spring Boot</name>
 
   <properties>
-    <version.org.kie.kogito>999-SNAPSHOT</version.org.kie.kogito>
-    <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
+    <version.org.kie.kogito>10.1.999-SNAPSHOT</version.org.kie.kogito>
+    <kogito.bom.version>10.1.999-SNAPSHOT</kogito.bom.version>
   </properties>
 
   <dependencyManagement>
