@@ -1,12 +1,12 @@
-# Kogito Serverless Workflow - Currency Exchange Workflow
+# SonataFlow - Currency Exchange Workflow
 
 ## Description
 
-This project contains a [serverless workflow](src/main/resources/currency-exchange-workflow.sw.json) and some auxiliary resources that implement the **Currency Exchange Workflow**
-described in the [serverless-workflow-oauth2-orchestration-quarkus/README.md](https://github.com/wmedvede/kogito-docs/blob/main/serverlessworkflow/modules/ROOT/pages/security/orchestrating-third-party-services-with-oauth2.adoc). (TODO update link).
+This project contains a [workflow](src/main/resources/currency-exchange-workflow.sw.json) and some auxiliary resources that implement the **Currency Exchange Workflow**
+described in the SonataFlow guide: [Orchestration of third-party services using OAuth 2.0 authentication](https://sonataflow.org/serverlessworkflow/latest/security/orchestrating-third-party-services-with-oauth2.html).
 
 The service is described using JSON format as defined in the
-[CNCF Serverless Workflow specification](https://github.com/serverlessworkflow/specification).
+[CNCF Serverless Workflow specification](https://github.com/serverlessworkflow/specification/tree/0.8.x).
 
 ## Infrastructure requirements
 
@@ -86,7 +86,7 @@ To run the generated native executable, generated in `target/`, execute
 
 The service based on the JSON workflow definition can be accessed by sending requests to the http://localhost:8080/currency-exchange-workflow url.
 
-Use the following curl command to create a new serverless workflow instance and get the results:
+Use the following curl command to create a new workflow instance and get the results:
 
 
 ```sh
