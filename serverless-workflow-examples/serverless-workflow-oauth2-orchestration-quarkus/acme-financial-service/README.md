@@ -1,8 +1,8 @@
-# Kogito Serverless Workflow - Acme Financial Service
+# SonataFlow - Acme Financial Service
 
 ## Description
 
-This project contains a simple quarkus application that implements the `Acme Financial Service` referred in [serverless-workflow-oauth2-orchestration-quarkus/README.md](https://github.com/wmedvede/kogito-docs/blob/main/serverlessworkflow/modules/ROOT/pages/security/orchestrating-third-party-services-with-oauth2.adoc) (TODO, update link)
+This project contains a simple quarkus application that implements the `Acme Financial Service` referred in the SonataFlow guide: [Orchestration of third-party services using OAuth 2.0 authentication](https://sonataflow.org/serverlessworkflow/latest/security/orchestrating-third-party-services-with-oauth2.html)
 
 ## Infrastructure requirements
 
