@@ -18,8 +18,9 @@
  */
 package testscenario;
 
-import io.quarkus.test.junit.QuarkusTest;
 import org.drools.scenariosimulation.backend.runner.TestScenarioActivator;
+
+import io.quarkus.test.junit.QuarkusTest;
 
 /**
  * TestScenarioJunitActivator is a custom JUnit runner that enables the execution of Test Scenario files (*.scesim).
