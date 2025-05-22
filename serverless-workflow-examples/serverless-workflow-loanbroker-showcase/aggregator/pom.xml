@@ -29,6 +29,7 @@
   <name>Kogito Example :: Serverless Workflow Loan Broker Showcase :: Aggregator</name>
   <artifactId>serverless-workflow-loanbroker-showcase-aggregator</artifactId>
   <properties>
+    <version.com.github.tomakehurst.wiremock>3.13.0</version.com.github.tomakehurst.wiremock>
     <skipITs>true</skipITs>
   </properties>
   <dependencyManagement>
@@ -101,7 +102,7 @@
     <dependency>
       <groupId>org.wiremock</groupId>
       <artifactId>wiremock</artifactId>
-      <version>${version.com.github.tomakehurst}</version>
+      <version>${version.com.github.tomakehurst.wiremock}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
