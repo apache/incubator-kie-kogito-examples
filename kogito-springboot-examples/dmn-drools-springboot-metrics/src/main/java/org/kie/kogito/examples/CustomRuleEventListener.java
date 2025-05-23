@@ -31,7 +31,7 @@ import org.kie.api.event.rule.RuleFlowGroupDeactivatedEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import io.micrometer.prometheus.PrometheusMeterRegistry;
+import io.micrometer.prometheusmetrics.PrometheusMeterRegistry;
 
 public class CustomRuleEventListener extends DefaultAgendaEventListener {
 

@@ -23,7 +23,7 @@ import org.kie.kogito.examples.CustomRuleEventListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
-import io.micrometer.prometheus.PrometheusMeterRegistry;
+import io.micrometer.prometheusmetrics.PrometheusMeterRegistry;
 
 @Configuration
 public class RuleEventListenerConfig extends DefaultRuleEventListenerConfig {
