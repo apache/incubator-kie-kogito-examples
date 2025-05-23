@@ -27,8 +27,8 @@
     </encoder>
   </appender>
 
-  <logger name="org.kie.kogito" level="DEBUG" />
-  <logger name="org.drools" level="DEBUG" />
+  <logger name="org.kie.kogito" level="INFO" />
+  <logger name="org.drools" level="INFO" />
 
   <root level="info">
     <appender-ref ref="consoleAppender" />
