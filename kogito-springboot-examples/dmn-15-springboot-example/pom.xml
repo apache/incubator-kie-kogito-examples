@@ -38,7 +38,6 @@
     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
     <dependency-plugin.version>3.8.1</dependency-plugin.version>
     <enable.runtime.typecheck>true</enable.runtime.typecheck>
-    <version.io.smallrye.config.core>3.11.4</version.io.smallrye.config.core>
   </properties>
 
   <dependencyManagement>
@@ -55,11 +54,6 @@
         <version>${kogito.bom.version}</version>
         <type>pom</type>
         <scope>import</scope>
-      </dependency>
-      <dependency>
-        <groupId>io.smallrye.config</groupId>
-        <artifactId>smallrye-config</artifactId>
-        <version>${version.io.smallrye.config.core}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -93,10 +87,6 @@
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-scenario-simulation</artifactId>
       <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.smallrye.config</groupId>
-      <artifactId>smallrye-config</artifactId>
     </dependency>
   </dependencies>
 
