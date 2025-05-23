@@ -36,7 +36,7 @@
   <properties>
     <version.org.kie.kogito>999-SNAPSHOT</version.org.kie.kogito>
     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
-    <dependency-plugin.version>3.6.1</dependency-plugin.version>
+    <dependency-plugin.version>3.8.1</dependency-plugin.version>
     <enable.runtime.typecheck>true</enable.runtime.typecheck>
   </properties>
 
