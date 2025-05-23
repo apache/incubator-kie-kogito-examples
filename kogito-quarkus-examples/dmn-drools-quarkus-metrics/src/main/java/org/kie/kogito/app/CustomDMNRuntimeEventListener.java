@@ -31,7 +31,7 @@ import org.kie.dmn.api.core.event.DMNRuntimeEventListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import io.micrometer.prometheusmetrics.PrometheusMeterRegistry;
+import io.micrometer.prometheus.PrometheusMeterRegistry;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;

@@ -22,7 +22,7 @@ import org.kie.kogito.KogitoGAV;
 import org.kie.kogito.config.ConfigBean;
 import org.kie.kogito.process.impl.DefaultProcessEventListenerConfig;
 
-import io.micrometer.prometheusmetrics.PrometheusMeterRegistry;
+import io.micrometer.prometheus.PrometheusMeterRegistry;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;

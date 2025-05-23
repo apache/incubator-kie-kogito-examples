@@ -21,7 +21,7 @@ package org.kie.kogito.app;
 import org.kie.kogito.drools.core.config.DefaultRuleEventListenerConfig;
 import org.kie.kogito.examples.CustomRuleEventListener;
 
-import io.micrometer.prometheusmetrics.PrometheusMeterRegistry;
+import io.micrometer.prometheus.PrometheusMeterRegistry;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
