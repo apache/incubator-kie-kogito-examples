@@ -38,7 +38,7 @@
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
-    <version.com.github.tomakehurst.wiremock>2.33.2</version.com.github.tomakehurst.wiremock>
+    <version.com.github.tomakehurst.wiremock>3.13.0</version.com.github.tomakehurst.wiremock>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -124,8 +124,8 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>com.github.tomakehurst</groupId>
-      <artifactId>wiremock-jre8</artifactId>
+      <groupId>org.wiremock</groupId>
+      <artifactId>wiremock</artifactId>
       <version>${version.com.github.tomakehurst.wiremock}</version>
       <scope>test</scope>
     </dependency>

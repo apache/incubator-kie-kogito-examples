@@ -47,7 +47,7 @@
     <version.compiler.plugin>3.13.0</version.compiler.plugin>
     <maven.compiler.release>17</maven.compiler.release>
     <version.surefire.plugin>3.3.1</version.surefire.plugin>
-    <version.com.github.tomakehurst.wiremock>2.33.2</version.com.github.tomakehurst.wiremock>
+    <version.com.github.tomakehurst.wiremock>3.13.0</version.com.github.tomakehurst.wiremock>
   </properties>
 
   <dependencyManagement>
@@ -108,8 +108,8 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>com.github.tomakehurst</groupId>
-      <artifactId>wiremock-jre8</artifactId>
+      <groupId>org.wiremock</groupId>
+      <artifactId>wiremock</artifactId>
       <version>${version.com.github.tomakehurst.wiremock}</version>
       <scope>test</scope>
     </dependency>

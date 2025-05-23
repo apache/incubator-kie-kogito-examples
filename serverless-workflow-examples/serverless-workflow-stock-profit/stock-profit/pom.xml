@@ -29,6 +29,9 @@
   </parent>
   <artifactId>stock-profit</artifactId>
   <name>Kogito Example :: Serverless Workflow Stock Profit :: Quarkus</name>
+  <properties>
+    <version.com.github.tomakehurst.wiremock>3.13.0</version.com.github.tomakehurst.wiremock>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>org.apache.kie.sonataflow</groupId>
@@ -65,7 +68,7 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>com.github.tomakehurst</groupId>
+      <groupId>org.wiremock</groupId>
       <artifactId>wiremock</artifactId>
       <version>${version.com.github.tomakehurst.wiremock}</version>
       <scope>test</scope>
