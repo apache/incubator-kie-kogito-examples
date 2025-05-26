@@ -98,7 +98,7 @@ public class ProcessMetricsTest {
                         String.format("kogito_process_instance_running{app_id=\"default-process-monitoring-listener\",artifactId=\"%s\",process_id=\"demo.orders\",version=\"%s\"} 1.0",
                                 PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
                 .body(containsString(
-                        String.format("kogito_process_instance_started{app_id=\"default-process-monitoring-listener\",artifactId=\"%s\",process_id=\"demo.orderItems\",version=\"%s\"} 1.0",
+                        String.format("kogito_process_instance_started_total{app_id=\"default-process-monitoring-listener\",artifactId=\"%s\",process_id=\"demo.orderItems\",version=\"%s\"} 1",
                                 PROJECT_ARTIFACT_ID, PROJECT_VERSION)))
                 .body(containsString(
                         String.format("kogito_process_instance_running{app_id=\"default-process-monitoring-listener\",artifactId=\"%s\",process_id=\"demo.orders\",version=\"%s\"} 1.0",
