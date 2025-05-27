@@ -55,7 +55,7 @@
     <version.io.cloudevents>2.5.0</version.io.cloudevents>
     <!-- See: https://camel.apache.org/categories/Camel-Quarkus/ -->
     <!-- Aligned with Quarkus. We don't use the Camel Quarkus platform BOM to avoid upgrade delays in our CI. Feel free to use the BOM in your projects, though -->
-    <version.org.apache.camel.quarkus>3.9.0</version.org.apache.camel.quarkus>
+    <version.org.apache.camel.quarkus>3.20.1</version.org.apache.camel.quarkus>
 
     <version.surefire.plugin>3.3.1</version.surefire.plugin>
     <version.compiler.plugin>3.13.0</version.compiler.plugin>
