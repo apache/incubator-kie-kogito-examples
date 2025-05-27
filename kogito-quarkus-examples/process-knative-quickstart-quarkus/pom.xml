@@ -31,7 +31,7 @@
   <name>Kogito Example :: Process with Knative Eventing and Quarkus</name>
   <description>Kogito with Knative Eventing - Quarkus</description>
   <properties>
-    <version.com.github.tomakehurst.wiremock>2.33.2</version.com.github.tomakehurst.wiremock>
+    <version.org.wiremock>3.13.0</version.org.wiremock>
     <quarkus-plugin.version>3.20.1</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
@@ -114,9 +114,9 @@
     java.lang.NoSuchMethodError: 'com.github.fge.jackson.JsonNumEquals com.github.fge.jackson.JsonNumEquals.getInstance()'
     -->
     <dependency>
-      <groupId>com.github.tomakehurst</groupId>
-      <artifactId>wiremock-jre8</artifactId>
-      <version>${version.com.github.tomakehurst.wiremock}</version>
+      <groupId>org.wiremock</groupId>
+      <artifactId>wiremock</artifactId>
+      <version>${version.org.wiremock}</version>
       <scope>test</scope>
     </dependency>
     <dependency>

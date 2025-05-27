@@ -99,9 +99,9 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>com.github.tomakehurst</groupId>
-      <artifactId>wiremock-jre8</artifactId>
-      <version>${version.com.github.tomakehurst}</version>
+      <groupId>org.wiremock</groupId>
+      <artifactId>wiremock</artifactId>
+      <version>${version.org.wiremock}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
