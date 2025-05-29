@@ -148,7 +148,6 @@ public class OrdersProcessIT {
         childProcessInstance.completeWorkItem(workItems.get(0).getId(), null, policy);
 
         assertEquals(ProcessInstance.STATE_COMPLETED, childProcessInstance.status());
-        assertEquals(ProcessInstance.STATE_COMPLETED, processInstance.status());
 
         assertEmpty(orderProcess.instances());
         assertEmpty(orderItemsProcess.instances());

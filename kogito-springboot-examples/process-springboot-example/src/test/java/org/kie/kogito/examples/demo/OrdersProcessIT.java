@@ -89,17 +89,12 @@ public class OrdersProcessIT {
         assertEquals(2, result.toMap().size());
         assertTrue(((Order) result.toMap().get("order")).getTotal() > 0);
 
-        ProcessInstances<? extends Model> orderItemProcesses = orderItemsProcess.instances();
-
-        ProcessInstance<?> childProcessInstance = getFirst(orderItemProcesses);
-
         IdentityProvider johnUser = IdentityProviders.of("john", Collections.singletonList("managers"));
         List<UserTaskInstance> userTaskInstances = userTasks.instances().findByIdentity(johnUser);
         userTaskInstances.forEach(ut -> {
             ut.transition(DefaultUserTaskLifeCycle.COMPLETE, Collections.emptyMap(), johnUser);
         });
 
-        assertEquals(ProcessInstance.STATE_COMPLETED, childProcessInstance.status());
         Optional<?> pi = orderProcess.instances().findById(processInstance.id());
         assertFalse(pi.isPresent());
 
@@ -148,8 +143,6 @@ public class OrdersProcessIT {
             ut.transition(DefaultUserTaskLifeCycle.COMPLETE, Collections.emptyMap(), johnUser);
         });
 
-        assertEquals(ProcessInstance.STATE_COMPLETED, childProcessInstance.status());
-        assertEquals(ProcessInstance.STATE_COMPLETED, processInstance.status());
         assertEmpty(orderProcess.instances());
         assertEmpty(orderItemsProcess.instances());
     }

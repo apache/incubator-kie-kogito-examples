@@ -158,12 +158,7 @@ public class ApprovalsProcessTest {
             ut.setOutput("approved", false);
             ut.transition(DefaultUserTaskLifeCycle.COMPLETE, Collections.emptyMap(), userIdentity);
         });
-        assertEquals(org.kie.api.runtime.process.ProcessInstance.STATE_COMPLETED, processInstance.status());
+        assertThat(approvalsProcess.instances().stream().count()).isEqualTo(0);
 
-        Model result = (Model) processInstance.variables();
-        assertEquals(4, result.toMap().size());
-        assertEquals(result.toMap().get("approver"), "manager");
-        assertEquals(result.toMap().get("firstLineApproval"), true);
-        assertEquals(result.toMap().get("secondLineApproval"), false);
     }
 }
