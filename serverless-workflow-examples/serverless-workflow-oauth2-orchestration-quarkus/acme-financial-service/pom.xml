@@ -37,9 +37,9 @@
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
-    <version.compiler.plugin>3.13.0</version.compiler.plugin>
+    <version.compiler.plugin>3.14.0</version.compiler.plugin>
     <maven.compiler.release>17</maven.compiler.release>
-    <version.failsafe.plugin>3.3.1</version.failsafe.plugin>
+    <version.failsafe.plugin>3.5.2</version.failsafe.plugin>
     <version.org.assertj>3.22.0</version.org.assertj>
   </properties>
   <dependencyManagement>
