@@ -38,6 +38,17 @@
     <container.image.kafka>redpandadata/redpanda:v24.3.1</container.image.kafka>
   </properties>
 
+  <repositories>
+    <!-- useful to resolve parent pom when it is a SNAPSHOT -->
+    <repository>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <id>apache.snapshots</id>
+      <name>Apache Snapshot Repository</name>
+      <url>https://repository.apache.org/snapshots</url>
+    </repository>
+  </repositories>
 
   <build>
     <pluginManagement>
