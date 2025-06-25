@@ -66,7 +66,7 @@ https://kafka.apache.org/quickstart
 
 Alternatively, you can use the provided Docker Compose file in src/main/docker. To get Kafka started in the localhost port 9092, simply run:
 ```sh
-docker-compose up
+docker compose up
 ```
 
 ## Build and run

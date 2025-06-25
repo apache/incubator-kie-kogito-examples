@@ -11,7 +11,7 @@ You will need:
 - Java 17+ installed
 - Environment variable JAVA_HOME set accordingly
 - Maven 3.9.6+ installed
-- Docker 19+ (only if you want to run the integration tests and/or you want to use the `docker-compose` script provided in this example).
+- Docker 19+ (only if you want to run the integration tests and/or you want to use the `docker compose` script provided in this example).
 
 ### How to enable the feature
 
@@ -53,10 +53,10 @@ You can use these default dashboards, or you can personalize them and use your c
 
 ### Compile and Run in Local Dev Mode
 
-It is possible to use `docker-compose` to demonstrate how to inject the generated dashboards in the volume of the Grafana container:
+It is possible to use `docker compose` to demonstrate how to inject the generated dashboards in the volume of the Grafana container:
 
 1. Run `mvn clean package` to build the project and generate dashboards.
-2. Run `docker-compose up` to start the applications.
+2. Run `docker compose up` to start the applications.
 
 The volumes of the Grafana container are properly set in the `docker-compose.yml` file, so that the dashboards are automatically loaded at startup.
 
