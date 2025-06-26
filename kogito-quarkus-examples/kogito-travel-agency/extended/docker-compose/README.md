@@ -29,7 +29,7 @@ In order to use it, please ensure you have Docker Compose installed on your mach
 
   Then run
 
-    docker-compose up
+    docker compose up
 
   Once all services bootstrap, the following ports will be assigned on your local machine:
   - PostgreSQL: 5432
@@ -46,12 +46,12 @@ Prometheus will also be available on http://localhost:9090, no authentication is
   
   To stop all services, simply run:
 
-    docker-compose stop
+    docker compose stop
     
   It is also recommended to remove any of stopped containers by running:
   
-    docker-compose rm
+    docker compose rm
     
   For more details please check the Docker Compose documentation.
   
-    docker-compose --help
+    docker compose --help

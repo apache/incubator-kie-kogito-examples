@@ -88,17 +88,17 @@ NOTE: Data Index graphql UI will be available in http://localhost:8180/q/graphql
 You should start all the services before you execute any of the **Data Index** example. To do that please execute:
 
 ```sh
-mvn clean package -P container,data-index-addon 
+mvn clean package -Pcontainer,data-index-addon 
 ```
 
 For Linux and MacOS:
 
 1. Open a Terminal
 2. Go to docker-compose folder
-3. Run ```docker-compose up```
+3. Run ```docker compose up```
 
 ```bash
-cd docker-compose && docker-compose up
+cd docker-compose && docker compose up
 ```
 
 TIP: If you get a `permission denied` error while creating the postgresql container, consider using SELinux context.
@@ -144,7 +144,7 @@ For Linux and MacOS:
 or 
 
 ```bash
-cd docker-compose && ./startServices.sh
+cd docker compose && ./startServices.sh
 ```
 
 Once all services bootstrap, the following ports will be assigned on your local machine:

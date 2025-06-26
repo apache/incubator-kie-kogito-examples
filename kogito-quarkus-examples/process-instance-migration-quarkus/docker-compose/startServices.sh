@@ -8,15 +8,15 @@ PROJECT_VERSION=$(cd ../ && mvn help:evaluate -Dexpression=project.version -q -D
 
 echo "Project version: ${PROJECT_VERSION}"
 
-if [[ $PROJECT_VERSION == *SNAPSHOT ]];
-then
-  KOGITO_VERSION="latest"
-else
-  KOGITO_VERSION=${PROJECT_VERSION%.*}
-fi
+case $PROJECT_VERSION in
+ *SNAPSHOT)
+   KOGITO_VERSION="main" ;;
+ *)
+   KOGITO_VERSION=${PROJECT_VERSION%.*} ;;
+esac
 
 if [ -n "$1" ]; then
-  if [[ ("$1" == "infra") || ("$1" == "example")]];
+  if [ $1 = "infra" -o $1 = "example" ];
   then
     PROFILE="$1"
   else
