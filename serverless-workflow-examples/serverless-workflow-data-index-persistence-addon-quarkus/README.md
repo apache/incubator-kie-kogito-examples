@@ -56,7 +56,7 @@ NOTE: Data Index graphql UI will be available in http://localhost:8180/graphiql/
 You should start all the services before you execute any of the **Data Index** example. To do that please execute:
 
 ```sh
-mvn clean package -P container
+mvn clean package -Pcontainer
 ```
 
 For Linux and MacOS:
