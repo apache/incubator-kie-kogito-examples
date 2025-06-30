@@ -66,7 +66,7 @@ There's a useful [docker-compose.yml](docker-compose.yml) in the root that start
 Simply start it with this command from the root of the repo:
 
 ```
-docker-compose up -d
+docker compose up -d
 ```
 
 Once everything is started you can check the data contained in your small Kafka instance via [Kafdrop](https://github.com/obsidiandynamics/kafdrop) at `http://localhost:9000/`.

@@ -16,7 +16,7 @@ case $PROJECT_VERSION in
 esac
 
 if [ -n "$1" ]; then
-  if [ $1 = "infra" -o $1 = "example" ];
+  if [ "$1" = "infra" -o "$1" = "example" ];
   then
     PROFILE="$1"
   else

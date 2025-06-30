@@ -10,7 +10,7 @@ You will need:
   - Java 11+ installed 
   - Environment variable JAVA_HOME set accordingly
   - Maven 3.8.6+ installed
-  - Docker 19+ (only if you want to run the integration tests and/or you want to use the `docker-compose` script provided in this example).
+  - Docker 19+ (only if you want to run the integration tests and/or you want to use the `docker compose` script provided in this example).
 
 ### How to enable the feature
 
@@ -63,9 +63,9 @@ Custom dashboards will be available in the grafana panel, together with auto-gen
 
 ### Compile and Run in Local Dev Mode
 
-It is possible to use `docker-compose` to demonstrate how to inject the generated dashboards in the volume of the grafana container:
+It is possible to use `docker compose` to demonstrate how to inject the generated dashboards in the volume of the grafana container:
 1. Run `mvn clean package -Dcontainer` to build the project and generate dashboards.  A docker image tagged `org.kie.kogito.examples/dmn-drools-springboot-metrics-example:1.0` will be built (docker must be installed on your system).
-2. Run `docker-compose up` to start the applications. 
+2. Run `docker compose up` to start the applications. 
 
 The volumes of the grafana container are properly set in the `docker-compose.yml` file, so that the dashboards are properly loaded at startup.
 
@@ -99,4 +99,4 @@ curl -X POST 'http://localhost:8080/LoanEligibility' -H 'Content-Type: applicati
 
 the service will return the decision results.  
 
-If you are using the `docker-compose` script we provided, go to `localhost:3000` and have a look at your dashboards.
+If you are using the `docker compose` script we provided, go to `localhost:3000` and have a look at your dashboards.
