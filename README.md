@@ -8,7 +8,7 @@ Apache KIE Examples are currently updated after a stable release.
 
 ## Branches
 
-Current stable branch is `10.0.x`, pointing to the latest released `10.0.0` version.
+Current stable branch is `10.1.x`, pointing to the latest released `10.1.0` version.
 
 Current development branch is `main`.
 
