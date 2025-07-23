@@ -26,7 +26,7 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>serverless-workflow-examples-parent</artifactId>
-    <version>10.1.999-SNAPSHOT</version>
+    <version>10.1.0</version>
     <relativePath>../serverless-workflow-examples-parent/pom.xml</relativePath>
   </parent>
 

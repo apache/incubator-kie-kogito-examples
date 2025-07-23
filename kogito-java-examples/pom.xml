@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>kogito-examples</artifactId>
-    <version>10.1.999-SNAPSHOT</version>
+    <version>10.1.0</version>
   </parent>
 
   <artifactId>kogito-java-examples</artifactId>

@@ -28,15 +28,15 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>kogito-springboot-examples</artifactId>
-    <version>10.1.999-SNAPSHOT</version>
+    <version>10.1.0</version>
   </parent>
   <artifactId>dmn-resource-jar-springboot-example</artifactId>
   <name>Kogito Example :: DMN :: Resource jar providing model</name>
   <packaging>pom</packaging>
 
   <properties>
-    <version.org.kie.kogito>10.1.999-SNAPSHOT</version.org.kie.kogito>
-    <kogito.bom.version>10.1.999-SNAPSHOT</kogito.bom.version>
+    <version.org.kie.kogito>10.1.0</version.org.kie.kogito>
+    <kogito.bom.version>10.1.0</kogito.bom.version>
   </properties>
 
   <modules>
