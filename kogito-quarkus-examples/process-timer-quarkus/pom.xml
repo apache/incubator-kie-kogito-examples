@@ -121,7 +121,7 @@
       <dependencies>
         <dependency>
           <groupId>org.kie</groupId>
-          <artifactId>kogito-addons-quarkus-jobs-service-embedded</artifactId>
+          <artifactId>kogito-addons-quarkus-jobs</artifactId>
         </dependency>
       </dependencies>
     </profile>
