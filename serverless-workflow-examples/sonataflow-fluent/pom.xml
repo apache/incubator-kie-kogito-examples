@@ -3,14 +3,14 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>serverless-workflow-examples</artifactId>
-    <version>10.1.999-SNAPSHOT</version>
+    <version>10.1.0</version>
   </parent>
   <artifactId>sonataflow-fluent</artifactId>
   <name>Kogito Example :: SonataFlow :: Java Embedded examples</name>
   <properties>
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-    <kogito.bom.version>10.1.999-SNAPSHOT</kogito.bom.version>
+    <kogito.bom.version>10.1.0</kogito.bom.version>
     <maven.compiler.release>17</maven.compiler.release>
     <java.module.name>SonataFlowFluent</java.module.name>
   </properties>

@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
     <artifactId>dmn-resource-jar-quarkus-example</artifactId>
-    <version>10.1.999-SNAPSHOT</version>
+    <version>10.1.0</version>
   </parent>
 
   <artifactId>dmn-quarkus-resource-jar</artifactId>
