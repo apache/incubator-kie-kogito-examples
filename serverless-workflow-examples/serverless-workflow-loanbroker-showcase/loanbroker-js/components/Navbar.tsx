@@ -6,16 +6,15 @@ const NavItem = ({ route }: { route: Route }) => {
   const router = useRouter();
   return (
     <li className="nav-item">
-      <Link href={route.link}>
-        <a
-          className={
-            router.pathname === route.link ? "nav-link active" : "nav-link"
-          }
-          aria-current="page"
-          href="#"
-        >
-          {route.name}
-        </a>
+      <Link
+        href={route.link}
+        className={
+          router.pathname === route.link ? "nav-link active" : "nav-link"
+        }
+        aria-current="page">
+
+        {route.name}
+
       </Link>
     </li>
   );
@@ -42,10 +41,10 @@ const NavDropdown = ({ route }: { route: Route }) => (
 
 const NavDropdownItem = ({ route }: { route: Route }) => (
   <li>
-    <Link href={route.link}>
-      <a className="dropdown-item" href="#">
-        {route.name}
-      </a>
+    <Link href={route.link} className="dropdown-item">
+
+      {route.name}
+
     </Link>
   </li>
 );
