@@ -43,5 +43,5 @@ to stop the services and remove the containers.
 For more details please check the Docker Compose documentation.
 
 ```shell
-docker-compose --help
+docker compose --help
 ```

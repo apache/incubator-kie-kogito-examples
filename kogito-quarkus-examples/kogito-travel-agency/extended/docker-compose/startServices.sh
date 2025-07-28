@@ -24,19 +24,19 @@ PROJECT_VERSION=$(cd ../ && mvn help:evaluate -Dexpression=project.version -q -D
 
 echo "Project version: ${PROJECT_VERSION}"
 
-if [[ $PROJECT_VERSION == *SNAPSHOT ]];
-then
-  KOGITO_VERSION="latest"
-else
-  KOGITO_VERSION=${PROJECT_VERSION%.*}
-fi
+case $PROJECT_VERSION in
+ *SNAPSHOT)
+   KOGITO_VERSION="main" ;;
+ *)
+   KOGITO_VERSION=${PROJECT_VERSION%.*} ;;
+esac
 
 echo "Kogito Image version: ${KOGITO_VERSION}"
 echo "KOGITO_VERSION=${KOGITO_VERSION}" > ".env"
 
-if [ "$(uname)" == "Darwin" ]; then
+if [ $(uname) = "Darwin" ]; then
    echo "DOCKER_GATEWAY_HOST=kubernetes.docker.internal" >> ".env"
-elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+elif [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then
    echo "DOCKER_GATEWAY_HOST=172.17.0.1" >> ".env"
 fi
 
@@ -85,4 +85,4 @@ else
     exit 1
 fi
 
-docker-compose up
+docker compose up

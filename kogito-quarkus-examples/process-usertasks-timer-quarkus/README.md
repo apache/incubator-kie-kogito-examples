@@ -77,9 +77,9 @@ Once all services bootstrap, the following ports will be assigned on your local 
 
 > **_NOTE:_**  This step requires the project to be compiled, please consider running a ```mvn clean install``` command on the project root before running the ```startServices.sh``` script for the first time or any time you modify the project.
 
-Once started you can simply stop all services by executing the ```docker-compose -f docker-compose-postgresql.yml stop```.
+Once started you can simply stop all services by executing the ```docker compose -f docker-compose-postgresql.yml stop```.
 
-All created containers can be removed by executing the ```docker-compose -f docker-compose-postgresql.yml rm```.
+All created containers can be removed by executing the ```docker compose -f docker-compose-postgresql.yml rm```.
 
 #### Run the Hiring example with PostgreSQL
 
@@ -161,9 +161,9 @@ Once all services bootstrap, the following ports will be assigned on your local 
 
 > **_NOTE:_**  This step requires the project to be compiled, please consider running a ```mvn clean install -Pinfinispan``` command on the project root before running the ```startServices.sh infinispan``` script for the first time or any time you modify the project.
 
-Once started you can simply stop all services by executing the ```docker-compose -f docker-compose-infinispan.yml stop```.
+Once started you can simply stop all services by executing the ```docker compose -f docker-compose-infinispan.yml stop```.
 
-All created containers can be removed by executing the ```docker-compose -f docker-compose-infinispan.yml rm```.
+All created containers can be removed by executing the ```docker compose -f docker-compose-infinispan.yml rm```.
 
 #### Run the Hiring example with Infinispan
 

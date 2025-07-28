@@ -24,7 +24,7 @@ Optionally and for convenience, a docker-compose [configuration file](docker-com
 provided in the path [docker-compose/](docker-compose/), where you can just run the command from there:
 
 ```sh
-docker-compose up
+docker compose up
 ```
 
 In this way a container for Kafka will be started on port 9092.
@@ -40,7 +40,7 @@ Optionally and for convenience, a docker-compose [configuration file](docker-com
 provided in the path [docker-compose/](docker-compose/), where you can just run the command from there:
 
 ```sh
-docker-compose up
+docker compose up
 ```
 
 In this way a container for PostgreSQL will be started on port 5432.
@@ -84,7 +84,7 @@ For Linux and MacOS:
 3. Run the ```startServices.sh``` script
 
 ```bash
-cd docker-compose && sh ./startServices.sh
+cd docker compose && sh ./startServices.sh
 ```
 
 Tip: If you get permission denied while creating the postgres container, consider to use SELinux context.
@@ -107,9 +107,9 @@ Once all services bootstrap, the following ports will be assigned on your local 
 
 > **_NOTE:_**  This step requires the project to be compiled, please consider running a ```mvn clean package -Dcontainer``` command on the project root before running the ```startServices.sh``` script for the first time or any time you modify the project.
 
-Once started you can simply stop all services by executing the ```docker-compose -f docker-compose.yml stop```.
+Once started you can simply stop all services by executing the ```docker compose -f docker-compose.yml stop```.
 
-All created containers can be removed by executing the ```docker-compose -f docker-compose.yml rm```.
+All created containers can be removed by executing the ```docker compose -f docker-compose.yml rm```.
 
 
 ### Compile and Run using Local Native Image

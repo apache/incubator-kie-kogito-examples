@@ -39,9 +39,10 @@
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
-    <version.compiler.plugin>3.13.0</version.compiler.plugin>
+    <version.compiler.plugin>3.14.0</version.compiler.plugin>
     <maven.compiler.release>17</maven.compiler.release>
-    <version.failsafe.plugin>3.3.1</version.failsafe.plugin>
+    <version.failsafe.plugin>3.5.2</version.failsafe.plugin>
+    <version.io.quarkiverse.openapi.generator>2.10.0-lts</version.io.quarkiverse.openapi.generator>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -81,6 +82,11 @@
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-resteasy-client-oidc-filter</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkiverse.openapi.generator</groupId>
+      <artifactId>quarkus-openapi-generator-oidc</artifactId>
+      <version>${version.io.quarkiverse.openapi.generator}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.kie.sonataflow</groupId>

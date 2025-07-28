@@ -98,9 +98,9 @@ Once all services bootstrap, the following ports will be assigned on your local 
 
 > **_NOTE:_**  This step requires the project to be compiled, please consider running a ```mvn clean install``` command on the project root before running the ```startServices.sh``` script for the first time or any time you modify the project.
 
-Once started you can simply stop all services by executing the ```docker-compose stop```.
+Once started you can simply stop all services by executing the ```docker compose stop```.
 
-All created containers can be removed by executing the ```docker-compose rm```.
+All created containers can be removed by executing the ```docker compose rm```.
 
 ### Using Keycloak as Authentication Server
 
