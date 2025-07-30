@@ -19,7 +19,7 @@ The custom REST endpoint evaluates a PMML that computes a linear regression:
 You will need:
   - Java 17+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.9.6+ installed
+  - Maven 3.9.9+ installed
 
 ### Compile and Run in Local Dev Mode
 

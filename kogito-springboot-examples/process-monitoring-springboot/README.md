@@ -10,7 +10,7 @@ You will need:
 
 - Java 11+ installed
 - Environment variable JAVA_HOME set accordingly
-- Maven 3.8.6+ installed
+- Maven 3.9.9+ installed
 - Docker 19+ (only if you want to run the integration tests and/or you want to use the `docker-compose` script provided in this example).
 
 ### How to enable the feature
