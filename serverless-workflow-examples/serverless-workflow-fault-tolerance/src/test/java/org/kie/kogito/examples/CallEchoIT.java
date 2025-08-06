@@ -48,21 +48,22 @@ class CallEchoIT {
                 .statusCode(200);
 
         // next 3 calls must fail with "HTTP 500 Internal Server Error"
-        assertCallEcoStartsWithMessage(ACCESS_CIRCUIT_BREAKER_ECHO_ERROR);
-        assertCallEcoStartsWithMessage(ACCESS_CIRCUIT_BREAKER_ECHO_ERROR);
-        assertCallEcoStartsWithMessage(ACCESS_CIRCUIT_BREAKER_ECHO_ERROR);
+        assertCallEchoStartsWithMessage(ACCESS_CIRCUIT_BREAKER_ECHO_ERROR);
+        assertCallEchoStartsWithMessage(ACCESS_CIRCUIT_BREAKER_ECHO_ERROR);
+        assertCallEchoStartsWithMessage(ACCESS_CIRCUIT_BREAKER_ECHO_ERROR);
 
         // fourth call must fail due to the Open circuit.
-        assertCallEcoStartsWithMessage(ACCESS_OPEN_CIRCUIT_ERROR);
+        assertCallEchoStartsWithMessage(ACCESS_OPEN_CIRCUIT_ERROR);
     }
 
-    private static void assertCallEcoStartsWithMessage(String prefix) {
+    private static void assertCallEchoStartsWithMessage(String prefix) {
         JsonPath result = prepareCircuitBreakerCall()
                 .statusCode(500)
                 .extract()
                 .jsonPath();
         String message = result.get("message");
-        assertTrue(message != null && message.startsWith(prefix));
+        assertTrue(message != null && message.startsWith(prefix),
+    "Expected message to start with: " + prefix + " but got: " + message);
     }
 
     private static ValidatableResponse prepareCircuitBreakerCall() {
