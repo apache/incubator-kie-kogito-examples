@@ -28,7 +28,7 @@ To enable and configure the Circuit Breaker you must follow this procedure:
 
 2. Enable the Circuit Breaker
 
-When a workflow use REST calls, behind the scene, a set of classes are generated to support these invocations.
+When a workflow uses REST calls, behind the scene, a set of classes are generated to support these invocations.
 In general, the generation is transparent, and you don't need to pay attention on it.
 
 However, to enable the Circuit Breaker, you must provide some configurations that are related to that generation, and impacts the generated code.
@@ -222,10 +222,10 @@ curl -X 'POST' \
 
 This time, the external service will not fail if executed, however, if you repeat the workflow execution during the next 2 minutes,
 you will continue getting the org.eclipse.microprofile.faulttolerance.exceptions.CircuitBreakerOpenException, since 
-the circuit will continues in the `Open` status because of the following configuration:
+the circuit will remain in the `Open` status because of the following configuration:
 
 ````
-# Wait 2 minute2 before an Open circuit goes to the Half Open state.
+# Wait 2 minutes before an Open circuit goes to the Half Open state.
 quarkus.fault-tolerance."org.kie.kogito.openapi.externalservice.api.ExternalServiceResourceApi/circuitBreakerEcho".circuit-breaker.delay=2
 quarkus.fault-tolerance."org.kie.kogito.openapi.externalservice.api.ExternalServiceResourceApi/circuitBreakerEcho".circuit-breaker.delay-unit=minutes
 ````
