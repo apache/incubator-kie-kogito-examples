@@ -44,7 +44,7 @@ We recommend that you build the project and inspect the generated sources under 
 ![Generated Sources](docs/circuit-breaker-generated-sources.png)
 
 
-When the Circuit Breaker is not configured, the generated signature for the Java method corresponding to the `circuitBreakerEcho` operation will look like this:
+By default, when the Circuit Breaker is not enabled, the generated signature for the Java method corresponding to the `circuitBreakerEcho` operation will look like this:
 
 ````
 @io.quarkiverse.openapi.generator.markers.OperationMarker(name="", openApiSpecId="external_service_yaml", operationId="circuitBreakerEcho", method="POST", path="/external-service/circuit-breaker")
@@ -64,6 +64,14 @@ to enable the Circuit Breaker, you must add the following entry in the `applicat
 ````
 org.kie.kogito.openapi.externalservice.api.ExternalServiceResourceApi/circuitBreakerEcho/CircuitBreaker/enabled=true
 ````
+
+In general, for any other operation you must follow this pattern:
+
+`<classname>/<methodname>/CircuitBreaker/enabled=true`
+
+* classname: is the fully qualified name of the generated class.
+* methodname: is the name of the method corresponding to the given operation.
+
 
 > **NOTE:** Every operation must be configured individually, and different operations might be located in different classes.
 
@@ -91,14 +99,18 @@ If you don't see the annotation, we recommend that you navigate and look into th
 
 The build time behavioural properties are used to define configurations like thresholds and delays, for more information [see](https://quarkus.io/version/3.20/guides/smallrye-fault-tolerance#configuration-reference).
 
-To set these properties you must use the prefix `quarkus.fault-tolerance."org.kie.kogito.openapi.externalservice.api.ExternalServiceResourceApi/circuitBreakerEcho"`.
+To create these properties you must follow this pattern:
+
+`quarkus.fault-tolerance."<classname>/<methodname>".<property>=<value>`
+* classname: is the fully qualified name of the generated class.
+* methodname: is the name of the method corresponding to the given operation.
 
 Below is the configuration used for the example:
 
 ````
 # Build time property to add the Circuit Breaker capability to the corresponding generated class/method, by annotating
 # it with the eclipse microprofile @org.eclipse.microprofile.faulttolerance.CircuitBreaker.
-# This property doesn't follow the quarkus.fault-tolerance.xxx prefix, you must use this format.
+# NOTE: this property doesn't follow the quarkus.fault-tolerance.xxx prefix, you must use this format instead.
 org.kie.kogito.openapi.externalservice.api.ExternalServiceResourceApi/circuitBreakerEcho/CircuitBreaker/enabled=true
 
 # Configuration values for the sake of current example. Produces a quick circuit Open, and a long delayed transitioning
@@ -159,8 +171,7 @@ You will see an output like this:
 }
 ````
 
-3. Configure the external service `circuitBreakerEcho` operation to fail using the following command:\
-The external-service was designed to fail intentionally upon configuration.
+3. Configure the external service `circuitBreakerEcho` operation to fail using the following command:
 
 ````
 curl -X 'POST' \
@@ -172,6 +183,7 @@ curl -X 'POST' \
   "enabled": false
 }'
 ````
+> **NOTE:** The external service was designed to expose an `/admin` endpoint that can be used to program the `circuitBreakerEcho` operation intentionally to fail.
 
 4. Execute the workflow again with the following command:
 
@@ -194,7 +206,7 @@ call to the external service `circuitBreakerEcho` operation, and has got the err
 }
 ````
 
-5. Repeat 3 or more executions, and this time, you will start to see the following result:
+5. Repeat 3 or more executions of the workflow execution command. And, this time, you will start to see the following result:
 
 ````
 {
