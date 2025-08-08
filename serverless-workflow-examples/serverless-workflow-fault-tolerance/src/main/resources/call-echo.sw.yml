@@ -1,0 +1,22 @@
+id: call-echo
+version: "1.0"
+name: Call Echo
+start: CallExternalService
+functions:
+  - name: circuitBreakerEchoFunction
+    operation: specs/external-service.yaml#circuitBreakerEcho
+    type: rest
+states:
+  - name: CallExternalService
+    type: operation
+    actions:
+      - name: executeCircuitBreakerEcho
+        functionRef:
+          refName: circuitBreakerEchoFunction
+          arguments:
+            echo: ".echo"
+        actionDataFilter:
+          useResults: true
+          results: "."
+          toStateData: ".echoResult"
+    end: true
