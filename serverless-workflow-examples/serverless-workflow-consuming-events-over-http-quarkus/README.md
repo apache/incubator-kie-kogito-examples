@@ -21,7 +21,7 @@ This is the infrastructure required to integrate with [Knative Eventing](https:/
 You will need:
   - Java 17+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.9.6+ installed
+  - Maven 3.9.9+ installed
   - [Docker Engine](https://docs.docker.com/engine/) and [Docker Compose](https://docs.docker.com/compose/) installed
 
 When using native image compilation, you will also need: 
