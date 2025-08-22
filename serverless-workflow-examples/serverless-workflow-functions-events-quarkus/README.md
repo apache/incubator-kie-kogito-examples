@@ -63,7 +63,7 @@ Also, there is the Swagger UI that can also be used to explore the APIs in this 
 You will need:
   - Java 17+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.9.6+ installed
+  - Maven 3.9.9+ installed
 
 When using native image compilation, you will also need: 
   - [GraalVm](https://www.graalvm.org/downloads/) 20.2.0+ installed

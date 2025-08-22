@@ -74,7 +74,7 @@ You can install Infinispan server by downloading version 12.x from the [official
 You will need:
   - Java 17+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.9.6+ installed
+  - Maven 3.9.9+ installed
 
 When using native image compilation, you will also need:
   - GraalVM 19.3+ installed
