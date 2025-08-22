@@ -76,18 +76,10 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-openapi</artifactId>
     </dependency>
-    <!-- Comment to disable jobs service integration -->
     <dependency>
       <groupId>org.kie</groupId>
-      <artifactId>kogito-addons-quarkus-jobs-management</artifactId>
+      <artifactId>kogito-addons-quarkus-embedded-jobs</artifactId>
     </dependency>
-    <!-- uncomment this to enable persistence for kogito -->
-    <!--
-    <dependency>
-      <groupId>org.kie</groupId>
-      <artifactId>kie-addons-quarkus-persistence-infinispan</artifactId>
-    </dependency>
-    -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-health</artifactId>
@@ -119,10 +111,7 @@
         </property>
       </activation>
       <dependencies>
-        <dependency>
-          <groupId>org.kie</groupId>
-          <artifactId>kogito-addons-quarkus-jobs-service-embedded</artifactId>
-        </dependency>
+
       </dependencies>
     </profile>
   </profiles>
