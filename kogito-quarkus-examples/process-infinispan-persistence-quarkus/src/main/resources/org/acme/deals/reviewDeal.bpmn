@@ -20,7 +20,7 @@
   <bpmn2:itemDefinition id="__3597E33A-1C00-41B3-924E-09EA47F79D93_reviewOutputXItem" structureRef="java.lang.String"/>
   <bpmn2:process id="dealreviews" drools:packageName="org.acme.deals" drools:version="1.0" drools:adHoc="false" name="Deal Review" isExecutable="true">
     <bpmn2:extensionElements>
-      <drools:import name="org.acme.travels.Traveller"/>
+      <drools:import name="org.acme.deals.Traveller"/>
     </bpmn2:extensionElements>
     <bpmn2:property id="deal" itemSubjectRef="_dealItem" name="deal"/>
     <bpmn2:property id="review" itemSubjectRef="_reviewItem" name="review"/>
