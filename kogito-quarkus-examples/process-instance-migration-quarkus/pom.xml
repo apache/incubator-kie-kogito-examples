@@ -99,10 +99,6 @@
     </dependency>
     <dependency>
       <groupId>org.kie</groupId>
-      <artifactId>kogito-addons-quarkus-jobs-management</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.kie</groupId>
       <artifactId>kie-addons-quarkus-process-svg</artifactId>
     </dependency>
     <dependency>
@@ -133,11 +129,11 @@
     <!-- Jobs Service -->
     <dependency>
       <groupId>org.kie</groupId>
-      <artifactId>kogito-addons-quarkus-jobs</artifactId>
+      <artifactId>kogito-addons-quarkus-embedded-jobs</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>jobs-service-postgresql-common</artifactId>
+      <groupId>org.kie</groupId>
+      <artifactId>kogito-addons-quarkus-embedded-jobs-jpa</artifactId>
     </dependency>
 
     <!-- Data Audit -->

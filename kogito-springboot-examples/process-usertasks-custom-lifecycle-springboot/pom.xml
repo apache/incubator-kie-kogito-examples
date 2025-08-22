@@ -114,10 +114,14 @@
           <groupId>org.infinispan</groupId>
           <artifactId>infinispan-spring-boot3-starter-remote</artifactId>
         </dependency>
-        <dependency>
-          <groupId>org.kie</groupId>
-          <artifactId>kogito-addons-springboot-jobs-management</artifactId>
-        </dependency>
+		<dependency>
+			<groupId>org.kie</groupId>
+			<artifactId>kogito-addons-springboot-embedded-jobs</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.kie</groupId>
+			<artifactId>kogito-addons-springboot-embedded-jobs-jpa</artifactId>
+		</dependency>
       </dependencies>
     </profile>
   </profiles>

@@ -80,11 +80,10 @@
       <artifactId>jbpm-spring-boot-starter</artifactId>
     </dependency>
 
-    <!-- Comment to disable jobs service integration -->
-    <dependency>
-      <groupId>org.kie</groupId>
-      <artifactId>kogito-addons-springboot-jobs-management</artifactId>
-    </dependency>
+	<dependency>
+		<groupId>org.kie</groupId>
+		<artifactId>kogito-addons-springboot-embedded-jobs</artifactId>
+	</dependency>
 
     <dependency>
       <groupId>org.kie</groupId>
