@@ -14,7 +14,7 @@
     "bootstrap-icons": "^1.9.1",
     "cloudevents": "^6.0.2",
     "formik": "^2.2.9",
-    "next": "12.2.5",
+    "next": "14.2.30",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "recoil": "^0.7.5",
