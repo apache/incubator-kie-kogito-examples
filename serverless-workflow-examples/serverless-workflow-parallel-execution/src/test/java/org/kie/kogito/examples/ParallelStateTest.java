@@ -19,7 +19,7 @@
 package org.kie.kogito.examples;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.hasLength;
+import static org.hamcrest.Matchers.is;
 
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
@@ -33,10 +33,11 @@ class ParallelStateTest {
         given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
-                .body("{}").when()
+                .body("{\"number\":2}").when()
                 .post("/parallel")
                 .then()
                 .statusCode(201)
-                .body("workflowdata.result", hasLength(2));
+                .body("workflowdata.half", is(1))
+                .body("workflowdata.double", is(4));
     }
 }
