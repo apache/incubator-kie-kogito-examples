@@ -7,19 +7,14 @@
   "start": "Parallel",
   "functions": [
     {
-      "name": "concatA",
+      "name": "half",
       "type": "expression",
-      "operation": ".result|=.+\"A\""
+      "operation": "{half:.number/2}"
     },
     {
-      "name": "concatB",
+      "name": "double",
       "type": "expression",
-      "operation": ".result|=.+\"B\""
-    },
-    {
-      "name": "concatC",
-      "type": "expression",
-      "operation": ".result|=.+\"C\""
+      "operation": "{double:.number*2}"
     }
   ],
   "states": [
@@ -31,7 +26,7 @@
           "name": "branchA",
           "actions": [
             {
-              "functionRef": "concatA"
+              "functionRef": "half"
             }
           ]
         },
@@ -39,24 +34,14 @@
           "name": "branchB",
           "actions": [
             {
-              "functionRef": "concatB"
-            }
-          ]
-        },
-        {
-          "name": "branchC",
-          "actions": [
-            {
-              "functionRef": "concatC"
+              "functionRef": "double"
             }
           ]
         }
       ],
       "numCompleted": "2",
       "completionType": "atLeast",
-      "end": {
-        "terminate": true
-      }
+      "end": true
     }
   ]
 }
