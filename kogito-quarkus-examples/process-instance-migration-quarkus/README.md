@@ -46,6 +46,16 @@ And when using native image compilation, you will also need:
 - GraalVM native image needs as well native-image extension: https://www.graalvm.org/reference-manual/native-image/
 - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too, please refer to GraalVM installation documentation for more details.
 
+### How to enable the feature
+
+Import the following dependency in your `pom.xml` to enable the process migration.:
+
+```XML
+<dependency>
+ <groupId>org.kie</groupId>
+ <artifactId>kie-addons-quarkus-process-migration</artifactId>
+</dependency>
+
 ### Infrastructure Services
 
 This quickstart provides a docker compose template that starts all the required services. This setup ensures that all services are connected with a default configuration.
