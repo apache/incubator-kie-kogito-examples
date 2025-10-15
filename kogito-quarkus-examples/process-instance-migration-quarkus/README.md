@@ -53,7 +53,7 @@ Import the following dependency in your `pom.xml` to enable the process migratio
 ```XML
 <dependency>
  <groupId>org.kie</groupId>
- <artifactId>kie-addons-quarkus-process-migration</artifactId>
+ <artifactId>kie-addons-quarkus-process-instance-migration</artifactId>
 </dependency>
 
 ### Infrastructure Services
