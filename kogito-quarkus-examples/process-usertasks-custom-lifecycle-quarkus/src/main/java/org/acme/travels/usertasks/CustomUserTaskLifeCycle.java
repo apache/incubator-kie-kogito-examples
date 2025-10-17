@@ -55,6 +55,7 @@ public class CustomUserTaskLifeCycle implements UserTaskLifeCycle {
     public static final String COMPLETE = "complete";
     public static final String SKIP = "skip";
     public static final String FAIL = "fail";
+    public static final String TASK_NAME = "secondLineApproval";
 
     public static final UserTaskState INACTIVE = UserTaskState.initalized();
     public static final UserTaskState ACTIVE = UserTaskState.of("Active");
@@ -97,11 +98,23 @@ public class CustomUserTaskLifeCycle implements UserTaskLifeCycle {
     @Override
     public Optional<UserTaskTransitionToken> transition(UserTaskInstance userTaskInstance, UserTaskTransitionToken userTaskTransitionToken, IdentityProvider identityProvider) {
         checkPermission(userTaskInstance, identityProvider);
+        if (TASK_NAME.equals(userTaskInstance.getTaskName())) {
+            checkExcludedUserPermission(userTaskInstance, identityProvider);
+        }
         UserTaskTransition transition = transitions.stream()
                 .filter(t -> t.source().equals(userTaskInstance.getStatus()) && t.id().equals(userTaskTransitionToken.transitionId()))
                 .findFirst()
                 .orElseThrow(() -> new UserTaskTransitionException("Invalid transition from " + userTaskInstance.getStatus()));
         return transition.executor().execute(userTaskInstance, userTaskTransitionToken, identityProvider);
+    }
+
+    private static void checkExcludedUserPermission(UserTaskInstance userTaskInstance, IdentityProvider identityProvider) {
+        Set<String> excludedUsers = userTaskInstance.getExcludedUsers();
+        if (excludedUsers != null && !excludedUsers.isEmpty() && excludedUsers.contains(identityProvider.getName())) {
+            throw new NotAuthorizedException(String.format(
+                    "User '%s' is not authorized to perform an operation on user task '%s'",
+                    identityProvider.getName(), userTaskInstance.getId()));
+        }
     }
 
     @Override
