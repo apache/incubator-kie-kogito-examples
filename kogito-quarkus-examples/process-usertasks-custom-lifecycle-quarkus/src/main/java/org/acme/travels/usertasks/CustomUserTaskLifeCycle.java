@@ -199,6 +199,13 @@ public class CustomUserTaskLifeCycle implements UserTaskLifeCycle {
             return;
         }
 
+        Set<String> excludedUsers = userTaskInstance.getExcludedUsers();
+        if (excludedUsers != null && !excludedUsers.isEmpty() && excludedUsers.contains(identityProvider.getName())) {
+            throw new NotAuthorizedException(String.format(
+                    "User '%s' is not authorized to perform an operation on user task '%s'",
+                    identityProvider.getName(), userTaskInstance.getId()));
+        }
+
         if (List.of(INACTIVE, ACTIVE, STARTED).contains(userTaskInstance.getStatus())) {
             // there is no user
             Set<String> users = new HashSet<>(userTaskInstance.getPotentialUsers());
