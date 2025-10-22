@@ -147,11 +147,58 @@ curl -H 'Content-Type:application/json' -H 'Accept:application/json' -H "Authori
 
 ### Show tasks
 
+Below command will list the tasks for user `john`.
+
 ```sh
 curl -H 'Content-Type:application/json' -H 'Accept:application/json' -H "Authorization: Bearer "$access_token 'http://localhost:8080/approvals/{uuid}/tasks?user=john&group=employees'
 ```
+The approval process consists of two levels.
 
-Try with the manager Mary
+### Complete first line approval task
+
+From keyclock [localhost:8281/auth](http://localhost:8281)  --> `Users` screen  add a new user `manager` belonging to group `managers`
+Get the access_token for `manager`.
+
+The first line approval task is assigned to the user `manager`.
+
+```sh
+export access_token=$(\
+    curl -X POST http://localhost:8281/auth/realms/kogito/protocol/openid-connect/token \
+    --user kogito-app:secret \
+    -H 'content-type: application/x-www-form-urlencoded' \
+    -d 'username=manager&password=manager&grant_type=password' | jq --raw-output '.access_token' \
+ )
+```
+Get the tasks assigned to the user `manager`.
+
+```sh
+curl -H "Authorization: Bearer "$access_token -X GET 'http://localhost:8080/usertasks/instance?group=managers&user=manager'  -H 'accept: application/json'
+```
+
+The task: `firstLineApproval` needs to be transitioned to status `complete` for completing the first line of approval.
+
+```sh
+curl -H "Authorization: Bearer "$access_token -X POST -H "Accept: application/json" -H 'Content-Type:application/json' -d '{ "transitionId": "complete"}'  'http://localhost:8080/usertasks/instance/{taskid}/transition?group=managers&user=manager'
+```
+where `{taskid}` is the id of the user task assigned to the user.
+
+The task: `firstLineApproval` is completed by the user `manager`.
+
+### Complete the second line approval task
+
+List the tasks assigned to the user `manager`.
+
+```sh
+curl -H "Authorization: Bearer "$access_token -X GET 'http://localhost:8080/usertasks/instance?group=managers&user=manager'  -H 'accept: application/json'
+
+```
+The task: `secondLineApproval` is also assigned to the user  `manager`.if we try to transition the task: `secondLineApproval` with same user , error will be returned.
+To maintain compliance of approval process, the same user cannot perform both levels of approval. Therefore, the second-level approval must be completed by a different user.
+
+Proceed to complete the task: `secondLineApproval` using an alternate approver.
+In this instance, the approval will be carried out by the user `mary`.
+
+First get the access token for user `mary`.
 
 ```sh
 export access_token=$(\
@@ -161,76 +208,24 @@ export access_token=$(\
     -d 'username=mary&password=mary&grant_type=password' | jq --raw-output '.access_token' \
  )
 ```
-
+List the tasks assigned to user `mary`.
 ```sh
-curl -H 'Content-Type:application/json' -H 'Accept:application/json' -H "Authorization: Bearer "$access_token 'http://localhost:8080/approvals/{uuid}/tasks?user=mary&group=managers'
+curl -H "Authorization: Bearer "$access_token -X GET 'http://localhost:8080/usertasks/instance?group=managers&user=mary'  -H 'accept: application/json'
 ```
+Now we have the id for the second level approval task.
 
-where `{uuid}` is the id of the given approval instance
-
-
-### Complete first line approval task
-
+1. First step is to `claim` the task.
 ```sh
-curl -H "Authorization: Bearer "$access_token -X POST -d '{"approved" : true}' -H 'Content-Type:application/json' -H 'Accept:application/json' 'http://localhost:8080/approvals/{uuid}/firstLineApproval/{tuuid}?user=mary&group=managers'
+curl -H "Authorization: Bearer "$access_token -X POST -H "Accept: application/json" -H 'Content-Type:application/json' -d '{ "transitionId": "claim"}'  'http://localhost:8080/usertasks/instance/{taskid}/transition?group=managers&user=mary'
 ```
+where `{taskid}` is the id of the task assigned to the user.
 
-where `{uuid}` is the id of the given approval instance and `{tuuid}` is the id of the task
 
-### Show tasks
-
+2. Second step is to `complete` the task.
 ```sh
-curl -H 'Content-Type:application/json' -H 'Accept:application/json' -H "Authorization: Bearer "$access_token 'http://localhost:8080/approvals/{uuid}/tasks?user=mary&group=managers'
+curl -H "Authorization: Bearer "$access_token -X POST -H "Accept: application/json" -H 'Content-Type:application/json' -d '{ "transitionId": "complete"}'  'http://localhost:8080/usertasks/instance/{taskid}/transition?group=managers&user=mary'
 ```
+where `{taskid}` is the id of the task assigned to the user.
 
-where `{uuid}` is the id of the given approval instance. This should return empty response as Mary was the first approver and by that can't be assigned to another one.
+The second line approval has also been completed, marking the end of the approval process.
 
-Repeating the request with another user
-
-```sh
-export access_token=$(\
-    curl -X POST http://localhost:8281/auth/realms/kogito/protocol/openid-connect/token \
-    --user kogito-app:secret \
-    -H 'content-type: application/x-www-form-urlencoded' \
-    -d 'username=poul&password=poul&grant_type=password' | jq --raw-output '.access_token' \
- )
-```
-
-```sh
-curl -H 'Content-Type:application/json' -H 'Accept:application/json' -H "Authorization: Bearer "$access_token 'http://localhost:8080/approvals/{uuid}/tasks?user=poul&group=managers'
-```
-
-Now we have the id for the second approval task
-
-### Complete second line approval task
-
-```sh
-curl -H "Authorization: Bearer "$access_token -X POST -d '{"approved" : true}' -H 'Content-Type:application/json' -H 'Accept:application/json' 'http://localhost:8080/approvals/{uuid}/secondLineApproval/{tuuid}?user=poul&group=managers'
-```
-
-where `{uuid}` is the id of the given approval instance and `{tuuid}` is the id of the task instance
-
-This completes the approval and returns approvals model where both approvals of first and second line can be found,
-plus the approver who made the first one.
-
-```json
-{
-  "approver": "mary",
-  "firstLineApproval": true,
-  "id": "20fcafed-255e-4e1b-b00f-9943aabb47fd",
-  "secondLineApproval": true,
-  "traveller": {
-    "address": {
-      "city": "Boston",
-      "country": "US",
-      "street": "main street",
-      "zipCode": "10005"
-    },
-    "email": "jon.doe@example.com",
-    "firstName": "John",
-    "lastName": "Doe",
-    "nationality": "American"
-  }
-}
-
-```
