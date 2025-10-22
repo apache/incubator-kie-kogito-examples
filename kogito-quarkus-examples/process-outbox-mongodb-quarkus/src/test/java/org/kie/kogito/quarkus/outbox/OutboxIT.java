@@ -92,7 +92,6 @@ public class OutboxIT {
         COMPOSE.waitingFor("kafka", Wait.forListeningPort());
         COMPOSE.waitingFor("sidecar", Wait.forListeningPort());
         COMPOSE.waitingFor("kogito", Wait.forListeningPort());
-        COMPOSE.withLocalCompose(true);
     }
 
     private static Consumer<OutputFrame> logger() {
