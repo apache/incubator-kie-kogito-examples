@@ -95,6 +95,21 @@ public class CustomUserTaskLifeCycle implements UserTaskLifeCycle {
     }
 
     @Override
+    public String startTransition() {
+        return ACTIVATE;
+    }
+
+    @Override
+    public String reassignTransition() {
+        return RELEASE;
+    }
+
+    @Override
+    public String abortTransition() {
+        return SKIP;
+    }
+
+    @Override
     public Optional<UserTaskTransitionToken> transition(UserTaskInstance userTaskInstance, UserTaskTransitionToken userTaskTransitionToken, IdentityProvider identityProvider) {
         checkPermission(userTaskInstance, identityProvider);
         UserTaskTransition transition = transitions.stream()
