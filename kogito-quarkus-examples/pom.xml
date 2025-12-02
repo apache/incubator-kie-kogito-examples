@@ -100,6 +100,7 @@
         <module>process-usertasks-timer-quarkus</module>
         <module>process-usertasks-with-security-oidc-quarkus</module>
         <module>process-usertasks-with-security-quarkus</module>
+        <module>process-usertasks-ws-humantask-lifecycle-quarkus</module>
         <module>rules-incubation-api-quarkus</module>
         <module>rules-legacy-quarkus-example</module>
         <module>rules-legacy-scesim-quarkus-example</module>

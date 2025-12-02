@@ -1,0 +1,14 @@
+{
+  "Servers": {
+    "1": {
+      "Name": "kie",
+      "Group": "Servers",
+      "Host": "postgres",
+      "Port": 5432,
+      "MaintenanceDB": "kie",
+      "Username": "kie-user",
+      "SSLMode": "disable",
+      "PassFile": "/var/lib/pgadmin/pgpass"
+    }
+  }
+}

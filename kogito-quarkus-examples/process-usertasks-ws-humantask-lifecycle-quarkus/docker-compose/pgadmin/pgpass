@@ -1,0 +1,2 @@
+postgres:5432:kie:kie-user:kie-pass
+postgres:5432:postgres:kie-user:kie-pass
