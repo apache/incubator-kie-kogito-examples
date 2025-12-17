@@ -14,7 +14,7 @@ Demonstrates DMN on Kogito capabilities, including REST interface code generatio
 You will need:
 - Java 17+ installed
 - Environment variable JAVA_HOME set accordingly
-- Maven 3.9.9+ installed
+- Maven 3.9.11+ installed
 
 ### Compile and Run
 

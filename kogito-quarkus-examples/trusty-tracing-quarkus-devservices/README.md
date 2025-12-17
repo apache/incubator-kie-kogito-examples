@@ -12,7 +12,7 @@ PostgreSQL instance and a User Interface can be launched from Quarkus DevMode to
 You will need:
   - Java 17+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.9.9+ installed
+  - Maven 3.9.11+ installed
   - A Docker environment
 
 ### Compile and Run in Local Dev Mode

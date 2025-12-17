@@ -24,7 +24,7 @@ This example shows
 You will need:
   - Java 11+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.9.9+ installed
+  - Maven 3.9.11+ installed
   - [jq](https://stedolan.github.io/jq) tool installed. You can download it from [here](https://stedolan.github.io/jq/download)
   - Docker to be able to install keycloak server
 

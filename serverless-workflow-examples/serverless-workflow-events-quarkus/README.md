@@ -21,7 +21,7 @@ Here is the overall architecture of this example:
 You will need:
   - Java 17+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.9.9+ installed
+  - Maven 3.9.11+ installed
   - Apache Kafka installed
 
 When using native image compilation, you will also need: 

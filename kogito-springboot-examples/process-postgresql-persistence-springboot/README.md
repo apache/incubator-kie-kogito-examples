@@ -85,7 +85,7 @@ Optionally and for convenience, a docker-compose [configuration file](docker-com
 You will need:
   - Java 11+ installed 
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.9.9+ installed
+  - Maven 3.9.11+ installed
 
 ### Compile and Run in Local Dev Mode
 
