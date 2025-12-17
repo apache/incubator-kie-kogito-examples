@@ -115,66 +115,49 @@ curl -u john:john -H 'Content-Type:application/json' -H 'Accept:application/json
 ```
 
 ### Show tasks
+Get the tasks assigned to the user `manager`
 
 ```sh
-curl -u john:john -H 'Content-Type:application/json' -H 'Accept:application/json' 'http://localhost:8080/approvals/{uuid}/tasks?user=john&group=managers'
+curl -X GET 'http://localhost:8080/usertasks/instance?group=managers&user=manager' -H 'accept: application/json'
 ```
-
-where `{uuid}` is the id of the given approval instance
-
 
 ### Complete first line approval task
+First line approval task is assigned to the user `manager`.
+So use the below command to complete the first line of approval for the task.
 
 ```sh
-curl -u john:john -X POST -d '{"approved" : true}' -H 'Content-Type:application/json' -H 'Accept:application/json' http://localhost:8080/approvals/{uuid}/firstLineApproval/{tuuid}?user=john&group=managers'
+curl -X POST 'http://localhost:8080/usertasks/instance/{taskid}/transition?group=managers&user=manager' -H 'accept: application/json' -H 'Content-Type: application/json' -d '{"transitionId": "complete"}'
 ```
+where `{taskid}` is the id of the task instance.
 
-where `{uuid}` is the id of the given approval instance and `{tuuid}` is the id of the task instance
-
-### Show tasks
-
-```sh
-curl -u john:john -H 'Content-Type:application/json' -H 'Accept:application/json' 'http://localhost:8080/approvals/{uuid}/tasks?user=john&group=managers'
-```
-
-where `{uuid}` is the id of the given approval instance
-
-This should return empty response as the admin user was the first approver and by that can't be assigned to another one.
-
-Repeating the request with another user will return task
-
-```
-curl -u mary:mary -H 'Content-Type:application/json' -H 'Accept:application/json' 'http://localhost:8080/approvals/{uuid}/tasks?user=mary&group=managers'
-```
-
+First line of approval is completed by the user `manager`
 
 ### Complete second line approval task
 
+Get the tasks assigned to the user `manager`
+```sh
+curl -X 'GET' 'http://localhost:8080/usertasks/instance?group=managers&user=manager' -H 'accept: application/json'
 ```
-curl -u mary:mary -X POST -d '{"approved" : true}' -H 'Content-Type:application/json' -H 'Accept:application/json' 'http://localhost:8080/approvals/{uuid}/secondLineApproval/{tuuid}?user=mary&group=managers'
+The task `secondLineApproval` is also assigned to the user `manager` But if we try to transition the task with user `manager` , error will be returned.
+To maintain compliance of approval process, the same user cannot perform both levels of approval. Therefore, the second-level approval must be completed by a different user.
+
+Get the tasks assigned to the user `admin`
+
+```sh
+curl -X GET 'http://localhost:8080/usertasks/instance?group=managers&user=admin' -H 'accept: application/json'
 ```
+1. First step is to `claim` the task
 
-where `{uuid}` is the id of the given approval instance and `{tuuid}` is the id of the task instance
-
-This completes the approval and returns approvals model where both approvals of first and second line can be found,
-plus the approver who made the first one.
-
-```json
-{
-	"approver":"john",
-	"firstLineApproval":true,
-	"id":"2eeafa82-d631-4554-8d8e-46614cbe3bdf",
-	"secondLineApproval":true,
-	"traveller":{
-		"address":{
-			"city":"Boston",
-			"country":"US",
-			"street":"main street",
-			"zipCode":"10005"},
-		"email":"jon.doe@example.com",
-		"firstName":"John",
-		"lastName":"Doe",
-		"nationality":"American"
-	}
-}
+```sh
+curl -X POST 'http://localhost:8080/usertasks/instance/{taskid}/transition?group=managers&user=admin' -H 'accept: application/json' -H 'Content-Type: application/json' -d '{"transitionId": "claim"}'
 ```
+where `{taskid}` is the id of the task assigned to the user.
+
+2. Second step is to `complete` the task
+
+```sh
+curl -X POST 'http://localhost:8080/usertasks/instance/{taskid}/transition?group=managers&user=admin' -H 'accept: application/json' -H 'Content-Type: application/json' -d '{"transitionId": "complete"}'
+```
+where `{taskid}` is the id of the task assigned to the user.
+
+The second line approval has also been completed, marking the end of the approval process.

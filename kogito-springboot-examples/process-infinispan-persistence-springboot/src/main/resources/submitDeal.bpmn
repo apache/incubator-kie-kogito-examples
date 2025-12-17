@@ -8,7 +8,7 @@
   <bpmn2:itemDefinition id="__C3082C6F-963E-40A2-B31B-1E8F336AA4C6_reviewOutputXItem" structureRef="java.lang.String"/>
   <bpmn2:process id="deals" drools:packageName="org.acme.deals" drools:version="1.0" drools:adHoc="false" name="SubmitDeal" isExecutable="true">
     <bpmn2:extensionElements>
-      <drools:import name="org.acme.travels.Traveller"/>
+      <drools:import name="org.acme.deals.Traveller"/>
     </bpmn2:extensionElements>
     <bpmn2:property id="name" itemSubjectRef="_nameItem" name="name"/>
     <bpmn2:property id="review" itemSubjectRef="_reviewItem" name="review"/>
