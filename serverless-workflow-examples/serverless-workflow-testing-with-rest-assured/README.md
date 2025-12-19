@@ -1,1 +1,1 @@
-Serverless Workflow guide: https://github.com/apache/incubator-kie-kogito-docs/blob/main/serverlessworkflow/modules/ROOT/pages/testing-and-troubleshooting/basic-integration-tests-with-restassured.adoc
+Serverless Workflow guide: https://github.com/apache/incubator-kie-kogito-docs/blob/main/serverlessworkflow/modules/ROOT/pages/use-cases/advanced-developer-use-cases/testing/basic-integration-tests-with-restassured.adoc
