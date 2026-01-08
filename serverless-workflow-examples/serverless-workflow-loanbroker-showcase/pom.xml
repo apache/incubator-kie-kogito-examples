@@ -51,7 +51,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
     <version.org.wiremock>3.13.0</version.org.wiremock>
-    <version.org.testcontainers>2.0.1</version.org.testcontainers>
+    <version.org.testcontainers>2.0.3</version.org.testcontainers>
     <version.io.cloudevents>2.5.0</version.io.cloudevents>
     <!-- See: https://camel.apache.org/categories/Camel-Quarkus/ -->
     <!-- Aligned with Quarkus. We don't use the Camel Quarkus platform BOM to avoid upgrade delays in our CI. Feel free to use the BOM in your projects, though -->
