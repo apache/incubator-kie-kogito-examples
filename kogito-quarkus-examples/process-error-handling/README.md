@@ -60,7 +60,7 @@ The `Apply` script calls the corresponding method of the class `ErrorHandlingScr
 You will need:
   - Java 17+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.9.6+ installed
+  - Maven 3.9.11+ installed
 
 When using native image compilation, you will also need:
   - GraalVM 19.3+ installed

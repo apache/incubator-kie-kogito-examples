@@ -11,7 +11,7 @@ This example contains a simple workflow definition that executes a python standa
 You will need:
   - Java 17+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.8.6+ installed
+  - Maven 3.9.11+ installed
   - Python3 installed
   
 
