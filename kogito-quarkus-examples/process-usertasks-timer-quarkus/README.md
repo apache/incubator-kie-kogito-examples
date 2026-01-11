@@ -61,12 +61,6 @@ You should start all the services before you execute any of the **Hiring** examp
 ./startServices.sh
 ```
 
-or
-
-```bash
-./startServices.sh postgresql
-```
-
 Once all services bootstrap, the following ports will be assigned on your local machine:
 
 - PostgreSQL: 5432
@@ -127,85 +121,6 @@ To run the generated native executable, generated in `target/`, execute
 
 ```sh
 ./target/./target/process-usertasks-timer-quarkus
-```
-
-### Run Example with Infinispan
-
-#### Compile Hiring example with profile infinispan
-
-First thing is to compile the example with the infinispan profile executing:
-
-1. Open a Terminal
-2. Go to the example folder and run
-```sh
-mvn clean install -Pinfinispan
-```
-#### Start infrastructure services
-
-You should start all the services before you execute any of the **Hiring** example, to do that please execute:
-
-1. Open a Terminal
-2. Go to docker-compose folder
-3. Run the ```startServices.sh``` script with infinispan argument
-
-```bash
-./startServices.sh infinispan
-```
-
-Once all services bootstrap, the following ports will be assigned on your local machine:
-
-- Infinispan: 11222
-- Kafka: 9092
-- Data Index: 8180
-- Jobs Service: 8580
-
-> **_NOTE:_**  This step requires the project to be compiled, please consider running a ```mvn clean install -Pinfinispan``` command on the project root before running the ```startServices.sh infinispan``` script for the first time or any time you modify the project.
-
-Once started you can simply stop all services by executing the ```docker compose -f docker-compose-infinispan.yml stop```.
-
-All created containers can be removed by executing the ```docker compose -f docker-compose-infinispan.yml rm```.
-
-#### Run the Hiring example with Infinispan
-
-##### Compile and Run Hiring example process in Local Dev Mode
-
-Once all the infrastructure services are ready, you can start the Hiring example by doing:
-
-- Open a Terminal
-- Go to the hiring example folder
-- Start the example with the command
-
-```bash
-mvn clean package quarkus:dev -Pinfinispan
-```
-
-NOTE: With dev mode of Quarkus you can take advantage of hot reload for business assets like processes, rules, decision tables and java code. No need to redeploy or restart your running application.
-
-##### Package and Run in JVM mode
-
-```sh
-mvn clean package -Pinfinispan
-java -jar target/quarkus-app/quarkus-run.jar
-```
-
-or on windows
-
-```sh
-mvn clean package -Pinfinispan
-java -jar target\quarkus-app\quarkus-run.jar
-```
-
-##### Package and Run using Local Native Image
-Note that this requires GRAALVM_HOME to point to a valid GraalVM installation
-
-```sh
-mvn clean package -Pnative -Pinfinispan
-```
-
-To run the generated native executable, generated in `target/`, execute
-
-```sh
-./target/process-usertasks-timer-quarkus
 ```
 
 ### Submit a request to start new hiring

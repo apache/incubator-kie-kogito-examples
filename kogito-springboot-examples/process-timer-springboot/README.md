@@ -243,14 +243,9 @@ to match the location of the Kogito Job Service when starting it - see below.
 Second one is used by Kogito Job Service to callback when the timer expires and needs to be pointing to the service host and port
 
 ```sh
-java -Dquarkus.http.port=8085 -jar jobs-service-infinispan/target/jobs-service-infinispan-{version}-runner.jar
 ```
 
-* After Starting Infinispan you should see a similar Log as follows
-
-<p align="center"><img src="docs/images/infinispanRunning.png"></p>
-
-If you'd like to use PostgresSQL or MongoDB as persistence, start the PostgreSQL or MongoDB server, then start job service with following command
+If you'd like to use PostgresSQL or MongoDB as persistence, start the corresponding server, then start job service with one of the following commands.
 
 For PostgreSQL:
 ```sh
