@@ -13,7 +13,7 @@ Based on these two processes (defined using BPMN 2.0 format), the custom data ob
 ### Prerequisites
 
 You will need:
-  - Java 11+ installed
+  - Java 17+ installed
   - Environment variable JAVA_HOME set accordingly
   - Maven 3.9.11+ installed
 
@@ -27,7 +27,7 @@ mvn clean compile spring-boot:run
 
 ```
 mvn clean package
-java -jar target/jbpm-springboot-example.jar
+java -jar target/process-springboot-example.jar
 ```
 
 or on windows
@@ -36,22 +36,6 @@ or on windows
 mvn clean package
 java -jar target\jbpm-springboot-example.jar
 ```
-
-### Running with persistence enabled
-
-Kogito runtime supports multiple persistence types, including Infinispan.
-In order to use the Infinispan based persistence, you need to have a Infinispan server installed and available over the network.
-The default configuration, expects the server to be running on:
-```
-infinispan.remote.server-list=localhost:11222
-```
-If you need to change it, you can do so by updating the application.properties file located in src/main/resources.
-
-You can install Infinispan server by downloading version 12.x from the [official website](https://infinispan.org/download/).
-
-Once Infinispan is up and running you can build this project with `-Ppersistence` to enable additional processing during the build. Next you start it in exact same way as without persistence.
-
-This extra profile in maven configuration adds additional dependencies needed to work with Infinispan as persistent store.
 
 ### Running with events enabled
 

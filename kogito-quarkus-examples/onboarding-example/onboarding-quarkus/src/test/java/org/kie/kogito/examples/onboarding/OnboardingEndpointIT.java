@@ -31,10 +31,8 @@ import org.kie.kogito.examples.test.RecordedOutputWorkItemHandler;
 import org.kie.kogito.internal.process.workitem.KogitoWorkItem;
 import org.kie.kogito.internal.process.workitem.KogitoWorkItemHandler;
 import org.kie.kogito.process.ProcessConfig;
-import org.kie.kogito.testcontainers.quarkus.InfinispanQuarkusTestResource;
 
 import io.fabric8.kubernetes.client.server.mock.EnableKubernetesMockClient;
-import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
 
@@ -45,7 +43,6 @@ import static org.hamcrest.core.Is.is;
 
 @EnableKubernetesMockClient
 @QuarkusTest
-@QuarkusTestResource(value = InfinispanQuarkusTestResource.Conditional.class)
 public class OnboardingEndpointIT {
 
     @Inject

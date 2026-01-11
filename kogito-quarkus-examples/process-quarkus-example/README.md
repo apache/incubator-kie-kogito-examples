@@ -62,22 +62,6 @@ To run the generated native executable, generated in `target/`, execute
 
 Note: This does not yet work on Windows, GraalVM and Quarkus should be rolling out support for Windows soon.
 
-### Running with persistence enabled
-
-Kogito runtime supports multiple persistence types, including Infinispan.
-In order to use the Infinispan based persistence, you need to have a Infinispan server installed and available over the network.
-The default configuration, expects the server to be running on:
-```
-quarkus.infinispan-client.hosts=localhost:11222
-```
-If you need to change it, you can do so by updating the application.properties file located in src/main/resources.
-
-You can install Infinispan server by downloading version 12.x from the [official website](https://infinispan.org/download/).
-
-Once Infinispan is up and running you can build this project with `-Ppersistence` to enable additional processing during the build. Next you start it in exact same way as without persistence.
-
-This extra profile in maven configuration adds additional dependencies needed to work with Infinispan as persistent store.
-
 ### Running with events enabled
 
 Kogito supports cloud events using Kafka as message broker. So to be able to enable this you need to have

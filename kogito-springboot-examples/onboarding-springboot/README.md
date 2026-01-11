@@ -46,27 +46,6 @@ Please follow the instruction for each of the individual services. It is recomme
 mvn clean package spring-boot:run
 ```
 
-### Running with persistence enabled
-
-Kogito runtime supports multiple persistence types, including Infinispan. In order to use the Infinispan based
-persistence, you need to have a Infinispan server installed and available over the network. The default configuration,
-expects the server to be running on:
-
-```
-infinispan.remote.server-list=localhost:11222
-```
-
-If you need to change it, you can do so by updating the application.properties file located in src/main/resources.
-
-You can install Infinispan server by downloading version 12.x from
-the [official website](https://infinispan.org/download/).
-
-Once Inifispan is up and running you can build this project with `-Ppersistence` to enable additional processing during
-the build. Next you start it in exact same way as without persistence.
-
-This extra profile in maven configuration adds additional dependencies needed to work with infinispan as persistent
-store.
-
 ## Usage
 
 Once the services are up and running, you can use the following example to interact with the service.

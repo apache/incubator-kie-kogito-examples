@@ -16,19 +16,16 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.kie.kogito.examples;
+package org.kie.kogito.tests;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.kubernetes.fabric8.discovery.KubernetesCatalogWatchAutoConfiguration;
-import org.springframework.cloud.kubernetes.fabric8.discovery.KubernetesDiscoveryClientAutoConfiguration;
 
-@SpringBootApplication(scanBasePackages = { "org.kie.kogito.**" },
-        exclude = { KubernetesDiscoveryClientAutoConfiguration.class,
-                KubernetesCatalogWatchAutoConfiguration.class })
-public class KogitoOnboardingApplication {
+@SpringBootApplication(scanBasePackages = { "org.kie.kogito.**", "org.acme.travels.**" })
+public class KogitoApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(KogitoOnboardingApplication.class, args);
+        SpringApplication.run(KogitoApplication.class, args);
     }
+
 }

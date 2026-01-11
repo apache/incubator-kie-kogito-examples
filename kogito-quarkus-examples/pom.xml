@@ -74,7 +74,6 @@
         <module>process-decisions-rules-quarkus</module>
         <module>process-error-handling</module>
         <module>process-incubation-api-quarkus</module>
-        <module>process-infinispan-persistence-quarkus</module>
         <module>process-instance-migration-quarkus</module>
         <module>process-kafka-avro-multi-quarkus</module>
         <module>process-kafka-multi-quarkus</module>
@@ -142,7 +141,6 @@
         <module>pmml-event-driven-quarkus</module>
         <module>pmml-quarkus-example</module>
         <module>process-business-rules-quarkus</module>
-        <module>process-infinispan-persistence-quarkus</module>
         <module>process-instance-migration-quarkus</module>
         <module>process-kafka-persistence-quarkus</module>
         <module>process-kafka-quickstart-quarkus</module>

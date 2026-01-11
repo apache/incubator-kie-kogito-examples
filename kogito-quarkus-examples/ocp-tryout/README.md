@@ -99,7 +99,6 @@ if marked `-` then namespace defaults are applied
 |---|---|---|---|---|
 |**namespace default per deployment/statefulSet**|10m|64Mi|1|750Mi|
 |keycloak|-|-|-|-|
-|kogito-data-index-infinispan|-|-|-|500Mi|
 |kogito-jobs-service|-|-|-|500Mi|
 |kogito-travel-agency-travels-jvm|-|-|-|500Mi|
 |kogito-travel-agency-visas-jvm|-|-|-|500Mi|
