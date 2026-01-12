@@ -22,7 +22,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.kie.kogito.Model;
 import org.kie.kogito.process.Process;
-import org.kie.kogito.testcontainers.quarkus.InfinispanQuarkusTestResource;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 
 import io.quarkus.test.common.QuarkusTestResource;
@@ -40,7 +39,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.kie.kogito.test.utils.ProcessInstancesTestUtils.abort;
 
 @QuarkusTest
-@QuarkusTestResource(value = InfinispanQuarkusTestResource.Conditional.class)
 @QuarkusTestResource(value = KafkaQuarkusTestResource.Conditional.class)
 public class OrdersRestIT {
 

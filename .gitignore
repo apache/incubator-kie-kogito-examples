@@ -58,3 +58,4 @@ kogito-travel-agency/extended/scripts/persistence/
 /kogito-quarkus-examples/ocp-tryout/keycloak/kogito-realm.json
 
 **/docker-compose/.env
+.mvn/maven.config

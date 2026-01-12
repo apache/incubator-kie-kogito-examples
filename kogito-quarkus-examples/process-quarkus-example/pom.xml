@@ -123,23 +123,6 @@
   </build>
   <profiles>
     <profile>
-      <id>persistence</id>
-      <activation>
-        <property>
-          <name>persistence</name>
-        </property>
-      </activation>
-      <properties>
-        <enable.resource.infinispan>true</enable.resource.infinispan>
-      </properties>
-      <dependencies>
-        <dependency>
-          <groupId>org.kie</groupId>
-          <artifactId>kie-addons-quarkus-persistence-infinispan</artifactId>
-        </dependency>
-      </dependencies>
-    </profile>
-    <profile>
       <id>events</id>
       <activation>
         <property>
