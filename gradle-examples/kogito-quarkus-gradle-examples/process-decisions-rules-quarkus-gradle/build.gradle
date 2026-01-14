@@ -44,38 +44,15 @@ dependencies {
   implementation 'org.jbpm:jbpm-with-drools-quarkus'
   implementation 'org.kie.kogito:process-workitems'
   implementation 'org.kie.kogito:jbpm-flow'
+  implementation 'org.kie.kogito:jbpm-bpmn2'
   implementation 'org.drools:drools-quarkus-decisions'
   testImplementation("org.junit.jupiter:junit-jupiter:5.12.1")
   testImplementation 'io.quarkus:quarkus-junit5'
   testImplementation("io.rest-assured:rest-assured")
 }
 
-
-//generateModelConfig {
-//  jsonSchemaVersion = "DRAFT_2019_09"
-//}
-
-//tasks.named("quarkusDev") {
-//  dependsOn(tasks.named("compileSecondaryJava"))
-//}
-//
-//tasks.named("quarkusRun") {
-//  dependsOn(tasks.named("compileSecondaryJava"))
-//}
-
-//tasks.named("quarkusDependenciesBuild") {
-//  dependsOn(tasks.named("compileSecondaryJava"))
-//}
-//
-//tasks.named("jar") {
-//  dependsOn(tasks.named("compileSecondaryJava"))
-//  from(tasks.named("compileSecondaryJava").get())
-//}
-//
-//tasks.named("compileTestJava") {
-//  dependsOn(tasks.named("compileSecondaryJava"))
-//}
-
 test {
+  dependsOn 'cleanTest'
   useJUnitPlatform()
+  forkEvery 1
 }

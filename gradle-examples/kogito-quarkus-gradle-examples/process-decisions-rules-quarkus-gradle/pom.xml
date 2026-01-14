@@ -49,12 +49,12 @@
                 <executions>
                     <execution>
                         <id>gradle</id>
-                        <phase>test-compile</phase>
+                        <phase>test</phase>
                         <configuration>
                             <executable>${gradle.executable}</executable>
                             <arguments>
                                 <argument>clean</argument>
-                                <argument>test</argument>
+                                <argument>quarkusIntTest</argument>
                             </arguments>
                         </configuration>
                         <goals>
