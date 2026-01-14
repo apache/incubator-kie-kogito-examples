@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.kie.kogito.examples</groupId>
+        <artifactId>kogito-quarkus-gradle-examples</artifactId>
+        <version>999-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>process-decisions-rules-quarkus-gradle</artifactId>
+    <name>Kogito Example :: Process :: Decisions :: Rules :: Quarkus :: Gradle</name>
+    <description>Process with DRL, DMN and DRL integration - Quarkus - Gradle</description>
+
+    <properties>
+        <java.module.name>process.decisions.rules.quarkus.gradle</java.module.name>
+        <maven.compiler.release>17</maven.compiler.release>
+        <gradle.executable>${project.parent.parent.basedir}/gradlew</gradle.executable>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.kie.kogito</groupId>
+            <artifactId>kogito-gradle-plugin</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- exclude maven compilation -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>**/*.java</exclude>
+                    </excludes>
+                    <testExcludes>
+                        <exclude>**/*.java</exclude>
+                    </testExcludes>
+                </configuration>
+            </plugin>
+            <!-- execute Gradle command -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>gradle</id>
+                        <phase>test-compile</phase>
+                        <configuration>
+                            <executable>${gradle.executable}</executable>
+                            <arguments>
+                                <argument>clean</argument>
+                                <argument>test</argument>
+                            </arguments>
+                        </configuration>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>${project.basedir}/build</directory>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>WINDOWS</id>
+            <activation>
+                <os>
+                    <family>windows</family>
+                </os>
+            </activation>
+            <properties>
+                <gradle.executable>${project.parent.parent.basedir}/gradlew.bat</gradle.executable>
+            </properties>
+        </profile>
+    </profiles>
+</project>
