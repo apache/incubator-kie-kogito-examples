@@ -24,7 +24,7 @@ Kafka cluster installed and available over the network. Refer to [Kafka Apache s
 You will need:
   - Java 11+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.8.6+ installed
+  - Maven 3.9.11+ installed
   - Apache Kafka
 
 ### Compile and Run in Local Dev Mode

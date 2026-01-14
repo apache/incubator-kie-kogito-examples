@@ -31,7 +31,7 @@ An injectable KieRuntimeBuilder is generated, so you can create Drools v7 KieBas
 You will need:
   - Java 11+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.8.6+ installed
+  - Maven 3.9.11+ installed
 
 ### Compile and Run
 

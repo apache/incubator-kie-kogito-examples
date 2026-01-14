@@ -15,7 +15,7 @@ Listener injection is _optional_. If you don't need it, just ignore it.
 You will need:
   - Java 11+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.8.6+ installed
+  - Maven 3.9.11+ installed
 
 ### Compile and Run
 
