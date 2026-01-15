@@ -139,66 +139,35 @@ You will need:
 ### Compile and Run in Local Dev Mode
 
 ```sh
-../../gradlew clean bootRun
+../../gradlew clean quarkusDev
 ```
 
 or on windows
 
 ```sh
-..\..\gradlew.bat clean bootRun
+..\..\gradlew.bat clean quarkusDev
 ```
 
-### Package and Run in JVM mode
+!!!! TO BE FIXED
+**_### Package and Run in JVM mode
 ```sh
-../../gradlew clean bootJar
-java -jar build/libs/process-decisions-rules-springboot-gradle.jar
+../../gradlew clean jar
+java -jar target/process-decisions-springboot.jar
 ```
 
 or on windows
 
 ```sh
 ..\..\gradlew.bat clean jar
-java -jar build\libs\process-decisions-rules-springboot-gradle.ja
-```
-
-## HOT-RELOAD
-That module feature the "org.springframework.boot:spring-boot-devtools" plugin to enable hot reload on source change (additional dependency):
-
-```kts
-  developmentOnly 'org.springframework.boot:spring-boot-devtools'
-```
-
-To achieve that:
-1. in one terminal, issue the command that will listen for code change and, eventually, rebuilt the application on-demand
-```sh
-../../gradlew clean compileSecondaryJava --continuous --parallel
-```
-or on windows
-
-```sh
-..\..\gradlew.bat clean compileSecondaryJava --continuous --parallel
-```
-
-
-2. inside another terminal, issue the command that actually start the application
-```sh
-../../gradlew bootRun
-```
-
-or on windows
-
-```sh
-..\..\gradlew.bat bootRun
-```
-
-Whenever a source is modified, the code will be rebuilt and the application re-loaded with the modifications.
-
+java -jar target\process-decisions-springboot.jar
+```_**
+!!!! TO BE FIXED !!!!
 
 ## OpenAPI (Swagger) documentation
 
 [Specification at swagger.io](https://swagger.io/docs/specification/about/)
 
-You can take a look at the [OpenAPI definition](http://localhost:8080/v3/api-docs) - automatically generated and included in this service - to determine all available operations exposed by this service. For easy readability you can visualize the OpenAPI definition file using a UI tool like for example available [Swagger UI](https://editor.swagger.io).
+You can take a look at the [OpenAPI definition](http://localhost:8080/q/openapi) - automatically generated and included in this service - to determine all available operations exposed by this service. For easy readability you can visualize the OpenAPI definition file using a UI tool like for example available [Swagger UI](https://editor.swagger.io).
 
 In addition, various clients to interact with this service can be easily generated using this OpenAPI definition.
 
@@ -372,7 +341,3 @@ After the Curl command, you should see a similar console log
 }
 ```
 In this case the driver license is expired when the DRL is evaluated because the  DriverService generated an expired date for the driver's license thus DMN is not evaluated, so the `validLicense` is `false`, `suspended` and `fine` are `null`.
-
-
-
-

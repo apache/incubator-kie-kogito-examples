@@ -33,7 +33,7 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 
 @QuarkusTest
-public class TrafficProcessIT {
+public class TrafficProcessTest {
 
     public static final BigDecimal SPEED_LIMIT = new BigDecimal(100);
 

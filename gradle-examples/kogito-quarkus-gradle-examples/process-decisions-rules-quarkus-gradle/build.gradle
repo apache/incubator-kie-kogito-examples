@@ -20,11 +20,10 @@
 
 plugins {
   id 'java'
-//  id("org.kie.kogito.gradle") version "999-SNAPSHOT"
   id 'io.quarkus'
 
-  // TO BE REMOVED
-  id "com.dorongold.task-tree" version "4.0.1"
+  // Inspection purpose
+  id "com.dorongold.task-tree" version "${taskTreeVersion}"
 }
 
 repositories {
@@ -39,20 +38,20 @@ dependencies {
   implementation 'io.quarkus:quarkus-resteasy-jackson'
   implementation 'io.quarkus:quarkus-smallrye-openapi'
 
-  implementation platform("org.kie.kogito:kogito-bom:999-SNAPSHOT")
+  implementation platform("org.kie.kogito:kogito-bom:${kogitoVersion}")
 
   implementation 'org.jbpm:jbpm-with-drools-quarkus'
   implementation 'org.kie.kogito:process-workitems'
   implementation 'org.kie.kogito:jbpm-flow'
   implementation 'org.kie.kogito:jbpm-bpmn2'
   implementation 'org.drools:drools-quarkus-decisions'
-  testImplementation("org.junit.jupiter:junit-jupiter:5.12.1")
+  testImplementation("org.junit.jupiter:junit-jupiter:${junitVersion}")
   testImplementation 'io.quarkus:quarkus-junit5'
   testImplementation("io.rest-assured:rest-assured")
 }
 
 test {
-  dependsOn 'cleanTest'
   useJUnitPlatform()
+  include("**/*Test*")
   forkEvery 1
 }

@@ -37,4 +37,4 @@ pluginManagement {
     }
   }
 }
-rootProject.name = "kogito-gradle-plugin-test"
+rootProject.name = "process-decisions-rules-springboot-gradle"

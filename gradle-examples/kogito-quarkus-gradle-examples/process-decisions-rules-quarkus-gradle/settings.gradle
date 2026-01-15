@@ -21,4 +21,4 @@ pluginManagement {
     id "${quarkusPluginId}" version "${quarkusPluginVersion}"
   }
 }
-rootProject.name = "kogito-gradle-plugin-test"
+rootProject.name = "process-decisions-rules-quarkus-gradle"
