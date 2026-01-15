@@ -20,8 +20,12 @@
 
 plugins {
   id 'java'
-  id("org.kie.kogito.gradle") version "999-SNAPSHOT"
-  id 'org.springframework.boot' version '3.4.11'
+  id("org.kie.kogito.gradle") version "${kogitoVersion}"
+  id "org.springframework.boot" version "${springBootVersion}"
+  id("io.spring.dependency-management") version "${springBootDependencyManagementVersion}"
+
+  // Inspection purpose
+  id "com.dorongold.task-tree" version "${taskTreeVersion}"
 }
 
 repositories {
@@ -30,11 +34,11 @@ repositories {
 }
 
 dependencies {
-  implementation platform("org.kie.kogito:kogito-spring-boot-bom:999-SNAPSHOT")
+  implementation platform("org.kie.kogito:kogito-spring-boot-bom:${kogitoVersion}")
   implementation("org.springframework.boot:spring-boot-starter-web")
   implementation("org.jbpm:jbpm-spring-boot-starter")
   implementation("org.drools:drools-decisions-spring-boot-starter")
-  testImplementation("org.junit.jupiter:junit-jupiter:5.12.1")
+  testImplementation("org.junit.jupiter:junit-jupiter:${junitVersion}")
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testImplementation("io.rest-assured:rest-assured")
   developmentOnly 'org.springframework.boot:spring-boot-devtools'
@@ -50,8 +54,20 @@ tasks.withType(JavaCompile).configureEach() {
 
 }
 
-tasks.named("bootRun") {
+springBoot {
   mainClass = 'org.kie.kogito.traffic.KogitoApplication'
+}
+
+
+tasks.named("resolveMainClassName") {
+  dependsOn(tasks.named("compileSecondaryJava"))
+}
+
+tasks.named("bootRun") {
+  dependsOn(tasks.named("compileSecondaryJava"))
+}
+
+tasks.named("bootJar") {
   dependsOn(tasks.named("compileSecondaryJava"))
 }
 
@@ -65,6 +81,6 @@ tasks.named("compileTestJava") {
 }
 
 test {
-  dependsOn(tasks.named("jar"))
+  dependsOn(tasks.named("compileSecondaryJava"))
   useJUnitPlatform()
 }

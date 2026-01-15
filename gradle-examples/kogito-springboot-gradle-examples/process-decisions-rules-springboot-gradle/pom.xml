@@ -49,7 +49,7 @@
         <executions>
           <execution>
             <id>gradle</id>
-            <phase>test-compile</phase>
+            <phase>test</phase>
             <configuration>
               <executable>${gradle.executable}</executable>
               <arguments>
@@ -63,6 +63,7 @@
           </execution>
         </executions>
       </plugin>
+      <!-- Include Gradle build directory in the clean-up -->
       <plugin>
         <artifactId>maven-clean-plugin</artifactId>
         <configuration>
