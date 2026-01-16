@@ -31,6 +31,9 @@ repositories {
   mavenLocal()
 }
 
+group 'org.kie.kogito.examples'
+version '999-SNAPSHOT'
+
 dependencies {
   implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
   implementation 'io.quarkus:quarkus-arc'
@@ -51,7 +54,14 @@ dependencies {
 }
 
 test {
-  useJUnitPlatform()
-  include("**/*Test*")
-  forkEvery 1
+  systemProperty "java.util.logging.manager", "org.jboss.logmanager.LogManager"
+}
+
+compileJava {
+  options.encoding = 'UTF-8'
+  options.compilerArgs << '-parameters'
+}
+
+compileTestJava {
+  options.encoding = 'UTF-8'
 }

@@ -158,7 +158,7 @@ or on windows
 
 ```sh
 ..\..\gradlew.bat clean jar
-java -jar build\libs\process-decisions-rules-springboot-gradle.ja
+java -jar build\libs\process-decisions-rules-springboot-gradle.jar
 ```
 
 ## HOT-RELOAD

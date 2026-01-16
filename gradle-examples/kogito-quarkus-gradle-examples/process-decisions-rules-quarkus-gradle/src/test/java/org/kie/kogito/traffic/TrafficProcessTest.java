@@ -38,6 +38,12 @@ public class TrafficProcessTest {
     public static final BigDecimal SPEED_LIMIT = new BigDecimal(100);
 
     @Test
+    public void getOpenAPI() {
+        ValidatableResponse body = given().when().get("/q/openapi").then().statusCode(200);
+        System.out.println(body.extract().asString());
+    }
+
+    @Test
     public void testTrafficViolationEmbeddedDecisionOnQuarkus() {
         testTrafficProcess("traffic", "12-345", 120d, "no", true, true);
         testTrafficProcess("traffic", "12-15", 140d, "yes", true, false);

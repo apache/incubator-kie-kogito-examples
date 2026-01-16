@@ -44,14 +44,20 @@ dependencies {
   developmentOnly 'org.springframework.boot:spring-boot-devtools'
 }
 
+group 'org.kie.kogito.examples'
+version '999-SNAPSHOT'
 
 generateModelConfig {
   jsonSchemaVersion = "DRAFT_2019_09"
 }
 
-tasks.withType(JavaCompile).configureEach() {
-  options.encoding = "UTF-8"
+compileJava {
+  options.encoding = 'UTF-8'
+  options.compilerArgs << '-parameters'
+}
 
+compileTestJava {
+  options.encoding = 'UTF-8'
 }
 
 springBoot {
