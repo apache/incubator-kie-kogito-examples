@@ -139,26 +139,26 @@ You will need:
 ### Compile and Run in Local Dev Mode
 
 ```sh
-../../gradlew clean quarkusDev
+../../../gradlew clean quarkusDev
 ```
 
 or on windows
 
 ```sh
-..\..\gradlew.bat clean quarkusDev
+..\..\..\gradlew.bat clean quarkusDev
 ```
 
 !!!! TO BE FIXED
 **_### Package and Run in JVM mode
 ```sh
-../../gradlew clean jar
+../../../gradlew clean jar
 java -jar target/process-decisions-springboot.jar
 ```
 
 or on windows
 
 ```sh
-..\..\gradlew.bat clean jar
+..\..\..\gradlew.bat clean jar
 java -jar target\process-decisions-springboot.jar
 ```_**
 !!!! TO BE FIXED !!!!
