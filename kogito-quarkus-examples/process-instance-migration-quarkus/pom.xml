@@ -31,10 +31,10 @@
   <name>Kogito Example :: Process Instance Migration Quarkus</name>
   <description>Process Instance Migration example - Quarkus</description>
   <properties>
-    <quarkus-plugin.version>3.20.3</quarkus-plugin.version>
+    <quarkus-plugin.version>3.27.2</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-    <quarkus.platform.version>3.20.3</quarkus.platform.version>
+    <quarkus.platform.version>3.27.2</quarkus.platform.version>
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
     <kogito-apps.bom.artifact-id>kogito-apps-bom</kogito-apps.bom.artifact-id>
@@ -111,6 +111,14 @@
     </dependency>
 
     <!-- Persistence -->
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-hibernate-orm-panache</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.persistence</groupId>
+      <artifactId>jakarta.persistence-api</artifactId>
+    </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-jdbc-postgresql</artifactId>
