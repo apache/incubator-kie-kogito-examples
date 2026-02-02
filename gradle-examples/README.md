@@ -104,7 +104,19 @@ The executed gradle script (`gradlew` vs `gradlew.bat`) is selected at execution
 
 
 
+## GRADLE Profiles
+GRADLE does not offer the concept of profile out of the box, as MAVEN.
+TO achieve that, the steps to follow are described [here](https://docs.gradle.org/current/userguide/migrating_from_maven.html#migmvn:profiles_and_properties)
 
+1. inside GRADLE, we'll call them `buildProfile`
+2. create a `build.gradle` file with all common settings
+3. for each `buildProfile`, create a `profile-${buildProfile}.gradle` file, containing only the profile-specific settings
+4. add the following snippet in the `build.gradle`, to load the `buildProfile` specific building script
+```groovy
+if (!hasProperty('buildProfile')) ext.buildProfile = 'prod'
+apply from: "profile-${buildProfile}.gradle"
+```
+(here, we are assuming that, by default, the buildProfile will be `prod`)
 
 
 

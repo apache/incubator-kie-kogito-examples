@@ -53,6 +53,10 @@ dependencies {
   testImplementation("io.rest-assured:rest-assured")
 }
 
+if (!hasProperty('buildProfile')) ext.buildProfile = 'prod'
+
+apply from: "profile-${buildProfile}.gradle"
+
 test {
   systemProperty "java.util.logging.manager", "org.jboss.logmanager.LogManager"
 }
