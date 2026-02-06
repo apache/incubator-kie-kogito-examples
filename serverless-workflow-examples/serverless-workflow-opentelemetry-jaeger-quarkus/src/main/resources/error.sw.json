@@ -1,0 +1,34 @@
+{
+  "id": "error",
+  "version": "1.0",
+  "specVersion": "0.8",
+  "name": "Error workflow",
+  "description": "Deterministic failure to validate error traces in Jaeger.",
+  "start": "FailNow",
+  "states": [
+    {
+      "name": "FailNow",
+      "type": "operation",
+      "actions": [
+        {
+          "name": "fail",
+          "functionRef": {
+            "refName": "failFn",
+            "arguments": {
+              "message": "Intentional failure for opentelemetry tests"
+            }
+          }
+        }
+      ],
+      "end": true
+    }
+  ],
+  "functions": [
+    {
+      "name": "failFn",
+      "type": "custom",
+      "operation": "service:org.kie.kogito.examples.sw.opentelemetry.jaeger.ErrorFunctions::fail"
+    }
+  ]
+}
+

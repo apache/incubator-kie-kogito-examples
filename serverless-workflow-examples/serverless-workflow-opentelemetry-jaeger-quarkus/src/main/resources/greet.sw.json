@@ -1,0 +1,71 @@
+{
+  "id": "greet",
+  "version": "1.0",
+  "specVersion": "0.8",
+  "name": "Greet parent workflow",
+  "description": "Parent workflow that logs, calls a subflow, then returns a static response.",
+  "start": "Init",
+  "states": [
+    {
+      "name": "Init",
+      "type": "operation",
+      "actions": [
+        {
+          "name": "log-start",
+          "functionRef": {
+            "refName": "logInfo",
+            "arguments": {
+              "message": "Parent workflow started"
+            }
+          }
+        }
+      ],
+      "transition": "CallSubflow"
+    },
+    {
+       "name": "CallSubflow",
+       "type": "operation",
+       "actions": [
+       {
+         "name": "invoke-subflow",
+         "subFlowRef": {
+            "workflowId": "greetSubflow"
+         }
+       }
+       ],
+       "transition": "Finish"
+    },
+    {
+      "name": "Finish",
+      "type": "operation",
+      "actions": [
+        {
+          "name": "log-end",
+          "functionRef": {
+            "refName": "logInfo",
+            "arguments": {
+              "message": "Parent workflow completed"
+            }
+          }
+        }
+      ],
+      "transition": "Done"
+    },
+    {
+      "name": "Done",
+      "type": "inject",
+      "data": {
+        "message": "Hello from parent workflow"
+      },
+      "end": true
+    }
+  ],
+  "functions": [
+    {
+      "name": "logInfo",
+      "type": "custom",
+      "operation": "sysout:INFO"
+    }
+  ]
+}
+

@@ -1,0 +1,21 @@
+openapi: 3.0.3
+info:
+  title: Persist Callback
+  version: "1.0"
+paths:
+  /register:
+    post:
+      operationId: callBack
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                processInstanceId:
+                  type: string
+      responses:
+        "202":
+          description: Accepted
+

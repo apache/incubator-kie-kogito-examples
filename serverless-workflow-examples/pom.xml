@@ -81,7 +81,8 @@
         <module>serverless-workflow-timeouts-showcase-operator-devprofile</module>
         <module>serverless-workflow-python-quarkus</module>
         <module>sonataflow-fluent</module>
-        <module>serverless-workflow-fault-tolerance</module>
+	<module>serverless-workflow-fault-tolerance</module>
+	<module>serverless-workflow-opentelemetry-jaeger-quarkus</module>
       </modules>
     </profile>
 

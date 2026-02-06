@@ -1,0 +1,75 @@
+{
+  "id": "persistWait",
+  "version": "1.0",
+  "name": "Persistence + Callback resume example",
+  "description": "Waits for an HTTP callback event and resumes after restart",
+  "start": "printWaitMessage",
+  "events": [
+    {
+      "name": "resumeEvent",
+      "source": "",
+      "type": "resume"
+    }
+  ],
+  "functions": [
+    {
+      "name": "callBack",
+      "type": "rest",
+      "operation": "specs/persist-callback.yaml#callBack"
+    },
+    {
+      "name": "printMessage",
+      "type": "custom",
+      "operation": "sysout:INFO"
+    }
+  ],
+  "states": [
+    {
+      "name": "printWaitMessage",
+      "type": "operation",
+      "actions": [
+        {
+          "name": "printBeforeEvent",
+          "functionRef": {
+            "refName": "printMessage",
+            "arguments": {
+              "message": "Init - waiting for resume event"
+            }
+          }
+        }
+      ],
+      "transition": "waitForEvent"
+    },
+    {
+      "name": "waitForEvent",
+      "type": "callback",
+      "action": {
+        "functionRef": {
+          "refName": "callBack",
+          "arguments": {
+            "processInstanceId": "$WORKFLOW.instanceId"
+          }
+        }
+      },
+      "eventRef": "resumeEvent",
+      "transition": "finish"
+    },
+    {
+      "name": "finish",
+      "type": "operation",
+      "actions": [
+        {
+          "name": "printAfterEvent",
+          "functionRef": {
+            "refName": "printMessage",
+            "arguments": {
+              "message": "After resume - context should be restored"
+            }
+          }
+        }
+      ],
+      "end": true
+    }
+  ]
+}
+
