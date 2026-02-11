@@ -21,7 +21,11 @@ package org.kie.kogito.dmn.consumer.example;
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 
 @QuarkusIntegrationTest
-public class NativeTrafficViolationIT extends TrafficViolationTest {
+public class NativeTrafficViolationIT extends TrafficViolationTestBase {
 
     // Execute the same tests but in native mode.
+    // Extends TrafficViolationTestBase (not TrafficViolationTest) because
+    // @QuarkusIntegrationTest does not support @Inject fields.
+    // See https://github.com/quarkusio/quarkus/discussions/24775
+    // See https://quarkus.io/guides/getting-started-testing
 }
