@@ -1,0 +1,42 @@
+{
+  "id": "greetSubflow",
+  "version": "1.0",
+  "specVersion": "0.8",
+  "name": "Greet subflow",
+  "description": "Subflow that logs and returns a static response.",
+  "start": "SubflowLog",
+  "states": [
+    {
+      "name": "SubflowLog",
+      "type": "operation",
+      "actions": [
+        {
+          "name": "log-subflow",
+          "functionRef": {
+            "refName": "logInfo",
+            "arguments": {
+              "message": "Subflow executed"
+            }
+          }
+        }
+      ],
+      "transition": "SubflowDone"
+    },
+    {
+      "name": "SubflowDone",
+      "type": "inject",
+      "data": {
+        "message": "Hello from subflow"
+      },
+      "end": true
+    }
+  ],
+  "functions": [
+    {
+      "name": "logInfo",
+      "type": "custom",
+      "operation": "sysout:INFO"
+    }
+  ]
+}
+
