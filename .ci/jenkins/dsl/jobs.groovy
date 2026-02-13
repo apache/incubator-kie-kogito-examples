@@ -77,6 +77,13 @@ Map getMultijobPRConfig(JenkinsFolder jobFolder) {
                 env : [
                     KOGITO_EXAMPLES_SUBFOLDER_POM: 'serverless-workflow-examples/',
                 ]
+            ],
+            [
+                    id: 'kogito-gradle-examples',
+                    primary: true,
+                    env : [
+                            KOGITO_EXAMPLES_SUBFOLDER_POM: 'gradle-examples/',
+                    ]
             ]
         ]
     ]
