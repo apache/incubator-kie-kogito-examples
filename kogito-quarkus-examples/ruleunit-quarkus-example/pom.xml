@@ -29,6 +29,7 @@
   </parent>
   <artifactId>ruleunit-quarkus-example</artifactId>
   <name>Kogito Example :: RuleUnit - Quarkus</name>
+  
   <properties>
     <quarkus-plugin.version>3.27.2</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
