@@ -38,26 +38,6 @@ Please note the additional parameter to specify you are running the service loca
 kubernetes, it would take advantage of the service lookup feature to find other required service using labels (which
 isn't available when running locally).
 
-### Running with persistence enabled
-
-Kogito runtime supports multiple persistence types, including Infinispan. In order to use the Infinispan based
-persistence, you need to have an Infinispan server installed and available over the network. The default configuration,
-expects the server to be running on:
-
-```
-quarkus.infinispan-client.hosts=localhost:11222
-```
-
-If you need to change it, you can do so by updating the `application.properties` file located in `src/main/resources`.
-
-You can install Infinispan server by downloading version 12.x from
-the [official website](https://infinispan.org/download/).
-
-Once Inifispan is up and running you can build this project with `-Ppersistence` to enable additional processing during
-the build. Next you start it in exact same way as without persistence.
-
-This extra profile in maven configuration adds additional dependencies needed to work with Infinispan as persistent
-store.
 
 ## OpenAPI (Swagger) documentation
 
@@ -110,15 +90,12 @@ $ mvn clean install -Pminikube
 # For Kubernetes or Knative just change the given profile to the respective platform (lower case).
 ```
 
-> NOTE: If you're targeting a Kubernetes or OpenShift cluster, consider the resources created on `target/kubernetes` directory.
-
 Please see the official [Quarkus Guide](https://quarkus.io/guides/deploying-to-kubernetes) for more information.
 
 ## Deploying to Knative
 
 To be able to deploy to Knative you can follow
-the [same guide mentioned above](https://quarkus.io/guides/deploying-to-kubernetes#knative). The needed information is
-already added to the `application.properties` file.
+the [same guide mentioned above](https://quarkus.io/guides/deploying-to-kubernetes#knative).
 
 In addition, following permissions should be added to the default service account so the service discovery can properly
 happen
