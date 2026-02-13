@@ -41,7 +41,7 @@ jobs:
         uses: apache/incubator-kie-kogito-pipelines/.ci/actions/build-chain@main
         env:
           KOGITO_EXAMPLES_SUBFOLDER_POM: kogito-quarkus-examples/
-          BUILD_MVN_OPTS_CURRENT: '-Pnative'
+          BUILD_MVN_OPTS_CURRENT: '-Dnative -Dquarkus.native.container-build=true'
         with:
           annotations-prefix: ${{ runner.os }}-${{ matrix.java-version }}/${{ matrix.maven-version }}
           github-token: "${{ secrets.GITHUB_TOKEN }}"
