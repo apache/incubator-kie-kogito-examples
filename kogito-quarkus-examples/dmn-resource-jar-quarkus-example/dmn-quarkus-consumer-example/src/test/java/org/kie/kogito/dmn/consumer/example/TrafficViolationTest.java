@@ -25,38 +25,14 @@ import org.kie.kogito.dmn.DmnDecisionModel;
 import org.kie.kogito.dmn.consumer.example.customprofiles.CustomDMNProfile;
 
 import io.quarkus.test.junit.QuarkusTest;
-import io.restassured.http.ContentType;
 
-import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.is;
 
 @QuarkusTest
-public class TrafficViolationTest {
+public class TrafficViolationTest extends TrafficViolationTestBase {
 
     @jakarta.inject.Inject
     DecisionModels decisionModels;
-
-    @Test
-    public void testEvaluateTrafficViolation() {
-        given()
-                .body("{\n" +
-                        "    \"Driver\": {\n" +
-                        "        \"Points\": 2\n" +
-                        "    },\n" +
-                        "    \"Violation\": {\n" +
-                        "        \"Type\": \"speed\",\n" +
-                        "        \"Actual Speed\": 120,\n" +
-                        "        \"Speed Limit\": 100\n" +
-                        "    }\n" +
-                        "}")
-                .contentType(ContentType.JSON)
-                .when()
-                .post("/Traffic Violation")
-                .then()
-                .statusCode(200)
-                .body("'Should the driver be suspended?'", is("No"));
-    }
 
     @Test
     void testCustomDMNProfile() {
