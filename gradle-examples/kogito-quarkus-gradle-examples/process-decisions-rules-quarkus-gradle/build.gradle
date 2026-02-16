@@ -29,6 +29,12 @@ plugins {
 repositories {
   mavenCentral()
   mavenLocal()
+  maven {
+    url = uri("https://repo.maven.apache.org/maven2/")
+  }
+  maven {
+    url = uri("https://repository.apache.org/snapshots/")
+  }
 }
 
 group 'org.kie.kogito.examples'
