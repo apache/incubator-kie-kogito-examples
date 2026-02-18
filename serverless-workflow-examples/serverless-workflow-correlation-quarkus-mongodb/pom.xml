@@ -47,6 +47,7 @@
     <version.compiler.plugin>3.13.0</version.compiler.plugin>
     <maven.compiler.release>17</maven.compiler.release>
     <version.failsafe.plugin>3.3.1</version.failsafe.plugin>
+    <version.org.testcontainers>2.0.3</version.org.testcontainers>
   </properties>
 
   <dependencyManagement>
@@ -64,6 +65,11 @@
         <version>${kogito.bom.version}</version>
         <type>pom</type>
         <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.testcontainers</groupId>
+        <artifactId>testcontainers</artifactId>
+        <version>${version.org.testcontainers}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
