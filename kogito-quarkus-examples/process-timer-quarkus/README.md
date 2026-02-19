@@ -109,24 +109,7 @@ java -Dquarkus.http.port=8085 -jar jobs-service-common/target/jobs-service-commo
 
 <p align="center"><img src="docs/images/kogitoWebServiceLog.png"></p>
 
-In case you'd like to run the job service with enabled persistence then start
-Infinispan server before and then run the job service with following command
-
-Download Infinispan Server from
-https://infinispan.org/download/
-
-Start Infinispan Server
-[Infinispan Directory]/bin/sh server.sh
-
-```sh
-java -Dquarkus.http.port=8085 -jar jobs-service-infinispan/target/jobs-service-infinispan-{version}-runner.jar
-```
-
-* After Starting Infinispan you should see a similar Log as follows
-
-<p align="center"><img src="docs/images/infinispanRunning.png"></p>
-
-If you'd like to use PostgresSQL or MongoDB as persistence, start the PostgreSQL or MongoDB server, then start job service with following command
+If you'd like to run the job service with enabled persistence (PostgresSQL or MongoDB), start the PostgreSQL or MongoDB server, then start job service with following command
 
 For PostgreSQL:
 ```sh

@@ -25,10 +25,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication(scanBasePackages = { "org.kie.kogito.**", "org.acme.travels.**" })
-public class KogitoInfinispanSpringbootApplication {
+public class KogitoApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(KogitoInfinispanSpringbootApplication.class, args);
+        SpringApplication.run(KogitoApplication.class, args);
     }
 
     @Bean

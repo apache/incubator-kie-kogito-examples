@@ -34,11 +34,9 @@ import org.kie.kogito.examples.test.RecordedOutputWorkItemHandler;
 import org.kie.kogito.internal.process.workitem.KogitoWorkItem;
 import org.kie.kogito.internal.process.workitem.KogitoWorkItemHandler;
 import org.kie.kogito.process.ProcessConfig;
-import org.kie.kogito.testcontainers.springboot.InfinispanSpringBootTestResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import io.restassured.RestAssured;
@@ -49,7 +47,6 @@ import static org.hamcrest.core.Is.is;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoOnboardingApplication.class)
-@ContextConfiguration(initializers = InfinispanSpringBootTestResource.Conditional.class)
 public class OnboardingEndpointIT {
 
     @Autowired

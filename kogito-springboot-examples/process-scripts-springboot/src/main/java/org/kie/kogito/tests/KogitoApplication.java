@@ -16,11 +16,16 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.acme.deals;
+package org.kie.kogito.tests;
 
-import io.quarkus.test.junit.QuarkusIntegrationTest;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@QuarkusIntegrationTest
-public class NativeDealsRestIT extends DealsRestIT {
+@SpringBootApplication(scanBasePackages = { "org.kie.kogito.**", "org.acme.travels.**" })
+public class KogitoApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(KogitoApplication.class, args);
+    }
 
 }

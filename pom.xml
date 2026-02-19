@@ -208,12 +208,10 @@
             </excludes>
             <systemPropertyVariables>
               <tests.category>${tests.category}</tests.category>
-              <enable.resource.infinispan>${enable.resource.infinispan}</enable.resource.infinispan>
               <enable.resource.kafka>${enable.resource.kafka}</enable.resource.kafka>
               <enable.resource.postgresql>${enable.resource.postgresql}</enable.resource.postgresql>
               <enable.resource.mongodb>${enable.resource.mongodb}</enable.resource.mongodb>
               <container.image.keycloak>${container.image.keycloak}</container.image.keycloak>
-              <container.image.infinispan>${container.image.infinispan}</container.image.infinispan>
               <container.image.kafka>${container.image.kafka}</container.image.kafka>
               <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
             </systemPropertyVariables>

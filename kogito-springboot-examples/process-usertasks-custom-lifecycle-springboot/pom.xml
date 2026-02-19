@@ -40,17 +40,10 @@
 
   <dependencyManagement>
     <dependencies>
-    <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-spring-boot-bom</artifactId>
-      <version>${kogito.bom.version}</version>
-      <type>pom</type>
-      <scope>import</scope>
-    </dependency>
       <dependency>
-        <groupId>org.infinispan</groupId>
-        <artifactId>infinispan-bom</artifactId>
-        <version>${version.org.infinispan}</version>
+        <groupId>org.kie.kogito</groupId>
+        <artifactId>kogito-spring-boot-bom</artifactId>
+        <version>${kogito.bom.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -101,27 +94,6 @@
           <groupId>org.springframework.kafka</groupId>
           <artifactId>spring-kafka</artifactId>
         </dependency>
-      </dependencies>
-    </profile>
-    <profile>
-      <id>persistence</id>
-      <dependencies>
-        <dependency>
-          <groupId>org.kie</groupId>
-          <artifactId>kie-addons-springboot-persistence-infinispan</artifactId>
-        </dependency>
-        <dependency>
-          <groupId>org.infinispan</groupId>
-          <artifactId>infinispan-spring-boot3-starter-remote</artifactId>
-        </dependency>
-		<dependency>
-			<groupId>org.kie</groupId>
-			<artifactId>kogito-addons-springboot-embedded-jobs</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kie</groupId>
-			<artifactId>kogito-addons-springboot-embedded-jobs-jpa</artifactId>
-		</dependency>
       </dependencies>
     </profile>
   </profiles>

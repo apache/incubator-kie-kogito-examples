@@ -39,19 +39,12 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>org.infinispan</groupId>
-        <artifactId>infinispan-bom</artifactId>
-        <version>${version.org.infinispan}</version>
+        <groupId>org.kie.kogito</groupId>
+        <artifactId>kogito-spring-boot-bom</artifactId>
+        <version>${kogito.bom.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
-    <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-spring-boot-bom</artifactId>
-      <version>${kogito.bom.version}</version>
-      <type>pom</type>
-      <scope>import</scope>
-    </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -89,16 +82,6 @@
       <groupId>org.kie</groupId>
       <artifactId>kie-addons-springboot-process-management</artifactId>
     </dependency>
-
-    <!-- uncomment these two to enable persistence for Kogito -->
-    <!--     <dependency>
-      <groupId>org.infinispan</groupId>
-      <artifactId>infinispan-spring-boot3-starter-remote</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.kie</groupId>
-      <artifactId>kie-addons-springboot-persistence-infinispan</artifactId>
-    </dependency> -->
 
   </dependencies>
 

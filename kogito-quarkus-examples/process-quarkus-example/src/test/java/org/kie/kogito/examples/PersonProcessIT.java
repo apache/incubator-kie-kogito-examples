@@ -31,7 +31,6 @@ import org.kie.kogito.examples.demo.Person;
 import org.kie.kogito.process.Process;
 import org.kie.kogito.process.ProcessInstance;
 import org.kie.kogito.process.WorkItem;
-import org.kie.kogito.testcontainers.quarkus.InfinispanQuarkusTestResource;
 import org.kie.kogito.testcontainers.quarkus.KafkaQuarkusTestResource;
 
 import io.quarkus.test.common.QuarkusTestResource;
@@ -45,7 +44,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @QuarkusTest
-@QuarkusTestResource(value = InfinispanQuarkusTestResource.Conditional.class)
 @QuarkusTestResource(value = KafkaQuarkusTestResource.Conditional.class)
 public class PersonProcessIT {
 

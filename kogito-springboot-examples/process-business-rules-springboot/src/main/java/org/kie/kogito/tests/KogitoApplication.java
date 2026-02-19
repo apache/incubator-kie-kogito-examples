@@ -22,10 +22,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication(scanBasePackages = { "org.kie.kogito.**", "org.acme.travels.**", "org.drools.project.model.**" })
-public class KogitoInfinispanSpringbootApplication {
+public class KogitoApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(KogitoInfinispanSpringbootApplication.class, args);
+        SpringApplication.run(KogitoApplication.class, args);
     }
 
 }
