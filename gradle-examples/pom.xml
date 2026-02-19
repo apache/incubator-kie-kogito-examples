@@ -15,7 +15,6 @@
   <description>Kogito Examples built with Gradle</description>
   <modules>
     <module>kogito-springboot-gradle-examples</module>
-    <module>kogito-quarkus-gradle-examples</module>
   </modules>
 
 </project>

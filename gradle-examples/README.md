@@ -19,7 +19,7 @@
 
 # Kogito Gradle Plugin Examples
 
-This modules contains quarkus and springboot kogito examples built with gradle.
+This modules contains springboot kogito examples built with gradle.
 This module, and its children, also contains pom.xml files so that they can be built and tested inside maven-based CI.
 
 To avoid duplication of the same folder, all the concrete examples uses the same gradle executables [gradlew](./gradlew) or [gradlew.bat](./gradlew.bat) and relates to the same  [gradle-wrapper](./gradle) directory.
