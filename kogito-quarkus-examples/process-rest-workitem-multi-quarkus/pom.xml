@@ -31,10 +31,10 @@
   <name>Kogito Example :: Process Rest :: Quarkus</name>
   <description>Invoking multiple Rest WS using RestWorkItemHandler</description>
   <properties>
-    <quarkus-plugin.version>3.20.3</quarkus-plugin.version>
+    <quarkus-plugin.version>3.27.2</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-    <quarkus.platform.version>3.20.3</quarkus.platform.version>
+    <quarkus.platform.version>3.27.2</quarkus.platform.version>
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
