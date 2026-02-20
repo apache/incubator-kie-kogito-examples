@@ -5,17 +5,18 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
-    <artifactId>kogito-examples</artifactId>
+    <artifactId>gradle-examples</artifactId>
     <version>999-SNAPSHOT</version>
   </parent>
-  <artifactId>gradle-examples</artifactId>
   <packaging>pom</packaging>
 
-  <name>Gradle Examples</name>
-  <description>Kogito Examples built with Gradle</description>
+
+  <artifactId>kogito-quarkus-gradle-examples</artifactId>
+
+  <name>Quarkus Gradle Examples</name>
+  <description>Kogito Quarkus Examples built with Gradle</description>
   <modules>
-    <module>kogito-springboot-gradle-examples</module>
-    <module>kogito-quarkus-gradle-examples</module>
+    <module>process-decisions-rules-quarkus-gradle</module>
   </modules>
 
 </project>
