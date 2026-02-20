@@ -31,10 +31,10 @@
   <artifactId>query-answer-service</artifactId>
   <name>Kogito Example :: Serverless Workflow Query and Answer :: Workflow Service</name>
   <properties>
-    <quarkus-plugin.version>3.20.3</quarkus-plugin.version>
+    <quarkus-plugin.version>3.27.2</quarkus-plugin.version>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
-    <quarkus.platform.version>3.20.3</quarkus.platform.version>
+    <quarkus.platform.version>3.27.2</quarkus.platform.version>
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
@@ -55,6 +55,11 @@
         <version>${kogito.bom.version}</version>
         <type>pom</type>
         <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.testcontainers</groupId>
+        <artifactId>testcontainers</artifactId>
+        <version>${version.org.testcontainers}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

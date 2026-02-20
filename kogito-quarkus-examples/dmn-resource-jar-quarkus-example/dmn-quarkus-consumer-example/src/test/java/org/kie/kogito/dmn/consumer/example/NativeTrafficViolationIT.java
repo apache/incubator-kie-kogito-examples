@@ -21,7 +21,7 @@ package org.kie.kogito.dmn.consumer.example;
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 
 @QuarkusIntegrationTest
-public class NativeTrafficViolationIT extends TrafficViolationTest {
+public class NativeTrafficViolationIT extends TrafficViolationTestBase {
 
     // Execute the same tests but in native mode.
 }
