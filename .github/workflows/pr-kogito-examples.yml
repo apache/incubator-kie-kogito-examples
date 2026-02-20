@@ -60,6 +60,7 @@ jobs:
         uses: apache/incubator-kie-kogito-pipelines/.ci/actions/build-chain@main
         env:
           KOGITO_EXAMPLES_SUBFOLDER_POM: ${{ matrix.env_KOGITO_EXAMPLES_SUBFOLDER_POM }}
+          DEPENDENCY_TREE_FILE: 'mvn_dependency_tree_${{ matrix.job_name }}_${{ matrix.os }}.txt'
         with:
           annotations-prefix: ${{ runner.os }}-${{ matrix.java-version }}/${{ matrix.maven-version }}
           github-token: "${{ secrets.GITHUB_TOKEN }}"
@@ -74,4 +75,4 @@ jobs:
         if: ${{ always() }}
         with:
           name: dependency-trees-logs
-          path: '**/mvn_dependency_tree.txt'
+          path: '**/${{ env.DEPENDENCY_TREE_FILE }}'
