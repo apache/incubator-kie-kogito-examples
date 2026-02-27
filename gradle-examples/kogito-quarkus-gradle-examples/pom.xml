@@ -13,10 +13,11 @@
 
   <artifactId>kogito-quarkus-gradle-examples</artifactId>
 
-  <name>Quarkus Gradle Examples</name>
+  <name>Kogito Example :: Gradle :: Quarkus</name>
   <description>Kogito Quarkus Examples built with Gradle</description>
   <modules>
     <module>process-decisions-rules-quarkus-gradle</module>
+    <module>dmn-quarkus-gradle</module>
   </modules>
 
 </project>
