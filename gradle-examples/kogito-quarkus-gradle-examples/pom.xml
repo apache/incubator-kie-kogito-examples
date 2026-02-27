@@ -17,6 +17,7 @@
   <description>Kogito Quarkus Examples built with Gradle</description>
   <modules>
     <module>process-decisions-rules-quarkus-gradle</module>
+    <module>dmn-quarkus-gradle</module>
   </modules>
 
 </project>

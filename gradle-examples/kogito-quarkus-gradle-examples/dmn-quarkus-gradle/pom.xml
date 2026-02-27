@@ -5,16 +5,16 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.kie.kogito.examples</groupId>
-    <artifactId>kogito-springboot-gradle-examples</artifactId>
+    <artifactId>kogito-quarkus-gradle-examples</artifactId>
     <version>999-SNAPSHOT</version>
   </parent>
 
-  <artifactId>dmn-springboot-gradle</artifactId>
-  <name>Kogito Example :: Gradle :: Spring Boot :: Decisions - Scesim</name>
-  <description>Decision with SCESIM integration- Spring Boot - Gradle</description>
+  <artifactId>dmn-quarkus-gradle</artifactId>
+  <name>Kogito Example :: Gradle :: Quarkus :: Decisions - Scesim</name>
+  <description>Decision with SCESIM integration- Quarkus - Gradle</description>
 
   <properties>
-    <java.module.name>dmn.springboot.gradle</java.module.name>
+    <java.module.name>dmn.quarkus.gradle</java.module.name>
     <maven.compiler.release>17</maven.compiler.release>
     <gradle.executable>${project.parent.parent.basedir}/gradlew</gradle.executable>
   </properties>
