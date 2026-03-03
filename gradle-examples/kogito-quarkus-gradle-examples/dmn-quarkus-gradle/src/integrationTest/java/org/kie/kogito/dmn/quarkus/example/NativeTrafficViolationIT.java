@@ -7,7 +7,7 @@
  * "License"); you may not use this file except in compliance
  * with the License.  You may obtain a copy of the License at
  *
- *    http://www.apache.org/licenses/LICENSE-2.0
+ *   http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
@@ -15,23 +15,13 @@
  * KIND, either express or implied.  See the License for the
  * specific language governing permissions and limitations
  * under the License.
- *
  */
+package org.kie.kogito.dmn.quarkus.example;
 
-pluginManagement {
-  repositories {
-    mavenLocal()
-    mavenCentral()
-    maven {
-      url = uri("target/dependencies")
-    }
-    maven {
-      url = uri("https://plugins.gradle.org/m2/")
-    }
-  }
+import io.quarkus.test.junit.QuarkusIntegrationTest;
 
-  plugins {
-    id "${quarkusPluginId}" version "${quarkusPluginVersion}"
-  }
+@QuarkusIntegrationTest
+public class NativeTrafficViolationIT extends TrafficViolationTest {
+
+    // Execute the same tests but in native mode.
 }
-rootProject.name = "process-decisions-rules-quarkus-gradle"

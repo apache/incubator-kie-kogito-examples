@@ -11,7 +11,7 @@
   <artifactId>gradle-examples</artifactId>
   <packaging>pom</packaging>
 
-  <name>Gradle Examples</name>
+  <name>Kogito Example :: Gradle</name>
   <description>Kogito Examples built with Gradle</description>
   <modules>
     <module>kogito-springboot-gradle-examples</module>

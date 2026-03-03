@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>process-decisions-rules-quarkus-gradle</artifactId>
-    <name>Kogito Example :: Process :: Decisions :: Rules :: Quarkus :: Gradle</name>
+    <name>Kogito Example :: Gradle :: Quarkus :: Process - Decisions - Rules</name>
     <description>Process with DRL, DMN and DRL integration - Quarkus - Gradle</description>
 
     <properties>

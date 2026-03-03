@@ -34,4 +34,4 @@ pluginManagement {
     id "${quarkusPluginId}" version "${quarkusPluginVersion}"
   }
 }
-rootProject.name = "process-decisions-rules-quarkus-gradle"
+rootProject.name = "dmn-quarkus-gradle"

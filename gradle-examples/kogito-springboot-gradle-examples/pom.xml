@@ -12,10 +12,11 @@
 
   <artifactId>kogito-springboot-gradle-examples</artifactId>
 
-  <name>Springboot Gradle Examples</name>
+  <name>Kogito Example :: Gradle :: Spring Boot</name>
   <description>Kogito Springboot Examples built with Gradle</description>
   <modules>
     <module>process-decisions-rules-springboot-gradle</module>
+    <module>dmn-springboot-gradle</module>
   </modules>
 
 

@@ -9,12 +9,12 @@
     <version>999-SNAPSHOT</version>
   </parent>
 
-  <artifactId>process-decisions-rules-springboot-gradle</artifactId>
-  <name>Kogito Example :: Gradle :: Spring Boot :: Process - Decisions - Rules</name>
-  <description>Process with DRL, DMN and DRL integration - Spring Boot - Gradle</description>
+  <artifactId>dmn-springboot-gradle</artifactId>
+  <name>Kogito Example :: Gradle :: Spring Boot :: Decisions - Scesim</name>
+  <description>Decision with SCESIM integration- Spring Boot - Gradle</description>
 
   <properties>
-    <java.module.name>process.decisions.rules.springboot.gradle</java.module.name>
+    <java.module.name>dmn.springboot.gradle</java.module.name>
     <maven.compiler.release>17</maven.compiler.release>
     <gradle.executable>${project.parent.parent.basedir}/gradlew</gradle.executable>
   </properties>

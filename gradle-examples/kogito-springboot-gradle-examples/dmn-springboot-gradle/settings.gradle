@@ -29,9 +29,12 @@ pluginManagement {
       url = uri("https://plugins.gradle.org/m2/")
     }
   }
-
-  plugins {
-    id "${quarkusPluginId}" version "${quarkusPluginVersion}"
+  resolutionStrategy {
+    eachPlugin {
+      if (requested.id.namespace == "org.kie.kogito") {
+        useModule("org.kie.kogito:kogito-gradle-plugin:${requested.version}")
+      }
+    }
   }
 }
-rootProject.name = "process-decisions-rules-quarkus-gradle"
+rootProject.name = "dmn-springboot-gradle"
