@@ -86,6 +86,9 @@ public class JaegerTestResource implements QuarkusTestResourceLifecycleManager {
         cfg.put("quarkus.otel.exporter.otlp.traces.endpoint", otlpGrpcEndpoint);
         cfg.put("quarkus.otel.exporter.otlp.traces.protocol", "grpc");
 
+        // OpenTelemetry SDK autoconfigure
+        cfg.put("otel.metrics.exporter", "none");
+
         // Optional: make Jaeger query base URL available to the tests
         cfg.put("test.jaeger.query.base-url", jaegerQueryBaseUrl);
 

@@ -141,6 +141,7 @@
         <module>kogito-quarkus-examples</module>
         <module>kogito-springboot-examples</module>
         <module>serverless-workflow-examples</module>
+        <module>gradle-examples</module>
       </modules>
     </profile>
   </profiles>
