@@ -36,6 +36,7 @@
 
   <properties>
     <java.module.name>org.kie.kogito.examples.springboot</java.module.name>
+    <version.org.springframework.boot>3.5.10</version.org.springframework.boot>
   </properties>
 
   <dependencyManagement>

@@ -36,8 +36,8 @@
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
     <quarkus.platform.version>3.27.2</quarkus.platform.version>
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
-    <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
-    <kogito-apps.bom.artifact-id>kogito-apps-bom</kogito-apps.bom.artifact-id>
+    <kogito.bom.artifact-id>kogito-quarkus-bom</kogito.bom.artifact-id>
+    <kogito-apps.bom.artifact-id>kogito-apps-quarkus-bom</kogito-apps.bom.artifact-id>
     <version.org.kie.kogito>999-SNAPSHOT</version.org.kie.kogito>
   </properties>
   <dependencyManagement>
