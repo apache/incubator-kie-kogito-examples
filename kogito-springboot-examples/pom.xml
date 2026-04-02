@@ -39,16 +39,6 @@
     <version.org.springframework.boot>3.5.10</version.org.springframework.boot>
   </properties>
 
- <!-- <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.infinispan</groupId>
-        <artifactId>infinispan-spring-boot3-starter-remote</artifactId>
-        <version>${version.org.infinispan}</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>-->
-
   <profiles>
     <profile>
       <id>default</id>
