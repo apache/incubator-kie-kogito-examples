@@ -41,12 +41,12 @@
 
   <dependencyManagement>
     <dependencies>
-      <dependency>
+      <!--<dependency>
         <groupId>org.kie</groupId>
         <artifactId>kie-dmn-test-resources</artifactId>
         <version>${project.version}</version>
         <classifier>tests</classifier>
-      </dependency>
+      </dependency>-->
       <dependency>
         <groupId>org.kie.kogito</groupId>
         <artifactId>kogito-spring-boot-bom</artifactId>

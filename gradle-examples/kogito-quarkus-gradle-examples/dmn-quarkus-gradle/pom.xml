@@ -19,14 +19,6 @@
     <gradle.executable>${project.parent.parent.basedir}/gradlew</gradle.executable>
   </properties>
 
-  <dependencies>
-    <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-gradle-plugin</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-  </dependencies>
-
   <build>
     <plugins>
       <!-- exclude maven compilation -->
