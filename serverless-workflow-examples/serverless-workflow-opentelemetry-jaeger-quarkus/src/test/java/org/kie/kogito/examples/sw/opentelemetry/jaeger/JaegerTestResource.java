@@ -88,6 +88,7 @@ public class JaegerTestResource implements QuarkusTestResourceLifecycleManager {
 
         // OpenTelemetry SDK autoconfigure
         cfg.put("otel.metrics.exporter", "none");
+        cfg.put("otel.traces.exporter", "none");
 
         // Optional: make Jaeger query base URL available to the tests
         cfg.put("test.jaeger.query.base-url", jaegerQueryBaseUrl);
