@@ -16,7 +16,7 @@
 # under the License.
 
 github:
-  description: Apache KIE Examples repository with showcases on how to use Kogito, Drools, SonataFlow
+  description: Apache KIE Examples repository with showcases on how to use Kogito, Drools, and jBPM
   homepage: https://kie.apache.org
   labels:
     - apache
