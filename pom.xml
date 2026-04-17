@@ -389,7 +389,6 @@
           </configuration>
         </plugin>
         <plugin>
-          <!-- So, how to consider kogito-examples ? Shall we manage as the upstream code, enforcing rules, or as templates for final users, where such rules may not make sense ? -->
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-enforcer-plugin</artifactId>
           <configuration>
