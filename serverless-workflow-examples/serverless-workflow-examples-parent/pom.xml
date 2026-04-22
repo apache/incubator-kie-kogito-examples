@@ -31,12 +31,26 @@
   <name>Kogito Example :: Serverless Workflow Examples :: Parent</name>
 
   <properties>
+    <!-- Used to define which poms are allowed to have dependencyManagement sections. This is to enforce the convention that only the root pom should have dependencyManagement, and all other poms should inherit from it. -->
+    <allowedPomsList>org.kie.kogito.examples:serverless-workflow-examples-parent</allowedPomsList>
     <java.module.name>org.kie.kogito.examples.serverless.workflow</java.module.name>
     <!-- Reproducible builds -->
     <project.build.outputTimestamp>2024-01-16T00:00:00Z</project.build.outputTimestamp>
     <version.maven.artifact.plugin>3.4.1</version.maven.artifact.plugin>
     <container.image.kafka>redpandadata/redpanda:v24.3.1</container.image.kafka>
   </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.kie.kogito</groupId>
+        <artifactId>kogito-apps-quarkus-bom</artifactId>
+        <version>999-SNAPSHOT</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <repositories>
     <!-- useful to resolve parent pom when it is a SNAPSHOT -->
