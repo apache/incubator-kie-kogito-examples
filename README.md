@@ -1,6 +1,6 @@
 # Apache KIE Examples
 
-This repository contains a number of examples for [Drools](https://github.com/apache/incubator-kie-drools), [jBPM](https://www.jbpm.org), [Kogito](https://github.com/apache/incubator-kie-kogito-runtimes) and [SonataFlow](https://sonataflow.org) that you can take a look at and try out yourself.  Please take a look at the readme of each individual example for more details on how the example works and how to run it yourself.
+This repository contains a number of examples for [Drools](https://github.com/apache/incubator-kie-drools), [jBPM](https://www.jbpm.org), and [Kogito](https://github.com/apache/incubator-kie-kogito-runtimes) that you can take a look at and try out yourself.  Please take a look at the readme of each individual example for more details on how the example works and how to run it yourself.
 
 Apache KIE Examples showcase use cases, features, applications, know-how's of everything our community's technology has to offer.
 
@@ -22,7 +22,7 @@ If you want to use an alternative BOM when building the Apache KIE Quarkus quick
 mvn -Dquarkus.platform.artifact-id=quarkus-universe-bom clean install
 ```
 Currently, only [Drools](https://github.com/apache/incubator-kie-drools) is part of the Quarkus Platform.
-> Note: Integration of Kogito and Sonataflow are in progress.
+> Note: Integration of Kogito are in progress.
 
 ## Getting started with the examples
 
@@ -32,7 +32,7 @@ git clone git@github.com:apache/incubator-kie-kogito-examples.git
 ```
 2. Navigate to the root of the example's directory
 ```
-cd ./incubator-kie-kogito-examples/serverless-workflow-examples/serverless-workflow-funqy
+cd ./incubator-kie-kogito-examples/kogito-quarkus-examples/process-quarkus-example
 ```
 3. Open the README.md and follow its instructions
 
