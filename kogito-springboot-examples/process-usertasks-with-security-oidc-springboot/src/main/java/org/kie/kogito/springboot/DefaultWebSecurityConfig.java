@@ -30,14 +30,14 @@ class DefaultWebSecurityConfig {
 
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests()
-                .anyRequest()
-                .authenticated()
-                .and()
-                .oauth2ResourceServer().jwt();
-        http.cors()
-                .and()
-                .csrf().disable();
+        // Spring Security 7 (Spring Boot 4) removed the chained HttpSecurity DSL in favor of the lambda DSL.
+        http
+                .authorizeHttpRequests(authz -> authz.anyRequest().authenticated())
+                .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> {
+                }))
+                .cors(cors -> {
+                })
+                .csrf(csrf -> csrf.disable());
         return http.build();
     }
 }

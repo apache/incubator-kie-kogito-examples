@@ -33,6 +33,13 @@ repositories {
   mavenLocal()
 }
 
+// TODO Spring Boot 4 ships Groovy 5.0.4 via spring-boot-dependencies, but RestAssured 5.5.6
+// (managed by kogito-dependencies-bom) was compiled against Groovy 4 and hits a NullPointerException
+// in MetaClassImpl.getMetaProperty under Groovy 5. The Maven side already pins Groovy 4.0.29 in
+// kogito-spring-boot-bom — match that here so the Gradle classpath is consistent. Drop once
+// RestAssured ships a Groovy-5-compatible release.
+ext['groovy.version'] = '4.0.29'
+
 dependencies {
   implementation platform("org.kie.kogito:kogito-spring-boot-bom:${kogitoVersion}")
   implementation("org.springframework.boot:spring-boot-starter-web")

@@ -55,6 +55,12 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
     </dependency>
+    <!-- Spring Boot 4.0: RestTemplateBuilder relocated from spring-boot (org.springframework.boot.web.client)
+         into the opt-in spring-boot-restclient module (org.springframework.boot.restclient). -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-restclient</artifactId>
+    </dependency>
 
     <!-- jBPM -->
     <dependency>

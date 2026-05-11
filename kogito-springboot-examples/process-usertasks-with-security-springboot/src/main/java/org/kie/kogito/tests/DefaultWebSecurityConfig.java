@@ -36,12 +36,12 @@ public class DefaultWebSecurityConfig {
 
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
+        // Spring Security 7 (Spring Boot 4) removed the chained HttpSecurity DSL in favor of the lambda DSL.
         http
-                .csrf().disable()
-                .authorizeHttpRequests()
-                .requestMatchers("/**").authenticated()
-                .and()
-                .httpBasic();
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(authz -> authz.requestMatchers("/**").authenticated())
+                .httpBasic(httpBasic -> {
+                });
 
         return http.build();
     }

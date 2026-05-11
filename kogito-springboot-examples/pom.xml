@@ -36,6 +36,15 @@
 
   <properties>
     <java.module.name>org.kie.kogito.examples.springboot</java.module.name>
+    <!-- Spring Boot 4.0.5 ships Netty 4.2.12, and Infinispan 15.x's Hot Rod client calls
+         io.netty.channel.IoHandle (only present in Netty 4.2.x). The shared kogito-dependencies-bom
+         keeps Netty on the 4.1.x line for Quarkus / Vert.x 4.5.x compatibility. The explicit
+         per-artifact pins below override the inherited shared-BOM 4.1.x entries for Spring Boot
+         examples — BOM imports cannot override inherited explicit-version dependencyManagement
+         (verified by experiment: pins in kogito-spring-boot-bom did not propagate). Mirrors the
+         equivalent block in 3-kogito-runtimes/springboot/pom.xml. Drop this block once the
+         planned BOM split lands and each runtime owns its own Netty pin. -->
+    <version.io.netty>4.2.12.Final</version.io.netty>
   </properties>
 
   <dependencyManagement>
@@ -44,6 +53,62 @@
         <groupId>org.infinispan</groupId>
         <artifactId>infinispan-spring-boot3-starter-remote</artifactId>
         <version>${version.org.infinispan}</version>
+      </dependency>
+      <!-- See <properties> note above: per-artifact Netty 4.2 pins for the Spring Boot examples. -->
+      <dependency>
+        <groupId>io.netty</groupId>
+        <artifactId>netty-buffer</artifactId>
+        <version>${version.io.netty}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.netty</groupId>
+        <artifactId>netty-codec-dns</artifactId>
+        <version>${version.io.netty}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.netty</groupId>
+        <artifactId>netty-codec-http</artifactId>
+        <version>${version.io.netty}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.netty</groupId>
+        <artifactId>netty-codec-http2</artifactId>
+        <version>${version.io.netty}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.netty</groupId>
+        <artifactId>netty-codec-socks</artifactId>
+        <version>${version.io.netty}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.netty</groupId>
+        <artifactId>netty-common</artifactId>
+        <version>${version.io.netty}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.netty</groupId>
+        <artifactId>netty-handler</artifactId>
+        <version>${version.io.netty}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.netty</groupId>
+        <artifactId>netty-handler-proxy</artifactId>
+        <version>${version.io.netty}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.netty</groupId>
+        <artifactId>netty-resolver</artifactId>
+        <version>${version.io.netty}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.netty</groupId>
+        <artifactId>netty-resolver-dns</artifactId>
+        <version>${version.io.netty}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.netty</groupId>
+        <artifactId>netty-transport</artifactId>
+        <version>${version.io.netty}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

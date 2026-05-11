@@ -23,7 +23,6 @@ import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.autoconfigure.actuate.observability.AutoConfigureObservability;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 
@@ -32,8 +31,8 @@ import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
 
+// Spring Boot 4 removed @AutoConfigureObservability; observability auto-config is enabled by default in tests.
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
-@AutoConfigureObservability
 public class DashboardsListTest {
 
     @LocalServerPort
