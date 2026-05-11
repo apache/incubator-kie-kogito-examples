@@ -25,8 +25,8 @@ import org.springframework.cloud.kubernetes.fabric8.discovery.Fabric8CatalogWatc
 import org.springframework.cloud.kubernetes.fabric8.discovery.Fabric8DiscoveryClientAutoConfiguration;
 
 // Disabling the cache metrics for now, see: https://github.com/infinispan/infinispan-spring-boot/issues/168
-// Spring Cloud Kubernetes 5 (Spring Boot 4) renamed the Kubernetes*AutoConfiguration classes
-// to the Fabric8* prefix to disambiguate from the Kubernetes-Client variant in the same package.
+// Spring Cloud Kubernetes 5: the Fabric8* prefix disambiguates the Fabric8 variants from the
+// Kubernetes-Client variants in the same package.
 @SpringBootApplication(scanBasePackages = { "org.kie.kogito.**" },
         exclude = { CacheMetricsAutoConfiguration.class,
                 Fabric8DiscoveryClientAutoConfiguration.class,

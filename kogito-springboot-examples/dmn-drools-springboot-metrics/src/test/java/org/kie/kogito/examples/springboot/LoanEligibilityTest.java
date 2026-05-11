@@ -30,7 +30,6 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 
-// Spring Boot 4 removed @AutoConfigureObservability; observability auto-config is enabled by default in tests.
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
 public class LoanEligibilityTest {
 

@@ -26,19 +26,10 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-// TODO Jackson 3 migration: Spring Boot 4 stops auto-registering MappingJackson2HttpMessageConverter
-// even when a Jackson 2 ObjectMapper bean is present (the auto-configured HTTP converter is now
-// MappingJacksonHttpMessageConverter on Jackson 3, which writes timestamps in UTC `Z` regardless
-// of the timezone configured on the kogito-codegen-generated GlobalObjectMapper). Without the
-// Jackson 2 converter Spring MVC produces the wrong timezone format and the OnboardingEndpointIT
-// payroll.paymentDate assertion fails.
-//
-// This module has no rule units, so the codegen-generated RestObjectMapper (which would normally
-// register this converter) is not produced — we register it locally instead. The canWrite override
-// on String mirrors the codegen-template logic so DMN endpoints' pre-serialized String responses
-// continue to flow through StringHttpMessageConverter unchanged.
-//
-// Drop in lock-step with the broader Jackson 3 migration.
+// Register a Jackson 2 HTTP converter for this module: it has no rule units, so the
+// codegen-generated RestObjectMapper that normally provides one is not produced here.
+// canWrite refuses String so DMN controllers' pre-serialized JSON passes through StringHttpMessageConverter.
+// TODO drop in lock-step with the Jackson 3 migration.
 @Configuration
 public class JacksonHttpMessageConverterConfig {
 

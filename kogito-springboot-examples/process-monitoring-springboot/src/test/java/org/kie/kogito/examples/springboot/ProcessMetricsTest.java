@@ -39,7 +39,6 @@ import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.kie.kogito.test.utils.ProcessInstancesTestUtils.abort;
 
-// Spring Boot 4 removed @AutoConfigureObservability; observability auto-config is enabled by default in tests.
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = DemoApplication.class)
 public class ProcessMetricsTest {

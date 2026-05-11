@@ -57,9 +57,7 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
     </dependency>
-    <!-- Spring Boot 4.0: cache metrics auto-config relocated from spring-boot-autoconfigure into the
-         opt-in spring-boot-cache module (org.springframework.boot.cache.autoconfigure.metrics.*).
-         Required because KogitoOnboardingApplication excludes CacheMetricsAutoConfiguration. -->
+    <!-- spring-boot-cache: hosts CacheMetricsAutoConfiguration, which this app excludes below. -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-cache</artifactId>

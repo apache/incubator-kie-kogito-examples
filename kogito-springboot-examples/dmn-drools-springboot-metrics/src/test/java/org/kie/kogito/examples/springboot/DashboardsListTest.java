@@ -31,7 +31,6 @@ import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
 
-// Spring Boot 4 removed @AutoConfigureObservability; observability auto-config is enabled by default in tests.
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = KogitoSpringbootApplication.class)
 public class DashboardsListTest {
 
