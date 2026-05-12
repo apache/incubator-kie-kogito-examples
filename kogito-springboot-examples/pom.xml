@@ -39,7 +39,7 @@
     <!-- Override Netty to 4.2.x for these SB examples. The shared kogito-dependencies-bom pins 4.1.x
          for Quarkus/Vert.x, but Infinispan 15.x's Hot Rod client needs 4.2 (uses io.netty.channel.IoHandle).
          Per-artifact pins below are required because BOM-imported entries cannot override the parent-
-         imported BOM's explicit versions. Mirrors 3-kogito-runtimes/springboot/pom.xml.
+         imported BOM's explicit versions. Mirrors the matching block in kogito-runtimes' springboot/pom.xml.
          TODO drop after the planned BOM split. -->
     <version.io.netty>4.2.12.Final</version.io.netty>
   </properties>

@@ -19,8 +19,8 @@
 package org.springframework.boot.autoconfigure.cache;
 
 // Empty stub at the legacy FQN. infinispan-spring-boot3-starter-remote 15.2.6 declares
-// @AutoConfigureBefore(CacheAutoConfiguration.class) pointing here; the real class moved to
-// org.springframework.boot.cache.autoconfigure.CacheAutoConfiguration. Mirrors the matching shim
-// in 3-kogito-runtimes. Drop when the Infinispan starter targets the new FQN.
+// @AutoConfigureBefore(CacheAutoConfiguration.class) pointing here; the real class lives at
+// org.springframework.boot.cache.autoconfigure.CacheAutoConfiguration. Drop when the Infinispan
+// starter targets that FQN.
 public class CacheAutoConfiguration {
 }
