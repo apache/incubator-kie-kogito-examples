@@ -26,10 +26,10 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-// Register a Jackson 2 HTTP converter for this module: it has no rule units, so the
-// codegen-generated RestObjectMapper that normally provides one is not produced here.
-// canWrite refuses String so DMN controllers' pre-serialized JSON passes through StringHttpMessageConverter.
-// TODO drop in lock-step with the Jackson 3 migration.
+// Jackson 2 HTTP converter for this module — it has no rule units, so the codegen-generated
+// RestObjectMapper that normally provides one is not produced here. canWrite refuses String so DMN
+// controllers' pre-serialized JSON passes through StringHttpMessageConverter. Remove together with
+// https://github.com/apache/incubator-kie-drools/issues/6702 (Jackson 3 migration).
 @Configuration
 public class JacksonHttpMessageConverterConfig {
 
