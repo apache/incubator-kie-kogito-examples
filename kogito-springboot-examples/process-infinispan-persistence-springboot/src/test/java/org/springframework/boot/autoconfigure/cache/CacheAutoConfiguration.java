@@ -16,23 +16,11 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.kie.kogito.tests;
+package org.springframework.boot.autoconfigure.cache;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.restclient.RestTemplateBuilder;
-import org.springframework.context.annotation.Bean;
-import org.springframework.web.client.RestTemplate;
-
-@SpringBootApplication(scanBasePackages = { "org.kie.kogito.**", "org.acme.travels.**" })
-public class KogitoInfinispanSpringbootApplication {
-
-    public static void main(String[] args) {
-        SpringApplication.run(KogitoInfinispanSpringbootApplication.class, args);
-    }
-
-    @Bean
-    public RestTemplate restTemplate(RestTemplateBuilder builder) {
-        return builder.build();
-    }
+// Empty stub at the legacy FQN. infinispan-spring-boot3-starter-remote 15.2.6 declares
+// @AutoConfigureBefore(CacheAutoConfiguration.class) pointing here; the real class lives at
+// org.springframework.boot.cache.autoconfigure.CacheAutoConfiguration. Drop when the Infinispan
+// starter targets that FQN.
+public class CacheAutoConfiguration {
 }

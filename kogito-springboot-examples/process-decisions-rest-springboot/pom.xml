@@ -53,6 +53,11 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
+    <!-- spring-boot-restclient: hosts RestTemplateBuilder (org.springframework.boot.restclient). -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-restclient</artifactId>
+    </dependency>
 
     <dependency>
       <groupId>org.jbpm</groupId>

@@ -19,16 +19,18 @@
 package org.kie.kogito.examples;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.actuate.autoconfigure.metrics.cache.CacheMetricsAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.kubernetes.fabric8.discovery.KubernetesCatalogWatchAutoConfiguration;
-import org.springframework.cloud.kubernetes.fabric8.discovery.KubernetesDiscoveryClientAutoConfiguration;
+import org.springframework.boot.cache.autoconfigure.metrics.CacheMetricsAutoConfiguration;
+import org.springframework.cloud.kubernetes.fabric8.discovery.Fabric8CatalogWatchAutoConfiguration;
+import org.springframework.cloud.kubernetes.fabric8.discovery.Fabric8DiscoveryClientAutoConfiguration;
 
 // Disabling the cache metrics for now, see: https://github.com/infinispan/infinispan-spring-boot/issues/168
+// Spring Cloud Kubernetes 5: the Fabric8* prefix disambiguates the Fabric8 variants from the
+// Kubernetes-Client variants in the same package.
 @SpringBootApplication(scanBasePackages = { "org.kie.kogito.**" },
         exclude = { CacheMetricsAutoConfiguration.class,
-                KubernetesDiscoveryClientAutoConfiguration.class,
-                KubernetesCatalogWatchAutoConfiguration.class })
+                Fabric8DiscoveryClientAutoConfiguration.class,
+                Fabric8CatalogWatchAutoConfiguration.class })
 public class KogitoOnboardingApplication {
 
     public static void main(String[] args) {

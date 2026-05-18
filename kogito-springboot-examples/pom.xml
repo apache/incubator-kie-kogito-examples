@@ -38,11 +38,15 @@
     <!-- Used to define which poms are allowed to have dependencyManagement sections. This is to enforce the convention that only the root pom should have dependencyManagement, and all other poms should inherit from it. -->
     <allowedPomsList>org.kie.kogito.examples:kogito-springboot-examples</allowedPomsList>
     <java.module.name>org.kie.kogito.examples.springboot</java.module.name>
-    <version.org.springframework.boot>3.5.12</version.org.springframework.boot>
   </properties>
 
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>org.infinispan</groupId>
+        <artifactId>infinispan-spring-boot3-starter-remote</artifactId>
+        <version>${version.org.infinispan}</version>
+      </dependency>
       <dependency>
         <groupId>org.kie.kogito</groupId>
         <artifactId>kogito-apps-springboot-bom</artifactId>
