@@ -37,11 +37,10 @@ public class DefaultWebSecurityConfig {
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
-                .authorizeHttpRequests()
-                .requestMatchers("/**").authenticated()
-                .and()
-                .httpBasic();
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(authz -> authz.requestMatchers("/**").authenticated())
+                .httpBasic(httpBasic -> {
+                });
 
         return http.build();
     }

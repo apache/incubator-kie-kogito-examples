@@ -33,6 +33,10 @@ repositories {
   mavenLocal()
 }
 
+// Pin Groovy 4 to match the Maven side: RestAssured 5.5.6 is compiled against Groovy 4 and trips
+// a NullPointerException under Groovy 5. TODO drop when RestAssured ships a Groovy 5 release.
+ext['groovy.version'] = '4.0.29'
+
 dependencies {
   implementation platform("org.kie.kogito:kogito-spring-boot-bom:${kogitoVersion}")
   implementation("org.springframework.boot:spring-boot-starter-web")
