@@ -38,6 +38,8 @@
     <!-- Used to define which poms are allowed to have dependencyManagement sections. This is to enforce the convention that only the root pom should have dependencyManagement, and all other poms should inherit from it. -->
     <allowedPomsList>org.kie.kogito.examples:kogito-springboot-examples</allowedPomsList>
     <java.module.name>org.kie.kogito.examples.springboot</java.module.name>
+    <!-- TODO: remove this property and declare  kogito-apps-springboot-bom as parent, to have everything already inherited-->
+    <version.org.springframework.boot>4.0.5</version.org.springframework.boot>
   </properties>
 
   <dependencyManagement>
