@@ -47,7 +47,7 @@ dependencies {
   implementation 'io.quarkus:quarkus-resteasy-jackson'
   implementation 'io.quarkus:quarkus-smallrye-openapi'
 
-  implementation platform("org.kie.kogito:kogito-bom:${kogitoVersion}")
+  implementation platform("org.kie.kogito:kogito-quarkus-bom:${kogitoVersion}")
 
   implementation 'org.jbpm:jbpm-with-drools-quarkus'
   implementation 'org.kie.kogito:process-workitems'
