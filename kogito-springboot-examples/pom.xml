@@ -39,7 +39,7 @@
     <allowedPomsList>org.kie.kogito.examples:kogito-springboot-examples</allowedPomsList>
     <java.module.name>org.kie.kogito.examples.springboot</java.module.name>
     <!-- TODO: remove the following properties and declare  kogito-apps-springboot-bom as parent, to have everything already inherited-->
-    <version.org.springframework.boot>4.0.5</version.org.springframework.boot>
+    <version.org.springframework.boot>4.0.6</version.org.springframework.boot>
     <!-- This is needed to avoid having a different version of netty inherited by kogito-examples. -->
     <version.io.netty>4.2.12.Final</version.io.netty>
   </properties>
