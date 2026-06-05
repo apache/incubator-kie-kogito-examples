@@ -67,9 +67,9 @@ property `kogito.persistence.auto.ddl=true`.
 For more details you can check [applications.properties](src/main/resources/application.properties).
 
 Optionally and for convenience, a docker-compose [configuration file](docker-compose/docker-compose.yml) is
- provided in the path [docker-compose/](docker-compose/), where you can just run the command from there:
+ provided in the path [docker compose/](docker-compose/), where you can just run the command from there:
   ```sh
-  docker-compose up
+  docker compose up
   ```  
   In this way a container for PostgreSQL running on port 5432, along with PgAdmin, running on port
    8055 to allow the database management.
@@ -85,7 +85,7 @@ Optionally and for convenience, a docker-compose [configuration file](docker-com
 You will need:
   - Java 11+ installed 
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.8.6+ installed
+  - Maven 3.9.11+ installed
 
 ### Compile and Run in Local Dev Mode
 

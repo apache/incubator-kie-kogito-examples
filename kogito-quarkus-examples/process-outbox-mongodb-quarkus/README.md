@@ -17,7 +17,7 @@ mvn clean package
 
 2. Deploy Kogito App, MongoDB, Debezium and Kafka
 ```shell
-docker-compose up
+docker compose up
 ```
 
 3. Check if Debezium is in `RUNNING` state
@@ -40,7 +40,7 @@ curl -d '{"approver" : "john", "order" : {"orderNumber" : "12345", "shipped" : f
 
 7. Shut down the cluster
 ```shell
-docker-compose down
+docker compose down
 ```
 
 ## Kogito App Example Usage

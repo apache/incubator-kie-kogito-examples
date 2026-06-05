@@ -55,6 +55,11 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
     </dependency>
+    <!-- spring-boot-restclient: hosts RestTemplateBuilder (org.springframework.boot.restclient). -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-restclient</artifactId>
+    </dependency>
 
     <!-- jBPM -->
     <dependency>
@@ -89,7 +94,6 @@
         <version>${version.org.kie.kogito}</version>
         <executions>
           <execution>
-            <phase>compile</phase>
             <goals>
               <goal>generateModel</goal>
             </goals>

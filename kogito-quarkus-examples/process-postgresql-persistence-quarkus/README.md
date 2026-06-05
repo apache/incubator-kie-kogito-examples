@@ -69,7 +69,7 @@ For more details you can check [applications.properties](src/main/resources/appl
 Optionally and for convenience, a docker-compose [configuration file](docker-compose/docker-compose.yml) is
  provided in the path [docker-compose/](docker-compose/), where you can just run the command from there:
   ```sh
-  docker-compose up
+  docker compose up
   ```  
   In this way a container for PostgreSQL running on port 5432, along with PgAdmin, running on port
    8055 to allow the database management.
@@ -85,7 +85,7 @@ Optionally and for convenience, a docker-compose [configuration file](docker-com
 You will need:
   - Java 17+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.9.6+ installed
+  - Maven 3.9.11+ installed
 
 When using native image compilation, you will also need:
   - GraalVM 19.3+ installed

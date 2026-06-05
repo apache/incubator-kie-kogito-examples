@@ -41,19 +41,19 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
+        <groupId>org.kie.kogito</groupId>
+        <artifactId>kogito-spring-boot-bom</artifactId>
+        <version>${kogito.bom.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
         <groupId>org.infinispan</groupId>
         <artifactId>infinispan-bom</artifactId>
         <version>${version.org.infinispan}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
-    <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>kogito-spring-boot-bom</artifactId>
-      <version>${kogito.bom.version}</version>
-      <type>pom</type>
-      <scope>import</scope>
-    </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -121,7 +121,6 @@
         <version>${version.org.kie.kogito}</version>
         <executions>
           <execution>
-            <phase>compile</phase>
             <goals>
               <goal>generateModel</goal>
             </goals>

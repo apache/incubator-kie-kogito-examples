@@ -25,12 +25,12 @@ PROJECT_VERSION=$(cd ../ && mvn help:evaluate -Dexpression=project.version -q -D
 
 echo "Project version: ${PROJECT_VERSION}"
 
-if [[ $PROJECT_VERSION == *SNAPSHOT ]];
-then
-  KOGITO_VERSION="main"
-else
-  KOGITO_VERSION=${PROJECT_VERSION%.*}
-fi
+case $PROJECT_VERSION in
+ *SNAPSHOT)
+   KOGITO_VERSION="main" ;;
+ *)
+   KOGITO_VERSION=${PROJECT_VERSION%.*} ;;
+esac
 
 echo "Kogito Image version: ${KOGITO_VERSION}"
 echo "KOGITO_VERSION=${KOGITO_VERSION}" > ".env"
@@ -52,4 +52,4 @@ else
     exit 1
 fi
 
-docker-compose -f docker-compose-postgresql.yml up
+docker compose -f docker-compose-postgresql.yml up

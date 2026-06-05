@@ -11,7 +11,7 @@ A simple DMN service to evaluate a loan approval and generate tracing events tha
 You will need:
   - Java 11+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.8.6+ installed
+  - Maven 3.9.11+ installed
 
 ### Configuration of the tracing addon
 

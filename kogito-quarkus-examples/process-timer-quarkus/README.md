@@ -86,7 +86,7 @@ This needs to be given when starting process instance as delay attribute of type
 You will need:
   - Java 17+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.9.6+ installed
+  - Maven 3.9.11+ installed
 
 When using native image compilation, you will also need:
   - GraalVM 19.3+ installed
@@ -144,13 +144,13 @@ After that you can redo the timer queries described above.
 
 ### Kogito Jobs Service configuration into the application
 
-To be able to use Kogito Job Service as timer service , an additional dependency is needed into the `pom.xml` file:
+To be able to use Kogito Job Service as embedded , an additional dependency is needed into the `pom.xml` file:
 
 ```xml
-<dependency>
-  <groupId>org.kie</groupId>
-  <artifactId>kogito-addons-quarkus-jobs-management</artifactId>
-</dependency>
+		<dependency>
+			<groupId>org.kie</groupId>
+			<artifactId>kogito-addons-quarkus-embedded-jobs</artifactId>
+		</dependency>
 ```
 
 Then, to allow to use Job Service as timer service there is a need to specify some properties in the `src/main/application.properties` file:

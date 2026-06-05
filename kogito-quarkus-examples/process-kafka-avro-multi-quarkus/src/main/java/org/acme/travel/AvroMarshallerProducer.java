@@ -29,6 +29,7 @@ import org.kie.kogito.event.avro.AvroIO;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Produces;
+import jakarta.inject.Named;
 
 @ApplicationScoped
 public class AvroMarshallerProducer {
@@ -41,11 +42,13 @@ public class AvroMarshallerProducer {
     }
 
     @Produces
+    @Named("avro_marshaller")
     EventMarshaller<byte[]> getAvroMarshaller() {
         return new AvroEventMarshaller(avroUtils);
     }
 
     @Produces
+    @Named("avro_unmarshaller")
     EventUnmarshaller<byte[]> getAvroUnmarshaller() {
         return new AvroEventUnmarshaller(avroUtils);
     }

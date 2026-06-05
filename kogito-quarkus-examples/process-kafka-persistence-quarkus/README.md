@@ -66,7 +66,7 @@ https://kafka.apache.org/quickstart
 
 Alternatively, you can use the provided Docker Compose file in src/main/docker. To get Kafka started in the localhost port 9092, simply run:
 ```sh
-docker-compose up
+docker compose up
 ```
 
 ## Build and run
@@ -76,7 +76,7 @@ docker-compose up
 You will need:
   - Java 17+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.9.6+ installed
+  - Maven 3.9.11+ installed
 
 When using native image compilation, you will also need:
   - GraalVM 20.2+ installed

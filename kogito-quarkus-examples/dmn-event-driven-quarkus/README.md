@@ -16,7 +16,7 @@ The main goal behind the addon is to allow Kogito DMN services to be used as par
 You will need:
   - Java 17+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.9.6+ installed
+  - Maven 3.9.11+ installed
   - [Docker Engine](https://docs.docker.com/engine/) and [Docker Compose](https://docs.docker.com/compose/) installed
 
 When using native image compilation, you will also need:
@@ -66,7 +66,7 @@ There's a useful [docker-compose.yml](docker-compose.yml) in the root that start
 Simply start it with this command from the root of the repo:
 
 ```
-docker-compose up -d
+docker compose up -d
 ```
 
 Once everything is started you can check the data contained in your small Kafka instance via [Kafdrop](https://github.com/obsidiandynamics/kafdrop) at `http://localhost:9000/`.

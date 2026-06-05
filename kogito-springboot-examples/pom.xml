@@ -35,15 +35,23 @@
   <name>Kogito Example :: Spring Boot</name>
 
   <properties>
+    <!-- Used to define which poms are allowed to have dependencyManagement sections. This is to enforce the convention that only the root pom should have dependencyManagement, and all other poms should inherit from it. -->
+    <allowedPomsList>org.kie.kogito.examples:kogito-springboot-examples</allowedPomsList>
     <java.module.name>org.kie.kogito.examples.springboot</java.module.name>
+    <!-- TODO: remove the following properties and declare  kogito-apps-springboot-bom as parent, to have everything already inherited-->
+    <version.org.springframework.boot>4.0.6</version.org.springframework.boot>
+    <!-- This is needed to avoid having a different version of netty inherited by kogito-examples. -->
+    <version.io.netty>4.2.12.Final</version.io.netty>
   </properties>
 
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>org.infinispan</groupId>
-        <artifactId>infinispan-spring-boot3-starter-remote</artifactId>
-        <version>${version.org.infinispan}</version>
+        <groupId>org.kie.kogito</groupId>
+        <artifactId>kogito-apps-springboot-bom</artifactId>
+        <version>${project.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -52,7 +60,7 @@
     <profile>
       <id>default</id>
       <activation>
-        <activeByDefault>true</activeByDefault>
+        <activeByDefault>false</activeByDefault>
       </activation>
       <modules>
         <module>decisiontable-springboot-example</module>
@@ -72,6 +80,7 @@
         <module>process-business-rules-springboot</module>
         <module>process-decisions-rest-springboot</module>
         <module>process-decisions-rules-springboot</module>
+        <module>process-decisions-rules-springboot-yaml</module>
         <module>process-decisions-springboot</module>
         <module>process-infinispan-persistence-springboot</module>
         <module>process-kafka-multi-springboot</module>
@@ -119,6 +128,7 @@
         <module>pmml-springboot-example</module>
         <module>process-business-calendar-springboot-example</module>
         <module>process-business-rules-springboot</module>
+        <module>process-decisions-rules-springboot-yaml</module>
         <module>process-infinispan-persistence-springboot</module>
         <module>process-kafka-multi-springboot</module>
         <module>process-kafka-quickstart-springboot</module>

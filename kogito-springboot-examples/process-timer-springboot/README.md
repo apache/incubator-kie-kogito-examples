@@ -86,7 +86,7 @@ This needs to be given when starting process instance as delay attribute of type
 You will need:
   - Java 11+ installed
   - Environment variable JAVA_HOME set accordingly
-  - Maven 3.8.6+ installed
+  - Maven 3.9.11+ installed
 
 ### Compile and Run in Local Dev Mode
 
@@ -241,30 +241,6 @@ kogito.service.url=http://localhost:8080
 First one is used to direct the Kogito runtime to let it know where is the Kogito Job Service - it needs
 to match the location of the Kogito Job Service when starting it - see below.
 Second one is used by Kogito Job Service to callback when the timer expires and needs to be pointing to the service host and port
-
-### Start Kogito Job Service
-
-You need to download the job service and start it locally
-
-You can download it from [Select Latest Version]
-https://repo.maven.apache.org/maven2/org/kie/kogito/jobs-service/
-
-```sh
-java -Dquarkus.http.port=8085 -jar jobs-service-common/target/jobs-service-common-{version}-runner.jar
-```
-
-* After Starting Kogito Job Service you should see a similar Log as follows
-
-<p align="center"><img src="docs/images/kogitoWebServiceLog.png"></p>
-
-In case you'd like to run the job service with enabled persistence then start
-Infinispan server before and then run the job service with following command
-
-Download Infinispan Server from
-https://infinispan.org/download/
-
-Start Infinispan Server
-[Infinispan Directory]/bin/sh server.sh
 
 ```sh
 java -Dquarkus.http.port=8085 -jar jobs-service-infinispan/target/jobs-service-infinispan-{version}-runner.jar

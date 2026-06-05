@@ -35,12 +35,27 @@
   <name>Kogito Example :: Quarkus</name>
 
   <properties>
+    <!-- Used to define which poms are allowed to have dependencyManagement sections. This is to enforce the convention that only the root pom should have dependencyManagement, and all other poms should inherit from it. -->
+    <allowedPomsList>org.kie.kogito.examples:kogito-quarkus-examples</allowedPomsList>
     <java.module.name>org.kie.kogito.examples.quarkus</java.module.name>
     <!-- Port 0 means dynamic port -->
     <tests.quarkus.http.port>0</tests.quarkus.http.port>
     <!-- override default to fast-jar packaging for forward-compatibility -->
     <quarkus.package.jar.type>fast-jar</quarkus.package.jar.type>
+
   </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.kie.kogito</groupId>
+        <artifactId>kogito-apps-quarkus-bom</artifactId>
+        <version>${project.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <profiles>
     <profile>
@@ -72,6 +87,7 @@
         <module>process-decisions-quarkus</module>
         <module>process-decisions-rest-quarkus</module>
         <module>process-decisions-rules-quarkus</module>
+        <module>process-decisions-rules-quarkus-yaml</module>
         <module>process-error-handling</module>
         <module>process-incubation-api-quarkus</module>
         <module>process-infinispan-persistence-quarkus</module>
@@ -100,6 +116,7 @@
         <module>process-usertasks-timer-quarkus</module>
         <module>process-usertasks-with-security-oidc-quarkus</module>
         <module>process-usertasks-with-security-quarkus</module>
+        <module>process-usertasks-ws-humantask-lifecycle-quarkus</module>
         <module>rules-incubation-api-quarkus</module>
         <module>rules-legacy-quarkus-example</module>
         <module>rules-legacy-scesim-quarkus-example</module>
