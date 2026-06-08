@@ -33,7 +33,6 @@
   <description>Kogito with DMN Knative Eventing - Quarkus</description>
 
   <properties>
-    <version.org.wiremock>3.13.0</version.org.wiremock>
     <quarkus-plugin.version>3.27.4</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
@@ -117,7 +116,7 @@
     -->
     <dependency>
       <groupId>org.wiremock</groupId>
-      <artifactId>wiremock</artifactId>
+      <artifactId>wiremock-jetty12</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
