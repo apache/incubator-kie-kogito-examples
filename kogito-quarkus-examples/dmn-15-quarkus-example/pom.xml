@@ -12,7 +12,7 @@
   <artifactId>dmn-15-quarkus-example</artifactId>
   <name>Kogito Example :: DMN :: 1.5 Features</name>
   <properties>
-    <quarkus-plugin.version>3.27.3</quarkus-plugin.version>
+    <quarkus-plugin.version>3.27.4</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
     <quarkus.platform.version>3.27.3</quarkus.platform.version>
