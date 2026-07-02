@@ -31,7 +31,7 @@
   <name>Kogito Example :: Process with Knative Eventing and Quarkus</name>
   <description>Kogito with Knative Eventing - Quarkus</description>
   <properties>
-    <quarkus-plugin.version>3.27.4</quarkus-plugin.version>
+    <quarkus-plugin.version>3.27.4.1</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
     <quarkus.platform.version>3.27.3</quarkus.platform.version>

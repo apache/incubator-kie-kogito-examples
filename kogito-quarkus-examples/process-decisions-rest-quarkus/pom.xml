@@ -32,7 +32,7 @@
   <description>Process with DMN and DRL integration through REST - Quarkus</description>
   <properties>
     <tests.quarkus.http.port>8080</tests.quarkus.http.port>
-    <quarkus-plugin.version>3.27.4</quarkus-plugin.version>
+    <quarkus-plugin.version>3.27.4.1</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
     <quarkus.platform.version>3.27.3</quarkus.platform.version>
