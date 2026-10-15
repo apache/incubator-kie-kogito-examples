@@ -2,7 +2,7 @@
 
 ## Description
 
-A simple DMN + PMML service.
+A simple DMN + PMML service. The equipment maintenance example imports a PMML scorecard into a DMN model to calculate a maintenance priority from equipment data.
 
 ## Installing and Running
 
@@ -73,6 +73,38 @@ Example response:
   "fld2":2.0,
   "fld1":3.0,
   "Decision":52.5
+}
+```
+
+### POST /EquipmentMaintenance
+
+Given inputs:
+
+```json
+{
+  "monthsInService": 23.0,
+  "equipmentType": "PRESS",
+  "operatingEnvironment": "OUTDOOR",
+  "inspectionPassed": true
+}
+```
+
+Curl command (using the JSON object above):
+
+```sh
+curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"monthsInService":23.0,"equipmentType":"PRESS","operatingEnvironment":"OUTDOOR","inspectionPassed":true}' http://localhost:8080/EquipmentMaintenance
+```
+
+Example response:
+
+```json
+{
+  "EquipmentMaintenanceScoreBKM":"function EquipmentMaintenanceScoreBKM( monthsInService, equipmentType, operatingEnvironment, inspectionPassed )",
+  "monthsInService":23.0,
+  "equipmentType":"PRESS",
+  "operatingEnvironment":"OUTDOOR",
+  "inspectionPassed":true,
+  "Maintenance Priority":21.345
 }
 ```
 

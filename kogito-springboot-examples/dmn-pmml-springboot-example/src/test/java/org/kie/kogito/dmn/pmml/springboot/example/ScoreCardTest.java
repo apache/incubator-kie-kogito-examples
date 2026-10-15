@@ -38,8 +38,8 @@ import static org.kie.kogito.dmn.pmml.springboot.example.CommonTestUtils.testRes
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class ScoreCardTest {
 
-    private static final String BASE_PATH = "/Testscorecard/SampleScore";
-    private static final String TARGET = "overallScore";
+    private static final String BASE_PATH = "/Testscorecard/MaintenancePriorityScore";
+    private static final String TARGET = "maintenancePriorityScore";
 
     @LocalServerPort
     private int port;
@@ -51,26 +51,26 @@ public class ScoreCardTest {
 
     @Test
     public void testEvaluateScoreCardResult() {
-        String inputData = "{\"age\": 23.0, \"occupation\": \"SKYDIVER\", \"residenceState\": \"AP\", \"validLicense\": true}";
+        String inputData = "{\"monthsInService\": 23.0, \"equipmentType\": \"PRESS\", \"operatingEnvironment\": \"OUTDOOR\", \"inspectionPassed\": true}";
         testResult(inputData, BASE_PATH, TARGET, 21.345f);
     }
 
     @Test
     public void testEvaluateScoreCardResultWrongData() {
-        String inputData = "{\"age\": wrong-data, \"occupation\": \"SKYDIVER\", \"residenceState\": \"AP\", \"validLicense\": true}";
+        String inputData = "{\"monthsInService\": wrong-data, \"equipmentType\": \"PRESS\", \"operatingEnvironment\": \"OUTDOOR\", \"inspectionPassed\": true}";
         testResultWrongData(inputData, BASE_PATH);
     }
 
     @Test
     public void testEvaluateScoreCardResultDescriptive() {
-        String inputData = "{\"age\": 23.0, \"occupation\": \"SKYDIVER\", \"residenceState\": \"AP\", \"validLicense\": true}";
+        String inputData = "{\"monthsInService\": 23.0, \"equipmentType\": \"PRESS\", \"operatingEnvironment\": \"OUTDOOR\", \"inspectionPassed\": true}";
         final Map<String, Object> expectedResultMap = Collections.singletonMap(TARGET, 21.345f);
         testDescriptive(inputData, BASE_PATH, TARGET, expectedResultMap);
     }
 
     @Test
     public void testEvaluateScoreCardResultDescriptiveWrongData() {
-        String inputData = "{\"age\": wrong-data, \"occupation\": \"SKYDIVER\", \"residenceState\": \"AP\", \"validLicense\": true}";
+        String inputData = "{\"monthsInService\": wrong-data, \"equipmentType\": \"PRESS\", \"operatingEnvironment\": \"OUTDOOR\", \"inspectionPassed\": true}";
         testDescriptiveWrongData(inputData, BASE_PATH);
     }
 }
