@@ -152,6 +152,13 @@
             <skip>true</skip>
           </configuration>
         </plugin>
+        <!-- The Java and Gradle trees inherit from this pom and get no aggregator pluginManagement:
+             failsafe must track surefire, which the kie parent pins off a different property. -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-failsafe-plugin</artifactId>
+          <version>${version.surefire.plugin}</version>
+        </plugin>
       </plugins>
     </pluginManagement>
     <plugins>

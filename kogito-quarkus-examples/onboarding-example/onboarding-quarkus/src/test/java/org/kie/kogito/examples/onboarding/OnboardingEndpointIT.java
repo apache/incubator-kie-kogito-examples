@@ -43,7 +43,7 @@ import jakarta.inject.Inject;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.core.Is.is;
 
-@EnableKubernetesMockClient
+@EnableKubernetesMockClient(https = false)
 @QuarkusTest
 @QuarkusTestResource(value = InfinispanQuarkusTestResource.Conditional.class)
 public class OnboardingEndpointIT {
