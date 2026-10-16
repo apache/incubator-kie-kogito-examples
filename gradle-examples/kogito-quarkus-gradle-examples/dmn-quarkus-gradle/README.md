@@ -12,6 +12,7 @@ The org.kie.dmn.runtime.typecheck=true property is used to enable type and value
 
 You will need:
   - Java 17+ installed
+  - Gradle 9.7.1
   - Environment variable JAVA_HOME set accordingly
 
 ## Build and run

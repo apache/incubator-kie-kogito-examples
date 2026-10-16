@@ -134,6 +134,7 @@ The DMN file where this decision is declared is [TrafficViolation.dmn](src/main/
 
 You will need:
 - Java 17+ installed
+- Gradle 9.7.1
 - Environment variable JAVA_HOME set accordingly
 
 ### Compile and Run in Local Dev Mode
